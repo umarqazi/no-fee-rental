@@ -11,5 +11,6 @@ npm-debug.log
 yarn-error.log
 /public/assets/images/*
 /public/blog/wp-config.php
+/public/blog/.htaccess
 /public/blog/wp-content/uploads/*
 /public/blog/wp-content/themes/nofeerentals/assets/images/*
