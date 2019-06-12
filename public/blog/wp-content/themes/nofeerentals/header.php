@@ -82,51 +82,29 @@
   <div class="header-wrapper">
     <div class=" container-lg">
       <div class="header-container">
-        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/logo.png" class="logo" />
-        <ul class="menu-links">
-          <li>
-            <a href="#">Rent </a>
-            <a href="#">Neighborhood </a>
-          </li>
-        </ul>
-        <div class="header-right-wrapper">
-          <div class="recent-search-dropdown">
-            <a href="#">Recent Searches <i class="fa fa-angle-down"></i></a>
-            <div class="dropDown">
-              <a href="#"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/gallery-img.jpg" alt="" /> <span>NYC - Manhattan NYC - Manhattan</span></a>
-              <a href="#"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/gallery-img.jpg" alt="" /> <span>NYC - Manhattan</span></a>
-              <a href="#"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/gallery-img.jpg" alt="" /> <span>NYC - Manhattan </span></a>
-            </div>
-          </div>
-          <div class="actions-btns d-none">
-            <button type="button" class="signup-btn">Signup</button>
-            <button type="button" class="signup-btn login-btn">Login</button>
-          </div>
-          <div class="login-user">
-            <a href="#"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/agent-img.jpg" alt="" class="avtar" /> Jhone Doe <i class="fa fa-angle-down"></i></a>
-            <div class="user-dropdown">
-              <a href="#">Dashboard </a>
-              <a href="#">Profile Setting </a>
-              <a href="#">Log Out </a>
-            </div>
-          </div>
-          <i class="fa fa-bars menu-btn"></i>
-        </div>
+        <a href="/">
+          <img src="<?php echo get_template_directory_uri(); ?>/assets/images/logo.png" class="logo" />
+        </a>
+        <?php
+          if ( has_nav_menu( 'header-menu' ) ) {
+            wp_nav_menu(
+              array(
+                'theme_location' => 'header-menu',
+                'container' => 'false',
+                'menu_class' => 'menu-links'
+              )
+            );
+          }
+        ?>
       </div>
     </div>
   </div>
 
-  <?php
-    if(is_page('blog')) {
-      ?>
-      <div class="header-bg inner-pages-banner">
-        <div class="banner-wrapper">
-          <h1 class="mb-1">OUR BLOGS</h1>
-          <p>Our Blog on Apartments and Renting</p>
-        </div>
-      </div>
-      <?php
-    }
-  ?>
+  <div class="header-bg inner-pages-banner">
+    <div class="banner-wrapper">
+      <h1 class="mb-1">Our Blog</h1>
+      <p>Our Blog on Apartments and Renting</p>
+    </div>
+  </div>
 
 </header>
