@@ -41,17 +41,6 @@
         <a href="#" class="ft-links">Privacy Policy </a>
         <a href="#" class="ft-links">Terms</a>
       </li>
-      <li class="wow fadeInLeft" data-wow-delay="0.6s">
-        <h4>Newsletter </h4>
-        <div class="newsletter">
-          <div class="title">subscribe news letter</div>
-          <p>Enter your email address & get daily newsletter</p>
-          <div class="newsletter-form">
-            <input type="text" class="fld" placeholder="Email Address" />
-            <button class="btn-default">Subscribe</button>
-          </div>
-        </div>
-      </li>
     </ul>
     <div class="copyright wow fadeIn " data-wow-delay="0.3s">
       <p><img src="<?php echo get_template_directory_uri(); ?>/assets/images/home-icon.png" /> Fair Housing & Equal Oppurtunity</p>
