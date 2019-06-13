@@ -4,4 +4,7 @@
     @if(Session::has('message'))
     toastr.{!! Session::get('alert_type') !!}("{{ Session::get('message') }}");
     @endif
+    @if (session('status'))
+    toastr.success("{{ session('status') }}");
+    @endif
 </script>

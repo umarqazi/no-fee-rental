@@ -31,4 +31,5 @@ Route::get('/press', function () {
 /*** admin routes ***/
 Route::group(array('prefix' => 'admin'), function() {
     Route::get('/dashboard', 'Admin\AdminController@dashboard')->name('admin-dashboard');
+    Route::get('/view-listing', 'Admin\AdminController@viewListing')->name('view-listing');
 });

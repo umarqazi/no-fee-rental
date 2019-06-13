@@ -30,4 +30,11 @@ class AdminController extends Controller
     public function dashboard(){
         return view::make('admin.index');
     }
+
+    /**
+     * @return \Illuminate\Contracts\View\View
+     */
+    public function viewListing(){
+        return view::make('admin.listing.view-listing');
+    }
 }

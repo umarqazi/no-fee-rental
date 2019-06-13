@@ -1,7 +1,7 @@
 <div class="mobile-menu">
     <i class="fa fa-times close-menu-btn"></i>
     <div class="user-avtar">
-        <a href="{!! url('/') !!}"><img src="assets/images/agent-img.jpg" alt="" class="avtar" /> Jhone Doe <i class="fa fa-angle-down"></i></a>
+        <a href="{!! url('/') !!}"><img src="{!! asset('assets/images/agent-img.jpg') !!}" alt="" class="avtar" /> Jhone Doe <i class="fa fa-angle-down"></i></a>
         <div class="user-dropdown">
             <a href="#">Dashboard </a>
             <a href="#">Profile Setting </a>
@@ -57,7 +57,7 @@
 <div class="header-wrapper">
     <div class=" container-lg">
         <div class="header-container">
-            <a href="{!! url('/') !!}"> <img src="assets/images/logo.png" class="logo" /></a>
+            <a href="{!! url('/') !!}"> <img src="{!! asset('assets/images/logo.png') !!}" class="logo" /></a>
             <ul class="menu-links">
                 <li>
                     <a href="#">Rent </a>
@@ -68,17 +68,36 @@
                 <div class="recent-search-dropdown">
                     <a href="#">Recent Searches <i class="fa fa-angle-down"></i></a>
                     <div class="dropDown">
-                        <a href="#"><img src="assets/images/gallery-img.jpg" alt="" /> <span>NYC - Manhattan NYC - Manhattan</span></a>
-                        <a href="#"><img src="assets/images/gallery-img.jpg" alt="" /> <span>NYC - Manhattan</span></a>
-                        <a href="#"><img src="assets/images/gallery-img.jpg" alt="" /> <span>NYC - Manhattan </span></a>
+                        <a href="#"><img src="{!! asset('assets/images/gallery-img.jpg') !!}" alt="" /> <span>NYC - Manhattan NYC - Manhattan</span></a>
+                        <a href="#"><img src="{!! asset('assets/images/gallery-img.jpg') !!}" alt="" /> <span>NYC - Manhattan</span></a>
+                        <a href="#"><img src="{!! asset('assets/images/gallery-img.jpg') !!}" alt="" /> <span>NYC - Manhattan </span></a>
                     </div>
                 </div>
-                <div class="actions-btns">
-                    <button type="button" class="signup-btn signup-modal-btn" data-toggle="modal" data-target="#login">Signup</button>
-                    <button type="button" class="signup-btn login-btn signin-modal-btn" data-toggle="modal" data-target="#login">Login</button>
-                </div>
+                @if(Auth::check())
+                    <div class="login-user">
+                        <a href="#"><img src="assets/images/agent-img.jpg" alt="" class="avtar" /> Jhone Doe <i class="fa fa-angle-down"></i></a>
+                        <div class="user-dropdown">
+                            <a href="#">Dashboard </a>
+                            <a href="#">Profile Setting </a>
+                            <a class="dropdown-item" href="{{ route('logout') }}"
+                               onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                {{ __('Logout') }}
+                            </a>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                        </div>
+                    </div>
+                @else
+                    <div class="actions-btns">
+                        <button type="button" class="signup-btn signup-modal-btn" data-toggle="modal" data-target="#login">Signup</button>
+                        <button type="button" class="signup-btn login-btn signin-modal-btn" data-toggle="modal" data-target="#login">Login</button>
+                    </div>
+                @endif
                 <div class="login-user d-none">
-                    <a href="#"><img src="assets/images/agent-img.jpg" alt="" class="avtar" /> Jhone Doe <i class="fa fa-angle-down"></i></a>
+                    <a href="#"><img src="{!! asset('assets/images/agent-img.jpg') !!}" alt="" class="avtar" /> Jhone Doe <i class="fa fa-angle-down"></i></a>
                     <div class="user-dropdown">
                         <a href="#">Dashboard </a>
                         <a href="#">Profile Setting </a>

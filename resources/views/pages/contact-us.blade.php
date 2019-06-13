@@ -2,7 +2,6 @@
 @section('title', 'Contact Us')
 @section('content')
     <section class="inner-pages wow fadeIn" data-wow-delay="0.2s">
-        @include('layouts.toaster')
         <div class="container-lg">
             <h2 class="text-center">Lets Connect</h2>
             <div class="contact-info">
