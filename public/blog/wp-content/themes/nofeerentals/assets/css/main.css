@@ -1599,7 +1599,14 @@ footer .copyright .social-icons li a:hover {
 }
 /*Rental Guides*/
 .rental-guides-container {
-  padding-top: 0 !important;
+  padding-top: 0;
+}
+.rental-guides-container.single-post{
+  padding-top: 100px;
+}
+.single-post .featured-img{
+  height: 400px;
+  margin-bottom: 20px;
 }
 .rental-guides-container .rental-guides-row {
   line-height: 0;
