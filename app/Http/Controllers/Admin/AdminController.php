@@ -34,7 +34,14 @@ class AdminController extends Controller
     /**
      * @return \Illuminate\Contracts\View\View
      */
-    public function viewListing(){
-        return view::make('admin.listing.view-listing');
+    public function viewPropertyListing(){
+        return view::make('admin.listing.property-listing');
+    }
+
+    /**
+     *
+     */
+    public function profile(){
+        return view::make('admin.profile');
     }
 }

@@ -27,9 +27,12 @@ Route::post('contact-us', 'ContactUsController@contactUs')->name('contact-us');
 Route::get('/press', function () {
     return view('pages/press');
 })->name('press');
-
+Route::get('/change-password', 'UserController@changePassword')->name('change-password');
+Route::post('/change-password', 'UserController@updatePassword')->name('change-password');
 /*** admin routes ***/
 Route::group(array('prefix' => 'admin'), function() {
     Route::get('/dashboard', 'Admin\AdminController@dashboard')->name('admin-dashboard');
-    Route::get('/view-listing', 'Admin\AdminController@viewListing')->name('view-listing');
+    Route::get('/profile', 'Admin\AdminController@profile')->name('profile');
+    Route::post('/profile', 'UserController@editProfile')->name('edit-profile');
+    Route::get('/property-listing', 'Admin\AdminController@viewPropertyListing')->name('property-listing');
 });

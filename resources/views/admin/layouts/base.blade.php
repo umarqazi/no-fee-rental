@@ -7,7 +7,9 @@
     {!! HTML::style('assets/css/admin/bootstrap.min.css') !!}
     {!! HTML::style('assets/css/admin/animate.min.css') !!}
     {!! HTML::style('assets/css/admin/main.css') !!}
+    {!! HTML::style('assets/css/style.css') !!}
     {!! HTML::style('assets/css/admin/responsive.css') !!}
+    {!! HTML::script('assets/js/admin/jquery.min.js') !!}
 </head>
 <body>
 @include('admin.layouts.header')
@@ -15,10 +17,10 @@
     @section('sidebar')
         @include('admin.layouts.sidebar')
     @show
+    @include('layouts.toaster')
     @yield('content')
 </div>
 
-{!! HTML::script('assets/js/admin/jquery.min.js') !!}
 {!! HTML::script('assets/js/admin/bootstrap.min.js') !!}
 {!! HTML::script('assets/js/admin/wow.min.js') !!}
 {!! HTML::script('assets/js/admin/datepicker.min.js') !!}
