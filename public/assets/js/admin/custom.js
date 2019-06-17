@@ -24,19 +24,16 @@ $(document).ready(function () {
 		$(".grid-view-wrapper").show();
 	});
 
-	$(".additional-info .input-style").attr("disabled", true);
+
 
 	$(".edit-profile").click(function () {
 		$(".additional-info .input-style").attr("disabled", false);
+		$("#image-picker").removeClass('d-none');
 		$(this).hide();
 		$(".update-profile").show()
 	});
 
-	$(".update-profile").click(function () {
-		$(".additional-info .input-style").attr("disabled", true);
-		$(this).hide();
-		$(".edit-profile").show()
-	});
+
 
 	$('#datepicker').datepicker({
 		uiLibrary: 'bootstrap4'

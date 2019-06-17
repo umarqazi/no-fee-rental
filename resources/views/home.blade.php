@@ -23,6 +23,6 @@
         </div>
     </div>
 </section>
-@include('homepage.search')
+@include('homepage.feature')
 @include('homepage.life-container')
 @include('homepage.neighborhood')

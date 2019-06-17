@@ -30,4 +30,18 @@ class AdminController extends Controller
     public function dashboard(){
         return view::make('admin.index');
     }
+
+    /**
+     * @return \Illuminate\Contracts\View\View
+     */
+    public function viewPropertyListing(){
+        return view::make('admin.listing.property-listing');
+    }
+
+    /**
+     *
+     */
+    public function profile(){
+        return view::make('admin.profile');
+    }
 }

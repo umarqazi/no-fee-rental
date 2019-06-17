@@ -1,3 +1,10 @@
 .invalid-feedback{
     display: inline-block;
 }
+.main-wrapper .listing-wrapper .listing-row{
+    height: auto;
+}
+.main-wrapper .listing-wrapper .listing-row .img-holder .main-img{
+    height: auto;
+    min-height: 100%;
+}

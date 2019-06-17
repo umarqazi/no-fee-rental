@@ -2,7 +2,7 @@
     <div class="container-lg">
         <ul class="footer-wrapper">
             <li class="wow fadeInLeft" data-wow-delay="0.2s">
-                <img src="assets/images/footer-logo.png" alt="" />
+                <img src="{!! asset('assets/images/footer-logo.png') !!}" alt="" />
                 <div class="logo-text">
                     Is the easiest way to search all no fee rentals in one place.
                 </div>
@@ -41,18 +41,18 @@
             </li>
         </ul>
         <div class="copyright wow fadeIn " data-wow-delay="0.3s">
-            <p><img src="assets/images/home-icon.png" /> Fair Housing & Equal Oppurtunity</p>
+            <p><img src="{!! asset('assets/images/home-icon.png') !!}" /> Fair Housing & Equal Oppurtunity</p>
             <ul class="social-icons">
-                <li><a href="#"><img src="assets/images/fb-icon.png" alt="" /></a></li>
-                <li><a href="#"><img src="assets/images/twitter-icon.png" alt="" /></a></li>
-                <li><a href="#"><img src="assets/images/google-icon.png" alt="" /></a></li>
+                <li><a href="#"><img src="{!! asset('assets/images/fb-icon.png') !!}" alt="" /></a></li>
+                <li><a href="#"><img src="{!! asset('assets/images/twitter-icon.png') !!}" alt="" /></a></li>
+                <li><a href="#"><img src="{!! asset('assets/images/google-icon.png') !!}" alt="" /></a></li>
             </ul>
         </div>
     </div>
 </footer>
-<script src="assets/js/jquery-ui.min.js" type="text/javascript"></script>
-<script src="assets/js/bootstrap.min.js"></script>
-<script src="assets/js/popper.min.js"></script>
-<script src="assets/js/wow.min.js"></script>
-<script type="text/javascript" src="assets/js/pignose.calendar.full.min.js"></script>
-<script src="assets/js/custom.js"></script>
+{!! HTML::script('assets/js/jquery-ui.min.js') !!}
+{!! HTML::script('assets/js/bootstrap.min.js') !!}
+{!! HTML::script('assets/js/popper.min.js') !!}
+{!! HTML::script('assets/js/wow.min.js') !!}
+{!! HTML::script('assets/js/pignose.calendar.full.min.js') !!}
+{!! HTML::script('assets/js/custom.js') !!}
