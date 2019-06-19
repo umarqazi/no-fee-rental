@@ -9,6 +9,8 @@
 namespace App\Repository;
 
 class UserRepo {
+
+	public $paginate = 15;
 	protected $user_model;
 
 	/**
@@ -74,7 +76,14 @@ class UserRepo {
 	/**
 	 * @return mixed | array
 	 */
-	public function showAll() {
-		return $this->user_model->latest()->get();
+	public function showAgents() {
+		return $this->user_model->whereuser_type(2)->latest()->paginate($this->paginate);
+	}
+
+	/**
+	 * @return mixed | array
+	 */
+	public function showRenters() {
+		return $this->user_model->whereuser_type(3)->latest()->paginate($this->paginate);
 	}
 }

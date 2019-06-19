@@ -8,8 +8,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Forms\Users\ChangePasswordForm;
-use App\Forms\Users\UserForm;
+use App\Forms\User\ChangePasswordForm;
+use App\Forms\User\UserForm;
 use App\Http\Requests\ChangePassword;
 use App\Http\Requests\User;
 use App\Services\UserServices;
@@ -75,9 +75,10 @@ class UserController extends Controller {
 	}
 
 	public function addUser(Request $request) {
-		return ($this->user_service->registerUser(new UserForm($request)))
-		? redirect()->back()->with(['message' => 'User added successfully.', 'alert_type' => 'success'])
-		: redirect()->back()->with(['message' => 'Something went wrong.', 'alert_type' => 'error']);
+		dd($request->all());
+		return ($this->user_service->registerUser(new UserForm($request->all())))
+		? response()->json(['message' => 'User added successfully.', 'alert_type' => 'success'], 200)
+		: response()->json(['message' => 'Something went wrong.', 'alert_type' => 'error'], 400);
 	}
 
 	public function visibilityToggle($id) {

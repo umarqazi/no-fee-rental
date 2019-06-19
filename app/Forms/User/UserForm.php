@@ -6,7 +6,7 @@
  * Time: 4:11 PM
  */
 
-namespace App\Forms\Users;
+namespace App\Forms\User;
 
 use App\Forms\BaseForm;
 use Illuminate\Validation\Rule;

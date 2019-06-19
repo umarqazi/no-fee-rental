@@ -9,4 +9,4 @@ Route::get('/property-listing', 'Admin\AdminController@viewPropertyListing')->na
 
 Route::post('/create-user', 'UserController@addUser')->name('user.add');
 Route::get('/visibility/{id}', 'UserController@visibilityToggle');
-Route::get('/delete-user/{id}', 'UserController@deleteUser')->name('user.delete');
+Route::get('/delete-user/{id}', 'UserController@deleteUser')->name('agent.delete');

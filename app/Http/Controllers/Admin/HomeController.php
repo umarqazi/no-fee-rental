@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: adi
+ * author: Yousuf
  * Date: 6/11/19
  * Time: 4:30 PM
  */
@@ -27,8 +27,10 @@ class HomeController extends Controller {
 	 * @return \Illuminate\Contracts\View\View
 	 */
 	public function index() {
-		$users = $this->service->allUsers();
-		return view('admin.index', compact('users'));
+		$page = 'users';
+		$agents = $this->service->allAgents();
+		$renters = $this->service->allRenters();
+		return view('admin.index', compact('agents', 'renters', 'page'));
 	}
 
 	/**
