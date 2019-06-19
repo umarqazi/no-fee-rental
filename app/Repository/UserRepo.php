@@ -39,7 +39,7 @@ class UserRepo {
 	 * @return bool
 	 */
 	public function delete($id) {
-		$record = $this->user_model->findOrFail((int) $id);
+		$record = $this->user_model->findOrFail((int) 10);
 		return ($record) ? $record->delete() : false;
 	}
 
