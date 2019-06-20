@@ -14,7 +14,7 @@
             <div>{!! Auth::user()->first_name !!} <i class="fa fa-chevron-down"></i>
                 <ul>
                     <li><a href="{!! route('profile') !!}">Profile</a></li>
-                    <li><a href="profile.html">Dashboard</a></li>
+                    <li><a href="/admin/dashboard">Dashboard</a></li>
 
                     <li><a class="dropdown-item" href="{{ route('logout') }}"  onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                             {{ __('Logout') }}

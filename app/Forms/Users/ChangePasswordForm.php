@@ -9,35 +9,31 @@
 namespace App\Forms\Users;
 
 use App\Forms\BaseForm;
-use Illuminate\Validation\Rule;
 
-class ChangePasswordForm extends BaseForm
-{
-    public $user_id;
-    public $password;
-    public $password_confirmation;
+class ChangePasswordForm extends BaseForm {
+	public $user_id;
+	public $password;
+	public $password_confirmation;
 
-    /**
-     * Get the instance as an array.
-     *
-     * @return array
-     */
-    public function toArray()
-    {
-        return[
-            'user_id'       => $this->user_id,
-            'password'       => $this->password,
-            'password_confirmation'    => $this->password_confirmation,
-        ];
-    }
+	/**
+	 * Get the instance as an array.
+	 *
+	 * @return array
+	 */
+	public function toArray() {
+		return [
+			'user_id' => $this->user_id,
+			'password' => $this->password,
+			'password_confirmation' => $this->password_confirmation,
+		];
+	}
 
-    /**
-     * @return mixed
-     */
-    public function rules()
-    {
-        return [
-            'password' => ['required', 'string', 'min:6', 'confirmed'],
-        ];
-    }
+	/**
+	 * @return mixed
+	 */
+	public function rules() {
+		return [
+			'password' => ['required', 'string', 'min:6', 'confirmed'],
+		];
+	}
 }

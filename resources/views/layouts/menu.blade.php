@@ -3,7 +3,7 @@
     <div class="user-avtar">
         <a href="{!! url('/') !!}"><img src="{!! asset('assets/images/agent-img.jpg') !!}" alt="" class="avtar" /> Jhone Doe <i class="fa fa-angle-down"></i></a>
         <div class="user-dropdown">
-            <a href="#">Dashboard </a>
+            <a href="/admin/dashboard">Dashboard </a>
             <a href="#">Profile Setting </a>
             <a href="#">Log Out </a>
         </div>
@@ -77,7 +77,7 @@
                     <div class="login-user">
                         <a href="#"><img src="assets/images/agent-img.jpg" alt="" class="avtar" /> Jhone Doe <i class="fa fa-angle-down"></i></a>
                         <div class="user-dropdown">
-                            <a href="#">Dashboard </a>
+                            <a href="/admin/dashboard">Dashboard </a>
                             <a href="#">Profile Setting </a>
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                onclick="event.preventDefault();
@@ -97,7 +97,7 @@
                     </div>
                 @endif
                 <div class="login-user d-none">
-                    <a href="#"><img src="{!! asset('assets/images/agent-img.jpg') !!}" alt="" class="avtar" /> Jhone Doe <i class="fa fa-angle-down"></i></a>
+                    <a href="#"><img src="{!! asset('assets/images/agent-img.jpg') !!}" alt="" class="avtar" />{{ (auth()->check()) ? Auth::user()->first_name : '' }}<i class="fa fa-angle-down"></i></a>
                     <div class="user-dropdown">
                         <a href="#">Dashboard </a>
                         <a href="#">Profile Setting </a>

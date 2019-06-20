@@ -8,40 +8,40 @@
 
 namespace App\Http\Controllers\Admin;
 
-
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\View;
 
-class AdminController extends Controller
-{
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+class AdminController extends Controller {
 
-    /**
-     * @return \Illuminate\Contracts\View\View
-     */
-    public function dashboard(){
-        return view::make('admin.index');
-    }
+	private $service;
+	/**
+	 * Create a new controller instance.
+	 *
+	 * @return void
+	 */
+	public function __construct(\App\Services\UserServices $service) {
+		$this->service = $service;
+	}
 
-    /**
-     * @return \Illuminate\Contracts\View\View
-     */
-    public function viewPropertyListing(){
-        return view::make('admin.listing.property-listing');
-    }
+	/**
+	 * @return \Illuminate\Contracts\View\View
+	 */
+	public function dashboard() {
+		$users = $this->service->allUsers();
+		return view('admin.index', compact('users'));
+	}
 
-    /**
-     *
-     */
-    public function profile(){
-        return view::make('admin.profile');
-    }
+	/**
+	 * @return \Illuminate\Contracts\View\View
+	 */
+	public function viewPropertyListing() {
+		return view::make('admin.listing.property-listing');
+	}
+
+	/**
+	 *
+	 */
+	public function profile() {
+		return view::make('admin.profile');
+	}
 }
