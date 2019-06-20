@@ -957,6 +957,14 @@ footer .footer-wrapper .newsletter p {
 footer .footer-wrapper .newsletter .newsletter-form {
   display: flex;
   justify-content: space-between;
+  position: relative;
+}
+footer .footer-wrapper .newsletter .newsletter-form .ajax-loader{
+  position: absolute;
+  left: 50%;
+  top: 32%;
+  z-index: 999;
+  display: none;
 }
 footer .footer-wrapper .newsletter .newsletter-form .fld {
   background: #fff;
@@ -1926,6 +1934,19 @@ footer .copyright .social-icons li a:hover {
   height: 100px;
   padding-top: 10px;
 }
+
+/* jquery validation msgs css*/
+.newsletter-form label#error{
+  display: none;
+}
+.newsletter-form label.error,
+.newsletter-form label#error{
+  position: absolute;
+  bottom: -20px;
+  color: #fff;
+  font-size: 13px;
+}
+
 /*Responsive style*/
 @media only screen and (max-width: 1599px) {
   .neighborhood-search .search-result-wrapper .search-listing .featured-properties .property-listing .property-thumb {

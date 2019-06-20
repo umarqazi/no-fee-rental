@@ -30,3 +30,5 @@ Route::post('/change-password', 'UserController@updatePassword')->name('change-p
 
 // Login route for all user type
 Route::post('/login')->name('attempt.login')->middleware('authguard');
+
+  Route::post('newsletter','NewsletterController@store');

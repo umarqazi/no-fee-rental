@@ -133,7 +133,7 @@ $(document).ready(function () {
 	});
 
 
-	$('#image-gallery').lightSlider({
+	/*$('#image-gallery').lightSlider({
 		gallery: true,
 		item: 1,
 		thumbItem: 4,
@@ -162,6 +162,72 @@ $(document).ready(function () {
 				items: 2
 			}
 		}
+	});*/
+
+
+	// footer newsletter form ajax
+	$('#subscribe').click(function () {
+
+		var form = $( "#newsletter-form" );
+		
+		form.validate({
+
+      onfocusout: false,
+			rules: {
+				// compound rule
+				email: {
+					required: true,
+					email: true
+				}
+			}
+
+		});
+
+
+		if (form.valid()){
+
+			$.ajaxSetup({
+				headers: {
+					'X-CSRF-TOKEN': $('#newsletter-form input[type="hidden"]').val()
+				}
+			});
+
+			$.ajax({
+				
+				url: 'http://nofeerentalsblog.wp/newsletter',
+				type: 'post',
+				data: {
+					email: $('#newsletter-form .fld').val()
+				},
+				beforeSend: function () {
+					$('.ajax-loader').show();
+				},
+				success: function (response) {
+					
+					var respObj = JSON.parse(response);
+
+					$('.ajax-loader').hide();
+					form[0].reset();
+					$('#newsletterModal .modal-body').text(respObj.message);
+					$('#newsletterModal').modal();
+					
+				},
+				error: function (response) {
+					$('.ajax-loader').hide();
+					var respObj = response.responseJSON;
+					var errors = respObj.errors;
+					var keys   = Object.keys(errors);
+					var count  = keys.length;
+					for (var i = 0; i < count; i++)
+					{
+						form.find("." + keys[i]).html(errors[keys[i]]).show();
+					}
+				}
+				
+			});
+
+		}
+
 	});
 
 

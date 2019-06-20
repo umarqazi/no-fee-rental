@@ -33,10 +33,13 @@
                 <div class="newsletter">
                     <div class="title">subscribe news letter</div>
                     <p>Enter your email address & get daily newsletter</p>
-                    <div class="newsletter-form">
-                        <input type="text" class="fld" placeholder="Email Address" />
-                        <button class="btn-default">Subscribe</button>
-                    </div>
+                    <form method="post" action="javascript:void(0);" class="newsletter-form" id="newsletter-form">
+                        @csrf
+                        <img src="{{asset('assets/images/ajax-loader.gif')}}" class="ajax-loader" />
+                        <input type="email" class="fld" placeholder="Email Address" name="email" />
+                        <label id="error" class="error email" for="email"></label>
+                        <button type="submit" class="btn-default" id="subscribe">Subscribe</button>
+                    </form>
                 </div>
             </li>
         </ul>
@@ -50,5 +53,21 @@
         </div>
     </div>
 </footer>
+
+<!-- Modal -->
+<div class="modal fade" id="newsletterModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Message</h5>
+            </div>
+            <div class="modal-body"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 @include('features.login-signup-popup')
 @include('layouts.scripts')
