@@ -18,3 +18,12 @@ function uploadImage($image, $path) {
 function mailService($to, $data) {
 	return Mail::to($to)->send(new App\Mail\MailHandler($data));
 }
+
+// Use to handle common errors
+function error($msg) {
+	return redirect()->back()->with(['message' => $msg, 'alert_type' => 'error']);
+}
+
+function success($msg) {
+	return redirect()->back()->with(['message' => $msg, 'alert_type' => 'success']);
+}

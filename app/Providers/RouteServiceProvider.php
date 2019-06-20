@@ -38,6 +38,8 @@ class RouteServiceProvider extends ServiceProvider {
 
 		$this->mapAdminRoutes();
 
+		$this->mapAgentRoutes();
+
 		//
 	}
 
@@ -77,8 +79,22 @@ class RouteServiceProvider extends ServiceProvider {
 	 */
 	protected function mapAdminRoutes() {
 		Route::prefix('admin')
-			->middleware(['web', 'auth'])
+			->middleware(['web', 'auth:admin'])
 			->namespace($this->namespace)
 			->group(base_path('routes/admin.php'));
+	}
+
+	/**
+	 * Define the "agent" routes for the application.
+	 *
+	 * These routes are typically stateless.
+	 *
+	 * @return void
+	 */
+	protected function mapAgentRoutes() {
+		Route::prefix('agent')
+			->middleware(['web', 'auth:agent'])
+			->namespace($this->namespace)
+			->group(base_path('routes/agent.php'));
 	}
 }

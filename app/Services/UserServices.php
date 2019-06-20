@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 
 class UserServices {
+
 	protected $user_repo;
 
 	/**
@@ -64,8 +65,14 @@ class UserServices {
 		return false;
 	}
 
-	public function allUsers() {
-		return $this->user_repo->showAll();
+	public function allAgents() {
+		$this->user_repo->paginate = 20;
+		return $this->user_repo->showAgents();
+	}
+
+	public function allRenters() {
+		$this->user_repo->paginate = 20;
+		return $this->user_repo->showRenters();
 	}
 
 	public function updateStatus($id) {

@@ -3,7 +3,8 @@
 namespace App\Exceptions;
 
 use Exception;
-use Illuminate\Auth\AuthenticationException;
+use Illuminate\Auth\AuthenticationException as Auth;
+use Illuminate\Database\Eloquent\ModelNotFoundException as ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler {
@@ -33,6 +34,9 @@ class Handler extends ExceptionHandler {
 	 * @return void
 	 */
 	public function report(Exception $exception) {
+		if ($exception instanceof ModelNotFoundException) {
+			dd('Requested Record Not Exist');
+		}
 		parent::report($exception);
 	}
 
@@ -47,7 +51,39 @@ class Handler extends ExceptionHandler {
 		return parent::render($request, $exception);
 	}
 
-	protected function unauthenticated($request, AuthenticationException $exception) {
-		// dd($exception);
+	/**
+	 * Render Auth Exception.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @param  \Exception  $exception
+	 * @return \Illuminate\Http\Response
+	 */
+	protected function unauthenticated($request, Auth $exception) {
+		if ($request->ajax() || $request->expectsJson()) {
+			return response()->json(['message' => 'Request Not Allowed.'], 401);
+		}
+		switch ($exception->guards()[0]) {
+		case 'admin':
+			return redirect('/')->with(['message' => 'Login Required', 'alert_type' => 'error']);
+			break;
+
+		case 'agent':
+			return redirect('/')->with(['message' => 'Login Required']);
+			break;
+
+		case 'renter':
+			// code...
+			break;
+
+		case 'owner':
+			// code...
+			break;
+
+		default:
+			// code...
+			break;
+		}
+		dd($request, $exception);
+		return abort(401);
 	}
 }

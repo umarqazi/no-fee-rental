@@ -9,6 +9,8 @@
 namespace App\Repository;
 
 class UserRepo {
+
+	public $paginate = 15;
 	protected $user_model;
 
 	/**
@@ -39,7 +41,7 @@ class UserRepo {
 	 * @return bool
 	 */
 	public function delete($id) {
-		$record = $this->user_model->findOrFail((int) $id);
+		$record = $this->user_model->findOrFail((int) 10);
 		return ($record) ? $record->delete() : false;
 	}
 
@@ -74,7 +76,14 @@ class UserRepo {
 	/**
 	 * @return mixed | array
 	 */
-	public function showAll() {
-		return $this->user_model->latest()->get();
+	public function showAgents() {
+		return $this->user_model->whereuser_type(2)->latest()->paginate($this->paginate);
+	}
+
+	/**
+	 * @return mixed | array
+	 */
+	public function showRenters() {
+		return $this->user_model->whereuser_type(3)->latest()->paginate($this->paginate);
 	}
 }

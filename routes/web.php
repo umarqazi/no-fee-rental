@@ -27,3 +27,6 @@ Route::get('/press', function () {
 })->name('press');
 Route::get('/change-password', 'UserController@changePassword')->name('change-password');
 Route::post('/change-password', 'UserController@updatePassword')->name('change-password');
+
+// Login route for all user type
+Route::post('/login')->name('attempt.login')->middleware('authguard');
