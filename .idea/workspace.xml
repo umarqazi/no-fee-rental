@@ -2,7 +2,192 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="022db0c4-8cde-4867-82da-85455bd6a7d9" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/Admin.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Forms/NewsletterForm.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Forms/User/ChangePasswordForm.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Forms/User/UserForm.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Helpers/functions.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/HomeController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/LoginController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/Agent/HomeController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/Agent/LoginController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/NewsletterController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Middleware/AuthGuardAssign.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Mail/MailHandler.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Repository/NewsletterRepo.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Services/NewsletterService.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/newsletter.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/migrations/2019_06_19_064516_create_admins_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/seeds/RolesTableSeeder.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/seeds/UsersTableSeeder.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/admin/fonts/gijgo-material.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/admin/fonts/gijgo-material.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/admin/fonts/gijgo-material.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/admin/fonts/gijgo-material.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/admin/images/account-img.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/admin/images/agent-image.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/admin/images/bell-icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/admin/images/blog-img.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/admin/images/copy-icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/admin/images/edit-icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/admin/images/listing-img.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/admin/images/logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/admin/images/menu-icon-1.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/admin/images/menu-icon-2.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/admin/images/menu-icon-3.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/admin/images/menu-icon-4.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/admin/images/menu-icon-5.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/admin/images/menu-icon-6.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/admin/images/menu-icon-7.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/admin/images/team-img.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/admin/owlcarousel/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/admin/owlcarousel/assets/ajax-loader.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/admin/owlcarousel/assets/owl.carousel.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/admin/owlcarousel/assets/owl.carousel.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/admin/owlcarousel/assets/owl.theme.default.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/admin/owlcarousel/assets/owl.theme.default.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/admin/owlcarousel/assets/owl.theme.green.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/admin/owlcarousel/assets/owl.theme.green.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/admin/owlcarousel/assets/owl.video.play.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/admin/owlcarousel/owl.carousel.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/admin/owlcarousel/owl.carousel.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/agent/css/animate.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/agent/css/bootstrap.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/agent/css/dropzone.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/agent/css/jquery.fancybox.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/agent/css/main.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/agent/css/main.less" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/agent/css/responsive.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/agent/css/responsive.less" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/agent/images/account-img.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/agent/images/agent-image.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/agent/images/bell-icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/agent/images/copy-icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/agent/images/edit-icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/agent/images/listing-img.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/agent/images/logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/agent/images/menu-icon-1.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/agent/images/menu-icon-2.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/agent/images/menu-icon-3.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/agent/images/menu-icon-4.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/agent/images/menu-icon-5.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/agent/images/team-img.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/agent/js/bootstrap.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/agent/js/custom.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/agent/js/dropzone.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/agent/js/jquery.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/agent/js/popper.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/agent/js/vivus.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/agent/js/wow.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/agent/owlcarousel/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/agent/owlcarousel/assets/ajax-loader.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/agent/owlcarousel/assets/owl.carousel.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/agent/owlcarousel/assets/owl.carousel.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/agent/owlcarousel/assets/owl.theme.default.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/agent/owlcarousel/assets/owl.theme.default.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/agent/owlcarousel/assets/owl.theme.green.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/agent/owlcarousel/assets/owl.theme.green.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/agent/owlcarousel/assets/owl.video.play.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/agent/owlcarousel/owl.carousel.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/agent/owlcarousel/owl.carousel.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/js/jquery.validate.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/auth/login.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/layouts/app.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/layouts/footer.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/layouts/scripts.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/models/add-user.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/agent/auth/passwords/email.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/agent/auth/passwords/reset.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/agent/auth/verify.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/agent/index.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/agent/layouts/app.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/agent/layouts/footer.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/agent/layouts/header.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/layouts/scripts.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/mails/create_user.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/routes/admin.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/routes/agent.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/no-fee-rental.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Exceptions/Handler.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Exceptions/Handler.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Forms/Users/ChangePasswordForm.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Forms/Users/ProfileForm.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/AdminController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ContactUsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ContactUsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Kernel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/Authenticate.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/Authenticate.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/RedirectIfAuthenticated.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/RedirectIfAuthenticated.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Providers/RouteServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/RouteServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Repository/ContactUsRepo.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repository/ContactUsRepo.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Repository/UserRepo.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repository/UserRepo.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Services/ContactUsService.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Services/ContactUsService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Services/UserServices.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Services/UserServices.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bootstrap/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/bootstrap/app.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bootstrap/cache/packages.php" beforeDir="false" afterPath="$PROJECT_DIR$/bootstrap/cache/packages.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bootstrap/cache/services.php" beforeDir="false" afterPath="$PROJECT_DIR$/bootstrap/cache/services.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/auth.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/auth.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2019_06_11_152518_create_contact_uses_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_06_11_152518_create_contact_uses_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/assets/css/admin/animate.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/admin/css/animate.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/assets/css/admin/bootstrap.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/admin/css/bootstrap.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/assets/css/admin/datepicker.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/admin/css/datepicker.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/assets/css/admin/dropzone.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/admin/css/dropzone.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/assets/css/admin/jquery.fancybox.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/admin/css/jquery.fancybox.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/assets/css/admin/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/admin/css/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/assets/css/admin/main.less" beforeDir="false" afterPath="$PROJECT_DIR$/public/admin/css/main.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/assets/css/admin/responsive.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/admin/css/responsive.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/assets/css/admin/responsive.less" beforeDir="false" afterPath="$PROJECT_DIR$/public/admin/css/responsive.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/assets/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/css/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/assets/js/admin/bootstrap.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/admin/js/bootstrap.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/assets/js/admin/custom.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/admin/js/custom.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/assets/js/admin/datepicker.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/admin/js/datepicker.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/assets/js/admin/dropzone.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/admin/js/dropzone.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/assets/js/admin/jquery.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/admin/js/jquery.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/assets/js/admin/popper.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/admin/js/popper.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/assets/js/admin/vivus.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/admin/js/vivus.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/assets/js/admin/wow.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/admin/js/wow.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/assets/js/custom.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/js/custom.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/layouts/base.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/layouts/header.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/layouts/header.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/layouts/sidebar.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/profile.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/profile.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/users.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/auth/login.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/agent/auth/register.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/auth/passwords/email.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/auth/passwords/email.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/auth/passwords/reset.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/auth/passwords/reset.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/auth/register.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/auth/register.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/auth/verify.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/auth/verify.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/homepage/feature.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/features/feature.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/homepage/life-container.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/features/life-container.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/homepage/login-signup-popup.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/features/login-signup-popup.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/homepage/neighborhood.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/features/neighborhood.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/homepage/search.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/features/search.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/agent/auth/login.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/base-static.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/base.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/footer.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/footer.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/header.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/header.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/home-header.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/toaster.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/contact-us.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/contact-us.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/welcome.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -18,8 +203,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/views/admin/layouts/header.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="22" column="33" selection-start-line="22" selection-start-column="33" selection-end-line="22" selection-end-column="33" />
+            <state relative-caret-position="45">
+              <caret line="47" selection-start-line="47" selection-end-line="47" />
             </state>
           </provider>
         </entry>
@@ -27,8 +212,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/layouts/footer.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="855">
-              <caret line="57" column="43" selection-start-line="57" selection-start-column="43" selection-end-line="57" selection-end-column="43" />
+            <state relative-caret-position="1080">
+              <caret line="72" column="27" selection-start-line="72" selection-start-column="27" selection-end-line="72" selection-end-column="27" />
             </state>
           </provider>
         </entry>
@@ -245,35 +430,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="no-fee-rental" type="b2602c69:ProjectViewProjectNode" />
-              <item name="no-fee-rental" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="no-fee-rental" type="b2602c69:ProjectViewProjectNode" />
-              <item name="no-fee-rental" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="no-fee-rental" type="b2602c69:ProjectViewProjectNode" />
-              <item name="no-fee-rental" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="no-fee-rental" type="b2602c69:ProjectViewProjectNode" />
-              <item name="no-fee-rental" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="layouts" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
+      <pane id="ProjectPane" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -327,12 +484,12 @@
       <workItem from="1560496388776" duration="11013000" />
       <workItem from="1560585087813" duration="11883000" />
       <workItem from="1560755776902" duration="2621000" />
-      <workItem from="1561358715155" duration="296000" />
+      <workItem from="1561358715155" duration="918000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="100215000" />
+    <option name="totallyTimeSpent" value="100837000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="64" y="-11" width="1303" height="780" extended-state="6" />
@@ -349,10 +506,10 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.32868218" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" weight="0.32921174" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.32713178" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.70852715" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -361,6 +518,32 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+              <option name="COLUMN_ORDER">
+                <list>
+                  <option value="0" />
+                  <option value="1" />
+                  <option value="2" />
+                  <option value="3" />
+                </list>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Auth/ResetPasswordController.php">
@@ -702,18 +885,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/admin/layouts/header.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="22" column="33" selection-start-line="22" selection-start-column="33" selection-end-line="22" selection-end-column="33" />
-          <folding>
-            <element signature="n#style#0;n#form#0;n#li#2;n#ul#0;n#div#0;n#div#1;n#div#0;n#header#0;n#!!top" expanded="true" />
-          </folding>
+        <state relative-caret-position="45">
+          <caret line="47" selection-start-line="47" selection-end-line="47" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/layouts/footer.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="855">
-          <caret line="57" column="43" selection-start-line="57" selection-start-column="43" selection-end-line="57" selection-end-column="43" />
+        <state relative-caret-position="1080">
+          <caret line="72" column="27" selection-start-line="72" selection-start-column="27" selection-end-line="72" selection-end-column="27" />
         </state>
       </provider>
     </entry>

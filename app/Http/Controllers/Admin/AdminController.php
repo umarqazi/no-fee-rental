@@ -1,47 +1,22 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: adi
- * Date: 6/11/19
- * Time: 4:30 PM
- */
 
 namespace App\Http\Controllers\Admin;
 
-
+use App\Forms\User\UserForm;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\View;
+use App\Services\UserService;
 
-class AdminController extends Controller
-{
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+class AdminController extends Controller {
 
-    /**
-     * @return \Illuminate\Contracts\View\View
-     */
-    public function dashboard(){
-        return view::make('admin.index');
-    }
+	private $service;
 
-    /**
-     * @return \Illuminate\Contracts\View\View
-     */
-    public function viewPropertyListing(){
-        return view::make('admin.listing.property-listing');
-    }
+	public function __construct(UserService $service) {
+		$this->service = $service;
+	}
 
-    /**
-     *
-     */
-    public function profile(){
-        return view::make('admin.profile');
-    }
+	public function addUsers(Request $request) {
+		return ($this->service->createUser(new UserForm($request)))
+		? success('User has been added succesfully')
+		: error('Something went wrong');
+	}
 }

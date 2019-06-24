@@ -14,3 +14,6 @@ yarn-error.log
 /public/blog/.htaccess
 /public/blog/wp-content/uploads/*
 /public/blog/wp-content/themes/nofeerentals/assets/images/*
+/.phpintel
+/.idea
+/bootstrap
