@@ -30,3 +30,8 @@ Route::get('/change-password/{id}', 'UserController@changePassword')->name('chan
 
 // Login route for all user type
 Route::post('/login')->name('attempt.login')->middleware('authguard');
+
+// Route for Invited Agent Signup
+Route::get('/signup', function () {
+	return view('signup');
+})->name('agent.signup');
