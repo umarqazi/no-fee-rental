@@ -14,6 +14,10 @@
     <link rel="stylesheet" href="{{asset('admin/css/datepicker.min.css')}}">
     <link rel="stylesheet" href="{{asset('admin/css/main.css')}}">
     <link rel="stylesheet" href="{{asset('admin/css/responsive.css')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css">
+    <script src="{{asset('admin/js/jquery.min.js')}}"></script>
+    <script src="{{asset('assets/js/toastr.js')}}"></script>
+
 
     <title>@yield('title')</title>
 
@@ -44,3 +48,4 @@
             </div>
         </div>
     </header>
+    @include('admin.layouts.scripts')

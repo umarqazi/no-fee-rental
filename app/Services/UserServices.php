@@ -61,6 +61,7 @@ class UserServices {
 		if (!empty($this->user_repo->create($form->collection))) {
 			$data = $form->user;
 			$data->view = 'create-user';
+			$data->token = str_random(60);
 			$data->subject = 'Account Created';
 			mailService($form->user->email, $data);
 			return true;
@@ -70,12 +71,12 @@ class UserServices {
 	}
 
 	public function allAgents() {
-		$this->user_repo->paginate = 20;
+		$this->user_repo->paginate = 5;
 		return $this->user_repo->showAgents();
 	}
 
 	public function allRenters() {
-		$this->user_repo->paginate = 20;
+		$this->user_repo->paginate = 5;
 		return $this->user_repo->showRenters();
 	}
 

@@ -14,6 +14,9 @@ class AuthGuardAssign {
 	 */
 	public function handle($request, Closure $next) {
 		$user = \App\User::whereEmail($request->email)->select('user_type')->first();
+		if (empty($user)) {
+			return redirect()->back()->with(['message' => 'Wrong Email or Password.', 'alert_type' => 'error']);
+		}
 		switch ($user->user_type) {
 		case 1:
 			return (new \App\Http\Controllers\Admin\LoginController)->login($request);

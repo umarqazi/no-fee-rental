@@ -1,7 +1,6 @@
 @extends('admin.layouts.app')
 @section('title', 'Users')
 @section('content')
-
     <div class="wrapper">
         <div class="heading-wrapper">
             <h1>User Accounts</h1>
@@ -53,9 +52,9 @@
                                     <td>{{$agent->email}}</td>
                                     <td>{{!empty($agent->phone_number) ? $agent->phone_number : '---'}}</td>
                                     <td>
-                                        <a href="/admin/visibility/{{$agent->id}}"><i class="fa fa-eye{{($agent->status) ? '-slash' : ''}} action-btn" data-toggle="modal" data-target="#agent-modal"></i></a>
+                                        <a href="{{route('admin.userStatus', $agent->id)}}"><i class="fa fa-eye{{($agent->status) ? '-slash' : ''}} action-btn" data-toggle="modal" data-target="#agent-modal"></i></a>
                                         <a href="#"><i class="fa fa-edit px-2 action-btn"></i></a>
-                                        <a href="javascript:void(0);" onclick="confirm('Are you sure?') ? window.location.href='{{route("agent.delete", $agent->id)}}' : ''"><i class="fa fa-trash action-btn"></i></a>
+                                        <a href="javascript:void(0);" onclick="confirm('Are you sure?') ? window.location.href='{{route("admin.deleteUser", $agent->id)}}' : ''"><i class="fa fa-trash action-btn"></i></a>
                                     </td>
                                 </tr>
                                     @endforeach
@@ -64,6 +63,7 @@
                             @else
                             No Record Found
                             @endif
+                            {!! $agents->render() !!}
                         </div>
 
                     </div>
@@ -87,9 +87,9 @@
                                     <td>{{$renter->first_name." ".$renter->last_name}}</td>
                                     <td>4693 White Oak Drive Kansas City, MO</td>
                                     <td>
-                                        <a href="/admin/visibility/{{$renter->id}}"><i class="fa fa-eye{{($renter->status) ? '-slash' : ''}} action-btn" data-toggle="modal" data-target="#renter-modal"></i></a>
+                                        <a href="{{ route('admin.userStatus', $renter->id) }}"><i class="fa fa-eye{{($renter->status) ? '-slash' : ''}} action-btn" data-toggle="modal" data-target="#renter-modal"></i></a>
                                         <a href="#"><i class="fa fa-edit px-2 action-btn"></i></a>
-                                        <a href="javascript:void(0);" onclick="confirm('Are you sure?') ? window.location.href='{{route("renter.delete", $renter->id)}}' : ''"><i class="fa fa-trash action-btn"></i></a>
+                                        <a href="javascript:void(0);" onclick="confirm('Are you sure?') ? window.location.href='{{route("admin.deleteUser", $renter->id)}}' : ''"><i class="fa fa-trash action-btn"></i></a>
                                     </td>
                                 </tr>
                                     @endforeach
@@ -98,6 +98,7 @@
                             @else
                             No Record Found
                             @endif
+                            {!! $renters->render() !!}
                         </div>
 
                     </div>

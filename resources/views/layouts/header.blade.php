@@ -9,6 +9,6 @@
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/pignose.calendar.min.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/main.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css">
         <script type="text/javascript" src="{{ asset('assets/js/jquery.min.js') }}"></script>
     </head>

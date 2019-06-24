@@ -24,6 +24,22 @@ function error($msg) {
 	return redirect()->back()->with(['message' => $msg, 'alert_type' => 'error']);
 }
 
-function success($msg) {
-	return redirect()->back()->with(['message' => $msg, 'alert_type' => 'success']);
+function success($msg, $path = null) {
+	return ($path != null)
+	? redirect($path)->with(['message' => $msg, 'alert_type' => 'success'])
+	: redirect()->back()->with(['message' => $msg, 'alert_type' => 'success']);
+}
+
+function toast($message, $type) {
+	$select = null;
+	switch ($type) {
+	case 'success':
+		$select = "success";
+		break;
+
+	case 'error':
+		$select = "error";
+		break;
+	}
+	return "<script>toastr.{$select}('{$message}');</script>";
 }

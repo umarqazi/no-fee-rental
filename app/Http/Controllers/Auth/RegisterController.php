@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Traits\RegistersUsers;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -27,7 +28,9 @@ class RegisterController extends Controller {
 	 *
 	 * @var string
 	 */
-	protected $redirectTo = '/home';
+	protected $redirectTo = '/agent/home';
+
+	protected $user_type;
 
 	/**
 	 * Create a new controller instance.
@@ -60,13 +63,20 @@ class RegisterController extends Controller {
 	 * @return \App\User
 	 */
 	protected function create(array $data) {
+		$this->user_type = $data['user_type'];
 		$users = User::create([
 			'first_name' => $data['first_name'],
 			'last_name' => $data['last_name'],
-			'user_type' => '1',
+			'user_type' => $data['user_type'],
 			'email' => $data['email'],
 			'password' => Hash::make($data['password']),
 		]);
+
+		return $users;
+	}
+
+	protected function guard() {
+		return Auth::guard($this->user_type == 2 ? 'agent' : '');
 	}
 
 }
