@@ -9,8 +9,8 @@
             </div>
 
             <!-- Modal body -->
-            <form method="post" id="add-user" action="{{route('user.add')}}" enctype="multipart/form-data">
-                @csrf
+            <form method="post" id="add-user" action="{{ route('admin.addUser') }}" enctype="multipart/form-data">
+            @csrf
             <div class="modal-body">
 
                 <div class="row">
@@ -47,24 +47,19 @@
                             <label>Type </label>
                             <select class="input-style" name="user_type">
                                 <option value="">Select User Type</option>
-                                <option value="2">Agent</option>
-                                <option value="4">Owner</option>
-                                <option value="3">Renter</option>
+                                @foreach($roles as $role)
+                                <option value="{{$role->id}}">{{$role->name}}</option>
+                                @endforeach
                             </select>
                             {{ $errors->first('user_type') }}
                         </div>
-                    </div>
-                    <div class="col-md-12">
-                        <label>Password</label>
-                        <input type="password" name="password" class="input-style">
-                        {{ $errors->first('password') }}
                     </div>
                 </div>
             </div>
 
             <!-- Modal footer -->
             <div class="modal-footer justify-content-center">
-                <button type="button" id="add-user-button" class="btn-default">Add User</button>
+                <button type="submit" id="add-user-button" class="btn-default">Add User</button>
             </div>
             </form>
 
