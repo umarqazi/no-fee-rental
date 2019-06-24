@@ -1,5 +1,16 @@
 <?php
 
+/*
+|--------------------------------------------------------------------------
+| Admin Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+ */
+
 Route::get('/home', 'Admin\HomeController@index')->name('admin.index');
 Route::get('/logout', 'Admin\LoginController@logout')->name('admin.logout');
 Route::get('/show-profile', 'Admin\AdminController@profile')->name('admin.profile');
@@ -12,3 +23,15 @@ Route::post('/password-update', 'Admin\AdminController@updatePassword')->name('a
 
 Route::post('/profile', 'UserController@editProfile')->name('edit-profile');
 Route::get('/property-listing', 'Admin\AdminController@viewPropertyListing')->name('property-listing');
+
+Route::post('/send-invitation', function (\Illuminate\Http\Request $request) {
+	$token = str_random(60);
+	$data = [
+		'token' => $token,
+		'view' => 'agent-invitation',
+		'subject' => 'Invitation By ' . auth()->user()->email,
+		'link' => route('agent.signup'),
+	];
+	mailService($request->email, json_decode(json_encode($data)));
+	return success('Invitation has been sent');
+})->name('admin.sendInvitation');

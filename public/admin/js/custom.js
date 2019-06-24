@@ -24,7 +24,7 @@ $(document).ready(function () {
 		$(".grid-view-wrapper").show();
 	});
 
-	// $(".additional-info .input-style").attr("disabled", true);
+	$(".additional-info .input-style").attr("disabled", true);
 
 	$(".edit-profile").click(function () {
 		$(".additional-info .input-style").attr("disabled", false);
@@ -32,11 +32,11 @@ $(document).ready(function () {
 		$(".update-profile").show()
 	});
 
-	// $(".update-profile").click(function () {
-	// 	$(".additional-info .input-style").attr("disabled", true);
-	// 	$(this).hide();
-	// 	$(".edit-profile").show()
-	// });
+	$(".update-profile").click(function () {
+		// $(".additional-info .input-style").attr("disabled", true);
+		$(this).hide();
+		$(".edit-profile").show()
+	});
 
 	$('#datepicker').datepicker({
 		uiLibrary: 'bootstrap4'
