@@ -98,12 +98,12 @@
                     <div class="row">
                         <div class="col-sm-12 mb-3">
                             <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" class="custom-control-input" id="signup-option1" name="signup-option">
-                                <label class="custom-control-label" for="signup-option1">Finding a Home ( Client )</label>
+                                <input type="radio" value="3" class="custom-control-input" id="user_type1" name="user_type">
+                                <label class="custom-control-label" for="user_type1">Finding a Home ( Client )</label>
                             </div>
                             <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" class="custom-control-input" id="signup-option2" name="signup-option">
-                                <label class="custom-control-label" for="signup-option2">Finding a Home ( Agent )</label>
+                                <input type="radio" value="2" class="custom-control-input" id="user_type2" name="user_type">
+                                <label class="custom-control-label" for="user_type2">Finding a Home ( Agent )</label>
                             </div>
                         </div>
                         <div class="col-sm-6">
@@ -139,7 +139,7 @@
                         </div>
                         <div class="col-sm-12">
                             <div class="form-group">
-                                {!! Form::text('password', null, ['class'=>'input-style', 'placeholder'=>'Password']) !!}
+                                {!! Form::password('password', ['class'=>'input-style', 'placeholder'=>'Password']) !!}
                                 @if ($errors->has('password'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('password') }}</strong>
@@ -149,7 +149,7 @@
                         </div>
                         <div class="col-sm-12">
                             <div class="form-group">
-                                {!! Form::text('password_confirmation', null, ['class'=>'input-style', 'placeholder'=>'Confirm Password']) !!}
+                                {!! Form::password('password_confirmation', ['class'=>'input-style', 'placeholder'=>'Confirm Password']) !!}
                                 @if ($errors->has('password_confirmation'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('password_confirmation') }}</strong>
@@ -157,10 +157,6 @@
                                 @endif
                             </div>
                         </div>
-                    </div>
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="agent" name="agent">
-                        <label class="custom-control-label" for="agent-checkbox">I am an Agent</label>
                     </div>
                     <div class="text-center mt-3 mb-4">
                         <button class="btn-default">Signup</button>

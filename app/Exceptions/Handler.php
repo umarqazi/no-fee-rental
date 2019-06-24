@@ -80,10 +80,9 @@ class Handler extends ExceptionHandler {
 			break;
 
 		default:
-			// code...
+			return redirect('/')->with(['message' => 'Login Required']);
 			break;
 		}
-		dd($request, $exception);
 		return abort(401);
 	}
 }

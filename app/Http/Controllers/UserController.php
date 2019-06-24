@@ -51,7 +51,7 @@ class UserController extends Controller {
 	/**
 	 * @return \Illuminate\Contracts\View\View
 	 */
-	public function changePassword() {
+	public function changePassword($token) {
 		return view::make('change-password');
 	}
 
@@ -72,25 +72,5 @@ class UserController extends Controller {
 
 		return Redirect::to(route('profile'))->with($notification);
 
-	}
-
-	public function addUser(Request $request) {
-		dd($request->all());
-		return ($this->user_service->registerUser(new UserForm($request->all())))
-		? response()->json(['message' => 'User added successfully.', 'alert_type' => 'success'], 200)
-		: response()->json(['message' => 'Something went wrong.', 'alert_type' => 'error'], 400);
-	}
-
-	public function visibilityToggle($id) {
-		$status = $this->user_service->updateStatus($id);
-		return (isset($status))
-		? redirect()->back()->with(['message' => ($status) ? 'User Active' : 'User Deactive', 'alert_type' => 'success'])
-		: redirect()->back()->with(['message' => 'Something went wrong', 'alert_type' => 'error']);
-	}
-
-	public function deleteUser($id) {
-		return ($this->user_service->deleteUser($id))
-		? redirect()->back()->with(['message' => 'User Deleted', 'alert_type' => 'success'])
-		: redirect()->back()->with(['message' => 'Something went wrong', 'alert_type' => 'error']);
 	}
 }

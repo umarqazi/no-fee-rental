@@ -30,7 +30,7 @@
 				<img src="assets/images/agent-image.jpg" alt="" />
 				<div>Agent {{auth()->user()->first_name}} <i class="fa fa-chevron-down"></i>
 					<ul>
-						<li><a href="profile.html">Dashboard</a></li>
+						<li><a href="/agent/home">Dashboard</a></li>
 						<li><a href="profile.html">Profile</a></li>
 						<li><a href="{{route('agent.logout')}}">Logout</a></li>
 					</ul>

@@ -4,6 +4,7 @@
         <div class="notifications">
             <div>
                 <a href="#"><img src="{!! asset('admin/images/bell-icon.png') !!}" alt="" /></a>
+
             </div>
         </div>
         <sapn class="menu-icon">
@@ -28,3 +29,4 @@
         </div>
     </div>
 </header>
+@include('admin.layouts.scripts')

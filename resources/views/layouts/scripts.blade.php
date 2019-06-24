@@ -6,11 +6,11 @@
 <script src="{{asset('assets/js/pignose.calendar.full.min.js')}}"></script>
 <script src="{{asset('assets/js/jquery.validate.min.js')}}"></script>
 <script src="{{asset('assets/js/custom.js')}}"></script>
-<script src="{{asset('assets/js/toaster.js')}}"></script>
-<script>
+<script src="{{asset('assets/js/toastr.js')}}"></script>
     @if(session('message'))
-    toastr.{!! session('alert_type') !!}("{{ session('message') }}");
+    	{!! toast(session('message'), session('alert_type')) !!}
     @endif
+<script>
     @if (session('status'))
     toastr.success("{{ session('status') }}");
     @endif

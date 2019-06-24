@@ -40,11 +40,4 @@ class HomeController extends Controller {
 	public function viewPropertyListing() {
 		return view::make('admin.listing.property-listing');
 	}
-
-	/**
-	 *
-	 */
-	public function profile() {
-		return view::make('admin.profile');
-	}
 }

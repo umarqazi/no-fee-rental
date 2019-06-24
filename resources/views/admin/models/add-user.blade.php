@@ -9,59 +9,52 @@
             </div>
 
             <!-- Modal body -->
-            <form method="post" id="add-user" action="{{ route('admin.addUser') }}" enctype="multipart/form-data">
-            @csrf
+            {!! Form::open(['method' => 'post', 'url' => route('admin.addUser'), 'enctype' => 'multipart/form-data']) !!}
             <div class="modal-body">
 
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>First Name </label>
-                            <input type="text" name="first_name" class="input-style" />
+                            {!! Form::text('first_name', '', ['class' => 'input-style']) !!}
                             {{ $errors->first('first_name') }}
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Last Name </label>
-                            <input type="text" name="last_name" class="input-style" />
+                            {!! Form::text('last_name', '', ['class' => 'input-style']) !!}
                             {{ $errors->first('last_name') }}
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Email</label>
-                            <input type="text" name="email" class="input-style" />
+                            {!! Form::email('email', '', ['class' => 'input-style']) !!}
                             {{ $errors->first('email') }}
                         </div>
                     </div>
                      <div class="col-md-6">
                         <div class="form-group">
                             <label>Phone Number</label>
-                            <input type="text" name="phone_number" class="input-style" />
+                            {!! Form::text('phone_number', '', ['class' => 'input-style']) !!}
                             {{ $errors->first('phone_number') }}
                         </div>
                     </div>
                     <div class="col-md-12">
                         <div class="form-group">
                             <label>Type </label>
-                            <select class="input-style" name="user_type">
-                                <option value="">Select User Type</option>
-                                @foreach($roles as $role)
-                                <option value="{{$role->id}}">{{$role->name}}</option>
-                                @endforeach
-                            </select>
+                            {!! Form::select('user_type', $roles, '', ['class' => 'input-style']) !!}
                             {{ $errors->first('user_type') }}
                         </div>
                     </div>
                 </div>
             </div>
-
             <!-- Modal footer -->
             <div class="modal-footer justify-content-center">
-                <button type="submit" id="add-user-button" class="btn-default">Add User</button>
+                {!! Form::submit('Add User', ['class' => 'btn-default']) !!}
             </div>
-            </form>
+            {!! Form::close() !!}
 
         </div>
     </div>

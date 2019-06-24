@@ -25,8 +25,8 @@ Route::post('contact-us', 'ContactUsController@contactUs')->name('contact-us');
 Route::get('/press', function () {
 	return view('pages.press');
 })->name('press');
-Route::get('/change-password', 'UserController@changePassword')->name('change-password');
-Route::post('/change-password', 'UserController@updatePassword')->name('change-password');
+Route::get('/change-password/{id}', 'UserController@changePassword')->name('change-password');
+// Route::post('/change-password', 'UserController@updatePassword')->name('change-password');
 
 // Login route for all user type
 Route::post('/login')->name('attempt.login')->middleware('authguard');
