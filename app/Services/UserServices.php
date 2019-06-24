@@ -9,6 +9,7 @@
 namespace App\Services;
 
 use App\Forms\IForm;
+use App\Repository\RolesRepo;
 use App\Repository\UserRepo;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
@@ -17,11 +18,14 @@ class UserServices {
 
 	protected $user_repo;
 
+	protected $roles_repo;
+
 	/**
 	 * UserServices constructor.
 	 */
-	public function __construct(UserRepo $repo) {
+	public function __construct(UserRepo $repo, RolesRepo $roles) {
 		$this->user_repo = $repo;
+		$this->roles_repo = $roles;
 	}
 
 	/**
@@ -81,5 +85,9 @@ class UserServices {
 
 	public function deleteUser($id) {
 		return $this->user_repo->delete($id);
+	}
+
+	function userRoles() {
+		return $this->roles_repo->getRoles();
 	}
 }
