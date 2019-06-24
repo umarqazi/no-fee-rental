@@ -1,4 +1,4 @@
-@extends('layouts.base-static')
+@extends('layouts.app')
 @section('title', 'Forgot Password')
 @section('content')
     <section class="inner-pages wow fadeIn" data-wow-delay="0.2s">
