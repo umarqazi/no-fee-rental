@@ -27,10 +27,10 @@
     23 => 'Illuminate\\Notifications\\NexmoChannelServiceProvider',
     24 => 'Fideloper\\Proxy\\TrustedProxyServiceProvider',
     25 => 'Laravel\\Tinker\\TinkerServiceProvider',
-    26 => 'Collective\\Html\\HtmlServiceProvider',
-    27 => 'Spatie\\Permission\\PermissionServiceProvider',
-    28 => 'BeyondCode\\DumpServer\\DumpServerServiceProvider',
-    29 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
+    26 => 'BeyondCode\\DumpServer\\DumpServerServiceProvider',
+    27 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
+    28 => 'Collective\\Html\\HtmlServiceProvider',
+    29 => 'Spatie\\Permission\\PermissionServiceProvider',
     30 => 'Collective\\Html\\HtmlServiceProvider',
     31 => 'App\\Providers\\AppServiceProvider',
     32 => 'App\\Providers\\AuthServiceProvider',
@@ -53,8 +53,8 @@
     10 => 'Illuminate\\Notifications\\SlackChannelServiceProvider',
     11 => 'Illuminate\\Notifications\\NexmoChannelServiceProvider',
     12 => 'Fideloper\\Proxy\\TrustedProxyServiceProvider',
-    13 => 'Spatie\\Permission\\PermissionServiceProvider',
-    14 => 'BeyondCode\\DumpServer\\DumpServerServiceProvider',
+    13 => 'BeyondCode\\DumpServer\\DumpServerServiceProvider',
+    14 => 'Spatie\\Permission\\PermissionServiceProvider',
     15 => 'App\\Providers\\AppServiceProvider',
     16 => 'App\\Providers\\AuthServiceProvider',
     17 => 'App\\Providers\\EventServiceProvider',
@@ -165,11 +165,11 @@
     'validator' => 'Illuminate\\Validation\\ValidationServiceProvider',
     'validation.presence' => 'Illuminate\\Validation\\ValidationServiceProvider',
     'command.tinker' => 'Laravel\\Tinker\\TinkerServiceProvider',
+    'NunoMaduro\\Collision\\Contracts\\Provider' => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
     'html' => 'Collective\\Html\\HtmlServiceProvider',
     'form' => 'Collective\\Html\\HtmlServiceProvider',
     'Collective\\Html\\HtmlBuilder' => 'Collective\\Html\\HtmlServiceProvider',
     'Collective\\Html\\FormBuilder' => 'Collective\\Html\\HtmlServiceProvider',
-    'NunoMaduro\\Collision\\Contracts\\Provider' => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
   ),
   'when' => 
   array (
@@ -212,10 +212,10 @@
     'Laravel\\Tinker\\TinkerServiceProvider' => 
     array (
     ),
-    'Collective\\Html\\HtmlServiceProvider' => 
+    'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider' => 
     array (
     ),
-    'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider' => 
+    'Collective\\Html\\HtmlServiceProvider' => 
     array (
     ),
   ),

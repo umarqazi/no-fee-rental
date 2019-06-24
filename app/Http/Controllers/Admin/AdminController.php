@@ -4,13 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use App\Forms\User\UserForm;
 use App\Http\Controllers\Controller;
-use App\Services\UserService;
+use App\Services\UserServices;
 
 class AdminController extends Controller {
 
 	private $service;
 
-	public function __construct(UserService $service) {
+	public function __construct(UserServices $service) {
 		$this->service = $service;
 	}
 
