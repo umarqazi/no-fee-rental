@@ -28,6 +28,8 @@ class MailHandler extends Mailable {
 	public function build() {
 		$view = null;
 		$data = $this->data;
+
+		// Select View which send to user
 		switch ($this->data->view) {
 		case 'create-user':
 			$view = 'mails.create_user';

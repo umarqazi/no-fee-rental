@@ -32,9 +32,9 @@ class UserService {
 	 * @param $data
 	 * @return bool
 	 */
-	function updateAdminProfile(IForm $form, $data) {
+	function updateProfile(IForm $form) {
 		$form->validate();
-		return $this->user_repo->update($form->collection, $data->id);
+		return $this->user_repo->update($form->toArray(), (toObject($form))->id);
 	}
 
 	/**
@@ -42,13 +42,17 @@ class UserService {
 	 * @param $form
 	 * @return bool
 	 */
-	function updateProfileImage($profile_image, $form) {
-		$destinationPath = 'data/' . $form->id . '/profile_image';
+	function updateProfileImage($profile_image, $id) {
+		$destinationPath = 'data/' . $id . '/profile_image';
 		$image_name = uploadImage($profile_image, $destinationPath);
 		$image_data = ['profile_image' => $image_name];
-		return $this->user_repo->update($image_data, $form->id);
+		return $this->user_repo->update($image_data, $id);
 	}
 
+	/**
+	 * @param $form Instance
+	 * @return bool
+	 */
 	function changePassword(IForm $form) {
 		$form->validate();
 		$user_password = ['password' => Hash::make($form->password)];
@@ -56,35 +60,61 @@ class UserService {
 		return $this->user_repo->update($user_password, $user_id);
 	}
 
+	/**
+	 * @param null
+	 * @return mixed | array
+	 */
 	function allAgents() {
 		$this->user_repo->paginate = 5;
 		return $this->user_repo->showAgents();
 	}
 
+	/**
+	 * @param null
+	 * @return mixed | array
+	 */
 	function allRenters() {
 		$this->user_repo->paginate = 5;
 		return $this->user_repo->showRenters();
 	}
 
+	/**
+	 * @param id | (int)
+	 * @return bool
+	 */
 	function updateStatus($id) {
 		return $this->user_repo->active_deactive($id);
 	}
 
+	/**
+	 * @param id | (int)
+	 * @return bool
+	 */
 	function deleteUser($id) {
 		return $this->user_repo->delete($id);
 	}
 
+	/**
+	 * @param id | (int)
+	 * @return mixed | array
+	 */
 	function userRoles() {
 		return $this->roles_repo->getRoles();
 	}
 
+	/**
+	 * @param $form instance
+	 * @return bool
+	 */
 	function add_new_user(IForm $user) {
 		$user->validate();
-		if (!empty($this->user_repo->create($user->toArray()))) {
+		$data = $this->user_repo->create($user->toArray());
+		if (!empty($data)) {
 			$email = [
 				'first_name' => $user->first_name,
 				'subject' => 'Account Created',
 				'view' => 'create-user',
+				'link' => route('user.change_password', base64_encode($user->email)),
 			];
 
 			mailService($user->email, toObject($email));

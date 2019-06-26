@@ -14,7 +14,7 @@ class CreateAgentInvitesTable extends Migration {
 		Schema::create('agent_invites', function (Blueprint $table) {
 			$table->increments('id');
 			$table->unsignedInteger('invited_by');
-			$table->string('invitation_email');
+			$table->string('email');
 			$table->string('token', 60);
 			$table->timestamps();
 

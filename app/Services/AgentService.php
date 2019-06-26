@@ -26,7 +26,6 @@ class AgentService {
 	 */
 	function send_invite_to_agent(IForm $agent) {
 		$agent->validate();
-
 		$email = [
 			'view' => 'agent-invitation',
 			'subject' => 'Invitation By ' . auth()->user()->email,
@@ -34,8 +33,8 @@ class AgentService {
 		];
 
 		DB::beginTransaction();
-		$this->model->create($agent->toArray());
-		mailService($agent->invitation_email, toObject($email));
+		$this->repo->invite_agent_record($agent->toArray());
+		mailService($agent->email, toObject($email));
 		DB::commit();
 		return true;
 	}

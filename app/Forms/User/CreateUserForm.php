@@ -44,7 +44,7 @@ class CreateUserForm extends BaseForm {
 		return [
 			'first_name' => 'required|string|max:255',
 			'last_name' => 'required|string|max:255',
-			'user_type' => !empty($this->user->user_type) ? 'required' : '',
+			'user_type' => 'required',
 			'email' => 'required|email|unique:users',
 			'phone_number' => 'required|max:16',
 		];

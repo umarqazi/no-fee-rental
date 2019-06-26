@@ -35,12 +35,17 @@
                         </div>
                         <div class="col-sm-12">
                             <div class="form-group">
-                                {!! Form::text('email', $authenticate_token->invitation_email, ['class'=>'input-style', 'readonly', 'placeholder'=>'Email']) !!}
+                                {!! Form::text('email', $authenticate_token->email, ['class'=>'input-style', 'readonly', 'placeholder'=>'Email']) !!}
                                 @if ($errors->has('email'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('email') }}</strong>
                                     </span>
                                 @endif
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                {!! Form::text('phone_number', null, ['class'=>'input-style', 'placeholder'=>'Phone Number']) !!}
                             </div>
                         </div>
                         <div class="col-sm-12">

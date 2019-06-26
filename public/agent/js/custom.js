@@ -25,8 +25,10 @@ $(document).ready(function () {
 	});
 
 	$(".additional-info .input-style").attr("disabled", true);
+	$('#image-picker').hide();
 
 	$(".edit-profile").click(function () {
+		$('#image-picker').show();
 		$(".additional-info .input-style").attr("disabled", false);
 		$(this).hide();
 		$(".update-profile").show()

@@ -27,16 +27,19 @@ Route::post('contact-us', 'ContactUsController@contactUs')->name('contact-us');
 Route::get('/press', function () {
 	return view('pages.press');
 })->name('press');
-// Route::get('/change-password/{id}', 'UserController@changePassword')->name('change-password');
-Route::post('/change-password', 'UserController@updatePassword')->name('change-password');
+
 Route::post('newsletter', 'NewsletterController@store');
+
+// Added User By Admin Change Password Routes
+Route::get('/change-password/{token}', 'UserController@changePassword')->name('user.change_password');
+Route::post('/change-password/{token}', 'UserController@updatePassword')->name('change-password');
 
 // Login route for all user type
 Route::post('/login')->name('attempt.login')->middleware('authguard');
 
 // Route for Invited Agent Signup
 Route::get('/signup/{token}', function ($token) {
-	$authenticate_token = \App\AgentInvites::select(['id', 'token', 'invitation_email'])->whereToken($token)->first();
+	$authenticate_token = \App\AgentInvites::select(['id', 'token', 'email'])->whereToken($token)->first();
 	if (!empty($authenticate_token) && $authenticate_token->token == $token) {
 		return view('invited_agent_signup', compact('authenticate_token'));
 	}

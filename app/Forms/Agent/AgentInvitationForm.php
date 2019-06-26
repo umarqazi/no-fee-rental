@@ -20,7 +20,7 @@ class AgentInvitationForm extends BaseForm {
 	function toArray() {
 		return [
 			'invited_by' => $this->invite_by,
-			'invitation_email' => $this->invitation_email,
+			'email' => $this->email,
 			'token' => $this->token,
 		];
 	}
@@ -31,7 +31,7 @@ class AgentInvitationForm extends BaseForm {
 	function rules() {
 		return [
 			'invited_by' => 'required|integer',
-			'invitation_email' => 'required|email',
+			'email' => 'required|email|unique:users',
 			'token' => 'required|string',
 		];
 	}

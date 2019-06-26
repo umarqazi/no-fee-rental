@@ -16,6 +16,9 @@
                     <label>Invite Member:</label>
                     {!! Form::open(['url' => route('admin.sendInvitation'), 'method' => 'post']) !!}
                     {!! Form::email('email', null, ['class' => 'input-style']) !!}
+                    <span class="invalid-feedback" role="alert" style="display: block;">
+                        {{ $errors->first('email') }}
+                    </span>
                     {!! Form::submit('Send', ['class' => 'btn-default large-btn mt-4']) !!}
                     {!! Form::close() !!}
                 </div>

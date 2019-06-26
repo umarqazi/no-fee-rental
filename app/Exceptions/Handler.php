@@ -64,11 +64,11 @@ class Handler extends ExceptionHandler {
 		}
 		switch ($exception->guards()[0]) {
 		case 'admin':
-			return redirect('/')->with(['message' => 'Login Required', 'alert_type' => 'error']);
+			return redirect('/')->with(['message' => 'Your login session has been expired', 'alert_type' => 'error']);
 			break;
 
 		case 'agent':
-			return redirect('/')->with(['message' => 'Login Required']);
+			return redirect('/')->with(['message' => 'Your login session has been expired', 'alert_type' => 'error']);
 			break;
 
 		case 'renter':
@@ -80,7 +80,7 @@ class Handler extends ExceptionHandler {
 			break;
 
 		default:
-			return redirect('/')->with(['message' => 'Login Required']);
+			return redirect('/')->with(['message' => 'Your login session has been expired']);
 			break;
 		}
 		return abort(401);

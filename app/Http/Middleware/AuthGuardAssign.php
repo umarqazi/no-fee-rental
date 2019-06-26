@@ -27,7 +27,7 @@ class AuthGuardAssign {
 			break;
 
 		case 3:
-			return (new \App\Http\Controllers\Renter\LoginController)->login($request);
+			return (new \App\Http\Controllers\Auth\LoginController)->login($request);
 			break;
 
 		default:
