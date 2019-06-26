@@ -1,4 +1,4 @@
-@extends('admin.layouts.base')
+@extends('secured-layouts.app')
 
 @section('title', 'Nofee Rental')
 

@@ -22,13 +22,19 @@
 </head>
 
 <body>
-	@include('admin.layouts.header')
-	<div class="main-wrapper">
-		@section('sidebar')
-			@include('admin.layouts.sidebar')
-		@show
-		@yield('content')
-	</div>
-	@include('admin.layouts.footer')
+@include('secured-layouts.header')
+<div class="main-wrapper">
+	@section('sidebar')
+		@if(Auth::user())
+			@if(Auth::user()->hasRole('admin'))
+				@include('secured-layouts.sidebar')
+			@else
+				@include('secured-layouts.agent-sidebar')
+			@endif
+		@endif
+	@show
+	@yield('content')
+</div>
+@include('secured-layouts.footer')
 </body>
 </html>
