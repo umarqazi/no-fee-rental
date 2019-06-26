@@ -15,7 +15,8 @@
             <div>{!! Auth::user()->first_name !!} {!! Auth::user()->last_name !!} <i class="fa fa-chevron-down"></i>
                 <ul>
                     <li><a href="{!! route('admin.profile') !!}">Account</a></li>
-                    <li><a class="dropdown-item" href="{{ route('logout') }}"
+                    <li>
+                        <a class="dropdown-item" href="{{ route('logout') }}"
                            onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                             {{ __('Logout') }}
@@ -23,7 +24,8 @@
 
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             @csrf
-                        </form></li>
+                        </form>
+                    </li>
                 </ul>
             </div>
         </div>
