@@ -1,4 +1,4 @@
-@extends('admin.layouts.app')
+@extends('secured-layouts.app')
 @section('title', 'no fee rental')
 @section('content')
 <div class="wrapper">

@@ -11,7 +11,7 @@
             <i class="fa fa-bars"></i>
         </sapn>
         <div class="avtar">
-            <img src="{!! asset('storage/'.Auth::user()->profile_image) !!}" alt="" />
+            <img src="{!! !empty(Auth::user()->profile_image) ? asset('storage/'.Auth::user()->profile_image) : asset('assets/images/default-image.jpeg')!!}" alt="" />
             <div>{!! Auth::user()->first_name !!} {!! Auth::user()->last_name !!} <i class="fa fa-chevron-down"></i>
                 <ul>
                     <li><a href="{!! route('admin.profile') !!}">Account</a></li>
@@ -31,4 +31,4 @@
         </div>
     </div>
 </header>
-@include('admin.layouts.scripts')
+@include('secured-layouts.scripts')

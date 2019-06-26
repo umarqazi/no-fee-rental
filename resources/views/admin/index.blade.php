@@ -1,4 +1,4 @@
-@extends('admin.layouts.app')
+@extends('secured-layouts.app')
 @section('title', 'Users')
 @section('content')
     <div class="wrapper">
