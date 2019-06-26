@@ -14,7 +14,7 @@ use App\Repository\UserRepo;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 
-class UserServices {
+class UserService {
 
 	protected $user_repo;
 
@@ -23,7 +23,7 @@ class UserServices {
 	/**
 	 * UserServices constructor.
 	 */
-	public function __construct(UserRepo $repo, RolesRepo $roles) {
+	function __construct(UserRepo $repo, RolesRepo $roles) {
 		$this->user_repo = $repo;
 		$this->roles_repo = $roles;
 	}
@@ -32,7 +32,7 @@ class UserServices {
 	 * @param $data
 	 * @return bool
 	 */
-	public function updateAdminProfile(IForm $form, $data) {
+	function updateAdminProfile(IForm $form, $data) {
 		$form->validate();
 		return $this->user_repo->update($form->collection, $data->id);
 	}
@@ -42,53 +42,55 @@ class UserServices {
 	 * @param $form
 	 * @return bool
 	 */
-	public function updateProfileImage($profile_image, $form) {
+	function updateProfileImage($profile_image, $form) {
 		$destinationPath = 'data/' . $form->id . '/profile_image';
 		$image_name = uploadImage($profile_image, $destinationPath);
 		$image_data = ['profile_image' => $image_name];
 		return $this->user_repo->update($image_data, $form->id);
 	}
 
-	public function changePassword(IForm $form) {
+	function changePassword(IForm $form) {
 		$form->validate();
 		$user_password = ['password' => Hash::make($form->password)];
 		$user_id = ['id' => $form->user_id];
 		return $this->user_repo->update($user_password, $user_id);
 	}
 
-	public function registerUser(IForm $form) {
-		$form->validate();
-		if (!empty($this->user_repo->create($form->collection))) {
-			$data = $form->user;
-			$data->view = 'create-user';
-			$data->token = str_random(60);
-			$data->subject = 'Account Created';
-			mailService($form->user->email, $data);
-			return true;
-		}
-
-		return false;
-	}
-
-	public function allAgents() {
+	function allAgents() {
 		$this->user_repo->paginate = 5;
 		return $this->user_repo->showAgents();
 	}
 
-	public function allRenters() {
+	function allRenters() {
 		$this->user_repo->paginate = 5;
 		return $this->user_repo->showRenters();
 	}
 
-	public function updateStatus($id) {
+	function updateStatus($id) {
 		return $this->user_repo->active_deactive($id);
 	}
 
-	public function deleteUser($id) {
+	function deleteUser($id) {
 		return $this->user_repo->delete($id);
 	}
 
 	function userRoles() {
 		return $this->roles_repo->getRoles();
+	}
+
+	function add_new_user(IForm $user) {
+		$user->validate();
+		if (!empty($this->user_repo->create($user->toArray()))) {
+			$email = [
+				'first_name' => $user->first_name,
+				'subject' => 'Account Created',
+				'view' => 'create-user',
+			];
+
+			mailService($user->email, toObject($email));
+			return true;
+		}
+
+		return false;
 	}
 }

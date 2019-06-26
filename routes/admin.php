@@ -24,14 +24,4 @@ Route::post('/password-update', 'Admin\AdminController@updatePassword')->name('a
 Route::post('/profile', 'UserController@editProfile')->name('edit-profile');
 Route::get('/property-listing', 'Admin\AdminController@viewPropertyListing')->name('property-listing');
 
-Route::post('/send-invitation', function (\Illuminate\Http\Request $request) {
-	$token = str_random(60);
-	$data = [
-		'token' => $token,
-		'view' => 'agent-invitation',
-		'subject' => 'Invitation By ' . auth()->user()->email,
-		'link' => route('agent.signup'),
-	];
-	mailService($request->email, json_decode(json_encode($data)));
-	return success('Invitation has been sent');
-})->name('admin.sendInvitation');
+Route::post('/send-invitation', 'Admin\AdminController@agentInvitations')->name('admin.sendInvitation');

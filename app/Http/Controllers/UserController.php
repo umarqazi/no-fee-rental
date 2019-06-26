@@ -8,11 +8,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Forms\Agent\CreateAgentForm;
 use App\Forms\User\ChangePasswordForm;
-use App\Forms\User\UserForm;
 use App\Http\Requests\ChangePassword;
 use App\Http\Requests\User;
-use App\Services\UserServices;
+use App\Services\AgentService;
+use App\Services\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -26,8 +27,9 @@ class UserController extends Controller {
 	/**
 	 * UserController constructor.
 	 */
-	public function __construct(UserServices $service) {
-		$this->user_service = $service;
+	public function __construct(UserService $user_service, AgentService $agent_service) {
+		$this->user_service = $user_service;
+		$this->agent_service = $agent_service;
 	}
 
 	/**
@@ -72,5 +74,22 @@ class UserController extends Controller {
 
 		return Redirect::to(route('profile'))->with($notification);
 
+	}
+
+	/**
+	 * @param Agent $request
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
+	function invited_agent_sign_up(Request $request) {
+		$form = new CreateAgentForm();
+		$form->first_name = $request->first_name;
+		$form->last_name = $request->last_name;
+		$form->email = $request->email;
+		$form->user_type = 2;
+		$form->password = $request->password;
+		$form->password_confirmation = $request->password_confirmation;
+		return $this->agent_service->register_new_agent($form)
+		? redirect('/')->with(['message' => "Your account has been created. Now you can logged in.", 'alert_type' => 'success'])
+		: error('Something went wrong.');
 	}
 }

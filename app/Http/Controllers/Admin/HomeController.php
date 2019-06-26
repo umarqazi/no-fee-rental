@@ -19,7 +19,7 @@ class HomeController extends Controller {
 	 *
 	 * @return void
 	 */
-	public function __construct(\App\Services\UserServices $service) {
+	public function __construct(\App\Services\UserService $service) {
 		$this->service = $service;
 	}
 

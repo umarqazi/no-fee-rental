@@ -43,3 +43,7 @@ function toast($message, $type) {
 	}
 	return "<script>toastr.{$select}('{$message}');</script>";
 }
+
+function toObject($data) {
+	return json_decode(json_encode($data));
+}
