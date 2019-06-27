@@ -4,20 +4,20 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAmenitiesTable extends Migration {
+class CreateListingImagesTable extends Migration {
 	/**
 	 * Run the migrations.
 	 *
 	 * @return void
 	 */
 	public function up() {
-		Schema::create('amenities', function (Blueprint $table) {
+		Schema::create('listing_images', function (Blueprint $table) {
 			$table->increments('id');
 			$table->unsignedInteger('listing_id');
-			$table->string('amenity');
-
-			$table->foreign('listing_id')->references('id')->on('listings')->onDelete('cascade')->onEdit('cascade');
+			$table->string('listing_image');
 			$table->timestamps();
+
+			$table->foreign('listing_id')->references('id')->on('listings')->onEdit('cascade')->onDelete('cascade');
 		});
 	}
 
@@ -27,6 +27,6 @@ class CreateAmenitiesTable extends Migration {
 	 * @return void
 	 */
 	public function down() {
-		Schema::dropIfExists('amenities');
+		Schema::dropIfExists('listing_images');
 	}
 }

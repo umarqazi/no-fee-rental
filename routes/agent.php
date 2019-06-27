@@ -8,3 +8,8 @@ Route::post('/update-profile', 'Agent\AgentController@profileUpdate')->name('age
 
 Route::post('/password-update', 'Agent\AgentController@updatePassword')->name('agent.updatePassword');
 Route::get('/password-reset', 'Agent\AgentController@resetPassword')->name('agent.resetPassword');
+
+Route::get('/add-listing', 'Agent\ListingController@listing_form')->name('agent.addListing');
+
+Route::post('/upload-listing-images', 'Agent\ListingController@uploadImages')->name('agent.litingImages');
+Route::post('/add-listing', 'Agent\ListingController@addListing')->name('agent.createListing');

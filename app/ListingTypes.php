@@ -4,8 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ListingImages extends Model {
-	protected $fillable = ['listing_id', 'listing_image'];
+class ListingTypes extends Model {
+	protected $fillable = ['listing_id', 'property_type', 'value'];
 
 	public function listing() {
 		return $this->hasOne('App\Listing', 'id', 'listing_id');
