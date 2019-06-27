@@ -98,13 +98,16 @@
                     <div class="row">
                         <div class="col-sm-12 mb-3">
                             <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" value="3" class="custom-control-input" id="user_type1" name="user_type">
-                                <label class="custom-control-label" for="user_type1">Finding a Home ( Client )</label>
+                                <input type="radio" value="3" class="custom-control-input" id="signup-option1" name="user_type">
+                                <label class="custom-control-label" for="signup-option1">Finding a Home ( Client )</label>
                             </div>
                             <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" value="2" class="custom-control-input" id="user_type2" name="user_type">
-                                <label class="custom-control-label" for="user_type2">Finding a Home ( Agent )</label>
+                                <input type="radio" value="2" class="custom-control-input" id="signup-option2" name="user_type">
+                                <label class="custom-control-label" for="signup-option2">Finding a Home ( Agent )</label>
                             </div>
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $errors->first('user_type') }}</strong>
+                            </span>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">

@@ -8,13 +8,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Forms\Agent\CreateAgentForm;
 use App\Forms\User\ChangePasswordForm;
-use App\Forms\User\UserForm;
 use App\Http\Requests\ChangePassword;
 use App\Http\Requests\User;
-use App\Services\UserServices;
+use App\Services\AgentService;
+use App\Services\UserService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\View;
 
@@ -26,8 +26,9 @@ class UserController extends Controller {
 	/**
 	 * UserController constructor.
 	 */
-	public function __construct(UserServices $service) {
-		$this->user_service = $service;
+	public function __construct(UserService $user_service, AgentService $agent_service) {
+		$this->user_service = $user_service;
+		$this->agent_service = $agent_service;
 	}
 
 	/**
@@ -52,25 +53,44 @@ class UserController extends Controller {
 	 * @return \Illuminate\Contracts\View\View
 	 */
 	public function changePassword($token) {
-		return view::make('change-password');
+		return view::make('change-password', compact('token'));
 	}
 
 	/**
 	 * @param ChangePassword $request
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function updatePassword(Request $request) {
+	public function updatePassword(Request $request, $token) {
+		$user = \App\User::select('id')->whereEmail(base64_decode($token))->first();
 		$change_password = new ChangePasswordForm();
 		$change_password->password = $request->password;
 		$change_password->password_confirmation = $request->password_confirmation;
-		$change_password->user_id = Auth::user()->id;
+		$change_password->user_id = $user->id;
 		$this->user_service->changePassword($change_password);
 		$notification = [
-			'message' => 'Password has been updated successfully',
+			'message' => 'Password has been set successfully. Now you can logged in',
 			'alert_type' => 'success',
 		];
 
-		return Redirect::to(route('profile'))->with($notification);
+		return redirect('/')->with($notification);
 
+	}
+
+	/**
+	 * @param Agent $request
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
+	public function invited_agent_sign_up(Request $request) {
+		$form = new CreateAgentForm();
+		$form->first_name = $request->first_name;
+		$form->last_name = $request->last_name;
+		$form->phone_number = $request->phone_number;
+		$form->email = $request->email;
+		$form->user_type = 2;
+		$form->password = $request->password;
+		$form->password_confirmation = $request->password_confirmation;
+		return $this->agent_service->register_new_agent($form)
+		? redirect('/')->with(['message' => "Your account has been created. Now you can logged in.", 'alert_type' => 'success'])
+		: error('Something went wrong.');
 	}
 }

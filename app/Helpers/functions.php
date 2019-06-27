@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Mail;
 
 // Use to Upload Images
-function uploadImage($image, $path) {
+function uploadImage($image, $path, $unlinkOld = false) {
 	$name = time() . '.' . $image->getClientOriginalExtension();
 	if (!File::isDirectory($path)) {
 		File::makeDirectory($path, 0777, true, true);
@@ -42,4 +42,8 @@ function toast($message, $type) {
 		break;
 	}
 	return "<script>toastr.{$select}('{$message}');</script>";
+}
+
+function toObject($data) {
+	return json_decode(json_encode($data));
 }

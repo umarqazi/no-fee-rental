@@ -1,7 +1,7 @@
 <div class="mobile-menu">
     <i class="fa fa-times close-menu-btn"></i>
     <div class="user-avtar">
-        <a href="{!! url('/') !!}"><img src="{!! asset('assets/images/agent-img.jpg') !!}" alt="" class="avtar" /> Jhone Doe <i class="fa fa-angle-down"></i></a>
+        <a href="{!! url('/') !!}"><img src="{!! asset('assets/images/agent-img.jpg') !!}" alt="" class="avtar" /> {{ (auth()->check()) ? auth()->user()->first_name." ".auth()->user()->last_name : '' }} <i class="fa fa-angle-down"></i></a>
         <div class="user-dropdown">
             <a href="/admin/dashboard">Dashboard </a>
             <a href="#">Profile Setting </a>
@@ -75,7 +75,7 @@
                 </div>
                 @if(Auth::check())
                     <div class="login-user">
-                        <a href="#"><img src="assets/images/agent-img.jpg" alt="" class="avtar" /> Jhone Doe <i class="fa fa-angle-down"></i></a>
+                        <a href="#"><img src="assets/images/agent-img.jpg" alt="" class="avtar" /> {{ auth()->user()->first_name." ".auth()->user()->last_name }} <i class="fa fa-angle-down"></i></a>
                         <div class="user-dropdown">
                             <a href="/admin/dashboard">Dashboard </a>
                             <a href="#">Profile Setting </a>

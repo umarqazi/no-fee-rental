@@ -9,11 +9,11 @@
         </div>
         <div class="block profile-container">
             <div class="block-body">
-                {!! Form::model($user, ['url' => route('admin.profileUpdate'), 'method' => 'post', 'enctype' => 'multipart/form-data']) !!}
+                {!! Form::model($user, ['url' => route('agent.profileUpdate'), 'method' => 'post', 'enctype' => 'multipart/form-data']) !!}
                 <div class="user-avtar">
                     <div class="img-holder">
                         <img src="{{ !empty($user->profile_image) ? asset('storage/'.$user->profile_image) : asset('assets/images/default-image.jpeg') }}" alt="" />
-                        <label @if($errors->isEmpty()) class="d-none" @endif id="image-picker">
+                        <label @if($errors->isEmpty()) @endif id="image-picker">
                             <i class="fa fa-edit edit-btn"></i>{!! Form::file('profile_image', ['class' => 'd-none']) !!}
                         </label>
                         <div class="col-12">
@@ -83,7 +83,7 @@
                         </div>
 
                         <div class="col-md-12 mt-4 text-center">
-                            <a href="{{ route('admin.resetPassword') }}" class="btn-default large-btn edit-profile" >Change Password</a>
+                            <a href="{{ route('agent.resetPassword') }}" class="btn-default large-btn edit-profile" >Change Password</a>
                             <button type="button" class="btn-default large-btn edit-profile @if(!$errors->isEmpty()) d-none @endif" >Edit Profile</button>
                             {!! Form::submit('Update Profile', ['class' => "btn-default large-btn update-profile"]) !!}
                         </div>

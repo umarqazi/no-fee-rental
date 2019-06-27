@@ -35,4 +35,8 @@ class User extends Authenticatable {
 	protected $casts = [
 		'email_verified_at' => 'datetime',
 	];
+
+	public function agent_invites() {
+		return $this->hasMany('App\AgentInvites', 'invited_by', 'id');
+	}
 }

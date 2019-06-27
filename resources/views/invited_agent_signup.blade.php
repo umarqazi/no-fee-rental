@@ -11,18 +11,8 @@
                 <div class="login-heading">
                     <!-- Signup -->
                 </div>
-                {!! Form::open(['url' => route('register'), 'method' => 'post']) !!}
+                {!! Form::open(['url' => route('agent.signup'), 'method' => 'post']) !!}
                     <div class="row">
-                        <div class="col-sm-12 mb-3">
-                            <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" value="3" class="custom-control-input" id="signup-option1" name="user_type">
-                                <label class="custom-control-label" for="signup-option1">Finding a Home ( Client )</label>
-                            </div>
-                            <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" value="2" class="custom-control-input" id="signup-option2" name="user_type">
-                                <label class="custom-control-label" for="signup-option2">Finding a Home ( Agent )</label>
-                            </div>
-                        </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 {!! Form::text('first_name', null, ['class'=>'input-style', 'placeholder'=>'First Name']) !!}
@@ -45,13 +35,17 @@
                         </div>
                         <div class="col-sm-12">
                             <div class="form-group">
-                                {!! Form::text('email', null, ['class'=>'input-style', 'placeholder'=>'Email']) !!}
+                                {!! Form::text('email', $authenticate_token->email, ['class'=>'input-style', 'readonly', 'placeholder'=>'Email']) !!}
                                 @if ($errors->has('email'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('email') }}</strong>
                                     </span>
                                 @endif
-                                <!-- <p class="finding-home-text">If you would like to syndicate listing into no fee rentals nyc, please use tha same email address that you use for your RealtyMX, Nestio or OLR account.</p> -->
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                {!! Form::text('phone_number', null, ['class'=>'input-style', 'placeholder'=>'Phone Number']) !!}
                             </div>
                         </div>
                         <div class="col-sm-12">

@@ -25,7 +25,7 @@ class UserRepo {
 	 * @return bool
 	 */
 	public function update($data, $id) {
-		return $this->user_model->whereId((int) $id)->update($data);
+		return $this->user_model->whereId($id)->update($data);
 	}
 
 	/**
@@ -41,7 +41,7 @@ class UserRepo {
 	 * @return bool
 	 */
 	public function delete($id) {
-		$record = $this->user_model->findOrFail((int) 10);
+		$record = $this->user_model->findOrFail((int) $id);
 		return ($record) ? $record->delete() : false;
 	}
 

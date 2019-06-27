@@ -14,24 +14,16 @@
 Route::get('/home', 'Admin\HomeController@index')->name('admin.index');
 Route::get('/logout', 'Admin\LoginController@logout')->name('admin.logout');
 Route::get('/show-profile', 'Admin\AdminController@profile')->name('admin.profile');
-Route::get('/password-reset', 'Admin\AdminController@resetPassword')->name('admin.resetPassword');
 Route::get('/delete-user/{id}', 'Admin\AdminController@deleteUser')->name('admin.deleteUser');
 Route::get('/status-update/{id}', 'Admin\AdminController@visibilityToggle')->name('admin.userStatus');
 Route::post('/create-user', 'Admin\AdminController@addUser')->name('admin.addUser');
 Route::post('/update-profile', 'Admin\AdminController@profileUpdate')->name('admin.profileUpdate');
 Route::post('/password-update', 'Admin\AdminController@updatePassword')->name('admin.updatePassword');
+Route::get('/password-reset', 'Admin\AdminController@resetPassword')->name('admin.resetPassword');
 
 Route::post('/profile', 'UserController@editProfile')->name('edit-profile');
 Route::get('/property-listing', 'Admin\AdminController@viewPropertyListing')->name('property-listing');
 
-Route::post('/send-invitation', function (\Illuminate\Http\Request $request) {
-	$token = str_random(60);
-	$data = [
-		'token' => $token,
-		'view' => 'agent-invitation',
-		'subject' => 'Invitation By ' . auth()->user()->email,
-		'link' => route('agent.signup'),
-	];
-	mailService($request->email, json_decode(json_encode($data)));
-	return success('Invitation has been sent');
-})->name('admin.sendInvitation');
+Route::post('/send-invitation', 'Admin\AdminController@agentInvitations')->name('admin.sendInvitation');
+Route::post('/edit-user/{id}', 'Admin\AdminController@editUser')->name('admin.editUser');
+Route::post('/update-user/{id}', 'Admin\AdminController@updateUser')->name('admin.updateUser');
