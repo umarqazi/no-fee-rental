@@ -103,6 +103,22 @@ class UserService {
 	}
 
 	/**
+	 * @param id | (int)
+	 * @return json response
+	 */
+	function edit_user_json_response($id) {
+		$data = $this->user_repo->edit($id);
+		return ($data)
+		? response()->json(['data' => $data], 200)
+		: response()->json(['message' => 'Something went wrong'], 404);
+	}
+
+	function update_user(IForm $user) {
+		$user->validate();
+		return $this->user_repo->update($user->toArray(), $user->id) ? true : false;
+	}
+
+	/**
 	 * @param $form instance
 	 * @return bool
 	 */

@@ -5,7 +5,7 @@
         <div class="heading-wrapper">
             <h1>User Accounts</h1>
             <a href="#" class="btn-default ml-auto" data-toggle="modal" data-target="#invite-user"><i class="fa fa-share"></i> Send Invites</a>
-            <a href="#" class="btn-default ml-3" data-toggle="modal" data-target="#add-member"><i class="fa fa-plus"></i> Add Users</a>
+            <a href="#" class="btn-default ml-3" data-toggle="modal" id="add-user" data-target="#add-member"><i class="fa fa-plus"></i> Add Users</a>
         </div>
         <div class="block listing-container manage-accounts">
             <div class="heading-wrapper pl-0">
@@ -53,7 +53,7 @@
                                     <td>{{!empty($agent->phone_number) ? $agent->phone_number : '---'}}</td>
                                     <td>
                                         <a href="{{route('admin.userStatus', $agent->id)}}"><i class="fa fa-eye{{($agent->status) ? '-slash' : ''}} action-btn" data-toggle="modal" data-target="#agent-modal"></i></a>
-                                        <a href="#"><i class="fa fa-edit px-2 action-btn"></i></a>
+                                        <a href="javascript:void(0);" onclick="updateUser('{{$agent->id}}');"><i class="fa fa-edit px-2 action-btn"></i></a>
                                         <a href="javascript:void(0);" onclick="confirm('Are you sure?') ? window.location.href='{{route("admin.deleteUser", $agent->id)}}' : ''"><i class="fa fa-trash action-btn"></i></a>
                                     </td>
                                 </tr>
@@ -88,7 +88,7 @@
                                     <td>4693 White Oak Drive Kansas City, MO</td>
                                     <td>
                                         <a href="{{ route('admin.userStatus', $renter->id) }}"><i class="fa fa-eye{{($renter->status) ? '-slash' : ''}} action-btn" data-toggle="modal" data-target="#renter-modal"></i></a>
-                                        <a href="#"><i class="fa fa-edit px-2 action-btn"></i></a>
+                                        <a href="javascript:void(0);" onclick="updateUser('{{$agent->id}}');"><i class="fa fa-edit px-2 action-btn"></i></a>
                                         <a href="javascript:void(0);" onclick="confirm('Are you sure?') ? window.location.href='{{route("admin.deleteUser", $renter->id)}}' : ''"><i class="fa fa-trash action-btn"></i></a>
                                     </td>
                                 </tr>
@@ -240,3 +240,43 @@
     </div>
 
 @endsection
+
+<script type="text/javascript">
+    window.onload = function() {
+    $('#add-user').on('click', function() {
+        $('#add_user').attr('action', '/admin/create-user');
+        $('.modal-title').text('Add User');
+        $('.modal-footer input').val('Add User');
+        $('#user_type').val('');
+        $('input[type=text], input[type=email]').val('');
+    });
+}
+
+    function updateUser(id) {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name=csrf-token]').attr('content')
+            }
+        });
+
+        $.ajax({
+            url: `/admin/edit-user/${id}`,
+            type: 'post',
+            success: function(res) {
+                $('#add_user').attr('action', `/admin/update-user/${id}`);
+                $('.modal-title').text('Update User');
+                $('.modal-footer input').val('Update');
+                $('#first_name').val(res.data.first_name);
+                $('#last_name').val(res.data.last_name);
+                $('#email').val(res.data.email);
+                $('#phone_number').val(res.data.phone_number);
+                $('#user_type').val(res.data.user_type);
+                $('#add-member').modal('show');
+            },
+
+            error: function(err) {
+               toastr.error(err);
+            }
+        });
+    }
+</script>

@@ -122,6 +122,23 @@ class AdminController extends Controller {
 		: error('Something went wrong');
 	}
 
+	function editUser($id) {
+		return $this->user_service->edit_user_json_response($id);
+	}
+
+	function updateUser(Request $request, $id) {
+		$user = new EditUserForm();
+		$user->id = $request->id;
+		$user->first_name = $request->first_name;
+		$user->last_name = $request->last_name;
+		$user->email = $request->email;
+		$user->phone_number = $request->phone_number;
+		$user->user_type = $request->user_type;
+		return $this->user_service->update_user($user)
+		? success('User has been updated.')
+		: error('Something went wrong');
+	}
+
 	/**
 	 * send & save invitation
 	 *

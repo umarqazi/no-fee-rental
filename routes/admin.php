@@ -25,3 +25,5 @@ Route::post('/profile', 'UserController@editProfile')->name('edit-profile');
 Route::get('/property-listing', 'Admin\AdminController@viewPropertyListing')->name('property-listing');
 
 Route::post('/send-invitation', 'Admin\AdminController@agentInvitations')->name('admin.sendInvitation');
+Route::post('/edit-user/{id}', 'Admin\AdminController@editUser')->name('admin.editUser');
+Route::post('/update-user/{id}', 'Admin\AdminController@updateUser')->name('admin.updateUser');
