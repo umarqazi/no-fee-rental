@@ -734,7 +734,7 @@ header .agent-avtar .avtar:hover div ul {
 }
 .add-new-listing-wrapper .dropzone.dz-clickable {
   cursor: pointer;
-  height: 150px;
+  height: 200px;
   min-height: inherit;
   display: flex;
   padding: 0px;

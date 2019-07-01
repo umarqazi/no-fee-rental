@@ -1,17 +1,29 @@
 <?php
 
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Mail;
 
 // Use to Upload Images
 function uploadImage($image, $path, $unlinkOld = false) {
 	$name = time() . '.' . $image->getClientOriginalExtension();
-	if (!File::isDirectory($path)) {
-		File::makeDirectory($path, 0777, true, true);
+	$image->move($path, $name);
+	// if (!File::isDirectory($path)) {
+	// 	File::makeDirectory($path, 0777, true, true);
+	// }
+	// Storage::disk('public')->putFileAs($path, $image, $name);
+	// $full_image_name = $path . '/' . $name;
+	return $name;
+}
+
+function uploadMultiImages($files, $path) {
+	$paths = [];
+
+	foreach ($files as $file) {
+		$name = time() . '.' . $file->getClientOriginalExtension();
+		array_push($paths, $name);
+		$file->move($path, $name);
 	}
-	Storage::disk('public')->putFileAs($path, $image, $name);
-	$full_image_name = $path . '/' . $name;
-	return $full_image_name;
+
+	return $paths;
 }
 
 // Use to send emails

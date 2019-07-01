@@ -20,6 +20,7 @@ class CreateListingForm extends BaseForm {
 	public $baths;
 	public $unit;
 	public $rent;
+	public $thumbnail;
 	public $square_feet;
 
 	public $listing_type;
@@ -45,6 +46,7 @@ class CreateListingForm extends BaseForm {
 			'baths' => $this->baths,
 			'unit' => $this->unit,
 			'rent' => $this->rent,
+			'thumbnail' => $this->thumbnail,
 			'square_feet' => $this->square_feet,
 			'listing_type' => $this->listing_type,
 			'amenities' => $this->amenities,
@@ -67,6 +69,7 @@ class CreateListingForm extends BaseForm {
 			'neighborhood' => 'required|string',
 			'bedrooms' => 'required',
 			'baths' => 'required',
+			'thumbnail' => 'required|mimes:jpg,png,jpeg',
 			'description' => 'requried',
 			'unit' => 'required',
 			'rent' => 'required',
