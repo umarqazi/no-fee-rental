@@ -51,7 +51,7 @@ class ListingController extends Controller {
 		$form->unit_feature = $request->unit_feature;
 		$form->building_feature = $request->building_feature;
 		$form->pet_policy = $request->pet_policy;
-		$form->thumbnail = $request->thumbnail;
+		$form->thumbnail = $request->file('thumbnail');
 		$listing = $this->service->add_listing($form);
 		return ($listing)
 		? redirect(route('agent.listingImagesForm', $listing->id))
@@ -59,7 +59,7 @@ class ListingController extends Controller {
 	}
 
 	public function showListingImagesForm($id) {
-		return view('agent.upload-listing-images', compact('id'));
+		return view('agent.add-listing-images', compact('id'));
 	}
 
 	public function uploadImages(Request $request, $id) {
@@ -80,37 +80,12 @@ class ListingController extends Controller {
 		$constants = config('constants.listing_types');
 		$types = array_keys($constants);
 		foreach ($listing->listingTypes as $value) {
-			$col[$types[$value['property_type'] - 1]] = $value['value'];
-
-			// '$' . $value['property_type'][$value['value']] = $value['value'];
-
-			// if ($value['property_type'] == $types['listing_type']) {
-			// 	$listing_type[$value['value']] = $value['value'];
-			// }
-
-			// if ($value['property_type'] == $types['pet_policy']) {
-			// 	$pet_policy[$value['value']] = $value['value'];
-			// }
-
-			// if ($value['property_type'] == $types['unit_feature']) {
-			// 	$unit_feature[$value['value']] = $value['value'];
-			// }
-
-			// if ($value['property_type'] == $types['building_feature']) {
-			// 	$building_feature[$value['value']] = $value['value'];
-			// }
-
-			// if ($value['property_type'] == $types['amenities']) {
-			// 	$amenities[$value['value']] = $value['value'];
-			// }
-
+			// make collection for specific types
+			$col[$types[$value['property_type'] - 1]][] = $value['value'];
+			// assign collections
+			$listing->{$types[$value['property_type'] - 1]} = $col[$types[$value['property_type'] - 1]];
 		}
-		dd($col);
-		$listing->listing_type = $listing_type;
-		$listing->pet_policy = $pet_policy;
-		$listing->amenities = $amenities;
-		$listing->unit_feature = $unit_feature;
-		$listing->building_feature = $building_feature;
+
 		return view('agent.add-listing', compact('listing', 'edit'));
 	}
 
@@ -130,6 +105,31 @@ class ListingController extends Controller {
 	}
 
 	public function updateListing(Request $request, $id) {
-		dd($request->all(), $id);
+		$form = new CreateListingForm();
+		$form->name = $request->name;
+		$form->email = $request->email;
+		$form->description = $request->description;
+		$form->phone_number = $request->phone_number;
+		$form->website = $request->website;
+		$form->street_address = $request->street_address;
+		$form->display_address = $request->display_address;
+		$form->available = $request->available;
+		$form->city_state_zip = $request->city_state_zip;
+		$form->neighborhood = $request->neighborhood;
+		$form->bedrooms = $request->bedrooms;
+		$form->baths = $request->baths;
+		$form->unit = $request->unit;
+		$form->rent = $request->rent;
+		$form->square_feet = $request->square_feet;
+		$form->listing_type = $request->listing_type;
+		$form->amenities = $request->amenities;
+		$form->unit_feature = $request->unit_feature;
+		$form->building_feature = $request->building_feature;
+		$form->pet_policy = $request->pet_policy;
+		$form->old = ($request->hasFile('thumbnail')) ? $request->old_thumbnail : true;
+		$form->thumbnail = ($request->hasFile('thumbnail')) ? $request->file('thumbnail') : $request->old_thumbnail;
+		return $this->service->update_listing($form, $id)
+		? success('Property has been updated successfully')
+		: error('Something went wrong');
 	}
 }

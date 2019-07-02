@@ -91,4 +91,63 @@ class ListingService {
 	public function edit_listing($id) {
 		return $this->listing_repo->edit_listing($id);
 	}
+
+	public function update_listing(IForm $listing, $id) {
+		DB::beginTransaction();
+		$listing->thumbnail = $listing->thumbnail;
+
+		if ($listing->old != 'true') {
+			$listing->thumbnail = uploadImage($listing->thumbnail, 'uploads/listing/thumbnails', true, $listing->old);
+		}
+
+		$data = [
+			'name' => $listing->name,
+			'email' => $listing->email,
+			'description' => $listing->description,
+			'phone_number' => $listing->phone_number,
+			'website' => $listing->website,
+			'street_address' => $listing->street_address,
+			'display_address' => $listing->display_address,
+			'available' => $listing->available,
+			'city_state_zip' => $listing->city_state_zip,
+			'neighborhood' => $listing->neighborhood,
+			'bedrooms' => $listing->bedrooms,
+			'baths' => $listing->baths,
+			'unit' => $listing->unit,
+			'rent' => $listing->rent,
+			'thumbnail' => $listing->thumbnail,
+			'square_feet' => $listing->square_feet,
+		];
+
+		if ($this->listing_repo->update_listing($id, $data)) {
+			return $this->update_listing_type($id, $listing);
+		}
+
+		DB::rollback();
+		return false;
+	}
+
+	public function update_listing_type($id, $listing) {
+		$batch = [];
+		foreach ($listing as $key => $type) {
+
+			if (is_array($listing->{$key})) {
+				$type = sprintf("%s", config("constants.listing_types.{$key}"));
+				foreach ($listing->{$key} as $key => $value) {
+					$batch = [
+						'listing_id' => $id,
+						'property_type' => $type,
+						'value' => $value,
+						'created_at' => now(),
+						'updated_at' => now(),
+					];
+
+					$this->listing_repo->update_listing_type($id, $batch);
+				}
+
+				DB::commit();
+				return true;
+			}
+		}
+	}
 }

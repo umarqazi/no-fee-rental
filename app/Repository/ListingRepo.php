@@ -35,6 +35,10 @@ class ListingRepo {
 		return $this->listing->whereId($id)->update($data);
 	}
 
+	public function update_listing_type($id, $data) {
+		return $this->listing_type->whereId($id)->update($data);
+	}
+
 	public function search_active_listing($keywords) {
 		return $this->listing->whereStatus(true)->where($keywords)->latest('updated_at')->paginate($this->paginate, ['*'], 'active-searched-listing');
 	}
