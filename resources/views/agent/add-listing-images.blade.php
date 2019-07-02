@@ -20,3 +20,18 @@
 	</div>
 </div>
 @endsection
+
+<script type="text/javascript">
+window.onload = function() {
+	Dropzone.options.imagesUploader = {
+        paramName: "file", // The name that will be used to transfer the file
+        maxFiles: 1,
+        init: function() {
+            this.on("maxfilesexceeded", function(file) {
+                this.removeAllFiles();
+                this.addFile(file);
+            });
+        }
+    };
+}
+</script>
