@@ -17,7 +17,7 @@ class ContactUsRepo {
 		$this->contact_model = new ContactUs();
 	}
 	public function save($data) {
-		$this->contact_model->create($data);
+		return $this->contact_model->create($data);
 	}
 
 	public function allMessages() {
