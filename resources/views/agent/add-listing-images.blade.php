@@ -11,27 +11,15 @@
 		<div class="block-body">
 			<div class="row">
 				<div class="col-md-12 mt-4">
-					<form action="{{ route('agent.listingImages', $id) }}" id="images-uploader" class="dropzone">
+					<form action="{{ route('agent.listingImages', $id) }}" id="upload" class="dropzone">
 						@csrf
 					</form>
+				</div>
+				<div class="col-md-12 mt-4 text-center">
+					<a href="{{ route('agent.finishListing') }}"><button id="post_listing" class="btn-default">Finish</button></a>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
 @endsection
-
-<script type="text/javascript">
-window.onload = function() {
-	Dropzone.options.imagesUploader = {
-        paramName: "file", // The name that will be used to transfer the file
-        maxFiles: 1,
-        init: function() {
-            this.on("maxfilesexceeded", function(file) {
-                this.removeAllFiles();
-                this.addFile(file);
-            });
-        }
-    };
-}
-</script>

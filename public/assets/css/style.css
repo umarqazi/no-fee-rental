@@ -1,5 +1,6 @@
 .invalid-feedback{
     display: inline-block;
+    font-size: 15px;
 }
 .main-wrapper .listing-wrapper .listing-row{
     height: auto;

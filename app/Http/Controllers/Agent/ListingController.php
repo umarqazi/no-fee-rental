@@ -63,8 +63,10 @@ class ListingController extends Controller {
 	}
 
 	public function uploadImages(Request $request, $id) {
-		uploadMultiImages($request->file('file'), '/uploads/listing/');
-		dd($request->all(), $id);
+		$files = uploadMultiImages($request->file('file'), 'data/' . auth()->id() . '/listing/images');
+		return ($this->service->add_listing_images($id, $files))
+		? response()->json(['message' => 'Property has been added successfully'], 200)
+		: response()->json(['message' => 'Something went wrong'], 500);
 	}
 
 	public function repostListing($id) {

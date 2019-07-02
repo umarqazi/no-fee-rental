@@ -10,16 +10,15 @@ function uploadImage($image, $path, $unlinkOld = false) {
 	}
 	Storage::disk('public')->putFileAs($path, $image, $name);
 	$full_image_name = $path . '/' . $name;
-	return $name;
+	return $full_image_name;
 }
 
 function uploadMultiImages($files, $path) {
 	$paths = [];
 
 	foreach ($files as $file) {
-		$name = time() . '.' . $file->getClientOriginalExtension();
+		$name = uploadImage($file, $path);
 		array_push($paths, $name);
-		$file->move($path, $name);
 	}
 
 	return $paths;

@@ -43,7 +43,7 @@
 								@foreach($listing['active'] as $al)
 								<div class="listing-row">
 									<div class="img-holder">
-										<img src="{{isset($al->thumbnail) ? asset('uploads/listing/thumbnails/'.$al->thumbnail) : asset('uploads/listing/thumbnails/default.jpg')}}" alt="" style="height: 205px;" class="main-img" />
+										<img src="{{isset($al->thumbnail) ? asset('storage/'.$al->thumbnail) : asset('uploads/listing/thumbnails/default.jpg')}}" alt="" style="height: 205px;" class="main-img" />
 									</div>
 									<div class="info">
 										<p class="title">{{ $al->display_address }}</p>
@@ -77,7 +77,7 @@
 									@foreach($listing['active'] as $al)
 									<div class="col-lg-3 col-md-4 col-sm-6">
 										<div class="listing-thumb">
-											<img src="{{isset($al->thumbnail) ? asset('uploads/listing/thumbnails/'.$al->thumbnail) : asset('uploads/listing/thumbnails/default.jpg')}}" alt="" style="width: 400px;" class="main-img" />
+											<img src="{{isset($al->thumbnail) ? asset('storage/'.$al->thumbnail) : asset('uploads/listing/thumbnails/default.jpg')}}" alt="" style="width: 400px;" class="main-img" />
 											<div class="info">
 												<p class="title">{{ $al->display_address }}</p>
 												<p><i class="fa fa-tag"></i> ${{ $al->rent }}</p>
@@ -116,7 +116,7 @@
 								@foreach($listing['inactive'] as $il)
 								<div class="listing-row">
 									<div class="img-holder">
-										<img src="{{isset($il->thumbnail) ? asset('uploads/listing/thumbnails/'.$il->thumbnail) : asset('uploads/listing/thumbnails/default.jpg')}}" alt="" style="height:205px;" class="main-img" />
+										<img src="{{isset($il->thumbnail) ? asset('storage/'.$il->thumbnail) : asset('uploads/listing/thumbnails/default.jpg')}}" alt="" style="height:205px;" class="main-img" />
 									</div>
 									<div class="info">
 										<p class="title">{{ $il->display_address }}</p>
@@ -150,7 +150,7 @@
 									@foreach($listing['inactive'] as $il)
 									<div class="col-lg-3 col-md-4 col-sm-6">
 										<div class="listing-thumb">
-											<img src="{{isset($il->thumbnail) ? asset('uploads/listing/thumbnails/'.$il->thumbnail) : asset('uploads/listing/thumbnails/default.jpg')}}" alt="" style="width: 400px;" class="main-img" />
+											<img src="{{isset($il->thumbnail) ? asset('storage/'.$il->thumbnail) : asset('uploads/listing/thumbnails/default.jpg')}}" alt="" style="width: 400px;" class="main-img" />
 											<div class="info">
 												<p class="title">{{ $il->display_address }}</p>
 												<p><i class="fa fa-tag"></i> ${{ $il->rent }}</p>
