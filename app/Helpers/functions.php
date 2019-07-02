@@ -3,14 +3,13 @@
 use Illuminate\Support\Facades\Mail;
 
 // Use to Upload Images
-function uploadImage($image, $path, $unlinkOld = false, $file = null) {
-
-	if ($unlinkOld) {
-		@unlink(public_path(file_exists($path) ? $path . '/' . $file : ''));
-	}
-
+function uploadImage($image, $path, $unlinkOld = false) {
 	$name = time() . '.' . $image->getClientOriginalExtension();
-	$image->move($path, $name);
+	if (!File::isDirectory($path)) {
+		File::makeDirectory($path, 0777, true, true);
+	}
+	Storage::disk('public')->putFileAs($path, $image, $name);
+	$full_image_name = $path . '/' . $name;
 	return $name;
 }
 
