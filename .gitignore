@@ -17,3 +17,4 @@ yarn-error.log
 /.phpintel
 /.idea
 /bootstrap
+/public/uploads/

@@ -13,10 +13,11 @@ class CreateListingsTable extends Migration {
 	public function up() {
 		Schema::create('listings', function (Blueprint $table) {
 			$table->increments('id');
-			$table->string('seller_name');
-			$table->string('seller_phone_number');
-			$table->string('seller_email');
-			$table->string('seller_website');
+			$table->unsignedInteger('user_id');
+			$table->string('name');
+			$table->string('phone_number');
+			$table->string('email');
+			$table->string('website');
 			$table->string('street_address');
 			$table->string('display_address');
 			$table->string('neighborhood');
@@ -31,8 +32,9 @@ class CreateListingsTable extends Migration {
 			$table->string('map_location')->nullable();
 			$table->boolean('status')->default(1);
 			$table->string('city_state_zip')->comment = "any one of 3 given accepted";
-
 			$table->timestamps();
+
+			$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onEdit('cascade');
 		});
 	}
 
