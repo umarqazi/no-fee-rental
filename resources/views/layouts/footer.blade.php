@@ -9,7 +9,7 @@
             </li>
             <li class="wow fadeInLeft" data-wow-delay="0.3s">
                 <h4>Renters </h4>
-                <a href="#" class="ft-links">Renters Guide</a>
+                <a href="http://no-fee-rental.teamtechverx.com/blog/?page_id=49" class="ft-links">Renters Guide</a>
                 <a href="#" class="ft-links">Help and Answers</a>
                 <a href="#" class="ft-links">Rent Calculator</a>
                 <a href="#" class="ft-links">Blog</a>
@@ -23,10 +23,10 @@
             </li>
             <li class="wow fadeInLeft" data-wow-delay="0.5s">
                 <h4>Company </h4>
-                <a href="#" class="ft-links">About Us</a>
-                <a href="#" class="ft-links">Press</a>
-                <a href="#" class="ft-links">Privacy Policy </a>
-                <a href="#" class="ft-links">Terms</a>
+                <a href="http://no-fee-rental.teamtechverx.com/blog/?page_id=66" class="ft-links">About Us</a>
+                <a href="http://no-fee-rental.teamtechverx.com/blog/?page_id=70" class="ft-links">Press</a>
+                <a href="http://no-fee-rental.teamtechverx.com/blog/?page_id=3" class="ft-links">Privacy Policy </a>
+                <a href="http://no-fee-rental.teamtechverx.com/blog/?page_id=27" class="ft-links">Terms</a>
             </li>
             <li class="wow fadeInLeft" data-wow-delay="0.6s">
                 <h4>Newsletter </h4>
