@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Forms\IForm;
+use Validator;
 use App\Repository\ListingRepo;
 use DB;
 
@@ -17,15 +18,16 @@ class ListingService {
 	}
 
 	public function add_listing(IForm $listing) {
-		// $listing->validate();
+		$listing->validate();
 		DB::beginTransaction();
 		if ($listing->thumbnail) {
-			$listing->thumbnail = uploadImage($listing->thumbnail, 'uploads/listing/thumbnails');
+			$listing->thumbnail = uploadImage($listing->thumbnail, 'data/' . auth()->id() . '/listing/thumbnails');
 		}
 		if (!empty($list = $this->listing_repo->create_listing($listing->toArray()))) {
 			return $this->add_listing_type($listing, $list);
 		}
 
+		DB::rollback();
 		return false;
 	}
 
@@ -97,7 +99,7 @@ class ListingService {
 		$listing->thumbnail = $listing->thumbnail;
 
 		if ($listing->old != 'true') {
-			$listing->thumbnail = uploadImage($listing->thumbnail, 'uploads/listing/thumbnails', true, $listing->old);
+			$listing->thumbnail = uploadImage($listing->thumbnail, 'data/' . auth()->id() . '/listing/thumbnails', true, $listing->old);
 		}
 
 		$data = [
@@ -144,10 +146,23 @@ class ListingService {
 
 					$this->listing_repo->update_listing_type($id, $batch);
 				}
-
-				DB::commit();
+                DB::commit();
 				return true;
 			}
 		}
+	}
+
+	public function add_listing_images($id, $files) {
+		$batch = [];
+		foreach ($files as $file) {
+			$batch[] = [
+				'listing_id' => $id,
+				'listing_image' => $file,
+				'created_at' => now(),
+				'updated_at' => now(),
+			];
+		}
+		DB::commit();
+		return $this->listing_repo->create_listing_images($batch);
 	}
 }

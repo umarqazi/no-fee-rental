@@ -15,6 +15,7 @@
 	{!! HTML::style('admin/css/datepicker.min.css') !!}
 	{!! HTML::style('admin/css/main.css') !!}
 	{!! HTML::style('admin/css/responsive.css') !!}
+	{!! HTML::style('assets/css/style.css') !!}
 	{!! HTML::style('https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css') !!}
     {!! HTML::script('assets/js/jquery.min.js') !!}
     {!! HTML::script('admin/js/dropzone.js') !!}

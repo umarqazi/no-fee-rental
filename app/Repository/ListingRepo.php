@@ -10,9 +10,10 @@ class ListingRepo {
 
 	private $listing_type;
 
-	public function __construct(\App\Listing $listing, \App\ListingTypes $listing_type) {
+	public function __construct(\App\Listing $listing, \App\ListingTypes $listing_type, \App\ListingImages $listing_images) {
 		$this->listing = $listing;
 		$this->listing_type = $listing_type;
+		$this->listing_images = $listing_images;
 	}
 
 	public function create_listing($data) {
@@ -21,6 +22,10 @@ class ListingRepo {
 
 	public function create_type($data) {
 		return $this->listing_type->insert($data);
+	}
+
+	public function create_listing_images($data) {
+		return $this->listing_images->insert($data);
 	}
 
 	public function get_active_listing() {

@@ -59,26 +59,21 @@ class CreateListingForm extends BaseForm {
 	function rules() {
 		return [
 			'name' => 'required|string',
-			'email' => 'required|string|email',
+			'email' => 'required|email',
 			'phone_number' => 'required|string',
 			'website' => 'required|string',
 			'street_address' => 'required|string',
 			'display_address' => 'required|string',
-			'available' => 'required|string',
-			'city_state_zip' => 'required|string',
+			'available' => 'required',
+			'city_state_zip' => 'required',
 			'neighborhood' => 'required|string',
 			'bedrooms' => 'required',
 			'baths' => 'required',
 			'thumbnail' => 'required|mimes:jpg,png,jpeg',
-			'description' => 'requried',
+			'description' => 'required',
 			'unit' => 'required',
 			'rent' => 'required',
 			'square_feet' => 'required',
-			'listing_type' => 'required|array',
-			'amenities' => 'required|array',
-			'unit_feature' => 'required|array',
-			'building_feature' => 'required|array',
-			'pet_policy' => 'required|array',
 		];
 	}
 
