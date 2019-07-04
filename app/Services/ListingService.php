@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Forms\IForm;
-use Validator;
 use App\Repository\ListingRepo;
 use DB;
 
@@ -57,6 +56,20 @@ class ListingService {
 		return false;
 	}
 
+	public function add_listing_images($id, $files) {
+		$batch = [];
+		foreach ($files as $file) {
+			$batch[] = [
+				'listing_id' => $id,
+				'listing_image' => $file,
+				'created_at' => now(),
+				'updated_at' => now(),
+			];
+		}
+
+		return $this->listing_repo->create_listing_images($batch);
+	}
+
 	public function get_all_listing() {
 		$this->listing_repo->paginate = $this->paginate;
 		$active = $this->listing_repo->get_active_listing();
@@ -67,6 +80,10 @@ class ListingService {
 		];
 
 		return $listing;
+	}
+
+	public function edit_listing($id) {
+		return $this->listing_repo->edit_listing($id);
 	}
 
 	public function search_list_with_filters(IForm $search) {
@@ -88,10 +105,6 @@ class ListingService {
 
 	public function listing_status($id) {
 		return $this->listing_repo->active_deactive_listing($id);
-	}
-
-	public function edit_listing($id) {
-		return $this->listing_repo->edit_listing($id);
 	}
 
 	public function update_listing(IForm $listing, $id) {
@@ -146,23 +159,9 @@ class ListingService {
 
 					$this->listing_repo->update_listing_type($id, $batch);
 				}
-                DB::commit();
+				DB::commit();
 				return true;
 			}
 		}
-	}
-
-	public function add_listing_images($id, $files) {
-		$batch = [];
-		foreach ($files as $file) {
-			$batch[] = [
-				'listing_id' => $id,
-				'listing_image' => $file,
-				'created_at' => now(),
-				'updated_at' => now(),
-			];
-		}
-		DB::commit();
-		return $this->listing_repo->create_listing_images($batch);
 	}
 }

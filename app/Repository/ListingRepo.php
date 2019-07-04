@@ -29,11 +29,19 @@ class ListingRepo {
 	}
 
 	public function get_active_listing() {
-		return $this->listing->whereStatus(true)->latest('updated_at')->paginate($this->paginate, ['*'], 'active-listing');
+		return $this->listing
+			->whereuser_id(auth()->id())
+			->whereStatus(true)
+			->latest('updated_at')
+			->paginate($this->paginate, ['*'], 'active-listing');
 	}
 
 	public function get_inactive_listing() {
-		return $this->listing->whereStatus(false)->latest('updated_at')->paginate($this->paginate, ['*'], 'inactive-listing');
+		return $this->listing
+			->whereuser_id(auth()->id())
+			->whereStatus(false)
+			->latest('updated_at')
+			->paginate($this->paginate, ['*'], 'inactive-listing');
 	}
 
 	public function update_listing($id, $data) {
@@ -45,11 +53,21 @@ class ListingRepo {
 	}
 
 	public function search_active_listing($keywords) {
-		return $this->listing->whereStatus(true)->where($keywords)->latest('updated_at')->paginate($this->paginate, ['*'], 'active-searched-listing');
+		return $this->listing
+			->whereuser_id(auth()->id())
+			->whereStatus(true)
+			->where($keywords)
+			->latest('updated_at')
+			->paginate($this->paginate, ['*'], 'active-searched-listing');
 	}
 
 	public function search_inactive_listing($keywords) {
-		return $this->listing->whereStatus(false)->where($keywords)->latest('updated_at')->paginate($this->paginate, ['*'], 'inactive-searched-listing');
+		return $this->listing
+			->whereuser_id(auth()->id())
+			->whereStatus(false)
+			->where($keywords)
+			->latest('updated_at')
+			->paginate($this->paginate, ['*'], 'inactive-searched-listing');
 	}
 
 	public function active_deactive_listing($id) {
