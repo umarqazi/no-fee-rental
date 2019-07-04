@@ -47,7 +47,7 @@ class ListingService {
 				}
 			}
 		}
-		if ($this->listing_repo->create_type($batch)) {
+		if ($this->listing_repo->create_listing_type($batch)) {
 			DB::commit();
 			return $list;
 		}
@@ -74,9 +74,11 @@ class ListingService {
 		$this->listing_repo->paginate = $this->paginate;
 		$active = $this->listing_repo->get_active_listing();
 		$inactive = $this->listing_repo->get_inactive_listing();
+		$pending = $this->listing_repo->get_pending_listing();
 		$listing = [
 			'active' => $active,
 			'inactive' => $inactive,
+			'pending' => $pending,
 		];
 
 		return $listing;
@@ -84,6 +86,16 @@ class ListingService {
 
 	public function edit_listing($id) {
 		return $this->listing_repo->edit_listing($id);
+	}
+
+	public function remove_listing_image($id) {
+		$image = $this->listing_repo->get_single_image($id);
+		removeFile('storage/' . $path->listing_image);
+		return $this->listing_repo->delete_image($id);
+	}
+
+	public function edit_listing_images($id) {
+		return $this->listing_repo->get_listing_images($id);
 	}
 
 	public function search_list_with_filters(IForm $search) {
@@ -149,19 +161,22 @@ class ListingService {
 			if (is_array($listing->{$key})) {
 				$type = sprintf("%s", config("constants.listing_types.{$key}"));
 				foreach ($listing->{$key} as $key => $value) {
-					$batch = [
+					$batch[] = [
 						'listing_id' => $id,
 						'property_type' => $type,
 						'value' => $value,
 						'created_at' => now(),
 						'updated_at' => now(),
 					];
-
-					$this->listing_repo->update_listing_type($id, $batch);
 				}
-				DB::commit();
-				return true;
 			}
 		}
+
+		if ($this->listing_repo->update_listing_type($id, $batch)) {
+			DB::commit();
+			return true;
+		}
+
+		DB::rollback();
 	}
 }

@@ -29,6 +29,7 @@ class ListingController extends Controller {
 	}
 
 	public function addListing(Request $request) {
+		$edit = false;
 		$form = new CreateListingForm();
 		$form->user_id = Auth::id();
 		$form->name = $request->name;
@@ -53,8 +54,9 @@ class ListingController extends Controller {
 		$form->pet_policy = $request->pet_policy;
 		$form->thumbnail = $request->file('thumbnail');
 		$listing = $this->service->add_listing($form);
+		$id = $listing->id;
 		return ($listing)
-		? redirect(route('agent.listingImagesForm', $listing->id))
+		? view('agent.add-listing-images', compact('id', 'edit'))
 		: error('Something went wrong');
 	}
 
@@ -107,6 +109,7 @@ class ListingController extends Controller {
 	}
 
 	public function updateListing(Request $request, $id) {
+		$edit = true;
 		$form = new CreateListingForm();
 		$form->name = $request->name;
 		$form->email = $request->email;
@@ -130,8 +133,17 @@ class ListingController extends Controller {
 		$form->pet_policy = $request->pet_policy;
 		$form->old = ($request->hasFile('thumbnail')) ? $request->old_thumbnail : true;
 		$form->thumbnail = ($request->hasFile('thumbnail')) ? $request->file('thumbnail') : $request->old_thumbnail;
-		return $this->service->update_listing($form, $id)
-		? success('Property has been updated successfully')
+		if ($update = $this->service->update_listing($form, $id)) {
+			$listing_images = $this->service->edit_listing_images($id);
+		}
+		return $update
+		? view('agent.add-listing-images', compact('id', 'edit', 'listing_images'))
 		: error('Something went wrong');
+	}
+
+	public function removeListingImage($id) {
+		return ($this->service->remove_listing_image($id))
+		? response()->json(['message' => 'success'])
+		: response()->json(['message' => 'something went wrong']);
 	}
 }

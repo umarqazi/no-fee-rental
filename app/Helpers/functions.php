@@ -13,6 +13,11 @@ function uploadImage($image, $path, $unlinkOld = false) {
 	return $full_image_name;
 }
 
+function removeFile($path) {
+	return @unlink(public_path(file_exists($path) ? $path : ''));
+
+}
+
 function uploadMultiImages($files, $path) {
 	$paths = [];
 
