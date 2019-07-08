@@ -101,7 +101,7 @@
 						@if(isset($listing->thumbnail))
 							{!! Form::hidden('old_thumbnail', $listing->thumbnail) !!}
 						@endif
-					<img src="{{($edit && isset($listing->thumbnail)) ? asset('storage/'.$listing->thumbnail) : ''}}" id="img" style="{{($edit) ? 'width: 180px;height: 145px;margin-bottom: 15px;' : ''}}">
+					<img class="img-thumbnail" src="{{($edit && isset($listing->thumbnail)) ? asset('storage/'.$listing->thumbnail) : ''}}" id="img" style="{{($edit) ? 'width: 180px;height: 145px;margin-bottom: 15px;' : ''}}">
 				</div>
 				<div class="col-md-12">
 					<div class="form-group">

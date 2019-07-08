@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Agent;
+namespace App\Http\Controllers\Admin;
 
 use App\Forms\Listing\CreateListingForm;
 use App\Forms\Listing\SearchListingForm;
@@ -17,25 +17,36 @@ class ListingController extends Controller {
 		$this->service = $service;
 	}
 
-	public function index() {
+	public function index(Request $request) {
 		$listing = $this->service->get_all_listing();
-		return view('agent.index', compact('listing'));
+		$return = view('admin.listing_view', compact('listing'));
+		if ($request->ajax()) {
+			$return = response()->json(['listing' => $listing], 200);
+		}
+
+		return $return;
+	}
+
+	public function finishCreate() {
+		return redirect(route('admin.viewListing'))
+			->with(['message' => 'Property has been added.', 'alert_type' => 'success']);
+	}
+
+	public function finishUpdate() {
+		return redirect(route('admin.viewListing'))
+			->with(['message' => 'Property has been updated.', 'alert_type' => 'success']);
 	}
 
 	public function listingForm() {
 		$edit = false;
 		$listing = null;
-		return view('agent.add_listing', compact('listing', 'edit'));
+		return view('admin.add_listing', compact('listing', 'edit'));
 	}
 
-	public function finishCreate() {
-		return redirect(route('agent.index'))
-			->with(['message' => 'Property has been added.', 'alert_type' => 'success']);
-	}
-
-	public function finishUpdate() {
-		return redirect(route('agent.index'))
-			->with(['message' => 'Property has been updated.', 'alert_type' => 'success']);
+	public function approveRequest($id) {
+		return ($this->service->approve_request($id))
+		? response()->json(['message' => 'success'], 200)
+		: response()->json(['message' => 'error'], 500);
 	}
 
 	public function addListing(Request $request) {
@@ -62,12 +73,12 @@ class ListingController extends Controller {
 		$form->unit_feature = $request->unit_feature;
 		$form->building_feature = $request->building_feature;
 		$form->pet_policy = $request->pet_policy;
-		$form->status = 2;
+		$form->status = 1;
 		$form->thumbnail = $request->file('thumbnail');
 		$listing = $this->service->add_listing($form);
 		$id = $listing->id;
 		return ($listing)
-		? view('agent.add_listing_images', compact('id', 'edit'))
+		? view('admin.add_listing_images', compact('id', 'edit'))
 		: error('Something went wrong');
 	}
 
@@ -97,7 +108,7 @@ class ListingController extends Controller {
 			$listing->{$types[$value['property_type'] - 1]} = $col[$types[$value['property_type'] - 1]];
 		}
 
-		return view('agent.add_listing', compact('listing', 'edit'));
+		return view('admin.add_listing', compact('listing', 'edit'));
 	}
 
 	public function searchListingWithFilters(Request $request) {
@@ -105,7 +116,7 @@ class ListingController extends Controller {
 		$form->bedrooms = isset($request->beds) ? $request->beds : null;
 		$form->baths = isset($request->baths) ? $request->baths : null;
 		$listing = $this->service->search_list_with_filters($form);
-		return view('agent.index', compact('listing'));
+		return view('admin.listing_view', compact('listing'));
 	}
 
 	public function listingVisibilityToggle($id) {
@@ -144,7 +155,7 @@ class ListingController extends Controller {
 			$listing_images = $this->service->edit_listing_images($id);
 		}
 		return $update
-		? view('agent.add_listing_images', compact('id', 'edit', 'listing_images'))
+		? view('admin.add_listing_images', compact('id', 'edit', 'listing_images'))
 		: error('Something went wrong');
 	}
 

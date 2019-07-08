@@ -242,41 +242,26 @@
 @endsection
 
 <script type="text/javascript">
-    window.onload = function() {
-    $('#add-user').on('click', function() {
-        $('#add_user').attr('action', '/admin/create-user');
-        $('.modal-title').text('Add User');
-        $('.modal-footer input').val('Add User');
-        $('#user_type').val('');
-        $('input[type=text], input[type=email]').val('');
-    });
-}
-
     function updateUser(id) {
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name=csrf-token]').attr('content')
-            }
-        });
 
-        $.ajax({
-            url: `/admin/edit-user/${id}`,
-            type: 'post',
-            success: function(res) {
-                $('#add_user').attr('action', `/admin/update-user/${id}`);
-                $('.modal-title').text('Update User');
-                $('.modal-footer input').val('Update');
-                $('#first_name').val(res.data.first_name);
-                $('#last_name').val(res.data.last_name);
-                $('#email').val(res.data.email);
-                $('#phone_number').val(res.data.phone_number);
-                $('#user_type').val(res.data.user_type);
-                $('#add-member').modal('show');
-            },
+            $.ajax({
+                url: `/admin/edit-user/${id}`,
+                type: 'post',
+                success: function(res) {
+                    $('#add_user').attr('action', `/admin/update-user/${id}`);
+                    $('.modal-title').text('Update User');
+                    $('.modal-footer input').val('Update');
+                    $('#first_name').val(res.data.first_name);
+                    $('#last_name').val(res.data.last_name);
+                    $('#email').val(res.data.email);
+                    $('#phone_number').val(res.data.phone_number);
+                    $('#user_type').val(res.data.user_type);
+                    $('#add-member').modal('show');
+                },
 
-            error: function(err) {
-               toastr.error(err);
-            }
-        });
-    }
+                error: function(err) {
+                   toastr.error(err);
+                }
+            });
+        }
 </script>

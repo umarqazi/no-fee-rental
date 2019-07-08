@@ -12,6 +12,7 @@
     {!! HTML::style('https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css') !!}
     {!! HTML::script('assets/js/jquery.min.js') !!}
     {!! HTML::script('assets/js/toastr.js') !!}
+    {!! HTML::script('js/custom.js') !!}
 </head>
 <body>
     @include('layouts.header')
