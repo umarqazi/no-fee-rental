@@ -7,6 +7,7 @@ class CreateListingForm extends BaseForm {
 
 	public $user_id;
 	public $name;
+	public $status;
 	public $email;
 	public $phone_number;
 	public $description;
@@ -36,6 +37,7 @@ class CreateListingForm extends BaseForm {
 			'name' => $this->name,
 			'email' => $this->email,
 			'phone_number' => $this->phone_number,
+			'status' => $this->status,
 			'website' => $this->website,
 			'street_address' => $this->street_address,
 			'display_address' => $this->display_address,

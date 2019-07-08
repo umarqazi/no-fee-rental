@@ -24,11 +24,5 @@ Route::match(['get', 'post'], '/search-listing', 'Agent\ListingController@search
 Route::get('/listing-status/{id}', 'Agent\ListingController@listingVisibilityToggle')->name('agent.listingStatus');
 Route::get('/edit-list/{id}', 'Agent\ListingController@editListingForm')->name('agent.editListing');
 Route::post('/update-listing/{id}', 'Agent\ListingController@updateListing')->name('agent.updateListing');
-Route::get('/finish-listing', function () {
-	return redirect(route('agent.index'))
-		->with(['message' => 'Property has been added.', 'alert_type' => 'success']);
-})->name('agent.finishListing');
-Route::get('/update-listing', function () {
-	return redirect(route('agent.index'))
-		->with(['message' => 'Property has been updated.', 'alert_type' => 'success']);
-})->name('agent.updateListing');
+Route::get('/finish-listing', 'Agent\ListingController@finishCreate')->name('agent.finishCreateListing');
+Route::get('/update-listing', 'Agent\ListingController@finishUpdate')->name('agent.finishUpdateListing');

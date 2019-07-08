@@ -4,7 +4,9 @@ namespace App\Repository;
 
 class ListingRepo {
 
-	public $paginate;
+	public $paginate = 20;
+
+	public $sortBy = 'updated_at';
 
 	private $listing;
 
@@ -19,94 +21,59 @@ class ListingRepo {
 		$this->listing_images = $listing_images;
 	}
 
-	public function create_listing($data) {
-		return $this->listing->create($data);
+	public function create($model, $data) {
+		return $this->{$model}->create($data);
 	}
 
-	public function create_listing_type($data) {
-		return $this->listing_type->insert($data);
+	public function insert($model, $data) {
+		return $this->{$model}->insert($data);
 	}
 
-	public function create_listing_images($data) {
-		return $this->listing_images->insert($data);
+	public function get($model, $params) {
+		return $this->{$model}
+			->where($params)
+			->latest($this->sortBy)
+			->paginate($this->paginate);
 	}
 
-	public function get_active_listing() {
+	public function get_with($model, $params, $relation) {
+		return $this->{$model}
+			->where($params)
+			->with($relation)
+			->latest($this->sortBy)
+			->paginate($this->paginate);
+	}
+
+	public function first($model, $params) {
+		return $this->{$model}
+			->where($params)
+			->first();
+	}
+
+	public function first_with($params, $relation) {
 		return $this->listing
-			->whereuser_id(auth()->id())
-			->whereStatus(true)
-			->latest('updated_at')
-			->paginate($this->paginate, ['*'], 'active-listing');
+			->where($params)
+			->with($relation)
+			->first();
 	}
 
-	public function get_inactive_listing() {
-		return $this->listing
-			->whereuser_id(auth()->id())
-			->whereStatus(false)
-			->latest('updated_at')
-			->paginate($this->paginate, ['*'], 'inactive-listing');
+	public function delete($model, $id) {
+		return $this->{$model}
+			->whereId($id)
+			->delete();
 	}
 
-	public function get_pending_listing() {
-		return $this->listing
-			->whereuser_id(auth()->id())
-			->whereStatus(2)
-			->latest('updated_at')
-			->paginate($this->paginate, ['*'], 'pending-listing');
+	public function update($model, $id, $data) {
+		return $this->{$model}
+			->whereId($id)
+			->update($data);
 	}
 
-	public function update_listing($id, $data) {
-		return $this->listing->whereId($id)->update($data);
-	}
-
-	public function update_listing_type($id, $data) {
-		$this->listing_type->wherelisting_id($id)->delete();
-		return $this->create_listing_type($data);
-	}
-
-	public function update_listing_images($id, $data) {
-		return $this->listing_images->whereId($id)->update($data);
-	}
-
-	public function search_active_listing($keywords) {
-		return $this->listing
-			->whereuser_id(auth()->id())
-			->whereStatus(true)
-			->where($keywords)
-			->latest('updated_at')
-			->paginate($this->paginate, ['*'], 'active-searched-listing');
-	}
-
-	public function search_inactive_listing($keywords) {
-		return $this->listing
-			->whereuser_id(auth()->id())
-			->whereStatus(false)
-			->where($keywords)
-			->latest('updated_at')
-			->paginate($this->paginate, ['*'], 'inactive-searched-listing');
-	}
-
-	public function active_deactive_listing($id) {
+	public function active_deactive($id, $column) {
 		$query = $this->listing->whereId((int) $id);
-		$status = $query->select('status')->first();
-		$updateStatus = ($status->status) ? 0 : 1;
-		$query->update(['status' => $updateStatus]);
+		$status = $query->select($column)->first();
+		$updateStatus = ($status->{$column}) ? 0 : 1;
+		$query->update([$column => $updateStatus]);
 		return $updateStatus;
-	}
-
-	public function edit_listing($id) {
-		return $this->listing->with('listingTypes')->whereId($id)->first();
-	}
-
-	public function get_listing_images($id) {
-		return $this->listing_images->wherelisting_id($id)->get();
-	}
-
-	public function get_single_image($id) {
-		return $this->listing_images->whereId($id)->first();
-	}
-
-	public function delete_image($id) {
-		return $this->listing_images->whereId($id)->delete();
 	}
 }

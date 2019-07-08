@@ -10,7 +10,9 @@ class ListingService {
 
 	protected $listing_repo;
 
-	protected $paginate = 5;
+	protected $paginate = 2;
+
+	protected $sortBy = 2;
 
 	public function __construct(ListingRepo $listing_repo) {
 		$this->listing_repo = $listing_repo;
@@ -22,7 +24,7 @@ class ListingService {
 		if ($listing->thumbnail) {
 			$listing->thumbnail = uploadImage($listing->thumbnail, 'data/' . auth()->id() . '/listing/thumbnails');
 		}
-		if (!empty($list = $this->listing_repo->create_listing($listing->toArray()))) {
+		if (!empty($list = $this->listing_repo->create('listing', $listing->toArray()))) {
 			return $this->add_listing_type($listing, $list);
 		}
 
@@ -47,7 +49,7 @@ class ListingService {
 				}
 			}
 		}
-		if ($this->listing_repo->create_listing_type($batch)) {
+		if ($this->listing_repo->insert('listing_type', $batch)) {
 			DB::commit();
 			return $list;
 		}
@@ -67,14 +69,14 @@ class ListingService {
 			];
 		}
 
-		return $this->listing_repo->create_listing_images($batch);
+		return $this->listing_repo->insert('listing_images', $batch);
 	}
 
 	public function get_all_listing() {
 		$this->listing_repo->paginate = $this->paginate;
-		$active = $this->listing_repo->get_active_listing();
-		$inactive = $this->listing_repo->get_inactive_listing();
-		$pending = $this->listing_repo->get_pending_listing();
+		$active = $this->listing_repo->get('listing', isAdmin() ? ['status' => true] : ['status' => true, 'user_id' => auth()->id()]);
+		$inactive = $this->listing_repo->get('listing', isAdmin() ? ['status' => false] : ['status' => false, 'user_id' => auth()->id()]);
+		$pending = $this->listing_repo->get('listing', isAdmin() ? ['status' => 2] : ['status' => 2, 'user_id' => auth()->id()]);
 		$listing = [
 			'active' => $active,
 			'inactive' => $inactive,
@@ -85,38 +87,54 @@ class ListingService {
 	}
 
 	public function edit_listing($id) {
-		return $this->listing_repo->edit_listing($id);
+		return $this->listing_repo->first_with(['id' => $id], 'listingTypes');
 	}
 
-	public function remove_listing_image($id) {
-		$image = $this->listing_repo->get_single_image($id);
-		removeFile('storage/' . $path->listing_image);
-		return $this->listing_repo->delete_image($id);
+	public function approve_request($id) {
+		return $this->listing_repo->update('listing', $id, ['status' => 1]);
 	}
 
 	public function edit_listing_images($id) {
-		return $this->listing_repo->get_listing_images($id);
+		return $this->listing_repo->get('listing_images', ['listing_id' => $id]);
 	}
 
 	public function search_list_with_filters(IForm $search) {
-		$this->listing_repo->paginate = $this->paginate;
 		$keywords = [];
+		$this->listing_repo->paginate = $this->paginate;
 		!empty($search->baths) ? $keywords['baths'] = $search->baths : null;
 		!empty($search->bedrooms) ? $keywords['bedrooms'] = $search->bedrooms : null;
-		$active = $this->listing_repo->search_active_listing($keywords);
-		$inactive = $this->listing_repo->search_inactive_listing($keywords);
+		$active = $this->listing_repo->get('listing',
+			isAdmin()
+			? array_merge($keywords, ['status' => true])
+			: array_merge($keywords, ['user_id' => auth()->id(), 'status' => true]));
+		$inactive = $this->listing_repo->get('listing',
+			isAdmin()
+			? array_merge($keywords, ['status' => false])
+			: array_merge($keywords, ['user_id' => auth()->id(), 'status' => false]));
+		$pending = $this->listing_repo->get('listing',
+			isAdmin()
+			? array_merge($keywords, ['status' => 2])
+			: array_merge($keywords, ['user_id' => auth()->id(), 'status' => 2]));
+
 		return $listing = [
 			'active' => $active->appends(['beds' => $search->bedrooms, 'baths' => $search->baths]),
 			'inactive' => $inactive->appends(['beds' => $search->bedrooms, 'baths' => $search->baths]),
+			'pending' => $pending->appends(['beds' => $search->bedrooms, 'baths' => $search->baths]),
 		];
 	}
 
 	public function repost_listing($id) {
-		return $this->listing_repo->update_listing($id, ['status' => 1, 'updated_at' => now()]);
+		return $this->listing_repo->update('listing', $id, ['status' => 1, 'updated_at' => now()]);
 	}
 
 	public function listing_status($id) {
-		return $this->listing_repo->active_deactive_listing($id);
+		return $this->listing_repo->active_deactive($id, 'status');
+	}
+
+	public function remove_listing_image($id) {
+		$image = $this->listing_repo->first('listing_images', $id);
+		removeFile('storage/' . $path->listing_image);
+		return $this->listing_repo->delete('listing_images', $id);
 	}
 
 	public function update_listing(IForm $listing, $id) {
@@ -146,7 +164,7 @@ class ListingService {
 			'square_feet' => $listing->square_feet,
 		];
 
-		if ($this->listing_repo->update_listing($id, $data)) {
+		if ($this->listing_repo->update('listing', $id, $data)) {
 			return $this->update_listing_type($id, $listing);
 		}
 
@@ -172,7 +190,8 @@ class ListingService {
 			}
 		}
 
-		if ($this->listing_repo->update_listing_type($id, $batch)) {
+		$this->listing_repo->delete('listing_type', $id);
+		if ($this->listing_repo->insert('listing_type', $batch)) {
 			DB::commit();
 			return true;
 		}

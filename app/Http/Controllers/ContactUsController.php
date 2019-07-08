@@ -21,7 +21,7 @@ class ContactUsController extends Controller {
 		$contact_us = $this->contact_service->saveRecord($data_array);
 		$contact_us->view = 'contact-us';
 		$contact_us->subject = 'New Message';
-		mailService('muhammad.adeel@gems.techverx.com', $contact_us);
+		// mailService('muhammad.adeel@gems.techverx.com', $contact_us);
 		$notification = array(
 			'message' => 'Thank you for your message, Our representative will contact you soon',
 			'alert_type' => 'success',

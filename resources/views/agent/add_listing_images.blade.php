@@ -23,7 +23,7 @@
 				</div>
 				@endif
 				<div class="col-md-12 mt-4 text-center">
-					<a href="{{ ($edit) ? route('agent.updateListing') : route('agent.finishListing') }}"><button id="post_listing" class="btn-default">{{ ($edit) ? 'Update' : 'Finish' }}</button></a>
+					<a href="{{ ($edit) ? route('agent.finishUpdateListing') : route('agent.finishCreateListing') }}"><button id="post_listing" class="btn-default">{{ ($edit) ? 'Update' : 'Finish' }}</button></a>
 				</div>
 			</div>
 		</div>

@@ -30,6 +30,7 @@ class CreateListingsTable extends Migration {
 			$table->boolean('available');
 			$table->text('description');
 			$table->string('map_location')->nullable();
+			$table->integer('is_featured')->default(0)->comment = "0-Non-Featured, 1-Featured";
 			$table->integer('status')->default(2)->comment = "0-Inactive, 1-Active, 2-Pending";
 			$table->string('city_state_zip')->comment = "any one of 3 given accepted";
 			$table->timestamps();

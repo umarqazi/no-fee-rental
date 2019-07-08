@@ -21,6 +21,7 @@
     {!! HTML::script('admin/js/dropzone.js') !!}
     {!! HTML::script('assets/js/toastr.js') !!}
     {!! HTML::script('js/custom.js') !!}
+    {!! HTML::script('https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js') !!}
 
 	<title>@yield('title')</title>
 

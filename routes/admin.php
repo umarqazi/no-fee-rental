@@ -27,3 +27,22 @@ Route::get('/property-listing', 'Admin\AdminController@viewPropertyListing')->na
 Route::post('/send-invitation', 'Admin\AdminController@agentInvitations')->name('admin.sendInvitation');
 Route::post('/edit-user/{id}', 'Admin\AdminController@editUser')->name('admin.editUser');
 Route::post('/update-user/{id}', 'Admin\AdminController@updateUser')->name('admin.updateUser');
+
+// Listing Routes
+Route::get('/listing-view', 'Admin\ListingController@index')->name('admin.viewListing');
+Route::get('/add-listing', 'Admin\ListingController@listingForm')->name('admin.addListing');
+Route::post('/add-listing', 'Admin\ListingController@addListing')->name('admin.createListing');
+Route::post('/approve-listing-request/{id}', 'Admin\ListingController@approveRequest')->name('admin.approveRequest');
+Route::post('/listing-status/{id}', 'Admin\ListingController@listingVisibilityToggle')->name('admin.listingStatus');
+Route::post('/upload-listing-images/{id}', 'Admin\ListingController@uploadImages')->name('admin.listingImages');
+Route::post('/remove-listing-image/{id}', 'Admin\ListingController@removeListingImage');
+Route::get('/listing-repost/{id}', 'Admin\ListingController@repostListing')->name('admin.listingRepost');
+Route::match(['get', 'post'], '/search-listing', 'Admin\ListingController@searchListingWithFilters')->name('admin.listingSearch');
+Route::get('/edit-list/{id}', 'Admin\ListingController@editListingForm')->name('admin.editListing');
+Route::post('/update-listing/{id}', 'Admin\ListingController@updateListing')->name('admin.updateListing');
+Route::get('/finish-create-listing', 'Admin\ListingController@finishCreate')->name('admin.finishCreateListing');
+Route::get('/finish-update-listing', 'Admin\ListingController@finishUpdate')->name('admin.finishUpdateListing');
+
+// Featured Listing Routes
+Route::get('/feature-listing', 'Admin\FeaturedListingController@index')->name('admin.featureListing');
+Route::post('/ad-feature-request/{id}', 'Admin\FeaturedListingController@featureRequest')->name('admin.adfeature');

@@ -29,6 +29,14 @@ function uploadMultiImages($files, $path) {
 	return $paths;
 }
 
+function isAdmin() {
+	return auth()->guard('admin')->check();
+}
+
+function isAgent() {
+	return auth()->guard('agent')->check();
+}
+
 // Use to send emails
 function mailService($to, $data) {
 	return Mail::to($to)->send(new App\Mail\MailHandler($data));
