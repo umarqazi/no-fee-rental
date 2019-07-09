@@ -30,19 +30,3 @@
 	</div>
 </div>
 @endsection
-
-<script type="text/javascript">
-	function remove(id, image) {
-    	$.ajax({
-    		url: `/agent/remove-listing-image/${id}`,
-    		type: 'post',
-    		success: function(res) {
-    			$(image).remove();
-    		},
-
-    		error: function (err) {
-    			console.log(err);
-    		}
-    	});
-    }
-</script>

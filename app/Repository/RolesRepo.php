@@ -8,11 +8,21 @@ class RolesRepo {
 
 	private $role;
 
-	function __construct(Role $role) {
+	/**
+	 * create a new model instance
+	 *
+	 * @return void
+	 */
+	public function __construct(Role $role) {
 		$this->role = $role;
 	}
 
-	function getRoles() {
+	/**
+	 * fetch roles.
+	 *
+	 * @return array
+	 */
+	public function getRoles() {
 		$roleArray = [];
 		$roles = $this->role->select(['id', 'name'])->get();
 		$roleArray[''] = 'Select User Type';

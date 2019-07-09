@@ -8,11 +8,11 @@ use DB;
 
 class ListingService {
 
+	public $paginate;
+
+	public $sortBy;
+
 	protected $listing_repo;
-
-	protected $paginate = 2;
-
-	protected $sortBy = 2;
 
 	public function __construct(ListingRepo $listing_repo) {
 		$this->listing_repo = $listing_repo;
@@ -74,9 +74,21 @@ class ListingService {
 
 	public function get_all_listing() {
 		$this->listing_repo->paginate = $this->paginate;
-		$active = $this->listing_repo->get('listing', isAdmin() ? ['status' => true] : ['status' => true, 'user_id' => auth()->id()]);
-		$inactive = $this->listing_repo->get('listing', isAdmin() ? ['status' => false] : ['status' => false, 'user_id' => auth()->id()]);
-		$pending = $this->listing_repo->get('listing', isAdmin() ? ['status' => 2] : ['status' => 2, 'user_id' => auth()->id()]);
+		$active = $this->listing_repo->get('listing',
+			isAdmin()
+			? ['status' => true]
+			: ['status' => true, 'user_id' => auth()->id()],
+			'active-listing');
+		$inactive = $this->listing_repo->get('listing',
+			isAdmin()
+			? ['status' => false]
+			: ['status' => false, 'user_id' => auth()->id()],
+			'inactive-listing');
+		$pending = $this->listing_repo->get('listing',
+			isAdmin()
+			? ['status' => 2]
+			: ['status' => 2, 'user_id' => auth()->id()],
+			'pending-listing');
 		$listing = [
 			'active' => $active,
 			'inactive' => $inactive,
@@ -106,15 +118,18 @@ class ListingService {
 		$active = $this->listing_repo->get('listing',
 			isAdmin()
 			? array_merge($keywords, ['status' => true])
-			: array_merge($keywords, ['user_id' => auth()->id(), 'status' => true]));
+			: array_merge($keywords, ['user_id' => auth()->id(), 'status' => true]),
+			'active-listing');
 		$inactive = $this->listing_repo->get('listing',
 			isAdmin()
 			? array_merge($keywords, ['status' => false])
-			: array_merge($keywords, ['user_id' => auth()->id(), 'status' => false]));
+			: array_merge($keywords, ['user_id' => auth()->id(), 'status' => false]),
+			'inactive-listing');
 		$pending = $this->listing_repo->get('listing',
 			isAdmin()
 			? array_merge($keywords, ['status' => 2])
-			: array_merge($keywords, ['user_id' => auth()->id(), 'status' => 2]));
+			: array_merge($keywords, ['user_id' => auth()->id(), 'status' => 2]),
+			'pending-listing');
 
 		return $listing = [
 			'active' => $active->appends(['beds' => $search->bedrooms, 'baths' => $search->baths]),
@@ -132,8 +147,8 @@ class ListingService {
 	}
 
 	public function remove_listing_image($id) {
-		$image = $this->listing_repo->first('listing_images', $id);
-		removeFile('storage/' . $path->listing_image);
+		$image = $this->listing_repo->first('listing_images', ['id' => $id]);
+		removeFile('storage/' . $image->listing_image);
 		return $this->listing_repo->delete('listing_images', $id);
 	}
 
@@ -197,5 +212,9 @@ class ListingService {
 		}
 
 		DB::rollback();
+	}
+
+	public function request_featured($id) {
+		return $this->listing_repo->update('listing', $id, ['is_featured' => 2]);
 	}
 }

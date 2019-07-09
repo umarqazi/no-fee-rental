@@ -22,7 +22,7 @@ class AdminController extends Controller {
 	 *
 	 * @return void
 	 */
-	function __construct(UserService $user_service, AgentService $agent_service) {
+	public function __construct(UserService $user_service, AgentService $agent_service) {
 		$this->user_service = $user_service;
 		$this->agent_service = $agent_service;
 	}
@@ -32,7 +32,7 @@ class AdminController extends Controller {
 	 *
 	 * @return string
 	 */
-	function addUser(Request $request) {
+	public function addUser(Request $request) {
 		$user = new CreateUserForm();
 		$user->first_name = $request->first_name;
 		$user->last_name = $request->last_name;
@@ -49,7 +49,7 @@ class AdminController extends Controller {
 	 *
 	 * @return view
 	 */
-	function profile() {
+	public function profile() {
 		$user = Auth::user();
 		return view('admin.profile', compact('user'));
 	}
@@ -59,7 +59,7 @@ class AdminController extends Controller {
 	 *
 	 * @return string
 	 */
-	function profileUpdate(Request $request) {
+	public function profileUpdate(Request $request) {
 		$admin = new EditUserForm();
 		$admin->id = Auth::id();
 		$admin->first_name = $request->first_name;
@@ -71,7 +71,9 @@ class AdminController extends Controller {
 			$update_data = $this->user_service->updateProfileImage($request->file('profile_image'), Auth::id());
 		}
 
-		return ($update_data) ? success('Profile has been updated.') : error('Something went wrong');
+		return ($update_data)
+		? success('Profile has been updated.')
+		: error('Something went wrong');
 	}
 
 	/**
@@ -79,7 +81,7 @@ class AdminController extends Controller {
 	 *
 	 * @return view
 	 */
-	function resetPassword() {
+	public function resetPassword() {
 		return view('admin.update_password');
 	}
 
@@ -88,7 +90,7 @@ class AdminController extends Controller {
 	 *
 	 * @return boolean
 	 */
-	function updatePassword(Request $request) {
+	public function updatePassword(Request $request) {
 		$change_password = new ChangePasswordForm();
 		$change_password->password = $request->password;
 		$change_password->password_confirmation = $request->password_confirmation;
@@ -104,7 +106,7 @@ class AdminController extends Controller {
 	 *
 	 * @return string
 	 */
-	function visibilityToggle($id) {
+	public function visibilityToggle($id) {
 		$status = $this->user_service->updateStatus($id);
 		return (isset($status))
 		? success(($status) ? 'User Active' : 'User Deactive')
@@ -116,17 +118,20 @@ class AdminController extends Controller {
 	 *
 	 * @return boolean
 	 */
-	function deleteUser($id) {
+	public function deleteUser($id) {
 		return ($this->user_service->deleteUser($id))
 		? success('User Deleted')
 		: error('Something went wrong');
 	}
 
-	function editUser($id) {
-		return $this->user_service->edit_user_json_response($id);
+	public function editUser($id) {
+		$data = $this->user_service->edit_user($id);
+		return $data
+		? response()->json(['data' => $data], 200)
+		: response()->json(['message' => 'Something went wrong'], 500);
 	}
 
-	function updateUser(Request $request, $id) {
+	public function updateUser(Request $request, $id) {
 		$user = new EditUserForm();
 		$user->id = $request->id;
 		$user->first_name = $request->first_name;
@@ -144,7 +149,7 @@ class AdminController extends Controller {
 	 *
 	 * @return boolean
 	 */
-	function agentInvitations(Request $request) {
+	public function agentInvitations(Request $request) {
 		$agent = new AgentInvitationForm;
 		$agent->invite_by = Auth::id();
 		$agent->token = str_random(60);

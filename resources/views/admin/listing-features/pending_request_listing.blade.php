@@ -17,7 +17,7 @@
 										<p><i class="fa fa-map-marker-alt"></i> RealtyMX ID: mrgnyc_366577 · Auto Feed Mode</p>
 										<p>Request By: {{ $pl->agent->first_name.' '.$pl->agent->last_name }}</p>
 										<p>Posted: {{ date("m/d/y H:m A", strtotime($pl->created_at)) }}</p>
-										<a href="javascript:void(0);" onclick="approve('{{ $pl->id }}', this)" title="Click To Approve"><span class="status" style="background: #ffce39;">Pending</span></a>
+										<a href="{{ route('admin.approveRequest', $pl->id) }}" title="Click To Approve"><span class="status" style="background: #ffce39;">Pending</span></a>
 										<div class="actions-btns">
 											<a href="{{ route('admin.editListing', $pl->id) }}"><span><img src="{{asset('admin/images/edit-icon.png')}}" alt=""></span></a>
 											<span><img src="{{asset('admin/images/copy-icon.png')}}" alt=""></span>
@@ -50,7 +50,7 @@
 												</ul>
 												<p><i class="fa fa-map-marker-alt"></i> RealtyMX ID: mrgnyc_366577 · Auto Feed Mode</p>
 												<p>Posted: {{ date("m/d/y H:m A", strtotime($pl->created_at)) }}</p>
-												<a href="javascript:void(0);" onclick="approve('{{ $pl->id }}', this)" title="Click To Approve"><span class="status" style="background: #ffce39;">Pending</span></a>
+												<a href="{{ route('admin.approveRequest', $pl->id) }}" title="Click To Approve"><span class="status" style="background: #ffce39;">Pending</span></a>
 												<div class="actions-btns">
 													<a href="{{ route('admin.listingRepost', $pl->id) }}"><button type="button" class="border-btn">Repost</button></a>
 													<button type="button" class="border-btn">Request Feature</button>

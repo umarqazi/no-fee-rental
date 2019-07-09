@@ -30,9 +30,9 @@ class CreateListingsTable extends Migration {
 			$table->boolean('available');
 			$table->text('description');
 			$table->string('map_location')->nullable();
-			$table->integer('is_featured')->default(0)->comment = "0-Non-Featured, 1-Featured";
+			$table->integer('is_featured')->default(0)->comment = "0-Non-Featured, 1-Featured, 2-Request-Featured";
 			$table->integer('status')->default(2)->comment = "0-Inactive, 1-Active, 2-Pending";
-			$table->string('city_state_zip')->comment = "any one of 3 given accepted";
+			$table->string('city_state_zip')->comment = "Any one of 3 given accepted";
 			$table->timestamps();
 
 			$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onEdit('cascade');

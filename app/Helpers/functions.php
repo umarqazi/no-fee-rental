@@ -14,8 +14,7 @@ function uploadImage($image, $path, $unlinkOld = false) {
 }
 
 function removeFile($path) {
-	return @unlink(public_path(file_exists($path) ? $path : ''));
-
+	return unlink(public_path($path ?? ''));
 }
 
 function uploadMultiImages($files, $path) {

@@ -240,28 +240,3 @@
     </div>
 
 @endsection
-
-<script type="text/javascript">
-    function updateUser(id) {
-
-            $.ajax({
-                url: `/admin/edit-user/${id}`,
-                type: 'post',
-                success: function(res) {
-                    $('#add_user').attr('action', `/admin/update-user/${id}`);
-                    $('.modal-title').text('Update User');
-                    $('.modal-footer input').val('Update');
-                    $('#first_name').val(res.data.first_name);
-                    $('#last_name').val(res.data.last_name);
-                    $('#email').val(res.data.email);
-                    $('#phone_number').val(res.data.phone_number);
-                    $('#user_type').val(res.data.user_type);
-                    $('#add-member').modal('show');
-                },
-
-                error: function(err) {
-                   toastr.error(err);
-                }
-            });
-        }
-</script>

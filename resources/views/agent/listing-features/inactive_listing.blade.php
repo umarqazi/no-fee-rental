@@ -22,7 +22,6 @@
 											<span><img src="{{asset('agent/images/edit-icon.png')}}" alt=""></span>
 											<span><img src="{{asset('agent/images/copy-icon.png')}}" alt=""></span>
 											<a href="{{ route('agent.listingRepost', $il->id) }}"><button type="button" class="border-btn">Repost</button></a>
-											<button type="button" class="border-btn">Request Feature</button>
 										</div>
 									</div>
 								</div>
@@ -53,7 +52,6 @@
 												<a href="{{ route('agent.listingStatus', $il->id) }}" title="Publish this property"><span class="status" style="background: red;">Deactive</span></a>
 												<div class="actions-btns">
 													<a href="{{ route('agent.listingRepost', $il->id) }}"><button type="button" class="border-btn">Repost</button></a>
-													<button type="button" class="border-btn">Request Feature</button>
 												</div>
 												<div class="list-actions-icons">
 													<button><i class="fa fa-edit"></i></button>

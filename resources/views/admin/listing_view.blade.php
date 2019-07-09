@@ -10,7 +10,7 @@
 				<div class="heading-wrapper pl-0">
 					<ul class="nav nav-pills">
 						<li class="nav-item">
-							<a class="nav-link active" data-toggle="pill" href="#listing-active">Active ( {{ count($listing['active']) }} )</a>
+							<a class="nav-link" data-toggle="pill" href="#listing-active">Active ( {{ count($listing['active']) }} )</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" data-toggle="pill" href="#listing-inactive">Inactive ( {{ count($listing['inactive']) }} )</a>
@@ -39,7 +39,7 @@
 				<div class="block-body">
 					<!-- Tab panes -->
 					<div class="tab-content">
-						<div class="tab-pane active" id="listing-active">
+						<div class="tab-pane" id="listing-active">
 							@include('admin.listing-features.active_listing')
 						</div>
 						<div class="tab-pane fade" id="listing-inactive">
