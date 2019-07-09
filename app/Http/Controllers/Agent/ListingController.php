@@ -149,8 +149,15 @@ class ListingController extends Controller {
 	}
 
 	public function removeListingImage($id) {
+		dd($id);
 		return ($this->service->remove_listing_image($id))
 		? response()->json(['message' => 'success'])
 		: response()->json(['message' => 'something went wrong']);
+	}
+
+	public function requestFeatured($id) {
+		return $this->service->request_featured($id)
+		? success('Request has been send.')
+		: error('Something went wrong');
 	}
 }

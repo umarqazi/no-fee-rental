@@ -29,7 +29,7 @@
         </div>
     </div>
 </section>
-@include('features.feature')
+@include('features.feature_listing')
 @include('features.life-container')
 @include('features.neighborhood')
 @endsection

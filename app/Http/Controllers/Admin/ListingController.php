@@ -13,42 +13,73 @@ class ListingController extends Controller {
 
 	protected $service;
 
+	/**
+	 * create new service instance
+	 *
+	 * @return string
+	 */
 	public function __construct(ListingService $service) {
 		$this->service = $service;
+		$this->service->paginate = 20;
 	}
 
+	/**
+	 * show listing table
+	 *
+	 * @return view
+	 */
 	public function index(Request $request) {
 		$listing = $this->service->get_all_listing();
-		$return = view('admin.listing_view', compact('listing'));
-		if ($request->ajax()) {
-			$return = response()->json(['listing' => $listing], 200);
-		}
-
-		return $return;
+		return view('admin.listing_view', compact('listing'));
 	}
 
+	/**
+	 * finish add listing
+	 *
+	 * @return redirect URL
+	 */
 	public function finishCreate() {
 		return redirect(route('admin.viewListing'))
 			->with(['message' => 'Property has been added.', 'alert_type' => 'success']);
 	}
 
+	/**
+	 * finish update listing
+	 *
+	 * @return redirect URL
+	 */
 	public function finishUpdate() {
 		return redirect(route('admin.viewListing'))
 			->with(['message' => 'Property has been updated.', 'alert_type' => 'success']);
 	}
 
+	/**
+	 * Show listing Form
+	 *
+	 * @return view
+	 */
 	public function listingForm() {
 		$edit = false;
 		$listing = null;
 		return view('admin.add_listing', compact('listing', 'edit'));
 	}
 
+	/**
+	 * approve || reject listing request
+	 *
+	 * @return json
+	 */
 	public function approveRequest($id) {
 		return ($this->service->approve_request($id))
-		? response()->json(['message' => 'success'], 200)
-		: response()->json(['message' => 'error'], 500);
+		? success('Listing has been approved successfully')
+		: error('Something went wrong');
 	}
 
+	/**
+	 * create new listing
+	 *
+	 * @return view listing image form
+	 */
 	public function addListing(Request $request) {
 		$edit = false;
 		$form = new CreateListingForm();
@@ -82,6 +113,11 @@ class ListingController extends Controller {
 		: error('Something went wrong');
 	}
 
+	/**
+	 * add images for listing
+	 *
+	 * @return json
+	 */
 	public function uploadImages(Request $request, $id) {
 		$files = uploadMultiImages($request->file('file'), 'data/' . auth()->id() . '/listing/images');
 		return ($this->service->add_listing_images($id, $files))
@@ -89,12 +125,22 @@ class ListingController extends Controller {
 		: response()->json(['message' => 'Something went wrong'], 500);
 	}
 
+	/**
+	 * repost old listing
+	 *
+	 * @return redirect
+	 */
 	public function repostListing($id) {
 		return $this->service->repost_listing($id)
 		? success('Property has been reposeted')
 		: error('Something went wrong');
 	}
 
+	/**
+	 * edit listing
+	 *
+	 * @return view | array | mixed
+	 */
 	public function editListingForm($id) {
 		$edit = true;
 		$col = [];
@@ -111,6 +157,11 @@ class ListingController extends Controller {
 		return view('admin.add_listing', compact('listing', 'edit'));
 	}
 
+	/**
+	 * search listing
+	 *
+	 * @return view | array | mixed
+	 */
 	public function searchListingWithFilters(Request $request) {
 		$form = new SearchListingForm();
 		$form->bedrooms = isset($request->beds) ? $request->beds : null;
@@ -119,6 +170,11 @@ class ListingController extends Controller {
 		return view('admin.listing_view', compact('listing'));
 	}
 
+	/**
+	 * publish || unpublish listing
+	 *
+	 * @return boolean
+	 */
 	public function listingVisibilityToggle($id) {
 		$status = $this->service->listing_status($id);
 		return (isset($status))
@@ -126,6 +182,11 @@ class ListingController extends Controller {
 		: error('Something went wrong');
 	}
 
+	/**
+	 * update listing
+	 *
+	 * @return view
+	 */
 	public function updateListing(Request $request, $id) {
 		$edit = true;
 		$form = new CreateListingForm();
@@ -159,6 +220,11 @@ class ListingController extends Controller {
 		: error('Something went wrong');
 	}
 
+	/**
+	 * remove listing images
+	 *
+	 * @return json
+	 */
 	public function removeListingImage($id) {
 		return ($this->service->remove_listing_image($id))
 		? response()->json(['message' => 'success'])

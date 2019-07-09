@@ -29,19 +29,19 @@ class ListingRepo {
 		return $this->{$model}->insert($data);
 	}
 
-	public function get($model, $params) {
+	public function get($model, $params, $page_alias = 'page') {
 		return $this->{$model}
 			->where($params)
 			->latest($this->sortBy)
-			->paginate($this->paginate);
+			->paginate($this->paginate, ['*'], $page_alias);
 	}
 
-	public function get_with($model, $params, $relation) {
+	public function get_with($model, $params, $relation, $page_alias = 'page') {
 		return $this->{$model}
 			->where($params)
 			->with($relation)
 			->latest($this->sortBy)
-			->paginate($this->paginate);
+			->paginate($this->paginate, ['*'], $page_alias);
 	}
 
 	public function first($model, $params) {

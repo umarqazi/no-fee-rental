@@ -4,7 +4,7 @@ namespace App\Services;
 
 class FeatureListingService {
 
-	protected $paginate = 20;
+	public $paginate;
 
 	private $listing_repo;
 
@@ -13,13 +13,23 @@ class FeatureListingService {
 	}
 
 	public function get_featured_listing() {
+		$this->listing_repo->paginate = $this->paginate;
 		return [
-			'featured' => $this->listing_repo->get('listing', ['is_featured' => true]),
-			'request_featured' => $this->listing_repo->get_with('listing', ['is_featured' => false], 'agent'),
+			'featured' => $this->listing_repo->get('listing', ['is_featured' => true], 'featured'),
+			'request_featured' => $this->listing_repo->get_with('listing', ['is_featured' => 2], 'agent', 'request-featured'),
 		];
 	}
 
-	public function update_feature_request($id) {
-		return $this->listing_repo->active_deactive($id, 'is_featured');
+	public function featured_listing() {
+		$this->listing_repo->paginate = $this->paginate;
+		return $this->listing_repo->get('listing', ['is_featured' => true], 'featured');
+	}
+
+	public function approve_featured_request($id) {
+		return $this->listing_repo->update('listing', $id, ['is_featured' => 1]);
+	}
+
+	public function remove_featured_listing($id) {
+		return $this->listing_repo->update('listing', $id, ['is_featured' => 0]);
 	}
 }

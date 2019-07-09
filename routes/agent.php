@@ -26,3 +26,6 @@ Route::get('/edit-list/{id}', 'Agent\ListingController@editListingForm')->name('
 Route::post('/update-listing/{id}', 'Agent\ListingController@updateListing')->name('agent.updateListing');
 Route::get('/finish-listing', 'Agent\ListingController@finishCreate')->name('agent.finishCreateListing');
 Route::get('/update-listing', 'Agent\ListingController@finishUpdate')->name('agent.finishUpdateListing');
+
+// Featured Listing
+Route::get('/request-featured/{id}', 'Agent\ListingController@requestFeatured')->name('agent.requestFeatured');

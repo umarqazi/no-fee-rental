@@ -23,7 +23,7 @@ class UserService {
 	/**
 	 * UserServices constructor.
 	 */
-	function __construct(UserRepo $repo, RolesRepo $roles) {
+	public function __construct(UserRepo $repo, RolesRepo $roles) {
 		$this->user_repo = $repo;
 		$this->roles_repo = $roles;
 	}
@@ -32,7 +32,7 @@ class UserService {
 	 * @param $data
 	 * @return bool
 	 */
-	function updateProfile(IForm $form) {
+	public function updateProfile(IForm $form) {
 		$form->validate();
 		return $this->user_repo->update($form->toArray(), (toObject($form))->id);
 	}
@@ -42,7 +42,7 @@ class UserService {
 	 * @param $form
 	 * @return bool
 	 */
-	function updateProfileImage($profile_image, $id) {
+	public function updateProfileImage($profile_image, $id) {
 		$destinationPath = 'data/' . $id . '/profile_image';
 		$image_name = uploadImage($profile_image, $destinationPath);
 		$image_data = ['profile_image' => $image_name];
@@ -53,7 +53,7 @@ class UserService {
 	 * @param $form Instance
 	 * @return bool
 	 */
-	function changePassword(IForm $form) {
+	public function changePassword(IForm $form) {
 		$form->validate();
 		$user_password = ['password' => Hash::make($form->password)];
 		$user_id = ['id' => $form->user_id];
@@ -64,7 +64,7 @@ class UserService {
 	 * @param null
 	 * @return mixed | array
 	 */
-	function allAgents() {
+	public function allAgents() {
 		$this->user_repo->paginate = 5;
 		return $this->user_repo->showAgents();
 	}
@@ -73,7 +73,7 @@ class UserService {
 	 * @param null
 	 * @return mixed | array
 	 */
-	function allRenters() {
+	public function allRenters() {
 		$this->user_repo->paginate = 5;
 		return $this->user_repo->showRenters();
 	}
@@ -82,7 +82,7 @@ class UserService {
 	 * @param id | (int)
 	 * @return bool
 	 */
-	function updateStatus($id) {
+	public function updateStatus($id) {
 		return $this->user_repo->active_deactive($id);
 	}
 
@@ -90,7 +90,7 @@ class UserService {
 	 * @param id | (int)
 	 * @return bool
 	 */
-	function deleteUser($id) {
+	public function deleteUser($id) {
 		return $this->user_repo->delete($id);
 	}
 
@@ -98,7 +98,7 @@ class UserService {
 	 * @param id | (int)
 	 * @return mixed | array
 	 */
-	function userRoles() {
+	public function userRoles() {
 		return $this->roles_repo->getRoles();
 	}
 
@@ -106,14 +106,11 @@ class UserService {
 	 * @param id | (int)
 	 * @return json response
 	 */
-	function edit_user_json_response($id) {
-		$data = $this->user_repo->edit($id);
-		return ($data)
-		? response()->json(['data' => $data], 200)
-		: response()->json(['message' => 'Something went wrong'], 404);
+	public function edit_user($id) {
+		return $this->user_repo->edit($id);
 	}
 
-	function update_user(IForm $user) {
+	public function update_user(IForm $user) {
 		$user->validate();
 		return $this->user_repo->update($user->toArray(), $user->id) ? true : false;
 	}
@@ -122,7 +119,7 @@ class UserService {
 	 * @param $form instance
 	 * @return bool
 	 */
-	function add_new_user(IForm $user) {
+	public function add_new_user(IForm $user) {
 		$user->validate();
 		$data = $this->user_repo->create($user->toArray());
 		if (!empty($data)) {

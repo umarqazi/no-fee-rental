@@ -18,12 +18,12 @@
 										<p><i class="fa fa-map-marker-alt"></i> RealtyMX ID: mrgnyc_366577 · Auto Feed Mode</p>
 										<p>Requested By: {{ $rf->agent->first_name }}</p>
 										<p>Posted: {{ date("m/d/y H:m A", strtotime($rf->created_at)) }}</p>
-										<a href="javascript:void(0);" onclick="makeFeatured('{{ $rf->id }}', this)" title="Publish this property"><span class="status" style="background: blue;">Approve</span></a>
+										<a href="{{ route('admin.approveFeature', $rf->id )}}" title="Make this property featured"><span class="status" style="background: blue;margin-right: 60px;">Approve</span></a>
+										<a href="{{ route('admin.removeFeatured', $rf->id )}}" title="Reject feature request"><span class="status" style="background: red;">Cancel</span></a>
 										<div class="actions-btns">
 											<a href="{{ route('admin.editListing', $rf->id) }}"><span><img src="{{asset('admin/images/edit-icon.png')}}" alt=""></span></a>
 											<span><img src="{{asset('admin/images/copy-icon.png')}}" alt=""></span>
 											<a href="{{ route('admin.listingRepost', $rf->id) }}"><button type="button" class="border-btn">Repost</button></a>
-											<button type="button" class="border-btn">Request Feature</button>
 										</div>
 									</div>
 								</div>
@@ -51,10 +51,10 @@
 												</ul>
 												<p><i class="fa fa-map-marker-alt"></i> RealtyMX ID: mrgnyc_366577 · Auto Feed Mode</p>
 												<p>Posted: {{ date("m/d/y H:m A", strtotime($rf->created_at)) }}</p>
-												<a href="javascript:void(0);" onclick="makeFeatured('{{ $rf->id }}', this)" title="Publish this property"><span class="status" style="background: blue;">Approve</span></a>
+												<a href="{{ route('admin.approveFeature', $rf->id )}}" title="Make this property featured"><span class="status" style="background: blue;">Approve</span></a>
+												<a href="{{ route('admin.removeFeatured', $rf->id )}}" title="Reject feature request"><span class="status" style="background: red;">Cancel</span></a>
 												<div class="actions-btns">
 													<a href="{{ route('admin.listingRepost', $rf->id) }}"><button type="button" class="border-btn">Repost</button></a>
-													<button type="button" class="border-btn">Request Feature</button>
 												</div>
 												<div class="list-actions-icons">
 													<a href="{{ route('admin.editListing', $rf->id) }}"><button><i class="fa fa-edit"></i></button></a>

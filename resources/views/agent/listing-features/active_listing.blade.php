@@ -17,11 +17,16 @@
 										<p><i class="fa fa-map-marker-alt"></i> RealtyMX ID: mrgnyc_366577 · Auto Feed Mode</p>
 										<p>Posted: {{ date("m/d/y H:m A", strtotime($al->created_at)) }}</p>
 										<a href="{{ route('agent.listingStatus', $al->id) }}" title="Unpublish this property"><span class="status">Active</span></a>
+										@if($al->is_featured != 0)
+											<span class="status" style="margin-right: 60px;background: blueviolet;">{{($al->is_featured == 2) ? 'Requested for feature' : 'Featured' }}</span>
+										@endif
 										<div class="actions-btns">
 											<a href="{{ route('agent.editListing', $al->id) }}"><span><img src="{{asset('agent/images/edit-icon.png')}}" alt=""></span></a>
 											<span><img src="{{asset('agent/images/copy-icon.png')}}" alt=""></span>
 											<a href="{{ route('agent.listingRepost', $al->id) }}"><button type="button" class="border-btn">Repost</button></a>
-											<button type="button" class="border-btn">Request Feature</button>
+										@if($al->is_featured != 1 && $al->is_featured != 2)
+											<a href="{{ route('agent.requestFeatured', $al->id) }}"><button type="button" class="border-btn">Request Feature</button></a>
+										@endif
 										</div>
 									</div>
 								</div>
@@ -50,9 +55,14 @@
 												<p><i class="fa fa-map-marker-alt"></i> RealtyMX ID: mrgnyc_366577 · Auto Feed Mode</p>
 												<p>Posted: {{ date("m/d/y H:m A", strtotime($al->created_at)) }}</p>
 												<a href="{{ route('agent.listingStatus', $al->id) }}" title="Unpublish this property"><span class="status">Active</span></a>
+												@if($al->is_featured != 0)
+													<span class="status" style="margin-right: 60px;background: blueviolet;">{{($al->is_featured == 2) ? 'Requested for feature' : 'Featured' }}</span>
+												@endif
 												<div class="actions-btns">
 													<a href="{{ route('agent.listingRepost', $al->id) }}"><button type="button" class="border-btn">Repost</button></a>
-													<button type="button" class="border-btn">Request Feature</button>
+													@if($al->is_featured != 1 && $al->is_featured != 2)
+														<a href="{{ route('agent.requestFeatured', $al->id) }}"><button type="button" class="border-btn">Request Feature</button></a>
+													@endif
 												</div>
 												<div class="list-actions-icons">
 													<button><i class="fa fa-edit"></i></button>

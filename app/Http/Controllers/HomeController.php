@@ -2,17 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
-
 class HomeController extends Controller {
+
+	protected $service;
+
 	/**
 	 * Create a new controller instance.
 	 *
 	 * @return void
 	 */
-	public function __construct() {
-		$this->middleware('auth')->except('home');
+	public function __construct(\App\Services\FeatureListingService $service) {
+		$this->service = $service;
+		$this->service->paginate = 8;
+		$this->middleware('auth')->except('index');
 	}
 
 	/**
@@ -21,13 +23,7 @@ class HomeController extends Controller {
 	 * @return \Illuminate\Contracts\Support\Renderable
 	 */
 	public function index() {
-		if (Auth::user()->hasRole('admin')) {
-			return Redirect::to('/admin/dashboard');
-		}
-		return Redirect::to('/');
-	}
-
-	public function home() {
-		return view('index');
+		$featured_listings = $this->service->featured_listing();
+		return view('index', compact('featured_listings'));
 	}
 }
