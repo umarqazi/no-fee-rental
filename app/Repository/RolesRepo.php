@@ -22,7 +22,7 @@ class RolesRepo {
 	 *
 	 * @return array
 	 */
-	public function getRoles() {
+	public function get_roles() {
 		$roleArray = [];
 		$roles = $this->role->select(['id', 'name'])->get();
 		$roleArray[''] = 'Select User Type';

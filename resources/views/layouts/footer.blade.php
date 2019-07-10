@@ -77,3 +77,5 @@
 <script src="{{asset('assets/js/pignose.calendar.full.min.js')}}"></script>
 <script src="{{asset('assets/js/jquery.validate.min.js')}}"></script>
 <script src="{{asset('assets/js/custom.js')}}"></script>
+<script src="{{asset('assets/js/lightslider.js')}}"></script>
+<script src="{{asset('assets/owlcarousel/owl.carousel.min.js')}}"></script>

@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: adi
- * Date: 6/14/19
- * Time: 3:53 PM
- */
 
 namespace App\Services;
 
@@ -32,7 +26,7 @@ class UserService {
 	 * @param $data
 	 * @return bool
 	 */
-	public function updateProfile(IForm $form) {
+	public function update_profile(IForm $form) {
 		$form->validate();
 		return $this->user_repo->update($form->toArray(), (toObject($form))->id);
 	}
@@ -42,7 +36,7 @@ class UserService {
 	 * @param $form
 	 * @return bool
 	 */
-	public function updateProfileImage($profile_image, $id) {
+	public function update_profile_image($profile_image, $id) {
 		$destinationPath = 'data/' . $id . '/profile_image';
 		$image_name = uploadImage($profile_image, $destinationPath);
 		$image_data = ['profile_image' => $image_name];
@@ -53,7 +47,7 @@ class UserService {
 	 * @param $form Instance
 	 * @return bool
 	 */
-	public function changePassword(IForm $form) {
+	public function change_password(IForm $form) {
 		$form->validate();
 		$user_password = ['password' => Hash::make($form->password)];
 		$user_id = ['id' => $form->user_id];
@@ -64,7 +58,7 @@ class UserService {
 	 * @param null
 	 * @return mixed | array
 	 */
-	public function allAgents() {
+	public function all_agents() {
 		$this->user_repo->paginate = 5;
 		return $this->user_repo->showAgents();
 	}
@@ -73,7 +67,7 @@ class UserService {
 	 * @param null
 	 * @return mixed | array
 	 */
-	public function allRenters() {
+	public function all_renters() {
 		$this->user_repo->paginate = 5;
 		return $this->user_repo->showRenters();
 	}
@@ -82,7 +76,7 @@ class UserService {
 	 * @param id | (int)
 	 * @return bool
 	 */
-	public function updateStatus($id) {
+	public function update_status($id) {
 		return $this->user_repo->active_deactive($id);
 	}
 
@@ -90,7 +84,7 @@ class UserService {
 	 * @param id | (int)
 	 * @return bool
 	 */
-	public function deleteUser($id) {
+	public function delete_user($id) {
 		return $this->user_repo->delete($id);
 	}
 
@@ -98,8 +92,8 @@ class UserService {
 	 * @param id | (int)
 	 * @return mixed | array
 	 */
-	public function userRoles() {
-		return $this->roles_repo->getRoles();
+	public function user_roles() {
+		return $this->roles_repo->get_roles();
 	}
 
 	/**

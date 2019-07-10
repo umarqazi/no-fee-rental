@@ -145,13 +145,8 @@ class ListingController extends Controller {
 		$edit = true;
 		$col = [];
 		$listing = $this->service->edit_listing($id);
-		$constants = config('constants.listing_types');
-		$types = array_keys($constants);
-		foreach ($listing->listingTypes as $value) {
-			// make collection for specific types
-			$col[$types[$value['property_type'] - 1]][] = $value['value'];
-			// assign collections
-			$listing->{$types[$value['property_type'] - 1]} = $col[$types[$value['property_type'] - 1]];
+		foreach (features($listing->listingTypes) as $key => $value) {
+			$listing->{$key} = $value;
 		}
 
 		return view('admin.add_listing', compact('listing', 'edit'));

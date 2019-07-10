@@ -20,7 +20,8 @@
     {!! HTML::script('assets/js/jquery.min.js') !!}
     {!! HTML::script('admin/js/dropzone.js') !!}
     {!! HTML::script('assets/js/toastr.js') !!}
-    {!! HTML::script('js/listing.js') !!}
+    {!! HTML::script('assets/js/listing.js') !!}
+    {!! HTML::script('assets/js/jquery-validation.min.js') !!}
     {!! HTML::script('https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js') !!}
 
 	<title>@yield('title')</title>

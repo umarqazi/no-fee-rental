@@ -13,7 +13,7 @@ class AgentRepo {
 	 * agent invites && user models.
 	 *
 	 */
-	function __construct(\App\AgentInvites $agent_invites, \App\User $agent) {
+	public function __construct(\App\AgentInvites $agent_invites, \App\User $agent) {
 		$this->agent = $agent;
 		$this->agent_invites = $agent_invites;
 	}
@@ -23,7 +23,7 @@ class AgentRepo {
 	 *
 	 * @return user | object
 	 */
-	function create_agent($data) {
+	public function create_agent($data) {
 		return $this->agent->create($data);
 	}
 
@@ -32,7 +32,7 @@ class AgentRepo {
 	 *
 	 * @return user | object
 	 */
-	function create($data) {
+	public function create($data) {
 		return $this->agent->create($data);
 	}
 
@@ -41,7 +41,7 @@ class AgentRepo {
 	 *
 	 * @return user | object
 	 */
-	function invite_agent_record($data) {
+	public function invite_agent_record($data) {
 		return $this->agent_invites->create($data);
 	}
 }

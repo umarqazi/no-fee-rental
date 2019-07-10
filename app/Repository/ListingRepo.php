@@ -50,16 +50,16 @@ class ListingRepo {
 			->first();
 	}
 
-	public function first_with($params, $relation) {
-		return $this->listing
+	public function first_with($model, $params, $relation) {
+		return $this->{$model}
 			->where($params)
 			->with($relation)
 			->first();
 	}
 
-	public function delete($model, $id) {
+	public function delete($model, $param) {
 		return $this->{$model}
-			->whereId($id)
+			->where($param)
 			->delete();
 	}
 

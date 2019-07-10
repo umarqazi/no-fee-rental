@@ -67,5 +67,30 @@ function toast($message, $type) {
 }
 
 function toObject($data) {
-	return json_decode(json_encode($data));
+	return (object) $data;
+}
+
+function features($data = null, $readable = false) {
+	$build = [];
+	$config = config('constants');
+	$features = $config['features'];
+
+	if ($data == null) {
+		return $features;
+	}
+
+	$keys = array_keys($config['listing_types']);
+	foreach ($data as $value) {
+		$index = $value->property_type - 1;
+		$key = $keys[$index];
+		if ($readable) {
+			$feature = $features[$key][$value->value - 1];
+			$key = str_replace('_', ' ', ucfirst($key));
+			$build[$key][] = $feature;
+		} else {
+			$build[$key][] = $value->value;
+		}
+	}
+
+	return $build;
 }

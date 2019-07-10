@@ -133,7 +133,7 @@ $(document).ready(function () {
 	});
 
 
-	/*$('#image-gallery').lightSlider({
+	$('#image-gallery').lightSlider({
 		gallery: true,
 		item: 1,
 		thumbItem: 4,
@@ -162,7 +162,7 @@ $(document).ready(function () {
 				items: 2
 			}
 		}
-	});*/
+	});
 
 
 	// footer newsletter form ajax

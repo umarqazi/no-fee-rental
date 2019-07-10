@@ -10,26 +10,10 @@
 	<div class="block add-new-listing-wrapper">
 		<div class="block-body">
 			{!! Form::model($listing, ['url' => ($edit) ? route('admin.updateListing', $listing->id) : route('admin.createListing'), 'id' => 'listing_form', 'method' => 'post', 'enctype' => 'multipart/form-data']) !!}
-			<div class="row">
+				<div class="row">
 					@include('admin.listing-features.listing_info')
-				<!-- Listing Type -->
-				<div class="col-md-6">
-					@include('admin.listing-features.listing_types')
-				</div>
-				<!-- Pet Policy -->
-				<div class="col-md-6">
-					@include('admin.listing-features.pet_policy')
-				</div>
-				<!-- Unit Features -->
-				<div class="col-md-6">
-					@include('admin.listing-features.unit_features')
-				</div>
-				<!-- Building Features -->
-				<div class="col-md-6">
-					@include('admin.listing-features.building_features')
-				</div>
-				<!-- Amenities -->
-					@include('admin.listing-features.amenities')
+
+					@include('admin.listing-features.features')
 
 					@include('admin.listing-features.basic_info')
 

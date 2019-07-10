@@ -32,4 +32,8 @@ class FeatureListingService {
 	public function remove_featured_listing($id) {
 		return $this->listing_repo->update('listing', $id, ['is_featured' => 0]);
 	}
+
+	public function detail($id) {
+		return $this->listing_repo->first_with('listing', ['id' => $id], ['agent', 'listingImages', 'listingTypes']);
+	}
 }

@@ -14,7 +14,7 @@ class HomeController extends Controller {
 	public function __construct(\App\Services\FeatureListingService $service) {
 		$this->service = $service;
 		$this->service->paginate = 8;
-		$this->middleware('auth')->except('index');
+		// $this->middleware('auth')->only('');
 	}
 
 	/**
@@ -25,5 +25,10 @@ class HomeController extends Controller {
 	public function index() {
 		$featured_listings = $this->service->featured_listing();
 		return view('index', compact('featured_listings'));
+	}
+
+	public function listingDetail($id) {
+		$listing = $this->service->detail($id);
+		return view('listing_detail', compact('listing'));
 	}
 }

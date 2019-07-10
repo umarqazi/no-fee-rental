@@ -37,9 +37,9 @@ class UserController extends Controller {
 	 */
 	public function editProfile(Request $request) {
 		$form = new UserForm($request);
-		$update_data = $this->user_service->updateAdminProfile($form, $form->user);
+		$update_data = $this->user_service->update_admin_profile($form, $form->user);
 		if ($request->hasFile('profile_image')) {
-			$update_data = $this->user_service->updateProfileImage($request->file('profile_image'), $form->user);
+			$update_data = $this->user_service->update_profile_image($request->file('profile_image'), $form->user);
 		}
 		$notification = [
 			'message' => 'ProfileForm has been updated successfully',
@@ -66,7 +66,7 @@ class UserController extends Controller {
 		$change_password->password = $request->password;
 		$change_password->password_confirmation = $request->password_confirmation;
 		$change_password->user_id = $user->id;
-		$this->user_service->changePassword($change_password);
+		$this->user_service->change_password($change_password);
 		$notification = [
 			'message' => 'Password has been set successfully. Now you can logged in',
 			'alert_type' => 'success',

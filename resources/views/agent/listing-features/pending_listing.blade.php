@@ -20,7 +20,6 @@
 										<div class="actions-btns">
 											<a href="{{ route('agent.editListing', $pl->id) }}"><span><img src="{{asset('agent/images/edit-icon.png')}}" alt=""></span></a>
 											<span><img src="{{asset('agent/images/copy-icon.png')}}" alt=""></span>
-											<button type="button" class="border-btn">Request Feature</button>
 										</div>
 									</div>
 								</div>
@@ -49,9 +48,6 @@
 												<p><i class="fa fa-map-marker-alt"></i> RealtyMX ID: mrgnyc_366577 · Auto Feed Mode</p>
 												<p>Posted: {{ date("m/d/y H:m A", strtotime($pl->created_at)) }}</p>
 												<span class="status" style="background: #ffce39;">Pending</span>
-												<div class="actions-btns">
-													<button type="button" class="border-btn">Request Feature</button>
-												</div>
 												<div class="list-actions-icons">
 													<a href="{{ route('agent.editListing', $pl->id) }}"><button><i class="fa fa-edit"></i></button></a>
 													<button><i class="fa fa-copy"></i></button>

@@ -66,9 +66,9 @@ class AdminController extends Controller {
 		$admin->last_name = $request->last_name;
 		$admin->email = $request->email;
 		$admin->phone_number = $request->phone_number;
-		$update_data = $this->user_service->updateProfile($admin);
+		$update_data = $this->user_service->update_profile($admin);
 		if ($request->hasFile('profile_image')) {
-			$update_data = $this->user_service->updateProfileImage($request->file('profile_image'), Auth::id());
+			$update_data = $this->user_service->update_profile_image($request->file('profile_image'), Auth::id());
 		}
 
 		return ($update_data)
@@ -95,7 +95,7 @@ class AdminController extends Controller {
 		$change_password->password = $request->password;
 		$change_password->password_confirmation = $request->password_confirmation;
 		$change_password->user_id = Auth::id();
-		return $this->user_service->changePassword($change_password)
+		return $this->user_service->change_password($change_password)
 		? success('Password has been updated succesfully.', '/admin/show-profile')
 		: error('Something went wrong');
 
@@ -107,7 +107,7 @@ class AdminController extends Controller {
 	 * @return string
 	 */
 	public function visibilityToggle($id) {
-		$status = $this->user_service->updateStatus($id);
+		$status = $this->user_service->update_status($id);
 		return (isset($status))
 		? success(($status) ? 'User Active' : 'User Deactive')
 		: error('Something went wrong');
@@ -119,7 +119,7 @@ class AdminController extends Controller {
 	 * @return boolean
 	 */
 	public function deleteUser($id) {
-		return ($this->user_service->deleteUser($id))
+		return ($this->user_service->delete_user($id))
 		? success('User Deleted')
 		: error('Something went wrong');
 	}

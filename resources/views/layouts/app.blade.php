@@ -9,10 +9,11 @@
     {!! HTML::style('assets/css/pignose.calendar.min.css') !!}
     {!! HTML::style('assets/css/main.css') !!}
     {!! HTML::style('assets/css/style.css') !!}
-    {!! HTML::style('https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css') !!}
+    {!! HTML::style('assets/css/lightslider.css') !!}
+    {!! HTML::style('assets/owlcarousel/assets/owl.carousel.min.css') !!}
     {!! HTML::script('assets/js/jquery.min.js') !!}
     {!! HTML::script('assets/js/toastr.js') !!}
-    {!! HTML::script('js/custom.js') !!}
+    {!! HTML::style('https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css') !!}
 </head>
 <body>
     @include('layouts.header')

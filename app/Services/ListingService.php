@@ -99,7 +99,7 @@ class ListingService {
 	}
 
 	public function edit_listing($id) {
-		return $this->listing_repo->first_with(['id' => $id], 'listingTypes');
+		return $this->listing_repo->first_with('listing', ['id' => $id], 'listingTypes');
 	}
 
 	public function approve_request($id) {
@@ -149,7 +149,7 @@ class ListingService {
 	public function remove_listing_image($id) {
 		$image = $this->listing_repo->first('listing_images', ['id' => $id]);
 		removeFile('storage/' . $image->listing_image);
-		return $this->listing_repo->delete('listing_images', $id);
+		return $this->listing_repo->delete('listing_images', ['id' => $id]);
 	}
 
 	public function update_listing(IForm $listing, $id) {
@@ -188,30 +188,9 @@ class ListingService {
 	}
 
 	public function update_listing_type($id, $listing) {
-		$batch = [];
-		foreach ($listing as $key => $type) {
-
-			if (is_array($listing->{$key})) {
-				$type = sprintf("%s", config("constants.listing_types.{$key}"));
-				foreach ($listing->{$key} as $key => $value) {
-					$batch[] = [
-						'listing_id' => $id,
-						'property_type' => $type,
-						'value' => $value,
-						'created_at' => now(),
-						'updated_at' => now(),
-					];
-				}
-			}
-		}
-
-		$this->listing_repo->delete('listing_type', $id);
-		if ($this->listing_repo->insert('listing_type', $batch)) {
-			DB::commit();
-			return true;
-		}
-
-		DB::rollback();
+		$list['id'] = $id;
+		$this->listing_repo->delete('listing_type', ['listing_id' => $id]);
+		return $this->add_listing_type($listing, (object) $list);
 	}
 
 	public function request_featured($id) {
