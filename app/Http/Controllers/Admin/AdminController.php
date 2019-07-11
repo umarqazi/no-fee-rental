@@ -14,6 +14,9 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller {
 
+	/**
+	 * @var UserService
+	 */
 	private $user_service;
 	private $agent_service;
 

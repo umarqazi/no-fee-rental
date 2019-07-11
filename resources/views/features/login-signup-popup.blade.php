@@ -16,7 +16,7 @@
                 <div class="login-heading">
                     Login
                 </div>
-                <form method="POST" action="{{ route('attempt.login') }}">
+                <form method="POST" action="{{ route('attempt.login') }}" id="login_form">
                     @csrf
 
                     <div class="row">
@@ -93,7 +93,7 @@
                 <div class="login-heading">
                     Signup
                 </div>
-                <form method="POST" action="{{ route('register') }}">
+                <form method="POST" action="{{ route('register') }}" id="signup_form">
                     @csrf
                     <div class="row">
                         <div class="col-sm-12 mb-3">
@@ -142,7 +142,7 @@
                         </div>
                         <div class="col-sm-12">
                             <div class="form-group">
-                                {!! Form::password('password', ['class'=>'input-style', 'placeholder'=>'Password']) !!}
+                                {!! Form::password('password', ['class'=>'input-style', 'placeholder'=>'Password', 'id' => 'password']) !!}
                                 @if ($errors->has('password'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('password') }}</strong>

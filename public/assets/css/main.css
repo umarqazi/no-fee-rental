@@ -2472,3 +2472,7 @@ footer .copyright .social-icons li a:hover {
     flex: 0 0 50%;
   }
 }
+
+.error {
+  color:red;
+}

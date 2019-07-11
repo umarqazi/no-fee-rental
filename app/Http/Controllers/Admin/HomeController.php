@@ -8,6 +8,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\View;
 
@@ -39,5 +40,14 @@ class HomeController extends Controller {
 	 */
 	public function viewPropertyListing() {
 		return view::make('admin.listing.property-listing');
+	}
+
+	public function search(Request $request) {
+		$page = 'users';
+		$roles = $this->service->user_roles();
+		$query = $this->service->search_user($request->keywords);
+		$agents = $query->whereuser_type(2)->paginate(5);
+		$renters = $query->whereuser_type(3)->paginate(5);
+		return view('admin.index', compact('agents', 'renters', 'page', 'roles'));
 	}
 }

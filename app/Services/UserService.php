@@ -130,4 +130,8 @@ class UserService {
 
 		return false;
 	}
+
+	public function search_user($keyword) {
+		return $this->user_repo->search($keyword);
+	}
 }

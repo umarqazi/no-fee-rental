@@ -12,19 +12,37 @@ class ListingRepo {
 
 	private $listing_type;
 
-	public function __construct(
-		\App\Listing $listing,
-		\App\ListingTypes $listing_type,
-		\App\ListingImages $listing_images) {
+	private $listing_images;
+
+	/**
+	 * ListingRepo constructor.
+	 *
+	 * @param \App\Listing $listing
+	 * @param \App\ListingTypes $listing_type
+	 * @param \App\ListingImages $listing_images
+	 */
+	public function __construct( \App\Listing $listing, \App\ListingTypes $listing_type, \App\ListingImages $listing_images) {
 		$this->listing = $listing;
 		$this->listing_type = $listing_type;
 		$this->listing_images = $listing_images;
 	}
 
+	/**
+	 * @param $model
+	 * @param $data
+	 *
+	 * @return mixed
+	 */
 	public function create($model, $data) {
 		return $this->{$model}->create($data);
 	}
 
+	/**
+	 * @param $model
+	 * @param $data
+	 *
+	 * @return mixed
+	 */
 	public function insert($model, $data) {
 		return $this->{$model}->insert($data);
 	}

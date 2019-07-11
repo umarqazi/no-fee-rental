@@ -86,4 +86,12 @@ class UserRepo {
 	public function showRenters() {
 		return $this->user_model->whereuser_type(3)->latest()->paginate($this->paginate);
 	}
+
+	public function search($keywords) {
+		return $this->user_model
+			->orWhere("first_name", "like", "%{$keywords}%")
+			->orWhere("last_name", "like", "%{$keywords}%")
+			->orWhere("email", "like", "%{$keywords}%")
+			->orWhere("phone_number", "like", "%{$keywords}%");
+	}
 }

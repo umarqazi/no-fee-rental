@@ -9,7 +9,7 @@
 	</div>
 	<div class="block add-new-listing-wrapper">
 		<div class="block-body">
-			{!! Form::model($listing, ['url' => ($edit) ? route('admin.updateListing', $listing->id) : route('admin.createListing'), 'id' => 'listing_form', 'method' => 'post', 'enctype' => 'multipart/form-data']) !!}
+			{!! Form::model($listing, ['id' => 'listing-form', 'url' => ($edit) ? route('admin.updateListing', $listing->id) : route('admin.createListing'), 'id' => 'listing_form', 'method' => 'post', 'enctype' => 'multipart/form-data']) !!}
 				<div class="row">
 					@include('admin.listing-features.listing_info')
 

@@ -48,3 +48,5 @@ Route::get('/finish-update-listing', 'Admin\ListingController@finishUpdate')->na
 Route::get('/feature-listing', 'Admin\FeaturedListingController@index')->name('admin.featureListing');
 Route::get('/approve-feature-request/{id}', 'Admin\FeaturedListingController@approveFeatureRequest')->name('admin.approveFeature');
 Route::get('/remove-featured-listing/{id}', 'Admin\FeaturedListingController@removeFeatured')->name('admin.removeFeatured');
+
+Route::post('/search-user', 'Admin\HomeController@search')->name('admin.search');

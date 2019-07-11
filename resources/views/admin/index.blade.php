@@ -22,8 +22,12 @@
                 </ul>
                 <div class="filter-wrapper">
                     <div class="search-user">
+                        {!! Form::open(['url' => route('admin.search'), 'method' => 'post']) !!}
+                        <button type="submit" style="background: none; border:none; outline: none; cursor:pointer;">
                         <i class="fa fa-search"></i>
-                        <input type="text" placeholder="Search" class="search-fld" />
+                        </button>
+                            <input type="text" name="keywords" placeholder="Search" class="search-fld" />
+                        {!! Form::close() !!}
                     </div>
                 </div>
             </div>

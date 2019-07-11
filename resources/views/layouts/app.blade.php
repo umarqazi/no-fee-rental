@@ -13,6 +13,8 @@
     {!! HTML::style('assets/owlcarousel/assets/owl.carousel.min.css') !!}
     {!! HTML::script('assets/js/jquery.min.js') !!}
     {!! HTML::script('assets/js/toastr.js') !!}
+    {!! HTML::script('http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js') !!}
+    {!! HTML::script('assets/js/validate.js') !!}
     {!! HTML::style('https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css') !!}
 </head>
 <body>

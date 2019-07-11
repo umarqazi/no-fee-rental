@@ -1,8 +1,12 @@
 <?php
 
-use Illuminate\Support\Facades\Mail;
-
-// Use to Upload Images
+/**
+ * @param $image
+ * @param $path
+ * @param bool $unlinkOld
+ *
+ * @return string
+ */
 function uploadImage($image, $path, $unlinkOld = false) {
 	$name = time() . '.' . $image->getClientOriginalExtension();
 	if (!File::isDirectory($path)) {
@@ -10,48 +14,85 @@ function uploadImage($image, $path, $unlinkOld = false) {
 	}
 	Storage::disk('public')->putFileAs($path, $image, $name);
 	$full_image_name = $path . '/' . $name;
+	(!$unlinkOld) ?: removeFile($path);
 	return $full_image_name;
 }
 
-function removeFile($path) {
-	return unlink(public_path($path ?? ''));
-}
-
+/**
+ * @param $files
+ * @param $path
+ *
+ * @return array
+ */
 function uploadMultiImages($files, $path) {
 	$paths = [];
-
 	foreach ($files as $file) {
 		$name = uploadImage($file, $path);
 		array_push($paths, $name);
 	}
-
 	return $paths;
 }
 
+/**
+ * @param $path
+ *
+ * @return bool
+ */
+function removeFile($path) {
+	return unlink(public_path($path ?? ''));
+}
+
+/**
+ * @return mixed
+ */
 function isAdmin() {
 	return auth()->guard('admin')->check();
 }
 
+/**
+ * @return mixed
+ */
 function isAgent() {
 	return auth()->guard('agent')->check();
 }
 
-// Use to send emails
+/**
+ * @param $to
+ * @param $data
+ *
+ * @return mixed
+ */
 function mailService($to, $data) {
-	return Mail::to($to)->send(new App\Mail\MailHandler($data));
+	return \Illuminate\Support\Facades\Mail::to($to)->send(new App\Mail\MailHandler($data));
 }
 
-// Use to handle common errors
+/**
+ * @param $msg
+ *
+ * @return \Illuminate\Http\RedirectResponse
+ */
 function error($msg) {
 	return redirect()->back()->with(['message' => $msg, 'alert_type' => 'error']);
 }
 
+/**
+ * @param $msg
+ * @param null $path
+ *
+ * @return \Illuminate\Http\RedirectResponse
+ */
 function success($msg, $path = null) {
 	return ($path != null)
 	? redirect($path)->with(['message' => $msg, 'alert_type' => 'success'])
 	: redirect()->back()->with(['message' => $msg, 'alert_type' => 'success']);
 }
 
+/**
+ * @param $message
+ * @param $type
+ *
+ * @return string
+ */
 function toast($message, $type) {
 	$select = null;
 	switch ($type) {
@@ -66,10 +107,21 @@ function toast($message, $type) {
 	return "<script>toastr.{$select}('{$message}');</script>";
 }
 
+/**
+ * @param $data
+ *
+ * @return object
+ */
 function toObject($data) {
 	return (object) $data;
 }
 
+/**
+ * @param null $data
+ * @param bool $readable
+ *
+ * @return array|mixed
+ */
 function features($data = null, $readable = false) {
 	$build = [];
 	$config = config('constants');

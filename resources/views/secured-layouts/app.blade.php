@@ -21,7 +21,8 @@
     {!! HTML::script('admin/js/dropzone.js') !!}
     {!! HTML::script('assets/js/toastr.js') !!}
     {!! HTML::script('assets/js/listing.js') !!}
-    {!! HTML::script('assets/js/jquery-validation.min.js') !!}
+	{!! HTML::script('http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js') !!}
+    {!! HTML::script('assets/js/validate.js') !!}
     {!! HTML::script('https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js') !!}
 
 	<title>@yield('title')</title>
@@ -33,7 +34,7 @@
 <div class="main-wrapper">
 	@section('sidebar')
 		@if(Auth::user())
-			@if(Auth::guard('admin')->check())
+			@if(isAdmin())
 				@include('secured-layouts.sidebar')
 			@else
 				@include('secured-layouts.agent-sidebar')
