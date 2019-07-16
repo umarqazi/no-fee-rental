@@ -38,4 +38,9 @@
             </div>
         </div>
     </div>
+    <script>
+        window.onload = function() {
+            $(".additional-info .input-style").attr("disabled", false);
+        }
+    </script>
   @endsection

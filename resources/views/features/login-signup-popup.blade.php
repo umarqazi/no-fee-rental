@@ -34,7 +34,7 @@
 
                         <div class="col-md-6">
                             <div class="form-group">
-                                <input id="password" type="password" class="input-style" placeholder="Password" name="password" required>
+                                <input type="password" class="input-style" placeholder="Password" name="password" required>
 
                                 @if ($errors->has('password'))
                                     <span class="invalid-feedback" role="alert">

@@ -1,6 +1,7 @@
 
-	<script src="{{asset('admin/js/bootstrap.min.js')}}"></script>
-	<script src="{{asset('admin/js/popper.min.js')}}"></script>
-	<script src="{{asset('admin/js/wow.min.js')}}"></script>
-	<script src="{{asset('admin/js/datepicker.min.js')}}"></script>
-	<script src="{{asset('admin/js/custom.js')}}"></script>
+	<script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
+	<script src="{{asset('assets/js/popper.min.js')}}"></script>
+	<script src="{{asset('assets/js/wow.min.js')}}"></script>
+	<script src="{{asset('assets/js/datepicker.min.js')}}"></script>
+	<script src="{{asset('assets/js/custom.js')}}"></script>
+	<script src="{{asset('assets/owlcarousel/owl.carousel.min.js')}}"></script>

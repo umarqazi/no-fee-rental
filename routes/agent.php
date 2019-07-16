@@ -8,17 +8,20 @@ Route::get('/logout', 'Agent\LoginController@logout')->name('agent.logout');
 
 // Profile Routes
 Route::get('/show-profile', 'Agent\AgentController@profile')->name('agent.profile');
-Route::post('/update-profile', 'Agent\AgentController@profileUpdate')->name('agent.profileUpdate');
+Route::post('/update-profile', 'Agent\AgentController@updateProfile')->name('agent.profileUpdate');
 
 // Password Routes
 Route::post('/password-update', 'Agent\AgentController@updatePassword')->name('agent.updatePassword');
 Route::get('/password-reset', 'Agent\AgentController@resetPassword')->name('agent.resetPassword');
 
 // Listing Routes
+Route::post('/add-listing', 'Agent\ListingController@create')->name('agent.createListing');
+
+
+
 Route::get('/add-listing', 'Agent\ListingController@listingForm')->name('agent.addListing');
 Route::post('/upload-listing-images/{id}', 'Agent\ListingController@uploadImages')->name('agent.listingImages');
 Route::post('/remove-listing-image/{id}', 'Agent\ListingController@removeListingImage');
-Route::post('/add-listing', 'Agent\ListingController@addListing')->name('agent.createListing');
 Route::get('/listing-repost/{id}', 'Agent\ListingController@repostListing')->name('agent.listingRepost');
 Route::match(['get', 'post'], '/search-listing', 'Agent\ListingController@searchListingWithFilters')->name('agent.listingSearch');
 Route::get('/listing-status/{id}', 'Agent\ListingController@listingVisibilityToggle')->name('agent.listingStatus');

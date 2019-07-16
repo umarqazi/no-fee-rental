@@ -52,11 +52,10 @@ class Handler extends ExceptionHandler {
 	}
 
 	/**
-	 * Render Auth Exception.
+	 * @param \Illuminate\Http\Request $request
+	 * @param Auth $exception
 	 *
-	 * @param  \Illuminate\Http\Request  $request
-	 * @param  \Exception  $exception
-	 * @return \Illuminate\Http\Response
+	 * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse|\Symfony\Component\HttpFoundation\Response|void
 	 */
 	protected function unauthenticated($request, Auth $exception) {
 		if ($request->ajax() || $request->expectsJson()) {

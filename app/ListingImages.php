@@ -10,4 +10,8 @@ class ListingImages extends Model {
 	public function listing() {
 		return $this->hasOne('App\Listing', 'id', 'listing_id');
 	}
+
+	public function scopeImages($query, $id) {
+		return $query->whereId($id);
+	}
 }

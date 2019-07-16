@@ -4,17 +4,18 @@
  * @param $image
  * @param $path
  * @param bool $unlinkOld
+ * @param null $old_image
  *
  * @return string
  */
-function uploadImage($image, $path, $unlinkOld = false) {
+function uploadImage($image, $path, $unlinkOld = false, $old_image = null) {
 	$name = time() . '.' . $image->getClientOriginalExtension();
 	if (!File::isDirectory($path)) {
 		File::makeDirectory($path, 0777, true, true);
 	}
 	Storage::disk('public')->putFileAs($path, $image, $name);
 	$full_image_name = $path . '/' . $name;
-	(!$unlinkOld) ?: removeFile($path);
+	(!$unlinkOld) ?: removeFile($old_image);
 	return $full_image_name;
 }
 
@@ -39,7 +40,7 @@ function uploadMultiImages($files, $path) {
  * @return bool
  */
 function removeFile($path) {
-	return unlink(public_path($path ?? ''));
+	return @unlink('storage/'.$path ?? '');
 }
 
 /**
@@ -54,6 +55,20 @@ function isAdmin() {
  */
 function isAgent() {
 	return auth()->guard('agent')->check();
+}
+
+/**
+ * @return int|null
+ */
+function myId() {
+	return auth()->id();
+}
+
+/**
+ * @return \Illuminate\Contracts\Auth\Authenticatable|null
+ */
+function mySelf(){
+	return auth()->user();
 }
 
 /**

@@ -6,15 +6,22 @@ use App\Forms\BaseForm;
 
 class AgentInvitationForm extends BaseForm {
 
+	/**
+	 * @var string
+	 */
 	public $email;
 
+	/**
+	 * @var integer
+	 */
 	public $invite_by;
 
+	/**
+	 * @var string
+	 */
 	public $token;
 
 	/**
-	 * Get the instance as an array.
-	 *
 	 * @return array
 	 */
 	function toArray() {
@@ -26,7 +33,7 @@ class AgentInvitationForm extends BaseForm {
 	}
 
 	/**
-	 * @return mixed
+	 * @return array|mixed
 	 */
 	function rules() {
 		return [

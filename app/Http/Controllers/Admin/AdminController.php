@@ -2,163 +2,66 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Forms\Agent\AgentInvitationForm;
-use App\Forms\User\ChangePasswordForm;
-use App\Forms\User\CreateUserForm;
-use App\Forms\User\EditUserForm;
-use App\Http\Controllers\Controller;
-use App\Services\AgentService;
-use App\Services\UserService;
-use Auth;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Services\UserServices\AdminService;
 
 class AdminController extends Controller {
 
 	/**
-	 * @var UserService
+	 * @var AdminService
 	 */
-	private $user_service;
-	private $agent_service;
+	private $service;
 
 	/**
-	 * Create a new controller instance.
+	 * AdminController constructor.
 	 *
-	 * @return void
+	 * @param AdminService $service
 	 */
-	public function __construct(UserService $user_service, AgentService $agent_service) {
-		$this->user_service = $user_service;
-		$this->agent_service = $agent_service;
+	public function __construct(AdminService $service) {
+		$this->service = $service;
 	}
 
 	/**
-	 * use to add new users.
-	 *
-	 * @return string
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
-	public function addUser(Request $request) {
-		$user = new CreateUserForm();
-		$user->first_name = $request->first_name;
-		$user->last_name = $request->last_name;
-		$user->email = $request->email;
-		$user->phone_number = $request->phone_number;
-		$user->user_type = $request->user_type;
-		return ($this->user_service->add_new_user($user))
-		? success('User has been added succesfully')
-		: error('Something went wrong');
-	}
-
-	/**
-	 * use to show admin profile.
-	 *
-	 * @return view
-	 */
-	public function profile() {
-		$user = Auth::user();
+	public function showProfile() {
+		$user = mySelf();
 		return view('admin.profile', compact('user'));
 	}
 
 	/**
-	 * use to update admin profile.
+	 * @param Request $request
 	 *
-	 * @return string
+	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function profileUpdate(Request $request) {
-		$admin = new EditUserForm();
-		$admin->id = Auth::id();
-		$admin->first_name = $request->first_name;
-		$admin->last_name = $request->last_name;
-		$admin->email = $request->email;
-		$admin->phone_number = $request->phone_number;
-		$update_data = $this->user_service->update_profile($admin);
+	public function updateProfile(Request $request) {
+		$update_data = $this->service->update_profile($request);
 		if ($request->hasFile('profile_image')) {
-			$update_data = $this->user_service->update_profile_image($request->file('profile_image'), Auth::id());
+			$update_data = $this->service->update_profile_image($request->file('profile_image'), myId(), $request->old_profile ?? '');
 		}
 
 		return ($update_data)
-		? success('Profile has been updated.')
-		: error('Something went wrong');
+			? success('Profile has been updated')
+			: error('Something went wrong');
 	}
 
 	/**
-	 * use to show admin reset password form.
-	 *
-	 * @return view
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
 	public function resetPassword() {
 		return view('admin.update_password');
 	}
 
 	/**
-	 * use to update admin password.
+	 * @param Request $request
 	 *
-	 * @return boolean
+	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function updatePassword(Request $request) {
-		$change_password = new ChangePasswordForm();
-		$change_password->password = $request->password;
-		$change_password->password_confirmation = $request->password_confirmation;
-		$change_password->user_id = Auth::id();
-		return $this->user_service->change_password($change_password)
-		? success('Password has been updated succesfully.', '/admin/show-profile')
-		: error('Something went wrong');
+		return $this->service->change_password($request)
+			? success('Password has been updated successfully.', route('admin.showProfile'))
+			: error('Something went wrong');
 
-	}
-
-	/**
-	 * use to active | deactive user.
-	 *
-	 * @return string
-	 */
-	public function visibilityToggle($id) {
-		$status = $this->user_service->update_status($id);
-		return (isset($status))
-		? success(($status) ? 'User Active' : 'User Deactive')
-		: error('Something went wrong');
-	}
-
-	/**
-	 * use to delete a user.
-	 *
-	 * @return boolean
-	 */
-	public function deleteUser($id) {
-		return ($this->user_service->delete_user($id))
-		? success('User Deleted')
-		: error('Something went wrong');
-	}
-
-	public function editUser($id) {
-		$data = $this->user_service->edit_user($id);
-		return $data
-		? response()->json(['data' => $data], 200)
-		: response()->json(['message' => 'Something went wrong'], 500);
-	}
-
-	public function updateUser(Request $request, $id) {
-		$user = new EditUserForm();
-		$user->id = $request->id;
-		$user->first_name = $request->first_name;
-		$user->last_name = $request->last_name;
-		$user->email = $request->email;
-		$user->phone_number = $request->phone_number;
-		$user->user_type = $request->user_type;
-		return $this->user_service->update_user($user)
-		? success('User has been updated.')
-		: error('Something went wrong');
-	}
-
-	/**
-	 * send & save invitation
-	 *
-	 * @return boolean
-	 */
-	public function agentInvitations(Request $request) {
-		$agent = new AgentInvitationForm;
-		$agent->invite_by = Auth::id();
-		$agent->token = str_random(60);
-		$agent->email = $request->email;
-		return $this->agent_service->send_invite_to_agent($agent)
-		? success('Invitation has been sent')
-		: error('Something went wrong');
 	}
 }

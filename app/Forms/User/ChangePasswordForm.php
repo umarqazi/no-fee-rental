@@ -11,29 +11,39 @@ namespace App\Forms\User;
 use App\Forms\BaseForm;
 
 class ChangePasswordForm extends BaseForm {
-	public $user_id;
+
+	/**
+	 * @var integer
+	 */
+	public $id;
+
+	/**
+	 * @var string
+	 */
 	public $password;
+
+	/**
+	 * @var string
+	 */
 	public $password_confirmation;
 
 	/**
-	 * Get the instance as an array.
-	 *
 	 * @return array
 	 */
 	public function toArray() {
 		return [
-			'user_id' => $this->user_id,
+			'id' => $this->id,
 			'password' => $this->password,
 			'password_confirmation' => $this->password_confirmation,
 		];
 	}
 
 	/**
-	 * @return mixed
+	 * @return array|mixed
 	 */
 	public function rules() {
 		return [
-			'password' => ['required', 'string', 'min:6', 'confirmed'],
+			'password' => 'required|string|min:9|confirmed',
 		];
 	}
 }

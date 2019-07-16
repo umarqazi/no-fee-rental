@@ -10,13 +10,13 @@
 				<div class="heading-wrapper pl-0">
 					<ul class="nav nav-pills">
 						<li class="nav-item">
-							<a class="nav-link" data-toggle="pill" href="#listing-active">Active ( {{ count($listing['active']) }} )</a>
+							<a class="nav-link" data-toggle="pill" href="#listing-active">Active ( {{ $listing['totalActive'] }} )</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" data-toggle="pill" href="#listing-inactive">Inactive ( {{ count($listing['inactive']) }} )</a>
+							<a class="nav-link" data-toggle="pill" href="#listing-inactive">Inactive ( {{ $listing['totalInactive'] }} )</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" data-toggle="pill" href="#listing-pending">Pending Requests ( {{ count($listing['pending']) }} )</a>
+							<a class="nav-link" data-toggle="pill" href="#listing-pending">Pending Requests ( {{ $listing['totalPending'] }} )</a>
 						</li>
 					</ul>
 					<div class="filter-wrapper">

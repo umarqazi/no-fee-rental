@@ -36,7 +36,37 @@ class User extends Authenticatable {
 		'email_verified_at' => 'datetime',
 	];
 
-	public function agent_invites() {
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function agentInvites() {
 		return $this->hasMany('App\AgentInvites', 'invited_by', 'id');
+	}
+
+	/**
+	 * @param $query
+	 *
+	 * @return mixed
+	 */
+	public function scopeAdmins($query) {
+		return $query->whereuser_type(1);
+	}
+
+	/**
+	 * @param $query
+	 *
+	 * @return mixed
+	 */
+	public function scopeAgents($query) {
+		return $query->whereuser_type(2);
+	}
+
+	/**
+	 * @param $query
+	 *
+	 * @return mixed
+	 */
+	public function scopeRenters($query) {
+		return $query->whereuser_type(4);
 	}
 }

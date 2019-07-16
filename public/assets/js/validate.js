@@ -146,7 +146,7 @@ $(() => {
            },
            password: {
                required: true,
-               greaterThan: 7
+               greaterThan: 8
            }
        },
 
@@ -156,7 +156,8 @@ $(() => {
                email: "Enter valid email."
            },
             password: {
-               required: "Password is required."
+               required: "Password is required.",
+                greaterThan: "Password should be greater than 8 characters."
             }
         }
     });
@@ -173,7 +174,7 @@ $(() => {
             },
             password: {
                 required: true,
-                greaterThan: 7
+                greaterThan: 8
             },
             password_confirmation: {
                 required: true,
@@ -205,4 +206,21 @@ $(() => {
             },
         }
     });
+
+    // NewsLetter Form Validations
+    // $("#newsletter-form").validate({
+    //     rules: {
+    //         email: {
+    //             required: true,
+    //             email: true
+    //         }
+    //     },
+    //
+    //     messages: {
+    //         email: {
+    //             required: "Email is required.",
+    //             email: "Please enter valid email."
+    //         }
+    //     }
+    // });
 });

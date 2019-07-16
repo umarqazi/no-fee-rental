@@ -13,7 +13,7 @@ use App\Forms\User\ChangePasswordForm;
 use App\Http\Requests\ChangePassword;
 use App\Http\Requests\User;
 use App\Services\AgentService;
-use App\Services\UserService;
+use App\Services\BaseUserService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\View;
@@ -26,7 +26,7 @@ class UserController extends Controller {
 	/**
 	 * UserController constructor.
 	 */
-	public function __construct(UserService $user_service, AgentService $agent_service) {
+	public function __construct(BaseUserService $user_service, AgentService $agent_service) {
 		$this->user_service = $user_service;
 		$this->agent_service = $agent_service;
 	}

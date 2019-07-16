@@ -13,6 +13,9 @@
                 <div class="user-avtar">
                     <div class="img-holder">
                         <img src="{{ !empty($user->profile_image) ? asset('storage/'.$user->profile_image) : asset('assets/images/default-image.jpeg') }}" alt="" />
+                        @if(!empty($user->profile_image))
+                            <input type="hidden" name="old_profile" value="{{ $user->profile_image }}">
+                        @endif
                         <label @if($errors->isEmpty()) @endif id="image-picker">
                             <i class="fa fa-edit edit-btn"></i>{!! Form::file('profile_image', ['class' => 'd-none']) !!}
                         </label>

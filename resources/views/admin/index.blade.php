@@ -22,11 +22,11 @@
                 </ul>
                 <div class="filter-wrapper">
                     <div class="search-user">
-                        {!! Form::open(['url' => route('admin.search'), 'method' => 'post']) !!}
+                        {!! Form::open(['url' => route('admin.searchUser'), 'method' => 'post']) !!}
                         <button type="submit" style="background: none; border:none; outline: none; cursor:pointer;">
                         <i class="fa fa-search"></i>
                         </button>
-                            <input type="text" name="keywords" placeholder="Search" class="search-fld" />
+                        {!! Form::text('keywords', Request::get('keywords'), ['class' => 'search-fld', 'placeholder' => 'Search']) !!}
                         {!! Form::close() !!}
                     </div>
                 </div>
@@ -50,17 +50,23 @@
                                 </thead>
                                 <tbody>
                                     @foreach($agents as $key => $agent)
-                                <tr>
-                                    <td>{{$key + 1}}</td>
-                                    <td>{{$agent->first_name." ".$agent->last_name}}</td>
-                                    <td>{{$agent->email}}</td>
-                                    <td>{{!empty($agent->phone_number) ? $agent->phone_number : '---'}}</td>
-                                    <td>
-                                        <a href="{{route('admin.userStatus', $agent->id)}}"><i class="fa fa-eye{{($agent->status) ? '-slash' : ''}} action-btn" data-toggle="modal" data-target="#agent-modal"></i></a>
-                                        <a href="javascript:void(0);" onclick="updateUser('{{$agent->id}}');"><i class="fa fa-edit px-2 action-btn"></i></a>
-                                        <a href="javascript:void(0);" onclick="confirm('Are you sure?') ? window.location.href='{{route("admin.deleteUser", $agent->id)}}' : ''"><i class="fa fa-trash action-btn"></i></a>
-                                    </td>
-                                </tr>
+                                        <tr>
+                                            <td>{{$key + 1}}</td>
+                                            <td>{{$agent->first_name." ".$agent->last_name}}</td>
+                                            <td>{{$agent->email}}</td>
+                                            <td>{{$agent->phone_number ?? '---'}}</td>
+                                            <td>
+                                                <a href="{{route('admin.statusUser', $agent->id)}}">
+                                                    <i class="fa fa-eye{{($agent->status) ? '-slash' : ''}} action-btn" data-toggle="modal" data-target="#agent-modal"></i>
+                                                </a>
+                                                <a href="javascript:void(0);" onclick="updateUser('{{$agent->id}}');">
+                                                    <i class="fa fa-edit px-2 action-btn"></i>
+                                                </a>
+                                                <a href="javascript:void(0);" onclick="deleteUser('{{ route('admin.deleteUser', $agent->id) }}')">
+                                                    <i class="fa fa-trash action-btn"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
                                     @endforeach
                                 </tbody>
                             </table>
@@ -86,16 +92,23 @@
                                 </thead>
                                 <tbody>
                                     @foreach($renters as $key => $renter)
-                                <tr>
-                                    <td>{{$key + 1}}</td>
-                                    <td>{{$renter->first_name." ".$renter->last_name}}</td>
-                                    <td>4693 White Oak Drive Kansas City, MO</td>
-                                    <td>
-                                        <a href="{{ route('admin.userStatus', $renter->id) }}"><i class="fa fa-eye{{($renter->status) ? '-slash' : ''}} action-btn" data-toggle="modal" data-target="#renter-modal"></i></a>
-                                        <a href="javascript:void(0);" onclick="updateUser('{{$agent->id}}');"><i class="fa fa-edit px-2 action-btn"></i></a>
-                                        <a href="javascript:void(0);" onclick="confirm('Are you sure?') ? window.location.href='{{route("admin.deleteUser", $renter->id)}}' : ''"><i class="fa fa-trash action-btn"></i></a>
-                                    </td>
-                                </tr>
+                                        <tr>
+                                            <td>{{$key + 1}}</td>
+
+                                            <td>{{$renter->first_name." ".$renter->last_name}}</td>
+                                            <td>4693 White Oak Drive Kansas City, MO</td>
+                                            <td>
+                                                <a href="{{ route('admin.statusUser', $renter->id) }}">
+                                                    <i class="fa fa-eye{{($renter->status) ? '-slash' : ''}} action-btn" data-toggle="modal" data-target="#renter-modal"></i>
+                                                </a>
+                                                <a href="javascript:void(0);" onclick="updateUser('{{$renter->id}}');">
+                                                    <i class="fa fa-edit px-2 action-btn"></i>
+                                                </a>
+                                                <a href="javascript:void(0);" onclick="deleteUser('{{ route('admin.deleteUser', $renter->id) }}')">
+                                                    <i class="fa fa-trash action-btn"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
                                     @endforeach
                                 </tbody>
                             </table>
@@ -242,5 +255,5 @@
 
         </div>
     </div>
-
+</div>
 @endsection

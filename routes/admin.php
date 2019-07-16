@@ -10,43 +10,46 @@
 | contains the "web" middleware group. Now create something great!
 |
  */
-
+// Index Routes
 Route::get('/home', 'Admin\HomeController@index')->name('admin.index');
+
+// Auth Routes
 Route::get('/logout', 'Admin\LoginController@logout')->name('admin.logout');
-Route::get('/show-profile', 'Admin\AdminController@profile')->name('admin.profile');
-Route::post('/update-profile', 'Admin\AdminController@profileUpdate')->name('admin.profileUpdate');
-Route::post('/password-update', 'Admin\AdminController@updatePassword')->name('admin.updatePassword');
+
+// Profile Routes
+Route::get('/show-profile', 'Admin\AdminController@showProfile')->name('admin.showProfile');
+Route::post('/update-profile', 'Admin\AdminController@updateProfile')->name('admin.updateProfile');
+
+// ResetPassword Routes
 Route::get('/password-reset', 'Admin\AdminController@resetPassword')->name('admin.resetPassword');
+Route::post('/password-update', 'Admin\AdminController@updatePassword')->name('admin.updatePassword');
 
 // User Routes
-Route::get('/delete-user/{id}', 'Admin\AdminController@deleteUser')->name('admin.deleteUser');
-Route::get('/status-update/{id}', 'Admin\AdminController@visibilityToggle')->name('admin.userStatus');
-Route::post('/create-user', 'Admin\AdminController@addUser')->name('admin.addUser');
-Route::post('/edit-user/{id}', 'Admin\AdminController@editUser')->name('admin.editUser');
-Route::post('/update-user/{id}', 'Admin\AdminController@updateUser')->name('admin.updateUser');
-
-Route::post('/profile', 'UserController@editProfile')->name('edit-profile');
-Route::get('/property-listing', 'Admin\AdminController@viewPropertyListing')->name('property-listing');
-Route::post('/send-invitation', 'Admin\AdminController@agentInvitations')->name('admin.sendInvitation');
+Route::get('/delete-user/{id}', 'Admin\UserController@delete')->name('admin.deleteUser');
+Route::get('/status-update/{id}', 'Admin\UserController@status')->name('admin.statusUser');
+Route::post('/create-user', 'Admin\UserController@create')->name('admin.createUser');
+Route::post('/edit-user/{id}', 'Admin\UserController@edit')->name('admin.editUser');
+Route::post('/update-user/{id}', 'Admin\UserController@update')->name('admin.updateUser');
+Route::post('/search-user', 'Admin\UserController@search')->name('admin.searchUser');
+Route::post('/send-invitation', 'Admin\UserController@invite')->name('admin.sendInvitation');
 
 // Listing Routes
+Route::post('/add-listing', 'Admin\ListingController@create')->name('admin.createListing');
+Route::match(['get', 'post'], '/search-listing', 'Admin\ListingController@searchWithFilters')->name('admin.listingSearch');
+Route::get('/property-listing', 'Admin\AdminController@viewPropertyListing')->name('property-listing');
 Route::get('/listing-view', 'Admin\ListingController@index')->name('admin.viewListing');
-Route::get('/add-listing', 'Admin\ListingController@listingForm')->name('admin.addListing');
-Route::post('/add-listing', 'Admin\ListingController@addListing')->name('admin.createListing');
-Route::get('/approve-listing-request/{id}', 'Admin\ListingController@approveRequest')->name('admin.approveRequest');
-Route::get('/listing-status/{id}', 'Admin\ListingController@listingVisibilityToggle')->name('admin.listingStatus');
+Route::get('/add-listing', 'Admin\ListingController@showForm')->name('admin.addListing');
+Route::get('/approve-listing-request/{id}', 'Admin\ListingController@approve')->name('admin.approveRequest');
+Route::get('/listing-status/{id}', 'Admin\ListingController@status')->name('admin.listingStatus');
 Route::post('/upload-listing-images/{id}', 'Admin\ListingController@uploadImages')->name('admin.listingImages');
-Route::get('/remove-listing-image/{id}', 'Admin\ListingController@removeListingImage');
-Route::get('/listing-repost/{id}', 'Admin\ListingController@repostListing')->name('admin.listingRepost');
-Route::match(['get', 'post'], '/search-listing', 'Admin\ListingController@searchListingWithFilters')->name('admin.listingSearch');
-Route::get('/edit-list/{id}', 'Admin\ListingController@editListingForm')->name('admin.editListing');
-Route::post('/update-listing/{id}', 'Admin\ListingController@updateListing')->name('admin.updateListing');
+Route::get('/remove-listing-image/{id}', 'Admin\ListingController@removeImage');
+Route::get('/listing-repost/{id}', 'Admin\ListingController@repost')->name('admin.listingRepost');
+Route::get('/edit-list/{id}', 'Admin\ListingController@edit')->name('admin.editListing');
+Route::post('/update-listing/{id}', 'Admin\ListingController@update')->name('admin.updateListing');
 Route::get('/finish-create-listing', 'Admin\ListingController@finishCreate')->name('admin.finishCreateListing');
 Route::get('/finish-update-listing', 'Admin\ListingController@finishUpdate')->name('admin.finishUpdateListing');
 
 // Featured Listing Routes
 Route::get('/feature-listing', 'Admin\FeaturedListingController@index')->name('admin.featureListing');
-Route::get('/approve-feature-request/{id}', 'Admin\FeaturedListingController@approveFeatureRequest')->name('admin.approveFeature');
+Route::get('/approve-feature-request/{id}', 'Admin\FeaturedListingController@approve')->name('admin.approveFeature');
 Route::get('/remove-featured-listing/{id}', 'Admin\FeaturedListingController@removeFeatured')->name('admin.removeFeatured');
-
-Route::post('/search-user', 'Admin\HomeController@search')->name('admin.search');

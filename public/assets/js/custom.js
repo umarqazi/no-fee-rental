@@ -1,6 +1,47 @@
-$(document).ready(function () {
-
+$(() => {
 	new WOW().init();
+
+	$("header .menu-icon").click(function () {
+		$(".main-wrapper aside").slideDown();
+	});
+
+	$("aside .close-menu").click(function () {
+		$(".main-wrapper aside").slideUp();
+	});
+
+	$(".list-view-btn").click(function () {
+		$(".grid-view-btn").removeClass('active');
+		$(this).addClass('active');
+		$(".grid-view-wrapper").hide();
+		$(".listing-wrapper").show();
+	});
+
+	$(".grid-view-btn").click(function () {
+		$(".list-view-btn").removeClass('active');
+		$(this).addClass('active');
+		$(".listing-wrapper").hide();
+		$(".grid-view-wrapper").show();
+	});
+
+	$(".additional-info .input-style").attr("disabled", true);
+
+	$('#image-picker').hide();
+
+	$(".edit-profile").click(function () {
+		$('#image-picker').show();
+		$(".additional-info .input-style").attr("disabled", false);
+		$(this).hide();
+		$(".update-profile").show()
+	});
+
+	$(".update-profile").click(function () {
+		$(this).hide();
+		$(".edit-profile").show()
+	});
+
+	$('#datepicker').datepicker({
+		uiLibrary: 'bootstrap4'
+	});
 
 	$(".property-thumb .heart-icon").click(function () {
 		$(this).toggleClass('favourite');
@@ -9,46 +50,30 @@ $(document).ready(function () {
 	$('#price-range-submit').hide();
 
 	$("#min_price,#max_price").on('change', function () {
-
 		$('#price-range-submit').show();
-
-		var min_price_range = parseInt($("#min_price").val());
-
-		var max_price_range = parseInt($("#max_price").val());
-
+		let min_price_range = parseInt($("#min_price").val());
+		let max_price_range = parseInt($("#max_price").val());
 		if (min_price_range > max_price_range) {
 			$('#max_price').val(min_price_range);
 		}
-
 		$("#slider-range").slider({
 			values: [min_price_range, max_price_range]
 		});
-
 	});
 
-
 	$("#min_price,#max_price").on("paste keyup", function () {
-
 		$('#price-range-submit').show();
-
 		var min_price_range = parseInt($("#min_price").val());
-
 		var max_price_range = parseInt($("#max_price").val());
-
 		if (min_price_range == max_price_range) {
-
 			max_price_range = min_price_range + 100;
-
 			$("#min_price").val(min_price_range);
 			$("#max_price").val(max_price_range);
 		}
-
 		$("#slider-range").slider({
 			values: [min_price_range, max_price_range]
 		});
-
 	});
-
 
 	$(function () {
 		$("#slider-range").slider({
@@ -58,27 +83,21 @@ $(document).ready(function () {
 			max: 10000,
 			values: [0, 10000],
 			step: 100,
-
 			slide: function (event, ui) {
 				if (ui.values[0] == ui.values[1]) {
 					return false;
 				}
-
 				$("#min_price").val(ui.values[0]);
 				$("#max_price").val(ui.values[1]);
 			}
 		});
-
 		$("#min_price").val($("#slider-range").slider("values", 0));
 		$("#max_price").val($("#slider-range").slider("values", 1));
-
 	});
 
-	$("#slider-range,#price-range-submit").click(function () {
-
+	$("#slider-range, #price-range-submit").click(function () {
 		var min_price = $('#min_price').val();
 		var max_price = $('#max_price').val();
-
 		$("#searchResults").text("Here List of products will be shown which are cost between " + min_price + " " + "and" + " " + max_price + ".");
 	});
 
@@ -102,10 +121,7 @@ $(document).ready(function () {
 		$("#signin-wrapper").hide();
 		$("#signup-wrapper").fadeIn();
 	});
-	$(".signin-modal-btn").click(function () {
-		$("#signup-wrapper").hide();
-		$("#signin-wrapper").fadeIn();
-	});
+
 	$(".row .custom-control-input").click(function () {
 		var radioId = $("input[name='signup-option']:checked").attr('id');
 		if (radioId == 'signup-option1') {
@@ -114,6 +130,7 @@ $(document).ready(function () {
 			$(".finding-home-text").show();
 		}
 	});
+
 	$(".close-menu").click(function () {
 		$(".mobile-menu").slideUp();
 	});
@@ -132,7 +149,6 @@ $(document).ready(function () {
 		});
 	});
 
-
 	$('#image-gallery').lightSlider({
 		gallery: true,
 		item: 1,
@@ -145,7 +161,6 @@ $(document).ready(function () {
 			$('#image-gallery').removeClass('cS-hidden');
 		}
 	});
-
 
 	$('.property-listing.mobile-listing .owl-carousel').owlCarousel({
 		loop: false,
@@ -164,71 +179,89 @@ $(document).ready(function () {
 		}
 	});
 
+	$('#subscribe').on('click', async function () {
+		let res = JSON.parse(await ajaxRequest(
+				`http://nofeerentalsblog.wp/newsletter`,
+				'post',
+				{email: $('#newsletter-form .fld').val()}));
 
-	// footer newsletter form ajax
-	$('#subscribe').click(function () {
-
-		var form = $( "#newsletter-form" );
-		
-		form.validate({
-
-      onfocusout: false,
-			rules: {
-				// compound rule
-				email: {
-					required: true,
-					email: true
-				}
-			}
-
-		});
-
-
-		if (form.valid()){
-
-			$.ajaxSetup({
-				headers: {
-					'X-CSRF-TOKEN': $('#newsletter-form input[type="hidden"]').val()
-				}
-			});
-
-			$.ajax({
-				
-				url: 'http://nofeerentalsblog.wp/newsletter',
-				type: 'post',
-				data: {
-					email: $('#newsletter-form .fld').val()
-				},
-				beforeSend: function () {
-					$('.ajax-loader').show();
-				},
-				success: function (response) {
-					
-					var respObj = JSON.parse(response);
-
-					$('.ajax-loader').hide();
-					form[0].reset();
-					$('#newsletterModal .modal-body').text(respObj.message);
-					$('#newsletterModal').modal();
-					
-				},
-				error: function (response) {
-					$('.ajax-loader').hide();
-					var respObj = response.responseJSON;
-					var errors = respObj.errors;
-					var keys   = Object.keys(errors);
-					var count  = keys.length;
-					for (var i = 0; i < count; i++)
-					{
-						form.find("." + keys[i]).html(errors[keys[i]]).show();
-					}
-				}
-				
-			});
-
-		}
-
+		$('#newsletter-form').reset();
+		$('#newsletterModal .modal-body').text(res.message);
+		$('#newsletterModal').modal();
 	});
-
-
 });
+
+/**
+ *
+ * @param id
+ * @returns {Promise<void>}
+ */
+async function updateUser(id) {
+	let res = await ajaxRequest(`/admin/edit-user/${id}`, 'post');
+	$('#add_user').attr('action', `/admin/update-user/${id}`);
+	$('.modal-title').text('Update User');
+	$('.modal-footer input').val('Update');
+	$('#first_name').val(res.data.first_name);
+	$('#last_name').val(res.data.last_name);
+	$('#email').val(res.data.email);
+	$('#phone_number').val(res.data.phone_number);
+	$('#user_type').val(res.data.user_type);
+	$('#add-member').modal('show');
+}
+
+/**
+ *
+ * @param route
+ * @returns {Promise<void>}
+ */
+async function deleteUser(route) {
+	if(await confirm('Are You Sure?')) {
+		window.location.href = route;
+	}
+}
+
+/**
+ *
+ * @param msg
+ * @returns {*}
+ */
+function confirm(msg) {
+	return swal({
+		title: "Are you sure?",
+		text: msg,
+		icon: "warning",
+		buttons: [
+			'No, cancel it!',
+			'Yes, I am sure!'
+		],
+		dangerMode: true,
+	}).then(function(isConfirm) {
+		return (isConfirm) ? true : false
+	});
+}
+
+/**
+ *
+ * @param url
+ * @param type
+ * @param loader
+ * @returns {*|jQuery|{getAllResponseHeaders, abort, setRequestHeader, readyState, getResponseHeader, overrideMimeType, statusCode}}
+ */
+function ajaxRequest(url, type, loader = false, data = null) {
+	return $.ajax({
+		url: url,
+		type: type,
+		data: data,
+		headers: {
+			'X-CSRF-TOKEN': $('meta[name=csrf-token]').attr('content'),
+		},
+		success: function(res) {
+			return res;
+		},
+
+		error: function(err) {
+			console.log(err);
+			toastr.error(err);
+		}
+	})
+}

@@ -40,6 +40,9 @@ class AuthGuardAssign {
 		return $next($this->request);
 	}
 
+	/**
+	 * @return mixed
+	 */
 	private function check_type() {
 		return \App\User::whereEmail($this->request->email)->select('user_type')->first();
 	}

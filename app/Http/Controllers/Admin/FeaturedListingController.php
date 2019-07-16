@@ -3,18 +3,27 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Services\FeatureListingService;
+use App\Services\ListingServices\FeatureListingService;
 
 class FeaturedListingController extends Controller {
 
 	/**
-	 * Create a new controller instance.
+	 * @var FeatureListingService
+	 */
+	private $service;
+
+	/**
+	 * @var int
+	 */
+	private $paginate = 20;
+
+	/**
+	 * FeaturedListingController constructor.
 	 *
-	 * @return void
+	 * @param FeatureListingService $service
 	 */
 	public function __construct(FeatureListingService $service) {
-		$this->feature_service = $service;
-		$this->feature_service->paginate = 20;
+		$this->service = $service;
 	}
 
 	/**
@@ -23,17 +32,17 @@ class FeaturedListingController extends Controller {
 	 * @return view
 	 */
 	public function index() {
-		$listing = $this->feature_service->get_featured_listing();
+		$listing = $this->service->get($this->paginate);
 		return view('admin.featured_listing_view', compact('listing'));
 	}
 
 	/**
-	 * approve or reject featured request.
+	 * @param $id
 	 *
-	 * @return boolean
+	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function approveFeatureRequest($id) {
-		return $this->feature_service->approve_featured_request($id)
+	public function approve($id) {
+		return $this->service->mark($id)
 		? success('Property has been marked as featured.')
 		: error('Something went wrong');
 	}
@@ -43,8 +52,8 @@ class FeaturedListingController extends Controller {
 	 *
 	 * @return boolean
 	 */
-	public function removeFeatured($id) {
-		return $this->feature_service->remove_featured_listing($id)
+	public function remove($id) {
+		return $this->service->unmark($id)
 		? success('Property has been removed from featured.')
 		: error('Something went wrong');
 	}

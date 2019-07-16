@@ -2,6 +2,7 @@
 
 namespace App;
 
+use const http\Client\Curl\FEATURES;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -16,7 +17,7 @@ class Listing extends Model {
 	/**
 	 * @var array $fillable
 	 */
-	protected $fillable = ['user_id', 'name', 'email', 'phone_number', 'website', 'street_address', 'display_address', 'neighborhood', 'thumbnail', 'baths', 'bedrooms', 'unit', 'rent', 'square_feet', 'available', 'description', 'map_location', 'status', 'city_state_zip'];
+	protected $fillable = ['user_id', 'name', 'email', 'phone_number', 'website', 'street_address', 'display_address', 'neighborhood', 'thumbnail', 'baths', 'bedrooms', 'unit', 'rent', 'square_feet', 'available', 'description', 'is_featured', 'map_location', 'status', 'city_state_zip'];
 
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -45,7 +46,9 @@ class Listing extends Model {
 	 * @return mixed active listing
 	 */
 	public function scopeActive($query) {
-		return $query->whereStatus(1);
+		isAdmin() ?: $clause['user_id'] = myId();
+		$clause['status'] = ACTIVELISTING;
+		return $query->where($clause)->latest('updated_at');
 	}
 
 	/**
@@ -54,7 +57,9 @@ class Listing extends Model {
 	 * @return mixed
 	 */
 	public function scopeInactive($query) {
-		return $query->whereStatus(0);
+		isAdmin() ?: $clause['user_id'] = myId();
+		$clause['status'] = INACTIVELISTING;
+		return $query->where($clause)->latest();
 	}
 
 	/**
@@ -63,7 +68,9 @@ class Listing extends Model {
 	 * @return mixed
 	 */
 	public function scopePending($query) {
-		return $query->whereStatus(2);
+		isAdmin() ?: $clause['user_id'] = myId();
+		$clause['status'] = PENDINGLISTING;
+		return $query->where($clause)->latest();
 	}
 
 	/**
@@ -108,7 +115,7 @@ class Listing extends Model {
 	 * @return mixed
 	 */
 	public function scopeFeatured($query) {
-		return $query->whereis_featured(true);
+		return $query->whereis_featured(APPROVEFEATURED)->latest('updated_at');
 	}
 
 	/**
@@ -117,6 +124,16 @@ class Listing extends Model {
 	 * @return mixed
 	 */
 	public function scopeRequestFeatured($query) {
-		return $query->whereis_featured(2);
+		return $query->whereis_featured(REQUESTFEATURED)->latest();
+	}
+
+	/**
+	 * @param $query
+	 * @param $array
+	 *
+	 * @return mixed
+	 */
+	public function scopeSearch($query, $array) {
+		return $query->where($array)->latest('updated_at');
 	}
 }
