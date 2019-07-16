@@ -32,7 +32,7 @@ class ListingController extends Controller {
 	 */
 	public function index() {
 		$listing = $this->service->get($this->paginate);
-		return view('admin.listing_view', compact('listing'));
+		return view('agent.index', compact('listing'));
 	}
 
 	/**
@@ -41,7 +41,7 @@ class ListingController extends Controller {
 	 * @return redirect URL
 	 */
 	public function finishCreate() {
-		return redirect(route('admin.viewListing'))
+		return redirect(route('agent.index'))
 			->with(['message' => 'Property has been added.', 'alert_type' => 'success']);
 	}
 
@@ -51,7 +51,7 @@ class ListingController extends Controller {
 	 * @return redirect URL
 	 */
 	public function finishUpdate() {
-		return redirect(route('admin.viewListing'))
+		return redirect(route('agent.index'))
 			->with(['message' => 'Property has been updated.', 'alert_type' => 'success']);
 	}
 
@@ -63,7 +63,7 @@ class ListingController extends Controller {
 	public function showForm() {
 		$edit = false;
 		$listing = null;
-		return view('admin.add_listing', compact('listing', 'edit'));
+		return view('agent.add_listing', compact('listing', 'edit'));
 	}
 
 	/**
@@ -75,7 +75,7 @@ class ListingController extends Controller {
 		$edit = false;
 		$id = $this->service->create($request);
 		return ($id)
-			? view('admin.add_listing_images', compact('id', 'edit'))
+			? view('agent.add_listing_images', compact('id', 'edit'))
 			: error('Something went wrong');
 	}
 
@@ -90,7 +90,7 @@ class ListingController extends Controller {
 		$update = $this->service->update($id, $request);
 		$listing_images = $this->service->images($id)->get();
 		return $update
-			? view('admin.add_listing_images', compact('id', 'edit', 'listing_images'))
+			? view('agent.add_listing_images', compact('id', 'edit', 'listing_images'))
 			: error('Something went wrong');
 	}
 
@@ -125,12 +125,12 @@ class ListingController extends Controller {
 	 */
 	public function edit($id) {
 		$edit = true;
-		$listing = $this->service->edit($id);
+		$listing = $this->service->edit($id)->first();
 		foreach (features($listing->listingTypes) as $key => $value) {
 			$listing->{$key} = $value;
 		}
 
-		return view('admin.add_listing', compact('listing', 'edit'));
+		return view('agent.add_listing', compact('listing', 'edit'));
 	}
 
 	/**
@@ -140,7 +140,7 @@ class ListingController extends Controller {
 	 */
 	public function searchWithFilters(Request $request) {
 		$listing = $this->service->search($request, $this->paginate);
-		return view('admin.listing_view', compact('listing'));
+		return view('agent.listing_view', compact('listing'));
 	}
 
 	/**

@@ -47,6 +47,6 @@ Route::get('/signup/{token}', function ($token) {
 	return redirect('/')->with(['message' => 'Invalid token request cannot be processed.', 'alert_type' => 'error']);
 })->name('agent.signup_form');
 
-Route::post('/agent/signup', 'UserController@invited_agent_sign_up')->name('agent.signup');
+Route::post('/agent/signup', 'UserController@agentSignup')->name('agent.signup');
 
 Route::get('/listing-detail/{id}', 'HomeController@detail')->name('listing.detail');

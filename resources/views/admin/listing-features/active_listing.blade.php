@@ -21,8 +21,8 @@
 											<span class="status" style="margin-right: 60px;background: blueviolet;">{{($al->is_featured == 2) ? 'Requested for feature' : 'Featured' }}</span>
 										@endif
 										<div class="actions-btns">
-											<a href="{{ route('admin.editListing', $al->id) }}"><span><img src="{{asset('admin/images/edit-icon.png')}}" alt=""></span></a>
-											<span><img src="{{asset('admin/images/copy-icon.png')}}" alt=""></span>
+											<a href="{{ route('admin.editListing', $al->id) }}"><span><img src="{{asset('assets/images/edit-icon.png')}}" alt=""></span></a>
+											<span><img src="{{asset('assets/images/copy-icon.png')}}" alt=""></span>
 											<a href="{{ route('admin.listingRepost', $al->id) }}"><button type="button" class="border-btn">Repost</button></a>
 										@if($al->is_featured != 1)
 											<a href="{{ route('admin.approveFeature', $al->id )}}"><button type="button" class="border-btn">Make Featured</button></a>

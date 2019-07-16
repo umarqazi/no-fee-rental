@@ -12,6 +12,7 @@
                     <!-- Signup -->
                 </div>
                 {!! Form::open(['url' => route('agent.signup'), 'method' => 'post']) !!}
+                {!! Form::hidden('user_type', 2) !!}
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">

@@ -16,10 +16,8 @@ Route::get('/password-reset', 'Agent\AgentController@resetPassword')->name('agen
 
 // Listing Routes
 Route::post('/add-listing', 'Agent\ListingController@create')->name('agent.createListing');
+Route::get('/add-listing', 'Agent\ListingController@showForm')->name('agent.addListing');
 
-
-
-Route::get('/add-listing', 'Agent\ListingController@listingForm')->name('agent.addListing');
 Route::post('/upload-listing-images/{id}', 'Agent\ListingController@uploadImages')->name('agent.listingImages');
 Route::post('/remove-listing-image/{id}', 'Agent\ListingController@removeListingImage');
 Route::get('/listing-repost/{id}', 'Agent\ListingController@repostListing')->name('agent.listingRepost');

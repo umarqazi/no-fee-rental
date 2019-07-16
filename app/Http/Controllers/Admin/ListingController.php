@@ -136,7 +136,7 @@ class ListingController extends Controller {
 	 */
 	public function edit($id) {
 		$edit = true;
-		$listing = $this->service->edit($id);
+		$listing = $this->service->edit($id)->first();
 		foreach (features($listing->listingTypes) as $key => $value) {
 			$listing->{$key} = $value;
 		}
