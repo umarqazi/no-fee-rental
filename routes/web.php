@@ -48,3 +48,5 @@ Route::get('/signup/{token}', function ($token) {
 })->name('agent.signup_form');
 
 Route::post('/agent/signup', 'UserController@invited_agent_sign_up')->name('agent.signup');
+
+Route::get('/listing-detail/{id}', 'HomeController@detail')->name('listing.detail');

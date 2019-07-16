@@ -1,7 +1,7 @@
 <aside>
     <span class="close-menu"><i class="fa fa-times-circle"></i></span>
     <div class="avtar">
-        <img src="assets/images/agent-image.jpg" alt="" />
+        <img src="{{ asset('assets/images/agent-image.jpg')}}" alt="" />
         <span>Agent George <i class="fa fa-chevron-down"></i></span>
         <ul>
             <li><a href="profile.html">Dashboard</a></li>

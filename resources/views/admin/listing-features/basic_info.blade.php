@@ -36,3 +36,4 @@
 		</span>
 	</div>
 </div>
+{!! Form::hidden('status', 1) !!}

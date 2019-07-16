@@ -2,162 +2,167 @@
 
 namespace App\Http\Controllers\Agent;
 
-use App\Forms\Listing\CreateListingForm;
-use App\Forms\Listing\SearchListingForm;
-use App\Http\Controllers\Controller;
-use App\Services\ListingService;
-use Auth;
 use Illuminate\Http\Request;
+use App\Services\ListingService;
+use App\Http\Controllers\Controller;
 
 class ListingController extends Controller {
 
-	protected $service;
+	/**
+	 * @var ListingService
+	 */
+	private $service;
 
+	/**
+	 * @var int
+	 */
+	private $paginate = 20;
+
+	/**
+	 * ListingController constructor.
+	 *
+	 * @param ListingService $service
+	 */
 	public function __construct(ListingService $service) {
 		$this->service = $service;
 	}
 
+	/**
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 */
 	public function index() {
-		$listing = $this->service->get_all_listing();
-		return view('agent.index', compact('listing'));
+		$listing = $this->service->get($this->paginate);
+		return view('admin.listing_view', compact('listing'));
 	}
 
-	public function listingForm() {
-		$edit = false;
-		$listing = null;
-		return view('agent.add_listing', compact('listing', 'edit'));
-	}
-
+	/**
+	 * finish add listing
+	 *
+	 * @return redirect URL
+	 */
 	public function finishCreate() {
-		return redirect(route('agent.index'))
+		return redirect(route('admin.viewListing'))
 			->with(['message' => 'Property has been added.', 'alert_type' => 'success']);
 	}
 
+	/**
+	 * finish update listing
+	 *
+	 * @return redirect URL
+	 */
 	public function finishUpdate() {
-		return redirect(route('agent.index'))
+		return redirect(route('admin.viewListing'))
 			->with(['message' => 'Property has been updated.', 'alert_type' => 'success']);
 	}
 
-	public function addListing(Request $request) {
+	/**
+	 * Show listing Form
+	 *
+	 * @return view
+	 */
+	public function showForm() {
 		$edit = false;
-		$form = new CreateListingForm();
-		$form->user_id = Auth::id();
-		$form->name = $request->name;
-		$form->email = $request->email;
-		$form->description = $request->description;
-		$form->phone_number = $request->phone_number;
-		$form->website = $request->website;
-		$form->street_address = $request->street_address;
-		$form->display_address = $request->display_address;
-		$form->available = $request->available;
-		$form->city_state_zip = $request->city_state_zip;
-		$form->neighborhood = $request->neighborhood;
-		$form->bedrooms = $request->bedrooms;
-		$form->baths = $request->baths;
-		$form->unit = $request->unit;
-		$form->rent = $request->rent;
-		$form->square_feet = $request->square_feet;
-		$form->listing_type = $request->listing_type;
-		$form->amenities = $request->amenities;
-		$form->unit_feature = $request->unit_feature;
-		$form->building_feature = $request->building_feature;
-		$form->pet_policy = $request->pet_policy;
-		$form->status = 2;
-		$form->thumbnail = $request->file('thumbnail');
-		$listing = $this->service->add_listing($form);
-		$id = $listing->id;
-		return ($listing)
-		? view('agent.add_listing_images', compact('id', 'edit'))
-		: error('Something went wrong');
+		$listing = null;
+		return view('admin.add_listing', compact('listing', 'edit'));
 	}
 
-	public function uploadImages(Request $request, $id) {
-		$files = uploadMultiImages($request->file('file'), 'data/' . auth()->id() . '/listing/images');
-		return ($this->service->add_listing_images($id, $files))
-		? response()->json(['message' => 'Property has been added successfully'], 200)
-		: response()->json(['message' => 'Something went wrong'], 500);
+	/**
+	 * create new listing
+	 *
+	 * @return view listing image form
+	 */
+	public function create(Request $request) {
+		$edit = false;
+		$id = $this->service->create($request);
+		return ($id)
+			? view('admin.add_listing_images', compact('id', 'edit'))
+			: error('Something went wrong');
 	}
 
-	public function repostListing($id) {
-		return $this->service->repost_listing($id)
-		? success('Property has been reposeted')
-		: error('Something went wrong');
-	}
-
-	public function editListingForm($id) {
+	/**
+	 * @param $id
+	 * @param Request $request
+	 *
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+	 */
+	public function update($id, Request $request) {
 		$edit = true;
-		$col = [];
-		$listing = $this->service->edit_listing($id);
-		$constants = config('constants.listing_types');
-		$types = array_keys($constants);
-		foreach ($listing->listingTypes as $value) {
-			// make collection for specific types
-			$col[$types[$value['property_type'] - 1]][] = $value['value'];
-			// assign collections
-			$listing->{$types[$value['property_type'] - 1]} = $col[$types[$value['property_type'] - 1]];
-		}
-
-		return view('agent.add_listing', compact('listing', 'edit'));
-	}
-
-	public function searchListingWithFilters(Request $request) {
-		$form = new SearchListingForm();
-		$form->bedrooms = isset($request->beds) ? $request->beds : null;
-		$form->baths = isset($request->baths) ? $request->baths : null;
-		$listing = $this->service->search_list_with_filters($form);
-		return view('agent.index', compact('listing'));
-	}
-
-	public function listingVisibilityToggle($id) {
-		$status = $this->service->listing_status($id);
-		return (isset($status))
-		? success(($status) ? 'Property has been published.' : 'Property has been unpublished')
-		: error('Something went wrong');
-	}
-
-	public function updateListing(Request $request, $id) {
-		$edit = true;
-		$form = new CreateListingForm();
-		$form->name = $request->name;
-		$form->email = $request->email;
-		$form->description = $request->description;
-		$form->phone_number = $request->phone_number;
-		$form->website = $request->website;
-		$form->street_address = $request->street_address;
-		$form->display_address = $request->display_address;
-		$form->available = $request->available;
-		$form->city_state_zip = $request->city_state_zip;
-		$form->neighborhood = $request->neighborhood;
-		$form->bedrooms = $request->bedrooms;
-		$form->baths = $request->baths;
-		$form->unit = $request->unit;
-		$form->rent = $request->rent;
-		$form->square_feet = $request->square_feet;
-		$form->listing_type = $request->listing_type;
-		$form->amenities = $request->amenities;
-		$form->unit_feature = $request->unit_feature;
-		$form->building_feature = $request->building_feature;
-		$form->pet_policy = $request->pet_policy;
-		$form->old = ($request->hasFile('thumbnail')) ? $request->old_thumbnail : true;
-		$form->thumbnail = ($request->hasFile('thumbnail')) ? $request->file('thumbnail') : $request->old_thumbnail;
-		if ($update = $this->service->update_listing($form, $id)) {
-			$listing_images = $this->service->edit_listing_images($id);
-		}
+		$update = $this->service->update($id, $request);
+		$listing_images = $this->service->images($id)->get();
 		return $update
-		? view('agent.add_listing_images', compact('id', 'edit', 'listing_images'))
-		: error('Something went wrong');
+			? view('admin.add_listing_images', compact('id', 'edit', 'listing_images'))
+			: error('Something went wrong');
 	}
 
-	public function removeListingImage($id) {
-		dd($id);
-		return ($this->service->remove_listing_image($id))
-		? response()->json(['message' => 'success'])
-		: response()->json(['message' => 'something went wrong']);
+	/**
+	 * @param Request $request
+	 * @param $id
+	 *
+	 * @return \Illuminate\Http\JsonResponse
+	 */
+	public function uploadImages(Request $request, $id) {
+		$files = uploadMultiImages($request->file('file'), 'data/' . myId() . '/listing/images');
+		return ($this->service->insertImages($id, $files))
+			? response()->json(['message' => 'success'], 200)
+			: response()->json(['message' => 'Something went wrong'], 500);
 	}
 
-	public function requestFeatured($id) {
-		return $this->service->request_featured($id)
-		? success('Request has been send.')
-		: error('Something went wrong');
+	/**
+	 * @param $id
+	 *
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
+	public function repost($id) {
+		return $this->service->repost($id)
+			? success('Property has been reposted')
+			: error('Something went wrong');
+	}
+
+	/**
+	 * @param $id
+	 *
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 */
+	public function edit($id) {
+		$edit = true;
+		$listing = $this->service->edit($id);
+		foreach (features($listing->listingTypes) as $key => $value) {
+			$listing->{$key} = $value;
+		}
+
+		return view('admin.add_listing', compact('listing', 'edit'));
+	}
+
+	/**
+	 * @param Request $request
+	 *
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 */
+	public function searchWithFilters(Request $request) {
+		$listing = $this->service->search($request, $this->paginate);
+		return view('admin.listing_view', compact('listing'));
+	}
+
+	/**
+	 * @param $id
+	 *
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
+	public function status($id) {
+		$status = $this->service->status($id);
+		return (isset($status))
+			? success(($status) ? 'Property has been published.' : 'Property has been unpublished')
+			: error('Something went wrong');
+	}
+
+	/**
+	 * @param $id
+	 *
+	 * @return \Illuminate\Http\JsonResponse
+	 */
+	public function removeImage($id) {
+		return ($this->service->removeImage($id))
+			? response()->json(['message' => 'success'])
+			: response()->json(['message' => 'something went wrong']);
 	}
 }

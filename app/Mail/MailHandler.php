@@ -9,12 +9,15 @@ use Illuminate\Queue\SerializesModels;
 class MailHandler extends Mailable {
 	use Queueable, SerializesModels;
 
+	/**
+	 * @var Object
+	 */
 	private $data;
 
 	/**
-	 * Create a new message instance.
+	 * MailHandler constructor.
 	 *
-	 * @return void
+	 * @param $data
 	 */
 	public function __construct($data) {
 		$this->data = $data;
@@ -29,7 +32,7 @@ class MailHandler extends Mailable {
 		$view = null;
 		$data = $this->data;
 
-		// Select View which send to user
+		// Select Which View Render
 		switch ($this->data->view) {
 		case 'create-user':
 			$view = 'mails.create_user';
@@ -42,6 +45,11 @@ class MailHandler extends Mailable {
 		case 'contact-us':
 			$view = 'mails.contact-us';
 			break;
+
+		case 'approve-request':
+			$view = 'mails.approve-request';
+			break;
+
 
 		default:
 			// code...

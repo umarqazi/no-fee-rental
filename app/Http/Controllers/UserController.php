@@ -13,7 +13,7 @@ use App\Forms\User\ChangePasswordForm;
 use App\Http\Requests\ChangePassword;
 use App\Http\Requests\User;
 use App\Services\AgentService;
-use App\Services\UserService;
+use App\Services\BaseUserService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\View;
@@ -26,7 +26,7 @@ class UserController extends Controller {
 	/**
 	 * UserController constructor.
 	 */
-	public function __construct(UserService $user_service, AgentService $agent_service) {
+	public function __construct(BaseUserService $user_service, AgentService $agent_service) {
 		$this->user_service = $user_service;
 		$this->agent_service = $agent_service;
 	}
@@ -37,9 +37,9 @@ class UserController extends Controller {
 	 */
 	public function editProfile(Request $request) {
 		$form = new UserForm($request);
-		$update_data = $this->user_service->updateAdminProfile($form, $form->user);
+		$update_data = $this->user_service->update_admin_profile($form, $form->user);
 		if ($request->hasFile('profile_image')) {
-			$update_data = $this->user_service->updateProfileImage($request->file('profile_image'), $form->user);
+			$update_data = $this->user_service->update_profile_image($request->file('profile_image'), $form->user);
 		}
 		$notification = [
 			'message' => 'ProfileForm has been updated successfully',
@@ -66,7 +66,7 @@ class UserController extends Controller {
 		$change_password->password = $request->password;
 		$change_password->password_confirmation = $request->password_confirmation;
 		$change_password->user_id = $user->id;
-		$this->user_service->changePassword($change_password);
+		$this->user_service->change_password($change_password);
 		$notification = [
 			'message' => 'Password has been set successfully. Now you can logged in',
 			'alert_type' => 'success',

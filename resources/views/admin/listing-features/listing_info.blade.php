@@ -39,7 +39,7 @@
 				<div class="col-md-6">
 					<div class="form-group">
 						<label>Bedrooms</label>
-						{!! Form::number('bedrooms', null, ['class' => 'input-style']) !!}
+						{!! Form::text('bedrooms', null, ['class' => 'input-style']) !!}
 						<span class="invalid-feedback" role="alert">
 							{!! $errors->first('bedrooms') !!}
 						</span>
@@ -48,7 +48,7 @@
 				<div class="col-md-6">
 					<div class="form-group">
 						<label>Bathrooms</label>
-						{!! Form::number('baths', null, ['class' => 'input-style']) !!}
+						{!! Form::text('baths', null, ['class' => 'input-style']) !!}
 						<span class="invalid-feedback" role="alert">
 							{!! $errors->first('baths') !!}
 						</span>
@@ -57,7 +57,7 @@
 				<div class="col-md-6">
 					<div class="form-group">
 						<label>Unit</label>
-						{!! Form::number('unit', null, ['class' => 'input-style']) !!}
+						{!! Form::text('unit', null, ['class' => 'input-style']) !!}
 						<span class="invalid-feedback" role="alert">
 							{!! $errors->first('unit') !!}
 						</span>
@@ -66,7 +66,7 @@
 				<div class="col-md-6">
 					<div class="form-group">
 						<label>Rent</label>
-						{!! Form::number('rent', null, ['class' => 'input-style']) !!}
+						{!! Form::text('rent', null, ['class' => 'input-style']) !!}
 						<span class="invalid-feedback" role="alert">
 							{!! $errors->first('rent') !!}
 						</span>

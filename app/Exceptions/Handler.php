@@ -52,16 +52,16 @@ class Handler extends ExceptionHandler {
 	}
 
 	/**
-	 * Render Auth Exception.
+	 * @param \Illuminate\Http\Request $request
+	 * @param Auth $exception
 	 *
-	 * @param  \Illuminate\Http\Request  $request
-	 * @param  \Exception  $exception
-	 * @return \Illuminate\Http\Response
+	 * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse|\Symfony\Component\HttpFoundation\Response|void
 	 */
 	protected function unauthenticated($request, Auth $exception) {
 		if ($request->ajax() || $request->expectsJson()) {
 			return response()->json(['message' => 'Request Not Allowed.'], 401);
 		}
+
 		switch ($exception->guards()[0]) {
 		case 'admin':
 			return redirect('/')->with(['message' => 'Your login session has been expired', 'alert_type' => 'error']);

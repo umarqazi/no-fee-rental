@@ -2,19 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\ListingServices\FeatureListingService;
+
 class HomeController extends Controller {
 
-	protected $service;
+	/**
+	 * @var FeatureListingService
+	 */
+	private $service;
 
 	/**
-	 * Create a new controller instance.
-	 *
-	 * @return void
+	 * @var int
 	 */
-	public function __construct(\App\Services\FeatureListingService $service) {
+	private $paginate = 20;
+
+	/**
+	 * HomeController constructor.
+	 *
+	 * @param FeatureListingService $service
+	 */
+	public function __construct(FeatureListingService $service) {
 		$this->service = $service;
-		$this->service->paginate = 8;
-		$this->middleware('auth')->except('index');
 	}
 
 	/**
@@ -23,7 +31,17 @@ class HomeController extends Controller {
 	 * @return \Illuminate\Contracts\Support\Renderable
 	 */
 	public function index() {
-		$featured_listings = $this->service->featured_listing();
+		$featured_listings = $this->service->featured()->paginate($this->paginate);
 		return view('index', compact('featured_listings'));
+	}
+
+	/**
+	 * @param $id
+	 *
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 */
+	public function detail($id) {
+		$listing = $this->service->detail($id)->first();
+		return view('listing_detail', compact('listing'));
 	}
 }

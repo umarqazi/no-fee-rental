@@ -2,27 +2,24 @@
 
 namespace App\Http\Controllers\Agent;
 
-use App\Forms\User\ChangePasswordForm;
-use App\Forms\User\EditUserForm;
-use App\Http\Controllers\Controller;
-use App\Services\AgentService;
-use App\Services\UserService;
-use Auth;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Services\UserServices\AgentService;
 
 class AgentController extends Controller {
 
-	private $user_service;
-	private $agent_service;
+	/**
+	 * @var AgentService
+	 */
+	private $service;
 
 	/**
-	 * Create a new controller instance.
+	 * AgentController constructor.
 	 *
-	 * @return void
+	 * @param AgentService $service
 	 */
-	function __construct(UserService $user_service, AgentService $agent_service) {
-		$this->user_service = $user_service;
-		$this->agent_service = $agent_service;
+	public function __construct(AgentService $service) {
+		$this->service = $service;
 	}
 
 	/**
@@ -30,26 +27,20 @@ class AgentController extends Controller {
 	 *
 	 * @return view
 	 */
-	function profile() {
-		$user = Auth::user();
+	public function profile() {
+		$user = mySelf();
 		return view('agent.profile', compact('user'));
 	}
 
 	/**
-	 * use to update admin profile.
+	 * @param Request $request
 	 *
-	 * @return string
+	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	function profileUpdate(Request $request) {
-		$agent = new EditUserForm();
-		$agent->id = Auth::id();
-		$agent->first_name = $request->first_name;
-		$agent->last_name = $request->last_name;
-		$agent->email = $request->email;
-		$agent->phone_number = $request->phone_number;
-		$update_data = $this->user_service->updateProfile($agent);
+	public function updateProfile(Request $request) {
+		$update_data = $this->service->update_profile($request);
 		if ($request->hasFile('profile_image')) {
-			$update_data = $this->user_service->updateProfileImage($request->file('profile_image'), Auth::id());
+			$update_data = $this->service->update_profile_image($request->file('profile_image'), myId(), $request->old_profile ?? '');
 		}
 
 		return ($update_data) ? success('Profile has been updated.') : error('Something went wrong');
@@ -60,22 +51,18 @@ class AgentController extends Controller {
 	 *
 	 * @return view
 	 */
-	function resetPassword() {
+	public function resetPassword() {
 		return view('agent.update_password');
 	}
 
 	/**
-	 * use to update admin password.
+	 * @param Request $request
 	 *
-	 * @return boolean
+	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	function updatePassword(Request $request) {
-		$change_password = new ChangePasswordForm();
-		$change_password->password = $request->password;
-		$change_password->password_confirmation = $request->password_confirmation;
-		$change_password->user_id = Auth::id();
-		return $this->user_service->changePassword($change_password)
-		? success('Password has been updated succesfully.', '/agent/show-profile')
+	public function updatePassword(Request $request) {
+		return $this->service->change_password($request)
+		? success('Password has been updated successfully.', route('agent.profile'))
 		: error('Something went wrong');
 
 	}
