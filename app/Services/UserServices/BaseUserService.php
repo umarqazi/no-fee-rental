@@ -138,4 +138,13 @@ class BaseUserService extends RolesService {
 	public function roles() {
 		return $this->get();
 	}
+
+	/**
+	 * @param $clause
+	 *
+	 * @return mixed
+	 */
+	public function first($clause) {
+		return $this->repo->first($clause);
+	}
 }

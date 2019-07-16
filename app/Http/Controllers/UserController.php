@@ -8,71 +8,62 @@
 
 namespace App\Http\Controllers;
 
-use App\Forms\Agent\CreateAgentForm;
-use App\Forms\User\ChangePasswordForm;
-use App\Http\Requests\ChangePassword;
-use App\Http\Requests\User;
-use App\Services\AgentService;
-use App\Services\BaseUserService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\View;
+use App\Services\UserServices\ClientService;
 
 class UserController extends Controller {
-	protected $user_service;
 
-	protected $user_id;
+	/**
+	 * @var BaseUserService
+	 */
+	private $service;
 
 	/**
 	 * UserController constructor.
+	 *
+	 * @param BaseUserService $service
 	 */
-	public function __construct(BaseUserService $user_service, AgentService $agent_service) {
-		$this->user_service = $user_service;
-		$this->agent_service = $agent_service;
+	public function __construct(ClientService $service) {
+		$this->service = $service;
 	}
 
 	/**
-	 * @param User $request
+	 * @param Request $request
+	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function editProfile(Request $request) {
-		$form = new UserForm($request);
-		$update_data = $this->user_service->update_admin_profile($form, $form->user);
+		$update_data = $this->service->update_profile($request);
 		if ($request->hasFile('profile_image')) {
-			$update_data = $this->user_service->update_profile_image($request->file('profile_image'), $form->user);
+			$update_data = $this->service->update_profile_image($request->file('profile_image'), myId(), $request->old_profile ?? null);
 		}
-		$notification = [
-			'message' => 'ProfileForm has been updated successfully',
-			'alert_type' => 'success',
-		];
 
-		return Redirect::back()->with($notification);
+		return $update_data
+			? success('Profile has been updated successfully')
+			: error('Something went wrong');
 	}
 
 	/**
-	 * @return \Illuminate\Contracts\View\View
+	 * @param $token
+	 *
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
 	public function changePassword($token) {
-		return view::make('change-password', compact('token'));
+		return view('change-password', compact('token'));
 	}
 
 	/**
-	 * @param ChangePassword $request
+	 * @param Request $request
+	 * @param $token
+	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function updatePassword(Request $request, $token) {
-		$user = \App\User::select('id')->whereEmail(base64_decode($token))->first();
-		$change_password = new ChangePasswordForm();
-		$change_password->password = $request->password;
-		$change_password->password_confirmation = $request->password_confirmation;
-		$change_password->user_id = $user->id;
-		$this->user_service->change_password($change_password);
-		$notification = [
-			'message' => 'Password has been set successfully. Now you can logged in',
-			'alert_type' => 'success',
-		];
-
-		return redirect('/')->with($notification);
+		$user = $this->service->first(['email' => base64_decode($token)])->first();
+		$request->id = $user->id;
+		return $this->service->change_password($request)
+			? success('Password has been updated')
+			: error('Something went wrong');
 
 	}
 
@@ -80,17 +71,9 @@ class UserController extends Controller {
 	 * @param Agent $request
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function invited_agent_sign_up(Request $request) {
-		$form = new CreateAgentForm();
-		$form->first_name = $request->first_name;
-		$form->last_name = $request->last_name;
-		$form->phone_number = $request->phone_number;
-		$form->email = $request->email;
-		$form->user_type = 2;
-		$form->password = $request->password;
-		$form->password_confirmation = $request->password_confirmation;
-		return $this->agent_service->register_new_agent($form)
-		? redirect('/')->with(['message' => "Your account has been created. Now you can logged in.", 'alert_type' => 'success'])
-		: error('Something went wrong.');
+	public function agentSignup(Request $request) {
+		return $this->service->agent_signup($request)
+			? success( 'Account has been created' )
+			: error( 'Something went wrong' );
 	}
 }
