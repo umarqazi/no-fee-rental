@@ -17,16 +17,15 @@ Route::get('/password-reset', 'Agent\AgentController@resetPassword')->name('agen
 // Listing Routes
 Route::post('/add-listing', 'Agent\ListingController@create')->name('agent.createListing');
 Route::get('/add-listing', 'Agent\ListingController@showForm')->name('agent.addListing');
-
 Route::post('/upload-listing-images/{id}', 'Agent\ListingController@uploadImages')->name('agent.listingImages');
-Route::post('/remove-listing-image/{id}', 'Agent\ListingController@removeListingImage');
-Route::get('/listing-repost/{id}', 'Agent\ListingController@repostListing')->name('agent.listingRepost');
-Route::match(['get', 'post'], '/search-listing', 'Agent\ListingController@searchListingWithFilters')->name('agent.listingSearch');
-Route::get('/listing-status/{id}', 'Agent\ListingController@listingVisibilityToggle')->name('agent.listingStatus');
-Route::get('/edit-list/{id}', 'Agent\ListingController@editListingForm')->name('agent.editListing');
-Route::post('/update-listing/{id}', 'Agent\ListingController@updateListing')->name('agent.updateListing');
+Route::post('/remove-listing-image/{id}', 'Agent\ListingController@removeImage');
+Route::get('/listing-repost/{id}', 'Agent\ListingController@repost')->name('agent.listingRepost');
+Route::match(['get', 'post'], '/search-listing', 'Agent\ListingController@searchWithFilters')->name('agent.listingSearch');
+Route::get('/listing-status/{id}', 'Agent\ListingController@status')->name('agent.listingStatus');
+Route::get('/edit-list/{id}', 'Agent\ListingController@edit')->name('agent.editListing');
+Route::post('/update-listing/{id}', 'Agent\ListingController@update')->name('agent.updateListing');
 Route::get('/finish-listing', 'Agent\ListingController@finishCreate')->name('agent.finishCreateListing');
 Route::get('/update-listing', 'Agent\ListingController@finishUpdate')->name('agent.finishUpdateListing');
 
 // Featured Listing
-Route::get('/request-featured/{id}', 'Agent\ListingController@requestFeatured')->name('agent.requestFeatured');
+Route::get('/request-featured/{id}', 'Agent\ListingController@request')->name('agent.requestFeatured');

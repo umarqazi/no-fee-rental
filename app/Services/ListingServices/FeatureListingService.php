@@ -28,7 +28,7 @@ class FeatureListingService extends BaseListingService {
 	 *
 	 * @return array
 	 */
-	private function collection($feature, $paginate) {
+	public function collection($feature, $paginate) {
 		return [
 			'totalFeatured' => $this->featured()->count(),
 			'totalRequestFeatured' => $this->requestFeatured()->count(),
@@ -57,7 +57,20 @@ class FeatureListingService extends BaseListingService {
 	 * @return mixed
 	 */
 	public function mark($id) {
-		return $this->repo->update($id, ['is_featured' => APPROVEFEATURED]);
+		if ($this->repo->update($id, ['is_featured' => APPROVEFEATURED])) {
+			$list = $this->repo->first(['id' => $id])->withagent()->first();
+			$data = [
+				'subject' => 'Featured Request Approved',
+				'view' => 'request-featured-approved',
+				'name' => $list->agent->name,
+				'approved_by' => mySelf()->first_name,
+				'approved_on' => $list->updated_at,
+			];
+			mailService($list->agent->email, toObject($data));
+			return true;
+		}
+
+		return false;
 	}
 
 	/**

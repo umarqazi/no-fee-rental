@@ -40,7 +40,7 @@ function uploadMultiImages($files, $path) {
  * @return bool
  */
 function removeFile($path) {
-	return @unlink('storage/'.$path ?? '');
+	return @unlink('storage/' . $path ?? '');
 }
 
 /**
@@ -67,8 +67,17 @@ function myId() {
 /**
  * @return \Illuminate\Contracts\Auth\Authenticatable|null
  */
-function mySelf(){
+function mySelf() {
 	return auth()->user();
+}
+
+/**
+ * @param $date
+ *
+ * @return mixed
+ */
+function dateReadable($date) {
+	return $date->diffForHumans();
 }
 
 /**

@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
-use App\Services\ListingService;
 use App\Http\Controllers\Controller;
+use App\Services\ListingService;
+use Illuminate\Http\Request;
 
 class ListingController extends Controller {
 
@@ -33,26 +33,6 @@ class ListingController extends Controller {
 	public function index() {
 		$listing = $this->service->get($this->paginate);
 		return view('admin.listing_view', compact('listing'));
-	}
-
-	/**
-	 * finish add listing
-	 *
-	 * @return redirect URL
-	 */
-	public function finishCreate() {
-		return redirect(route('admin.viewListing'))
-			->with(['message' => 'Property has been added.', 'alert_type' => 'success']);
-	}
-
-	/**
-	 * finish update listing
-	 *
-	 * @return redirect URL
-	 */
-	public function finishUpdate() {
-		return redirect(route('admin.viewListing'))
-			->with(['message' => 'Property has been updated.', 'alert_type' => 'success']);
 	}
 
 	/**
@@ -91,6 +71,16 @@ class ListingController extends Controller {
 	}
 
 	/**
+	 * finish add listing
+	 *
+	 * @return redirect URL
+	 */
+	public function finishCreate() {
+		return redirect(route('admin.viewListing'))
+			->with(['message' => 'Property has been added.', 'alert_type' => 'success']);
+	}
+
+	/**
 	 * @param $id
 	 * @param Request $request
 	 *
@@ -101,8 +91,18 @@ class ListingController extends Controller {
 		$update = $this->service->update($id, $request);
 		$listing_images = $this->service->images($id)->get();
 		return $update
-			? view('admin.add_listing_images', compact('id', 'edit', 'listing_images'))
-			: error('Something went wrong');
+		? view('admin.add_listing_images', compact('id', 'edit', 'listing_images'))
+		: error('Something went wrong');
+	}
+
+	/**
+	 * finish update listing
+	 *
+	 * @return redirect URL
+	 */
+	public function finishUpdate() {
+		return redirect(route('admin.viewListing'))
+			->with(['message' => 'Property has been updated.', 'alert_type' => 'success']);
 	}
 
 	/**

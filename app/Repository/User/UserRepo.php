@@ -2,8 +2,8 @@
 
 namespace App\Repository\User;
 
-use App\User;
 use App\Repository\BaseRepo;
+use App\User;
 
 class UserRepo extends BaseRepo {
 
@@ -56,7 +56,7 @@ class UserRepo extends BaseRepo {
 	 */
 	public function active_deactive($id) {
 		$query = $this->edit($id);
-		$updateStatus = ($query->status) ? 0 : 1;
+		$updateStatus = ($query->status) ? UNPUBLISH : PUBLISH;
 		$this->update($id, ['status' => $updateStatus]);
 		return $updateStatus;
 	}

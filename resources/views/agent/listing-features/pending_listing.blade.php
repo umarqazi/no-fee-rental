@@ -18,8 +18,8 @@
 										<p>Posted: {{ date("m/d/y H:m A", strtotime($pl->created_at)) }}</p>
 										<span class="status" style="background: #ffce39;">Pending</span>
 										<div class="actions-btns">
-											<a href="{{ route('agent.editListing', $pl->id) }}"><span><img src="{{asset('agent/images/edit-icon.png')}}" alt=""></span></a>
-											<span><img src="{{asset('agent/images/copy-icon.png')}}" alt=""></span>
+											<a href="{{ route('agent.editListing', $pl->id) }}"><span><img src="{{asset('assets/images/edit-icon.png')}}" alt=""></span></a>
+											<span><img src="{{asset('assets/images/copy-icon.png')}}" alt=""></span>
 										</div>
 									</div>
 								</div>

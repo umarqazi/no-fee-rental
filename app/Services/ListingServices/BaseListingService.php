@@ -8,10 +8,10 @@
 
 namespace App\Services\ListingServices;
 
-use Illuminate\Support\Facades\DB;
 use App\Forms\Listing\CreateListingForm;
-use App\Repository\Listing\ListingTypeRepo;
 use App\Repository\Listing\ListingImageRepo;
+use App\Repository\Listing\ListingTypeRepo;
+use Illuminate\Support\Facades\DB;
 
 class BaseListingService {
 
@@ -163,7 +163,9 @@ class BaseListingService {
 	private function updateList($id, $listing) {
 		DB::beginTransaction();
 		if ($listing->old == 'false') {
-			$listing->thumbnail = uploadImage($listing->thumbnail, 'data/' . auth()->id() . '/listing/thumbnails', true, $listing->old);
+			$listing->thumbnail = uploadImage($listing->thumbnail, 'data/' . myId() . '/listing/thumbnails', true, $listing->old);
+		} else {
+			$listing->thumbnail = uploadImage($listing->thumbnail, 'data/' . myId() . '/listing/thumbnails');
 		}
 
 		$data = [
@@ -185,7 +187,7 @@ class BaseListingService {
 			'square_feet' => $listing->square_feet,
 		];
 
-		if($update = $this->repo->update($id, $data)) {
+		if ($update = $this->repo->update($id, $data)) {
 			return $this->updateType($id, $listing);
 		}
 
@@ -201,7 +203,7 @@ class BaseListingService {
 	 */
 	private function updateType($id, $data) {
 		$this->repo = new ListingTypeRepo();
-		$this->repo->delete($id);
+		$this->repo->deleteMultiple(['listing_id' => $id]);
 		return $this->createType($id, $data);
 	}
 
@@ -263,16 +265,7 @@ class BaseListingService {
 		$keywords = [];
 		!empty($request->baths) ? $keywords['baths'] = $request->baths : null;
 		!empty($request->beds) ? $keywords['bedrooms'] = $request->beds : null;
-		return $this->collection($this->repo->search($keywords), $paginate);
-	}
-
-	/**
-	 * @param $paginate
-	 *
-	 * @return array
-	 */
-	public function get($paginate) {
-		return $this->collection($this->repo, $paginate);
+		return $this->searchedCollection($keywords, $paginate);
 	}
 
 	/**
@@ -281,18 +274,60 @@ class BaseListingService {
 	 *
 	 * @return array
 	 */
-	private function collection($listing, $paginate) {
+	public function collection($listing, $paginate) {
 		return [
+			'active' => $listing->active()->paginate($paginate, ['*'], 'active'),
+			'pending' => $listing->pending()->paginate($paginate, ['*'], 'pending'),
+			'inactive' => $listing->inactive()->paginate($paginate, ['*'], 'inactive'),
 			'totalActive' => $listing->active()->count(),
 			'totalPending' => $listing->pending()->count(),
 			'totalInactive' => $listing->inactive()->count(),
-			'active' => $listing->active()->paginate($paginate, ['*'], 'active-listing'),
-			'pending' => $listing->pending()->paginate($paginate, ['*'], 'pending-listing'),
-			'inactive' => $listing->inactive()->paginate($paginate, ['*'], 'inactive-listing')
 		];
 	}
 
+	/**
+	 * @param $keywords
+	 * @param $paginate
+	 *
+	 * @return array
+	 */
+	public function searchedCollection($keywords, $paginate) {
+		return [
+			'totalActive' => $this->repo->search($keywords)->active()->count(),
+			'totalPending' => $this->repo->search($keywords)->pending()->count(),
+			'totalInactive' => $this->repo->search($keywords)->inactive()->count(),
+			'pending' => $this->repo->search($keywords)->pending()->paginate($paginate, ['*'], 'pending'),
+			'active' => $this->repo->search($keywords)->active()->paginate($paginate, ['*'], 'active'),
+			'inactive' => $this->repo->search($keywords)->inactive()->paginate($paginate, ['*'], 'inactive'),
+		];
+	}
+	/**
+	 * @param $id
+	 *
+	 * @return mixed
+	 */
 	public function status($id) {
 		return $this->repo->status($id);
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function active() {
+		return $this->repo->active();
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function inactive() {
+		return $this->repo->inactive();
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function pending() {
+		return $this->repo->pending();
 	}
 }

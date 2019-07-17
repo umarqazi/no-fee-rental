@@ -20,7 +20,7 @@ class ListingService extends BaseListingService {
 	 * @return mixed
 	 */
 	public function approve($id) {
-		if($this->repo->update($id, ['status' => 1])) {
+		if ($this->repo->update($id, ['status' => 1])) {
 			$list = $this->repo->first(['id' => $id])->withagent()->first();
 			$data = [
 				'name' => $list->agent->first_name,
@@ -34,31 +34,21 @@ class ListingService extends BaseListingService {
 		}
 	}
 
-//	public function search_list_with_filters(IForm $search) {
-//		$keywords = [];
-//		$this->listing_repo->paginate = $this->paginate;
-//		!empty($search->baths) ? $keywords['baths'] = $search->baths : null;
-//		!empty($search->bedrooms) ? $keywords['bedrooms'] = $search->bedrooms : null;
-//		$active = $this->listing_repo->get('listing',
-//			isAdmin()
-//			? array_merge($keywords, ['status' => true])
-//			: array_merge($keywords, ['user_id' => auth()->id(), 'status' => true]),
-//			'active-listing');
-//		$inactive = $this->listing_repo->get('listing',
-//			isAdmin()
-//			? array_merge($keywords, ['status' => false])
-//			: array_merge($keywords, ['user_id' => auth()->id(), 'status' => false]),
-//			'inactive-listing');
-//		$pending = $this->listing_repo->get('listing',
-//			isAdmin()
-//			? array_merge($keywords, ['status' => 2])
-//			: array_merge($keywords, ['user_id' => auth()->id(), 'status' => 2]),
-//			'pending-listing');
-//
-//		return $listing = [
-//			'active' => $active->appends(['beds' => $search->bedrooms, 'baths' => $search->baths]),
-//			'inactive' => $inactive->appends(['beds' => $search->bedrooms, 'baths' => $search->baths]),
-//			'pending' => $pending->appends(['beds' => $search->bedrooms, 'baths' => $search->baths]),
-//		];
-//	}
+	/**
+	 * @param $paginate
+	 *
+	 * @return array
+	 */
+	public function get($paginate) {
+		return $this->collection($this->repo, $paginate);
+	}
+
+	/**
+	 * @param $id
+	 *
+	 * @return mixed
+	 */
+	public function requestForFeatured($id) {
+		return $this->repo->sendRequest($id);
+	}
 }

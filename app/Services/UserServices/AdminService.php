@@ -16,18 +16,15 @@ class AdminService extends BaseUserService {
 		parent::__construct(new UserRepo);
 	}
 
-	/**
-	 * @return mixed
-	 */
-	public function agents() {
-		return $this->repo->agents();
+	public function get($paginate) {
+		return $this->collection($this->repo, $paginate);
 	}
 
-	/**
-	 * @return mixed
-	 */
-	public function renters() {
-		return $this->repo->renters();
+	private function collection($user, $paginate) {
+		return [
+			'agents' => $user->agents()->paginate($paginate, ['*'], 'agents'),
+			'renters' => $user->renters()->paginate($paginate, ['*'], 'renters'),
+		];
 	}
 
 	/**
@@ -35,8 +32,8 @@ class AdminService extends BaseUserService {
 	 *
 	 * @return mixed
 	 */
-	public function search($request) {
-		return $this->repo->search($request->keywords);
+	public function search($request, $paginate) {
+		return $this->collection($this->repo->search($request->keywords), $paginate);
 	}
 
 	/**
@@ -61,7 +58,7 @@ class AdminService extends BaseUserService {
 	 * @return bool
 	 */
 	public function send_invite($request) {
-		parent::__construct(new AgentRepo);
+		$this->repo = new AgentRepo;
 		$agent = new AgentInvitationForm();
 		$agent->invite_by = myId();
 		$agent->email = $request->email;

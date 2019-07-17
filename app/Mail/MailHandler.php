@@ -50,6 +50,9 @@ class MailHandler extends Mailable {
 			$view = 'mails.approve-request';
 			break;
 
+		case 'request-featured-approved':
+			$view = 'mails.request_featured';
+			break;
 
 		default:
 			// code...
