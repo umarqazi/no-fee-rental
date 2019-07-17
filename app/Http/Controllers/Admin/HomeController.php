@@ -37,8 +37,7 @@ class HomeController extends Controller {
 	 */
 	public function index() {
 		$roles = $this->service->roles();
-		$agents = $this->service->agents()->paginate($this->paginate, ['*'], 'agents');
-		$renters = $this->service->renters()->paginate($this->paginate, ['*'], 'renters');
-		return view('admin.index', compact('agents', 'renters', 'roles'));
+		$users = $this->service->get($this->paginate);
+		return view('admin.index', compact('roles', 'users'));
 	}
 }

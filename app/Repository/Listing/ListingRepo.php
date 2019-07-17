@@ -67,7 +67,14 @@ class ListingRepo extends BaseRepo {
 	/**
 	 * @return mixed
 	 */
-	public function requestFeatured() {
+	public function requestfeatured() {
 		return $this->model->requestFeatured();
+	}
+
+	/**
+	 * @return boolean
+	 */
+	public function sendRequest($id) {
+		return $this->update($id, ['is_featured' => REQUESTFEATURED]);
 	}
 }

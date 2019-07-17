@@ -2,11 +2,10 @@
 
 namespace App\Services\UserServices;
 
-use App\Repository\Roles\RolesRepo;
-use App\Forms\User\EditForm;
-use App\Forms\User\CreateForm;
-use App\Forms\User\EditProfileForm;
 use App\Forms\User\ChangePasswordForm;
+use App\Forms\User\CreateForm;
+use App\Forms\User\EditForm;
+use App\Forms\User\EditProfileForm;
 use App\Services\RolesService;
 
 class BaseUserService extends RolesService {
@@ -136,7 +135,7 @@ class BaseUserService extends RolesService {
 	 * @return array
 	 */
 	public function roles() {
-		return $this->get();
+		return $this->fetch();
 	}
 
 	/**
@@ -146,5 +145,19 @@ class BaseUserService extends RolesService {
 	 */
 	public function first($clause) {
 		return $this->repo->first($clause);
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function agents() {
+		return $this->repo->agents();
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function renters() {
+		return $this->repo->renters();
 	}
 }

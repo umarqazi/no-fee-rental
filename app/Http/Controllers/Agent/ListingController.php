@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Agent;
 
-use Illuminate\Http\Request;
-use App\Services\ListingService;
 use App\Http\Controllers\Controller;
+use App\Services\ListingService;
+use Illuminate\Http\Request;
 
 class ListingController extends Controller {
 
@@ -75,8 +75,8 @@ class ListingController extends Controller {
 		$edit = false;
 		$id = $this->service->create($request);
 		return ($id)
-			? view('agent.add_listing_images', compact('id', 'edit'))
-			: error('Something went wrong');
+		? view('agent.add_listing_images', compact('id', 'edit'))
+		: error('Something went wrong');
 	}
 
 	/**
@@ -90,8 +90,8 @@ class ListingController extends Controller {
 		$update = $this->service->update($id, $request);
 		$listing_images = $this->service->images($id)->get();
 		return $update
-			? view('agent.add_listing_images', compact('id', 'edit', 'listing_images'))
-			: error('Something went wrong');
+		? view('agent.add_listing_images', compact('id', 'edit', 'listing_images'))
+		: error('Something went wrong');
 	}
 
 	/**
@@ -103,8 +103,8 @@ class ListingController extends Controller {
 	public function uploadImages(Request $request, $id) {
 		$files = uploadMultiImages($request->file('file'), 'data/' . myId() . '/listing/images');
 		return ($this->service->insertImages($id, $files))
-			? response()->json(['message' => 'success'], 200)
-			: response()->json(['message' => 'Something went wrong'], 500);
+		? response()->json(['message' => 'success'], 200)
+		: response()->json(['message' => 'Something went wrong'], 500);
 	}
 
 	/**
@@ -114,8 +114,8 @@ class ListingController extends Controller {
 	 */
 	public function repost($id) {
 		return $this->service->repost($id)
-			? success('Property has been reposted')
-			: error('Something went wrong');
+		? success('Property has been reposted')
+		: error('Something went wrong');
 	}
 
 	/**
@@ -140,7 +140,7 @@ class ListingController extends Controller {
 	 */
 	public function searchWithFilters(Request $request) {
 		$listing = $this->service->search($request, $this->paginate);
-		return view('agent.listing_view', compact('listing'));
+		return view('agent.index', compact('listing'));
 	}
 
 	/**
@@ -151,8 +151,8 @@ class ListingController extends Controller {
 	public function status($id) {
 		$status = $this->service->status($id);
 		return (isset($status))
-			? success(($status) ? 'Property has been published.' : 'Property has been unpublished')
-			: error('Something went wrong');
+		? success(($status) ? 'Property has been published.' : 'Property has been unpublished')
+		: error('Something went wrong');
 	}
 
 	/**
@@ -162,7 +162,18 @@ class ListingController extends Controller {
 	 */
 	public function removeImage($id) {
 		return ($this->service->removeImage($id))
-			? response()->json(['message' => 'success'])
-			: response()->json(['message' => 'something went wrong']);
+		? response()->json(['message' => 'success'])
+		: response()->json(['message' => 'something went wrong']);
+	}
+
+	/**
+	 * @param $id
+	 *
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
+	public function request($id) {
+		return $this->service->requestForFeatured($id)
+		? success('Your request for featured has been sent.')
+		: error('Something went wrong');
 	}
 }

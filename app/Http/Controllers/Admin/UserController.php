@@ -2,25 +2,26 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Services\UserServices\AdminService;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
-class UserController extends Controller
-{
+class UserController extends Controller {
 	/**
 	 * @var AdminService
 	 */
 	private $service;
+
+	private $paginate = 20;
 
 	/**
 	 * UserController constructor.
 	 *
 	 * @param AdminService $service
 	 */
-    public function __construct(AdminService $service) {
-    	$this->service = $service;
-    }
+	public function __construct(AdminService $service) {
+		$this->service = $service;
+	}
 
 	/**
 	 * @param Request $request
@@ -29,8 +30,8 @@ class UserController extends Controller
 	 */
 	public function create(Request $request) {
 		return $this->service->create($request)
-			? success('User has been added')
-			: error('Something went wrong');
+		? success('User has been added')
+		: error('Something went wrong');
 	}
 
 	/**
@@ -41,8 +42,8 @@ class UserController extends Controller
 	public function status($id) {
 		$status = $this->service->status($id);
 		return isset($status)
-			? success(($status) ? 'User has been active' : 'User has been deactive')
-			: error('Something went wrong');
+		? success(($status) ? 'User has been active' : 'User has been deactive')
+		: error('Something went wrong');
 	}
 
 	/**
@@ -52,8 +53,8 @@ class UserController extends Controller
 	 */
 	public function delete($id) {
 		return $this->service->delete($id)
-			? success('User has been deleted')
-			: error('Something went wrong');
+		? success('User has been deleted')
+		: error('Something went wrong');
 	}
 
 	/**
@@ -64,8 +65,8 @@ class UserController extends Controller
 	 */
 	public function update(Request $request, $id) {
 		return $this->service->update($id, $request)
-			? success('User has been updated')
-			: error('Something went wrong');
+		? success('User has been updated')
+		: error('Something went wrong');
 	}
 
 	/**
@@ -84,7 +85,7 @@ class UserController extends Controller
 	 * @return mixed
 	 */
 	public function search(Request $request) {
-		dd($this->service->search($request)->where(['user_type' => 2])->get());
+		dd($this->service->search($request, $this->paginate)->where(['user_type' => 2])->get());
 	}
 
 	/**
@@ -94,7 +95,7 @@ class UserController extends Controller
 	 */
 	public function invite(Request $request) {
 		return $this->service->send_invite($request)
-			? success('Invitation has been sent')
-			: error('Something went wrong');
+		? success('Invitation has been sent')
+		: error('Something went wrong');
 	}
 }

@@ -15,7 +15,7 @@
 						@csrf
 					</form>
 				</div>
-				@if($edit && count($listing_images) > 0)
+				@if($edit && !empty($listing_images) && count($listing_images) > 0)
 				<div class="col-12">
 					@foreach($listing_images as $image)
 						<img onclick="remove('{{$image->id}}', this)" src="{{ asset('storage/'.$image->listing_image) }}" height="50" width="50">

@@ -20,7 +20,7 @@ class RolesService {
 	/**
 	 * @return array
 	 */
-	public function get() {
+	public function fetch() {
 		$toArray = [];
 		$toArray[''] = 'Select User Type';
 		foreach ($this->repo->get() as $key => $value) {

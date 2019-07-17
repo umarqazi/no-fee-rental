@@ -2,7 +2,6 @@
 
 namespace App;
 
-use const http\Client\Curl\FEATURES;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -129,11 +128,11 @@ class Listing extends Model {
 
 	/**
 	 * @param $query
-	 * @param $array
+	 * @param $clause
 	 *
 	 * @return mixed
 	 */
-	public function scopeSearch($query, $array) {
-		return $query->where($array)->latest('updated_at');
+	public function scopeSearch($query, $clause) {
+		return $query->where($clause)->latest('updated_at');
 	}
 }

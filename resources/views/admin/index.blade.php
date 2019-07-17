@@ -37,7 +37,7 @@
                     <div class="tab-pane active" id="tab-1">
 
                         <div class="table-responsive">
-                            @if(count($agents) > 0)
+                            @if(count($users['agents']) > 0)
                             <table class="table table-hover">
                                 <thead>
                                 <tr>
@@ -49,7 +49,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($agents as $key => $agent)
+                                    @foreach($users['agents'] as $key => $agent)
                                         <tr>
                                             <td>{{$key + 1}}</td>
                                             <td>{{$agent->first_name." ".$agent->last_name}}</td>
@@ -73,14 +73,14 @@
                             @else
                             No Record Found
                             @endif
-                            {!! $agents->render() !!}
+                            {!! ($users['agents'])->render() !!}
                         </div>
 
                     </div>
                     <div class="tab-pane fade" id="tab-2">
 
                         <div class="table-responsive">
-                            @if(count($renters) > 0)
+                            @if(count($users['renters']) > 0)
                             <table class="table table-hover">
                                 <thead>
                                 <tr>
@@ -91,7 +91,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($renters as $key => $renter)
+                                    @foreach($users['renters'] as $key => $renter)
                                         <tr>
                                             <td>{{$key + 1}}</td>
 
@@ -115,7 +115,7 @@
                             @else
                             No Record Found
                             @endif
-                            {!! $renters->render() !!}
+                            {!! ($users['renters'])->render() !!}
                         </div>
 
                     </div>
