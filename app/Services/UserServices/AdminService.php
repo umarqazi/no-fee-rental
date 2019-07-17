@@ -16,10 +16,21 @@ class AdminService extends BaseUserService {
 		parent::__construct(new UserRepo);
 	}
 
+	/**
+	 * @param $paginate
+	 *
+	 * @return array
+	 */
 	public function get($paginate) {
 		return $this->collection($this->repo, $paginate);
 	}
 
+	/**
+	 * @param $user
+	 * @param $paginate
+	 *
+	 * @return array
+	 */
 	private function collection($user, $paginate) {
 		return [
 			'agents' => $user->agents()->paginate($paginate, ['*'], 'agents'),

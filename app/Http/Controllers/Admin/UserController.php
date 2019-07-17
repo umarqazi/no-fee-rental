@@ -85,7 +85,9 @@ class UserController extends Controller {
 	 * @return mixed
 	 */
 	public function search(Request $request) {
-		dd($this->service->search($request, $this->paginate)->where(['user_type' => 2])->get());
+		$roles = $this->service->roles();
+		$users = $this->service->search($request, $this->paginate);
+		return view('admin.index', compact('roles', 'users'));
 	}
 
 	/**

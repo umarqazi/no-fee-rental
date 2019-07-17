@@ -17,14 +17,14 @@
 										<p><i class="fa fa-map-marker-alt"></i> RealtyMX ID: mrgnyc_366577 · Auto Feed Mode</p>
 										<p>Posted: {{ date("m/d/y H:m A", strtotime($al->created_at)) }}</p>
 										<a href="{{ route('admin.listingStatus', $al->id) }}" title="Unpublish this property"><span class="status">Active</span></a>
-										@if($al->is_featured != 0)
-											<span class="status" style="margin-right: 60px;background: blueviolet;">{{($al->is_featured == 2) ? 'Requested for feature' : 'Featured' }}</span>
+										@if($al->is_featured != REJECTFEATURE)
+											<span class="status" style="margin-right: 60px;background: blueviolet;">{{($al->is_featured == REQUESTFEATURED) ? 'Requested for feature' : 'Featured' }}</span>
 										@endif
 										<div class="actions-btns">
 											<a href="{{ route('admin.editListing', $al->id) }}"><span><img src="{{asset('assets/images/edit-icon.png')}}" alt=""></span></a>
 											<span><img src="{{asset('assets/images/copy-icon.png')}}" alt=""></span>
 											<a href="{{ route('admin.listingRepost', $al->id) }}"><button type="button" class="border-btn">Repost</button></a>
-										@if($al->is_featured != 1)
+										@if($al->is_featured != APPROVEFEATURED)
 											<a href="{{ route('admin.approveFeature', $al->id )}}"><button type="button" class="border-btn">Make Featured</button></a>
 										@endif
 										</div>
@@ -55,12 +55,12 @@
 												<p><i class="fa fa-map-marker-alt"></i> RealtyMX ID: mrgnyc_366577 · Auto Feed Mode</p>
 												<p>Posted: {{ date("m/d/y H:m A", strtotime($al->created_at)) }}</p>
 												<a href="javascript:void(0);" onclick="inactive('{{ $al->id }}', this)" title="Unpublish this property"><span class="status">Active</span></a>
-												@if($al->is_featured != 0)
-													<span class="status" style="margin-right: 60px;background: blueviolet;">{{($al->is_featured == 2) ? 'Requested for feature' : 'Featured' }}</span>
+												@if($al->is_featured != REJECTFEATURE)
+													<span class="status" style="margin-right: 60px;background: blueviolet;">{{($al->is_featured == REQUESTFEATURED) ? 'Requested for feature' : 'Featured' }}</span>
 												@endif
 												<div class="actions-btns">
 													<a href="{{ route('admin.listingRepost', $al->id) }}"><button type="button" class="border-btn">Repost</button></a>
-												@if($al->is_featured != 1)
+												@if($al->is_featured != APPROVEFEATURED)
 													<a href="{{ route('admin.approveFeature', $al->id )}}"><button type="button" class="border-btn">Make Featured</button></a>
 												@endif
 												</div>

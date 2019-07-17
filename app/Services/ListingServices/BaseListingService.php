@@ -58,7 +58,7 @@ class BaseListingService {
 		$form->building_feature = $request->building_feature;
 		$form->pet_policy = $request->pet_policy;
 		$form->status = $request->status;
-		$form->old = ($request->hasFile('thumbnail')) ? $request->old_thumbnail : false;
+		$form->old = ($request->hasFile('thumbnail')) ? $request->old_thumbnail : true;
 		$form->thumbnail = ($request->hasFile('thumbnail')) ? $request->file('thumbnail') : $request->old_thumbnail;
 		$form->validate();
 		return $form;
@@ -162,10 +162,8 @@ class BaseListingService {
 	 */
 	private function updateList($id, $listing) {
 		DB::beginTransaction();
-		if ($listing->old == 'false') {
+		if ($listing->old != 'true') {
 			$listing->thumbnail = uploadImage($listing->thumbnail, 'data/' . myId() . '/listing/thumbnails', true, $listing->old);
-		} else {
-			$listing->thumbnail = uploadImage($listing->thumbnail, 'data/' . myId() . '/listing/thumbnails');
 		}
 
 		$data = [
