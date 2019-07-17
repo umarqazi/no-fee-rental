@@ -75,8 +75,8 @@ $(() => {
                greaterThan: 0
            },
            thumbnail: {
-               required: true,
-               validateExtension: true
+               required: ($('input[name="old_thumbnail"]').val()) ? false : true,
+               validateExtension: ($('input[name="old_thumbnail"]').val()) ? false : true,
            },
        },
 

@@ -43,10 +43,10 @@ class UserRepo extends BaseRepo {
 	public function search($keywords) {
 		return $this->model
 			->orWhere("first_name", "like", "%{$keywords}%")
-			->where('user_type', '!=', ADMIN)
 			->orWhere("last_name", "like", "%{$keywords}%")
 			->orWhere("email", "like", "%{$keywords}%")
-			->orWhere("phone_number", "like", "%{$keywords}%");
+			->orWhere("phone_number", "like", "%{$keywords}%")
+			->where('user_type', '!=', ADMIN);
 	}
 
 	/**
