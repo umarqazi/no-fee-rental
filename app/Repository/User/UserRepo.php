@@ -55,8 +55,8 @@ class UserRepo extends BaseRepo {
 	 * @return int
 	 */
 	public function active_deactive($id) {
-		$query = $this->edit($id);
-		$updateStatus = ($query->status) ? UNPUBLISH : PUBLISH;
+		$status = $this->find($id);
+		$updateStatus = ($status->status) ? DEACTIVE : ACTIVE;
 		$this->update($id, ['status' => $updateStatus]);
 		return $updateStatus;
 	}

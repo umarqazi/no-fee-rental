@@ -47,6 +47,13 @@ class FeatureListingService extends BaseListingService {
 	/**
 	 * @return mixed
 	 */
+	public function activeFeatured() {
+		return $this->repo->activeFeatured();
+	}
+
+	/**
+	 * @return mixed
+	 */
 	public function requestFeatured() {
 		return $this->repo->requestfeatured();
 	}

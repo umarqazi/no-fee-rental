@@ -32,10 +32,10 @@ class AdminService extends BaseUserService {
 	 * @return array
 	 */
 	private function collection($user, $paginate) {
-		return [
-			'agents' => $user->agents()->paginate($paginate, ['*'], 'agents'),
-			'renters' => $user->renters()->paginate($paginate, ['*'], 'renters'),
-		];
+		$agents = $user->agents()->paginate($paginate, ['*'], 'agents');
+		$renters = $user->renters()->paginate($paginate, ['*'], 'renters');
+
+		return compact('agents', 'renters');
 	}
 
 	/**

@@ -20,10 +20,18 @@ class ContactUsService {
 		$this->contact_repo = new ContactUsRepo();
 	}
 
+	/**
+	 * @param $data
+	 *
+	 * @return mixed
+	 */
 	public function saveRecord($data) {
 		return $this->contact_repo->save($data);
 	}
 
+	/**
+	 * @return mixed
+	 */
 	public function showMessages() {
 		return $this->contact_repo->allMessages();
 	}

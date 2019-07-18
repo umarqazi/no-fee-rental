@@ -65,6 +65,15 @@ class BaseRepo implements IRepo {
 	}
 
 	/**
+	 * @param $id
+	 *
+	 * @return mixed
+	 */
+	public function find($id) {
+		return $this->model->find($id);
+	}
+
+	/**
 	 * @param $clause
 	 *
 	 * @return mixed
