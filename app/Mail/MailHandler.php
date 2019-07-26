@@ -34,7 +34,7 @@ class MailHandler extends Mailable {
 
 		// Select Which View Render
 		switch ($this->data->view) {
-		case 'create-user':
+		case 'signup':
 			$view = 'mails.create_user';
 			break;
 

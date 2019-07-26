@@ -8,8 +8,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Services\UserServices\ClientService;
+use Illuminate\Http\Request;
 
 class UserController extends Controller {
 
@@ -39,8 +39,8 @@ class UserController extends Controller {
 		}
 
 		return $update_data
-			? success('Profile has been updated successfully')
-			: error('Something went wrong');
+		? success('Profile has been updated successfully')
+		: error('Something went wrong');
 	}
 
 	/**
@@ -59,11 +59,12 @@ class UserController extends Controller {
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function updatePassword(Request $request, $token) {
-		$user = $this->service->first(['email' => base64_decode($token)])->first();
-		$request->id = $user->id;
-		return $this->service->change_password($request)
-			? success('Password has been updated')
-			: error('Something went wrong');
+		if ($user = $this->service->validateEncodedToken($token)) {
+			$request->id = $user->id;
+			$this->service->change_password($request);
+			return success('Password has been updated');
+		}
+		return error('Invalid token request cannot be processed.');
 
 	}
 
@@ -71,9 +72,44 @@ class UserController extends Controller {
 	 * @param Agent $request
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function agentSignup(Request $request) {
-		return $this->service->agent_signup($request)
-			? success( 'Account has been created' )
-			: error( 'Something went wrong' );
+	public function invitedAgentSignup(Request $request) {
+		return $this->service->invitedAgentSignup($request)
+		? success('Account has been created')
+		: error('Something went wrong');
+	}
+
+	public function invitedAgentSignupForm($token) {
+
+		$authenticate_token = \App\AgentInvites::select(['id', 'token', 'email'])->whereToken($token)->first();
+
+		if (!empty($authenticate_token) && $authenticate_token->token == $token) {
+			return view('invited_agent_signup', compact('authenticate_token'));
+		}
+
+		return error('Invalid token request cannot be processed.');
+	}
+
+	/**
+	 * @param Request $request
+	 *
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
+	public function signup(Request $request) {
+		return $this->service->signup($request)
+		? success('Account has been created. Please check your inbox')
+		: error('Something went wrong');
+	}
+
+	/**
+	 * @param $token
+	 *
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
+	public function confirmEmail($token) {
+		if ($this->service->verifyEmail($token)) {
+			return success('Email has been verified.');
+		}
+
+		return error('Something went wrong');
 	}
 }

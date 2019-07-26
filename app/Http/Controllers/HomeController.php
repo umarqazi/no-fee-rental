@@ -31,7 +31,7 @@ class HomeController extends Controller {
 	 * @return \Illuminate\Contracts\Support\Renderable
 	 */
 	public function index() {
-		$featured_listings = $this->service->featured()->paginate($this->paginate);
+		$featured_listings = $this->service->activeFeatured()->paginate($this->paginate);
 		return view('index', compact('featured_listings'));
 	}
 

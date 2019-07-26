@@ -15,7 +15,7 @@ class ListingImages extends Model {
 	 * @return \Illuminate\Database\Eloquent\Relations\HasOne
 	 */
 	public function listing() {
-		return $this->hasOne('App\Listing', 'id', 'listing_id');
+		return $this->belongsTo(Listing::class, 'id', 'listing_id');
 	}
 
 	/**

@@ -18,7 +18,14 @@ if (!defined('AGENT')) {
  * Auth type OWNER
  */
 if (!defined('OWNER')) {
-	define('OWNER', 1);
+	define('OWNER', 3);
+}
+
+/**
+ * Auth type RENTER
+ */
+if (!defined('RENTER')) {
+	define('RENTER', 4);
 }
 
 /**
@@ -36,17 +43,10 @@ if (!defined('DEACTIVE')) {
 }
 
 /**
- * Auth type RENTER
+ * Reject Feature
  */
-if (!defined('RENTER')) {
-	define('RENTER', 1);
-}
-
-/**
- * Request Feature
- */
-if (!defined('REQUESTFEATURED')) {
-	define('REQUESTFEATURED', 2);
+if (!defined('REJECTFEATURE')) {
+	define('REJECTFEATURE', 0);
 }
 
 /**
@@ -57,10 +57,17 @@ if (!defined('APPROVEFEATURED')) {
 }
 
 /**
- * Reject Feature
+ * Request Feature
  */
-if (!defined('REJECTFEATURE')) {
-	define('REJECTFEATURE', 0);
+if (!defined('REQUESTFEATURED')) {
+	define('REQUESTFEATURED', 2);
+}
+
+/**
+ * Inactive listing
+ */
+if (!defined('INACTIVELISTING')) {
+	define('INACTIVELISTING', 0);
 }
 
 /**
@@ -68,13 +75,6 @@ if (!defined('REJECTFEATURE')) {
  */
 if (!defined('ACTIVELISTING')) {
 	define('ACTIVELISTING', 1);
-}
-
-/**
- * Active listing
- */
-if (!defined('INACTIVELISTING')) {
-	define('INACTIVELISTING', 0);
 }
 
 /**

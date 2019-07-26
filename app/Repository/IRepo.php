@@ -45,4 +45,11 @@ interface IRepo {
 	 * @return mixed
 	 */
 	public function insert($data);
+
+	/**
+	 * @param $id
+	 *
+	 * @return mixed
+	 */
+	public function find($id);
 }

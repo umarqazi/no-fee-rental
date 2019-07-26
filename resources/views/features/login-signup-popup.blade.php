@@ -93,7 +93,7 @@
                 <div class="login-heading">
                     Signup
                 </div>
-                <form method="POST" action="{{ route('register') }}" id="signup_form">
+                <form method="POST" action="{{ route('user.signup') }}" id="signup_form">
                     @csrf
                     <div class="row">
                         <div class="col-sm-12 mb-3">
@@ -138,6 +138,16 @@
                                     </span>
                                 @endif
                                 <p class="finding-home-text">If you would like to syndicate listing into no fee rentals nyc, please use tha same email address that you use for your RealtyMX, Nestio or OLR account.</p>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                {!! Form::text('phone_number', null, ['class'=>'input-style', 'placeholder'=>'Phone Number']) !!}
+                                @if ($errors->has('phone_number'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('phone_number') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
                         <div class="col-sm-12">
