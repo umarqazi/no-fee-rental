@@ -4,6 +4,8 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800|Raleway:300,400,500,600,700,800,900" rel="stylesheet">
+
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/place/autocomplete/json?input=1600+Amphitheatre&key=AIzaSyBxkm_FQRxju_pClcyJAtxso96q5KoGqQk"></script>
     {!! HTML::style('assets/css/bootstrap.min.css') !!}
     {!! HTML::style('assets/css/jquery-ui.css') !!}
     {!! HTML::style('assets/css/toastr.css') !!}
@@ -19,6 +21,10 @@
     {!! HTML::script('assets/js/validate.js') !!}
 </head>
     <body>
+        <div class="loader">
+            <div class="loader-wrap"> </div>
+            <div class="main-loader"></div>
+        </div>
         @include('layouts.header')
         @include('layouts.scripts')
         @yield('content')

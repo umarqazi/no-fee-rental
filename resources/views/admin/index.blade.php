@@ -20,16 +20,6 @@
                         <a class="nav-link" data-toggle="pill" href="#tab-3">Company</a>
                     </li>
                 </ul>
-                <div class="filter-wrapper">
-                    <div class="search-user">
-                        {!! Form::open(['url' => route('admin.searchUser'), 'method' => 'post']) !!}
-                        <button type="submit" style="background: none; border:none; outline: none; cursor:pointer;">
-                        <i class="fa fa-search"></i>
-                        </button>
-                        {!! Form::text('keywords', Request::get('keywords'), ['class' => 'search-fld', 'placeholder' => 'Search']) !!}
-                        {!! Form::close() !!}
-                    </div>
-                </div>
             </div>
             <div class="block-body">
                 <!-- Tab panes -->
@@ -37,183 +27,52 @@
                     <div class="tab-pane active" id="tab-1">
 
                         <div class="table-responsive">
-                            @if(count($users['agents']) > 0)
-                            <table class="table table-hover">
+                            <table id="agents_table" style="width: 100%;" class="datatable dataTable table table-hover display">
                                 <thead>
                                 <tr>
                                     <th>Agent Id</th>
-                                    <th>User Name</th>
+                                    <th>Agent Name</th>
                                     <th>Email</th>
                                     <th>Phone Number</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
-                                <tbody>
-                                    @foreach($users['agents'] as $key => $agent)
-                                        <tr>
-                                            <td>{{$key + 1}}</td>
-                                            <td>{{$agent->first_name." ".$agent->last_name}}</td>
-                                            <td>{{$agent->email}}</td>
-                                            <td>{{$agent->phone_number ?? '---'}}</td>
-                                            <td>
-                                                <a href="{{route('admin.statusUser', $agent->id)}}">
-                                                    <i class="fa fa-eye{{($agent->status) ? '-slash' : ''}} action-btn" data-toggle="modal" data-target="#agent-modal"></i>
-                                                </a>
-                                                <a href="javascript:void(0);" onclick="updateUser('{{$agent->id}}');">
-                                                    <i class="fa fa-edit px-2 action-btn"></i>
-                                                </a>
-                                                <a href="javascript:void(0);" onclick="deleteUser('{{ route('admin.deleteUser', $agent->id) }}')">
-                                                    <i class="fa fa-trash action-btn"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
+                                <tbody></tbody>
                             </table>
-                            @else
-                            No Record Found
-                            @endif
-                            {!! ($users['agents'])->render() !!}
                         </div>
 
                     </div>
                     <div class="tab-pane fade" id="tab-2">
 
                         <div class="table-responsive">
-                            @if(count($users['renters']) > 0)
-                            <table class="table table-hover">
+                            <table class="datatable dataTable table table-hover display" style="width: 100%;" id="renters_table">
                                 <thead>
                                 <tr>
                                     <th>Renter Id</th>
                                     <th>Renter Name</th>
-                                    <th>Property</th>
+                                    <th>Email</th>
+                                    <th>Phone Number</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
-                                <tbody>
-                                    @foreach($users['renters'] as $key => $renter)
-                                        <tr>
-                                            <td>{{$key + 1}}</td>
-
-                                            <td>{{$renter->first_name." ".$renter->last_name}}</td>
-                                            <td>4693 White Oak Drive Kansas City, MO</td>
-                                            <td>
-                                                <a href="{{ route('admin.statusUser', $renter->id) }}">
-                                                    <i class="fa fa-eye{{($renter->status) ? '-slash' : ''}} action-btn" data-toggle="modal" data-target="#renter-modal"></i>
-                                                </a>
-                                                <a href="javascript:void(0);" onclick="updateUser('{{$renter->id}}');">
-                                                    <i class="fa fa-edit px-2 action-btn"></i>
-                                                </a>
-                                                <a href="javascript:void(0);" onclick="deleteUser('{{ route('admin.deleteUser', $renter->id) }}')">
-                                                    <i class="fa fa-trash action-btn"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
+                                <tbody></tbody>
                             </table>
-                            @else
-                            No Record Found
-                            @endif
-                            {!! ($users['renters'])->render() !!}
                         </div>
 
                     </div>
                     <div class="tab-pane fade" id="tab-3">
-
+                        <a href="#" style="float: right;margin: 10px;" class="btn-default ml-3" data-toggle="modal" id="create-company" data-target="#add-company"><i class="fa fa-plus"></i> Add Company</a>
                         <div class="table-responsive">
-                            <table class="table table-hover">
+                            <table class="datatable dataTable table table-hover display" style="width: 100%;" id="companies_table">
                                 <thead>
                                 <tr>
-                                    <th>User Id</th>
-                                    <th>Customer Name</th>
-                                    <th>Property</th>
-                                    <th>Date</th>
-                                    <th>Type</th>
-                                    <th>Reply rate</th>
+                                    <th>Company Id</th>
+                                    <th>Name</th>
+                                    <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
-                                <tbody>
-                                <tr>
-                                    <td>#243654</td>
-                                    <td>Quiche Hollandaise</td>
-                                    <td>4693 White Oak Drive Kansas City, MO</td>
-                                    <td>20 Jan 2019</td>
-                                    <td>Agent</td>
-                                    <td>90% / 2 hrs</td>
-                                    <td>
-                                        <i class="fa fa-eye action-btn" data-toggle="modal" data-target="#user-modal"></i>
-                                        <i class="fa fa-edit px-2 action-btn"></i>
-                                        <i class="fa fa-trash action-btn"></i>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>#243654</td>
-                                    <td>Quiche Hollandaise</td>
-                                    <td>4693 White Oak Drive Kansas City, MO</td>
-                                    <td>20 Jan 2019</td>
-                                    <td>Agent</td>
-                                    <td>90% / 2 hrs</td>
-                                    <td>
-                                        <i class="fa fa-eye action-btn" data-toggle="modal" data-target="#user-modal"></i>
-                                        <i class="fa fa-edit px-2 action-btn"></i>
-                                        <i class="fa fa-trash action-btn"></i>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>#243654</td>
-                                    <td>Quiche Hollandaise</td>
-                                    <td>4693 White Oak Drive Kansas City, MO</td>
-                                    <td>20 Jan 2019</td>
-                                    <td>Agent</td>
-                                    <td>90% / 2 hrs</td>
-                                    <td>
-                                        <i class="fa fa-eye action-btn" data-toggle="modal" data-target="#user-modal"></i>
-                                        <i class="fa fa-edit px-2 action-btn"></i>
-                                        <i class="fa fa-trash action-btn"></i>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>#243654</td>
-                                    <td>Quiche Hollandaise</td>
-                                    <td>4693 White Oak Drive Kansas City, MO</td>
-                                    <td>20 Jan 2019</td>
-                                    <td>Agent</td>
-                                    <td>90% / 2 hrs</td>
-                                    <td>
-                                        <i class="fa fa-eye action-btn" data-toggle="modal" data-target="#user-modal"></i>
-                                        <i class="fa fa-edit px-2 action-btn"></i>
-                                        <i class="fa fa-trash action-btn"></i>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>#243654</td>
-                                    <td>Quiche Hollandaise</td>
-                                    <td>4693 White Oak Drive Kansas City, MO</td>
-                                    <td>20 Jan 2019</td>
-                                    <td>Agent</td>
-                                    <td>90% / 2 hrs</td>
-                                    <td>
-                                        <i class="fa fa-eye action-btn" data-toggle="modal" data-target="#user-modal"></i>
-                                        <i class="fa fa-edit px-2 action-btn"></i>
-                                        <i class="fa fa-trash action-btn"></i>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>#243654</td>
-                                    <td>Quiche Hollandaise</td>
-                                    <td>4693 White Oak Drive Kansas City, MO</td>
-                                    <td>20 Jan 2019</td>
-                                    <td>Agent</td>
-                                    <td>90% / 2 hrs</td>
-                                    <td>
-                                        <i class="fa fa-eye action-btn" data-toggle="modal" data-target="#user-modal"></i>
-                                        <i class="fa fa-edit px-2 action-btn"></i>
-                                        <i class="fa fa-trash action-btn"></i>
-                                    </td>
-                                </tr>
-                                </tbody>
+                                <tbody></tbody>
                             </table>
                         </div>
 
@@ -224,12 +83,15 @@
     </div>
 </div>
 
+ <!-- Add User Modal -->
 @include('admin.models.add-user')
 
-<!-- Invite User modal -->
+<!-- Invite User Modal -->
 @include('admin.models.invite-agent')
 
-<!-- Invite User modal -->
+<!-- Add Company Modal -->
+@include('admin.models.add-company')
+
 <div class="modal fade user-modal-wrapper" id="user-modal">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">

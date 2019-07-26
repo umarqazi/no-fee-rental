@@ -54,10 +54,19 @@ class UserRepo extends BaseRepo {
 	 *
 	 * @return int
 	 */
-	public function active_deactive($id) {
-		$status = $this->find($id);
+	public function activeDeactive($id) {
+		$status = $this->find(['id' => $id])->first();
 		$updateStatus = ($status->status) ? DEACTIVE : ACTIVE;
 		$this->update($id, ['status' => $updateStatus]);
 		return $updateStatus;
+	}
+
+	/**
+	 * @param $email
+	 *
+	 * @return bool
+	 */
+	public function isUniqueEmail($email) {
+		return $this->find(['email' => $email])->first() ? true : false;
 	}
 }

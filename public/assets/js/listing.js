@@ -8,14 +8,6 @@ $(() => {
     	$('#img').attr('style', 'width: 180px;height: 145px;margin-bottom: 15px;');
     });
 
-    $('body').on('click', '#add-user', function() {
-        $('#add_user').attr('action', '/admin/create-user');
-        $('.modal-title').text('Add User');
-        $('.modal-footer input').val('Add User');
-        $('#user_type').val('');
-        $('input[type=text], input[type=email]').val('');
-    });
-
 
 
     if(localStorage.getItem('tab')) {

@@ -29,7 +29,7 @@
                 <div class="login-heading">
                     Login
                 </div>
-                <form method="POST" action="{{ route('login') }}">
+                <form method="POST" action="{{ route('login') }}" class="ajax">
                     @csrf
 
                     <div class="row">

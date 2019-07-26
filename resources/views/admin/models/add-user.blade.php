@@ -9,7 +9,7 @@
             </div>
 
             <!-- Modal body -->
-            {!! Form::open(['method' => 'post', 'url' => route('admin.createUser'), 'id' => 'add_user', 'enctype' => 'multipart/form-data']) !!}
+            {!! Form::open(['method' => 'post', 'url' => route('admin.createUser'), 'id' => 'add_user', 'class' => 'ajax', 'enctype' => 'multipart/form-data', 'reset' => 'true']) !!}
             <div class="modal-body">
 
                 <div class="row">

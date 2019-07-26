@@ -191,54 +191,7 @@ $(() => {
 	});
 });
 
-/**
- *
- * @param id
- * @returns {Promise<void>}
- */
-async function updateUser(id) {
-	let res = await ajaxRequest(`/admin/edit-user/${id}`, 'post');
-	$('#add_user').attr('action', `/admin/update-user/${id}`);
-	$('.modal-title').text('Update User');
-	$('.modal-footer input').val('Update');
-	$('#first_name').val(res.data.first_name);
-	$('#last_name').val(res.data.last_name);
-	$('#email').val(res.data.email);
-	$('#phone_number').val(res.data.phone_number);
-	$('#user_type').val(res.data.user_type);
-	$('#add-member').modal('show');
-}
 
-/**
- *
- * @param route
- * @returns {Promise<void>}
- */
-async function deleteUser(route) {
-	if(await confirm('Are You Sure?')) {
-		window.location.href = route;
-	}
-}
-
-/**
- *
- * @param msg
- * @returns {*}
- */
-function confirm(msg) {
-	return swal({
-		title: "Are you sure?",
-		text: msg,
-		icon: "warning",
-		buttons: [
-			'No, cancel it!',
-			'Yes, I am sure!'
-		],
-		dangerMode: true,
-	}).then(function(isConfirm) {
-		return (isConfirm) ? true : false
-	});
-}
 
 /**
  *
@@ -247,21 +200,21 @@ function confirm(msg) {
  * @param loader
  * @returns {*|jQuery|{getAllResponseHeaders, abort, setRequestHeader, readyState, getResponseHeader, overrideMimeType, statusCode}}
  */
-function ajaxRequest(url, type, loader = false, data = null) {
-	return $.ajax({
-		url: url,
-		type: type,
-		data: data,
-		headers: {
-			'X-CSRF-TOKEN': $('meta[name=csrf-token]').attr('content'),
-		},
-		success: function(res) {
-			return res;
-		},
+// function ajaxRequest(url, type, loader = false, data = null) {
+// 	return $.ajax({
+// 		url: url,
+// 		type: type,
+// 		data: data,
+// 		headers: {
+// 			'X-CSRF-TOKEN': $('meta[name=csrf-token]').attr('content'),
+// 		},
+// 		success: function(res) {
+// 			return res;
+// 		},
 
-		error: function(err) {
-			console.log(err);
-			toastr.error(err);
-		}
-	})
-}
+// 		error: function(err) {
+// 			console.log(err);
+// 			toastr.error(err);
+// 		}
+// 	})
+// }

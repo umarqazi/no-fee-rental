@@ -22,4 +22,13 @@ class AgentRepo extends BaseRepo {
 	public function invite($data) {
 		return $this->create($data);
 	}
+
+	/**
+	 * @param $email
+	 *
+	 * @return bool
+	 */
+	public function isUniqueEmail($email) {
+		return $this->find(['email' => $email])->first() ? true : false;
+	}
 }

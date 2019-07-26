@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: adi
- * Date: 6/15/19
- * Time: 4:11 PM
- */
 
 namespace App\Forms\User;
 
@@ -43,7 +37,7 @@ class ChangePasswordForm extends BaseForm {
 	 */
 	public function rules() {
 		return [
-			'password' => 'required|string|min:9|confirmed',
+			'password' => 'required|string|min:8|confirmed',
 		];
 	}
 }

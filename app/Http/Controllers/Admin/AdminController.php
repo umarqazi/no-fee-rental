@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Services\UserServices\AdminService;
+use Illuminate\Http\Request;
 
 class AdminController extends Controller {
 
@@ -36,14 +36,14 @@ class AdminController extends Controller {
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function updateProfile(Request $request) {
-		$update_data = $this->service->update_profile($request);
+		$update_data = $this->service->updateProfile($request);
 		if ($request->hasFile('profile_image')) {
-			$update_data = $this->service->update_profile_image($request->file('profile_image'), myId(), $request->old_profile ?? '');
+			$update_data = $this->service->updateProfileImage($request->file('profile_image'), myId(), $request->old_profile ?? '');
 		}
 
 		return ($update_data)
-			? success('Profile has been updated')
-			: error('Something went wrong');
+		? success('Profile has been updated')
+		: error('Something went wrong');
 	}
 
 	/**
@@ -59,9 +59,9 @@ class AdminController extends Controller {
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function updatePassword(Request $request) {
-		return $this->service->change_password($request)
-			? success('Password has been updated successfully.', route('admin.showProfile'))
-			: error('Something went wrong');
+		return $this->service->changePassword($request)
+		? success('Password has been updated successfully.', route('admin.showProfile'))
+		: error('Something went wrong');
 
 	}
 }
