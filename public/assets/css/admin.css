@@ -1316,3 +1316,7 @@ header .agent-avtar .avtar:hover div ul {
 .error {
   color: red;
 }
+
+.swal-footer {
+  text-align: center !important;
+}

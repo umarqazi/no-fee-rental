@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Carbon\Carbon;
+
 /**
  * @param $image
  * @param $path
@@ -77,7 +79,15 @@ function mySelf() {
  * @return mixed
  */
 function dateReadable($date) {
-	return $date->diffForHumans();
+	if ($date == null) {
+		return;
+	}
+
+	if ($date instanceof Carbon) {
+		return $date->diffForHumans();
+	}
+
+	return \Carbon\Carbon::createFromTimestamp(strtotime($date))->diffForHumans();
 }
 
 /**
@@ -95,8 +105,21 @@ function mailService($to, $data) {
  *
  * @return \Illuminate\Http\RedirectResponse
  */
-function error($msg) {
-	return redirect()->back()->with(['message' => $msg, 'alert_type' => 'error']);
+function error($msg, $path = null) {
+	return ($path == null)
+	? redirect()->back()->with(['message' => $msg, 'alert_type' => 'error'])
+	: redirect($path)->with(['message' => $msg, 'alert_type' => 'error']);
+}
+
+/**
+ * @param $msg
+ * @param null $data
+ * @param int $code
+ *
+ * @return \Illuminate\Http\JsonResponse
+ */
+function json($msg, $data = null, $status = true, $code = 200) {
+	return response()->json(['msg' => $msg, 'data' => $data, 'status' => $status], $code);
 }
 
 /**
@@ -106,9 +129,9 @@ function error($msg) {
  * @return \Illuminate\Http\RedirectResponse
  */
 function success($msg, $path = null) {
-	return ($path != null)
-	? redirect($path)->with(['message' => $msg, 'alert_type' => 'success'])
-	: redirect()->back()->with(['message' => $msg, 'alert_type' => 'success']);
+	return ($path == null)
+	? redirect()->back()->with(['message' => $msg, 'alert_type' => 'success'])
+	: redirect($path)->with(['message' => $msg, 'alert_type' => 'success']);
 }
 
 /**
@@ -118,17 +141,7 @@ function success($msg, $path = null) {
  * @return string
  */
 function toast($message, $type) {
-	$select = null;
-	switch ($type) {
-	case 'success':
-		$select = "success";
-		break;
-
-	case 'error':
-		$select = "error";
-		break;
-	}
-	return "<script>toastr.{$select}('{$message}');</script>";
+	return "<script>toastr.{$type}('{$message}');</script>";
 }
 
 /**

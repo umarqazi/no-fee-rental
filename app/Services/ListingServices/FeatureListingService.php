@@ -65,7 +65,7 @@ class FeatureListingService extends BaseListingService {
 	 */
 	public function mark($id) {
 		if ($this->repo->update($id, ['is_featured' => APPROVEFEATURED])) {
-			$list = $this->repo->first(['id' => $id])->withagent()->first();
+			$list = $this->repo->find(['id' => $id])->withagent()->first();
 			$data = [
 				'subject' => 'Featured Request Approved',
 				'view' => 'request-featured-approved',
@@ -104,6 +104,6 @@ class FeatureListingService extends BaseListingService {
 	 * @return mixed
 	 */
 	public function detail($id) {
-		return $this->repo->first(['id' => $id])->withall();
+		return $this->repo->find(['id' => $id])->withall();
 	}
 }

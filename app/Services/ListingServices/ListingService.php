@@ -21,7 +21,7 @@ class ListingService extends BaseListingService {
 	 */
 	public function approve($id) {
 		if ($this->repo->update($id, ['status' => 1])) {
-			$list = $this->repo->first(['id' => $id])->withagent()->first();
+			$list = $this->repo->find(['id' => $id])->withagent()->first();
 			$data = [
 				'name' => $list->agent->first_name,
 				'approved_by' => mySelf()->first_name,

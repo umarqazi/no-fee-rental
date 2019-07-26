@@ -1,23 +1,44 @@
 <?php
 
-namespace App\Forms\Agent;
+namespace App\Forms\User;
 
 use App\Forms\BaseForm;
 
-class CreateAgentForm extends BaseForm {
+class ClientSignupForm extends BaseForm {
 
+	/**
+	 * @var string
+	 */
 	public $first_name;
 
+	/**
+	 * @var string
+	 */
 	public $last_name;
 
+	/**
+	 * @var string
+	 */
 	public $email;
 
+	/**
+	 * @var string
+	 */
 	public $phone_number;
 
+	/**
+	 * @var integer
+	 */
 	public $user_type;
 
+	/**
+	 * @var string
+	 */
 	public $password;
 
+	/**
+	 * @var string
+	 */
 	public $password_confirmation;
 
 	/**
@@ -45,7 +66,7 @@ class CreateAgentForm extends BaseForm {
 			'first_name' => 'required|string',
 			'last_name' => 'required|string',
 			'email' => 'required|email|unique:users',
-			'phone_number' => 'required',
+			'phone_number' => 'required|max:16',
 			'password' => 'required|string|confirmed|min:8',
 			'user_type' => 'required|integer',
 		];

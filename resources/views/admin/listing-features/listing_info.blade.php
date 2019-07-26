@@ -2,7 +2,7 @@
 				<div class="col-md-6">
 					<div class="form-group">
 						<label>Street Address</label>
-						{!! Form::text('street_address', null, ['class' => 'input-style']) !!}
+						{!! Form::text('street_address', null, ['id' => 'controls', 'class' => 'controls input-style']) !!}
 						<span class="mt-2 d-block">* The street address is not shown, and is used for your reference</span>
 						<span class="invalid-feedback" role="alert">
 							{!! $errors->first('street_address') !!}

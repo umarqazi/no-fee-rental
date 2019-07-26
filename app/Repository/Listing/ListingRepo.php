@@ -41,7 +41,7 @@ class ListingRepo extends BaseRepo {
 	 * @return int
 	 */
 	public function status($id) {
-		$query = $this->first(['id' => $id]);
+		$query = $this->find(['id' => $id]);
 		$status = $query->select('status')->first();
 		$updateStatus = ($status->status) ? 0 : 1;
 		$query->update(['status' => $updateStatus]);

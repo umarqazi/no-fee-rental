@@ -38,6 +38,10 @@ class MailHandler extends Mailable {
 			$view = 'mails.create_user';
 			break;
 
+		case 'create-user':
+			$view = 'mails.create_user';
+			break;
+
 		case 'agent-invitation':
 			$view = 'mails.agent_invitation';
 			break;

@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: adi
+ * Author: Yousuf
  * Date: 6/14/19
  * Time: 3:57 PM
  */
@@ -95,7 +95,7 @@ class UserController extends Controller {
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function signup(Request $request) {
-		return $this->service->signup($request)
+		return $this->service->agentSignup($request)
 		? success('Account has been created. Please check your inbox')
 		: error('Something went wrong');
 	}

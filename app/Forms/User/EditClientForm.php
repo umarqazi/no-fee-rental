@@ -4,7 +4,7 @@ namespace App\Forms\User;
 
 use App\Forms\BaseForm;
 
-class EditForm extends BaseForm {
+class EditClientForm extends BaseForm {
 
 	/**
 	 * @var integer
@@ -29,23 +29,23 @@ class EditForm extends BaseForm {
 	/**
 	 * @var string
 	 */
-	public $email;
+	public $profile;
 
 	/**
-	 * @var integer
+	 * @var string
 	 */
-	public $user_type;
+	public $email;
 
 	/**
 	 * @return array
 	 */
 	function toArray() {
 		return [
+			'id' => $this->id,
 			'first_name' => $this->first_name,
 			'last_name' => $this->last_name,
 			'email' => $this->email,
 			'phone_number' => $this->phone_number,
-			'user_type' => $this->user_type
 		];
 	}
 
@@ -54,11 +54,14 @@ class EditForm extends BaseForm {
 	 */
 	function rules() {
 		return [
-			'first_name' => 'required',
-			'last_name' => 'required',
+			'first_name' => 'required|string',
+			'last_name' => 'required|string',
 			'email' => 'required|email',
-			'phone_number' => 'required',
-			'user_type' => 'required'
+			'phone_number' => 'required|max:16',
 		];
+	}
+
+	function getClientJS() {
+
 	}
 }

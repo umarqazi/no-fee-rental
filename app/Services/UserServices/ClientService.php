@@ -8,7 +8,7 @@
 
 namespace App\Services\UserServices;
 
-use App\Forms\Agent\CreateAgentForm;
+use App\Forms\Agent\CreateForm;
 use App\Repository\User\UserRepo;
 use DB;
 
@@ -27,7 +27,7 @@ class ClientService extends BaseUserService {
 	 * @return mixed
 	 */
 	public function invitedAgentSignup($request) {
-		return $this->signup($request, false);
+		return $this->agentSignup($request, false);
 	}
 
 	/**
@@ -36,8 +36,8 @@ class ClientService extends BaseUserService {
 	 *
 	 * @return bool
 	 */
-	public function signup($request, $sendMail = true) {
-		$form = new CreateAgentForm();
+	public function agentSignup($request, $sendMail = true) {
+		$form = new CreateForm();
 		$form->first_name = $request->first_name;
 		$form->last_name = $request->last_name;
 		$form->email = $request->email;
@@ -64,7 +64,7 @@ class ClientService extends BaseUserService {
 			DB::commit();
 			return true;
 		}
-
+		DB::rollback();
 		return false;
 	}
 

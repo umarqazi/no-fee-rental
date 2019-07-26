@@ -19,6 +19,13 @@ class BaseRepo implements IRepo {
 	}
 
 	/**
+	 * @return mixed
+	 */
+	public function all() {
+		return $this->model->get();
+	}
+
+	/**
 	 * @param $data
 	 *
 	 * @return mixed
@@ -65,20 +72,11 @@ class BaseRepo implements IRepo {
 	}
 
 	/**
-	 * @param $id
-	 *
-	 * @return mixed
-	 */
-	public function find($id) {
-		return $this->model->find($id);
-	}
-
-	/**
 	 * @param $clause
 	 *
 	 * @return mixed
 	 */
-	public function first($clause) {
+	public function find($clause) {
 		return $this->model->where($clause);
 	}
 
