@@ -168,6 +168,7 @@ $(() => {
             user_type: "required",
             first_name: "required",
             last_name: "required",
+            phone_number: "required",
             email: {
                 required: true,
                 email: true,
@@ -196,6 +197,9 @@ $(() => {
                 required: "Email is required.",
                 email: "Please enter valid email"
             },
+            phone_number: {
+              required: "Phone number is requried."
+            },
             password: {
                 required: "Password is required.",
                 greaterThan: "Password should be greater than 8 characters."
@@ -207,20 +211,90 @@ $(() => {
         }
     });
 
-    // NewsLetter Form Validations
-    // $("#newsletter-form").validate({
-    //     rules: {
-    //         email: {
-    //             required: true,
-    //             email: true
-    //         }
-    //     },
-    //
-    //     messages: {
-    //         email: {
-    //             required: "Email is required.",
-    //             email: "Please enter valid email."
-    //         }
+    $('#add_user').validate({
+      rules: {
+        user_type: "required",
+        first_name: "required",
+        last_name: "required",
+        phone_number: "required",
+        email: {
+          required: true,
+          email: true,
+        },
+      },
+      messages: {
+        user_type: {
+                required: "Select user type."
+            },
+            first_name: {
+                required: "First name is required."
+            },
+            last_name: {
+                required: "Last name is required."
+            },
+            email: {
+                required: "Email is required.",
+                email: "Please enter valid email"
+            },
+            phone_number: {
+              required: "Phone number is requried."
+            },
+      }
+    });
+
+    $('#agent_invite').validate({
+      rules: {
+        email: {
+          required: true,
+          email: true
+        }
+      },
+
+      messages: {
+        email: {
+          required: "Email is required.",
+          email: "Enter a valid Email.",
+        }
+      }
+    });
+
+    // $('input[name=email]:last').on('keydown', function(e) {
+    //   $('label.error').remove().find('.error').removeClass('error');
+    //   $('input[type=submit]:last').attr('disabled', false);
+    // });
+
+    // $('input[name=email]:last').on('blur', async function(e) {
+    //   e.preventDefault();
+    //   $('input[type=email]').trigger('keydown');
+    //   let res = await ajax(`/admin/unique-email`, 'post', e.target.value);
+    //     if(!res) {
+    //       $('input[type=email]:last').after('<label class="error">Email already taken.</label>');
+    //       $('input[type=submit]:last').attr('disabled', true);
+    //       return;
     //     }
     // });
+
+    // $('#agent_invite').on('submit', async function(e) {
+    //   e.preventDefault();
+    //   $('input[type=email]').trigger('keydown');
+    //   let res = await ajax(`/admin/unique-email`, 'post', $('input[type=email]:last').val());
+    //     if(!res) {
+    //       $('input[type=email]:last').after('<label class="error">Email already taken.</label>');
+    //       $('input[type=submit]:last').attr('disabled', true);
+    //       return;
+    //     }
+    // });
+
+    function ajax(url, type, data){
+      return $.ajax({
+          url: url,
+          headers: {
+           'X-CSRF-TOKEN': $('meta[name=csrf-token]').attr('content')
+          },
+          data: {
+            email: data
+          },
+          type: type,
+        });     
+    }
 });

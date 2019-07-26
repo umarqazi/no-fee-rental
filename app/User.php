@@ -2,11 +2,12 @@
 
 namespace App;
 
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable {
+class User extends Authenticatable implements MustVerifyEmail {
 	use Notifiable, HasRoles;
 
 	/**
@@ -39,8 +40,15 @@ class User extends Authenticatable {
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
 	 */
+	public function listing() {
+		return $this->hasMany(Listing::class);
+	}
+
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
 	public function agentInvites() {
-		return $this->hasMany('App\AgentInvites', 'invited_by', 'id');
+		return $this->hasMany(AgentInvites::class, 'invited_by', 'id');
 	}
 
 	/**
@@ -49,7 +57,7 @@ class User extends Authenticatable {
 	 * @return mixed
 	 */
 	public function scopeAdmins($query) {
-		return $query->whereuser_type(1);
+		return $query->whereuser_type(ADMIN);
 	}
 
 	/**
@@ -58,7 +66,7 @@ class User extends Authenticatable {
 	 * @return mixed
 	 */
 	public function scopeAgents($query) {
-		return $query->whereuser_type(2);
+		return $query->whereuser_type(AGENT);
 	}
 
 	/**
@@ -67,6 +75,6 @@ class User extends Authenticatable {
 	 * @return mixed
 	 */
 	public function scopeRenters($query) {
-		return $query->whereuser_type(4);
+		return $query->whereuser_type(RENTER);
 	}
 }

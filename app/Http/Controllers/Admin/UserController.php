@@ -29,9 +29,19 @@ class UserController extends Controller {
 	 * @return \Illuminate\Http\RedirectResponsefeature->featured(
 	 */
 	public function create(Request $request) {
-		return $this->service->create($request)
-		? success('User has been added')
-		: error('Something went wrong');
+		$user = $this->service->create($request);
+
+		if ($request->ajax()) {
+			$res = ($user)
+			? json('User has been added.', $user, true, 200)
+			: json('Something went wrong.', null, false, 500);
+		} else {
+			$res = ($user)
+			? success('User has been added.')
+			: error('Something went wrong');
+		}
+
+		return $res;
 	}
 
 	/**
@@ -39,11 +49,20 @@ class UserController extends Controller {
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function status($id) {
+	public function status(Request $request, $id) {
 		$status = $this->service->status($id);
-		return isset($status)
-		? success(($status) ? 'User has been active' : 'User has been deactive')
-		: error('Something went wrong');
+
+		if ($request->ajax()) {
+			$res = isset($status)
+			? json(($status) ? 'User has been active' : 'User has been deactive', $status, true, 200)
+			: json('Something went wrong.', null, false, 500);
+		} else {
+			$res = isset($status)
+			? success(($status) ? 'User has been active' : 'User has been deactive')
+			: error('Something went wrong');
+		}
+
+		return $res;
 	}
 
 	/**
@@ -51,10 +70,20 @@ class UserController extends Controller {
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function delete($id) {
-		return $this->service->delete($id)
-		? success('User has been deleted')
-		: error('Something went wrong');
+	public function delete(Request $request, $id) {
+		$user = $this->service->delete($id);
+
+		if ($request->ajax()) {
+			$res = ($user)
+			? json('User has been deleted.', $user, true, 200)
+			: json('Something went wrong.', null, false, 500);
+		} else {
+			$res = ($user)
+			? success('User has been deleted.')
+			: error('Something went wrong');
+		}
+
+		return $res;
 	}
 
 	/**
@@ -64,9 +93,19 @@ class UserController extends Controller {
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function update(Request $request, $id) {
-		return $this->service->update($id, $request)
-		? success('User has been updated')
-		: error('Something went wrong');
+		$user = $this->service->update($id, $request);
+
+		if ($request->ajax()) {
+			$res = ($user)
+			? json('User has been updated.', $user, true, 200)
+			: json('Something went wrong.', null, false, 500);
+		} else {
+			$res = ($user)
+			? success('User has been updated.')
+			: error('Something went wrong');
+		}
+
+		return $res;
 	}
 
 	/**
@@ -96,8 +135,29 @@ class UserController extends Controller {
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function invite(Request $request) {
-		return $this->service->send_invite($request)
-		? success('Invitation has been sent')
-		: error('Something went wrong');
+		$invite = $this->service->sendInvite($request);
+
+		if ($request->ajax()) {
+			$res = ($invite)
+			? json('Invitation has been sent.', $invite, true, 200)
+			: json('Something went wrong.', null, false, 500);
+		} else {
+			$res = ($invite)
+			? success('Invitation has been sent.')
+			: error('Something went wrong');
+		}
+
+		return $res;
+	}
+
+	/**
+	 * @param Request $request
+	 *
+	 * @return JSON Boolean
+	 */
+	public function unique(Request $request) {
+		return $this->service->isUniqueEmail($request)
+		? response()->json(true)
+		: response()->json(false);
 	}
 }

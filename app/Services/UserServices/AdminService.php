@@ -2,7 +2,9 @@
 
 namespace App\Services\UserServices;
 
-use App\Forms\Agent\AgentInvitationForm;
+use App\Forms\User\AgentInvitationForm;
+use App\Forms\User\UserForm;
+use App\Repository\CompanyRepo;
 use App\Repository\User\AgentRepo;
 use App\Repository\User\UserRepo;
 use Illuminate\Http\Request;
@@ -32,10 +34,10 @@ class AdminService extends BaseUserService {
 	 * @return array
 	 */
 	private function collection($user, $paginate) {
-		return [
-			'agents' => $user->agents()->paginate($paginate, ['*'], 'agents'),
-			'renters' => $user->renters()->paginate($paginate, ['*'], 'renters'),
-		];
+		$agents = $user->agents()->paginate($paginate, ['*'], 'agents');
+		$renters = $user->renters()->paginate($paginate, ['*'], 'renters');
+
+		return compact('agents', 'renters');
 	}
 
 	/**
@@ -48,19 +50,12 @@ class AdminService extends BaseUserService {
 	}
 
 	/**
-	 * @return array|mixed
-	 */
-	public function roles() {
-		return parent::roles();
-	}
-
-	/**
 	 * @param $id
 	 *
 	 * @return int
 	 */
 	public function status($id) {
-		return $this->repo->active_deactive($id);
+		return $this->repo->activeDeactive($id);
 	}
 
 	/**
@@ -68,7 +63,7 @@ class AdminService extends BaseUserService {
 	 *
 	 * @return bool
 	 */
-	public function send_invite($request) {
+	public function sendInvite($request) {
 		$this->repo = new AgentRepo;
 		$agent = new AgentInvitationForm();
 		$agent->invite_by = myId();
@@ -85,4 +80,89 @@ class AdminService extends BaseUserService {
 		return true;
 	}
 
+	/**
+	 * @param $request
+	 *
+	 * @return bool|mixed
+	 */
+	public function create($request) {
+		$user = new UserForm();
+		$user->first_name = $request->first_name;
+		$user->last_name = $request->last_name;
+		$user->email = $request->email;
+		$user->phone_number = $request->phone_number;
+		$user->user_type = $request->user_type;
+		$user->validate();
+		$response = $this->repo->create($user->toArray());
+		if (!empty($response)) {
+			$email = [
+				'first_name' => $user->first_name,
+				'subject' => 'Account Created',
+				'view' => 'create-user',
+				'link' => route('user.change_password', base64_encode($user->email)),
+			];
+			mailService($user->email, toObject($email));
+			return $response;
+		}
+		return false;
+	}
+
+	/**
+	 * @param $id
+	 * @param $request
+	 *
+	 * @return mixed
+	 */
+	public function update($id, $request) {
+		$user = new UserForm();
+		$user->id = $request->id ?? myId();
+		$user->first_name = $request->first_name;
+		$user->last_name = $request->last_name;
+		$user->email = $request->email;
+		$user->phone_number = $request->phone_number;
+		$user->user_type = $request->user_type;
+		$user->validate();
+		return $this->repo->update($user->id, $user->toArray());
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function agents() {
+		return $this->repo->agents()->get();
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function renters() {
+		return $this->repo->renters()->get();
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function companies() {
+		$this->repo = new CompanyRepo();
+		return $this->repo->companies()->get();
+	}
+
+	/**
+	 * @param $request
+	 *
+	 * @return bool
+	 */
+	public function isUniqueEmail($request) {
+		$this->repo = new AgentRepo;
+		if (!$this->repo->isUniqueEmail($request->email)) {
+			$this->repo = new UserRepo;
+			if (!$this->repo->isUniqueEmail($request->email)) {
+				return true;
+			}
+
+			return false;
+		}
+
+		return false;
+	}
 }

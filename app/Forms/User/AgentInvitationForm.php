@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Forms\Agent;
+namespace App\Forms\User;
 
 use App\Forms\BaseForm;
 

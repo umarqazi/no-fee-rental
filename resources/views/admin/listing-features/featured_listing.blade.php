@@ -20,8 +20,8 @@
 										<p>Posted: {{ date("m/d/y H:m A", strtotime($fl->created_at)) }}</p>
 										<a href="{{ route('admin.removeFeatured', $fl->id) }}" title="Remove this property from featured"><span class="status" style="background: red;">Remove Feature</span></a>
 										<div class="actions-btns">
-											<a href="{{ route('admin.editListing', $fl->id) }}"><span><img src="{{asset('admin/images/edit-icon.png')}}" alt=""></span></a>
-											<span><img src="{{asset('admin/images/copy-icon.png')}}" alt=""></span>
+											<a href="{{ route('admin.editListing', $fl->id) }}"><span><img src="{{asset('assets/images/edit-icon.png')}}" alt=""></span></a>
+											<span><img src="{{asset('assets/images/copy-icon.png')}}" alt=""></span>
 											<a href="{{ route('admin.listingRepost', $fl->id) }}"><button type="button" class="border-btn">Repost</button></a>
 										</div>
 									</div>

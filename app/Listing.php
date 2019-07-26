@@ -13,30 +13,36 @@ use Illuminate\Database\Eloquent\Model;
  * @property integer is_featured
  */
 class Listing extends Model {
+
 	/**
 	 * @var array $fillable
 	 */
-	protected $fillable = ['user_id', 'name', 'email', 'phone_number', 'website', 'street_address', 'display_address', 'neighborhood', 'thumbnail', 'baths', 'bedrooms', 'unit', 'rent', 'square_feet', 'available', 'description', 'is_featured', 'map_location', 'status', 'city_state_zip'];
+	protected $fillable = [
+		'user_id', 'name', 'email', 'phone_number', 'website', 'street_address',
+		'display_address', 'neighborhood', 'thumbnail', 'baths', 'bedrooms', 'unit',
+		'rent', 'square_feet', 'available', 'description', 'is_featured', 'map_location',
+		'status', 'city_state_zip',
+	];
 
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
 	 */
 	public function listingImages() {
-		return $this->hasMany('App\ListingImages', 'listing_id');
+		return $this->hasMany(ListingImages::class, 'listing_id');
 	}
 
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
 	 */
 	public function listingTypes() {
-		return $this->hasMany('App\ListingTypes', 'listing_id');
+		return $this->hasMany(ListingTypes::class, 'listing_id');
 	}
 
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
 	 */
 	public function agent() {
-		return $this->belongsTo('App\User', 'user_id');
+		return $this->belongsTo(User::class, 'user_id');
 	}
 
 	/**
@@ -124,6 +130,24 @@ class Listing extends Model {
 	 */
 	public function scopeRequestFeatured($query) {
 		return $query->whereis_featured(REQUESTFEATURED)->latest();
+	}
+
+	/**
+	 * @param $query
+	 *
+	 * @return mixed
+	 */
+	public function scopeActiveFeatured($query) {
+		return $query->featured()->whereStatus(ACTIVE);
+	}
+
+	/**
+	 * @param $query
+	 *
+	 * @return mixed
+	 */
+	public function scopeInactiveFeatured($query) {
+		return $query->featured()->whereStatus(DEACTIVE);
 	}
 
 	/**

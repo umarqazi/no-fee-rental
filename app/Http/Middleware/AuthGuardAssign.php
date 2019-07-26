@@ -18,8 +18,13 @@ class AuthGuardAssign {
 		$this->request = $request;
 		$user = $this->check_type();
 		if (empty($user)) {
-			return redirect()->back()->with(['message' => 'Wrong Email or Password.', 'alert_type' => 'error']);
+			$msg = 'Wrong Email or Password.';
+			return ($request->ajax()) ? json($msg, null, false) : error($msg);
+		} else if (!$user->status) {
+			$msg = 'Your account status is not active. Contact Administrator';
+			return ($request->ajax()) ? json($msg, null, false) : error($msg);
 		}
+
 		switch ($user->user_type) {
 		case 1:
 			return (new \App\Http\Controllers\Admin\LoginController)->login($this->request);
@@ -44,6 +49,6 @@ class AuthGuardAssign {
 	 * @return mixed
 	 */
 	private function check_type() {
-		return \App\User::whereEmail($this->request->email)->select('user_type')->first();
+		return \App\User::whereEmail($this->request->email)->select(['user_type', 'status'])->first();
 	}
 }

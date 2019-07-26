@@ -16,14 +16,11 @@
                 <div class="login-heading">
                     Login
                 </div>
-                <form method="POST" action="{{ route('attempt.login') }}" id="login_form">
-                    @csrf
-
+                {!! Form::open(['url' => route('attempt.login'), 'method' => 'post', 'reset' => 'false', 'id' => 'login_form', 'class' => 'ajax']) !!}
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <input id="email" type="email" class="input-style" name="email" placeholder="Email" value="{{ old('email') }}" required autofocus>
-
+                                {!! Form::email('email', null, ['class' => 'input-style', 'placeholder' => 'Email']) !!}
                                 @if ($errors->has('email'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('email') }}</strong>
@@ -34,8 +31,7 @@
 
                         <div class="col-md-6">
                             <div class="form-group">
-                                <input type="password" class="input-style" placeholder="Password" name="password" required>
-
+                                {!! Form::password('password', ['class' => 'input-style', 'placeholder' => 'Password']) !!}
                                 @if ($errors->has('password'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('password') }}</strong>
@@ -48,8 +44,7 @@
                         <div class="form-group">
                             <div class="col-md-12 align-left">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
+                                    {!! Form::checkbox('remember', null, old('remember') ? 'checked' : '', ['class' => 'form-check-input']) !!}
                                     <label class="form-check-label" for="remember">
                                         {{ __('Remember Me') }}
                                     </label>
@@ -69,7 +64,7 @@
                             </div>
                         </div>
                     </div>
-                </form>
+                {!! Form::close() !!}
                 <p class="footer-text">Don’t have an account? <span class="signup-modal-btn">Signup</span></p>
             </div>
 
@@ -93,8 +88,7 @@
                 <div class="login-heading">
                     Signup
                 </div>
-                <form method="POST" action="{{ route('register') }}" id="signup_form">
-                    @csrf
+                {!! Form::open(['url' => route('user.signup'), 'class' => 'ajax', 'reset' => 'true' , 'method' => 'post', 'id' => 'signup_form']) !!}
                     <div class="row">
                         <div class="col-sm-12 mb-3">
                             <div class="custom-control custom-radio custom-control-inline">
@@ -131,13 +125,42 @@
                         </div>
                         <div class="col-sm-12">
                             <div class="form-group">
-                                {!! Form::text('email', null, ['class'=>'input-style', 'placeholder'=>'Email']) !!}
+                                {!! Form::text('email', null, ['class'=>'input-style', 'id' => 'email', 'placeholder'=>'Email']) !!}
                                 @if ($errors->has('email'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('email') }}</strong>
                                     </span>
                                 @endif
                                 <p class="finding-home-text">If you would like to syndicate listing into no fee rentals nyc, please use tha same email address that you use for your RealtyMX, Nestio or OLR account.</p>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <div class="main-input input-style">
+                                    <select name="company" id="company">
+                                      <option value="1">One</option>
+                                      <option value="2">Two</option>
+                                      <option value="3">Three</option>
+                                      <option value="4">Four</option>
+                                      <option value="4" class="other">Other</option>
+                                    </select>
+                                </div>
+                                @if ($errors->has('company'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('company') }}</strong>
+                                    </span>
+                                @endif
+                                <p class="finding-home-text">If you would like to syndicate listing into no fee rentals nyc, please use tha same email address that you use for your RealtyMX, Nestio or OLR account.</p>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                {!! Form::text('phone_number', null, ['class'=>'input-style', 'placeholder'=>'Phone Number']) !!}
+                                @if ($errors->has('phone_number'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('phone_number') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
                         <div class="col-sm-12">
@@ -164,11 +187,9 @@
                     <div class="text-center mt-3 mb-4">
                         <button class="btn-default">Signup</button>
                     </div>
-                </form>
-                <p class="footer-text">Already have an account? <span class="signin-modal-btn">Login</span></p>
+                {!! Form::close() !!}
+                <p class="footer-text">Already have an account? <span class="signin-wrapper">Login</span></p>
             </div>
-
         </div>
-
     </div>
 </div>

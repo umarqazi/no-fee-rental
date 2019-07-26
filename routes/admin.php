@@ -25,8 +25,8 @@ Route::get('/password-reset', 'Admin\AdminController@resetPassword')->name('admi
 Route::post('/password-update', 'Admin\AdminController@updatePassword')->name('admin.updatePassword');
 
 // User Routes
-Route::get('/delete-user/{id}', 'Admin\UserController@delete')->name('admin.deleteUser');
-Route::get('/status-update/{id}', 'Admin\UserController@status')->name('admin.statusUser');
+Route::post('/delete-user/{id}', 'Admin\UserController@delete')->name('admin.deleteUser');
+Route::post('/status-update/{id}', 'Admin\UserController@status')->name('admin.statusUser');
 Route::post('/create-user', 'Admin\UserController@create')->name('admin.createUser');
 Route::post('/edit-user/{id}', 'Admin\UserController@edit')->name('admin.editUser');
 Route::post('/update-user/{id}', 'Admin\UserController@update')->name('admin.updateUser');
@@ -53,3 +53,17 @@ Route::get('/finish-update-listing', 'Admin\ListingController@finishUpdate')->na
 Route::get('/feature-listing', 'Admin\FeaturedListingController@index')->name('admin.featureListing');
 Route::get('/approve-feature-request/{id}', 'Admin\FeaturedListingController@approve')->name('admin.approveFeature');
 Route::get('/remove-featured-listing/{id}', 'Admin\FeaturedListingController@remove')->name('admin.removeFeatured');
+
+// Jquery Email Validation Response
+Route::post('/unique-email', 'Admin\UserController@unique');
+
+Route::get('/get-renters', 'Admin\HomeController@renters');
+Route::get('/get-agents', 'Admin\HomeController@agents');
+Route::get('/get-companies', 'Admin\HomeController@companies');
+
+// Company Routes
+Route::post('/add-company', 'Admin\CompanyController@create')->name('admin.createCompany');
+Route::post('/edit-company/{id}', 'Admin\CompanyController@edit');
+Route::post('/update-company/{id}', 'Admin\CompanyController@update');
+Route::post('/delete-company/{id}', 'Admin\CompanyController@delete');
+Route::post('/company-status-update/{id}', 'Admin\CompanyController@status');

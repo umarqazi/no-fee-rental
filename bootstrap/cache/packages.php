@@ -60,22 +60,22 @@
       0 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
     ),
   ),
-  'spatie/laravel-newsletter' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Spatie\\Newsletter\\NewsletterServiceProvider',
-    ),
-    'aliases' => 
-    array (
-      'Newsletter' => 'Spatie\\Newsletter\\NewsletterFacade',
-    ),
-  ),
   'spatie/laravel-permission' => 
   array (
     'providers' => 
     array (
       0 => 'Spatie\\Permission\\PermissionServiceProvider',
+    ),
+  ),
+  'yajra/laravel-datatables-oracle' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Yajra\\DataTables\\DataTablesServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'DataTables' => 'Yajra\\DataTables\\Facades\\DataTables',
     ),
   ),
 );

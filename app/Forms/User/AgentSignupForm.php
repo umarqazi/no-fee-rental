@@ -1,16 +1,10 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: adi
- * Date: 6/15/19
- * Time: 4:11 PM
- */
 
 namespace App\Forms\User;
 
 use App\Forms\BaseForm;
 
-class CreateForm extends BaseForm {
+class AgentSignupForm extends BaseForm {
 
 	/**
 	 * @var string
@@ -30,6 +24,10 @@ class CreateForm extends BaseForm {
 	/**
 	 * @var string
 	 */
+	public $company;
+	/**
+	 * @var string
+	 */
 	public $phone_number;
 
 	/**
@@ -38,28 +36,45 @@ class CreateForm extends BaseForm {
 	public $user_type;
 
 	/**
+	 * @var string
+	 */
+	public $password;
+
+	/**
+	 * @var string
+	 */
+	public $password_confirmation;
+
+	/**
+	 * Get the instance as an array.
+	 *
 	 * @return array
 	 */
-	public function toArray() {
+	function toArray() {
 		return [
 			'first_name' => $this->first_name,
 			'last_name' => $this->last_name,
 			'email' => $this->email,
 			'phone_number' => $this->phone_number,
+			'company' => $this->company,
 			'user_type' => $this->user_type,
+			'password' => $this->password,
+			'password_confirmation' => $this->password_confirmation,
 		];
 	}
 
 	/**
-	 * @return array|mixed
+	 * @return mixed
 	 */
-	public function rules() {
+	function rules() {
 		return [
-			'first_name' => 'required|string|max:255',
-			'last_name' => 'required|string|max:255',
-			'user_type' => 'required',
+			'first_name' => 'required|string',
+			'last_name' => 'required|string',
 			'email' => 'required|email|unique:users',
 			'phone_number' => 'required|max:16',
+			'company' => 'required|string',
+			'password' => 'required|string|confirmed|min:8',
+			'user_type' => 'required|integer',
 		];
 	}
 }

@@ -18,11 +18,9 @@ interface IRepo {
 	public function edit($id);
 
 	/**
-	 * @param $clause
-	 *
 	 * @return mixed
 	 */
-	public function first($clause);
+	public function all();
 
 	/**
 	 * @param $id
@@ -40,9 +38,23 @@ interface IRepo {
 	public function delete($id);
 
 	/**
+	 * @param $clause
+	 *
+	 * @return bool|mixed
+	 */
+	public function deleteMultiple($clause);
+
+	/**
 	 * @param $data
 	 *
 	 * @return mixed
 	 */
 	public function insert($data);
+
+	/**
+	 * @param $clause
+	 *
+	 * @return mixed
+	 */
+	public function find($clause);
 }
