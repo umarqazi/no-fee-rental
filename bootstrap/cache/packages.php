@@ -1,9 +1,16 @@
 <?php return array (
-  'laravel/slack-notification-channel' => 
+  'beyondcode/laravel-dump-server' => 
   array (
     'providers' => 
     array (
-      0 => 'Illuminate\\Notifications\\SlackChannelServiceProvider',
+      0 => 'BeyondCode\\DumpServer\\DumpServerServiceProvider',
+    ),
+  ),
+  'fideloper/proxy' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Fideloper\\Proxy\\TrustedProxyServiceProvider',
     ),
   ),
   'laravel/nexmo-notification-channel' => 
@@ -13,11 +20,11 @@
       0 => 'Illuminate\\Notifications\\NexmoChannelServiceProvider',
     ),
   ),
-  'fideloper/proxy' => 
+  'laravel/slack-notification-channel' => 
   array (
     'providers' => 
     array (
-      0 => 'Fideloper\\Proxy\\TrustedProxyServiceProvider',
+      0 => 'Illuminate\\Notifications\\SlackChannelServiceProvider',
     ),
   ),
   'laravel/tinker' => 
@@ -39,18 +46,11 @@
       'Html' => 'Collective\\Html\\HtmlFacade',
     ),
   ),
-  'spatie/laravel-permission' => 
+  'nesbot/carbon' => 
   array (
     'providers' => 
     array (
-      0 => 'Spatie\\Permission\\PermissionServiceProvider',
-    ),
-  ),
-  'beyondcode/laravel-dump-server' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'BeyondCode\\DumpServer\\DumpServerServiceProvider',
+      0 => 'Carbon\\Laravel\\ServiceProvider',
     ),
   ),
   'nunomaduro/collision' => 
@@ -58,6 +58,24 @@
     'providers' => 
     array (
       0 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
+    ),
+  ),
+  'spatie/laravel-newsletter' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Spatie\\Newsletter\\NewsletterServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Newsletter' => 'Spatie\\Newsletter\\NewsletterFacade',
+    ),
+  ),
+  'spatie/laravel-permission' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Spatie\\Permission\\PermissionServiceProvider',
     ),
   ),
 );
