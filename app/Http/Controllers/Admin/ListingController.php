@@ -171,9 +171,15 @@ class ListingController extends Controller {
 	 *
 	 * @return \Illuminate\Http\JsonResponse
 	 */
-	public function removeImage($id) {
-		return ($this->service->removeImage($id))
-		? response()->json(['message' => 'success'])
-		: response()->json(['message' => 'something went wrong']);
+	public function removeImage(Request $request, $id) {
+		$remres = $this->service->removeImage($id);
+
+		if ($request->ajax()) {
+			$res = ($remres) ? json('Image removed successfully.', null, true) : json('Something went wrong', null, false);
+		} else {
+			$res = ($remres) ? success('Image removed successfully.') : error('Something went wrong');
+		}
+
+		return $res;
 	}
 }

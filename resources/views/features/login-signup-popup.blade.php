@@ -193,3 +193,5 @@
         </div>
     </div>
 </div>
+
+{!! HTML::script('assets/js/login.js') !!}

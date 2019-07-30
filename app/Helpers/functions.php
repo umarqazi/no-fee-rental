@@ -153,6 +153,10 @@ function toObject($data) {
 	return (object) $data;
 }
 
+function dataTable($data) {
+	return datatables()->of($data)->toJson();
+}
+
 /**
  * @param null $data
  * @param bool $readable
