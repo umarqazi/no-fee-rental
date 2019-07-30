@@ -6,6 +6,7 @@ use App\Forms\BaseForm;
 
 class UserForm extends BaseForm {
 
+	public $id;
 	/**
 	 * @var string
 	 */
@@ -52,7 +53,7 @@ class UserForm extends BaseForm {
 			'first_name' => 'required|string|max:255',
 			'last_name' => 'required|string|max:255',
 			'user_type' => 'required',
-			'email' => 'required|email',
+			'email' => ($this->id) ? 'required|email' : 'required|email|unique:users',
 			'phone_number' => 'required|max:16',
 		];
 	}

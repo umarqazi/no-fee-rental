@@ -211,6 +211,7 @@ $(() => {
         }
     });
 
+    // Create User Form Validations
     $('#add_user').validate({
       rules: {
         user_type: "required",
@@ -242,6 +243,7 @@ $(() => {
       }
     });
 
+    // Agent Invite Form Validation
     $('#agent_invite').validate({
       rules: {
         email: {
@@ -257,44 +259,4 @@ $(() => {
         }
       }
     });
-
-    // $('input[name=email]:last').on('keydown', function(e) {
-    //   $('label.error').remove().find('.error').removeClass('error');
-    //   $('input[type=submit]:last').attr('disabled', false);
-    // });
-
-    // $('input[name=email]:last').on('blur', async function(e) {
-    //   e.preventDefault();
-    //   $('input[type=email]').trigger('keydown');
-    //   let res = await ajax(`/admin/unique-email`, 'post', e.target.value);
-    //     if(!res) {
-    //       $('input[type=email]:last').after('<label class="error">Email already taken.</label>');
-    //       $('input[type=submit]:last').attr('disabled', true);
-    //       return;
-    //     }
-    // });
-
-    // $('#agent_invite').on('submit', async function(e) {
-    //   e.preventDefault();
-    //   $('input[type=email]').trigger('keydown');
-    //   let res = await ajax(`/admin/unique-email`, 'post', $('input[type=email]:last').val());
-    //     if(!res) {
-    //       $('input[type=email]:last').after('<label class="error">Email already taken.</label>');
-    //       $('input[type=submit]:last').attr('disabled', true);
-    //       return;
-    //     }
-    // });
-
-    function ajax(url, type, data){
-      return $.ajax({
-          url: url,
-          headers: {
-           'X-CSRF-TOKEN': $('meta[name=csrf-token]').attr('content')
-          },
-          data: {
-            email: data
-          },
-          type: type,
-        });     
-    }
 });

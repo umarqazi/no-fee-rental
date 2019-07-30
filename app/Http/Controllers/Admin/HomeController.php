@@ -10,7 +10,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Services\UserServices\AdminService;
-use DataTables;
 
 class HomeController extends Controller {
 
@@ -45,20 +44,20 @@ class HomeController extends Controller {
 	 * @return \Illuminate\Contracts\View\View
 	 */
 	public function agents() {
-		return datatables()->of($this->service->agents())->toJson();
+		return dataTable($this->service->agents());
 	}
 
 	/**
 	 * @return \Illuminate\Contracts\View\View
 	 */
 	public function renters() {
-		return datatables()->of($this->service->renters())->toJson();
+		return dataTable($this->service->renters());
 	}
 
 	/**
 	 * @return \Illuminate\Contracts\View\View
 	 */
 	public function companies() {
-		return datatables()->of($this->service->companies())->toJson();
+		return dataTable($this->service->companies());
 	}
 }

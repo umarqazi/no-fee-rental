@@ -50,3 +50,10 @@ Route::get('/signup/{token}', 'UserController@invitedAgentSignupForm')->name('ag
 Route::post('/agent/signup', 'UserController@invitedAgentSignup')->name('agent.signup');
 Route::get('/listing-detail/{id}', 'HomeController@detail')->name('listing.detail');
 Route::post('/user-signup', 'UserController@signup')->name('user.signup');
+
+use App\Http\Resources\UserResource;
+
+Route::get('/test', function () {
+	$data = new UserResource(\App\User::first());
+	dd($data);
+});

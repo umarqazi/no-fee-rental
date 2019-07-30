@@ -60,7 +60,7 @@ class BaseListingService {
 		$form->status = $request->status;
 		$form->old = ($request->hasFile('thumbnail')) ? $request->old_thumbnail : true;
 		$form->thumbnail = ($request->hasFile('thumbnail')) ? $request->file('thumbnail') : $request->old_thumbnail;
-		$form->validate();
+		dd($form->validate());
 		return $form;
 	}
 

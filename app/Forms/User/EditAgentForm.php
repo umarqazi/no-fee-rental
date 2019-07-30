@@ -57,7 +57,7 @@ class EditAgentForm extends BaseForm {
 		return [
 			'first_name' => 'required|string',
 			'last_name' => 'required|string',
-			'email' => 'required|email',
+			'email' => ($this->id) ? 'required|email' : 'required|email|unique:users',
 			'phone_number' => 'required|max:16',
 			'company' => 'required|string',
 		];

@@ -118,4 +118,6 @@
         </div>
     </div>
 </div>
+{!! HTML::script('assets/js/user.js') !!}
+{!! HTML::script('assets/js/company.js') !!}
 @endsection

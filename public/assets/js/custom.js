@@ -190,31 +190,3 @@ $(() => {
 		$('#newsletterModal').modal();
 	});
 });
-
-
-
-/**
- *
- * @param url
- * @param type
- * @param loader
- * @returns {*|jQuery|{getAllResponseHeaders, abort, setRequestHeader, readyState, getResponseHeader, overrideMimeType, statusCode}}
- */
-// function ajaxRequest(url, type, loader = false, data = null) {
-// 	return $.ajax({
-// 		url: url,
-// 		type: type,
-// 		data: data,
-// 		headers: {
-// 			'X-CSRF-TOKEN': $('meta[name=csrf-token]').attr('content'),
-// 		},
-// 		success: function(res) {
-// 			return res;
-// 		},
-
-// 		error: function(err) {
-// 			console.log(err);
-// 			toastr.error(err);
-// 		}
-// 	})
-// }
