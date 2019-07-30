@@ -115,7 +115,7 @@ class UserController extends Controller {
 	 */
 	public function edit($id) {
 		$user = $this->service->edit($id);
-		return response()->json(['data' => $user], 200);
+		return json('', $user, true);
 	}
 
 	/**
