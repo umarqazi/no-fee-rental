@@ -28,4 +28,7 @@
 		</div>
 	</div>
 </div>
+
+{!! HTML::script('assets/js/map.js') !!}
+{!! HTML::script('assets/js/listing.js') !!}
 @endsection

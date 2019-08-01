@@ -78,4 +78,11 @@
       'DataTables' => 'Yajra\\DataTables\\Facades\\DataTables',
     ),
   ),
+  'orchestra/parser' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Orchestra\\Parser\\XmlServiceProvider',
+    ),
+  ),
 );

@@ -58,9 +58,10 @@ class BaseListingService {
 		$form->building_feature = $request->building_feature;
 		$form->pet_policy = $request->pet_policy;
 		$form->status = $request->status;
+		$form->map_location = $request->map_location;
 		$form->old = ($request->hasFile('thumbnail')) ? $request->old_thumbnail : true;
 		$form->thumbnail = ($request->hasFile('thumbnail')) ? $request->file('thumbnail') : $request->old_thumbnail;
-		dd($form->validate());
+		$form->validate();
 		return $form;
 	}
 

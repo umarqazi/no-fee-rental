@@ -22,15 +22,11 @@ Route::get('/renter-guide', function () {
 	return view('pages.renter-guide');
 });
 
-Route::get('/contact-us', function () {
-	return view('pages.contact-us');
-})->name('contact-us');
+Route::get('/contact-us', 'ContactUsController@showForm')->name('contact-us');
 
-Route::post('contact-us', 'ContactUsController@contactUs')->name('contact-us');
+Route::post('/contact-us', 'ContactUsController@contactUs')->name('contact-us');
 
-Route::get('/press', function () {
-	return view('pages.press');
-})->name('press');
+Route::get('/press', 'ContactUsController@showPress')->name('press');
 
 Route::post('newsletter', 'NewsletterController@store');
 
@@ -51,9 +47,4 @@ Route::post('/agent/signup', 'UserController@invitedAgentSignup')->name('agent.s
 Route::get('/listing-detail/{id}', 'HomeController@detail')->name('listing.detail');
 Route::post('/user-signup', 'UserController@signup')->name('user.signup');
 
-use App\Http\Resources\UserResource;
-
-Route::get('/test', function () {
-	$data = new UserResource(\App\User::first());
-	dd($data);
-});
+Route::get('/test', 'RealtyMXController@get');
