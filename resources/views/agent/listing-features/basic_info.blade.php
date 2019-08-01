@@ -36,4 +36,5 @@
 		</span>
 	</div>
 </div>
+{!! Form::hidden('map_location', null) !!}
 {!! Form::hidden('status', 2) !!}

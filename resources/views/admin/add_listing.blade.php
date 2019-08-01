@@ -17,9 +17,9 @@
 
 					@include('admin.listing-features.basic_info')
 
-				<div class="col-md-12 mt-4">
-					<div id="map"></div>
-				</div>
+					<div class="col-md-12 mt-4">
+						<div id="map"></div>
+					</div>
 				<div class="col-md-12 mt-4 text-center">
 					<button type="submit" class="btn-default">{{($edit) ? 'Update' : 'Post'}} Listing</button>
 				</div>
@@ -29,6 +29,7 @@
 	</div>
 </div>
 
+{!! HTML::script('assets/js/map.js') !!}
 {!! HTML::script('assets/js/listing.js') !!}
 
 @endsection

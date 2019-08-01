@@ -11,10 +11,3 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js([
-	'resources/js/login.js',
-	'resources/js/common.js',
-	'resources/js/map.js',
-	'resources/js/admin/user.js',
-	'resources/js/admin/company.js',
-	], 'public/assets/js/app.js');

@@ -32,13 +32,15 @@
     28 => 'BeyondCode\\DumpServer\\DumpServerServiceProvider',
     29 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
     30 => 'Yajra\\DataTables\\DataTablesServiceProvider',
-    31 => 'Collective\\Html\\HtmlServiceProvider',
-    32 => 'Yajra\\DataTables\\DataTablesServiceProvider',
-    33 => 'App\\Providers\\AppServiceProvider',
-    34 => 'App\\Providers\\AuthServiceProvider',
-    35 => 'App\\Providers\\EventServiceProvider',
-    36 => 'App\\Providers\\RouteServiceProvider',
-    37 => 'Spatie\\Permission\\PermissionServiceProvider',
+    31 => 'Orchestra\\Parser\\XmlServiceProvider',
+    32 => 'Collective\\Html\\HtmlServiceProvider',
+    33 => 'Yajra\\DataTables\\DataTablesServiceProvider',
+    34 => 'Orchestra\\Parser\\XmlServiceProvider',
+    35 => 'App\\Providers\\AppServiceProvider',
+    36 => 'App\\Providers\\AuthServiceProvider',
+    37 => 'App\\Providers\\EventServiceProvider',
+    38 => 'App\\Providers\\RouteServiceProvider',
+    39 => 'Spatie\\Permission\\PermissionServiceProvider',
   ),
   'eager' => 
   array (
@@ -174,6 +176,7 @@
     'Collective\\Html\\HtmlBuilder' => 'Collective\\Html\\HtmlServiceProvider',
     'Collective\\Html\\FormBuilder' => 'Collective\\Html\\HtmlServiceProvider',
     'NunoMaduro\\Collision\\Contracts\\Provider' => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
+    'orchestra.parser.xml' => 'Orchestra\\Parser\\XmlServiceProvider',
   ),
   'when' => 
   array (
@@ -220,6 +223,9 @@
     array (
     ),
     'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider' => 
+    array (
+    ),
+    'Orchestra\\Parser\\XmlServiceProvider' => 
     array (
     ),
   ),

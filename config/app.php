@@ -167,6 +167,7 @@ return [
 			         * Package Service Providers...
 		*/
 		Yajra\DataTables\DataTablesServiceProvider::class,
+		Orchestra\Parser\XmlServiceProvider::class,
 
 		/*
 			         * Application Service Providers...
@@ -229,6 +230,7 @@ return [
 		'Form' => Collective\Html\FormFacade::class,
 		'HTML' => Collective\Html\HtmlFacade::class,
 		'DataTables' => Yajra\DataTables\Facades\DataTables::class,
+		'XMLParse' => Orchestra\Parser\Xml\Facade::class,
 
 	],
 
