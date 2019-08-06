@@ -73,6 +73,7 @@
                     <div class="text-center mt-3 mb-4">
                         <button class="btn-default">Signup</button>
                     </div>
+                    {!! Form::hidden('token', $authenticate_token->token) !!}
                     {!! Form::close() !!}
             </div>
 </div>

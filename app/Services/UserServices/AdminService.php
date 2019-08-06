@@ -2,12 +2,10 @@
 
 namespace App\Services\UserServices;
 
-use App\Forms\User\AgentInvitationForm;
 use App\Forms\User\UserForm;
 use App\Repository\CompanyRepo;
 use App\Repository\User\AgentRepo;
 use App\Repository\User\UserRepo;
-use Illuminate\Http\Request;
 
 class AdminService extends BaseUserService {
 
@@ -58,27 +56,22 @@ class AdminService extends BaseUserService {
 		return $this->repo->activeDeactive($id);
 	}
 
-	/**
-	 * @param $request
-	 *
-	 * @return bool
-	 */
-	public function sendInvite($request) {
-		$this->repo = new AgentRepo;
-		$agent = new AgentInvitationForm();
-		$agent->invite_by = myId();
-		$agent->email = $request->email;
-		$agent->token = str_random(60);
-		$agent->validate();
-		$email = [
-			'view' => 'agent-invitation',
-			'subject' => 'Invitation By ' . mySelf()->email,
-			'link' => route('agent.signup_form', $agent->token),
-		];
-		$this->repo->invite($agent->toArray());
-		mailService($agent->email, toObject($email));
-		return true;
-	}
+    /**
+     * @param $request
+     *
+     * @return UserForm
+     */
+	private function form($request) {
+        $user = new UserForm();
+        $user->id = $request->id ?? myId();
+        $user->first_name = $request->first_name;
+        $user->last_name = $request->last_name;
+        $user->email = $request->email;
+        $user->phone_number = $request->phone_number;
+        $user->user_type = $request->user_type;
+        $user->validate();
+        return $user;
+    }
 
 	/**
 	 * @param $request
@@ -86,13 +79,7 @@ class AdminService extends BaseUserService {
 	 * @return bool|mixed
 	 */
 	public function create($request) {
-		$user = new UserForm();
-		$user->first_name = $request->first_name;
-		$user->last_name = $request->last_name;
-		$user->email = $request->email;
-		$user->phone_number = $request->phone_number;
-		$user->user_type = $request->user_type;
-		$user->validate();
+		$user = $this->form($request);
 		$response = $this->repo->create($user->toArray());
 		if (!empty($response)) {
 			$email = [
@@ -114,14 +101,7 @@ class AdminService extends BaseUserService {
 	 * @return mixed
 	 */
 	public function update($id, $request) {
-		$user = new UserForm();
-		$user->id = $request->id ?? myId();
-		$user->first_name = $request->first_name;
-		$user->last_name = $request->last_name;
-		$user->email = $request->email;
-		$user->phone_number = $request->phone_number;
-		$user->user_type = $request->user_type;
-		$user->validate();
+		$user = $this->form($request);
 		return $this->repo->update($user->id, $user->toArray());
 	}
 

@@ -38,7 +38,7 @@ class AgentInvitationForm extends BaseForm {
 	function rules() {
 		return [
 			'invited_by' => 'required|integer',
-			'email' => 'required|email|unique:users',
+			'email' => 'required|email|unique:users|unique:agent_invites',
 			'token' => 'required|string',
 		];
 	}

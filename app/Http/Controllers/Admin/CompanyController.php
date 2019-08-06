@@ -10,8 +10,6 @@ class CompanyController extends Controller {
 
 	private $service;
 
-	private $paginate = 20;
-
 	public function __construct(CompanyService $service) {
 		$this->service = $service;
 	}

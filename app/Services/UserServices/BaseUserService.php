@@ -2,8 +2,10 @@
 
 namespace App\Services\UserServices;
 
+use App\Forms\User\AgentInvitationForm;
 use App\Forms\User\ChangePasswordForm;
 use App\Forms\User\EditProfileForm;
+use App\Repository\User\AgentRepo;
 use App\Services\RolesService;
 
 class BaseUserService extends RolesService {
@@ -54,6 +56,9 @@ class BaseUserService extends RolesService {
 		$user->email = $request->email;
 		$user->phone_number = $request->phone_number;
 		$user->validate();
+        if ($request->hasFile('profile_image')) {
+            $this->updateProfileImage($request->file('profile_image'), myId(), $request->old_profile ?? '');
+        }
 		return $this->repo->update($user->id, $user->toArray());
 	}
 
@@ -69,6 +74,46 @@ class BaseUserService extends RolesService {
 		$image_name = uploadImage($profile_image, $destinationPath, true, $old_image);
 		return $this->repo->update($id, ['profile_image' => $image_name]);
 	}
+
+    /**
+     * @param $agent
+     *
+     * @return mixed
+     */
+	private function agentMail($agent) {
+        $email = [
+            'view' => 'agent-invitation',
+            'from' => mySelf()->email,
+            'subject' => 'Invitation By ' . mySelf()->email,
+            'link' => route('agent.signup_form', $agent->token),
+        ];
+
+        return mailService($agent->email, toObject($email));
+    }
+
+    /**
+     * @param $request
+     *
+     * @return bool
+     */
+    public function sendInvite($request) {
+        $this->repo = new AgentRepo;
+        $agent = new AgentInvitationForm();
+        $agent->invite_by = myId();
+        $agent->email = $request->email;
+        $agent->token = str_random(60);
+        if ($agent->fails()) {
+           if($res = $this->repo->find(['email' => $request->email])->first()) {
+               $this->repo->update($res->id, ['token' => $agent->token]);
+               $this->agentMail($agent);
+               return true;
+           }
+           return $agent->validate();
+        }
+        $this->repo->invite($agent->toArray());
+        $this->agentMail($agent);
+        return true;
+    }
 
 	/**
 	 * @param $request

@@ -19,11 +19,6 @@ class HomeController extends Controller {
 	private $service;
 
 	/**
-	 * @var int
-	 */
-	private $paginate = 10;
-
-	/**
 	 * HomeController constructor.
 	 *
 	 * @param AdminService $service
@@ -40,23 +35,26 @@ class HomeController extends Controller {
 		return view('admin.index', compact('roles'));
 	}
 
-	/**
-	 * @return \Illuminate\Contracts\View\View
-	 */
+    /**
+     * @return mixed
+     * @throws \Exception
+     */
 	public function agents() {
 		return dataTable($this->service->agents());
 	}
 
-	/**
-	 * @return \Illuminate\Contracts\View\View
-	 */
+    /**
+     * @return mixed
+     * @throws \Exception
+     */
 	public function renters() {
 		return dataTable($this->service->renters());
 	}
 
-	/**
-	 * @return \Illuminate\Contracts\View\View
-	 */
+    /**
+     * @return mixed
+     * @throws \Exception
+     */
 	public function companies() {
 		return dataTable($this->service->companies());
 	}

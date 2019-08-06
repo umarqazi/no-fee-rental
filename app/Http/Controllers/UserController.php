@@ -8,6 +8,7 @@
 
 namespace App\Http\Controllers;
 
+use App\AgentInvites;
 use App\Services\UserServices\ClientService;
 use Illuminate\Http\Request;
 
@@ -18,11 +19,11 @@ class UserController extends Controller {
 	 */
 	private $service;
 
-	/**
-	 * UserController constructor.
-	 *
-	 * @param BaseUserService $service
-	 */
+    /**
+     * UserController constructor.
+     *
+     * @param ClientService $service
+     */
 	public function __construct(ClientService $service) {
 		$this->service = $service;
 	}
@@ -43,11 +44,11 @@ class UserController extends Controller {
 		: error('Something went wrong');
 	}
 
-	/**
-	 * @param $token
-	 *
-	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-	 */
+    /**
+     * @param $token
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
 	public function changePassword($token) {
 		return view('change-password', compact('token'));
 	}
@@ -68,20 +69,24 @@ class UserController extends Controller {
 
 	}
 
-	/**
-	 * @param Agent $request
-	 * @return \Illuminate\Http\RedirectResponse
-	 */
+    /**
+     * @param Request $request
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
 	public function invitedAgentSignup(Request $request) {
 		return $this->service->invitedAgentSignup($request)
 		? success('Account has been created')
 		: error('Something went wrong');
 	}
 
+    /**
+     * @param $token
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
 	public function invitedAgentSignupForm($token) {
-
-		$authenticate_token = \App\AgentInvites::select(['id', 'token', 'email'])->whereToken($token)->first();
-
+		$authenticate_token = $this->service->getAgentToken($token)->first();
 		if (!empty($authenticate_token) && $authenticate_token->token == $token) {
 			return view('invited_agent_signup', compact('authenticate_token'));
 		}
@@ -107,7 +112,7 @@ class UserController extends Controller {
 	 */
 	public function confirmEmail($token) {
 		if ($this->service->verifyEmail($token)) {
-			return success('Email has been verified.');
+			return success('Email has been verified.', '/');
 		}
 
 		return error('Something went wrong');
