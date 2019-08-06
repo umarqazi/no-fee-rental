@@ -12,8 +12,6 @@ return [
 		'listing_type' => [
 			0 => 'By Owner',
 			1 => 'Exclusive',
-			2 => 'No Fee',
-			3 => 'Exclusive',
 		],
 
 		'pet_policy' => [
@@ -26,6 +24,7 @@ return [
 			1 => 'Laundry In Unit',
 			2 => 'Parking Space',
 			3 => 'Outdoor Space',
+            4 => 'Abdullah',
 		],
 
 		'building_feature' => [

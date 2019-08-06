@@ -7,7 +7,7 @@ Route::get('/home', 'Agent\ListingController@index')->name('agent.index');
 Route::get('/logout', 'Agent\LoginController@logout')->name('agent.logout');
 
 // Profile Routes
-Route::get('/show-profile', 'Agent\AgentController@profile')->name('agent.profile');
+Route::get('/show-profile', 'Agent\AgentController@profile')->name('agent.showProfile');
 Route::post('/update-profile', 'Agent\AgentController@updateProfile')->name('agent.profileUpdate');
 
 // Password Routes
@@ -29,3 +29,10 @@ Route::get('/update-listing', 'Agent\ListingController@finishUpdate')->name('age
 
 // Featured Listing
 Route::get('/request-featured/{id}', 'Agent\ListingController@request')->name('agent.requestFeatured');
+
+// Agent Invites
+Route::get('/all-invites', 'Agent\MemberController@get')->name('agent.getInvites');
+Route::post('/invite-agent', 'Agent\MemberController@invite')->name('agent.inviteMember');
+Route::get('/test', function() {
+    return view('agent.members');
+});

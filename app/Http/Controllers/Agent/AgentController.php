@@ -38,12 +38,9 @@ class AgentController extends Controller {
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function updateProfile(Request $request) {
-		$update_data = $this->service->update_profile($request);
-		if ($request->hasFile('profile_image')) {
-			$update_data = $this->service->update_profile_image($request->file('profile_image'), myId(), $request->old_profile ?? '');
-		}
-
-		return ($update_data) ? success('Profile has been updated.') : error('Something went wrong');
+		return ($this->service->updateProfile($request))
+            ? success('Profile has been updated.')
+            : error('Something went wrong');
 	}
 
 	/**

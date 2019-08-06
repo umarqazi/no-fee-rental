@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Services\UserServices\AdminService;
 use Illuminate\Http\Request;
@@ -36,12 +37,8 @@ class AdminController extends Controller {
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function updateProfile(Request $request) {
-		$update_data = $this->service->updateProfile($request);
-		if ($request->hasFile('profile_image')) {
-			$update_data = $this->service->updateProfileImage($request->file('profile_image'), myId(), $request->old_profile ?? '');
-		}
-
-		return ($update_data)
+//	    Auth::loginUsingId()
+		return ($this->service->updateProfile($request))
 		? success('Profile has been updated')
 		: error('Something went wrong');
 	}

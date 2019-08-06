@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AgentInviteForm;
 use App\Services\UserServices\AdminService;
 use Illuminate\Http\Request;
 
@@ -134,7 +135,7 @@ class UserController extends Controller {
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function invite(Request $request) {
+	public function invite(AgentInviteForm $request) {
 		$invite = $this->service->sendInvite($request);
 
 		if ($request->ajax()) {
@@ -156,8 +157,8 @@ class UserController extends Controller {
 	 * @return JSON Boolean
 	 */
 	public function unique(Request $request) {
-		return $this->service->isUniqueEmail($request)
-		? response()->json(true)
-		: response()->json(false);
+		// return $this->service->isUniqueEmail($request)
+		// ? response()->json(true)
+		// : response()->json(false);
 	}
 }

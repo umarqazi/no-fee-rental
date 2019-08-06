@@ -30,34 +30,18 @@ abstract class BaseForm implements IForm {
 		return $this->getValidator()->fails();
 	}
 
+    /**
+     * @return array
+     */
+	public function failed() {
+	    return $this->getValidator()->failed();
+    }
+
 /**
  * @return array|mixed
  */
 	public function errorMessages() {
 		return [];
-	}
-
-/**
- * @param $params
- */
-	public function loadFromArray($params) {
-		foreach ($params as $key => $value) {
-			if (property_exists($this, $key)) {
-				$this->$key = $value;
-			}
-		}
-	}
-
-/**
- * @param $model
- */
-	public function loadFromModel($model) {
-		$keys = $model->getFillable();
-		foreach ($keys as $key) {
-			if (property_exists($this, $key) || !empty($this->$key)) {
-				$model->$key = $this->$key;
-			}
-		}
 	}
 
 /**
@@ -73,13 +57,5 @@ abstract class BaseForm implements IForm {
  */
 	public function validate() {
 		$this->getValidator()->validate();
-	}
-
-/**
- * @param $name
- * @return mixed
- */
-	public function nameToClass($name) {
-		return str_replace([' ', '/', '&'], '_', strtolower($name));
 	}
 }

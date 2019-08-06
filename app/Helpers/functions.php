@@ -1,6 +1,8 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * @param $image
@@ -46,6 +48,20 @@ function removeFile($path) {
 }
 
 /**
+ * @return bool
+ */
+function whoAmI() {
+	$guards = array_keys(config('auth.guards'));
+	foreach ($guards as $guard) {
+		if (Auth::guard($guard)->check()) {
+			return $guard;
+		}
+	}
+
+	return false;
+}
+
+/**
  * @return mixed
  */
 function isAdmin() {
@@ -63,14 +79,14 @@ function isAgent() {
  * @return int|null
  */
 function myId() {
-	return auth()->id();
+	return auth()->guard(whoAmI())->id();
 }
 
 /**
  * @return \Illuminate\Contracts\Auth\Authenticatable|null
  */
 function mySelf() {
-	return auth()->user();
+	return auth()->guard(whoAmI())->user();
 }
 
 /**
@@ -153,6 +169,12 @@ function toObject($data) {
 	return (object) $data;
 }
 
+/**
+ * @param $data
+ *
+ * @return mixed
+ * @throws Exception
+ */
 function dataTable($data) {
 	return datatables()->of($data)->toJson();
 }

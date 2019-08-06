@@ -1,12 +1,19 @@
 <div class="mobile-menu">
     <i class="fa fa-times close-menu-btn"></i>
     <div class="user-avtar">
-        <a href="{!! url('/') !!}"><img src="{!! asset('assets/images/agent-img.jpg') !!}" alt="" class="avtar" /> {{ (auth()->check()) ? auth()->user()->first_name." ".auth()->user()->last_name : '' }} <i class="fa fa-angle-down"></i></a>
-        <div class="user-dropdown">
-            <a href="/admin/dashboard">Dashboard </a>
-            <a href="#">Profile Setting </a>
-            <a href="#">Log Out </a>
-        </div>
+            @if(Auth::guard(whoAmI())->check())
+                <a href="javascript:void(0);">
+                    <img src = "{!! !empty(mySelf()->profile_image)
+                                    ? asset('storage/'.mySelf()->profile_image)
+                                    : asset('assets/images/agent-img.jpg') !!}" alt="" class="avtar" />
+                    {{ mySelf()->first_name." ".mySelf()->last_name }} <i class="fa fa-angle-down"></i>
+                </a>
+                <div class="user-dropdown">
+                    <a href="{{ route(whoAmI().'.index') }}">Dashboard </a>
+                    <a href="{{ route(whoAmI().'.showProfile') }}">Profile Setting </a>
+                    <a href="{{ route(whoAmI().'.logout') }}">Log Out </a>
+                </div>
+            @endif
     </div>
     <div class="mobile-nav">
         <ul>
@@ -18,15 +25,9 @@
                 </a>
                 <div class="collapse" id="menuToggle1">
                     <ul>
-                        <li>
-                            <a href="#">Some Link</a>
-                        </li>
-                        <li>
-                            <a href="#">Some Link</a>
-                        </li>
-                        <li>
-                            <a href="#">Some Link</a>
-                        </li>
+                        <li><a href="#">Some Link</a></li>
+                        <li><a href="#">Some Link</a></li>
+                        <li><a href="#">Some Link</a></li>
                     </ul>
                 </div>
             </li>
@@ -36,20 +37,16 @@
                 </a>
                 <div class="collapse" id="menuToggle2">
                     <ul>
-                        <li>
-                            <a href="#">Some Link</a>
-                        </li>
-                        <li>
-                            <a href="#">Some Link</a>
-                        </li>
-                        <li>
-                            <a href="#">Some Link</a>
-                        </li>
+                        <li><a href="#">Some Link</a></li>
+                        <li><a href="#">Some Link</a></li>
+                        <li><a href="#">Some Link</a></li>
                     </ul>
                 </div>
             </li>
-            <li><a href="" data-toggle="modal" data-target="#login" class="signin-modal-btn close-menu">Login</a></li>
-            <li><a href="#" data-toggle="modal" data-target="#login" class="signup-modal-btn close-menu">signup</a></li>
+            @if(!auth()->guard(whoAmI())->check())
+                <li><a href="" data-toggle="modal" data-target="#login" class="signin-modal-btn close-menu">Login</a></li>
+                <li><a href="#" data-toggle="modal" data-target="#login" class="signup-modal-btn close-menu">signup</a></li>
+            @endif
         </ul>
     </div>
 </div>
@@ -73,21 +70,20 @@
                         <a href="#"><img src="{!! asset('assets/images/gallery-img.jpg') !!}" alt="" /> <span>NYC - Manhattan </span></a>
                     </div>
                 </div>
-                @if(Auth::check())
+                @if(Auth::guard(whoAmI())->check())
                     <div class="login-user">
-                        <a href="#"><img src="assets/images/agent-img.jpg" alt="" class="avtar" /> {{ auth()->user()->first_name." ".auth()->user()->last_name }} <i class="fa fa-angle-down"></i></a>
+                        <a href="#">
+                            <img
+                                src = "{!! !empty(mySelf()->profile_image)
+                                    ? asset('storage/'.mySelf()->profile_image)
+                                    : asset('assets/images/agent-img.jpg') !!}
+                                    " alt="" class="avtar" />
+                            {{ mySelf()->first_name." ".mySelf()->last_name }} <i class="fa fa-angle-down"></i>
+                        </a>
                         <div class="user-dropdown">
-                            <a href="/admin/dashboard">Dashboard </a>
-                            <a href="#">Profile Setting </a>
-                            <a class="dropdown-item" href="{{ route('logout') }}"
-                               onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                {{ __('Logout') }}
-                            </a>
-
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                @csrf
-                            </form>
+                            <a href="{{ route(whoAmI().'.index') }}">Dashboard </a>
+                            <a href="{{ route(whoAmI().'.showProfile') }}">Profile Setting </a>
+                            <a href="{{ route(whoAmI().'.logout') }}">Log Out </a>
                         </div>
                     </div>
                 @else
@@ -96,17 +92,7 @@
                         <button type="button" class="signup-btn login-btn signin-modal-btn" data-toggle="modal" data-target="#login">Login</button>
                     </div>
                 @endif
-                <div class="login-user d-none">
-                    <a href="#"><img src="{!! asset('assets/images/agent-img.jpg') !!}" alt="" class="avtar" />{{ (auth()->check()) ? Auth::user()->first_name : '' }}<i class="fa fa-angle-down"></i></a>
-                    <div class="user-dropdown">
-                        <a href="#">Dashboard </a>
-                        <a href="#">Profile Setting </a>
-                        <a href="#">Log Out </a>
-                    </div>
-                </div>
-                <i class="fa fa-bars menu-btn"></i>
             </div>
         </div>
     </div>
 </div>
-
