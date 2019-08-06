@@ -48,3 +48,7 @@ Route::get('/listing-detail/{id}', 'HomeController@detail')->name('listing.detai
 Route::get('/auth', function() {
     auth()->logout();
 });
+
+Route::get('/socket', function() {
+    return view('socket');
+});
