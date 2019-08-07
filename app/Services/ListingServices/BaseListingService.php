@@ -10,6 +10,7 @@ namespace App\Services\ListingServices;
 
 use App\Forms\Listing\CreateListingForm;
 use App\Repository\Listing\ListingImageRepo;
+use App\Repository\Listing\ListingRepo;
 use App\Repository\Listing\ListingTypeRepo;
 use Illuminate\Support\Facades\DB;
 
@@ -25,7 +26,7 @@ class BaseListingService {
 	 *
 	 * @param $repo
 	 */
-	public function __construct($repo) {
+	public function __construct(ListingRepo $repo) {
 		$this->repo = $repo;
 	}
 
@@ -105,8 +106,8 @@ class BaseListingService {
 		$this->repo = new ListingTypeRepo;
 		foreach ($data as $key => $type) {
 			if (is_array($data->{$key})) {
-				$type = sprintf("%s", config("constants.listing_types.{$key}"));
-				foreach ($data->{$key} as $key => $value) {
+				$type = sprintf("%s", config("features.listing_types.{$key}"));
+				foreach ($data->{$key} as $value) {
 					$batch[] = [
 						'listing_id' => $id,
 						'property_type' => $type,

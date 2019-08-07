@@ -8,7 +8,7 @@ return [
 		'amenities' => 5,
 	],
 
-	'features' => [
+	'listing_features' => [
 		'listing_type' => [
 			0 => 'By Owner',
 			1 => 'Exclusive',
