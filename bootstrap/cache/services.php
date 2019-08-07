@@ -35,12 +35,11 @@
     31 => 'Orchestra\\Parser\\XmlServiceProvider',
     32 => 'Collective\\Html\\HtmlServiceProvider',
     33 => 'Yajra\\DataTables\\DataTablesServiceProvider',
-    34 => 'Orchestra\\Parser\\XmlServiceProvider',
-    35 => 'App\\Providers\\AppServiceProvider',
-    36 => 'App\\Providers\\AuthServiceProvider',
-    37 => 'App\\Providers\\EventServiceProvider',
-    38 => 'App\\Providers\\RouteServiceProvider',
-    39 => 'Spatie\\Permission\\PermissionServiceProvider',
+    34 => 'App\\Providers\\AppServiceProvider',
+    35 => 'App\\Providers\\AuthServiceProvider',
+    36 => 'App\\Providers\\EventServiceProvider',
+    37 => 'App\\Providers\\RouteServiceProvider',
+    38 => 'Spatie\\Permission\\PermissionServiceProvider',
   ),
   'eager' => 
   array (

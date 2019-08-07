@@ -187,8 +187,8 @@ function dataTable($data) {
  */
 function features($data = null, $readable = false) {
 	$build = [];
-	$config = config('constants');
-	$features = $config['features'];
+	$config = config('features');
+	$features = $config['listing_features'];
 
 	if ($data == null) {
 		return $features;
