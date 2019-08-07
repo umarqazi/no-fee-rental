@@ -40,4 +40,12 @@ class ContactUsController extends Controller {
 	public function getMessages() {
 		return $this->contact_service->showMessages();
 	}
+
+	public function showForm() {
+		return view('pages.contact-us');
+	}
+
+	public function showPress() {
+		return view('pages.press');
+	}
 }

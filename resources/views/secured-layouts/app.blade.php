@@ -29,6 +29,7 @@
 	{!! HTML::script('assets/js/lightslider.js') !!}
 	{!! HTML::script('assets/js/pignose.calendar.full.min.js') !!}
     {!! HTML::script('assets/js/dropzone.js') !!}
+    {!! HTML::script('assets/js/app.js') !!}
     {!! HTML::script('assets/js/toastr.js') !!}
     {!! HTML::script('assets/js/validate.js') !!}
     {!! HTML::script('assets/js/global.js') !!}

@@ -246,3 +246,10 @@
 .dataTables_filter {
   float: right;
 }
+
+#map {
+  width: 100%;
+    position: relative;
+    overflow: hidden;
+    height: 600px;
+}

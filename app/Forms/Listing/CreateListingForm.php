@@ -17,6 +17,7 @@ class CreateListingForm extends BaseForm {
 	public $available;
 	public $city_state_zip;
 	public $neighborhood;
+	public $map_location;
 	public $bedrooms;
 	public $baths;
 	public $unit;
@@ -56,6 +57,7 @@ class CreateListingForm extends BaseForm {
 			'unit_feature' => $this->unit_feature,
 			'building_feature' => $this->building_feature,
 			'pet_policy' => $this->pet_policy,
+			'map_location' => $this->map_location,
 		];
 	}
 
@@ -68,6 +70,7 @@ class CreateListingForm extends BaseForm {
 			'street_address' => 'required|string',
 			'display_address' => 'required|string',
 			'available' => 'required',
+			'map_location' => 'required',
 			'city_state_zip' => 'required',
 			'neighborhood' => 'required|string',
 			'bedrooms' => 'required',
