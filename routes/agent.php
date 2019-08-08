@@ -33,6 +33,11 @@ Route::get('/request-featured/{id}', 'Agent\ListingController@request')->name('a
 // Agent Invites
 Route::get('/all-invites', 'Agent\MemberController@get')->name('agent.getInvites');
 Route::post('/invite-agent', 'Agent\MemberController@invite')->name('agent.inviteMember');
+
+// Messaging Routes
+Route::get('/messages-view', 'Agent\MessageController@index')->name('agent.messageIndex');
+Route::get('/load-chat/{id}', 'Agent\MessageController@loadChat')->name('agent.loadChat');
+Route::post('/accept-meeting/{id}', 'Agent\MessageController@confirmMeeting');
 Route::get('/test', function() {
     return view('agent.members');
 });

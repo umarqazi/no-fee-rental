@@ -49,6 +49,5 @@ Route::get('/auth', function() {
     auth()->logout();
 });
 
-Route::get('/socket', function() {
-    return view('socket');
-});
+// Messaging Routes
+Route::post('/send-message', 'MessageController@send')->name('send.message');

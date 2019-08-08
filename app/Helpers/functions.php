@@ -58,7 +58,14 @@ function whoAmI() {
 		}
 	}
 
-	return false;
+	return 'web';
+}
+
+/**
+ * @return mixed
+ */
+function authenticated() {
+    return Auth::guard(whoAmI())->check();
 }
 
 /**
