@@ -2,9 +2,7 @@
 @section('title', 'No Fee Rental')
 @section('content')
 <header>
-	<div class="header-bg inner-pages-banner">
-
-		</div>
+	<div class="header-bg inner-pages-banner"></div>
 </header>
 <section class="neighborhood-search wow fadeIn listing-detail-container" data-wow-delay="0.2s">
 		<div class="container-lg">
@@ -183,4 +181,6 @@
 			</div>
 		</div>
 	</section>
+    {{--Check Availability--}}
+    @include('features.message')
 @endsection

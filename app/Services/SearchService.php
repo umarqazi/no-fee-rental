@@ -83,7 +83,7 @@ class SearchService {
         $this->args = toObject($this->args->toArray());
         foreach ($this->args as $key => $type) {
             if (is_array($this->args->{$key})) {
-                $property_type = sprintf("%s", config("constants.listing_types.{$key}"));
+                $property_type = sprintf("%s", config("features.listing_types.{$key}"));
                 $this->query->whereHas('listingTypes', function ($query) use ($property_type, $type) {
                     return $query->where('property_type', $property_type)->whereIn('value', array_values($type));
                 });

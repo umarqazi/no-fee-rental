@@ -1,17 +1,17 @@
 
 function populateFields(form, data) {
-    $.each(data, function(key, value) {  
-        var ctrl = $('[name='+key+']', form);  
-        switch(ctrl.prop("type")) { 
-            case "radio": case "checkbox":  
+    $.each(data, function(key, value) {
+        var ctrl = $('[name='+key+']', form);
+        switch(ctrl.prop("type")) {
+            case "radio": case "checkbox":
                 ctrl.each(function() {
                     if($(this).attr('value') == value) $(this).attr("checked",value);
-                });   
+                });
                 break;
             default:
-                ctrl.val(value); 
+                ctrl.val(value);
         }
-    });  
+    });
 }
 
 async function ajaxRequest(url, type, data, processing = true, form) {
@@ -28,23 +28,24 @@ async function ajaxRequest(url, type, data, processing = true, form) {
 
 		success: (res) => {
 			$('.loader').hide();
-			if(!res.status) {
+
+			if(!res.status && res.msg) {
 				toastr.error(res.msg);
 				return false;
 			}
 
-			if(res.msg)
-				toastr.success(res.msg);
-			return res;
+			if(res.msg) {
+                toastr.success(res.msg);
+                return res;
+            }
 		},
 
 		error: (err) => {
 			$('.loader').hide();
-			if(err.status == 422) {
+			if(err.status === 422) {
 				populateErrors(form, err.responseJSON.errors);
 				return;
 			}
-
 			toastr.error(err.responseJSON.msg);
 			return;
 		}
@@ -70,7 +71,7 @@ function populateErrors(form, errors) {
 }
 
 $(() => {
-	
+
 	$('body').on('submit', '.ajax', async function(e) {
 		e.preventDefault();
 		let form = $(this);
@@ -79,7 +80,7 @@ $(() => {
 		let type = $(this).attr('method');
 		let data = $(this).serialize();
 		let reset = $(this).attr('reset');
-		
+
 		if(!form.valid()) {
 			return;
 		}
