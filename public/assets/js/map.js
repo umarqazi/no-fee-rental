@@ -5,12 +5,27 @@
 let map;
 let marker;
 let coords;
+const bound = {
+    lat: 33.738045,
+    lng: 73.084488
+};
 const ZOOM = 15;
 const NAVIGATOR = navigator.geolocation;
 const GEOCODER = new google.maps.Geocoder();
 let infowindow = new google.maps.InfoWindow();
 
 const MAP = {
+    defaultBound: () => {
+        let defaultbounds = new google.maps.LatLngBounds(
+            new google.maps.LatLng(33.738045, 73.084488),
+            new google.maps.LatLng(33.738045, 73.084488)
+        );
+        let options = {
+            bounds: defaultbounds
+        };
+        return options;
+    },
+
   toolTip: (place) => {
       infowindow.setContent(place);
       infowindow.open(map, marker);
@@ -54,7 +69,8 @@ const MAP = {
   },
 
   autoCompletePlaces: (selector) => {
-    new google.maps.places.SearchBox(selector);
+        console.log(MAP.defaultBound());
+    new google.maps.places.Autocomplete(selector, MAP.defaultBound());
   }
 };
 
@@ -79,7 +95,6 @@ $(() => {
     setTimeout(() => {
       MAP.getLatLngByAddress($('body').find('#controls').val()).then(res => {
         coords = {latitude: res[0].geometry.location.lat(), longitude: res[0].geometry.location.lng()};
-        console.log(JSON.stringify(coords));
         $('input[name=map_location]').val(JSON.stringify(coords));
         MAP.setGoogleMapLocation(document.getElementById('map'), coords);
         marker = MAP.addMarkers({ lat: coords.latitude, lng: coords.longitude });

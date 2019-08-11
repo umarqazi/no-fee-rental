@@ -84,13 +84,13 @@
 </div>
 
  <!-- Add User Modal -->
-@include('admin.models.add-user')
+@include('admin.modals.add_user')
 
 <!-- Invite User Modal -->
-@include('admin.models.invite-agent')
+@include('admin.modals.invite_agent')
 
 <!-- Add Company Modal -->
-@include('admin.models.add-company')
+@include('admin.modals.add_company')
 
 <div class="modal fade user-modal-wrapper" id="user-modal">
     <div class="modal-dialog modal-dialog-centered">

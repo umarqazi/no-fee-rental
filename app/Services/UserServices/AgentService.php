@@ -2,6 +2,7 @@
 
 namespace App\Services\UserServices;
 
+use App\Repository\MemberRepo;
 use App\Repository\User\UserRepo;
 
 class AgentService extends BaseUserService {
@@ -12,4 +13,8 @@ class AgentService extends BaseUserService {
 	public function __construct() {
 		parent::__construct(new UserRepo);
 	}
+
+	public function getMembers() {
+	    return $this->repo->get();
+    }
 }

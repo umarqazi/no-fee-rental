@@ -9,8 +9,10 @@
 namespace App\Services\UserServices;
 
 use App\Forms\Agent\CreateForm;
+use App\Repository\MemberRepo;
+use App\Repository\User\AgentRepo;
 use App\Repository\User\UserRepo;
-use DB;
+use Illuminate\Support\Facades\DB;
 
 class ClientService extends BaseUserService {
 
@@ -20,6 +22,7 @@ class ClientService extends BaseUserService {
 	public function __construct() {
 		parent::__construct(new UserRepo);
 	}
+
 
 	/**
 	 * @param $request
@@ -61,6 +64,10 @@ class ClientService extends BaseUserService {
 			DB::commit();
 			return true;
 		} else if ($user) {
+		    $this->repo = new AgentRepo();
+		    $requestedAgentId = $this->repo->find(['token' => $request->token])->first();
+            $this->repo = new MemberRepo();
+            $this->repo->create(['agent_id' => $requestedAgentId->invited_by, 'member_id' => $user->id]);
 			DB::commit();
 			return true;
 		}
@@ -74,7 +81,7 @@ class ClientService extends BaseUserService {
 	 * @return bool
 	 */
 	public function validateEncodedToken($token) {
-		$record = $this->repo->first(['email' => base64_decode($token)])->first();
+		$record = $this->repo->find(['email' => base64_decode($token)])->first();
 		return $record ? $record : false;
 	}
 
@@ -92,4 +99,14 @@ class ClientService extends BaseUserService {
 
 		return false;
 	}
+
+    /**
+     * @param $token
+     *
+     * @return mixed
+     */
+    public function getAgentToken($token) {
+        $this->repo = new AgentRepo();
+        return $this->repo->find(['token' => $token]);
+    }
 }

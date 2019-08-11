@@ -10,24 +10,20 @@
 | contains the "web" middleware group. Now create something great!
 |
  */
+use Illuminate\Support\Facades\Redis;
 
-// Guest Auth Routes Group
-Auth::routes();
-
-Route::get('/', 'HomeController@index');
-
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('web.index');
 
 Route::get('/renter-guide', function () {
 	return view('pages.renter-guide');
 });
 
+// Contact Us Routes
 Route::get('/contact-us', 'ContactUsController@showForm')->name('contact-us');
-
 Route::post('/contact-us', 'ContactUsController@contactUs')->name('contact-us');
 
+// Wordpress Pages
 Route::get('/press', 'ContactUsController@showPress')->name('press');
-
 Route::post('newsletter', 'NewsletterController@store');
 
 // Added User By Admin Change Password Routes
@@ -43,8 +39,10 @@ Route::post('/login')->name('attempt.login')->middleware('authguard');
 // Route for Invited Agent Signup
 Route::get('/signup/{token}', 'UserController@invitedAgentSignupForm')->name('agent.signup_form');
 
+Route::post('/user-signup', 'UserController@signup')->name('user.signup');
 Route::post('/agent/signup', 'UserController@invitedAgentSignup')->name('agent.signup');
 Route::get('/listing-detail/{id}', 'HomeController@detail')->name('listing.detail');
-Route::post('/user-signup', 'UserController@signup')->name('user.signup');
 
-Route::get('/test', 'RealtyMXController@get');
+Route::get('/auth', function() {
+    auth()->logout();
+});

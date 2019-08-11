@@ -12,8 +12,6 @@ return [
 		'listing_type' => [
 			0 => 'By Owner',
 			1 => 'Exclusive',
-			2 => 'No Fee',
-			3 => 'Exclusive',
 		],
 
 		'pet_policy' => [
