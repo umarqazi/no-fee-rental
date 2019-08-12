@@ -25,13 +25,13 @@ class SearchController extends Controller
      * @param Request $request
      */
     public function advanceSearch(Request $request) {
-        collect($request->all())->reject(function ($args) {
+        $filter = collect($request->all())->reject(function ($args) {
             if (is_array($args)) {
                 $args = array_filter($args, function($value) { return !is_null($value) && $value !== ''; });
             }
             return empty($args);
         })->map(function($args, $method) {
-            if(method_exists($this, $method)) {
+            if(method_exists($this->service, $method)) {
                 $this->service->args = collect($args);
                 $this->service->{$method}();
                 $this->service->args = null;
