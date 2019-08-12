@@ -24,6 +24,7 @@ return [
 			1 => 'Laundry In Unit',
 			2 => 'Parking Space',
 			3 => 'Outdoor Space',
+            4 => 'Abdullah',
 		],
 
 		'building_feature' => [

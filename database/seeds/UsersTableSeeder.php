@@ -22,6 +22,16 @@ class UsersTableSeeder extends Seeder {
 				'created_at' => now(),
 				'updated_at' => now(),
 			],
+            [
+                'first_name' => 'Eli',
+                'last_name' => 'Halali',
+                'email' => 'nofeerentalsync@techverx.com',
+                'user_type' => 1,
+                'password' => bcrypt('123456789'),
+                'remember_token' => str_random(60),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
 			[
 				'first_name' => 'Muhammad',
 				'last_name' => 'Adeel',

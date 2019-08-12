@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -159,4 +160,20 @@ class Listing extends Model {
 	public function scopeSearch($query, $clause) {
 		return $query->where($clause)->latest('updated_at');
 	}
+
+    /**
+     * Scope year range filter
+     * @param $query
+     * @param $start_year
+     * @param $end_year
+     * @param string $date
+     *
+     * @return mixed
+     */
+	public function scopeBetweenYear($query, $start_year, $end_year, $date = 'created_at') {
+	    return $query->whereBetween($date, [
+            Carbon::create($start_year)->startOfYear(),
+            Carbon::create($end_year)->endOfYear(),
+        ]);
+    }
 }

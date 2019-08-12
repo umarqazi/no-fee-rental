@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Redis;
 
 Route::get('/', 'HomeController@index')->name('web.index');
 
+Route::get('/search', 'SearchController@advanceSearch')->name('list.search');
+
 Route::get('/renter-guide', function () {
 	return view('pages.renter-guide');
 });
