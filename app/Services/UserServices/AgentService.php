@@ -2,7 +2,6 @@
 
 namespace App\Services\UserServices;
 
-use App\Repository\MemberRepo;
 use App\Repository\User\UserRepo;
 
 class AgentService extends BaseUserService {
