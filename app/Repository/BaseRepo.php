@@ -68,7 +68,7 @@ class BaseRepo implements IRepo {
 	 * @return mixed
 	 */
 	public function edit($id) {
-		return $this->model->findOrFail((int) $id);
+		return $this->model->where(['id' => $id]);
 	}
 
 	/**

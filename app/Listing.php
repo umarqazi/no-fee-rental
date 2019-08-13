@@ -33,6 +33,7 @@ class Listing extends Model {
 	}
 
 	/**
+     * return listing types
 	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
 	 */
 	public function listingTypes() {
