@@ -30,26 +30,9 @@ class ListingController extends Controller {
 	/**
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
-	public function index($check = null) {
-
-		if($check == 'cheaper'){
-            $listing = $this->service->getCheaper($this->paginate);
-        }
-
-		elseif($check == 'petPolicy'){
-            $listing = $this->service->getPetPolicy($this->paginate);
-        }
-
-		elseif($check == 'recent'){
-            $listing = $this->service->getRecent($this->paginate);
-        }
-
-	    else{
-            $listing = $this->service->get($this->paginate);
-        }
-
+	public function index() {
+		$listing = $this->service->get($this->paginate);
 		return view('admin.listing_view', compact('listing'));
-
 	}
 
 	/**

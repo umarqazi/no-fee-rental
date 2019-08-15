@@ -34,66 +34,7 @@ class ListingRepo extends BaseRepo {
 	public function pending() {
 		return $this->model->pending()->withimages();
 	}
-    /**
-     * @return mixed
-     */
-    public function cheaperActive() {
-        return $this->model->cheaperActive()->withimages();
-    }
 
-    /**
-     * @return mixed
-     */
-    public function cheaperInactive() {
-        return $this->model->cheaperInactive()->withimages();
-    }
-
-    /**
-     * @return mixed
-     */
-    public function cheaperPending() {
-        return $this->model->cheaperPending()->withimages();
-    }
-    /**
-     * @return mixed
-     */
-    public function petPolicyActive() {
-        return $this->model->petPolicyActive()->withimages();
-    }
-
-    /**
-     * @return mixed
-     */
-    public function petPolicyInactive() {
-        return $this->model->petPolicyInactive()->withimages();
-    }
-
-    /**
-     * @return mixed
-     */
-    public function petPolicyPending() {
-        return $this->model->petPolicyPending()->withimages();
-    }
-    /**
-     * @return mixed
-     */
-    public function recentActive() {
-        return $this->model->recentActive()->withimages();
-    }
-
-    /**
-     * @return mixed
-     */
-    public function recentInactive() {
-        return $this->model->recentInactive()->withimages();
-    }
-
-    /**
-     * @return mixed
-     */
-    public function recentPending() {
-        return $this->model->recentPending()->withimages();
-    }
 	/**
 	 * @param $id
 	 *

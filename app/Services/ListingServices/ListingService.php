@@ -42,34 +42,8 @@ class ListingService extends BaseListingService {
 	public function get($paginate) {
 		return $this->collection($this->repo, $paginate);
 	}
-    /**
-     * @param $paginate
-     *
-     * @return array
-     */
-    public function getCheaper($paginate) {
-        return $this->cheaperCollection($this->repo, $paginate);
-    }
-    /**
-     * @param $paginate
-     *
-     * @return array
-     */
 
-    public function getPetPolicy($paginate) {
-        return $this->getPetPolicyCollection($this->repo, $paginate);
-    }
-
-    /**
-     * @param $paginate
-     *
-     * @return array
-     */
-    public function getRecent($paginate) {
-        return $this->recentCollection($this->repo, $paginate);
-    }
-
-    /**
+	/**
 	 * @param $id
 	 *
 	 * @return mixed
