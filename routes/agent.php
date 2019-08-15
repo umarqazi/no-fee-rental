@@ -26,6 +26,7 @@ Route::get('/edit-list/{id}', 'Agent\ListingController@edit')->name('agent.editL
 Route::post('/update-listing/{id}', 'Agent\ListingController@update')->name('agent.updateListing');
 Route::get('/finish-listing', 'Agent\ListingController@finishCreate')->name('agent.finishCreateListing');
 Route::get('/update-listing', 'Agent\ListingController@finishUpdate')->name('agent.finishUpdateListing');
+Route::get('/listing/{sortBy}', 'Agent\ListingController@sortBy')->name('agent.sorting');
 
 // Featured Listing
 Route::get('/request-featured/{id}', 'Agent\ListingController@request')->name('agent.requestFeatured');

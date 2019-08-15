@@ -48,8 +48,11 @@ Route::get('/edit-list/{id}', 'Admin\ListingController@edit')->name('admin.editL
 Route::post('/update-listing/{id}', 'Admin\ListingController@update')->name('admin.updateListing');
 Route::get('/finish-create-listing', 'Admin\ListingController@finishCreate')->name('admin.finishCreateListing');
 Route::get('/finish-update-listing', 'Admin\ListingController@finishUpdate')->name('admin.finishUpdateListing');
+Route::get('/listing/{sortBy}', 'Admin\ListingController@sortBy')->name('admin.sorting');
 
 // Featured Listing Routes
+Route::get('/feature-listing/{sortBy}', 'Admin\FeaturedListingController@sortBy')->name('admin.featureSorting');
+Route::match(['get', 'post'], '/search-feature-listing', 'Admin\FeaturedListingController@searchWithFilters')->name('admin.featureListingSearch');
 Route::get('/feature-listing', 'Admin\FeaturedListingController@index')->name('admin.featureListing');
 Route::get('/approve-feature-request/{id}', 'Admin\FeaturedListingController@approve')->name('admin.approveFeature');
 Route::get('/remove-featured-listing/{id}', 'Admin\FeaturedListingController@remove')->name('admin.removeFeatured');

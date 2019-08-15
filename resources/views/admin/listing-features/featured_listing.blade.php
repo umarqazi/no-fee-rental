@@ -2,7 +2,7 @@
 
 							<!--List view listing-->
 							<div class="listing-wrapper">
-								@foreach($listing['featured'] as $fl)
+								@foreach($listing->featured as $fl)
 								<div class="listing-row">
 									<div class="img-holder">
 										<img src="{{isset($fl->thumbnail) ? asset('storage/'.$fl->thumbnail) : asset('uploads/listing/thumbnails/default.jpg')}}" alt="" style="height:205px;" class="main-img" />
@@ -27,16 +27,16 @@
 									</div>
 								</div>
 								@endforeach
-								@if(count($listing['featured']) < 1)
+								@if($listing->featured->total() < 1)
 									<p class="null">No Record Found</p>
 								@endif
-								{!! $listing['featured']->render() !!}
+								{!! $listing->featured->render() !!}
 							</div>
 
 							<!--Grid view listing-->
 							<div class="grid-view-wrapper">
 								<div class="row">
-									@foreach($listing['featured'] as $fl)
+									@foreach($listing->featured as $fl)
 									<div class="col-lg-3 col-md-4 col-sm-6">
 										<div class="listing-thumb">
 											<img src="{{isset($fl->thumbnail) ? asset('storage/'.$fl->thumbnail) : asset('uploads/listing/thumbnails/default.jpg')}}" alt="" style="width: 400px;" class="main-img" />
@@ -62,9 +62,9 @@
 										</div>
 									</div>
 									@endforeach
-									@if(count($listing['featured']) < 1)
+									@if($listing->featured->total() < 1)
 										<p class="null">No Record Found</p>
 									@endif
 								</div>
-									{!! $listing['featured']->render() !!}
+									{!! $listing->featured->render() !!}
 							</div>

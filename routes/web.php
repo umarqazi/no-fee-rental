@@ -51,3 +51,5 @@ Route::get('/auth', function() {
 
 // Messaging Routes
 Route::post('/send-message', 'MessageController@send')->name('send.message');
+
+Route::get('/test/{file}', 'RealtyMXController@get');

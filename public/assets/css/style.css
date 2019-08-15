@@ -267,3 +267,34 @@
 .view-chat:hover{
     color: #fff;
 }
+.sort-bt{
+    position: relative;
+    margin-right: 15px;
+}
+.sort-bt i{
+    color: #e77817;
+    display: inline-block;
+}
+.custom-dropdown{
+    position: absolute;
+    top: 25px;
+    left: 0;
+    right: 0;
+    display: none;
+    background-color: #f1f4f5;
+    padding: 5px;
+    z-index: 9;
+    min-width: 100px;
+}
+.custom-dropdown ul li a{
+    display: block;
+    color: #000;
+    text-transform: capitalize;
+    font-weight: 500;
+    padding: 5px;
+}
+.custom-dropdown ul li a:hover{
+    background-color: #e77817;
+    color: #fff;
+    opacity: .7;
+}

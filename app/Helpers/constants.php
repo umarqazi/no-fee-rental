@@ -83,3 +83,15 @@ if (!defined('ACTIVELISTING')) {
 if (!defined('PENDINGLISTING')) {
 	define('PENDINGLISTING', 2);
 }
+
+if(!defined('CHEAPER')) {
+    define('CHEAPER', 'asc');
+}
+
+if(!defined('RECENT')) {
+    define('RECENT', 'asc');
+}
+
+if(!defined('PET_POLICY')) {
+    define('PET_POLICY', 2);
+}

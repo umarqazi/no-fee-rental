@@ -1,19 +1,12 @@
-
-function populateFields(form, data) {
-    $.each(data, function(key, value) {
-        var ctrl = $('[name='+key+']', form);
-        switch(ctrl.prop("type")) {
-            case "radio": case "checkbox":
-                ctrl.each(function() {
-                    if($(this).attr('value') == value) $(this).attr("checked",value);
-                });
-                break;
-            default:
-                ctrl.val(value);
-        }
-    });
-}
-
+/**
+ *
+ * @param url
+ * @param type
+ * @param data
+ * @param processing
+ * @param form
+ * @returns {Promise<void>}
+ */
 async function ajaxRequest(url, type, data, processing = true, form) {
 	setHeaders();
 	var res = await $.ajax({
@@ -54,8 +47,29 @@ async function ajaxRequest(url, type, data, processing = true, form) {
 		return res;
 }
 
+/**
+ *
+ * @param form
+ * @param data
+ */
+function populateFields(form, data) {
+    $.each(data, function(key, value) {
+        var ctrl = $('[name='+key+']', form);
+        switch(ctrl.prop("type")) {
+            case "radio": case "checkbox":
+                ctrl.each(function() {
+                    if($(this).attr('value') === value) $(this).attr("checked",value);
+                });
+                break;
+            default:
+                ctrl.val(value);
+        }
+    });
+}
 
-
+/**
+ * Set Default Request Headers
+ */
 function setHeaders() {
 	$.ajaxSetup({
 		headers: {
@@ -64,6 +78,11 @@ function setHeaders() {
 	});
 }
 
+/**
+ *
+ * @param form
+ * @param errors
+ */
 function populateErrors(form, errors) {
 	$.each(errors, function (key, msg) {
 		$(form).find(`input[name=${key}]`).after(`<label class="error">${msg}</label>`);
@@ -85,7 +104,7 @@ $(() => {
 			return;
 		}
 		let res = await ajaxRequest(url, type, data, false, form);
-		if(reset == 'true'){
+		if(reset === 'true'){
 			resetForm();
 		}
 		if(res.status){
@@ -111,10 +130,13 @@ function confirm(msg) {
 		],
 		dangerMode: true,
 	}).then(function(isConfirm) {
-		return (isConfirm) ? true : false
+		return !!(isConfirm);
 	});
 }
 
+/**
+ * Reset Current Form
+ */
 function resetForm() {
 	$('input[type=text], input[type=email], input[type=number], input[type=password], select').val('');
 	$('input:checkbox, input:radio').prop('checked', false);
@@ -134,6 +156,13 @@ async function deleteRecord(route, table, form) {
     }
 }
 
+/**
+ *
+ * @param route
+ * @param table
+ * @param form
+ * @returns {Promise<void>}
+ */
 async function toggleStatus(route, table, form) {
     if(await confirm('Sure to perform this action?')) {
         let res = await ajaxRequest(route, 'post', null);
@@ -148,7 +177,8 @@ async function toggleStatus(route, table, form) {
 
 /**
  *
- * @param id
+ * @param form_id
+ * @param route
  * @returns {Promise<void>}
  */
 async function updateRecord(form_id, route) {

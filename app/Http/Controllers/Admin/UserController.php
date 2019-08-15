@@ -8,12 +8,11 @@ use App\Services\UserServices\AdminService;
 use Illuminate\Http\Request;
 
 class UserController extends Controller {
+
 	/**
 	 * @var AdminService
 	 */
 	private $service;
-
-	private $paginate = 20;
 
 	/**
 	 * UserController constructor.
@@ -149,16 +148,5 @@ class UserController extends Controller {
 		}
 
 		return $res;
-	}
-
-	/**
-	 * @param Request $request
-	 *
-	 * @return JSON Boolean
-	 */
-	public function unique(Request $request) {
-		// return $this->service->isUniqueEmail($request)
-		// ? response()->json(true)
-		// : response()->json(false);
 	}
 }
