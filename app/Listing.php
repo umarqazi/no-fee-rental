@@ -55,7 +55,7 @@ class Listing extends Model {
 	public function scopeActive($query) {
 		isAdmin() ?: $clause['user_id'] = myId();
 		$clause['status'] = ACTIVELISTING;
-		return $query->where($clause)->latest('updated_at');
+		return $query->where($clause);
 	}
 
 	/**
@@ -79,7 +79,96 @@ class Listing extends Model {
 		$clause['status'] = PENDINGLISTING;
 		return $query->where($clause)->latest();
 	}
+    /**
+     * @param $query
+     *
+     * @return mixed active listing
+     */
+    public function scopeCheaperActive($query) {
 
+        return $query->active()->orderBy('rent', 'ASC');
+    }
+
+    /**
+     * @param $query
+     *
+     * @return mixed
+     */
+    public function scopeCheaperInactive($query) {
+        return $query->inactive()->orderBy('rent', 'ASC');
+    }
+
+    /**
+     * @param $query
+     *
+     * @return mixed
+     */
+    public function scopeCheaperPending($query) {
+        return $query->pending()->orderBy('rent', 'ASC');
+    }
+    /**
+     * @param $query
+     *
+     * @return mixed active listing
+     */
+    public function scopePetPolicyActive($query) {
+        return $query->active()->whereHas('listingTypes', function ($query) {
+            return $query->where('property_type', 2);
+        });
+
+    }
+
+    /**
+     * @param $query
+     *
+     * @return mixed
+     */
+    public function scopePetPolicyInactive($query) {
+        return $query->active()->whereHas('listingTypes', function ($query) {
+            return $query->where('property_type', 2);
+        });
+
+    }
+
+    /**
+     * @param $query
+     *
+     * @return mixed
+     */
+    public function scopePetPolicyPending($query) {
+        return $query->active()->whereHas('listingTypes', function ($query) {
+            return $query->where('property_type', 2);
+        });
+
+    }
+    /**
+     * @param $query
+     *
+     * @return mixed
+     */
+
+    public function scopeRecentActive($query) {
+        return $query->active()->orderBy('updated_at', 'DESC');
+
+    }
+
+    /**
+     * @param $query
+     *
+     * @return mixed
+     */
+    public function scopeRecentInactive($query) {
+        return $query->inactive()->orderBy('updated_at', 'DESC');
+    }
+
+    /**
+     * @param $query
+     *
+     * @return mixed
+     */
+    public function scopeRecentPending($query) {
+        return $query->pending()->orderBy('updated_at', 'DESC');
+    }
 	/**
 	 * @param $query
 	 *

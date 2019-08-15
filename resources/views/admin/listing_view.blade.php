@@ -24,10 +24,17 @@
 							<span><i class="fa fa-th-list list-view-btn active"></i></span>
 							<span><i class="fa fa-th grid-view-btn"></i></span>
 						</div>
-						<span class="sort-bt">
+						<div class="sort-by">
 							<i class="fa fa-sort-amount-down"></i>
+                            <div class="custom-dropdown">
+                                <ul>
+                                    <li><a href="/admin/listing_view/cheaper">Cheeper</a></li>
+                                    <li><a href="/admin/listing_view/petPolicy" >Pet Policy </a></li>
+                                    <li><a href="/admin/listing_view/recent" >Recent</a></li>
+                                </ul>
+                            </div>
 							<span>Sort By</span>
-						</span>
+						</div>
 						<form action="{{ route('admin.listingSearch') }}" id="search" method="post">
 							@csrf
 							<input value="{{ !empty(Request::get('beds')) ? Request::get('beds') : '' }}" type="number" name="beds" class="filter-input" placeholder="All Beds" />
@@ -52,7 +59,11 @@
 				</div>
 			</div>
 		</div>
-
+<script type="text/javascript">
+    $(".sort-by > i").click(function () {
+       $(this).siblings(".custom-dropdown").slideToggle();
+    });
+</script>
 {!! HTML::script('assets/js/listing.js') !!}
 
 @endsection
