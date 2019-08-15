@@ -55,7 +55,7 @@ class Listing extends Model {
 	public function scopeActive($query) {
 		isAdmin() ?: $clause['user_id'] = myId();
 		$clause['status'] = ACTIVELISTING;
-		return $query->where($clause)->latest('updated_at');
+		return $query->where($clause);
 	}
 
 	/**
