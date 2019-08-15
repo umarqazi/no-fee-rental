@@ -285,58 +285,8 @@ class BaseListingService {
 			'totalInactive' => $listing->inactive()->count(),
 		];
 	}
-    /**
-     * @param $listing
-     * @param $paginate
-     *
-     * @return array
-     */
-    public function cheaperCollection($listing, $paginate) {
-        return [
-            'active' => $listing->cheaperActive()->paginate($paginate, ['*'], 'active'),
-            'pending' => $listing->cheaperPending()->paginate($paginate, ['*'], 'pending'),
-            'inactive' => $listing->cheaperInactive()->paginate($paginate, ['*'], 'inactive'),
-            'totalActive' => $listing->cheaperActive()->count(),
-            'totalPending' => $listing->cheaperPending()->count(),
-            'totalInactive' => $listing->cheaperInactive()->count(),
-        ];
-    }
-    /**
-     * @param $listing
-     * @param $paginate
-     *
-     * @return array
-     */
-    public function getPetPolicyCollection($listing, $paginate)
-    {
-        return [
-            'active' => $listing->petPolicyActive()->paginate($paginate, ['*'], 'active'),
-            'pending' => $listing->petPolicyPending()->paginate($paginate, ['*'], 'pending'),
-            'inactive' => $listing->petPolicyInactive()->paginate($paginate, ['*'], 'inactive'),
-            'totalActive' => $listing->petPolicyActive()->count(),
-            'totalPending' => $listing->petPolicyPending()->count(),
-            'totalInactive' => $listing->petPolicyInactive()->count(),
-        ];
-    }
-    /**
-     * @param $listing
-     * @param $paginate
-     *
-     * @return array
-     */
-    public function recentCollection($listing, $paginate)
-    {
-        return [
-            'active' => $listing->recentActive()->paginate($paginate, ['*'], 'active'),
-            'pending' => $listing->recentPending()->paginate($paginate, ['*'], 'pending'),
-            'inactive' => $listing->recentInactive()->paginate($paginate, ['*'], 'inactive'),
-            'totalActive' => $listing->recentActive()->count(),
-            'totalPending' => $listing->recentPending()->count(),
-            'totalInactive' => $listing->recentInactive()->count(),
-        ];
-    }
 
-        /**
+	/**
 	 * @param $keywords
 	 * @param $paginate
 	 *

@@ -48,7 +48,6 @@ Route::get('/edit-list/{id}', 'Admin\ListingController@edit')->name('admin.editL
 Route::post('/update-listing/{id}', 'Admin\ListingController@update')->name('admin.updateListing');
 Route::get('/finish-create-listing', 'Admin\ListingController@finishCreate')->name('admin.finishCreateListing');
 Route::get('/finish-update-listing', 'Admin\ListingController@finishUpdate')->name('admin.finishUpdateListing');
-Route::get('/listing_view/{check}', 'Admin\ListingController@index')->name('admin.cheaperListing');
 
 // Featured Listing Routes
 Route::get('/feature-listing', 'Admin\FeaturedListingController@index')->name('admin.featureListing');
