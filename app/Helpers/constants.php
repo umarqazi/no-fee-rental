@@ -85,11 +85,11 @@ if (!defined('PENDINGLISTING')) {
 }
 
 if(!defined('CHEAPER')) {
-    define('CHEAPER', 'asc');
+    define('CHEAPER', 'ASC');
 }
 
 if(!defined('RECENT')) {
-    define('RECENT', 'asc');
+    define('RECENT', 'DSC');
 }
 
 if(!defined('PET_POLICY')) {
