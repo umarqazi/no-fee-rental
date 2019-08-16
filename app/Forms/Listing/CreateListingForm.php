@@ -25,13 +25,15 @@ class CreateListingForm extends BaseForm {
 	public $thumbnail;
 	public $old;
 	public $square_feet;
-
 	public $listing_type;
 	public $amenities;
 	public $unit_feature;
 	public $building_feature;
 	public $pet_policy;
 
+    /**
+     * @return array
+     */
 	function toArray() {
 		return [
 			'user_id' => $this->user_id,
@@ -61,6 +63,9 @@ class CreateListingForm extends BaseForm {
 		];
 	}
 
+    /**
+     * @return array|mixed
+     */
 	function rules() {
 		return [
 			'name' => 'required|string',
@@ -82,5 +87,4 @@ class CreateListingForm extends BaseForm {
 			'square_feet' => 'required',
 		];
 	}
-
 }

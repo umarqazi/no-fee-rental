@@ -11,3 +11,4 @@ const mix = require('laravel-mix');
  |
  */
 
+mix.js('resources/js/listing.js', 'public/assets/js/vue/listing.js');

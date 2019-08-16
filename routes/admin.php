@@ -49,6 +49,8 @@ Route::post('/update-listing/{id}', 'Admin\ListingController@update')->name('adm
 Route::get('/finish-create-listing', 'Admin\ListingController@finishCreate')->name('admin.finishCreateListing');
 Route::get('/finish-update-listing', 'Admin\ListingController@finishUpdate')->name('admin.finishUpdateListing');
 
+Route::get('/listing-get', 'Admin\ListingController@listing');
+
 // Featured Listing Routes
 Route::get('/feature-listing', 'Admin\FeaturedListingController@index')->name('admin.featureListing');
 Route::get('/approve-feature-request/{id}', 'Admin\FeaturedListingController@approve')->name('admin.approveFeature');

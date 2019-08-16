@@ -57,11 +57,11 @@ class ListingController extends Controller {
 		: error('Something went wrong');
 	}
 
-	/**
-	 * create new listing
-	 *
-	 * @return view listing image form
-	 */
+    /**
+     * @param Request $request
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
 	public function create(Request $request) {
 		$edit = false;
 		$id = $this->service->create($request);
@@ -105,15 +105,14 @@ class ListingController extends Controller {
 			->with(['message' => 'Property has been updated.', 'alert_type' => 'success']);
 	}
 
-	/**
-	 * @param Request $request
-	 * @param $id
-	 *
-	 * @return \Illuminate\Http\JsonResponse
-	 */
+    /**
+     * @param Request $request
+     * @param $id
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
 	public function uploadImages(Request $request, $id) {
-		$files = uploadMultiImages($request->file('file'), 'data/' . myId() . '/listing/images');
-		return ($this->service->insertImages($id, $files))
+		return ($this->service->insertImages($id, $request))
 		? response()->json(['message' => 'success'], 200)
 		: response()->json(['message' => 'Something went wrong'], 500);
 	}
@@ -175,11 +174,12 @@ class ListingController extends Controller {
 		$remres = $this->service->removeImage($id);
 
 		if ($request->ajax()) {
-			$res = ($remres) ? json('Image removed successfully.', null, true) : json('Something went wrong', null, false);
-		} else {
-			$res = ($remres) ? success('Image removed successfully.') : error('Something went wrong');
+			return ($remres)
+                ? json('Image removed successfully.', null, true)
+                : json('Something went wrong', null, false);
 		}
-
-		return $res;
+			return ($remres)
+                ? success('Image removed successfully.')
+                : error('Something went wrong');
 	}
 }

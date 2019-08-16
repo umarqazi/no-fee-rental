@@ -1,19 +1,24 @@
 <?php
 
-namespace App\Services\ListingServices;
+namespace App\Services;
 
 use App\Repository\Listing\ListingRepo;
 
-class FeatureListingService extends BaseListingService {
+class FeatureListingService {
 
-	/**
-	 * FeatureListingService constructor.
-	 */
+    /**
+     * @var ListingRepo
+     */
+	private $repo;
+
+    /**
+     * FeatureListingService constructor.
+     */
 	public function __construct() {
-		parent::__construct(new ListingRepo);
-	}
+	    $this->repo = new ListingRepo();
+    }
 
-	/**
+    /**
 	 * @param $paginate
 	 *
 	 * @return array

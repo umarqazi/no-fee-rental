@@ -5,6 +5,7 @@
 let map;
 let marker;
 let coords;
+// Bound Search location to Pakistan Region
 const bound = {
     lat: 33.738045,
     lng: 73.084488

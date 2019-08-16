@@ -6,7 +6,7 @@
 				<h1>Listings</h1>
 				<a href="{{ route('admin.addListing') }}" class="btn-default">New Listing</a>
 			</div>
-			<div class="block listing-container">
+			<div class="block listing-container" id="app">
 				<div class="heading-wrapper pl-0">
 					<ul class="nav nav-pills">
 						<li class="nav-item">
@@ -52,7 +52,6 @@
 				</div>
 			</div>
 		</div>
-
 {!! HTML::script('assets/js/listing.js') !!}
 
 @endsection

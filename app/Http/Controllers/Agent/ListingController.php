@@ -66,11 +66,11 @@ class ListingController extends Controller {
 		return view('agent.add_listing', compact('listing', 'edit'));
 	}
 
-	/**
-	 * create new listing
-	 *
-	 * @return view listing image form
-	 */
+    /**
+     * @param Request $request
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
 	public function create(Request $request) {
 		$edit = false;
 		$id = $this->service->create($request);
@@ -101,8 +101,7 @@ class ListingController extends Controller {
 	 * @return \Illuminate\Http\JsonResponse
 	 */
 	public function uploadImages(Request $request, $id) {
-		$files = uploadMultiImages($request->file('file'), 'data/' . myId() . '/listing/images');
-		return ($this->service->insertImages($id, $files))
+		return ($this->service->insertImages($id, $request))
 		? response()->json(['message' => 'success'], 200)
 		: response()->json(['message' => 'Something went wrong'], 500);
 	}

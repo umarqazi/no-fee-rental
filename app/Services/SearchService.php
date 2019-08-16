@@ -18,10 +18,12 @@ class SearchService {
      * @var mixed
      */
     public $args;
+
     /**
      * @var SearchRepo
      */
     private $repo;
+
     /**
      * collect query result
      *

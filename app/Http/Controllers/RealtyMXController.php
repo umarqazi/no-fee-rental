@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 
 class RealtyMXController extends Controller {
 
+    public $push;
 	protected $required = [
 		'amenities', 'photo', 'type', 'status', 'id',
 		'neighborhood', 'agent', 'price', 'availableOn',
@@ -16,9 +18,9 @@ class RealtyMXController extends Controller {
 
 	protected $batch;
 
-	public function get(Request $request) {
+	public function get(Request $request, $file) {
 
-		$filePath = base_path('/storage/app/realtyMXFeed/' . $request->fileName);
+		$filePath = base_path('/storage/app/realtyMXFeed/' . $file);
 		$file = fread(fopen($filePath, 'r'), filesize($filePath));
 		$xml = simplexml_load_string($file);
 		$data = json_decode(json_encode($xml), true);
@@ -33,9 +35,15 @@ class RealtyMXController extends Controller {
 					}
 				});
 			}
-			$this->batch[] = $this->push;
+
+			dd($this->push['agent']);
+			if(User::where('email', $this->push['agent'])->first()) {
+                $this->batch[] = $this->push;
+            }
+
 			$this->push = null;
 		}
+		// http://www.no-fee-rental/uedh74/396-new-jersy
 
 		dd($this->batch);
 	}
