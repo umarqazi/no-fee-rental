@@ -1,5 +1,11 @@
 $(() => {
-
+    if (localStorage.getItem('grid-view')) {
+        $('.list-view-btn').removeClass('active');
+        setTimeout(() => {
+            $('body').find('.grid-view-btn').trigger('click');
+        }, 500);
+        localStorage.removeItem('grid-view');
+    }
     $(".sort-bt > i,span").on('click', function () {
         $(this).siblings(".custom-dropdown").slideToggle();
     });
@@ -12,7 +18,13 @@ $(() => {
     	$('#img').attr('style', 'width: 180px;height: 145px;margin-bottom: 15px;');
     });
 
+    $(".grid-view-btn").click(function(){
+        localStorage.setItem('grid-view', 1 );
+    });
 
+    $(".list-view-btn").click(function(){
+        localStorage.removeItem('grid-view', 1 );
+    });
 
     if(localStorage.getItem('tab')) {
         $('body').find('.nav-item, .active').removeClass('active');

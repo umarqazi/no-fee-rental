@@ -54,7 +54,7 @@
 												</ul>
 												<p><i class="fa fa-map-marker-alt"></i> RealtyMX ID: mrgnyc_366577 · Auto Feed Mode</p>
 												<p>Posted: {{ date("m/d/y H:m A", strtotime($al->created_at)) }}</p>
-												<a href="javascript:void(0);" onclick="inactive('{{ $al->id }}', this)" title="Unpublish this property"><span class="status">Active</span></a>
+                                                <a href="{{ route('admin.listingStatus', $al->id) }}" title="Unpublish this property"><span class="status">Active</span></a>
 												@if($al->is_featured != REJECTFEATURE)
 													<span class="status" style="margin-right: 60px;background: blueviolet;">{{($al->is_featured == REQUESTFEATURED) ? 'Requested for feature' : 'Featured' }}</span>
 												@endif
