@@ -66,7 +66,7 @@ class Listing extends Model {
 	public function scopeInactive($query) {
 		isAdmin() ?: $clause['user_id'] = myId();
 		$clause['status'] = INACTIVELISTING;
-		return $query->where($clause)->latest();
+		return $query->where($clause);
 	}
 
 	/**
@@ -77,7 +77,7 @@ class Listing extends Model {
 	public function scopePending($query) {
 		isAdmin() ?: $clause['user_id'] = myId();
 		$clause['status'] = PENDINGLISTING;
-		return $query->where($clause)->latest();
+		return $query->where($clause);
 	}
 
 	/**
