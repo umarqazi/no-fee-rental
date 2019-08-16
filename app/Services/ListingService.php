@@ -71,15 +71,6 @@ class ListingService {
     }
 
     /**
-     * @param $request
-     *
-     * @return bool
-     */
-    public function create($request) {
-        return $this->createList($this->form($request));
-    }
-
-    /**
      * @param $data
      *
      * @return bool
@@ -127,38 +118,6 @@ class ListingService {
         }
         DB::rollback();
         return false;
-    }
-
-    /**
-     * @param $id
-     * @param $request
-     *
-     * @return mixed
-     */
-    public function insertImages($id, $request) {
-        $batch = [];
-        $this->repo = new ListingImageRepo;
-        $files = uploadMultiImages($request->file('file'), 'data/' . myId() . '/listing/images');
-        foreach ($files as $file) {
-            $batch[] = [
-                'listing_id' => $id,
-                'listing_image' => $file,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ];
-        }
-
-        return $this->repo->insert($batch);
-    }
-
-    /**
-     * @param $id
-     * @param $request
-     *
-     * @return bool
-     */
-    public function update($id, $request) {
-        return $this->updateList($id, $this->form($request));
     }
 
     /**
@@ -213,6 +172,90 @@ class ListingService {
     }
 
     /**
+     * @param $listing
+     * @param $paginate
+     *
+     * @return array
+     */
+    private function collection($listing, $paginate) {
+        return [
+            'active' => $listing->active()->paginate($paginate, ['*'], 'active'),
+            'pending' => $listing->pending()->paginate($paginate, ['*'], 'pending'),
+            'inactive' => $listing->inactive()->paginate($paginate, ['*'], 'inactive'),
+        ];
+    }
+
+    /**
+     * @param $keywords
+     * @param $paginate
+     *
+     * @return array
+     */
+    private function searchCollection($keywords, $paginate) {
+        return [
+            'pending' => $this->repo->search($keywords)->pending()->paginate($paginate, ['*'], 'pending'),
+            'active' => $this->repo->search($keywords)->active()->paginate($paginate, ['*'], 'active'),
+            'inactive' => $this->repo->search($keywords)->inactive()->paginate($paginate, ['*'], 'inactive'),
+        ];
+    }
+
+    /**
+     * @param $paginate
+     * @param $col
+     * @param $order
+     *
+     * @return array
+     */
+    private function sortCollection($paginate, $col, $order) {
+        return [
+            'active' => $this->active()->orderBy($col, $order)->paginate($paginate, ['*'], 'active'),
+            'inactive' => $this->inactive()->orderBy($col, $order)->paginate($paginate, ['*'], 'inactive'),
+            'pending' => $this->pending()->orderBy($col, $order)->paginate($paginate, ['*'], 'pending')
+        ];
+    }
+
+    /**
+     * @param $request
+     *
+     * @return bool
+     */
+    public function create($request) {
+        return $this->createList($this->form($request));
+    }
+
+    /**
+     * @param $id
+     * @param $request
+     *
+     * @return mixed
+     */
+    public function insertImages($id, $request) {
+        $batch = [];
+        $this->repo = new ListingImageRepo;
+        $files = uploadMultiImages($request->file('file'), 'data/' . myId() . '/listing/images');
+        foreach ($files as $file) {
+            $batch[] = [
+                'listing_id' => $id,
+                'listing_image' => $file,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ];
+        }
+
+        return $this->repo->insert($batch);
+    }
+
+    /**
+     * @param $id
+     * @param $request
+     *
+     * @return bool
+     */
+    public function update($id, $request) {
+        return $this->updateList( $id, $this->form( $request ) );
+    }
+
+    /**
      * @param $id
      *
      * @return mixed
@@ -247,7 +290,7 @@ class ListingService {
      *
      * @return mixed
      */
-    public function active_deactive($id) {
+    public function visibility($id) {
         return $this->repo->status($id);
     }
 
@@ -270,49 +313,7 @@ class ListingService {
         $keywords = [];
         !empty($request->baths) ? $keywords['baths'] = $request->baths : null;
         !empty($request->beds) ? $keywords['bedrooms'] = $request->beds : null;
-        return $this->searchedCollection($keywords, $paginate);
-    }
-
-    /**
-     * @param $listing
-     * @param $paginate
-     *
-     * @return array
-     */
-    public function collection($listing, $paginate) {
-        return [
-            'active' => $listing->active()->paginate($paginate, ['*'], 'active'),
-            'pending' => $listing->pending()->paginate($paginate, ['*'], 'pending'),
-            'inactive' => $listing->inactive()->paginate($paginate, ['*'], 'inactive'),
-            'totalActive' => $listing->active()->count(),
-            'totalPending' => $listing->pending()->count(),
-            'totalInactive' => $listing->inactive()->count(),
-        ];
-    }
-
-    /**
-     * @param $keywords
-     * @param $paginate
-     *
-     * @return array
-     */
-    public function searchedCollection($keywords, $paginate) {
-        return [
-            'totalActive' => $this->repo->search($keywords)->active()->count(),
-            'totalPending' => $this->repo->search($keywords)->pending()->count(),
-            'totalInactive' => $this->repo->search($keywords)->inactive()->count(),
-            'pending' => $this->repo->search($keywords)->pending()->paginate($paginate, ['*'], 'pending'),
-            'active' => $this->repo->search($keywords)->active()->paginate($paginate, ['*'], 'active'),
-            'inactive' => $this->repo->search($keywords)->inactive()->paginate($paginate, ['*'], 'inactive'),
-        ];
-    }
-    /**
-     * @param $id
-     *
-     * @return mixed
-     */
-    public function status($id) {
-        return $this->repo->status($id);
+        return $this->searchCollection($keywords, $paginate);
     }
 
     /**
@@ -372,5 +373,36 @@ class ListingService {
      */
     public function requestForFeatured($id) {
         return $this->repo->sendRequest($id);
+    }
+
+    /**
+     * @param $paginate
+     *
+     * @return array
+     */
+    public function cheaper($paginate) {
+        return $this->sortCollection($paginate, 'rent', CHEAPER);
+    }
+
+    /**
+     * @param $paginate
+     *
+     * @return array
+     */
+    public function recent($paginate) {
+        return $this->sortCollection($paginate, 'created_at', RECENT);
+    }
+
+    /**
+     * @param $paginate
+     *
+     * @return array
+     */
+    public function petPolicy($paginate) {
+        return [
+            'active' => $this->repo->active()->policy()->paginate($paginate, ['*'], 'active'),
+            'inactive' => $this->repo->inactive()->policy()->paginate($paginate, ['*'], 'inactive'),
+            'pending' => $this->repo->pending()->policy()->paginate($paginate, ['*'], 'pending'),
+        ];
     }
 }

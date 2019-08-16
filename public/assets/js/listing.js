@@ -1,5 +1,9 @@
 $(() => {
 
+    $(".sort-bt > i,span").on('click', function () {
+        $(this).siblings(".custom-dropdown").slideToggle();
+    });
+
     $('.input-style').attr('disabled', false);
 
     $('body').on('change', '#upload-file', function(e) {

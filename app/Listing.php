@@ -177,4 +177,16 @@ class Listing extends Model {
             Carbon::create($end_year)->endOfYear(),
         ]);
     }
+
+    /**
+     * @param $query
+     * @param $for
+     *
+     * @return mixed
+     */
+    public function scopePolicy($query) {
+	    return $query->whereHas('listingTypes', function($subQuery) {
+	        return $subQuery->where('property_type', PET_POLICY);
+        });
+    }
 }

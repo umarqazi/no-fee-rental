@@ -24,23 +24,47 @@ class FeatureListingService {
 	 * @return array
 	 */
 	public function get($paginate) {
-		return $this->collection($this->repo, $paginate);
+		return $this->collection($paginate);
 	}
 
-	/**
-	 * @param $feature
-	 * @param $paginate
-	 *
-	 * @return array
-	 */
-	public function collection($feature, $paginate) {
+    /**
+     * @param $paginate
+     *
+     * @return array
+     */
+	private function collection($paginate) {
 		return [
-			'totalFeatured' => $this->featured()->count(),
-			'totalRequestFeatured' => $this->requestFeatured()->count(),
 			'featured' => $this->featured()->paginate($paginate, ['*'], 'featured'),
 			'request_featured' => $this->requestFeatured()->paginate($paginate, ['*'], 'request-featured'),
 		];
 	}
+
+    /**
+     * @param $keywords
+     * @param $paginate
+     *
+     * @return array
+     */
+    private function searchCollection($keywords, $paginate) {
+        return [
+            'featured' => $this->repo->search($keywords)->featured()->paginate($paginate, ['*'], 'featured'),
+            'request_featured' => $this->repo->search($keywords)->requestfeatured()->paginate($paginate, ['*'], 'request-featured'),
+        ];
+    }
+
+    /**
+     * @param $paginate
+     * @param $col
+     * @param $order
+     *
+     * @return array
+     */
+    private function sortCollection($paginate, $col, $order) {
+        return [
+            'featured' => $this->featured()->orderBy($col, $order)->paginate($paginate, ['*'], 'featured'),
+            'request_featured' => $this->requestFeatured()->orderBy($col, $order)->paginate($paginate, ['*'], 'request-featured'),
+        ];
+    }
 
 	/**
 	 * @return mixed
@@ -52,16 +76,16 @@ class FeatureListingService {
 	/**
 	 * @return mixed
 	 */
-	public function activeFeatured() {
-		return $this->repo->activeFeatured();
-	}
-
-	/**
-	 * @return mixed
-	 */
 	public function requestFeatured() {
 		return $this->repo->requestfeatured();
 	}
+
+    /**
+     * @return mixed
+     */
+	public function activeFeatured() {
+	    return $this->repo->activeFeatured();
+    }
 
 	/**
 	 * @param $id
@@ -111,4 +135,47 @@ class FeatureListingService {
 	public function detail($id) {
 		return $this->repo->find(['id' => $id])->withall();
 	}
+
+    /**
+     * @param $request
+     * @param $paginate
+     *
+     * @return array
+     */
+    public function search($request, $paginate) {
+        $keywords = [];
+        !empty($request->baths) ? $keywords['baths'] = $request->baths : null;
+        !empty($request->beds) ? $keywords['bedrooms'] = $request->beds : null;
+        return $this->searchCollection($keywords, $paginate);
+    }
+
+    /**
+     * @param $paginate
+     *
+     * @return array
+     */
+    public function cheaper($paginate) {
+        return $this->sortCollection($paginate, 'rent', CHEAPER);
+    }
+
+    /**
+     * @param $paginate
+     *
+     * @return array
+     */
+    public function recent($paginate) {
+        return $this->sortCollection($paginate, 'created_at', RECENT);
+    }
+
+    /**
+     * @param $paginate
+     *
+     * @return array
+     */
+    public function petPolicy($paginate) {
+        return [
+            'featured' => $this->repo->featured()->policy()->paginate($paginate, ['*'], 'featured'),
+            'request_featured' => $this->repo->requestfeatured()->policy()->paginate($paginate, ['*'], 'request-featured'),
+        ];
+    }
 }

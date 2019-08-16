@@ -16,7 +16,7 @@ class ListingController extends Controller {
 	/**
 	 * @var int
 	 */
-	private $paginate = 20;
+	private $paginate = 5;
 
 	/**
 	 * ListingController constructor.
@@ -31,7 +31,7 @@ class ListingController extends Controller {
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
 	public function index() {
-		$listing = $this->service->get($this->paginate);
+		$listing = toObject($this->service->get($this->paginate));
 		return view('admin.listing_view', compact('listing'));
 	}
 
@@ -149,7 +149,7 @@ class ListingController extends Controller {
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
 	public function searchWithFilters(Request $request) {
-		$listing = $this->service->search($request, $this->paginate);
+		$listing = toObject($this->service->search($request, $this->paginate));
 		return view('admin.listing_view', compact('listing'));
 	}
 
@@ -159,7 +159,7 @@ class ListingController extends Controller {
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function status($id) {
-		$status = $this->service->status($id);
+		$status = $this->service->visibility($id);
 		return (isset($status))
 		? success(($status) ? 'Property has been published.' : 'Property has been unpublished')
 		: error('Something went wrong');
@@ -182,4 +182,18 @@ class ListingController extends Controller {
                 ? success('Image removed successfully.')
                 : error('Something went wrong');
 	}
+
+    /**
+     * @param $order
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+	public function sortBy($order) {
+	    if(method_exists($this->service, $order)) {
+            $listing = toObject( $this->service->{$order}( $this->paginate ));
+        } else {
+            return $this->index();
+        }
+        return view('admin.listing_view', compact('listing'));
+    }
 }

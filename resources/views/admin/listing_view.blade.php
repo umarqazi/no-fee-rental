@@ -10,13 +10,13 @@
 				<div class="heading-wrapper pl-0">
 					<ul class="nav nav-pills">
 						<li class="nav-item">
-							<a class="nav-link" data-toggle="pill" href="#listing-active">Active ( {{ $listing['totalActive'] }} )</a>
+							<a class="nav-link" data-toggle="pill" href="#listing-active">Active ( {{ $listing->active->total() }} )</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" data-toggle="pill" href="#listing-inactive">Inactive ( {{ $listing['totalInactive'] }} )</a>
+							<a class="nav-link" data-toggle="pill" href="#listing-inactive">Inactive ( {{ $listing->inactive->total() }} )</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" data-toggle="pill" href="#listing-pending">Pending Requests ( {{ $listing['totalPending'] }} )</a>
+							<a class="nav-link" data-toggle="pill" href="#listing-pending">Pending Requests ( {{ $listing->pending->total() }} )</a>
 						</li>
 					</ul>
 					<div class="filter-wrapper">
@@ -24,11 +24,18 @@
 							<span><i class="fa fa-th-list list-view-btn active"></i></span>
 							<span><i class="fa fa-th grid-view-btn"></i></span>
 						</div>
-						<span class="sort-bt">
+						<div class="sort-bt">
 							<i class="fa fa-sort-amount-down"></i>
+                            <div class="custom-dropdown">
+                                <ul>
+                                    <li><a href="{{ route('admin.sorting', 'cheaper') }}">Cheaper</a></li>
+                                    <li><a href="{{ route('admin.sorting', 'petPolicy') }}" >Pet Policy </a></li>
+                                    <li><a href="{{ route('admin.sorting', 'recent') }}" >Recent</a></li>
+                                </ul>
+                            </div>
 							<span>Sort By</span>
-						</span>
-						<form action="{{ route('admin.listingSearch') }}" id="search" method="post">
+                        </div>
+                        <form action="{{ route('admin.listingSearch') }}" id="search" method="post">
 							@csrf
 							<input value="{{ !empty(Request::get('beds')) ? Request::get('beds') : '' }}" type="number" name="beds" class="filter-input" placeholder="All Beds" />
 							<input value="{{ !empty(Request::get('baths')) ? Request::get('baths') : '' }}" type="number" name="baths" class="filter-input" placeholder="All Baths" />
@@ -53,5 +60,4 @@
 			</div>
 		</div>
 {!! HTML::script('assets/js/listing.js') !!}
-
 @endsection
