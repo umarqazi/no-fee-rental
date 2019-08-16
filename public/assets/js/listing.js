@@ -1,4 +1,12 @@
 $(() => {
+
+    $('#availableOn').datetimepicker({
+        format: 'Y/m/d H:i',
+        timepicker: true,
+        datepicker: true,
+    });
+
+
     if (localStorage.getItem('grid-view')) {
         $('.list-view-btn').removeClass('active');
         setTimeout(() => {
@@ -6,6 +14,7 @@ $(() => {
         }, 500);
         localStorage.removeItem('grid-view');
     }
+
     $(".sort-bt > i,span").on('click', function () {
         $(this).siblings(".custom-dropdown").slideToggle();
     });

@@ -2,10 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\RealtyMXService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class RealtyMXController extends Controller {
+
+    /**
+     * @var RealtyMXService
+     */
+    private $service;
+
+    private $report = [];
 
     /**
      * @var array
@@ -49,6 +57,15 @@ class RealtyMXController extends Controller {
 	];
 
     /**
+     * RealtyMXController constructor.
+     *
+     * @param RealtyMXService $service
+     */
+	public function __construct(RealtyMXService $service) {
+	    $this->service = $service;
+    }
+
+    /**
      * @param $data
      */
 	private function assignStack($data) {
@@ -85,7 +102,7 @@ class RealtyMXController extends Controller {
      *
      */
 	private function recursiveIterator() {
-        collect($this->hold)->map(function ($a, $b) {
+        collect($this->hold)->map(function ($a) {
             $this->stack = $a;
             $this->recursion();
             $this->collection[] = $this->push;
@@ -110,31 +127,52 @@ class RealtyMXController extends Controller {
                 return $a;
             });
         }
-
+        $this->collection = null;
         (empty($this->batch)) ?: $this->checkAndPush();
 	}
+
+    /**
+     * @param $list
+     *
+     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
+     */
+	private function writeCSV() {
+        $filename = 'csv/realty.csv';
+        $file = fopen($filename, 'w');
+        $columns = ['Listing_web_id','URL','Reason_of_rejection'];
+        fputcsv($file, $columns);
+        $headers = [
+            "Content-type" => "text/csv",
+        ];
+        foreach ($this->report as $report) {
+            fputcsv($file, $report);
+        }
+        return \Illuminate\Support\Facades\Response::download($filename, 'realty.csv', $headers);
+    }
 
     /**
      *
      */
 	private function checkAndPush() {
-        collect($this->batch)->map(function($a) {
-            if($this->agentFilter($a['agent'])) {
-                echo "agent fine";
-                $a['street_address'] = $a['address'] ?? null;
-                $a['square_feet']    = $a['squareFeet'] ?? null;
-                if ( $this->listingFilter( $a ) ) {
-                    echo 'insert';
+        collect($this->batch)->map(function($listing) {
+            if($this->agentFilter($listing['agent'])) {
+                $listing['street_address'] = $listing['address'] ?? null;
+                $listing['square_feet']    = $listing['squareFeet'] ?? 0;
+                if ( $this->listingFilter( $listing ) ) {
+                    $list = $this->service->formCollection($listing);
+                    $this->collection[] = $list;
+                    $this->report[] = ["RLMX-{$list['realty_id']}",$list['realty_url'],"none"];
                 } else {
-                    echo "<pre>";
-                    echo 'listing already taken';
-                    die;
+                    $this->report[] = [$listing['rlsid'],"none","Listing already taken"];
                 }
             } else {
-                echo "<pre>";
-                echo 'agent not exist';
+                $this->report[] = [$listing['rlsid'],"none","Agent Not Exist"];
             }
         });
+        (empty($this->collection)) ?: $this->service->insert($this->collection);
+        $this->writeCSV();
+        dd('done');
+        return ($this->collection);
     }
 
     /**

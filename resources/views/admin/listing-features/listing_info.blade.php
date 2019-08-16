@@ -1,8 +1,9 @@
-
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.js"></script>
 				<div class="col-md-6">
 					<div class="form-group">
 						<label>Street Address</label>
-						{!! Form::text('street_address', null, ['id' => 'controls', 'class' => 'controls input-style']) !!}
+						{!! Form::text('street_address', null, ['id' => 'controls', 'class' => 'controls input-style', 'autocomplete' => 'off']) !!}
 						<span class="mt-2 d-block">* The street address is not shown, and is used for your reference</span>
 						<span class="invalid-feedback" role="alert">
 							{!! $errors->first('street_address') !!}
@@ -84,7 +85,7 @@
 				<div class="col-md-6">
 					<div class="form-group">
 						<label>Availble</label>
-						{!! Form::select('available', ['' => 'Select Availability', '1' => 'Available', '0' => 'Not Available'], null, ['class' => 'input-style']) !!}
+                        {!! Form::text('available', null, ['id' => 'availableOn', 'class' => 'input-style', 'autocomplete' => 'off']) !!}
 						<span class="invalid-feedback" role="alert">
 							{!! $errors->first('available') !!}
 						</span>

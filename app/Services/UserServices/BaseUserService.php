@@ -31,7 +31,7 @@ class BaseUserService extends RolesService {
 	 * @return mixed
 	 */
 	public function edit($id) {
-		return $this->repo->edit($id);
+		return $this->repo->edit($id)->first();
 	}
 
 	/**
