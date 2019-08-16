@@ -2,7 +2,7 @@
 
 							<!--List view listing-->
 							<div class="listing-wrapper">
-								@foreach($listing['inactive'] as $il)
+								@foreach($listing->inactive as $il)
 								<div class="listing-row">
 									<div class="img-holder">
 										<img src="{{isset($il->thumbnail) ? asset('storage/'.$il->thumbnail) : asset('uploads/listing/thumbnails/default.jpg')}}" alt="" style="height:205px;" class="main-img" />
@@ -26,16 +26,16 @@
 									</div>
 								</div>
 								@endforeach
-								@if(count($listing['inactive']) < 1)
+								@if($listing->inactive->total() < 1)
 									No Record Found
 								@endif
-								{!! $listing['inactive']->render() !!}
+								{!! $listing->inactive->render() !!}
 							</div>
 
 							<!--Grid view listing-->
 							<div class="grid-view-wrapper">
 								<div class="row">
-									@foreach($listing['inactive'] as $il)
+									@foreach($listing->inactive as $il)
 									<div class="col-lg-3 col-md-4 col-sm-6">
 										<div class="listing-thumb">
 											<img src="{{isset($il->thumbnail) ? asset('storage/'.$il->thumbnail) : asset('uploads/listing/thumbnails/default.jpg')}}" alt="" style="width: 400px;" class="main-img" />
@@ -61,9 +61,9 @@
 										</div>
 									</div>
 									@endforeach
-									@if(count($listing['inactive']) < 1)
+									@if($listing->inactive->total() < 1)
 										No Record Found
 									@endif
 								</div>
-									{!! $listing['inactive']->render() !!}
+									{!! $listing->inactive->render() !!}
 							</div>

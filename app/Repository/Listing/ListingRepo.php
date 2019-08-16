@@ -42,9 +42,9 @@ class ListingRepo extends BaseRepo {
 	 */
 	public function status($id) {
 		$query = $this->find(['id' => $id]);
-		$status = $query->select('status')->first();
-		$updateStatus = ($status->status) ? 0 : 1;
-		$query->update(['status' => $updateStatus]);
+		$status = $query->select('visibility')->first();
+		$updateStatus = ($status->visibility) ? 0 : 1;
+		$query->update(['visibility' => $updateStatus]);
 		return $updateStatus;
 	}
 

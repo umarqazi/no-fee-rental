@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\ListingServices\FeatureListingService;
+use App\Services\FeatureListingService;
 
 class HomeController extends Controller {
 

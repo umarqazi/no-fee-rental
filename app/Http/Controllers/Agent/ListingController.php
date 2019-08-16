@@ -31,46 +31,38 @@ class ListingController extends Controller {
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
 	public function index() {
-		$listing = $this->service->get($this->paginate);
+		$listing = toObject($this->service->get($this->paginate));
 		return view('agent.index', compact('listing'));
 	}
 
-	/**
-	 * finish add listing
-	 *
-	 * @return redirect URL
-	 */
+    /**
+     * @return \Illuminate\Http\RedirectResponse
+     */
 	public function finishCreate() {
-		return redirect(route('agent.index'))
-			->with(['message' => 'Property has been added.', 'alert_type' => 'success']);
+		return success('Property has been added.', route('agent.index'));
 	}
 
-	/**
-	 * finish update listing
-	 *
-	 * @return redirect URL
-	 */
+    /**
+     * @return \Illuminate\Http\RedirectResponse
+     */
 	public function finishUpdate() {
-		return redirect(route('agent.index'))
-			->with(['message' => 'Property has been updated.', 'alert_type' => 'success']);
+		return success('Property has been updated.', route('agent.index'));
 	}
 
-	/**
-	 * Show listing Form
-	 *
-	 * @return view
-	 */
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
 	public function showForm() {
 		$edit = false;
 		$listing = null;
 		return view('agent.add_listing', compact('listing', 'edit'));
 	}
 
-	/**
-	 * create new listing
-	 *
-	 * @return view listing image form
-	 */
+    /**
+     * @param Request $request
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
 	public function create(Request $request) {
 		$edit = false;
 		$id = $this->service->create($request);
@@ -101,8 +93,7 @@ class ListingController extends Controller {
 	 * @return \Illuminate\Http\JsonResponse
 	 */
 	public function uploadImages(Request $request, $id) {
-		$files = uploadMultiImages($request->file('file'), 'data/' . myId() . '/listing/images');
-		return ($this->service->insertImages($id, $files))
+		return ($this->service->insertImages($id, $request))
 		? response()->json(['message' => 'success'], 200)
 		: response()->json(['message' => 'Something went wrong'], 500);
 	}
@@ -139,7 +130,7 @@ class ListingController extends Controller {
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
 	public function searchWithFilters(Request $request) {
-		$listing = $this->service->search($request, $this->paginate);
+		$listing = toObject($this->service->search($request, $this->paginate));
 		return view('agent.index', compact('listing'));
 	}
 
@@ -149,7 +140,7 @@ class ListingController extends Controller {
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function status($id) {
-		$status = $this->service->status($id);
+		$status = $this->service->visibility($id);
 		return (isset($status))
 		? success(($status) ? 'Property has been published.' : 'Property has been unpublished')
 		: error('Something went wrong');
@@ -176,4 +167,18 @@ class ListingController extends Controller {
 		? success('Your request for featured has been sent.')
 		: error('Something went wrong');
 	}
+
+    /**
+     * @param $order
+     *
+     * @return view|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function sortBy($order) {
+        if(method_exists($this->service, $order)) {
+            $listing = toObject( $this->service->{$order}( $this->paginate ));
+        } else {
+            return $this->index();
+        }
+        return view('agent.index', compact('listing'));
+    }
 }

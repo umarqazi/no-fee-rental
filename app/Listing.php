@@ -19,10 +19,10 @@ class Listing extends Model {
 	 * @var array $fillable
 	 */
 	protected $fillable = [
-		'user_id', 'name', 'email', 'phone_number', 'website', 'street_address',
+		'user_id', 'realty_id', 'name', 'email', 'phone_number', 'url', 'street_address',
 		'display_address', 'neighborhood', 'thumbnail', 'baths', 'bedrooms', 'unit',
 		'rent', 'square_feet', 'available', 'description', 'is_featured', 'map_location',
-		'status', 'city_state_zip',
+		'status', 'visibility', 'city_state_zip', 'realty_url'
 	];
 
 	/**
@@ -54,8 +54,8 @@ class Listing extends Model {
 	 */
 	public function scopeActive($query) {
 		isAdmin() ?: $clause['user_id'] = myId();
-		$clause['status'] = ACTIVELISTING;
-		return $query->where($clause)->latest('updated_at');
+		$clause['visibility'] = ACTIVELISTING;
+		return $query->where($clause);
 	}
 
 	/**
@@ -65,8 +65,8 @@ class Listing extends Model {
 	 */
 	public function scopeInactive($query) {
 		isAdmin() ?: $clause['user_id'] = myId();
-		$clause['status'] = INACTIVELISTING;
-		return $query->where($clause)->latest();
+		$clause['visibility'] = INACTIVELISTING;
+		return $query->where($clause);
 	}
 
 	/**
@@ -76,8 +76,8 @@ class Listing extends Model {
 	 */
 	public function scopePending($query) {
 		isAdmin() ?: $clause['user_id'] = myId();
-		$clause['status'] = PENDINGLISTING;
-		return $query->where($clause)->latest();
+		$clause['visibility'] = PENDINGLISTING;
+		return $query->where($clause);
 	}
 
 	/**
@@ -140,7 +140,7 @@ class Listing extends Model {
 	 * @return mixed
 	 */
 	public function scopeActiveFeatured($query) {
-		return $query->featured()->whereStatus(ACTIVE);
+		return $query->featured()->whereVisibility(ACTIVE);
 	}
 
 	/**
@@ -149,7 +149,7 @@ class Listing extends Model {
 	 * @return mixed
 	 */
 	public function scopeInactiveFeatured($query) {
-		return $query->featured()->whereStatus(DEACTIVE);
+		return $query->featured()->whereVisibility(DEACTIVE);
 	}
 
 	/**
@@ -176,5 +176,17 @@ class Listing extends Model {
             Carbon::create($start_year)->startOfYear(),
             Carbon::create($end_year)->endOfYear(),
         ]);
+    }
+
+    /**
+     * @param $query
+     * @param $for
+     *
+     * @return mixed
+     */
+    public function scopePolicy($query) {
+	    return $query->whereHas('listingTypes', function($subQuery) {
+	        return $subQuery->where('property_type', PET_POLICY);
+        });
     }
 }

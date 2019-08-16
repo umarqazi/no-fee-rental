@@ -6,12 +6,14 @@ use App\Forms\BaseForm;
 class CreateListingForm extends BaseForm {
 
 	public $user_id;
+	public $realty_id;
+	public $realty_url;
 	public $name;
 	public $status;
 	public $email;
 	public $phone_number;
 	public $description;
-	public $website;
+	public $url;
 	public $street_address;
 	public $display_address;
 	public $available;
@@ -25,22 +27,26 @@ class CreateListingForm extends BaseForm {
 	public $thumbnail;
 	public $old;
 	public $square_feet;
-
 	public $listing_type;
 	public $amenities;
 	public $unit_feature;
 	public $building_feature;
 	public $pet_policy;
 
+    /**
+     * @return array
+     */
 	function toArray() {
 		return [
 			'user_id' => $this->user_id,
-			'description' => $this->description,
+            'realty_id' => $this->realty_id,
+            'realty_url' => $this->realty_url,
+            'description' => $this->description,
 			'name' => $this->name,
 			'email' => $this->email,
 			'phone_number' => $this->phone_number,
 			'status' => $this->status,
-			'website' => $this->website,
+			'url' => $this->url,
 			'street_address' => $this->street_address,
 			'display_address' => $this->display_address,
 			'available' => $this->available,
@@ -61,12 +67,15 @@ class CreateListingForm extends BaseForm {
 		];
 	}
 
+    /**
+     * @return array|mixed
+     */
 	function rules() {
 		return [
 			'name' => 'required|string',
 			'email' => 'required|email',
 			'phone_number' => 'required|string',
-			'website' => 'required|string',
+			'url' => 'required|string',
 			'street_address' => 'required|string',
 			'display_address' => 'required|string',
 			'available' => 'required',
@@ -75,12 +84,11 @@ class CreateListingForm extends BaseForm {
 			'neighborhood' => 'required|string',
 			'bedrooms' => 'required',
 			'baths' => 'required',
-			'thumbnail' => ($this->old != 'true') ? 'required|mimes:jpg,png,jpeg' : '',
+			'thumbnail' => ($this->old != 'true') ? 'required' : '',
 			'description' => 'required',
 			'unit' => 'required',
 			'rent' => 'required',
 			'square_feet' => 'required',
 		];
 	}
-
 }

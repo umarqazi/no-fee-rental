@@ -5,6 +5,7 @@
 let map;
 let marker;
 let coords;
+// Bound Search location to Pakistan Region
 const bound = {
     lat: 33.738045,
     lng: 73.084488
@@ -104,12 +105,23 @@ $(() => {
   });
 });
 
-window.onload = async function() {
-	MAP.getCurrentLocation().then(latlng => {
-		MAP.setGoogleMapLocation(document.getElementById('map'), latlng.coords);
-    MAP.getAddressByLatLng(latlng.coords).then(place => {
-        marker = MAP.addMarkers({ lat: latlng.coords.latitude, lng: latlng.coords.longitude });
-        MAP.toolTip(place[0].formatted_address);
-    });
-	});
+window.onload = function() {
+    let lat_lng = $('body').find('input[name=map_location]').val();
+    if(lat_lng !== null && lat_lng !== '') {
+        alert('hi');
+        lat_lng = JSON.parse(lat_lng);
+        MAP.setGoogleMapLocation(document.getElementById('map'), lat_lng);
+        MAP.getAddressByLatLng(lat_lng).then(place => {
+            marker = MAP.addMarkers({ lat: lat_lng.latitude, lng: lat_lng.longitude });
+            MAP.toolTip(place[0].formatted_address);
+        });
+    } else {
+        MAP.getCurrentLocation().then(latlng => {
+            MAP.setGoogleMapLocation(document.getElementById('map'), latlng.coords);
+            MAP.getAddressByLatLng(latlng.coords).then(place => {
+                marker = MAP.addMarkers({lat: latlng.coords.latitude, lng: latlng.coords.longitude});
+                MAP.toolTip(place[0].formatted_address);
+            });
+        });
+    }
 }
