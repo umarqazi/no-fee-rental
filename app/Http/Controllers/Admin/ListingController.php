@@ -41,9 +41,9 @@ class ListingController extends Controller {
 	 * @return view
 	 */
 	public function showForm() {
-		$edit = false;
+		$action = 'create';
 		$listing = null;
-		return view('admin.add_listing', compact('listing', 'edit'));
+		return view('admin.add_listing', compact('listing', 'action'));
 	}
 
 	/**
@@ -63,10 +63,10 @@ class ListingController extends Controller {
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
 	public function create(Request $request) {
-		$edit = false;
+		$action = 'Create';
 		$id = $this->service->create($request);
 		return ($id)
-		? view('admin.add_listing_images', compact('id', 'edit'))
+		? view('admin.add_listing_images', compact('id', 'action'))
 		: error('Something went wrong');
 	}
 
@@ -87,11 +87,12 @@ class ListingController extends Controller {
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
 	 */
 	public function update($id, Request $request) {
-		$edit = true;
+
+		$action = 'update';
 		$update = $this->service->update($id, $request);
 		$listing_images = $this->service->images($id)->get();
 		return $update
-		? view('admin.add_listing_images', compact('id', 'edit', 'listing_images'))
+		? view('admin.add_listing_images', compact('id', 'action', 'listing_images'))
 		: error('Something went wrong');
 	}
 
@@ -134,13 +135,13 @@ class ListingController extends Controller {
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
 	public function edit($id) {
-		$edit = true;
+		$action = 'Update';
 		$listing = $this->service->edit($id)->first();
 		foreach (features($listing->listingTypes) as $key => $value) {
 			$listing->{$key} = $value;
 		}
 
-		return view('admin.add_listing', compact('listing', 'edit'));
+		return view('admin.add_listing', compact('listing', 'action'));
 	}
 
 	/**
@@ -196,4 +197,19 @@ class ListingController extends Controller {
         }
         return view('admin.listing_view', compact('listing'));
     }
+    /**
+     * @param $id
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function copy($id) {
+        $action = 'Copy';
+        $listing = $this->service->edit($id)->first();
+        foreach (features($listing->listingTypes) as $key => $value) {
+            $listing->{$key} = $value;
+        }
+
+        return view('admin.add_listing', compact('listing', 'action'));
+    }
+
 }

@@ -11,22 +11,24 @@
 
 	 <!-- CSS -->
 	{!! HTML::style('assets/css/dropzone.min.css') !!}
+    {!! HTML::style('assets/css/jquery-ui.css') !!}
 	{!! HTML::style('assets/css/bootstrap.min.css') !!}
 	{!! HTML::style('assets/css/animate.min.css') !!}
     {!! HTML::style('assets/css/datatable.min.css') !!}
-	{!! HTML::style('assets/css/datepicker.min.css') !!}
 	{!! HTML::style('assets/css/admin.css') !!}
 	{!! HTML::style('assets/css/responsive.css') !!}
 	{!! HTML::style('assets/css/style.css') !!}
-	{!! HTML::style('https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css') !!}
+    {!! HTML::style('assets/css/datetime.min.css') !!}
+    {!! HTML::style('assets/css/toastr.css') !!}
 
 	 <!-- JS -->
-	{!! HTML::script('https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js') !!}
     {!! HTML::script('assets/js/jquery-3.2.1.min.js') !!}
 	{!! HTML::script('assets/js/jquery.validate.min.js') !!}
+    {!! HTML::script('assets/js/jquery-ui.min.js') !!}
 	{!! HTML::script('assets/js/lightslider.js') !!}
 	{!! HTML::script('assets/js/pignose.calendar.full.min.js') !!}
     {!! HTML::script('assets/js/dropzone.js') !!}
+    {!! HTML::script('assets/js/sweetalert.min.js') !!}
     {!! HTML::script('assets/js/toastr.js') !!}
     {!! HTML::script('assets/js/validate.js') !!}
     {!! HTML::script('assets/js/global.js') !!}
@@ -46,7 +48,7 @@
 		@if(Auth::guard(whoAmI())->check())
 			@if(isAdmin())
 				@include('secured-layouts.sidebar')
-			@else
+			@elseif(isAgent())
 				@include('secured-layouts.agent-sidebar')
 			@endif
 		@endif

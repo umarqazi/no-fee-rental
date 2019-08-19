@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Repository\User;
+namespace App\Repository;
 
-use App\Repository\BaseRepo;
 use App\User;
 
 class UserRepo extends BaseRepo {
@@ -36,27 +35,14 @@ class UserRepo extends BaseRepo {
 	}
 
 	/**
-	 * @param $keywords
-	 *
-	 * @return mixed
-	 */
-	public function search($keywords) {
-		return $this->model
-			->orWhere("first_name", "like", "%{$keywords}%")
-			->orWhere("last_name", "like", "%{$keywords}%")
-			->orWhere("email", "like", "%{$keywords}%")
-			->orWhere("phone_number", "like", "%{$keywords}%")
-			->where('user_type', '!=', ADMIN);
-	}
-
-	/**
 	 * @param $id
 	 *
 	 * @return int
 	 */
-	public function activeDeactive($id) {
+	public function status($id) {
 		$status = $this->find(['id' => $id])->first();
 		$updateStatus = ($status->status) ? DEACTIVE : ACTIVE;
+//		dd($updateStatus);
 		$this->update($id, ['status' => $updateStatus]);
 		return $updateStatus;
 	}

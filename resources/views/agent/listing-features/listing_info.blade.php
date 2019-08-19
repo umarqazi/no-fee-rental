@@ -84,7 +84,7 @@
 				<div class="col-md-6">
 					<div class="form-group">
 						<label>Availble</label>
-						{!! Form::select('available', ['' => 'Select Availability', '1' => 'Available', '0' => 'Not Available'], null, ['class' => 'input-style']) !!}
+                            {!! Form::text('available', null, ['class' => 'input-style', 'id' => "datepicker", 'autocomplete' => 'off']) !!}
 						<span class="invalid-feedback" role="alert">
 							{!! $errors->first('available') !!}
 						</span>

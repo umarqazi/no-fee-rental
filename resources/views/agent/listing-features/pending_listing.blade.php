@@ -50,7 +50,7 @@
 												<span class="status" style="background: #ffce39;">Pending</span>
 												<div class="list-actions-icons">
 													<a href="{{ route('agent.editListing', $pl->id) }}"><button><i class="fa fa-edit"></i></button></a>
-													<button><i class="fa fa-copy"></i></button>
+                                                    <a href="{{ route('admin.copyListing', $al->id) }}"><button><i class="fa fa-copy"></i></button></a>
 												</div>
 											</div>
 										</div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Excel;
 use App\Services\RealtyMXService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -13,6 +14,9 @@ class RealtyMXController extends Controller {
      */
     private $service;
 
+    /**
+     * @var array
+     */
     private $report = [];
 
     /**
@@ -136,18 +140,9 @@ class RealtyMXController extends Controller {
      *
      * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
      */
-	private function writeCSV() {
-        $filename = 'csv/realty.csv';
-        $file = fopen($filename, 'w');
-        $columns = ['Listing_web_id','URL','Reason_of_rejection'];
-        fputcsv($file, $columns);
-        $headers = [
-            "Content-type" => "text/csv",
-        ];
-        foreach ($this->report as $report) {
-            fputcsv($file, $report);
-        }
-        return \Illuminate\Support\Facades\Response::download($filename, 'realty.csv', $headers);
+	public function export() {
+        return Excel::download($this->service->export($this->report), 'invoices.xlsx');
+//        return response()->download();
     }
 
     /**
@@ -170,9 +165,7 @@ class RealtyMXController extends Controller {
             }
         });
         (empty($this->collection)) ?: $this->service->insert($this->collection);
-        $this->writeCSV();
-        dd('done');
-        return ($this->collection);
+        return $this->export();
     }
 
     /**

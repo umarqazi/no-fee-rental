@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Agent;
 
+use App\Services\UserService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Services\UserServices\AgentService;
 
 class AgentController extends Controller {
 
@@ -18,7 +18,7 @@ class AgentController extends Controller {
 	 *
 	 * @param AgentService $service
 	 */
-	public function __construct(AgentService $service) {
+	public function __construct(UserService $service) {
 		$this->service = $service;
 	}
 

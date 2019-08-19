@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Repository\User;
+namespace App\Repository;
 
 use App\AgentInvites;
-use App\Repository\BaseRepo;
 
 class AgentRepo extends BaseRepo {
 

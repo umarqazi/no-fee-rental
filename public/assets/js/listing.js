@@ -1,17 +1,10 @@
 $(() => {
 
-    $('#availableOn').datetimepicker({
-        format: 'Y/m/d H:i',
-        timepicker: true,
-        datepicker: true,
-    });
-
-
     if (localStorage.getItem('grid-view')) {
         $('.list-view-btn').removeClass('active');
         setTimeout(() => {
             $('body').find('.grid-view-btn').trigger('click');
-        }, 500);
+        }, 100);
         localStorage.removeItem('grid-view');
     }
 

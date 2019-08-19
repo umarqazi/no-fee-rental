@@ -6,14 +6,18 @@ use Closure;
 
 class AuthGuardAssign {
 
+    /**
+     * @var
+     */
 	protected $request;
-	/**
-	 * Handle an incoming request.
-	 *
-	 * @param  \Illuminate\Http\Request  $request
-	 * @param  \Closure  $next
-	 * @return mixed
-	 */
+
+    /**
+     * @param $request
+     * @param Closure $next
+     *
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Symfony\Component\HttpFoundation\Response|void
+     * @throws \Illuminate\Validation\ValidationException
+     */
 	public function handle($request, Closure $next) {
 		$this->request = $request;
 		$user = $this->check_type();
@@ -36,10 +40,6 @@ class AuthGuardAssign {
 
 		case 3:
 			return (new \App\Http\Controllers\Auth\LoginController)->login($this->request);
-			break;
-
-		default:
-			return redirect()->back();
 			break;
 		}
 		return $next($this->request);

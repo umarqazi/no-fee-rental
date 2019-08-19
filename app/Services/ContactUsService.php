@@ -11,13 +11,17 @@ namespace App\Services;
 use App\Repository\ContactUsRepo;
 
 class ContactUsService {
-	protected $contact_repo;
 
-	/**
-	 * ContactUsService constructor.
-	 */
+    /**
+     * @var ContactUsRepo
+     */
+	private $repo;
+
+    /**
+     * ContactUsService constructor.
+     */
 	public function __construct() {
-		$this->contact_repo = new ContactUsRepo();
+		$this->repo = new ContactUsRepo();
 	}
 
 	/**
@@ -26,13 +30,13 @@ class ContactUsService {
 	 * @return mixed
 	 */
 	public function saveRecord($data) {
-		return $this->contact_repo->save($data);
+		return $this->repo->create($data);
 	}
 
 	/**
 	 * @return mixed
 	 */
 	public function showMessages() {
-		return $this->contact_repo->allMessages();
+		return $this->repo->all();
 	}
 }

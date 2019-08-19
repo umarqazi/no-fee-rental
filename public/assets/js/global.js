@@ -151,8 +151,6 @@ async function deleteRecord(route, table, form) {
     if(await confirm('You want to delete?')) {
         let res = await ajaxRequest(route, 'post', null);
         table.row($(form).parents('tr')).remove().draw();
-        (res.status) ? toastr.success(res.msg) : toastr.error(res.msg);
-        return res;
     }
 }
 

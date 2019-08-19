@@ -108,11 +108,11 @@ class ListingService {
                 $type = sprintf("%s", config("features.listing_types.{$key}"));
                 foreach ($data->{$key} as $value) {
                     $batch[] = [
-                        'listing_id' => $id,
+                        'listing_id'    => $id,
                         'property_type' => $type,
-                        'value' => $value,
-                        'created_at' => now(),
-                        'updated_at' => now(),
+                        'value'         => $value,
+                        'created_at'    => now(),
+                        'updated_at'    => now(),
                     ];
                 }
             }
@@ -138,22 +138,22 @@ class ListingService {
         }
 
         $data = [
-            'name' => $listing->name,
-            'email' => $listing->email,
-            'description' => $listing->description,
-            'phone_number' => $listing->phone_number,
-            'website' => $listing->website,
-            'street_address' => $listing->street_address,
+            'name'            => $listing->name,
+            'email'           => $listing->email,
+            'description'     => $listing->description,
+            'phone_number'    => $listing->phone_number,
+            'website'         => $listing->website,
+            'street_address'  => $listing->street_address,
             'display_address' => $listing->display_address,
-            'available' => $listing->available,
-            'city_state_zip' => $listing->city_state_zip,
-            'neighborhood' => $listing->neighborhood,
-            'bedrooms' => $listing->bedrooms,
-            'baths' => $listing->baths,
-            'unit' => $listing->unit,
-            'rent' => $listing->rent,
-            'thumbnail' => $listing->thumbnail,
-            'square_feet' => $listing->square_feet,
+            'available'       => $listing->available,
+            'city_state_zip'  => $listing->city_state_zip,
+            'neighborhood'    => $listing->neighborhood,
+            'bedrooms'        => $listing->bedrooms,
+            'baths'           => $listing->baths,
+            'unit'            => $listing->unit,
+            'rent'            => $listing->rent,
+            'thumbnail'       => $listing->thumbnail,
+            'square_feet'     => $listing->square_feet,
         ];
 
         if ($update = $this->repo->update($id, $data)) {
@@ -177,16 +177,21 @@ class ListingService {
     }
 
     /**
-     * @param $listing
      * @param $paginate
      *
      * @return array
      */
-    private function collection($listing, $paginate) {
+    private function collection($paginate) {
         return [
-            'active' => $listing->active()->latest('updated_at')->paginate($paginate, ['*'], 'active'),
-            'pending' => $listing->pending()->latest()->paginate($paginate, ['*'], 'pending'),
-            'inactive' => $listing->inactive()->latest()->paginate($paginate, ['*'], 'inactive'),
+            'active'   => $this->active()
+                               ->latest('updated_at')
+                               ->paginate($paginate, ['*'], 'active'),
+            'pending'  => $this->pending()
+                               ->latest()
+                               ->paginate($paginate, ['*'], 'pending'),
+            'inactive' => $this->inactive()
+                               ->latest()
+                               ->paginate($paginate, ['*'], 'inactive'),
         ];
     }
 
@@ -198,9 +203,18 @@ class ListingService {
      */
     private function searchCollection($keywords, $paginate) {
         return [
-            'pending' => $this->repo->search($keywords)->pending()->latest()->paginate($paginate, ['*'], 'pending'),
-            'active' => $this->repo->search($keywords)->active()->latest('updated_at')->paginate($paginate, ['*'], 'active'),
-            'inactive' => $this->repo->search($keywords)->inactive()->latest()->paginate($paginate, ['*'], 'inactive'),
+            'pending'  => $this->repo->search($keywords)
+                                     ->pending()
+                                     ->latest()
+                                     ->paginate($paginate, ['*'], 'pending'),
+            'active'   => $this->repo->search($keywords)
+                                     ->active()
+                                     ->latest('updated_at')
+                                     ->paginate($paginate, ['*'], 'active'),
+            'inactive' => $this->repo->search($keywords)
+                                     ->inactive()
+                                     ->latest()
+                                     ->paginate($paginate, ['*'], 'inactive'),
         ];
     }
 
@@ -213,9 +227,34 @@ class ListingService {
      */
     private function sortCollection($paginate, $col, $order) {
         return [
-            'active' => $this->active()->orderBy($col, $order)->paginate($paginate, ['*'], 'active'),
-            'inactive' => $this->inactive()->orderBy($col, $order)->paginate($paginate, ['*'], 'inactive'),
-            'pending' => $this->pending()->orderBy($col, $order)->paginate($paginate, ['*'], 'pending')
+            'active'   => $this->active()
+                               ->orderBy($col, $order)
+                               ->paginate($paginate, ['*'], 'active'),
+            'inactive' => $this->inactive()
+                               ->orderBy($col, $order)
+                               ->paginate($paginate, ['*'], 'inactive'),
+            'pending'  => $this->pending()
+                               ->orderBy($col, $order)
+                               ->paginate($paginate, ['*'], 'pending')
+        ];
+    }
+
+    /**
+     * @param $paginate
+     *
+     * @return array
+     */
+    public function petPolicy($paginate) {
+        return [
+            'active'   => $this->active()
+                               ->policy()
+                               ->paginate($paginate, ['*'], 'active'),
+            'inactive' => $this->inactive()
+                               ->policy()
+                               ->paginate($paginate, ['*'], 'inactive'),
+            'pending'  => $this->pending()
+                               ->policy()
+                               ->paginate($paginate, ['*'], 'pending'),
         ];
     }
 
@@ -240,10 +279,10 @@ class ListingService {
         $files = uploadMultiImages($request->file('file'), 'data/' . myId() . '/listing/images');
         foreach ($files as $file) {
             $batch[] = [
-                'listing_id' => $id,
+                'listing_id'    => $id,
                 'listing_image' => $file,
-                'created_at' => now(),
-                'updated_at' => now(),
+                'created_at'    => now(),
+                'updated_at'    => now(),
             ];
         }
 
@@ -351,11 +390,11 @@ class ListingService {
         if ($this->repo->update($id, ['status' => 1])) {
             $list = $this->repo->find(['id' => $id])->withagent()->first();
             $data = [
-                'name' => $list->agent->first_name,
+                'name'        => $list->agent->first_name,
                 'approved_by' => mySelf()->first_name,
                 'approved_on' => $list->updated_at,
-                'view' => 'approve-request',
-                'subject' => 'Request Approved for listing',
+                'view'        => 'approve-request',
+                'subject'     => 'Request Approved for listing',
             ];
             mailService($list->agent->email, toObject($data));
             return true;
@@ -368,7 +407,7 @@ class ListingService {
      * @return array
      */
     public function get($paginate) {
-        return $this->collection($this->repo, $paginate);
+        return $this->collection($paginate);
     }
 
     /**
@@ -396,18 +435,5 @@ class ListingService {
      */
     public function recent($paginate) {
         return $this->sortCollection($paginate, 'updated_at', RECENT);
-    }
-
-    /**
-     * @param $paginate
-     *
-     * @return array
-     */
-    public function petPolicy($paginate) {
-        return [
-            'active' => $this->repo->active()->policy()->paginate($paginate, ['*'], 'active'),
-            'inactive' => $this->repo->inactive()->policy()->paginate($paginate, ['*'], 'inactive'),
-            'pending' => $this->repo->pending()->policy()->paginate($paginate, ['*'], 'pending'),
-        ];
     }
 }

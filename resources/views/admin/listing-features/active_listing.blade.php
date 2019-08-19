@@ -17,7 +17,7 @@
 										<p><i class="fa fa-map-marker-alt"></i> RealtyMX ID: mrgnyc_366577 · Auto Feed Mode</p>
 										<p>Posted: {{ date("m/d/y H:m A", strtotime($al->created_at)) }}</p>
 										<a href="{{ route('admin.listingStatus', $al->id) }}" title="Unpublish this property"><span class="status">Active</span></a>
-										@if($al->is_featured != REJECTFEATURE)
+										@if($al->is_featured != REJECTFEATURED)
 											<span class="status" style="margin-right: 60px;background: blueviolet;">{{($al->is_featured == REQUESTFEATURED) ? 'Requested for feature' : 'Featured' }}</span>
 										@endif
 										<div class="actions-btns">
@@ -29,6 +29,7 @@
 										@endif
 										</div>
 									</div>
+
 								</div>
 								@endforeach
 								@if($listing->active->total() < 1)
@@ -55,7 +56,7 @@
 												<p><i class="fa fa-map-marker-alt"></i> RealtyMX ID: mrgnyc_366577 · Auto Feed Mode</p>
 												<p>Posted: {{ date("m/d/y H:m A", strtotime($al->created_at)) }}</p>
                                                 <a href="{{ route('admin.listingStatus', $al->id) }}" title="Unpublish this property"><span class="status">Active</span></a>
-												@if($al->is_featured != REJECTFEATURE)
+												@if($al->is_featured != REJECTFEATURED)
 													<span class="status" style="margin-right: 60px;background: blueviolet;">{{($al->is_featured == REQUESTFEATURED) ? 'Requested for feature' : 'Featured' }}</span>
 												@endif
 												<div class="actions-btns">
@@ -66,7 +67,7 @@
 												</div>
 												<div class="list-actions-icons">
 													<a href="{{ route('admin.editListing', $al->id) }}"><button><i class="fa fa-edit"></i></button></a>
-													<button><i class="fa fa-copy"></i></button>
+                                                    <a href="{{ route('admin.copyListing', $al->id) }}"><button><i class="fa fa-copy"></i></button></a>
 												</div>
 											</div>
 										</div>

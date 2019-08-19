@@ -8,23 +8,22 @@
 
 namespace App\Http\Controllers;
 
-use App\AgentInvites;
-use App\Services\UserServices\ClientService;
+use App\Services\UserService;
 use Illuminate\Http\Request;
 
 class UserController extends Controller {
 
-	/**
-	 * @var BaseUserService
-	 */
+    /**
+     * @var UserService
+     */
 	private $service;
 
     /**
      * UserController constructor.
      *
-     * @param ClientService $service
+     * @param UserService $service
      */
-	public function __construct(ClientService $service) {
+	public function __construct(UserService $service) {
 		$this->service = $service;
 	}
 
@@ -34,9 +33,9 @@ class UserController extends Controller {
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function editProfile(Request $request) {
-		$update_data = $this->service->update_profile($request);
+		$update_data = $this->service->updateProfile($request);
 		if ($request->hasFile('profile_image')) {
-			$update_data = $this->service->update_profile_image($request->file('profile_image'), myId(), $request->old_profile ?? null);
+			$update_data = $this->service->updateProfileImage($request->file('profile_image'), myId(), $request->old_profile ?? null);
 		}
 
 		return $update_data
@@ -50,7 +49,9 @@ class UserController extends Controller {
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
 	public function changePassword($token) {
-		return view('change-password', compact('token'));
+	    return $this->service->validateEncodedToken($token)
+		    ? view('change-password', compact('token'))
+            : abort(401);
 	}
 
 	/**
@@ -62,7 +63,7 @@ class UserController extends Controller {
 	public function updatePassword(Request $request, $token) {
 		if ($user = $this->service->validateEncodedToken($token)) {
 			$request->id = $user->id;
-			$this->service->change_password($request);
+			$this->service->changePassword($request);
 			return success('Password has been updated');
 		}
 		return error('Invalid token request cannot be processed.');
@@ -86,12 +87,12 @@ class UserController extends Controller {
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
 	public function invitedAgentSignupForm($token) {
-		$authenticate_token = $this->service->getAgentToken($token)->first();
+		$authenticate_token = $this->service->isInvitedAgent($token)->first();
 		if (!empty($authenticate_token) && $authenticate_token->token == $token) {
 			return view('invited_agent_signup', compact('authenticate_token'));
 		}
 
-		return error('Invalid token request cannot be processed.');
+		return abort(401);
 	}
 
 	/**
@@ -100,9 +101,8 @@ class UserController extends Controller {
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function signup(Request $request) {
-		return $this->service->agentSignup($request)
-		? success('Account has been created. Please check your inbox')
-		: error('Something went wrong');
+		$response = $this->service->signup($request);
+		return sendResponse($request, $response, 'We send an email to your account. Kindly verify your email');
 	}
 
 	/**
@@ -115,6 +115,6 @@ class UserController extends Controller {
 			return success('Email has been verified.', '/');
 		}
 
-		return error('Something went wrong');
+		return abort(401);
 	}
 }

@@ -10,17 +10,12 @@ namespace App\Repository;
 
 use App\ContactUs;
 
-class ContactUsRepo {
-	protected $contact_model;
+class ContactUsRepo extends BaseRepo {
 
+    /**
+     * ContactUsRepo constructor.
+     */
 	public function __construct() {
-		$this->contact_model = new ContactUs();
-	}
-	public function save($data) {
-		return $this->contact_model->create($data);
-	}
-
-	public function allMessages() {
-		return $this->contact_model->latest()->get();
+	    parent::__construct(new ContactUs());
 	}
 }
