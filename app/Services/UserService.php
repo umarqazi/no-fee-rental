@@ -89,6 +89,7 @@ class UserService {
      */
     public function create($request) {
         $user = $this->form($request);
+        DB::beginTransaction();
         $response = $this->repo->create($user->toArray());
         if (!empty($response)) {
             $email = [
@@ -98,6 +99,7 @@ class UserService {
                 'link'       => route('user.change_password', base64_encode($user->email)),
             ];
             mailService($user->email, toObject($email));
+            DB::commit();
             return $response;
         }
         return false;
