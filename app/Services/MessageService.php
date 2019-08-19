@@ -34,9 +34,9 @@ class MessageService {
         $inbox = $this->inbox();
         $meeting = $this->meetingRequests();
         $collection = [
-            'totalInbox' => $inbox->count(),
-            'totalRequests' => $meeting->count(),
-            'inbox' => $inbox->paginate($paginate, ['*'], 'inbox'),
+            'totalInbox'       => $inbox->count(),
+            'totalRequests'    => $meeting->count(),
+            'inbox'            => $inbox->paginate($paginate, ['*'], 'inbox'),
             'meeting_requests' => $meeting->paginate($paginate, ['*'], 'meeting-requests')
         ];
         return toObject($collection);
@@ -103,8 +103,8 @@ class MessageService {
         }
 
         $data = [
-            'first_name' => $request->name,
-            'email' => $request->email,
+            'first_name'   => $request->name,
+            'email'        => $request->email,
             'phone_number' => $request->phone,
         ];
     }

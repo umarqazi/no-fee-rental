@@ -8,7 +8,7 @@ $(() => {
 	$('body').on('form-success-update_company', function(res, data) {
 		$('#companies_table').DataTable().ajax.reload();
 		$('#add-company').modal('hide');
-	});	
+	});
 
 	$('body').on('click', '#updateCompany', async function(e) {
 		let id = $(this).attr('ref_id');
@@ -41,7 +41,7 @@ $(() => {
         let res = await toggleStatus(route, $(`#${$(this).parents('table').attr('id')}`).DataTable(), $(this));
     });
 
-	// +++++ Companes Table +++++ //
+	// +++++ Companies Table +++++ //
     $('#companies_table').DataTable({
         serverSide: true,
         processing: true,

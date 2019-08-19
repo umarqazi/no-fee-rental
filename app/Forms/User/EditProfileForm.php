@@ -21,6 +21,11 @@ class EditProfileForm extends BaseForm {
 	 */
 	public $last_name;
 
+    /**
+     * @var string
+     */
+	public $profile;
+
 	/**
 	 * @var string
 	 */
@@ -40,6 +45,7 @@ class EditProfileForm extends BaseForm {
 			'first_name' => $this->first_name,
 			'last_name' => $this->last_name,
 			'email' => $this->email,
+            'profile_image' => $this->profile,
 			'phone_number' => $this->phone_number
 		];
 	}
@@ -53,6 +59,7 @@ class EditProfileForm extends BaseForm {
 			'first_name' => 'required',
 			'last_name' => 'required',
 			'email' => 'required|email',
+            'profile_image' => 'required',
 			'phone_number' => 'required'
 		];
 	}

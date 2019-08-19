@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
-use App\Services\UserServices\AdminService;
+use App\Services\UserService;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller {
@@ -19,7 +18,7 @@ class AdminController extends Controller {
 	 *
 	 * @param AdminService $service
 	 */
-	public function __construct(AdminService $service) {
+	public function __construct(UserService $service) {
 		$this->service = $service;
 	}
 

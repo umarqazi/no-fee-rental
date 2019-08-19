@@ -1,6 +1,4 @@
 
-{{--Normal Search--}}
-
 <div class="header-bg">
     <div class="banner-wrapper wow fadeInUp " data-wow-delay="0.2s">
         <h1>NYC’s Premier Source For NO FEE Rentals</h1>
@@ -23,6 +21,3 @@
         <a href="" class="advance-search" data-toggle="modal" data-target="#advance-search">+Advanced Search</a>
     </div>
 </div>
-
-{{--Advance Search--}}
-@include('features.advance_search')

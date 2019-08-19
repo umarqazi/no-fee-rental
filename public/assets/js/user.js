@@ -38,8 +38,7 @@ $(() => {
 
     $('body').on('click', '#updateUserStatus', async function(e) {
         let route = $(this).attr('route');
-        let res = await toggleStatus(route, $(`#${$(this).parents('table').attr('id')}`).DataTable(), $(this));
-        // (res.status) ? toastr.success(res.msg) : toastr.error(res.msg);
+        await toggleStatus(route, $(`#${$(this).parents('table').attr('id')}`).DataTable(), $(this));
     });
 
     // +++++ Agents Table +++++ //

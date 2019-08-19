@@ -1,7 +1,5 @@
 @extends('secured-layouts.app')
-
 @section('title', 'Nofee Rental')
-
 @section('content')
 <div class="wrapper">
 	<div class="heading-wrapper">
@@ -29,6 +27,12 @@
 	</div>
 </div>
 
+{!! HTML::script('assets/js/datetime.min.js') !!}
 {!! HTML::script('assets/js/map.js') !!}
 {!! HTML::script('assets/js/listing.js') !!}
+<script>
+    $('#datepicker').datetimepicker({
+        format: 'yyyy-mm-dd hh:ii'
+    });
+</script>
 @endsection

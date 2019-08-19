@@ -17,7 +17,7 @@
 										<p><i class="fa fa-map-marker-alt"></i> RealtyMX ID: mrgnyc_366577 · Auto Feed Mode</p>
 										<p>Posted: {{ date("m/d/y H:m A", strtotime($al->created_at)) }}</p>
 										<a href="{{ route('admin.listingStatus', $al->id) }}" title="Unpublish this property"><span class="status">Active</span></a>
-										@if($al->is_featured != REJECTFEATURE)
+										@if($al->is_featured != REJECTFEATURED)
 											<span class="status" style="margin-right: 60px;background: blueviolet;">{{($al->is_featured == REQUESTFEATURED) ? 'Requested for feature' : 'Featured' }}</span>
 										@endif
 										<div class="actions-btns">
@@ -55,7 +55,7 @@
 												<p><i class="fa fa-map-marker-alt"></i> RealtyMX ID: mrgnyc_366577 · Auto Feed Mode</p>
 												<p>Posted: {{ date("m/d/y H:m A", strtotime($al->created_at)) }}</p>
                                                 <a href="{{ route('admin.listingStatus', $al->id) }}" title="Unpublish this property"><span class="status">Active</span></a>
-												@if($al->is_featured != REJECTFEATURE)
+												@if($al->is_featured != REJECTFEATURED)
 													<span class="status" style="margin-right: 60px;background: blueviolet;">{{($al->is_featured == REQUESTFEATURED) ? 'Requested for feature' : 'Featured' }}</span>
 												@endif
 												<div class="actions-btns">

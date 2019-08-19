@@ -68,6 +68,8 @@
         </div>
     </div>
 </div>
-
-@include('features.login-signup-popup')
-
+{{--Login Modal--}}
+@include('features.login')
+{{--SignUp Modal--}}
+@include('features.signup')
+{!! HTML::script('assets/js/login.js') !!}

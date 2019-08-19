@@ -1,8 +1,11 @@
 @extends('layouts.app')
-@section('title', 'No Fee Rental')
+@section('title', 'No Fee Rental | Dashboard')
 @section('content')
 <header>
+    {{--Normal Search--}}
     @include('features.search')
+    {{--Advance Search--}}
+    @include('features.advance_search')
 </header>
 <section class="need-help-container wow fadeIn " data-wow-delay="0.2s">
     <div class="container-lg">
@@ -29,7 +32,10 @@
         </div>
     </div>
 </section>
+{{--Featured Listing--}}
 @include('features.feature_listing')
+{{--Life Container--}}
 @include('features.life-container')
+{{--Neighborhoods--}}
 @include('features.neighborhood')
 @endsection

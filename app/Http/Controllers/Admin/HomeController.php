@@ -8,22 +8,22 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Services\UserService;
 use App\Http\Controllers\Controller;
-use App\Services\UserServices\AdminService;
 
 class HomeController extends Controller {
 
-	/**
-	 * @var AdminService
-	 */
+    /**
+     * @var AdminService|UserService
+     */
 	private $service;
 
-	/**
-	 * HomeController constructor.
-	 *
-	 * @param AdminService $service
-	 */
-	public function __construct(AdminService $service) {
+    /**
+     * HomeController constructor.
+     *
+     * @param UserService $service
+     */
+	public function __construct(UserService $service) {
 		$this->service = $service;
 	}
 
@@ -31,7 +31,12 @@ class HomeController extends Controller {
 	 * @return \Illuminate\Contracts\View\View
 	 */
 	public function index() {
-		$roles = $this->service->roles();
+		$roles = [
+		    ''     => 'Select Type',
+		    AGENT  => 'Agent',
+            OWNER  => 'Owner',
+            RENTER => 'Renter'
+        ];
 		return view('admin.index', compact('roles'));
 	}
 

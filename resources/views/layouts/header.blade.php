@@ -88,7 +88,7 @@
                     </div>
                 @else
                     <div class="actions-btns">
-                        <button type="button" class="signup-btn signup-modal-btn" data-toggle="modal" data-target="#login">Signup</button>
+                        <button type="button" class="signup-btn signup-modal-btn" data-toggle="modal" data-target="#signup">Signup</button>
                         <button type="button" class="signup-btn login-btn signin-modal-btn" data-toggle="modal" data-target="#login">Login</button>
                     </div>
                 @endif

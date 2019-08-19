@@ -1,78 +1,7 @@
-<!--Login signup modal-->
-<div class="modal fade login-modal" id="login">
+<div class="modal fade login-modal" id="signup">
     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
-        <div class="modal-content" id="signin-wrapper">
-            <img src="assets/images/modal-close-icon.png" alt="" class="close-modal" data-dismiss="modal" />
-            <div class="logo-info-wrapper">
-                <img src="assets/images/modal-logo.png" alt="" class="logo" />
-                <h3>Login</h3>
-                <ul>
-                    <li>Save your searches</li>
-                    <li>Save your favorite listings</li>
-                    <li>Get email notifications for new listings in neighborhoods that you like Access to showing on demand</li>
-                </ul>
-            </div>
-            <div class="login-form-wrapper">
-                <div class="login-heading">
-                    Login
-                </div>
-                {!! Form::open(['url' => route('attempt.login'), 'method' => 'post', 'reset' => 'false', 'id' => 'login_form', 'class' => 'ajax']) !!}
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                {!! Form::email('email', null, ['class' => 'input-style', 'placeholder' => 'Email']) !!}
-                                @if ($errors->has('email'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                {!! Form::password('password', ['class' => 'input-style', 'placeholder' => 'Password']) !!}
-                                @if ($errors->has('password'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group">
-                            <div class="col-md-12 align-left">
-                                <div class="form-check">
-                                    {!! Form::checkbox('remember', null, old('remember') ? 'checked' : '', ['class' => 'form-check-input']) !!}
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            @if (Route::has('password.request'))
-                                <a class="forgot-password" href="{{ route('password.request') }}">
-                                    {{ __('Forgot Your Password?') }}
-                                </a>
-                            @endif
-                            <div class="text-center mt-5 mb-4">
-                                <button type="submit" class="btn-default">
-                                    {{ __('Login') }}
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                {!! Form::close() !!}
-                <p class="footer-text">Don’t have an account? <span class="signup-modal-btn">Signup</span></p>
-            </div>
-
-        </div>
-
-        <!--Sign up-->
-
-        <div class="modal-content" id="signup-wrapper">
+        {{--Signup Container--}}
+        <div class="modal-content">
             <img src="assets/images/modal-close-icon.png" alt="" class="close-modal" data-dismiss="modal" />
             <div class="logo-info-wrapper">
                 <img src="assets/images/modal-logo.png" alt="" class="logo" />
@@ -188,10 +117,8 @@
                         <button class="btn-default">Signup</button>
                     </div>
                 {!! Form::close() !!}
-                <p class="footer-text">Already have an account? <span class="signin-wrapper">Login</span></p>
+                <p class="footer-text">Already have an account? <span class="signin-wrapper" id = "login-btn">Login</span></p>
             </div>
         </div>
     </div>
 </div>
-
-{!! HTML::script('assets/js/login.js') !!}

@@ -1,8 +1,7 @@
-{{-- Advance Search--}}
 <div class="modal fade" id="advance-search">
     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg">
         <div class="modal-content">
-            <!-- Modal Header -->
+            {{--Modal Header--}}
             <div class="modal-header">
                 <h4 class="modal-title">Advance Search</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>

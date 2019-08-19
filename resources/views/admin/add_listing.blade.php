@@ -27,6 +27,7 @@
 	</div>
 </div>
 
+{!! HTML::script('assets/js/datetime.min.js') !!}
 {!! HTML::script('assets/js/map.js') !!}
 {!! HTML::script('assets/js/listing.js') !!}
 
