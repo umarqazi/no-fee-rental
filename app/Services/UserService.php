@@ -296,10 +296,11 @@ class UserService {
         $user = $this->repo->create($form->toArray());
         if ($user && $sendMail) {
             $data = [
-                'view' => 'signup',
-                'subject' => 'Verify Email',
+                'view'       => 'signup',
+                'subject'    => 'Verify Email',
                 'first_name' => $user->first_name,
-                'link' => route('user.confirmEmail', $form->remember_token),
+                'link'       => route('user.confirmEmail', $user->remember_token),
+
             ];
             mailService($user->email, toObject($data));
             DB::commit();
