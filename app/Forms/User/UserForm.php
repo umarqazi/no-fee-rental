@@ -32,6 +32,11 @@ class UserForm extends BaseForm {
 	 */
 	public $user_type;
 
+    /**
+     * @var
+     */
+	public $remember_token;
+
 	/**
 	 * @return array
 	 */
@@ -42,6 +47,7 @@ class UserForm extends BaseForm {
 			'email' => $this->email,
 			'phone_number' => $this->phone_number,
 			'user_type' => $this->user_type,
+            'remember_token' => $this->remember_token
 		];
 	}
 

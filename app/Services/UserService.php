@@ -78,6 +78,7 @@ class UserService {
         $user->email = $request->email;
         $user->phone_number = $request->phone_number;
         $user->user_type = $request->user_type;
+        $user->remember_token = str_random(60);
         $user->validate();
         return $user;
     }
@@ -89,17 +90,15 @@ class UserService {
      */
     public function create($request) {
         $user = $this->form($request);
-        DB::beginTransaction();
         $response = $this->repo->create($user->toArray());
         if (!empty($response)) {
             $email = [
                 'first_name' => $user->first_name,
                 'subject'    => 'Account Created',
                 'view'       => 'create-user',
-                'link'       => route('user.change_password', base64_encode($user->email)),
+                'link'       => route('user.change_password', $user->remember_token),
             ];
             mailService($user->email, toObject($email));
-            DB::commit();
             return $response;
         }
         return false;
@@ -289,6 +288,7 @@ class UserService {
         $form->user_type = $request->user_type;
         $form->password = $request->password;
         $form->password_confirmation = $request->password_confirmation;
+        $form->remember_token = str_random(60);
         $form->validate();
 
         DB::beginTransaction();
@@ -299,7 +299,7 @@ class UserService {
                 'view' => 'signup',
                 'subject' => 'Verify Email',
                 'first_name' => $user->first_name,
-                'link' => route('user.confirmEmail', base64_encode($user->email)),
+                'link' => route('user.confirmEmail', $form->remember_token),
             ];
             mailService($user->email, toObject($data));
             DB::commit();
@@ -322,7 +322,7 @@ class UserService {
      * @return bool
      */
     public function validateEncodedToken($token) {
-        $record = $this->repo->find(['email' => base64_decode($token)])->first();
+        $record = $this->repo->find(['remember_token' => $token])->first();
         return $record ? $record : false;
     }
 
