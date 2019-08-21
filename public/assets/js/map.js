@@ -105,12 +105,21 @@ $(() => {
   });
 });
 
-window.onload = async function() {
-	MAP.getCurrentLocation().then(latlng => {
-		MAP.setGoogleMapLocation(document.getElementById('map'), latlng.coords);
-    MAP.getAddressByLatLng(latlng.coords).then(place => {
-        marker = MAP.addMarkers({ lat: latlng.coords.latitude, lng: latlng.coords.longitude });
-        MAP.toolTip(place[0].formatted_address);
-    });
-	});
+window.onload = function() {
+    let lat_lng = JSON.parse($('body').find('input[name=map_location]').val());
+    if(lat_lng !== null) {
+        MAP.setGoogleMapLocation(document.getElementById('map'), lat_lng);
+        MAP.getAddressByLatLng(lat_lng).then(place => {
+            marker = MAP.addMarkers({ lat: lat_lng.latitude, lng: lat_lng.longitude });
+            MAP.toolTip(place[0].formatted_address);
+        });
+    } else {
+        MAP.getCurrentLocation().then(latlng => {
+            MAP.setGoogleMapLocation(document.getElementById('map'), latlng.coords);
+            MAP.getAddressByLatLng(latlng.coords).then(place => {
+                marker = MAP.addMarkers({lat: latlng.coords.latitude, lng: latlng.coords.longitude});
+                MAP.toolTip(place[0].formatted_address);
+            });
+        });
+    }
 }
