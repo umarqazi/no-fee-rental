@@ -1,186 +1,510 @@
 @extends('layouts.app')
 @section('title', 'No Fee Rental')
 @section('content')
-<header>
-	<div class="header-bg inner-pages-banner"></div>
-</header>
-<section class="neighborhood-search wow fadeIn listing-detail-container" data-wow-delay="0.2s">
-		<div class="container-lg">
-			<div class="row">
-				<div class="col-lg-7">
-					<div class="item">
-						<div class="clearfix" style="max-width:100%;">
-							<ul id="image-gallery" class="gallery list-unstyled cS-hidden">
-								@foreach($listing->listingImages as $li)
-									<li data-thumb="{{asset('storage/'.$li->listing_image)}}">
-										<img src="{{asset('storage/'.$li->listing_image)}}" />
-									</li>
-								@endforeach
-							</ul>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-5 ">
-					<div class="listing-info">
-						<div class="product-title">
-							<p>$5,500 • Two Bedrooms </p>
-							<span>
-							<a href="#"><img src="assets/images/share-icon.png" alt="" /> </a>
-							<a href="#" class="ml-2"><img src="assets/images/fav-icon.png" alt="" /> </a>
-						</span>
-						</div>
-						<p class="title-subtext">{{ $listing->street_address }}</p>
-						<div class="apartment-details">
-							Apartment Details <br>
-							<span>${{ $listing->rent }}, {{ $listing->bedrooms.' '.(($listing->bedrooms > 1) ? 'Bedrooms' : 'Bedroom') }}, {{ $listing->baths.' '.(($listing->baths > 1) ? 'Baths' : 'Bath') }}</span>
-						</div>
-						<ul class="info-listing">
-							<li>
-								<p>
-									<strong>Last Updated</strong><br>
-									<span>{{ $listing->updated_at->diffForHumans() }}</span>
-								</p>
-							</li>
-							<li>
-								<p>
-									<strong>Availble</strong><br>
-									<span>{{ (config('constants.available'))[$listing->available] }}</span>
-								</p>
-							</li>
-							<li>
-								<p>
-									<strong>Listed For</strong><br>
-									<span>29 days</span>
-								</p>
-							</li>
-							@foreach(features($listing->listingTypes, true) as $type => $values)
-							<li>
-								<p>
-									<strong>{{ $type }}</strong><br>
-									@foreach($values as $value)
-										<span><i class="fa fa-angle-right"></i> {{$value}}</span>
-									@endforeach
-								</p>
-							</li>
-							@endforeach
-							<li>
-								<p>
-									<img src="assets/images/sq-icon.png" alt="" class="mr-2" />
-									<span>{{ $listing->square_feet }} Sq. Ft</span>
-								</p>
-							</li>
-							<li>
-								<p>
-									<img src="assets/images/web-icon.png" alt="" class="mr-2" />
-									<span>Web Id : 00123</span>
-								</p>
-							</li>
-						</ul>
-						<div class="near-by">
-							Near By Subway Stations
-						</div>
-						<div class="near-by-info">
-							<div>
-								<img src="assets/images/numbers.png" alt="" />
-							</div>
-							<div>
-								<p> 51st St (0.25 mi) </p>
-								<p>42 Street - Grand Central (0.26 mi) </p>
-								<p>Lexington Av-53 St (0.34 mi </p>
-								<p>5th Av (0.5 mi) </p>
-							</div>
-						</div>
-						<div class="text-center mt-5">
-							<button class="btn-default" data-toggle="modal" data-target="#check-availability">Check Availability</button>
-						</div>
-						<div class="interested-title">
-							Interested in this apartment? Listings
-						</div>
-						<div class="agent-appointment">
-							<div class="agent-info">
-								<img src="assets/images/agent-img.jpg" alt="" />
-								<p>Jeff Clarke<br><span>646-470-7445</span></p>
-							</div>
-							<button class="btn-default">Make an appointment</button>
-						</div>
-					</div>
-				</div>
-			</div>
-			<h3 class="mt-5 mb-3">Description</h3>
-			<p>
-				{{ $listing->description }}</p>
-			<h3 class="mt-5 mb-3">Nearby Buildings </h3>
+    <!doctype html>
+<html lang="en">
 
-			<div class="featured-properties nearby-listing">
-				<div class="property-listing ">
-					<div class="property-thumb">
-						<div class="check-btn">
-							<button class="btn-default" data-toggle="modal" data-target="#check-availability">Check Availability</button>
-						</div>
-						<span class="heart-icon"></span>
-						<img src="assets/images/gallery-img.jpg" alt="" class="main-img">
-						<div class="info">
-							<a href="#">
-								<p>$3,200 / Month </p>
-								<ul>
-									<li><i class="fa fa-bed"></i> 2</li>
-									<li><i class="fa fa-bath"></i> 2</li>
-								</ul>
-							</a>
-						</div>
-					</div>
-					<div class="property-thumb">
-						<div class="check-btn">
-							<button class="btn-default" data-toggle="modal" data-target="#check-availability">Check Availability</button>
-						</div>
-						<span class="heart-icon"></span>
-						<img src="assets/images/gallery-img.jpg" alt="" class="main-img">
-						<div class="info">
-							<a href="#">
-								<p>$3,200 / Month </p>
-								<ul>
-									<li><i class="fa fa-bed"></i> 2</li>
-									<li><i class="fa fa-bath"></i> 2</li>
-								</ul>
-							</a>
-						</div>
-					</div>
-					<div class="property-thumb">
-						<div class="check-btn">
-							<button class="btn-default" data-toggle="modal" data-target="#check-availability">Check Availability</button>
-						</div>
-						<span class="heart-icon"></span>
-						<img src="assets/images/gallery-img.jpg" alt="" class="main-img">
-						<div class="info">
-							<a href="#">
-								<p>$3,200 / Month </p>
-								<ul>
-									<li><i class="fa fa-bed"></i> 2</li>
-									<li><i class="fa fa-bath"></i> 2</li>
-								</ul>
-							</a>
-						</div>
-					</div>
-					<div class="property-thumb">
-						<div class="check-btn">
-							<button class="btn-default" data-toggle="modal" data-target="#check-availability">Check Availability</button>
-						</div>
-						<span class="heart-icon"></span>
-						<img src="assets/images/gallery-img.jpg" alt="" class="main-img">
-						<div class="info">
-							<a href="#">
-								<p>$3,200 / Month </p>
-								<ul>
-									<li><i class="fa fa-bed"></i> 2</li>
-									<li><i class="fa fa-bath"></i> 2</li>
-								</ul>
-							</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-    {{--Check Availability--}}
-    @include('features.message')
-@endsection
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800|Raleway:300,400,500,600,700,800,900" rel="stylesheet">
+
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/jquery-ui.css" type="text/css" media="all" />
+    <link rel="stylesheet" href="assets/css/animate.min.css">
+    <link rel="stylesheet" href="assets/owlcarousel/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="assets/css/lightslider.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/listing_detail.css">
+
+    <title>NOFEE RENTAL</title>
+
+</head>
+
+<body>
+
+
+<section class="neighborhood-search wow fadeIn listing-detail-container" data-wow-delay="0.2s">
+    <div class="container-lg">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="item">
+                    <div class="clearfix" style="max-width:100%;">
+                        <ul id="image-gallery" class="gallery list-unstyled cS-hidden">
+                            @for ($i = 0; $i < sizeof($listing->listingImages); $i++)
+                            <li data-thumb="{{$listing->listingImages[$i]->listing_image}}" class="large-view">
+                                <img src="{{$listing->listingImages[$i]->listing_image}}" />
+                            </li>
+                            @endfor
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 ">
+                <div class="listing-info">
+                    <div class="product-title">
+                        <p> {{$listing->display_address}} </p>
+                        <span>
+                            <a href="#"><img src="assets/images/share-icon.png" alt="" /> </a>
+                            <a href="#" class="ml-2"><img src="assets/images/fav-icon.png" alt="" /> </a>
+                        </span>
+                    </div>
+                    <p class="title-subtext">{{$listing->street_address}}</p>
+                    <div class="unavailable-btn">
+                        <span>Unavailable </span>
+                        <i class="far fa-clock"></i>
+                        <label> 21 hours since last update </label>
+                    </div>
+                    <div class="apartment-details">
+                        <h4> $ {{$listing->rent}}/ month</h4>
+                    </div>
+                    <div class="row after-apartment-icon">
+                        <div class="col-lg-3 col-3">
+                            <i class="fas fa-bed"></i> {{$listing->bedrooms}} Beds
+                        </div>
+                        <div class="col-lg-3 col-3">
+                            <i class="fas fa-bath"> </i> {{$listing->baths}} bath
+                        </div>
+                        <div class="col-lg-3 col-3">
+                            <i class="fas fa-ruler"> </i> {{$listing->square_feet}} ft
+                        </div>
+                    </div>
+                    <div class="row Availability-date-sec">
+                        <div class="col-lg-6">
+                            <div class="row">
+                                <div class="col-lg-8 col-8">
+                                    <span>Availability date: </span>
+                                </div>
+                                <div class="col-lg-4 col-4">
+                                    <strong> Now</strong>
+                                </div>
+                                <div class="col-lg-8 col-8">
+                                    <span>Lease term: </span>
+                                </div>
+                                <div class="col-lg-4 col-4">
+                                    <strong> 1 year</strong>
+                                </div>
+                                <div class="col-lg-8 col-8">
+                                    <span>Days on market: </span>
+                                </div>
+                                <div class="col-lg-4 col-4">
+                                    <strong> 190 days</strong>
+                                </div>
+                                <div class="col-lg-8 col-8">
+                                    <span>Exposure: </span>
+                                </div>
+                                <div class="col-lg-4 col-4">
+                                    <strong> None</strong>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="row">
+                                <div class="col-lg-8 col-8">
+                                    <span>Broker fee: </span>
+                                </div>
+                                <div class="col-lg-4 col-4">
+                                    <strong> No fee</strong>
+                                </div>
+                                <div class="col-lg-8 col-8">
+                                    <span>Application fee: </span>
+                                </div>
+                                <div class="col-lg-4 col-4">
+                                    <strong> $100.00</strong>
+                                </div>
+                                <div class="col-lg-8 col-8">
+                                    <span>Free months: </span>
+                                </div>
+                                <div class="col-lg-4 col-4">
+                                    <strong> None</strong>
+                                </div>
+                                <div class="col-lg-8 col-8">
+                                    <span>Deposit: </span>
+                                </div>
+                                <div class="col-lg-4 col-4">
+                                    <strong> $5,600.00</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="appointment-section">
+                        <div class="row">
+                            <div class="col-lg-5">
+                                <a href="#"><img src="assets/images/careers-icon.png" alt="apointment"></a>
+                                <p> 1 agent from <strong>Arraynyc </strong></p>
+                            </div>
+                            <div class="col-lg-7">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <a href="#" class="btn apointment-btn">Appointment </a>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <a href="#" class="btn contct-agent-btn">Contact Agent </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- <ul class="info-listing">
+                        <li>
+                            <p>
+                                <strong>Last Updated</strong><br>
+                                <span>29 days</span>
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                <strong>Availble</strong><br>
+                                <span>Immediately</span>
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                <strong>Listed For</strong><br>
+                                <span>29 days</span>
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                <strong>Pets</strong><br>
+                                <span>Large Dogs & Cats</span>
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                <img src="assets/images/sq-icon.png" alt="" class="mr-2" />
+                                <span>0 Sq. Ft</span>
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                <img src="assets/images/web-icon.png" alt="" class="mr-2" />
+                                <span>Web Id : 00123</span>
+                            </p>
+                        </li>
+                    </ul> -->
+                    <!-- <div class="near-by">
+                        Near By Subway Stations
+                    </div>
+                    <div class="near-by-info">
+                        <div>
+                            <img src="assets/images/numbers.png" alt="" />
+                        </div>
+                        <div>
+                            <p> 51st St (0.25 mi) </p>
+                            <p>42 Street - Grand Central (0.26 mi) </p>
+                            <p>Lexington Av-53 St (0.34 mi </p>
+                            <p>5th Av (0.5 mi) </p>
+                        </div>
+                    </div> -->
+                    <!-- <div class="text-center mt-5">
+                        <button class="btn-default" data-toggle="modal" data-target="#check-availability">Check Availability</button>
+                    </div>
+                    <div class="interested-title">
+                        Interested in this apartment? Listings
+                    </div>
+                    <div class="agent-appointment">
+                        <div class="agent-info">
+                            <img src="assets/images/agent-img.jpg" alt="" />
+                            <p>Jeff Clarke<br><span>646-470-7445</span></p>
+                        </div>
+                        <button class="btn-default">Make an appointment</button>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+        <h3 class="mt-5 mb-3">Description</h3>
+        <p>{{$listing->description}}</p>
+        <div class="listing-aminities-sec">
+            <h3>Amenities </h3>
+            <div class=" col-lg-12">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <p>Listing Aminities </p>
+                        <ul>
+                            <li> Dishwasher</li>
+                            <li> Storage Available</li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3">
+                        <p>&nbsp; </p>
+                        <ul>
+                            <li> Terrace</li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3">
+                        <p>BUILDING AMENITIES</p>
+                        <ul>
+                            <li> Doorman</li>
+                            <li> Gym</li>
+                            <li> Pets Allowed</li>
+                            <li> Elevator</li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3">
+                        <p>&nbsp;</p>
+                        <ul>
+                            <li> Laundry in Building</li>
+                            <li> Garage Parking</li>
+                            <li> Parking Available</li>
+                            <li> Roof Deck</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="location-map-sec">
+            <h3>Location </h3>
+            <div class="row">
+
+                <div class="col-lg-6">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <label> TRANSPORTATION</label>
+                            <p>Jay St & Willoughby St </p>
+                            <span class="span-box text-a"> A </span>
+                            <span class="span-box text-c"> C </span>
+                            <span class="span-box text-f"> F </span>
+                            <span class="span-box text-r"> R </span>
+
+                            <p>Smith St & Bergen St </p>
+                            <span class="span-box text-f"> F </span>
+                            <span class="span-box text-g"> G </span>
+
+                            <p>Smith St & Bergen St </p>
+                            <span class="span-box text-f"> F </span>
+                            <span class="span-box text-g"> G </span>
+
+                            <p>Court Street & Montague Street </p>
+                            <span class="span-box text-r"> R </span>
+                            <span class="span-box text-2"> 2 </span>
+                            <span class="span-box text-2"> 3 </span>
+                            <span class="span-box text-4"> 4 </span>
+                            <span class="span-box text-4"> 5 </span>
+
+                            <p>Cadman Plaza West & Montague St</p>
+                            <span class="span-box text-r"> R </span>
+                            <span class="span-box text-2"> 2 </span>
+                            <span class="span-box text-2"> 3 </span>
+                            <span class="span-box text-4"> 4 </span>
+                            <span class="span-box text-4"> 5 </span>
+
+                        </div>
+                        <div class="col-lg-6 mob-top-mrg">
+                            <label> Schools</label>
+                            <ul>
+                                <li> Brooklyn Law School</li>
+                            </ul>
+                            <label class="city-bike"> City Bike</label>
+                            <ul class="second-ul">
+                                <li>Clinton St & Joralemon St</li>
+                                <li>Henry St & Atlantic Ave</li>
+                                <li>State St & Smith Stt</li>
+                                <li>Cadman Plaza West & Montague St</li>
+                                <li>Schermerhorn St & Court St</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3403.339582092198!2d74.27331331462928!3d31.459843557277164!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x391903e9fe073afd%3A0xcec14940bde5aec4!2sTechverx!5e0!3m2!1sen!2s!4v1566307863547!5m2!1sen!2s" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+        <h3 class="mt-5 mb-3">Nearby Buildings </h3>
+        <div class="related-carasoule-sec">
+            <div class="owl-slider">
+                <div id="carousel" class="owl-carousel">
+                    <div class="item">
+                        <img class="owl-lazy" data-src="assets/images/large-view-6.jpg" alt="first-img"> <i class="fas fa-star"></i>
+                        <label>$8,000 / month </label>
+                        <div class="item-inner">
+                            <p>195 Santon Street Lower East Side, Manhattan -#5B </p>
+                            <p> <i class="fas fa-bed"> 4 Beds</i> <i class="fas fa-bath"> 2 Baths </i></p>
+                            <p><i class="far fa-clock"> 6 days since last update</i> </p>
+                            <a href="#" class="btn "> Quick Contact</a>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img class="owl-lazy" data-src="assets/images/large-view-6.jpg" alt="first-img"> <i class="fas fa-star"></i>
+                        <label>$8,000 / month </label>
+                        <div class="item-inner">
+                            <p>195 Santon Street Lower East Side, Manhattan -#5B </p>
+                            <p> <i class="fas fa-bed"> 4 Beds</i> <i class="fas fa-bath"> 2 Baths </i></p>
+                            <p><i class="far fa-clock"> 6 days since last update</i> </p>
+                            <a href="#" class="btn "> Quick Contact</a>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img class="owl-lazy" data-src="assets/images/large-view-6.jpg" alt="first-img"> <i class="fas fa-star"></i>
+                        <label>$8,000 / month </label>
+                        <div class="item-inner">
+                            <p>195 Santon Street Lower East Side, Manhattan -#5B </p>
+                            <p> <i class="fas fa-bed"> 4 Beds</i> <i class="fas fa-bath"> 2 Baths </i></p>
+                            <p><i class="far fa-clock"> 6 days since last update</i> </p>
+                            <a href="#" class="btn "> Quick Contact</a>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img class="owl-lazy" data-src="assets/images/large-view-6.jpg" alt="first-img"> <i class="fas fa-star"></i>
+                        <label>$8,000 / month </label>
+                        <div class="item-inner">
+                            <p>195 Santon Street Lower East Side, Manhattan -#5B </p>
+                            <p> <i class="fas fa-bed"> 4 Beds</i> <i class="fas fa-bath"> 2 Baths </i></p>
+                            <p><i class="far fa-clock"> 6 days since last update</i> </p>
+                            <a href="#" class="btn "> Quick Contact</a>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img class="owl-lazy" data-src="assets/images/large-view-6.jpg" alt="first-img"> <i class="fas fa-star"></i>
+                        <label>$8,000 / month </label>
+                        <div class="item-inner">
+                            <p>195 Santon Street Lower East Side, Manhattan -#5B </p>
+                            <p> <i class="fas fa-bed"> 4 Beds</i> <i class="fas fa-bath"> 2 Baths </i></p>
+                            <p><i class="far fa-clock"> 6 days since last update</i> </p>
+                            <a href="#" class="btn "> Quick Contact</a>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img class="owl-lazy" data-src="assets/images/large-view-6.jpg" alt="first-img"> <i class="fas fa-star"></i>
+                        <label>$8,000 / month </label>
+                        <div class="item-inner">
+                            <p>195 Santon Street Lower East Side, Manhattan -#5B </p>
+                            <p> <i class="fas fa-bed"> 4 Beds</i> <i class="fas fa-bath"> 2 Baths </i></p>
+                            <p><i class="far fa-clock"> 6 days since last update</i> </p>
+                            <a href="#" class="btn "> Quick Contact</a>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img class="owl-lazy" data-src="assets/images/large-view-6.jpg" alt="first-img"> <i class="fas fa-star"></i>
+                        <label>$8,000 / month </label>
+                        <div class="item-inner">
+                            <p>195 Santon Street Lower East Side, Manhattan -#5B </p>
+                            <p> <i class="fas fa-bed"> 4 Beds</i> <i class="fas fa-bath"> 2 Baths </i></p>
+                            <p><i class="far fa-clock"> 6 days since last update</i> </p>
+                            <a href="#" class="btn "> Quick Contact</a>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img class="owl-lazy" data-src="assets/images/large-view-6.jpg" alt="first-img"> <i class="fas fa-star"></i>
+                        <label>$8,000 / month </label>
+                        <div class="item-inner">
+                            <p>195 Santon Street Lower East Side, Manhattan -#5B </p>
+                            <p> <i class="fas fa-bed"> 4 Beds</i> <i class="fas fa-bath"> 2 Baths </i></p>
+                            <p><i class="far fa-clock"> 6 days since last update</i> </p>
+                            <a href="#" class="btn "> Quick Contact</a>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img class="owl-lazy" data-src="assets/images/large-view-6.jpg" alt="first-img"> <i class="fas fa-star"></i>
+                        <label>$8,000 / month </label>
+                        <div class="item-inner">
+                            <p>195 Santon Street Lower East Side, Manhattan -#5B </p>
+                            <p> <i class="fas fa-bed"> 4 Beds</i> <i class="fas fa-bath"> 2 Baths </i></p>
+                            <p><i class="far fa-clock"> 6 days since last update</i> </p>
+                            <a href="#" class="btn "> Quick Contact</a>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img class="owl-lazy" data-src="assets/images/large-view-6.jpg" alt="first-img"> <i class="fas fa-star"></i>
+                        <label>$8,000 / month </label>
+                        <div class="item-inner">
+                            <p>195 Santon Street Lower East Side, Manhattan -#5B </p>
+                            <p> <i class="fas fa-bed"> 4 Beds</i> <i class="fas fa-bath"> 2 Baths </i></p>
+                            <p><i class="far fa-clock"> 6 days since last update</i> </p>
+                            <a href="#" class="btn "> Quick Contact</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div class="featured-properties nearby-listing">
+            <div class="property-listing ">
+                <div class="property-thumb">
+                    <div class="check-btn">
+                        <button class="btn-default" data-toggle="modal" data-target="#check-availability">Check Availability</button>
+                    </div>
+                    <span class="heart-icon"></span>
+                    <img src="assets/images/gallery-img.jpg" alt="" class="main-img">
+                    <div class="info">
+                        <a href="#">
+                            <p>$3,200 / Month </p>
+                            <ul>
+                                <li><i class="fa fa-bed"></i> 2</li>
+                                <li><i class="fa fa-bath"></i> 2</li>
+                            </ul>
+                        </a>
+                    </div>
+                </div>
+                <div class="property-thumb">
+                    <div class="check-btn">
+                        <button class="btn-default" data-toggle="modal" data-target="#check-availability">Check Availability</button>
+                    </div>
+                    <span class="heart-icon"></span>
+                    <img src="assets/images/gallery-img.jpg" alt="" class="main-img">
+                    <div class="info">
+                        <a href="#">
+                            <p>$3,200 / Month </p>
+                            <ul>
+                                <li><i class="fa fa-bed"></i> 2</li>
+                                <li><i class="fa fa-bath"></i> 2</li>
+                            </ul>
+                        </a>
+                    </div>
+                </div>
+                <div class="property-thumb">
+                    <div class="check-btn">
+                        <button class="btn-default" data-toggle="modal" data-target="#check-availability">Check Availability</button>
+                    </div>
+                    <span class="heart-icon"></span>
+                    <img src="assets/images/gallery-img.jpg" alt="" class="main-img">
+                    <div class="info">
+                        <a href="#">
+                            <p>$3,200 / Month </p>
+                            <ul>
+                                <li><i class="fa fa-bed"></i> 2</li>
+                                <li><i class="fa fa-bath"></i> 2</li>
+                            </ul>
+                        </a>
+                    </div>
+                </div>
+                <div class="property-thumb">
+                    <div class="check-btn">
+                        <button class="btn-default" data-toggle="modal" data-target="#check-availability">Check Availability</button>
+                    </div>
+                    <span class="heart-icon"></span>
+                    <img src="assets/images/gallery-img.jpg" alt="" class="main-img">
+                    <div class="info">
+                        <a href="#">
+                            <p>$3,200 / Month </p>
+                            <ul>
+                                <li><i class="fa fa-bed"></i> 2</li>
+                                <li><i class="fa fa-bath"></i> 2</li>
+                            </ul>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+    </div>
+</section>
+
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/jquery-ui.min.js" type="text/javascript"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/popper.min.js"></script>
+<script src="assets/js/wow.min.js"></script>
+<script src="assets/owlcarousel/owl.carousel.min.js"></script>
+<script src="assets/js/lightslider.js"></script>
+<script src="assets/js/custom.js"></script>
+
+</body>
+
+</html>@endsection
