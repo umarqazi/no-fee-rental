@@ -56,7 +56,7 @@
 												</div>
 												<div class="list-actions-icons">
 													<a href="{{ route('admin.editListing', $fl->id) }}"><button><i class="fa fa-edit"></i></button></a>
-													<button><i class="fa fa-copy"></i></button>
+                                                    <a href="{{ route('admin.copyListing', $fl->id) }}"><button><i class="fa fa-copy"></i></button></a>
 												</div>
 											</div>
 										</div>

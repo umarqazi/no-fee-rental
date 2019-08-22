@@ -171,7 +171,6 @@ return [
 		/*
 	     * Application Service Providers...
 		 */
-        Maatwebsite\Excel\ExcelServiceProvider::class,
 		App\Providers\AppServiceProvider::class,
 		App\Providers\AuthServiceProvider::class,
 		// App\Providers\BroadcastServiceProvider::class,
@@ -229,7 +228,7 @@ return [
 		'Form' => Collective\Html\FormFacade::class,
 		'HTML' => Collective\Html\HtmlFacade::class,
 		'DataTables' => Yajra\DataTables\Facades\DataTables::class,
-        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+
 	],
 
 ];
