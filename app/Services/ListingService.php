@@ -184,9 +184,9 @@ class ListingService {
      */
     private function collection($listing, $paginate) {
         return [
-            'active' => $listing->active()->paginate($paginate, ['*'], 'active'),
-            'pending' => $listing->pending()->paginate($paginate, ['*'], 'pending'),
-            'inactive' => $listing->inactive()->paginate($paginate, ['*'], 'inactive'),
+            'active' => $listing->active()->latest('updated_at')->paginate($paginate, ['*'], 'active'),
+            'pending' => $listing->pending()->latest()->paginate($paginate, ['*'], 'pending'),
+            'inactive' => $listing->inactive()->latest()->paginate($paginate, ['*'], 'inactive'),
         ];
     }
 
@@ -198,9 +198,9 @@ class ListingService {
      */
     private function searchCollection($keywords, $paginate) {
         return [
-            'pending' => $this->repo->search($keywords)->pending()->paginate($paginate, ['*'], 'pending'),
-            'active' => $this->repo->search($keywords)->active()->paginate($paginate, ['*'], 'active'),
-            'inactive' => $this->repo->search($keywords)->inactive()->paginate($paginate, ['*'], 'inactive'),
+            'pending' => $this->repo->search($keywords)->pending()->latest()->paginate($paginate, ['*'], 'pending'),
+            'active' => $this->repo->search($keywords)->active()->latest('updated_at')->paginate($paginate, ['*'], 'active'),
+            'inactive' => $this->repo->search($keywords)->inactive()->latest()->paginate($paginate, ['*'], 'inactive'),
         ];
     }
 
@@ -395,7 +395,7 @@ class ListingService {
      * @return array
      */
     public function recent($paginate) {
-        return $this->sortCollection($paginate, 'created_at', RECENT);
+        return $this->sortCollection($paginate, 'updated_at', RECENT);
     }
 
     /**
