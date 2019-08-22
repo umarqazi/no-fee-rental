@@ -117,7 +117,7 @@ class RealtyMXController extends Controller {
      * @param $file
      */
 	public function get(Request $request, $file) {
-		$filePath = base_path('/storage/app/realtyMXFeed/' . $file);
+		$filePath = base_path('storage/app/realtyMXFeed/' . $file);
 		$file = fread(fopen($filePath, 'r'), filesize($filePath));
 		$xml = simplexml_load_string($file);
 		$data = json_decode(json_encode($xml), true);

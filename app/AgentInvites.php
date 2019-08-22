@@ -8,7 +8,11 @@ class AgentInvites extends Model {
 
 	protected $fillable = ['invited_by', 'email', 'token', 'created_at', 'updated_at'];
 
-	public function admin() {
-		return $this->belongsTo(User::class, 'id', 'invited_by');
+	public function user() {
+		return $this->hasOne(User::class, 'id', 'invited_by');
 	}
+
+	public function scopeInviteBy($query, $token) {
+	    return $query->whereToken($token)->with('user');
+    }
 }

@@ -31,14 +31,13 @@ Route::get('/listing/{sortBy}', 'Agent\ListingController@sortBy')->name('agent.s
 // Featured Listing
 Route::get('/request-featured/{id}', 'Agent\ListingController@request')->name('agent.requestFeatured');
 
-// Agent Invites
+// Agent Members Routes
+Route::get('/team', 'Agent\MemberController@index')->name('agent.team');
 Route::get('/all-invites', 'Agent\MemberController@get')->name('agent.getInvites');
 Route::post('/invite-agent', 'Agent\MemberController@invite')->name('agent.inviteMember');
 
 // Messaging Routes
 Route::get('/messages-view', 'Agent\MessageController@index')->name('agent.messageIndex');
-Route::get('/load-chat/{id}', 'Agent\MessageController@loadChat')->name('agent.loadChat');
+Route::get('/load-chat/{id}', 'Agent\MessageController@inbox')->name('agent.loadChat');
+Route::post('/send-message/{id}', 'Agent\MessageController@send')->name('send.message');
 Route::post('/accept-meeting/{id}', 'Agent\MessageController@confirmMeeting');
-Route::get('/test', function() {
-    return view('agent.members');
-});

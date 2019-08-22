@@ -108,7 +108,6 @@ $(() => {
 window.onload = function() {
     let lat_lng = $('body').find('input[name=map_location]').val();
     if(lat_lng !== null && lat_lng !== '') {
-        alert('hi');
         lat_lng = JSON.parse(lat_lng);
         MAP.setGoogleMapLocation(document.getElementById('map'), lat_lng);
         MAP.getAddressByLatLng(lat_lng).then(place => {

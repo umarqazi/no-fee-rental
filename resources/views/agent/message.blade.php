@@ -2,7 +2,6 @@
 @section('title', 'Messages')
 @section('content')
     <div class="wrapper">
-
         <div class="heading-wrapper">
             <h1>Messages</h1>
         </div>
@@ -34,8 +33,7 @@
                         @foreach ($data->inbox as $inbox)
                         <div class="message-row row">
                             <div class="col-sm-10">
-                            <h3>{{ $inbox->from_user->first_name }}</h3>
-{{--                            <p>Reminder from nofeerentals: You have still not replied to Ethan in regards Reminder from RentHop: You have still not replied to... <a href="" data-toggle="modal" inbox_id="{{ $inbox->id }}" id="load_chat" data-target="#message-modal">Read More</a></p>--}}
+                            <h3>{{ $inbox->sender->first_name }}</h3>
                             </div>
                             <div class="col-sm-2">
                                 <a href="{{ route('agent.loadChat', $inbox->id) }}" class="view-chat"> View</a>
@@ -76,15 +74,14 @@
                             </div>
                             <div class="date-text"> Sun, 05/5/19, 10:14 am</div>
                         </div>
-
                     </div>
 
                     {{--Request Meeting--}}
                     <div class="tab-pane fade" id="tab-3">
                         @foreach ($data->meeting_requests as $meeting)
                         <div class="message-row">
-                            <h3>{{ $meeting->from_user->first_name }}</h3>
-                            <p>Reminder from nofeerentals: You have still not replied to {{ $meeting->from_user->first_name }} in regards Reminder from RentHop<a href="" data-toggle="modal" data-target="#message-modal">Read More</a></p>
+                            <h3>{{ $meeting->sender->first_name }}</h3>
+                            <p>Reminder from nofeerentals: You have still not replied to {{ $meeting->sender->first_name }} in regards Reminder from RentHop<a href="" data-toggle="modal" data-target="#message-modal">Read More</a></p>
                             <div class="property">
                                 <img src="{{!empty($meeting->listing->thumbnail)
                                         ? asset('storage/'.$meeting->listing->thumbnail)

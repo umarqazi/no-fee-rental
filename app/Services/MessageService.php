@@ -8,6 +8,8 @@
 
 namespace App\Services;
 
+use App\Forms\MessageForm;
+use App\Repository\ContactRepo;
 use App\Repository\MessageRepo;
 use Illuminate\Support\Facades\DB;
 
@@ -22,7 +24,7 @@ class MessageService {
      * MessageService constructor.
      */
     public function __construct() {
-        $this->repo = new MessageRepo();
+        $this->repo = new ContactRepo();
     }
 
     /**
@@ -42,8 +44,23 @@ class MessageService {
         return toObject($collection);
     }
 
-    public function loadChat($id, $paginate) {
-        return $this->repo->history($id)->paginate($paginate, ['*'], 'history');
+    /**
+     * @param $id
+     * @param $paginate
+     *
+     * @return mixed
+     */
+    public function loadChat($id) {
+        return $this->messages($id)->first();
+    }
+
+    /**
+     * @param $id
+     *
+     * @return mixed
+     */
+    public function messages($id) {
+        return $this->repo->messages($id);
     }
 
     /**
@@ -66,7 +83,16 @@ class MessageService {
      * @return mixed
      */
     public function initChat($id) {
-        return $this->repo->update($id, ['request_meeting' => ACTIVE]);
+        $user = $this->repo->sender();
+        $data = [
+            'view'        => 'meeting-accepted',
+            'subject'     => 'Meeting Request Approved',
+            'name'        => $user->sender->first_name,
+            'approved_on' => now(),
+            'approved_by' => mySelf()->first_name
+        ];
+        mailService($user->sender->email, toObject($data));
+        return $this->repo->update($id, ['request_meeting' => ACTIVE, 'seen' => true]);
     }
 
     /**
@@ -109,7 +135,19 @@ class MessageService {
         ];
     }
 
-    public function message($id, $request) {
-//        return
+    /**
+     * @param $id
+     * @param $request
+     *
+     * @return mixed
+     */
+    public function send($id, $request) {
+        $this->repo = new MessageRepo();
+        $form = new MessageForm();
+        $form->message = $request->message;
+        $form->align = myId();
+        $form->contact_id = $id;
+        $form->validate();
+        return $this->repo->create($form->toArray());
     }
 }

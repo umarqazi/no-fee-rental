@@ -4,8 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Contact extends Model
-{
+class Contact extends Model {
+
     /**
      * @var array
      */
@@ -19,11 +19,10 @@ class Contact extends Model
     ];
 
     /**
-     * Inverse Relation
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function messages() {
-        return $this->belongsToMany(Contact::class, 'messages');
+        return $this->hasMany(Message::class, 'contact_id', 'id');
     }
 
     /**
@@ -36,7 +35,7 @@ class Contact extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function from_user() {
+    public function sender() {
         return $this->belongsTo(User::class, 'from', 'id');
     }
 
@@ -48,7 +47,7 @@ class Contact extends Model
      */
     public function scopeInbox($query) {
         return $query->where(['to' => myId(), 'request_meeting' => ACTIVE])
-                     ->with(['from_user', 'listing']);
+                     ->with(['sender', 'listing']);
     }
 
     /**
@@ -59,11 +58,17 @@ class Contact extends Model
      */
     public function scopeMeetingRequests($query) {
         return $query->where(['to' => myId(),'request_meeting' => DEACTIVE])
-                     ->with(['from_user', 'listing']);
+                     ->with(['sender', 'listing']);
     }
 
-    public function scopeloadChat($query, $id) {
+    /**
+     * @param $query
+     * @param $id
+     *
+     * @return mixed
+     */
+    public function scopeAgentMessages($query, $id) {
         return $query->where(['id' => $id])
-                     ->with(['messages', 'listing', 'from_user']);
+                     ->with(['messages', 'listing', 'sender']);
     }
 }
