@@ -23,7 +23,7 @@ class ListingService {
     /**
      * @var ListingRepo
      */
-    private $repo;
+    protected $repo;
 
     /**
      * BaseListingService constructor.
@@ -42,11 +42,14 @@ class ListingService {
     private function form($request) {
         $form = new CreateListingForm();
         $form->user_id = myId();
+        $form->realty_id = $request->realty_id ?? null;
+        $form->realty_url = $request->realty_url ?? null;
+        $form->realty = $request->realty ?? false;
         $form->name = $request->name;
         $form->email = $request->email;
         $form->description = $request->description;
         $form->phone_number = $request->phone_number;
-        $form->website = $request->website;
+        $form->url = $request->url;
         $form->street_address = $request->street_address;
         $form->display_address = $request->display_address;
         $form->available = $request->available;
@@ -57,15 +60,15 @@ class ListingService {
         $form->unit = $request->unit;
         $form->rent = $request->rent;
         $form->square_feet = $request->square_feet;
-        $form->listing_type = $request->listing_type;
-        $form->amenities = $request->amenities;
-        $form->unit_feature = $request->unit_feature;
-        $form->building_feature = $request->building_feature;
-        $form->pet_policy = $request->pet_policy;
+        $form->listing_type = $request->listing_type ?? null;
+        $form->amenities = $request->amenities ?? null;
+        $form->unit_feature = $request->unit_feature ?? null;
+        $form->building_feature = $request->building_feature ?? null;
+        $form->pet_policy = $request->pet_policy ?? null;
         $form->status = $request->status;
         $form->map_location = $request->map_location;
-        $form->old = ($request->hasFile('thumbnail')) ? $request->old_thumbnail : true;
-        $form->thumbnail = ($request->hasFile('thumbnail')) ? $request->file('thumbnail') : $request->old_thumbnail;
+        $form->old = ($request->thumbnail) ? $request->old_thumbnail ?? null : true;
+        $form->thumbnail = ($request->thumbnail) ? $request->thumbnail ?? null : $request->old_thumbnail;
 		$form->validate();
         return $form;
     }
@@ -77,12 +80,14 @@ class ListingService {
      */
     private function createList($data) {
         DB::beginTransaction();
-        if ($data->thumbnail) {
+        if ($data->thumbnail && !$data->realty) {
             $data->thumbnail = uploadImage($data->thumbnail, 'data/' . myId() . '/listing/thumbnails');
         }
-
-        if (!empty($list = $this->repo->create($data->toArray()))) {
+        $list = $this->repo->create($data->toArray());
+        if (!empty($list) && !$data->realty) {
             return $this->createType($list->id, $data);
+        } else if(!empty($list) && $data->realty) {
+            DB::commit();
         }
 
         DB::rollback();

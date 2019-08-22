@@ -1,6 +1,13 @@
 $(() => {
 
-    $(".sort-bt > i,span").on('click', function () {
+    $('#availableOn').datetimepicker({
+        format: 'Y/m/d H:i',
+        timepicker: true,
+        datepicker: true,
+    });
+
+
+        $(".sort-bt > i,span").on('click', function () {
         $(this).siblings(".custom-dropdown").slideToggle();
     });
 

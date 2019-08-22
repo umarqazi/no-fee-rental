@@ -53,3 +53,6 @@ Route::get('/auth', function() {
 Route::post('/send-message', 'MessageController@send')->name('send.message');
 
 Route::get('/test/{file}', 'RealtyMXController@get');
+Route::get('/realty-mx/{client}/{listing}', function($a, $b) {
+    dd(\App\Listing::where('realty_id', $b)->first());
+});

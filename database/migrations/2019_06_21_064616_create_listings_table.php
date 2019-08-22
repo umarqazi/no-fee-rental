@@ -13,26 +13,29 @@ class CreateListingsTable extends Migration {
 	public function up() {
 		Schema::create('listings', function (Blueprint $table) {
 			$table->increments('id');
-			$table->unsignedInteger('user_id');
-			$table->string('name');
-			$table->string('phone_number');
-			$table->string('email');
-			$table->string('website');
-			$table->string('street_address');
-			$table->string('display_address');
-			$table->string('neighborhood');
-			$table->string('thumbnail');
-			$table->integer('baths');
-			$table->integer('bedrooms');
-			$table->integer('unit');
-			$table->integer('rent');
-			$table->integer('square_feet');
-			$table->boolean('available');
-			$table->text('description');
+            $table->unsignedInteger('user_id');
+            $table->string('realty_id')->nullable();
+			$table->string('name')->nullable();
+			$table->string('phone_number')->nullable();
+			$table->string('email')->nullable();
+			$table->string('url')->nullable();
+			$table->string('street_address')->nullable();
+			$table->string('display_address')->nullable();
+			$table->string('neighborhood')->nullable();
+			$table->string('thumbnail')->nullable();
+			$table->integer('baths')->nullable();
+			$table->integer('bedrooms')->nullable();
+			$table->integer('unit')->nullable();
+			$table->integer('rent')->nullable();
+			$table->integer('square_feet')->nullable();
+			$table->text('description')->nullable();
 			$table->string('map_location')->nullable();
+			$table->string('status')->nullable();
+			$table->string('realty_url')->nullable();
 			$table->integer('is_featured')->default(0)->comment = "0-Non-Featured, 1-Featured, 2-Request-Featured";
-			$table->integer('status')->default(2)->comment = "0-Inactive, 1-Active, 2-Pending";
+			$table->integer('visibility')->default(2)->comment = "0-Inactive, 1-Active, 2-Pending";
 			$table->string('city_state_zip')->comment = "Any one of 3 given accepted";
+            $table->timestamp('available')->nullable();
 			$table->timestamps();
 
 			$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onEdit('cascade');

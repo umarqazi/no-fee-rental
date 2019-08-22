@@ -3,7 +3,7 @@
 <div class="col-md-6">
 	<div class="form-group">
 		<label>Your Name </label>
-		{!! Form::text('name', null, ['class' => 'input-style']) !!}
+		{!! Form::text('name', mySelf()->first_name, ['class' => 'input-style']) !!}
 		<span class="invalid-feedback" role="alert">
 			{!! $errors->first('name') !!}
 		</span>
@@ -12,7 +12,7 @@
 <div class="col-md-6">
 	<div class="form-group">
 		<label>Phone Number</label>
-		{!! Form::text('phone_number', null, ['class' => 'input-style']) !!}
+		{!! Form::text('phone_number', mySelf()->phone_number ?? null, ['class' => 'input-style']) !!}
 		<span class="invalid-feedback" role="alert">
 			{!! $errors->first('phone_number') !!}
 		</span>
@@ -21,7 +21,7 @@
 <div class="col-md-6">
 	<div class="form-group">
 		<label>Email </label>
-		{!! Form::text('email', null, ['class' => 'input-style']) !!}
+		{!! Form::text('email', mySelf()->email, ['class' => 'input-style']) !!}
 		<span class="invalid-feedback" role="alert">
 			{!! $errors->first('email') !!}
 		</span>
@@ -30,11 +30,11 @@
 <div class="col-md-6">
 	<div class="form-group">
 		<label>URL</label>
-		{!! Form::text('website', null, ['class' => 'input-style']) !!}
+		{!! Form::text('url', null, ['class' => 'input-style']) !!}
 		<span class="invalid-feedback" role="alert">
 			{!! $errors->first('website') !!}
 		</span>
 	</div>
 </div>
 {!! Form::hidden('map_location', null) !!}
-{!! Form::hidden('status', 1) !!}
+{!! Form::hidden('visibility', 1) !!}
