@@ -5,7 +5,10 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800|Raleway:300,400,500,600,700,800,900" rel="stylesheet">
 
-    <!-- CSS -->
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAXbbZYutEBE_0ulFJVMlgOprFErdXmJvg&libraries=places" type="text/javascript"></script>
+    <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
+
+        <!-- CSS -->
     {!! HTML::style('assets/css/bootstrap.min.css') !!}
     {!! HTML::style('assets/css/jquery-ui.css') !!}
     {!! HTML::style('assets/css/toastr.css') !!}

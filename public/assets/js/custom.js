@@ -189,4 +189,14 @@ $(() => {
 		$('#newsletterModal .modal-body').text(res.message);
 		$('#newsletterModal').modal();
 	});
+
+    $(document).ready(function(){
+        $(".minimize-button").click(function(){
+            $(".new-found-results").toggleClass("summery-details");
+        });
+        $('.dropdown-toggle').dropdown();
+        $('#divNewNotifications li').on('click', function() {
+            $('#dropdown_title').html($(this).find('a').html());
+        });
+    });
 });

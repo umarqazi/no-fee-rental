@@ -228,7 +228,5 @@ return [
 		'Form' => Collective\Html\FormFacade::class,
 		'HTML' => Collective\Html\HtmlFacade::class,
 		'DataTables' => Yajra\DataTables\Facades\DataTables::class,
-
 	],
-
 ];
