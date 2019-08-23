@@ -386,7 +386,7 @@ header .agent-avtar .avtar:hover div ul {
   flex: 0 0 158px;
   text-align: center;
   padding-top: 25px;
-  min-height: 100vh;
+  min-height: calc(100vh - 71px)    ;
 }
 .main-wrapper aside .close-menu,
 .main-wrapper aside .avtar {

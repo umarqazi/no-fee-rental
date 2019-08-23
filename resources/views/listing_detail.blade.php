@@ -1,33 +1,9 @@
 @extends('layouts.app')
 @section('title', 'No Fee Rental')
 @section('content')
-    <!doctype html>
-<html lang="en">
-
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800|Raleway:300,400,500,600,700,800,900" rel="stylesheet">
-
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/jquery-ui.css" type="text/css" media="all" />
-    <link rel="stylesheet" href="assets/css/animate.min.css">
-    <link rel="stylesheet" href="assets/owlcarousel/assets/owl.carousel.min.css">
-    <link rel="stylesheet" href="assets/css/lightslider.css">
-    <link rel="stylesheet" href="assets/css/main.css">
-    <link rel="stylesheet" href="assets/css/listing_detail.css">
-
-    <title>NOFEE RENTAL</title>
-
-</head>
-
-<body>
-
-
+    <header>
+        <div class="header-bg inner-pages-banner"></div>
+    </header>
 <section class="neighborhood-search wow fadeIn listing-detail-container" data-wow-delay="0.2s">
     <div class="container-lg">
         <div class="row">
@@ -495,16 +471,4 @@
         </div> -->
     </div>
 </section>
-
-<script src="assets/js/jquery.min.js"></script>
-<script src="assets/js/jquery-ui.min.js" type="text/javascript"></script>
-<script src="assets/js/bootstrap.min.js"></script>
-<script src="assets/js/popper.min.js"></script>
-<script src="assets/js/wow.min.js"></script>
-<script src="assets/owlcarousel/owl.carousel.min.js"></script>
-<script src="assets/js/lightslider.js"></script>
-<script src="assets/js/custom.js"></script>
-
-</body>
-
-</html>@endsection
+@endsection

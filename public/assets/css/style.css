@@ -298,6 +298,7 @@
     color: #fff;
     opacity: .7;
 }
+
 .neighborhood-search{
     width: 80%;
     margin: 105px auto;
@@ -599,4 +600,200 @@
     .mob-top-mrg{
         margin-top: 20px;
     }
+
+.message-block{
+    border: #ddd solid 1px;
+    background: #fff;
+    padding: 10px;
+    position: relative;
+    overflow: hidden;
+}
+.message-block .listing-header{
+    background: #eee;
+    padding: 10px;
+    display: flex;
+    margin-bottom: 15px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.message-block .listing-header .info{
+    display: flex;
+    align-items: flex-start;
+}
+
+.message-block .listing-header .info p{
+    font-size: 14px;
+    font-weight: 600;
+    color: #5a5a5a;
+    text-transform: capitalize;
+}
+.message-block .listing-header .price span{
+    font-size: 28px;
+    color: #223970;
+    font-weight: 600;
+}
+.message-block .listing-header .info h3{
+    font-size: 22px;
+    font-weight: 600;
+    color: #223970;
+    margin: 0px 0px 8px;
+    text-transform: capitalize;
+}
+
+.message-block .listing-header .info img{
+    width: 80px;
+    height: 80px;
+    border: #ddd solid 1px;
+    object-fit: cover;
+    margin-right: 15px;
+}
+
+.message-block .receiver{
+    display: block;
+    margin: 10px 0px;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.message-block .receiver p{
+    background: #0A246A;
+    color: #fff;
+    -webkit-border-radius: 10px;
+    -webkit-border-top-left-radius: 0;
+    -moz-border-radius: 10px;
+    -moz-border-radius-topleft: 0;
+    border-radius: 10px;
+    border-top-left-radius: 0;
+    padding: 10px 15px;
+    display: inline-block;
+}
+
+.message-block .receiver span {
+    padding-left: 10px;
+}
+
+.message-block .sender{
+    display: block;
+    margin: 10px 0px;
+    max-width: 100%;
+    margin: 0 auto;
+    text-align: right;
+}
+
+.message-block .sender p{
+    background: #eee;
+    color: #fff;
+    -webkit-border-radius: 10px;
+    -webkit-border-bottom-right-radius: 0;
+    -moz-border-radius: 10px;
+    -moz-border-radius-bottomright: 0;
+    border-radius: 10px;
+    border-bottom-right-radius: 0;
+    padding: 10px 15px;
+    display: inline-block;
+    color: #000;
+}
+
+.message-block .sender span{
+    padding-left: 10px;
+}
+
+.message-block .message-box{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.message-block .message-box .fa-paper-plane{
+    margin-left: auto;
+}
+
+.message-block .message-box .send-message{
+    flex: auto;
+    border-radius: 5px;
+    height: 60px;
+    padding-left: 10px;
+    padding-top: 10px;
+    border: #ddd solid 1px;
+    resize: none;
+    outline: none !important;
+}
+
+.message-block .message-box .fa{
+    margin: 0px 10px;
+    font-size: 22px;
+}
+
+.message-block .message-box .fa:hover{
+    color: #e7781b;
+    cursor: pointer;
+}
+
+.message-block .messages-wrapper{
+    max-height: 420px;
+    overflow: auto;
+    padding-right: 10px;
+}
+
+.message-block .users-listing{
+    position: absolute;
+    right: -100%;
+    top: 10px;
+    height: calc(100% - 80px);
+    background: #fff;
+    -webkit-box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.13);
+    -moz-box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.13);
+    box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.13);
+    width: 300px;
+    transition: all ease-in-out 0.5s;
+}
+
+.message-block .users-listing .header-text{
+    text-align: center;
+    padding: 20px 10px;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 600;
+    background: #223971;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.message-block .users-listing .list-wrapper{
+    height: calc(100% - 64px);
+    overflow: auto;
+}
+
+.message-block .users-listing.active_listing_bar{
+    right: 10px;
+}
+
+.message-block .users-listing .header-text i{
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.message-block .users-listing .list{
+    margin-bottom:15px;
+    border-bottom: #ddd solid 1px;
+    padding: 10px 0px;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+.message-block .users-listing .list:hover{
+    background: #eee;
+}
+
+.message-block .users-listing .list img{
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    margin-right: 10px;
+    border-radius: 50%;
 }

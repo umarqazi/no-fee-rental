@@ -9,12 +9,14 @@
             <!-- Modal body -->
             <div class="modal-body">
                 <p class="mb-3">Renter choose to anonymize their contact info:</p>
-                <textarea class="text-area" placeholder="Reply here.."></textarea>
+                {!! Form::open(['url' => null]) !!}
+                <textarea name="message" class="text-area" placeholder="Reply here.."></textarea>
                 <div class="actions-btns">
-                    <button class="btn-default">Reply</button>
+                    <button type="submit" id="send-message" class="btn-default">Reply</button>
                     <button class="border-btn">Reply Not Needed</button>
                     <button class="archive">Archive Conversation</button>
                 </div>
+                {!! Form::close() !!}
                 <div class="message-list">
                     <h3 id="user_name">Elitan</h3>
                     <p>Reminder from Nofee: You have still not replied to Ethan in regards to 3 Bedrooms at West 96th Street / 911 ($4,400) </p>
@@ -25,7 +27,7 @@
                     <p>Name: <strong>Ethan</strong></p>
                     <p>E-mail: <strong><a href="#">elitan001@nofee-msg.com</a></strong></p>
                     <p>Phone: <strong>646-760-4979 </strong></p>
-                    <p>Question/Comments: <strong>Hi, I'm interested in this apartment. Is it still available for a showing? </strong></p>
+                    <p>Question/Comments: <strong></strong></p>
                     <div class="property-info">
                         <img src="assets/images/listing-img.jpg" alt="" />
                         <div class="info">
@@ -42,7 +44,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
