@@ -34,8 +34,10 @@ class FeatureListingService {
      */
 	private function collection($paginate) {
 		return [
-			'featured' => $this->featured()->paginate($paginate, ['*'], 'featured'),
-			'request_featured' => $this->requestFeatured()->paginate($paginate, ['*'], 'request-featured'),
+			'featured'         => $this->featured()
+                                       ->paginate($paginate, ['*'], 'featured'),
+			'request_featured' => $this->requestFeatured()
+                                       ->paginate($paginate, ['*'], 'request-featured'),
 		];
 	}
 
@@ -47,8 +49,12 @@ class FeatureListingService {
      */
     private function searchCollection($keywords, $paginate) {
         return [
-            'featured' => $this->repo->search($keywords)->featured()->paginate($paginate, ['*'], 'featured'),
-            'request_featured' => $this->repo->search($keywords)->requestfeatured()->paginate($paginate, ['*'], 'request-featured'),
+            'featured'         => $this->repo->search($keywords)
+                                             ->featured()
+                                             ->paginate($paginate, ['*'], 'featured'),
+            'request_featured' => $this->repo->search($keywords)
+                                             ->requestfeatured()
+                                             ->paginate($paginate, ['*'], 'request-featured'),
         ];
     }
 
@@ -61,8 +67,28 @@ class FeatureListingService {
      */
     private function sortCollection($paginate, $col, $order) {
         return [
-            'featured' => $this->featured()->orderBy($col, $order)->paginate($paginate, ['*'], 'featured'),
-            'request_featured' => $this->requestFeatured()->orderBy($col, $order)->paginate($paginate, ['*'], 'request-featured'),
+            'featured'         => $this->featured()
+                                       ->orderBy($col, $order)
+                                       ->paginate($paginate, ['*'], 'featured'),
+            'request_featured' => $this->requestFeatured()
+                                       ->orderBy($col, $order)
+                                       ->paginate($paginate, ['*'], 'request-featured'),
+        ];
+    }
+
+    /**
+     * @param $paginate
+     *
+     * @return array
+     */
+    public function petPolicy($paginate) {
+        return [
+            'featured'         => $this->featured()
+                                       ->policy()
+                                       ->paginate($paginate, ['*'], 'featured'),
+            'request_featured' => $this->requestfeatured()
+                                       ->policy()
+                                       ->paginate($paginate, ['*'], 'request-featured'),
         ];
     }
 
@@ -96,9 +122,9 @@ class FeatureListingService {
 		if ($this->repo->update($id, ['is_featured' => APPROVEFEATURED])) {
 			$list = $this->repo->find(['id' => $id])->withagent()->first();
 			$data = [
-				'subject' => 'Featured Request Approved',
-				'view' => 'request-featured-approved',
-				'name' => $list->agent->name,
+				'subject'     => 'Featured Request Approved',
+				'view'        => 'request-featured-approved',
+				'name'        => $list->agent->name,
 				'approved_by' => mySelf()->first_name,
 				'approved_on' => $list->updated_at,
 			];
@@ -115,7 +141,7 @@ class FeatureListingService {
 	 * @return mixed
 	 */
 	public function unmark($id) {
-		return $this->repo->update($id, ['is_featured' => REJECTFEATURE]);
+		return $this->repo->update($id, ['is_featured' => REJECTFEATURED]);
 	}
 
 	/**
@@ -145,7 +171,7 @@ class FeatureListingService {
     public function search($request, $paginate) {
         $keywords = [];
         !empty($request->baths) ? $keywords['baths'] = $request->baths : null;
-        !empty($request->beds) ? $keywords['bedrooms'] = $request->beds : null;
+        !empty($request->beds)  ? $keywords['bedrooms'] = $request->beds : null;
         return $this->searchCollection($keywords, $paginate);
     }
 
@@ -164,18 +190,6 @@ class FeatureListingService {
      * @return array
      */
     public function recent($paginate) {
-        return $this->sortCollection($paginate, 'created_at', RECENT);
-    }
-
-    /**
-     * @param $paginate
-     *
-     * @return array
-     */
-    public function petPolicy($paginate) {
-        return [
-            'featured' => $this->repo->featured()->policy()->paginate($paginate, ['*'], 'featured'),
-            'request_featured' => $this->repo->requestfeatured()->policy()->paginate($paginate, ['*'], 'request-featured'),
-        ];
+        return $this->sortCollection($paginate, 'updated_at', RECENT);
     }
 }

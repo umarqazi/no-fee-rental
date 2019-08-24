@@ -45,8 +45,8 @@ if (!defined('DEACTIVE')) {
 /**
  * Reject Feature
  */
-if (!defined('REJECTFEATURE')) {
-	define('REJECTFEATURE', 0);
+if (!defined('REJECTFEATURED')) {
+	define('REJECTFEATURED', 0);
 }
 
 /**

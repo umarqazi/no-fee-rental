@@ -164,19 +164,18 @@ return [
 		Collective\Html\HtmlServiceProvider::class,
 
 		/*
-			         * Package Service Providers...
-		*/
+		 * Package Service Providers...
+		 */
 		Yajra\DataTables\DataTablesServiceProvider::class,
 
 		/*
-			         * Application Service Providers...
-		*/
+	     * Application Service Providers...
+		 */
 		App\Providers\AppServiceProvider::class,
 		App\Providers\AuthServiceProvider::class,
 		// App\Providers\BroadcastServiceProvider::class,
 		App\Providers\EventServiceProvider::class,
 		App\Providers\RouteServiceProvider::class,
-		Spatie\Permission\PermissionServiceProvider::class,
 
 	],
 

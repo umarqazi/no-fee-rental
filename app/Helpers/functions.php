@@ -86,7 +86,7 @@ function isAgent() {
  * @return int|null
  */
 function myId() {
-	return auth()->guard(whoAmI())->id();
+	return mySelf()->id;
 }
 
 /**
@@ -102,9 +102,6 @@ function mySelf() {
  * @return mixed
  */
 function dateReadable($date) {
-	if ($date == null) {
-		return;
-	}
 
 	if ($date instanceof Carbon) {
 		return $date->diffForHumans();
@@ -137,6 +134,7 @@ function error($msg, $path = null) {
 /**
  * @param $msg
  * @param null $data
+ * @param bool $status
  * @param int $code
  *
  * @return \Illuminate\Http\JsonResponse
@@ -155,6 +153,25 @@ function success($msg, $path = null) {
 	return ($path == null)
 	? redirect()->back()->with(['message' => $msg, 'alert_type' => 'success'])
 	: redirect($path)->with(['message' => $msg, 'alert_type' => 'success']);
+}
+
+/**
+ * @param $request
+ * @param null $data
+ * @param null $msg
+ * @param null $path
+ *
+ * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
+ */
+function sendResponse($request, $data = null, $msg = null, $path = null) {
+    if($request->ajax())
+        return ($data)
+            ? json($msg, $data)
+            : json('Something went wrong', null, false, 500);
+    else
+        return ($data)
+            ? success($msg, $path)
+            : error('Something went wrong');
 }
 
 /**

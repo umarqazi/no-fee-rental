@@ -13,6 +13,9 @@ class RealtyMXController extends Controller {
      */
     private $service;
 
+    /**
+     * @var array
+     */
     private $report = [];
 
     /**
@@ -136,18 +139,22 @@ class RealtyMXController extends Controller {
      *
      * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
      */
-	private function writeCSV() {
+	public function writeCSV() {
         $filename = 'csv/realty.csv';
+	    $headers = [
+            'Content-Type: text/csv',
+            'Content-Disposition: attachment; filename="realty.csv";',
+        ];
         $file = fopen($filename, 'w');
         $columns = ['Listing_web_id','URL','Reason_of_rejection'];
         fputcsv($file, $columns);
-        $headers = [
-            "Content-type" => "text/csv",
-        ];
-        foreach ($this->report as $report) {
-            fputcsv($file, $report);
-        }
-        return \Illuminate\Support\Facades\Response::download($filename, 'realty.csv', $headers);
+        $callback = function() use ($file) {
+            foreach ( $this->report as $report ) {
+                fputcsv( $file, $report );
+            }
+        };
+        fclose($file);
+        return response()->streamDownload($callback, 'realty.csv', $headers);
     }
 
     /**
@@ -170,9 +177,7 @@ class RealtyMXController extends Controller {
             }
         });
         (empty($this->collection)) ?: $this->service->insert($this->collection);
-        $this->writeCSV();
-        dd('done');
-        return ($this->collection);
+        return $this->writeCSV();
     }
 
     /**
