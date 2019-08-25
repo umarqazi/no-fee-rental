@@ -29,6 +29,7 @@
 										@endif
 										</div>
 									</div>
+
 								</div>
 								@endforeach
 								@if($listing->active->total() < 1)
@@ -66,7 +67,7 @@
 												</div>
 												<div class="list-actions-icons">
 													<a href="{{ route('admin.editListing', $al->id) }}"><button><i class="fa fa-edit"></i></button></a>
-													<button><i class="fa fa-copy"></i></button>
+                                                    <a href="{{ route('admin.copyListing', $al->id) }}"><button><i class="fa fa-copy"></i></button></a>
 												</div>
 											</div>
 										</div>

@@ -3,7 +3,7 @@
 @section('content')
 <div class="wrapper">
 	<div class="heading-wrapper">
-		<h1>{{($edit) ? 'Update' : 'Upload' }} Listing Images</h1>
+		<h1>{{$action}} Listing Images</h1>
 	</div>
 	<div class="block add-new-listing-wrapper">
 		<div class="block-body">
@@ -13,7 +13,7 @@
 						@csrf
 					</form>
 				</div>
-				@if($edit && !empty($listing_images) && count($listing_images) > 0)
+				@if($action == 'Update' && !empty($listing_images) && count($listing_images) > 0)
 				<div class="col-12">
 					@foreach($listing_images as $image)
 						<img onclick="remove('{{$image->id}}', this)" src="{{ asset('storage/'.$image->listing_image) }}" height="50" width="50">
@@ -21,7 +21,7 @@
 				</div>
 				@endif
 				<div class="col-md-12 mt-4 text-center">
-					<a href="{{ ($edit) ? route('admin.finishUpdateListing') : route('admin.finishCreateListing') }}"><button id="post_listing" class="btn-default">{{ ($edit) ? 'Update' : 'Finish' }}</button></a>
+					<a href="{{ ($action == 'Update') ? route('admin.finishUpdateListing') : route('admin.finishCreateListing') }}"><button id="post_listing" class="btn-default">{{$action}}</button></a>
 				</div>
 			</div>
 		</div>
