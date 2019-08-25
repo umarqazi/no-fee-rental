@@ -251,7 +251,10 @@ class UserService {
         $form->password = $request->password;
         $form->password_confirmation = $request->password_confirmation;
         $form->validate();
-        return $this->repo->update($form->id, ['password' => bcrypt($form->password)]);
+        return $this->repo->update($form->id, [
+            'email_verified_at' => now(),
+            'password'          => bcrypt($form->password)
+        ]);
     }
 
     /**
@@ -294,10 +297,10 @@ class UserService {
         $user = $this->repo->create($form->toArray());
         if ($user && $sendMail) {
             $data = [
-                'view' => 'signup',
-                'subject' => 'Verify Email',
+                'view'       => 'signup',
+                'subject'    => 'Verify Email',
                 'first_name' => $user->first_name,
-                'link' => route('user.confirmEmail', base64_encode($user->email)),
+                'link'       => route('user.confirmEmail', base64_encode($user->email)),
             ];
             mailService($user->email, toObject($data));
             DB::commit();
@@ -344,7 +347,7 @@ class UserService {
      *
      * @return mixed
      */
-    public function getAgentToken($token) {
+    public function isInvitedAgent($token) {
         $this->repo = new AgentRepo();
         return $this->repo->find(['token' => $token]);
     }
