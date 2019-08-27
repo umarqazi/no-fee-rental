@@ -32,6 +32,6 @@ class SearchRepo extends BaseRepo {
      * @return mixed
      */
     public function fetch($query) {
-        return $query->get();
+        return $query;
     }
 }

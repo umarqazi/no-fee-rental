@@ -109,9 +109,11 @@ class SearchService {
     }
 
     /**
-     * fetch the build query
+     * @param $paginate
+     *
+     * @return mixed
      */
-    public function fetchQuery() {
-        return $this->repo->fetch($this->query);
+    public function fetchQuery($paginate) {
+        return $this->repo->fetch($this->query)->paginate($paginate);
     }
 }

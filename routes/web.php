@@ -53,3 +53,5 @@ Route::get('/test/{file}', 'RealtyMXController@get');
 Route::get('/realty-mx/{client}/{listing}', function($a, $b) {
     dd(\App\Listing::where('realty_id', $b)->first());
 });
+
+Route::post('/listing-detail', 'ListingController@detail');

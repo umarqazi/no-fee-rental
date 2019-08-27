@@ -471,4 +471,76 @@
         </div> -->
     </div>
 </section>
+			<div class="featured-properties nearby-listing">
+				<div class="property-listing ">
+					<div class="property-thumb">
+						<div class="check-btn">
+							<button class="btn-default" data-toggle="modal" data-target="#check-availability">Check Availability</button>
+						</div>
+						<span class="heart-icon"></span>
+						<img src="assets/images/gallery-img.jpg" alt="" class="main-img">
+						<div class="info">
+							<a href="#">
+								<p>$3,200 / Month </p>
+								<ul>
+									<li><i class="fa fa-bed"></i> 2</li>
+									<li><i class="fa fa-bath"></i> 2</li>
+								</ul>
+							</a>
+						</div>
+					</div>
+					<div class="property-thumb">
+						<div class="check-btn">
+							<button class="btn-default" data-toggle="modal" data-target="#check-availability">Check Availability</button>
+						</div>
+						<span class="heart-icon"></span>
+						<img src="assets/images/gallery-img.jpg" alt="" class="main-img">
+						<div class="info">
+							<a href="#">
+								<p>$3,200 / Month </p>
+								<ul>
+									<li><i class="fa fa-bed"></i> 2</li>
+									<li><i class="fa fa-bath"></i> 2</li>
+								</ul>
+							</a>
+						</div>
+					</div>
+					<div class="property-thumb">
+						<div class="check-btn">
+							<button class="btn-default" data-toggle="modal" data-target="#check-availability">Check Availability</button>
+						</div>
+						<span class="heart-icon"></span>
+						<img src="assets/images/gallery-img.jpg" alt="" class="main-img">
+						<div class="info">
+							<a href="#">
+								<p>$3,200 / Month </p>
+								<ul>
+									<li><i class="fa fa-bed"></i> 2</li>
+									<li><i class="fa fa-bath"></i> 2</li>
+								</ul>
+							</a>
+						</div>
+					</div>
+					<div class="property-thumb">
+						<div class="check-btn">
+							<button class="btn-default" data-toggle="modal" data-target="#check-availability">Check Availability</button>
+						</div>
+						<span class="heart-icon"></span>
+						<img src="assets/images/gallery-img.jpg" alt="" class="main-img">
+						<div class="info">
+							<a href="#">
+								<p>$3,200 / Month </p>
+								<ul>
+									<li><i class="fa fa-bed"></i> 2</li>
+									<li><i class="fa fa-bath"></i> 2</li>
+								</ul>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+    {{--Check Availability--}}
+{{--    @include('features.message')--}}
 @endsection
