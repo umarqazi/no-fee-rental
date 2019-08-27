@@ -182,5 +182,5 @@
 		</div>
 	</section>
     {{--Check Availability--}}
-    @include('features.message')
+{{--    @include('features.message')--}}
 @endsection
