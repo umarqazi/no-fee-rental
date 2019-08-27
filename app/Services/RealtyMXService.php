@@ -9,10 +9,16 @@
 
 namespace App\Services;
 
+use Maatwebsite\Excel\Concerns\FromCollection;
 use App\Repository\Listing\ListingImageRepo;
 use App\Repository\Listing\ListingRepo;
 
-class RealtyMXService extends ListingService {
+class RealtyMXService extends ListingService implements FromCollection{
+
+    /**
+     * @var
+     */
+    private $export;
 
     /**
      * RealtyMXService constructor.
@@ -21,6 +27,23 @@ class RealtyMXService extends ListingService {
      */
     public function __construct(ListingRepo $repo) {
         parent::__construct($repo);
+    }
+
+    /**
+     * @return array|\Illuminate\Support\Collection
+     */
+    public function collection() {
+        return collect($this->export);
+    }
+
+    /**
+     * @param $report
+     *
+     * @return array|\Illuminate\Support\Collection
+     */
+    public function export($report) {
+        $this->export = $report;
+        return $this->collection();
     }
 
     /**
