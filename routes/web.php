@@ -45,13 +45,10 @@ Route::post('/user-signup', 'UserController@signup')->name('user.signup');
 Route::post('/agent/signup', 'UserController@invitedAgentSignup')->name('agent.signup');
 Route::get('/listing-detail/{id}', 'HomeController@detail')->name('listing.detail');
 
-Route::get('/auth', function() {
-    auth()->logout();
-});
-
 // Messaging Routes
 Route::post('/send-message', 'MessageController@send')->name('send.message');
 
+// Realty MX Routes
 Route::get('/test/{file}', 'RealtyMXController@get');
 Route::get('/realty-mx/{client}/{listing}', function($a, $b) {
     dd(\App\Listing::where('realty_id', $b)->first());

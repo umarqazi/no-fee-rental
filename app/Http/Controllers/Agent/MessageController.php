@@ -47,14 +47,11 @@ class MessageController extends Controller
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
     public function confirmMeeting(Request $request, $id) {
-        $status = $this->service->initChat($id);
-        if($request->ajax()) {
-            $res = ($status) ?: json('Something went wrong', null, false);
-        } else {
-            $res = ($status) ?: error('Something went wrong');
-        }
+        $data = null;
+        if($this->service->initChat($id))
+            $data = $this->service->messages($id)->first();
 
-        return $res;
+        return sendResponse($request, $data);
     }
 
     /**
@@ -63,19 +60,21 @@ class MessageController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function loadChat(Request $request, $id) {
-        $chat = $this->service->loadChat($id, $this->paginate);
-        return view('agent.chat_inbox', compact('chat'));
-//        if($request->ajax()) {
-//            $res = ($chat) ? json(null, $chat) : json('Something went wrong');
-//        } else {
-//            $res = null;
-//        }
-//        return $res;
+    public function inbox($id) {
+        $collection = $this->service->loadChat($id);
+        return view('agent.inbox', compact('collection'));
     }
 
-    public function send(Request $request) {
-
+    /**
+     * @param Request $request
+     * @param $id
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function send(Request $request, $id) {
+        if($res = $this->service->send($id, $request)) {
+            return sendResponse($request, $res, 'Message has been sent');
+        }
     }
 
     public function delete($id) {

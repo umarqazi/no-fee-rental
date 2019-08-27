@@ -49,9 +49,7 @@ class UserController extends Controller {
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
 	public function changePassword($token) {
-	    return $this->service->validateEncodedToken($token)
-		    ? view('change-password', compact('token'))
-            : abort(401);
+		return view('change-password', compact('token'));
 	}
 
 	/**
@@ -87,12 +85,12 @@ class UserController extends Controller {
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
 	public function invitedAgentSignupForm($token) {
-		$authenticate_token = $this->service->isInvitedAgent($token)->first();
+		$authenticate_token = $this->service->getAgentToken($token)->first();
 		if (!empty($authenticate_token) && $authenticate_token->token == $token) {
 			return view('invited_agent_signup', compact('authenticate_token'));
 		}
 
-		return abort(401);
+		return error('Invalid token request cannot be processed.');
 	}
 
 	/**
@@ -115,6 +113,6 @@ class UserController extends Controller {
 			return success('Email has been verified.', '/');
 		}
 
-		return abort(401);
+		return error('Something went wrong');
 	}
 }

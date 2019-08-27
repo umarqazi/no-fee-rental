@@ -30,4 +30,13 @@ class AgentRepo extends BaseRepo {
 	public function isUniqueEmail($email) {
 		return $this->find(['email' => $email])->first() ? true : false;
 	}
+
+    /**
+     * @param $token
+     *
+     * @return mixed
+     */
+	public function inviteBy($token) {
+	    return $this->model->inviteBy($token)->first();
+    }
 }

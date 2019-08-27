@@ -78,6 +78,7 @@ class UserService {
         $user->email = $request->email;
         $user->phone_number = $request->phone_number;
         $user->user_type = $request->user_type;
+        $user->remember_token = str_random(60);
         $user->validate();
         return $user;
     }
@@ -95,7 +96,7 @@ class UserService {
                 'first_name' => $user->first_name,
                 'subject'    => 'Account Created',
                 'view'       => 'create-user',
-                'link'       => route('user.change_password', base64_encode($user->email)),
+                'link'       => route('user.change_password', $user->remember_token),
             ];
             mailService($user->email, toObject($email));
             return $response;
@@ -251,10 +252,7 @@ class UserService {
         $form->password = $request->password;
         $form->password_confirmation = $request->password_confirmation;
         $form->validate();
-        return $this->repo->update($form->id, [
-            'email_verified_at' => now(),
-            'password'          => bcrypt($form->password)
-        ]);
+        return $this->repo->update($form->id, ['password' => bcrypt($form->password)]);
     }
 
     /**
@@ -290,6 +288,7 @@ class UserService {
         $form->user_type = $request->user_type;
         $form->password = $request->password;
         $form->password_confirmation = $request->password_confirmation;
+        $form->remember_token = str_random(60);
         $form->validate();
 
         DB::beginTransaction();
@@ -300,16 +299,22 @@ class UserService {
                 'view'       => 'signup',
                 'subject'    => 'Verify Email',
                 'first_name' => $user->first_name,
-                'link'       => route('user.confirmEmail', base64_encode($user->email)),
+                'link'       => route('user.confirmEmail', $user->remember_token),
+
             ];
             mailService($user->email, toObject($data));
             DB::commit();
             return true;
         } else if ($user) {
             $this->repo = new AgentRepo();
-            $requestedAgentId = $this->repo->find(['token' => $request->token])->first();
-            $this->repo = new MemberRepo();
-            $this->repo->create(['agent_id' => $requestedAgentId->invited_by, 'member_id' => $user->id]);
+            $invitedBy = $this->repo->inviteBy($request->token);
+            if($invitedBy->user->user_type == AGENT) {
+                $this->repo = new MemberRepo();
+                $this->repo->create([
+                    'agent_id' => $invitedBy->invited_by,
+                    'member_id' => $user->id
+                ]);
+            }
             DB::commit();
             return true;
         }
@@ -323,7 +328,7 @@ class UserService {
      * @return bool
      */
     public function validateEncodedToken($token) {
-        $record = $this->repo->find(['email' => base64_decode($token)])->first();
+        $record = $this->repo->find(['remember_token' => $token])->first();
         return $record ? $record : false;
     }
 
@@ -347,7 +352,7 @@ class UserService {
      *
      * @return mixed
      */
-    public function isInvitedAgent($token) {
+    public function getAgentToken($token) {
         $this->repo = new AgentRepo();
         return $this->repo->find(['token' => $token]);
     }
@@ -355,7 +360,7 @@ class UserService {
     /**
      * @return mixed
      */
-    public function getMembers() {
-        return $this->repo->get();
+    public function getAgentInvitedMembers() {
+        return $this->repo->agentInvitedMembers();
     }
 }
