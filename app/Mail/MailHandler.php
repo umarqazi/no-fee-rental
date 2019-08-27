@@ -50,6 +50,10 @@ class MailHandler extends Mailable {
 			$view = 'mails.contact-us';
 			break;
 
+		case 'meeting-accepted';
+			$view = 'mails.meeting_accepted';
+			break;
+
 		case 'approve-request':
 			$view = 'mails.approve-request';
 			break;

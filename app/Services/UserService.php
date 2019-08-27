@@ -352,7 +352,7 @@ class UserService {
     /**
      * @return mixed
      */
-    public function getMembers() {
-        return $this->repo->get();
+    public function getAgentInvitedMembers() {
+        return $this->repo->agentInvitedMembers();
     }
 }

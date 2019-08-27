@@ -19,9 +19,16 @@ class MemberRepo extends BaseRepo {
     }
 
     /**
-     * Return collection of agent members
+     *
      */
-    public function get() {
-        return dd($this->model->invites());
+    public function getInvitedAgents() {
+        return $this->model->invites();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function friends() {
+        return $this->model->myfriends();
     }
 }

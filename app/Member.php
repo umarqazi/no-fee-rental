@@ -9,13 +9,34 @@ class Member extends Model
     protected $fillable = ['agent_id', 'member_id'];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function agent() {
-        return $this->belongsTo(User::class, 'id', 'agent_id');
+    public function friends() {
+        return $this->hasMany(User::class, 'id', 'member_id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function invitedAgents() {
+        return $this->hasMany(AgentInvites::class, 'invited_by', 'agent_id');
+    }
+
+    /**
+     * @param $query
+     *
+     * @return mixed
+     */
     public function scopeInvites($query) {
-        return $query->with('agent')->get();
+        return $query->with('invitedAgents');
+    }
+
+    /**
+     * @param $query
+     *
+     * @return mixed
+     */
+    public function scopeMyFriends($query) {
+        return $query->where('agent_id', myId())->with('friends');
     }
 }

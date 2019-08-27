@@ -42,7 +42,6 @@ class UserRepo extends BaseRepo {
 	public function status($id) {
 		$status = $this->find(['id' => $id])->first();
 		$updateStatus = ($status->status) ? DEACTIVE : ACTIVE;
-//		dd($updateStatus);
 		$this->update($id, ['status' => $updateStatus]);
 		return $updateStatus;
 	}
