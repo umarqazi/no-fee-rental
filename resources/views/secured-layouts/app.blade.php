@@ -18,8 +18,8 @@
 	{!! HTML::style('assets/css/admin.css') !!}
 	{!! HTML::style('assets/css/responsive.css') !!}
 	{!! HTML::style('assets/css/style.css') !!}
-    {!! HTML::style('assets/css/datetime.min.css') !!}
     {!! HTML::style('assets/css/toastr.css') !!}
+    {!! HTML::style('assets/css/datepicker.min.css') !!}
 
 	 <!-- JS -->
     {!! HTML::script('assets/js/vendor/jquery-3.2.1.min.js') !!}
@@ -33,6 +33,7 @@
     {!! HTML::script('assets/js/validate.js') !!}
     {!! HTML::script('assets/js/global.js') !!}
     {!! HTML::script('assets/js/vendor/datatable.min.js') !!}
+    {!! HTML::script('assets/js/vendor/datepicker.min.js') !!}
 
 	<title>@yield('title')</title>
 </head>
@@ -45,12 +46,15 @@
 @include('secured-layouts.header')
 <div class="main-wrapper">
 	@section('sidebar')
-		@if(Auth::guard(whoAmI())->check())
-			@if(isAdmin())
-				@include('secured-layouts.sidebar')
-			@elseif(isAgent())
-				@include('secured-layouts.agent-sidebar')
-			@endif
+		@if(authenticated())
+			@switch(whoAmI())
+                @case('admin')
+				    @include('secured-layouts.sidebar')
+                @break
+                @case('agent')
+    				@include('secured-layouts.agent-sidebar')
+                @break
+            @endswitch
 		@endif
 	@show
 	@yield('content')
