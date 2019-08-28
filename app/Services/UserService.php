@@ -181,6 +181,8 @@ class UserService {
         $user->last_name = $request->last_name;
         $user->email = $request->email;
         $user->phone_number = $request->phone_number;
+        $user->neighbourhood_expertise = $request->neighbourhood_expertise;
+        $user->languages = $request->languages;
         $user->profile = $request->file('profile_image') ?? $request->old_profile;
         $user->validate();
         if ($request->hasFile('profile_image')) {
