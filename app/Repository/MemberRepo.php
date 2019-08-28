@@ -19,7 +19,7 @@ class MemberRepo extends BaseRepo {
     }
 
     /**
-     *
+     * @return mixed
      */
     public function getInvitedAgents() {
         return $this->model->invites();

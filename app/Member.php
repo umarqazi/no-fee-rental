@@ -9,10 +9,10 @@ class Member extends Model
     protected $fillable = ['agent_id', 'member_id'];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function friends() {
-        return $this->hasMany(User::class, 'id', 'member_id');
+        return $this->hasOne(User::class, 'id', 'member_id');
     }
 
     /**

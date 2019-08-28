@@ -23,15 +23,15 @@
             <div class="tab-content">
                 <div class="tab-pane active" id="listing-active">
                     <ul class="team-listing">
-                        @foreach($team->friends as $team)
+                        @foreach($team as $member)
                         <li>
                             <img src="{{
-                                !empty($team->profile_image)
-                                ? asset('storage/'.$team->profile_image)
+                                !empty($member->friends->profile_image)
+                                ? asset('storage/'.$member->friends->profile_image)
                                 : asset('assets/images/default-image.jpeg')
                             }}" alt="" class="main-img" />
-                            <div class="name">{{ $team->first_name.' '.$team->last_name }}</div>
-                            <a href="#" class="team-mail">{{ $team->email }}</a>
+                            <div class="name">{{ $member->friends->first_name.' '.$member->friends->last_name }}</div>
+                            <a href="#" class="team-mail">{{ $member->friends->email }}</a>
                             <div class="actions-btns">
                                 <a href="#" class="btn-default"><i class="fa fa-user"></i> Profile</a>
                                 <a href="#" class="btn-default"><i class="fa fa-envelope"></i> Contact</a>

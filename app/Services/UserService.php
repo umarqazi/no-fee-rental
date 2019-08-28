@@ -307,9 +307,14 @@ class UserService {
             return true;
         } else if ($user) {
             $this->repo = new AgentRepo();
-            $requestedAgentId = $this->repo->find(['token' => $request->token])->first();
-            $this->repo = new MemberRepo();
-            $this->repo->create(['agent_id' => $requestedAgentId->invited_by, 'member_id' => $user->id]);
+            $invitedBy = $this->repo->inviteBy($request->token);
+            if($invitedBy->user->user_type == AGENT) {
+                $this->repo = new MemberRepo();
+                $this->repo->create([
+                    'agent_id' => $invitedBy->invited_by,
+                    'member_id' => $user->id
+                ]);
+            }
             DB::commit();
             return true;
         }

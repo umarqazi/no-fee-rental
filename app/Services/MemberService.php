@@ -33,7 +33,7 @@ class MemberService extends UserService {
      * @return mixed
      */
     public function team() {
-        return $this->repo->friends()->first();
+        return $this->repo->friends()->get();
     }
 
     /**
