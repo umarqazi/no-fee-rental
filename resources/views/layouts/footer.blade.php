@@ -33,7 +33,7 @@
                 <div class="newsletter">
                     <div class="title">subscribe news letter</div>
                     <p>Enter your email address & get daily newsletter</p>
-                    <form method="post" action="javascript:void(0);" class="newsletter-form" id="newsletter-form">
+                    <form method="post" action="/newsletter-subscribe" class="newsletter-form" id="newsletter-form">
                         @csrf
                         <img src="{{asset('assets/images/ajax-loader.gif')}}" class="ajax-loader" />
                         <input type="email" class="fld" placeholder="Email Address" name="email" />
