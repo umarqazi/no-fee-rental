@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('title', 'No Fee Rental | Search')
 @section('content')
+    <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
     <div class="header-bg inner-pages-banner"></div>
     <div class="clearfix"></div>
     <section class="property-wrap main-wrapper">
@@ -108,8 +109,8 @@
                                 <p>Posted: {{ date('m/d/y h:m:i', strtotime($result->created_at)) }}</p>
 
                                 <div class="actions-btns">
-                                    <button type="button" class="border-btn">Repost</button>
-                                    <button type="button" class="border-btn">Request Feature</button>
+                                    <button type="button" class="border-btn">Appointment</button>
+                                    <button type="button" class="border-btn">Check Availability</button>
                                 </div>
                             </div>
                         </div>

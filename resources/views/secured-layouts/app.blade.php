@@ -22,17 +22,17 @@
     {!! HTML::style('assets/css/toastr.css') !!}
 
 	 <!-- JS -->
-    {!! HTML::script('assets/js/jquery-3.2.1.min.js') !!}
-	{!! HTML::script('assets/js/jquery.validate.min.js') !!}
-    {!! HTML::script('assets/js/jquery-ui.min.js') !!}
-	{!! HTML::script('assets/js/lightslider.js') !!}
-	{!! HTML::script('assets/js/pignose.calendar.full.min.js') !!}
-    {!! HTML::script('assets/js/dropzone.js') !!}
-    {!! HTML::script('assets/js/sweetalert.min.js') !!}
-    {!! HTML::script('assets/js/toastr.js') !!}
+    {!! HTML::script('assets/js/vendor/jquery-3.2.1.min.js') !!}
+	{!! HTML::script('assets/js/vendor/jquery.validate.min.js') !!}
+    {!! HTML::script('assets/js/vendor/jquery-ui.min.js') !!}
+	{!! HTML::script('assets/js/vendor/lightslider.js') !!}
+	{!! HTML::script('assets/js/vendor/pignose.calendar.full.min.js') !!}
+    {!! HTML::script('assets/js/vendor/dropzone.js') !!}
+    {!! HTML::script('assets/js/vendor/sweetalert.min.js') !!}
+    {!! HTML::script('assets/js/vendor/toastr.js') !!}
     {!! HTML::script('assets/js/validate.js') !!}
     {!! HTML::script('assets/js/global.js') !!}
-    {!! HTML::script('assets/js/datatable.min.js') !!}
+    {!! HTML::script('assets/js/vendor/datatable.min.js') !!}
 
 	<title>@yield('title')</title>
 </head>

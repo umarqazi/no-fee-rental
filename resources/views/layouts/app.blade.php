@@ -6,7 +6,7 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800|Raleway:300,400,500,600,700,800,900" rel="stylesheet">
 
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAXbbZYutEBE_0ulFJVMlgOprFErdXmJvg&libraries=places" type="text/javascript"></script>
-    <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
+    <script src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer.js" ></script>
 
         <!-- CSS -->
     {!! HTML::style('assets/css/bootstrap.min.css') !!}
@@ -20,9 +20,9 @@
     {!! HTML::style('assets/owlcarousel/assets/owl.carousel.min.css') !!}
 
     <!-- JS -->
-    {!! HTML::script('assets/js/jquery-3.2.1.min.js') !!}
-    {!! HTML::script('assets/js/toastr.js') !!}
-    {!! HTML::script('assets/js/jquery.validate.min.js') !!}
+    {!! HTML::script('assets/js/vendor/jquery-3.2.1.min.js') !!}
+    {!! HTML::script('assets/js/vendor/toastr.js') !!}
+    {!! HTML::script('assets/js/vendor/jquery.validate.min.js') !!}
     {!! HTML::script('assets/js/global.js') !!}
     {!! HTML::script('assets/js/validate.js') !!}
     {!! HTML::script("https://maps.googleapis.com/maps/api/place/autocomplete/json?input=1600+Amphitheatre&key=".config('services.google.map_api')) !!}
