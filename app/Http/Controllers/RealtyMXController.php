@@ -148,13 +148,11 @@ class RealtyMXController extends Controller {
         $file = fopen($filename, 'w');
         $columns = ['Listing_web_id','URL','Reason_of_rejection'];
         fputcsv($file, $columns);
-        $callback = function() use ($file) {
             foreach ( $this->report as $report ) {
                 fputcsv( $file, $report );
             }
-        };
         fclose($file);
-        return response()->streamDownload($callback, 'realty.csv', $headers);
+        return asset('csv/realty.csv');
     }
 
     /**

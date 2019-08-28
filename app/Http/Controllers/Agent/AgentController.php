@@ -38,9 +38,8 @@ class AgentController extends Controller {
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function updateProfile(Request $request) {
-		return ($this->service->updateProfile($request))
-            ? success('Profile has been updated.')
-            : error('Something went wrong');
+		$res = $this->service->updateProfile($request);
+		return sendResponse($request, $res, 'Profile has been updated.');
 	}
 
 	/**
