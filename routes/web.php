@@ -24,6 +24,10 @@ Route::get('/renter-guide', function () {
 Route::get('/contact-us', 'ContactUsController@showForm')->name('contact-us');
 Route::post('/contact-us', 'ContactUsController@contactUs')->name('contact-us');
 
+
+// subscription through mail chimp
+Route::post('/newsletter-subscribe', 'HomeController@newsLetterSubscribe')->name('newsLetter-subscription');
+
 // Wordpress Pages
 Route::get('/press', 'ContactUsController@showPress')->name('press');
 Route::post('newsletter', 'NewsletterController@store');
