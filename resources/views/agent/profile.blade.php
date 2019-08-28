@@ -84,6 +84,28 @@
                                 @endif
                             </div>
                         </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Neighbourhood Expertise</label>
+                                {!! Form::text('neighbourhood_expertise', null, ['class' => 'input-style']) !!}
+                                @if ($errors->has('neighbourhood_expertise'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('neighbourhood_expertise') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Languages</label>
+                                {!! Form::text('languages', null, ['class'=>'input-style']) !!}
+                                @if ($errors->has('languages'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('languages') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
 
                         <div class="col-md-12 mt-4 text-center">
                             <a href="{{ route('agent.resetPassword') }}" class="btn-default large-btn edit-profile" >Change Password</a>

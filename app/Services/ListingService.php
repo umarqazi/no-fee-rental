@@ -387,7 +387,7 @@ class ListingService {
      * @return mixed
      */
     public function approve($id) {
-        if ($this->repo->update($id, ['status' => 1])) {
+        if ($this->repo->update($id, ['visibility' => 1])) {
             $list = $this->repo->find(['id' => $id])->withagent()->first();
             $data = [
                 'name'        => $list->agent->first_name,
