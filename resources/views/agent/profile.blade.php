@@ -1,8 +1,6 @@
 @extends('secured-layouts.app')
 @section('title', 'Nofee Rental')
 @section('content')
-    {!! HTML::style('assets/css/amsify.css') !!}
-    {!! HTML::script('assets/js/amsify.js') !!}
     <div class="wrapper">
         <div class="heading-wrapper">
             <h1>Profile And Account Settings</h1>
@@ -118,6 +116,8 @@
             </div>
         </div>
     </div>
+    {!! HTML::style('assets/css/amsify.css') !!}
+    {!! HTML::script('assets/js/vendor/amsify.js') !!}
     {!! HTML::script('assets/js/profile.js') !!}
     <script>
         $('.edit-profile').on('click', function(e) {
