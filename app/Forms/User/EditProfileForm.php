@@ -39,6 +39,17 @@ class EditProfileForm extends BaseForm {
 	/**
 	 * @return array
 	 */
+    public $neighbourhood_expertise;
+
+    /**
+     * @return array
+     */
+    public $languages;
+
+    /**
+     * @return array
+     */
+
 	public function toArray() {
 		return [
 			'id' => $this->id,
@@ -46,7 +57,9 @@ class EditProfileForm extends BaseForm {
 			'last_name' => $this->last_name,
 			'email' => $this->email,
             'profile_image' => $this->profile,
-			'phone_number' => $this->phone_number
+			'phone_number' => $this->phone_number,
+            'neighbourhood_expertise' => $this->neighbourhood_expertise,
+            'languages' => $this->languages
 		];
 	}
 
