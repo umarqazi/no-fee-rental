@@ -13,6 +13,11 @@ class SearchController extends Controller
     private $service;
 
     /**
+     * @var int
+     */
+    private $paginate = 20;
+
+    /**
      * SearchController constructor.
      *
      * @param SearchService $service
@@ -23,6 +28,8 @@ class SearchController extends Controller
 
     /**
      * @param Request $request
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function advanceSearch(Request $request) {
         $filter = collect($request->all())->reject(function ($args) {
@@ -37,7 +44,7 @@ class SearchController extends Controller
                 $this->service->args = null;
             }
         });
-        $res = $this->service->fetchQuery();
-        dd($res);
+        $results = $this->service->fetchQuery($this->paginate);
+        return view('advance_search', compact('results'));
     }
 }
