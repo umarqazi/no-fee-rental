@@ -47,6 +47,8 @@ $(() => {
 		$(this).toggleClass('favourite');
 	});
 
+	//
+
 	$('#price-range-submit').hide();
 
 	$("#min_price,#max_price").on('change', function () {
@@ -82,7 +84,7 @@ $(() => {
 			min: 0,
 			max: 10000,
 			values: [0, 10000],
-			step: 100,
+			step: 1,
 			slide: function (event, ui) {
 				if (ui.values[0] == ui.values[1]) {
 					return false;
@@ -100,6 +102,165 @@ $(() => {
 		var max_price = $('#max_price').val();
 		$("#searchResults").text("Here List of products will be shown which are cost between " + min_price + " " + "and" + " " + max_price + ".");
 	});
+
+
+//start range slider 2
+
+$('#price-range-submit').hide();
+
+	$("#min_price_2,#max_price_2").on('change', function () {
+
+		$('#price-range-submit').show();
+
+		var min_price_2_range = parseInt($("#min_price_2").val());
+
+		var max_price_2_range = parseInt($("#max_price_2").val());
+
+		if (min_price_2_range > max_price_2_range) {
+			$('#max_price_2').val(min_price_2_range);
+		}
+
+		$("#slider-range-2").slider({
+			values: [min_price_2_range, max_price_2_range]
+		});
+
+	});
+
+	$("#min_price_2,#max_price_2").on("paste keyup", function () {
+
+		$('#price-range-submit').show();
+
+		var min_price_2_range = parseInt($("#min_price_2").val());
+
+		var max_price_2_range = parseInt($("#max_price_2").val());
+
+		if (min_price_2_range == max_price_2_range) {
+
+			max_price_2_range = min_price_2_range + 100;
+
+			$("#min_price_2").val(min_price_2_range);
+			$("#max_price_2").val(max_price_2_range);
+		}
+
+		$("#slider-range-2").slider({
+			values: [min_price_2_range, max_price_2_range]
+		});
+
+	});
+
+
+	$(function () {
+		$("#slider-range-2").slider({
+			range: true,
+			orientation: "horizontal",
+			min: 0,
+			max: 10000,
+			values: [0, 10000],
+			step: 1,
+
+			slide: function (event, ui) {
+				if (ui.values[0] == ui.values[1]) {
+					return false;
+				}
+
+				$("#min_price_2").val(ui.values[0]);
+				$("#max_price_2").val(ui.values[1]);
+			}
+		});
+
+		$("#min_price_2").val($("#slider-range-2").slider("values", 0));
+		$("#max_price_2").val($("#slider-range-2").slider("values", 1));
+
+	});
+
+	$("#slider-range-2,#price-range-submit").click(function () {
+
+		var min_price_2 = $('#min_price_2').val();
+		var max_price_2 = $('#max_price_2').val();
+
+		$("#searchResults").text("Here List of products will be shown which are cost between " + min_price_2 + " " + "and" + " " + max_price_2 + ".");
+	});
+
+//start range slider 3
+
+$('#price-range-submit').hide();
+
+	$("#min_price_3,#max_price_3").on('change', function () {
+
+		$('#price-range-submit').show();
+
+		var min_price_3_range = parseInt($("#min_price_3").val());
+
+		var max_price_3_range = parseInt($("#max_price_3").val());
+
+		if (min_price_3_range > max_price_3_range) {
+			$('#max_price_3').val(min_price_3_range);
+		}
+
+		$("#slider-range-3").slider({
+			values: [min_price_3_range, max_price_3_range]
+		});
+
+	});
+
+
+	$("#min_price_3,#max_price_3").on("paste keyup", function () {
+
+		$('#price-range-submit').show();
+
+		var min_price_3_range = parseInt($("#min_price_3").val());
+
+		var max_price_3_range = parseInt($("#max_price_3").val());
+
+		if (min_price_3_range == max_price_3_range) {
+
+			max_price_3_range = min_price_3_range + 100;
+
+			$("#min_price_3").val(min_price_3_range);
+			$("#max_price_3").val(max_price_3_range);
+		}
+
+		$("#slider-range-3").slider({
+			values: [min_price_3_range, max_price_3_range]
+		});
+
+	});
+
+
+	$(function () {
+		$("#slider-range-3").slider({
+			range: true,
+			orientation: "horizontal",
+			min: 1995,
+			max: 2018,
+			values: [0, 2018],
+			step: 1,
+
+			slide: function (event, ui) {
+				if (ui.values[0] == ui.values[1]) {
+					return false;
+				}
+
+				$("#min_price_3").val(ui.values[0]);
+				$("#max_price_3").val(ui.values[1]);
+			}
+		});
+
+		$("#min_price_3").val($("#slider-range-3").slider("values", 0));
+		$("#max_price_3").val($("#slider-range-3").slider("values", 1));
+
+	});
+
+	$("#slider-range-3,#price-range-submit").click(function () {
+
+		var min_price_3 = $('#min_price_3').val();
+		var max_price_3 = $('#max_price_3').val();
+
+		$("#searchResults").text("Here List of products will be shown which are cost between " + min_price_3 + " " + "and" + " " + max_price_3 + ".");
+	});
+
+// end range slider 3
+
 
 	$(".menu-btn").click(function () {
 		$(".mobile-menu").slideDown();
