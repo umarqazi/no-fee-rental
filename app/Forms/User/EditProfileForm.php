@@ -72,7 +72,6 @@ class EditProfileForm extends BaseForm {
 			'first_name' => 'required',
 			'last_name' => 'required',
 			'email' => 'required|email',
-            'profile_image' => 'required',
 			'phone_number' => 'required'
 		];
 	}
