@@ -59,3 +59,7 @@ Route::get('/realty-mx/{client}/{listing}', function($a, $b) {
 });
 
 Route::post('/listing-detail', 'ListingController@detail');
+
+Route::get('/neigbor', function() {
+	return view('neighborhood');
+});
