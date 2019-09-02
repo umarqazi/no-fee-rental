@@ -15,28 +15,28 @@
                 </h3>
                 <div class="notification-inner-scroll" id="style-2">
                     <div class="notiofication-content">
-                        <img src="{{asset('assets/images/agent-image.jp')}}"> <a href="">new guest account(s) have been created.</a> <i class="fas fa-times"></i>
+                        <img src="{!! asset('assets/images/account-img.jpg') !!}"> <a href="">new guest account(s) have been created.new guest account(s) have been created.new guest account(s) have been created.new guest account(s) have been created.new guest account(s) have been created.</a> <i class="fas fa-times"></i>
                     </div>
                     <div class="notiofication-content">
-                        <img src="{{asset('assets/images/agent-image.jp')}}"> <a href="">new guest account(s) have been created.</a> <i class="fas fa-times"></i>
+                        <img src="{!! asset('assets/images/account-img.jpg') !!}"> <a href="">new guest account(s) have been created.</a> <i class="fas fa-times"></i>
                     </div>
                     <div class="notiofication-content">
-                        <img src="{{asset('assets/images/agent-image.jp')}}"> <a href="">new guest account(s) have been created.</a> <i class="fas fa-times"></i>
+                        <img src="{!! asset('assets/images/account-img.jpg') !!}"> <a href="">new guest account(s) have been created.</a> <i class="fas fa-times"></i>
                     </div>
                     <div class="notiofication-content">
-                        <img src="{{asset('assets/images/agent-image.jp')}}"> <a href="">new guest account(s) have been created.</a> <i class="fas fa-times"></i>
+                        <img src="{!! asset('assets/images/account-img.jpg') !!}"> <a href="">new guest account(s) have been created.</a> <i class="fas fa-times"></i>
                     </div>
                     <div class="notiofication-content">
-                        <img src="{{asset('assets/images/agent-image.jp')}}"> <a href="">new guest account(s) have been created.</a> <i class="fas fa-times"></i>
+                        <img src="{!! asset('assets/images/account-img.jpg') !!}"> <a href="">new guest account(s) have been created.</a> <i class="fas fa-times"></i>
                     </div>
                     <div class="notiofication-content">
-                        <img src="{{asset('assets/images/agent-image.jp')}}"> <a href="">new guest account(s) have been created.</a> <i class="fas fa-times"></i>
+                        <img src="{!! asset('assets/images/account-img.jpg') !!}"> <a href="">new guest account(s) have been created.</a> <i class="fas fa-times"></i>
                     </div>
                     <div class="notiofication-content">
-                        <img src="{{asset('assets/images/agent-image.jp')}}"> <a href="">new guest account(s) have been created.</a> <i class="fas fa-times"></i>
+                        <img src="{!! asset('assets/images/account-img.jpg') !!}"> <a href="">new guest account(s) have been created.</a> <i class="fas fa-times"></i>
                     </div>
                     <div class="notiofication-content">
-                        <img src="{{asset('assets/images/agent-image.jp')}}"> <a href="">new guest account(s) have been created.</a> <i class="fas fa-times"></i>
+                        <img src="{!! asset('assets/images/account-img.jpg') !!}"> <a href="">new guest account(s) have been created.</a> <i class="fas fa-times"></i>
                     </div>
 
                 </div>
@@ -98,14 +98,15 @@
     }
     
     .notification-container img {
-        width: 30px;
-        height: 30px;
-        max-width: 30px;
-        max-height: 30px;
-        margin-right: 10px;
+        width: 40px;
+        height: 40px;
+        max-width: 40px;
+        max-height: 40px;
+        margin-right: 5px;
         position: relative;
-        top: -5px;
+        top: -10px;
         border-radius: 100px;
+        float: left;
     }
     
     .notification-container h3 {
@@ -143,30 +144,7 @@
     .notification {
         box-sizing: border-box;
     }
-    
-    .notification-icon {
-        position: relative;
-        margin-right: 1em;
-        border-radius: 5px;
-        background: #ecf0f1;
-    }
-    
-    .notification-icon i {
-        margin: .5rem;
-    }
-    
-    .notification-icon:nth-of-type(1) i {
-        background: -webkit-linear-gradient(300deg, #acccea, #6495ed);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
-    
-    .notification-icon:nth-of-type(2) i {
-        background: -webkit-linear-gradient(300deg, #fff9ab, #00b8ff);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
-    
+
     main {
         position: relative;
     }
@@ -193,7 +171,7 @@
         background-color: #f3f9fd;
         padding: top;
         padding-top: 18px;
-        padding-bottom: 5px;
+        padding-bottom: 18px;
         padding-left: 23px;
         border-bottom: 1px solid #94929f;
         position: relative;
@@ -201,15 +179,18 @@
     
     .notiofication-content a {
         position: relative;
-        top: -15px;
+        top: -3px;
         color: #222;
+        width: 80%;
+        display: inline-table;
     }
     
     .notiofication-content .fa-times {
         position: absolute;
-        right: 15px;
+        top: 15px;
         cursor: pointer;
         -webkit-text-stroke: 1px #F5F5F5;
+        width: 16px;
     }
     
     #style-2::-webkit-scrollbar-track {
@@ -235,6 +216,32 @@
     
     .notification-container.toggle-notification {
         display: block;
+    }
+
+
+    @media only screen and (min-width: 320px) and (max-width: 475px){
+        .notification-container{
+            right: -40px;
+            width: 303px;
+        }
+        .notiofication-content a{
+            width: 75%;
+        }
+        .notification-container:before{
+            right: 40px;
+        }
+        .notification-container h3{
+            padding: 20px 10px;
+        }
+        .notification-container i.right {
+            right: 10px;
+        }
+        .notiofication-content{
+            padding: 15px 10px 5px; 
+        }
+        .notiofication-content .fa-times{
+            right: 5px;
+        }
     }
 </style>
 <script type="text/javascript">

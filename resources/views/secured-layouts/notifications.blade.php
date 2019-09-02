@@ -7,28 +7,28 @@
                   <a href=""class="setting-text"> Settings</a>
                 </h3>
                     <div class="notiofication-content-dt">
-                        <img src="{{asset('assets/images/agent-image.jp')}}"> <a href="">new guest account(s) have been created.</a> <i class="fas fa-times"></i>
+                        <img src="{!! asset('assets/images/account-img.jpg') !!}"> <a href="">new guest account(s) have been created.</a> <i class="fas fa-times"></i>
                     </div>
                     <div class="notiofication-content-dt">
-                        <img src="{{asset('assets/images/agent-image.jp')}}"> <a href="">new guest account(s) have been created.</a> <i class="fas fa-times"></i>
+                        <img src="{!! asset('assets/images/account-img.jpg') !!}"> <a href="">new guest account(s) have been created.</a> <i class="fas fa-times"></i>
                     </div>
                     <div class="notiofication-content-dt">
-                        <img src="{{asset('assets/images/agent-image.jp')}}"> <a href="">new guest account(s) have been created.</a> <i class="fas fa-times"></i>
+                        <img src="{!! asset('assets/images/account-img.jpg') !!}"> <a href="">new guest account(s) have been created.</a> <i class="fas fa-times"></i>
                     </div>
                     <div class="notiofication-content-dt">
-                        <img src="{{asset('assets/images/agent-image.jp')}}"> <a href="">new guest account(s) have been created.</a> <i class="fas fa-times"></i>
+                        <img src="{!! asset('assets/images/account-img.jpg') !!}"> <a href="">new guest account(s) have been created.</a> <i class="fas fa-times"></i>
                     </div>
                     <div class="notiofication-content-dt">
-                        <img src="{{asset('assets/images/agent-image.jp')}}"> <a href="">new guest account(s) have been created.</a> <i class="fas fa-times"></i>
-                    </div>
-                    <div class="notiofication-content">
-                        <img src="{{asset('assets/images/agent-image.jp')}}"> <a href="">new guest account(s) have been created.</a> <i class="fas fa-times"></i>
+                        <img src="{!! asset('assets/images/account-img.jpg') !!}"> <a href="">new guest account(s) have been created.</a> <i class="fas fa-times"></i>
                     </div>
                     <div class="notiofication-content-dt">
-                        <img src="{{asset('assets/images/agent-image.jp')}}"> <a href="">new guest account(s) have been created.</a> <i class="fas fa-times"></i>
+                        <img src="{!! asset('assets/images/account-img.jpg') !!}"> <a href="">new guest account(s) have been created.</a> <i class="fas fa-times"></i>
                     </div>
                     <div class="notiofication-content-dt">
-                        <img src="{{asset('assets/images/agent-image.jp')}}"> <a href="">new guest account(s) have been created.</a> <i class="fas fa-times"></i>
+                        <img src="{!! asset('assets/images/account-img.jpg') !!}"> <a href="">new guest account(s) have been created.</a> <i class="fas fa-times"></i>
+                    </div>
+                    <div class="notiofication-content-dt">
+                        <img src="{!! asset('assets/images/account-img.jpg') !!}"> <a href="">new guest account(s) have been created.</a> <i class="fas fa-times"></i>
                     </div>
 
                 <div class="clearfix"> </div>
@@ -40,11 +40,11 @@
 <style type="text/css">
     @charset "UTF-8";
     @import "https://fonts.googleapis.com/css?family=Material+Icons";
-    .notification-detail{
-    	width: 100%;
+    .notification-detail {
+        width: 100%;
     }
-    .notification-details {
-       
+    .notification-details{
+        cursor: default;
         width: 100%;
         font-weight: 300;
         background: white;
@@ -53,7 +53,7 @@
         box-shadow: 0.5rem 0.5rem 2rem 0 rgba(0, 0, 0, 0.2);
     }
     
-    .notification-detailsbefore {
+    .notification-details:before {
         content: "";
         position: absolute;
         top: 1px;
@@ -67,14 +67,15 @@
     }
     
     .notification-details img {
-        width: 30px;
-        height: 30px;
-        max-width: 30px;
-        max-height: 30px;
-        margin-right: 10px;
+        width: 40px;
+        height: 40px;
+        max-width: 40px;
+        max-height: 40px;
+        margin-right: 5px;
         position: relative;
-        top: -5px;
+        top: -10px;
         border-radius: 100px;
+        float: left;
     }
     
     .notification-details h3 {
@@ -84,10 +85,6 @@
         color: #84929f;
         padding: 20px;
         margin-bottom: 0px;
-    }
-    .notification-details .setting-text{
-    	display: inline-block;
-    	float: right;
     }
     
     .notification-details i {
@@ -105,55 +102,25 @@
         opacity: .8;
         cursor: pointer;
     }
-    
+    .setting-text{
+        float: right;
+    }
     @keyframes dropPanel {
         0% {
             opacity: 0;
             transform: translateY(-100px) scaleY(0.5);
         }
     }
-    
-    .notification {
-        box-sizing: border-box;
-    }
-    
-    .notification-icon {
-        position: relative;
-        margin-right: 1em;
-        border-radius: 5px;
-        background: #ecf0f1;
-    }
-    
-    .notification-icon i {
-        margin: .5rem;
-    }
-    
-    .notification-icon:nth-of-type(1) i {
-        background: -webkit-linear-gradient(300deg, #acccea, #6495ed);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
-    
-    .notification-icon:nth-of-type(2) i {
-        background: -webkit-linear-gradient(300deg, #fff9ab, #00b8ff);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
-    
+
     main {
         position: relative;
-    }
-    
-    .mark-read {
-        position: absolute;
-        right: 65px;
     }
 
     .notiofication-content-dt {
         background-color: #f3f9fd;
         padding: top;
         padding-top: 18px;
-        padding-bottom: 5px;
+        padding-bottom: 18px;
         padding-left: 23px;
         border-bottom: 1px solid #94929f;
         position: relative;
@@ -161,15 +128,44 @@
     
     .notiofication-content-dt a {
         position: relative;
-        top: -15px;
+        top: -3px;
         color: #222;
+        width: 80%;
+        display: inline-table;
     }
     
     .notiofication-content-dt .fa-times {
         position: absolute;
-        right: 15px;
+        top: 15px;
         cursor: pointer;
         -webkit-text-stroke: 1px #F5F5F5;
+        width: 16px;
+        right: 15px;
+    }
+
+    @media only screen and (min-width: 320px) and (max-width: 475px){
+        .notification-details{
+            right: -40px;
+            width: 303px;
+        }
+        .notiofication-content-dt a{
+            width: 75%;
+        }
+        .notification-details:before{
+            right: 40px;
+        }
+        .notification-details h3{
+            padding: 20px 10px;
+        }
+        .notification-details i.right {
+            right: 10px;
+        }
+        .notiofication-content-dt{
+            padding: 15px 10px 5px; 
+        }
+        .notiofication-content-dt .fa-times{
+            right: 5px;
+        }
     }
 
 

@@ -67,3 +67,6 @@ Route::get('/neigbor', function() {
 Route::get('/noti', function() {
 	return view('secured-layouts.notifications');
 });
+Route::get('/rent', function() {
+	return view('rent');
+});
