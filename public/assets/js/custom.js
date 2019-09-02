@@ -31,7 +31,7 @@ $(() => {
 		$('#image-picker').show();
 		$(".additional-info .input-style").attr("disabled", false);
 		$(this).hide();
-		$(".update-profile").show()
+		$(".update-profile").show();
 	});
 
 	$(".update-profile").click(function () {

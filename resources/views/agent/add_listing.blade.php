@@ -27,12 +27,10 @@
 	</div>
 </div>
 
-{!! HTML::script('assets/js/datetime.min.js') !!}
+{!! HTML::script('assets/js/vendor/datetime.min.js') !!}
 {!! HTML::script('assets/js/map.js') !!}
 {!! HTML::script('assets/js/listing.js') !!}
 <script>
-    $('#datepicker').datetimepicker({
-        format: 'yyyy-mm-dd hh:ii'
-    });
+
 </script>
 @endsection

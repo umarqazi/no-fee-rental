@@ -83,11 +83,12 @@
 				</div>
 				<div class="col-md-6">
 					<div class="form-group">
-						<label>Availble</label>
-                            {!! Form::text('available', null, ['class' => 'input-style', 'id' => "datepicker", 'autocomplete' => 'off']) !!}
-						<span class="invalid-feedback" role="alert">
+                        <label>Availble</label>
+                        <input type='text' class="input-style" id='timepicker-actions-exmpl' />
+                        <span class="invalid-feedback" role="alert">
 							{!! $errors->first('available') !!}
 						</span>
+                        </div>
 					</div>
 				</div>
 				<div class="col-md-6">
@@ -103,6 +104,7 @@
 						@endif
 					<img class="img-thumbnail" src="{{($edit && isset($listing->thumbnail)) ? asset('storage/'.$listing->thumbnail) : ''}}" id="img" style="{{($edit) ? 'width: 180px;height: 145px;margin-bottom: 15px;' : ''}}">
 				</div>
+                <div class="col-md-6"></div>
 				<div class="col-md-12">
 					<div class="form-group">
 						<label>Description</label>

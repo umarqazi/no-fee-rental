@@ -8,6 +8,7 @@
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAXbbZYutEBE_0ulFJVMlgOprFErdXmJvg&libraries=places" type="text/javascript"></script>
     <script src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer.js" ></script>
 
+
         <!-- CSS -->
     {!! HTML::style('assets/css/bootstrap.min.css') !!}
     {!! HTML::style('assets/css/jquery-ui.css') !!}
@@ -26,6 +27,7 @@
     {!! HTML::script('assets/js/global.js') !!}
     {!! HTML::script('assets/js/validate.js') !!}
     {!! HTML::script("https://maps.googleapis.com/maps/api/place/autocomplete/json?input=1600+Amphitheatre&key=".config('services.google.map_api')) !!}
+    {!! HTML::script('assets/js/vendor/moment.js') !!}
     <script type="text/javascript" src=""></script>
 </head>
     <body>

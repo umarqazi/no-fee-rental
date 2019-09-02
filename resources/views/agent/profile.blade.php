@@ -1,7 +1,5 @@
 @extends('secured-layouts.app')
-
 @section('title', 'Nofee Rental')
-
 @section('content')
     <div class="wrapper">
         <div class="heading-wrapper">
@@ -9,7 +7,7 @@
         </div>
         <div class="block profile-container">
             <div class="block-body">
-                {!! Form::model($user, ['url' => route('agent.profileUpdate'), 'method' => 'post', 'enctype' => 'multipart/form-data']) !!}
+                {!! Form::model($user, ['url' => route('agent.profileUpdate'), 'class' => 'ajax', 'method' => 'post', 'enctype' => 'multipart/form-data']) !!}
                 <div class="user-avtar">
                     <div class="img-holder">
                         <img src="{{ !empty($user->profile_image) ? asset('storage/'.$user->profile_image) : asset('assets/images/default-image.jpeg') }}" alt="" />
@@ -87,7 +85,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Neighbourhood Expertise</label>
-                                {!! Form::text('neighbourhood_expertise', null, ['class' => 'input-style']) !!}
+                                {!! Form::text('neighbourhood_expertise', null, ['class' => 'input-style', 'placeholder' => 'Neighborhoods Expertise']) !!}
                                 @if ($errors->has('neighbourhood_expertise'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('neighbourhood_expertise') }}</strong>
@@ -98,7 +96,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Languages</label>
-                                {!! Form::text('languages', null, ['class'=>'input-style']) !!}
+                                {!! Form::text('languages', null, ['class'=>'input-style', 'placeholder' => 'Languages', 'disabled' => 'disabled']) !!}
                                 @if ($errors->has('languages'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('languages') }}</strong>
@@ -106,7 +104,6 @@
                                 @endif
                             </div>
                         </div>
-
                         <div class="col-md-12 mt-4 text-center">
                             <a href="{{ route('agent.resetPassword') }}" class="btn-default large-btn edit-profile" >Change Password</a>
                             <button type="button" class="btn-default large-btn edit-profile @if(!$errors->isEmpty()) d-none @endif" >Edit Profile</button>
@@ -119,4 +116,33 @@
             </div>
         </div>
     </div>
+    {!! HTML::style('assets/css/amsify.css') !!}
+    {!! HTML::script('assets/js/vendor/amsify.js') !!}
+    {!! HTML::script('assets/js/profile.js') !!}
+    <script>
+        $('.edit-profile').on('click', function(e) {
+            let lang = [];
+            let neighbors = [];
+            let languages = @php echo json_encode(config('languages')); @endphp;
+            let neighborhoods = @php echo json_encode(config('neighborhoods')) @endphp;
+
+            for(let language in languages) {
+                lang.push(languages[language]);
+            }
+
+            for(let neighbor in neighborhoods) {
+                neighbors.push(neighborhoods[neighbor]);
+            }
+
+            $('input[name="languages"]').amsifySuggestags({
+                suggestions: lang,
+                whiteList: true
+            });
+
+            $('input[name="neighbourhood_expertise"]').amsifySuggestags({
+                suggestions: neighbors,
+                whiteList: true
+            });
+        });
+    </script>
 @endsection
