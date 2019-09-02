@@ -751,9 +751,9 @@ h3 {
   display: none;
 }
 .featured-properties {
-  background: #eff4f7;
+  /*background: #eff4f7;*/
   padding: 80px 0px;
-  border-bottom: #e5ecf0 solid 1px;
+  /*border-bottom: #e5ecf0 solid 1px;*/
 }
 .featured-properties .nav-pills {
   justify-content: center;
@@ -1432,7 +1432,7 @@ footer .copyright .social-icons li a:hover {
 }
 .neighborhood-search {
   padding: 60px 0px 160px;
-  background: #eff4f7;
+  /*background: #eff4f7;*/
 }
 .neighborhood-search .sorting-listing {
   margin-bottom: 20px;
@@ -1462,6 +1462,7 @@ footer .copyright .social-icons li a:hover {
   height: 50px;
   display: inline-block;
   vertical-align: middle;
+  background-color: #eff4f7;
 }
 .neighborhood-search .filters-wrapper {
   display: flex;
@@ -1519,17 +1520,18 @@ footer .copyright .social-icons li a:hover {
   display: flex;
 }
 .neighborhood-search .search-result-wrapper .map-wrapper {
-  flex: 0 0 65%;
+  flex: 0 0 40%;
+  padding: 0px 15px;
 }
 .neighborhood-search .search-result-wrapper .map-wrapper.map-small-view {
   flex: 0 0 50%;
 }
 .neighborhood-search .search-result-wrapper .search-listing {
-  padding: 20px;
+  padding: 0px 0px 20px 15px;
   flex: auto;
 }
 .neighborhood-search .search-result-wrapper .search-listing h3 {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 .neighborhood-search .search-result-wrapper .search-listing h3 span {
   color: #000;
@@ -1544,7 +1546,7 @@ footer .copyright .social-icons li a:hover {
 .neighborhood-search .search-result-wrapper .search-listing .sort-by-wrapper .sort-by {
   display: flex;
   align-items: center;
-  flex: 0 0 50%;
+  flex: 0 0 100%;
 }
 .neighborhood-search .search-result-wrapper .search-listing .sort-by-wrapper .sort-by span {
   width: 120px;
@@ -1558,7 +1560,7 @@ footer .copyright .social-icons li a:hover {
 }
 .neighborhood-search .search-result-wrapper .search-listing .featured-properties .property-listing {
   margin: 20px -15px 0px;
-  height: calc(100vh - 200px);
+  /*height: calc(100vh - 200px);*/
   overflow: auto;
 }
 .neighborhood-search .search-result-wrapper .search-listing .featured-properties .property-listing .property-thumb {
@@ -2533,4 +2535,37 @@ footer .copyright .social-icons li a:hover {
 
 .error {
   color:red;
+}
+
+
+
+.search-result-wrapper .search-bdr-top{
+  width: 100%;
+  border-top: 1px solid #CCCCCC;
+  border-bottom: 1px solid #CCCCCC;
+  padding: 10px 15px;
+}
+
+#search-tabs-sec .nav-item{
+  margin-right:10px; 
+}
+#search-tabs-sec .nav-pills .nav-link{
+  color: #3D3A39;
+  background-color: #fff;
+  font-size: 14px;
+  border:1px solid #CCCCCC;
+}
+
+#search-tabs-sec .nav-pills .nav-link.active, .nav-pills .show>.nav-link{
+  color: #fff;
+  background-color: #223971;
+  font-size: 14px;
+  border:1px solid #223971;
+}
+.sort-by-wrapper .custom-select-list{
+  height: 32px;
+}
+.search-result-wrapper .search-listing h3{
+  padding-top: 20px;
+  color: #3D3A39;
 }
