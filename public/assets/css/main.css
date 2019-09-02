@@ -711,7 +711,7 @@ h3 {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  left: 4px;
+  left: -20px;
   top: 8px;
 }
 .login-modal .modal-dialog .login-form-wrapper .custom-radio .custom-control-label:before {
@@ -2475,4 +2475,10 @@ footer .copyright .social-icons li a:hover {
 
 .error {
   color:red;
+}
+
+
+#signup .modal-dialog-scrollable .modal-content{
+    max-height: calc(100vh - -100px) !important;
+    overflow: initial;
 }

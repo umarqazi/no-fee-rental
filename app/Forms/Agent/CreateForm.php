@@ -54,6 +54,14 @@ class CreateForm extends BaseForm {
      * @return array
      */
 
+    public $license_number;
+
+    /**
+     * Get the instance as an array.
+     *
+     * @return array
+     */
+
 	function toArray() {
 		return [
 			'first_name' => $this->first_name,
@@ -63,7 +71,8 @@ class CreateForm extends BaseForm {
 			'user_type' => $this->user_type,
 			'password' => $this->password,
 			'password_confirmation' => $this->password_confirmation,
-            'remember_token' => $this->remember_token
+            'license_number' => $this->license_number,
+            'remember_token' => $this->remember_token,
 		];
 	}
 

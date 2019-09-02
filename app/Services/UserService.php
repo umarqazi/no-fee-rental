@@ -289,6 +289,7 @@ class UserService {
         $form->phone_number = $request->phone_number;
         $form->user_type = $request->user_type;
         $form->password = $request->password;
+        $form->license_number = $request->license_number;
         $form->password_confirmation = $request->password_confirmation;
         $form->remember_token = str_random(60);
         $form->validate();

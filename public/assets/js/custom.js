@@ -1,6 +1,10 @@
 $(() => {
 	new WOW().init();
 
+    $("#signup-option1").trigger('click');
+    $(".license_num").hide();
+    $("#phone_number").addClass('col-sm-12');
+
 	$("header .menu-icon").click(function () {
 		$(".main-wrapper aside").slideDown();
 	});
@@ -123,11 +127,15 @@ $(() => {
 	});
 
 	$(".row .custom-control-input").click(function () {
-		var radioId = $("input[name='signup-option']:checked").attr('id');
+		var radioId = $("input[name=user_type]:checked").attr('id');
 		if (radioId == 'signup-option1') {
 			$(".finding-home-text").hide();
+            $(".license_num").hide();
+            $("#phone_number").addClass('col-sm-12');
 		} else {
+            $("#phone_number").removeClass('col-sm-12');
 			$(".finding-home-text").show();
+            $(".license_num").show();
 		}
 	});
 
