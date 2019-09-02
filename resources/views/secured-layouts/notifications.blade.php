@@ -1,90 +1,59 @@
-<header>
-
-    <a href="{{ url('/') }}"><img src="{!! asset('assets/images/logo.png') !!}" alt="" class="logo" /></a>
-    <div class="agent-avtar">
-        <div class="notifications">
-            <div>
-                <a href="#" class="notiii"><img src="{!! asset('assets/images/bell-icon.png') !!}" alt="" /></a>
-            </div>
-        </div>
-        <main>
-            <div class="notification-container">
+@extends('secured-layouts.app')
+@section('title', 'Nofee Rental')
+@section('content')
+<section class="notification-detail">
+<div class="notification-details">
                 <h3>Notifications
-                  <i class="material-icons dp48 right">settings</i>
-                  <a href="#" class="mark-read"> Mark as read</a>
+                  <a href=""class="setting-text"> Settings</a>
                 </h3>
-                <div class="notification-inner-scroll" id="style-2">
-                    <div class="notiofication-content">
+                    <div class="notiofication-content-dt">
+                        <img src="{{asset('assets/images/agent-image.jp')}}"> <a href="">new guest account(s) have been created.</a> <i class="fas fa-times"></i>
+                    </div>
+                    <div class="notiofication-content-dt">
+                        <img src="{{asset('assets/images/agent-image.jp')}}"> <a href="">new guest account(s) have been created.</a> <i class="fas fa-times"></i>
+                    </div>
+                    <div class="notiofication-content-dt">
+                        <img src="{{asset('assets/images/agent-image.jp')}}"> <a href="">new guest account(s) have been created.</a> <i class="fas fa-times"></i>
+                    </div>
+                    <div class="notiofication-content-dt">
+                        <img src="{{asset('assets/images/agent-image.jp')}}"> <a href="">new guest account(s) have been created.</a> <i class="fas fa-times"></i>
+                    </div>
+                    <div class="notiofication-content-dt">
                         <img src="{{asset('assets/images/agent-image.jp')}}"> <a href="">new guest account(s) have been created.</a> <i class="fas fa-times"></i>
                     </div>
                     <div class="notiofication-content">
                         <img src="{{asset('assets/images/agent-image.jp')}}"> <a href="">new guest account(s) have been created.</a> <i class="fas fa-times"></i>
                     </div>
-                    <div class="notiofication-content">
+                    <div class="notiofication-content-dt">
                         <img src="{{asset('assets/images/agent-image.jp')}}"> <a href="">new guest account(s) have been created.</a> <i class="fas fa-times"></i>
                     </div>
-                    <div class="notiofication-content">
-                        <img src="{{asset('assets/images/agent-image.jp')}}"> <a href="">new guest account(s) have been created.</a> <i class="fas fa-times"></i>
-                    </div>
-                    <div class="notiofication-content">
-                        <img src="{{asset('assets/images/agent-image.jp')}}"> <a href="">new guest account(s) have been created.</a> <i class="fas fa-times"></i>
-                    </div>
-                    <div class="notiofication-content">
-                        <img src="{{asset('assets/images/agent-image.jp')}}"> <a href="">new guest account(s) have been created.</a> <i class="fas fa-times"></i>
-                    </div>
-                    <div class="notiofication-content">
-                        <img src="{{asset('assets/images/agent-image.jp')}}"> <a href="">new guest account(s) have been created.</a> <i class="fas fa-times"></i>
-                    </div>
-                    <div class="notiofication-content">
+                    <div class="notiofication-content-dt">
                         <img src="{{asset('assets/images/agent-image.jp')}}"> <a href="">new guest account(s) have been created.</a> <i class="fas fa-times"></i>
                     </div>
 
-                </div>
                 <div class="clearfix"> </div>
-                <div class="notification-footer">
-                    <a href=""> See All</a>
-                </div>
+                
             </div>
-
-        </main>
-        <sapn class="menu-icon">
-            <i class="fa fa-bars"></i>
-        </sapn>
-        <div class="avtar">
-            <img src="{!! !empty(mySelf()->profile_image) ? asset('storage/'.mySelf()->profile_image) : asset('assets/images/default-image.jpeg')!!}" alt="" />
-            <div>{!! mySelf()->first_name !!} {!! mySelf()->last_name !!} <i class="fa fa-chevron-down"></i>
-                <ul>
-                    <li><a href="{!! route(whoAmI().'.showProfile') !!}">Account</a></li>
-                    <li><a href="{!! route(whoAmI().'.logout') !!}">Logout</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</header>
-@include('secured-layouts.scripts')
+</section>
+@endsection
 
 <style type="text/css">
     @charset "UTF-8";
     @import "https://fonts.googleapis.com/css?family=Material+Icons";
-    .notification-container {
-        cursor: default;
-        position: absolute;
-        z-index: 999;
-        top: 35px;
-        right: 0px;
-        width: 400px;
+    .notification-detail{
+    	width: 100%;
+    }
+    .notification-details {
+       
+        width: 100%;
         font-weight: 300;
         background: white;
         border-radius: 0.5rem;
         box-sizing: border-box;
         box-shadow: 0.5rem 0.5rem 2rem 0 rgba(0, 0, 0, 0.2);
-        animation-name: dropPanel;
-        animation-iteration-count: 1;
-        animation-timing-function: all;
-        animation-duration: .75s;
     }
     
-    .notification-container:before {
+    .notification-detailsbefore {
         content: "";
         position: absolute;
         top: 1px;
@@ -97,7 +66,7 @@
         border-bottom: .75rem solid white;
     }
     
-    .notification-container img {
+    .notification-details img {
         width: 30px;
         height: 30px;
         max-width: 30px;
@@ -108,7 +77,7 @@
         border-radius: 100px;
     }
     
-    .notification-container h3 {
+    .notification-details h3 {
         text-transform: uppercase;
         font-size: 75%;
         font-weight: 700;
@@ -116,19 +85,23 @@
         padding: 20px;
         margin-bottom: 0px;
     }
+    .notification-details .setting-text{
+    	display: inline-block;
+    	float: right;
+    }
     
-    .notification-container i {
+    .notification-details i {
         color: #b5c4d2;
         font-size: 140%;
         @vertical-align (50%);
         position: absolute;
     }
     
-    .notification-container i.right {
+    .notification-details i.right {
         right: 2rem;
     }
     
-    .notification-container i.right:hover {
+    .notification-details i.right:hover {
         opacity: .8;
         cursor: pointer;
     }
@@ -175,21 +148,8 @@
         position: absolute;
         right: 65px;
     }
-    
-    .notification-footer {
-        background-color: #fff;
-        bottom: 0px;
-        width: 100%;
-        text-align: center;
-        padding: 10px;
-    }
-    
-    .notification-inner-scroll {
-        height: 330px;
-        overflow-y: scroll;
-    }
-    
-    .notiofication-content {
+
+    .notiofication-content-dt {
         background-color: #f3f9fd;
         padding: top;
         padding-top: 18px;
@@ -199,49 +159,26 @@
         position: relative;
     }
     
-    .notiofication-content a {
+    .notiofication-content-dt a {
         position: relative;
         top: -15px;
         color: #222;
     }
     
-    .notiofication-content .fa-times {
+    .notiofication-content-dt .fa-times {
         position: absolute;
         right: 15px;
         cursor: pointer;
         -webkit-text-stroke: 1px #F5F5F5;
     }
-    
-    #style-2::-webkit-scrollbar-track {
-        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-        border-radius: 10px;
-        background-color: #F5F5F5;
-    }
-    
-    #style-2::-webkit-scrollbar {
-        width: 10px;
-        background-color: #F5F5F5;
-    }
-    
-    #style-2::-webkit-scrollbar-thumb {
-        border-radius: 10px;
-        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
-        background-color: #223971;
-    }
-    
-    .notification-container {
-        display: none;
-    }
-    
-    .notification-container.toggle-notification {
-        display: block;
-    }
+
+
 </style>
+
 <script type="text/javascript">
-    $(".notiii").click(function() {
-        $(".notification-container").toggleClass("toggle-notification");
-    });
-       $(".notiofication-content .fa-times").click(function() {
-       $(this).closest('div.notiofication-content').fadeOut("slow", function() { $(this).remove();})
+	$(".notiofication-content-dt .fa-times").click(function() {
+       $(this).closest('div.notiofication-content-dt').fadeOut("slow", function() { $(this).remove();})
     });
 </script>
+
+
