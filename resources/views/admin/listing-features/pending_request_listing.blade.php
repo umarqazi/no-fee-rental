@@ -14,7 +14,6 @@
 											<li><i class="fa fa-bed"></i> {{ $pl->bedrooms }} Bed</li>
 											<li><i class="fa fa-bath"></i> {{ $pl->baths }} Bath</li>
 										</ul>
-										<p><i class="fa fa-map-marker-alt"></i> RealtyMX ID: mrgnyc_366577 · Auto Feed Mode</p>
 										<p>Request By: {{ $pl->agent->first_name.' '.$pl->agent->last_name }}</p>
 										<p>Posted: {{ date("m/d/y H:m A", strtotime($pl->created_at)) }}</p>
 										<a href="{{ route('admin.approveRequest', $pl->id) }}" title="Click To Approve"><span class="status" style="background: #ffce39;">Pending</span></a>
@@ -48,12 +47,9 @@
 													<li><i class="fa fa-bed"></i> {{ $pl->bedrooms }} Bed</li>
 													<li><i class="fa fa-bath"></i> {{ $pl->baths }} Bath</li>
 												</ul>
-												<p><i class="fa fa-map-marker-alt"></i> RealtyMX ID: mrgnyc_366577 · Auto Feed Mode</p>
 												<p>Posted: {{ date("m/d/y H:m A", strtotime($pl->created_at)) }}</p>
 												<a href="{{ route('admin.approveRequest', $pl->id) }}" title="Click To Approve"><span class="status" style="background: #ffce39;">Pending</span></a>
 												<div class="actions-btns">
-													<a href="{{ route('admin.listingRepost', $pl->id) }}"><button type="button" class="border-btn">Repost</button></a>
-													<button type="button" class="border-btn">Request Feature</button>
 												</div>
 												<div class="list-actions-icons">
                                                     <a href="{{ route('admin.editListing', $pl->id) }}"><button><i class="fa fa-edit"></i></button></a>

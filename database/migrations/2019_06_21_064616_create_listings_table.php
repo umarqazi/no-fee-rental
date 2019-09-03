@@ -16,9 +16,8 @@ class CreateListingsTable extends Migration {
             $table->unsignedInteger('user_id');
             $table->string('realty_id')->nullable();
 			$table->string('name')->nullable();
+            $table->string('email')->nullable();
 			$table->string('phone_number')->nullable();
-			$table->string('email')->nullable();
-			$table->string('url')->nullable();
 			$table->string('street_address')->nullable();
 			$table->string('display_address')->nullable();
 			$table->string('neighborhood')->nullable();
@@ -30,12 +29,12 @@ class CreateListingsTable extends Migration {
 			$table->integer('square_feet')->nullable();
 			$table->text('description')->nullable();
 			$table->string('map_location')->nullable();
-			$table->string('status')->nullable();
 			$table->string('realty_url')->nullable();
 			$table->integer('is_featured')->default(0)->comment = "0-Non-Featured, 1-Featured, 2-Request-Featured";
-			$table->integer('visibility')->default(2)->comment = "0-Inactive, 1-Active, 2-Pending";
+            $table->integer('visibility')->default(2)->comment = "0-Inactive, 1-Active, 2-Pending";
+            $table->integer('availability')->default(1)->comment = "0-Not Available, 1-Available";
 			$table->string('city_state_zip')->comment = "Any one of 3 given accepted";
-            $table->timestamp('available')->nullable();
+            $table->string('open_house')->nullable();
 			$table->timestamps();
 
 			$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onEdit('cascade');

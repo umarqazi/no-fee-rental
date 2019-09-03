@@ -5,7 +5,7 @@
 								@foreach($listing->inactive as $il)
 								<div class="listing-row">
 									<div class="img-holder">
-										<img src="{{isset($il->thumbnail) ? asset('storage/'.$il->thumbnail) : asset('uploads/listing/thumbnails/default.jpg')}}" alt="" style="height:205px;" class="main-img" />
+                                        <img src="{{isset($il->thumbnail) ? ((!empty($il->realty_id)) ? $il->thumbnail : asset('storage/'.$il->thumbnail)) : asset('uploads/listing/thumbnails/default.jpg')}}" alt="" style="height: 205px; width: 100%;" class="main-img" />
 									</div>
 									<div class="info">
 										<p class="title">{{ $il->display_address }}</p>
@@ -38,7 +38,7 @@
 									@foreach($listing->inactive as $il)
 									<div class="col-lg-3 col-md-4 col-sm-6">
 										<div class="listing-thumb">
-											<img src="{{isset($il->thumbnail) ? asset('storage/'.$il->thumbnail) : asset('uploads/listing/thumbnails/default.jpg')}}" alt="" style="width: 400px;" class="main-img" />
+                                            <img src="{{isset($il->thumbnail) ? ((!empty($il->realty_id)) ? $il->thumbnail : asset('storage/'.$il->thumbnail)) : asset('uploads/listing/thumbnails/default.jpg')}}" alt="" style="height: 205px; width: 100%;" class="main-img" />
 											<div class="info">
 												<p class="title">{{ $il->display_address }}</p>
 												<p><i class="fa fa-tag"></i> ${{ $il->rent }}</p>

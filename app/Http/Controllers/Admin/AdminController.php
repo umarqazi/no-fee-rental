@@ -8,16 +8,16 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller {
 
-	/**
-	 * @var AdminService
-	 */
+    /**
+     * @var UserService
+     */
 	private $service;
 
-	/**
-	 * AdminController constructor.
-	 *
-	 * @param AdminService $service
-	 */
+    /**
+     * AdminController constructor.
+     *
+     * @param UserService $service
+     */
 	public function __construct(UserService $service) {
 		$this->service = $service;
 	}
@@ -36,7 +36,6 @@ class AdminController extends Controller {
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function updateProfile(Request $request) {
-//	    Auth::loginUsingId()
 		return ($this->service->updateProfile($request))
 		? success('Profile has been updated')
 		: error('Something went wrong');

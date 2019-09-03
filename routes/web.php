@@ -10,6 +10,8 @@
 | contains the "web" middleware group. Now create something great!
 |
  */
+
+use App\Events\TriggerNotification;
 use Illuminate\Support\Facades\Redis;
 
 Route::get('/', 'HomeController@index')->name('web.index');
@@ -23,7 +25,6 @@ Route::get('/renter-guide', function () {
 // Contact Us Routes
 Route::get('/contact-us', 'ContactUsController@showForm')->name('contact-us');
 Route::post('/contact-us', 'ContactUsController@contactUs')->name('contact-us');
-
 
 // subscription through mail chimp
 Route::post('/newsletter-subscribe', 'HomeController@newsLetterSubscribe')->name('newsLetter-subscription');
@@ -45,24 +46,25 @@ Route::post('/login')->name('attempt.login')->middleware('authguard');
 // Route for Invited Agent Signup
 Route::get('/signup/{token}', 'UserController@invitedAgentSignupForm')->name('agent.signup_form');
 
+// User Signup Routes
 Route::post('/user-signup', 'UserController@signup')->name('user.signup');
 Route::post('/agent/signup', 'UserController@invitedAgentSignup')->name('agent.signup');
-Route::get('/listing-detail/{id}', 'HomeController@detail')->name('listing.detail');
 
 // Messaging Routes
 Route::post('/send-message', 'MessageController@send')->name('send.message');
 
 // Realty MX Routes
 Route::get('/test/{file}', 'RealtyMXController@get');
-Route::get('/realty-mx/{client}/{listing}', function($a, $b) {
-    dd(\App\Listing::where('realty_id', $b)->first());
-});
+Route::get('/realty-mx/{client}/{listing}', 'RealtyMXController@detail');
 
+// Listing Routes
 Route::post('/listing-detail', 'ListingController@detail');
+Route::get('/listing-detail/{id}', 'HomeController@detail')->name('listing.detail');
 
-Route::get('/neigbor', function() {
-	return view('neighborhood');
-});
+// Notification Routes
+Route::post('/fetch-notifications', 'NotificationController@get');
+Route::get('/all-notifications', 'NotificationController@all');
+
 
 Route::get('/noti', function() {
 	return view('secured-layouts.notifications');

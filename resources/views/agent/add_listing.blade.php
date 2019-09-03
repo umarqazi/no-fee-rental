@@ -27,8 +27,28 @@
         </div>
     </div>
 
-    {!! HTML::script('assets/js/datetime.min.js') !!}
-    {!! HTML::script('assets/js/map.js') !!}
-    {!! HTML::script('assets/js/listing.js') !!}
+{!! HTML::script('assets/js/vendor/autocomplete.js') !!}
+{!! HTML::script('assets/js/vendor/datepicker.min.js') !!}
+{!! HTML::script('assets/js/map.js') !!}
+{!! HTML::script('assets/js/listing.js') !!}
+<script>
+    let neighbours = @php echo json_encode(config('neighborhoods')); @endphp;
+    let $neighbour = $('input[name=neighborhood]');
+    $neighbour.autocomplete({
+        source: neighbours,
+        select: function (event, ui) {
+            $(this).val(ui.item ? ui.item : " ");
+        },
 
+        change: function (event, ui) {
+            if (!ui.item) {
+                this.value = '';
+                if($('.neigh').length > 0) return;
+                $neighbour.after('<label id="neighbors-error" class="error neigh" for="baths">Invalid Neighborhood.</label>');
+            } else {
+                $('#neighbors-error').remove();
+            }
+        }
+    });
+</script>
 @endsection
