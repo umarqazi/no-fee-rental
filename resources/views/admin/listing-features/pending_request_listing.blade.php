@@ -19,8 +19,8 @@
 										<p>Posted: {{ date("m/d/y H:m A", strtotime($pl->created_at)) }}</p>
 										<a href="{{ route('admin.approveRequest', $pl->id) }}" title="Click To Approve"><span class="status" style="background: #ffce39;">Pending</span></a>
 										<div class="actions-btns">
-											<a href="{{ route('admin.editListing', $pl->id) }}"><span><img src="{{asset('admin/images/edit-icon.png')}}" alt=""></span></a>
-											<span><img src="{{asset('admin/images/copy-icon.png')}}" alt=""></span>
+                                            <a href="{{ route('admin.editListing', $pl->id) }}"><span><img src="{{asset('assets/images/edit-icon.png')}}" alt=""></span></a>
+                                            <a href="{{ route('admin.copyListing', $pl->id) }}"><span><img src="{{asset('assets/images/copy-icon.png')}}" alt=""></span></a>
 											<a href="{{ route('admin.listingRepost', $pl->id) }}"><button type="button" class="border-btn">Repost</button></a>
 											<button type="button" class="border-btn">Request Feature</button>
 										</div>
@@ -56,8 +56,8 @@
 													<button type="button" class="border-btn">Request Feature</button>
 												</div>
 												<div class="list-actions-icons">
-													<a href="{{ route('admin.editListing', $pl->id) }}"><button><i class="fa fa-edit"></i></button></a>
-													<button><i class="fa fa-copy"></i></button>
+                                                    <a href="{{ route('admin.editListing', $pl->id) }}"><button><i class="fa fa-edit"></i></button></a>
+                                                    <a href="{{ route('admin.copyListing', $pl->id) }}"><button><i class="fa fa-copy"></i></button></a>
 												</div>
 											</div>
 										</div>

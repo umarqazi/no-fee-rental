@@ -22,7 +22,7 @@
 										@endif
 										<div class="actions-btns">
 											<a href="{{ route('agent.editListing', $al->id) }}"><span><img src="{{asset('assets/images/edit-icon.png')}}" alt=""></span></a>
-											<span><img src="{{asset('assets/images/copy-icon.png')}}" alt=""></span>
+                                            <a href="{{ route('agent.copyListing', $al->id) }}"><span><img src="{{asset('assets/images/copy-icon.png')}}" alt=""></span></a>
 											<a href="{{ route('agent.listingRepost', $al->id) }}"><button type="button" class="border-btn">Repost</button></a>
 										@if($al->is_featured != 1 && $al->is_featured != 2)
 											<a href="{{ route('agent.requestFeatured', $al->id) }}"><button type="button" class="border-btn">Request Feature</button></a>
@@ -65,8 +65,8 @@
 													@endif
 												</div>
 												<div class="list-actions-icons">
-													<button><i class="fa fa-edit"></i></button>
-													<button><i class="fa fa-copy"></i></button>
+                                                    <a href="{{ route('agent.editListing', $al->id) }}"><button><i class="fa fa-edit"></i></button></a>
+                                                    <a href="{{ route('agent.copyListing', $al->id) }}"><button><i class="fa fa-copy"></i></button></a>
 												</div>
 											</div>
 										</div>

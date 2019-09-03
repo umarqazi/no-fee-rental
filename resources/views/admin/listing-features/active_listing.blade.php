@@ -22,7 +22,7 @@
 										@endif
 										<div class="actions-btns">
 											<a href="{{ route('admin.editListing', $al->id) }}"><span><img src="{{asset('assets/images/edit-icon.png')}}" alt=""></span></a>
-											<span><img src="{{asset('assets/images/copy-icon.png')}}" alt=""></span>
+											<a href="{{ route('admin.copyListing', $al->id) }}"><span><img src="{{asset('assets/images/copy-icon.png')}}" alt=""></span></a>
 											<a href="{{ route('admin.listingRepost', $al->id) }}"><button type="button" class="border-btn">Repost</button></a>
 										@if($al->is_featured != APPROVEFEATURED)
 											<a href="{{ route('admin.approveFeature', $al->id )}}"><button type="button" class="border-btn">Make Featured</button></a>
