@@ -72,3 +72,7 @@ Route::get('/noti', function() {
 Route::get('/rent', function() {
 	return view('rent');
 });
+
+Route::get('/neigh', function() {
+	return view('neighborhood');
+});
