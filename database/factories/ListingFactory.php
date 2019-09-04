@@ -23,7 +23,6 @@ $factory->define(\App\Listing::class, function (Faker $faker) use ($neighbours) 
         'user_id' => random_int(1, 6),
         'email' => $faker->email,
         'phone_number' => $faker->phoneNumber,
-        'url' => $faker->url,
         'street_address' => $faker->address,
         'display_address' => $faker->address,
         'map_location' => json_encode(['latitude' => $faker->latitude, 'longitude' => $faker->longitude]),
@@ -34,9 +33,8 @@ $factory->define(\App\Listing::class, function (Faker $faker) use ($neighbours) 
         'baths' => random_int(1, 10),
         'bedrooms' => random_int(1, 20),
         'unit' => random_int(1, 200),
-        'status' => 'open',
         'visibility' => ACTIVE,
-        'available' => $faker->date(),
+        'availability' => random_int(1, 200),
         'is_featured' => random_int(0, 1),
         'neighborhood' => array_random($neighbours),
         'thumbnail' => $faker->image()
