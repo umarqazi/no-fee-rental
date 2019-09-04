@@ -722,7 +722,7 @@ h3 {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  left: -20px;
+  left: 4px;
   top: 8px;
 }
 .login-modal .modal-dialog .login-form-wrapper .custom-radio .custom-control-label:before {
@@ -1083,7 +1083,7 @@ footer .copyright .social-icons li a:hover {
 }
 #advance-search .search-input-wrap input:nth-child(2){
   margin-left: 20px;
-  
+
 }
 #advance-search .search-form-grou-mrg-btm .form-group{
   margin-bottom: 30px;
@@ -2551,7 +2551,7 @@ footer .copyright .social-icons li a:hover {
 }
 
 #search-tabs-sec .nav-item{
-  margin-right:10px; 
+  margin-right:10px;
 }
 #search-tabs-sec .nav-pills .nav-link{
   color: #3D3A39;

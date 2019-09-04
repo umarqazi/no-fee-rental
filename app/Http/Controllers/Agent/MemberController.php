@@ -47,16 +47,7 @@ class MemberController extends Controller
      */
     public function invite(Request $request) {
         $invite = $this->service->sendInvite($request);
-        if($request->ajax()) {
-            $res = ($invite)
-                    ? json('Invitation has been sent.', null, true)
-                    : json('Something went wrong', null, false, 500);
-        } else {
-            $res = ($invite)
-                    ? success('Invitation has been sent.')
-                    : error('Something went wrong');
-        }
-        return $res;
+        return sendResponse($request, $invite, 'Invitation has been sent.');
     }
 }
 

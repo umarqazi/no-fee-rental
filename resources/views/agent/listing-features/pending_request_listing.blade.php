@@ -21,7 +21,6 @@
                 @endif
                 <div class="actions-btns">
                     <a href="{{ route('agent.editListing', $al->id) }}"><span><img src="{{asset('assets/images/edit-icon.png')}}" alt=""></span></a>
-
                     <a href="{{ route('agent.copyListing', $al->id) }}"><span><img src="{{asset('assets/images/copy-icon.png')}}" alt=""></span></a>
                     <a href="{{ route('agent.listingRepost', $al->id) }}"><button type="button" class="border-btn">Repost</button></a>
                     @if($al->is_featured != 1 && $al->is_featured != 2)

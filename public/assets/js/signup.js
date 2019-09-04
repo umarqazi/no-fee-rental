@@ -12,11 +12,12 @@ $(() => {
         if(res.length > 0) {
             response = true;
             $('#license-error').remove();
-            $selector.after(`<label id="license-success" class="error neigh" for="baths">Invalid License Number.</label>`);
+            if($('#license-success').length > 0) return;
+            $selector.after(`<label id="license-success" class="success" for="baths">License Number verified.</label>`);
             console.log(res);
         } else {
             if($('#license-error').length > 0) return;
-            $selector.after(`<label id="license-error" class="error neigh" for="baths">Invalid License Number.</label>`);
+            $selector.after(`<label id="license-error" class="neigh" for="baths">Invalid License Number.</label>`);
         }
     });
 
