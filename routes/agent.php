@@ -4,7 +4,7 @@
 Route::get('/home', 'Agent\ListingController@index')->name('agent.index');
 
 // Auth Routes
-Route::get('/logout', 'Agent\LoginController@logout')->name('agent.logout');
+Route::get('/logout', 'Agent\AuthController@logout')->name('agent.logout');
 
 // Profile Routes
 Route::get('/show-profile', 'Agent\AgentController@profile')->name('agent.showProfile');
