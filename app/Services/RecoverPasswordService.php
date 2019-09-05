@@ -155,8 +155,15 @@ class RecoverPasswordService {
      * @return mixed
      */
     public function recover($request) {
-        return $this->isValidEmail($request->token, $request->email)
-            ? $this->userRepo->updateByClause(['email' => $request->email], ['password' => bcrypt($request->password)])
-            : false;
+        if($this->isValidEmail($request->token, $request->email)) {
+            DB::beginTransaction();
+            $this->repo->deleteMultiple(['token' => $request->token]);
+            $this->userRepo->updateByClause(['email' => $request->email], ['password' => bcrypt($request->password)]);
+            DB::commit();
+            return true;
+        }
+
+            DB::rollBack();
+            return false;
     }
 }

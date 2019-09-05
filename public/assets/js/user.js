@@ -29,7 +29,7 @@ $(() => {
         $('#update_user').attr({'action': '/admin/create-user', 'id': 'add_user'});
         $('.modal-title').text('Add User');
         $('.modal-footer input').val('Add User');
-        resetForm();
+        $(this).find('form').trigger('reset');
     });
 
     $body.on('click', '#deleteUser', async function(e) {

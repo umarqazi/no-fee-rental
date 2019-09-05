@@ -11,20 +11,15 @@ $(() => {
 
         if(res.length > 0) {
             response = true;
-            $('#license-error').remove();
             if($('#license-success').length > 0) return;
+            $('#license-error').remove();
+            $('input[type=submit]').removeAttr('disabled');
             $selector.after(`<label id="license-success" class="success" for="baths">License Number verified.</label>`);
-            console.log(res);
         } else {
             if($('#license-error').length > 0) return;
+            $('#license-success').remove();
+            $('input[type=submit]').attr({'disabled': 'true'});
             $selector.after(`<label id="license-error" class="neigh" for="baths">Invalid License Number.</label>`);
-        }
-    });
-
-    $('body').on('submit', '#signup_form', (e) => {
-        if(!response) {
-            e.preventDefault();
-            return;
         }
     });
 });
