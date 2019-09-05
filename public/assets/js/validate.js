@@ -263,4 +263,54 @@ $(() => {
         }
       }
     });
+
+    // Forgot Password
+    $('#forgot-password').validate({
+        rules: {
+            email: {
+                required: true,
+                email: true
+            }
+        },
+
+        messages: {
+            email : {
+                required: 'Email should be required.',
+                email: "Invalid email enter"
+            }
+        }
+    })
+
+    // Reset Passwprd
+    $('#reset-password').validate({
+        rules: {
+            email: {
+                required: true,
+                email: true
+            },
+            password: {
+                required: true,
+                greaterThan: 8
+            },
+            password_confirmation: {
+                required: true,
+                equalTo: '#password',
+            }
+        },
+
+        messages: {
+            email : {
+                required: 'Email should be required.',
+                email: "Invalid email enter"
+            },
+            password: {
+                required: "Password is required.",
+                greaterThan: "Password should be greater than 8 characters."
+            },
+            password_confirmation: {
+                required: "Confirm password is required",
+                equalTo: "Password not matched."
+            },
+        }
+    })
 });
