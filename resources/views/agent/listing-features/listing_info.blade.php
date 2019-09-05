@@ -1,6 +1,10 @@
 
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.css"/>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.js"></script>
+
+<link rel="stylesheet" type="text/css" href="{{asset('assets/css/datepicker.min.css')}}"/>
+<script src="{{asset('assets/js/datepicker.min.js')}}"></script>
+<script src="{{asset('assets/js/datepicker.en.js')}}"></script>
+
+
 <div class="col-md-6">
     <div class="form-group">
         <label>Street Address</label>
@@ -86,11 +90,13 @@
 				<div class="col-md-6">
 					<div class="form-group">
                         <label>Open House</label>
-                        {!! Form::text('open_house', null, ['class' => 'input-style', 'id' => 'timepicker-actions-exmpl']) !!}
+                        {!! Form::text('open_house', null, ['class' => 'input-style', 'id' => 'timepicker-actions-exmpl', 'data-language' => 'en']) !!}
                         <span class="invalid-feedback" role="alert">
 							{!! $errors->first('available') !!}
 						</span>
+
                     </div>
+
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
@@ -130,3 +136,53 @@
 						</span>
     </div>
 </div>
+
+
+<script>
+    // Create start date
+    var start = new Date(),
+        prevDay,
+        startHours = 9;
+
+    // 09:00 AM
+    start.setHours(9);
+    start.setMinutes(0);
+
+    // If today is Saturday or Sunday set 10:00 AM
+    if ([6, 0].indexOf(start.getDay()) != -1) {
+        start.setHours(10);
+        startHours = 10
+    }
+
+    $('#timepicker-actions-exmpl').datepicker({
+        timepicker: true,
+        language: 'en',
+        startDate: start,
+        minHours: startHours,
+        maxHours: 18,
+        onSelect: function (fd, d, picker) {
+            // Do nothing if selection was cleared
+            if (!d) return;
+
+            var day = d.getDay();
+
+            // Trigger only if date is changed
+            if (prevDay != undefined && prevDay == day) return;
+            prevDay = day;
+
+            // If chosen day is Saturday or Sunday when set
+            // hour value for weekends, else restore defaults
+            if (day == 6 || day == 0) {
+                picker.update({
+                    minHours: 10,
+                    maxHours: 16
+                })
+            } else {
+                picker.update({
+                    minHours: 9,
+                    maxHours: 18
+                })
+            }
+        }
+    })
+</script>

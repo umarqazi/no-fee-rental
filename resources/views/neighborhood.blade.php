@@ -1,8 +1,16 @@
 @extends('layouts.app')
 @section('title', 'No Fee Rental')
 @section('content')
+<script src="{{asset('assets/js/jquery.nicescroll.min.js')}}"></script>
 
-<section class="neighborhood-search wow fadeIn" data-wow-delay="0.2s">
+<script>
+  $(document).ready(function() {
+    $("#boxscroll2").niceScroll("#contentscroll2",{cursorcolor:"#223971",cursoropacitymax:0.9,boxzoom:true,touchbehavior:true});  // Second scrollable DIV
+  });
+  
+</script>
+
+<section class="neighborhood-search neighbourhood-pd wow fadeIn" data-wow-delay="0.2s">
 		<div class="container-lg">
 			<div class="sorting-listing">
 				<select class="custom-select-list">
@@ -84,8 +92,8 @@
 				</div>
 				<h3>Manhattan, NY Rental</h3>
 				<span>328+ places available for rent </span>
-				
-				<div class="featured-properties">
+				<div id="boxscroll2">
+				<div class="featured-properties" id="contentscroll2">
 					<div class="property-listing desktop-listing">
 						<div class="property-thumb">
 							<div class="check-btn">
@@ -277,12 +285,15 @@
 					</div>
 				</div>
 			</div>
+			</div>
 
 			<div class="map-wrapper">
-				<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4816.459725725764!2d-1.5508326210331098!3d52.87227474539793!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4879f73fd75747e9%3A0xccb1537b184bcded!2sFindern%2C+Derby%2C+UK!5e0!3m2!1sen!2s!4v1557903251137!5m2!1sen!2s" width="100%" height="95.7%" frameborder="0" style="border:0" allowfullscreen></iframe>
+				<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4816.459725725764!2d-1.5508326210331098!3d52.87227474539793!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4879f73fd75747e9%3A0xccb1537b184bcded!2sFindern%2C+Derby%2C+UK!5e0!3m2!1sen!2s!4v1557903251137!5m2!1sen!2s" width="100%" height="95%" frameborder="0" style="border:0" allowfullscreen></iframe>
 			</div>
 			
 		</div>
 
 	</section>
 @endsection
+
+

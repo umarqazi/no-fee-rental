@@ -1434,6 +1434,9 @@ footer .copyright .social-icons li a:hover {
   padding: 60px 0px 160px;
   /*background: #eff4f7;*/
 }
+.neighborhood-search.neighbourhood-pd{
+  padding: 20px 0px 20px !important;
+}
 .neighborhood-search .sorting-listing {
   margin-bottom: 20px;
 }
@@ -1559,7 +1562,7 @@ footer .copyright .social-icons li a:hover {
   padding: 0px;
 }
 .neighborhood-search .search-result-wrapper .search-listing .featured-properties .property-listing {
-  margin: 20px -15px 0px;
+  margin: 1px -15px 0px;
   /*height: calc(100vh - 200px);*/
   overflow: auto;
 }
@@ -1575,6 +1578,23 @@ footer .copyright .social-icons li a:hover {
 .neighborhood-search .search-result-wrapper .search-listing .featured-properties .property-listing.mobile-listing {
   display: none;
 }
+.neighborhood-search .search-result-wrapper .search-listing 
+.featured-properties .property-listing .property-thumb:nth-last-of-type(1){
+  margin-bottom: 0px;
+}
+.neighborhood-search .search-result-wrapper .search-listing 
+.featured-properties .property-listing .property-thumb:nth-last-of-type(2){
+  margin-bottom: 0px;
+}
+
+#boxscroll2 {
+  margin-top: 20px;
+  height: 450px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+
 /*Rent calculator*/
 .calculator-container {
   background: #fff;
@@ -2572,4 +2592,18 @@ footer .copyright .social-icons li a:hover {
 .search-result-wrapper .search-listing h3{
   padding-top: 20px;
   color: #3D3A39;
+}
+
+
+
+
+
+/*Neighbourhood*/
+@media only screen and (max-width: 1279px) {
+.neighborhood-search .search-result-wrapper .search-listing .sort-by-wrapper{
+  padding-right:15px;
+}
+#boxscroll2{
+  margin-right: 15px;
+}
 }
