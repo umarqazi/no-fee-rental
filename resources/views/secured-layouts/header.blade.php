@@ -1,5 +1,5 @@
 <header>
-    <a href="{{ url('/') }}"><img src="{!! asset('assets/images/logo.png') !!}" alt="" class="logo" /></a>
+    <a href="{{ url('/') }}"><img src="{!! asset('assets/images/logo1.png') !!}" alt="" class="logo" /></a>
     <div class="agent-avtar" id="notification-area">
         <div class="notifications">
             <div>
