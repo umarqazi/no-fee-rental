@@ -119,7 +119,7 @@
     @if(isset($listing->thumbnail))
         {!! Form::hidden('old_thumbnail', $listing->thumbnail) !!}
     @endif
-    <img class="img-thumbnail" src="{{($action == 'Update' && isset($listing->thumbnail)) ? asset('storage/'.$listing->thumbnail) : ''}}" id="img" style="{{($action == 'Update') ? 'width: 180px;height: 145px;margin-bottom: 15px;' : ''}}">
+    <img class="img-thumbnail" src="{{($action == 'Update' || $action == 'Copy' && isset($listing->thumbnail)) ? asset('storage/'.$listing->thumbnail) : ''}}" id="img" style="{{($action == 'Update' || $action == 'Copy') ? 'width: 180px;height: 145px;margin-bottom: 15px;' : ''}}">
 </div>
 <div class="col-md-6"></div>
 <div class="col-md-12">

@@ -5,4 +5,9 @@ $(() => {
             return false;
         }
     });
+
+    $('input[name=profile_image]').on('change', async function(e) {
+         let file = $(this)[0].files[0];
+        await livePreview(file, '#view_profile');
+    });
 });

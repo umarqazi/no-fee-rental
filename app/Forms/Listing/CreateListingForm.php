@@ -195,7 +195,7 @@ class CreateListingForm extends BaseForm {
 			'neighborhood'    => 'required|string',
 			'bedrooms'        => 'required|integer',
 			'baths'           => 'required|integer',
-			'thumbnail'       => 'sometimes|required|mimes:jpg,png,jpeg',
+			'thumbnail'       => 'sometimes|mimes:jpg,png,jpeg',
 			'description'     => 'required',
 			'unit'            => 'required|integer',
 			'rent'            => 'required|integer',
