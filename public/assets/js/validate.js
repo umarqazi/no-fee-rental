@@ -279,7 +279,7 @@ $(() => {
                 email: "Invalid email enter"
             }
         }
-    })
+    });
 
     // Reset Passwprd
     $('#reset-password').validate({
@@ -312,5 +312,5 @@ $(() => {
                 equalTo: "Password not matched."
             },
         }
-    })
+    });
 });
