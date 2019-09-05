@@ -30,16 +30,16 @@ class AuthGuardAssign {
 		}
 
 		switch ($user->user_type) {
-		case 1:
-			return (new \App\Http\Controllers\Admin\LoginController)->login($this->request);
+		case ADMIN:
+			return (new \App\Http\Controllers\Admin\AuthController)->login($this->request);
 			break;
 
-		case 2:
-			return (new \App\Http\Controllers\Agent\LoginController)->login($this->request);
+		case AGENT:
+			return (new \App\Http\Controllers\Agent\AuthController)->login($this->request);
 			break;
 
-		case 3:
-			return (new \App\Http\Controllers\Auth\LoginController)->login($this->request);
+		case RENTER:
+			return (new \App\Http\Controllers\AuthController)->login($this->request);
 			break;
 		}
 		return $next($this->request);

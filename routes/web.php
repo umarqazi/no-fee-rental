@@ -37,6 +37,12 @@ Route::post('newsletter', 'NewsletterController@store');
 Route::get('/change-password/{token}', 'UserController@changePassword')->name('user.change_password');
 Route::post('/change-password/{token}', 'UserController@updatePassword')->name('change-password');
 
+// Forgot Password
+Route::get('/forgot-password', 'RecoverPasswordController@resetForm')->name('forgot.password');
+Route::post('/reset-password', 'RecoverPasswordController@sendRequest')->name('password.email');
+Route::post('/update-password', 'RecoverPasswordController@recover')->name('password.update');
+Route::get('/reset-password/{token}', 'RecoverPasswordController@recoverForm')->name('recover.password');
+
 // Email Confirmation
 Route::get('/confirm-email/{token}', 'UserController@confirmEmail')->name('user.confirmEmail');
 
@@ -76,3 +82,4 @@ Route::get('/rent', function() {
 Route::get('/neigh', function() {
 	return view('neighborhood');
 });
+Route::get('/reset', 'RecoverPasswordController@sendRequest');
