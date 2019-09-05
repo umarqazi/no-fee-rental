@@ -14,7 +14,7 @@
 Route::get('/home', 'Admin\HomeController@index')->name('admin.index');
 
 // Auth Routes
-Route::get('/logout', 'Admin\LoginController@logout')->name('admin.logout');
+Route::get('/logout', 'Admin\AuthController@logout')->name('admin.logout');
 
 // Profile Routes
 Route::get('/show-profile', 'Admin\AdminController@showProfile')->name('admin.showProfile');

@@ -24,7 +24,7 @@ class HomeController extends Controller {
 	 * @param FeatureListingService $service
 	 */
 	public function __construct(FeatureListingService $service) {
-		$this->service = $service;
+        $this->service = $service;
 	}
 
 	/**

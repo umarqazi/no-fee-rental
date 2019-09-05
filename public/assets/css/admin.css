@@ -315,7 +315,7 @@ header .agent-avtar .notifications > div {
   display: flex;
   margin-top: 2px;
 }
-header .agent-avtar .notifications:after {
+header .agent-avtar .notifications .noti-alert {
   content: "";
   position: absolute;
   right: -3px;

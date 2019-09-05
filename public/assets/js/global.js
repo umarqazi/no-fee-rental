@@ -3,48 +3,59 @@
  * @param url
  * @param type
  * @param data
- * @param processing
+ * @param loading
  * @param form
+ * @param contentType
  * @returns {Promise<void>}
  */
-async function ajaxRequest(url, type, data, processing = true, form) {
+async function ajaxRequest(url, type, data, loading = true, form = null, contentType = 'true') {
 	setHeaders();
-	var res = await $.ajax({
-		url: url,
-		type: type,
-		data: data,
-		processData: processing,
+	let settings = {
+        url: url,
+        type: type,
+        data: data,
+        processData: true,
+        beforeSend: () => {
+            (loading) ? $('.loader').show() : '';
+        },
 
-		beforeSend: (xhr) => {
-			$('.loader').show();
-		},
+        success: (res) => {
+            (loading) ? $('.loader').hide() : '';
 
-		success: (res) => {
-			$('.loader').hide();
+            if(!res.status) {
+                if(res.msg !== undefined) {
+                    if (res.msg !== '' && res.msg !== null) {
+                        toastr.error(res.msg);
+                    }
+                }
+                return false;
+            }
 
-			if(!res.status && res.msg) {
-				toastr.error(res.msg);
-				return false;
-			}
-
-			if(res.msg) {
-                toastr.success(res.msg);
+            if(res.status) {
+                if(res.msg !== '' && res.msg !== null) {
+                    toastr.success(res.msg);
+                }
                 return res;
             }
-		},
+        },
 
-		error: (err) => {
-			$('.loader').hide();
-			if(err.status === 422) {
-				populateErrors(form, err.responseJSON.errors);
-				return;
-			}
-			toastr.error(err.responseJSON.msg);
-			return;
-		}
-	});
+        error: (err) => {
+            (loading) ? $('.loader').hide() : '';
+            if(err.status === 422) {
+                populateErrors(form, err.responseJSON.errors);
+                return;
+            }
+            if(err.responseJSON.msg !== '' || err.responseJSON.msg !== null) {
+                toastr.error(err.responseJSON.msg);
+            }
+        }
+    };
+	if(contentType === 'false') {
+	    settings.processData = false;
+	    settings.contentType = false;
+    }
 
-		return res;
+	return await $.ajax(settings);
 }
 
 /**
@@ -92,26 +103,31 @@ function populateErrors(form, errors) {
 $(() => {
 
 	$('body').on('submit', '.ajax', async function(e) {
+	    if($('#license-error').length > 0) return;
 		e.preventDefault();
-		let form = $(this);
-		let id = $(this).attr('id');
-		let url = $(this).attr('action');
-		let type = $(this).attr('method');
-		let data = $(this).serialize();
-		let reset = $(this).attr('reset');
+		let form    = $(this);
+		let id      = $(this).attr('id');
+		let url     = $(this).attr('action');
+		let type    = $(this).attr('method');
+		let data    = $(this).serialize();
+		let reset   = $(this).attr('reset');
+        let loading = $(this).attr('loading');
+        let content = $(this).attr('content');
 
 		if(!form.valid()) {
 			return;
 		}
-		let res = await ajaxRequest(url, type, data, false, form);
+
+		let res = await ajaxRequest(url, type, data, loading, form, content);
+
 		if(reset === 'true'){
-			resetForm();
-		}
+            $(form).reset();
+        }
+
 		if(res.status){
 			form.trigger(`form-success-${id}`, res.data);
 		}
 	});
-
 });
 
 /**
@@ -132,14 +148,6 @@ function confirm(msg) {
 	}).then(function(isConfirm) {
 		return !!(isConfirm);
 	});
-}
-
-/**
- * Reset Current Form
- */
-function resetForm() {
-	$('input[type=text], input[type=email], input[type=number], input[type=password], select').val('');
-	$('input:checkbox, input:radio').prop('checked', false);
 }
 
 /**

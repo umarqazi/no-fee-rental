@@ -1,23 +1,35 @@
-
+<style>
+    .ui-menu {
+        max-width: 850px;
+        width: 100%;
+    }
+</style>
 <div class="header-bg">
     <div class="banner-wrapper wow fadeInUp " data-wow-delay="0.2s">
         <h1>NYC’s Premier Source For NO FEE Rentals</h1>
         <div class="search-property">
-            <input type="text" class="search-fld" placeholder="Enter an address, Neighborhood, City or Zip Code" />
-            <select class="custom-select-input">
-                <option>Up To $5,000</option>
-                <option>Up To $5,000</option>
-                <option>Up To $5,000</option>
-                <option>Up To $5,000</option>
-            </select>
-            <select class="custom-select-input size-input">
-                <option>Size</option>
-                <option>Size</option>
-                <option>Size</option>
-                <option>Size</option>
-            </select>
+            <i class="fas fa-search"></i>
+{{--            {!! Form::open('') !!}--}}
+            <input type="text" class="search-fld" name="neighborhood" placeholder="Enter Neighborhood" />
             <button class="search-btn">Search</button>
         </div>
         <a href="" class="advance-search" data-toggle="modal" data-target="#advance-search">+Advanced Search</a>
     </div>
 </div>
+{!! HTML::script('assets/js/vendor/autocomplete.js') !!}
+<script>
+    let neighbours = @php echo json_encode(config('neighborhoods')); @endphp;
+    let $neighbour = $('input[name=neighborhood]');
+    $neighbour.autocomplete({
+        source: neighbours,
+        select: function (event, ui) {
+            $(this).val(ui.item ? ui.item : " ");
+        },
+
+        change: function (event, ui) {
+            if (!ui.item) {
+                this.value = '';
+            }
+        }
+    });
+</script>

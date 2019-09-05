@@ -89,4 +89,14 @@ class BaseRepo implements IRepo {
 	public function update($id, $data) {
 		return $this->model->whereId($id)->update($data);
 	}
+
+    /**
+     * @param $clause
+     * @param $data
+     *
+     * @return mixed
+     */
+	public function updateByClause($clause, $data) {
+	    return $this->model->where($clause)->update($data);
+    }
 }

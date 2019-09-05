@@ -38,6 +38,10 @@ class MailHandler extends Mailable {
 			$view = 'mails.create_user';
 			break;
 
+		case 'reset-password':
+		    $view = 'mails.reset_password';
+		    break;
+
 		case 'create-user':
 			$view = 'mails.create_user';
 			break;
@@ -66,7 +70,7 @@ class MailHandler extends Mailable {
 			// code...
 			break;
 		}
-		return $this->from($this->data->from ?? config('mail.username'))
+		return $this->from($this->data->fromEmail ?? config('mail.username'))
                     ->subject($this->data->subject)
                     ->view($view, compact('data'));
 	}

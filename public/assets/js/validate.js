@@ -169,6 +169,7 @@ $(() => {
             first_name: "required",
             last_name: "required",
             phone_number: "required",
+            license_number: "required",
             email: {
                 required: true,
                 email: true,
@@ -184,6 +185,9 @@ $(() => {
         },
 
         messages: {
+            license_number: {
+                required: "License number is required."
+            },
             user_type: {
                 required: "Select user type."
             },

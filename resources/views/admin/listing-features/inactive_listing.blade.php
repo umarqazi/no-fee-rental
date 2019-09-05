@@ -19,8 +19,8 @@
 										<p>Posted: {{ date("m/d/y H:m A", strtotime($il->created_at)) }}</p>
 										<a href="{{ route('admin.listingStatus', $il->id) }}" title="Publish this property"><span class="status" style="background: red;">Deactive</span></a>
 										<div class="actions-btns">
-											<a href="{{ route('admin.editListing', $il->id) }}"><span><img src="{{asset('admin/images/edit-icon.png')}}" alt=""></span></a>
-											<span><img src="{{asset('admin/images/copy-icon.png')}}" alt=""></span>
+                                            <a href="{{ route('admin.editListing', $il->id) }}"><span><img src="{{asset('assets/images/edit-icon.png')}}" alt=""></span></a>
+                                            <a href="{{ route('admin.copyListing', $il->id) }}"><span><img src="{{asset('assets/images/copy-icon.png')}}" alt=""></span></a>
 											<a href="{{ route('admin.listingRepost', $il->id) }}"><button type="button" class="border-btn">Repost</button></a>
 										</div>
 									</div>

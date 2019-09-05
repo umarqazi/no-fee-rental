@@ -1,5 +1,14 @@
 <div class="modal fade login-modal" id="signup">
     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
+        <style>
+            .neigh {
+                color: red;
+            }
+
+            .success {
+                color:4f984f;
+            }
+        </style>
         {{--Signup Container--}}
         <div class="modal-content">
             <img src="assets/images/modal-close-icon.png" alt="" class="close-modal" data-dismiss="modal" />
@@ -64,25 +73,11 @@
                             </div>
                         </div>
                         <div class="col-sm-6">
-                            <div class="form-group">
-                                <div class="main-input input-style">
-                                    <select name="company" id="company">
-                                      <option value="1">One</option>
-                                      <option value="2">Two</option>
-                                      <option value="3">Three</option>
-                                      <option value="4">Four</option>
-                                      <option value="4" class="other">Other</option>
-                                    </select>
-                                </div>
-                                @if ($errors->has('company'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('company') }}</strong>
-                                    </span>
-                                @endif
-                                <p class="finding-home-text">If you would like to syndicate listing into no fee rentals nyc, please use tha same email address that you use for your RealtyMX, Nestio or OLR account.</p>
-                            </div>
+                            <div class="form-group license_num">
+                                {!! Form::text('license_number', null, ['class'=>'input-style', 'placeholder'=>'License Number'])!!}
+                            <p id="license-verify"></p></div>
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-6" id="phone_number">
                             <div class="form-group">
                                 {!! Form::text('phone_number', null, ['class'=>'input-style', 'placeholder'=>'Phone Number']) !!}
                                 @if ($errors->has('phone_number'))
@@ -122,3 +117,4 @@
         </div>
     </div>
 </div>
+{!! HTML::script('assets/js/signup.js') !!}

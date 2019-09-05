@@ -3,7 +3,7 @@
 @section('content')
 <div class="wrapper">
 	<div class="heading-wrapper">
-		<h1>{{ ($action) }} Listing</h1>
+		<h1>{{$action}} Listing</h1>
 	</div>
 	<div class="block add-new-listing-wrapper">
 		<div class="block-body">

@@ -121,6 +121,15 @@ function mailService($to, $data) {
 }
 
 /**
+ * @param $data
+ *
+ * @return \App\Services\NotificationService
+ */
+function notificationService($data) {
+    return new \App\Services\NotificationService(toObject($data));
+}
+
+/**
  * @param $msg
  *
  * @return \Illuminate\Http\RedirectResponse
@@ -160,18 +169,19 @@ function success($msg, $path = null) {
  * @param null $data
  * @param null $msg
  * @param null $path
+ * @param null $errorMsg
  *
  * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
  */
-function sendResponse($request, $data = null, $msg = null, $path = null) {
+function sendResponse($request, $data = null, $msg = null, $path = null, $errorMsg = null) {
     if($request->ajax())
         return ($data)
             ? json($msg, $data)
-            : json('Something went wrong', null, false, 500);
+            : json($errorMsg ?? 'Something went wrong', null, false, 500);
     else
         return ($data)
             ? success($msg, $path)
-            : error('Something went wrong');
+            : error($errorMsg ?? 'Something went wrong');
 }
 
 /**

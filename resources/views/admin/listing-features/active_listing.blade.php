@@ -4,7 +4,7 @@
 								@foreach($listing->active as $al)
 								<div class="listing-row">
 									<div class="img-holder">
-										<img src="{{isset($al->thumbnail) ? asset('storage/'.$al->thumbnail) : asset('uploads/listing/thumbnails/default.jpg')}}" alt="" style="height: 205px;" class="main-img" />
+                                        <img src="{{isset($al->thumbnail) ? ((!empty($al->realty_id)) ? $al->thumbnail : asset('storage/'.$al->thumbnail)) : asset('uploads/listing/thumbnails/default.jpg')}}" alt="" style="height: 205px; width: 100%;" class="main-img" />
 									</div>
 									<div class="info">
 										<p class="title">{{ $al->display_address }}</p>
@@ -22,7 +22,7 @@
 										@endif
 										<div class="actions-btns">
 											<a href="{{ route('admin.editListing', $al->id) }}"><span><img src="{{asset('assets/images/edit-icon.png')}}" alt=""></span></a>
-											<span><img src="{{asset('assets/images/copy-icon.png')}}" alt=""></span>
+											<a href="{{ route('admin.copyListing', $al->id) }}"><span><img src="{{asset('assets/images/copy-icon.png')}}" alt=""></span></a>
 											<a href="{{ route('admin.listingRepost', $al->id) }}"><button type="button" class="border-btn">Repost</button></a>
 										@if($al->is_featured != APPROVEFEATURED)
 											<a href="{{ route('admin.approveFeature', $al->id )}}"><button type="button" class="border-btn">Make Featured</button></a>

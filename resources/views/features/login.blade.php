@@ -16,7 +16,13 @@
                 <div class="login-heading">
                     Login
                 </div>
-                {!! Form::open(['url' => route('attempt.login'), 'method' => 'post', 'reset' => 'false', 'id' => 'login_form', 'class' => 'ajax']) !!}
+                {!! Form::open([
+                    'url' => route('attempt.login'),
+                    'method' => 'post',
+                    'reset' => false,
+                    'id' => 'login_form',
+                    'class' => 'ajax'
+                ]) !!}
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
@@ -48,6 +54,7 @@
                                 <label class="form-check-label" for="remember">
                                     {{ __('Remember Me') }}
                                 </label>
+                                <a href="{{ route('forgot.password') }}">Forgot Password.</a>
                             </div>
                         </div>
                     </div>
