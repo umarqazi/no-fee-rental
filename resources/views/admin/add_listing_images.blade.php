@@ -14,9 +14,12 @@
 					</form>
 				</div>
 				@if($action == 'Update' && !empty($listing_images) && count($listing_images) > 0)
-				<div class="col-12">
+				<div class="row after-dropzone-img">
 					@foreach($listing_images as $image)
-						<img onclick="remove('{{$image->id}}', this)" src="{{ asset('storage/'.$image->listing_image) }}" height="50" width="50">
+                        <div class="parent-div col-lg-2">
+                        <span onclick="remove('{{$image->id}}', this)" >x</span>
+                        <img src="{{ asset('storage/'.$image->listing_image) }}" height="50" width="50">
+                        </div>
 					@endforeach
 				</div>
 				@endif

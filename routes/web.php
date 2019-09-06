@@ -11,9 +11,6 @@
 |
  */
 
-use App\Events\TriggerNotification;
-use Illuminate\Support\Facades\Redis;
-
 Route::get('/', 'HomeController@index')->name('web.index');
 
 Route::get('/search', 'SearchController@advanceSearch')->name('list.search');
@@ -27,7 +24,7 @@ Route::get('/contact-us', 'ContactUsController@showForm')->name('contact-us');
 Route::post('/contact-us', 'ContactUsController@contactUs')->name('contact-us');
 
 // subscription through mail chimp
-Route::post('/newsletter-subscribe', 'HomeController@newsLetterSubscribe')->name('newsLetter-subscription');
+Route::post('/newsletter-subscribe', 'NewsletterController@subscribe')->name('newsLetter-subscription');
 
 // Wordpress Pages
 Route::get('/press', 'ContactUsController@showPress')->name('press');

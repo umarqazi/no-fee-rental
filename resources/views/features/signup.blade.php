@@ -109,7 +109,7 @@
                         </div>
                     </div>
                     <div class="text-center mt-3 mb-4">
-                        <button class="btn-default">Signup</button>
+                        {!! Form::submit('Signup', ['class' => 'btn-default']) !!}
                     </div>
                 {!! Form::close() !!}
                 <p class="footer-text">Already have an account? <span class="signin-wrapper" id = "login-btn">Login</span></p>

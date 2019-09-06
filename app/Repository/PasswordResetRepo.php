@@ -9,11 +9,13 @@
 
 namespace App\Repository;
 
-
 use App\PasswordReset;
 
 class PasswordResetRepo extends BaseRepo {
 
+    /**
+     * PasswordResetRepo constructor.
+     */
     public function __construct() {
         parent::__construct(new PasswordReset());
     }

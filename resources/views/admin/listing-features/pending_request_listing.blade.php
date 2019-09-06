@@ -20,8 +20,6 @@
 										<div class="actions-btns">
                                             <a href="{{ route('admin.editListing', $pl->id) }}"><span><img src="{{asset('assets/images/edit-icon.png')}}" alt=""></span></a>
                                             <a href="{{ route('admin.copyListing', $pl->id) }}"><span><img src="{{asset('assets/images/copy-icon.png')}}" alt=""></span></a>
-											<a href="{{ route('admin.listingRepost', $pl->id) }}"><button type="button" class="border-btn">Repost</button></a>
-											<button type="button" class="border-btn">Request Feature</button>
 										</div>
 									</div>
 								</div>

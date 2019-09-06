@@ -28,4 +28,3 @@
     </div>
 </div>
 {!! Form::hidden('map_location', null) !!}
-{!! Form::hidden('visibility', 1) !!}

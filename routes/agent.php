@@ -18,7 +18,7 @@ Route::get('/password-reset', 'Agent\AgentController@resetPassword')->name('agen
 Route::post('/add-listing', 'Agent\ListingController@create')->name('agent.createListing');
 Route::get('/add-listing', 'Agent\ListingController@showForm')->name('agent.addListing');
 Route::post('/upload-listing-images/{id}', 'Agent\ListingController@uploadImages')->name('agent.listingImages');
-Route::post('/remove-listing-image/{id}', 'Agent\ListingController@removeImage');
+Route::get('/remove-listing-image/{id}', 'Agent\ListingController@removeImage');
 Route::get('/listing-repost/{id}', 'Agent\ListingController@repost')->name('agent.listingRepost');
 Route::match(['get', 'post'], '/search-listing', 'Agent\ListingController@searchWithFilters')->name('agent.listingSearch');
 Route::get('/listing-status/{id}', 'Agent\ListingController@status')->name('agent.listingStatus');
@@ -39,5 +39,5 @@ Route::post('/invite-agent', 'Agent\MemberController@invite')->name('agent.invit
 // Messaging Routes
 Route::get('/messages-view', 'Agent\MessageController@index')->name('agent.messageIndex');
 Route::get('/load-chat/{id}', 'Agent\MessageController@inbox')->name('agent.loadChat');
-Route::post('/send-message/{id}', 'Agent\MessageController@send')->name('send.message');
+Route::post('/send-message/{id}', 'Agent\MessageController@send')->name('agent.sendMessage');
 Route::post('/accept-meeting/{id}', 'Agent\MessageController@confirmMeeting');

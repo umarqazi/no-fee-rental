@@ -5,13 +5,15 @@
 
   class NewsletterRepo {
 
-    public function subscribe($data){
-
-      if(!Newsletter::isSubscribed($data['email'])){
-        Newsletter::subscribePending($data['email']);
-        return true;
+      /**
+       * @param $request
+       *
+       * @return bool
+       */
+      public function subscribe($request){
+          if(Newsletter::subscribe($request->email)) {
+              return true;
+          }
+          return false;
       }
-
-    }
-
   }

@@ -359,11 +359,4 @@ class UserService {
         $this->repo = new AgentRepo();
         return $this->repo->find(['token' => $token]);
     }
-
-    /**
-     * @return mixed
-     */
-    public function getAgentInvitedMembers() {
-        return $this->repo->agentInvitedMembers();
-    }
 }
