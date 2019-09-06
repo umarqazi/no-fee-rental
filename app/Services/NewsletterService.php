@@ -1,7 +1,7 @@
 <?php
   namespace App\Services;
 
-  use App\Forms\IForm;
+  use App\Forms\NewsletterForm;
   use App\Repository\NewsletterRepo;
 
   class NewsletterService {
@@ -21,13 +21,14 @@
       }
 
       /**
-       * @param IForm $form
+       * @param $request
        *
-       * @return mixed
+       * @return bool
        */
-    public function subscribeUser(IForm $form) {
-      $form->validate();
-      return $this->repo->subscribe($form->collection);
-    }
-
+      public function subscribe($request) {
+          $form = new NewsletterForm();
+          $form->email = $request->email;
+          $form->validate();
+          return $this->repo->subscribe($form);
+      }
   }

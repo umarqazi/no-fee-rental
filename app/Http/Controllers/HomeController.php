@@ -46,16 +46,4 @@ class HomeController extends Controller {
 		$listing = $this->service->detail($id)->first();
 		return view('listing_detail', compact('listing'));
 	}
-
-    /**
-     * request
-     *
-     * @return newsletter subscription
-     */
-    public function newsLetterSubscribe() {
-        Newsletter::subscribe(request('email'));
-        return redirect(route('web.index'))
-            ->with(['message' => 'subscription has been added.', 'alert_type' => 'success']);
-
-    }
 }
