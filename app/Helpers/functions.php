@@ -85,7 +85,7 @@ function isAgent() {
  * @return int|null
  */
 function myId() {
-	return mySelf()->id;
+	return (authenticated()) ? mySelf()->id : null;
 }
 
 /**

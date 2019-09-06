@@ -27,7 +27,6 @@ class MessageController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      */
     public function send(Request $request) {
-        dd($request->all());
         $res = $this->service->sendRequest($request);
         return sendResponse($request, $res, 'Appointment Request has been sent.');
     }
