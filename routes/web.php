@@ -63,3 +63,10 @@ Route::post('/listing-detail', 'ListingController@detail');
 Route::get('/neigbor', function() {
 	return view('neighborhood');
 });
+
+Route::get('/noti', function() {
+	return view('secured-layouts.notifications');
+});
+Route::get('/rent', function() {
+	return view('rent');
+});
