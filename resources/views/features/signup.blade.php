@@ -64,25 +64,11 @@
                             </div>
                         </div>
                         <div class="col-sm-6">
-                            <div class="form-group">
-                                <div class="main-input input-style">
-                                    <select name="company" id="company">
-                                      <option value="1">One</option>
-                                      <option value="2">Two</option>
-                                      <option value="3">Three</option>
-                                      <option value="4">Four</option>
-                                      <option value="4" class="other">Other</option>
-                                    </select>
-                                </div>
-                                @if ($errors->has('company'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('company') }}</strong>
-                                    </span>
-                                @endif
-                                <p class="finding-home-text">If you would like to syndicate listing into no fee rentals nyc, please use tha same email address that you use for your RealtyMX, Nestio or OLR account.</p>
-                            </div>
+                            <div class="form-group license_num">
+                                {!! Form::text('license_number', null, ['class'=>'input-style licence', 'placeholder'=>'License Number','onblur'=>'license_verification()'])!!}
+                            <p id="license-verify"></p></div>
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-6" id="phone_number">
                             <div class="form-group">
                                 {!! Form::text('phone_number', null, ['class'=>'input-style', 'placeholder'=>'Phone Number']) !!}
                                 @if ($errors->has('phone_number'))
@@ -122,3 +108,27 @@
         </div>
     </div>
 </div>
+<script>
+    function license_verification(){
+        var license_num =   $(".licence").val()
+           $.ajax({
+            url: "https://data.ny.gov/resource/yg7h-zjbf.json?license_number="+license_num+"",
+            type: "GET",
+            data: {
+                "$limit" : 5000,
+                "$$app_token" : "r2d5ljgcgGPadDzIIgzTzu5Qf"
+            }
+        }).done(function(data) {
+           if(data.length ==1){
+              $("#license-verify").css('color','green');
+              $("#license-verify").text('License Number Verified Successfully!');
+           }
+           else {
+               $("#license-verify").css('color','red');console.log('na');
+               $("#license-verify").text('Wrong License Number');
+           }
+        });
+    }
+
+</script>
+
