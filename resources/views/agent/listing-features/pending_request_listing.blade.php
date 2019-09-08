@@ -14,7 +14,6 @@
                     <li><i class="fa fa-bed"></i> {{ $al->bedrooms }} Bed</li>
                     <li><i class="fa fa-bath"></i> {{ $al->baths }} Bath</li>
                 </ul>
-                <p><i class="fa fa-map-marker-alt"></i> RealtyMX ID: mrgnyc_366577 · Auto Feed Mode</p>
                 <p>Posted: {{ date("m/d/y H:m A", strtotime($al->created_at)) }}</p>
                 <span class="status" style="background: yellow;">Pending</span>
                 @if($al->is_featured != 0)
@@ -23,10 +22,6 @@
                 <div class="actions-btns">
                     <a href="{{ route('agent.editListing', $al->id) }}"><span><img src="{{asset('assets/images/edit-icon.png')}}" alt=""></span></a>
                     <span><img src="{{asset('assets/images/copy-icon.png')}}" alt=""></span>
-                    <a href="{{ route('agent.listingRepost', $al->id) }}"><button type="button" class="border-btn">Repost</button></a>
-                    @if($al->is_featured != 1 && $al->is_featured != 2)
-                        <a href="{{ route('agent.requestFeatured', $al->id) }}"><button type="button" class="border-btn">Request Feature</button></a>
-                    @endif
                 </div>
             </div>
         </div>

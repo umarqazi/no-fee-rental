@@ -35,11 +35,9 @@ class ListingController extends Controller {
 		return view('admin.listing_view', compact('listing'));
 	}
 
-	/**
-	 * Show listing Form
-	 *
-	 * @return view
-	 */
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
 	public function showForm() {
 		$action = 'create';
 		$listing = null;

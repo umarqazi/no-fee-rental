@@ -44,30 +44,30 @@ class ListingService {
         $form->user_id = myId();
         $form->realty_id = $request->realty_id ?? null;
         $form->realty_url = $request->realty_url ?? null;
-        $form->realty = $request->realty ?? false;
-        $form->name = $request->name;
-        $form->email = $request->email;
-        $form->description = $request->description;
-        $form->phone_number = $request->phone_number;
-        $form->url = $request->url;
-        $form->street_address = $request->street_address;
-        $form->display_address = $request->display_address;
-        $form->available = $request->available;
-        $form->city_state_zip = $request->city_state_zip;
-        $form->neighborhood = $request->neighborhood;
-        $form->bedrooms = $request->bedrooms;
-        $form->baths = $request->baths;
-        $form->unit = $request->unit;
-        $form->rent = $request->rent;
-        $form->square_feet = $request->square_feet;
+        $form->name = $request->name ?? null;
+        $form->availability = $request->availability;
+        $form->visibility = !isAdmin() ? 2 : 1;
+        $form->email = $request->email ?? null;
+        $form->description = $request->description ?? null;
+        $form->phone_number = $request->phone_number ?? null;
+        $form->street_address = $request->street_address ?? null;
+        $form->display_address = $request->display_address ?? null;
+        $form->open_house = $request->open_house ?? null;
+        $form->city_state_zip = $request->city_state_zip ?? null;
+        $form->neighborhood = $request->neighborhood ?? null;
+        $form->bedrooms = $request->bedrooms ?? null;
+        $form->baths = $request->baths ?? null;
+        $form->unit = $request->unit ?? null;
+        $form->rent = $request->rent ?? null;
+        $form->square_feet = $request->square_feet ?? null;
         $form->listing_type = $request->listing_type ?? null;
         $form->amenities = $request->amenities ?? null;
         $form->unit_feature = $request->unit_feature ?? null;
         $form->building_feature = $request->building_feature ?? null;
         $form->pet_policy = $request->pet_policy ?? null;
-        $form->status = $request->status;
-        $form->map_location = $request->map_location;
-        $form->old = ($request->thumbnail) ? $request->old_thumbnail ?? null : true;
+        $form->status = $request->status ?? null;
+        $form->map_location = $request->map_location ?? null;
+        $form->old_thumbnail = ($request->thumbnail) ? $request->old_thumbnail ?? null : true;
         $form->thumbnail = ($request->thumbnail) ? $request->thumbnail ?? null : $request->old_thumbnail;
 		$form->validate();
         return $form;
@@ -80,11 +80,10 @@ class ListingService {
      */
     private function createList($data) {
         DB::beginTransaction();
-        if ($data->thumbnail && !$data->realty) {
+        if ($data->thumbnail)
             $data->thumbnail = uploadImage($data->thumbnail, 'data/' . myId() . '/listing/thumbnails');
-        }
         $list = $this->repo->create($data->toArray());
-        if (!empty($list) && !$data->realty) {
+        if (!empty($list)) {
             return $this->createType($list->id, $data);
         } else if(!empty($list) && $data->realty) {
             DB::commit();
@@ -387,6 +386,7 @@ class ListingService {
      * @return mixed
      */
     public function approve($id) {
+        DB::beginTransaction();
         if ($this->repo->update($id, ['visibility' => 1])) {
             $list = $this->repo->find(['id' => $id])->withagent()->first();
             $data = [
@@ -395,8 +395,15 @@ class ListingService {
                 'approved_on' => $list->updated_at,
                 'view'        => 'approve-request',
                 'subject'     => 'Request Approved for listing',
+                'from' => myId(),
+                'toEmail' => $list->agent->email,
+                'fromEmail' => mySelf()->email,
+                'to' => $list->agent->id,
+                'path' => request()->root(),
+                'notification' => 'Listing has been approved',
             ];
-            mailService($list->agent->email, toObject($data));
+            notificationService($data);
+            DB::commit();
             return true;
         }
     }

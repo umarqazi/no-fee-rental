@@ -14,7 +14,7 @@ $(() => {
 
     $('.input-style').attr('disabled', false);
 
-    $('body').on('change', '#upload-file', function(e) {
+    $('body').on('change', '#file-3', function(e) {
     	let file = e.target.files[0];
     	imagePreview(file, '#img');
     	$('#img').attr('style', 'width: 180px;height: 145px;margin-bottom: 15px;');

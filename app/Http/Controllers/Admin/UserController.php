@@ -65,14 +65,15 @@ class UserController extends Controller {
         return sendResponse($request, $user, 'User has been updated');
 	}
 
-	/**
-	 * @param $id
-	 *
-	 * @return \Illuminate\Http\JsonResponse
-	 */
-	public function edit($id) {
+    /**
+     * @param Request $request
+     * @param $id
+     *
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
+     */
+	public function edit(Request $request, $id) {
 		$user = $this->service->edit($id);
-		return json('', $user, true);
+		return sendResponse($request, $user, null);
 	}
 
     /**

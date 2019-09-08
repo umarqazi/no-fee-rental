@@ -27,14 +27,5 @@
 		</span>
 	</div>
 </div>
-<div class="col-md-6">
-	<div class="form-group">
-		<label>Website</label>
-		{!! Form::text('url', null, ['class' => 'input-style']) !!}
-		<span class="invalid-feedback" role="alert">
-			{!! $errors->first('website') !!}
-		</span>
-	</div>
-</div>
 {!! Form::hidden('map_location', null) !!}
 {!! Form::hidden('visibility', 2) !!}

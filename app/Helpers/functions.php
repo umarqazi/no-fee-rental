@@ -121,6 +121,15 @@ function mailService($to, $data) {
 }
 
 /**
+ * @param $data
+ *
+ * @return \App\Services\NotificationService
+ */
+function notificationService($data) {
+    return new \App\Services\NotificationService(toObject($data));
+}
+
+/**
  * @param $msg
  *
  * @return \Illuminate\Http\RedirectResponse

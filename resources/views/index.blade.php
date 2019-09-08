@@ -32,6 +32,7 @@
         </div>
     </div>
 </section>
+{!! HTML::script('assets/js/notification.js') !!}
 {{--Featured Listing--}}
 @include('features.feature_listing')
 {{--Life Container--}}

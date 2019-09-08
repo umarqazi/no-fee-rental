@@ -39,6 +39,11 @@ class RealtyMXController extends Controller {
     private $stack;
 
     /**
+     * @var string
+     */
+    private $agentFounded;
+
+    /**
      * @var array
      */
     private $hold;
@@ -66,6 +71,16 @@ class RealtyMXController extends Controller {
      */
 	public function __construct(RealtyMXService $service) {
 	    $this->service = $service;
+    }
+
+    /**
+     * @param $realty_id
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function detail($realty_id) {
+        $listing = $this->service->detail($realty_id);
+        return view('listing_detail', compact('listing'));
     }
 
     /**
@@ -163,6 +178,7 @@ class RealtyMXController extends Controller {
             if($this->agentFilter($listing['agent'])) {
                 $listing['street_address'] = $listing['address'] ?? null;
                 $listing['square_feet']    = $listing['squareFeet'] ?? 0;
+                $listing['agent']          = $this->agentFounded;
                 if ( $this->listingFilter( $listing ) ) {
                     $list = $this->service->formCollection($listing);
                     $this->collection[] = $list;
@@ -184,10 +200,12 @@ class RealtyMXController extends Controller {
      * @return bool
      */
     private function validateAgent($agent) {
+
         $validate = Validator::make($agent, [
             'email' => 'email|unique:users'
         ]);
         if($validate->fails()) {
+            $this->agentFounded = $agent;
             $message = $validate->failed();
             if($message['email']['Unique']) {
                 return true;
@@ -219,9 +237,8 @@ class RealtyMXController extends Controller {
      * @return bool
      */
     private function listingFilter($input) {
-	    if(!is_array($input)) {
+	    if(!is_array($input))
 	        $input = collect($input)->toArray();
-        }
 
 	    $validate = Validator::make($input, [
             'neighborhood' => 'unique:listings',

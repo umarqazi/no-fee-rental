@@ -1,16 +1,17 @@
 
 $(() => {
+    let $body = $('body');
 
-	$('body').on('form-success-add_user', function(res, data) {
+	$body.on('form-success-add_user', function(res, data) {
         reloadAllTables();
 	});
 
-    $('body').on('form-success-update_user', function(res, data) {
+    $body.on('form-success-update_user', function(res, data) {
         reloadAllTables();
         $('#add-member').modal('hide');
     });
 
-    $('body').on('click', '#updateUser', async function(e) {
+    $body.on('click', '#updateUser', async function(e) {
         let id = $(this).attr('ref_id');
         let route = $(this).attr('route');
         $('#add_user, #update_user').attr({'action': `/admin/update-user/${id}`, 'id': 'update_user'});
@@ -22,7 +23,7 @@ $(() => {
         let res = await updateRecord('#update_user', route);
     });
 
-    $('body').on('click', '#add-user', function() {
+    $body.on('click', '#add-user', function() {
         $('label.error').remove();
         $('.error').removeClass('error');
         $('#update_user').attr({'action': '/admin/create-user', 'id': 'add_user'});
@@ -31,12 +32,12 @@ $(() => {
         resetForm();
     });
 
-    $('body').on('click', '#deleteUser', async function(e) {
+    $body.on('click', '#deleteUser', async function(e) {
         let route = $(this).attr('route');
         await deleteRecord(route, $(`#${$(this).parents('table').attr('id')}`).DataTable(), $(this));
     });
 
-    $('body').on('click', '#updateUserStatus', async function(e) {
+    $body.on('click', '#updateUserStatus', async function(e) {
         let route = $(this).attr('route');
         await toggleStatus(route, $(`#${$(this).parents('table').attr('id')}`).DataTable(), $(this));
     });

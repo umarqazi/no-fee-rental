@@ -10,6 +10,8 @@
 | contains the "web" middleware group. Now create something great!
 |
  */
+
+use App\Events\TriggerNotification;
 use Illuminate\Support\Facades\Redis;
 
 Route::get('/', 'HomeController@index')->name('web.index');
@@ -54,8 +56,6 @@ Route::post('/send-message', 'MessageController@send')->name('send.message');
 
 // Realty MX Routes
 Route::get('/test/{file}', 'RealtyMXController@get');
-Route::get('/realty-mx/{client}/{listing}', function($a, $b) {
-    dd(\App\Listing::where('realty_id', $b)->first());
-});
+Route::get('/realty-mx/{client}/{listing}', 'RealtyMXController@detail');
 
 Route::post('/listing-detail', 'ListingController@detail');

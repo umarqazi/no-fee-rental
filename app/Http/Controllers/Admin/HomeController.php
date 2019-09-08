@@ -14,7 +14,7 @@ use App\Http\Controllers\Controller;
 class HomeController extends Controller {
 
     /**
-     * @var AdminService|UserService
+     * @var UserService
      */
 	private $service;
 

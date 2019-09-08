@@ -54,4 +54,13 @@ class UserRepo extends BaseRepo {
 	public function isUniqueEmail($email) {
 		return $this->find(['email' => $email])->first() ? true : false;
 	}
+
+    /**
+     * @param $email
+     *
+     * @return mixed
+     */
+	public function findByEmail($email) {
+	    return $this->find(['email' => $email])->first();
+    }
 }
