@@ -6,7 +6,10 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta charset="utf-8" name="csrf-token" content="{{csrf_token()}}">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons">
+    <script>
+        Window.Laravel = {user: "{{ authenticated() ? myId() : null }}"};
+    </script>
 	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAXbbZYutEBE_0ulFJVMlgOprFErdXmJvg&libraries=places" type="text/javascript"></script>
 
 	 <!-- CSS -->

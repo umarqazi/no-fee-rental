@@ -65,7 +65,7 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group license_num">
-                                {!! Form::text('license_number', null, ['class'=>'input-style licence', 'placeholder'=>'License Number','onblur'=>'license_verification()'])!!}
+                                {!! Form::text('license_number', null, ['class'=>'input-style', 'placeholder'=>'License Number'])!!}
                             <p id="license-verify"></p></div>
                         </div>
                         <div class="col-sm-6" id="phone_number">
@@ -108,27 +108,28 @@
         </div>
     </div>
 </div>
+{!! HTML::script('assets/js/signup.js') !!}
 <script>
-    function license_verification(){
-        var license_num =   $(".licence").val()
-           $.ajax({
-            url: "https://data.ny.gov/resource/yg7h-zjbf.json?license_number="+license_num+"",
-            type: "GET",
-            data: {
-                "$limit" : 5000,
-                "$$app_token" : "r2d5ljgcgGPadDzIIgzTzu5Qf"
-            }
-        }).done(function(data) {
-           if(data.length ==1){
-              $("#license-verify").css('color','green');
-              $("#license-verify").text('License Number Verified Successfully!');
-           }
-           else {
-               $("#license-verify").css('color','red');console.log('na');
-               $("#license-verify").text('Wrong License Number');
-           }
-        });
-    }
+    // function license_verification(){
+    //     var license_num =   $(".licence").val()
+    //        $.ajax({
+    //         url: """,
+    //         type: "GET",
+    //         data: {
+    //             "$limit" : 5000,
+    //             "$$app_token" : "r2d5ljgcgGPadDzIIgzTzu5Qf"
+    //         }
+    //     }).done(function(data) {
+    //        if(data.length ==1){
+    //           $("#license-verify").css('color','green');
+    //           $("#license-verify").text('License Number Verified Successfully!');
+    //        }
+    //        else {
+    //            $("#license-verify").css('color','red');console.log('na');
+    //            $("#license-verify").text('Wrong License Number');
+    //        }
+    //     });
+    // }
 
 </script>
 

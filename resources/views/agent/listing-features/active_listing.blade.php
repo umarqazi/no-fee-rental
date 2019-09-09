@@ -43,7 +43,7 @@
 									@foreach($listing->active as $al)
 									<div class="col-lg-3 col-md-4 col-sm-6">
 										<div class="listing-thumb">
-											<img src="{{isset($al->thumbnail) ? asset('storage/'.$al->thumbnail) : asset('uploads/listing/thumbnails/default.jpg')}}" alt="" style="width: 400px;" class="main-img" />
+                                            <img src="{{isset($al->thumbnail) ? ((!empty($al->realty_id)) ? $al->thumbnail : asset('storage/'.$al->thumbnail)) : asset('uploads/listing/thumbnails/default.jpg')}}" alt="" style="height: 205px; width: 100%;" class="main-img" />
 											<div class="info">
 												<p class="title">{{ $al->display_address }}</p>
 												<p><i class="fa fa-tag"></i> ${{ $al->rent }}</p>

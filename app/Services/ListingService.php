@@ -395,12 +395,12 @@ class ListingService {
                 'approved_on' => $list->updated_at,
                 'view'        => 'approve-request',
                 'subject'     => 'Request Approved for listing',
-                'from' => myId(),
-                'toEmail' => $list->agent->email,
-                'fromEmail' => mySelf()->email,
-                'to' => $list->agent->id,
-                'path' => request()->root(),
-                'notification' => 'Listing has been approved',
+                'path'        => route('listing.detail', $list->id),
+                'from'        => myId(),
+                'toEmail'     => $list->agent->email,
+                'fromEmail'   => mySelf()->email,
+                'to'          => $list->agent->id,
+                'notification'=> 'Listing has been approved',
             ];
             notificationService($data);
             DB::commit();

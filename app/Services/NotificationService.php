@@ -28,11 +28,11 @@ class NotificationService extends NotificationSettingService {
      *
      * @param $data
      */
-    public function __construct($data) {
+    public function __construct($data = null) {
         parent::__construct();
         $this->data = $data;
         $this->repository = new NotificationRepo();
-        $this->send();
+        ($this->data == null) ?: $this->send();
     }
 
     /**
@@ -48,11 +48,12 @@ class NotificationService extends NotificationSettingService {
      * @return void
      */
     private function send() {
+        $this->save();
         $settings = $this->receiverSettings($this->data->to);
 
         if(empty($settings)) {
-            event(new \App\Events\TriggerNotification($this->data));
             \Illuminate\Support\Facades\Mail::to($this->data->toEmail)->send(new \App\Mail\MailHandler($this->data));
+            event(new \App\Events\TriggerNotification($this->data));
         }
 
         if(!empty($settings) && $settings->allow_web_notification) {
@@ -75,5 +76,12 @@ class NotificationService extends NotificationSettingService {
         $form->notification = $this->data->notification;
         $form->validate();
         return $this->repository->create($form->toArray());
+    }
+
+    /**
+     * @return mixed
+     */
+    public function get() {
+        return $this->repository->get();
     }
 }

@@ -23,14 +23,16 @@ async function ajaxRequest(url, type, data, loading = true, form = null, content
             (loading) ? $('.loader').hide() : '';
 
             if(!res.status) {
-                if(res.msg !== '' || res.msg !== null) {
-                    toastr.error(res.msg);
+                if(res.msg !== undefined) {
+                    if (res.msg !== '' && res.msg !== null) {
+                        toastr.error(res.msg);
+                    }
                 }
                 return false;
             }
 
             if(res.status) {
-                if(res.msg !== '' || res.msg !== null) {
+                if(res.msg !== '' && res.msg !== null) {
                     toastr.success(res.msg);
                 }
                 return res;

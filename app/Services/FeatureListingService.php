@@ -124,11 +124,17 @@ class FeatureListingService {
 			$data = [
 				'subject'     => 'Featured Request Approved',
 				'view'        => 'request-featured-approved',
+                'from'        => myId(),
+                'to'          => $list->agent->id,
+                'path'        => route('listing.detail', $list->id),
+                'fromEmail'   => mySelf()->email,
+                'toEmail'     => $list->agent->email,
+                'notification'=> 'Your listing marked as featured',
 				'name'        => $list->agent->name,
 				'approved_by' => mySelf()->first_name,
 				'approved_on' => $list->updated_at,
 			];
-			mailService($list->agent->email, toObject($data));
+			notificationService(toObject($data));
 			return true;
 		}
 
