@@ -19,8 +19,8 @@
 										<p>Posted: {{ date("m/d/y H:m A", strtotime($il->created_at)) }}</p>
 										<a href="{{ route('agent.listingStatus', $il->id) }}" title="Publish this property"><span class="status" style="background: red;">Deactive</span></a>
 										<div class="actions-btns">
-											<span><img src="{{asset('assets/images/edit-icon.png')}}" alt=""></span>
-											<span><img src="{{asset('assets/images/copy-icon.png')}}" alt=""></span>
+                                            <a href="{{ route('agent.editListing', $al->id) }}"><span><img src="{{asset('assets/images/edit-icon.png')}}" alt=""></span></a>
+                                            <a href="{{ route('agent.copyListing', $al->id) }}"><span><img src="{{asset('assets/images/copy-icon.png')}}" alt=""></span></a>
 											<a href="{{ route('agent.listingRepost', $il->id) }}"><button type="button" class="border-btn">Repost</button></a>
 										</div>
 									</div>
@@ -54,8 +54,8 @@
 													<a href="{{ route('agent.listingRepost', $il->id) }}"><button type="button" class="border-btn">Repost</button></a>
 												</div>
 												<div class="list-actions-icons">
-													<button><i class="fa fa-edit"></i></button>
-													<button><i class="fa fa-copy"></i></button>
+                                                    <a href="{{ route('agent.editListing', $al->id) }}"><button><i class="fa fa-edit"></i></button></a>
+                                                    <a href="{{ route('agent.copyListing', $al->id) }}"><button><i class="fa fa-copy"></i></button></a>
 												</div>
 											</div>
 										</div>
