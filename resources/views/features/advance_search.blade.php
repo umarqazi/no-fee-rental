@@ -16,10 +16,6 @@
                                 {!! Form::text('neighborhoods', null, ['placeholder' => 'Enter Address or Neighborhood', 'class' => 'input-style enter-address']) !!}
                             </div>
                         </div> -->
-                       <!--  {{-- Price Range--}}
-                        <div class="col-md-12">
-                            
-                        </div> -->
                         {{-- Beds--}}
                         <div class="col-md-6 search-form-grou-mrg-btm">
                             <div class="form-group">
@@ -111,38 +107,38 @@
                                 <ul class="select-bed-options">
                                     <li>
                                         <div class="custom-control custom-radio">
-                                            {!! Form::radio('beds', 'studio', false, ['class' => 'custom-control-input', 'id' => 'studio']) !!}
-                                            <label class="custom-control-label" for="studio">Studio</label>
+                                            {!! Form::radio('rooms', 'studio', false, ['class' => 'custom-control-input', 'id' => 'rooms']) !!}
+                                            <label class="custom-control-label" for="rooms">Studio</label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="custom-control custom-radio">
-                                            {!! Form::radio('beds', 1, false, ['class' => 'custom-control-input', 'id' => 'beds1']) !!}
-                                            <label class="custom-control-label" for="beds1">1</label>
+                                            {!! Form::radio('rooms', 1, false, ['class' => 'custom-control-input', 'id' => 'rooms1']) !!}
+                                            <label class="custom-control-label" for="rooms1">1</label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="custom-control custom-radio">
-                                            {!! Form::radio('beds', 2, false, ['class' => 'custom-control-input', 'id' => 'beds2']) !!}
-                                            <label class="custom-control-label" for="beds2">2</label>
+                                            {!! Form::radio('rooms', 2, false, ['class' => 'custom-control-input', 'id' => 'rooms2']) !!}
+                                            <label class="custom-control-label" for="rooms2">2</label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="custom-control custom-radio">
-                                            {!! Form::radio('beds', 3, false, ['class' => 'custom-control-input', 'id' => 'beds3']) !!}
-                                            <label class="custom-control-label" for="beds3">3</label>
+                                            {!! Form::radio('rooms', 3, false, ['class' => 'custom-control-input', 'id' => 'rooms3']) !!}
+                                            <label class="custom-control-label" for="rooms3">3</label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="custom-control custom-radio">
-                                            {!! Form::radio('beds', 4, false, ['class' => 'custom-control-input', 'id' => 'beds4']) !!}
-                                            <label class="custom-control-label" for="beds4">4</label>
+                                            {!! Form::radio('rooms', 4, false, ['class' => 'custom-control-input', 'id' => 'rooms4']) !!}
+                                            <label class="custom-control-label" for="rooms4">4</label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="custom-control custom-radio">
-                                            {!! Form::radio('beds', 5, false, ['class' => 'custom-control-input', 'id' => 'beds5']) !!}
-                                            <label class="custom-control-label" for="beds5">5+</label>
+                                            {!! Form::radio('rooms', 5, false, ['class' => 'custom-control-input', 'id' => 'rooms5']) !!}
+                                            <label class="custom-control-label" for="rooms5">5+</label>
                                         </div>
                                     </li>
                                 </ul>
@@ -154,37 +150,37 @@
                             <div class="form-group">
                                 <label class="label">Price Range</label>
                                 <div class="slider-wrapper">
-                                    <div class="search-input-wrap"> 
+                                    <div class="search-input-wrap">
                                     {!! Form::number('priceRange[min_price]', null, ['min' => 0, 'max' => 9900, 'id' => 'min_price', 'class' => 'price-range-field input-style', 'oninput' => 'validity.valid||(value=0);']) !!} -
-                                    {!! Form::number('priceRange[max_price]', null, ['min' => 0, 'max' => 10000, 'id' => 'max_price', 'class' => 'price-range-field input-style', 'oninput' => 'validity.valid||(value=10000);']) !!} 
+                                    {!! Form::number('priceRange[max_price]', null, ['min' => 0, 'max' => 10000, 'id' => 'max_price', 'class' => 'price-range-field input-style', 'oninput' => 'validity.valid||(value=10000);']) !!}
                                 </div>
-                                    
+
                                     <div id="slider-range" class="price-filter-range" name="rangeInput"></div>
-                                    
+
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="label">Square feet</label>
                                 <div class="slider-wrapper">
-                                    <div class="search-input-wrap"> 
+                                    <div class="search-input-wrap">
                                     {!! Form::number('priceRange[min_price_2]', null, ['min' => 0, 'max' => 9900, 'id' => 'min_price_2', 'class' => 'price-range-field input-style', 'oninput' => 'validity.valid||(value=0);']) !!} -
-                                    {!! Form::number('priceRange[max_price_2]', null, ['min' => 0, 'max' => 10000, 'id' => 'max_price_2', 'class' => 'price-range-field input-style', 'oninput' => 'validity.valid||(value=10000);']) !!} 
+                                    {!! Form::number('priceRange[max_price_2]', null, ['min' => 0, 'max' => 10000, 'id' => 'max_price_2', 'class' => 'price-range-field input-style', 'oninput' => 'validity.valid||(value=10000);']) !!}
                                     </div>
                                     <div id="slider-range-2" class="price-filter-range" name="rangeInput"></div>
-                                    
+
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="label">Year Built</label>
                                 <div class="slider-wrapper">
-                                    <div class="search-input-wrap"> 
+                                    <div class="search-input-wrap">
                                     {!! Form::number('priceRange[min_price_3]', null, ['id' => 'min_price_3', 'class' => 'price-range-field input-style', 'oninput' => 'validity.valid||(value=0);']) !!} -
-                                    {!! Form::number('priceRange[max_price_3]', null, ['min' => 0, 'max' => 10000, 'id' => 'max_price_3', 'class' => 'price-range-field input-style', 'oninput' => 'validity.valid||(value=10000);']) !!} 
+                                    {!! Form::number('priceRange[max_price_3]', null, ['min' => 0, 'max' => 10000, 'id' => 'max_price_3', 'class' => 'price-range-field input-style', 'oninput' => 'validity.valid||(value=10000);']) !!}
                                     </div>
                                     <div id="slider-range-3" class="price-filter-range" name="rangeInput"></div>
-                                    
+
                                 </div>
                             </div>
                         </div>
@@ -240,7 +236,7 @@
                                 </div>
                             </div>
                         </div>
-                     
+
 
                         <div class="col-md-12 text-left mt-4 mb-4 bdr-top-btn">
                             <button type="submit" class="btn-default">Search</button>

@@ -1,5 +1,14 @@
 <div class="modal fade login-modal" id="signup">
     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
+        <style>
+            .neigh {
+                color: red;
+            }
+
+            .success {
+                color:4f984f;
+            }
+        </style>
         {{--Signup Container--}}
         <div class="modal-content">
             <img src="assets/images/modal-close-icon.png" alt="" class="close-modal" data-dismiss="modal" />
@@ -109,27 +118,3 @@
     </div>
 </div>
 {!! HTML::script('assets/js/signup.js') !!}
-<script>
-    // function license_verification(){
-    //     var license_num =   $(".licence").val()
-    //        $.ajax({
-    //         url: """,
-    //         type: "GET",
-    //         data: {
-    //             "$limit" : 5000,
-    //             "$$app_token" : "r2d5ljgcgGPadDzIIgzTzu5Qf"
-    //         }
-    //     }).done(function(data) {
-    //        if(data.length ==1){
-    //           $("#license-verify").css('color','green');
-    //           $("#license-verify").text('License Number Verified Successfully!');
-    //        }
-    //        else {
-    //            $("#license-verify").css('color','red');console.log('na');
-    //            $("#license-verify").text('Wrong License Number');
-    //        }
-    //     });
-    // }
-
-</script>
-

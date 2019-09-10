@@ -82,15 +82,24 @@
 						</span>
 					</div>
 				</div>
-				<div class="col-md-6">
-					<div class="form-group">
-						<label>Availble</label>
-                        {!! Form::text('available', null, ['id' => 'availableOn', 'class' => 'input-style', 'autocomplete' => 'off']) !!}
-						<span class="invalid-feedback" role="alert">
+<div class="col-md-6">
+<div class="form-group">
+    <label>Open House</label>
+    {!! Form::text('open_house', null, ['class' => 'input-style', 'id' => 'timepicker-actions-exmpl']) !!}
+    <span class="invalid-feedback" role="alert">
 							{!! $errors->first('available') !!}
 						</span>
-					</div>
-				</div>
+</div>
+</div>
+<div class="col-md-6">
+    <div class="form-group">
+        <label>Availability</label>
+        {!! Form::select('availability', ['' => 'Select', '1' => 'Available', '2' => 'Not Available'], null, ['class' => 'input-style']) !!}
+        <span class="invalid-feedback" role="alert">
+							{!! $errors->first('available') !!}
+						</span>
+    </div>
+</div>
 				<div class="col-md-6">
 					<div class="form-group" id="file">
 						<label>Add Cover Photo</label>

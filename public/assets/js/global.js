@@ -103,6 +103,7 @@ function populateErrors(form, errors) {
 $(() => {
 
 	$('body').on('submit', '.ajax', async function(e) {
+	    if($('#license-error').length > 0) return;
 		e.preventDefault();
 		let form    = $(this);
 		let id      = $(this).attr('id');

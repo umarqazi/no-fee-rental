@@ -17,6 +17,7 @@ return [
 		'pet_policy' => [
 			0 => 'Cats Allowed',
 			1 => 'Dogs Allowed',
+            2 => 'Pets Allowed'
 		],
 
 		'unit_feature' => [
@@ -24,7 +25,6 @@ return [
 			1 => 'Laundry In Unit',
 			2 => 'Parking Space',
 			3 => 'Outdoor Space',
-            4 => 'Abdullah',
 		],
 
 		'building_feature' => [
@@ -44,7 +44,6 @@ return [
 			6 => 'In-Unit Laundry',
 			7 => 'On-Site Parking',
 			8 => 'Terrace',
-			9 => 'Pets Allowed',
 		],
 	],
 
