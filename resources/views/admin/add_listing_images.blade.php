@@ -16,7 +16,6 @@
 				@if($action == 'Update' && !empty($listing_images) && count($listing_images) > 0)
 				<div class="row after-dropzone-img">
 					@foreach($listing_images as $image)
-
                         <div class="parent-div col-lg-2">
                         <span onclick="remove('{{$image->id}}', this)" >x</span>
                         <img src="{{ asset('storage/'.$image->listing_image) }}" height="50" width="50">

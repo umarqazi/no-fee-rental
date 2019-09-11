@@ -13,7 +13,7 @@
                         <ul id="image-gallery" class="gallery list-unstyled cS-hidden">
                             @for ($i = 0; $i < sizeof($listing->listingImages); $i++)
                             <li data-thumb="{{asset('storage/'.$listing->listingImages[$i]->listing_image)}}" class="large-view">
-                                <img src="{{ asset('storage/'.$listing->listingImages[$i]->listing_image) }}" />
+                                <a target="_blank" href="{{ asset('storage/'.$listing->listingImages[$i]->listing_image) }}"><img src="{{ asset('storage/'.$listing->listingImages[$i]->listing_image) }}" /></a>
                             </li>
                             @endfor
                         </ul>
@@ -119,7 +119,7 @@
                                         <a href="#" class="btn apointment-btn">Appointment </a>
                                     </div>
                                     <div class="col-lg-6">
-                                        <a href="#" class="btn contct-agent-btn">Contact Agent </a>
+                                        <a href="#" class="btn contct-agent-btn">Check Availability </a>
                                     </div>
                                 </div>
                             </div>

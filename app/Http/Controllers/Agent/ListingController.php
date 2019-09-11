@@ -53,7 +53,7 @@ class ListingController extends Controller {
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
 	public function showForm() {
-        $action = 'create';
+        $action = 'Create';
 		$listing = null;
 		return view('agent.add_listing', compact('listing', 'action'));
 	}
@@ -78,7 +78,7 @@ class ListingController extends Controller {
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
 	 */
 	public function update($id, Request $request) {
-        $action = 'update';
+        $action = 'Update';
 		$update = $this->service->update($id, $request);
 		$listing_images = $this->service->images($id)->get();
 		return $update
@@ -146,15 +146,15 @@ class ListingController extends Controller {
 		: error('Something went wrong');
 	}
 
-	/**
-	 * @param $id
-	 *
-	 * @return \Illuminate\Http\JsonResponse
-	 */
-	public function removeImage($id) {
-		return ($this->service->removeImage($id))
-		? response()->json(['message' => 'success'])
-		: response()->json(['message' => 'something went wrong']);
+    /**
+     * @param Request $request
+     * @param $id
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+	public function removeImage(Request $request, $id) {
+		$res = $this->service->removeImage($id);
+		return sendResponse($request, $res, 'Image has been removed.');
 	}
 
 	/**
