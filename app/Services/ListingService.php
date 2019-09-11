@@ -67,8 +67,8 @@ class ListingService {
         $form->pet_policy = $request->pet_policy ?? null;
         $form->status = $request->status ?? null;
         $form->map_location = $request->map_location ?? null;
-        $form->old_thumbnail = ($request->thumbnail) ? $request->old_thumbnail ?? null : true;
-        $form->thumbnail = ($request->thumbnail) ? $request->thumbnail ?? null : $request->old_thumbnail;
+        $form->old_thumbnail = !empty($request->hasFile('thumbnail')) ? false : $request->old_thumbnail;
+        $form->thumbnail = empty($request->hasFile('thumbnail')) ? '' : $request->thumbnail ?? null;
 		$form->validate();
         return $form;
     }
@@ -80,7 +80,7 @@ class ListingService {
      */
     private function createList($data) {
         DB::beginTransaction();
-        if ($data->thumbnail)
+        if (!empty($data->thumbnail))
             $data->thumbnail = uploadImage($data->thumbnail, 'data/' . myId() . '/listing/thumbnails');
         $list = $this->repo->create($data->toArray());
         if (!empty($list)) {
@@ -132,19 +132,23 @@ class ListingService {
      */
     private function updateList($id, $listing) {
         DB::beginTransaction();
-        if ($listing->old != 'true') {
-            $listing->thumbnail = uploadImage($listing->thumbnail, 'data/' . myId() . '/listing/thumbnails', true, $listing->old);
+        if (!empty($listing->thumbnail)) {
+            $listing->thumbnail = uploadImage($listing->thumbnail, 'data/' . myId() . '/listing/thumbnails', true, $listing->old_thumbnail);
+        } else {
+            $listing->thumbnail = $listing->old_thumbnail;
         }
 
         $data = [
             'name'            => $listing->name,
             'email'           => $listing->email,
+            'open_house'      => $listing->open_house,
+            'visibility'      => $listing->visibility,
             'description'     => $listing->description,
+            'map_location'    => $listing->map_location,
             'phone_number'    => $listing->phone_number,
-            'website'         => $listing->website,
             'street_address'  => $listing->street_address,
             'display_address' => $listing->display_address,
-            'available'       => $listing->available,
+            'availability'    => $listing->availability,
             'city_state_zip'  => $listing->city_state_zip,
             'neighborhood'    => $listing->neighborhood,
             'bedrooms'        => $listing->bedrooms,
@@ -284,7 +288,6 @@ class ListingService {
                 'updated_at'    => now(),
             ];
         }
-
         return $this->repo->insert($batch);
     }
 

@@ -63,10 +63,8 @@ $(() => {
  *
  * @return void
  */
-function imagePreview(file, targetId) {
-    let fr = new FileReader();
-    fr.onload = function(e) {$(targetId).attr('src', e.target.result);}
-    fr.readAsDataURL(file);
+async function imagePreview(file, targetId) {
+    await livePreview(file, targetId);
 }
 
 /**
@@ -77,6 +75,8 @@ function imagePreview(file, targetId) {
  */
 
 async function remove(id, image) {
-    await ajaxRequest(`/admin/remove-listing-image/${id}`, 'get');
-    $(image).remove();
+    let url = window.location.href;
+    url = url.split('/');
+    await ajaxRequest(`/${url[3]}/remove-listing-image/${id}`, 'get');
+    $(image).parents('.parent-div').remove();
 }

@@ -196,3 +196,17 @@ async function updateRecord(form_id, route) {
     populateFields(form_id, res.data);
     return res;
 }
+
+/**
+ *
+ * @param file
+ * @param target
+ * @returns {Promise<void>}
+ */
+async function livePreview(file, target) {
+    let reader = new FileReader();
+    reader.onload = function(e) {
+        $(target).attr('src', e.target.result);
+    }
+    reader.readAsDataURL(file);
+}

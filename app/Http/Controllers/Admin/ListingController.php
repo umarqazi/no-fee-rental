@@ -39,7 +39,7 @@ class ListingController extends Controller {
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
 	public function showForm() {
-		$action = 'create';
+		$action = 'Create';
 		$listing = null;
 		return view('admin.add_listing', compact('listing', 'action'));
 	}
@@ -85,8 +85,7 @@ class ListingController extends Controller {
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
 	 */
 	public function update($id, Request $request) {
-
-		$action = 'update';
+		$action = 'Update';
 		$update = $this->service->update($id, $request);
 		$listing_images = $this->service->images($id)->get();
 		return $update
@@ -164,22 +163,15 @@ class ListingController extends Controller {
 		: error('Something went wrong');
 	}
 
-	/**
-	 * @param $id
-	 *
-	 * @return \Illuminate\Http\JsonResponse
-	 */
+    /**
+     * @param Request $request
+     * @param $id
+     *
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
+     */
 	public function removeImage(Request $request, $id) {
-		$remres = $this->service->removeImage($id);
-
-		if ($request->ajax()) {
-			return ($remres)
-                ? json('Image removed successfully.', null, true)
-                : json('Something went wrong', null, false);
-		}
-			return ($remres)
-                ? success('Image removed successfully.')
-                : error('Something went wrong');
+		$remove = $this->service->removeImage($id);
+		return sendResponse($request, $remove, 'Image removed successfully.');
 	}
 
     /**

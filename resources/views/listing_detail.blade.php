@@ -12,8 +12,8 @@
                     <div class="clearfix" style="max-width:100%;">
                         <ul id="image-gallery" class="gallery list-unstyled cS-hidden">
                             @for ($i = 0; $i < sizeof($listing->listingImages); $i++)
-                            <li data-thumb="{{$listing->listingImages[$i]->listing_image}}" class="large-view">
-                                <img src="{{$listing->listingImages[$i]->listing_image}}" />
+                            <li data-thumb="{{asset('storage/'.$listing->listingImages[$i]->listing_image)}}" class="large-view">
+                                <img src="{{ asset('storage/'.$listing->listingImages[$i]->listing_image) }}" />
                             </li>
                             @endfor
                         </ul>
