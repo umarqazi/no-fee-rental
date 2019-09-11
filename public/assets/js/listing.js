@@ -64,13 +64,10 @@ $(() => {
  * @return void
  */
 function imagePreview(file, targetId) {
-        let fr = new FileReader();
-        fr.onload = function(e) {
-            $(targetId).attr('src', e.target.result);
-        }
-
-        fr.readAsDataURL(file);
-    }
+    let fr = new FileReader();
+    fr.onload = function(e) {$(targetId).attr('src', e.target.result);}
+    fr.readAsDataURL(file);
+}
 
 /**
  * build collection for api
