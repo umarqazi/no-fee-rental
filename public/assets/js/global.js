@@ -103,7 +103,6 @@ function populateErrors(form, errors) {
 $(() => {
 
 	$('body').on('submit', '.ajax', async function(e) {
-	    if($('#license-error').length > 0) return;
 		e.preventDefault();
 		let form    = $(this);
 		let id      = $(this).attr('id');
@@ -121,7 +120,8 @@ $(() => {
 		let res = await ajaxRequest(url, type, data, loading, form, content);
 
 		if(reset === 'true'){
-            $(form).reset();
+            $(form).trigger("reset");
+            // $(form).reset();
         }
 
 		if(res.status){
@@ -148,6 +148,10 @@ function confirm(msg) {
 	}).then(function(isConfirm) {
 		return !!(isConfirm);
 	});
+}
+
+function reset(form) {
+    $(form)
 }
 
 /**
