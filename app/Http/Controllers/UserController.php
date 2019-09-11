@@ -74,9 +74,8 @@ class UserController extends Controller {
      * @return \Illuminate\Http\RedirectResponse
      */
 	public function invitedAgentSignup(Request $request) {
-		return $this->service->invitedAgentSignup($request)
-		? success('Account has been created')
-		: error('Something went wrong');
+		$res = $this->service->invitedAgentSignup($request);
+		return sendResponse($request, $res, 'Account has been created', '/');
 	}
 
     /**
