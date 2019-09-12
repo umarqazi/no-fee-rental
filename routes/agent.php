@@ -28,6 +28,7 @@ Route::get('/finish-listing', 'Agent\ListingController@finishCreate')->name('age
 Route::get('/update-listing', 'Agent\ListingController@finishUpdate')->name('agent.finishUpdateListing');
 Route::get('/listing/{sortBy}', 'Agent\ListingController@sortBy')->name('agent.sorting');
 Route::get('/copy-list/{id}', 'Agent\ListingController@copy')->name('agent.copyListing');
+
 // Featured Listing
 Route::get('/request-featured/{id}', 'Agent\ListingController@request')->name('agent.requestFeatured');
 

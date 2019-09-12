@@ -9,14 +9,14 @@ use App\Http\Controllers\Controller;
 class MemberController extends Controller
 {
     /**
-     * @var AgentService
+     * @var MemberService
      */
     private $service;
 
     /**
      * MemberController constructor.
      *
-     * @param AgentService $service
+     * @param MemberService $service
      */
     public function __construct(MemberService $service) {
         $this->service = $service;

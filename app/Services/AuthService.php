@@ -50,7 +50,7 @@ class AuthService {
 
         if ($this->attemptLogin($request)) {
             return ($request->ajax())
-                    ? response()->json(['data' => ['url' => "{$this->guard}/home"], 'status' => true])
+                    ? response()->json(['data' => ['url' => "/{$this->guard}/home"], 'status' => true])
                     : $this->sendLoginResponse($request);
         }
 

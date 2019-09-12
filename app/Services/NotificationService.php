@@ -30,9 +30,9 @@ class NotificationService extends NotificationSettingService {
      */
     public function __construct($data = null) {
         parent::__construct();
+        (is_object($data)) ?: $data = toObject($data);
         $this->data = $data;
         $this->repository = new NotificationRepo();
-        ($this->data == null) ?: $this->send();
     }
 
     /**
@@ -47,7 +47,7 @@ class NotificationService extends NotificationSettingService {
     /**
      * @return void
      */
-    private function send() {
+    public function send() {
         $this->save();
         $settings = $this->receiverSettings($this->data->to);
 

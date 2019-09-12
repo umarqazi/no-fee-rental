@@ -24,6 +24,6 @@ class NotificationRepo extends BaseRepo {
      * @return mixed
      */
     public function get() {
-        return $this->find(['to' => myId()])->with('from')->latest()->paginate(10);
+        return $this->find(['to' => myId()])->with('from')->latest()->get();
     }
 }

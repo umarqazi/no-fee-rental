@@ -996,6 +996,7 @@ footer .footer-wrapper .newsletter .newsletter-form .btn-default {
   line-height: 40px;
   position: relative;
   left: -4px;
+    cursor:pointer;
 }
 footer .copyright {
   display: flex;
@@ -1578,11 +1579,11 @@ footer .copyright .social-icons li a:hover {
 .neighborhood-search .search-result-wrapper .search-listing .featured-properties .property-listing.mobile-listing {
   display: none;
 }
-.neighborhood-search .search-result-wrapper .search-listing 
+.neighborhood-search .search-result-wrapper .search-listing
 .featured-properties .property-listing .property-thumb:nth-last-of-type(1){
   margin-bottom: 0px;
 }
-.neighborhood-search .search-result-wrapper .search-listing 
+.neighborhood-search .search-result-wrapper .search-listing
 .featured-properties .property-listing .property-thumb:nth-last-of-type(2){
   margin-bottom: 0px;
 }

@@ -110,6 +110,26 @@ function dateReadable($date) {
 }
 
 /**
+ * @param $date
+ * @param $format
+ *
+ * @return false|string
+ */
+function formattedDate($format, $date) {
+    return date($format, strtotime($date));
+}
+
+/**
+ * @param $dateAlpha
+ * @param $dateBeta
+ *
+ * @return bool
+ */
+function compareDates($dateAlpha, $dateBeta) {
+    return formattedDate('y/m/d', $dateAlpha) >= formattedDate('y/m/d', $dateBeta);
+}
+
+/**
  * @param $to
  * @param $data
  *
@@ -169,13 +189,14 @@ function success($msg, $path = null) {
  * @param null $msg
  * @param null $path
  * @param null $errorMsg
+ * @param int $code
  *
  * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
  */
-function sendResponse($request, $data = null, $msg = null, $path = null, $errorMsg = null) {
+function sendResponse($request, $data = null, $msg = null, $path = null, $errorMsg = null, $code = 200) {
     if($request->ajax())
         return ($data)
-            ? json($msg, $data)
+            ? json($msg, $data, true, $code)
             : json($errorMsg ?? 'Something went wrong', null, false, 500);
     else
         return ($data)
