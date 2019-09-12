@@ -46,7 +46,7 @@
                         {!! Form::text('phone_number', null, ['class' => 'input-style', 'placeholder' => 'Phone Number']) !!}
                     </div>
                     <div class="form-group">
-                        {!! Form::text('open_house', null, ['autocomplete' => 'off', 'class' => 'input-style', 'id' => 'timepicker-actions-exmpl', 'data-language' => 'en']) !!}
+                        {!! Form::text('appointment_at', null, ['autocomplete' => 'off', 'class' => 'input-style', 'id' => 'timepicker-actions-exmpl', 'data-language' => 'en']) !!}
                     </div>
                     <div class="form-group">
                         {!! Form::textarea('message', null, ['rows' => 5, 'class' => 'input-style text-area', 'placeholder' => 'Message']) !!}

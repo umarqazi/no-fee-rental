@@ -8,9 +8,11 @@
 
 namespace App\Services;
 
+use App\Forms\AppointmentForm;
 use App\Forms\MessageForm;
 use App\Repository\ContactRepo;
 use App\Repository\MessageRepo;
+use App\Repository\UserRepo;
 use Illuminate\Support\Facades\DB;
 
 class MessageService {
@@ -96,43 +98,62 @@ class MessageService {
     }
 
     /**
+     * @param $data
      * @param $request
      *
-     * @return bool|void
+     * @return bool
+     */
+    private function createContact($data, $request) {
+        if ( $contact = $this->repo->create($data) ) {
+            $contact->messages()->attach( $contact, [
+                'align'      => myId(),
+                'message'    => $request->message,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+            DB::commit();
+            return true;
+        }
+        DB::rollBack();
+        return false;
+    }
+
+    /**
+     * @param $request
+     *
+     * @return bool
      */
     public function sendRequest($request) {
-        if(authenticated()) {
-            if ( $this->repo->isNew( $request->listing_id ) ) {
-                DB::beginTransaction();
-                $data = [
-                    'appointment_at' => $request->appointment_at,
-                    'from'           => myId(),
-                    'to'             => $request->to,
-                    'cc'             => null,
-                    'listing_id'     => $request->listing_id
-                ];
-                if ( $contact = $this->repo->create( $data ) ) {
-                    $contact->messages()->attach( $contact, [
-                        'align'      => myId(),
-                        'message'    => $request->message,
-                        'created_at' => now(),
-                        'updated_at' => now(),
-                    ] );
-                    DB::commit();
-                    return true;
-                }
+        DB::beginTransaction();
+        $form = new AppointmentForm();
+        $form->listing_id = $request->listing_id;
+        $form->to = $request->to;
+        $form->appointment_at = $request->appointment_at;
+        $form->from = (authenticated()) ? myId() : null;
 
-                DB::rollBack();
-                return false;
+        if(authenticated()) {
+            $form->validate();
+            if ($this->repo->isNew( $request->listing_id)) {
+                return $this->createContact($form->toArray(), $request);
             }
+        } else {
+            $form->first_name = $request->first_name;
+            $form->email = $request->email;
+            $form->phone_number = $request->phone_number;
+            $form->newRequestValidate();
+            $this->repo = new UserRepo();
+            $guest = $this->repo->create($form->newRequestArray());
+            $this->repo = new ContactRepo();
+            $form->from = $guest->id;
+            $form->validate();
+            if($this->createContact($form->toArray(), $request)) {
+                DB::commit();
+                return true;
+            }
+
+            DB::rollBack();
             return false;
         }
-
-        $data = [
-            'first_name'   => $request->name,
-            'email'        => $request->email,
-            'phone_number' => $request->phone,
-        ];
     }
 
     /**
