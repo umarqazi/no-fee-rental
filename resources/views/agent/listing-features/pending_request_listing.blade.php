@@ -22,10 +22,6 @@
                 <div class="actions-btns">
                     <a href="{{ route('agent.editListing', $al->id) }}"><span><img src="{{asset('assets/images/edit-icon.png')}}" alt=""></span></a>
                     <a href="{{ route('agent.copyListing', $al->id) }}"><span><img src="{{asset('assets/images/copy-icon.png')}}" alt=""></span></a>
-                    <a href="{{ route('agent.listingRepost', $al->id) }}"><button type="button" class="border-btn">Repost</button></a>
-                    @if($al->is_featured != 1 && $al->is_featured != 2)
-                        <a href="{{ route('agent.requestFeatured', $al->id) }}"><button type="button" class="border-btn">Request Feature</button></a>
-                    @endif
                 </div>
             </div>
         </div>
@@ -56,12 +52,6 @@
                         @if($al->is_featured != 0)
                             <span class="status" style="margin-right: 60px;background: blueviolet;">{{($al->is_featured == 2) ? 'Requested for feature' : 'Featured' }}</span>
                         @endif
-                        <div class="actions-btns">
-                            <a href="{{ route('agent.listingRepost', $al->id) }}"><button type="button" class="border-btn">Repost</button></a>
-                            @if($al->is_featured != 1 && $al->is_featured != 2)
-                                <a href="{{ route('agent.requestFeatured', $al->id) }}"><button type="button" class="border-btn">Request Feature</button></a>
-                            @endif
-                        </div>
                         <div class="list-actions-icons">
                             <a href="{{ route('agent.editListing', $al->id) }}"><button><i class="fa fa-edit"></i></button></a>
                             <a href="{{ route('agent.copyListing', $al->id) }}"><button><i class="fa fa-copy"></i></button></a>

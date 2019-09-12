@@ -19,7 +19,7 @@
                     @foreach($featured_listings as $key => $fl)
                     <div class="property-thumb">
                         <div class="check-btn">
-                            <a href="{{ route('listing.detail', $fl->id) }}"><button class="btn-default" data-toggle="modal" data-target="#check-availability">Check Availability</button></a>
+                            <a href="{{ route('listing.detail', $fl->id) }}"><button class="btn-default" data-toggle="modal" data-target="#check-availability">View Details</button></a>
                         </div>
                         <span class="heart-icon"></span>
                         <img src="{{ asset('storage/'.$fl->thumbnail) }}" alt="" class="main-img" />

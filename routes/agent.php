@@ -39,5 +39,5 @@ Route::post('/invite-agent', 'Agent\MemberController@invite')->name('agent.invit
 // Messaging Routes
 Route::get('/messages-view', 'Agent\MessageController@index')->name('agent.messageIndex');
 Route::get('/load-chat/{id}', 'Agent\MessageController@inbox')->name('agent.loadChat');
-Route::post('/send-message/{id}', 'Agent\MessageController@send')->name('send.message');
+Route::post('/send-message/{id}', 'Agent\MessageController@send')->name('agent.sendMessage');
 Route::post('/accept-meeting/{id}', 'Agent\MessageController@confirmMeeting');

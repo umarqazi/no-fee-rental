@@ -1,4 +1,3 @@
-
 <link rel="stylesheet" type="text/css" href="{{asset('assets/css/datepicker.min.css')}}"/>
 <script src="{{asset('assets/js/datepicker.min.js')}}"></script>
 <script src="{{asset('assets/js/datepicker.en.js')}}"></script>

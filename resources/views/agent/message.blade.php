@@ -30,6 +30,9 @@
                 <div class="tab-content">
                     {{--Inbox--}}
                     <div class="tab-pane active" id="tab-1">
+                        @if( $data->totalInbox < 1)
+                            No Record Found
+                        @endif
                         @foreach ($data->inbox as $inbox)
                         <div class="message-row row">
                             <div class="col-sm-10">
@@ -78,6 +81,9 @@
 
                     {{--Request Meeting--}}
                     <div class="tab-pane fade" id="tab-3">
+                        @if( $data->totalRequests < 1)
+                            No Record Found
+                        @endif
                         @foreach ($data->meeting_requests as $meeting)
                         <div class="message-row">
                             <h3>{{ $meeting->sender->first_name }}</h3>

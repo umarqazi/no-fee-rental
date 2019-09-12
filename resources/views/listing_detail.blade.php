@@ -12,7 +12,7 @@
                     <div class="clearfix" style="max-width:100%;">
                         <ul id="image-gallery" class="gallery list-unstyled cS-hidden">
                             @for ($i = 0; $i < sizeof($listing->listingImages); $i++)
-                            <li data-thumb="{{asset('storage/'.$listing->listingImages[$i]->listing_image)}}" class="large-view">
+                                <li data-thumb="{{asset('storage/'.$listing->listingImages[$i]->listing_image)}}" class="large-view">
                                 <a target="_blank" href="{{ asset('storage/'.$listing->listingImages[$i]->listing_image) }}"><img src="{{ asset('storage/'.$listing->listingImages[$i]->listing_image) }}" /></a>
                             </li>
                             @endfor
@@ -25,8 +25,8 @@
                     <div class="product-title">
                         <p> {{$listing->display_address}} </p>
                         <span>
-                            <a href="#"><img src="assets/images/share-icon.png" alt="" /> </a>
-                            <a href="#" class="ml-2"><img src="assets/images/fav-icon.png" alt="" /> </a>
+                            <a href="#"><img src="/assets/images/share-icon.png" alt="" /> </a>
+                            <a href="#" class="ml-2"><img src="/assets/images/fav-icon.png" alt="" /> </a>
                         </span>
                     </div>
                     <p class="title-subtext">{{$listing->street_address}}</p>
@@ -110,13 +110,13 @@
                     <div class="appointment-section">
                         <div class="row">
                             <div class="col-lg-5">
-                                <a href="#"><img src="assets/images/careers-icon.png" alt="apointment"></a>
+                                <a href="#"><img src="/assets/images/careers-icon.png" alt="apointment"></a>
                                 <p> 1 agent from <strong>Arraynyc </strong></p>
                             </div>
                             <div class="col-lg-7">
                                 <div class="row">
                                     <div class="col-lg-6">
-                                        <a href="#" class="btn apointment-btn">Appointment </a>
+                                        <a href="#check-availability" data-target="#check-availability" data-toggle="modal" class="btn apointment-btn">Appointment </a>
                                     </div>
                                     <div class="col-lg-6">
                                         <a href="#" class="btn contct-agent-btn">Check Availability </a>
@@ -125,72 +125,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- <ul class="info-listing">
-                        <li>
-                            <p>
-                                <strong>Last Updated</strong><br>
-                                <span>29 days</span>
-                            </p>
-                        </li>
-                        <li>
-                            <p>
-                                <strong>Availble</strong><br>
-                                <span>Immediately</span>
-                            </p>
-                        </li>
-                        <li>
-                            <p>
-                                <strong>Listed For</strong><br>
-                                <span>29 days</span>
-                            </p>
-                        </li>
-                        <li>
-                            <p>
-                                <strong>Pets</strong><br>
-                                <span>Large Dogs & Cats</span>
-                            </p>
-                        </li>
-                        <li>
-                            <p>
-                                <img src="assets/images/sq-icon.png" alt="" class="mr-2" />
-                                <span>0 Sq. Ft</span>
-                            </p>
-                        </li>
-                        <li>
-                            <p>
-                                <img src="assets/images/web-icon.png" alt="" class="mr-2" />
-                                <span>Web Id : 00123</span>
-                            </p>
-                        </li>
-                    </ul> -->
-                    <!-- <div class="near-by">
-                        Near By Subway Stations
-                    </div>
-                    <div class="near-by-info">
-                        <div>
-                            <img src="assets/images/numbers.png" alt="" />
-                        </div>
-                        <div>
-                            <p> 51st St (0.25 mi) </p>
-                            <p>42 Street - Grand Central (0.26 mi) </p>
-                            <p>Lexington Av-53 St (0.34 mi </p>
-                            <p>5th Av (0.5 mi) </p>
-                        </div>
-                    </div> -->
-                    <!-- <div class="text-center mt-5">
-                        <button class="btn-default" data-toggle="modal" data-target="#check-availability">Check Availability</button>
-                    </div>
-                    <div class="interested-title">
-                        Interested in this apartment? Listings
-                    </div>
-                    <div class="agent-appointment">
-                        <div class="agent-info">
-                            <img src="assets/images/agent-img.jpg" alt="" />
-                            <p>Jeff Clarke<br><span>646-470-7445</span></p>
-                        </div>
-                        <button class="btn-default">Make an appointment</button>
-                    </div> -->
                 </div>
             </div>
         </div>
@@ -298,7 +232,7 @@
             <div class="owl-slider">
                 <div id="carousel" class="owl-carousel">
                     <div class="item">
-                        <img class="owl-lazy" data-src="assets/images/large-view-6.jpg" alt="first-img"> <i class="fas fa-star"></i>
+                        <img class="owl-lazy" data-src="/assets/images/large-view-6.jpg" alt="first-img"> <i class="fas fa-star"></i>
                         <label>$8,000 / month </label>
                         <div class="item-inner">
                             <p>195 Santon Street Lower East Side, Manhattan -#5B </p>
@@ -308,7 +242,7 @@
                         </div>
                     </div>
                     <div class="item">
-                        <img class="owl-lazy" data-src="assets/images/large-view-6.jpg" alt="first-img"> <i class="fas fa-star"></i>
+                        <img class="owl-lazy" data-src="/assets/images/large-view-6.jpg" alt="first-img"> <i class="fas fa-star"></i>
                         <label>$8,000 / month </label>
                         <div class="item-inner">
                             <p>195 Santon Street Lower East Side, Manhattan -#5B </p>
@@ -318,7 +252,7 @@
                         </div>
                     </div>
                     <div class="item">
-                        <img class="owl-lazy" data-src="assets/images/large-view-6.jpg" alt="first-img"> <i class="fas fa-star"></i>
+                        <img class="owl-lazy" data-src="/assets/images/large-view-6.jpg" alt="first-img"> <i class="fas fa-star"></i>
                         <label>$8,000 / month </label>
                         <div class="item-inner">
                             <p>195 Santon Street Lower East Side, Manhattan -#5B </p>
@@ -328,7 +262,7 @@
                         </div>
                     </div>
                     <div class="item">
-                        <img class="owl-lazy" data-src="assets/images/large-view-6.jpg" alt="first-img"> <i class="fas fa-star"></i>
+                        <img class="owl-lazy" data-src="/assets/images/large-view-6.jpg" alt="first-img"> <i class="fas fa-star"></i>
                         <label>$8,000 / month </label>
                         <div class="item-inner">
                             <p>195 Santon Street Lower East Side, Manhattan -#5B </p>
@@ -338,7 +272,7 @@
                         </div>
                     </div>
                     <div class="item">
-                        <img class="owl-lazy" data-src="assets/images/large-view-6.jpg" alt="first-img"> <i class="fas fa-star"></i>
+                        <img class="owl-lazy" data-src="/assets/images/large-view-6.jpg" alt="first-img"> <i class="fas fa-star"></i>
                         <label>$8,000 / month </label>
                         <div class="item-inner">
                             <p>195 Santon Street Lower East Side, Manhattan -#5B </p>
@@ -348,7 +282,7 @@
                         </div>
                     </div>
                     <div class="item">
-                        <img class="owl-lazy" data-src="assets/images/large-view-6.jpg" alt="first-img"> <i class="fas fa-star"></i>
+                        <img class="owl-lazy" data-src="/assets/images/large-view-6.jpg" alt="first-img"> <i class="fas fa-star"></i>
                         <label>$8,000 / month </label>
                         <div class="item-inner">
                             <p>195 Santon Street Lower East Side, Manhattan -#5B </p>
@@ -358,7 +292,7 @@
                         </div>
                     </div>
                     <div class="item">
-                        <img class="owl-lazy" data-src="assets/images/large-view-6.jpg" alt="first-img"> <i class="fas fa-star"></i>
+                        <img class="owl-lazy" data-src="/assets/images/large-view-6.jpg" alt="first-img"> <i class="fas fa-star"></i>
                         <label>$8,000 / month </label>
                         <div class="item-inner">
                             <p>195 Santon Street Lower East Side, Manhattan -#5B </p>
@@ -368,7 +302,7 @@
                         </div>
                     </div>
                     <div class="item">
-                        <img class="owl-lazy" data-src="assets/images/large-view-6.jpg" alt="first-img"> <i class="fas fa-star"></i>
+                        <img class="owl-lazy" data-src="/assets/images/large-view-6.jpg" alt="first-img"> <i class="fas fa-star"></i>
                         <label>$8,000 / month </label>
                         <div class="item-inner">
                             <p>195 Santon Street Lower East Side, Manhattan -#5B </p>
@@ -378,7 +312,7 @@
                         </div>
                     </div>
                     <div class="item">
-                        <img class="owl-lazy" data-src="assets/images/large-view-6.jpg" alt="first-img"> <i class="fas fa-star"></i>
+                        <img class="owl-lazy" data-src="/assets/images/large-view-6.jpg" alt="first-img"> <i class="fas fa-star"></i>
                         <label>$8,000 / month </label>
                         <div class="item-inner">
                             <p>195 Santon Street Lower East Side, Manhattan -#5B </p>
@@ -388,7 +322,7 @@
                         </div>
                     </div>
                     <div class="item">
-                        <img class="owl-lazy" data-src="assets/images/large-view-6.jpg" alt="first-img"> <i class="fas fa-star"></i>
+                        <img class="owl-lazy" data-src="/assets/images/large-view-6.jpg" alt="first-img"> <i class="fas fa-star"></i>
                         <label>$8,000 / month </label>
                         <div class="item-inner">
                             <p>195 Santon Street Lower East Side, Manhattan -#5B </p>
@@ -400,75 +334,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- <div class="featured-properties nearby-listing">
-            <div class="property-listing ">
-                <div class="property-thumb">
-                    <div class="check-btn">
-                        <button class="btn-default" data-toggle="modal" data-target="#check-availability">Check Availability</button>
-                    </div>
-                    <span class="heart-icon"></span>
-                    <img src="assets/images/gallery-img.jpg" alt="" class="main-img">
-                    <div class="info">
-                        <a href="#">
-                            <p>$3,200 / Month </p>
-                            <ul>
-                                <li><i class="fa fa-bed"></i> 2</li>
-                                <li><i class="fa fa-bath"></i> 2</li>
-                            </ul>
-                        </a>
-                    </div>
-                </div>
-                <div class="property-thumb">
-                    <div class="check-btn">
-                        <button class="btn-default" data-toggle="modal" data-target="#check-availability">Check Availability</button>
-                    </div>
-                    <span class="heart-icon"></span>
-                    <img src="assets/images/gallery-img.jpg" alt="" class="main-img">
-                    <div class="info">
-                        <a href="#">
-                            <p>$3,200 / Month </p>
-                            <ul>
-                                <li><i class="fa fa-bed"></i> 2</li>
-                                <li><i class="fa fa-bath"></i> 2</li>
-                            </ul>
-                        </a>
-                    </div>
-                </div>
-                <div class="property-thumb">
-                    <div class="check-btn">
-                        <button class="btn-default" data-toggle="modal" data-target="#check-availability">Check Availability</button>
-                    </div>
-                    <span class="heart-icon"></span>
-                    <img src="assets/images/gallery-img.jpg" alt="" class="main-img">
-                    <div class="info">
-                        <a href="#">
-                            <p>$3,200 / Month </p>
-                            <ul>
-                                <li><i class="fa fa-bed"></i> 2</li>
-                                <li><i class="fa fa-bath"></i> 2</li>
-                            </ul>
-                        </a>
-                    </div>
-                </div>
-                <div class="property-thumb">
-                    <div class="check-btn">
-                        <button class="btn-default" data-toggle="modal" data-target="#check-availability">Check Availability</button>
-                    </div>
-                    <span class="heart-icon"></span>
-                    <img src="assets/images/gallery-img.jpg" alt="" class="main-img">
-                    <div class="info">
-                        <a href="#">
-                            <p>$3,200 / Month </p>
-                            <ul>
-                                <li><i class="fa fa-bed"></i> 2</li>
-                                <li><i class="fa fa-bath"></i> 2</li>
-                            </ul>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div> -->
     </div>
 </section>
 			<div class="featured-properties nearby-listing">
@@ -494,7 +359,7 @@
 							<button class="btn-default" data-toggle="modal" data-target="#check-availability">Check Availability</button>
 						</div>
 						<span class="heart-icon"></span>
-						<img src="assets/images/gallery-img.jpg" alt="" class="main-img">
+						<img src="/assets/images/gallery-img.jpg" alt="" class="main-img">
 						<div class="info">
 							<a href="#">
 								<p>$3,200 / Month </p>
@@ -510,7 +375,7 @@
 							<button class="btn-default" data-toggle="modal" data-target="#check-availability">Check Availability</button>
 						</div>
 						<span class="heart-icon"></span>
-						<img src="assets/images/gallery-img.jpg" alt="" class="main-img">
+						<img src="/assets/images/gallery-img.jpg" alt="" class="main-img">
 						<div class="info">
 							<a href="#">
 								<p>$3,200 / Month </p>
@@ -542,5 +407,56 @@
 		</div>
 	</section>
     {{--Check Availability--}}
-{{--    @include('features.message')--}}
+    @include('features.message')
+    {{--Messages JS--}}
+    {!! HTML::script('assets/js/message.js') !!}
+    <script>
+        // Create start date
+        var start = new Date(),
+            prevDay,
+            startHours = 9;
+
+        // 09:00 AM
+        start.setHours(9);
+        start.setMinutes(0);
+
+        // If today is Saturday or Sunday set 10:00 AM
+        if ([6, 0].indexOf(start.getDay()) != -1) {
+            start.setHours(10);
+            startHours = 10
+        }
+
+        $('#timepicker-actions-exmpl').datepicker({
+            timepicker: true,
+            language: 'en',
+            startDate: start,
+            minHours: startHours,
+            maxHours: 18,
+            onSelect: function (fd, d, picker) {
+                // Do nothing if selection was cleared
+                if (!d) return;
+
+                var day = d.getDay();
+
+                // Trigger only if date is changed
+                if (prevDay != undefined && prevDay == day) return;
+                prevDay = day;
+
+                // If chosen day is Saturday or Sunday when set
+                // hour value for weekends, else restore defaults
+                if (day == 6 || day == 0) {
+                    picker.update({
+                        minHours: 10,
+                        maxHours: 16
+                    })
+                } else {
+                    picker.update({
+                        minHours: 9,
+                        maxHours: 18
+                    })
+                }
+            }
+        })
+    </script>
+
 @endsection
