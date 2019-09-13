@@ -10,7 +10,7 @@
 									<div class="info">
 										<p class="title">{{ $rf->display_address }}</p>
 										<p><i class="fa fa-tag"></i> ${{ $rf->rent }}</p>
-										<p>Freshmen Score : 90%</p>
+										<p>Freshness Score : 90%</p>
 										<ul>
 											<li><i class="fa fa-bed"></i> {{ $rf->bedrooms }} Bed</li>
 											<li><i class="fa fa-bath"></i> {{ $rf->baths }} Bath</li>
@@ -42,9 +42,9 @@
 										<div class="listing-thumb">
 											<img src="{{isset($rf->thumbnail) ? asset('storage/'.$rf->thumbnail) : asset('uploads/listing/thumbnails/default.jpg')}}" alt="" style="width: 400px;" class="main-img" />
 											<div class="info">
-												<p class="title">{{ $rf->display_address }}</p>
+												<p class="title">{{ str_limit($rf->display_address, $limit = 25, $end = '...') }}</p>
 												<p><i class="fa fa-tag"></i> ${{ $rf->rent }}</p>
-												<p>Freshmen Score : 90%</p>
+												<p>Freshness Score : 90%</p>
 												<ul>
 													<li><i class="fa fa-bed"></i> {{ $rf->bedrooms }} Bed</li>
 													<li><i class="fa fa-bath"></i> {{ $rf->baths }} Bath</li>
