@@ -255,11 +255,7 @@ class MessageService {
         $form->validate();
         if($res = $this->mRepo->create($form->toArray())) {
             $msg = [
-                'sender' => [
-                    'profile_image' => asset(!empty(mySelf()->profile_image)
-                                        ? 'storage/'.mySelf()->profile_image
-                                        : 'assets/images/agent-img.jpg')
-                ],
+                'sender'  => mySelf(),
                 'to'      => $request->to,
                 'from'    => myId(),
                 'message' => $form->message

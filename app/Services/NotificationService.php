@@ -30,9 +30,18 @@ class NotificationService extends NotificationSettingService {
      */
     public function __construct($data = null) {
         parent::__construct();
-        (is_object($data)) ?: $data = toObject($data);
-        $this->data = $data;
+        $this->setter($data);
         $this->repository = new NotificationRepo();
+    }
+
+    /**
+     * @param $data
+     *
+     * @return $this
+     */
+    public function setter($data) {
+        $this->data = (is_object($data)) ?: $data = toObject($data);
+        return $this;
     }
 
     /**
@@ -76,6 +85,24 @@ class NotificationService extends NotificationSettingService {
         $form->notification = $this->data->notification;
         $form->validate();
         return $this->repository->create($form->toArray());
+    }
+
+    /**
+     * @param $request
+     *
+     * @return mixed
+     */
+    public function markAsRead($request) {
+        return $this->repository->markAllAsRead($request->ids);
+    }
+
+    /**
+     * @param $id
+     *
+     * @return bool|mixed
+     */
+    public function delete($id) {
+        return $this->repository->remove($id);
     }
 
     /**

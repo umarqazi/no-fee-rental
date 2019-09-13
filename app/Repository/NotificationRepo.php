@@ -26,4 +26,22 @@ class NotificationRepo extends BaseRepo {
     public function get() {
         return $this->find(['to' => myId()])->with('from')->latest()->get();
     }
+
+    /**
+     * @param $ids
+     *
+     * @return mixed
+     */
+    public function markAllAsRead($ids) {
+        return $this->updateMultiRows($ids, ['is_read' => true]);
+    }
+
+    /**
+     * @param $id
+     *
+     * @return bool|mixed
+     */
+    public function remove($id) {
+        return $this->delete($id);
+    }
 }

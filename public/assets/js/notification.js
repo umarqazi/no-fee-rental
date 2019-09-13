@@ -11358,63 +11358,208 @@ window.io = __webpack_require__(/*! socket.io-client */ "./node_modules/socket.i
 
 _asyncToGenerator(
 /*#__PURE__*/
-_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-  var fetchNotifications, _fetchNotifications;
-
-  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
+  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
     while (1) {
-      switch (_context2.prev = _context2.next) {
+      switch (_context4.prev = _context4.next) {
         case 0:
-          _fetchNotifications = function _ref3() {
-            _fetchNotifications = _asyncToGenerator(
-            /*#__PURE__*/
-            _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-              var res;
-              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-                while (1) {
-                  switch (_context.prev = _context.next) {
-                    case 0:
-                      _context.next = 2;
-                      return ajaxRequest('/fetch-notifications', 'post', '', false);
-
-                    case 2:
-                      res = _context.sent;
-                      vue.$data.notifications = res.data.data;
-
-                    case 4:
-                    case "end":
-                      return _context.stop();
-                  }
-                }
-              }, _callee);
-            }));
-            return _fetchNotifications.apply(this, arguments);
-          };
-
-          fetchNotifications = function _ref2() {
-            return _fetchNotifications.apply(this, arguments);
-          };
+          $('.notifications').on('click', function () {
+            hideAlert();
+          }); // Exception handler
 
           if ((typeof io === "undefined" ? "undefined" : _typeof(io)) !== undefined) {
             window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_1__["default"]({
               broadcaster: 'socket.io',
               host: window.location.hostname + ':6001'
             });
-          }
+          } // Listener for new web notification
+
 
           window.Echo.channel("notification-channel." + Window.Laravel.user).listen('.notification', function (res) {
-            console.log(res);
-          });
-          _context2.next = 6;
-          return fetchNotifications();
+            pushNotification(res);
+          }); // Listener for incoming messages
+
+          window.Echo.channel("messaging-channel." + Window.Laravel.user).listen('.message',
+          /*#__PURE__*/
+          function () {
+            var _ref2 = _asyncToGenerator(
+            /*#__PURE__*/
+            _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(res) {
+              var url;
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+                while (1) {
+                  switch (_context.prev = _context.next) {
+                    case 0:
+                      url = window.location.href;
+                      url = url.split('/');
+
+                      if (!(url[4] !== 'load-chat')) {
+                        _context.next = 5;
+                        break;
+                      }
+
+                      _context.next = 5;
+                      return ajaxRequest('/push-notification', 'post', res, false);
+
+                    case 5:
+                    case "end":
+                      return _context.stop();
+                  }
+                }
+              }, _callee);
+            }));
+
+            return function (_x) {
+              return _ref2.apply(this, arguments);
+            };
+          }()); // Mark As Read
+
+          $('.mark-read').on('click',
+          /*#__PURE__*/
+          function () {
+            var _ref3 = _asyncToGenerator(
+            /*#__PURE__*/
+            _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(e) {
+              var ids;
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+                while (1) {
+                  switch (_context2.prev = _context2.next) {
+                    case 0:
+                      ids = [];
+                      $('.unread').each(function (index, value) {
+                        ids.push($(value).attr('data-id'));
+                      });
+                      _context2.next = 4;
+                      return ajaxRequest('/mark-all-as-read', 'post', {
+                        ids: ids
+                      }, false);
+
+                    case 4:
+                      $('body').find('.unread').addClass('notification-bg-read').removeClass('unread');
+
+                    case 5:
+                    case "end":
+                      return _context2.stop();
+                  }
+                }
+              }, _callee2);
+            }));
+
+            return function (_x2) {
+              return _ref3.apply(this, arguments);
+            };
+          }()); // Remove a notification
+
+          $('body').on('click', '.fa-times',
+          /*#__PURE__*/
+          function () {
+            var _ref4 = _asyncToGenerator(
+            /*#__PURE__*/
+            _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(e) {
+              var $selector, id;
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+                while (1) {
+                  switch (_context3.prev = _context3.next) {
+                    case 0:
+                      $selector = $(this).parents('div.notiofication-content');
+                      id = $selector.attr('data-id');
+                      _context3.next = 4;
+                      return ajaxRequest("/delete-notification/".concat(id), 'post', null, false);
+
+                    case 4:
+                      $selector.remove();
+                      isNull();
+
+                    case 6:
+                    case "end":
+                      return _context3.stop();
+                  }
+                }
+              }, _callee3, this);
+            }));
+
+            return function (_x3) {
+              return _ref4.apply(this, arguments);
+            };
+          }());
 
         case 6:
         case "end":
-          return _context2.stop();
+          return _context4.stop();
       }
     }
-  }, _callee2);
-}))();
+  }, _callee4);
+}))(); // Whether to show null message or not
+
+
+function isNull() {
+  if ($('.notiofication-content').length < 1) {
+    hideAlert();
+    $('.notification-inner-scroll').append('<p style="text-align: center;" id="null">No notification found</p>');
+  } else {
+    showAlert();
+    $('body').find('#null').remove();
+  }
+}
+/**
+ *
+ * @param data
+ */
+
+
+function pushNotification(data) {
+  var src = data.sender.profile_image !== null ? '/storage/' + data.sender.profile_image : window.location.origin + '/assets/images/default-image.jpeg';
+  $('.notification-inner-scroll').prepend("\n        <div class=\"notiofication-content ".concat(data.is_read ? 'notification-bg-read' : 'unread', "\" data-id=\"").concat(data.id, "\">\n            <img src=\"").concat(src, "\" alt=\"\">\n            <a href=\"").concat(data.path, "\">").concat(data.notification, "</a> <i class=\"fas fa-times\"></i>\n        </div>\n    "));
+  isNull();
+}
+
+function hideAlert() {
+  $('body').find('.noti-alert').removeClass('noti-alert').addClass('hide-alert');
+}
+
+function showAlert() {
+  $('body').find('.hide-alert').removeClass('hide-alert').addClass('noti-alert');
+}
+/**
+ *
+ * @returns {Promise<void>}
+ */
+
+
+window.onload =
+/*#__PURE__*/
+_asyncToGenerator(
+/*#__PURE__*/
+_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5() {
+  var res;
+  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
+    while (1) {
+      switch (_context5.prev = _context5.next) {
+        case 0:
+          _context5.next = 2;
+          return ajaxRequest('/fetch-notifications', 'post', null, false);
+
+        case 2:
+          res = _context5.sent;
+          res.data.forEach(function (collection) {
+            var obj = {
+              'id': collection.id,
+              'is_read': collection.is_read,
+              'sender': collection.from,
+              'path': collection.path,
+              'notification': collection.notification
+            };
+            pushNotification(obj);
+          });
+          isNull();
+
+        case 5:
+        case "end":
+          return _context5.stop();
+      }
+    }
+  }, _callee5);
+}));
 
 /***/ }),
 
