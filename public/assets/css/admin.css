@@ -645,6 +645,17 @@ header .agent-avtar .avtar:hover div ul {
   padding: 5px 12px;
   border-radius: 20px;
 }
+.main-wrapper .grid-view-wrapper .listing-thumb .info .status-approve {
+  position: absolute;
+  right: 70px;
+  top: 10px;
+  font-size: 11px;
+  background: #00a651;
+  color: #fff;
+  padding: 5px 12px;
+  border-radius: 20px;
+}
+
 .main-wrapper .grid-view-wrapper .listing-thumb .actions-btns {
   right: 10px;
   bottom: 10px;

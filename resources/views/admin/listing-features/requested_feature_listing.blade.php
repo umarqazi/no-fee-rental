@@ -51,7 +51,7 @@
 												</ul>
 												<p><i class="fa fa-map-marker-alt"></i> RealtyMX ID: mrgnyc_366577 · Auto Feed Mode</p>
 												<p>Posted: {{ date("m/d/y H:m A", strtotime($rf->created_at)) }}</p>
-												<a href="{{ route('admin.approveFeature', $rf->id )}}" title="Make this property featured"><span class="status" style="background: blue;">Approve</span></a>
+												<a href="{{ route('admin.approveFeature', $rf->id )}}" title="Make this property featured"><span class="status-approve" style="background: blue;">Approve</span></a>
 												<a href="{{ route('admin.removeFeatured', $rf->id )}}" title="Reject feature request"><span class="status" style="background: red;">Cancel</span></a>
 												<div class="actions-btns">
 													<a href="{{ route('admin.listingRepost', $rf->id) }}"><button type="button" class="border-btn">Repost</button></a>
