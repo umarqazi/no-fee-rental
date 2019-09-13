@@ -37,7 +37,8 @@ class MemberController extends Controller
      * @throws \Exception
      */
     public function get() {
-        return dataTable($this->service->invites()->invitedAgents);
+        $data = $this->service->invites();
+        return dataTable(!empty($data) ? $data->invitedAgent : []);
     }
 
     /**
