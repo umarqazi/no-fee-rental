@@ -70,6 +70,10 @@ class MailHandler extends Mailable {
 			$view = 'mails.request_featured';
 			break;
 
+		case 'member-invitation':
+                $view = 'mails.member_invitation';
+                break;
+
 		default:
 			// code...
 			break;

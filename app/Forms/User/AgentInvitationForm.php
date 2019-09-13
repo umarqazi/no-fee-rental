@@ -21,6 +21,11 @@ class AgentInvitationForm extends BaseForm {
 	 */
 	public $token;
 
+    /**
+     * @var string
+     */
+    public $accept;
+
 	/**
 	 * @return array
 	 */
@@ -29,6 +34,7 @@ class AgentInvitationForm extends BaseForm {
 			'invited_by' => $this->invite_by,
 			'email' => $this->email,
 			'token' => $this->token,
+            'accept' => $this->accept,
 		];
 	}
 
