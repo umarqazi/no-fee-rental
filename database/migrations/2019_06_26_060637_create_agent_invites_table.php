@@ -16,6 +16,7 @@ class CreateAgentInvitesTable extends Migration {
 			$table->unsignedInteger('invited_by');
 			$table->string('email');
 			$table->string('token', 60);
+            $table->boolean('accept')->nullable();
 			$table->timestamps();
 
 			$table->foreign('invited_by')->references('id')->on('users');
