@@ -147,13 +147,13 @@ class UserService {
         if (!$this->repo->isUniqueEmail($request->email)) {
             $this->repo = new UserRepo;
             if (!$this->repo->isUniqueEmail($request->email)) {
-                return true;
+                return 'true';
             }
 
-            return false;
+            return 'false';
         }
 
-        return false;
+        return 'false';
     }
 
     public function edit($id) {
@@ -220,25 +220,55 @@ class UserService {
     }
 
     /**
+     * @param $member
+     *
+     * @return mixed
+     */
+    private function memberMail($agent) {
+        $email = [
+            'view'    => 'member-invitation',
+            'from'    => mySelf()->email,
+            'subject' => 'Invitation By ' . mySelf()->email,
+            'link'    => route('agent.acceptInvitation', $agent->token),
+        ];
+
+        return mailService($agent->email, toObject($email));
+    }
+
+    /**
      * @param $request
      *
      * @return bool
      */
     public function sendInvite($request) {
-        $this->repo = new AgentRepo;
+        $this->repo1 = new AgentRepo;
+        $this->repo2 = new UserRepo;
         $agent = new AgentInvitationForm();
         $agent->invite_by = myId();
         $agent->email = $request->email;
         $agent->token = str_random(60);
+        if(isAdmin()) {
+            $agent->accept = NULL;
+        }
+        else {
+            $agent->accept = 0 ;
+        }
         if ($agent->fails()) {
-            if($res = $this->repo->find(['email' => $request->email])->first()) {
-                $this->repo->update($res->id, ['token' => $agent->token]);
+            if($InviteRes = $this->repo1->find(['email' => $request->email])->first()) {
+                if($UserRes = $this->repo2->find(['email' => $request->email])->first()) {
+                    $this->memberMail($agent);
+                    $this->repo1->update($InviteRes->id, ['token' => $agent->token]);
+                    return true ;
+                }
+                $this->repo1->update($InviteRes->id, ['token' => $agent->token]);
                 $this->agentMail($agent);
                 return true;
             }
+
             return $agent->validate();
         }
-        $this->repo->invite($agent->toArray());
+
+        $this->repo1->invite($agent->toArray());
         $this->agentMail($agent);
         return true;
     }
@@ -308,7 +338,9 @@ class UserService {
             mailService($user->email, toObject($data));
             DB::commit();
             return true;
-        } else if ($user) {
+        }
+
+        if ($user) {
             $this->repo = new AgentRepo();
             $invitedBy = $this->repo->inviteBy($request->token);
             if($invitedBy->user->user_type == AGENT) {
@@ -358,5 +390,21 @@ class UserService {
     public function getAgentToken($token) {
         $this->repo = new AgentRepo();
         return $this->repo->find(['token' => $token]);
+    }
+
+    /**
+     * @param $token
+     *
+     * @return mixed
+     */
+    public function addMember($request) {
+        $this->repo = new MemberRepo();
+        $this->repo1 = new UserRepo;
+        $UserRes = $this->repo1->find(['email' => $request->email])->first() ;
+        $this->repo->create([
+            'agent_id' => mySelf()->id,
+            'member_id' => $UserRes->id
+        ]);
+        return true;
     }
 }

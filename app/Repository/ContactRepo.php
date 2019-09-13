@@ -14,6 +14,9 @@ use App\Contact;
 
 class ContactRepo extends BaseRepo {
 
+    /**
+     * ContactRepo constructor.
+     */
     public function __construct() {
         parent::__construct(new Contact());
     }
@@ -21,15 +24,15 @@ class ContactRepo extends BaseRepo {
     /**
      * @return mixed
      */
-    public function inbox() {
-        return $this->model->inbox();
+    public function inboxTab() {
+        return $this->model->inboxTab();
     }
 
     /**
      * @return mixed
      */
-    public function requests() {
-        return $this->model->meetingRequests();
+    public function requestTab() {
+        return $this->model->meetingRequestTab();
     }
 
     /**
@@ -37,23 +40,25 @@ class ContactRepo extends BaseRepo {
      *
      * @return bool
      */
-    public function isNew($request) {
-        return $this->model->where(['from' => $request->from, 'listing_id' => $request->listing_id]) ? true : false;
+    public function isNewContact($request) {
+        return $this->model->where(['from' => $request->from, 'listing_id' => $request->listing_id])->first() ? false : true;
     }
 
     /**
-     * @param $id
+     * @param $contactId
      *
      * @return mixed
      */
-    public function messages($id) {
-        return $this->model->agentMessages($id);
+    public function receiverInfo($contactId) {
+        return $this->model->receiverInfo($contactId)->first()->sender;
     }
 
     /**
+     * @param $contactId
+     *
      * @return mixed
      */
-    public function sender() {
-        return $this->model->with('sender')->first();
+    public function messages($contactId) {
+        return $this->model->agentMessages($contactId);
     }
 }

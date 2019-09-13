@@ -10,7 +10,7 @@
 									<div class="info">
 										<p class="title">{{ $il->display_address }}</p>
 										<p><i class="fa fa-tag"></i> ${{ $il->rent }}</p>
-										<p>Freshmen Score : 90%</p>
+										<p>Freshness Score : 90%</p>
 										<ul>
 											<li><i class="fa fa-bed"></i> {{ $il->bedrooms }} Bed</li>
 											<li><i class="fa fa-bath"></i> {{ $il->baths }} Bath</li>
@@ -40,9 +40,9 @@
 										<div class="listing-thumb">
                                             <img src="{{isset($il->thumbnail) ? ((!empty($il->realty_id)) ? $il->thumbnail : asset('storage/'.$il->thumbnail)) : asset('uploads/listing/thumbnails/default.jpg')}}" alt="" style="height: 205px; width: 100%;" class="main-img" />
 											<div class="info">
-												<p class="title">{{ $il->display_address }}</p>
+												<p class="title">{{ str_limit($il->display_address, $limit = 25, $end = '...') }}</p>
 												<p><i class="fa fa-tag"></i> ${{ $il->rent }}</p>
-												<p>Freshmen Score : 90%</p>
+												<p>Freshness Score : 90%</p>
 												<ul>
 													<li><i class="fa fa-bed"></i> {{ $il->bedrooms }} Bed</li>
 													<li><i class="fa fa-bath"></i> {{ $il->baths }} Bath</li>

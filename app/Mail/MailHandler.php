@@ -46,9 +46,17 @@ class MailHandler extends Mailable {
 			$view = 'mails.create_user';
 			break;
 
+		case 'meeting-request':
+            $view = 'mails.meeting_request';
+            break;
+
 		case 'agent-invitation':
 			$view = 'mails.agent_invitation';
 			break;
+
+        case 'message-receive':
+            $view = 'mails.new_message_receive';
+            break;
 
 		case 'contact-us':
 			$view = 'mails.contact-us';
@@ -65,6 +73,10 @@ class MailHandler extends Mailable {
 		case 'request-featured-approved':
 			$view = 'mails.request_featured';
 			break;
+
+		case 'member-invitation':
+                $view = 'mails.member_invitation';
+                break;
 
 		default:
 			// code...

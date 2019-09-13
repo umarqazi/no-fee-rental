@@ -11,6 +11,9 @@
 |
  */
 
+use Illuminate\Http\Request;
+use function foo\func;
+
 Route::get('/', 'HomeController@index')->name('web.index');
 
 Route::get('/search', 'SearchController@advanceSearch')->name('list.search');
@@ -43,6 +46,9 @@ Route::get('/reset-password/{token}', 'RecoverPasswordController@recoverForm')->
 // Email Confirmation
 Route::get('/confirm-email/{token}', 'UserController@confirmEmail')->name('user.confirmEmail');
 
+// Email Validation
+Route::post('/verfiy-email', 'UserController@verifyEmail');
+
 // Login route for all user type
 Route::post('/login')->name('attempt.login')->middleware('authguard');
 
@@ -65,6 +71,9 @@ Route::post('/listing-detail', 'ListingController@detail');
 Route::get('/listing-detail/{id}', 'HomeController@detail')->name('listing.detail');
 
 // Notification Routes
+Route::post('/delete-notification/{id}', 'NotificationController@delete');
+Route::post('/mark-all-as-read', 'NotificationController@markAsRead');
+Route::post('/push-notification', 'NotificationController@push');
 Route::post('/fetch-notifications', 'NotificationController@get');
 Route::get('/all-notifications', 'NotificationController@all');
 
@@ -74,6 +83,10 @@ Route::get('/noti', function() {
 });
 Route::get('/rent', function() {
 	return view('rent');
+});
+
+Route::post('/test', function (Request $request) {
+    return 'false';
 });
 
 Route::get('/neigh', function() {

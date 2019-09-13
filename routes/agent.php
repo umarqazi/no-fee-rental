@@ -28,6 +28,7 @@ Route::get('/finish-listing', 'Agent\ListingController@finishCreate')->name('age
 Route::get('/update-listing', 'Agent\ListingController@finishUpdate')->name('agent.finishUpdateListing');
 Route::get('/listing/{sortBy}', 'Agent\ListingController@sortBy')->name('agent.sorting');
 Route::get('/copy-list/{id}', 'Agent\ListingController@copy')->name('agent.copyListing');
+
 // Featured Listing
 Route::get('/request-featured/{id}', 'Agent\ListingController@request')->name('agent.requestFeatured');
 
@@ -35,6 +36,7 @@ Route::get('/request-featured/{id}', 'Agent\ListingController@request')->name('a
 Route::get('/team', 'Agent\MemberController@index')->name('agent.team');
 Route::get('/all-invites', 'Agent\MemberController@get')->name('agent.getInvites');
 Route::post('/invite-agent', 'Agent\MemberController@invite')->name('agent.inviteMember');
+Route::get('/accept-invitation/{token}', 'Agent\MemberController@acceptInvitation')->name('agent.acceptInvitation');
 
 // Messaging Routes
 Route::get('/messages-view', 'Agent\MessageController@index')->name('agent.messageIndex');

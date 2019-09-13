@@ -19,5 +19,4 @@ class MessageRepo extends BaseRepo {
     public function __construct() {
         parent::__construct(new Message());
     }
-
 }
