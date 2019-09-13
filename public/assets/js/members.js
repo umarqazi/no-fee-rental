@@ -1,7 +1,5 @@
 $(() => {
 
-    fn.dataTable.ext.errMode = 'throw';
-
     $('#agent_invites_table').DataTable({
         "ajax": {
             "url": "/agent/all-invites"

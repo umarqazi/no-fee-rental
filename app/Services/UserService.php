@@ -308,7 +308,9 @@ class UserService {
             mailService($user->email, toObject($data));
             DB::commit();
             return true;
-        } else if ($user) {
+        }
+
+        if ($user) {
             $this->repo = new AgentRepo();
             $invitedBy = $this->repo->inviteBy($request->token);
             if($invitedBy->user->user_type == AGENT) {
