@@ -172,17 +172,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <label class="label">Year Built</label>
-                                <div class="slider-wrapper">
-                                    <div class="search-input-wrap">
-                                    {!! Form::number('priceRange[min_price_3]', null, ['id' => 'min_price_3', 'class' => 'price-range-field input-style', 'oninput' => 'validity.valid||(value=0);']) !!} -
-                                    {!! Form::number('priceRange[max_price_3]', null, ['min' => 0, 'max' => 10000, 'id' => 'max_price_3', 'class' => 'price-range-field input-style', 'oninput' => 'validity.valid||(value=10000);']) !!}
-                                    </div>
-                                    <div id="slider-range-3" class="price-filter-range" name="rangeInput"></div>
 
-                                </div>
-                            </div>
                         </div>
                         {{--Keywords--}}
                         <div class="col-md-6">
