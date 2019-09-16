@@ -1,8 +1,7 @@
 @extends('layouts.app')
-
-@section('title', 'No Fee Rental')
-
+@section('title', 'No Fee Rental | SignUp')
 @section('content')
+
 <div class="container" style="padding: 110px;">
             <div class="logo-info-wrapper">
                 <h3>Create Account</h3>
@@ -12,7 +11,7 @@
                     <!-- Signup -->
                 </div>
                 {!! Form::open(['url' => route('agent.signup'), 'method' => 'post']) !!}
-                {!! Form::hidden('user_type', 2) !!}
+                {!! Form::hidden('user_type', AGENT) !!}
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
