@@ -14,7 +14,8 @@
 <html <?php language_attributes(); ?>>
 <head>
   <meta charset="<?php bloginfo( 'charset' ); ?>">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"">
+  <meta name="viewport" content="width=device-width">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="profile" href="https://gmpg.org/xfn/11">
 
   <?php wp_head(); ?>
@@ -126,12 +127,12 @@
       ?>
 
       <div class="header-bg inner-pages-banner" style="background: url(<?php echo $featured_image; ?>) no-repeat center center;">
-        <div class="banner-wrapper">
+        <!-- <div class="banner-wrapper">
           <h1 class="mb-1"><?php echo $title; ?></h1>
           <?php if($sub_title){ ?>
             <p><?php echo $sub_title; ?></p>
           <?php } ?>
-        </div>
+        </div> -->
       </div>
 
     <?php } ?>
