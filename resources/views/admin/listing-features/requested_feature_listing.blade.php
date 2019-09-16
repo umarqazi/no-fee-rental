@@ -10,7 +10,7 @@
 									<div class="info">
 										<p class="title">{{ $rf->display_address }}</p>
 										<p><i class="fa fa-tag"></i> ${{ $rf->rent }}</p>
-										<p>Freshmen Score : 90%</p>
+										<p>Freshness Score : 90%</p>
 										<ul>
 											<li><i class="fa fa-bed"></i> {{ $rf->bedrooms }} Bed</li>
 											<li><i class="fa fa-bath"></i> {{ $rf->baths }} Bath</li>
@@ -42,16 +42,16 @@
 										<div class="listing-thumb">
 											<img src="{{isset($rf->thumbnail) ? asset('storage/'.$rf->thumbnail) : asset('uploads/listing/thumbnails/default.jpg')}}" alt="" style="width: 400px;" class="main-img" />
 											<div class="info">
-												<p class="title">{{ $rf->display_address }}</p>
+												<p class="title">{{ str_limit($rf->display_address, $limit = 25, $end = '...') }}</p>
 												<p><i class="fa fa-tag"></i> ${{ $rf->rent }}</p>
-												<p>Freshmen Score : 90%</p>
+												<p>Freshness Score : 90%</p>
 												<ul>
 													<li><i class="fa fa-bed"></i> {{ $rf->bedrooms }} Bed</li>
 													<li><i class="fa fa-bath"></i> {{ $rf->baths }} Bath</li>
 												</ul>
 												<p><i class="fa fa-map-marker-alt"></i> RealtyMX ID: mrgnyc_366577 · Auto Feed Mode</p>
 												<p>Posted: {{ date("m/d/y H:m A", strtotime($rf->created_at)) }}</p>
-												<a href="{{ route('admin.approveFeature', $rf->id )}}" title="Make this property featured"><span class="status" style="background: blue;">Approve</span></a>
+												<a href="{{ route('admin.approveFeature', $rf->id )}}" title="Make this property featured"><span class="status-approve" style="background: blue;">Approve</span></a>
 												<a href="{{ route('admin.removeFeatured', $rf->id )}}" title="Reject feature request"><span class="status" style="background: red;">Cancel</span></a>
 												<div class="actions-btns">
 													<a href="{{ route('admin.listingRepost', $rf->id) }}"><button type="button" class="border-btn">Repost</button></a>

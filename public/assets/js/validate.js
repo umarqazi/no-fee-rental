@@ -1,17 +1,13 @@
 
 
 $(() => {
-
+    const TOKEN = $('meta[name=csrf-token]').attr('content');
     $.validator.addMethod("greaterThan", function(a, b, c) {
         return a.length > c;
     });
 
     $.validator.addMethod("validateSelect", function(val, ele, arg) {
             return arg !== val;
-    });
-
-    $.validator.addMethod("confirmed", function(val, ele, arg) {
-        console.log(val, parseInt($(arg).val()));
     });
 
     $.validator.addMethod("validateExtension", function(value, ele) {
@@ -173,6 +169,13 @@ $(() => {
             email: {
                 required: true,
                 email: true,
+                remote: {
+                    headers: {
+                        'X-CSRF-TOKEN': TOKEN
+                    },
+                    url: "/verfiy-email",
+                    type: "post",
+                }
             },
             password: {
                 required: true,
@@ -198,6 +201,7 @@ $(() => {
                 required: "Last name is required."
             },
             email: {
+                remote: "Email already taken",
                 required: "Email is required.",
                 email: "Please enter valid email"
             },
@@ -225,6 +229,13 @@ $(() => {
         email: {
           required: true,
           email: true,
+          remote: {
+              headers: {
+                'X-CSRF-TOKEN': TOKEN
+              },
+              url: "/verfiy-email",
+              type: "post",
+          }
         },
       },
       messages: {
@@ -238,6 +249,7 @@ $(() => {
                 required: "Last name is required."
             },
             email: {
+                remote: "Email already taken",
                 required: "Email is required.",
                 email: "Please enter valid email"
             },
@@ -252,15 +264,73 @@ $(() => {
       rules: {
         email: {
           required: true,
-          email: true
+          email: true,
+          remote: {
+            headers: {
+                'X-CSRF-TOKEN': TOKEN
+            },
+            url: "/verfiy-email",
+            type: "post",
+          }
         }
       },
 
       messages: {
         email: {
+          remote: "Email already taken",
           required: "Email is required.",
           email: "Enter a valid Email.",
         }
       }
+    });
+
+    // Forgot Password
+    $('#forgot-password').validate({
+        rules: {
+            email: {
+                required: true,
+                email: true
+            }
+        },
+
+        messages: {
+            email : {
+                required: 'Email should be required.',
+                email: "Invalid email enter"
+            }
+        }
+    });
+
+    // Reset Password
+    $('#reset-password').validate({
+        rules: {
+            email: {
+                required: true,
+                email: true
+            },
+            password: {
+                required: true,
+                greaterThan: 8
+            },
+            password_confirmation: {
+                required: true,
+                equalTo: '#password',
+            }
+        },
+
+        messages: {
+            email : {
+                required: 'Email should be required.',
+                email: "Invalid email enter"
+            },
+            password: {
+                required: "Password is required.",
+                greaterThan: "Password should be greater than 8 characters."
+            },
+            password_confirmation: {
+                required: "Confirm password is required",
+                equalTo: "Password not matched."
+            },
+        }
     });
 });

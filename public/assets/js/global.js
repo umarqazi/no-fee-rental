@@ -103,7 +103,6 @@ function populateErrors(form, errors) {
 $(() => {
 
 	$('body').on('submit', '.ajax', async function(e) {
-	    if($('#license-error').length > 0) return;
 		e.preventDefault();
 		let form    = $(this);
 		let id      = $(this).attr('id');
@@ -118,10 +117,10 @@ $(() => {
 			return;
 		}
 
-		let res = await ajaxRequest(url, type, data, loading, form, content);
+		let res = await ajaxRequest(url, type, data, (loading !== 'false'), form, content);
 
 		if(reset === 'true'){
-            $(form).reset();
+            $(form).trigger("reset");
         }
 
 		if(res.status){
@@ -148,6 +147,10 @@ function confirm(msg) {
 	}).then(function(isConfirm) {
 		return !!(isConfirm);
 	});
+}
+
+function reset(form) {
+    $(form)
 }
 
 /**
@@ -191,4 +194,18 @@ async function updateRecord(form_id, route) {
     let res = await ajaxRequest(route, 'post');
     populateFields(form_id, res.data);
     return res;
+}
+
+/**
+ *
+ * @param file
+ * @param target
+ * @returns {Promise<void>}
+ */
+async function livePreview(file, target) {
+    let reader = new FileReader();
+    reader.onload = function(e) {
+        $(target).attr('src', e.target.result);
+    };
+    reader.readAsDataURL(file);
 }

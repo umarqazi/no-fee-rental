@@ -33,13 +33,11 @@
                 <div class="newsletter">
                     <div class="title">subscribe news letter</div>
                     <p>Enter your email address & get daily newsletter</p>
-                    <form method="post" action="/newsletter-subscribe" class="newsletter-form" id="newsletter-form">
-                        @csrf
-                        <img src="{{asset('assets/images/ajax-loader.gif')}}" class="ajax-loader" />
-                        <input type="email" class="fld" placeholder="Email Address" name="email" />
-                        <label id="error" class="error email" for="email"></label>
-                        <button type="submit" class="btn-default" id="subscribe">Subscribe</button>
-                    </form>
+                    {!! Form::open(['url' => route('newsLetter-subscription'), 'id' => 'newsletter-form', 'class' => 'newsletter-form ajax', 'reset' => 'true', 'method' => 'post']) !!}
+                    {!! Form::text('email', null, ['class' => 'fld', 'placeholder' => 'Email Address']) !!}
+                    <label id="error" class="error email" for="email"></label>
+                    {!! Form::submit('Subscribe', ['class' => 'btn-default']) !!}
+                    {!! Form::close() !!}
                 </div>
             </li>
         </ul>

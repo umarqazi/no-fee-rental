@@ -51,6 +51,11 @@
                         </div>
                         <div class="col-sm-12">
                             <div class="form-group">
+                                {!! Form::text('license_number', null, ['class'=>'input-style', 'placeholder'=>'License Number'])!!}
+                                <p id="license-verify"></p></div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
                                 {!! Form::password('password', ['class'=>'input-style', 'placeholder'=>'Password']) !!}
                                 @if ($errors->has('password'))
                                     <span class="invalid-feedback" role="alert">

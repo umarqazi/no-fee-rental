@@ -49,7 +49,7 @@ class UserController extends Controller {
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
 	public function changePassword($token) {
-		return view('change-password', compact('token'));
+		return view('change_password', compact('token'));
 	}
 
 	/**
@@ -74,9 +74,8 @@ class UserController extends Controller {
      * @return \Illuminate\Http\RedirectResponse
      */
 	public function invitedAgentSignup(Request $request) {
-		return $this->service->invitedAgentSignup($request)
-		? success('Account has been created')
-		: error('Something went wrong');
+		$res = $this->service->invitedAgentSignup($request);
+		return sendResponse($request, $res, 'Account has been created', '/');
 	}
 
     /**
@@ -115,4 +114,13 @@ class UserController extends Controller {
 
 		return error('Something went wrong');
 	}
+
+    /**
+     * @param Request $request
+     *
+     * @return bool
+     */
+	public function verifyEmail(Request $request) {
+	    return $this->service->isUniqueEmail($request);
+    }
 }

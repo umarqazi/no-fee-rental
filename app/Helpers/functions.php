@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Storage;
  * @return string
  */
 function uploadImage($image, $path, $unlinkOld = false, $old_image = null) {
-	$name = time() . '.' . $image->getClientOriginalExtension();
+	$name = str_random(5) . '.' . $image->getClientOriginalExtension();
 	if (!File::isDirectory($path)) {
 		File::makeDirectory($path, 0777, true, true);
 	}
@@ -32,8 +32,7 @@ function uploadImage($image, $path, $unlinkOld = false, $old_image = null) {
 function uploadMultiImages($files, $path) {
 	$paths = [];
 	foreach ($files as $file) {
-		$name = uploadImage($file, $path);
-		array_push($paths, $name);
+		array_push($paths, uploadImage($file, $path));
 	}
 	return $paths;
 }
@@ -86,7 +85,7 @@ function isAgent() {
  * @return int|null
  */
 function myId() {
-	return mySelf()->id;
+	return (authenticated()) ? mySelf()->id : null;
 }
 
 /**
@@ -108,6 +107,26 @@ function dateReadable($date) {
 	}
 
 	return \Carbon\Carbon::createFromTimestamp(strtotime($date))->diffForHumans();
+}
+
+/**
+ * @param $date
+ * @param $format
+ *
+ * @return false|string
+ */
+function formattedDate($format, $date) {
+    return date($format, strtotime($date));
+}
+
+/**
+ * @param $dateAlpha
+ * @param $dateBeta
+ *
+ * @return bool
+ */
+function compareDates($dateAlpha, $dateBeta) {
+    return formattedDate('y/m/d', $dateAlpha) >= formattedDate('y/m/d', $dateBeta);
 }
 
 /**
@@ -169,18 +188,20 @@ function success($msg, $path = null) {
  * @param null $data
  * @param null $msg
  * @param null $path
+ * @param null $errorMsg
+ * @param int $code
  *
  * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
  */
-function sendResponse($request, $data = null, $msg = null, $path = null) {
+function sendResponse($request, $data = null, $msg = null, $path = null, $errorMsg = null, $code = 200) {
     if($request->ajax())
         return ($data)
-            ? json($msg, $data)
-            : json('Something went wrong', null, false, 500);
+            ? json($msg, $data, true, $code)
+            : json($errorMsg ?? 'Something went wrong', null, false, 500);
     else
         return ($data)
             ? success($msg, $path)
-            : error('Something went wrong');
+            : error($errorMsg ?? 'Something went wrong');
 }
 
 /**

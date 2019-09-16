@@ -3,22 +3,31 @@
   namespace App\Http\Controllers;
 
   use Illuminate\Http\Request;
-  use App\Forms\NewsletterForm;
   use App\Services\NewsletterService;
 
-  class NewsletterController extends Controller
-  {
-    protected $newsletter_service;
+  class NewsletterController extends Controller {
 
-    public function __construct(NewsletterService $service)
-    {
-      $this->newsletter_service = $service;
-    }
+      /**
+       * @var NewsletterService
+       */
+      private $service;
 
-    public function store(Request $request)
-    {
-      return ($this->newsletter_service->subscribeUser(new NewsletterForm($request)))
-        ? json_encode(['message' => 'Thanks for subscribe.', 'alert_type' => 'success'])
-        : json_encode(['message' => 'Sorry! You have already subscribed.', 'alert_type' => 'error']);
-    }
+      /**
+       * NewsletterController constructor.
+       *
+       * @param NewsletterService $service
+       */
+      public function __construct(NewsletterService $service) {
+          $this->service = $service;
+      }
+
+      /**
+       * @param Request $request
+       *
+       * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
+       */
+      public function subscribe(Request $request) {
+          $res = $this->service->subscribe($request);
+          return sendResponse($request, $res, 'Successfully subscribed to newsletter.', null, 'Already Subscribed');
+      }
   }

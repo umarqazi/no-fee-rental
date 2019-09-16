@@ -30,6 +30,9 @@
                 <div class="tab-content">
                     {{--Inbox--}}
                     <div class="tab-pane active" id="tab-1">
+                        @if( $data->totalInbox < 1)
+                            No Record Found
+                        @endif
                         @foreach ($data->inbox as $inbox)
                         <div class="message-row row">
                             <div class="col-sm-10">
@@ -51,7 +54,7 @@
                                     <div class="price"><i class="fa fa-tag"></i> ${{ $inbox->listing->rent }}</div>
                                 </div>
                             </div>
-                            <div class="date-text"> {{ date('D, d/m/y', strtotime($inbox->appointment_at)) }} 10:14 am</div>
+                            <div class="date-text"> {{ formattedDate('D, d/m/y', $inbox->appointment_at) }} 10:14 am</div>
                         </div>
                         @endforeach
                     </div>
@@ -78,6 +81,9 @@
 
                     {{--Request Meeting--}}
                     <div class="tab-pane fade" id="tab-3">
+                        @if( $data->totalRequests < 1)
+                            No Record Found
+                        @endif
                         @foreach ($data->meeting_requests as $meeting)
                         <div class="message-row">
                             <h3>{{ $meeting->sender->first_name }}</h3>
@@ -95,7 +101,7 @@
                                     <div class="price"><i class="fa fa-tag"></i> ${{ $meeting->listing->rent }}</div>
                                 </div>
                             </div>
-                            <div class="date-text">{{ date('D, d/m/y', strtotime($meeting->appointment_at)) }} 10:14 am</div>
+                            <div class="date-text">{{ $meeting->appointment_at }}</div>
                             <div class="actions-btns">
                                 <button class="border-btn" meeting_id="{{ $meeting->id }}" id="reply">Reply</button>
                                 <button class="border-btn">Deny</button>

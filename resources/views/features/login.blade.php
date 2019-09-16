@@ -46,17 +46,19 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="form-group">
-                        <div class="col-md-12 align-left">
-                            <div class="form-check">
-                                {!! Form::checkbox('remember', null, old('remember') ? 'checked' : '', ['class' => 'form-check-input']) !!}
-                                <label class="form-check-label" for="remember">
-                                    {{ __('Remember Me') }}
-                                </label>
-                            </div>
+                <div class="row form-group">
+                    <div class="form-check col-lg-6 ">
+                        <div style="margin-left: 15px;">
+                            {!! Form::checkbox('remember', null, old('remember') ? 'checked' : '', ['class' => 'form-check-input']) !!}
+                            <label class="form-check-label" for="remember">
+                                {{ __('Remember Me') }}
+                            </label>
                         </div>
                     </div>
+                            <div class="col-lg-6 text-right">
+                                <a href="{{ route('forgot.password') }}">Forgot Password.</a>
+                            </div>
+
                     <div class="col-md-12">
                         @if (Route::has('password.request'))
                             <a class="forgot-password" href="{{ route('password.request') }}">

@@ -84,4 +84,13 @@ class ListingRepo extends BaseRepo {
 	public function sendRequest($id) {
 		return $this->update($id, ['is_featured' => REQUESTFEATURED]);
 	}
+
+    /**
+     * @param $id
+     *
+     * @return mixed
+     */
+	public function agent($id) {
+	    return $this->find(['id' => $id])->withagent()->first();
+    }
 }

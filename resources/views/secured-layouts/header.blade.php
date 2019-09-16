@@ -1,6 +1,6 @@
 <header>
-    <a href="{{ url('/') }}"><img src="{!! asset('assets/images/logo.png') !!}" alt="" class="logo" /></a>
-    <div class="agent-avtar" id="notification-area">
+    <a href="{{ url('/') }}"><img src="{!! asset('assets/images/logo1.png') !!}" alt="" class="logo" /></a>
+    <div class="agent-avtar">
         <div class="notifications">
             <div>
                 <a href="#" class="notiii"><img src="{!! asset('assets/images/bell-icon.png') !!}" alt="" /></a>
@@ -11,18 +11,10 @@
             <div class="notification-container">
                 <h3>Notifications
                   <i class="material-icons dp48 right">settings</i>
-                  <a href="#" class="mark-read"> Mark as read</a>
+                  <a href="javascript:void(0);" class="mark-read"> Mark as read</a>
                 </h3>
                 <div class="notification-inner-scroll" id="style-2">
-                    <div class="notiofication-content" v-for="notification in notifications" :class="{ 'notification-bg-read': notification.is_read }">
-                        <span v-if="notification.from.profile_image !== null">
-                            <img :src="'/storage/'+notification.from.profile_image" alt="null">
-                        </span>
-                        <span v-else>
-                            <img src="{{ asset('assets/images/default-image.jpeg') }}" alt="">
-                        </span>
-                        <a :href="notification.path">@{{notification.notification}}</a> <i class="fas fa-times"></i>
-                    </div>
+
                 </div>
                 <div class="clearfix"> </div>
                 <div class="notification-footer">

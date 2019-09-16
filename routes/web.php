@@ -11,8 +11,8 @@
 |
  */
 
-use App\Events\TriggerNotification;
-use Illuminate\Support\Facades\Redis;
+use Illuminate\Http\Request;
+use function foo\func;
 
 Route::get('/', 'HomeController@index')->name('web.index');
 
@@ -27,7 +27,7 @@ Route::get('/contact-us', 'ContactUsController@showForm')->name('contact-us');
 Route::post('/contact-us', 'ContactUsController@contactUs')->name('contact-us');
 
 // subscription through mail chimp
-Route::post('/newsletter-subscribe', 'HomeController@newsLetterSubscribe')->name('newsLetter-subscription');
+Route::post('/newsletter-subscribe', 'NewsletterController@subscribe')->name('newsLetter-subscription');
 
 // Wordpress Pages
 Route::get('/press', 'ContactUsController@showPress')->name('press');
@@ -37,8 +37,17 @@ Route::post('newsletter', 'NewsletterController@store');
 Route::get('/change-password/{token}', 'UserController@changePassword')->name('user.change_password');
 Route::post('/change-password/{token}', 'UserController@updatePassword')->name('change-password');
 
+// Forgot Password
+Route::get('/forgot-password', 'RecoverPasswordController@resetForm')->name('forgot.password');
+Route::post('/reset-password', 'RecoverPasswordController@sendRequest')->name('password.email');
+Route::post('/update-password', 'RecoverPasswordController@recover')->name('password.update');
+Route::get('/reset-password/{token}', 'RecoverPasswordController@recoverForm')->name('recover.password');
+
 // Email Confirmation
 Route::get('/confirm-email/{token}', 'UserController@confirmEmail')->name('user.confirmEmail');
+
+// Email Validation
+Route::post('/verfiy-email', 'UserController@verifyEmail');
 
 // Login route for all user type
 Route::post('/login')->name('attempt.login')->middleware('authguard');
@@ -62,6 +71,9 @@ Route::post('/listing-detail', 'ListingController@detail');
 Route::get('/listing-detail/{id}', 'HomeController@detail')->name('listing.detail');
 
 // Notification Routes
+Route::post('/delete-notification/{id}', 'NotificationController@delete');
+Route::post('/mark-all-as-read', 'NotificationController@markAsRead');
+Route::post('/push-notification', 'NotificationController@push');
 Route::post('/fetch-notifications', 'NotificationController@get');
 Route::get('/all-notifications', 'NotificationController@all');
 
@@ -73,6 +85,11 @@ Route::get('/rent', function() {
 	return view('rent');
 });
 
+Route::post('/test', function (Request $request) {
+    return 'false';
+});
+
 Route::get('/neigh', function() {
 	return view('neighborhood');
 });
+Route::get('/reset', 'RecoverPasswordController@sendRequest');

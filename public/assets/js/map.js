@@ -147,7 +147,7 @@ $(() => {
 // Map Initialize
 window.onload = function() {
     // Search listing
-    let coords = $('body').find('input[name=map_location]');
+    let coords = $('body').find('input[type=hidden]:last');
     if(coords.length > 1 && window.location.pathname === '/search') {
         let coordsCollection = [];
         coords.each((index, value) => {
@@ -160,12 +160,12 @@ window.onload = function() {
     // Update listing
     coords = coords.val();
     if(coords !== null && coords !== '') {
+        let location = $('body').find('#controls').val();
         coords = JSON.parse(coords);
         setMap(coords);
-        latLngToAddr(coords).then(address => {
-            marker = addMarker(coords, address[0].formatted_address);
-            showInfoWindow(address[0].formatted_address, marker);
-        });
+        marker = addMarker(coords, location);
+        showInfoWindow(location, marker);
+        return;
     }
 
     // Add listing

@@ -100,7 +100,7 @@
                             <div class="info">
                                 <p class="title">{{ $result->street_address }}</p>
                                 <p><i class="fa fa-tag"></i> ${{ $result->rent }}</p>
-                                <p>Freshmen Score : 90%</p>
+                                <p>Freshness Score : 90%</p>
                                 <ul>
                                     <li><i class="fa fa-bed"></i> {{ $result->bedrooms }} Bed</li>
                                     <li><i class="fa fa-bath"></i> {{ $result->baths }} Bath</li>
