@@ -7,29 +7,14 @@
 <div class="header-bg">
     <div class="banner-wrapper wow fadeInUp " data-wow-delay="0.2s">
         <h1>NYC’s Premier Source For NO FEE Rentals</h1>
+        {!! Form::open(['url' => route('list.search'), 'method' => 'get', 'id' => 'search']) !!}
         <div class="search-property">
             <i class="fas fa-search"></i>
-{{--            {!! Form::open('') !!}--}}
-            <input type="text" class="search-fld" name="neighborhood" placeholder="Enter Neighborhood" />
-            <button class="search-btn">Search</button>
+            {!! Form::text('neighborhoods', null, ['id' => 'neigh', 'placeholder' => 'Enter Neighborhood', 'class' => 'search-fld']) !!}
+            {!! Form::button('Search', ['class' => 'search-btn', 'type' => 'submit']) !!}
         </div>
+        {!! Form::close() !!}
         <a href="" class="advance-search" data-toggle="modal" data-target="#advance-search">+Advanced Search</a>
     </div>
 </div>
 {!! HTML::script('assets/js/vendor/autocomplete.js') !!}
-<script>
-    let neighbours = @php echo json_encode(config('neighborhoods')); @endphp;
-    let $neighbour = $('input[name=neighborhood]');
-    $neighbour.autocomplete({
-        source: neighbours,
-        select: function (event, ui) {
-            $(this).val(ui.item ? ui.item : " ");
-        },
-
-        change: function (event, ui) {
-            if (!ui.item) {
-                this.value = '';
-            }
-        }
-    });
-</script>

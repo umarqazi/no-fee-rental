@@ -16,6 +16,7 @@ use function foo\func;
 
 Route::get('/', 'HomeController@index')->name('web.index');
 
+// Search Listing Route
 Route::get('/search', 'SearchController@advanceSearch')->name('list.search');
 
 Route::get('/renter-guide', function () {
@@ -89,7 +90,7 @@ Route::post('/test', function (Request $request) {
     return 'false';
 });
 
-Route::get('/neigh', function() {
+Route::get('/neighborhood', function() {
 	return view('neighborhood');
 });
 Route::get('/reset', 'RecoverPasswordController@sendRequest');

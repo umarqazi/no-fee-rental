@@ -1,4 +1,6 @@
 "use strict";
+
+let $body = $('body');
 const ZOOM = 10;
 const NAVIGATOR = navigator.geolocation;
 const RADIUS = 1500;
@@ -83,7 +85,10 @@ const markerClusters = (coords) => {
     let markers = coords.map(function(location) {
         setMap();
         let mark = addMarker(location);
+        mark.set("id", 1);
+        console.log(mark.get("id"));
         google.maps.event.addListener(mark, "click", async function (e) {
+            console.log(e);
             let coords = JSON.stringify({latitude: e.latLng.lat(), longitude: e.latLng.lng()});
             let res = await ajaxRequest(`listing-detail`, 'post', {map_location: coords});
             showInfoWindow(`<a href="javascript:void(0)"><div class="location-thumbnaail"><img src="${document.location.origin}/storage/${res.data.thumbnail}"><div class="price-wrapp"><p class="price"> $${res.data.rent} </p><div class="additional-info"><p>${res.data.street_address} #2</p><ul><li><p>${res.data.bedrooms}</p>Beds</li><li><p>${res.data.baths}</p>Rooms</li></ul></div></div></div></a>`, mark);
@@ -123,7 +128,6 @@ const closeInfoWindow = async () => {
 
 // Document Ready Methods
 $(() => {
-  let $body = $('body');
   $body.on('keyup', '#controls', function() {
       autoComplete();
   });
@@ -147,35 +151,35 @@ $(() => {
 // Map Initialize
 window.onload = function() {
     // Search listing
-    let coords = $('body').find('input[type=hidden]:last');
-    if(coords.length > 1 && window.location.pathname === '/search') {
-        let coordsCollection = [];
-        coords.each((index, value) => {
-            coordsCollection.push(JSON.parse($(value).val()));
-        });
-        markerClusters(coordsCollection);
-        return;
-    }
-
-    // Update listing
-    coords = coords.val();
-    if(coords !== null && coords !== '') {
-        let location = $('body').find('#controls').val();
-        coords = JSON.parse(coords);
-        setMap(coords);
-        marker = addMarker(coords, location);
-        showInfoWindow(location, marker);
-        return;
-    }
-
-    // Add listing
-    myLocation().then(coords => {
-        setMap(coords);
-        latLngToAddr(coords).then(address => {
-            marker = addMarker(coords, address[0].formatted_address);
-            showInfoWindow(address[0].formatted_address, marker);
-        });
-    });
+    // let coords = $body.find('input[name=map_location]');
+    // if(coords.length > 0 && window.location.pathname === '/search') {
+    //     let coordsCollection = [];
+    //     coords.each((index, value) => {
+    //         coordsCollection.push(JSON.parse($(value).val()));
+    //     });
+    //     markerClusters(coordsCollection);
+    //     return;
+    // }
+    //
+    // // Update listing
+    // coords = coords.val();
+    // if(coords !== null && coords !== '') {
+    //     let location = $('body').find('#controls').val();
+    //     coords = JSON.parse(coords);
+    //     setMap(coords);
+    //     marker = addMarker(coords, location);
+    //     showInfoWindow(location, marker);
+    //     return;
+    // }
+    //
+    // // Add listing
+    // myLocation().then(coords => {
+    //     setMap(coords);
+    //     latLngToAddr(coords).then(address => {
+    //         marker = addMarker(coords, address[0].formatted_address);
+    //         showInfoWindow(address[0].formatted_address, marker);
+    //     });
+    // });
 };
 
 
