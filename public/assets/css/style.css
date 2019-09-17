@@ -302,9 +302,8 @@
 
 .neighborhood-search{
     width: 100%;
-    margin: 105px auto;
-    -webkit-box-shadow: 0 2px 11px 0 rgba(0,0,0,.12);
-    box-shadow: 0 2px 11px 0 rgba(0,0,0,.12);
+    margin: 90px auto;
+    border-top: 1px solid #eee;
     border-radius: 5px;
     position: relative;
 }

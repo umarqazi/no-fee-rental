@@ -481,9 +481,9 @@ h3 {
   vertical-align: middle;
   font-size: 0;
   margin-left: 15px;
-  -webkit-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.26);
-  -moz-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.26);
-  box-shadow: 0px 2px 5px 2px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.27);
+  -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.27);
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.27);
   border-radius: 30px;
 }
 .header-wrapper .header-container .header-right-wrapper .actions-btns .signup-btn {
@@ -783,9 +783,9 @@ h3 {
 }
 .featured-properties .property-listing .property-thumb {
   height: 230px;
-  margin: 0px 35px;
+  margin: 0px 15px;
   overflow: hidden;
-  width: calc(100% / 4 - 70px);
+  width: calc(100% / 4);
   margin-bottom: 80px;
   position: relative;
 }
@@ -814,12 +814,12 @@ h3 {
   position: absolute;
   bottom: 0;
   width: 100%;
-  padding: 60px 0px 15px 25px;
+  padding: 60px 0px 15px 10px;
 }
 .featured-properties .property-listing .property-thumb .info p {
   color: #fff;
-  font-size: 20px;
-  font-weight: 600;
+  font-size: 16px;
+  font-weight: 500;
   margin-bottom: 0;
   position: relative;
   z-index: 1;
@@ -882,8 +882,23 @@ h3 {
   -moz-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.26);
   box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.26);
 }
+.featured-properties .property-listing .info{
+    transform: translateX(-200px);
+    -webkit-transition: transform 0.2s ease 0s;
+    transition: transform 0.2s ease 0s;
+    overflow: hidden;
+    position: absolute;
+    left: 0;
+    right: 0;
+    opacity: 0;
+} 
 .featured-properties .property-listing .property-thumb:hover .check-btn {
   left: 0;
+}
+.featured-properties .property-listing .property-thumb:hover .info {
+  transform: translateX(0px);
+  transition: 0.3s ease-in-out;
+  opacity: 1;
 }
 .your-life-container {
   background: url(../images/your-life-bg.jpg) no-repeat center right -120px;
@@ -2048,6 +2063,213 @@ footer .copyright .social-icons li a:hover {
   bottom: 5px;
 }
 
+.featured-properties .property-listing .info a{
+  display: inline-block;
+}
+.featured-properties .property-listing .info p{
+  display: inline-block;
+  font-size: 13px;
+
+}
+.featured-properties .property-listing .info .info-link-text {
+  width: 75%;
+  float: left;
+}
+.featured-properties .property-listing .info a.info-link-text:hover p{
+  color: #fff !important; 
+}
+.featured-properties .property-listing .info small{
+  display: inline-block;
+  font-size: 14px;
+  color: #fff;
+  position: relative;
+  font-weight: 500;
+}
+.featured-properties .property-listing .info .info-link-text p:nth-of-type(2){
+  font-size: 11px;
+  font-weight: 600;
+}
+.featured-properties .property-listing .viewfeature-btn{
+  background-color: #fff;
+  padding: 5px 15px;
+  color: #000;
+  z-index: 999;
+  display: inline-block;
+  font-size: 13px;
+  position: relative;
+  top: 10px;
+  font-weight: 600;
+  margin-left: 5px;
+}
+.featured-properties .property-listing .property-thumb:hover .feaure-policy-text{
+  opacity: 0;
+  transition: 0.3s ease-in-out;
+}
+.featured-properties .property-listing .feaure-policy-text{
+  position: absolute;
+  bottom: 0px;
+  color: #fff;
+  font-weight: 600;
+  font-size: 16px;
+  left: 0;
+  right: 0;
+  margin-left: 15px;
+  margin-bottom: 15px;
+}
+.featured-properties .property-listing .feaure-policy-text p{
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+
+/*Appointmentmodal*/
+        
+#appointmentModal .modal-content {
+    border-radius: 15px;
+}
+
+#appointmentModal .modal-body {
+    padding: 40px 30px;
+}
+
+#appointmentModal .modal-body img {
+    width: 100%;
+    border-radius: 10px;
+    height: 125px;
+    object-fit: cover;
+}
+
+#appointmentModal .modal-body h3 {
+    font-size: 20px;
+    color: #213970;
+    margin-top: 0px;
+    margin-bottom: 10px;
+}
+
+#appointmentModal .padding-leftt-0 {
+    padding-left: 0px;
+}
+
+#appointmentModal .after-border {
+    border-top: 1px solid #B7B7B7;
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+
+#appointmentModal .modal-body strong {
+    font-weight: 700;
+    font-size: 20px;
+}
+
+#appointmentModal .modal-body span {
+    font-size: 14px;
+}
+
+#appointmentModal .modal-body .fa-home {
+    color: #E87717;
+}
+
+#appointmentModal .modal-body textarea {
+    width: 100%;
+    height: 120px;
+    padding: 10px;
+    margin: 30px 0px;
+    border-radius: 5px;
+}
+
+#appointmentModal .modal-body a.btn {
+    width: 100%;
+    height: 45px;
+    text-align: center;
+    border: 1px solid #F36F21;
+    color: #F36F21;
+    background-color: transparent;
+    text-transform: uppercase;
+    line-height: 33px;
+    font-size: 14px;
+}
+
+#appointmentModal .modal-body a.btn:hover,
+#appointmentModal .modal-body a.btn:active,
+#appointmentModal .modal-body a.btn:focus {
+    background-color: #F36F21;
+    transition: all 0.5s ease-out;
+    color: #fff;
+    box-shadow: none;
+}
+
+.datepicker {
+    z-index: 999999;
+}
+
+.timeDatepicker {
+    margin-top: 5px;
+}
+
+#appointmentModal .modal-body .fa-calendar-alt {
+    color: #F36F21;
+}
+
+#timepicker-actions-exmpl {
+    margin-top: 15px;
+    border: none;
+    border-bottom: 1px solid #B7B7B7;
+    color: #F36F21;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+#timepicker-actions-exmpl:active,
+#timepicker-actions-exmpl:focus {
+    outline: none;
+}
+
+.owl-slider{
+    display: none;
+}
+.desktop-listiing{
+    display: block;
+    display: flex;
+}
+
+.property-listing .owl-nav button.owl-prev{
+  left: 15px;
+
+}
+.property-listing .owl-prev span{
+  background-color: #223971;
+  padding: 10px;
+  color: #fff;
+  font-size: 20px;
+}
+.property-listing .owl-next span{
+  background-color: #f36f21;
+  padding: 5px;
+  color: #fff;
+  font-size: 20px;
+}
+
+
+@media (max-width: 991px) {
+    #appointmentModal .padding-leftt-0 {
+        padding-left: 15px;
+    }
+    #appointmentModal .modal-body a.btn {
+        margin-bottom: 10px;
+    }
+    #appointmentModal .modal-body img {
+        margin-bottom: 10px;
+    }
+}
+
+@media (min-width: 576px) {
+    #appointmentModal .modal-dialog {
+        max-width: 555px;
+        margin: 1.75rem auto;
+    }
+}
 /*Responsive style*/
 @media only screen and (max-width: 1599px) {
   .neighborhood-search .search-result-wrapper .search-listing .featured-properties .property-listing .property-thumb {
@@ -2093,7 +2315,7 @@ footer .copyright .social-icons li a:hover {
   .featured-properties .property-listing .property-thumb {
     margin: 0px 15px;
     overflow: hidden;
-    width: calc(100% / 4 - 30px);
+    width: calc(100% / 3 - 30px);
     margin-bottom: 30px;
   }
   footer .footer-wrapper {
@@ -2132,6 +2354,7 @@ footer .footer-wrapper > li{
 .newsletter{
   width: 300px;
   margin: 0 auto;
+  padding-top: 15px;
 }
 .collapse-menu{
   display: none;
@@ -2145,6 +2368,7 @@ footer .footer-wrapper h4{
 footer .footer-wrapper .logo-text{
   max-width: 100%;
   text-align:center;
+  margin-bottom: 15px;
 }
 }
 @media only screen and (max-width: 991px) {
@@ -2153,7 +2377,7 @@ footer .footer-wrapper .logo-text{
     padding: 0px 15px;
   }
   .featured-properties .property-listing .property-thumb {
-    width: calc(100% / 3 - 30px);
+    width: calc(100% / 2 - 30px);
   }
   .header-wrapper .header-container ul.menu-links,
   .header-wrapper .header-container .header-right-wrapper .login-user,
@@ -2165,7 +2389,7 @@ footer .footer-wrapper .logo-text{
     right: 0;
   }
   .header-bg {
-    height: 768px;
+    height: 520px;
   }
   .header-wrapper {
     background: rgba(255, 255, 255, 0.71);
@@ -2286,13 +2510,13 @@ footer .footer-wrapper .logo-text{
     text-align: center;
   }
   .header-bg .banner-wrapper h1 {
-    font-size: 36px;
+    font-size: 20px;
   }
   .need-help-container .wrapper h2 {
-    font-size: 28px;
+    font-size: 22px;
   }
   .need-help-container .wrapper p {
-    font-size: 16px;
+    font-size: 14px;
   }
   .about-us-container {
     background: none;
@@ -2312,15 +2536,15 @@ footer .footer-wrapper .logo-text{
     font-size: 24px;
   }
   h3 {
-    font-size: 22px;
+    font-size: 18px;
   }
   p {
-    font-size: 16px;
+    font-size: 14px;
   }
   .btn-default {
     padding: 0px 30px;
-    font-size: 16px;
-    line-height: 45px;
+    font-size: 13px;
+    line-height: 40px;
   }
   .your-life-container {
     background: none;
@@ -2341,7 +2565,8 @@ footer .footer-wrapper .logo-text{
     width: calc(100% - 260px);
   }
   .header-bg .search-property .search-btn {
-    height: 60px;
+    height: 45px;
+    font-size: 14px;
   }
   .neighborhood-search .filters-wrapper {
     display: block;
@@ -2395,7 +2620,19 @@ footer .footer-wrapper .logo-text{
   }
   .header-bg .search-property .search-fld{
     padding: 0px 45px;
+    font-size: 14px;
   }
+  .header-bg .banner-wrapper .advance-search{
+    font-size: 14px;
+  }
+  .need-help-container .wrapper .btn-default {
+    font-size: 13px;
+    line-height: 40px;
+    padding: 0px 22px;
+}
+.featured-properties{
+  padding: 40px 0px;
+}
 }
 @media only screen and (max-width: 767px) {
   .header-wrapper .header-container .logo {
@@ -2551,6 +2788,24 @@ footer .footer-wrapper .logo-text{
   }
   .let-us-hlep-form .modal-header .modal-title {
     font-size: 18px;
+  }
+  .featured-properties .property-listing .info .info-link-text p:nth-of-type(2){
+    display: block;
+  }
+  .owl-slider{
+    display: block;
+  }
+  .desktop-listiing{
+    display: none;
+  }
+  
+}
+@media only screen and (min-width: 577px) and (max-width: 767px){
+  .featured-properties .property-listing .info .info-link-text{
+    width: 70%;
+  }
+  .property-listing .owl-slider .property-thumb{
+    width: 92% !important;
   }
 }
 @media only screen and (max-width: 576px) {

@@ -67,7 +67,7 @@
                     <div class="dropDown">
                     </div>
                 </div>
-                @if(Auth::guard(whoAmI())->check())
+                @if(!Auth::guard(whoAmI())->check())
                     <div class="login-user">
                         <a href="#">
                             <img

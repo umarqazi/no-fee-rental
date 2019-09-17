@@ -122,7 +122,7 @@ class Listing extends Model {
 	 * @return mixed
 	 */
 	public function scopeFeatured($query) {
-		return $query->whereis_featured(APPROVEFEATURED)->latest('updated_at');
+		return $query->whereis_featured(APPROVEFEATURED);
 	}
 
 	/**
