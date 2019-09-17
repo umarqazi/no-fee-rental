@@ -1213,12 +1213,14 @@ footer .copyright .social-icons li a:hover {
   list-style: none;
 }
 .plan-listing .clm ul li {
-  background: url(../images/check-icon.png) no-repeat left top 6px;
-  font-weight: 600;
-  color: #000;
-  display: block;
-  list-style: none;
-  padding: 10px 0px 10px 35px;
+  background: url(../images/check-icon.png) no-repeat left top 10px;
+    font-weight: 600;
+    color: #000;
+    display: block;
+    list-style: none;
+    padding: 8px 0px 8px 30px;
+    font-size: 16px;
+    background-size: 20px;
 }
 .plan-listing .clm ul li:before {
   display: none;
@@ -2636,3 +2638,27 @@ footer .copyright .social-icons li a:hover {
 
 
 
+.kc_text_block ul li{
+  line-height: normal;
+  margin-bottom: 5px;
+  position: relative;
+  padding-left: 15px;
+}
+.kc_text_block ul li:before {
+    position: absolute;
+    left: 0;
+    top: 8px;
+    content: "";
+    width: 8px;
+    height: 8px;
+    background: #223971;
+    border-radius: 50%;
+}
+footer {
+  background: #223971;
+  padding: 80px 0px 20px;
+  position: relative;
+  float: left;
+  width: 100%;
+  clear: both;
+}

@@ -126,14 +126,14 @@
     if(!is_singular('post')){
       ?>
 
-      <div class="header-bg inner-pages-banner" style="background: url(<?php echo $featured_image; ?>) no-repeat center center;">
+      <!-- <div class="header-bg inner-pages-banner" style="background: url(<?php echo $featured_image; ?>) no-repeat center center;"> -->
         <!-- <div class="banner-wrapper">
           <h1 class="mb-1"><?php echo $title; ?></h1>
           <?php if($sub_title){ ?>
             <p><?php echo $sub_title; ?></p>
           <?php } ?>
         </div> -->
-      </div>
+      <!-- </div> -->
 
     <?php } ?>
 
