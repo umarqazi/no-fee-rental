@@ -17,8 +17,8 @@
     </div>
     <div class="mobile-nav">
         <ul>
-            <li><a href="#">Rent</a></li>
-            <li><a href="#">Neighborhood </a></li>
+            <li><a href="/">Rent</a></li>
+            <li><a href="/neighborhood">Neighborhood </a></li>
             <li>
                 <a class="" data-toggle="collapse" href="#menuToggle1" role="button" aria-expanded="false" aria-controls="menuToggle1">
                     Renters <i class="fa fa-angle-down"></i>
@@ -57,17 +57,14 @@
             <a href="{!! url('/') !!}"> <img src="{{ asset('assets/images/logo.png') }}" class="logo" /></a>
             <ul class="menu-links">
                 <li>
-                    <a href="#">Rent </a>
-                    <a href="#">Neighborhood </a>
+                    <a href="/">Rent </a>
+                    <a href="/neighborhood">Neighborhood </a>
                 </li>
             </ul>
             <div class="header-right-wrapper">
                 <div class="recent-search-dropdown">
                     <a href="#">Recent Searches <i class="fa fa-angle-down"></i></a>
                     <div class="dropDown">
-                        <a href="#"><img src="{!! asset('assets/images/gallery-img.jpg') !!}" alt="" /> <span>NYC - Manhattan NYC - Manhattan</span></a>
-                        <a href="#"><img src="{!! asset('assets/images/gallery-img.jpg') !!}" alt="" /> <span>NYC - Manhattan</span></a>
-                        <a href="#"><img src="{!! asset('assets/images/gallery-img.jpg') !!}" alt="" /> <span>NYC - Manhattan </span></a>
                     </div>
                 </div>
                 @if(Auth::guard(whoAmI())->check())
