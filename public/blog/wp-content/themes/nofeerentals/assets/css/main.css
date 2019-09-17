@@ -268,6 +268,7 @@ h3 {
   outline: none !important;
   box-shadow: none;
 }
+
 .header-bg {
   height: 100vh;
   background: url(../images/banner-bg.jpg) no-repeat top -100px center;
