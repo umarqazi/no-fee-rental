@@ -27,7 +27,7 @@
 
                 <div class="messages">
                     <ul>
-                        @foreach($collection->messages as $message)
+                        @foreach($collection->msgs as $message)
                         @if($message->align === myId())
                         <li class="replies">
                             <img style="width: 35px;height: 35px;"
@@ -50,7 +50,7 @@
                 </div>
                 <div class="message-input">
                     <div class="wrap">
-                        {!! Form::open(['url' => route('send.message', request()->segment(3))]) !!}
+                        {!! Form::open(['url' => route('agent.sendMessage', request()->segment(3)), 'class' => 'ajax', 'reset' => 'true']) !!}
                         <input name="message" type="text" placeholder="Write your message..." />
                         <i class="fa fa-paperclip attachment" aria-hidden="true"></i>
                         <button class="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>

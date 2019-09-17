@@ -12,16 +12,16 @@ class Contact extends Model {
     protected $fillable = ['from', 'to', 'cc', 'listing_id', 'seen', 'appointment_at'];
 
     /**
-     * @var array
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    protected $casts = [
-        'appointment_at' => 'datetime:Y-m-d'
-    ];
+    public function messages() {
+        return $this->belongsToMany(Contact::class, 'messages', 'contact_id', 'id');
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function messages() {
+    public function msgs() {
         return $this->hasMany(Message::class, 'contact_id', 'id');
     }
 
@@ -69,6 +69,6 @@ class Contact extends Model {
      */
     public function scopeAgentMessages($query, $id) {
         return $query->where(['id' => $id])
-                     ->with(['messages', 'listing', 'sender']);
+                     ->with(['msgs', 'listing', 'sender']);
     }
 }

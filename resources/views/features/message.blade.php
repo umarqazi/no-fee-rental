@@ -10,7 +10,7 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <!-- Modal body -->
-            {!! Form::model((!authenticated()) ?:mySelf(),['url' => route('send.message'), 'class' => 'ajax', 'method' => 'post']) !!}
+            {!! Form::model((!authenticated()) ?:mySelf(),['url' => route('send.message'), 'class' => 'ajax', 'id' => 'appointment', 'method' => 'post', 'reset' => 'true']) !!}
             <div class="modal-body">
                 <div class="pt-4">
                     <div class="small-view">
@@ -46,10 +46,10 @@
                         {!! Form::text('phone_number', null, ['class' => 'input-style', 'placeholder' => 'Phone Number']) !!}
                     </div>
                     <div class="form-group">
-                        {!! Form::text('appointment_at', null, ['autocomplete' => 'off', 'class' => 'input-style', 'id' => 'timepicker-actions-exmpl', 'data-language' => 'en']) !!}
+                        {!! Form::text('appointment_at', null, ['placeholder' => 'Request appointment date', 'autocomplete' => 'off', 'class' => 'input-style', 'id' => 'timepicker-actions-exmpl', 'data-language' => 'en']) !!}
                     </div>
                     <div class="form-group">
-                        {!! Form::textarea('message', null, ['rows' => 5, 'class' => 'input-style text-area', 'placeholder' => 'Message']) !!}
+                        {!! Form::textarea('message', null, ['style' => 'resize:none;', 'rows' => 5, 'class' => 'input-style text-area', 'placeholder' => 'Message']) !!}
                     </div>
                 </div>
             </div>

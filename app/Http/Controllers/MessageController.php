@@ -28,6 +28,6 @@ class MessageController extends Controller
      */
     public function send(Request $request) {
         $res = $this->service->sendRequest($request);
-        return sendResponse($request, $res, 'Appointment Request has been sent.');
+        return sendResponse($request, $res, 'Appointment Request has been sent.', null, 'Request Already Sent');
     }
 }

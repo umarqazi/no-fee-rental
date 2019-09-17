@@ -147,13 +147,13 @@ class UserService {
         if (!$this->repo->isUniqueEmail($request->email)) {
             $this->repo = new UserRepo;
             if (!$this->repo->isUniqueEmail($request->email)) {
-                return true;
+                return 'true';
             }
 
-            return false;
+            return 'false';
         }
 
-        return false;
+        return 'false';
     }
 
     public function edit($id) {

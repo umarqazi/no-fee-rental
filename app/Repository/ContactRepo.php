@@ -14,6 +14,9 @@ use App\Contact;
 
 class ContactRepo extends BaseRepo {
 
+    /**
+     * ContactRepo constructor.
+     */
     public function __construct() {
         parent::__construct(new Contact());
     }
@@ -37,8 +40,8 @@ class ContactRepo extends BaseRepo {
      *
      * @return bool
      */
-    public function isNew($request) {
-        return $this->model->where(['from' => $request->from, 'listing_id' => $request->listing_id]) ? true : false;
+    public function isNewContact($request) {
+        return $this->model->where(['from' => $request->from, 'listing_id' => $request->listing_id])->first() ? false : true;
     }
 
     /**

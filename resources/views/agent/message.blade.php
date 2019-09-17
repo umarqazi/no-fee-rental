@@ -54,7 +54,7 @@
                                     <div class="price"><i class="fa fa-tag"></i> ${{ $inbox->listing->rent }}</div>
                                 </div>
                             </div>
-                            <div class="date-text"> {{ date('D, d/m/y', strtotime($inbox->appointment_at)) }} 10:14 am</div>
+                            <div class="date-text"> {{ formattedDate('D, d/m/y', $inbox->appointment_at) }} 10:14 am</div>
                         </div>
                         @endforeach
                     </div>
@@ -101,7 +101,7 @@
                                     <div class="price"><i class="fa fa-tag"></i> ${{ $meeting->listing->rent }}</div>
                                 </div>
                             </div>
-                            <div class="date-text">{{ date('D, d/m/y', strtotime($meeting->appointment_at)) }} 10:14 am</div>
+                            <div class="date-text">{{ $meeting->appointment_at }}</div>
                             <div class="actions-btns">
                                 <button class="border-btn" meeting_id="{{ $meeting->id }}" id="reply">Reply</button>
                                 <button class="border-btn">Deny</button>

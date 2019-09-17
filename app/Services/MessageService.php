@@ -23,10 +23,19 @@ class MessageService {
     private $repo;
 
     /**
-     * MessageService constructor.
+     * @var UserRepo
      */
-    public function __construct() {
-        $this->repo = new ContactRepo();
+    private $userRepo;
+
+    /**
+     * MessageService constructor.
+     *
+     * @param ContactRepo $cRepo
+     * @param UserRepo $uRepo
+     */
+    public function __construct(ContactRepo $cRepo, UserRepo $uRepo) {
+        $this->repo = $cRepo;
+        $this->userRepo = $uRepo;
     }
 
     /**
@@ -48,7 +57,6 @@ class MessageService {
 
     /**
      * @param $id
-     * @param $paginate
      *
      * @return mixed
      */
@@ -80,6 +88,24 @@ class MessageService {
     }
 
     /**
+     * @param $request
+     *
+     * @return bool
+     */
+    public function isNewUser($request) {
+        return $this->sender($request) ? false : true;
+    }
+
+    /**
+     * @param $request
+     *
+     * @return mixed
+     */
+    public function sender($request) {
+        return $this->userRepo->findByEmail($request->email);
+    }
+
+    /**
      * @param $id
      *
      * @return mixed
@@ -98,16 +124,16 @@ class MessageService {
     }
 
     /**
-     * @param $data
-     * @param $request
+     * @param $form
      *
      * @return bool
      */
-    private function createContact($data, $request) {
-        if ( $contact = $this->repo->create($data) ) {
-            $contact->messages()->attach( $contact, [
-                'align'      => myId(),
-                'message'    => $request->message,
+    private function createContact($form) {
+        $form->validate();
+        if ( $contact = $this->repo->create($form->toArray()) ) {
+            $contact->messages()->attach( $contact->id, [
+                'align'      => $form->from,
+                'message'    => $form->message,
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
@@ -116,6 +142,18 @@ class MessageService {
         }
         DB::rollBack();
         return false;
+    }
+
+    /**
+     * @param $form
+     *
+     * @return bool
+     */
+    private function newContact($form) {
+        $form->newRequestValidate();
+        $guest = $this->userRepo->create($form->newRequestArray());
+        $form->from = $guest->id;
+        return $this->createContact($form);
     }
 
     /**
@@ -128,29 +166,20 @@ class MessageService {
         $form = new AppointmentForm();
         $form->listing_id = $request->listing_id;
         $form->to = $request->to;
+        $form->first_name = $request->first_name;
+        $form->email = $request->email;
+        $form->phone_number = $request->phone_number;
         $form->appointment_at = $request->appointment_at;
-        $form->from = (authenticated()) ? myId() : null;
+        $form->message = $request->message;
 
-        if(authenticated()) {
-            $form->validate();
-            if ($this->repo->isNew( $request->listing_id)) {
-                return $this->createContact($form->toArray(), $request);
-            }
+        if($this->isNewUser($request)) {
+            return $this->newContact($form);
         } else {
-            $form->first_name = $request->first_name;
-            $form->email = $request->email;
-            $form->phone_number = $request->phone_number;
-            $form->newRequestValidate();
-            $this->repo = new UserRepo();
-            $guest = $this->repo->create($form->newRequestArray());
-            $this->repo = new ContactRepo();
-            $form->from = $guest->id;
-            $form->validate();
-            if($this->createContact($form->toArray(), $request)) {
-                DB::commit();
-                return true;
+            $guest = $this->sender($form);
+            $form->from = authenticated() ? myId() : $guest->id;
+            if ($this->repo->isNewContact( $form )) {
+                return $this->createContact($form);
             }
-
             DB::rollBack();
             return false;
         }

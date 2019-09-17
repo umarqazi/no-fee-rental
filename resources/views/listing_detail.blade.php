@@ -1,6 +1,14 @@
 @extends('layouts.app')
 @section('title', 'No Fee Rental')
 @section('content')
+    <style>
+        .modal {
+            z-index: 25;
+        }
+        .modal-backdrop {
+            z-index: 20;
+        }
+    </style>
     <header>
         <div class="header-bg inner-pages-banner"></div>
     </header>
@@ -116,7 +124,11 @@
                             <div class="col-lg-7">
                                 <div class="row">
                                     <div class="col-lg-6">
-                                        <a href="#check-availability" data-target="#check-availability" data-toggle="modal" class="btn apointment-btn">Appointment </a>
+                                        @if(compareDates($listing->open_house, now()))
+                                            <a href="#check-availability" data-target="#check-availability" data-toggle="modal" class="btn apointment-btn">
+                                                Appointment
+                                            </a>
+                                        @endif
                                     </div>
                                     <div class="col-lg-6">
                                         <a href="#" class="btn contct-agent-btn">Check Availability </a>
@@ -421,7 +433,7 @@
         start.setMinutes(0);
 
         // If today is Saturday or Sunday set 10:00 AM
-        if ([6, 0].indexOf(start.getDay()) != -1) {
+        if ([6, 0].indexOf(start.getDay()) !== -1) {
             start.setHours(10);
             startHours = 10
         }

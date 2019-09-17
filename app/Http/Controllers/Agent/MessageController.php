@@ -72,12 +72,7 @@ class MessageController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function send(Request $request, $id) {
-        if($res = $this->service->send($id, $request)) {
-            return sendResponse($request, $res, 'Message has been sent');
-        }
-    }
-
-    public function delete($id) {
-
+        $res = $this->service->send($id, $request);
+        return sendResponse($request, $res, 'Message has been sent');
     }
 }

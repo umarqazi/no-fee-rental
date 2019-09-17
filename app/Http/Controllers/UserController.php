@@ -115,4 +115,13 @@ class UserController extends Controller {
 
 		return error('Something went wrong');
 	}
+
+    /**
+     * @param Request $request
+     *
+     * @return bool
+     */
+	public function verifyEmail(Request $request) {
+	    return $this->service->isUniqueEmail($request);
+    }
 }
