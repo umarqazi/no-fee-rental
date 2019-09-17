@@ -198,4 +198,22 @@ class FeatureListingService {
     public function recent($paginate) {
         return $this->sortCollection($paginate, 'updated_at', RECENT);
     }
+    /**
+     * @param $paginate
+     *
+     * @return array
+     */
+    public function featured_listing($paginate) {
+        return [
+            'recent'   => $this->featured()
+                ->latest('created_at')
+                ->paginate($paginate, ['*'], 'recent'),
+            'cheapest' => $this->featured()
+                ->orderBy( 'rent' ,'ASC')
+                ->paginate($paginate, ['*'], 'cheapest'),
+            'pet_policy' => $this->featured()
+                ->policy()
+                ->paginate($paginate, ['*'], 'pet_policy'),
+        ];
+    }
 }
