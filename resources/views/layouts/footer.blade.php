@@ -8,16 +8,16 @@
                 </div>
             </li>
             <li class="wow fadeInLeft" data-wow-delay="0.3s">
-                <h4 class="collapseabe-link">Renters <i class="fas fa-sort-down"></i></h4> 
+                <h4 class="collapseabe-link">Renters <i class="fas fa-sort-down"></i></h4>
                 <div class="collapse-menu">
                 <a href="http://no-fee-rental.teamtechverx.com/blog/?page_id=49" class="ft-links">Renters Guide</a>
-                <a href="#" class="ft-links">Help and Answers</a>
+                <a href="http://no-fee-rental.teamtechverx.com/blog/?page_id=68" class="ft-links">Help and Answers</a>
                 <a href="#" class="ft-links">Rent Calculator</a>
-                <a href="#" class="ft-links">Blog</a>
+                <a href="http://no-fee-rental.teamtechverx.com/blog/" class="ft-links">Blog</a>
                 </div>
             </li>
             <li class="wow fadeInLeft" data-wow-delay="0.4s">
-                <h4 class="collapseabe-link"> Support <i class="fas fa-sort-down"></i></h4> 
+                <h4 class="collapseabe-link"> Support <i class="fas fa-sort-down"></i></h4>
                 <div class="collapse-menu">
                 <a href="{!! route('contact-us') !!}" class="ft-links">Contact Us</a>
                 <a href="#" class="ft-links">Site Map</a>
@@ -80,7 +80,7 @@
 
 
 <script type="text/javascript">
-  
+
 
     function togglefooterlink() {
     if (window.matchMedia('(max-width: 1279px)').matches) {

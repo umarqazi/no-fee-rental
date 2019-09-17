@@ -74,7 +74,6 @@ $(() => {
             let url = window.location.origin + `/search?neighborhoods=${v.neighborhood !== null ? v.neighborhood : '' + v.beds !== null ? '&beds=' + v.beds : '' + v.baths !== null ? '&baths=' + v.baths : '' + v.price_min !== null ? '&priceRange%5Bmin_price%5D=' + v.price_min : '' + v.price_max !== null ? '&priceRange%5Bmax_price%5D=' + v.price_max : '' + v.square_feet_min !== null ? '&priceRange%5Bmin_price_2%5D=' + v.square_feet_min : '' + v.square_feet_max !== null ? '&priceRange%5Bmax_price_2%5D=' + v.square_feet_max : ''}`;
             $('.dropDown').prepend(`
                 <a href="${url}">
-                    <img src="http://localhost:8000/assets/images/gallery-img.jpg">
                     <span>
                         Nyc ${v.neighborhood !== null ? ' - ' + v.neighborhood : '' + v.beds !== null ? v.beds + ' bed' : '' + v.baths !== null ? v.baths + ' bath' : ''}
                     </span>
