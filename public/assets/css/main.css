@@ -2798,13 +2798,14 @@ footer .footer-wrapper .logo-text{
   .desktop-listiing{
     display: none;
   }
-  .owl-slider .property-listing .property-thumb{
-    width: 100% !important;
-  }
+  
 }
 @media only screen and (min-width: 577px) and (max-width: 767px){
   .featured-properties .property-listing .info .info-link-text{
     width: 70%;
+  }
+  .property-listing .owl-slider .property-thumb{
+    width: 92% !important;
   }
 }
 @media only screen and (max-width: 576px) {
