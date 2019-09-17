@@ -3,13 +3,15 @@
         <h2 class="text-center">Featured Properties</h2>
         <ul class="nav nav-pills">
             <li class="nav-item">
-                <a class="nav-link active" data-toggle="pill" href="#tab1">New</a>
+                <a class="nav-link active" data-toggle="pill" href="#tab1">Recent</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-toggle="pill" href="#tab2">Trending</a>
+                <a class="nav-link" data-toggle="pill" href="#tab2">Cheapest</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-toggle="pill" href="#tab3">Pet Friendly</a>
+                <a class="nav-link" data-toggle="pill" href="#tab3">Popular</a>
+            </li><li class="nav-item">
+                <a class="nav-link" data-toggle="pill" href="#tab4">Pet Policy</a>
             </li>
         </ul>
         <!-- Tab panes -->
@@ -31,6 +33,7 @@
                                     <li><i class="fa fa-bath"></i> {{ $fl->baths }}</li>
                                 </ul>
                             </a>
+                            <a href="javascript:void(0)" class="btn viewfeature-btn"> View </a>
                         </div>
                     </div>
                     @endforeach
@@ -45,13 +48,15 @@
                         <span class="heart-icon"></span>
                         <img src="assets/images/gallery-img.jpg" alt="" class="main-img" />
                         <div class="info">
-                            <a href="#">
-                                <p>$3,200 / Month </p>
-                                <ul>
-                                    <li><i class="fa fa-bed"></i> 2</li>
-                                    <li><i class="fa fa-bath"></i> 2</li>
-                                </ul>
+                            <a href="#" class="info-link-text">
+                                <p> $3,200 / Month </p> <small> 2 bed , 1 bath </small>
+                                <p> 88 Get Rich Avenue, Manhattan, Ny </p>
                             </a>
+                            <a href="javascript:void(0)" class="btn viewfeature-btn"> View </a>
+                        </div>
+                        <div class="feaure-policy-text">
+                            <p>$3,200 / Month </p>
+                            <span>2 bed , 1 bath </span>
                         </div>
                     </div>
                     <div class="property-thumb">
@@ -68,6 +73,7 @@
                                     <li><i class="fa fa-bath"></i> 2</li>
                                 </ul>
                             </a>
+                            <a href="javascript:void(0)" class="btn viewfeature-btn"> View </a>
                         </div>
                     </div>
                     <div class="property-thumb">
@@ -84,6 +90,7 @@
                                     <li><i class="fa fa-bath"></i> 2</li>
                                 </ul>
                             </a>
+                            <a href="javascript:void(0)" class="btn viewfeature-btn"> View </a>
                         </div>
                     </div>
                 </div>
@@ -104,6 +111,7 @@
                                     <li><i class="fa fa-bath"></i> 2</li>
                                 </ul>
                             </a>
+                            <a href="javascript:void(0)" class="btn viewfeature-btn"> View </a>
                         </div>
                     </div>
                     <div class="property-thumb">
@@ -120,6 +128,7 @@
                                     <li><i class="fa fa-bath"></i> 2</li>
                                 </ul>
                             </a>
+                            <a href="javascript:void(0)" class="btn viewfeature-btn"> View </a>
                         </div>
                     </div>
                     <div class="property-thumb">
@@ -136,6 +145,63 @@
                                     <li><i class="fa fa-bath"></i> 2</li>
                                 </ul>
                             </a>
+                            <a href="javascript:void(0)" class="btn viewfeature-btn"> View </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="tab4">
+                <div class="property-listing">
+                    <div class="property-thumb">
+                        <div class="check-btn">
+                            <button class="btn-default" data-toggle="modal" data-target="#check-availability">Check Availability</button>
+                        </div>
+                        <span class="heart-icon"></span>
+                        <img src="assets/images/gallery-img.jpg" alt="" class="main-img" />
+                        <div class="info">
+                            <a href="#">
+                                <p>$3,200 / Month </p>
+                                <ul>
+                                    <li><i class="fa fa-bed"></i> 2</li>
+                                    <li><i class="fa fa-bath"></i> 2</li>
+                                </ul>
+                            </a>
+                            <a href="javascript:void(0)" class="btn viewfeature-btn"> View </a>
+                        </div>
+                    </div>
+                    <div class="property-thumb">
+                        <div class="check-btn">
+                            <button class="btn-default" data-toggle="modal" data-target="#check-availability">Check Availability</button>
+                        </div>
+                        <span class="heart-icon"></span>
+                        <img src="assets/images/gallery-img.jpg" alt="" class="main-img" />
+                        <div class="info">
+                            <a href="#">
+                                <p>$3,200 / Month </p>
+                                <ul>
+                                    <li><i class="fa fa-bed"></i> 2</li>
+                                    <li><i class="fa fa-bath"></i> 2</li>
+                                </ul>
+                            </a>
+                            <a href="javascript:void(0)" class="btn viewfeature-btn"> View </a>
+                        </div>
+                    </div>
+                    <div class="property-thumb">
+                        <div class="check-btn">
+                            <button class="btn-default" data-toggle="modal" data-target="#check-availability">Check Availability</button>
+                        </div>
+                        <span class="heart-icon"></span>
+                        <img src="assets/images/gallery-img.jpg" alt="" class="main-img" />
+                        <div class="info">
+                            <a href="#">
+                                <p>$3,200 / Month </p>
+                                <ul>
+                                    <li><i class="fa fa-bed"></i> 2</li>
+                                    <li><i class="fa fa-bath"></i> 2</li>
+                                </ul>
+                            </a>
+                            <a href="javascript:void(0)" class="btn viewfeature-btn"> View </a>
                         </div>
                     </div>
                 </div>
