@@ -22,9 +22,9 @@
                     @foreach($featured_listings as $key => $fl)
                     <div class="property-thumb">
                         <div class="check-btn">
-                            <a href="{{ route('listing.detail', $fl->id) }}">
+                            <!-- <a href="{{ route('listing.detail', $fl->id) }}">
                                 <button class="btn-default" data-toggle="modal" data-target="#appointmentModal">Check Availability</button>
-                            </a>
+                            </a> -->
                         </div>
                         <span class="heart-icon"></span>
                         <img src="{{ asset('storage/'.$fl->thumbnail) }}" alt="" class="main-img" />
