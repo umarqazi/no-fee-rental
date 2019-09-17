@@ -3,7 +3,7 @@
     	{!! toast(session('message'), session('alert_type')) !!}
     @endif
 
-    {!! HTML::script('assets/js/recentSearch.js') !!}
+    {!! HTML::script('assets/js/recent-search.js') !!}
     {!! HTML::script('https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js') !!}
 <script src="{{asset('assets/js/vendor/jquery-ui.min.js')}}"></script>
 <script src="{{asset('assets/js/vendor/popper.min.js')}}"></script>
