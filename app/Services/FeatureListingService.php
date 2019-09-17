@@ -79,13 +79,22 @@ class FeatureListingService {
     /**
      * @param $paginate
      *
+     * @return mixed
+     */
+    private function policy($paginate) {
+        return $this->featured()
+                    ->policy()
+                    ->paginate($paginate, ['*'], 'featured');
+    }
+
+    /**
+     * @param $paginate
+     *
      * @return array
      */
     public function petPolicy($paginate) {
         return [
-            'featured'         => $this->featured()
-                                       ->policy()
-                                       ->paginate($paginate, ['*'], 'featured'),
+            'featured'         => $this->policy($paginate),
             'request_featured' => $this->requestfeatured()
                                        ->policy()
                                        ->paginate($paginate, ['*'], 'request-featured'),

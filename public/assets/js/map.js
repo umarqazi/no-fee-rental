@@ -1,7 +1,7 @@
 "use strict";
 
 let $body = $('body');
-const ZOOM = 10;
+let ZOOM = 10;
 const NAVIGATOR = navigator.geolocation;
 const RADIUS = 1500;
 const GEOCODER = new google.maps.Geocoder();
@@ -54,14 +54,14 @@ const addrToLatLng = (address) => {
     });
 };
 
-const addMarker = (coords, title) => {
+const addMarker = (coords, title = null, icon = null) => {
     marker = new google.maps.Marker({
         map: map,
         title: title,
         animation: google.maps.Animation.DROP,
         position: setLatLng(coords),
         icon: {
-            url: `${document.location.origin}/assets/images/map-icon.png`, // url
+            url: icon !== null ? icon : `${document.location.origin}/assets/images/map-icon.png`, // url
             scaledSize: new google.maps.Size(30, 30), // scaled size
         },
     });
@@ -151,35 +151,77 @@ $(() => {
 // Map Initialize
 window.onload = function() {
     // Search listing
-    // let coords = $body.find('input[name=map_location]');
-    // if(coords.length > 0 && window.location.pathname === '/search') {
-    //     let coordsCollection = [];
-    //     coords.each((index, value) => {
-    //         coordsCollection.push(JSON.parse($(value).val()));
-    //     });
-    //     markerClusters(coordsCollection);
-    //     return;
-    // }
-    //
-    // // Update listing
-    // coords = coords.val();
-    // if(coords !== null && coords !== '') {
-    //     let location = $('body').find('#controls').val();
-    //     coords = JSON.parse(coords);
-    //     setMap(coords);
-    //     marker = addMarker(coords, location);
-    //     showInfoWindow(location, marker);
-    //     return;
-    // }
-    //
-    // // Add listing
-    // myLocation().then(coords => {
-    //     setMap(coords);
-    //     latLngToAddr(coords).then(address => {
-    //         marker = addMarker(coords, address[0].formatted_address);
-    //         showInfoWindow(address[0].formatted_address, marker);
-    //     });
-    // });
+    let coords = $body.find('input[name=map_location]');
+    if(coords.length > 0 && window.location.pathname === '/search') {
+        let coordsCollection = [];
+        coords.each((index, value) => {
+            coordsCollection.push(JSON.parse($(value).val()));
+        });
+        markerClusters(coordsCollection);
+        return;
+    }
+
+    function checkAdult(location) {
+        return location.formatted_address === $('.title-subtext').text();
+    }
+
+    function getNearbyPlaces(position) {
+        let request = {
+            location: setLatLng(position),
+            radius: 1000,
+            // rankBy: google.maps.places.RankBy.DISTANCE,
+            keyword: 'station'
+        };
+
+        let service = new google.maps.places.PlacesService(map);
+        service.nearbySearch(request, nearbyCallback);
+    }
+
+    function nearbyCallback(results, status) {
+        console.log(results);
+        if(results.length > 0) {
+            results.forEach(value => {
+                console.log(value);
+                let coords = {
+                    latitude: value.geometry.location.lat(),
+                    longitude: value.geometry.location.lng()
+                };
+                let icon = value.icon;
+                let title = value.name;
+                addMarker(coords, title, icon);
+            });
+        }
+    }
+
+    // Update listing
+    coords = coords.val();
+    if(coords !== null && coords !== '') {
+        coords = JSON.parse(coords);
+        let location = $('body').find('#controls').val();
+        ZOOM = 15;
+        setMap(coords);
+        if(location === undefined) {
+            latLngToAddr(coords).then(location => {
+                let index = location.findIndex(checkAdult);
+                getNearbyPlaces(coords);
+                marker = addMarker(coords, location[index].formatted_address);
+                showInfoWindow(location[index].formatted_address, marker);
+            });
+        } else {
+            marker = addMarker(coords, location);
+            showInfoWindow(location, marker);
+        }
+        return;
+    }
+
+    // Add listing
+    myLocation().then(coords => {
+        setMap(coords);
+        latLngToAddr(coords).then(address => {
+            marker = addMarker(coords, address[0].formatted_address);
+            showInfoWindow(address[0].formatted_address, marker);
+        });
+    });
 };
 
 
