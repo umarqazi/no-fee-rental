@@ -49,7 +49,7 @@ class AuthService {
         }
 
         if ($this->attemptLogin($request)) {
-            return sendResponse($request, ['url' => "{$this->guard}/home"], null);
+            return sendResponse($request, ['url' => "/{$this->guard}/home"], null);
         }
 
         // If the login attempt was unsuccessful we will increment the number of attempts
