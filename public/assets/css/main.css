@@ -2931,13 +2931,15 @@ footer .footer-wrapper .logo-text{
   display: flex;
 }
 .search-bdr-top .btn-group__multiple .dropdown-menu{
-  /*max-width: 150px;
-  width: 150px;*/
-  border-radius: 15px;
+  border-radius: 8px;
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.22);
+  -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.22);
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.22);
+  border: none;
 }
 .search-bdr-top .btn-group__multiple ul li{
   position: relative;
-  padding: 10px 30px;
+  padding: 10px 30px 0px 20px;
   border-bottom: 1px solid #ddd;
 }
 .search-bdr-top .btn-group__multiple ul li:nth-last-child(1){
@@ -2948,6 +2950,7 @@ footer .footer-wrapper .logo-text{
 }
 .search-bdr-top .btn-group__multiple .dropdown-menu label{
   color: #223971;
+  font-size: 15px;
 }
 .search-bdr-top .btn-default:hover,
 .search-bdr-top .btn-default:active;
@@ -2955,13 +2958,35 @@ footer .footer-wrapper .logo-text{
   background-color: #223971;
   color: #fff;
 }
+.search-bdr-top .price-dropdown .btn-default{
+  width: 70px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  color: #000;
+  text-transform: initial;
+}
+.search-bdr-top .price-dropdown .form-group{
+  background-color: #fff;
+  padding: 10px;
+  width: 280px;
+}
+#advance-search .price-dropdown .form-group .input-style{
+  width: 80px;
+}
+
+.property-listing.neighbourhood-listing{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
 /**/
 
 
 .radio-button {
   display: block;
   position: relative;
-  padding-left: 35px;
+  padding-left: 20px;
   margin-bottom: 12px;
   cursor: pointer;
   font-size: 22px;
@@ -2981,11 +3006,12 @@ footer .footer-wrapper .logo-text{
 /* Create a custom radio button */
 .radio-button .checkmark {
   position: absolute;
-  top: 0;
+  top: 1px;
   left: 0;
-  height: 25px;
-  width: 25px;
-  background-color: #eee;
+  height: 12px;
+  width: 12px;
+  background-color: transparent;
+  border: 1px solid #223971;
   border-radius: 50%;
 }
 
@@ -2996,7 +3022,8 @@ footer .footer-wrapper .logo-text{
 
 /* When the radio button is checked, add a blue background */
 .radio-button input:checked ~ label .checkmark {
-  background-color: #2196F3;
+  background-color: #ffffff;
+  border: 1px solid #223971;
 }
 
 /* Create the indicator (the dot/circle - hidden when not checked) */
@@ -3013,25 +3040,21 @@ footer .footer-wrapper .logo-text{
 
 /* Style the indicator (dot/circle) */
 .radio-button .checkmark:after {
-  top: 9px;
-  left: 9px;
-  width: 8px;
-  height: 8px;
+  top: 2px;
+  left: 2px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
-  background: white;
+  background: #f36f21;
 }
-
+.desktop-listiing{
+    margin: 0px 0px;
+}
 
 /*Neighbourhood*/
 @media only screen and (max-width: 1279px) {
 .neighborhood-search .search-result-wrapper .search-listing .sort-by-wrapper{
   padding-right:15px;
 }
-#boxscroll2{
-  margin-right: 15px;
-}
 
-}
-.desktop-listiing{
-    margin: 0px 0px;
 }
