@@ -778,15 +778,16 @@ h3 {
 .featured-properties .property-listing {
   display: flex;
   align-items: center;
-  margin: 0px -35px;
+  margin: 0px -30px;
   flex-wrap: wrap;
+  justify-content: center;
 }
 .featured-properties .property-listing .property-thumb {
   height: 230px;
   margin: 0px 15px;
   overflow: hidden;
-  width: calc(100% / 4);
-  /*margin-bottom: 80px;*/
+  width: calc(100% / 4 - 30px);
+  margin-bottom: 30px;
   position: relative;
 }
 .featured-properties .property-listing .property-thumb .main-img {
@@ -1566,7 +1567,7 @@ footer .copyright .social-icons li a:hover {
   display: flex;
 }
 .neighborhood-search .search-result-wrapper .map-wrapper {
-  flex: 0 0 40%;
+  flex: 0 0 50%;
   padding: 0px 15px;
 }
 .neighborhood-search .search-result-wrapper .map-wrapper.map-small-view {
@@ -2129,7 +2130,7 @@ footer .copyright .social-icons li a:hover {
   font-size: 14px;
   left: 0;
   right: 0;
-  margin-left: 15px;
+  padding-left: 15px;
   padding-bottom: 15px;
   padding-top: 25px;
 }
@@ -2883,27 +2884,11 @@ footer .footer-wrapper .logo-text{
 
 .search-result-wrapper .search-bdr-top{
   width: 100%;
-  border-top: 1px solid #CCCCCC;
-  border-bottom: 1px solid #CCCCCC;
+  background-color:#F8F8F8; 
   padding: 10px 15px;
 }
 
-#search-tabs-sec .nav-item{
-  margin-right:10px;
-}
-#search-tabs-sec .nav-pills .nav-link{
-  color: #3D3A39;
-  background-color: #fff;
-  font-size: 14px;
-  border:1px solid #CCCCCC;
-}
 
-#search-tabs-sec .nav-pills .nav-link.active, .nav-pills .show>.nav-link{
-  color: #fff;
-  background-color: #223971;
-  font-size: 14px;
-  border:1px solid #223971;
-}
 .sort-by-wrapper .custom-select-list{
   height: 32px;
 }
@@ -2912,8 +2897,129 @@ footer .footer-wrapper .logo-text{
   color: #3D3A39;
 }
 
+.dropdown-warp{
+  display: flex;
+}
+/*Styling Selectbox*/
+
+.btn-group__multiple .dropdown-menu {
+  min-width: 100%;
+}
+.search-bdr-top .btn-group__multiple > .btn{
+  width: 70px;
+  background-color: #fff;
+  color: blue;
+  color: #000;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  text-transform: initial;
+  margin-right: 5px;
+}
+.search-bdr-top .btn-default{
+  background: #223971;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 14px;
+  padding: 0px 0px;
+  border-radius: 5px;
+  line-height: 34px;
+  display: inline-block;
+  border: none;
+  outline: none !important;
+}
+.dropdown-wrap{
+  display: flex;
+}
+.search-bdr-top .btn-group__multiple .dropdown-menu{
+  /*max-width: 150px;
+  width: 150px;*/
+  border-radius: 15px;
+}
+.search-bdr-top .btn-group__multiple ul li{
+  position: relative;
+  padding: 10px 30px;
+  border-bottom: 1px solid #ddd;
+}
+.search-bdr-top .btn-group__multiple ul li:nth-last-child(1){
+  border-bottom: none;
+}
+.search-bdr-top .dropdown-toggle::after{
+  display: none;
+}
+.search-bdr-top .btn-group__multiple .dropdown-menu label{
+  color: #223971;
+}
+.search-bdr-top .btn-default:hover,
+.search-bdr-top .btn-default:active;
+.search-bdr-top .btn-default:focus{
+  background-color: #223971;
+  color: #fff;
+}
+/**/
 
 
+.radio-button {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default radio button */
+.radio-button input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Create a custom radio button */
+.radio-button .checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+  border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+ .radio-button:hover .checkmark {
+  background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+.radio-button input:checked ~ label .checkmark {
+  background-color: #2196F3;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.radio-button .checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.radio-button input:checked ~ label .checkmark:after {
+  display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.radio-button .checkmark:after {
+  top: 9px;
+  left: 9px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: white;
+}
 
 
 /*Neighbourhood*/
