@@ -17,7 +17,7 @@
     </div>
     <div class="mobile-nav">
         <ul>
-            <li><a href="/">Rent</a></li>
+            <li><a href="/rent">Rent</a></li>
             <li><a href="/neighborhood">Neighborhood </a></li>
             <li>
                 <a class="" data-toggle="collapse" href="#menuToggle1" role="button" aria-expanded="false" aria-controls="menuToggle1">
@@ -57,7 +57,7 @@
             <a href="{!! url('/') !!}"> <img src="{{ asset('assets/images/logo.png') }}" class="logo" /></a>
             <ul class="menu-links">
                 <li>
-                    <a href="/">Rent </a>
+                    <a href="/rent">Rent </a>
                     <a href="/neighborhood">Neighborhood </a>
                 </li>
             </ul>
