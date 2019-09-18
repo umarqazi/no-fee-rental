@@ -94,3 +94,9 @@ Route::get('/neighborhood', function() {
 	return view('neighborhood');
 });
 Route::get('/reset', 'RecoverPasswordController@sendRequest');
+
+//fixing route
+Route::get('/showProfile', 'HomeController@index')->name('web.showProfile');
+Route::get('/logout', 'HomeController@index')->name('web.logout');
+
+
