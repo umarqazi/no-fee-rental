@@ -54,7 +54,7 @@
                         </div>
                     @endif
                     <div class="apartment-details">
-                        <h4> $ {{$listing->rent}} / Month</h4>
+                        <h4> ${{$listing->rent}} / month</h4>
                     </div>
                     <div class="row after-apartment-icon">
                         <div class="col-lg-3 col-3">
@@ -174,53 +174,15 @@
         <div class="location-map-sec">
             <h3>Location </h3>
             <div class="row">
-
                 <div class="col-lg-6">
                     <div class="row">
                         <div class="col-lg-6">
                             <label> TRANSPORTATION</label>
-                            <p>Jay St & Willoughby St </p>
-                            <span class="span-box text-a"> A </span>
-                            <span class="span-box text-c"> C </span>
-                            <span class="span-box text-f"> F </span>
-                            <span class="span-box text-r"> R </span>
-
-                            <p>Smith St & Bergen St </p>
-                            <span class="span-box text-f"> F </span>
-                            <span class="span-box text-g"> G </span>
-
-                            <p>Smith St & Bergen St </p>
-                            <span class="span-box text-f"> F </span>
-                            <span class="span-box text-g"> G </span>
-
-                            <p>Court Street & Montague Street </p>
-                            <span class="span-box text-r"> R </span>
-                            <span class="span-box text-2"> 2 </span>
-                            <span class="span-box text-2"> 3 </span>
-                            <span class="span-box text-4"> 4 </span>
-                            <span class="span-box text-4"> 5 </span>
-
-                            <p>Cadman Plaza West & Montague St</p>
-                            <span class="span-box text-r"> R </span>
-                            <span class="span-box text-2"> 2 </span>
-                            <span class="span-box text-2"> 3 </span>
-                            <span class="span-box text-4"> 4 </span>
-                            <span class="span-box text-4"> 5 </span>
-
+                            <ul class="second-ul"></ul>
                         </div>
                         <div class="col-lg-6 mob-top-mrg">
                             <label> Schools</label>
-                            <ul>
-                                <li> Brooklyn Law School</li>
-                            </ul>
-                            <label class="city-bike"> City Bike</label>
-                            <ul class="second-ul">
-                                <li>Clinton St & Joralemon St</li>
-                                <li>Henry St & Atlantic Ave</li>
-                                <li>State St & Smith Stt</li>
-                                <li>Cadman Plaza West & Montague St</li>
-                                <li>Schermerhorn St & Court St</li>
-                            </ul>
+                            <ul class="second-ul"></ul>
                         </div>
                     </div>
                 </div>
@@ -365,7 +327,7 @@
 						<img src="/assets/images/gallery-img.jpg" alt="" class="main-img">
 						<div class="info">
 							<a href="#">
-								<p>$3,200 / Month </p>
+								<p>$3,200 / month </p>
 								<ul>
 									<li><i class="fa fa-bed"></i> 2</li>
 									<li><i class="fa fa-bath"></i> 2</li>

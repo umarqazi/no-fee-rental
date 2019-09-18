@@ -43,9 +43,9 @@
                     </ul>
                 </div>
             </li>
-            @if(!auth()->guard(whoAmI())->check())
+            @if(!authenticated())
                 <li><a href="" data-toggle="modal" data-target="#login" class="signin-modal-btn close-menu">Login</a></li>
-                <li><a href="#" data-toggle="modal" data-target="#login" class="signup-modal-btn close-menu">signup</a></li>
+                <li><a href="#" data-toggle="modal" data-target="#login" class="signup-modal-btn close-menu">Signup</a></li>
             @endif
         </ul>
     </div>
@@ -67,7 +67,7 @@
                     <div class="dropDown">
                     </div>
                 </div>
-                @if(Auth::guard(whoAmI())->check())
+                @if(authenticated())
                     <div class="login-user">
                         <a href="#">
                             <img

@@ -126,6 +126,79 @@ const closeInfoWindow = async () => {
     infowindow.close();
 };
 
+const findIndex = (location) => {
+    return location.formatted_address === $('.title-subtext').text();
+};
+
+const nearByPlaces = async (position, keyword) => {
+    let request = {
+        location: setLatLng(position),
+        radius: 250,
+        keyword: keyword
+    };
+
+    let service = new google.maps.places.PlacesService(map);
+    return new Promise(res => {
+        service.nearbySearch(request, results => {
+            res(results);
+        });
+    })
+};
+
+/**
+ *
+ * @param coords
+ */
+const findSubways = async (coords) => {
+    nearByPlaces(coords, 'station').then(res => {
+        if(res.length > 0) {
+            res.forEach(value => {
+                let coords = {
+                    latitude: value.geometry.location.lat(),
+                    longitude: value.geometry.location.lng()
+                };
+                let icon = value.icon;
+                let title = value.name;
+                setSubways(title);
+                addMarker(coords, title, icon);
+            });
+        } else {
+            if($('#no-subway').length > 0) return;
+            $('.location-map-sec').find('.row:last > div:first').append('<p id="no-subway">No Subways Found</p>');
+        }
+    });
+};
+
+const findSchools = (coords) => {
+    nearByPlaces(coords, 'school').then(res => {
+        if(res.length > 0) {
+            res.forEach(value => {
+                let coords = {
+                    latitude: value.geometry.location.lat(),
+                    longitude: value.geometry.location.lng()
+                };
+                let icon = value.icon;
+                let title = value.name;
+                setSchools(title);
+                addMarker(coords, title, icon);
+            });
+        } else {
+            if($('#no-school').length > 0) return;
+            $('.mob-top-mrg').append('<p id="no-school">No Schools Found</p>');
+        }
+    });
+};
+
+const setSubways = (title) => {
+    $('#no-subway').remove();
+    $('.location-map-sec').find('.row:last > div:first > ul').append(`<li>${title}</li>`);
+};
+
+const setSchools = (title) => {
+    $('#no-school').remove();
+    $('.mob-top-mrg').find('ul').append(`<li>${title}</li>`);
+};
+
 // Document Ready Methods
 $(() => {
   $body.on('keyup', '#controls', function() {
@@ -161,51 +234,21 @@ window.onload = function() {
         return;
     }
 
-    function checkAdult(location) {
-        return location.formatted_address === $('.title-subtext').text();
-    }
-
-    function getNearbyPlaces(position) {
-        let request = {
-            location: setLatLng(position),
-            radius: 1000,
-            // rankBy: google.maps.places.RankBy.DISTANCE,
-            keyword: 'station'
-        };
-
-        let service = new google.maps.places.PlacesService(map);
-        service.nearbySearch(request, nearbyCallback);
-    }
-
-    function nearbyCallback(results, status) {
-        console.log(results);
-        if(results.length > 0) {
-            results.forEach(value => {
-                console.log(value);
-                let coords = {
-                    latitude: value.geometry.location.lat(),
-                    longitude: value.geometry.location.lng()
-                };
-                let icon = value.icon;
-                let title = value.name;
-                addMarker(coords, title, icon);
-            });
-        }
-    }
-
     // Update listing
     coords = coords.val();
     if(coords !== null && coords !== '') {
         coords = JSON.parse(coords);
         let location = $('body').find('#controls').val();
-        ZOOM = 15;
+        ZOOM = 16;
         setMap(coords);
         if(location === undefined) {
             latLngToAddr(coords).then(location => {
-                let index = location.findIndex(checkAdult);
-                getNearbyPlaces(coords);
-                marker = addMarker(coords, location[index].formatted_address);
-                showInfoWindow(location[index].formatted_address, marker);
+                let index = location.findIndex(findIndex);
+                findSubways(coords);findSchools(coords);
+                if(index !== -1) {
+                    marker = addMarker(coords, location[index].formatted_address);
+                    showInfoWindow(location[index].formatted_address, marker);
+                }
             });
         } else {
             marker = addMarker(coords, location);
