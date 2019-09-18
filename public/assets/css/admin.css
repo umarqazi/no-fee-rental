@@ -1331,3 +1331,6 @@ header .agent-avtar .avtar:hover div ul {
 .swal-footer {
   text-align: center !important;
 }
+.block-body .img-thumbnail {
+  margin-top: 15px;
+}
