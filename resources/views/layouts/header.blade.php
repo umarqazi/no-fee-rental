@@ -67,7 +67,7 @@
                     <div class="dropDown">
                     </div>
                 </div>
-                @if(Auth::guard(whoAmI())->check())
+                @if(!Auth::guard(whoAmI())->check())
                     <div class="login-user">
                         <a href="#">
                             <img
@@ -75,7 +75,7 @@
                                     ? asset('storage/'.mySelf()->profile_image)
                                     : asset('assets/images/agent-img.jpg') !!}
                                     " alt="" class="avtar" />
-                            {{ mySelf()->first_name." ".mySelf()->last_name }} <i class="fa fa-angle-down"></i>
+                            {{ mySelf()['first_name']." ".mySelf()['last_name'] }} <i class="fa fa-angle-down"></i>
                         </a>
                         <div class="user-dropdown">
                             <a href="{{ route(whoAmI().'.index') }}">Dashboard </a>
@@ -84,14 +84,13 @@
                         </div>
                     </div>
 
-                @endif
+                @else
                     <i class="fa fa-bars menu-btn"></i>
-                    @if(!Auth::guard(whoAmI())->check())
-                        <div class="actions-btns">
-                            <button type="button" class="signup-btn signup-modal-btn" data-toggle="modal" data-target="#signup">Signup</button>
-                            <button type="button" class="signup-btn login-btn signin-modal-btn" data-toggle="modal" data-target="#login">Login</button>
-                        </div>
-                    @endif
+                    <div class="actions-btns">
+                        <button type="button" class="signup-btn signup-modal-btn" data-toggle="modal" data-target="#signup">Signup</button>
+                        <button type="button" class="signup-btn login-btn signin-modal-btn" data-toggle="modal" data-target="#login">Login</button>
+                    </div>
+                @endif
             </div>
         </div>
     </div>
