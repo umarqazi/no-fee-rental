@@ -93,4 +93,7 @@ Route::post('/test', function (Request $request) {
 Route::get('/neighborhood', function() {
 	return view('neighborhood');
 });
+Route::get('/rent', function() {
+    return view('rent');
+});
 Route::get('/reset', 'RecoverPasswordController@sendRequest');
