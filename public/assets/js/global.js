@@ -117,7 +117,7 @@ $(() => {
 			return;
 		}
 
-		let res = await ajaxRequest(url, type, data, (loading) ? loading : true, form, content);
+		let res = await ajaxRequest(url, type, data, (loading !== 'false'), form, content);
 
 		if(reset === 'true'){
             $(form).trigger("reset");

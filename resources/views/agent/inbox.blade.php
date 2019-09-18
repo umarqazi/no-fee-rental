@@ -27,7 +27,7 @@
 
                 <div class="messages">
                     <ul>
-                        @foreach($collection->msgs as $message)
+                        @foreach($collection->messages as $message)
                         @if($message->align === myId())
                         <li class="replies">
                             <img style="width: 35px;height: 35px;"
@@ -50,8 +50,9 @@
                 </div>
                 <div class="message-input">
                     <div class="wrap">
-                        {!! Form::open(['url' => route('agent.sendMessage', request()->segment(3)), 'class' => 'ajax', 'reset' => 'true']) !!}
-                        <input name="message" type="text" placeholder="Write your message..." />
+                        {!! Form::open(['id' => 'send-message', 'loading' => 'false', 'url' => route('agent.sendMessage', request()->segment(3)), 'class' => 'ajax', 'reset' => 'true']) !!}
+                        {!! Form::text('message', null, ['placeholder' => 'Write your message...']) !!}
+                        {!! Form::hidden('to', myId() == $collection->to ? $collection->from : $collection->to) !!}
                         <i class="fa fa-paperclip attachment" aria-hidden="true"></i>
                         <button class="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
                         {!! Form::close() !!}
@@ -61,9 +62,5 @@
         </div>
     </div>
     {!! HTML::style('assets/css/chat.css') !!}
-    <script>
-        window.onload = function() {
-            $('.messages > ul').animate({scrollTop: $('.messages > ul')[0].scrollHeight});
-        }
-    </script>
+    {!! HTML::script('assets/js/message.js') !!}
 @endsection

@@ -48,20 +48,18 @@ class MessageController extends Controller
      */
     public function confirmMeeting(Request $request, $id) {
         $data = null;
-        if($this->service->initChat($id))
+        if($this->service->approveAppointment($id))
             $data = $this->service->messages($id)->first();
-
         return sendResponse($request, $data);
     }
 
     /**
-     * @param Request $request
      * @param $id
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function inbox($id) {
-        $collection = $this->service->loadChat($id);
+        $collection = $this->service->loadMessages($id)->first();
         return view('agent.inbox', compact('collection'));
     }
 
@@ -73,6 +71,6 @@ class MessageController extends Controller
      */
     public function send(Request $request, $id) {
         $res = $this->service->send($id, $request);
-        return sendResponse($request, $res, 'Message has been sent');
+        return sendResponse($request, $res, null);
     }
 }

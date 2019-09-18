@@ -49,7 +49,7 @@ class UserController extends Controller {
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
 	public function changePassword($token) {
-		return view('change-password', compact('token'));
+		return view('change_password', compact('token'));
 	}
 
 	/**

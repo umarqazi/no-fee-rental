@@ -12,24 +12,17 @@ class Contact extends Model {
     protected $fillable = ['from', 'to', 'cc', 'listing_id', 'seen', 'appointment_at'];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function messages() {
-        return $this->belongsToMany(Contact::class, 'messages', 'contact_id', 'id');
+    public function listing() {
+       return $this->hasOne(Listing::class, 'id', 'listing_id');
     }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function msgs() {
+    public function messages() {
         return $this->hasMany(Message::class, 'contact_id', 'id');
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function listing() {
-       return $this->hasOne(Listing::class, 'id', 'listing_id');
     }
 
     /**
@@ -45,7 +38,7 @@ class Contact extends Model {
      *
      * @return mixed
      */
-    public function scopeInbox($query) {
+    public function scopeInboxTab($query) {
         return $query->where(['to' => myId(), 'request_meeting' => ACTIVE])
                      ->with(['sender', 'listing']);
     }
@@ -56,7 +49,7 @@ class Contact extends Model {
      *
      * @return mixed
      */
-    public function scopeMeetingRequests($query) {
+    public function scopemeetingRequestTab($query) {
         return $query->where(['to' => myId(),'request_meeting' => DEACTIVE])
                      ->with(['sender', 'listing']);
     }
@@ -69,6 +62,16 @@ class Contact extends Model {
      */
     public function scopeAgentMessages($query, $id) {
         return $query->where(['id' => $id])
-                     ->with(['msgs', 'listing', 'sender']);
+                     ->with(['messages', 'listing', 'sender']);
+    }
+
+    /**
+     * @param $query
+     * @param $id
+     *
+     * @return mixed
+     */
+    public function scopeReceiverInfo($query, $id) {
+        return $query->where(['id' => $id])->with('sender');
     }
 }

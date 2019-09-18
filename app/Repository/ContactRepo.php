@@ -24,15 +24,15 @@ class ContactRepo extends BaseRepo {
     /**
      * @return mixed
      */
-    public function inbox() {
-        return $this->model->inbox();
+    public function inboxTab() {
+        return $this->model->inboxTab();
     }
 
     /**
      * @return mixed
      */
-    public function requests() {
-        return $this->model->meetingRequests();
+    public function requestTab() {
+        return $this->model->meetingRequestTab();
     }
 
     /**
@@ -45,18 +45,20 @@ class ContactRepo extends BaseRepo {
     }
 
     /**
-     * @param $id
+     * @param $contactId
      *
      * @return mixed
      */
-    public function messages($id) {
-        return $this->model->agentMessages($id);
+    public function receiverInfo($contactId) {
+        return $this->model->receiverInfo($contactId)->first()->sender;
     }
 
     /**
+     * @param $contactId
+     *
      * @return mixed
      */
-    public function sender() {
-        return $this->model->with('sender')->first();
+    public function messages($contactId) {
+        return $this->model->agentMessages($contactId);
     }
 }

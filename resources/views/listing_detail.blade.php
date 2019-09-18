@@ -124,7 +124,7 @@
                             <div class="col-lg-7">
                                 <div class="row">
                                     <div class="col-lg-6">
-                                        @if(compareDates($listing->open_house, now()))
+                                        @if(compareDates($listing->open_house, now()) && !isAdmin())
                                             <a href="#check-availability" data-target="#check-availability" data-toggle="modal" class="btn apointment-btn">
                                                 Appointment
                                             </a>
