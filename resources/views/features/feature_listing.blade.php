@@ -27,10 +27,10 @@
                                 <span class="heart-icon"></span>
                                 <img src="{{ asset('storage/'.$fl->thumbnail) }}" alt="" class="main-img" />
                                 <div class="info">
-                                    <a href="#" class="info-link-text">
+                                    <div class="info-link-text">
                                         <p> $ {{ $fl->rent }} </p> <small> {{ $fl->bedrooms }} {{ $fl->bedrooms > 1 ? 'beds' : 'bed' }} , {{ $fl->baths }} {{ $fl->baths > 1 ? 'baths' : 'bath' }} </small>
                                         <p> {{ $fl->display_address }} </p>
-                                    </a>
+                                    </div>
                                     <a href="javascript:void(0)" class="btn viewfeature-btn"> View </a>
                                 </div>
                                 <div class="feaure-policy-text">
@@ -55,15 +55,17 @@
                                         <span class="heart-icon"></span>
                                         <img src="{{ asset('storage/'.$fl->thumbnail) }}" alt="" class="main-img" />
                                         <div class="info">
-                                            <a href="#">
-                                                <p>$ {{ $fl->rent }} </p>
-                                                <ul>
-                                                    <li><i class="fa fa-bed"></i> {{ $fl->bedrooms }}</li>
-                                                    <li><i class="fa fa-bath"></i> {{ $fl->baths }}</li>
-                                                </ul>
-                                            </a>
+                                            <div class="info-link-text">
+                                                <p> $ {{ $fl->rent }} </p> <small> {{ $fl->bedrooms }} {{ $fl->bedrooms > 1 ? 'beds' : 'bed' }} , {{ $fl->baths }} {{ $fl->baths > 1 ? 'baths' : 'bath' }} </small>
+                                                <p> {{ $fl->display_address }} </p>
+                                            </div>
                                             <a href="javascript:void(0)" class="btn viewfeature-btn"> View </a>
                                         </div>
+                                        <div class="feaure-policy-text">
+                                            <p>${{ $fl->rent }} / Month </p>
+                                            <span>2 bed , 1 bath </span>
+                                        </div>
+
                                     </div>
                                 </div>
                             @endforeach
@@ -84,7 +86,7 @@
                                 <span class="heart-icon"></span>
                                 <img src="{{ asset('storage/'.$fl->thumbnail) }}" alt="" class="main-img" />
                                 <div class="info">
-                                    <div href="#" class="info-link-text">
+                                    <div class="info-link-text">
                                         <p> $ {{ $fl->rent }} </p> <small> {{ $fl->bedrooms }} {{ $fl->bedrooms > 1 ? 'beds' : 'bed' }} , {{ $fl->baths }} {{ $fl->baths > 1 ? 'baths' : 'bath' }} </small>
                                         <p> {{ $fl->display_address }} </p>
                                     </div>
@@ -100,7 +102,7 @@
                     </div>
 
                     <div class="owl-slider">
-                        <div class="owl-carousel owl-theme" id="carousel-1">
+                        <div class="owl-carousel owl-theme" id="carousel-2">
                             @foreach($featured_listings["cheapest"] as $key => $fl)
                                 <div class="item">
                                     <div class="property-thumb">
@@ -112,22 +114,23 @@
                                         <span class="heart-icon"></span>
                                         <img src="{{ asset('storage/'.$fl->thumbnail) }}" alt="" class="main-img" />
                                         <div class="info">
-                                            <a href="#">
-                                                <p>$ {{ $fl->rent }} </p>
-                                                <ul>
-                                                    <li><i class="fa fa-bed"></i> {{ $fl->bedrooms }}</li>
-                                                    <li><i class="fa fa-bath"></i> {{ $fl->baths }}</li>
-                                                </ul>
-                                            </a>
+                                            <div class="info-link-text">
+                                                <p> $ {{ $fl->rent }} </p> <small> {{ $fl->bedrooms }} {{ $fl->bedrooms > 1 ? 'beds' : 'bed' }} , {{ $fl->baths }} {{ $fl->baths > 1 ? 'baths' : 'bath' }} </small>
+                                                <p> {{ $fl->display_address }} </p>
+                                            </div>
                                             <a href="javascript:void(0)" class="btn viewfeature-btn"> View </a>
                                         </div>
+                                        <div class="feaure-policy-text">
+                                            <p>${{ $fl->rent }} / Month </p>
+                                            <span>2 bed , 1 bath </span>
+                                        </div>
                                     </div>
-                                </div>
-                            @endforeach
+                                    </div>
+                                @endforeach
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
             <div class="tab-pane" id="tab3">
                 <div class="property-listing">
                     <div class="desktop-listiing">
@@ -141,23 +144,21 @@
                                 <span class="heart-icon"></span>
                                 <img src="{{ asset('storage/'.$fl->thumbnail) }}" alt="" class="main-img" />
                                 <div class="info">
-                                    <a href="#" class="info-link-text">
+                                    <div class="info-link-text">
                                         <p> $ {{ $fl->rent }} </p> <small> {{ $fl->bedrooms }} {{ $fl->bedrooms > 1 ? 'beds' : 'bed' }} , {{ $fl->baths }} {{ $fl->baths > 1 ? 'baths' : 'bath' }} </small>
                                         <p> {{ $fl->display_address }} </p>
-                                    </a>
+                                    </div>
                                     <a href="javascript:void(0)" class="btn viewfeature-btn"> View </a>
                                 </div>
                                 <div class="feaure-policy-text">
                                     <p>${{ $fl->rent }} / Month </p>
                                     <span>2 bed , 1 bath </span>
                                 </div>
-
                             </div>
                         @endforeach
                     </div>
-
                     <div class="owl-slider">
-                        <div class="owl-carousel owl-theme" id="carousel-1">
+                        <div class="owl-carousel owl-theme" id="carousel-3">
                             @foreach($featured_listings["pet_policy"] as $key => $fl)
                                 <div class="item">
                                     <div class="property-thumb">
@@ -169,17 +170,19 @@
                                         <span class="heart-icon"></span>
                                         <img src="{{ asset('storage/'.$fl->thumbnail) }}" alt="" class="main-img" />
                                         <div class="info">
-                                            <a href="#">
-                                                <p>$ {{ $fl->rent }} </p>
-                                                <ul>
-                                                    <li><i class="fa fa-bed"></i> {{ $fl->bedrooms }}</li>
-                                                    <li><i class="fa fa-bath"></i> {{ $fl->baths }}</li>
-                                                </ul>
-                                            </a>
+                                            <div class="info-link-text">
+                                                <p> $ {{ $fl->rent }} </p> <small> {{ $fl->bedrooms }} {{ $fl->bedrooms > 1 ? 'beds' : 'bed' }} , {{ $fl->baths }} {{ $fl->baths > 1 ? 'baths' : 'bath' }} </small>
+                                                <p> {{ $fl->display_address }} </p>
+                                            </div>
                                             <a href="javascript:void(0)" class="btn viewfeature-btn"> View </a>
                                         </div>
+                                        <div class="feaure-policy-text">
+                                            <p>${{ $fl->rent }} / Month </p>
+                                            <span>2 bed , 1 bath </span>
+                                        </div>
+
                                     </div>
-                                </div>
+                                    </div>
                             @endforeach
                         </div>
                     </div>
@@ -189,8 +192,6 @@
         <div class="text-center">
             {{--<a href="#" class="btn-default">view all</a>--}}
         </div>
-    </div>
-    </div>
 </section>
 
 <div class="container">
@@ -237,7 +238,7 @@
 </div>
 
 <script type="text/javascript">
-    $('.owl-slider #carousel-1').owlCarousel({
+    $('.owl-slider #carousel-1, .owl-slider #carousel-2, .owl-slider #carousel-3').owlCarousel({
         autoplay: true,
         responsiveClass: true,
         autoHeight: true,
@@ -262,4 +263,6 @@
             }
         }
     });
+
+
 </script>

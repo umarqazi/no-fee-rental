@@ -497,7 +497,7 @@
 
 .location-map-sec ul{
     list-style: disc;
-    list-style-position: inside;
+
 
 }
 .city-bike{
@@ -505,6 +505,7 @@
 }
 .location-map-sec .second-ul li{
     padding-bottom: 15px;
+    line-height: 20px;
     color: #717171;
     font-size: 18px;
 }
@@ -537,8 +538,8 @@
     background: #ccc;
     margin: 0 3px;
 }
-.owl-dots button.owl-dot.active {
-    background-color: #000;
+.owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span{
+    background: #f36f21 !important;
 }
 .owl-dots button.owl-dot:focus {
     outline: none;
