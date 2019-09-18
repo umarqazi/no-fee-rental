@@ -20,7 +20,8 @@
     {!! HTML::style('assets/css/style.css') !!}
     {!! HTML::style('assets/css/lightslider.css') !!}
     {!! HTML::style('assets/owlcarousel/assets/owl.carousel.min.css') !!}
-
+    {!! HTML::style('assets/owlcarousel/assets/owl.theme.default.min.css') !!}
+    
     <!-- JS -->
     {!! HTML::script('https://maps.googleapis.com/maps/api/js?key='.config('services.google.map_api').'&libraries=places') !!}
     {!! HTML::script("https://maps.googleapis.com/maps/api/place/autocomplete/json?input=1600+Amphitheatre&key=".config('services.google.map_api')) !!}

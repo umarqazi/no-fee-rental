@@ -1547,6 +1547,7 @@ footer .copyright .social-icons li a:hover {
   justify-content: space-between;
   align-items: center;
 }
+
 .calculator-container .calculator-wrapper .form-clm .form-group label {
   flex: 0 0 50%;
   font-weight: 700;
@@ -1943,6 +1944,37 @@ footer .copyright .social-icons li a:hover {
 .let-us-help-modal .textArea {
   height: 100px;
   padding-top: 10px;
+}
+footer .footer-wrapper .logo-text {
+    font-size: 13px;
+    color: #fff;
+    max-width: 218px;
+    margin-top: 15px;
+    font-weight: 400;
+    line-height: 28px;
+}
+footer .footer-wrapper h4 {
+    color: #fff;
+    font-family: 'Raleway', sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    margin-top: 15px;
+}
+footer .footer-wrapper .newsletter .title {
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+footer .footer-wrapper .newsletter p {
+    font-size: 13px;
+    color: #fff;
+}
+footer .copyright p {
+    margin-bottom: 0;
+    color: #fff;
+    font-size: 13px;
 }
 /*Responsive style*/
 @media only screen and (max-width: 1599px) {

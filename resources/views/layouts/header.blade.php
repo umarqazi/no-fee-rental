@@ -17,7 +17,7 @@
     </div>
     <div class="mobile-nav">
         <ul>
-            <li><a href="/">Rent</a></li>
+            <li><a href="/rent">Rent</a></li>
             <li><a href="/neighborhood">Neighborhood </a></li>
             <li>
                 <a class="" data-toggle="collapse" href="#menuToggle1" role="button" aria-expanded="false" aria-controls="menuToggle1">
@@ -43,9 +43,9 @@
                     </ul>
                 </div>
             </li>
-            @if(!auth()->guard(whoAmI())->check())
+            @if(!authenticated())
                 <li><a href="" data-toggle="modal" data-target="#login" class="signin-modal-btn close-menu">Login</a></li>
-                <li><a href="#" data-toggle="modal" data-target="#login" class="signup-modal-btn close-menu">signup</a></li>
+                <li><a href="#" data-toggle="modal" data-target="#login" class="signup-modal-btn close-menu">Signup</a></li>
             @endif
         </ul>
     </div>
@@ -57,7 +57,7 @@
             <a href="{!! url('/') !!}"> <img src="{{ asset('assets/images/logo.png') }}" class="logo" /></a>
             <ul class="menu-links">
                 <li>
-                    <a href="/">Rent </a>
+                    <a href="/rent">Rent </a>
                     <a href="/neighborhood">Neighborhood </a>
                 </li>
             </ul>
@@ -67,7 +67,7 @@
                     <div class="dropDown">
                     </div>
                 </div>
-                @if(Auth::guard(whoAmI())->check())
+                @if(authenticated())
                     <div class="login-user">
                         <a href="#">
                             <img
@@ -75,7 +75,7 @@
                                     ? asset('storage/'.mySelf()->profile_image)
                                     : asset('assets/images/agent-img.jpg') !!}
                                     " alt="" class="avtar" />
-                            {{ mySelf()->first_name." ".mySelf()->last_name }} <i class="fa fa-angle-down"></i>
+                            {{ mySelf()['first_name']." ".mySelf()['last_name'] }} <i class="fa fa-angle-down"></i>
                         </a>
                         <div class="user-dropdown">
                             <a href="{{ route(whoAmI().'.index') }}">Dashboard </a>
@@ -84,14 +84,13 @@
                         </div>
                     </div>
 
-                @endif
+                @else
                     <i class="fa fa-bars menu-btn"></i>
-                    @if(!Auth::guard(whoAmI())->check())
-                        <div class="actions-btns">
-                            <button type="button" class="signup-btn signup-modal-btn" data-toggle="modal" data-target="#signup">Signup</button>
-                            <button type="button" class="signup-btn login-btn signin-modal-btn" data-toggle="modal" data-target="#login">Login</button>
-                        </div>
-                    @endif
+                    <div class="actions-btns">
+                        <button type="button" class="signup-btn signup-modal-btn" data-toggle="modal" data-target="#signup">Signup</button>
+                        <button type="button" class="signup-btn login-btn signin-modal-btn" data-toggle="modal" data-target="#login">Login</button>
+                    </div>
+                @endif
             </div>
         </div>
     </div>
