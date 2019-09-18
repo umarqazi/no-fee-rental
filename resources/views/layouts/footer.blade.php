@@ -11,18 +11,18 @@
                 <h4 class="collapseabe-link">Renters <i class="fas fa-sort-down"></i></h4> 
                 <div class="collapse-menu">
                 <a href="http://no-fee-rental.teamtechverx.com/blog/?page_id=49" class="ft-links">Renters Guide</a>
-                <a href="#" class="ft-links">Help and Answers</a>
-                <a href="#" class="ft-links">Rent Calculator</a>
-                <a href="#" class="ft-links">Blog</a>
+                <a href="http://no-fee-rental.teamtechverx.com//blog/?page_id=68" class="ft-links">Help and Answers</a>
+                <a href="/" class="ft-links">Rent Calculator</a>
+                <a href="http://no-fee-rental.teamtechverx.com/blog" class="ft-links">Blog</a>
                 </div>
             </li>
             <li class="wow fadeInLeft" data-wow-delay="0.4s">
                 <h4 class="collapseabe-link"> Support <i class="fas fa-sort-down"></i></h4> 
                 <div class="collapse-menu">
                 <a href="{!! route('contact-us') !!}" class="ft-links">Contact Us</a>
-                <a href="#" class="ft-links">Site Map</a>
-                <a href="#" class="ft-links">Feedback</a>
-                <a href="#" class="ft-links">Advertise with Us</a>
+                <a href="http://no-fee-rental.teamtechverx.com/blog/?page_id=185" class="ft-links">Site Map</a>
+                <a href="http://no-fee-rental.teamtechverx.com/blog/?page_id=187" class="ft-links">Feedback</a>
+                <a href="http://no-fee-rental.teamtechverx.com/blog/?page_id=195" class="ft-links">Advertise with Us</a>
                 </div>
             </li>
             <li class="wow fadeInLeft" data-wow-delay="0.5s">
