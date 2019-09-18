@@ -28,6 +28,8 @@
        */
       public function subscribe(Request $request) {
           $res = $this->service->subscribe($request);
-          return sendResponse($request, $res, 'Successfully subscribed to newsletter.', null, 'Already Subscribed');
+          return ($res)
+                ? response()->json(['status' => true, 'msg' => 'Successfully subscribed to newsletter.'])
+                : response()->json(['status' => false, 'msg' => 'Already Subscribed']);
       }
   }
