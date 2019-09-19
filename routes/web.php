@@ -71,6 +71,9 @@ Route::post('/listing-detail', 'ListingController@detail');
 Route::get('/listing-detail/{id}', 'HomeController@detail')->name('listing.detail');
 
 // Notification Routes
+Route::post('/delete-notification/{id}', 'NotificationController@delete');
+Route::post('/mark-all-as-read', 'NotificationController@markAsRead');
+Route::post('/push-notification', 'NotificationController@push');
 Route::post('/fetch-notifications', 'NotificationController@get');
 Route::get('/all-notifications', 'NotificationController@all');
 

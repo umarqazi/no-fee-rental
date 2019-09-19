@@ -11,6 +11,7 @@ namespace App\Forms;
 use Illuminate\Contracts\Support\Arrayable;
 
 interface IForm extends Arrayable {
+
 	/**
 	 * @return mixed
 	 */

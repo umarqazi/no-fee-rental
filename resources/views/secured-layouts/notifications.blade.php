@@ -3,9 +3,9 @@
 @section('content')
 <section class="notification-detail">
 <div class="notification-details">
-                <h3>Notifications
-                  <a href=""class="setting-text"> Settings</a>
-                </h3>
+    <h3>Notifications
+        <a href="" class="setting-text"> Settings</a>
+    </h3>
                     <div class="notiofication-content-dt">
                         <img src="{!! asset('assets/images/account-img.jpg') !!}"> <a href="">new guest account(s) have been created.</a> <i class="fas fa-times"></i>
                     </div>
@@ -32,7 +32,7 @@
                     </div>
 
                 <div class="clearfix"> </div>
-                
+
             </div>
 </section>
 @endsection
@@ -52,7 +52,7 @@
         box-sizing: border-box;
         box-shadow: 0.5rem 0.5rem 2rem 0 rgba(0, 0, 0, 0.2);
     }
-    
+
     .notification-details:before {
         content: "";
         position: absolute;
@@ -65,7 +65,7 @@
         border-right: .75rem solid transparent;
         border-bottom: .75rem solid white;
     }
-    
+
     .notification-details img {
         width: 40px;
         height: 40px;
@@ -77,7 +77,7 @@
         border-radius: 100px;
         float: left;
     }
-    
+
     .notification-details h3 {
         text-transform: uppercase;
         font-size: 75%;
@@ -86,18 +86,18 @@
         padding: 20px;
         margin-bottom: 0px;
     }
-    
+
     .notification-details i {
         color: #b5c4d2;
         font-size: 140%;
         @vertical-align (50%);
         position: absolute;
     }
-    
+
     .notification-details i.right {
         right: 2rem;
     }
-    
+
     .notification-details i.right:hover {
         opacity: .8;
         cursor: pointer;
@@ -125,7 +125,7 @@
         border-bottom: 1px solid #94929f;
         position: relative;
     }
-    
+
     .notiofication-content-dt a {
         position: relative;
         top: -3px;
@@ -133,7 +133,7 @@
         width: 80%;
         display: inline-table;
     }
-    
+
     .notiofication-content-dt .fa-times {
         position: absolute;
         top: 15px;
@@ -161,7 +161,7 @@
             right: 10px;
         }
         .notiofication-content-dt{
-            padding: 15px 10px 5px; 
+            padding: 15px 10px 5px;
         }
         .notiofication-content-dt .fa-times{
             right: 5px;
