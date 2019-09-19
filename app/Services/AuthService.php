@@ -49,9 +49,7 @@ class AuthService {
         }
 
         if ($this->attemptLogin($request)) {
-            return ($request->ajax())
-                    ? response()->json(['data' => ['url' => "/{$this->guard}/home"], 'status' => true])
-                    : $this->sendLoginResponse($request);
+            return sendResponse($request, ['url' => "{$this->guard}/home"], null);
         }
 
         // If the login attempt was unsuccessful we will increment the number of attempts
