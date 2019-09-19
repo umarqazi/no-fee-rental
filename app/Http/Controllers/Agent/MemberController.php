@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Agent;
 
 use App\Services\MemberService;
+use App\Services\UserService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -18,8 +19,9 @@ class MemberController extends Controller
      *
      * @param MemberService $service
      */
-    public function __construct(MemberService $service) {
+    public function __construct(MemberService $service, UserService $service1) {
         $this->service = $service;
+        $this->service1 = $service1;
     }
 
     /**
@@ -48,6 +50,21 @@ class MemberController extends Controller
     public function invite(Request $request) {
         $invite = $this->service->sendInvite($request);
         return sendResponse($request, $invite, 'Invitation has been sent.');
+    }
+    /**
+     *  Accept Invitation
+     *
+     * @param Request $request
+     *
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
+     */
+    public function acceptInvitation($token) {
+        $authenticate_token = $this->service->getAgentToken($token)->first();
+       $res  = $this->service1->addMember($authenticate_token);
+       if($res){
+           return redirect(route('web.index'))
+               ->with(['message' => 'You have been added to Team', 'alert_type' => 'success']);
+       }
     }
 }
 
