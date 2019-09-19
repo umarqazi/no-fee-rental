@@ -916,6 +916,9 @@ footer .footer-wrapper {
   display: flex;
   justify-content: space-between;
 }
+.footer-wrapper .collapseabe-link .fa-sort-down{
+  display:none;
+}
 footer .footer-wrapper > li {
   flex: auto;
   width: calc(100% / 5);
@@ -2479,6 +2482,9 @@ footer .footer-wrapper img{
   }
   .let-us-hlep-form .modal-header .modal-title {
     font-size: 18px;
+  }
+  .footer-wrapper .collapseabe-link .fa-sort-down{
+    display:block;
   }
 }
 @media only screen and (max-width: 576px) {
