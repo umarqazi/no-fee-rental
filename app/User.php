@@ -36,14 +36,6 @@ class User extends Authenticatable implements CanResetPassword {
 		'email_verified_at' => 'datetime',
 	];
 
-    /**
-     * @param string $token
-     */
-	public function sendPasswordResetNotification($token) {
-	    dd($token);
-//        $this->notify(new ResetPasswordNotification(($token)));
-    }
-
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
 	 */
