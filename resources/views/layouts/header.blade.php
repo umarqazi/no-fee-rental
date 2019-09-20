@@ -67,13 +67,14 @@
                     <div class="dropDown">
                     </div>
                 </div>
+                <i class="fa fa-bars menu-btn"></i>
                 @if(authenticated())
                     <div class="login-user">
                         <a href="#">
                             <img
                                 src = "{!! !empty(mySelf()->profile_image)
                                     ? asset('storage/'.mySelf()->profile_image)
-                                    : asset('assets/images/agent-img.jpg') !!}
+                                    : asset('assets/images/default.jpeg') !!}
                                     " alt="" class="avtar" />
                             {{ mySelf()['first_name']." ".mySelf()['last_name'] }} <i class="fa fa-angle-down"></i>
                         </a>
@@ -85,7 +86,6 @@
                     </div>
 
                 @else
-                    <i class="fa fa-bars menu-btn"></i>
                     <div class="actions-btns">
                         <button type="button" class="signup-btn signup-modal-btn" data-toggle="modal" data-target="#signup">Signup</button>
                         <button type="button" class="signup-btn login-btn signin-modal-btn" data-toggle="modal" data-target="#login">Login</button>

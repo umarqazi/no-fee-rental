@@ -22,4 +22,7 @@ $(() => {
             $selector.after(`<label id="license-error" class="neigh" for="baths">Invalid License Number.</label>`);
         }
     });
+    
 });
+
+

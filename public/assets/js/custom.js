@@ -325,11 +325,41 @@ $('#price-range-submit').hide();
 	$('#image-gallery').lightSlider({
 		gallery: true,
 		item: 1,
-		thumbItem: 4,
+		thumbItem: 10,
 		slideMargin: 0,
 		speed: 900,
 		auto: false,
-		loop: true,
+		loop: false,
+		responsive : [
+            {
+                breakpoint:1279,
+                settings: {
+                    item:1,
+                    thumbItem:8,
+                    slideMove:1,
+                  }
+            },
+            {
+                breakpoint:1024,
+                settings: {
+                    item:1,
+                    thumbItem:6,
+                    slideMove:1
+                  },
+                  breakpoint:991,
+                settings: {
+                    item:1,
+                    thumbItem:5,
+                    slideMove:1
+                  },
+                  breakpoint:767,
+                settings: {
+                    item:1,
+                    thumbItem:5,
+                    slideMove:1
+                  }
+            }
+        ],
 		onSliderLoad: function () {
 			$('#image-gallery').removeClass('cS-hidden');
 		}
@@ -371,5 +401,9 @@ $('#price-range-submit').hide();
         $('#divNewNotifications li').on('click', function() {
             $('#dropdown_title').html($(this).find('a').html());
         });
+    	$(".signup-modal-btn").click(function(){
+      		$('body').addClass('signup-modal-scroll');
+    	});
     });
+
 });

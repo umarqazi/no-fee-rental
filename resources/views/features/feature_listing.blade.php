@@ -245,6 +245,7 @@
         autoplayTimeout: 7000,
         smartSpeed: 800,
         nav: true,
+        dots:false,
         responsive: {
             0: {
                 items: 1

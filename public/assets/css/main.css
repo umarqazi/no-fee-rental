@@ -650,7 +650,7 @@ h3 {
 }
 .login-modal .modal-dialog .logo-info-wrapper .logo {
   display: block;
-  margin: 55px auto 78px auto;
+  margin: 55px auto 35px auto;
 }
 .login-modal .modal-dialog .logo-info-wrapper h3 {
   color: #fff;
@@ -811,10 +811,11 @@ h3 {
   position: absolute;
   bottom: 0;
   width: 100%;
-  padding: 50px 10px 15px 10px;
-display: flex;
-align-items: center;
-justify-content: space-between;
+  padding: 26px 10px 15px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 2;
 }
 .featured-properties .property-listing .property-thumb .info p {
   color: #fff;
@@ -1022,8 +1023,7 @@ footer .footer-wrapper .newsletter .newsletter-form .ajax-loader{
 footer .footer-wrapper .newsletter .newsletter-form .fld {
   background: #fff;
   padding-left: 10px;
-  border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px;
+  border-radius: 5px;
   border: none;
   height: 40px;
   flex: 60%;
@@ -1032,12 +1032,14 @@ footer .footer-wrapper .newsletter .newsletter-form .fld {
   width: 100%;
 }
 footer .footer-wrapper .newsletter .newsletter-form .btn-default {
-  font-size: 14px;
+  font-size: 12px;
   text-transform: capitalize;
   padding: 0px 15px;
-  line-height: 40px;
-  position: relative;
-  left: -4px;
+  line-height: 34px;
+  position: absolute;
+  right: 2px;
+  top: 2px;
+  bottom: 2px;
   cursor:pointer;
 }
 footer .copyright {
@@ -1565,9 +1567,34 @@ footer .copyright .social-icons li a:hover {
 .neighborhood-search .search-result-wrapper {
   display: flex;
 }
+
 .neighborhood-search .search-result-wrapper .map-wrapper {
   flex: 0 0 50%;
   padding: 0px 15px;
+  position: relative;
+  height: 618px;
+}
+
+.neighborhood-search .search-result-wrapper .map-wrapper.full-map{
+  flex: 0 0 100%;
+}
+
+.neighborhood-search .search-result-wrapper .map-wrapper .swipe-btn{
+  position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    background-color: #f36f21;
+    color: #fff;
+    font-size: 16px;
+    z-index: 99;
+    line-height: normal;
+    padding: 8px 12px;
+    border-radius: 50%;
+    -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.22);
+-moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.22);
+box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.22);
+cursor: pointer;
 }
 .neighborhood-search .search-result-wrapper .map-wrapper.map-small-view {
   flex: 0 0 50%;
@@ -1575,6 +1602,10 @@ footer .copyright .social-icons li a:hover {
 .neighborhood-search .search-result-wrapper .search-listing {
   padding: 0px 0px 20px 15px;
   flex: auto;
+  transition: all ease-in-out 0.3s;
+}
+.neighborhood-search .search-result-wrapper .search-listing.hide-list{
+  display: none;
 }
 .neighborhood-search .search-result-wrapper .search-listing h3 {
   margin-bottom: 10px;
@@ -1764,11 +1795,7 @@ footer .copyright .social-icons li a:hover {
   opacity: 1;
   border-radius: 0 !important;
 }
-.listing-detail-container .lSGallery li img {
-  height: 150px !important;
-  width: 100% !important;
-  object-fit: cover;
-}
+
 .listing-detail-container .listing-info .product-title {
   display: flex;
   justify-content: space-between;
@@ -1781,6 +1808,7 @@ footer .copyright .social-icons li a:hover {
   font-weight: 600;
   color: #223971;
   font-family: 'Raleway', sans-serif;
+  flex:85%;
 }
 .listing-detail-container .listing-info .title-subtext {
   color: #6a6d72;
@@ -1879,6 +1907,11 @@ footer .copyright .social-icons li a:hover {
 .listing-detail-container .nearby-listing {
   background: none;
   padding: 0px;
+}
+
+
+.appointment-iconDetails {
+  margin-right: 15px;
 }
 /*Blog page*/
 .blog-page h3 span {
@@ -2083,6 +2116,7 @@ footer .copyright .social-icons li a:hover {
 .featured-properties .property-listing .info a{
   display: inline-block;
 }
+
 .featured-properties .property-listing .info p{
   display: inline-block;
   font-size: 13px;
@@ -2251,9 +2285,7 @@ footer .copyright .social-icons li a:hover {
     margin: 0px -30px;
     justify-content: center;
 }
-.property-listing .owl-nav{
-  display: none;
-}
+
 .property-listing .owl-dots{
   width: 100%;
   left: 0;
@@ -2261,6 +2293,206 @@ footer .copyright .social-icons li a:hover {
 }
 .property-listing .owl-dots button.owl-dot{
   position: relative;
+}
+.mobile-view-dropdown{
+  display:none;
+}
+
+
+.error {
+  color:red;
+}
+
+
+#signup .modal-dialog-scrollable .modal-content{
+    max-height: calc(100vh - -100px) !important;
+    overflow: initial;
+}
+
+.search-result-wrapper .search-bdr-top{
+  width: 100%;
+  background-color:#F8F8F8;
+  padding: 10px 15px;
+}
+
+
+.sort-by-wrapper .custom-select-list{
+  height: 32px;
+}
+.search-result-wrapper .search-listing h3{
+  padding-top: 20px;
+  color: #3D3A39;
+}
+
+.dropdown-warp{
+  display: flex;
+}
+/*Styling Selectbox*/
+
+.btn-group__multiple .dropdown-menu {
+  min-width: 100%;
+}
+.search-bdr-top .btn-group__multiple > .btn{
+  width: 70px;
+  background-color: #fff;
+  color: blue;
+  color: #000;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  text-transform: initial;
+  margin-right: 5px;
+}
+.search-bdr-top .btn-default{
+  background: #223971;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 14px;
+  padding: 0px 0px;
+  border-radius: 5px;
+  line-height: 34px;
+  display: inline-block;
+  border: none;
+  outline: none !important;
+}
+.dropdown-wrap{
+  display: flex;
+}
+.search-bdr-top .btn-group__multiple .dropdown-menu{
+  border-radius: 8px;
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.22);
+  -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.22);
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.22);
+  border: none;
+}
+.search-bdr-top .btn-group__multiple ul li{
+  position: relative;
+  padding: 10px 30px 0px 20px;
+  border-bottom: 1px solid #ddd;
+}
+.search-bdr-top .btn-group__multiple ul li:nth-last-child(1){
+  border-bottom: none;
+}
+.search-bdr-top .dropdown-toggle::after{
+  display: none;
+}
+.search-bdr-top .btn-group__multiple .dropdown-menu label{
+  color: #223971;
+  font-size: 15px;
+}
+.search-bdr-top .btn-default:hover,
+.search-bdr-top .btn-default:active;
+.search-bdr-top .btn-default:focus{
+  background-color: #223971;
+  color: #fff;
+}
+.search-bdr-top .price-dropdown .btn-default{
+  width: 70px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  color: #000;
+  text-transform: initial;
+}
+.search-bdr-top .price-dropdown .form-group{
+  background-color: #fff;
+  padding: 10px;
+  width: 280px;
+}
+#advance-search .price-dropdown .form-group .input-style{
+  width: 80px;
+}
+
+.property-listing.neighbourhood-listing{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+/**/
+
+#mobile-map-listing-view{
+  display: none;
+}
+.radio-button {
+  display: block;
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default radio button */
+.radio-button input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Create a custom radio button */
+.radio-button .checkmark {
+  position: absolute;
+  top: 1px;
+  left: 0;
+  height: 12px;
+  width: 12px;
+  background-color: transparent;
+  border: 1px solid #223971;
+  border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+ .radio-button:hover .checkmark {
+  background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+.radio-button input:checked ~ label .checkmark {
+  background-color: #ffffff;
+  border: 1px solid #223971;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.radio-button .checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.radio-button input:checked ~ label .checkmark:after {
+  display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.radio-button .checkmark:after {
+  top: 2px;
+  left: 2px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #f36f21;
+}
+.desktop-listiing{
+    margin: 0px 0px;
+}
+.mobile-map-icon{
+  display: none;
+}
+
+.login-form-wrapper .row.form-group .forgot-pass{
+  text-align: right;
+}
+/*#login , #signup{*/
+  /*z-index: 99;*/
+/*}*/
+@media (max-width: 1260px){
+  .modal-dialog {
+    margin:.5rem !important; 
+  }
 }
 @media (max-width: 991px) {
     #appointmentModal .padding-leftt-0 {
@@ -2272,6 +2504,34 @@ footer .copyright .social-icons li a:hover {
     #appointmentModal .modal-body img {
         margin-bottom: 10px;
     }
+    .neighborhood-search .search-result-wrapper .search-listing .sort-by-wrapper{
+    padding-right:15px;
+    margin-top: 15px;
+    } 
+    .dropdown-wrap{
+    margin-top: 15px;
+    }
+    .mobile-view-dropdown{
+      display: block;
+    }
+    .mobile-view-dropdown i{
+      color: #f36f21;
+      margin-right: 5px;
+    }
+    #mobile-tabs-collapse{
+      display: none;
+    }
+    .collapse.show{
+      display: block !important;
+    }
+    #boxscroll2{
+      height: auto;
+      margin-top: 0;
+      overflow:hidden;
+    }
+    .search-result-wrapper .search-bdr-top{
+      padding:12px 15px;
+    } 
 }
 
 @media (min-width: 576px) {
@@ -2379,6 +2639,10 @@ footer .footer-wrapper .logo-text{
   max-width: 100%;
   text-align:center;
   margin-bottom: 15px;
+}
+
+.listing-detail-container .lSSlideOuter .lSPager.lSGallery{
+  display: none;
 }
 }
 @media only screen and (max-width: 991px) {
@@ -2643,6 +2907,40 @@ footer .footer-wrapper .logo-text{
 .featured-properties{
   padding: 40px 0px;
 }
+.mobile-map-icon{
+    position: absolute;
+    top: 7px;
+    right: 15px;
+    background: #223971;
+    color: #fff;
+    padding: 8px 0px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 12px;
+    width: 28px;
+    text-align: center;
+  }
+  .mobile-map-icon{
+  display: block;
+}
+  .neighborhood-search .search-result-wrapper .map-wrapper{
+    display: none;
+  }
+
+  #mobile-map-listing-view{
+    width: 100%;
+    height: 450px;
+    position: absolute;
+    z-index: 9;
+    top: 40px;
+    left: 0;
+    display: none;
+  }
+  .listing-Details .lSSlideOuter .lSPager.lSGallery img{
+    height: 85px !important;
+  }
+
+
 }
 @media only screen and (max-width: 767px) {
   .header-wrapper .header-container .logo {
@@ -2733,25 +3031,87 @@ footer .footer-wrapper .logo-text{
     margin: 15px 0px 0px;
     padding: 0px;
   }
-  .neighborhood-search .search-result-wrapper .search-listing .featured-properties .property-listing .owl-nav button {
-    margin: 0px;
+  .neighborhood-search .search-result-wrapper #contentscroll2 .property-listing .owl-nav{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 0px 0px 0px;
+    padding: 0px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #f36f21;
+  }
+  .neighborhood-search .search-result-wrapper #contentscroll2 .property-listing .owl-nav .owl-prev span{
+    color: #f36f21;
+    font-size: 36px;
+    line-height: 16px;
+    height: auto;
+  }
+  .neighborhood-search .search-result-wrapper #contentscroll2 .property-listing .owl-nav .owl-next span{
+    color: #f36f21;
+    font-size: 36px;
+    line-height: 16px;
+    height: auto;
+  }
+  .neighborhood-search .search-result-wrapper #contentscroll2 .property-listing .owl-nav button {
+    margin: 0px !important;
     padding: 0px;
     outline: none !important;
   }
-  .neighborhood-search .search-result-wrapper .search-listing .featured-properties .property-listing .owl-nav button span {
-    display: none;
-  }
-  .neighborhood-search .search-result-wrapper .search-listing .featured-properties .property-listing .owl-nav button.owl-prev {
+  .neighborhood-search .search-result-wrapper #contentscroll2 .property-listing .owl-nav button.owl-prev {
     background: url(../images/slider-arrow-left.png) no-repeat;
     background-size: 100%;
-    width: 60px;
-    height: 60px;
+    width: 40px;
+    height: 40px;
   }
-  .neighborhood-search .search-result-wrapper .search-listing .featured-properties .property-listing .owl-nav button.owl-next {
+
+  .neighborhood-search .search-result-wrapper #contentscroll2 .property-listing .owl-nav button.owl-next {
     background: url(../images/slider-arrow-right.png) no-repeat;
     background-size: 100%;
-    width: 60px;
-    height: 60px;
+    width: 40px;
+    height: 40px;
+  }
+  .tab-content .property-listing .owl-nav{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 0px 0px 0px;
+    padding: 0px;
+    top: 45%;
+    transform: translateY(-50%);
+    color: #f36f21;
+  }
+   .tab-content .property-listing .owl-nav .owl-prev span{
+    color: #f36f21;
+    font-size: 36px;
+    line-height: 16px;
+    height: auto;
+  }
+  .tab-content .property-listing .owl-nav .owl-next span{
+    color: #f36f21;
+    font-size: 36px;
+    line-height: 16px;
+    height: auto;
+  }
+  .tab-content .property-listing .owl-nav button {
+    margin: 0px !important;
+    padding: 0px;
+    outline: none !important;
+  }
+  
+.tab-content .property-listing .owl-nav button.owl-prev {
+    background: url(../images/slider-arrow-left.png) no-repeat;
+    background-size: 100%;
+    width: 40px;
+    height: 40px;
+  }
+ .tab-content .property-listing .owl-nav button.owl-next {
+    background: url(../images/slider-arrow-right.png) no-repeat;
+    background-size: 100%;
+    width: 40px;
+    height: 40px;
   }
   .neighborhood-search {
     padding: 60px 0px 70px;
@@ -2773,12 +3133,10 @@ footer .footer-wrapper .logo-text{
     margin-top: 10px;
     bottom: 0;
   }
-  .listing-detail-container .lSGallery li img {
-    height: 80px !important;
-  }
-  .listing-detail-container .listing-info .product-title {
+
+  /*.listing-detail-container .listing-info .product-title {
     display: block;
-  }
+  }*/
   .listing-detail-container .listing-info .product-title p {
     margin-bottom: 15px;
   }
@@ -2808,7 +3166,16 @@ footer .footer-wrapper .logo-text{
   .desktop-listiing{
     display: none;
   }
-
+  .neighborhood-search .search-result-wrapper .search-listing .featured-properties .property-listing {
+    display: block;
+  }
+  .neighborhood-search .search-result-wrapper .search-listing .featured-properties .property-listing {
+    display: none;
+  }
+  .neighborhood-search .search-result-wrapper .search-listing{
+    padding: 0px 0px 20px 0px;
+  }
+ 
 }
 @media only screen and (min-width: 577px) and (max-width: 767px){
   .featured-properties .property-listing .info .info-link-text{
@@ -2817,10 +3184,15 @@ footer .footer-wrapper .logo-text{
   .property-listing .owl-slider .property-thumb{
     width: 92% !important;
   }
+  .listing-Details .lSSlideOuter .lSPager.lSGallery img{
+    height: 60px !important;
+  }
+  
 }
 @media only screen and (max-width: 576px) {
   .featured-properties .property-listing .property-thumb {
-    width: calc(100% / 1 - 30px);
+    width: calc(100% / 1);
+    margin: 0;
   }
   .featured-properties .nav-pills li a {
     font-size: 16px;
@@ -2860,186 +3232,27 @@ footer .footer-wrapper .logo-text{
   .let-us-help-modal .cities-list li {
     flex: 0 0 50%;
   }
+  .appointment-section{
+    display: block !important;
+  }
+  .appointment-agent-img-section{
+    margin-bottom: 10px;
+  }
+  .appointment-buttons-section a{
+    width: 100% !important;
+  }
+  .appointment-section .apointment-btn{
+    margin-bottom: 10px;
+  }
+  .listing-Details .lSSlideOuter .lSPager.lSGallery img{
+    height: auto !important;
+  }
+  .login-form-wrapper .row.form-group .forgot-pass{
+  text-align: center;
+  margin-top: 20px;
+  }
 }
 
-.error {
-  color:red;
-}
-
-
-#signup .modal-dialog-scrollable .modal-content{
-    max-height: calc(100vh - -100px) !important;
-    overflow: initial;
-}
-
-.search-result-wrapper .search-bdr-top{
-  width: 100%;
-  background-color:#F8F8F8;
-  padding: 10px 15px;
-}
-
-
-.sort-by-wrapper .custom-select-list{
-  height: 32px;
-}
-.search-result-wrapper .search-listing h3{
-  padding-top: 20px;
-  color: #3D3A39;
-}
-
-.dropdown-warp{
-  display: flex;
-}
-/*Styling Selectbox*/
-
-.btn-group__multiple .dropdown-menu {
-  min-width: 100%;
-}
-.search-bdr-top .btn-group__multiple > .btn{
-  width: 70px;
-  background-color: #fff;
-  color: blue;
-  color: #000;
-  border: 1px solid #ddd;
-  font-size: 14px;
-  text-transform: initial;
-  margin-right: 5px;
-}
-.search-bdr-top .btn-default{
-  background: #223971;
-  color: #fff;
-  text-transform: uppercase;
-  font-size: 14px;
-  padding: 0px 0px;
-  border-radius: 5px;
-  line-height: 34px;
-  display: inline-block;
-  border: none;
-  outline: none !important;
-}
-.dropdown-wrap{
-  display: flex;
-}
-.search-bdr-top .btn-group__multiple .dropdown-menu{
-  border-radius: 8px;
-  -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.22);
-  -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.22);
-  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.22);
-  border: none;
-}
-.search-bdr-top .btn-group__multiple ul li{
-  position: relative;
-  padding: 10px 30px 0px 20px;
-  border-bottom: 1px solid #ddd;
-}
-.search-bdr-top .btn-group__multiple ul li:nth-last-child(1){
-  border-bottom: none;
-}
-.search-bdr-top .dropdown-toggle::after{
-  display: none;
-}
-.search-bdr-top .btn-group__multiple .dropdown-menu label{
-  color: #223971;
-  font-size: 15px;
-}
-.search-bdr-top .btn-default:hover,
-.search-bdr-top .btn-default:active;
-.search-bdr-top .btn-default:focus{
-  background-color: #223971;
-  color: #fff;
-}
-.search-bdr-top .price-dropdown .btn-default{
-  width: 70px;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  color: #000;
-  text-transform: initial;
-}
-.search-bdr-top .price-dropdown .form-group{
-  background-color: #fff;
-  padding: 10px;
-  width: 280px;
-}
-#advance-search .price-dropdown .form-group .input-style{
-  width: 80px;
-}
-
-.property-listing.neighbourhood-listing{
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-}
-
-/**/
-
-
-.radio-button {
-  display: block;
-  position: relative;
-  padding-left: 20px;
-  margin-bottom: 12px;
-  cursor: pointer;
-  font-size: 22px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-/* Hide the browser's default radio button */
-.radio-button input {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-}
-
-/* Create a custom radio button */
-.radio-button .checkmark {
-  position: absolute;
-  top: 1px;
-  left: 0;
-  height: 12px;
-  width: 12px;
-  background-color: transparent;
-  border: 1px solid #223971;
-  border-radius: 50%;
-}
-
-/* On mouse-over, add a grey background color */
- .radio-button:hover .checkmark {
-  background-color: #ccc;
-}
-
-/* When the radio button is checked, add a blue background */
-.radio-button input:checked ~ label .checkmark {
-  background-color: #ffffff;
-  border: 1px solid #223971;
-}
-
-/* Create the indicator (the dot/circle - hidden when not checked) */
-.radio-button .checkmark:after {
-  content: "";
-  position: absolute;
-  display: none;
-}
-
-/* Show the indicator (dot/circle) when checked */
-.radio-button input:checked ~ label .checkmark:after {
-  display: block;
-}
-
-/* Style the indicator (dot/circle) */
-.radio-button .checkmark:after {
-  top: 2px;
-  left: 2px;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #f36f21;
-}
-.desktop-listiing{
-    margin: 0px 0px;
-}
 
 /*Neighbourhood*/
 @media only screen and (max-width: 1279px) {
