@@ -73,7 +73,7 @@
                             <img
                                 src = "{!! !empty(mySelf()->profile_image)
                                     ? asset('storage/'.mySelf()->profile_image)
-                                    : asset('assets/images/agent-img.jpg') !!}
+                                    : asset('assets/images/default.jpeg') !!}
                                     " alt="" class="avtar" />
                             {{ mySelf()['first_name']." ".mySelf()['last_name'] }} <i class="fa fa-angle-down"></i>
                         </a>
