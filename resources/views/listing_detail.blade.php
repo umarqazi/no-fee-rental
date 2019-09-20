@@ -94,12 +94,6 @@
                         <div class="col-lg-6 col-sm-6">
                             <div class="row">
                                 <div class="col-lg-8 col-8">
-                                    <span>Broker fee: </span>
-                                </div>
-                                <div class="col-lg-4 col-4">
-                                    <strong> No fee</strong>
-                                </div>
-                                <div class="col-lg-8 col-8">
                                     <span>Application fee: </span>
                                 </div>
                                 <div class="col-lg-4 col-4">
