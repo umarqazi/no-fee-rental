@@ -43,7 +43,7 @@ class MemberController extends Controller
      */
     public function get() {
         $data = $this->mService->invites();
-        return dataTable(!empty($data) ? $data->invitedAgent : []);
+        return dataTable(!empty($data) ? $data->invitedAgents : []);
     }
 
     /**
@@ -65,7 +65,7 @@ class MemberController extends Controller
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
     public function acceptInvitation($token) {
-        $authenticate_token = $this->mService->getAgentToken($token)->first();
+        $authenticate_token = $this->uService->getAgentToken($token)->first();
        $res  = $this->uService->addMember($authenticate_token);
        if($res){
            return redirect(route('web.index'))
