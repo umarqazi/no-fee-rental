@@ -80,8 +80,6 @@
 
 
 <script type="text/javascript">
-
-
     function togglefooterlink() {
     if (window.matchMedia('(max-width: 1279px)').matches) {
         $(".collapseabe-link").click(function(){

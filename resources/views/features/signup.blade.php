@@ -117,4 +117,5 @@
         </div>
     </div>
 </div>
+
 {!! HTML::script('assets/js/signup.js') !!}
