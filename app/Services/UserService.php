@@ -267,7 +267,6 @@ class UserService {
 
             return $agent->validate();
         }
-
         $this->aRepo->invite($agent->toArray());
         $this->agentMail($agent);
         return true;

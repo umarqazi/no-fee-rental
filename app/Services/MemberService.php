@@ -25,7 +25,6 @@ class MemberService extends UserService {
      * @param MemberRepo $repo
      */
     public function __construct(MemberRepo $repo) {
-        parent::__construct(new UserRepo);
         $this->repo = $repo;
     }
 

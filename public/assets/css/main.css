@@ -2486,9 +2486,9 @@ cursor: pointer;
 .login-form-wrapper .row.form-group .forgot-pass{
   text-align: right;
 }
-#login , #signup{
-  z-index: 99;
-}
+/*#login , #signup{*/
+  /*z-index: 99;*/
+/*}*/
 @media (max-width: 1260px){
   .modal-dialog {
     margin:.5rem !important; 
