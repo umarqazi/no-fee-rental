@@ -9,7 +9,7 @@
         z-index: 20;
     }
 </style>
-<section class="neighborhood-search wow fadeIn listing-detail-container" data-wow-delay="0.2s">
+<section class="listing-Details neighborhood-search wow fadeIn listing-detail-container" data-wow-delay="0.2s">
     <div class="container-lg">
         <div class="row">
             <div class="col-lg-6">
@@ -27,7 +27,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6 ">
+            <div class="col-lg-6">
                 <div class="listing-info">
                     <div class="product-title">
                         <p> {{$listing->display_address}} </p>
@@ -53,19 +53,17 @@
                     <div class="apartment-details">
                         <h4> ${{$listing->rent}} / month</h4>
                     </div>
-                    <div class="row after-apartment-icon">
-                        <div class="col-lg-3 col-3">
-                            <i class="fas fa-bed"></i> {{$listing->bedrooms}} {{ $listing->bedrooms > 1 ? 'Beds' : 'Bed'}}
+                   
+                        <div class="appointment-iconDetails">
+                            <ul>
+                            <li> <i class="fas fa-bed"></i> {{$listing->bedrooms}} {{ $listing->bedrooms > 1 ? 'Beds' : 'Bed'}} </li>
+                             <li> <i class="fas fa-bath"> </i> {{$listing->baths}} {{ $listing->baths > 1 ? 'Baths' : 'Bath' }} </li>
+                             <li> <i class="fas fa-ruler"> </i> {{$listing->square_feet}} ft </li>
+                         </ul>
                         </div>
-                        <div class="col-lg-3 col-3">
-                            <i class="fas fa-bath"> </i> {{$listing->baths}} {{ $listing->baths > 1 ? 'Baths' : 'Bath' }}
-                        </div>
-                        <div class="col-lg-3 col-3">
-                            <i class="fas fa-ruler"> </i> {{$listing->square_feet}} ft
-                        </div>
-                    </div>
-                    <div class="row Availability-date-sec">
-                        <div class="col-lg-6">
+                <div class="Availability-date-sec">
+                    <div class="row ">
+                        <div class="col-lg-6 col-sm-6">
                             <div class="row">
                                 <div class="col-lg-8 col-8">
                                     <span>Availability date: </span>
@@ -93,7 +91,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 col-sm-6">
                             <div class="row">
                                 <div class="col-lg-8 col-8">
                                     <span>Broker fee: </span>
@@ -122,26 +120,19 @@
                             </div>
                         </div>
                     </div>
+                </div>
                     <div class="appointment-section">
-                        <div class="row">
-                            <div class="col-lg-5">
-                                <a href="#"><img src="/assets/images/careers-icon.png" alt="apointment"></a>
-                                <p> 1 agent from <strong>Arraynyc </strong></p>
-                            </div>
-                            <div class="col-lg-7">
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        @if(compareDates($listing->open_house, now()) && !isAdmin())
-                                            <a href="#check-availability" data-target="#check-availability" data-toggle="modal" class="btn apointment-btn">
-                                                Appointment
-                                            </a>
-                                        @endif
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <a href="#" class="btn contct-agent-btn">Check Availability </a>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="appointment-agent-img-section">
+                            <a href="#"><img src="/assets/images/careers-icon.png" alt="apointment"></a>
+                            <p> 1 agent from <strong>Arraynyc </strong></p>
+                        </div>
+                        <div class="appointment-buttons-section">
+                            @if(compareDates($listing->open_house, now()) && !isAdmin())
+                                <a href="#check-availability" data-target="#check-availability" data-toggle="modal" class="btn apointment-btn">
+                                    Appointment
+                                </a>
+                            @endif
+                            <a href="#" class="btn contct-agent-btn">Check Availability </a>
                         </div>
                     </div>
                 </div>
@@ -151,11 +142,10 @@
         <p>{{$listing->description ?? 'N/A'}}</p>
         <div class="listing-aminities-sec">
             <h3>Amenities </h3>
-            <div class=" col-lg-12">
                 <div class="row">
                     @php $amenities = features($listing->listingTypes, true); @endphp
                     @foreach($amenities as $key => $amenity)
-                    <div class="col-lg-3">
+                    <div class="col-lg-3 col-sm-4 col-6">
                         <p> {{ $key }}</p>
                         <ul>
                             @foreach($amenity as $key => $value)
@@ -165,27 +155,28 @@
                     </div>
                     @endforeach
                 </div>
-            </div>
         </div>
-
+    </div>
         <div class="location-map-sec">
-            <h3>Location </h3>
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <label> TRANSPORTATION</label>
-                            <ul class="second-ul"></ul>
-                        </div>
-                        <div class="col-lg-6 mob-top-mrg">
-                            <label> Schools</label>
-                            <ul class="second-ul"></ul>
+            <div class="container-lg">
+                <h3>Location </h3>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="row">
+                            <div class="col-lg-6 col-sm-6">
+                                <label> TRANSPORTATION</label>
+                                <ul class="second-ul"></ul>
+                            </div>
+                            <div class="col-lg-6 col-sm-6">
+                                <label> Schools</label>
+                                <ul class="second-ul"></ul>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-6">
-                    <input type="hidden" value="{{$listing->map_location}}" name="map_location">
-                    <div id="map"></div>
+                    <div class="col-lg-6">
+                        <input type="hidden" value="{{$listing->map_location}}" name="map_location">
+                        <div id="map"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -296,7 +287,7 @@
 {{--                </div>--}}
 {{--            </div>--}}
 {{--        </div>--}}
-    </div>
+
 </section>
 {{--			<div class="featured-properties nearby-listing">--}}
 {{--				<div class="property-listing ">--}}

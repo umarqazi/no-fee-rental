@@ -47,7 +47,7 @@
                     </div>
                 </div>
                 <div class="row form-group">
-                    <div class="form-check col-lg-6 ">
+                    <div class="form-check col-lg-6 col-sm-6">
                         <div style="margin-left: 15px;">
                             {!! Form::checkbox('remember', null, old('remember') ? 'checked' : '', ['class' => 'form-check-input']) !!}
                             <label class="form-check-label" for="remember">
@@ -55,7 +55,7 @@
                             </label>
                         </div>
                     </div>
-                            <div class="col-lg-6 text-right">
+                            <div class="col-lg-6 col-sm-6 forgot-pass">
                                 <a href="{{ route('forgot.password') }}">Forgot Password.</a>
                             </div>
 
@@ -73,7 +73,8 @@
                     </div>
                 </div>
                 {!! Form::close() !!}
-                <p class="footer-text">Don’t have an account? <span class="signup-modal-btn" id="signup-btn">Signup</span></p>
+                <p class="footer-text">Don’t have an account? <span class="signup-modal-btn" 
+                    id="signup-btn">Signup</span></p>
             </div>
 
         </div>
