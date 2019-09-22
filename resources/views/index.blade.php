@@ -38,4 +38,20 @@
 @include('features.life-container')
 {{--Neighborhoods--}}
 @include('features.neighborhood')
+<script>
+    let neighbours = @php echo json_encode(config('neighborhoods')); @endphp;
+    let $neighbour = $('input[name=neighborhoods]');
+    $neighbour.autocomplete({
+        source: neighbours,
+        select: function (event, ui) {
+            $(this).val(ui.item ? ui.item : " ");
+        },
+
+        change: function (event, ui) {
+            if (!ui.item) {
+                this.value = '';
+            }
+        }
+    });
+</script>
 @endsection

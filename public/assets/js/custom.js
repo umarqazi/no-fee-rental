@@ -95,6 +95,8 @@ $(() => {
 				}
 				$("#min_price").val(ui.values[0]);
 				$("#max_price").val(ui.values[1]);
+                $('body').trigger('min-price', ui.values[0]);
+                $('body').trigger('max-price', ui.values[1]);
 			}
 		});
 		$("#min_price").val($("#slider-range").slider("values", 0));
@@ -169,6 +171,8 @@ $('#price-range-submit').hide();
 
 				$("#min_price_2").val(ui.values[0]);
 				$("#max_price_2").val(ui.values[1]);
+                $('body').trigger('square-min', ui.values[0]);
+                $('body').trigger('square-max', ui.values[1]);
 			}
 		});
 

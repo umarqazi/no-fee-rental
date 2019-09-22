@@ -1,3 +1,14 @@
+<style>
+    #advance-search {
+        z-index: 20;
+    }
+    .modal-backdrop {
+        z-index: 15;
+    }
+</style>
+<link rel="stylesheet" type="text/css" href="{{asset('assets/css/datepicker.min.css')}}"/>
+<script src="{{asset('assets/js/datepicker.min.js')}}"></script>
+<script src="{{asset('assets/js/datepicker.en.js')}}"></script>
 <div class="modal fade" id="advance-search">
     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg">
         <div class="modal-content">
@@ -8,19 +19,12 @@
             </div>
             {{--Modal body--}}
             <div class="modal-body">
-                {!! Form::open(['url' => route('list.search'), 'method' => 'get']) !!}
+                {!! Form::open(['url' => route('list.search'), 'method' => 'get', 'id' => 'search']) !!}
                 <div class="row">
-                        <!-- <div class="col-md-12">
-                            <div class="form-group">
-                                <label class="label">Location</label>
-                                {!! Form::text('neighborhoods', null, ['placeholder' => 'Enter Address or Neighborhood', 'class' => 'input-style enter-address']) !!}
-                            </div>
-                        </div> -->
-                        {{-- Beds--}}
                         <div class="col-md-6 search-form-grou-mrg-btm">
                             <div class="form-group">
                                 <label class="label">Beds <span>(Select all that applies)</span></label>
-                                <ul class="select-bed-options">
+                                <ul class="select-bed-options" id="beds">
                                     <li>
                                         <div class="custom-control custom-radio">
                                             {!! Form::radio('beds', 'studio', false, ['class' => 'custom-control-input', 'id' => 'studio']) !!}
@@ -62,7 +66,7 @@
 
                             <div class="form-group">
                                 <label class="label">Baths <span>(Select all that applies)</span></label>
-                                <ul class="select-bed-options">
+                                <ul class="select-bed-options" id="baths">
                                     <li>
                                         <div class="custom-control custom-radio">
                                             {!! Form::radio('baths', 'studio', false, ['class' => 'custom-control-input', 'id' => 'studio']) !!}
@@ -101,49 +105,6 @@
                                     </li>
                                 </ul>
                             </div>
-
-                            <div class="form-group">
-                                <label class="label">Rooms <span>(Select all that applies)</span></label>
-                                <ul class="select-bed-options">
-                                    <li>
-                                        <div class="custom-control custom-radio">
-                                            {!! Form::radio('rooms', 'studio', false, ['class' => 'custom-control-input', 'id' => 'rooms']) !!}
-                                            <label class="custom-control-label" for="rooms">Studio</label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="custom-control custom-radio">
-                                            {!! Form::radio('rooms', 1, false, ['class' => 'custom-control-input', 'id' => 'rooms1']) !!}
-                                            <label class="custom-control-label" for="rooms1">1</label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="custom-control custom-radio">
-                                            {!! Form::radio('rooms', 2, false, ['class' => 'custom-control-input', 'id' => 'rooms2']) !!}
-                                            <label class="custom-control-label" for="rooms2">2</label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="custom-control custom-radio">
-                                            {!! Form::radio('rooms', 3, false, ['class' => 'custom-control-input', 'id' => 'rooms3']) !!}
-                                            <label class="custom-control-label" for="rooms3">3</label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="custom-control custom-radio">
-                                            {!! Form::radio('rooms', 4, false, ['class' => 'custom-control-input', 'id' => 'rooms4']) !!}
-                                            <label class="custom-control-label" for="rooms4">4</label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="custom-control custom-radio">
-                                            {!! Form::radio('rooms', 5, false, ['class' => 'custom-control-input', 'id' => 'rooms5']) !!}
-                                            <label class="custom-control-label" for="rooms5">5+</label>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-
                         </div>
                         {{--Baths--}}
                         <div class="col-md-6">
@@ -154,12 +115,9 @@
                                     {!! Form::number('priceRange[min_price]', null, ['min' => 0, 'max' => 9900, 'id' => 'min_price', 'class' => 'price-range-field input-style', 'oninput' => 'validity.valid||(value=0);']) !!} -
                                     {!! Form::number('priceRange[max_price]', null, ['min' => 0, 'max' => 10000, 'id' => 'max_price', 'class' => 'price-range-field input-style', 'oninput' => 'validity.valid||(value=10000);']) !!}
                                 </div>
-
                                     <div id="slider-range" class="price-filter-range" name="rangeInput"></div>
-
                                 </div>
                             </div>
-
                             <div class="form-group">
                                 <label class="label">Square feet</label>
                                 <div class="slider-wrapper">
@@ -168,37 +126,20 @@
                                     {!! Form::number('priceRange[max_price_2]', null, ['min' => 0, 'max' => 10000, 'id' => 'max_price_2', 'class' => 'price-range-field input-style', 'oninput' => 'validity.valid||(value=10000);']) !!}
                                     </div>
                                     <div id="slider-range-2" class="price-filter-range" name="rangeInput"></div>
-
                                 </div>
                             </div>
-
-
                         </div>
                         {{--Keywords--}}
                         <div class="col-md-6">
-                            <!-- <div class="form-group">
-                                <label class="label">Keywords</label>
-                                {!! Form::text('keywords', null, ['class' => 'input-style']) !!}
-                            </div> -->
                             <div class="form-group">
                                 <label class="label">Neighbourhoods</label>
-                                <select class="custom-select-list">
-                                    <option value="">Select</option>
-                                    <option>Select</option>
-                                    <option>Select</option>
-                                    <option>Select</option>
-                                </select>
+                                {!! Form::text('neighborhoods', null, ['id' => 'neigh', 'class' => 'input-style', 'placeholder' => 'Enter Neighborhood']) !!}
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="label">Open House</label>
-                                <select class="custom-select-list">
-                                    <option value="">Select</option>
-                                    <option>Select</option>
-                                    <option>Select</option>
-                                    <option>Select</option>
-                                </select>
+                                {!! Form::text('open_house', null, ['autocomplete' => 'off', 'id' => 'timepicker-actions-exmpl', 'placeholder', 'Open House', 'class' => 'input-style']) !!}
                             </div>
                         </div>
                         {{-- Building Features--}}
@@ -226,8 +167,6 @@
                                 </div>
                             </div>
                         </div>
-
-
                         <div class="col-md-12 text-left mt-4 mb-4 bdr-top-btn">
                             <button type="submit" class="btn-default">Search</button>
                         </div>
@@ -238,3 +177,51 @@
 
     </div>
 </div>
+<script>
+    // Create start date
+    var start = new Date(),
+        prevDay,
+        startHours = 9;
+
+    // 09:00 AM
+    start.setHours(9);
+    start.setMinutes(0);
+
+    // If today is Saturday or Sunday set 10:00 AM
+    if ([6, 0].indexOf(start.getDay()) != -1) {
+        start.setHours(10);
+        startHours = 10
+    }
+
+    $('#timepicker-actions-exmpl').datepicker({
+        timepicker: true,
+        language: 'en',
+        startDate: start,
+        minHours: startHours,
+        maxHours: 18,
+        onSelect: function (fd, d, picker) {
+            // Do nothing if selection was cleared
+            if (!d) return;
+
+            var day = d.getDay();
+
+            // Trigger only if date is changed
+            if (prevDay != undefined && prevDay == day) return;
+            prevDay = day;
+
+            // If chosen day is Saturday or Sunday when set
+            // hour value for weekends, else restore defaults
+            if (day == 6 || day == 0) {
+                picker.update({
+                    minHours: 10,
+                    maxHours: 16
+                })
+            } else {
+                picker.update({
+                    minHours: 9,
+                    maxHours: 18
+                })
+            }
+        }
+    })
+</script>
