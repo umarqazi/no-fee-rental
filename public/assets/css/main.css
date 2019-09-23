@@ -481,9 +481,9 @@ h3 {
   vertical-align: middle;
   font-size: 0;
   margin-left: 15px;
-  -webkit-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.26);
-  -moz-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.26);
-  box-shadow: 0px 2px 5px 2px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.27);
+  -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.27);
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.27);
   border-radius: 30px;
 }
 .header-wrapper .header-container .header-right-wrapper .actions-btns .signup-btn {
@@ -783,9 +783,9 @@ h3 {
 }
 .featured-properties .property-listing .property-thumb {
   height: 230px;
-  margin: 0px 35px;
+  margin: 0px 15px;
   overflow: hidden;
-  width: calc(100% / 4 - 70px);
+  width: calc(100% / 4);
   margin-bottom: 80px;
   position: relative;
 }
@@ -814,12 +814,12 @@ h3 {
   position: absolute;
   bottom: 0;
   width: 100%;
-  padding: 60px 0px 15px 25px;
+  padding: 60px 0px 15px 10px;
 }
 .featured-properties .property-listing .property-thumb .info p {
   color: #fff;
-  font-size: 20px;
-  font-weight: 600;
+  font-size: 16px;
+  font-weight: 500;
   margin-bottom: 0;
   position: relative;
   z-index: 1;
@@ -882,8 +882,23 @@ h3 {
   -moz-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.26);
   box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.26);
 }
+.featured-properties .property-listing .info{
+    transform: translateX(-200px);
+    -webkit-transition: transform 0.2s ease 0s;
+    transition: transform 0.2s ease 0s;
+    overflow: hidden;
+    position: absolute;
+    left: 0;
+    right: 0;
+    opacity: 0;
+} 
 .featured-properties .property-listing .property-thumb:hover .check-btn {
   left: 0;
+}
+.featured-properties .property-listing .property-thumb:hover .info {
+  transform: translateX(0px);
+  transition: 0.3s ease-in-out;
+  opacity: 1;
 }
 .your-life-container {
   background: url(../images/your-life-bg.jpg) no-repeat center right -120px;
@@ -2048,6 +2063,65 @@ footer .copyright .social-icons li a:hover {
   bottom: 5px;
 }
 
+.featured-properties .property-listing .info a{
+  display: inline-block;
+}
+.featured-properties .property-listing .info p{
+  display: inline-block;
+  font-size: 13px;
+
+}
+.featured-properties .property-listing .info .info-link-text {
+  width: 75%;
+  float: left;
+}
+.featured-properties .property-listing .info a.info-link-text:hover p{
+  color: #fff !important; 
+}
+.featured-properties .property-listing .info small{
+  display: inline-block;
+  font-size: 14px;
+  color: #fff;
+  position: relative;
+  font-weight: 500;
+}
+.featured-properties .property-listing .info .info-link-text p:nth-of-type(2){
+  font-size: 11px;
+  font-weight: 600;
+}
+.featured-properties .property-listing .viewfeature-btn{
+  background-color: #fff;
+  padding: 5px 15px;
+  color: #000;
+  z-index: 999;
+  display: inline-block;
+  font-size: 13px;
+  position: relative;
+  top: 10px;
+  font-weight: 600;
+  margin-left: 5px;
+}
+.featured-properties .property-listing .property-thumb:hover .feaure-policy-text{
+  opacity: 0;
+  transition: 0.3s ease-in-out;
+}
+.featured-properties .property-listing .feaure-policy-text{
+  position: absolute;
+  bottom: 0px;
+  color: #fff;
+  font-weight: 600;
+  font-size: 16px;
+  left: 0;
+  right: 0;
+  margin-left: 15px;
+  margin-bottom: 15px;
+}
+.featured-properties .property-listing .feaure-policy-text p{
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
 /*Responsive style*/
 @media only screen and (max-width: 1599px) {
   .neighborhood-search .search-result-wrapper .search-listing .featured-properties .property-listing .property-thumb {
@@ -2153,7 +2227,7 @@ footer .footer-wrapper .logo-text{
     padding: 0px 15px;
   }
   .featured-properties .property-listing .property-thumb {
-    width: calc(100% / 3 - 30px);
+    width: calc(100% / 2);
   }
   .header-wrapper .header-container ul.menu-links,
   .header-wrapper .header-container .header-right-wrapper .login-user,
