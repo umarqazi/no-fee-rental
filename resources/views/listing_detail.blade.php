@@ -1,14 +1,14 @@
 @extends('layouts.app')
 @section('title', 'No Fee Rental')
 @section('content')
-    <style>
-        .modal {
-            z-index: 25;
-        }
-        .modal-backdrop {
-            z-index: 20;
-        }
-    </style>
+<style>
+    .modal {
+        z-index: 25;
+    }
+    .modal-backdrop {
+        z-index: 20;
+    }
+</style>
     <header>
         <div class="header-bg inner-pages-banner"></div>
     </header>
@@ -19,11 +19,13 @@
                 <div class="item">
                     <div class="clearfix" style="max-width:100%;">
                         <ul id="image-gallery" class="gallery list-unstyled cS-hidden">
-                            @for ($i = 0; $i < sizeof($listing->listingImages); $i++)
-                                <li data-thumb="{{asset('storage/'.$listing->listingImages[$i]->listing_image)}}" class="large-view">
-                                <a target="_blank" href="{{ asset('storage/'.$listing->listingImages[$i]->listing_image) }}"><img src="{{ asset('storage/'.$listing->listingImages[$i]->listing_image) }}" /></a>
-                            </li>
-                            @endfor
+                            @foreach($listing->listingImages as $images)
+                                <li data-thumb="{{asset('storage/'.$images->listing_image)}}" class="large-view">
+                                    <a target="_blank" href="{{ asset('storage/'.$images->listing_image) }}">
+                                        <img src="{{ asset('storage/'.$images->listing_image) }}" />
+                                    </a>
+                                </li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>
@@ -33,25 +35,33 @@
                     <div class="product-title">
                         <p> {{$listing->display_address}} </p>
                         <span>
-                            <a href="#"><img src="/assets/images/share-icon.png" alt="" /> </a>
-                            <a href="#" class="ml-2"><img src="/assets/images/fav-icon.png" alt="" /> </a>
+                            <a href="javascript:void(0);"><img src="/assets/images/share-icon.png" alt="" /> </a>
+                            <a href="javascript:void(0);" class="ml-2"><img src="/assets/images/fav-icon.png" alt="" /> </a>
                         </span>
                     </div>
                     <p class="title-subtext">{{$listing->street_address}}</p>
-                    <div class="unavailable-btn">
-                        <span>Unavailable </span>
-                        <i class="far fa-clock"></i>
-                        <label> 21 hours since last update </label>
-                    </div>
+                    @if($listing->availability)
+                        <div class="available-btn">
+                            <span>Available</span>
+                            <i class="far fa-clock"></i>
+                            <label> {{ dateReadable($listing->updated_at) }} since last update </label>
+                        </div>
+                    @else
+                        <div class="unavailable-btn">
+                            <span>Unavailable </span>
+                            <i class="far fa-clock"></i>
+                            <label> {{ dateReadable($listing->updated_at) }} since last update </label>
+                        </div>
+                    @endif
                     <div class="apartment-details">
-                        <h4> $ {{$listing->rent}}/ month</h4>
+                        <h4> $ {{$listing->rent}} / Month</h4>
                     </div>
                     <div class="row after-apartment-icon">
                         <div class="col-lg-3 col-3">
-                            <i class="fas fa-bed"></i> {{$listing->bedrooms}} Beds
+                            <i class="fas fa-bed"></i> {{$listing->bedrooms}} {{ $listing->bedrooms > 1 ? 'Beds' : 'Bed'}}
                         </div>
                         <div class="col-lg-3 col-3">
-                            <i class="fas fa-bath"> </i> {{$listing->baths}} bath
+                            <i class="fas fa-bath"> </i> {{$listing->baths}} {{ $listing->baths > 1 ? 'Baths' : 'Bath' }}
                         </div>
                         <div class="col-lg-3 col-3">
                             <i class="fas fa-ruler"> </i> {{$listing->square_feet}} ft
@@ -141,42 +151,22 @@
             </div>
         </div>
         <h3 class="mt-5 mb-3">Description</h3>
-        <p>{{$listing->description}}</p>
+        <p>{{$listing->description ?? 'N/A'}}</p>
         <div class="listing-aminities-sec">
             <h3>Amenities </h3>
             <div class=" col-lg-12">
                 <div class="row">
+                    @php $amenities = features($listing->listingTypes, true); @endphp
+                    @foreach($amenities as $key => $amenity)
                     <div class="col-lg-3">
-                        <p>Listing Aminities </p>
+                        <p> {{ $key }}</p>
                         <ul>
-                            <li> Dishwasher</li>
-                            <li> Storage Available</li>
+                            @foreach($amenity as $key => $value)
+                                <li> {{ $value }}</li>
+                            @endforeach
                         </ul>
                     </div>
-                    <div class="col-lg-3">
-                        <p>&nbsp; </p>
-                        <ul>
-                            <li> Terrace</li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-3">
-                        <p>BUILDING AMENITIES</p>
-                        <ul>
-                            <li> Doorman</li>
-                            <li> Gym</li>
-                            <li> Pets Allowed</li>
-                            <li> Elevator</li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-3">
-                        <p>&nbsp;</p>
-                        <ul>
-                            <li> Laundry in Building</li>
-                            <li> Garage Parking</li>
-                            <li> Parking Available</li>
-                            <li> Roof Deck</li>
-                        </ul>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -235,7 +225,8 @@
                     </div>
                 </div>
                 <div class="col-lg-6">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3403.339582092198!2d74.27331331462928!3d31.459843557277164!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x391903e9fe073afd%3A0xcec14940bde5aec4!2sTechverx!5e0!3m2!1sen!2s!4v1566307863547!5m2!1sen!2s" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+                    <input type="hidden" value="{{$listing->map_location}}" name="map_location">
+                    <div id="map"></div>
                 </div>
             </div>
         </div>
@@ -416,12 +407,11 @@
 					</div>
 				</div>
 			</div>
-		</div>
-	</section>
     {{--Check Availability--}}
     @include('features.message')
     {{--Messages JS--}}
-    {!! HTML::script('assets/js/message.js') !!}
+    {!! HTML::script('assets/js/map.js') !!}
+{{--    {!! HTML::script('assets/js/message.js') !!}--}}
     <script>
         // Create start date
         var start = new Date(),

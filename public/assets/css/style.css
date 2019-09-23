@@ -337,12 +337,29 @@
     font-size: 13px;
     line-height: 20px;
 }
+.available-btn span {
+    padding: 3px 10px;
+    border-radius: 5px;
+    background-color: #51ab4c;
+    color: #fff;
+    font-size: 13px;
+    line-height: 20px;
+}
 .unavailable-btn i{
     margin-left: 30px;
     font-size: 18px;
     color: #b7b7b7;
 }
+.available-btn i{
+    margin-left: 30px;
+    font-size: 18px;
+    color: #b7b7b7;
+}
 .unavailable-btn label{
+    color:#b7b7b7;
+    font-size: 15px;
+}
+.available-btn label{
     color:#b7b7b7;
     font-size: 15px;
 }
