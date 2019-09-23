@@ -265,19 +265,11 @@ $(() => {
         email: {
           required: true,
           email: true,
-          remote: {
-            headers: {
-                'X-CSRF-TOKEN': TOKEN
-            },
-            url: "/verfiy-email",
-            type: "post",
-          }
         }
       },
 
       messages: {
         email: {
-          remote: "Email already taken",
           required: "Email is required.",
           email: "Enter a valid Email.",
         }

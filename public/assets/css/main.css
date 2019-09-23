@@ -2302,10 +2302,10 @@ cursor: pointer;
 #timepicker-actions-exmpl {
     margin-top: 15px;
     border: none;
-    border-bottom: 1px solid #B7B7B7;
+    border: 1px solid #B7B7B7;
     color: #F36F21;
     font-size: 14px;
-    font-weight: 700;
+    ;
 }
 
 #timepicker-actions-exmpl:active,
@@ -2522,9 +2522,6 @@ cursor: pointer;
 
 .login-form-wrapper .row.form-group .forgot-pass{
   text-align: right;
-}
-#login , #signup{
-  z-index: 99;
 }
 
 /*agent profile*/
@@ -2781,14 +2778,10 @@ border-color: #e17228;
 }
 /*profile contact*/
 
-
-
-
 @media (max-width: 1260px){
   .modal-dialog {
-    margin:.5rem !important; 
+    margin:.5rem !important;
   }
-
 }
 @media (max-width: 991px) {
     #appointmentModal .padding-leftt-0 {
@@ -2803,7 +2796,7 @@ border-color: #e17228;
     .neighborhood-search .search-result-wrapper .search-listing .sort-by-wrapper{
     padding-right:15px;
     margin-top: 15px;
-    } 
+    }
     .dropdown-wrap{
     margin-top: 15px;
     }
@@ -2827,7 +2820,7 @@ border-color: #e17228;
     }
     .search-result-wrapper .search-bdr-top{
       padding:12px 15px;
-    } 
+    }
 }
 
 @media (min-width: 576px) {
@@ -3433,7 +3426,7 @@ max-width: 370px;
     padding: 0px;
     outline: none !important;
   }
-  
+
 .tab-content .property-listing .owl-nav button.owl-prev {
     background: url(../images/slider-arrow-left.png) no-repeat;
     background-size: 100%;
@@ -3508,8 +3501,6 @@ max-width: 370px;
   .neighborhood-search .search-result-wrapper .search-listing{
     padding: 0px 0px 20px 0px;
   }
-  .clients-reviews-section span{
-  }
   .clients-reviews-section button.owl-prev{
     width: 40px;
     height: 40px;
@@ -3576,8 +3567,6 @@ max-width: 370px;
   font-weight: 700;
 }
 }
- 
-}
 @media only screen and (min-width: 577px) and (max-width: 767px){
   .featured-properties .property-listing .info .info-link-text{
     width: 70%;
@@ -3588,7 +3577,7 @@ max-width: 370px;
   .listing-Details .lSSlideOuter .lSPager.lSGallery img{
     height: 60px !important;
   }
-  
+
 }
 @media only screen and (max-width: 576px) {
   .featured-properties .property-listing .property-thumb {
