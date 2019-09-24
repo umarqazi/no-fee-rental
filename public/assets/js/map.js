@@ -22,7 +22,15 @@ const setMap = (coords = defaultCoords, radius = 0, types = [], styles = null) =
         zoom: ZOOM,
         radius: radius,
         types: types,
-        stylers: styles
+        styles: [
+            {
+                featureType: "poi",
+                elementType: "labels",
+                stylers: [
+                    { visibility: "off" }
+                ]
+            }
+        ]
     });
 
     return map;

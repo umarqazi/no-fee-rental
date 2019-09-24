@@ -812,8 +812,9 @@ h3 {
   bottom: 0;
   width: 100%;
   padding: 50px 10px 15px 10px;
-    display: flex;
-    align-items: center;
+display: flex;
+align-items: center;
+justify-content: space-between;
 }
 .featured-properties .property-listing .property-thumb .info p {
   color: #fff;
@@ -2087,10 +2088,6 @@ footer .copyright .social-icons li a:hover {
   font-size: 13px;
 
 }
-.featured-properties .property-listing .info .info-link-text {
-  width: 75%;
-  float: left;
-}
 .featured-properties .property-listing .info a.info-link-text:hover p{
   color: #fff !important;
 }
@@ -2258,19 +2255,12 @@ footer .copyright .social-icons li a:hover {
   display: none;
 }
 .property-listing .owl-dots{
-  position: absolute;
   width: 100%;
   left: 0;
   right: 0;
 }
 .property-listing .owl-dots button.owl-dot{
   position: relative;
-}
-.property-listing .owl-theme .owl-dots .owl-dot.active span,
-.owl-theme .owl-dots .owl-dot:hover span {
-  position: absolute;
-  top: -3px;
-  left: -4px;
 }
 @media (max-width: 991px) {
     #appointmentModal .padding-leftt-0 {
