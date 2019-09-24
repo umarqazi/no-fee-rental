@@ -698,15 +698,11 @@
         $(this).find("i").toggleClass('fa-bars fa-times');
         $("#mobile-tabs-collapse").slideToggle();
     });
-    $(".btn-type__radio").click(function(){
-        $(".btn-group__multiple-radio").find(".active").removeClass("active");
-        $(".price-dropdown .btn.btn-default").find(".active").removeClass("active");
+    $(".dropdown-wrap .btn-default").click(function(){
+        $(".dropdown-wrap .btn-default").removeClass("active");
         $(this).addClass("active");
     });
-     $(".price-dropdown .btn-default").click(function(){
-        $(".btn-group__multiple-radio").find(".active").removeClass("active");
-        $(this).addClass("active");
-    });
+
     $('.owl-slider #carouselNeighbour , .owl-slider #ClientCarousel').owlCarousel({
         autoplay: true,
         responsiveClass: true,
