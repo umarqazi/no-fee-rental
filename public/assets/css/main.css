@@ -1385,7 +1385,7 @@ background-size: cover;
   margin-bottom: 30px;
 }
 .contact-info .info {
-  margin-bottom: 30px;
+  margin-bottom: 40px;
   border: 1px solid #D7D7D7;
   padding: 30px 15px;
   display: flex;
@@ -1430,6 +1430,10 @@ background-size: cover;
   font-size: 20px;
   font-weight: 700;
   margin-bottom: 10px;
+}
+.rowmt-5 h2{
+  margin-bottom: 20px;
+  color: #000;
 }
 /*Need help Modal*/
 .need-help-modal .modal-header .modal-title {
@@ -1664,6 +1668,7 @@ cursor: pointer;
 }
 .neighborhood-search .search-result-wrapper .search-listing .sort-by-wrapper .sort-by span {
   width: 120px;
+  color: #5F6368;
 }
 .neighborhood-search .search-result-wrapper .search-listing .sort-by-wrapper .listing-large-view {
   cursor: pointer;
@@ -2153,7 +2158,13 @@ cursor: pointer;
 .featured-properties .property-listing .info a{
   display: inline-block;
 }
-
+.featured-properties .property-listing .info a:hover, 
+.featured-properties .property-listing .info a:active, 
+.featured-properties .property-listing .info a:focus{
+  color: #fff;
+  background: #01091d;
+  transition: all 0.3s ease-in-out;
+}
 .featured-properties .property-listing .info p{
   display: inline-block;
   font-size: 13px;
@@ -2632,6 +2643,17 @@ border-color: #e17228;
   padding-left: 15px;
   padding-right: 15px;
   width: 100%;
+  color: #3D3A39;
+}
+.agent-listing-profile .search-bdr-top .btn-group__multiple > .btn.active{
+  background-color: #223971;
+  color: #fff;
+  border:1px solid #223971;
+}
+.price-dropdown .btn-default.active{
+  background-color: #223971;
+  color: #fff;
+  border:1px solid #223971;
 }
 .agent-listing-profile #boxscroll2{
   height:auto;

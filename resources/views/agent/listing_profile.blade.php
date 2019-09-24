@@ -39,14 +39,8 @@
                         <div class="mobile-view-dropdown">
                             <i class="fa fa-bars"></i> Filters
                         </div>
-                        <!-- <div class="mobile-map-icon"><i class="fa fa-map-marker-alt"></i></div>
-
-                        <div id="mobile-map-listing-view">
-                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4816.459725725764!2d-1.5508326210331098!3d52.87227474539793!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4879f73fd75747e9%3A0xccb1537b184bcded!2sFindern%2C+Derby%2C+UK!5e0!3m2!1sen!2s!4v1557903251137!5m2!1sen!2s" width="100%" height="100%" frameborder="0" style="border:0" allowfullscreen></iframe>
-                            </div> -->
-
                         <div class="row profile-mbl-filter" id="mobile-tabs-collapse">
-                            <div class="col-lg-7 col-12 ">
+                            <div class="col-lg-9 col-12 ">
                                 <div class="dropdown-wrap">
                                     <div class="radio-group-0">
                                         <div class="item">
@@ -159,7 +153,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-5 col-12">
+                            <div class="col-lg-3 col-12">
                                 <div class="sort-by-wrapper">
                                     <div class="sort-by">
                                         <span>Sort By: </span>
@@ -705,13 +699,15 @@
         $(this).find("i").toggleClass('fa-bars fa-times');
         $("#mobile-tabs-collapse").slideToggle();
     });
-
-    $(".mobile-map-icon").click(function(){
-        $(this).find("i").toggleClass('fa-map-marker-alt fa-times');
-        $("#mobile-map-listing-view").slideToggle();
+    $(".btn-type__radio").click(function(){
+        $(".btn-group__multiple-radio").find(".active").removeClass("active");
+        $(".price-dropdown .btn.btn-default").find(".active").removeClass("active");
+        $(this).addClass("active");
     });
-
-    
+     $(".price-dropdown .btn-default").click(function(){
+        $(".btn-group__multiple-radio").find(".active").removeClass("active");
+        $(this).addClass("active");
+    });
     $('.owl-slider #carouselNeighbour , .owl-slider #ClientCarousel').owlCarousel({
         autoplay: true,
         responsiveClass: true,
