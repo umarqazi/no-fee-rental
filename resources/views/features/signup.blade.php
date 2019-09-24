@@ -41,9 +41,24 @@
                                 <strong>{{ $errors->first('user_type') }}</strong>
                             </span>
                         </div>
+                        <div class="col-sm-12 license_num">
+                             <div class="row align-items-center">
+                                <div class="col-sm-6 ">
+                                    <div class="form-group">
+                                        {!! Form::text('license_number', null, ['class'=>'input-style', 'placeholder'=>'License Number'])!!}
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="verified-icon">
+                                        <i class="fas fa-check-circle"></i>
+                                        <span>Liscence Verified</span>
+                                    </div>
+                                </div>
+                             </div>
+                        </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                {!! Form::text('first_name', null, ['class'=>'input-style', 'placeholder'=>'First Name']) !!}
+                                {!! Form::text('first_name', null, ['class'=>'input-style agnet-input', 'placeholder'=>'First Name']) !!}
                                 @if ($errors->has('first_name'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('first_name') }}</strong>
@@ -53,7 +68,7 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                {!! Form::text('last_name', null, ['class'=>'input-style', 'placeholder'=>'Last Name']) !!}
+                                {!! Form::text('last_name', null, ['class'=>'input-style agnet-input', 'placeholder'=>'Last Name']) !!}
                                 @if ($errors->has('last_name'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('last_name') }}</strong>
@@ -63,7 +78,7 @@
                         </div>
                         <div class="col-sm-12">
                             <div class="form-group">
-                                {!! Form::text('email', null, ['class'=>'input-style', 'id' => 'email', 'placeholder'=>'Email']) !!}
+                                {!! Form::text('email', null, ['class'=>'input-style agnet-input', 'id' => 'email', 'placeholder'=>'Email']) !!}
                                 @if ($errors->has('email'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('email') }}</strong>
@@ -72,14 +87,10 @@
                                 <p class="finding-home-text">If you would like to syndicate listing into no fee rentals nyc, please use tha same email address that you use for your RealtyMX, Nestio or OLR account.</p>
                             </div>
                         </div>
-                        <div class="col-sm-6">
-                            <div class="form-group license_num">
-                                {!! Form::text('license_number', null, ['class'=>'input-style', 'placeholder'=>'License Number'])!!}
-                            </div>
-                        </div>
+                       
                         <div class="col-sm-6" id="phone_number">
                             <div class="form-group">
-                                {!! Form::text('phone_number', null, ['class'=>'input-style', 'placeholder'=>'Phone Number']) !!}
+                                {!! Form::text('phone_number', null, ['class'=>'input-style agnet-input', 'placeholder'=>'Phone Number']) !!}
                                 @if ($errors->has('phone_number'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('phone_number') }}</strong>
@@ -87,9 +98,10 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="col-sm-12">
+                        <div class="col-sm-6">
                             <div class="form-group">
-                                {!! Form::password('password', ['class'=>'input-style', 'placeholder'=>'Password', 'id' => 'password']) !!}
+                                <i class="fa fa-eye"></i>
+                                {!! Form::password('password', ['class'=>'input-style agnet-input', 'placeholder'=>'Password', 'id' => 'password']) !!}
                                 @if ($errors->has('password'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('password') }}</strong>
@@ -97,9 +109,10 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="col-sm-12">
-                            <div class="form-group">
-                                {!! Form::password('password_confirmation', ['class'=>'input-style', 'placeholder'=>'Confirm Password']) !!}
+                        <div class="col-sm-6">
+                            <div class="form-group eye-form">
+                                <i class="fa fa-eye"></i>
+                                {!! Form::password('password_confirmation', ['class'=>'input-style agnet-input', 'placeholder'=>'Confirm Password']) !!}
                                 @if ($errors->has('password_confirmation'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('password_confirmation') }}</strong>
