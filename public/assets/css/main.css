@@ -624,7 +624,7 @@ h3 {
 }
 /*login sign up modal*/
 .login-modal .btn-default {
-  padding: 0px 50px;
+  padding: 0px 100px;
   line-height: 45px;
   font-size: 16px;
 }
@@ -743,6 +743,44 @@ h3 {
   font-size: 14px;
   margin-top: 10px;
   display: none;
+  opacity: 0.3;
+}
+.login-form-wrapper .form-group{
+  position: relative;
+}
+.login-form-wrapper .fa.fa-eye {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  color: #223971;
+  cursor: pointer;
+}
+
+.col-sm-12.license_num{
+  border-bottom: #ddd solid 1px;
+  margin-bottom: 15px;
+}
+
+.login-form-wrapper .agnet-input:disabled {
+  opacity: 0.3;
+}
+
+.login-form-wrapper .btn-default:disabled{
+  opacity: 0.3;
+  pointer-events: none;
+}
+.license_num .fas.fa-check-circle{
+  color: #6EC45E;
+  font-size: 20px;
+  display: inline-block;
+  vertical-align: middle;
+  padding-right: 5px;
+}
+.verified-icon{
+  margin-bottom: 10px;
+}
+.verified-icon span{
+  color: #223971;
 }
 .about-us-container {
   background: url(../images/about-bg.jpg) no-repeat center left -120px #ffffff;
@@ -2222,6 +2260,11 @@ cursor: pointer;
   position: relative;
   z-index: 1;
 }
+.featured-properties .property-listing .feaure-policy-text span{
+  font-size: 11px;
+  font-weight: 600;
+}
+
 /*Appointmentmodal*/
 
 #appointmentModal .modal-content {
@@ -3701,6 +3744,10 @@ max-width: 370px;
 .neighborhood-search .search-result-wrapper .search-listing .sort-by-wrapper{
   padding-right:15px;
 }
+}
+
+.inner-static-page-zero{
+  padding-top: 0px 0px 120px !important;
 }
 
 
