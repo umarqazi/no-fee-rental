@@ -908,7 +908,7 @@ h3 {
     left: 0;
     right: 0;
     opacity: 0;
-} 
+}
 .featured-properties .property-listing .property-thumb:hover .check-btn {
   left: 0;
 }
@@ -2093,7 +2093,7 @@ footer .copyright .social-icons li a:hover {
   float: left;
 }
 .featured-properties .property-listing .info a.info-link-text:hover p{
-  color: #fff !important; 
+  color: #fff !important;
 }
 .featured-properties .property-listing .info small{
   display: inline-block;
@@ -2129,7 +2129,7 @@ footer .copyright .social-icons li a:hover {
   font-size: 14px;
   left: 0;
   right: 0;
-  margin-left: 15px;
+  padding-left: 15px;
   padding-bottom: 15px;
   padding-top: 25px;
 }
@@ -2139,13 +2139,13 @@ footer .copyright .social-icons li a:hover {
   margin-bottom: 5px;
 }
 
-.featured-properties .property-listing .feaure-policy-text p, 
+.featured-properties .property-listing .feaure-policy-text p,
 .featured-properties .property-listing .feaure-policy-text span{
   position: relative;
   z-index: 1;
 }
 /*Appointmentmodal*/
-        
+
 #appointmentModal .modal-content {
     border-radius: 15px;
 }
@@ -2265,7 +2265,7 @@ footer .copyright .social-icons li a:hover {
 .property-listing .owl-dots button.owl-dot{
   position: relative;
 }
-.property-listing .owl-theme .owl-dots .owl-dot.active span, 
+.property-listing .owl-theme .owl-dots .owl-dot.active span,
 .owl-theme .owl-dots .owl-dot:hover span {
   position: absolute;
   top: -3px;
@@ -2817,7 +2817,7 @@ footer .footer-wrapper .logo-text{
   .desktop-listiing{
     display: none;
   }
-  
+
 }
 @media only screen and (min-width: 577px) and (max-width: 767px){
   .featured-properties .property-listing .info .info-link-text{
