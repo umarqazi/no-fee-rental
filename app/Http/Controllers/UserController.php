@@ -123,4 +123,13 @@ class UserController extends Controller {
 	public function verifyEmail(Request $request) {
 	    return $this->service->isUniqueEmail($request);
     }
+
+    /**
+     * @param Request $request
+     *
+     * @return bool
+     */
+    public function verifyLicense(Request $request) {
+        return $this->service->isUniqueLicense($request);
+    }
 }
