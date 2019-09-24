@@ -9,9 +9,6 @@
         z-index: 20;
     }
 </style>
-    <header>
-        <div class="header-bg inner-pages-banner"></div>
-    </header>
 <section class="neighborhood-search wow fadeIn listing-detail-container" data-wow-delay="0.2s">
     <div class="container-lg">
         <div class="row">
@@ -192,183 +189,183 @@
                 </div>
             </div>
         </div>
-        <h3 class="mt-5 mb-3">Nearby Buildings </h3>
-        <div class="related-carasoule-sec">
-            <div class="owl-slider">
-                <div id="carousel" class="owl-carousel">
-                    <div class="item">
-                        <img class="owl-lazy" data-src="/assets/images/large-view-6.jpg" alt="first-img"> <i class="fas fa-star"></i>
-                        <label>$8,000 / month </label>
-                        <div class="item-inner">
-                            <p>195 Santon Street Lower East Side, Manhattan -#5B </p>
-                            <p> <i class="fas fa-bed"> 4 Beds</i> <i class="fas fa-bath"> 2 Baths </i></p>
-                            <p><i class="far fa-clock"> 6 days since last update</i> </p>
-                            <a href="#" class="btn "> Quick Contact</a>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <img class="owl-lazy" data-src="/assets/images/large-view-6.jpg" alt="first-img"> <i class="fas fa-star"></i>
-                        <label>$8,000 / month </label>
-                        <div class="item-inner">
-                            <p>195 Santon Street Lower East Side, Manhattan -#5B </p>
-                            <p> <i class="fas fa-bed"> 4 Beds</i> <i class="fas fa-bath"> 2 Baths </i></p>
-                            <p><i class="far fa-clock"> 6 days since last update</i> </p>
-                            <a href="#" class="btn "> Quick Contact</a>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <img class="owl-lazy" data-src="/assets/images/large-view-6.jpg" alt="first-img"> <i class="fas fa-star"></i>
-                        <label>$8,000 / month </label>
-                        <div class="item-inner">
-                            <p>195 Santon Street Lower East Side, Manhattan -#5B </p>
-                            <p> <i class="fas fa-bed"> 4 Beds</i> <i class="fas fa-bath"> 2 Baths </i></p>
-                            <p><i class="far fa-clock"> 6 days since last update</i> </p>
-                            <a href="#" class="btn "> Quick Contact</a>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <img class="owl-lazy" data-src="/assets/images/large-view-6.jpg" alt="first-img"> <i class="fas fa-star"></i>
-                        <label>$8,000 / month </label>
-                        <div class="item-inner">
-                            <p>195 Santon Street Lower East Side, Manhattan -#5B </p>
-                            <p> <i class="fas fa-bed"> 4 Beds</i> <i class="fas fa-bath"> 2 Baths </i></p>
-                            <p><i class="far fa-clock"> 6 days since last update</i> </p>
-                            <a href="#" class="btn "> Quick Contact</a>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <img class="owl-lazy" data-src="/assets/images/large-view-6.jpg" alt="first-img"> <i class="fas fa-star"></i>
-                        <label>$8,000 / month </label>
-                        <div class="item-inner">
-                            <p>195 Santon Street Lower East Side, Manhattan -#5B </p>
-                            <p> <i class="fas fa-bed"> 4 Beds</i> <i class="fas fa-bath"> 2 Baths </i></p>
-                            <p><i class="far fa-clock"> 6 days since last update</i> </p>
-                            <a href="#" class="btn "> Quick Contact</a>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <img class="owl-lazy" data-src="/assets/images/large-view-6.jpg" alt="first-img"> <i class="fas fa-star"></i>
-                        <label>$8,000 / month </label>
-                        <div class="item-inner">
-                            <p>195 Santon Street Lower East Side, Manhattan -#5B </p>
-                            <p> <i class="fas fa-bed"> 4 Beds</i> <i class="fas fa-bath"> 2 Baths </i></p>
-                            <p><i class="far fa-clock"> 6 days since last update</i> </p>
-                            <a href="#" class="btn "> Quick Contact</a>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <img class="owl-lazy" data-src="/assets/images/large-view-6.jpg" alt="first-img"> <i class="fas fa-star"></i>
-                        <label>$8,000 / month </label>
-                        <div class="item-inner">
-                            <p>195 Santon Street Lower East Side, Manhattan -#5B </p>
-                            <p> <i class="fas fa-bed"> 4 Beds</i> <i class="fas fa-bath"> 2 Baths </i></p>
-                            <p><i class="far fa-clock"> 6 days since last update</i> </p>
-                            <a href="#" class="btn "> Quick Contact</a>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <img class="owl-lazy" data-src="/assets/images/large-view-6.jpg" alt="first-img"> <i class="fas fa-star"></i>
-                        <label>$8,000 / month </label>
-                        <div class="item-inner">
-                            <p>195 Santon Street Lower East Side, Manhattan -#5B </p>
-                            <p> <i class="fas fa-bed"> 4 Beds</i> <i class="fas fa-bath"> 2 Baths </i></p>
-                            <p><i class="far fa-clock"> 6 days since last update</i> </p>
-                            <a href="#" class="btn "> Quick Contact</a>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <img class="owl-lazy" data-src="/assets/images/large-view-6.jpg" alt="first-img"> <i class="fas fa-star"></i>
-                        <label>$8,000 / month </label>
-                        <div class="item-inner">
-                            <p>195 Santon Street Lower East Side, Manhattan -#5B </p>
-                            <p> <i class="fas fa-bed"> 4 Beds</i> <i class="fas fa-bath"> 2 Baths </i></p>
-                            <p><i class="far fa-clock"> 6 days since last update</i> </p>
-                            <a href="#" class="btn "> Quick Contact</a>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <img class="owl-lazy" data-src="/assets/images/large-view-6.jpg" alt="first-img"> <i class="fas fa-star"></i>
-                        <label>$8,000 / month </label>
-                        <div class="item-inner">
-                            <p>195 Santon Street Lower East Side, Manhattan -#5B </p>
-                            <p> <i class="fas fa-bed"> 4 Beds</i> <i class="fas fa-bath"> 2 Baths </i></p>
-                            <p><i class="far fa-clock"> 6 days since last update</i> </p>
-                            <a href="#" class="btn "> Quick Contact</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+{{--        <h3 class="mt-5 mb-3">Nearby Buildings </h3>--}}
+{{--        <div class="related-carasoule-sec">--}}
+{{--            <div class="owl-slider">--}}
+{{--                <div id="carousel" class="owl-carousel">--}}
+{{--                    <div class="item">--}}
+{{--                        <img class="owl-lazy" data-src="/assets/images/large-view-6.jpg" alt="first-img"> <i class="fas fa-star"></i>--}}
+{{--                        <label>$8,000 / month </label>--}}
+{{--                        <div class="item-inner">--}}
+{{--                            <p>195 Santon Street Lower East Side, Manhattan -#5B </p>--}}
+{{--                            <p> <i class="fas fa-bed"> 4 Beds</i> <i class="fas fa-bath"> 2 Baths </i></p>--}}
+{{--                            <p><i class="far fa-clock"> 6 days since last update</i> </p>--}}
+{{--                            <a href="#" class="btn "> Quick Contact</a>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                    <div class="item">--}}
+{{--                        <img class="owl-lazy" data-src="/assets/images/large-view-6.jpg" alt="first-img"> <i class="fas fa-star"></i>--}}
+{{--                        <label>$8,000 / month </label>--}}
+{{--                        <div class="item-inner">--}}
+{{--                            <p>195 Santon Street Lower East Side, Manhattan -#5B </p>--}}
+{{--                            <p> <i class="fas fa-bed"> 4 Beds</i> <i class="fas fa-bath"> 2 Baths </i></p>--}}
+{{--                            <p><i class="far fa-clock"> 6 days since last update</i> </p>--}}
+{{--                            <a href="#" class="btn "> Quick Contact</a>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                    <div class="item">--}}
+{{--                        <img class="owl-lazy" data-src="/assets/images/large-view-6.jpg" alt="first-img"> <i class="fas fa-star"></i>--}}
+{{--                        <label>$8,000 / month </label>--}}
+{{--                        <div class="item-inner">--}}
+{{--                            <p>195 Santon Street Lower East Side, Manhattan -#5B </p>--}}
+{{--                            <p> <i class="fas fa-bed"> 4 Beds</i> <i class="fas fa-bath"> 2 Baths </i></p>--}}
+{{--                            <p><i class="far fa-clock"> 6 days since last update</i> </p>--}}
+{{--                            <a href="#" class="btn "> Quick Contact</a>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                    <div class="item">--}}
+{{--                        <img class="owl-lazy" data-src="/assets/images/large-view-6.jpg" alt="first-img"> <i class="fas fa-star"></i>--}}
+{{--                        <label>$8,000 / month </label>--}}
+{{--                        <div class="item-inner">--}}
+{{--                            <p>195 Santon Street Lower East Side, Manhattan -#5B </p>--}}
+{{--                            <p> <i class="fas fa-bed"> 4 Beds</i> <i class="fas fa-bath"> 2 Baths </i></p>--}}
+{{--                            <p><i class="far fa-clock"> 6 days since last update</i> </p>--}}
+{{--                            <a href="#" class="btn "> Quick Contact</a>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                    <div class="item">--}}
+{{--                        <img class="owl-lazy" data-src="/assets/images/large-view-6.jpg" alt="first-img"> <i class="fas fa-star"></i>--}}
+{{--                        <label>$8,000 / month </label>--}}
+{{--                        <div class="item-inner">--}}
+{{--                            <p>195 Santon Street Lower East Side, Manhattan -#5B </p>--}}
+{{--                            <p> <i class="fas fa-bed"> 4 Beds</i> <i class="fas fa-bath"> 2 Baths </i></p>--}}
+{{--                            <p><i class="far fa-clock"> 6 days since last update</i> </p>--}}
+{{--                            <a href="#" class="btn "> Quick Contact</a>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                    <div class="item">--}}
+{{--                        <img class="owl-lazy" data-src="/assets/images/large-view-6.jpg" alt="first-img"> <i class="fas fa-star"></i>--}}
+{{--                        <label>$8,000 / month </label>--}}
+{{--                        <div class="item-inner">--}}
+{{--                            <p>195 Santon Street Lower East Side, Manhattan -#5B </p>--}}
+{{--                            <p> <i class="fas fa-bed"> 4 Beds</i> <i class="fas fa-bath"> 2 Baths </i></p>--}}
+{{--                            <p><i class="far fa-clock"> 6 days since last update</i> </p>--}}
+{{--                            <a href="#" class="btn "> Quick Contact</a>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                    <div class="item">--}}
+{{--                        <img class="owl-lazy" data-src="/assets/images/large-view-6.jpg" alt="first-img"> <i class="fas fa-star"></i>--}}
+{{--                        <label>$8,000 / month </label>--}}
+{{--                        <div class="item-inner">--}}
+{{--                            <p>195 Santon Street Lower East Side, Manhattan -#5B </p>--}}
+{{--                            <p> <i class="fas fa-bed"> 4 Beds</i> <i class="fas fa-bath"> 2 Baths </i></p>--}}
+{{--                            <p><i class="far fa-clock"> 6 days since last update</i> </p>--}}
+{{--                            <a href="#" class="btn "> Quick Contact</a>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                    <div class="item">--}}
+{{--                        <img class="owl-lazy" data-src="/assets/images/large-view-6.jpg" alt="first-img"> <i class="fas fa-star"></i>--}}
+{{--                        <label>$8,000 / month </label>--}}
+{{--                        <div class="item-inner">--}}
+{{--                            <p>195 Santon Street Lower East Side, Manhattan -#5B </p>--}}
+{{--                            <p> <i class="fas fa-bed"> 4 Beds</i> <i class="fas fa-bath"> 2 Baths </i></p>--}}
+{{--                            <p><i class="far fa-clock"> 6 days since last update</i> </p>--}}
+{{--                            <a href="#" class="btn "> Quick Contact</a>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                    <div class="item">--}}
+{{--                        <img class="owl-lazy" data-src="/assets/images/large-view-6.jpg" alt="first-img"> <i class="fas fa-star"></i>--}}
+{{--                        <label>$8,000 / month </label>--}}
+{{--                        <div class="item-inner">--}}
+{{--                            <p>195 Santon Street Lower East Side, Manhattan -#5B </p>--}}
+{{--                            <p> <i class="fas fa-bed"> 4 Beds</i> <i class="fas fa-bath"> 2 Baths </i></p>--}}
+{{--                            <p><i class="far fa-clock"> 6 days since last update</i> </p>--}}
+{{--                            <a href="#" class="btn "> Quick Contact</a>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                    <div class="item">--}}
+{{--                        <img class="owl-lazy" data-src="/assets/images/large-view-6.jpg" alt="first-img"> <i class="fas fa-star"></i>--}}
+{{--                        <label>$8,000 / month </label>--}}
+{{--                        <div class="item-inner">--}}
+{{--                            <p>195 Santon Street Lower East Side, Manhattan -#5B </p>--}}
+{{--                            <p> <i class="fas fa-bed"> 4 Beds</i> <i class="fas fa-bath"> 2 Baths </i></p>--}}
+{{--                            <p><i class="far fa-clock"> 6 days since last update</i> </p>--}}
+{{--                            <a href="#" class="btn "> Quick Contact</a>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
     </div>
 </section>
-			<div class="featured-properties nearby-listing">
-				<div class="property-listing ">
-					<div class="property-thumb">
-						<div class="check-btn">
-							<button class="btn-default" data-toggle="modal" data-target="#check-availability">Check Availability</button>
-						</div>
-						<span class="heart-icon"></span>
-						<img src="assets/images/gallery-img.jpg" alt="" class="main-img">
-						<div class="info">
-							<a href="#">
-								<p>$3,200 / Month </p>
-								<ul>
-									<li><i class="fa fa-bed"></i> 2</li>
-									<li><i class="fa fa-bath"></i> 2</li>
-								</ul>
-							</a>
-						</div>
-					</div>
-					<div class="property-thumb">
-						<div class="check-btn">
-							<button class="btn-default" data-toggle="modal" data-target="#check-availability">Check Availability</button>
-						</div>
-						<span class="heart-icon"></span>
-						<img src="/assets/images/gallery-img.jpg" alt="" class="main-img">
-						<div class="info">
-							<a href="#">
-								<p>$3,200 / month </p>
-								<ul>
-									<li><i class="fa fa-bed"></i> 2</li>
-									<li><i class="fa fa-bath"></i> 2</li>
-								</ul>
-							</a>
-						</div>
-					</div>
-					<div class="property-thumb">
-						<div class="check-btn">
-							<button class="btn-default" data-toggle="modal" data-target="#check-availability">Check Availability</button>
-						</div>
-						<span class="heart-icon"></span>
-						<img src="/assets/images/gallery-img.jpg" alt="" class="main-img">
-						<div class="info">
-							<a href="#">
-								<p>$3,200 / Month </p>
-								<ul>
-									<li><i class="fa fa-bed"></i> 2</li>
-									<li><i class="fa fa-bath"></i> 2</li>
-								</ul>
-							</a>
-						</div>
-					</div>
-					<div class="property-thumb">
-						<div class="check-btn">
-							<button class="btn-default" data-toggle="modal" data-target="#check-availability">Check Availability</button>
-						</div>
-						<span class="heart-icon"></span>
-						<img src="assets/images/gallery-img.jpg" alt="" class="main-img">
-						<div class="info">
-							<a href="#">
-								<p>$3,200 / Month </p>
-								<ul>
-									<li><i class="fa fa-bed"></i> 2</li>
-									<li><i class="fa fa-bath"></i> 2</li>
-								</ul>
-							</a>
-						</div>
-					</div>
-				</div>
-			</div>
+{{--			<div class="featured-properties nearby-listing">--}}
+{{--				<div class="property-listing ">--}}
+{{--					<div class="property-thumb">--}}
+{{--						<div class="check-btn">--}}
+{{--							<button class="btn-default" data-toggle="modal" data-target="#check-availability">Check Availability</button>--}}
+{{--						</div>--}}
+{{--						<span class="heart-icon"></span>--}}
+{{--						<img src="assets/images/gallery-img.jpg" alt="" class="main-img">--}}
+{{--						<div class="info">--}}
+{{--							<a href="#">--}}
+{{--								<p>$3,200 / Month </p>--}}
+{{--								<ul>--}}
+{{--									<li><i class="fa fa-bed"></i> 2</li>--}}
+{{--									<li><i class="fa fa-bath"></i> 2</li>--}}
+{{--								</ul>--}}
+{{--							</a>--}}
+{{--						</div>--}}
+{{--					</div>--}}
+{{--					<div class="property-thumb">--}}
+{{--						<div class="check-btn">--}}
+{{--							<button class="btn-default" data-toggle="modal" data-target="#check-availability">Check Availability</button>--}}
+{{--						</div>--}}
+{{--						<span class="heart-icon"></span>--}}
+{{--						<img src="/assets/images/gallery-img.jpg" alt="" class="main-img">--}}
+{{--						<div class="info">--}}
+{{--							<a href="#">--}}
+{{--								<p>$3,200 / month </p>--}}
+{{--								<ul>--}}
+{{--									<li><i class="fa fa-bed"></i> 2</li>--}}
+{{--									<li><i class="fa fa-bath"></i> 2</li>--}}
+{{--								</ul>--}}
+{{--							</a>--}}
+{{--						</div>--}}
+{{--					</div>--}}
+{{--					<div class="property-thumb">--}}
+{{--						<div class="check-btn">--}}
+{{--							<button class="btn-default" data-toggle="modal" data-target="#check-availability">Check Availability</button>--}}
+{{--						</div>--}}
+{{--						<span class="heart-icon"></span>--}}
+{{--						<img src="/assets/images/gallery-img.jpg" alt="" class="main-img">--}}
+{{--						<div class="info">--}}
+{{--							<a href="#">--}}
+{{--								<p>$3,200 / Month </p>--}}
+{{--								<ul>--}}
+{{--									<li><i class="fa fa-bed"></i> 2</li>--}}
+{{--									<li><i class="fa fa-bath"></i> 2</li>--}}
+{{--								</ul>--}}
+{{--							</a>--}}
+{{--						</div>--}}
+{{--					</div>--}}
+{{--					<div class="property-thumb">--}}
+{{--						<div class="check-btn">--}}
+{{--							<button class="btn-default" data-toggle="modal" data-target="#check-availability">Check Availability</button>--}}
+{{--						</div>--}}
+{{--						<span class="heart-icon"></span>--}}
+{{--						<img src="assets/images/gallery-img.jpg" alt="" class="main-img">--}}
+{{--						<div class="info">--}}
+{{--							<a href="#">--}}
+{{--								<p>$3,200 / Month </p>--}}
+{{--								<ul>--}}
+{{--									<li><i class="fa fa-bed"></i> 2</li>--}}
+{{--									<li><i class="fa fa-bath"></i> 2</li>--}}
+{{--								</ul>--}}
+{{--							</a>--}}
+{{--						</div>--}}
+{{--					</div>--}}
+{{--				</div>--}}
+{{--			</div>--}}
     {{--Check Availability--}}
     @include('features.message')
     {{--Messages JS--}}
