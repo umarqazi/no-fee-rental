@@ -694,7 +694,6 @@
     $(".neighborhood-search .search-result-wrapper .search-listing").toggleClass('hide-list');
     $(".neighborhood-search .search-result-wrapper .map-wrapper").toggleClass('full-map');
     });
-
     $(".mobile-view-dropdown").click(function(){
         $(this).find("i").toggleClass('fa-bars fa-times');
         $("#mobile-tabs-collapse").slideToggle();
@@ -735,7 +734,6 @@
         }
     });
 
-
     $('.owl-slider #ClientCarousel').owlCarousel({
         autoplay: true,
         responsiveClass: true,
@@ -762,7 +760,6 @@
             }
         }
     });
-
 </script>
 @endsection {!! HTML::script('assets/js/input-to-dropdown.js') !!}
 <!--  -->
