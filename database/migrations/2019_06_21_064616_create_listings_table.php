@@ -24,7 +24,7 @@ class CreateListingsTable extends Migration {
 			$table->string('thumbnail')->nullable();
 			$table->integer('baths')->nullable();
 			$table->integer('bedrooms')->nullable();
-			$table->integer('unit')->nullable();
+			$table->string('unit')->nullable();
 			$table->integer('rent')->nullable();
 			$table->integer('square_feet')->nullable();
 			$table->text('description')->nullable();
@@ -32,9 +32,7 @@ class CreateListingsTable extends Migration {
 			$table->string('realty_url')->nullable();
 			$table->integer('is_featured')->default(0)->comment = "0-Non-Featured, 1-Featured, 2-Request-Featured";
             $table->integer('visibility')->default(2)->comment = "0-Inactive, 1-Active, 2-Pending";
-            $table->integer('availability')->default(1)->comment = "0-Not Available, 1-Available";
-			$table->string('city_state_zip')->comment = "Any one of 3 given accepted";
-            $table->string('open_house')->nullable();
+            $table->string('availability')->comment = "0-Not Available, 1-Available, 2-Immediately, 3-Date";
 			$table->timestamps();
 
 			$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onEdit('cascade');

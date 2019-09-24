@@ -5,10 +5,10 @@
         <h3>{{ucwords(str_replace('_', ' ', $key))}}</h3>
         <ul class="checkbox-listing">
             @foreach($values as $id => $f)
-                @php $i ++; @endphp
+                @php $i ++; $id ++; @endphp
                  <li>
                      <div class="custom-control custom-checkbox">
-                         {!! Form::checkbox($key.'[]', $id, null,
+                         {!! Form::checkbox("amenities[$key][]", $id, null,
                             [
                                 ($action == 'Update') ? 'disabled' : '',
                                 'class' => 'custom-control-input',

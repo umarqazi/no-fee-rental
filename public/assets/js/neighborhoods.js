@@ -1,6 +1,54 @@
 $(() => {
     let $body = $('body');
 
+    $body.find('.submit-neighbor').on('click', function() {
+        $('form').submit();
+    });
+
+    $(".neighborhood-search .search-result-wrapper .map-wrapper .swipe-btn").on('click', function() {
+        $(this).find('i').toggleClass('fa-angle-left fa-angle-right');
+        $(".neighborhood-search .search-result-wrapper .search-listing").toggleClass('hide-list');
+        $(".neighborhood-search .search-result-wrapper .map-wrapper").toggleClass('full-map');
+    });
+
+    $(".mobile-view-dropdown").on('click', function(){
+        $(this).find("i").toggleClass('fa-bars fa-times');
+        $("#mobile-tabs-collapse").slideToggle();
+    });
+
+    $(".mobile-map-icon").on('click', function(){
+        $(this).find("i").toggleClass('fa-map-marker-alt fa-times');
+        $("#mobile-map-listing-view").slideToggle();
+    });
+
+    $('.owl-slider #carouselNeighbour').owlCarousel({
+        autoplay: true,
+        responsiveClass: true,
+        autoHeight: true,
+        smartSpeed: 1000,
+        dots:false,
+        autoplaySpeed:1000,
+        autoplayTimeout: 1000,
+        nav: true,
+        responsive: {
+            0: {
+                items: 1
+            },
+
+            600: {
+                items: 3
+            },
+
+            1024: {
+                items: 3
+            },
+
+            1366: {
+                items: 3
+            }
+        }
+    });
+
     $body.on('form-success-add_neighborhood', function (res, data) {
         reloadTable();
     });
@@ -53,7 +101,6 @@ $(() => {
         console.log(res.data.content);
         $('#neighborhood_content_view').val(res.data.content);
         $('#neighborhood_content_view').attr('readonly', true);
-        ;
     });
 
     $('#neighborhoods_table').DataTable({

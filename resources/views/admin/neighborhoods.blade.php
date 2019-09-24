@@ -107,5 +107,6 @@
         </div>
     </div>
     {!! HTML::script('assets/js/neighborhoods.js') !!}
+    <script> fetchNeighbours(); </script>
 @endsection
 

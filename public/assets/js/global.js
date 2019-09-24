@@ -209,3 +209,83 @@ async function livePreview(file, target) {
     };
     reader.readAsDataURL(file);
 }
+
+const fetchNeighbours = async (selector) => {
+    await ajaxRequest('/all-neighborhoods', 'post', null, false).then(neighbours => {
+        let data = [];
+        neighbours.data.forEach(v => {
+            data.push(v.name);
+        });
+        let $neighbour = selector;
+        $neighbour.autocomplete({
+            source: data,
+            select: function (event, ui) {
+                $(this).val(ui.item ? ui.item : " ");
+            },
+
+            change: function (event, ui) {
+                if (!ui.item) {
+                    this.value = '';
+                    if($('.neigh').length > 0) return;
+                    $neighbour.after('<label id="neighbors-error" class="error neigh" for="baths">Invalid Neighborhood.</label>');
+                } else {
+                    $('#neighbors-error').remove();
+                }
+            }
+        });
+    });
+};
+
+/**
+ *
+ * @param selector
+ * @param allowTime
+ */
+const enableDatePicker = (selector, allowTime = true) => {
+    // Create start date
+    var start = new Date(),
+        prevDay,
+        startHours = 9;
+
+    // 09:00 AM
+    start.setHours(9);
+    start.setMinutes(0);
+
+    // If today is Saturday or Sunday set 10:00 AM
+    if ([6, 0].indexOf(start.getDay()) != -1) {
+        start.setHours(10);
+        startHours = 10
+    }
+
+    $(selector).datepicker({
+        timepicker: allowTime,
+        language: 'en',
+        startDate: start,
+        minHours: startHours,
+        maxHours: 18,
+        onSelect: function (fd, d, picker) {
+            // Do nothing if selection was cleared
+            if (!d) return;
+
+            var day = d.getDay();
+
+            // Trigger only if date is changed
+            if (prevDay != undefined && prevDay == day) return;
+            prevDay = day;
+
+            // If chosen day is Saturday or Sunday when set
+            // hour value for weekends, else restore defaults
+            if (day == 6 || day == 0) {
+                picker.update({
+                    minHours: 10,
+                    maxHours: 16
+                })
+            } else {
+                picker.update({
+                    minHours: 9,
+                    maxHours: 18
+                })
+            }
+        }
+    });
+};

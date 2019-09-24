@@ -55,7 +55,7 @@ class ListingController extends Controller {
 	public function showForm() {
         $action = 'Create';
 		$listing = null;
-		return view('agent.add_listing', compact('listing', 'action'));
+		return view('listing-features.listing', compact('listing', 'action'));
 	}
 
     /**
@@ -63,13 +63,21 @@ class ListingController extends Controller {
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
-	public function create(Request $request) {
-        $action = 'Create';
+    public function create(Request $request) {
+        $request->visibility = DEACTIVE;
         $id = $this->service->create($request);
-		return ($id)
-		? view('agent.add_listing_images', compact('id', 'action'))
-		: error('Something went wrong');
-	}
+        return redirect(route('agent.createListingImages', $id));
+    }
+
+    /**
+     * @param $id
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function createImages($id) {
+        $action = 'Create';
+        return view('listing-features.listing_images', compact('id', 'action'));
+    }
 
 	/**
 	 * @param $id
@@ -79,10 +87,11 @@ class ListingController extends Controller {
 	 */
 	public function update($id, Request $request) {
         $action = 'Update';
+        $request->visibility = ACTIVE;
 		$update = $this->service->update($id, $request);
 		$listing_images = $this->service->images($id)->get();
 		return $update
-		? view('agent.add_listing_images', compact('id', 'action', 'listing_images'))
+		? view('listing-features.listing_images', compact('id', 'action', 'listing_images'))
 		: error('Something went wrong');
 	}
 
@@ -116,12 +125,14 @@ class ListingController extends Controller {
 	 */
 	public function edit($id) {
         $action = 'Update';
+        $amenities = null;
 		$listing = $this->service->edit($id)->first();
 		foreach (features($listing->listingTypes) as $key => $value) {
-			$listing->{$key} = $value;
-		}
+            $amenities[$key] = $value;
+        }
+		$listing->amenities = $amenities;
 
-		return view('agent.add_listing', compact('listing', 'action'));
+		return view('listing-features.listing', compact('listing', 'action'));
 	}
 
 	/**
@@ -188,11 +199,13 @@ class ListingController extends Controller {
      */
     public function copy($id) {
         $action = 'Copy';
+        $amenities = null;
         $listing = $this->service->edit($id)->first();
         foreach (features($listing->listingTypes) as $key => $value) {
-            $listing->{$key} = $value;
+            $amenities[$key] = $value;
         }
-        return view('agent.add_listing', compact('listing', 'action'));
+        $listing->amenities = $amenities;
+        return view('listing-features.listing', compact('listing', 'action'));
     }
 
 }

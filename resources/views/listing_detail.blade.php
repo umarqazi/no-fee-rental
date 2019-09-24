@@ -17,9 +17,9 @@
                     <div class="clearfix" style="max-width:100%;">
                         <ul id="image-gallery" class="gallery list-unstyled cS-hidden">
                             @foreach($listing->listingImages as $images)
-                                <li data-thumb="{{asset('storage/'.$images->listing_image)}}" class="large-view">
-                                    <a target="_blank" href="{{ asset('storage/'.$images->listing_image) }}">
-                                        <img src="{{ asset('storage/'.$images->listing_image) }}" />
+                                <li data-thumb="{{ asset($images->listing_image ? $images->listing_image : DLI) }}" class="large-view">
+                                    <a target="_blank" href="{{ asset($images->listing_image ? $images->listing_image : DLI) }}">
+                                        <img src="{{ asset($images->listing_image ? $images->listing_image : DLI) }}" />
                                     </a>
                                 </li>
                             @endforeach
@@ -53,7 +53,7 @@
                     <div class="apartment-details">
                         <h4> ${{$listing->rent}} / month</h4>
                     </div>
-                   
+
                         <div class="appointment-iconDetails">
                             <ul>
                             <li> <i class="fas fa-bed"></i> {{$listing->bedrooms}} {{ $listing->bedrooms > 1 ? 'Beds' : 'Bed'}} </li>

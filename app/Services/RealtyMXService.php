@@ -26,10 +26,10 @@ class RealtyMXService extends ListingService {
      * @param ListingRepo $repo
      * @param UserRepo $user_repo
      */
-    public function __construct(ListingRepo $repo, UserRepo $user_repo) {
-        $this->user_repo = $user_repo;
-        parent::__construct($repo);
-    }
+//    public function __construct(ListingRepo $repo, UserRepo $user_repo) {
+//        $this->user_repo = $user_repo;
+//        parent::__construct($repo);
+//    }
 
     /**
      * @param $list

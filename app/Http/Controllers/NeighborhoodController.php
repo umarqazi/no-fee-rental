@@ -14,12 +14,25 @@ class NeighborhoodController extends Controller {
     private $service;
 
     /**
+     * @var int
+     */
+    private $paginate = 20;
+
+    /**
      * NeighborhoodController constructor.
      *
      * @param NeighborhoodService $service
      */
     public function __construct(NeighborhoodService $service) {
         $this->service = $service;
+    }
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function index() {
+        $data = toObject($this->service->fetchListing($this->paginate));
+        return view('neighborhood', compact('data'));
     }
 
     /**
@@ -30,15 +43,6 @@ class NeighborhoodController extends Controller {
     public function create(Request $request) {
         $neighborhood = $this->service->create($request);
         return sendResponse($request, $neighborhood, 'Neighborhood has been added');
-    }
-
-    /**
-     * @param
-     *
-     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
-     */
-    public function index() {
-        return view('admin.neighborhoods');
     }
 
     /**
@@ -72,13 +76,22 @@ class NeighborhoodController extends Controller {
         $user = $this->service->delete($id);
         return sendResponse($request, $user, 'Neghborhoood has been deleted.');
     }
+
     /**
      * @return mixed
      * @throws \Exception
      */
-    public function getNeighborhoods() {
+    public function get() {
         return DataTable($this->service->neighborhoods());
     }
 
-
+    /**
+     * @param Request $request
+     *
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
+     */
+    public function all(Request $request) {
+        $neighbors = $this->service->all();
+        return sendResponse($request, $neighbors, null);
+    }
 }

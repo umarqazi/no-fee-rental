@@ -34,6 +34,7 @@ Route::post('/search-user', 'Admin\UserController@search')->name('admin.searchUs
 Route::post('/send-invitation', 'Admin\UserController@invite')->name('admin.sendInvitation');
 
 // Listing Routes
+Route::get('/add-listing-images/{id}', 'Admin\ListingController@createImages')->name('admin.createListingImages');
 Route::post('/add-listing', 'Admin\ListingController@create')->name('admin.createListing');
 Route::match(['get', 'post'], '/search-listing', 'Admin\ListingController@searchWithFilters')->name('admin.listingSearch');
 Route::get('/property-listing', 'Admin\AdminController@viewPropertyListing')->name('property-listing');
@@ -72,9 +73,9 @@ Route::post('/update-company/{id}', 'Admin\CompanyController@update');
 Route::post('/delete-company/{id}', 'Admin\CompanyController@delete');
 Route::post('/company-status-update/{id}', 'Admin\CompanyController@status');
 
-//neighborhood routes
+// Neighborhood Routes
 Route::get('/neighborhoods', 'NeighborhoodController@index')->name('neighborhoods');
-Route::get('/get-neighborhoods', 'NeighborhoodController@getNeighborhoods')->name('neighborhoods.get');
+Route::get('/get-neighborhoods', 'NeighborhoodController@get')->name('neighborhoods.get');
 Route::post('/neighborhood/create', 'NeighborhoodController@create')->name('neighborhood.create');
 Route::post('/neighborhood/edit/{id}', 'NeighborhoodController@edit')->name('neighborhood.edit');
 Route::post('/neighborhood/update/{id}', 'NeighborhoodController@update')->name('neighborhood.update');

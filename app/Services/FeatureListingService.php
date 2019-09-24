@@ -174,7 +174,7 @@ class FeatureListingService {
 	 * @return mixed
 	 */
 	public function detail($id) {
-		return $this->repo->find(['id' => $id])->withall();
+		return $this->repo->find(['id' => $id, 'visibility' => true])->withall();
 	}
 
     /**

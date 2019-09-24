@@ -17,4 +17,5 @@
         <a href="" class="advance-search" data-toggle="modal" data-target="#advance-search">+Advanced Search</a>
     </div>
 </div>
-{!! HTML::script('assets/js/vendor/autocomplete.js') !!}
+{{--Advance Search--}}
+@include('modals.advance_search')
