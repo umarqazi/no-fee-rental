@@ -32,5 +32,4 @@
 </div>
 
 {!! HTML::script('assets/js/listing.js') !!}
-
 @endsection

@@ -3,9 +3,7 @@
 @section('content')
 <header>
     {{--Normal Search--}}
-    @include('features.search')
-    {{--Advance Search--}}
-    @include('features.advance_search')
+    @include('sections.search')
 </header>
 <section class="need-help-container wow fadeIn " data-wow-delay="0.2s">
     <div class="container-lg">
@@ -33,25 +31,9 @@
     </div>
 </section>
 {{--Featured Listing--}}
-@include('features.feature_listing')
+@include('sections.feature_listing')
 {{--Life Container--}}
-@include('features.life-container')
+@include('sections.life-container')
 {{--Neighborhoods--}}
-@include('features.neighborhood')
-<script>
-    let neighbours = @php echo json_encode(config('neighborhoods')); @endphp;
-    let $neighbour = $('input[name=neighborhoods]');
-    $neighbour.autocomplete({
-        source: neighbours,
-        select: function (event, ui) {
-            $(this).val(ui.item ? ui.item : " ");
-        },
-
-        change: function (event, ui) {
-            if (!ui.item) {
-                this.value = '';
-            }
-        }
-    });
-</script>
+@include('sections.neighborhood')
 @endsection

@@ -28,10 +28,6 @@ class CreateListingForm extends BaseForm {
     /**
      * @var string
      */
-	public $status;
-    /**
-     * @var string
-     */
 	public $email;
 
     /**
@@ -58,11 +54,6 @@ class CreateListingForm extends BaseForm {
      * @var string
      */
 	public $open_house;
-
-    /**
-     * @var string
-     */
-	public $city_state_zip;
 
     /**
      * @var string
@@ -117,27 +108,7 @@ class CreateListingForm extends BaseForm {
     /**
      * @var array
      */
-	public $listing_type;
-
-    /**
-     * @var array
-     */
 	public $amenities;
-
-    /**
-     * @var array
-     */
-	public $unit_feature;
-
-    /**
-     * @var array
-     */
-	public $building_feature;
-
-    /**
-     * @var array
-     */
-	public $pet_policy;
 
     /**
      * @var integer
@@ -160,7 +131,6 @@ class CreateListingForm extends BaseForm {
 			'street_address'   => $this->street_address,
 			'display_address'  => $this->display_address,
 			'open_house'       => $this->open_house,
-			'city_state_zip'   => $this->city_state_zip,
 			'neighborhood'     => $this->neighborhood,
 			'bedrooms'         => $this->bedrooms,
 			'baths'            => $this->baths,
@@ -169,11 +139,7 @@ class CreateListingForm extends BaseForm {
 			'thumbnail'        => $this->thumbnail,
             'visibility'       => $this->visibility,
 			'square_feet'      => $this->square_feet,
-			'listing_type'     => $this->listing_type,
-			'amenities'        => $this->amenities,
-			'unit_feature'     => $this->unit_feature,
-			'building_feature' => $this->building_feature,
-			'pet_policy'       => $this->pet_policy,
+            'amenities'        => $this->amenities,
 			'map_location'     => $this->map_location,
 		];
 	}
@@ -189,15 +155,14 @@ class CreateListingForm extends BaseForm {
 			'street_address'  => 'required|string',
 			'display_address' => 'required|string',
             'visibility'      => 'required|integer',
-			'availability'    => 'required|integer',
+			'availability'    => 'required',
 			'map_location'    => 'required',
-			'city_state_zip'  => 'required',
 			'neighborhood'    => 'required|string',
 			'bedrooms'        => 'required|integer',
 			'baths'           => 'required|integer',
-			'thumbnail'       => 'sometimes|mimes:jpg,png,jpeg',
+            'thumbnail'       => 'sometimes|mimes:jpg,png,jpeg',
 			'description'     => 'required',
-			'unit'            => 'required|integer',
+			'unit'            => 'required',
 			'rent'            => 'required|integer',
 			'square_feet'     => 'required|integer',
 		];

@@ -49,6 +49,9 @@ Route::get('/confirm-email/{token}', 'UserController@confirmEmail')->name('user.
 // Email Validation
 Route::post('/verfiy-email', 'UserController@verifyEmail');
 
+//License Validations
+Route::post('/verfiy-license', 'UserController@verifyLicense');
+
 // Login route for all user type
 Route::post('/login')->name('attempt.login')->middleware('authguard');
 
@@ -89,13 +92,16 @@ Route::post('/test', function (Request $request) {
     return 'false';
 });
 
-Route::get('/neighborhood', function() {
-	return view('neighborhood');
-});
-
 Route::get('/rent', function() {
     return view('rent');
 });
 
 Route::get('/reset', 'RecoverPasswordController@sendRequest');
 
+// Neighborhood Routes
+Route::get('/neighborhoods', 'NeighborhoodController@index')->name('web.neighborhood');
+Route::post('/neighborhoods', 'NeighborhoodController@find')->name('web.findNeighborhood');
+Route::post('/neighborhood/create', 'NeighborhoodController@create')->name('neigborhood.create');
+Route::post('/neighborhood/edit/{id}', 'NeighborhoodController@edit')->name('neigborhood.edit');
+Route::post('/neighborhood/delete/{id}', 'NeighborhoodController@delete')->name('neigborhood.delete');
+Route::post('/all-neighborhoods', 'NeighborhoodController@all')->name('web.allNeighbours');

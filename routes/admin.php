@@ -34,6 +34,7 @@ Route::post('/search-user', 'Admin\UserController@search')->name('admin.searchUs
 Route::post('/send-invitation', 'Admin\UserController@invite')->name('admin.sendInvitation');
 
 // Listing Routes
+Route::get('/add-listing-images/{id}', 'Admin\ListingController@createImages')->name('admin.createListingImages');
 Route::post('/add-listing', 'Admin\ListingController@create')->name('admin.createListing');
 Route::match(['get', 'post'], '/search-listing', 'Admin\ListingController@searchWithFilters')->name('admin.listingSearch');
 Route::get('/property-listing', 'Admin\AdminController@viewPropertyListing')->name('property-listing');
@@ -43,7 +44,7 @@ Route::get('/approve-listing-request/{id}', 'Admin\ListingController@approve')->
 Route::get('/listing-status/{id}', 'Admin\ListingController@status')->name('admin.listingStatus');
 Route::post('/upload-listing-images/{id}', 'Admin\ListingController@uploadImages')->name('admin.listingImages');
 Route::get('/remove-listing-image/{id}', 'Admin\ListingController@removeImage');
-Route::get('/listing-repost/{id}', 'Admin\ListingController@repost')->name('admin.listingRepost');
+Route::get('/listing-repost/{id}', 'Admin\ListingController@repost')->name('admin.repostListing');
 Route::get('/edit-list/{id}', 'Admin\ListingController@edit')->name('admin.editListing');
 Route::get('/copy-list/{id}', 'Admin\ListingController@copy')->name('admin.copyListing');
 Route::post('/update-listing/{id}', 'Admin\ListingController@update')->name('admin.updateListing');
@@ -71,3 +72,11 @@ Route::post('/edit-company/{id}', 'Admin\CompanyController@edit');
 Route::post('/update-company/{id}', 'Admin\CompanyController@update');
 Route::post('/delete-company/{id}', 'Admin\CompanyController@delete');
 Route::post('/company-status-update/{id}', 'Admin\CompanyController@status');
+
+// Neighborhood Routes
+Route::get('/neighborhoods', 'NeighborhoodController@index')->name('neighborhoods');
+Route::get('/get-neighborhoods', 'NeighborhoodController@get')->name('neighborhoods.get');
+Route::post('/neighborhood/create', 'NeighborhoodController@create')->name('neighborhood.create');
+Route::post('/neighborhood/edit/{id}', 'NeighborhoodController@edit')->name('neighborhood.edit');
+Route::post('/neighborhood/update/{id}', 'NeighborhoodController@update')->name('neighborhood.update');
+Route::post('/neighborhood/delete/{id}', 'NeighborhoodController@delete')->name('neighborhood.delete');

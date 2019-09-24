@@ -13,12 +13,12 @@ use Illuminate\Support\Facades\Storage;
  * @return string
  */
 function uploadImage($image, $path, $unlinkOld = false, $old_image = null) {
-	$name = str_random(5) . '.' . $image->getClientOriginalExtension();
+	$name = str_random(20) . '.' . $image->getClientOriginalExtension();
 	if (!File::isDirectory($path)) {
 		File::makeDirectory($path, 0777, true, true);
 	}
 	Storage::disk('public')->putFileAs($path, $image, $name);
-	$full_image_name = $path . '/' . $name;
+	$full_image_name = 'storage/' . $path . '/' . $name;
 	(!$unlinkOld) ?: removeFile($old_image);
 	return $full_image_name;
 }
@@ -43,7 +43,7 @@ function uploadMultiImages($files, $path) {
  * @return bool
  */
 function removeFile($path) {
-	return @unlink('storage/' . $path ?? '');
+	return @unlink($path ?? '');
 }
 
 /**
@@ -262,4 +262,39 @@ function features($data = null, $readable = false) {
 	}
 
 	return $build;
+}
+
+/**
+ * @param $index
+ *
+ * @return mixed
+ */
+function fetchopenHouses($index) {
+    $time = config('openHouse');
+    return $time[$index];
+}
+
+/**
+ * @param $amenities
+ *
+ * @return bool
+ */
+function is_exclusive($amenities) {
+    foreach ($amenities as $amenity) {
+        if($amenity->property_type === 1 && $amenity->value === EXCLUSIVE) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+/**
+ * @param $string
+ * @param $phrase
+ *
+ * @return string
+ */
+function str_formatting($string, $phrase) {
+    return $string.' '.($string > 1 ? $phrase.'s' : $phrase);
 }

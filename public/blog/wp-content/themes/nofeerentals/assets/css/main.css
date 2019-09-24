@@ -2635,6 +2635,8 @@ footer .footer-wrapper img{
 }
 }
 
+
+
 /*Privacy Policy */
 
 .privacy-policy-banner{
@@ -2648,6 +2650,7 @@ footer .footer-wrapper img{
   margin-bottom: 50px;
   position: relative;
 }
+
 .privacy-policy-banner:before{
   content: "";
   width: 100%;

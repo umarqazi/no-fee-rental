@@ -7,14 +7,21 @@
 	</div>
 	<div class="block add-new-listing-wrapper">
 		<div class="block-body">
-			{!! Form::model($listing, ['id' => 'listing-form', 'url' => ($action == 'Update') ? route('admin.updateListing', $listing->id) : route('admin.createListing'), 'id' => 'listing_form', 'method' => 'post', 'enctype' => 'multipart/form-data']) !!}
+			{!! Form::model($listing,
+			    [
+			        'id' => 'listing-form',
+			        'url' => ($action == 'Update') ? route('admin.updateListing', $listing->id) : route('admin.createListing'),
+			        'id' => 'listing_form',
+			        'method' => 'post',
+			        'enctype' => 'multipart/form-data'
+			    ]) !!}
 				<div class="row">
-					@include('admin.listing-features.listing_info')
-
-					@include('admin.listing-features.features')
-
-					@include('admin.listing-features.basic_info')
-
+                    {{--Listing Info--}}
+					@include('listing-features.listing_info')
+                    {{--Amenities--}}
+					@include('listing-features.amenities')
+                    {{--Basic User Info--}}
+					@include('listing-features.basic_info')
 					<div class="col-md-12 mt-4">
 						<div id="map"></div>
 					</div>
@@ -27,26 +34,11 @@
 	</div>
 </div>
 
-{!! HTML::script('assets/js/map.js') !!}
 {!! HTML::script('assets/js/listing.js') !!}
 <script>
-    let neighbours = @php echo json_encode(config('neighborhoods')); @endphp;
-    let $neighbour = $('input[name=neighborhood]');
-    $neighbour.autocomplete({
-        source: neighbours,
-        select: function (event, ui) {
-            $(this).val(ui.item ? ui.item : " ");
-        },
-
-        change: function (event, ui) {
-            if (!ui.item) {
-                this.value = '';
-                if($('.neigh').length > 0) return;
-                $neighbour.after('<label id="neighbors-error" class="error neigh" for="baths">Invalid Neighborhood.</label>');
-            } else {
-                $('#neighbors-error').remove();
-            }
-        }
-    });
+    enableDatePicker('#availability_date');
+    enableDatePicker('.open-house-date', false);
+    initMap(document.getElementById('map'));
+    fetchNeighbours($('input[name=neighborhood]'));
 </script>
 @endsection

@@ -15,11 +15,12 @@ Route::post('/password-update', 'Agent\AgentController@updatePassword')->name('a
 Route::get('/password-reset', 'Agent\AgentController@resetPassword')->name('agent.resetPassword');
 
 // Listing Routes
+Route::get('/add-listing-images/{id}', 'Agent\ListingController@createImages')->name('agent.createListingImages');
 Route::post('/add-listing', 'Agent\ListingController@create')->name('agent.createListing');
 Route::get('/add-listing', 'Agent\ListingController@showForm')->name('agent.addListing');
 Route::post('/upload-listing-images/{id}', 'Agent\ListingController@uploadImages')->name('agent.listingImages');
 Route::get('/remove-listing-image/{id}', 'Agent\ListingController@removeImage');
-Route::get('/listing-repost/{id}', 'Agent\ListingController@repost')->name('agent.listingRepost');
+Route::get('/listing-repost/{id}', 'Agent\ListingController@repost')->name('agent.repostListing');
 Route::match(['get', 'post'], '/search-listing', 'Agent\ListingController@searchWithFilters')->name('agent.listingSearch');
 Route::get('/listing-status/{id}', 'Agent\ListingController@status')->name('agent.listingStatus');
 Route::get('/edit-list/{id}', 'Agent\ListingController@edit')->name('agent.editListing');
@@ -43,3 +44,5 @@ Route::get('/messages-view', 'Agent\MessageController@index')->name('agent.messa
 Route::get('/load-chat/{id}', 'Agent\MessageController@inbox')->name('agent.loadChat');
 Route::post('/send-message/{id}', 'Agent\MessageController@send')->name('agent.sendMessage');
 Route::post('/accept-meeting/{id}', 'Agent\MessageController@confirmMeeting');
+
+Route::get('/listing-profile', 'Agent\ListingController@profile');

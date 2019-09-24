@@ -109,4 +109,11 @@ class BaseRepo implements IRepo {
     public function updateMultiRows($ids, $data) {
 	    return $this->model->whereIn('id', $ids)->update($data);
     }
+
+    /**
+     * @return mixed
+     */
+    public function getFirst() {
+        return $this->model->first();
+    }
 }

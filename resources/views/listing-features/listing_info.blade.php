@@ -1,11 +1,16 @@
-<link rel="stylesheet" type="text/css" href="{{asset('assets/css/datepicker.min.css')}}"/>
-<script src="{{asset('assets/js/datepicker.min.js')}}"></script>
-<script src="{{asset('assets/js/datepicker.en.js')}}"></script>
+{!! HTML::style('assets/css/datepicker.min.css') !!}
+{!! HTML::script('assets/js/datepicker.min.js') !!}
+{!! HTML::script('assets/js/datepicker.en.js') !!}
 <div class="col-md-6">
     <div class="form-group">
         <label>Street Address</label>
-        {!! Form::text('street_address', null, ['id' => 'controls', 'class' => 'controls input-style', 'autocomplete' => 'off']) !!}
-        <span class="mt-2 d-block">* The street address is not shown, and is used for your reference</span>
+        {!! Form::text('street_address', null,
+        [
+            ($action == 'Update') ? 'readonly' : '',
+            'id'           => ($action !== 'Update') ? 'controls' : '',
+            'class'        => 'controls input-style',
+            'autocomplete' => 'off'
+        ]) !!}
         <span class="invalid-feedback" role="alert">
 			{!! $errors->first('street_address') !!}
 		</span>
@@ -13,17 +18,13 @@
 </div>
 <div class="col-md-6">
     <div class="form-group">
-        <label>City, State, Zip code</label>
-        {!! Form::text('city_state_zip', null, ['class' => 'input-style']) !!}
-        <span class="invalid-feedback" role="alert">
-			{!! $errors->first('city_state_zip') !!}
-		</span>
-    </div>
-</div>
-<div class="col-md-6">
-    <div class="form-group">
         <label>Display Address</label>
-        {!! Form::text('display_address', null, ['class' => 'input-style']) !!}
+        {!! Form::text('display_address', null,
+        [
+            ($action == 'Update') ? 'readonly' : '',
+            'id'    => 'autofill',
+            'class' => 'input-style',
+        ]) !!}
         <span class="invalid-feedback" role="alert">
 			{!! $errors->first('display_address') !!}
 		</span>
@@ -77,7 +78,7 @@
 <div class="col-md-6">
     <div class="form-group">
         <label>Square Feet</label>
-        {!! Form::number('square_feet', null, ['class' => 'input-style']) !!}
+        {!! Form::text('square_feet', null, ['class' => 'input-style']) !!}
         <span class="invalid-feedback" role="alert">
             {!! $errors->first('square_feet') !!}
         </span>
@@ -85,23 +86,31 @@
 </div>
 <div class="col-md-6">
     <div class="form-group">
-        <label>Open House</label>
-        {!! Form::text('open_house', null, ['autocomplete' => 'off', 'class' => 'input-style', 'id' => 'timepicker-actions-exmpl', 'data-language' => 'en']) !!}
-        <span class="invalid-feedback" role="alert">
-			{!! $errors->first('available') !!}
-		</span>
-    </div>
-</div>
-<div class="col-md-6">
-    <div class="form-group">
         <label>Availability</label>
-        {!! Form::select('availability', ['' => 'Select', '1' => 'Available', '2' => 'Not Available'], null, ['class' => 'input-style']) !!}
+        {!! Form::select('availability', config('features.available'), null, ['class' => 'input-style']) !!}
         <span class="invalid-feedback" role="alert">
 			{!! $errors->first('available') !!}
 		</span>
     </div>
 </div>
-<div class="col-md-6"></div>
+<div class="col-md-6 availability-date" style="display: none;">
+    <div class="form-group">
+        <label>Select Availability Date</label>
+        {!! Form::text('availability_date', null,
+            [
+                'autocomplete' => 'off',
+                'class' => 'input-style',
+                'id' => 'availability_date',
+                'data-language' => 'en'
+            ]) !!}
+        <span class="invalid-feedback" role="alert">
+			{!! $errors->first('availability_date') !!}
+		</span>
+    </div>
+</div>
+
+{{--Open House--}}
+@include('listing-features.open_house')
 <div class="col-md-6">
     <div class="box">
         {!! Form::file('thumbnail', ['class' => 'inputfile inputfile-3', 'id' => 'file-3']) !!}
@@ -118,9 +127,8 @@
     @if(isset($listing->thumbnail))
         {!! Form::hidden('old_thumbnail', $listing->thumbnail) !!}
     @endif
-    <img class="img-thumbnail" src="{{($action == 'Update' || $action == 'Copy' && isset($listing->thumbnail)) ? asset('storage/'.$listing->thumbnail) : ''}}" id="img" style="{{($action == 'Update' || $action == 'Copy') ? 'width: 180px;height: 145px;margin-bottom: 15px;' : ''}}">
+    <img class="img-thumbnail" src="{{($action == 'Update' || $action == 'Copy' && isset($listing->thumbnail)) ? asset($listing->thumbnail) : ''}}" id="img" style="{{($action == 'Update' || $action == 'Copy') ? 'width: 180px;height: 145px;margin-bottom: 15px;' : ''}}">
 </div>
-<div class="col-md-6"></div>
 <div class="col-md-12">
     <div class="form-group">
         <label>Description</label>
@@ -130,51 +138,3 @@
 		</span>
     </div>
 </div>
-<script>
-    // Create start date
-    var start = new Date(),
-        prevDay,
-        startHours = 9;
-
-    // 09:00 AM
-    start.setHours(9);
-    start.setMinutes(0);
-
-    // If today is Saturday or Sunday set 10:00 AM
-    if ([6, 0].indexOf(start.getDay()) != -1) {
-        start.setHours(10);
-        startHours = 10
-    }
-
-    $('#timepicker-actions-exmpl').datepicker({
-        timepicker: true,
-        language: 'en',
-        startDate: start,
-        minHours: startHours,
-        maxHours: 18,
-        onSelect: function (fd, d, picker) {
-            // Do nothing if selection was cleared
-            if (!d) return;
-
-            var day = d.getDay();
-
-            // Trigger only if date is changed
-            if (prevDay != undefined && prevDay == day) return;
-            prevDay = day;
-
-            // If chosen day is Saturday or Sunday when set
-            // hour value for weekends, else restore defaults
-            if (day == 6 || day == 0) {
-                picker.update({
-                    minHours: 10,
-                    maxHours: 16
-                })
-            } else {
-                picker.update({
-                    minHours: 9,
-                    maxHours: 18
-                })
-            }
-        }
-    })
-</script>
