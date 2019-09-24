@@ -680,7 +680,7 @@
     .neighborhood-search {
         width: 100% !important;
     }
-   
+
 }
 .search-box {
     display: inline-block;
@@ -1481,4 +1481,40 @@ main {
 }
 .featured-properties.nearby-listing{
     overflow-x: hidden;
+}
+
+.datepicker-withtime{
+    display: flex;
+    align-items: center;
+}
+.datepicker-withtime .form-group{
+    margin-right: 5px;
+}
+
+.datepicker-withtime label{
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 500;
+}
+.datepicker-withtime select{
+    width: 110px !important;
+    display: inline-block;
+    background-color: #cccc;
+    font-weight: 600;
+}
+.datepicker-withtime select:hover, .datepicker-withtime select:active,
+.datepicker-withtime select:focus{
+    box-shadow: none;
+}
+.datepicker-withtime .form-group .btn-default{
+    padding: 2px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    background-color: #dddddd;
+    color: #000;hgray;
+}
+@media only screen and (max-width: 767px){
+    .datepicker-withtime{
+        flex-direction: column ;
+    }
 }

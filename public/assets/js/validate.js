@@ -36,7 +36,7 @@ $(() => {
         };
     }(jQuery));
 
-    $('input[name="baths"], input[name="bedrooms"], input[name=rent], input[name="unit"]').inputFilter(function(value) {
+    $('input[name="baths"], input[name="bedrooms"], input[name=rent], input[name=square_feet]').inputFilter(function(value) {
         return /^\d*$/.test(value);
     });
 
@@ -165,7 +165,16 @@ $(() => {
             first_name: "required",
             last_name: "required",
             phone_number: "required",
-            license_number: "required",
+            license_number: {
+            required:true,
+            remote: {
+                    headers: {
+                        'X-CSRF-TOKEN': TOKEN
+                    },
+                    url: "/verfiy-license",
+                    type: "post",
+                }
+            },
             email: {
                 required: true,
                 email: true,
@@ -189,7 +198,8 @@ $(() => {
 
         messages: {
             license_number: {
-                required: "License number is required."
+                required: "License number is required.",
+                remote: "License already taken",
             },
             user_type: {
                 required: "Select user type."

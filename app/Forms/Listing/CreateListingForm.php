@@ -145,6 +145,26 @@ class CreateListingForm extends BaseForm {
 	public $visibility;
 
     /**
+     * @var string
+     */
+    public $date;
+
+    /**
+     * @var string
+     */
+    public $start_time;
+
+    /**
+     * @var string
+     */
+    public $end_time;
+
+    /**
+     * @var boolean
+     */
+    public $only_appt;
+
+    /**
      * @return array
      */
 	function toArray() {
@@ -160,7 +180,6 @@ class CreateListingForm extends BaseForm {
 			'street_address'   => $this->street_address,
 			'display_address'  => $this->display_address,
 			'open_house'       => $this->open_house,
-			'city_state_zip'   => $this->city_state_zip,
 			'neighborhood'     => $this->neighborhood,
 			'bedrooms'         => $this->bedrooms,
 			'baths'            => $this->baths,
@@ -170,7 +189,11 @@ class CreateListingForm extends BaseForm {
             'visibility'       => $this->visibility,
 			'square_feet'      => $this->square_feet,
 			'listing_type'     => $this->listing_type,
-			'amenities'        => $this->amenities,
+            'amenities'        => $this->amenities,
+            'date'             => $this->date,
+            'start_time'       => $this->start_time,
+            'end_time'         => $this->end_time,
+            'only_appt'        => $this->only_appt,
 			'unit_feature'     => $this->unit_feature,
 			'building_feature' => $this->building_feature,
 			'pet_policy'       => $this->pet_policy,
@@ -191,11 +214,10 @@ class CreateListingForm extends BaseForm {
             'visibility'      => 'required|integer',
 			'availability'    => 'required|integer',
 			'map_location'    => 'required',
-			'city_state_zip'  => 'required',
 			'neighborhood'    => 'required|string',
 			'bedrooms'        => 'required|integer',
 			'baths'           => 'required|integer',
-			'thumbnail'       => 'sometimes|mimes:jpg,png,jpeg',
+            'thumbnail'       => 'sometimes|mimes:jpg,png,jpeg',
 			'description'     => 'required',
 			'unit'            => 'required|integer',
 			'rent'            => 'required|integer',

@@ -43,7 +43,7 @@ Route::get('/approve-listing-request/{id}', 'Admin\ListingController@approve')->
 Route::get('/listing-status/{id}', 'Admin\ListingController@status')->name('admin.listingStatus');
 Route::post('/upload-listing-images/{id}', 'Admin\ListingController@uploadImages')->name('admin.listingImages');
 Route::get('/remove-listing-image/{id}', 'Admin\ListingController@removeImage');
-Route::get('/listing-repost/{id}', 'Admin\ListingController@repost')->name('admin.listingRepost');
+Route::get('/listing-repost/{id}', 'Admin\ListingController@repost')->name('admin.repostListing');
 Route::get('/edit-list/{id}', 'Admin\ListingController@edit')->name('admin.editListing');
 Route::get('/copy-list/{id}', 'Admin\ListingController@copy')->name('admin.copyListing');
 Route::post('/update-listing/{id}', 'Admin\ListingController@update')->name('admin.updateListing');

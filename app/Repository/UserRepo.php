@@ -42,6 +42,14 @@ class UserRepo extends BaseRepo {
 	public function isUniqueEmail($email) {
 		return $this->findByEmail($email) ? true : false;
 	}
+    /**
+     * @param $License_number
+     *
+     * @return bool
+     */
+    public function isUniqueLicense($license_number) {
+        return $this->find(['license_number' => $license_number])->first() ? true : false;
+    }
 
     /**
      * @param $email

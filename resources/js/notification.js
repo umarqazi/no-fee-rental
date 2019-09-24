@@ -3,6 +3,13 @@ window.io = require('socket.io-client');
 
 (async () => {
 
+    $(".notiii").click(function() {
+        $(".notification-container").toggleClass("toggle-notification");
+    });
+    $(".notiofication-content .fa-times").click(function() {
+        $(this).closest('div.notiofication-content').fadeOut("slow", function() { $(this).remove();})
+    });
+
     $('.notifications').on('click', function() {
         hideAlert();
     });

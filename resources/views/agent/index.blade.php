@@ -47,13 +47,13 @@
                 <!-- Tab panes -->
                 <div class="tab-content">
                     <div class="tab-pane" id="listing-active">
-                        @include('agent.listing-features.active_listing')
+                        @include('listing-features.active_listing')
                     </div>
                     <div class="tab-pane fade" id="listing-inactive">
-                        @include('agent.listing-features.inactive_listing')
+                        @include('listing-features.inactive_listing')
                     </div>
                     <div class="tab-pane fade" id="listing-pending">
-                        @include('agent.listing-features.pending_request_listing')
+                        @include('listing-features.pending_listing')
                     </div>
                 </div>
             </div>

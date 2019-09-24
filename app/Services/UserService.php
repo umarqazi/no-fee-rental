@@ -159,11 +159,21 @@ class UserService {
     }
 
     /**
-     * @param $id
+     * @param $request
      *
      * @return bool
      */
+    public function isUniqueLicense($request) {
+        if (!$this->uRepo->isUniqueLicense($request->license_number)) {
+            return 'true';
+        }
+        return 'false';
+    }
 
+    /**
+     * @param $id
+     * @return mixed
+     */
     public function edit($id) {
         return $this->uRepo->edit($id)->first();
     }
