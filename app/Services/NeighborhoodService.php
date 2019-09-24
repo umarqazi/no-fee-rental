@@ -34,8 +34,53 @@ class NeighborhoodService {
      */
     public function create($request) {
         $form = new NeighborhoodForm();
-        $form->content = $request->content;
+        $form->name = $request->neighborhood_name;
+        $form->content = $request->neighborhood_content;
         $form->validate();
         return $this->repo->create($form->toArray());
     }
+
+    /**
+     * @param $id
+     *
+     * @return bool
+     */
+
+    public function edit($id) {
+        return $this->repo->edit($id)->first();
+    }
+
+    /**
+     * @param $id
+     *
+     * @return bool
+     */
+
+    public function delete($id) {
+        return $this->repo->delete($id);
+    }
+
+    /**
+     * @param $id
+     * @param $request
+     *
+     * @return mixed
+     */
+    public function update($request,$id) {
+        $neighborhood = new NeighborhoodForm();
+        $neighborhood->name = $request->neighborhood_name;
+        $neighborhood->content = $request->neighborhood_content;
+        $neighborhood->validate();
+        return $this->repo->update($id, $neighborhood->toArray());
+    }
+
+    /**
+     * @param
+     *
+     * @return mixed
+     */
+    public function neighborhoods() {
+        return $this->repo->neighborhoods();
+    }
+
 }

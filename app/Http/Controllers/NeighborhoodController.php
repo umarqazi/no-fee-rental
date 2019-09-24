@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Services\NeighborhoodService;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Contracts\DataTable;
 
 class NeighborhoodController extends Controller {
 
@@ -27,16 +28,28 @@ class NeighborhoodController extends Controller {
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
     public function create(Request $request) {
-        $res = $this->service->create($request);
-        return sendResponse($request, $res, 'Neighborhood content added.', null);
+        $neighborhood = $this->service->create($request);
+        return sendResponse($request, $neighborhood, 'Neighborhood has been added');
     }
+
     /**
      * @param
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
     public function index() {
-        return view('', compact('listing'));
+        return view('admin.neighborhoods');
+    }
+
+    /**
+     * @param Request $request
+     * @param $id
+     *
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
+     */
+    public function edit(Request $request, $id) {
+        $neighborhood = $this->service->edit($id);
+        return sendResponse($request, $neighborhood, null);
     }
 
     /**
@@ -45,18 +58,27 @@ class NeighborhoodController extends Controller {
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
     public function update(Request $request,$id) {
-        $res = $this->service->create($request);
-        return sendResponse($request, $res, 'Neighborhood content added.', null);
+        $res = $this->service->update($request,$id);
+        return sendResponse($request, $res, 'Neighborhood has been updated.', null);
     }
 
     /**
      * @param Request $request
+     * @param $id
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
-    public function delete(Request $request,$id) {
-        $res = $this->service->create($request);
-        return sendResponse($request, $res, 'Neighborhood content added.', null);
+    public function delete(Request $request, $id) {
+        $user = $this->service->delete($id);
+        return sendResponse($request, $user, 'Neghborhoood has been deleted.');
     }
+    /**
+     * @return mixed
+     * @throws \Exception
+     */
+    public function getNeighborhoods() {
+        return DataTable($this->service->neighborhoods());
+    }
+
 
 }
