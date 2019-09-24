@@ -11363,6 +11363,14 @@ _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function 
     while (1) {
       switch (_context4.prev = _context4.next) {
         case 0:
+          $(".notiii").click(function () {
+            $(".notification-container").toggleClass("toggle-notification");
+          });
+          $(".notiofication-content .fa-times").click(function () {
+            $(this).closest('div.notiofication-content').fadeOut("slow", function () {
+              $(this).remove();
+            });
+          });
           $('.notifications').on('click', function () {
             hideAlert();
           }); // Exception handler
@@ -11483,7 +11491,7 @@ _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function 
             };
           }());
 
-        case 6:
+        case 8:
         case "end":
           return _context4.stop();
       }

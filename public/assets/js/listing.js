@@ -1,5 +1,6 @@
 $(() => {
 
+    let $body = $('body');
     if (localStorage.getItem('grid-view')) {
         $('.list-view-btn').removeClass('active');
         setTimeout(() => {
@@ -14,7 +15,7 @@ $(() => {
 
     $('.input-style').attr('disabled', false);
 
-    $('body').on('change', '#file-3', function(e) {
+    $body.on('change', '#file-3', function(e) {
     	let file = e.target.files[0];
     	imagePreview(file, '#img');
     	$('#img').attr('style', 'width: 180px;height: 145px;margin-bottom: 15px;');
@@ -29,7 +30,7 @@ $(() => {
     });
 
     if(localStorage.getItem('tab')) {
-        $('body').find('.nav-item, .active').removeClass('active');
+        $body.find('.nav-item, .active').removeClass('active');
         $('span.page-link').parents('li.page-item').addClass('active');
         $(`a[href="#${localStorage.getItem('tab')}"]`).addClass('active');
         $('.tab-content').find('#'+localStorage.getItem('tab')).removeClass('fade');
@@ -39,7 +40,7 @@ $(() => {
         $('.nav-link:first, .tab-content > .tab-pane:first').addClass('active');
     }
 
-    $('body').on('click', '.info > a', async function(e) {
+    $body.on('click', '.info > a', async function(e) {
         e.preventDefault();
         if(await confirm('Are you sure?')) {
             let currentTab = $(this).parents('div.active').attr('id');
@@ -48,13 +49,21 @@ $(() => {
         }
     });
 
-    $('body').on('click', '.page-link', function(e) {
+    $body.on('click', '.page-link', function(e) {
         e.preventDefault();
         let currentTab = $(this).parents('div.active').attr('id');
         localStorage.setItem('tab', currentTab);
         if(e.target.href) {
             window.location.href = e.target.href;
         }
+    });
+
+    $('select[name=availability]').on('change', function() {
+        let $selector = $('.availability-date');
+        if($(this).val() === '3') {
+            $selector.show();return;
+        }
+            $selector.hide();
     });
 });
 

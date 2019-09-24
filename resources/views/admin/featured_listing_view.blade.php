@@ -43,10 +43,10 @@
 					<!-- Tab panes -->
 					<div class="tab-content">
 						<div class="tab-pane active" id="featured">
-							@include('admin.listing-features.featured_listing')
+							@include('listing-features.featured_listing')
 						</div>
 						<div class="tab-pane fade" id="request-featured">
-							@include('admin.listing-features.requested_feature_listing')
+							@include('listing-features.requested_feature_listing')
 						</div>
 					</div>
 				</div>

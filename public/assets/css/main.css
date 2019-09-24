@@ -2616,7 +2616,7 @@ border-color: #e17228;
 /*Client review section*/
 .profile-section-padding{
   padding-top: 50px;
-  
+
 }
 .agent-listing-profile .search-result-wrapper .search-listing .featured-properties .property-listing .property-thumb{
     width: calc(100% / 4 - 30px);
@@ -2683,7 +2683,7 @@ border-color: #e17228;
     background: rgba(255, 255, 255, 0.38) !important;
 }
 .clients-reviews-section span {
-    font-size: 70px;    
+    font-size: 70px;
     position: relative;
     top: -5px;
 }
@@ -3250,6 +3250,7 @@ margin-bottom: 10px;
   .listing-Details .lSSlideOuter .lSPager.lSGallery img{
     height: 85px !important;
   }
+
     /*agent profile */
 .agent-profile-view {
 justify-content: center;
@@ -3654,5 +3655,6 @@ max-width: 370px;
 .neighborhood-search .search-result-wrapper .search-listing .sort-by-wrapper{
   padding-right:15px;
 }
-
 }
+
+

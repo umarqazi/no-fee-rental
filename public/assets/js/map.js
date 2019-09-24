@@ -122,7 +122,9 @@ const markerClusters = (coords) => {
 };
 
 const autoComplete = () => {
-    return new google.maps.places.Autocomplete(searchSelector);
+    let autocomplete = new google.maps.places.Autocomplete(searchSelector);
+    autocomplete.setFields(['adr_address']);
+    return autocomplete;
 };
 
 const showInfoWindow = (content, marker) => {
@@ -216,6 +218,7 @@ $(() => {
   $body.on('blur', '#controls', function() {
     setTimeout(() => {
       addrToLatLng($('body').find('#controls').val()).then(coords => {
+          console.log(coords);
           coords = {
               latitude: coords[0].geometry.location.lat(),
               longitude: coords[0].geometry.location.lng()

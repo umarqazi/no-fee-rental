@@ -18,21 +18,21 @@ class ListingRepo extends BaseRepo {
 	 * @return mixed
 	 */
 	public function active() {
-		return $this->model->active()->withimages();
+		return $this->model->active()->withall();
 	}
 
 	/**
 	 * @return mixed
 	 */
 	public function inactive() {
-		return $this->model->inactive()->withimages();
+		return $this->model->inactive()->withall();
 	}
 
 	/**
 	 * @return mixed
 	 */
 	public function pending() {
-		return $this->model->pending()->withimages();
+		return $this->model->pending()->withall();
 	}
 
 	/**
