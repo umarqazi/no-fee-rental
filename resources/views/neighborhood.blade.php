@@ -1,16 +1,5 @@
 @extends('layouts.app') @section('title', 'No Fee Rental') @section('content')
-<script src="{{asset('assets/js/jquery.nicescroll.min.js')}}"></script>
 
-<script>
-    $(document).ready(function() {
-        $("#boxscroll2").niceScroll("#contentscroll2", {
-            cursorcolor: "#223971",
-            cursoropacitymax: 0.9,
-            boxzoom: true,
-            touchbehavior: true
-        }); // Second scrollable DIV
-    });
-</script>
 
 <section class="neighborhood-search neighbourhood-pd wow fadeIn" data-wow-delay="0.2s">
     <div class="container-lg">
@@ -31,41 +20,39 @@
                 <div class="row">
                     <div class="search-bdr-top col-lg-12">
                         <div class="row">
-                            <div class="col-lg-8 col-8 ">
+                            <div class="col-lg-7 col-8 ">
                                 <div class="dropdown-wrap">
                                     <div class="radio-group-1 ">
                                         <div class="item">
-                                            <label>One
+                                            <label>Any
                                               <input type="radio" name="one">
                                               <span class="checkmark"></span>
                                             </label>
                                         </div>
                                         <div class="item">
-                                            <label>One
+                                            <label>Studio
                                               <input type="radio" name="one">
                                               <span class="checkmark"></span>
                                             </label>
                                         </div>
-                                        <!-- <div class="item">
-                                            <label for="val11">
-                                                <input name="radio1" type="radio"> Studio</label>
+                                        <div class="item">
+                                            <label>1
+                                              <input type="radio" name="one">
+                                              <span class="checkmark"></span>
+                                            </label>
                                         </div>
                                         <div class="item">
-                                            <label for="val12">
-                                                <input name="radio1" type="radio"> 1</label>
+                                            <label>2                                          
+                                              <input type="radio" name="one">
+                                              <span class="checkmark"></span>
+                                            </label>
                                         </div>
                                         <div class="item">
-                                            <label for="val13">
-                                                <input name="radio1" type="radio"> 2</label>
+                                            <label>3
+                                              <input type="radio" name="one">
+                                              <span class="checkmark"></span>
+                                            </label>
                                         </div>
-                                        <div class="item">
-                                            <label for="val14">
-                                                <input name="radio1" type="radio"> 3</label>
-                                        </div>
-                                        <div class="item">
-                                            <label for="val15">
-                                                <input name="radio1" type="radio"> 4</label>
-                                        </div> -->
                                     </div>
                                     <script>
                                         inputsToDropdown('.radio-group-1', 'Beds', 'radio', '.radio-group-1', '');
@@ -73,36 +60,45 @@
 
                                     <div class="radio-group-2 ">
                                         <div class="item">
-                                            <label for="val16">
-                                                <input name="radio1" type="radio"> Any</label>
+                                            <label>Any
+                                              <input type="radio" name="one-1">
+                                              <span class="checkmark"></span>
+                                            </label>
                                         </div>
                                         <div class="item">
-                                            <label for="val17">
-                                                <input name="radio1" type="radio"> Studio</label>
+                                            <label>Studio
+                                              <input type="radio" name="one-1">
+                                              <span class="checkmark"></span>
+                                            </label>
                                         </div>
                                         <div class="item">
-                                            <label for="val18">
-                                                <input name="radio1" type="radio"> 1</label>
+                                            <label>1
+                                              <input type="radio" name="one-1">
+                                              <span class="checkmark"></span>
+                                            </label>
                                         </div>
                                         <div class="item">
-                                            <label for="val19">
-                                                <input name="radio1" type="radio"> 2</label>
+                                            <label>2                                          
+                                              <input type="radio" name="one-1">
+                                              <span class="checkmark"></span>
+                                            </label>
                                         </div>
                                         <div class="item">
-                                            <label for="val20">
-                                                <input name="radio1" type="radio"> 3</label>
-                                        </div>
-                                        <div class="item">
-                                            <label for="val21">
-                                                <input name="radio1" type="radio"> 4</label>
+                                            <label>3
+                                              <input type="radio" name="one-1">
+                                              <span class="checkmark"></span>
+                                            </label>
                                         </div>
                                     </div>
                                     <script>
-                                        inputsToDropdown('.radio-group-2', 'Baths', 'radio', '.radio-group-1', '');
+                                        inputsToDropdown('.radio-group-2', 'Baths', 'radio', '.radio-group-2', '');
                                     </script>
+                                    <div class="price-dropdown">
+                                        <button class="btn btn-default" data-toggle="modal" data-target="#advance-search">More</button>  
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-lg-4 col-4">
+                            <div class="col-lg-5 col-4">
                                 <div class="sort-by-wrapper">
                                     <div class="sort-by">
                                         <span>Sort By: </span>
@@ -126,7 +122,7 @@
                 <span>328+ places available for rent </span>
                 <div id="boxscroll2">
                     <div class="featured-properties" id="contentscroll2">
-                        <div class="property-listing desktop-listing">
+                        <div class="property-listing neighbourhood-listing">
                             <div class="property-thumb">
                                 <div class="check-btn">
                                     <button class="btn-default" data-toggle="modal" data-target="#check-availability">Check Availability</button>
@@ -134,13 +130,15 @@
                                 <span class="heart-icon"></span>
                                 <img src="assets/images/gallery-img.jpg" alt="" class="main-img">
                                 <div class="info">
-                                    <a href="#">
-                                        <p>$3,200 / Month </p>
-                                        <ul>
-                                            <li><i class="fa fa-bed"></i> 2</li>
-                                            <li><i class="fa fa-bath"></i> 2</li>
-                                        </ul>
-                                    </a>
+                                    <div href="#" class="info-link-text">
+                                        <p> $ 12444  </p> <small>  1 bed , 4 baths  </small>
+                                        <p>  Battery Park  </p>
+                                    </div>
+                                    <a href="javascript:void(0)" class="btn viewfeature-btn"> View </a>
+                                </div>
+                                <div class="feaure-policy-text">
+                                    <p>$12444 / Month  </p>
+                                    <span>2 bed , 1 bath </span>
                                 </div>
                             </div>
                             <div class="property-thumb">
@@ -150,13 +148,15 @@
                                 <span class="heart-icon"></span>
                                 <img src="assets/images/gallery-img.jpg" alt="" class="main-img">
                                 <div class="info">
-                                    <a href="#">
-                                        <p>$3,200 / Month </p>
-                                        <ul>
-                                            <li><i class="fa fa-bed"></i> 2</li>
-                                            <li><i class="fa fa-bath"></i> 2</li>
-                                        </ul>
-                                    </a>
+                                    <div href="#" class="info-link-text">
+                                        <p> $ 12444  </p> <small>  1 bed , 4 baths  </small>
+                                        <p>  Battery Park  </p>
+                                    </div>
+                                    <a href="javascript:void(0)" class="btn viewfeature-btn"> View </a>
+                                </div>
+                                <div class="feaure-policy-text">
+                                    <p>$12444 / Month  </p>
+                                    <span>2 bed , 1 bath </span>
                                 </div>
                             </div>
                             <div class="property-thumb">
@@ -166,13 +166,15 @@
                                 <span class="heart-icon"></span>
                                 <img src="assets/images/gallery-img.jpg" alt="" class="main-img">
                                 <div class="info">
-                                    <a href="#">
-                                        <p>$3,200 / Month </p>
-                                        <ul>
-                                            <li><i class="fa fa-bed"></i> 2</li>
-                                            <li><i class="fa fa-bath"></i> 2</li>
-                                        </ul>
-                                    </a>
+                                    <div href="#" class="info-link-text">
+                                        <p> $ 12444  </p> <small>  1 bed , 4 baths  </small>
+                                        <p>  Battery Park  </p>
+                                    </div>
+                                    <a href="javascript:void(0)" class="btn viewfeature-btn"> View </a>
+                                </div>
+                                <div class="feaure-policy-text">
+                                    <p>$12444 / Month  </p>
+                                    <span>2 bed , 1 bath </span>
                                 </div>
                             </div>
                             <div class="property-thumb">
@@ -182,13 +184,15 @@
                                 <span class="heart-icon"></span>
                                 <img src="assets/images/gallery-img.jpg" alt="" class="main-img">
                                 <div class="info">
-                                    <a href="#">
-                                        <p>$3,200 / Month </p>
-                                        <ul>
-                                            <li><i class="fa fa-bed"></i> 2</li>
-                                            <li><i class="fa fa-bath"></i> 2</li>
-                                        </ul>
-                                    </a>
+                                    <div href="#" class="info-link-text">
+                                        <p> $ 12444  </p> <small>  1 bed , 4 baths  </small>
+                                        <p>  Battery Park  </p>
+                                    </div>
+                                    <a href="javascript:void(0)" class="btn viewfeature-btn"> View </a>
+                                </div>
+                                <div class="feaure-policy-text">
+                                    <p>$12444 / Month  </p>
+                                    <span>2 bed , 1 bath </span>
                                 </div>
                             </div>
                             <div class="property-thumb">
@@ -198,13 +202,15 @@
                                 <span class="heart-icon"></span>
                                 <img src="assets/images/gallery-img.jpg" alt="" class="main-img">
                                 <div class="info">
-                                    <a href="#">
-                                        <p>$3,200 / Month </p>
-                                        <ul>
-                                            <li><i class="fa fa-bed"></i> 2</li>
-                                            <li><i class="fa fa-bath"></i> 2</li>
-                                        </ul>
-                                    </a>
+                                    <div href="#" class="info-link-text">
+                                        <p> $ 12444  </p> <small>  1 bed , 4 baths  </small>
+                                        <p>  Battery Park  </p>
+                                    </div>
+                                    <a href="javascript:void(0)" class="btn viewfeature-btn"> View </a>
+                                </div>
+                                <div class="feaure-policy-text">
+                                    <p>$12444 / Month  </p>
+                                    <span>2 bed , 1 bath </span>
                                 </div>
                             </div>
                             <div class="property-thumb">
@@ -214,13 +220,15 @@
                                 <span class="heart-icon"></span>
                                 <img src="assets/images/gallery-img.jpg" alt="" class="main-img">
                                 <div class="info">
-                                    <a href="#">
-                                        <p>$3,200 / Month </p>
-                                        <ul>
-                                            <li><i class="fa fa-bed"></i> 2</li>
-                                            <li><i class="fa fa-bath"></i> 2</li>
-                                        </ul>
-                                    </a>
+                                    <div href="#" class="info-link-text">
+                                        <p> $ 12444  </p> <small>  1 bed , 4 baths  </small>
+                                        <p>  Battery Park  </p>
+                                    </div>
+                                    <a href="javascript:void(0)" class="btn viewfeature-btn"> View </a>
+                                </div>
+                                <div class="feaure-policy-text">
+                                    <p>$12444 / Month  </p>
+                                    <span>2 bed , 1 bath </span>
                                 </div>
                             </div>
                             <div class="property-thumb">
@@ -230,13 +238,15 @@
                                 <span class="heart-icon"></span>
                                 <img src="assets/images/gallery-img.jpg" alt="" class="main-img">
                                 <div class="info">
-                                    <a href="#">
-                                        <p>$3,200 / Month </p>
-                                        <ul>
-                                            <li><i class="fa fa-bed"></i> 2</li>
-                                            <li><i class="fa fa-bath"></i> 2</li>
-                                        </ul>
-                                    </a>
+                                    <div href="#" class="info-link-text">
+                                        <p> $ 12444  </p> <small>  1 bed , 4 baths  </small>
+                                        <p>  Battery Park  </p>
+                                    </div>
+                                    <a href="javascript:void(0)" class="btn viewfeature-btn"> View </a>
+                                </div>
+                                <div class="feaure-policy-text">
+                                    <p>$12444 / Month  </p>
+                                    <span>2 bed , 1 bath </span>
                                 </div>
                             </div>
                             <div class="property-thumb">
@@ -246,13 +256,15 @@
                                 <span class="heart-icon"></span>
                                 <img src="assets/images/gallery-img.jpg" alt="" class="main-img">
                                 <div class="info">
-                                    <a href="#">
-                                        <p>$3,200 / Month </p>
-                                        <ul>
-                                            <li><i class="fa fa-bed"></i> 2</li>
-                                            <li><i class="fa fa-bath"></i> 2</li>
-                                        </ul>
-                                    </a>
+                                    <div href="#" class="info-link-text">
+                                        <p> $ 12444  </p> <small>  1 bed , 4 baths  </small>
+                                        <p>  Battery Park  </p>
+                                    </div>
+                                    <a href="javascript:void(0)" class="btn viewfeature-btn"> View </a>
+                                </div>
+                                <div class="feaure-policy-text">
+                                    <p>$12444 / Month  </p>
+                                    <span>2 bed , 1 bath </span>
                                 </div>
                             </div>
                         </div>
@@ -267,14 +279,16 @@
                                         <span class="heart-icon"></span>
                                         <img src="assets/images/gallery-img.jpg" alt="" class="main-img">
                                         <div class="info">
-                                            <a href="#">
-                                                <p>$3,200 / Month </p>
-                                                <ul>
-                                                    <li><i class="fa fa-bed"></i> 2</li>
-                                                    <li><i class="fa fa-bath"></i> 2</li>
-                                                </ul>
-                                            </a>
-                                        </div>
+                                    <div href="#" class="info-link-text">
+                                        <p> $ 12444  </p> <small>  1 bed , 4 baths  </small>
+                                        <p>  Battery Park  </p>
+                                    </div>
+                                    <a href="javascript:void(0)" class="btn viewfeature-btn"> View </a>
+                                </div>
+                                <div class="feaure-policy-text">
+                                    <p>$12444 / Month  </p>
+                                    <span>2 bed , 1 bath </span>
+                                </div>
                                     </div>
                                 </div>
                                 <div class="item">
@@ -285,14 +299,16 @@
                                         <span class="heart-icon"></span>
                                         <img src="assets/images/gallery-img.jpg" alt="" class="main-img">
                                         <div class="info">
-                                            <a href="#">
-                                                <p>$3,200 / Month </p>
-                                                <ul>
-                                                    <li><i class="fa fa-bed"></i> 2</li>
-                                                    <li><i class="fa fa-bath"></i> 2</li>
-                                                </ul>
-                                            </a>
-                                        </div>
+                                    <div href="#" class="info-link-text">
+                                        <p> $ 12444  </p> <small>  1 bed , 4 baths  </small>
+                                        <p>  Battery Park  </p>
+                                    </div>
+                                    <a href="javascript:void(0)" class="btn viewfeature-btn"> View </a>
+                                </div>
+                                <div class="feaure-policy-text">
+                                    <p>$12444 / Month  </p>
+                                    <span>2 bed , 1 bath </span>
+                                </div>
                                     </div>
                                 </div>
                                 <div class="item">
@@ -303,14 +319,16 @@
                                         <span class="heart-icon"></span>
                                         <img src="assets/images/gallery-img.jpg" alt="" class="main-img">
                                         <div class="info">
-                                            <a href="#">
-                                                <p>$3,200 / Month </p>
-                                                <ul>
-                                                    <li><i class="fa fa-bed"></i> 2</li>
-                                                    <li><i class="fa fa-bath"></i> 2</li>
-                                                </ul>
-                                            </a>
-                                        </div>
+                                    <div href="#" class="info-link-text">
+                                        <p> $ 12444  </p> <small>  1 bed , 4 baths  </small>
+                                        <p>  Battery Park  </p>
+                                    </div>
+                                    <a href="javascript:void(0)" class="btn viewfeature-btn"> View </a>
+                                </div>
+                                <div class="feaure-policy-text">
+                                    <p>$12444 / Month  </p>
+                                    <span>2 bed , 1 bath </span>
+                                </div>
                                     </div>
                                 </div>
                             </div>
@@ -326,5 +344,173 @@
         </div>
     </div>
 </section>
+<div class="modal fade" id="advance-search">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            {{--Modal Header--}}
+            <div class="modal-header">
+                <h4 class="modal-title">Advance Search</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            {{--Modal body--}}
+            <div class="modal-body">
+                {!! Form::open(['url' => route('list.search'), 'method' => 'get', 'id' => 'search']) !!}
+                <div class="row">
+                        <div class="col-md-6 search-form-grou-mrg-btm">
+                            <div class="form-group">
+                                <label class="label">Beds <span>(Select all that applies)</span></label>
+                                <ul class="select-bed-options" id="beds">
+                                    <li>
+                                        <div class="custom-control custom-radio">
+                                            {!! Form::radio('beds', 'studio', false, ['class' => 'custom-control-input', 'id' => 'studio']) !!}
+                                            <label class="custom-control-label" for="studio">Studio</label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="custom-control custom-radio">
+                                            {!! Form::radio('beds', 1, false, ['class' => 'custom-control-input', 'id' => 'beds1']) !!}
+                                            <label class="custom-control-label" for="beds1">1</label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="custom-control custom-radio">
+                                            {!! Form::radio('beds', 2, false, ['class' => 'custom-control-input', 'id' => 'beds2']) !!}
+                                            <label class="custom-control-label" for="beds2">2</label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="custom-control custom-radio">
+                                            {!! Form::radio('beds', 3, false, ['class' => 'custom-control-input', 'id' => 'beds3']) !!}
+                                            <label class="custom-control-label" for="beds3">3</label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="custom-control custom-radio">
+                                            {!! Form::radio('beds', 4, false, ['class' => 'custom-control-input', 'id' => 'beds4']) !!}
+                                            <label class="custom-control-label" for="beds4">4</label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="custom-control custom-radio">
+                                            {!! Form::radio('beds', 5, false, ['class' => 'custom-control-input', 'id' => 'beds5']) !!}
+                                            <label class="custom-control-label" for="beds5">5+</label>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="label">Baths <span>(Select all that applies)</span></label>
+                                <ul class="select-bed-options" id="baths">
+                                    <li>
+                                        <div class="custom-control custom-radio">
+                                            {!! Form::radio('baths', 'studio', false, ['class' => 'custom-control-input', 'id' => 'studio']) !!}
+                                            <label class="custom-control-label" for="studio">Studio</label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="custom-control custom-radio">
+                                            {!! Form::radio('baths', 1, false, ['class' => 'custom-control-input', 'id' => '1']) !!}
+                                            <label class="custom-control-label" for="1">1</label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="custom-control custom-radio">
+                                            {!! Form::radio('baths', 2, false, ['class' => 'custom-control-input', 'id' => '2']) !!}
+                                            <label class="custom-control-label" for="2">2</label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="custom-control custom-radio">
+                                            {!! Form::radio('baths', 3, false, ['class' => 'custom-control-input', 'id' => '3']) !!}
+                                            <label class="custom-control-label" for="3">3</label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="custom-control custom-radio">
+                                            {!! Form::radio('baths', 4, false, ['class' => 'custom-control-input', 'id' => '4']) !!}
+                                            <label class="custom-control-label" for="4">4</label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="custom-control custom-radio">
+                                            {!! Form::radio('baths', 5, false, ['class' => 'custom-control-input', 'id' => '5']) !!}
+                                            <label class="custom-control-label" for="5">5+</label>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        {{--Baths--}}
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="label">Price Range</label>
+                                <div class="slider-wrapper">
+                                    <div class="search-input-wrap">
+                                    {!! Form::number('priceRange[min_price]', null, ['min' => 0, 'max' => 9900, 'id' => 'min_price', 'class' => 'price-range-field input-style', 'oninput' => 'validity.valid||(value=0);']) !!} -
+                                    {!! Form::number('priceRange[max_price]', null, ['min' => 0, 'max' => 10000, 'id' => 'max_price', 'class' => 'price-range-field input-style', 'oninput' => 'validity.valid||(value=10000);']) !!}
+                                </div>
+                                    <div id="slider-range" class="price-filter-range" name="rangeInput"></div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="label">Square feet</label>
+                                <div class="slider-wrapper">
+                                    <div class="search-input-wrap">
+                                    {!! Form::number('priceRange[min_price_2]', null, ['min' => 0, 'max' => 9900, 'id' => 'min_price_2', 'class' => 'price-range-field input-style', 'oninput' => 'validity.valid||(value=0);']) !!} -
+                                    {!! Form::number('priceRange[max_price_2]', null, ['min' => 0, 'max' => 10000, 'id' => 'max_price_2', 'class' => 'price-range-field input-style', 'oninput' => 'validity.valid||(value=10000);']) !!}
+                                    </div>
+                                    <div id="slider-range-2" class="price-filter-range" name="rangeInput"></div>
+                                </div>
+                            </div>
+                        </div>
+                        {{--Keywords--}}
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="label">Neighbourhoods</label>
+                                {!! Form::text('neighborhoods', null, ['id' => 'neigh', 'class' => 'input-style', 'placeholder' => 'Enter Neighborhood']) !!}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="label">Open House</label>
+                                {!! Form::text('open_house', null, ['autocomplete' => 'off', 'id' => 'timepicker-actions-exmpl', 'placeholder', 'Open House', 'class' => 'input-style']) !!}
+                            </div>
+                        </div>
+                        {{-- Building Features--}}
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="row">@php $i = 1; @endphp
+                                    @foreach(features() as $key => $values)
+                                        <div class="col-lg-3">
+                                            <label class="label">{{ucwords(str_replace('_', ' ', $key))}}</label>
+                                            <ul class="checkbox-listing">
+                                                @foreach($values as $id => $f)@php $id += 1; $i += 1; @endphp
+                                                @if($id == 6)
+                                                    </ul></div><div class="col-lg-6"><ul class="checkbox-listing" style="margin-top: 28px;">
+                                                @endif
+                                                <li>
+                                                    <div class="custom-control custom-checkbox">
+                                                        {!! Form::checkbox('amenities['.$key.'][]', $id, null, ['class' => 'custom-control-input', 'id' => "listitem{$i}"]) !!}
+                                                        <label class="custom-control-label" for="listitem{{$i}}">{{$f}}</label>
+                                                    </div>
+                                                </li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 text-left mt-4 mb-4 bdr-top-btn">
+                            <button type="submit" class="btn-default">Search</button>
+                        </div>
+                </div>
+                {!! Form::close() !!}
+            </div>
+        </div>
+
+    </div>
+</div>
 
 @endsection {!! HTML::script('assets/js/input-to-dropdown.js') !!}
