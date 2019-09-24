@@ -71,3 +71,11 @@ Route::post('/edit-company/{id}', 'Admin\CompanyController@edit');
 Route::post('/update-company/{id}', 'Admin\CompanyController@update');
 Route::post('/delete-company/{id}', 'Admin\CompanyController@delete');
 Route::post('/company-status-update/{id}', 'Admin\CompanyController@status');
+
+//neighborhood routes
+Route::get('/neighborhoods', 'NeighborhoodController@index')->name('neighborhoods');
+Route::get('/get-neighborhoods', 'NeighborhoodController@getNeighborhoods')->name('neighborhoods.get');
+Route::post('/neighborhood/create', 'NeighborhoodController@create')->name('neighborhood.create');
+Route::post('/neighborhood/edit/{id}', 'NeighborhoodController@edit')->name('neighborhood.edit');
+Route::post('/neighborhood/update/{id}', 'NeighborhoodController@update')->name('neighborhood.update');
+Route::post('/neighborhood/delete/{id}', 'NeighborhoodController@delete')->name('neighborhood.delete');

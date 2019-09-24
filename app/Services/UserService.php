@@ -158,6 +158,12 @@ class UserService {
         return 'false';
     }
 
+    /**
+     * @param $id
+     *
+     * @return bool
+     */
+
     public function edit($id) {
         return $this->uRepo->edit($id)->first();
     }
