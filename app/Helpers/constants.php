@@ -95,3 +95,23 @@ if(!defined('RECENT')) {
 if(!defined('PET_POLICY')) {
     define('PET_POLICY', 2);
 }
+
+if(!defined('EXCLUSIVE')) {
+    define('EXCLUSIVE', '2');
+}
+
+if(!defined('STR_LIMIT_LIST_VIEW')) {
+    define('STR_LIMIT_LIST_VIEW', 40);
+}
+
+if(!defined('STR_LIMIT_GRID_VIEW')) {
+    define('STR_LIMIT_GRID_VIEW', 25);
+}
+
+if(!defined('DLI')) {
+    define('DLI', 'assets/images/default-images/listing-thumb.jpg');
+}
+
+if(!defined('DUI')) {
+    define('DUI', 'assets/images/default-images/user.jpeg');
+}

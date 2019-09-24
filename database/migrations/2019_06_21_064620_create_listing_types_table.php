@@ -11,7 +11,7 @@ class CreateListingTypesTable extends Migration {
 	 * @return void
 	 */
 	public function up() {
-		Schema::create('listing_types', function (Blueprint $table) {
+		Schema::create('amenities', function (Blueprint $table) {
 			$table->increments('id');
 			$table->unsignedInteger('listing_id');
 			$table->integer('property_type')
@@ -29,6 +29,6 @@ class CreateListingTypesTable extends Migration {
 	 * @return void
 	 */
 	public function down() {
-		Schema::dropIfExists('listing_types');
+		Schema::dropIfExists('amenities');
 	}
 }

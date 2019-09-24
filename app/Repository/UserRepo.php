@@ -35,18 +35,6 @@ class UserRepo extends BaseRepo {
 	}
 
 	/**
-	 * @param $id
-	 *
-	 * @return int
-	 */
-	public function status($id) {
-		$status = $this->find(['id' => $id])->first();
-		$updateStatus = ($status->status) ? DEACTIVE : ACTIVE;
-		$this->update($id, ['status' => $updateStatus]);
-		return $updateStatus;
-	}
-
-	/**
 	 * @param $email
 	 *
 	 * @return bool
@@ -54,6 +42,14 @@ class UserRepo extends BaseRepo {
 	public function isUniqueEmail($email) {
 		return $this->findByEmail($email) ? true : false;
 	}
+    /**
+     * @param $License_number
+     *
+     * @return bool
+     */
+    public function isUniqueLicense($license_number) {
+        return $this->find(['license_number' => $license_number])->first() ? true : false;
+    }
 
     /**
      * @param $email

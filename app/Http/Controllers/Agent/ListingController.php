@@ -65,7 +65,7 @@ class ListingController extends Controller {
      */
 	public function create(Request $request) {
         $action = 'Create';
-		$id = $this->service->create($request);
+        $id = $this->service->create($request);
 		return ($id)
 		? view('agent.add_listing_images', compact('id', 'action'))
 		: error('Something went wrong');

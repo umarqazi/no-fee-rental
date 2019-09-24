@@ -75,7 +75,7 @@
                         <div class="col-sm-6">
                             <div class="form-group license_num">
                                 {!! Form::text('license_number', null, ['class'=>'input-style', 'placeholder'=>'License Number'])!!}
-                            <p id="license-verify"></p></div>
+                            </div>
                         </div>
                         <div class="col-sm-6" id="phone_number">
                             <div class="form-group">
