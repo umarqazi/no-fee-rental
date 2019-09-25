@@ -7,7 +7,7 @@ $(() => {
     let $selector = $('input[name=license_number]');
     let $first_name = $('input[name=first_name]');
     let $last_name = $('input[name=last_name]');
-    $selector.on('blur', async () => {
+    $selector.on('keydown', async () => {
         let license_number = $selector.val();
         if(license_number !== '' && $('[name=license_number]').valid()) {
             let res = await ajaxRequest(

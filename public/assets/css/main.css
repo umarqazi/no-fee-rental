@@ -1461,7 +1461,7 @@ background-size: cover;
   padding-top: 10px;
 }
 .contact-info .btn-default{
-  padding: 0px 80px; 
+  padding: 0px 80px;
 }
 .contact-info label{
   font-size: 16px;
@@ -1743,7 +1743,7 @@ cursor: pointer;
 #boxscroll2 {
   margin-top: 20px;
   height: 450px;
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
 }
 
@@ -2195,8 +2195,8 @@ cursor: pointer;
 .featured-properties .property-listing .info a{
   display: inline-block;
 }
-.featured-properties .property-listing .info a:hover, 
-.featured-properties .property-listing .info a:active, 
+.featured-properties .property-listing .info a:hover,
+.featured-properties .property-listing .info a:active,
 .featured-properties .property-listing .info a:focus{
   color: #fff;
   background: #01091d;
@@ -2526,7 +2526,7 @@ cursor: pointer;
 /* Create a custom radio button */
 .radio-button .checkmark {
   position: absolute;
-  top: 1px;
+  top: 8px;
   left: 0;
   height: 12px;
   width: 12px;
@@ -2893,7 +2893,7 @@ border-color: #e17228;
       padding:12px 15px;
     }
     .contact-info .btn-default{
-      margin-bottom: 20px; 
+      margin-bottom: 20px;
   }
   .neighborhood-search .search-result-wrapper .search-listing .featured-properties .property-listing .property-thumb{
     width: calc(100% / 2 - 30px);

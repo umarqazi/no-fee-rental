@@ -65,14 +65,18 @@ $(() => {
             $selector.hide();
     });
 
-    $('.controls').on('blur', function() {
+    $('.controls').on('keydown', function() {
         setTimeout(() => {
             $('#autofill').val($(this).val());
         }, 200)
     });
 
     $body.on('keyup', '#controls', function() {
-      autoComplete( document.getElementById('controls'));
+        autoComplete( document.getElementById('controls'));
+    });
+
+    $body.on('click', '.submit', function () {
+        $(this).parents('form').submit();
     });
 
     $body.on('blur', '#controls', function() {

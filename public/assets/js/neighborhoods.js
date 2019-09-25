@@ -2,7 +2,8 @@ $(() => {
     let $body = $('body');
 
     $body.find('.submit-neighbor').on('click', function() {
-        $('form').submit();
+        alert('ehr')
+        $(this).parents('form').submit();
     });
 
     $(".neighborhood-search .search-result-wrapper .map-wrapper .swipe-btn").on('click', function() {

@@ -114,6 +114,7 @@ class SearchService {
      * @return mixed
      */
     public function fetchQuery($paginate) {
-        return $this->repo->fetch($this->query)->paginate($paginate);
+        $listings = $this->repo->fetch($this->query)->paginate($paginate);
+        return compact('listings');
     }
 }
