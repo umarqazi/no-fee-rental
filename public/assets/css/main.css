@@ -1405,7 +1405,7 @@ footer .copyright .social-icons li a:hover {
 }
 /*contact us*/
 .inner-pages.contact-us{
-  padding: 20px 0px 120px;
+  padding: 0px 0px 120px;
   margin-top: 90px;
   border-top: 1px solid #eee;
 }
@@ -2841,7 +2841,7 @@ border-color: #e17228;
   color: #AFAFAF;
 }
 /*profile contact*/
-@media (min-width: 1366px){
+@media (min-width: 1367px){
   .container-lg {
     max-width: 80%;
 }
@@ -2903,6 +2903,13 @@ border-color: #e17228;
 }
 .inner-pages.contact-us{
   margin-top: 75px;
+}
+.login-info label{
+  font-size: 14px;
+}
+.login-info img{
+  width: 18px;
+  height: 18px;
 }
 }
 
