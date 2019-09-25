@@ -18,6 +18,4 @@ class Neighborhoods extends Model
     public function scopeNeighborhoods($query) {
         return $query->latest()->get();
     }
-
-
 }

@@ -128,13 +128,13 @@ const setMultiMarkers = (coords) => {
 /**
  *
  * @param coords
+ * @param selector
  */
-const markerClusters = (coords) => {
+const markerClusters = (coords, selector) => {
+    coords = [JSON.parse(coords)];
     let markers = coords.map(function(location) {
-        setMap();
+        setMap(location, selector);
         let mark = addMarker(location);
-        mark.set("id", 1);
-        console.log(mark.get("id"));
         google.maps.event.addListener(mark, "click", async function (e) {
             console.log(e);
             let coords = JSON.stringify({latitude: e.latLng.lat(), longitude: e.latLng.lng()});
@@ -300,26 +300,30 @@ const initMap = (selector) => {
     });
 };
 
-const mapWithMultiCoords = (coords, mapSelector, nearByLocations = false) => {
+/**
+ *
+ * @param coords
+ * @param mapSelector
+ * @param nearByLocations
+ * @param Zoom
+ */
+const mapWithNearbyLocations = (coords, mapSelector, nearByLocations = false, Zoom = 16) => {
     if (coords !== null && coords !== '') {
         coords = JSON.parse(coords);
-        let location = $('body').find('#controls').val();
-        ZOOM = 16;
+        ZOOM = Zoom;
         setMap(coords, mapSelector);
-        if (location === undefined) {
-            latLngToAddr(coords).then(location => {
-                let index = location.findIndex(findIndex);
-                if(nearByLocations) {
-                    findSubways(coords); findSchools(coords);
-                }
-                if (index !== -1) {
-                    marker = addMarker(coords, location[index].formatted_address);
-                    showInfoWindow(location[index].formatted_address, marker);
-                }
-            });
-        } else {
-            marker = addMarker(coords, location);
-            showInfoWindow(location, marker);
-        }
+        latLngToAddr(coords).then(location => {
+
+            let index = location.findIndex(findIndex);
+
+            if(nearByLocations) {
+                findSubways(coords); findSchools(coords);
+            }
+
+            if (index !== -1) {
+                marker = addMarker(coords, location[0].formatted_address);
+                showInfoWindow(location[0].formatted_address, marker);
+            }
+        });
     }
 };
