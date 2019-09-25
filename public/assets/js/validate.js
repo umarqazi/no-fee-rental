@@ -171,7 +171,7 @@ $(() => {
                     headers: {
                         'X-CSRF-TOKEN': TOKEN
                     },
-                    url: "/verfiy-license",
+                    url: "/verify-license",
                     type: "post",
                 }
             },
@@ -182,7 +182,7 @@ $(() => {
                     headers: {
                         'X-CSRF-TOKEN': TOKEN
                     },
-                    url: "/verfiy-email",
+                    url: "/verify-email",
                     type: "post",
                 }
             },
