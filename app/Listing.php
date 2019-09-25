@@ -40,6 +40,13 @@ class Listing extends Model {
 		return $this->hasMany(ListingTypes::class, 'listing_id');
 	}
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+	public function openHouses() {
+	    return $this->hasMany(OpenHouse::class, 'listing_id');
+    }
+
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
 	 */
@@ -98,6 +105,15 @@ class Listing extends Model {
 		return $query->with('listingTypes');
 	}
 
+    /**
+     * @param $query
+     *
+     * @return mixed
+     */
+    public function scopeWithOpenHouses($query) {
+        return $query->with('openHouses');
+    }
+
 	/**
 	 * @param $query
 	 *
@@ -113,7 +129,7 @@ class Listing extends Model {
 	 * @return mixed
 	 */
 	public function scopeWithAll($query) {
-		return $query->with(['agent', 'listingTypes', 'listingImages']);
+		return $query->with(['agent', 'listingTypes', 'listingImages', 'openHouses']);
 	}
 
 	/**

@@ -7,7 +7,7 @@
                 <img src="{{ asset(!empty($il->thumbnail) ? $il->thumbnail : DLI) }}" alt="" style="height:205px;" class="main-img" />
             </div>
             <div class="info">
-                <p class="title">{{ str_limit(is_exclusive($il->listingTypes) ? $il->street_address : $il->display_address, STR_LIMIT_LIST_VIEW, ' ...') }}</p>
+                <p class="title">{{ str_limit(is_exclusive($il->listingTypes) ? $il->unit.' '.$il->street_address : $il->display_address, STR_LIMIT_LIST_VIEW, ' ...') }}</p>
                 <p><i class="fa fa-tag"></i> ${{ $il->rent }}</p>
                 <p>Freshness Score : 90%</p>
                 <ul>
@@ -25,9 +25,6 @@
                     </a>
                     <a href="{{ route(whoAmI().'.copyListing', $il->id) }}">
                         <span><img src="{{asset('assets/images/copy-icon.png')}}" alt=""></span>
-                    </a>
-                    <a href="{{ route('listing.detail', $il->id) }}">
-                        <i class="fa fa-eye" style="font-size: 24px;position: relative;top: 5px;"></i>
                     </a>
                     <a href="{{ route(whoAmI().'.repostListing', $il->id) }}">
                         <button type="button" class="border-btn">Repost</button>
@@ -50,7 +47,7 @@
                 <div class="listing-thumb">
                     <img src="{{ asset(!empty($il->thumbnail) ? $il->thumbnail : DLI) }}" alt="" style="height:205px;" class="main-img" />
                     <div class="info">
-                        <p class="title">{{ str_limit(is_exclusive($il->listingTypes) ? $il->street_address : $il->display_address, STR_LIMIT_GRID_VIEW, ' ...') }}</p>
+                        <p class="title">{{ str_limit(is_exclusive($il->listingTypes) ? $il->unit.' '.$il->street_address : $il->display_address, STR_LIMIT_GRID_VIEW, ' ...') }}</p>
                         <p><i class="fa fa-tag"></i> ${{ $il->rent }}</p>
                         <p>Freshness Score : 90%</p>
                         <ul>
@@ -66,7 +63,6 @@
                         <div class="list-actions-icons">
                             <a href="{{ route(whoAmI().'.editListing', $il->id) }}"><button><i class="fa fa-edit"></i></button></a>
                             <a href="{{ route(whoAmI().'.copyListing', $il->id) }}"><button><i class="fa fa-copy"></i></button></a>
-                            <a href="{{ route('listing.detail', $il->id) }}"><button><i class="fa fa-eye"></i></button></a>
                         </div>
                     </div>
                 </div>

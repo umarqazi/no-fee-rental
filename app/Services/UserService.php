@@ -158,7 +158,6 @@ class UserService {
         return 'false';
     }
 
-
     /**
      * @param $request
      *

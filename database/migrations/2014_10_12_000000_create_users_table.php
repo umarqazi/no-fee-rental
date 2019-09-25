@@ -24,7 +24,7 @@ class CreateUsersTable extends Migration {
 			$table->string('password')->nullable();
             $table->string('neighbourhood_expertise')->nullable();
             $table->string('languages')->nullable();
-            $table->string('license_number')->nullable();
+            $table->string('license_number')->unique()->nullable();
 			$table->rememberToken();
 			$table->timestamps();
 		});

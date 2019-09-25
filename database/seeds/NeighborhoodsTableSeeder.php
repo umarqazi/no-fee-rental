@@ -3,7 +3,7 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class NeighborhoodTableSeeder extends Seeder
+class NeighborhoodsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.

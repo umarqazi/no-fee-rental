@@ -16,9 +16,9 @@ class CreateOpenHousesTable extends Migration
         Schema::create('open_houses', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('listing_id');
-            $table->date('date');
-            $table->time('start_time');
-            $table->time('end_time');
+            $table->string('date');
+            $table->string('start_time');
+            $table->string('end_time');
             $table->boolean('only_appt')->default(0);
             $table->timestamps();
 
