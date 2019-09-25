@@ -9,6 +9,7 @@
 namespace App\Services;
 
 use App\Forms\Agent\CreateForm;
+use App\Forms\CompanyForm;
 use App\Forms\User\AgentInvitationForm;
 use App\Forms\User\ChangePasswordForm;
 use App\Forms\User\EditProfileForm;
@@ -36,14 +37,19 @@ class UserService {
      */
     private $mRepo;
 
+    private $cRepo;
+
     /**
      * UserService constructor.
      *
      * @param UserRepo $uRepo
      * @param AgentRepo $aRepo
+     * @param MemberRepo $mRepo
+     * @param CompanyRepo $cRepo
      */
-    public function __construct(UserRepo $uRepo, AgentRepo $aRepo, MemberRepo $mRepo) {
+    public function __construct(UserRepo $uRepo, AgentRepo $aRepo, MemberRepo $mRepo, CompanyRepo $cRepo) {
         $this->uRepo = $uRepo;
+        $this->cRepo = $cRepo;
         $this->aRepo = $aRepo;
         $this->mRepo = $mRepo;
     }
@@ -109,12 +115,11 @@ class UserService {
     }
 
     /**
-     * @param $id
      * @param $request
      *
      * @return mixed
      */
-    public function update($id, $request) {
+    public function update($request) {
         $user = $this->form($request);
         return $this->uRepo->update($user->id, $user->toArray());
     }
@@ -137,8 +142,7 @@ class UserService {
      * @return mixed
      */
     public function companies() {
-        $cRepo = new CompanyRepo();
-        return $cRepo->companies()->get();
+        return $this->cRepo->companies()->get();
     }
 
     /**
@@ -356,6 +360,14 @@ class UserService {
         }
 
         if ($user) {
+            $cForm = new CompanyForm();
+            $cForm->company = $request->company;
+            $cForm->status = DEACTIVE;
+            if(!$cForm->fails()) {
+                dd('yes');
+                $this->cRepo->create($cForm->toArray());
+            }
+            dd('no');
             $invitedBy = $this->aRepo->inviteBy($request->token);
             if($invitedBy->user->user_type == AGENT) {
                 $this->mRepo->create([

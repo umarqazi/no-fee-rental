@@ -6,19 +6,29 @@ use App\Forms\BaseForm;
 
 class CompanyForm extends BaseForm {
 
-	public $id;
-
+    /**
+     * @var string
+     */
 	public $company;
 
+    /**
+     * @var integer
+     */
 	public $status;
 
+    /**
+     * @return array|mixed
+     */
 	public function rules() {
 		return [
-			'company' => ($this->id) ? 'required|string' : 'required|string|unique:companies',
+			'company' => 'required|unique:companies',
 			'status' => 'required|integer',
 		];
 	}
 
+    /**
+     * @return array
+     */
 	public function toArray() {
 		return [
 			'company' => $this->company,
