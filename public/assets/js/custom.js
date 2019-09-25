@@ -402,9 +402,18 @@ $('#price-range-submit').hide();
         $('#divNewNotifications li').on('click', function() {
             $('#dropdown_title').html($(this).find('a').html());
         });
-    	$(".signup-modal-btn").click(function(){
+    	$("#signup-btn").click(function(){
       		$('body').addClass('signup-modal-scroll');
     	});
+    	$('.close-signup-modal').click(function(){
+    		$('body').removeClass('signup-modal-scroll');
+    	});
+    	$(document).on("click", function (e) {
+        if ($(e.target).is("#signup-btn")==false && $(e.target).parents('#signup').length==0) {
+            $("body").removeClass("signup-modal-scroll");
+        }
+    	});
+
     });
 
 });

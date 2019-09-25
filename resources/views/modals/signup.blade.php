@@ -11,7 +11,7 @@
         </style>
         {{--Signup Container--}}
         <div class="modal-content">
-            <img src="assets/images/modal-close-icon.png" alt="" class="close-modal" data-dismiss="modal" />
+            <img src="assets/images/modal-close-icon.png" alt="" class="close-modal close-signup-modal"  data-dismiss="modal" />
             <div class="logo-info-wrapper">
                 <img src="assets/images/modal-logo.png" alt="" class="logo" />
                 <h3>Create Account</h3>

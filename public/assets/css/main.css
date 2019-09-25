@@ -261,7 +261,7 @@ h3 {
 .btn-default:hover,
 .btn-default:focus {
   color: #fff;
-  background: #01091d;
+  background: #223971;
   outline: none !important;
   box-shadow: none;
 }
@@ -2840,6 +2840,9 @@ border-color: #e17228;
   font-size: 16px;
   color: #AFAFAF;
 }
+#advance-search .form-group .checkbox-listing {
+    margin-bottom: 15px;
+}
 /*profile contact*/
 @media (min-width: 1367px){
   .container-lg {
@@ -2910,6 +2913,9 @@ border-color: #e17228;
 .login-info img{
   width: 18px;
   height: 18px;
+}
+#advance-search .search-input-wrap{
+  text-align: center; 
 }
 }
 
@@ -3239,8 +3245,11 @@ margin-bottom: 10px;
   #advance-search .modal-dialog {
     max-width: 96%;
   }
-  #advance-search .slider-wrapper #slider-range {
+ /* #advance-search .slider-wrapper #slider-range {
     width: calc(100% - 260px);
+  }*/
+  .modal #advance-search .slider-wrapper #slider-range {
+    width:100%;
   }
   .header-bg .search-property .search-btn {
     height: 45px;
@@ -3359,9 +3368,17 @@ max-width: 370px;
 .agent-profile-view .img-holder{
   flex: 0 0 260px;
 }
+#advance-search .slider-wrapper .search-input-wrap #slider-range {
+    width: 100% !important;
+}
+
 }
   /*end agent profile*/
-
+@media only screen and (min-width: 767px) and (max-width: 991px){
+  #advance-search .slider-wrapper .input-style{
+    width: 110px;
+  }
+}
 @media only screen and (max-width: 767px) {
   .header-wrapper .header-container .logo {
     max-width: 200px;
@@ -3660,6 +3677,7 @@ max-width: 370px;
   font-size: 18px;
   font-weight: 700;
 }
+
 }
 @media only screen and (min-width: 577px) and (max-width: 767px){
   .featured-properties .property-listing .info .info-link-text{
@@ -3684,6 +3702,16 @@ max-width: 370px;
   }
   #advance-search .slider-wrapper {
     display: block;
+  }
+  #advance-search .search-input-wrap{
+    width: 100%;
+    text-align: center;
+  }
+  #advance-search .search-input-wrap input:nth-child(1){
+    margin-right: 0px;
+  }
+  #advance-search .search-input-wrap input:nth-child(2){
+    margin-left: 0px;
   }
   #advance-search .slider-wrapper .input-style {
     width: 100%;
