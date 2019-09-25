@@ -309,7 +309,7 @@ const initMap = (selector) => {
  */
 const mapWithNearbyLocations = (coords, mapSelector, nearByLocations = false, Zoom = 16) => {
     if (coords !== null && coords !== '') {
-        coords = JSON.parse(coords);
+        coords = (typeof coords !== 'object') ? JSON.parse(coords) : coords;
         ZOOM = Zoom;
         setMap(coords, mapSelector);
         latLngToAddr(coords).then(location => {

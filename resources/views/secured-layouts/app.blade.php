@@ -22,7 +22,6 @@
 	{!! HTML::style('assets/css/responsive.css') !!}
 	{!! HTML::style('assets/css/style.css') !!}
     {!! HTML::style('assets/css/toastr.css') !!}
-    {!! HTML::style('assets/css/datepicker.min.css') !!}
 
 	 <!-- JS -->
     {!! HTML::script('assets/js/vendor/jquery-3.2.1.min.js') !!}
@@ -36,8 +35,6 @@
     {!! HTML::script('assets/js/validate.js') !!}
     {!! HTML::script('assets/js/global.js') !!}
     {!! HTML::script('assets/js/map.js') !!}
-    {!! HTML::script('assets/js/vendor/datatable.min.js') !!}
-    {!! HTML::script('assets/js/vendor/datepicker.min.js') !!}
 
 	<title>@yield('title')</title>
 </head>

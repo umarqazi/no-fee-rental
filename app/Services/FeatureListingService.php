@@ -215,14 +215,14 @@ class FeatureListingService {
     public function featured_listing($paginate) {
         return [
             'recent'   => $this->featured()
-                ->latest('created_at')
-                ->paginate($paginate, ['*'], 'recent'),
+                            ->latest('created_at')
+                            ->paginate($paginate, ['*'], 'recent'),
             'cheapest' => $this->featured()
-                ->orderBy( 'rent' ,'ASC')
-                ->paginate($paginate, ['*'], 'cheapest'),
+                            ->orderBy( 'rent' ,'ASC')
+                            ->paginate($paginate, ['*'], 'cheapest'),
             'pet_policy' => $this->featured()
-                ->policy()
-                ->paginate($paginate, ['*'], 'pet_policy'),
+                            ->policy()
+                            ->paginate($paginate, ['*'], 'pet_policy'),
         ];
     }
 }
