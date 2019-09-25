@@ -47,10 +47,10 @@ Route::get('/reset-password/{token}', 'RecoverPasswordController@recoverForm')->
 Route::get('/confirm-email/{token}', 'UserController@confirmEmail')->name('user.confirmEmail');
 
 // Email Validation
-Route::post('/verfiy-email', 'UserController@verifyEmail');
+Route::post('/verify-email', 'UserController@verifyEmail');
 
 //License Validations
-Route::post('/verfiy-license', 'UserController@verifyLicense');
+Route::post('/verify-license', 'UserController@verifyLicense');
 
 // Login route for all user type
 Route::post('/login')->name('attempt.login')->middleware('authguard');

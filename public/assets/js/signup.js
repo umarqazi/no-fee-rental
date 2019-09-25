@@ -18,11 +18,13 @@ $(() => {
 
             if(res.length > 0) {
                 form.append(`<input type="hidden" name="company" value="${res[0].business_name}">`);
+
+
                 $('.times').remove();
                 if($('.check').length > 0) return;
                 let str_split = res[0].license_holder_name.split(" ") ;
-                $first_name.val(str_split[0]);
-                $last_name.val(str_split[1]);
+                $first_name.val(str_split[1]);
+                $last_name.val(str_split[0]);
                 $('input[type=submit]').removeAttr('disabled');
                 message('check', 'License Number Verified');
             } else {
