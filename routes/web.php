@@ -101,7 +101,4 @@ Route::get('/reset', 'RecoverPasswordController@sendRequest');
 // Neighborhood Routes
 Route::get('/neighborhood', 'NeighborhoodController@index')->name('web.neighborhood');
 Route::get('/neighborhood-listing', 'NeighborhoodController@find')->name('web.findNeighborhoodLists');
-Route::post('/neighborhood/create', 'NeighborhoodController@create')->name('neigborhood.create');
-Route::post('/neighborhood/edit/{id}', 'NeighborhoodController@edit')->name('neigborhood.edit');
-Route::post('/neighborhood/delete/{id}', 'NeighborhoodController@delete')->name('neigborhood.delete');
 Route::post('/all-neighborhoods', 'NeighborhoodController@all')->name('web.allNeighbours');
