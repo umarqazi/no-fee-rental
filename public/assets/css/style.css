@@ -1532,3 +1532,7 @@ main {
     right: 15px;
     top: 15px;
 }
+
+.fa-times-circle {
+    color: red;
+}

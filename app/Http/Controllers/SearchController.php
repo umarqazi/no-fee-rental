@@ -44,7 +44,7 @@ class SearchController extends Controller
                 $this->service->args = null;
             }
         });
-        $results = $this->service->fetchQuery($this->paginate);
-        return view('advance_search', compact('results'));
+        $data = toObject($this->service->fetchQuery($this->paginate));
+        return view('listing_search_results', compact('data'));
     }
 }
