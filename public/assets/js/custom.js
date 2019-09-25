@@ -296,9 +296,10 @@ $('#price-range-submit').hide();
 		if (radioId == 'signup-option1') {
 			$(".finding-home-text").hide();
             $(".license_num").hide();
-            $("#phone_number").addClass('col-sm-12');
+            $("#signup_form .agnet-input").prop('disabled', false);
 		} else {
-            $("#phone_number").removeClass('col-sm-12');
+            $("#signup_form .agnet-input").prop('disabled', true);
+            $("#signup_form .btn-default").prop('disabled', true);
 			$(".finding-home-text").show();
             $(".license_num").show();
 		}

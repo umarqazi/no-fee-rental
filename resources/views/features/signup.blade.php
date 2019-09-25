@@ -54,7 +54,7 @@
                                         <span>Liscence Verified</span>
                                     </div>
                                 </div>
-                             </div>
+                             </div>  
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">

@@ -755,16 +755,13 @@ h3 {
   color: #223971;
   cursor: pointer;
 }
-
 .col-sm-12.license_num{
   border-bottom: #ddd solid 1px;
   margin-bottom: 15px;
 }
-
 .login-form-wrapper .agnet-input:disabled {
   opacity: 0.3;
 }
-
 .login-form-wrapper .btn-default:disabled{
   opacity: 0.3;
   pointer-events: none;
