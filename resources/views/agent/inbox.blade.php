@@ -9,7 +9,7 @@
                 <p>Phone: <strong>{{ $collection->sender->phone_number ?? 'N/A' }} </strong></p>
             </div>
             <div class="property-info">
-                <img src="assets/images/listing-img.jpg" alt="">
+                <img src="{{ asset($collection->listing->thumbnail ?? DLI ) }}" alt="">
                 <div class="info">
                     <div class="title">
                         <p><i class="fa fa-tag"></i> ${{ $collection->listing->rent }}</p>
@@ -30,18 +30,12 @@
                         @foreach($collection->messages as $message)
                         @if($message->align === myId())
                         <li class="replies">
-                            <img style="width: 35px;height: 35px;"
-                                 src="{{ !empty(mySelf()->profile_image)
-                                    ? asset('storage/'.mySelf()->profile_image)
-                                    : asset('assets/images/agent-img.jpg') }}" alt="" />
+                            <img style="width: 35px;height: 35px;" src="{{ asset(mySelf()->profile_image ?? DUI) }}" alt="" />
                             <p>{{ $message->message }}</p>
                         </li>
                         @else
                         <li class="sent">
-                            <img  style="width: 35px;height: 35px;"
-                                  src="{{ !empty($collection->sender->profile_image)
-                                       ? asset('storage/'.$collection->sender->profile_image)
-                                        : asset('assets/images/agent-img.jpg') }}" alt="" />
+                            <img  style="width: 35px;height: 35px;" src="{{ asset($collection->sender->profile_image ?? DUI) }}" alt="" />
                             <p>{{ $message->message }}</p>
                         </li>
                         @endif

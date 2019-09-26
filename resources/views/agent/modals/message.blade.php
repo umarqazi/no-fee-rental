@@ -29,7 +29,7 @@
                     <p>Phone: <strong>646-760-4979 </strong></p>
                     <p>Question/Comments: <strong></strong></p>
                     <div class="property-info">
-                        <img src="assets/images/listing-img.jpg" alt="" />
+                        <img src="" alt="" />
                         <div class="info">
                             <div class="title">
                                 <p><i class="fa fa-tag"></i> $5,870</p>

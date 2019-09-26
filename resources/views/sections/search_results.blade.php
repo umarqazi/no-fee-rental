@@ -116,7 +116,7 @@
                                         </button>
                                     </div>
                                     <span class="heart-icon"></span>
-                                    <img src="{{ asset($listing->thumbnail ? $listing->thumbnail : DLI) }}" alt="" class="main-img">
+                                    <img src="{{ asset( $listing->thumbnail ?? DLI ) }}" alt="" class="main-img">
                                     <div class="info">
                                         <div href="#" class="info-link-text">
                                             <p> $ {{ $listing->rent }} </p>
@@ -142,7 +142,7 @@
                                                 <button class="btn-default" data-toggle="modal" data-target="#check-availability">Check Availability</button>
                                             </div>
                                             <span class="heart-icon"></span>
-                                            <img src="{{ asset($listing->thumbnail ? $listing->thumbnail : DLI) }}" alt="" class="main-img">
+                                            <img src="{{ asset( $listing->thumbnail ?? DLI ) }}" alt="" class="main-img">
                                             <div class="info">
                                                 <div href="#" class="info-link-text">
                                                     <p> $ {{ $listing->rent }} </p>

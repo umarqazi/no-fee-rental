@@ -40,7 +40,7 @@
           <li>
             <a href="" data-toggle="modal" data-target="#signup" class="signup-modal-btn close-menu">Signup</a>
           </li>
-      </ul>    
+      </ul>
     </div>
   </div>
 

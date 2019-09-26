@@ -42,9 +42,7 @@
                                 <a href="{{ route('agent.loadChat', $inbox->id) }}" class="view-chat"> View</a>
                             </div>
                             <div class="property">
-                                <img src="{{!empty($inbox->listing->thumbnail)
-                                        ? asset('storage/'.$inbox->listing->thumbnail)
-                                        : asset('storage/uploads/listing/thumbnails/default.jpg')}}" alt="" />
+                                <img src="{{ asset($inbox->listing->thumbnail ?? DLI) }}" alt="" />
                                 <div class="info">
                                     <ul>
                                         <li><i class="fa fa-bed"></i> {{ $inbox->listing->bedrooms }} Bed</li>
@@ -89,9 +87,7 @@
                             <h3>{{ $meeting->sender->first_name }}</h3>
                             <p>Reminder from nofeerentals: You have still not replied to {{ $meeting->sender->first_name }} in regards Reminder from RentHop<a href="" data-toggle="modal" data-target="#message-modal">Read More</a></p>
                             <div class="property">
-                                <img src="{{!empty($meeting->listing->thumbnail)
-                                        ? asset('storage/'.$meeting->listing->thumbnail)
-                                        : asset('storage/uploads/listing/thumbnails/default.jpg')}}" alt="" />
+                                <img src="{{ asset($meeting->listing->thumbnail ?? DLI ) }}" alt="" />
                                 <div class="info">
                                     <ul>
                                         <li><i class="fa fa-bed"></i> {{ $meeting->listing->bedrooms ?? null }} Bed</li>

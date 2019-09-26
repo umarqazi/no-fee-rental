@@ -25,11 +25,7 @@
                     <ul class="team-listing">
                         @foreach($team as $member)
                         <li>
-                            <img src="{{
-                                !empty($member->friends->profile_image)
-                                ? asset('storage/'.$member->friends->profile_image)
-                                : asset('assets/images/default-image.jpeg')
-                            }}" alt="" class="main-img" />
+                            <img src="{{ asset($member->friends->profile_image ?? DUI)}}" alt="" class="main-img" />
                             <div class="name">{{ $member->friends->first_name.' '.$member->friends->last_name }}</div>
                             <a href="#" class="team-mail">{{ $member->friends->email }}</a>
                             <div class="actions-btns">
