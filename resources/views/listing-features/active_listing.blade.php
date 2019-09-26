@@ -4,7 +4,7 @@
     @foreach($listing->active as $al)
         <div class="listing-row">
             <div class="img-holder">
-                <img src="{{ asset(!empty($al->thumbnail) ? $al->thumbnail : DLI) }}" alt="" style="height: 205px; width: 100%;" class="main-img" />
+                <img src="{{ asset($al->thumbnail ?? DLI) }}" alt="" style="height: 205px; width: 100%;" class="main-img" />
             </div>
             <div class="info">
                 <p class="title">{{ str_limit(is_exclusive($al->listingTypes) ? $al->unit.' '.$al->street_address : $al->display_address, STR_LIMIT_LIST_VIEW, ' ...') }}</p>
@@ -47,6 +47,7 @@
     @endif
     {!! $listing->active->render() !!}
 </div>
+
 
 <!--Grid view listing-->
 <div class="grid-view-wrapper">

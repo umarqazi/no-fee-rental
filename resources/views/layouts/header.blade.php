@@ -19,7 +19,7 @@
         <ul>
             <li><a href="/rent">Rent</a></li>
             <li><a href="{{ route('web.neighborhood') }}">Neighborhood </a></li>
-            <li>
+            {{--<li>
                 <a class="" data-toggle="collapse" href="#menuToggle1" role="button" aria-expanded="false" aria-controls="menuToggle1">
                     Renters <i class="fa fa-angle-down"></i>
                 </a>
@@ -42,7 +42,7 @@
                         <li><a href="#">Some Link</a></li>
                     </ul>
                 </div>
-            </li>
+            </li>--}}
             @if(!authenticated())
                 <li><a href="" data-toggle="modal" data-target="#login" class="signin-modal-btn close-menu">Login</a></li>
                 <li><a href="#" data-toggle="modal" data-target="#login" class="signup-modal-btn close-menu">Signup</a></li>
