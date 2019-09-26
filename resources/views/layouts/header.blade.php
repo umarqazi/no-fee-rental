@@ -15,7 +15,7 @@
     </div>
     <div class="mobile-nav">
         <ul>
-            <li><a href="/rent">Rent</a></li>
+            <li><a href="javascript:void(0)">Rent</a></li>
             <li><a href="{{ route('web.neighborhood') }}">Neighborhood </a></li>
             @if(!authenticated())
                 <li><a href="" data-toggle="modal" data-target="#login" class="signin-modal-btn close-menu">Login</a></li>
@@ -31,7 +31,7 @@
             <a href="{!! url('/') !!}"> <img src="{{ asset('assets/images/logo.png') }}" class="logo" /></a>
             <ul class="menu-links">
                 <li>
-                    <a href="/rent">Rent </a>
+                    <a href="javascript:void(0)">Rent </a>
                     <a href="{{ route('web.neighborhood') }}">Neighborhood </a>
                 </li>
             </ul>
