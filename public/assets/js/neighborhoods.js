@@ -1,22 +1,23 @@
 $(() => {
     let $body = $('body');
 
-    $body.find('.submit-neighbor').on('click', function() {
-        $('form').submit();
+    $body.find('.submit-neighbor').on('click', function () {
+        alert('ehr')
+        $(this).parents('form').submit();
     });
 
-    $(".neighborhood-search .search-result-wrapper .map-wrapper .swipe-btn").on('click', function() {
+    $(".neighborhood-search .search-result-wrapper .map-wrapper .swipe-btn").on('click', function () {
         $(this).find('i').toggleClass('fa-angle-left fa-angle-right');
         $(".neighborhood-search .search-result-wrapper .search-listing").toggleClass('hide-list');
         $(".neighborhood-search .search-result-wrapper .map-wrapper").toggleClass('full-map');
     });
 
-    $(".mobile-view-dropdown").on('click', function(){
+    $(".mobile-view-dropdown").on('click', function () {
         $(this).find("i").toggleClass('fa-bars fa-times');
         $("#mobile-tabs-collapse").slideToggle();
     });
 
-    $(".mobile-map-icon").on('click', function(){
+    $(".mobile-map-icon").on('click', function () {
         $(this).find("i").toggleClass('fa-map-marker-alt fa-times');
         $("#mobile-map-listing-view").slideToggle();
     });
@@ -26,8 +27,8 @@ $(() => {
         responsiveClass: true,
         autoHeight: true,
         smartSpeed: 1000,
-        dots:false,
-        autoplaySpeed:1000,
+        dots: false,
+        autoplaySpeed: 1000,
         autoplayTimeout: 1000,
         nav: true,
         responsive: {

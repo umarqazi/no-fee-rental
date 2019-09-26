@@ -1458,7 +1458,7 @@ background-size: cover;
   padding-top: 10px;
 }
 .contact-info .btn-default{
-  padding: 0px 80px; 
+  padding: 0px 80px;
 }
 .contact-info label{
   font-size: 16px;
@@ -1664,13 +1664,24 @@ background-size: cover;
     font-size: 16px;
     z-index: 99;
     line-height: normal;
-    padding: 8px 12px;
+    padding:0;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border-radius: 50%;
     -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.22);
 -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.22);
 box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.22);
 cursor: pointer;
 }
+
+#desktop-map, #mobile-map{
+    width: 100%;
+    height: 100%;
+}
+
 .neighborhood-search .search-result-wrapper .map-wrapper.map-small-view {
   flex: 0 0 50%;
 }
@@ -1740,7 +1751,7 @@ cursor: pointer;
 #boxscroll2 {
   margin-top: 20px;
   height: 450px;
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
 }
 
@@ -2192,8 +2203,8 @@ cursor: pointer;
 .featured-properties .property-listing .info a{
   display: inline-block;
 }
-.featured-properties .property-listing .info a:hover, 
-.featured-properties .property-listing .info a:active, 
+.featured-properties .property-listing .info a:hover,
+.featured-properties .property-listing .info a:active,
 .featured-properties .property-listing .info a:focus{
   color: #fff;
   background: #01091d;
@@ -2523,7 +2534,7 @@ cursor: pointer;
 /* Create a custom radio button */
 .radio-button .checkmark {
   position: absolute;
-  top: 1px;
+  top: 8px;
   left: 0;
   height: 12px;
   width: 12px;
@@ -2849,10 +2860,10 @@ border-color: #e17228;
     max-width: 80%;
 }
 }
-@media (max-width: 1260px){
+/*@media (max-width: 1260px){
   .modal-dialog {
     margin:.5rem !important;
-  }
+  }*/
 }
 @media (max-width: 991px) {
     #appointmentModal .padding-leftt-0 {
@@ -2893,7 +2904,7 @@ border-color: #e17228;
       padding:12px 15px;
     }
     .contact-info .btn-default{
-      margin-bottom: 20px; 
+      margin-bottom: 20px;
   }
   .neighborhood-search .search-result-wrapper .search-listing .featured-properties .property-listing .property-thumb{
     width: calc(100% / 2 - 30px);
@@ -3342,7 +3353,7 @@ margin-bottom: 10px;
 
   #mobile-map-listing-view{
     width: 100%;
-    height: 450px;
+    height: 370px;
     position: absolute;
     z-index: 9;
     top: 40px;
@@ -3374,7 +3385,7 @@ max-width: 370px;
 
 }
   /*end agent profile*/
-@media only screen and (min-width: 767px) and (max-width: 991px){
+@media only screen and (min-width: 768px) and (max-width: 991px){
   #advance-search .slider-wrapper .input-style{
     width: 110px;
   }
@@ -3781,5 +3792,3 @@ max-width: 370px;
 .inner-static-page-zero{
   padding-top: 0px 0px 120px !important;
 }
-
-
