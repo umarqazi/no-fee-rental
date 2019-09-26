@@ -29,17 +29,20 @@
     25 => 'Illuminate\\Notifications\\SlackChannelServiceProvider',
     26 => 'Laravel\\Tinker\\TinkerServiceProvider',
     27 => 'Collective\\Html\\HtmlServiceProvider',
-    28 => 'Carbon\\Laravel\\ServiceProvider',
-    29 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
-    30 => 'Yajra\\DataTables\\DataTablesServiceProvider',
-    31 => 'Orchestra\\Parser\\XmlServiceProvider',
-    32 => 'Collective\\Html\\HtmlServiceProvider',
+    28 => 'Maatwebsite\\Excel\\ExcelServiceProvider',
+    29 => 'MaddHatter\\LaravelFullcalendar\\ServiceProvider',
+    30 => 'Carbon\\Laravel\\ServiceProvider',
+    31 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
+    32 => 'Spatie\\Newsletter\\NewsletterServiceProvider',
     33 => 'Yajra\\DataTables\\DataTablesServiceProvider',
-    34 => 'App\\Providers\\AppServiceProvider',
-    35 => 'App\\Providers\\AuthServiceProvider',
-    36 => 'App\\Providers\\EventServiceProvider',
-    37 => 'App\\Providers\\RouteServiceProvider',
-    38 => 'Spatie\\Permission\\PermissionServiceProvider',
+    34 => 'Collective\\Html\\HtmlServiceProvider',
+    35 => 'Yajra\\DataTables\\DataTablesServiceProvider',
+    36 => 'MaddHatter\\LaravelFullcalendar\\ServiceProvider',
+    37 => 'App\\Providers\\AppServiceProvider',
+    38 => 'App\\Providers\\AuthServiceProvider',
+    39 => 'App\\Providers\\BroadcastServiceProvider',
+    40 => 'App\\Providers\\EventServiceProvider',
+    41 => 'App\\Providers\\RouteServiceProvider',
   ),
   'eager' => 
   array (
@@ -57,14 +60,18 @@
     11 => 'Fideloper\\Proxy\\TrustedProxyServiceProvider',
     12 => 'Illuminate\\Notifications\\NexmoChannelServiceProvider',
     13 => 'Illuminate\\Notifications\\SlackChannelServiceProvider',
-    14 => 'Carbon\\Laravel\\ServiceProvider',
-    15 => 'Spatie\\Permission\\PermissionServiceProvider',
-    16 => 'Yajra\\DataTables\\DataTablesServiceProvider',
-    17 => 'App\\Providers\\AppServiceProvider',
-    18 => 'App\\Providers\\AuthServiceProvider',
-    19 => 'App\\Providers\\EventServiceProvider',
-    20 => 'App\\Providers\\RouteServiceProvider',
-    21 => 'Spatie\\Permission\\PermissionServiceProvider',
+    14 => 'Maatwebsite\\Excel\\ExcelServiceProvider',
+    15 => 'MaddHatter\\LaravelFullcalendar\\ServiceProvider',
+    16 => 'Carbon\\Laravel\\ServiceProvider',
+    17 => 'Spatie\\Newsletter\\NewsletterServiceProvider',
+    18 => 'Yajra\\DataTables\\DataTablesServiceProvider',
+    19 => 'Yajra\\DataTables\\DataTablesServiceProvider',
+    20 => 'MaddHatter\\LaravelFullcalendar\\ServiceProvider',
+    21 => 'App\\Providers\\AppServiceProvider',
+    22 => 'App\\Providers\\AuthServiceProvider',
+    23 => 'App\\Providers\\BroadcastServiceProvider',
+    24 => 'App\\Providers\\EventServiceProvider',
+    25 => 'App\\Providers\\RouteServiceProvider',
   ),
   'deferred' => 
   array (
@@ -175,7 +182,6 @@
     'Collective\\Html\\HtmlBuilder' => 'Collective\\Html\\HtmlServiceProvider',
     'Collective\\Html\\FormBuilder' => 'Collective\\Html\\HtmlServiceProvider',
     'NunoMaduro\\Collision\\Contracts\\Provider' => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
-    'orchestra.parser.xml' => 'Orchestra\\Parser\\XmlServiceProvider',
   ),
   'when' => 
   array (
@@ -222,9 +228,6 @@
     array (
     ),
     'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider' => 
-    array (
-    ),
-    'Orchestra\\Parser\\XmlServiceProvider' => 
     array (
     ),
   ),

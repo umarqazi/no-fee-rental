@@ -46,6 +46,28 @@
       'Html' => 'Collective\\Html\\HtmlFacade',
     ),
   ),
+  'maatwebsite/excel' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Maatwebsite\\Excel\\ExcelServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Excel' => 'Maatwebsite\\Excel\\Facades\\Excel',
+    ),
+  ),
+  'maddhatter/laravel-fullcalendar' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'MaddHatter\\LaravelFullcalendar\\ServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Calendar' => 'MaddHatter\\LaravelFullcalendar\\Facades\\Calendar',
+    ),
+  ),
   'nesbot/carbon' => 
   array (
     'providers' => 
@@ -60,11 +82,15 @@
       0 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
     ),
   ),
-  'spatie/laravel-permission' => 
+  'spatie/laravel-newsletter' => 
   array (
     'providers' => 
     array (
-      0 => 'Spatie\\Permission\\PermissionServiceProvider',
+      0 => 'Spatie\\Newsletter\\NewsletterServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Newsletter' => 'Spatie\\Newsletter\\NewsletterFacade',
     ),
   ),
   'yajra/laravel-datatables-oracle' => 
@@ -76,13 +102,6 @@
     'aliases' => 
     array (
       'DataTables' => 'Yajra\\DataTables\\Facades\\DataTables',
-    ),
-  ),
-  'orchestra/parser' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Orchestra\\Parser\\XmlServiceProvider',
     ),
   ),
 );
