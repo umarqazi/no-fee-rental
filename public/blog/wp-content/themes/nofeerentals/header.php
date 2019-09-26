@@ -26,57 +26,18 @@
 
   <div class="mobile-menu">
     <i class="fa fa-times close-menu-btn"></i>
-    <div class="user-avtar">
-      <a href="#"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/agent-img.jpg" alt="" class="avtar" /> Jhone Doe <i class="fa fa-angle-down"></i></a>
-      <div class="user-dropdown">
-        <a href="#">Dashboard </a>
-        <a href="#">Profile Setting </a>
-        <a href="#">Log Out </a>
-      </div>
-    </div>
     <div class="mobile-nav">
-      <ul>
-        <li><a href="#">Rent</a></li>
-        <li><a href="#">Neighborhood </a></li>
-        <li>
-          <a class="" data-toggle="collapse" href="#menuToggle1" role="button" aria-expanded="false" aria-controls="menuToggle1">
-            Renters <i class="fa fa-angle-down"></i>
-          </a>
-          <div class="collapse" id="menuToggle1">
-            <ul>
-              <li>
-                <a href="#">Some Link</a>
-              </li>
-              <li>
-                <a href="#">Some Link</a>
-              </li>
-              <li>
-                <a href="#">Some Link</a>
-              </li>
-            </ul>
-          </div>
-        </li>
-        <li>
-          <a class="" data-toggle="collapse" href="#menuToggle2" role="button" aria-expanded="false" aria-controls="menuToggle2">
-            Company <i class="fa fa-angle-down"></i>
-          </a>
-          <div class="collapse" id="menuToggle2">
-            <ul>
-              <li>
-                <a href="#">Some Link</a>
-              </li>
-              <li>
-                <a href="#">Some Link</a>
-              </li>
-              <li>
-                <a href="#">Some Link</a>
-              </li>
-            </ul>
-          </div>
-        </li>
-        <li><a href="#">Login</a></li>
-        <li><a href="#">signup</a></li>
-      </ul>
+      <?php
+                    if ( has_nav_menu( 'header-menu' ) ) {
+                      wp_nav_menu(
+                        array(
+                          'theme_location' => 'header-menu',
+                          'container' => 'false',
+                          'menu_class' => 'menu-links'
+                        )
+                      );
+                    }
+                  ?>
     </div>
   </div>
 
@@ -86,17 +47,22 @@
         <a href="/">
           <img src="<?php echo get_template_directory_uri(); ?>/assets/images/logo.png" class="logo" />
         </a>
-        <?php
-          if ( has_nav_menu( 'header-menu' ) ) {
-            wp_nav_menu(
-              array(
-                'theme_location' => 'header-menu',
-                'container' => 'false',
-                'menu_class' => 'menu-links'
-              )
-            );
-          }
-        ?>
+
+            <div class="header-right-wrapper">
+                <i class="fa fa-bars menu-btn"></i>
+                  <?php
+                    if ( has_nav_menu( 'header-menu' ) ) {
+                      wp_nav_menu(
+                        array(
+                          'theme_location' => 'header-menu',
+                          'container' => 'false',
+                          'menu_class' => 'menu-links'
+                        )
+                      );
+                    }
+                  ?>
+            </div>
+
       </div>
     </div>
   </div>

@@ -13,7 +13,6 @@
                             <div class="title"><h6> Manhattan </h6>
                             <p>632 Broadway, 6th Floor New York, NY 10012 P 212.753.7702
                             </p></div>
-                            
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -21,8 +20,7 @@
                             <img src="assets/images/email-icon.png" alt="" />
                             <div class="title"><h6> Marketing </h6>
                                 <a href="mailto:marketing@nofeerentals.com">marketing@nofeerentals.com</a>
-                            </div>
-                            
+                            </div> 
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -31,7 +29,6 @@
                             <div class="title"><h6> Careers </h6>
                                 <a href="#">careers@nofeerentals.com</a>
                             </div>
-                            
                         </div>
                     </div>
                 </div>

@@ -22,6 +22,7 @@
 </style>
 
 <?php
+$privacy_banner = get_field('privacy_banner');
 $content_before_middle_section = get_field('content_before_middle_section');
 $background_image = get_field('background_image');
 $title = get_field('title');
@@ -29,6 +30,7 @@ $description = get_field('description');
 $content_after_middle_section = get_field('content_after_middle_section');
 ?>
 <section class="inner-pages press-section wow fadeIn inner-page-terms" data-wow-delay="0.2s">
+	<div class="privacy-policy-banner" style="background-image: url(<?php echo $privacy_banner; ?>);"></div>
     <?php echo $content_before_middle_section; ?>
 
     <div class=" sec-padiing-terms <?php if($_GET['page_id']==27) echo 'entire-agreement-bg';elseif($_GET['page_id']==3) echo 'info-collect-bg'; else echo 'info-collect-bg' ?>" style="background-image: url(<?php echo $background_image; ?>);">

@@ -261,7 +261,7 @@ h3 {
 .btn-default:hover,
 .btn-default:focus {
   color: #fff;
-  background: #01091d;
+  background: #223971;
   outline: none !important;
   box-shadow: none;
 }
@@ -755,16 +755,13 @@ h3 {
   color: #223971;
   cursor: pointer;
 }
-
 .col-sm-12.license_num{
   border-bottom: #ddd solid 1px;
   margin-bottom: 15px;
 }
-
 .login-form-wrapper .agnet-input:disabled {
   opacity: 0.3;
 }
-
 .login-form-wrapper .btn-default:disabled{
   opacity: 0.3;
   pointer-events: none;
@@ -1066,7 +1063,7 @@ footer .footer-wrapper .newsletter .newsletter-form .fld {
   height: 40px;
   flex: 60%;
   font-size: 13px;
-  padding-right: 10px;
+  padding-right: 90px;
   width: 100%;
 }
 footer .footer-wrapper .newsletter .newsletter-form .btn-default {
@@ -1408,7 +1405,7 @@ footer .copyright .social-icons li a:hover {
 }
 /*contact us*/
 .inner-pages.contact-us{
-  padding: 20px 0px 120px;
+  padding: 0px 0px 120px;
   margin-top: 90px;
   border-top: 1px solid #eee;
 }
@@ -2854,8 +2851,11 @@ border-color: #e17228;
   font-size: 16px;
   color: #AFAFAF;
 }
+#advance-search .form-group .checkbox-listing {
+    margin-bottom: 15px;
+}
 /*profile contact*/
-@media (min-width: 1366px){
+@media (min-width: 1367px){
   .container-lg {
     max-width: 80%;
 }
@@ -2917,6 +2917,16 @@ border-color: #e17228;
 }
 .inner-pages.contact-us{
   margin-top: 75px;
+}
+.login-info label{
+  font-size: 14px;
+}
+.login-info img{
+  width: 18px;
+  height: 18px;
+}
+#advance-search .search-input-wrap{
+  text-align: center; 
 }
 }
 
@@ -3246,8 +3256,11 @@ margin-bottom: 10px;
   #advance-search .modal-dialog {
     max-width: 96%;
   }
-  #advance-search .slider-wrapper #slider-range {
+ /* #advance-search .slider-wrapper #slider-range {
     width: calc(100% - 260px);
+  }*/
+  .modal #advance-search .slider-wrapper #slider-range {
+    width:100%;
   }
   .header-bg .search-property .search-btn {
     height: 45px;
@@ -3366,9 +3379,17 @@ max-width: 370px;
 .agent-profile-view .img-holder{
   flex: 0 0 260px;
 }
+#advance-search .slider-wrapper .search-input-wrap #slider-range {
+    width: 100% !important;
+}
+
 }
   /*end agent profile*/
-
+@media only screen and (min-width: 767px) and (max-width: 991px){
+  #advance-search .slider-wrapper .input-style{
+    width: 110px;
+  }
+}
 @media only screen and (max-width: 767px) {
   .header-wrapper .header-container .logo {
     max-width: 200px;
@@ -3667,6 +3688,7 @@ max-width: 370px;
   font-size: 18px;
   font-weight: 700;
 }
+
 }
 @media only screen and (min-width: 577px) and (max-width: 767px){
   .featured-properties .property-listing .info .info-link-text{
@@ -3691,6 +3713,16 @@ max-width: 370px;
   }
   #advance-search .slider-wrapper {
     display: block;
+  }
+  #advance-search .search-input-wrap{
+    width: 100%;
+    text-align: center;
+  }
+  #advance-search .search-input-wrap input:nth-child(1){
+    margin-right: 0px;
+  }
+  #advance-search .search-input-wrap input:nth-child(2){
+    margin-left: 0px;
   }
   #advance-search .slider-wrapper .input-style {
     width: 100%;
