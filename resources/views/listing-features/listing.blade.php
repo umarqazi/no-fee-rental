@@ -38,6 +38,7 @@
 <script>
     enableDatePicker('#availability_date');
     enableDatePicker('.open-house-date', false);
+    autoComplete(document.getElementById('controls'));
     initMap(document.getElementById('map'));
     fetchNeighbours($('input[name=neighborhood]'));
 </script>
