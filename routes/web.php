@@ -11,16 +11,10 @@
 |
  */
 
-use Illuminate\Http\Request;
-
 Route::get('/', 'HomeController@index')->name('web.index');
 
 // Search Listing Route
 Route::get('/search', 'SearchController@advanceSearch')->name('list.search');
-
-Route::get('/renter-guide', function () {
-	return view('pages.renter-guide');
-});
 
 // Contact Us Routes
 Route::get('/contact-us', 'ContactUsController@showForm')->name('contact-us');
@@ -49,7 +43,7 @@ Route::get('/confirm-email/{token}', 'UserController@confirmEmail')->name('user.
 // Email Validation
 Route::post('/verify-email', 'UserController@verifyEmail');
 
-//License Validations
+// License Validations
 Route::post('/verify-license', 'UserController@verifyLicense');
 
 // Login route for all user type
@@ -83,13 +77,6 @@ Route::get('/all-notifications', 'NotificationController@all');
 
 Route::get('/noti', function() {
 	return view('secured-layouts.notifications');
-});
-Route::get('/rent', function() {
-	return view('rent');
-});
-
-Route::post('/test', function (Request $request) {
-    return 'false';
 });
 
 Route::get('/rent', function() {

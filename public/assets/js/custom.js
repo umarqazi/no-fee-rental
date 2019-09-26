@@ -296,9 +296,11 @@ $('#price-range-submit').hide();
 		if (radioId == 'signup-option1') {
 			$(".finding-home-text").hide();
             $(".license_num").hide();
-            $("#phone_number").addClass('col-sm-12');
+             $("#signup_form .btn-default").prop('disabled', false);
+            $("#signup_form .agnet-input").prop('disabled', false);
 		} else {
-            $("#phone_number").removeClass('col-sm-12');
+            $("#signup_form .agnet-input").prop('disabled', true);
+            $("#signup_form .btn-default").prop('disabled', true);
 			$(".finding-home-text").show();
             $(".license_num").show();
 		}
@@ -401,9 +403,18 @@ $('#price-range-submit').hide();
         $('#divNewNotifications li').on('click', function() {
             $('#dropdown_title').html($(this).find('a').html());
         });
-    	$(".signup-modal-btn").click(function(){
+    	$("#signup-btn").click(function(){
       		$('body').addClass('signup-modal-scroll');
     	});
+    	$('.close-signup-modal').click(function(){
+    		$('body').removeClass('signup-modal-scroll');
+    	});
+    	$(document).on("click", function (e) {
+        if ($(e.target).is("#signup-btn")==false && $(e.target).parents('#signup').length==0) {
+            $("body").removeClass("signup-modal-scroll");
+        }
+    	});
+
     });
 
 });

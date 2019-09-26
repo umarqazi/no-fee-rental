@@ -69,8 +69,9 @@
                                 <ul class="select-bed-options" id="baths">
                                     <li>
                                         <div class="custom-control custom-radio">
-                                            {!! Form::radio('baths', 'studio', false, ['class' => 'custom-control-input', 'id' => 'studio']) !!}
-                                            <label class="custom-control-label" for="studio">Any</label>
+                                            {!! Form::radio('baths', 'any', false, ['class' => 'custom-control-input', 'id' => 'Any']) !!}
+                                            <label class="custom-control-label" for="Any">Any</label>
+
                                         </div>
                                     </li>
                                     <li>
@@ -147,12 +148,12 @@
                             <div class="form-group">
                                 <div class="row">@php $i = 1; @endphp
                                     @foreach(features() as $key => $values)
-                                        <div class="col-lg-3">
+                                        <div class="col-lg-3 col-sm-4">
                                             <label class="label">{{ucwords(str_replace('_', ' ', $key))}}</label>
                                             <ul class="checkbox-listing">
                                                 @foreach($values as $id => $f)@php $id += 1; $i += 1; @endphp
                                                 @if($id == 6)
-                                                    </ul></div><div class="col-lg-6"><ul class="checkbox-listing" style="margin-top: 28px;">
+                                                    </ul></div><div class="col-lg-3 col-sm-4"><ul class="checkbox-listing" style="margin-top: 28px;">
                                                 @endif
                                                 <li>
                                                     <div class="custom-control custom-checkbox">

@@ -57,11 +57,11 @@ class RealtyMXController extends Controller {
      * @var array
      */
 	protected $filter = [
-		'amenities', 'photo', 'type', 'status', 'id',
+		'amenities', 'photo', 'type', 'status', 'id', 'apartment',
 		'neighborhood', 'agent', 'price', 'availableOn',
 		'description', 'latitude', 'longitude',
 		'address', 'url', 'zipcode', 'city', 'state', 'squareFeet',
-		'bathrooms', 'bedrooms', 'rlsid'
+		'bathrooms', 'bedrooms', 'rlsid', 'noFee', 'exclusive'
 	];
 
     /**
@@ -138,15 +138,8 @@ class RealtyMXController extends Controller {
 		$data = json_decode(json_encode($xml), true);
 		$this->hold = $data['properties'][$this->collectionOf];
 		$this->recursiveIterator();
-		foreach ($this->collection as $key => $value) {
-            $this->batch[] = collect($value)->reject(function($a) {
-                return empty($a);
-            })->map(function($a) {
-                return $a;
-            });
-        }
+        $this->batch = $this->collection;
         $this->collection = null;
-//        dd($this->service->formCollection($this->batch));
         (empty($this->batch)) ?: $this->checkAndPush();
 	}
 
@@ -176,23 +169,43 @@ class RealtyMXController extends Controller {
      */
 	private function checkAndPush() {
         collect($this->batch)->map(function($listing) {
-            if($this->agentFilter($listing['agent'])) {
-                $listing['street_address'] = $listing['address'] ?? null;
-                $listing['square_feet']    = $listing['squareFeet'] ?? 0;
-                $listing['agent']          = $this->agentFounded;
-                if ( $this->listingFilter( $listing ) ) {
-                    $list = $this->service->formCollection($listing);
-                    $this->collection[] = $list;
-                    $this->report[] = ["RLMX-{$list['realty_id']}",$list['realty_url'],"none"];
-                } else {
-                    $this->report[] = [$listing['rlsid'],"none","Listing already taken"];
+            if(array_has($listing, 'noFee')) {
+                if ( array_has( $listing, 'exclusive' ) ) {
+                    $listing['exclusive'] = 1;
                 }
+
+                if ( array_has( $listing, 'amenities' ) ) {
+                    $amenities = null;
+                    foreach ( $listing['amenities'] as $key => $amenity ) {
+                        $amenities[] = $key;
+                    }
+                    $listing['amenities'] = $amenities;
+                }
+
+                $this->service->formCollection($listing);
+                $this->collection[] = $listing;
             } else {
-                $this->report[] = [$listing['rlsid'],"none","we do not find any agent against this listing"];
+                $this->report[] = [$listing['rlsid'], 'none', 'We import only no fee listings'];
             }
+
+//            if($this->agentFilter($listing['agent'])) {
+//                $listing['street_address'] = $listing['address'] ?? null;
+//                $listing['square_feet']    = $listing['squareFeet'] ?? 0;
+//                $listing['agent']          = $this->agentFounded;
+//                if ( $this->listingFilter( $listing ) ) {
+//                    $list = $this->service->formCollection($listing);
+//                    $this->collection[] = $list;
+//                    $this->report[] = ["RLMX-{$list['realty_id']}",$list['realty_url'],"none"];
+//                } else {
+//                    $this->report[] = [$listing['rlsid'],"none","Listing already taken"];
+//                }
+//            } else {
+//                $this->report[] = [$listing['rlsid'],"none","we do not find any agent against this listing"];
+//            }
         });
-        (empty($this->collection)) ?: $this->service->insert($this->collection);
-        return $this->writeCSV();
+        dd($this->collection, $this->report);
+//        (empty($this->collection)) ?: $this->service->insert($this->collection);
+//        return $this->writeCSV();
     }
 
     /**
