@@ -10,50 +10,51 @@
    */
 
 ?>
-<!doctype html>
-<html <?php language_attributes(); ?>>
-<head>
-  <meta charset="<?php bloginfo( 'charset' ); ?>">
-  <meta name="viewport" content="width=device-width">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="profile" href="https://gmpg.org/xfn/11">
+    <!doctype html>
+    <html <?php language_attributes(); ?>>
 
-  <?php wp_head(); ?>
-</head>
+    <head>
+        <meta charset="<?php bloginfo( 'charset' ); ?>">
+        <meta name="viewport" content="width=device-width">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="profile" href="https://gmpg.org/xfn/11">
 
-<body <?php body_class(); ?>>
-<header>
+        <?php wp_head(); ?>
+    </head>
 
-  <div class="mobile-menu">
-    <i class="fa fa-times close-menu-btn"></i>
-    <div class="mobile-nav">
-        <ul id="menu-header-menu" class="menu-links">
-          <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-29">
-            <a href="http://no-fee-rental.teamtechverx.com/rent">Rent</a>
-          </li>
-          <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-33">
-            <a href="http://no-fee-rental.teamtechverx.com/neighborhood">Neighborhood</a>
-          </li>
-          <li>
-            <a href="" data-toggle="modal" data-target="#login" class="signin-modal-btn close-menu">Login</a>
-          </li>
-          <li>
-            <a href="" data-toggle="modal" data-target="#signup" class="signup-modal-btn close-menu">Signup</a>
-          </li>
-      </ul>    
-    </div>
-  </div>
+    <body <?php body_class(); ?>>
+        <header>
 
-  <div class="header-wrapper">
-    <div class=" container-lg">
-      <div class="header-container">
-        <a href="/">
+            <div class="mobile-menu">
+                <i class="fa fa-times close-menu-btn"></i>
+                <div class="mobile-nav">
+                    <ul id="menu-header-menu" class="menu-links">
+                        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-29">
+                            <a href="http://no-fee-rental.teamtechverx.com/rent">Rent</a>
+                        </li>
+                        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-33">
+                            <a href="http://no-fee-rental.teamtechverx.com/neighborhood">Neighborhood</a>
+                        </li>
+                        <li>
+                            <a href="" data-toggle="modal" data-target="#login" class="signin-modal-btn close-menu">Login</a>
+                        </li>
+                        <li>
+                            <a href="" data-toggle="modal" data-target="#signup" class="signup-modal-btn close-menu">Signup</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="header-wrapper">
+                <div class=" container-lg">
+                    <div class="header-container">
+                        <a href="/">
           <img src="<?php echo get_template_directory_uri(); ?>/assets/images/logo.png" class="logo" />
         </a>
 
-            <div class="header-right-wrapper">
-                <i class="fa fa-bars menu-btn"></i>
-                  <?php
+                        <div class="header-right-wrapper">
+                            <i class="fa fa-bars menu-btn"></i>
+                            <?php
                     if ( has_nav_menu( 'header-menu' ) ) {
                       wp_nav_menu(
                         array(
@@ -64,17 +65,17 @@
                       );
                     }
                   ?>
-                  <div class="actions-btns">
-                      <button type="button" class="signup-btn signup-modal-btn" data-toggle="modal" data-target="#signup">Signup</button>
-                      <button type="button" class="signup-btn login-btn signin-modal-btn" data-toggle="modal" data-target="#login">Login</button>
-                  </div>
+                                <div class="actions-btns">
+                                    <button type="button" class="signup-btn signup-modal-btn" data-toggle="modal" data-target="#signup">Signup</button>
+                                    <button type="button" class="signup-btn login-btn signin-modal-btn" data-toggle="modal" data-target="#login">Login</button>
+                                </div>
+                        </div>
+
+                    </div>
+                </div>
             </div>
 
-      </div>
-    </div>
-  </div>
-
-  <?php
+            <?php
 
     $featured_image = $title = $sub_title = "";
 
@@ -99,22 +100,17 @@
     if(!is_singular('post')){
       ?>
 
-      <!-- <div class="header-bg inner-pages-banner" style="background: url(<?php echo $featured_image; ?>) no-repeat center center;"> -->
-        <!-- <div class="banner-wrapper">
+                <!-- <div class="header-bg inner-pages-banner" style="background: url(<?php echo $featured_image; ?>) no-repeat center center;"> -->
+                <!-- <div class="banner-wrapper">
           <h1 class="mb-1"><?php echo $title; ?></h1>
           <?php if($sub_title){ ?>
             <p><?php echo $sub_title; ?></p>
           <?php } ?>
         </div> -->
-      <!-- </div> -->
+                <!-- </div> -->
 
-    <?php } ?>
+                <?php } ?>
 
+                    </div>
 
-
-
-
-
-</div>
-
-</header>
+        </header>
