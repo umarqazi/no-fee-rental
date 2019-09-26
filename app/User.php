@@ -43,6 +43,13 @@ class User extends Authenticatable implements CanResetPassword {
 		return $this->hasMany(Listing::class);
 	}
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function withCompany() {
+        return $this->hasMany(AgentCompany::class, 'agent_id');
+    }
+
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
 	 */
@@ -76,4 +83,16 @@ class User extends Authenticatable implements CanResetPassword {
 	public function scopeRenters($query) {
 		return $query->whereuser_type(RENTER);
 	}
+	
+    /**
+     * @param $query
+     *
+     * @return mixed
+     */
+    public function scopeWithCompany($query, $id) {
+        return $query->whereHas('withCompany', function($q) use ($id) {
+            $q->where('company_id', $id);
+        });
+    }
+
 }

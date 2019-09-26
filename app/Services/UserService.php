@@ -153,7 +153,7 @@ class UserService {
      * @return mixed
      */
     public function companies() {
-        return $this->cRepo->companies()->get();
+        return $this->cRepo->companies()->withAgents()->get();
     }
 
     /**
@@ -369,6 +369,7 @@ class UserService {
                     'company_id' => $company->id,
                 ]);
             } else {
+                $company = $this->cRepo->find(['company' => $request->company])->first();
                 $this->acRepo->create([
                     'agent_id' => $user->id,
                     'company_id' => $company->id,
@@ -462,5 +463,14 @@ class UserService {
             'member_id' => $UserRes->id
         ]);
         return true;
+    }
+
+    /**
+     * @param $request
+     *
+     * @return bool
+     */
+    public function associatedAgents($id) {
+        return $this->uRepo->agents()->withCompany($id)->get();
     }
 }

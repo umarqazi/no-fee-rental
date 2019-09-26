@@ -59,15 +59,27 @@ $(() => {
         columnDefs: [
             {
                 render: (data, type, row, a) => {
-                    return ++ a.row;
+                    return row.first_name+' '+row.last_name;
                 },
                 targets: 0
             },
             {
                 render: (data, type, row) => {
-                    return row.first_name+' '+row.last_name;
+                    return row.email;
                 },
                 targets: 1
+            },
+            {
+                render: (data, type, row) => {
+                    return row.phone_number
+                },
+                targets: 2
+            },
+            {
+                render: (data, type, row) => {
+                    return row.license_number;
+                },
+                targets: 3
             },
             {
                 render: (data, type, row) => {
