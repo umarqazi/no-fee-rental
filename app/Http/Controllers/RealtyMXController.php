@@ -187,7 +187,7 @@ class RealtyMXController extends Controller {
                     $this->report[] = [$listing['rlsid'],"none","Listing already taken"];
                 }
             } else {
-                $this->report[] = [$listing['rlsid'],"none","Agent Not Exist"];
+                $this->report[] = [$listing['rlsid'],"none","we do not find any agent against this listing"];
             }
         });
         (empty($this->collection)) ?: $this->service->insert($this->collection);

@@ -3,7 +3,6 @@ $(() => {
     let $body = $('body');
     let queries = JSON.parse(localStorage.getItem('search-queries'));
     let bath = null, bed = null, square_feet_min = null, square_feet_max = null, neighborhood = null, price_min = null, price_max = null, open_house = null;
-    let amenities = [];
 
     $('#baths').find('li').on('click', function() {
         bath = $(this).text();
@@ -16,7 +15,8 @@ $(() => {
     });
 
     $('input[name=neighborhoods]').on('keydown', function(e) {
-        neighborhood = $('input[name=neighborhoods]').val();
+        let $val = $('input[name=neighborhoods]').val();
+        neighborhood = $val.length > 0 ? $val : null;
     });
 
     $body.on('min-price', function(e, res) {
@@ -72,13 +72,17 @@ $(() => {
     if(queries && queries.length > 0) {
         queries.forEach((v, i) => {
             let url = window.location.origin + `/search?neighborhoods=${v.neighborhood !== null ? v.neighborhood : '' + v.beds !== null ? '&beds=' + v.beds : '' + v.baths !== null ? '&baths=' + v.baths : '' + v.price_min !== null ? '&priceRange%5Bmin_price%5D=' + v.price_min : '' + v.price_max !== null ? '&priceRange%5Bmax_price%5D=' + v.price_max : '' + v.square_feet_min !== null ? '&priceRange%5Bmin_price_2%5D=' + v.square_feet_min : '' + v.square_feet_max !== null ? '&priceRange%5Bmax_price_2%5D=' + v.square_feet_max : ''}`;
+            $('#empty-keywords').remove();
             $('.dropDown').prepend(`
                 <a href="${url}">
                     <span>
-                        Nyc ${v.neighborhood !== null ? ' - ' + v.neighborhood : '' + v.beds !== null ? v.beds + ' bed' : '' + v.baths !== null ? v.baths + ' bath' : ''}
+                       NYC ${(v.neighborhood !== "" ? ' - ' + v.neighborhood : '') + (v.beds !== null ? ' ' + v.beds + ' bed' : '') + (v.baths !== null ? ' ' + v.baths + ' bath' : '')}
                     </span>
                 </a>
              `);
         });
+    } else {
+        if($('#empty-keywords').length > 0) return;
+        $('.dropDown').append('<a href="javascript:void(0);" id="empty-keywords">You have no keywords yet to search</a>');
     }
 });
