@@ -167,6 +167,7 @@ return [
 		 * Package Service Providers...
 		 */
 		Yajra\DataTables\DataTablesServiceProvider::class,
+        MaddHatter\LaravelFullcalendar\ServiceProvider::class,
 
 		/*
 	     * Application Service Providers...
@@ -228,5 +229,6 @@ return [
 		'Form' => Collective\Html\FormFacade::class,
 		'HTML' => Collective\Html\HtmlFacade::class,
 		'DataTables' => Yajra\DataTables\Facades\DataTables::class,
+        'Calendar' => MaddHatter\LaravelFullcalendar\Facades\Calendar::class,
 	],
 ];

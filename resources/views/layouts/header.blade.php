@@ -67,6 +67,7 @@
                     <div class="dropDown">
                     </div>
                 </div>
+                <i class="fa fa-bars menu-btn"></i>
                 @if(authenticated())
                     <div class="login-user">
                         <a href="#">
@@ -85,7 +86,6 @@
                     </div>
 
                 @else
-                    <i class="fa fa-bars menu-btn"></i>
                     <div class="actions-btns">
                         <button type="button" class="signup-btn signup-modal-btn" data-toggle="modal" data-target="#signup">Signup</button>
                         <button type="button" class="signup-btn login-btn signin-modal-btn" data-toggle="modal" data-target="#login">Login</button>

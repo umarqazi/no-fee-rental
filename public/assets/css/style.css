@@ -1294,6 +1294,73 @@ main {
     display: block;
 }
 
+.fc-unthemed{
+    background: #fff;
+}
+
+.fc-unthemed .fc-toolbar{
+    padding: 15px;
+}
+
+.fc-unthemed .fc-button{
+    background: #223970;
+    outline: none !important;
+}
+.fc-unthemed .fc-button .fc-icon{
+    color: #fff;
+    text-shadow: none;
+}
+
+.fc-unthemed .fc-next-button{
+    border-left: #fff solid 1px;
+    outline: none !important;
+}
+.fc-unthemed .fc-today-button{
+    text-shadow: none;
+    color: #fff;
+    opacity: 1;
+    text-transform: capitalize;
+    outline: none !important;
+}
+
+.fc-unthemed .fc-center h2{
+    color: #000;
+    font-size: 22px;
+    font-weight: 600;
+    padding-top: 0px;
+}
+
+.fc-unthemed .fc-right .fc-button-group{
+    border: #0A246A solid 1px;
+    border-radius: 4px;
+}
+
+.fc-unthemed .fc-right .fc-button-group .fc-button{
+    text-shadow: none;
+    outline: none !important;
+    color: #223970;
+    opacity: 1;
+    text-transform: capitalize;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    border-right: #223970 solid 1px;
+}
+.fc-unthemed .fc-right .fc-button-group .fc-button:last-child{
+    border-right: 0px;
+}
+
+.fc-unthemed .fc-right .fc-button-group .fc-button.fc-state-active{
+    background: #223970;
+    color: #fff;
+}
+
+.fc-event-container .fc-content{
+    color: #fff;
+}
+.fc-view.fc-month-view.fc-basic-view{
+    padding: 0px 15px 15px 15px;
+}
 
 @media only screen and (min-width: 320px) and (max-width: 475px){
     .notification-container{
