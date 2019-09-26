@@ -132,7 +132,7 @@
             </div>
         </div>
         <h3 class="mt-5 mb-3">Description</h3>
-        <p>{{$listing->description ?? 'No description'}}</p>
+        <p>{!! $listing->description ?? 'No description' !!}</p>
         <div class="listing-aminities-sec">
             <h3>Amenities </h3>
             <div class="row">
