@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Services\RealtyMXService;
 use Illuminate\Http\Request;
+use Orchestra\Parser\Xml\Facade as XmlParser;
 use Illuminate\Support\Facades\Validator;
 
 class RealtyMXController extends Controller {
@@ -73,31 +74,15 @@ class RealtyMXController extends Controller {
 	    $this->service = $service;
     }
 
-    /**
+    /**\
+     * @param $unique_id
      * @param $realty_id
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function detail($realty_id) {
-        $listing = $this->service->detail($realty_id);
+    public function detail($unique_id, $realty_id) {
+        $listing = $this->service->detail($unique_id, $realty_id);
         return view('listing_detail', compact('listing'));
-    }
-
-    /**
-     * @param $data
-     */
-	private function assignStack($data) {
-        $this->stack = $data;
-        $this->recursion();
-    }
-
-    /**
-     *
-     */
-    private function recursion() {
-	    collect($this->stack)->map(function($a, $b) {
-            $this->push[$b] = $this->filter($a, $b);
-        });
     }
 
     /**
@@ -130,18 +115,40 @@ class RealtyMXController extends Controller {
     /**
      * @param Request $request
      * @param $file
+     *
+     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
      */
 	public function get(Request $request, $file) {
 		$filePath = base_path('storage/app/realtyMXFeed/' . $file);
-		$file = fread(fopen($filePath, 'r'), filesize($filePath));
-		$xml = simplexml_load_string($file);
-		$data = json_decode(json_encode($xml), true);
-		$this->hold = $data['properties'][$this->collectionOf];
-		$this->recursiveIterator();
-        $this->batch = $this->collection;
-        $this->collection = null;
-        (empty($this->batch)) ?: $this->checkAndPush();
+		$xml = XmlParser::load($filePath);
+		$content = $xml->getContent();
+        foreach ($content->properties->property as $property) {
+            $property = json_decode(json_encode($property));
+            if(isset($property->details->noFee) && $property->details->noFee === "Y") {
+                $url = $this->service->createList($property);
+                if(is_array($url)) {
+                    foreach ($url as $realty_url) {
+                        $this->report[] = [$this->webId($property) ?? null, $realty_url, 'none'];
+                    }
+                } else {
+                    $this->report[] = [$this->webId($property) ?? null, $url, 'none'];
+                }
+            } else {
+                $this->report[] = [$this->webId($property) ?? null, 'none', 'we import only no fee listing'];
+            }
+        }
+        return $this->writeCSV();
 	}
+
+    /**
+     * @param $list
+     *
+     * @return mixed
+     */
+	private function webId($list) {
+	    $list = collect($list)->toArray();
+	    return $list['@attributes']->id;
+    }
 
     /**
      * @param $list
@@ -225,6 +232,8 @@ class RealtyMXController extends Controller {
                 return true;
             }
         }
+
+        return false;
     }
 
     /**

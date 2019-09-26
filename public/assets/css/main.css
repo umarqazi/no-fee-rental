@@ -2197,7 +2197,7 @@ cursor: pointer;
   display:none;
   font-size: 12px;
   position: relative;
-  bottom: 5px;
+  bottom: 0;
 }
 
 .featured-properties .property-listing .info a{
@@ -3015,7 +3015,20 @@ border-color: #e17228;
 }
 footer .footer-wrapper > li{
   width: 100% !important;
+  text-align: left;
+}
+footer .footer-wrapper > li:first-child{
   text-align: center;
+  width: auto;
+}
+footer .footer-wrapper > li:last-child{
+  margin-top: 15px;
+  text-align: center;
+}
+footer .footer-wrapper > li:last-child h4{
+  width: auto;
+  text-align: center;
+  display: block;
 }
 .newsletter{
   width: 300px;
@@ -3024,12 +3037,31 @@ footer .footer-wrapper > li{
 }
 .collapse-menu{
   display: none;
+  width: 300px;
+  margin:0 auto 10px auto;
 }
 .footer-wrapper .fa-sort-down{
   display:inline-block;
 }
+footer .footer-wrapper .newsletter .newsletter-form{
+  flex-direction: column;
+}
+footer .footer-wrapper .newsletter .newsletter-form .btn-default{
+  position: inherit;
+    left: 0;
+    top: 0;
+}
+footer .footer-wrapper .newsletter .newsletter-form .fld{
+      flex: auto;
+    margin-bottom: 10px;
+}
 footer .footer-wrapper h4{
   margin-bottom: 15px;
+  width: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin:8px auto 8px auto;
 }
 footer .footer-wrapper .logo-text{
   max-width: 100%;

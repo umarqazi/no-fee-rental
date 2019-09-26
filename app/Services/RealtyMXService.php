@@ -23,13 +23,12 @@ class RealtyMXService extends ListingService {
     /**
      * RealtyMXService constructor.
      *
-     * @param ListingRepo $repo
      * @param UserRepo $user_repo
      */
-//    public function __construct(ListingRepo $repo, UserRepo $user_repo) {
-//        $this->user_repo = $user_repo;
-//        parent::__construct($repo);
-//    }
+    public function __construct(UserRepo $user_repo) {
+        $this->user_repo = $user_repo;
+        parent::__construct();
+    }
 
 
     private function listingCollection($list, $agent) {
@@ -39,75 +38,117 @@ class RealtyMXService extends ListingService {
     }
 
     /**
-     * @param $list
+     * @param $property
+     * @param $agent
+     * @param $user_id
      *
-     * @return array
+     * @return string
      */
-    public function formCollection($list) {
-        if(is_array($list['agent'])) {
-            dd(sizeof($list['agent']));
-            foreach ($list['agent'] as $key => $agent) {
-                dd($agent);
-//                $this->listingCollection($list, $agent);
-            }
-        } else {
-            dd($list, 'sad');
-        }
-        $realty_id = explode('-', $list['rlsid'])[1];
-        $user = $this->user_repo->findByEmail($list['agent']['email']);
-        return [
-            'user_id'         => $user->id,
-            'realty_id'       => $realty_id,
-            'description'     => $list['description'] ?? null,
-            'name'            => $list['agent']['name'] ?? null,
-            'email'           => $list['agent']['email'] ?? null,
-            'phone_number'    => $list['agent']['phone_numbers']['main']
-                              ?? $list['agent'][0]['phone_numbers']['main'] ?? null,
-            'street_address'  => $list['street_address'] ?? null,
-            'display_address' => $list['street_address'] ?? null,
-            'open_house'      => $list['availableOn'] ?? null,
-            'city_state_zip'  => $list['zipcode'] ?? null,
-            'neighborhood'    => $list['neighborhood'] ?? null,
-            'thumbnail'       => $list['photo'][0]['@attributes']['url'] ?? null,
-            'bedrooms'        => $list['bedrooms'] ?? null,
-            'baths'           => $list['bathrooms'] ?? null,
-            'unit'            => $list['unit'] ?? 0,
-            'rent'            => $list['price'] ?? null,
-            'realty_url'      => request()->root(). "/realty-mx/".str_random(5)."/" . $realty_id,
-            'square_feet'     => $list['square_feet'] ?? null,
-            'visibility'      => ACTIVELISTING,
-            'availability'    => $list['status'] == 'open' ? 1 : 0,
-            'map_location'    => json_encode([ 'latitude' => $list['latitude'] ?? null, 'longitude' => $list['longitude'] ?? null ]),
-        ];
+    private function list($property, $agent, $user_id) {
+        $realty_url = collect($property)->toArray();
+        $realty_id = $realty_url['@attributes']->id;
+        $realty_id = explode('_', $realty_id);
+        $images = $this->imageCollection($property->media->photo);
+        $list['realty_id']        = $realty_id[1] ?? str_random(12);
+        $list['unique_client_id'] = str_random(10);
+        $list['user_id']          = $user_id ?? null;
+        $list['name']             = $agent->name ?? null;
+        $list['email']            = $agent->email ?? null;
+        $list['phone_number']     = $agent->phone_numbers->main ?? null;
+        $list['street_address']   = $property->location->address   ?? null;
+        $list['display_address']  = $property->location->address   ?? null;
+        $list['unit']             = $property->location->apartment ?? null;
+        $list['neighborhood']     = $property->location->neighborhood ?? null;
+        $list['bedrooms']         = $property->details->bedrooms  ?? null;
+        $list['baths']            = $property->details->bathrooms ?? null;
+        $list['thumbnail']        = $images[0];
+        $list['rent']             = $property->details->price ?? null;
+        $list['availability']     = $property->details->availableOn ?? null;
+        $list['description']      = $property->details->description ?? null;
+        $list['visibility']       = DEACTIVE;
+        $list['realty_url']       = $realty_url['@attributes']->url ?? null;
+        $list['map_location']     = json_encode([
+                                        'latitude' => $property->location->latitude,
+                                        'longitude' => $property->location->longitude ]);
+        $listing = $this->lRepo->create($list);
+        $this->createImages($listing, $images);
+        return route('web.realty', [$list['unique_client_id'], $list['realty_id']]);
     }
 
     /**
-     * @param $id
-     * @param $list
-     *
-     * @return mixed
+     * @param $listing
+     * @param $images
      */
-    public function insertImages($id, $list) {
-        $data = [];
-        $this->repo = new ListingImageRepo;
-        foreach ($list['photo'] as $url) {
-            $data[] = [
-                'listing_id' => $id,
-                'path'       => $url,
-                'created_at' => now(),
-                'updated_at' => now()
+    private function createImages($listing, $images) {
+        $collection = null;
+        foreach ($images as $image) {
+            $collection[] = [
+                'listing_id'    => $listing->id,
+                'listing_image' => $image,
+                'created_at'    => now(),
+                'updated_at'    => now()
             ];
         }
 
-        return $this->repo->insert($data);
+        $this->lIRepo->insert($collection);
+
     }
 
     /**
-     * @param $data
+     * @param $images
      *
-     * @return mixed
+     * @return array
      */
-    public function insert($data) {
-        return $this->repo->insert($data);
+    private function imageCollection($images) {
+        $collection = [];
+        foreach ($images as $image) {
+            $image_array = collect($image)->toArray();
+            $collection[] = $image_array['@attributes']->url ?? null;
+        }
+
+        return $collection;
+    }
+
+    /**
+     * @param $email
+     *
+     * @return |null
+     */
+    private function findAgent($email) {
+        $user = $this->user_repo->find(['email' => $email])->first();
+        return $user->id ?? null;
+    }
+
+    /**
+     * @param $agents
+     * @param $property
+     *
+     * @return array|string
+     */
+    private function fetchAgents($agents, $property) {
+        if(is_array($agents)) {
+            $collection = [];
+            foreach ($agents as $agent) {
+                $collection[] = $this->list($property, $agent, $this->findAgent($agent->email));
+            }
+
+            return $collection;
+        } else {
+            return $this->list($property, $agents, $this->findAgent($agents->email));
+        }
+    }
+
+    /**
+     * @param $property
+     *
+     * @return array|bool|string
+     */
+    public function createList($property) {
+        return $this->fetchAgents($property->agents->agent, $property);
+    }
+
+    public function detail($unqiue_id, $realty_id) {
+        $listing = $this->lRepo->find(['unique_client_id' => $unqiue_id, 'realty_id' => $realty_id, 'visibility' => true])->first();
+        return $listing ?? abort(404);
     }
 }

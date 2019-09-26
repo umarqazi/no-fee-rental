@@ -135,6 +135,8 @@
                             <div class="form-group">
                                 <label class="label">Neighbourhoods</label>
                                 {!! Form::text('neighborhoods', null, ['id' => 'neigh', 'class' => 'input-style', 'placeholder' => 'Enter Neighborhood']) !!}
+                                <script>    fetchNeighbours($('input[name=neighborhoods]'));
+                                </script>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -180,5 +182,4 @@
 
 <script>
     enableDatePicker('#open_house');
-    fetchNeighbours($('input[name=neighborhoods]'));
 </script>

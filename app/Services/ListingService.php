@@ -24,22 +24,22 @@ class ListingService {
     /**
      * @var ListingRepo
      */
-    private $lRepo;
+    protected $lRepo;
 
     /**
      * @var ListingTypeRepo
      */
-    private $lARepo;
+    protected $lARepo;
 
     /**
      * @var ListingImageRepo
      */
-    private $lIRepo;
+    protected $lIRepo;
 
     /**
      * @var OpenHouseRepo
      */
-    private $oRepo;
+    protected $oRepo;
 
     /**
      * ListingService constructor.
