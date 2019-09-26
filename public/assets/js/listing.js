@@ -65,7 +65,7 @@ $(() => {
             $selector.hide();
     });
 
-    $('.controls').on('keydown', function() {
+    $('.controls').on('keydown blur', function() {
         setTimeout(() => {
             $('#autofill').val($(this).val());
         }, 200)

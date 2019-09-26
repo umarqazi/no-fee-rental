@@ -178,13 +178,14 @@
 </div>
 {{--Advance Search Modal--}}
 @include('modals.advance_search')
+{!! HTML::script('assets/js/neighborhoods.js') !!}
 {!! HTML::script('assets/js/input-to-dropdown.js') !!}
 <script>
     let coords = $('input[name=map_location]').val();
     inputsToDropdown('.radio-group-1', 'Beds', 'radio', '.radio-group-1', '');
     inputsToDropdown('.radio-group-2', 'Baths', 'radio', '.radio-group-2', '');
     if(coords !== undefined) {
-        markerClusters(coords, document.getElementById('desktop-map'));
+        markerClusters(coords, document.getElementById('mobile-map'));
         markerClusters(coords, document.getElementById('desktop-map'));
     }
 </script>
