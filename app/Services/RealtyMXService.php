@@ -9,9 +9,9 @@
 
 namespace App\Services;
 
-use App\Repository\Listing\ListingImageRepo;
-use App\Repository\Listing\ListingRepo;
 use App\Repository\UserRepo;
+use Illuminate\Support\Facades\Validator;
+
 
 class RealtyMXService extends ListingService {
 
@@ -65,14 +65,42 @@ class RealtyMXService extends ListingService {
         $list['rent']             = $property->details->price ?? null;
         $list['availability']     = $property->details->availableOn ?? null;
         $list['description']      = $property->details->description ?? null;
-        $list['visibility']       = DEACTIVE;
+        $list['visibility']       = $user_id ? ACTIVE : DEACTIVE;
         $list['realty_url']       = $realty_url['@attributes']->url ?? null;
         $list['map_location']     = json_encode([
                                         'latitude' => $property->location->latitude,
                                         'longitude' => $property->location->longitude ]);
+        $validate = $this->validListing($list);
+        if($validate->fails()) {
+            $failed_rules = $validate->failed();
+            if(
+                isset($failed_rules['name']['Unique']) &&
+                isset($failed_rules['realty_id']['Unique']) &&
+                isset($failed_rules['email']['Unique']) &&
+                isset($failed_rules['phone_number']['Unique'])
+            ) {
+                return false;
+            }
+        }
         $listing = $this->lRepo->create($list);
         $this->createImages($listing, $images);
         return route('web.realty', [$list['unique_client_id'], $list['realty_id']]);
+    }
+
+    /**
+     * @param $list
+     *
+     * @return \Illuminate\Contracts\Validation\Validator
+     */
+    private function validListing($list) {
+        $validate = Validator::make($list, [
+            'realty_id'      => 'unique:listings',
+            'name'           => 'unique:listings',
+            'email'          => 'unique:listings',
+            'phone_number'   => 'unique:listings',
+        ]);
+
+        return $validate;
     }
 
     /**
@@ -147,8 +175,39 @@ class RealtyMXService extends ListingService {
         return $this->fetchAgents($property->agents->agent, $property);
     }
 
-    public function detail($unqiue_id, $realty_id) {
-        $listing = $this->lRepo->find(['unique_client_id' => $unqiue_id, 'realty_id' => $realty_id, 'visibility' => true])->first();
+    /**
+     * @param $data
+     * @param $filepath
+     *
+     * @return string
+     */
+    public function writeCSV($data, $filepath) {
+        $file = fopen($filepath, 'w');
+        $columns = ['Listing_web_id','URL','Reason_of_rejection'];
+        fputcsv($file, $columns);
+        foreach ( $data as $report ) {
+            fputcsv( $file, $report );
+        }
+        fclose($file);
+        return asset('csv/realty.csv');
+    }
+
+    /**
+     * @param $list
+     *
+     * @return mixed
+     */
+    public function webId($list) {
+        $list = collect($list)->toArray();
+        return $list['@attributes']->id;
+    }
+
+    /**
+     * @param $unique_id
+     * @param $realty_id
+     */
+    public function detail($unique_id, $realty_id) {
+        $listing = $this->lRepo->find(['unique_client_id' => $unique_id, 'realty_id' => $realty_id, 'visibility' => true])->first();
         return $listing ?? abort(404);
     }
 }
