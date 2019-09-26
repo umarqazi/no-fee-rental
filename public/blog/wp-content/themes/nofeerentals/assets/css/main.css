@@ -640,6 +640,10 @@ h3 {
 .login-form-wrapper .agnet-input:disabled {
     opacity: 0.3;
 }
+.login-form-wrapper .btn-default:disabled {
+    opacity: 0.3;
+    pointer-events: none;
+}
 .login-modal .modal-dialog .logo-info-wrapper {
   background: url(../images/modal-bg.jpg) no-repeat center center;
   background-size: cover;
