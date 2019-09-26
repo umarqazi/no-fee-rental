@@ -33,16 +33,17 @@
     29 => 'MaddHatter\\LaravelFullcalendar\\ServiceProvider',
     30 => 'Carbon\\Laravel\\ServiceProvider',
     31 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
-    32 => 'Spatie\\Newsletter\\NewsletterServiceProvider',
-    33 => 'Yajra\\DataTables\\DataTablesServiceProvider',
-    34 => 'Collective\\Html\\HtmlServiceProvider',
-    35 => 'Yajra\\DataTables\\DataTablesServiceProvider',
-    36 => 'MaddHatter\\LaravelFullcalendar\\ServiceProvider',
-    37 => 'App\\Providers\\AppServiceProvider',
-    38 => 'App\\Providers\\AuthServiceProvider',
-    39 => 'App\\Providers\\BroadcastServiceProvider',
-    40 => 'App\\Providers\\EventServiceProvider',
-    41 => 'App\\Providers\\RouteServiceProvider',
+    32 => 'Orchestra\\Parser\\XmlServiceProvider',
+    33 => 'Spatie\\Newsletter\\NewsletterServiceProvider',
+    34 => 'Yajra\\DataTables\\DataTablesServiceProvider',
+    35 => 'Collective\\Html\\HtmlServiceProvider',
+    36 => 'Yajra\\DataTables\\DataTablesServiceProvider',
+    37 => 'MaddHatter\\LaravelFullcalendar\\ServiceProvider',
+    38 => 'App\\Providers\\AppServiceProvider',
+    39 => 'App\\Providers\\AuthServiceProvider',
+    40 => 'App\\Providers\\BroadcastServiceProvider',
+    41 => 'App\\Providers\\EventServiceProvider',
+    42 => 'App\\Providers\\RouteServiceProvider',
   ),
   'eager' => 
   array (
@@ -182,6 +183,7 @@
     'Collective\\Html\\HtmlBuilder' => 'Collective\\Html\\HtmlServiceProvider',
     'Collective\\Html\\FormBuilder' => 'Collective\\Html\\HtmlServiceProvider',
     'NunoMaduro\\Collision\\Contracts\\Provider' => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
+    'orchestra.parser.xml' => 'Orchestra\\Parser\\XmlServiceProvider',
   ),
   'when' => 
   array (
@@ -228,6 +230,9 @@
     array (
     ),
     'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider' => 
+    array (
+    ),
+    'Orchestra\\Parser\\XmlServiceProvider' => 
     array (
     ),
   ),

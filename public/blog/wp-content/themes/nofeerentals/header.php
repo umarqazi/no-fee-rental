@@ -107,13 +107,13 @@
 
     <?php } ?>
 
-    <div class="modal fade login-modal" id="signup">
+    <div class="modal fade login-modal show" id="signup">
     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
-        {{--Signup Container--}}
+        
         <div class="modal-content">
-            <img src="assets/images/modal-close-icon.png" alt="" class="close-modal close-signup-modal"  data-dismiss="modal" />
+            <img src="<?php bloginfo('template_url')?>/assets/images/modal-close-icon.png" alt="" class="close-modal close-signup-modal" data-dismiss="modal">
             <div class="logo-info-wrapper">
-                <img src="assets/images/modal-logo.png" alt="" class="logo" />
+                <img src="assets/images/modal-logo.png" alt="" class="logo">
                 <h3>Create Account</h3>
                 <ul>
                     <li>Save your searches</li>
@@ -126,7 +126,7 @@
                 <div class="login-heading">
                     Signup
                 </div>
-                {!! Form::open(['url' => route('user.signup'), 'class' => 'ajax', 'reset' => 'true' , 'method' => 'post', 'id' => 'signup_form']) !!}
+                <form method="POST" action="http://no-fee-rental.teamtechverx.com/user-signup" accept-charset="UTF-8" class="ajax" reset="true" id="signup_form" novalidate="novalidate"><input name="_token" type="hidden" value="wgtYrzIjKZeqRuv67Xf1mCwnwFUW8JlmJKzf0lre">
                     <div class="row">
                         <div class="col-sm-12 mb-3">
                             <div class="custom-control custom-radio custom-control-inline">
@@ -138,62 +138,80 @@
                                 <label class="custom-control-label" for="signup-option2">Finding a Home ( Agent )</label>
                             </div>
                             <span class="invalid-feedback" role="alert">
-                                <strong>{{ $errors->first('user_type') }}</strong>
+                                <strong></strong>
                             </span>
                         </div>
-                        <div class="col-sm-12 license_num">
-                             <div class="row align-items-center">
+                        <div class="col-sm-12 ">
+                             <div class="row align-items-center license_num">
                                 <div class="col-sm-6 ">
                                     <div class="form-group">
-                                       <input class="input-style" placeholder="License Number" name="license_number" type="text">
+                                        <input class="input-style" placeholder="License Number" name="license_number" type="text">
                                     </div>
                                 </div>
                         </div>
+                        </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <input class="input-style agnet-input" placeholder="First Name" name="first_name" type="text" disabled="">
+                                <input class="input-style agnet-input" placeholder="First Name" name="first_name" type="text">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <input class="input-style agnet-input" placeholder="Last Name" name="last_name" type="text" disabled="">
-                            </div>
+                                <input class="input-style agnet-input" placeholder="Last Name" name="last_name" type="text">
+                              </div>
                         </div>
                         <div class="col-sm-12">
                             <div class="form-group">
-                               <input class="input-style agnet-input" id="email" placeholder="Email" name="email" type="text" disabled="">
+                                <input class="input-style agnet-input" id="email" placeholder="Email" name="email" type="text">
                                 <p class="finding-home-text">If you would like to syndicate listing into no fee rentals nyc, please use tha same email address that you use for your RealtyMX, Nestio or OLR account.</p>
                             </div>
                         </div>
 
-                        <div class="col-sm-6" id="phone_number">
+                        <div class="col-sm-6 col-sm-12" id="phone_number">
                             <div class="form-group">
-                                <input class="input-style agnet-input" placeholder="Phone Number" name="phone_number" type="text" disabled="">
+                                <input class="input-style agnet-input" placeholder="Phone Number" name="phone_number" type="text">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <i class="fa fa-eye"></i>
-                                <input class="input-style agnet-input" placeholder="Password" id="password" name="password" type="password" value="" disabled="">
-                                    
+                                <input class="input-style agnet-input" placeholder="Password" id="password" name="password" type="password" value="">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group eye-form">
                                 <i class="fa fa-eye"></i>
-                                <input class="input-style agnet-input" placeholder="Confirm Password" name="password_confirmation" type="password" value="" disabled="">
+                                <input class="input-style agnet-input" placeholder="Confirm Password" name="password_confirmation" type="password" value="">
                             </div>
                         </div>
+                    
+                    <div class="col-md-12">
+                        <div class="text-center mt-3 mb-4">
+                            <input class="btn-default" type="submit" value="Signup">
+                        </div>
                     </div>
-                    <div class="text-center mt-3 mb-4">
-                        <input class="btn-default" type="submit" value="Signup" disabled="">
-                    </div>
-                <p class="footer-text">Already have an account? <span class="signin-wrapper" id = "login-btn">Login</span></p>
-            </div>
+                
+                <p class="footer-text">Already have an account? <span class="signin-wrapper" id="login-btn">Login</span></p>
+            </div></form>
         </div>
     </div>
 </div>
 
-{!! HTML::script('assets/js/signup.js') !!}
+<script src="http://no-fee-rental.teamtechverx.com/assets/js/signup.js"></script>
+
+<script src="http://no-fee-rental.teamtechverx.com/assets/js/login.js"></script>
+<script type="text/javascript">
+    function togglefooterlink() {
+        if (window.matchMedia('(max-width: 1279px)').matches) {
+            $(".collapseabe-link").click(function(){
+                $(this).parent().find('.collapse-menu').slideToggle();
+            });
+        }
+    }
+    togglefooterlink();
+</script>
+    
+
+</div>
 
 </header>
