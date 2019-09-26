@@ -17,8 +17,8 @@
     </div>
     <div class="mobile-nav">
         <ul>
-            <li><a href="/rent">Rent</a></li>
-            <li><a href="{{ route('web.neighborhood') }}">Neighborhood </a></li>
+            <li><a href="http://no-fee-rental.teamtechverx.com/rent">Rent</a></li>
+            <li><a href="http://no-fee-rental.teamtechverx.com/neighborhood">Neighborhood </a></li>
             <li>
                 <a class="" data-toggle="collapse" href="#menuToggle1" role="button" aria-expanded="false" aria-controls="menuToggle1">
                     Renters <i class="fa fa-angle-down"></i>
@@ -45,7 +45,7 @@
             </li>
             @if(!authenticated())
                 <li><a href="" data-toggle="modal" data-target="#login" class="signin-modal-btn close-menu">Login</a></li>
-                <li><a href="#" data-toggle="modal" data-target="#login" class="signup-modal-btn close-menu">Signup</a></li>
+                <li><a href="#" data-toggle="modal" data-target="#signup" class="signup-modal-btn close-menu">Signup</a></li>
             @endif
         </ul>
     </div>
@@ -95,3 +95,8 @@
         </div>
     </div>
 </div>
+
+
+
+
+
