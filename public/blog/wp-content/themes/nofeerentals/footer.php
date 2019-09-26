@@ -85,8 +85,6 @@
     }
     togglefooterlink();
 </script>
-
-<script type="text/javascript">
 <!-- Login Modal -->
     <div class="modal fade login-modal" id="login">
         <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
@@ -263,8 +261,6 @@
       $(".mobile-menu").slideUp();
     });
   });
-</script>
-
                     $(".close-menu-btn").click(function() {
                         $(".mobile-menu").slideUp();
                     });
