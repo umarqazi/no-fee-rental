@@ -159,6 +159,7 @@
   .main-wrapper .wrapper > .heading-wrapper a {
     margin-top: 15px;
   }
+
   .credit-plans-container .actions-btns {
     display: block;
   }
@@ -195,7 +196,14 @@
     margin-right: 0;
     display: inline-block;
   }
+  .main-wrapper .listing-container .nav-pills li a.active:after{
+    bottom:0px;
+  }
 }
 
-
+@media only screen and (max-width:576px){
+  .main-wrapper .wrapper > .heading-wrapper a.btn-default{
+    padding:0px 20px;
+  }
+}
 
