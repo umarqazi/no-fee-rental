@@ -2349,6 +2349,17 @@ footer {
 .footer-wrapper .fas.fa-angle-down{
   display: none;
 }
+.license_valid-text{
+  color: #223971;
+  margin-bottom: 15px;
+}
+.license_num .form-group{
+  margin-bottom: 5px;
+}
+.license_num{
+  border-bottom: #ddd solid 1px;
+  margin-bottom: 30px;
+}
 
 /*Responsive style*/
 @media only screen and (max-width: 1599px) {

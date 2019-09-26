@@ -1062,6 +1062,9 @@
 }
 
 @media only screen and (max-width: 767px) {
+    .neighborhood-search{
+        margin: 70px auto;
+    }
     .property-wrap .listing-wrapper .listing-row {
         display: block;
         position: relative;
@@ -1525,6 +1528,7 @@ main {
     width: 40%;
     display: inline-block;
     vertical-align: middle;
+    margin-right: 10px;
 }
 
 .neighbor-autocomplete .fa-search {
@@ -1599,6 +1603,9 @@ main {
     }
     #check-availability .modal-body a.btn{
         margin-bottom:10px;
+    }
+    .neighbor-autocomplete{
+        width: 60%;
     }
 }
 @media (min-width: 576px){

@@ -39,6 +39,9 @@
                                         {!! Form::text('license_number', null, ['class'=>'input-style', 'placeholder'=>'License Number'])!!}
                                     </div>
                                 </div>
+                                <div class="col-sm-12">
+                                    <p class="license_valid-text">You must have a valid license to join No FEE Rentals NYC</p>
+                                </div>
                         </div>
                         </div>
                         <div class="col-sm-6">

@@ -80,7 +80,7 @@
         <div class="modal-content">
             <img src="<?php bloginfo('template_url')?>/assets/images/modal-close-icon.png" alt="" class="close-modal close-signup-modal" data-dismiss="modal">
             <div class="logo-info-wrapper">
-                <img src="assets/images/modal-logo.png" alt="" class="logo">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/modal-logo.png" alt="" class="logo">
                 <h3>Login</h3>
                 <ul>
                     <li>Save your searches</li>
@@ -143,7 +143,7 @@
         <div class="modal-content">
             <img src="<?php bloginfo('template_url')?>/assets/images/modal-close-icon.png" alt="" class="close-modal close-signup-modal" data-dismiss="modal">
             <div class="logo-info-wrapper">
-                <img src="assets/images/modal-logo.png" alt="" class="logo">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/modal-logo.png" alt="" class="logo">
                 <h3>Create Account</h3>
                 <ul>
                     <li>Save your searches</li>
@@ -177,6 +177,9 @@
                                     <div class="form-group">
                                         <input class="input-style" placeholder="License Number" name="license_number" type="text">
                                     </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <p class="license_valid-text">You must have a valid license to join No FEE Rentals NYC</p>
                                 </div>
                         </div>
                         </div>

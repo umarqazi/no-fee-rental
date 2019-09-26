@@ -2854,6 +2854,20 @@ border-color: #e17228;
 #advance-search .form-group .checkbox-listing {
     margin-bottom: 15px;
 }
+.footer-wrapper .fas.fa-angle-down{
+  display: none;
+}
+.license_valid-text{
+  color: #223971;
+  margin-bottom: 15px;
+}
+.license_num .form-group{
+  margin-bottom: 5px;
+}
+.license_num{
+  border-bottom: #ddd solid 1px;
+  margin-bottom: 30px;
+}
 /*profile contact*/
 @media (min-width: 1367px){
   .container-lg {
@@ -3096,7 +3110,9 @@ margin-bottom: 10px;
 .agent-listing-profile .search-result-wrapper .search-listing .featured-properties .property-listing .property-thumb{
   width: calc(100% / 3 - 30px);
 }
-
+.footer-wrapper .fas.fa-angle-down{
+  display: block;
+}
 }
 @media only screen and (max-width: 991px) {
   .header-bg .search-property .search-fld {
