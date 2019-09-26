@@ -9,10 +9,12 @@
 namespace App\Services;
 
 use App\Forms\Agent\CreateForm;
+use App\Forms\CompanyForm;
 use App\Forms\User\AgentInvitationForm;
 use App\Forms\User\ChangePasswordForm;
 use App\Forms\User\EditProfileForm;
 use App\Forms\User\UserForm;
+use App\Repository\AgentCompanyRepo;
 use App\Repository\CompanyRepo;
 use App\Repository\MemberRepo;
 use App\Repository\AgentRepo;
@@ -37,15 +39,30 @@ class UserService {
     private $mRepo;
 
     /**
+     * @var CompanyRepo
+     */
+    private $cRepo;
+
+    /**
+     * @var CompanyRepo
+     */
+    private $acRepo;
+
+    /**
      * UserService constructor.
      *
      * @param UserRepo $uRepo
      * @param AgentRepo $aRepo
+     * @param MemberRepo $mRepo
+     * @param CompanyRepo $cRepo
      */
-    public function __construct(UserRepo $uRepo, AgentRepo $aRepo, MemberRepo $mRepo) {
+    public function __construct(UserRepo $uRepo, AgentRepo $aRepo, MemberRepo $mRepo, CompanyRepo $cRepo , AgentCompanyRepo $acRepo) {
         $this->uRepo = $uRepo;
+        $this->cRepo = $cRepo;
         $this->aRepo = $aRepo;
         $this->mRepo = $mRepo;
+        $this->acRepo = $acRepo;
+
     }
 
     /**
@@ -109,12 +126,11 @@ class UserService {
     }
 
     /**
-     * @param $id
      * @param $request
      *
      * @return mixed
      */
-    public function update($id, $request) {
+    public function update($request) {
         $user = $this->form($request);
         return $this->uRepo->update($user->id, $user->toArray());
     }
@@ -137,8 +153,7 @@ class UserService {
      * @return mixed
      */
     public function companies() {
-        $cRepo = new CompanyRepo();
-        return $cRepo->companies()->get();
+        return $this->cRepo->companies()->get();
     }
 
     /**
@@ -335,6 +350,7 @@ class UserService {
         $form->user_type = $request->user_type;
         $form->password = $request->password;
         $form->license_number = $request->license_number;
+        $form->company = $request->company;
         $form->password_confirmation = $request->password_confirmation;
         $form->remember_token = str_random(60);
         $form->validate();
@@ -343,6 +359,21 @@ class UserService {
         $form->password = bcrypt($form->password);
         $user = $this->uRepo->create($form->toArray());
         if ($user && $sendMail) {
+            $cForm = new CompanyForm();
+            $cForm->company = $request->company;
+            $cForm->status = DEACTIVE;
+            if (!$cForm->fails()) {
+                $company = $this->cRepo->create($cForm->toArray());
+                $this->acRepo->create([
+                    'agent_id' => $user->id,
+                    'company_id' => $company->id,
+                ]);
+            } else {
+                $this->acRepo->create([
+                    'agent_id' => $user->id,
+                    'company_id' => $company->id,
+                ]);
+            }
             $data = [
                 'view'       => 'signup',
                 'subject'    => 'Verify Email',
@@ -356,6 +387,21 @@ class UserService {
         }
 
         if ($user) {
+            $cForm = new CompanyForm();
+            $cForm->company = $request->company;
+            $cForm->status = DEACTIVE;
+            if (!$cForm->fails()) {
+                $company = $this->cRepo->create($cForm->toArray());
+                $this->acRepo->create([
+                    'agent_id' => $user->id,
+                    'company_id' => $company->id,
+                ]);
+            } else {
+                $this->acRepo->create([
+                    'agent_id' => $user->id,
+                    'company_id' => $company->id,
+                ]);
+            }
             $invitedBy = $this->aRepo->inviteBy($request->token);
             if($invitedBy->user->user_type == AGENT) {
                 $this->mRepo->create([

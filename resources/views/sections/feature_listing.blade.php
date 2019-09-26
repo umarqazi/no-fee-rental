@@ -17,55 +17,61 @@
             <div class="tab-pane active" id="tab1">
                 <div class="property-listing">
                     <div class="desktop-listiing">
+                        @if(count($featured_listings['recent']) < 1)
+                            <span>No List Found</span>
+                        @endif
                         @foreach($featured_listings["recent"] as $key => $fl)
                             <div class="property-thumb">
                                 <div class="check-btn">
-                                    <a href="{{ route('listing.detail', $fl->id) }}">
+                                    <a href="javascript:void(0);">
                                         <button class="btn-default" data-toggle="modal" data-target="#check-availability">Check Availability</button>
                                     </a>
                                 </div>
                                 <span class="heart-icon"></span>
-                                <img src="{{ asset('storage/'.$fl->thumbnail) }}" alt="" class="main-img" />
+                                <img src="{{ asset($fl->thumbnail ?? DLI) }}" alt="" class="main-img" />
                                 <div class="info">
                                     <div class="info-link-text">
-                                        <p> $ {{ $fl->rent }} </p> <small> {{ $fl->bedrooms }} {{ $fl->bedrooms > 1 ? 'beds' : 'bed' }} , {{ $fl->baths }} {{ $fl->baths > 1 ? 'baths' : 'bath' }} </small>
-                                        <p> {{ $fl->display_address }} </p>
+                                        <p> ${{ $fl->rent }} </p>
+                                        <small> {{ str_formatting($fl->bedrooms, 'Bed') .' ,'. str_formatting($fl->baths, 'Bath') }} </small>
+                                        <p> {{ is_exclusive($fl->listingTypes) ? $fl->street_address.' - '.$fl->unit : $fl->display_address }}</p>
                                     </div>
-                                    <a href="javascript:void(0)" class="btn viewfeature-btn"> View </a>
+                                    <a href="{{ route('listing.detail', $fl->id) }}" class="btn viewfeature-btn"> View </a>
                                 </div>
                                 <div class="feaure-policy-text">
                                     <p>${{ $fl->rent }} / Month </p>
-                                    <span>2 bed , 1 bath </span>
+                                    <span>{{ str_formatting($fl->bedrooms, 'Bed') .' ,'. str_formatting($fl->baths, 'Bath') }} </span>
                                 </div>
-
                             </div>
                         @endforeach
                     </div>
 
                     <div class="owl-slider">
                         <div class="owl-carousel owl-theme" id="carousel-1">
+                            @if(count($featured_listings['recent']) < 1)
+                                <span>No List Found</span>
+                            @endif
                             @foreach($featured_listings["recent"] as $key => $fl)
                                 <div class="item">
                                     <div class="property-thumb">
                                         <div class="check-btn">
-                                            <a href="{{ route('listing.detail', $fl->id) }}">
+                                            <a href="javascript:void(0);">
                                                 <button class="btn-default" data-toggle="modal" data-target="#check-availability">Check Availability</button>
                                             </a>
                                         </div>
                                         <span class="heart-icon"></span>
-                                        <img src="{{ asset('storage/'.$fl->thumbnail) }}" alt="" class="main-img" />
+                                        <img src="{{ asset($fl->thumbnail ?? DLI) }}" alt="" class="main-img" />
                                         <div class="info">
                                             <div class="info-link-text">
-                                                <p> $ {{ $fl->rent }} </p> <small> {{ $fl->bedrooms }} {{ $fl->bedrooms > 1 ? 'beds' : 'bed' }} , {{ $fl->baths }} {{ $fl->baths > 1 ? 'baths' : 'bath' }} </small>
-                                                <p> {{ $fl->display_address }} </p>
+                                                <p> ${{ $fl->rent }} </p>
+                                                <small> {{ str_formatting($fl->bedrooms, 'Bed') .' ,'. str_formatting($fl->baths, 'Bath') }} </small>
+                                                <p> {{ is_exclusive($fl->listingTypes) ? $fl->street_address.' - '.$fl->unit : $fl->display_address }}</p>
                                             </div>
-                                            <a href="javascript:void(0)" class="btn viewfeature-btn"> View </a>
+                                            <a href="{{ route('listing.detail', $fl->id) }}" class="btn viewfeature-btn"> View </a>
                                         </div>
                                         <div class="feaure-policy-text">
                                             <p>${{ $fl->rent }} / Month </p>
-                                            <span>2 bed , 1 bath </span>
+                                            <span>{{ str_formatting($fl->bedrooms, 'Bed') .' ,'. str_formatting($fl->baths, 'Bath') }} </span>
                                         </div>
-
                                     </div>
                                 </div>
                             @endforeach
@@ -76,57 +82,64 @@
             <div class="tab-pane" id="tab2">
                 <div class="property-listing">
                     <div class="desktop-listiing">
+                        @if(count($featured_listings['cheapest']) < 1)
+                            <span>No List Found</span>
+                        @endif
                         @foreach($featured_listings["cheapest"] as $key => $fl)
-                            <div class="property-thumb">
-                                <div class="check-btn">
-                                    <a href="{{ route('listing.detail', $fl->id) }}">
-                                        <button class="btn-default" data-toggle="modal" data-target="#check-availability">Check Availability</button>
-                                    </a>
-                                </div>
-                                <span class="heart-icon"></span>
-                                <img src="{{ asset('storage/'.$fl->thumbnail) }}" alt="" class="main-img" />
-                                <div class="info">
-                                    <div class="info-link-text">
-                                        <p> $ {{ $fl->rent }} </p> <small> {{ $fl->bedrooms }} {{ $fl->bedrooms > 1 ? 'beds' : 'bed' }} , {{ $fl->baths }} {{ $fl->baths > 1 ? 'baths' : 'bath' }} </small>
-                                        <p> {{ $fl->display_address }} </p>
+                                <div class="property-thumb">
+                                    <div class="check-btn">
+                                        <a href="javascript:void(0);">
+                                            <button class="btn-default" data-toggle="modal" data-target="#check-availability">Check Availability</button>
+                                        </a>
                                     </div>
-                                    <a href="javascript:void(0)" class="btn viewfeature-btn"> View </a>
+                                    <span class="heart-icon"></span>
+                                    <img src="{{ asset($fl->thumbnail ?? DLI) }}" alt="" class="main-img" />
+                                    <div class="info">
+                                        <div class="info-link-text">
+                                            <p> ${{ $fl->rent }} </p>
+                                            <small> {{ str_formatting($fl->bedrooms, 'Bed') .' ,'. str_formatting($fl->baths, 'Bath') }} </small>
+                                            <p> {{ is_exclusive($fl->listingTypes) ? $fl->street_address.' - '.$fl->unit : $fl->display_address }}</p>
+                                        </div>
+                                        <a href="{{ route('listing.detail', $fl->id) }}" class="btn viewfeature-btn"> View </a>
+                                    </div>
+                                    <div class="feaure-policy-text">
+                                        <p>${{ $fl->rent }} / Month </p>
+                                        <span>{{ str_formatting($fl->bedrooms, 'Bed') .' ,'. str_formatting($fl->baths, 'Bath') }} </span>
+                                    </div>
                                 </div>
-                                <div class="feaure-policy-text">
-                                    <p>${{ $fl->rent }} / Month </p>
-                                    <span>2 bed , 1 bath </span>
-                                </div>
-
-                            </div>
                         @endforeach
                     </div>
 
                     <div class="owl-slider">
                         <div class="owl-carousel owl-theme" id="carousel-2">
+                            @if(count($featured_listings['cheapest']) < 1)
+                                <span>No List Found</span>
+                            @endif
                             @foreach($featured_listings["cheapest"] as $key => $fl)
                                 <div class="item">
                                     <div class="property-thumb">
                                         <div class="check-btn">
-                                            <a href="{{ route('listing.detail', $fl->id) }}">
+                                            <a href="javascript:void(0);">
                                                 <button class="btn-default" data-toggle="modal" data-target="#check-availability">Check Availability</button>
                                             </a>
                                         </div>
                                         <span class="heart-icon"></span>
-                                        <img src="{{ asset('storage/'.$fl->thumbnail) }}" alt="" class="main-img" />
+                                        <img src="{{ asset($fl->thumbnail ?? DLI) }}" alt="" class="main-img" />
                                         <div class="info">
                                             <div class="info-link-text">
-                                                <p> $ {{ $fl->rent }} </p> <small> {{ $fl->bedrooms }} {{ $fl->bedrooms > 1 ? 'beds' : 'bed' }} , {{ $fl->baths }} {{ $fl->baths > 1 ? 'baths' : 'bath' }} </small>
-                                                <p> {{ $fl->display_address }} </p>
+                                                <p> ${{ $fl->rent }} </p>
+                                                <small> {{ str_formatting($fl->bedrooms, 'Bed') .' ,'. str_formatting($fl->baths, 'Bath') }} </small>
+                                                <p> {{ is_exclusive($fl->listingTypes) ? $fl->street_address.' - '.$fl->unit : $fl->display_address }}</p>
                                             </div>
-                                            <a href="javascript:void(0)" class="btn viewfeature-btn"> View </a>
+                                            <a href="{{ route('listing.detail', $fl->id) }}" class="btn viewfeature-btn"> View </a>
                                         </div>
                                         <div class="feaure-policy-text">
                                             <p>${{ $fl->rent }} / Month </p>
-                                            <span>2 bed , 1 bath </span>
+                                            <span>{{ str_formatting($fl->bedrooms, 'Bed') .' ,'. str_formatting($fl->baths, 'Bath') }} </span>
                                         </div>
                                     </div>
-                                    </div>
-                                @endforeach
+                                </div>
+                            @endforeach
                             </div>
                         </div>
                     </div>
@@ -134,55 +147,62 @@
             <div class="tab-pane" id="tab3">
                 <div class="property-listing">
                     <div class="desktop-listiing">
+                        @if(count($featured_listings['pet_policy']) < 1)
+                            <span>No List Found</span>
+                        @endif
                         @foreach($featured_listings["pet_policy"] as $key => $fl)
                             <div class="property-thumb">
                                 <div class="check-btn">
-                                    <a href="{{ route('listing.detail', $fl->id) }}">
+                                    <a href="javascript:void(0);">
                                         <button class="btn-default" data-toggle="modal" data-target="#check-availability">Check Availability</button>
                                     </a>
                                 </div>
                                 <span class="heart-icon"></span>
-                                <img src="{{ asset('storage/'.$fl->thumbnail) }}" alt="" class="main-img" />
+                                <img src="{{ asset($fl->thumbnail ?? DLI) }}" alt="" class="main-img" />
                                 <div class="info">
                                     <div class="info-link-text">
-                                        <p> $ {{ $fl->rent }} </p> <small> {{ $fl->bedrooms }} {{ $fl->bedrooms > 1 ? 'beds' : 'bed' }} , {{ $fl->baths }} {{ $fl->baths > 1 ? 'baths' : 'bath' }} </small>
-                                        <p> {{ $fl->display_address }} </p>
+                                        <p> ${{ $fl->rent }} </p>
+                                        <small> {{ str_formatting($fl->bedrooms, 'Bed') .' ,'. str_formatting($fl->baths, 'Bath') }} </small>
+                                        <p> {{ is_exclusive($fl->listingTypes) ? $fl->street_address.' - '.$fl->unit : $fl->display_address }}</p>
                                     </div>
-                                    <a href="javascript:void(0)" class="btn viewfeature-btn"> View </a>
+                                    <a href="{{ route('listing.detail', $fl->id) }}" class="btn viewfeature-btn"> View </a>
                                 </div>
                                 <div class="feaure-policy-text">
                                     <p>${{ $fl->rent }} / Month </p>
-                                    <span>2 bed , 1 bath </span>
+                                    <span>{{ str_formatting($fl->bedrooms, 'Bed') .' ,'. str_formatting($fl->baths, 'Bath') }} </span>
                                 </div>
                             </div>
                         @endforeach
                     </div>
                     <div class="owl-slider">
                         <div class="owl-carousel owl-theme" id="carousel-3">
+                            @if(count($featured_listings['pet_policy']) < 1)
+                                <span>No List Found</span>
+                            @endif
                             @foreach($featured_listings["pet_policy"] as $key => $fl)
                                 <div class="item">
                                     <div class="property-thumb">
                                         <div class="check-btn">
-                                            <a href="{{ route('listing.detail', $fl->id) }}">
+                                            <a href="javascript:void(0);">
                                                 <button class="btn-default" data-toggle="modal" data-target="#check-availability">Check Availability</button>
                                             </a>
                                         </div>
                                         <span class="heart-icon"></span>
-                                        <img src="{{ asset('storage/'.$fl->thumbnail) }}" alt="" class="main-img" />
+                                        <img src="{{ asset($fl->thumbnail ?? DLI) }}" alt="" class="main-img" />
                                         <div class="info">
                                             <div class="info-link-text">
-                                                <p> $ {{ $fl->rent }} </p> <small> {{ $fl->bedrooms }} {{ $fl->bedrooms > 1 ? 'beds' : 'bed' }} , {{ $fl->baths }} {{ $fl->baths > 1 ? 'baths' : 'bath' }} </small>
-                                                <p> {{ $fl->display_address }} </p>
+                                                <p> ${{ $fl->rent }} </p>
+                                                <small> {{ str_formatting($fl->bedrooms, 'Bed') .' ,'. str_formatting($fl->baths, 'Bath') }} </small>
+                                                <p> {{ is_exclusive($fl->listingTypes) ? $fl->street_address.' - '.$fl->unit : $fl->display_address }}</p>
                                             </div>
-                                            <a href="javascript:void(0)" class="btn viewfeature-btn"> View </a>
+                                            <a href="{{ route('listing.detail', $fl->id) }}" class="btn viewfeature-btn"> View </a>
                                         </div>
                                         <div class="feaure-policy-text">
                                             <p>${{ $fl->rent }} / Month </p>
-                                            <span>2 bed , 1 bath </span>
+                                            <span>{{ str_formatting($fl->bedrooms, 'Bed') .' ,'. str_formatting($fl->baths, 'Bath') }} </span>
                                         </div>
-
                                     </div>
-                                    </div>
+                                </div>
                             @endforeach
                         </div>
                     </div>
@@ -236,7 +256,7 @@
         </div>
     </div>
 </div>
-
+@include('modals.check_availability')
 <script type="text/javascript">
     $('.owl-slider #carousel-1, .owl-slider #carousel-2, .owl-slider #carousel-3').owlCarousel({
         autoplay: true,

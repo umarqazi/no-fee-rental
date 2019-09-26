@@ -42,15 +42,18 @@ class NeighborhoodService extends ListingService {
     }
 
     /**
+     * @param null $neighbour
      * @param $paginate
      *
      * @return array
      */
-    public function fetchListing($paginate) {
-        $neighborhood = $this->repo->getFirst();
+    public function fetchListing($paginate, $neighbour = null) {
+        $neighborhood = $neighbour != null
+                ? $this->repo->find(['name' => $neighbour])->first()
+                : $this->repo->getFirst();
         $collection = [
             'neighborhood' => $neighborhood,
-            'listing'      => $this->fetchByNeighbour($neighborhood->name, $paginate)
+            'listings'      => $this->fetchByNeighbour($neighborhood->name ?? null, $paginate)
         ];
 
         return $collection;

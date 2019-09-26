@@ -138,7 +138,7 @@ class Listing extends Model {
 	 * @return mixed
 	 */
 	public function scopeFeatured($query) {
-		return $query->whereis_featured(APPROVEFEATURED);
+		return $query->whereis_featured(APPROVEFEATURED)->withTypes();
 	}
 
 	/**

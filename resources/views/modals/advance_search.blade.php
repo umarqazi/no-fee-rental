@@ -70,7 +70,7 @@
                                     <li>
                                         <div class="custom-control custom-radio">
                                             {!! Form::radio('baths', 'studio', false, ['class' => 'custom-control-input', 'id' => 'studio']) !!}
-                                            <label class="custom-control-label" for="studio">Studio</label>
+                                            <label class="custom-control-label" for="studio">Any</label>
                                         </div>
                                     </li>
                                     <li>

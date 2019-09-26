@@ -31,12 +31,28 @@ class RealtyMXService extends ListingService {
 //        parent::__construct($repo);
 //    }
 
+
+    private function listingCollection($list, $agent) {
+        return [
+
+        ];
+    }
+
     /**
      * @param $list
      *
      * @return array
      */
     public function formCollection($list) {
+        if(is_array($list['agent'])) {
+            dd(sizeof($list['agent']));
+            foreach ($list['agent'] as $key => $agent) {
+                dd($agent);
+//                $this->listingCollection($list, $agent);
+            }
+        } else {
+            dd($list, 'sad');
+        }
         $realty_id = explode('-', $list['rlsid'])[1];
         $user = $this->user_repo->findByEmail($list['agent']['email']);
         return [

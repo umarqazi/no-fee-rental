@@ -1532,3 +1532,77 @@ main {
     right: 15px;
     top: 15px;
 }
+
+.fa-times-circle {
+    color: red;
+}
+
+/*Check Availability*/
+#check-availability .modal-content{
+    border-radius: 15px;
+}
+#check-availability .modal-body{
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
+#check-availability .modal-body img{
+    width: 100%;
+    border-radius: 10px;
+    height: 145px;
+    object-fit: cover;
+}
+#check-availability .modal-body h3{
+    font-size: 22px;
+    color: #213970;
+    margin-top: 0px;
+    margin-bottom: 10px;
+}
+.padding-leftt-0 {
+    padding-left: 0px;
+}
+#check-availability .after-border{
+    border-top: 1px solid #B7B7B7;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+#check-availability .modal-body .fa-home{
+    color: #E87717;
+}
+#check-availability .modal-body textarea{
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    margin: 20px 0px;
+    border-radius: 5px;
+}
+#check-availability .modal-body a.btn{
+    width: 100%;
+    text-align: center;
+    border: 1px solid #F36F21;
+    color: #F36F21;
+    background-color: transparent;
+    text-transform: uppercase;
+}
+#check-availability .modal-body a.btn:hover,#check-availability .modal-body a.btn:active,
+#check-availability .modal-body a.btn:focus{
+    background-color: #F36F21;
+    transition: all 0.5s ease-out;
+    color: #fff;
+    box-shadow: none;
+}
+
+
+@media (max-width: 991px){
+    .padding-leftt-0 {
+        padding-left: 15px;
+    }
+    #check-availability .modal-body a.btn{
+        margin-bottom:10px;
+    }
+}
+@media (min-width: 576px){
+    #check-availability .modal-dialog {
+        max-width: 555px;
+        margin: 1.75rem auto;
+    }
+}
