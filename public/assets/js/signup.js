@@ -46,7 +46,7 @@ $(() => {
 });
 
 function message(type, msg) {
-    $('.license_num > div > div')
+    $('.license_num > div')
         .after(`
             <div class="col-sm-6 ${type}">
                 <div class="verified-icon">
