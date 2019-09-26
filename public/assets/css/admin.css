@@ -1369,6 +1369,14 @@ header .agent-avtar .avtar:hover div ul {
   padding-top: 10px;
   padding-bottom: 10px;
 }
+@media only screen and (max-width:767px){
+  .dataTables_filter{
+    float: left !important;
+  }
+  div.table-responsive>div.dataTables_wrapper>div.row>div[class^="col-"]:last-child{
+    padding-left: 0px;
+  }
+}
 @media (min-width: 576px) {
   #add-neighborhood .modal-dialog {
     max-width: 600px;

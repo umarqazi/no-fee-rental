@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Services\RealtyMXService;
 use Illuminate\Http\Request;
+use Orchestra\Parser\Xml\Facade as XmlParser;
 use Illuminate\Support\Facades\Validator;
 
 class RealtyMXController extends Controller {
@@ -24,47 +25,6 @@ class RealtyMXController extends Controller {
     private $collection = [];
 
     /**
-     * @var array
-     */
-    private $push;
-
-    /**
-     * @var array
-     */
-    private $batch;
-
-    /**
-     * @var array
-     */
-    private $stack;
-
-    /**
-     * @var string
-     */
-    private $agentFounded;
-
-    /**
-     * @var array
-     */
-    private $hold;
-
-    /**
-     * @var string
-     */
-    private $collectionOf = 'property';
-
-    /**
-     * @var array
-     */
-	protected $filter = [
-		'amenities', 'photo', 'type', 'status', 'id', 'apartment',
-		'neighborhood', 'agent', 'price', 'availableOn',
-		'description', 'latitude', 'longitude',
-		'address', 'url', 'zipcode', 'city', 'state', 'squareFeet',
-		'bathrooms', 'bedrooms', 'rlsid', 'noFee', 'exclusive'
-	];
-
-    /**
      * RealtyMXController constructor.
      *
      * @param RealtyMXService $service
@@ -73,31 +33,15 @@ class RealtyMXController extends Controller {
 	    $this->service = $service;
     }
 
-    /**
+    /**\
+     * @param $unique_id
      * @param $realty_id
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function detail($realty_id) {
-        $listing = $this->service->detail($realty_id);
+    public function detail($unique_id, $realty_id) {
+        $listing = $this->service->detail($unique_id, $realty_id);
         return view('listing_detail', compact('listing'));
-    }
-
-    /**
-     * @param $data
-     */
-	private function assignStack($data) {
-        $this->stack = $data;
-        $this->recursion();
-    }
-
-    /**
-     *
-     */
-    private function recursion() {
-	    collect($this->stack)->map(function($a, $b) {
-            $this->push[$b] = $this->filter($a, $b);
-        });
     }
 
     /**
@@ -130,18 +74,40 @@ class RealtyMXController extends Controller {
     /**
      * @param Request $request
      * @param $file
+     *
+     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
      */
 	public function get(Request $request, $file) {
 		$filePath = base_path('storage/app/realtyMXFeed/' . $file);
-		$file = fread(fopen($filePath, 'r'), filesize($filePath));
-		$xml = simplexml_load_string($file);
-		$data = json_decode(json_encode($xml), true);
-		$this->hold = $data['properties'][$this->collectionOf];
-		$this->recursiveIterator();
-        $this->batch = $this->collection;
-        $this->collection = null;
-        (empty($this->batch)) ?: $this->checkAndPush();
+		$xml = XmlParser::load($filePath);
+		$content = $xml->getContent();
+        foreach ($content->properties->property as $property) {
+            $property = json_decode(json_encode($property));
+            if(isset($property->details->noFee) && $property->details->noFee === "Y") {
+                $url = $this->service->createList($property);
+                if(is_array($url)) {
+                    foreach ($url as $realty_url) {
+                        $this->report[] = [$this->webId($property) ?? null, $realty_url, 'none'];
+                    }
+                } else {
+                    $this->report[] = [$this->webId($property) ?? null, $url, 'none'];
+                }
+            } else {
+                $this->report[] = [$this->webId($property) ?? null, 'none', 'we import only no fee listing'];
+            }
+        }
+        return $this->writeCSV();
 	}
+
+    /**
+     * @param $list
+     *
+     * @return mixed
+     */
+	private function webId($list) {
+	    $list = collect($list)->toArray();
+	    return $list['@attributes']->id;
+    }
 
     /**
      * @param $list
@@ -165,50 +131,6 @@ class RealtyMXController extends Controller {
     }
 
     /**
-     *
-     */
-	private function checkAndPush() {
-        collect($this->batch)->map(function($listing) {
-            if(array_has($listing, 'noFee')) {
-                if ( array_has( $listing, 'exclusive' ) ) {
-                    $listing['exclusive'] = 1;
-                }
-
-                if ( array_has( $listing, 'amenities' ) ) {
-                    $amenities = null;
-                    foreach ( $listing['amenities'] as $key => $amenity ) {
-                        $amenities[] = $key;
-                    }
-                    $listing['amenities'] = $amenities;
-                }
-
-                $this->service->formCollection($listing);
-                $this->collection[] = $listing;
-            } else {
-                $this->report[] = [$listing['rlsid'], 'none', 'We import only no fee listings'];
-            }
-
-//            if($this->agentFilter($listing['agent'])) {
-//                $listing['street_address'] = $listing['address'] ?? null;
-//                $listing['square_feet']    = $listing['squareFeet'] ?? 0;
-//                $listing['agent']          = $this->agentFounded;
-//                if ( $this->listingFilter( $listing ) ) {
-//                    $list = $this->service->formCollection($listing);
-//                    $this->collection[] = $list;
-//                    $this->report[] = ["RLMX-{$list['realty_id']}",$list['realty_url'],"none"];
-//                } else {
-//                    $this->report[] = [$listing['rlsid'],"none","Listing already taken"];
-//                }
-//            } else {
-//                $this->report[] = [$listing['rlsid'],"none","we do not find any agent against this listing"];
-//            }
-        });
-        dd($this->collection, $this->report);
-//        (empty($this->collection)) ?: $this->service->insert($this->collection);
-//        return $this->writeCSV();
-    }
-
-    /**
      * @param $agent
      *
      * @return bool
@@ -225,6 +147,8 @@ class RealtyMXController extends Controller {
                 return true;
             }
         }
+
+        return false;
     }
 
     /**

@@ -17,32 +17,8 @@
     </div>
     <div class="mobile-nav">
         <ul>
-            <li><a href="http://no-fee-rental.teamtechverx.com/rent">Rent</a></li>
-            <li><a href="http://no-fee-rental.teamtechverx.com/neighborhood">Neighborhood </a></li>
-            <li>
-                <a class="" data-toggle="collapse" href="#menuToggle1" role="button" aria-expanded="false" aria-controls="menuToggle1">
-                    Renters <i class="fa fa-angle-down"></i>
-                </a>
-                <div class="collapse" id="menuToggle1">
-                    <ul>
-                        <li><a href="#">Some Link</a></li>
-                        <li><a href="#">Some Link</a></li>
-                        <li><a href="#">Some Link</a></li>
-                    </ul>
-                </div>
-            </li>
-            <li>
-                <a class="" data-toggle="collapse" href="#menuToggle2" role="button" aria-expanded="false" aria-controls="menuToggle2">
-                    Company <i class="fa fa-angle-down"></i>
-                </a>
-                <div class="collapse" id="menuToggle2">
-                    <ul>
-                        <li><a href="#">Some Link</a></li>
-                        <li><a href="#">Some Link</a></li>
-                        <li><a href="#">Some Link</a></li>
-                    </ul>
-                </div>
-            </li>
+            <li><a href="/rent">Rent</a></li>
+            <li><a href="{{ route('web.neighborhood') }}">Neighborhood </a></li>
             @if(!authenticated())
                 <li><a href="" data-toggle="modal" data-target="#login" class="signin-modal-btn close-menu">Login</a></li>
                 <li><a href="#" data-toggle="modal" data-target="#signup" class="signup-modal-btn close-menu">Signup</a></li>

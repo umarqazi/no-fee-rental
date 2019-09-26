@@ -61,7 +61,7 @@ Route::post('/send-message', 'MessageController@send')->name('send.message');
 
 // Realty MX Routes
 Route::get('/test/{file}', 'RealtyMXController@get');
-Route::get('/realty-mx/{client}/{listing}', 'RealtyMXController@detail');
+Route::get('/realty-mx/{client}/{listing}', 'RealtyMXController@detail')->name('web.realty');
 
 // Listing Routes
 Route::post('/listing-detail', 'ListingController@detail');
