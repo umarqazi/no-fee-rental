@@ -51,9 +51,9 @@
           <img src="<?php echo get_template_directory_uri(); ?>/assets/images/logo.png" class="logo" />
         </a>
 
-            <div class="header-right-wrapper">
-                <i class="fa fa-bars menu-btn"></i>
-                  <?php
+                        <div class="header-right-wrapper">
+                            <i class="fa fa-bars menu-btn"></i>
+                            <?php
                     if ( has_nav_menu( 'header-menu' ) ) {
                       wp_nav_menu(
                         array(
@@ -64,17 +64,17 @@
                       );
                     }
                   ?>
-                  <div class="actions-btns">
-                      <button type="button" class="signup-btn signup-modal-btn" data-toggle="modal" data-target="#signup">Signup</button>
-                      <button type="button" class="signup-btn login-btn signin-modal-btn" data-toggle="modal" data-target="#login">Login</button>
-                  </div>
+                                <div class="actions-btns">
+                                    <button type="button" class="signup-btn signup-modal-btn" data-toggle="modal" data-target="#signup">Signup</button>
+                                    <button type="button" class="signup-btn login-btn signin-modal-btn" data-toggle="modal" data-target="#login">Login</button>
+                                </div>
+                        </div>
+
+                    </div>
+                </div>
             </div>
 
-      </div>
-    </div>
-  </div>
-
-  <?php
+            <?php
 
     $featured_image = $title = $sub_title = "";
 
@@ -99,22 +99,17 @@
     if(!is_singular('post')){
       ?>
 
-      <!-- <div class="header-bg inner-pages-banner" style="background: url(<?php echo $featured_image; ?>) no-repeat center center;"> -->
-        <!-- <div class="banner-wrapper">
+                <!-- <div class="header-bg inner-pages-banner" style="background: url(<?php echo $featured_image; ?>) no-repeat center center;"> -->
+                <!-- <div class="banner-wrapper">
           <h1 class="mb-1"><?php echo $title; ?></h1>
           <?php if($sub_title){ ?>
             <p><?php echo $sub_title; ?></p>
           <?php } ?>
         </div> -->
-      <!-- </div> -->
+                <!-- </div> -->
 
-    <?php } ?>
+                <?php } ?>
 
+                    </div>
 
-
-
-
-
-</div>
-
-</header>
+        </header>
