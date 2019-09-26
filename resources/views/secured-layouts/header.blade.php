@@ -27,7 +27,7 @@
             <i class="fa fa-bars"></i>
         </span>
         <div class="avtar">
-            <img src="{!! asset(!empty(mySelf()->profile_image) ? mySelf()->profile_image : DUI) !!}" alt="" />
+            <img src="{!! asset( mySelf()->profile_image ?? DUI ) !!}" alt="" />
             <div>{!! mySelf()->first_name !!} {!! mySelf()->last_name !!} <i class="fa fa-chevron-down"></i>
                 <ul>
                     <li><a href="{!! route(whoAmI().'.showProfile') !!}">Account</a></li>

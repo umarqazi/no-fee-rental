@@ -146,16 +146,18 @@ class ListingService {
      */
     private function createOpenHouse($id, $data) {
         $batch = [];
-        for ($i = 0; $i < sizeof($data['date']); $i ++) {
-            $batch[] = [
-                'listing_id' => $id,
-                'date'       => $data['date'][$i],
-                'start_time' => $data['start_time'][$i],
-                'end_time'   => $data['end_time'][$i],
-                'only_appt'  => $data['by_appointment'][$i] ?? false,
-                'created_at' => now(),
-                'updated_at' => now()
-            ];
+        if(is_array($data['date'])) {
+            for ($i = 0; $i < sizeof($data['date']); $i++) {
+                $batch[] = [
+                    'listing_id' => $id,
+                    'date' => $data['date'][$i],
+                    'start_time' => $data['start_time'][$i],
+                    'end_time' => $data['end_time'][$i],
+                    'only_appt' => $data['by_appointment'][$i] ?? false,
+                    'created_at' => now(),
+                    'updated_at' => now()
+                ];
+            }
         }
         $this->oRepo->insert($batch);
         return $id;

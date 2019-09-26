@@ -30,6 +30,13 @@ class RealtyMXService extends ListingService {
         parent::__construct();
     }
 
+
+    private function listingCollection($list, $agent) {
+        return [
+
+        ];
+    }
+
     /**
      * @param $property
      * @param $agent

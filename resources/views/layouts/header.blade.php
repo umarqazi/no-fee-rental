@@ -3,9 +3,7 @@
     <div class="user-avtar">
             @if(Auth::guard(whoAmI())->check())
                 <a href="javascript:void(0);">
-                    <img src = "{!! !empty(mySelf()->profile_image)
-                                    ? asset(mySelf()->profile_image)
-                                    : asset('assets/images/agent-img.jpg') !!}" alt="" class="avtar" />
+                    <img src = "{!! asset( mySelf()->profile_image ?? DUI ) !!}" alt="" class="avtar" />
                     {{ mySelf()->first_name." ".mySelf()->last_name }} <i class="fa fa-angle-down"></i>
                 </a>
                 <div class="user-dropdown">
@@ -48,7 +46,7 @@
                     <div class="login-user">
                         <a href="#">
                             <img
-                                src = "{!! asset(!empty(mySelf()->profile_image) ? mySelf()->profile_image : DUI) !!}"
+                                src = "{!! asset( mySelf()->profile_image ?? DUI ) !!}"
                                 alt=""
                                 class="avtar"
                             />

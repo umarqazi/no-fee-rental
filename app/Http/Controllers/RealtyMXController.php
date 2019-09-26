@@ -18,6 +18,8 @@ class RealtyMXController extends Controller {
     private $report = [];
 
     /**
+
+    /**
      * RealtyMXController constructor.
      *
      * @param RealtyMXService $service
