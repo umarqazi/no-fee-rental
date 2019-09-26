@@ -30,10 +30,10 @@
                             <table id="agents_table" style="width: 100%;" class="datatable dataTable table table-hover display">
                                 <thead>
                                 <tr>
-                                    <th>Agent Id</th>
                                     <th>Agent Name</th>
                                     <th>Email</th>
                                     <th>Phone Number</th>
+                                    <th>License Number</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
@@ -66,10 +66,9 @@
                             <table class="datatable dataTable table table-hover display" style="width: 100%;" id="companies_table">
                                 <thead>
                                 <tr>
-                                    <th>Company Id</th>
+                                    <th>Serial Number</th>
                                     <th>Name</th>
-                                    <th>Status</th>
-                                    <th>Action</th>
+                                    <th>View Associated Agent</th>
                                 </tr>
                                 </thead>
                                 <tbody></tbody>

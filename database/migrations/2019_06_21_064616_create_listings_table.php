@@ -13,8 +13,9 @@ class CreateListingsTable extends Migration {
 	public function up() {
 		Schema::create('listings', function (Blueprint $table) {
 			$table->increments('id');
-            $table->unsignedInteger('user_id');
+            $table->unsignedInteger('user_id')->nullable();
             $table->string('realty_id')->nullable();
+            $table->string('unique_client_id')->nullable();
 			$table->string('name')->nullable();
             $table->string('email')->nullable();
 			$table->string('phone_number')->nullable();
@@ -32,7 +33,7 @@ class CreateListingsTable extends Migration {
 			$table->string('realty_url')->nullable();
 			$table->integer('is_featured')->default(0)->comment = "0-Non-Featured, 1-Featured, 2-Request-Featured";
             $table->integer('visibility')->default(2)->comment = "0-Inactive, 1-Active, 2-Pending";
-            $table->string('availability')->comment = "0-Not Available, 1-Available, 2-Immediately, 3-Date";
+            $table->string('availability')->nullable()->comment = "0-Not Available, 1-Available, 2-Immediately, 3-Date";
 			$table->timestamps();
 
 			$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onEdit('cascade');

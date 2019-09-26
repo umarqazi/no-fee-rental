@@ -41,12 +41,24 @@ $(() => {
         let res = await toggleStatus(route, $(`#${$(this).parents('table').attr('id')}`).DataTable(), $(this));
     });
 
-	// +++++ Companies Table +++++ //
+    $('body').on('click', '#viewAssociatedAgents', async function(e) {
+        let route = $(this).attr('route');
+        let res = await ajaxRequest(route, 'get');
+        $('#add-company').modal('show');
+        $('.share_list_popup ul').empty();
+        for(let i = 0 ; i < res.length ; i++)
+        {         console.log(res[i]['first_name']);
+            $('.share_list_popup ul').append('<li>"' + res[i]['first_name'] + res[i]['last_name'] +'"</li><br>');
+
+        }
+    });
+
+    // +++++ Companies Table +++++ //
     $('#companies_table').DataTable({
         serverSide: true,
         processing: true,
         "ajax": {
-            "url": "/admin/get-companies"
+            "url": "/admin/get-companies-with-agents"
         },
         "columns": [
             { data: "id" },
@@ -62,18 +74,17 @@ $(() => {
                 targets: 0
             },
             {
-                render: (data, type, row) => {
-                    return (row.status) ? 'Approved' : 'Not Approved';
+                render: (data, type, row, a) => {
+                    return row.company;
                 },
-                targets: 2
+                targets: 1
             },
+
             {
                 render: (data, type, row) => {
-                    return `<i class="fa ${row.status ? 'fa-eye' : 'fa-eye-slash'} action-btn" id="updateCompanyStatus" ref_id="${row.id}" route="/admin/company-status-update/${row.id}"></i>
-                            <i class="fa fa-edit px-2 action-btn" id="updateCompany" ref_id="${row.id}" route="/admin/edit-company/${row.id}"></i>
-                            <i class="fa fa-trash action-btn" id="deleteCompany" ref_id="${row.id}" route="/admin/delete-company/${row.id}"></i>`;
+                    return `<i class="fa  fa-eye action-btn" id="viewAssociatedAgents" ref_id="${row.id}" route="/admin/view-associated-agents/${row.id}"></i>`;
                 },
-                targets: 3
+                targets: 2
             }
         ]
     });
