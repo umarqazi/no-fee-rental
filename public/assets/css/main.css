@@ -774,7 +774,7 @@ h3 {
   padding-right: 5px;
 }
 .verified-icon{
-  margin-bottom: 10px;
+  margin-bottom: 18px;
 }
 .verified-icon span{
   color: #223971;
@@ -3387,7 +3387,7 @@ max-width: 370px;
   /*end agent profile*/
 @media only screen and (min-width: 768px) and (max-width: 991px){
   #advance-search .slider-wrapper .input-style{
-    width: 110px;
+    width: 105px;
   }
 }
 @media only screen and (max-width: 767px) {
