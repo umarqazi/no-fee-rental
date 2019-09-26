@@ -27,17 +27,20 @@
   <div class="mobile-menu">
     <i class="fa fa-times close-menu-btn"></i>
     <div class="mobile-nav">
-      <?php
-                    if ( has_nav_menu( 'header-menu' ) ) {
-                      wp_nav_menu(
-                        array(
-                          'theme_location' => 'header-menu',
-                          'container' => 'false',
-                          'menu_class' => 'menu-links'
-                        )
-                      );
-                    }
-                  ?>
+        <ul id="menu-header-menu" class="menu-links">
+          <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-29">
+            <a href="http://no-fee-rental.teamtechverx.com/rent">Rent</a>
+          </li>
+          <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-33">
+            <a href="http://no-fee-rental.teamtechverx.com/neighborhood">Neighborhood</a>
+          </li>
+          <li>
+            <a href="" data-toggle="modal" data-target="#login" class="signin-modal-btn close-menu">Login</a>
+          </li>
+          <li>
+            <a href="" data-toggle="modal" data-target="#signup" class="signup-modal-btn close-menu">Signup</a>
+          </li>
+      </ul>    
     </div>
   </div>
 
@@ -106,7 +109,6 @@
       <!-- </div> -->
 
     <?php } ?>
-
     <div class="modal fade login-modal show" id="signup">
     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
         
@@ -210,7 +212,6 @@
     }
     togglefooterlink();
 </script>
-    
 
 </div>
 
