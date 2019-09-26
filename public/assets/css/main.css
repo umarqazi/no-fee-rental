@@ -2860,10 +2860,10 @@ border-color: #e17228;
     max-width: 80%;
 }
 }
-@media (max-width: 1260px){
+/*@media (max-width: 1260px){
   .modal-dialog {
     margin:.5rem !important;
-  }
+  }*/
 }
 @media (max-width: 991px) {
     #appointmentModal .padding-leftt-0 {
@@ -3385,7 +3385,7 @@ max-width: 370px;
 
 }
   /*end agent profile*/
-@media only screen and (min-width: 767px) and (max-width: 991px){
+@media only screen and (min-width: 768px) and (max-width: 991px){
   #advance-search .slider-wrapper .input-style{
     width: 110px;
   }
