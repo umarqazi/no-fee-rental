@@ -329,6 +329,7 @@
 }
 .signup-modal-scroll {
     overflow: hidden;
+    padding-right: 17px;
 }
 .signup-modal-scroll .modal {
     overflow-x: hidden;

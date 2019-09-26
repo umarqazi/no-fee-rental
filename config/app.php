@@ -166,6 +166,7 @@ return [
 		/*
 		 * Package Service Providers...
 		 */
+        Orchestra\Parser\XmlServiceProvider::class,
 		Yajra\DataTables\DataTablesServiceProvider::class,
         MaddHatter\LaravelFullcalendar\ServiceProvider::class,
 
@@ -230,5 +231,6 @@ return [
 		'HTML' => Collective\Html\HtmlFacade::class,
 		'DataTables' => Yajra\DataTables\Facades\DataTables::class,
         'Calendar' => MaddHatter\LaravelFullcalendar\Facades\Calendar::class,
+        'XmlParser' => Orchestra\Parser\Xml\Facade::class,
 	],
 ];
