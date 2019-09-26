@@ -398,6 +398,7 @@ class UserService {
                     'company_id' => $company->id,
                 ]);
             } else {
+                $company = $this->cRepo->find(['company' => $request->company])->first();
                 $this->acRepo->create([
                     'agent_id' => $user->id,
                     'company_id' => $company->id,
