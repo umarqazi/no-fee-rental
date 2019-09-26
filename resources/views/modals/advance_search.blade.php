@@ -69,8 +69,8 @@
                                 <ul class="select-bed-options" id="baths">
                                     <li>
                                         <div class="custom-control custom-radio">
-                                            {!! Form::radio('baths', 'studio', false, ['class' => 'custom-control-input', 'id' => 'studio']) !!}
-                                            <label class="custom-control-label" for="studio">Studio</label>
+                                            {!! Form::radio('baths', 'any', false, ['class' => 'custom-control-input', 'id' => 'Any']) !!}
+                                            <label class="custom-control-label" for="Any">Any</label>
                                         </div>
                                     </li>
                                     <li>

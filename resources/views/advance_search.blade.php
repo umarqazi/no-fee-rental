@@ -298,7 +298,7 @@
 {{--                            <div class="form-group">--}}
 {{--                                <div class="slider-wrapper">--}}
 {{--                                    <input type="number" min=0 max="9900" oninput="validity.valid||(value='0');" id="min_price" class="price-range-field input-style" />--}}
-{{--                                    <div id="slider-range" class="price-filter-range" name="rangeInput"></div>--}}
+{{--                                    <div id="slider-range" class="price-filter-range slider-rangeadvance" name="rangeInput"></div>--}}
 {{--                                    <input type="number" min=0 max="10000" oninput="validity.valid||(value='10000');" id="max_price" class="price-range-field input-style" />--}}
 {{--                                </div>--}}
 {{--                            </div>--}}
