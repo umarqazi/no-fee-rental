@@ -7,7 +7,13 @@
         </div>
         <div class="block profile-container">
             <div class="block-body">
-            	{!! Form::open(['url' => route('admin.updatePassword'), 'method' => 'post', 'enctype' => 'multipart/form-data']) !!}
+                {!! Form::open(
+                    [
+                        'url'    => route('admin.updatePassword'),
+                        'method' => 'post',
+                        'id'     => 'update_password',
+                        'class'  => 'ajax'
+                    ]) !!}
             	 <div class="additional-info">
                     <div class="row">
 
@@ -28,7 +34,8 @@
                             </div>
                         </div>
                         <div class="col-md-12 mt-4">
-                       		{!! Form::submit('Update Password', ['class' => 'btn-default large-btn edit-profile']) !!}
+                       		{!! Form::submit('Update Password', ['class' => 'btn-default large-btn']) !!}
+                            <a href="{{ url()->previous() }}" class="btn-default large-btn">Back</a>
                         </div>
                     </div>
                 </div>
