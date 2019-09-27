@@ -406,6 +406,12 @@ $('#price-range-submit').hide();
     	$("#signup-btn").click(function(){
       		$('body').addClass('signup-modal-scroll');
     	});
+    	$("#login-btn").click(function() {
+        $('body').addClass('signup-modal-scroll');
+    });
+    $("#login").click(function() {
+        $('body').addClass('signup-modal-scroll');
+    });
     	$('.close-signup-modal').click(function(){
     		$('body').removeClass('signup-modal-scroll');
     	});
