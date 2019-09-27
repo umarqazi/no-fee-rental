@@ -72,7 +72,22 @@
         </div>
     </footer>
 
-    <!-- Login Modal -->
+
+<?php wp_footer(); ?>
+
+<script type="text/javascript">
+    function togglefooterlink() {
+        if (window.matchMedia('(max-width: 1279px)').matches) {
+            $(".collapseabe-link").click(function(){
+                $(this).parent().find('.collapse-menu').slideToggle();
+            });
+        }
+    }
+    togglefooterlink();
+</script>
+
+<script type="text/javascript">
+<!-- Login Modal -->
     <div class="modal fade login-modal" id="login">
         <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
 
@@ -218,27 +233,37 @@
                                     <input class="input-style agnet-input" placeholder="Confirm Password" name="password_confirmation" type="password" value="">
                                 </div>
                             </div>
-
-                            <div class="col-md-12">
-                                <div class="text-center mt-3 mb-4">
-                                    <input class="btn-default" type="submit" value="Signup">
-                                </div>
-                            </div>
-
-                            <p class="footer-text">Already have an account? <span class="signin-wrapper" id="login-btn">Login</span></p>
                         </div>
-                    </form>
-                </div>
-            </div>
+                    
+                    <div class="col-md-12">
+                        <div class="text-center mt-3 mb-4">
+                            <input class="btn-default" type="submit" value="Signup">
+                        </div>
+                    </div>
+                
+                <p class="footer-text">Already have an account? <span class="signin-wrapper" id="login-btn">Login</span></p>
+            </div></form>
         </div>
+    </div>
+</div>
 
-        <?php wp_footer(); ?>
 
-            <script>
-                $(document).ready(function() {
-                    $(".menu-btn").click(function() {
-                        $(".mobile-menu").slideDown();
-                    });
+
+<?php wp_footer(); ?>
+
+
+
+<script>
+  $( document ).ready(function() {
+    $(".menu-btn").click(function () {
+      $(".mobile-menu").slideDown();
+    });
+
+    $(".close-menu-btn").click(function () {
+      $(".mobile-menu").slideUp();
+    });
+  });
+</script>
 
                     $(".close-menu-btn").click(function() {
                         $(".mobile-menu").slideUp();

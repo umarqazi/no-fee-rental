@@ -4,7 +4,7 @@
     @foreach($listing->inactive as $il)
         <div class="listing-row">
             <div class="img-holder">
-                <img src="{{ asset(!empty($il->thumbnail) ? $il->thumbnail : DLI) }}" alt="" style="height:205px;" class="main-img" />
+                <img src="{{ asset( $il->thumbnail ?? DLI ) }}" alt="" style="height:205px;" class="main-img" />
             </div>
             <div class="info">
                 <p class="title">{{ str_limit(is_exclusive($il->listingTypes) ? $il->unit.' '.$il->street_address : $il->display_address, STR_LIMIT_LIST_VIEW, ' ...') }}</p>
@@ -45,7 +45,7 @@
         @foreach($listing->inactive as $il)
             <div class="col-lg-3 col-md-4 col-sm-6">
                 <div class="listing-thumb">
-                    <img src="{{ asset(!empty($il->thumbnail) ? $il->thumbnail : DLI) }}" alt="" style="height:205px;" class="main-img" />
+                    <img src="{{ asset( $il->thumbnail ?? DLI ) }}" alt="" style="height:205px;" class="main-img" />
                     <div class="info">
                         <p class="title">{{ str_limit(is_exclusive($il->listingTypes) ? $il->unit.' '.$il->street_address : $il->display_address, STR_LIMIT_GRID_VIEW, ' ...') }}</p>
                         <p><i class="fa fa-tag"></i> ${{ $il->rent }}</p>

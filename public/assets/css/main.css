@@ -1218,15 +1218,15 @@ footer .footer-wrapper .newsletter .newsletter-form .ajax-loader {
 }
 
 footer .footer-wrapper .newsletter .newsletter-form .fld {
-    background: #fff;
-    padding-left: 10px;
-    border-radius: 5px;
-    border: none;
-    height: 40px;
-    flex: 60%;
-    font-size: 13px;
-    padding-right: 90px;
-    width: 100%;
+  background: #fff;
+  padding-left: 10px;
+  border-radius: 5px;
+  border: none;
+  height: 40px;
+  flex: 60%;
+  font-size: 13px;
+  padding-right: 90px;
+  width: 100%;
 }
 
 footer .footer-wrapper .newsletter .newsletter-form .btn-default {
