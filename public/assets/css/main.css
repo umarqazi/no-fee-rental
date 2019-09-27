@@ -2894,10 +2894,10 @@ footer .copyright .social-icons li a:hover {
 }
 
 .search-bdr-top .btn-default:hover,
-.search-bdr-top .btn-default:active;
-.search-bdr-top .btn-default:focus {
-    background-color: #223971;
-    color: #fff;
+.search-bdr-top .btn-default:active,
+.search-bdr-top .btn-default:focus{
+  background-color: #223971;
+  color: #fff;
 }
 
 .search-bdr-top .price-dropdown .btn-default {
@@ -3374,91 +3374,90 @@ footer .copyright .social-icons li a:hover {
         max-width: 1600px;
     }
     .featured-properties .property-listing .property-thumb {
-        width: calc(100% / 4 - 30px); 
+        width: calc(100% / 4 - 30px);
     }
 
 }
 
 
-
 @media (max-width: 991px) {
-    #appointmentModal .padding-leftt-0 {
+    #appointmentModal {
         padding-left: 15px;
     }
-    
+
     #appointmentModal .modal-body a.btn {
         margin-bottom: 10px;
     }
-    
+
     #appointmentModal .modal-body img {
         margin-bottom: 10px;
     }
-    
+
     .neighborhood-search .search-result-wrapper .search-listing .sort-by-wrapper {
         padding-right: 15px;
         margin-top: 15px;
     }
-    
+
     .dropdown-wrap {
         margin-top: 15px;
     }
-    
+
     .mobile-view-dropdown {
         display: block;
     }
-    
+
     .mobile-view-dropdown i {
         color: #f36f21;
         margin-right: 5px;
     }
-    
+
     #mobile-tabs-collapse {
         display: none;
     }
-    
+
     .collapse.show {
         display: block !important;
     }
-    
+
     #boxscroll2 {
         height: auto;
         margin-top: 0;
         overflow: hidden;
     }
-    
+
     .search-result-wrapper .search-bdr-top {
         padding: 12px 15px;
     }
-    
+
     .contact-info .btn-default {
         margin-bottom: 20px;
     }
-    
+
     .neighborhood-search .search-result-wrapper .search-listing .featured-properties .property-listing .property-thumb {
         width: calc(100% / 2 - 30px);
     }
-    
+
     .inner-pages.contact-us {
         padding: 20px 0px 50px;
     }
-    
+
     .neighborhood-search {
         margin: 75px auto;
     }
-    
+
     .inner-pages.contact-us {
         margin-top: 75px;
     }
-    
+
     .login-info label {
         font-size: 14px;
     }
-    
+
     .login-info img {
         width: 18px;
         height: 18px;
     }
-    
+
     #advance-search .search-input-wrap {
         text-align: center;
     }
@@ -3477,7 +3476,31 @@ footer .copyright .social-icons li a:hover {
     .contact-info .info h6{
         font-size: 20px;
     }
-
+    .contact-info .btn-default{
+      margin-bottom: 20px;
+  }
+  .neighborhood-search .search-result-wrapper .search-listing .featured-properties .property-listing .property-thumb{
+    width: calc(100% / 2 - 30px);
+  }
+  .inner-pages.contact-us {
+    padding: 20px 0px 50px;
+}
+.neighborhood-search{
+  margin:75px auto;
+}
+.inner-pages.contact-us{
+  margin-top: 75px;
+}
+.login-info label{
+  font-size: 14px;
+}
+.login-info img{
+  width: 18px;
+  height: 18px;
+}
+#advance-search .search-input-wrap{
+  text-align: center;
+}
 }
 @media (min-width: 576px) {
     #appointmentModal .modal-dialog {
@@ -3491,16 +3514,16 @@ footer .copyright .social-icons li a:hover {
     .neighborhood-search .search-result-wrapper .search-listing .featured-properties .property-listing .property-thumb {
         height: 200px;
     }
-    
+
     .neighborhood-search .search-result-wrapper .search-listing .featured-properties .property-listing .property-thumb .main-img {
         height: 200px;
     }
-    
+
     .neighborhood-search .search-result-wrapper .search-listing .featured-properties .property-listing .property-thumb .check-btn .btn-default {
         font-size: 12px;
         padding: 0px 15px;
     }
-    
+
     .rental-guides-container .rental-guides-row .info {
         padding: 0px 25px;
     }
@@ -3509,17 +3532,17 @@ footer .copyright .social-icons li a:hover {
     .header-bg .search-property .search-fld {
         flex: 0 0 46%;
     }
-    
+
     .need-help-container .wrapper {
         display: block;
         text-align: center;
     }
-    
+
     .need-help-container .wrapper h2 {
         margin-right: 0;
         padding-right: 0;
     }
-    
+
     .need-help-container .wrapper h2:after {
         height: 1px;
         width: 100px;
@@ -3528,109 +3551,109 @@ footer .copyright .social-icons li a:hover {
         margin: 0 auto;
         bottom: 0;
     }
-    
+
     .need-help-container .wrapper p {
         margin: 12px 0px;
     }
-    
+
     .featured-properties .property-listing {
         margin: 0px -15px;
     }
-    
+
     .featured-properties .property-listing .property-thumb {
         margin: 0px 15px;
         overflow: hidden;
         width: calc(100% / 3 - 30px);
         margin-bottom: 30px;
     }
-    
+
     footer .footer-wrapper {
         flex-wrap: wrap;
     }
-    
+
     footer .footer-wrapper > li {
         width: calc(100% / 2);
     }
-    
+
     .header-bg {
         background: url(../images/banner-bg.jpg) no-repeat center center;
     }
-    
+
     .neighborhood-search .search-result-wrapper .search-listing .featured-properties .property-listing .property-thumb{
         width: calc(100% / 1 - 30px);
     }
-    
+
     .search-result-wrapper .map-wrapper iframe {
         height: 500px;
     }
-    
+
     .listing-detail-container .listing-info .agent-appointment .btn-default {
         line-height: 50px;
         font-size: 13px;
         padding: 0px 18px;
     }
-    
+
     .lSSlideOuter .lSSlideWrapper #image-gallery > li img {
         max-height: 600px;
     }
-    
+
     .about-us-container {
         background: url(../images/about-bg.jpg) no-repeat center left -275px #ffffff;
     }
-    
+
     .your-life-container {
         background: url(../images/your-life-bg.jpg) no-repeat center right -270px;
     }
-    
+
     footer .footer-wrapper > li {
         width: 100% !important;
         text-align: left;
     }
-    
+
     footer .footer-wrapper > li:first-child {
         text-align: center;
         width: auto;
     }
-    
+
     footer .footer-wrapper > li:last-child {
         margin-top: 15px;
         text-align: center;
     }
-    
+
     footer .footer-wrapper > li:last-child h4 {
         width: auto;
         text-align: center;
         display: block;
     }
-    
+
     .newsletter {
         width: 288px;
         margin: 0 auto;
         padding-top: 15px;
     }
-    
+
     .collapse-menu {
         display: none;
         width: 288px;
         margin: 0 auto 10px auto;
     }
-    
-   
+
+
     footer .footer-wrapper .newsletter .newsletter-form {
         flex-direction: column;
     }
-    
+
     footer .footer-wrapper .newsletter .newsletter-form .btn-default {
         position: inherit;
         left: 0;
         top: 0;
     }
-    
+
     footer .footer-wrapper .newsletter .newsletter-form .fld {
         flex: auto;
         margin-bottom: 10px;
     }
-    
+
     footer .footer-wrapper h4 {
         margin-bottom: 15px;
         width: 288px;
@@ -3639,43 +3662,43 @@ footer .copyright .social-icons li a:hover {
         justify-content: space-between;
         margin: 8px auto 8px auto;
     }
-    
+
     footer .footer-wrapper .logo-text {
         max-width: 100%;
         text-align: center;
         margin-bottom: 15px;
     }
-    
+
     .listing-detail-container .lSSlideOuter .lSPager.lSGallery {
         display: none;
     }
     /*agent profile responsive*/
-    
+
     .agent-profile-view .agent-info .contact-info {
         display: block;
     }
-    
+
     .agent-profile-view .agent-info .contact-info > div {
         margin-bottom: 10px;
     }
     /*end agent profile responsive*/
-    
+
     .clients-reviews-section .owl-nav button.owl-prev {
         left: 0px;
     }
-    
+
     .clients-reviews-section .owl-nav button.owl-next {
         right: 0px;
     }
-    
+
     .neighborhood-search.agent-listing-profile {
         padding: 20px 0px 0px !important;
     }
-    
+
     .agent-listing-profile .search-result-wrapper .search-listing .featured-properties .property-listing .property-thumb {
         width: calc(100% / 3 - 30px);
     }
-    
+
     .footer-wrapper .fas.fa-angle-down {
         display: block;
     }
@@ -3697,36 +3720,36 @@ footer .copyright .social-icons li a:hover {
         flex: 0 0 32%;
         padding: 0px 15px;
     }
-    
+
     .featured-properties .property-listing .property-thumb {
         width: calc(100% / 2 - 30px);
     }
-    
+
     .header-wrapper .header-container ul.menu-links,
     .header-wrapper .header-container .header-right-wrapper .login-user,
     .header-wrapper .header-container .header-right-wrapper .recent-search-dropdown {
         display: none;
     }
-    
+
     .header-wrapper .header-container .header-right-wrapper .recent-search-dropdown .dropDown {
         left: auto;
         right: 0;
     }
-    
+
     .header-bg {
         height: 520px;
     }
-    
+
     .header-wrapper {
         background: rgba(255, 255, 255, 0.71);
     }
-    
+
     .menu-btn {
         font-size: 26px;
         display: inline-block;
         vertical-align: middle;
     }
-    
+
     .mobile-menu {
         position: fixed;
         left: 0;
@@ -3739,22 +3762,22 @@ footer .copyright .social-icons li a:hover {
         padding: 15px;
         text-align: center;
     }
-    
+
     .mobile-menu .mobile-nav {
         max-width: 600px;
         margin: 0 auto;
         text-align: left;
     }
-    
+
     .mobile-menu .mobile-nav > ul {
         display: block;
     }
-    
+
     .mobile-menu .mobile-nav > ul > li {
         display: block;
         position: relative;
     }
-    
+
     .mobile-menu .mobile-nav > ul > li > a {
         display: block;
         color: #fff;
@@ -3762,27 +3785,27 @@ footer .copyright .social-icons li a:hover {
         padding: 12px 0px;
         font-size: 16px;
     }
-    
+
     .mobile-menu .mobile-nav > ul > li > a i {
         float: right;
     }
-    
+
     .mobile-menu .mobile-nav > ul > li ul {
         padding: 5px;
         border-top: 1px solid #fff;
         border-bottom: #fff solid 1px;
     }
-    
+
     .mobile-menu .mobile-nav > ul > li ul li {
         display: block;
     }
-    
+
     .mobile-menu .mobile-nav > ul > li ul li a {
         color: #fff;
         padding: 8px 0px;
         display: block;
     }
-    
+
     .close-menu-btn {
         color: #fff;
         font-size: 22px;
@@ -3790,17 +3813,17 @@ footer .copyright .social-icons li a:hover {
         right: 15px;
         top: 15px;
     }
-    
+
     .user-avtar {
         display: inline-block;
         text-align: center;
         position: relative;
     }
-    
+
     .user-avtar a {
         color: #fff;
     }
-    
+
     .user-avtar .avtar {
         width: 80px;
         height: 80px;
@@ -3810,17 +3833,17 @@ footer .copyright .social-icons li a:hover {
         display: inline-block;
         vertical-align: middle;
     }
-    
+
     .user-avtar .user-dropdown {
         display: none;
         padding: 10px 0px;
     }
-    
+
     .user-avtar .user-dropdown a {
         display: block;
         padding: 5px 0px;
     }
-    
+
     .user-avtar:hover .user-dropdown {
         display: block;
         background: #000;
@@ -3830,56 +3853,56 @@ footer .copyright .social-icons li a:hover {
         top: 80px;
         z-index: 3;
     }
-    
+
     .header-bg .search-property {
         display: block;
         line-height: 50px;
     }
-    
+
     .header-bg .search-property .search-fld {
         width: 100%;
         border-bottom: #ddd solid 1px;
         border-radius: 0;
     }
-    
+
     .header-bg .search-property .custom-select-input {
         width: 100%;
         border-bottom: #ddd solid 1px;
         border-radius: 0;
     }
-    
+
     .header-bg .search-property .search-btn {
         width: 100%;
         text-align: center;
         margin: 10px;
         width: calc(100% - 20px);
     }
-    
+
     .header-bg .banner-wrapper .advance-search {
         text-align: center;
     }
-    
+
     .header-bg .banner-wrapper h1 {
         font-size: 20px;
     }
-    
+
     .need-help-container .wrapper h2 {
         font-size: 22px;
     }
-    
+
     .need-help-container .wrapper p {
         font-size: 14px;
     }
-    
+
     .about-us-container {
         background: none;
     }
-    
+
     .about-us-container {
         text-align: center;
         padding-bottom: 30px;
     }
-    
+
     .about-us-container .about-mb-img {
         width: 100%;
         display: block;
@@ -3887,31 +3910,31 @@ footer .copyright .social-icons li a:hover {
         -webkit-clip-path: polygon(0 0, 100% 0, 100% 80%, 0% 100%);
         clip-path: polygon(0 0, 100% 0, 100% 80%, 0% 100%);
     }
-    
+
     h2 {
         font-size: 24px;
     }
-    
+
     h3 {
         font-size: 18px;
     }
-    
+
     p {
         font-size: 14px;
     }
-    
+
     .btn-default {
         padding: 0px 30px;
         font-size: 13px;
         line-height: 40px;
     }
-    
+
     .your-life-container {
         background: none;
         text-align: center;
         padding-bottom: 30px;
     }
-    
+
     .your-life-container .your-life-mb-img {
         width: 100%;
         display: block;
@@ -3919,106 +3942,106 @@ footer .copyright .social-icons li a:hover {
         -webkit-clip-path: polygon(0 0, 100% 0, 100% 80%, 0% 100%);
         clip-path: polygon(0 0, 100% 0, 100% 80%, 0% 100%);
     }
-    
+
     #advance-search .modal-dialog {
         max-width: 96%;
     }
     /* #advance-search .slider-wrapper #slider-range {
     width: calc(100% - 260px);
   }*/
-    
+
     .modal #advance-search .slider-wrapper #slider-range {
         width: 100%;
     }
-    
+
     .header-bg .search-property .search-btn {
         height: 45px;
         font-size: 14px;
     }
-    
+
     .neighborhood-search .filters-wrapper {
         display: block;
     }
-    
+
     .neighborhood-search .filters-wrapper .filter-search {
         padding: 15px 15px;
         margin: 0px 0px;
     }
-    
+
     .neighborhood-search .filters-wrapper .filters-listing {
         border-bottom: #fff solid 1px;
         border-top: #fff solid 1px;
     }
-    
+
     .inner-pages-banner {
         height: 320px;
         background-size: cover;
     }
-    
+
     .calculator-container .calculator-wrapper {
         display: block;
     }
-    
+
     .calculator-container .calculator-wrapper .form-clm {
         border-right: 0px;
         border-bottom: #e1e1e1 solid 2px;
     }
-    
+
     .rental-guides-container .rental-guides-row .main-img {
         -webkit-clip-path: polygon(0 0, 100% 0, 100% 80%, 0% 100%);
         clip-path: polygon(0 0, 100% 0, 100% 80%, 0% 100%);
     }
-    
+
     .rental-guides-container .rental-guides-row.right-content .main-img {
         -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0 80%);
         clip-path: polygon(0 0, 100% 0, 100% 100%, 0 80%);
     }
-    
+
     .rental-guides-container .rental-guides-row .info {
         padding: 30px 15px;
         text-align: center;
     }
-    
+
     .rental-guides-container .rental-guides-row .info ul li:before {
         margin-left: -15px;
         left: auto;
     }
-    
+
     .header-wrapper .header-container .header-right-wrapper .actions-btns {
         display: none;
     }
-    
+
     .listing-detail-container .listing-info .product-title {
         margin-top: 30px;
     }
-    
+
     .lSSlideOuter .lSSlideWrapper #image-gallery > li img {
         max-height: 600px;
     }
-    
+
     .header-bg .search-property .fa-search {
         top: 22%;
     }
-    
+
     .header-bg .search-property .search-fld {
         padding: 0px 45px;
         font-size: 14px;
     }
-    
+
     .header-bg .banner-wrapper .advance-search {
         font-size: 14px;
     }
-    
+
     .need-help-container .wrapper .btn-default {
         font-size: 13px;
         line-height: 40px;
         padding: 0px 22px;
     }
-    
+
     .featured-properties {
         padding: 40px 0px;
     }
-    
+
     .mobile-map-icon {
         position: absolute;
         top: 7px;
@@ -4032,15 +4055,15 @@ footer .copyright .social-icons li a:hover {
         width: 28px;
         text-align: center;
     }
-    
+
     .mobile-map-icon {
         display: block;
     }
-    
+
     .neighborhood-search .search-result-wrapper .map-wrapper {
         display: none;
     }
-    
+
     #mobile-map-listing-view {
         width: 100%;
        height: 500px;
@@ -4050,21 +4073,21 @@ footer .copyright .social-icons li a:hover {
         left: 0;
         display: none;
     }
-    
+
     .neighborhood-search .search-result-wrapper .search-listing{
         padding: 0px 0px 0px 0px;
     }
-    
+
     .listing-Details .lSSlideOuter .lSPager.lSGallery img {
         height: 85px !important;
     }
     /*agent profile */
-    
+
     .agent-profile-view {
         justify-content: center;
         flex-direction: column;
     }
-    
+
     .agent-profile-view .img-holder {
         width: auto;
         margin-right: 30px;
@@ -4072,11 +4095,11 @@ footer .copyright .social-icons li a:hover {
         margin: 0 auto 20px auto;
         max-width: 370px;
     }
-    
+
     .agent-profile-view .img-holder {
         flex: 0 0 260px;
     }
-    
+
     #advance-search .slider-wrapper .search-input-wrap #slider-range {
         width: 100% !important;
     }
@@ -4095,85 +4118,85 @@ footer .copyright .social-icons li a:hover {
     .header-wrapper .header-container .logo {
         max-width: 200px;
     }
-    
+
     .featured-properties .property-listing .property-thumb {
         width: calc(100% / 2 - 30px);
     }
-    
+
     footer .copyright {
         display: block;
         text-align: center;
     }
-    
+
     footer .copyright .social-icons {
         display: flex;
         justify-content: center;
         margin-top: 15px;
     }
-    
+
     footer .footer-wrapper > li {
         width: calc(100% / 1);
     }
-    
+
     footer {
         padding: 30px 0px 20px;
     }
-    
+
     footer .footer-wrapper .logo-text {
         max-width: 100%;
     }
-    
+
     .inner-pages {
         padding: 120px 0px 80px;
     }
-    
+
     .plan-listing {
         display: block;
     }
-    
+
     .plan-listing .clm {
         width: calc(100% / 1 - 30px);
         margin-bottom: 30px;
     }
-    
+
     .need-help-modal .custom-select-list {
         margin-bottom: 15px;
     }
-    
+
     .neighborhood-search .filters-wrapper .filters-listing {
         flex-wrap: wrap;
     }
-    
+
     .neighborhood-search .filters-wrapper .filters-listing .custom-select-list {
         flex: 0 0 50%;
         border-bottom: #fff solid 1px;
     }
-    
+
     .neighborhood-search .filters-wrapper .filters-listing {
         border-bottom: none;
     }
-    
+
     .neighborhood-search .search-result-wrapper .search-listing .sort-by-wrapper .listing-large-view {
         display: none;
     }
-    
+
     .neighborhood-search .search-result-wrapper .search-listing .sort-by-wrapper {
         display: block;
     }
-    
+
     .neighborhood-search .sorting-listing .custom-select-list {
         width: 100%;
         margin-bottom: 10px;
     }
-    
+
     .neighborhood-search .sorting-listing .bettery-park {
         margin-left: 0;
     }
-    
+
     .neighborhood-search .search-result-wrapper .search-listing .featured-properties .property-listing.desktop-listing {
         display: none;
     }
-    
+
     .neighborhood-search .search-result-wrapper .search-listing .featured-properties .property-listing.mobile-listing {
         display: block;
         height: auto;
@@ -4181,21 +4204,21 @@ footer .copyright .social-icons li a:hover {
         margin: 30px 0px;
         width: 100%;
     }
-    
+
     .neighborhood-search .search-result-wrapper .search-listing .featured-properties .property-listing.mobile-listing .property-thumb {
         width: 100%;
         margin: 0px;
         height: 220px;
     }
-    
+
     .neighborhood-search .search-result-wrapper .search-listing .featured-properties .property-listing.mobile-listing .property-thumb .main-img {
         height: 220px;
     }
-    
+
     .neighborhood-search .search-result-wrapper .search-listing .featured-properties .property-listing .owl-dots {
         display: none;
     }
-    
+
     .neighborhood-search .search-result-wrapper .search-listing .featured-properties .property-listing .owl-nav {
         position: relative;
         display: flex;
@@ -4204,7 +4227,7 @@ footer .copyright .social-icons li a:hover {
         margin: 15px 0px 0px;
         padding: 0px;
     }
-    
+
     .neighborhood-search .search-result-wrapper #contentscroll2 .property-listing .owl-nav {
         position: absolute;
         display: flex;
@@ -4216,41 +4239,41 @@ footer .copyright .social-icons li a:hover {
         transform: translateY(-50%);
         color: #f36f21;
     }
-    
+
     .neighborhood-search .search-result-wrapper #contentscroll2 .property-listing .owl-nav .owl-prev span {
         color: #f36f21;
         font-size: 36px;
         line-height: 16px;
         height: auto;
     }
-    
+
     .neighborhood-search .search-result-wrapper #contentscroll2 .property-listing .owl-nav .owl-next span {
         color: #f36f21;
         font-size: 36px;
         line-height: 16px;
         height: auto;
     }
-    
+
     .neighborhood-search .search-result-wrapper #contentscroll2 .property-listing .owl-nav button {
         margin: 0px !important;
         padding: 0px;
         outline: none !important;
     }
-    
+
     .neighborhood-search .search-result-wrapper #contentscroll2 .property-listing .owl-nav button.owl-prev {
         background: url(../images/slider-arrow-left.png) no-repeat;
         background-size: 100%;
         width: 40px;
         height: 40px;
     }
-    
+
     .neighborhood-search .search-result-wrapper #contentscroll2 .property-listing .owl-nav button.owl-next {
         background: url(../images/slider-arrow-right.png) no-repeat;
         background-size: 100%;
         width: 40px;
         height: 40px;
     }
-    
+
     .tab-content .property-listing .owl-nav {
         position: absolute;
         display: flex;
@@ -4262,27 +4285,27 @@ footer .copyright .social-icons li a:hover {
         transform: translateY(-50%);
         color: #f36f21;
     }
-    
+
     .tab-content .property-listing .owl-nav .owl-prev span {
         color: #f36f21;
         font-size: 36px;
         line-height: 16px;
         height: auto;
     }
-    
+
     .tab-content .property-listing .owl-nav .owl-next span {
         color: #f36f21;
         font-size: 36px;
         line-height: 16px;
         height: auto;
     }
-    
+
     .tab-content .property-listing .owl-nav button {
         margin: 0px !important;
         padding: 0px;
         outline: none !important;
     }
-    
+
     .tab-content .property-listing .owl-nav button.owl-prev {
         background: url(../images/slider-arrow-left.png) no-repeat;
         background-size: 100%;
@@ -4290,7 +4313,7 @@ footer .copyright .social-icons li a:hover {
         height: 40px;
         border-radius: 50%;
     }
-    
+
     .tab-content .property-listing .owl-nav button.owl-next {
         background: url(../images/slider-arrow-right.png) no-repeat;
         background-size: 100%;
@@ -4298,27 +4321,27 @@ footer .copyright .social-icons li a:hover {
         height: 40px;
         border-radius: 50%;
     }
-    
+
     .neighborhood-search {
         padding: 60px 0px 70px;
     }
-    
+
     .calculator-container .calculator-wrapper .form-clm {
         padding: 15px;
     }
-    
+
     .calculator-container .calculator-wrapper .form-clm .form-group {
         display: block;
     }
-    
+
     .login-modal .modal-dialog .modal-content {
         flex-direction: column;
     }
-    
+
     .login-modal .modal-dialog .logo-info-wrapper {
         min-height: inherit;
     }
-    
+
     .login-modal .modal-dialog .login-form-wrapper .footer-text {
         position: relative;
         margin-top: 10px;
@@ -4328,67 +4351,67 @@ footer .copyright .social-icons li a:hover {
     /*.listing-detail-container .listing-info .product-title {
     display: block;
   }*/
-    
+
     .listing-detail-container .listing-info .product-title p {
         margin-bottom: 15px;
     }
-    
+
     .listing-detail-container .listing-info .title-subtext {
         margin-top: 10px;
     }
-    
+
     .listing-detail-container .listing-info .near-by-info {
         display: block;
     }
-    
+
     .listing-detail-container .listing-info .agent-appointment {
         display: block;
         text-align: center;
     }
-    
+
     .listing-detail-container .listing-info .agent-appointment .agent-info {
         justify-content: center;
         margin-bottom: 15px;
     }
-    
+
     .let-us-hlep-form .modal-header .modal-title {
         font-size: 18px;
     }
-    
+
     .featured-properties .property-listing .info .info-link-text p:nth-of-type(2) {
         display: block;
     }
-    
+
     .owl-slider {
         display: block;
     }
-    
+
     .desktop-listiing {
         display: none;
     }
-    
+
     .neighborhood-search .search-result-wrapper .search-listing .featured-properties .property-listing {
         display: block;
     }
-    
+
     .neighborhood-search .search-result-wrapper .search-listing .featured-properties .property-listing {
         display: none;
     }
-    
+
     .neighborhood-search .search-result-wrapper .search-listing {
         padding: 0px 0px 20px 0px;
     }
-    
+
     .clients-reviews-section button.owl-prev {
         width: 40px;
         height: 40px;
     }
-    
+
     .clients-reviews-section button.owl-next {
         width: 40px;
         height: 40px;
     }
-    
+
     .clients-reviews-section button.owl-prev span {
         color: #f36f21;
         font-size: 36px;
@@ -4396,7 +4419,7 @@ footer .copyright .social-icons li a:hover {
         height: auto;
         line-height: 30px;
     }
-    
+
     .clients-reviews-section button.owl-next span {
         color: #f36f21;
         font-size: 36px;
@@ -4404,7 +4427,7 @@ footer .copyright .social-icons li a:hover {
         height: auto;
         line-height: 30px;
     }
-    
+
     .clients-reviews-section #ClientCarousel .item {
         background-color: #F4F5F8;
         width: calc(100% - 10px);
@@ -4412,50 +4435,50 @@ footer .copyright .social-icons li a:hover {
         padding: 30px 15px;
         margin: 0px 5px;
     }
-    
+
     .profile-mbl-filter .dropdown-wrap {
         display: block;
     }
-    
+
     .profile-mbl-filter .radio-group-0,
     .profile-mbl-filter .radio-group-1,
     .profile-mbl-filter .radio-group-2,
     .profile-mbl-filter .price-dropdown {
         display: inline-block;
     }
-    
+
     .profile-mbl-filter .btn-group__multiple > .btn {
         margin-top: 10px;
     }
-    
+
     .profile-mbl-filter .price-dropdown .btn-default {
         margin-top: 10px;
     }
-    
+
     .profile-contact-section .form-group label {
         font-size: 14px;
     }
-    
+
     .profile-section-padding {
         padding-top: 15px;
     }
-    
+
     .clients-reviews-section .owl-slider {
         display: block;
         margin-top: 20px;
     }
-    
+
     .agent-profile-view .agent-info p {
         line-height: 30px;
         font-size: 14px;
         margin-bottom: 15px;
     }
-    
+
     .agent-profile-view .agent-info .contact-info > div a {
         color: #7b7b7b;
         font-size: 14px;
     }
-    
+
     .agent-profile-view .agent-info h2 {
         font-size: 18px;
         font-weight: 700;
@@ -4471,11 +4494,11 @@ footer .copyright .social-icons li a:hover {
     .featured-properties .property-listing .info .info-link-text {
         width: 70%;
     }
-    
+
     .property-listing .owl-slider .property-thumb {
         width: 92% !important;
     }
-    
+
     .listing-Details .lSSlideOuter .lSPager.lSGallery img {
         height: 60px !important;
     }
@@ -4485,94 +4508,94 @@ footer .copyright .social-icons li a:hover {
         width: calc(100% / 1);
         margin: 0;
     }
-    
+
     .featured-properties .nav-pills li a {
         font-size: 16px;
         padding: 6px 12px;
     }
-    
+
     #advance-search .slider-wrapper {
         display: block;
     }
-    
+
     #advance-search .search-input-wrap {
         width: 100%;
         text-align: center;
     }
-    
+
     #advance-search .search-input-wrap input:nth-child(1) {
         margin-right: 0px;
     }
-    
+
     #advance-search .search-input-wrap input:nth-child(2) {
         margin-left: 0px;
     }
-    
+
     #advance-search .slider-wrapper .input-style {
         width: 100%;
     }
-    
+
     #advance-search .slider-wrapper #slider-range {
         width: calc(100% - 20px);
         margin: 20px auto;
     }
-    
+
     #advance-search .select-bed-options li .custom-control {
         font-size: 13px;
     }
-    
+
     .need-help-modal .select-bed-options li .custom-control-label {
         font-size: 12px;
     }
-    
+
     .check-availability-modal .small-view {
         display: block;
         text-align: center;
     }
-    
+
     .check-availability-modal .small-view .main-img {
         margin-bottom: 15px;
         margin-right: 0;
     }
-    
+
     .lSSlideOuter .lSSlideWrapper #image-gallery > li img {
         max-height: 300px;
     }
-    
+
     .let-us-hlep-form .btn-default {
         padding: 0px 20px;
         font-size: 13px;
     }
-    
+
     .let-us-help-modal .cities-list li {
         flex: 0 0 50%;
     }
-    
+
     .appointment-section {
         display: block !important;
     }
-    
+
     .appointment-agent-img-section {
         margin-bottom: 10px;
     }
-    
+
     .appointment-buttons-section a {
         width: 100% !important;
     }
-    
+
     .appointment-section .apointment-btn {
         margin-bottom: 10px;
     }
-    
+
     .listing-Details .lSSlideOuter .lSPager.lSGallery img {
         height: auto !important;
     }
-    
+
     .login-form-wrapper .row.form-group .forgot-pass {
         text-align: center;
         margin-top: 20px;
     }
-    
+
     .clients-reviews-section #ClientCarousel .item {
         width: calc(100% - 0px);
         margin: 0px 0px;

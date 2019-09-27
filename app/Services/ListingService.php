@@ -45,10 +45,10 @@ class ListingService {
      * ListingService constructor.
      */
     public function __construct() {
-        $this->lRepo = new ListingRepo();
+        $this->lRepo  = new ListingRepo();
         $this->lIRepo = new ListingImageRepo();
         $this->lARepo = new ListingTypeRepo();
-        $this->oRepo = new OpenHouseRepo();
+        $this->oRepo  = new OpenHouseRepo();
     }
 
     /**
@@ -57,29 +57,27 @@ class ListingService {
      * @return CreateListingForm
      */
     private function form($request) {
-        $form = new CreateListingForm();
-        $form->user_id = $request->user_id ?? myId();
-        $form->realty_id = $request->realty_id ?? null;
-        $form->realty_url = $request->realty_url ?? null;
-        $form->name = $request->name ?? null;
-        $form->email = $request->email ?? null;
-        $form->phone_number = $request->phone_number ?? null;
-        $form->open_house = $request->open_house ?? null;
-        $form->amenities = $request->amenities ?? null;
-        $form->street_address = $request->street_address ?? null;
+        $form                  = new CreateListingForm();
+        $form->user_id         = $request->user_id ?? myId();
+        $form->name            = $request->name ?? null;
+        $form->email           = $request->email ?? null;
+        $form->phone_number    = $request->phone_number ?? null;
+        $form->open_house      = $request->open_house ?? null;
+        $form->amenities       = $request->amenities ?? null;
+        $form->street_address  = $request->street_address ?? null;
         $form->display_address = $request->display_address ?? null;
-        $form->availability = $request->availability_date ?? $request->availability;
-        $form->visibility = $request->visibility ?? null;
-        $form->description = $request->description ?? null;
-        $form->neighborhood = $request->neighborhood ?? null;
-        $form->bedrooms = $request->bedrooms ?? null;
-        $form->baths = $request->baths ?? null;
-        $form->unit = $request->unit ?? null;
-        $form->rent = $request->rent ?? null;
-        $form->square_feet = $request->square_feet ?? null;
-        $form->map_location = $request->map_location;
-        $form->old_thumbnail = $request->old_thumbnail ?? null;
-        $form->thumbnail = $request->thumbnail ?? '';
+        $form->availability    = $request->availability_date ?? $request->availability;
+        $form->visibility      = $request->visibility ?? null;
+        $form->description     = $request->description ?? null;
+        $form->neighborhood    = $request->neighborhood ?? null;
+        $form->bedrooms        = $request->bedrooms ?? null;
+        $form->baths           = $request->baths ?? null;
+        $form->unit            = $request->unit ?? null;
+        $form->rent            = $request->rent ?? null;
+        $form->square_feet     = $request->square_feet ?? null;
+        $form->map_location    = $request->map_location;
+        $form->old_thumbnail   = $request->old_thumbnail ?? null;
+        $form->thumbnail       = $request->thumbnail ?? '';
 		$form->validate();
         return $form;
     }
@@ -93,16 +91,13 @@ class ListingService {
         DB::beginTransaction();
         if (!empty($data->thumbnail))
             $data->thumbnail = uploadImage($data->thumbnail, 'images/listing/thumbnails');
-        $data = collect($data->toArray());
-        $list = $this->lRepo->create($data->except('open_house', 'amenities')->toArray());
-        if ($list) {
-            if($this->createAmenities($list->id, $data['amenities'])) {
-                if($id = $this->createOpenHouse($list->id, $data['open_house'])) { DB::commit(); return $id; }
-                else { DB::rollBack(); return false; }
+            $data = collect($data->toArray());
+            if ($list = $this->lRepo->create($data->except('open_house', 'amenities')->toArray())) {
+                if($this->createAmenities($list->id, $data['amenities'])) {
+                    if($id = $this->createOpenHouse($list->id, $data['open_house'])) { DB::commit(); return $id; }
+                    else { DB::rollBack(); return false; }
+                }
             }
-        } else if(!empty($list) && $data->realty) {
-            DB::commit();
-        }
 
         DB::rollback();
         return false;
@@ -172,7 +167,11 @@ class ListingService {
     private function updateList($id, $listing) {
         DB::beginTransaction();
         if (!empty($listing->thumbnail)) {
-            $listing->thumbnail = uploadImage($listing->thumbnail, 'images/listing/thumbnails', true, $listing->old_thumbnail);
+            $listing->thumbnail = uploadImage(
+                                $listing->thumbnail,
+                                'images/listing/thumbnails',
+                                true,
+                                $listing->old_thumbnail);
         } else {
             $listing->thumbnail = $listing->old_thumbnail;
         }
@@ -246,17 +245,17 @@ class ListingService {
     private function searchCollection($keywords, $paginate) {
         return [
             'pending'  => $this->lRepo->search($keywords)
-                                     ->pending()
-                                     ->latest()
-                                     ->paginate($paginate, ['*'], 'pending'),
+                                      ->pending()
+                                      ->latest()
+                                      ->paginate($paginate, ['*'], 'pending'),
             'active'   => $this->lRepo->search($keywords)
-                                     ->active()
-                                     ->latest('updated_at')
-                                     ->paginate($paginate, ['*'], 'active'),
+                                      ->active()
+                                      ->latest('updated_at')
+                                      ->paginate($paginate, ['*'], 'active'),
             'inactive' => $this->lRepo->search($keywords)
-                                     ->inactive()
-                                     ->latest()
-                                     ->paginate($paginate, ['*'], 'inactive'),
+                                      ->inactive()
+                                      ->latest()
+                                      ->paginate($paginate, ['*'], 'inactive'),
         ];
     }
 
@@ -483,15 +482,5 @@ class ListingService {
      */
     public function recent($paginate) {
         return $this->sortCollection($paginate, 'updated_at', RECENT);
-    }
-
-    /**
-     * @param $neighbour
-     * @param $paginate
-     *
-     * @return mixed
-     */
-    public function fetchByNeighbour($neighbour, $paginate) {
-        return $this->lRepo->find(['neighborhood' => $neighbour])->withImages()->paginate($paginate);
     }
 }
