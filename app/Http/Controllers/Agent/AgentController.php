@@ -57,9 +57,7 @@ class AgentController extends Controller {
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function updatePassword(Request $request) {
-		return $this->service->change_password($request)
-		? success('Password has been updated successfully.', route('agent.profile'))
-		: error('Something went wrong');
-
+		$update = $this->service->changePassword($request);
+		return sendResponse($request, $update, 'Password has been updated.');
 	}
 }

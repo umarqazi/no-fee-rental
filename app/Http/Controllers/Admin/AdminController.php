@@ -54,9 +54,7 @@ class AdminController extends Controller {
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function updatePassword(Request $request) {
-		return $this->service->changePassword($request)
-		? success('Password has been updated successfully.', route('admin.showProfile'))
-		: error('Something went wrong');
-
-	}
+        $update = $this->service->changePassword($request);
+        return sendResponse($request, $update, 'Password has been updated.');
+    }
 }

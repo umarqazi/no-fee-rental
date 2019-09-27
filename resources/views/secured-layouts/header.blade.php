@@ -30,7 +30,7 @@
             <img src="{!! asset( mySelf()->profile_image ?? DUI ) !!}" alt="" />
             <div>{!! mySelf()->first_name !!} {!! mySelf()->last_name !!} <i class="fa fa-chevron-down"></i>
                 <ul>
-                    <li><a href="{!! route(whoAmI().'.showProfile') !!}">Account</a></li>
+                    <li><a href="{!! route(whoAmI().'.showProfile') !!}">Profile Settings</a></li>
                     <li><a href="{!! route(whoAmI().'.logout') !!}">Logout</a></li>
                 </ul>
             </div>
