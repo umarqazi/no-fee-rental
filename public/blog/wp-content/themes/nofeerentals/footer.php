@@ -74,7 +74,6 @@
 
 
 <?php wp_footer(); ?>
-
 <script type="text/javascript">
     function togglefooterlink() {
         if (window.matchMedia('(max-width: 1279px)').matches) {
@@ -249,24 +248,19 @@
 
 <?php wp_footer(); ?>
 
+    <script type="text/javascript">
+        
+         $( document ).ready(function() {
+        $(".menu-btn").click(function () {
+          $(".mobile-menu").slideDown();
+        });
 
+        $(".close-menu-btn").click(function () {
+          $(".mobile-menu").slideUp();
+        });
+      });
+    </script>
 
-<script>
-  $( document ).ready(function() {
-    $(".menu-btn").click(function () {
-      $(".mobile-menu").slideDown();
-    });
+ </body>
 
-    $(".close-menu-btn").click(function () {
-      $(".mobile-menu").slideUp();
-    });
-  });
-                    $(".close-menu-btn").click(function() {
-                        $(".mobile-menu").slideUp();
-                    });
-                });
-            </script>
-
-            </body>
-
-            </html>
+</html>

@@ -37,7 +37,7 @@ $(() => {
             },
 
             600: {
-                items: 3
+                items: 1
             },
 
             1024: {
@@ -104,46 +104,46 @@ $(() => {
         $('#neighborhood_content_view').attr('readonly', true);
     });
 
-    $('#neighborhoods_table').DataTable({
-        serverSide: true,
-        processing: true,
-        "ajax": {
-            "url": "/admin/get-neighborhoods"
-        },
-        "columns": [
-            {data: "id", name: "id"},
-            {data: "name", name: "name"},
-            {data: "content", name: "content"}
-        ],
-        columnDefs: [
-            {
-                render: (data, type, row) => {
-                    return row.id;
-                },
-                targets: 0
-            },
-            {
-                render: (data, type, row) => {
-                    return row.name;
-                },
-                targets: 1
-            },
-            {
-                render: (data, type, row) => {
-                    return row.content;
-                },
-                targets: 2
-            },
-            {
-                render: (data, type, row) => {
-                    return `<i class="fa fa-eye action-btn" id="viewNeighborhoodContent" ref_id="${row.id}" route="/admin/neighborhood/edit/${row.id}"></i>
-                            <i class="fa fa-edit px-2 action-btn" id="updateNeighborhood" ref_id="${row.id}" route="/admin/neighborhood/edit/${row.id}"></i>
-                            <i class="fa fa-trash action-btn" id="deleteNeighborhood" ref_id="${row.id}" route="/admin/neighborhood/delete/${row.id}"></i>`;
-                },
-                targets: 3
-            }
-        ]
-    });
+    // $('#neighborhoods_table').DataTable({
+    //     serverSide: true,
+    //     processing: true,
+    //     "ajax": {
+    //         "url": "/admin/get-neighborhoods"
+    //     },
+    //     "columns": [
+    //         {data: "id", name: "id"},
+    //         {data: "name", name: "name"},
+    //         {data: "content", name: "content"}
+    //     ],
+    //     columnDefs: [
+    //         {
+    //             render: (data, type, row) => {
+    //                 return row.id;
+    //             },
+    //             targets: 0
+    //         },
+    //         {
+    //             render: (data, type, row) => {
+    //                 return row.name;
+    //             },
+    //             targets: 1
+    //         },
+    //         {
+    //             render: (data, type, row) => {
+    //                 return row.content;
+    //             },
+    //             targets: 2
+    //         },
+    //         {
+    //             render: (data, type, row) => {
+    //                 return `<i class="fa fa-eye action-btn" id="viewNeighborhoodContent" ref_id="${row.id}" route="/admin/neighborhood/edit/${row.id}"></i>
+    //                         <i class="fa fa-edit px-2 action-btn" id="updateNeighborhood" ref_id="${row.id}" route="/admin/neighborhood/edit/${row.id}"></i>
+    //                         <i class="fa fa-trash action-btn" id="deleteNeighborhood" ref_id="${row.id}" route="/admin/neighborhood/delete/${row.id}"></i>`;
+    //             },
+    //             targets: 3
+    //         }
+    //     ]
+    // });
 
 
     function reloadTable() {

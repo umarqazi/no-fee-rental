@@ -129,7 +129,7 @@ class Listing extends Model {
 	 * @return mixed
 	 */
 	public function scopeWithAll($query) {
-		return $query->with(['agent', 'listingTypes', 'listingImages', 'openHouses']);
+		return $query->with(['agent.company.company', 'listingTypes', 'listingImages', 'openHouses']);
 	}
 
 	/**
@@ -196,7 +196,24 @@ class Listing extends Model {
 
     /**
      * @param $query
-     * @param $for
+     *
+     * @return mixed
+     */
+    public function scopeCheaper($query) {
+	    return $query->orderBy('rent', CHEAPER);
+    }
+
+    /**
+     * @param $query
+     *
+     * @return mixed
+     */
+    public function scopeRecent($query) {
+        return $query->orderBy('created_at', RECENT);
+    }
+
+    /**
+     * @param $query
      *
      * @return mixed
      */

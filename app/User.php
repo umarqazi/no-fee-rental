@@ -46,7 +46,7 @@ class User extends Authenticatable implements CanResetPassword {
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function withCompany() {
+    public function company() {
         return $this->hasMany(AgentCompany::class, 'agent_id');
     }
 
@@ -90,7 +90,7 @@ class User extends Authenticatable implements CanResetPassword {
      * @return mixed
      */
     public function scopeWithCompany($query, $id) {
-        return $query->whereHas('withCompany', function($q) use ($id) {
+        return $query->whereHas('company', function($q) use ($id) {
             $q->where('company_id', $id);
         });
     }

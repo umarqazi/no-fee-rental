@@ -44,7 +44,7 @@ class UserService {
     private $cRepo;
 
     /**
-     * @var CompanyRepo
+     * @var AgentCompanyRepo
      */
     private $acRepo;
 

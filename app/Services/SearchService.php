@@ -114,7 +114,28 @@ class SearchService {
      * @return mixed
      */
     public function fetchQuery($paginate) {
-        $listings = $this->repo->fetch($this->query)->paginate($paginate);
+        $listings = $this->repo->fetch($this->query)->orderBy('is_featured', '1')->paginate($paginate);
         return compact('listings');
+    }
+
+    /**
+     * sort result by rent
+     */
+    public function cheaper() {
+        $this->query->cheaper();
+    }
+
+    /**
+     * sort result by recent
+     */
+    public function recent() {
+        $this->query->recent();
+    }
+
+    /**
+     * sort result by pet policy
+     */
+    public function petPolicy() {
+        $this->query->policy();
     }
 }

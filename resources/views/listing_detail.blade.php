@@ -117,7 +117,7 @@
                     <div class="appointment-section">
                         <div class="appointment-agent-img-section">
                             <a href="#"><img src="/assets/images/careers-icon.png" alt="apointment"></a>
-                            <p> 1 agent from <strong>Arraynyc </strong></p>
+                            <p> 1 agent from <strong>{{$listing->agent->company[0]->company["company"]}} </strong></p>
                         </div>
                         <div class="appointment-buttons-section">
                             @if(compareDates($listing->open_house, now()) && !isAdmin())
