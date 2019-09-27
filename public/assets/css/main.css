@@ -941,7 +941,7 @@ h3 {
     height: 230px;
     margin: 0px 15px;
     overflow: hidden;
-    width: calc(100% / 4 - 30px);
+    width: calc(100% / 3 - 30px);
     margin-bottom: 30px;
     position: relative;
 }
@@ -1668,6 +1668,7 @@ footer .copyright .social-icons li a:hover {
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    min-height: 131px;
 }
 
 .contact-info .info img {
@@ -2050,7 +2051,7 @@ footer .copyright .social-icons li a:hover {
 
 #boxscroll2 {
     margin-top: 20px;
-    height: 450px;
+    height: 470px;
     overflow-y: auto;
     overflow-x: hidden;
 }
@@ -2600,7 +2601,7 @@ footer .copyright .social-icons li a:hover {
 .featured-properties .property-listing .info a:active,
 .featured-properties .property-listing .info a:focus {
     color: #fff;
-    background: #01091d;
+    background: #223971;
     transition: all 0.3s ease-in-out;
 }
 
@@ -3370,18 +3371,16 @@ footer .copyright .social-icons li a:hover {
 
 @media (min-width: 1367px) {
     .container-lg {
-        max-width: 80%;
+        max-width: 1600px;
     }
-}
-
-
-/*@media (max-width: 1260px){
-  .modal-dialog {
-    margin:.5rem !important;
-  }*/
-
+    .featured-properties .property-listing .property-thumb {
+        width: calc(100% / 4 - 30px); 
+    }
 
 }
+
+
+
 @media (max-width: 991px) {
     #appointmentModal .padding-leftt-0 {
         padding-left: 15px;
@@ -3463,6 +3462,22 @@ footer .copyright .social-icons li a:hover {
     #advance-search .search-input-wrap {
         text-align: center;
     }
+    footer .footer-wrapper .newsletter .newsletter-form .btn-default:hover,
+    footer .footer-wrapper .newsletter .newsletter-form .btn-default:active,
+    footer .footer-wrapper .newsletter .newsletter-form .btn-default:focus{
+        background: #04102d;
+    }
+    .contact-map iframe{
+        margin-top: 20px;
+        height: 400px;
+    }
+    .contact-info .info img{
+        max-width: 45px;
+    }
+    .contact-info .info h6{
+        font-size: 20px;
+    }
+
 }
 @media (min-width: 576px) {
     #appointmentModal .modal-dialog {
@@ -3541,8 +3556,8 @@ footer .copyright .social-icons li a:hover {
         background: url(../images/banner-bg.jpg) no-repeat center center;
     }
     
-    .neighborhood-search .search-result-wrapper {
-        display: block;
+    .neighborhood-search .search-result-wrapper .search-listing .featured-properties .property-listing .property-thumb{
+        width: calc(100% / 1 - 30px);
     }
     
     .search-result-wrapper .map-wrapper iframe {
@@ -3596,7 +3611,7 @@ footer .copyright .social-icons li a:hover {
     
     .collapse-menu {
         display: none;
-        width: 300px;
+        width: 288px;
         margin: 0 auto 10px auto;
     }
     
@@ -3666,6 +3681,15 @@ footer .copyright .social-icons li a:hover {
     }
     footer .footer-wrapper .newsletter .newsletter-form .fld{
         padding-right: 10px;
+    }
+    .neighborhood-search .search-result-wrapper .search-listing .featured-properties .property-listing .property-thumb:nth-last-of-type(2){
+        margin-bottom: 30px;
+    }
+    .neighborhood-search .search-result-wrapper .search-listing .featured-properties .property-listing .property-thumb:last-child{
+        margin-bottom: 0;
+    }
+    .neighborhood-search .search-result-wrapper .search-listing{
+        padding: 0px 0px 0px 15px;
     }
 }
 @media only screen and (max-width: 991px) {
@@ -4019,12 +4043,16 @@ footer .copyright .social-icons li a:hover {
     
     #mobile-map-listing-view {
         width: 100%;
-        height: 370px;
+       height: 500px;
         position: absolute;
         z-index: 9;
         top: 40px;
         left: 0;
         display: none;
+    }
+    
+    .neighborhood-search .search-result-wrapper .search-listing{
+        padding: 0px 0px 0px 0px;
     }
     
     .listing-Details .lSSlideOuter .lSPager.lSGallery img {
@@ -4051,6 +4079,9 @@ footer .copyright .social-icons li a:hover {
     
     #advance-search .slider-wrapper .search-input-wrap #slider-range {
         width: 100% !important;
+    }
+    .neighborhood-search .search-result-wrapper .search-listing .featured-properties .property-listing .property-thumb{
+        width: calc(100% / 2 - 30px);
     }
 }
 
@@ -4148,6 +4179,7 @@ footer .copyright .social-icons li a:hover {
         height: auto;
         overflow: inherit;
         margin: 30px 0px;
+        width: 100%;
     }
     
     .neighborhood-search .search-result-wrapper .search-listing .featured-properties .property-listing.mobile-listing .property-thumb {
@@ -4425,6 +4457,12 @@ footer .copyright .social-icons li a:hover {
     .agent-profile-view .agent-info h2 {
         font-size: 18px;
         font-weight: 700;
+    }
+    .neighborhood-search .search-result-wrapper{
+        display: block;
+    }
+    #mobile-map-listing-view{
+        height: 375px;
     }
 }
 @media only screen and (min-width: 577px) and (max-width: 767px) {
