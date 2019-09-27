@@ -3371,7 +3371,8 @@ footer .copyright .social-icons li a:hover {
 
 @media (min-width: 1367px) {
     .container-lg {
-        max-width: 1600px;
+        max-width: 1400px;
+
     }
     .featured-properties .property-listing .property-thumb {
         width: calc(100% / 4 - 30px);
