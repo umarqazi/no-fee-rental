@@ -74,8 +74,16 @@
 
 
 <?php wp_footer(); ?>
-
-
+<script type="text/javascript">
+    function togglefooterlink() {
+        if (window.matchMedia('(max-width: 1279px)').matches) {
+            $(".collapseabe-link").click(function(){
+                $(this).parent().find('.collapse-menu').slideToggle();
+            });
+        }
+    }
+    togglefooterlink();
+</script>
 <!-- Login Modal -->
     <div class="modal fade login-modal" id="login">
         <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
@@ -259,8 +267,11 @@
       $(".mobile-menu").slideUp();
     });
   });
-</script>
-
-            </body>
+                    $(".close-menu-btn").click(function() {
+                        $(".mobile-menu").slideUp();
+                    });
+                });
+            </script>
+          </body>
 
             </html>

@@ -1,16 +1,16 @@
 <?php return array (
   'app' => 
   array (
-    'name' => 'No_fee_rental',
+    'name' => 'Laravel',
     'env' => 'local',
     'debug' => true,
-    'url' => 'http://no-fee-rental.test/',
+    'url' => 'http://no-fee-rental.teamtechverx.com/',
     'asset_url' => NULL,
     'timezone' => 'UTC',
     'locale' => 'en',
     'fallback_locale' => 'en',
     'faker_locale' => 'en_US',
-    'key' => 'base64:bSza7/XjZ4hzbQz10PqzhyMBZj4mklD+CM2TyyvsubQ=',
+    'key' => 'base64:XqJnbI4NjFVNdAKKr4JOpf93TqgklEszLfvheWw4wb8=',
     'cipher' => 'AES-256-CBC',
     'providers' => 
     array (
@@ -38,10 +38,12 @@
       21 => 'Illuminate\\View\\ViewServiceProvider',
       22 => 'Collective\\Html\\HtmlServiceProvider',
       23 => 'Yajra\\DataTables\\DataTablesServiceProvider',
-      24 => 'App\\Providers\\AppServiceProvider',
-      25 => 'App\\Providers\\AuthServiceProvider',
-      26 => 'App\\Providers\\EventServiceProvider',
-      27 => 'App\\Providers\\RouteServiceProvider',
+      24 => 'MaddHatter\\LaravelFullcalendar\\ServiceProvider',
+      25 => 'App\\Providers\\AppServiceProvider',
+      26 => 'App\\Providers\\AuthServiceProvider',
+      27 => 'App\\Providers\\BroadcastServiceProvider',
+      28 => 'App\\Providers\\EventServiceProvider',
+      29 => 'App\\Providers\\RouteServiceProvider',
     ),
     'aliases' => 
     array (
@@ -81,6 +83,7 @@
       'Form' => 'Collective\\Html\\FormFacade',
       'HTML' => 'Collective\\Html\\HtmlFacade',
       'DataTables' => 'Yajra\\DataTables\\Facades\\DataTables',
+      'Calendar' => 'MaddHatter\\LaravelFullcalendar\\Facades\\Calendar',
     ),
   ),
   'auth' => 
@@ -185,7 +188,7 @@
       'file' => 
       array (
         'driver' => 'file',
-        'path' => '/var/www/html/no-fee-rental/storage/framework/cache/data',
+        'path' => '/home/deployer/no-fee-rental/storage/framework/cache/data',
       ),
       'memcached' => 
       array (
@@ -215,7 +218,7 @@
         'connection' => 'cache',
       ),
     ),
-    'prefix' => 'no_fee_rental_cache',
+    'prefix' => 'laravel_cache',
   ),
   'database' => 
   array (
@@ -225,7 +228,7 @@
       'sqlite' => 
       array (
         'driver' => 'sqlite',
-        'database' => 'no-fee-rental',
+        'database' => 'no_fee_rental',
         'prefix' => '',
         'foreign_key_constraints' => true,
       ),
@@ -234,9 +237,9 @@
         'driver' => 'mysql',
         'host' => '127.0.0.1',
         'port' => '3306',
-        'database' => 'no-fee-rental',
+        'database' => 'no_fee_rental',
         'username' => 'root',
-        'password' => 'techverx@123',
+        'password' => 'gQx!)vv523~',
         'unix_socket' => '',
         'charset' => 'utf8mb4',
         'collation' => 'utf8mb4_unicode_ci',
@@ -250,9 +253,9 @@
         'driver' => 'pgsql',
         'host' => '127.0.0.1',
         'port' => '3306',
-        'database' => 'no-fee-rental',
+        'database' => 'no_fee_rental',
         'username' => 'root',
-        'password' => 'techverx@123',
+        'password' => 'gQx!)vv523~',
         'charset' => 'utf8',
         'prefix' => '',
         'prefix_indexes' => true,
@@ -264,9 +267,9 @@
         'driver' => 'sqlsrv',
         'host' => '127.0.0.1',
         'port' => '3306',
-        'database' => 'no-fee-rental',
+        'database' => 'no_fee_rental',
         'username' => 'root',
-        'password' => 'techverx@123',
+        'password' => 'gQx!)vv523~',
         'charset' => 'utf8',
         'prefix' => '',
         'prefix_indexes' => true,
@@ -341,72 +344,6 @@
       'options' => 0,
     ),
   ),
-  'excel' => 
-  array (
-    'exports' => 
-    array (
-      'chunk_size' => 1000,
-      'pre_calculate_formulas' => false,
-      'csv' => 
-      array (
-        'delimiter' => ',',
-        'enclosure' => '"',
-        'line_ending' => '
-',
-        'use_bom' => false,
-        'include_separator_line' => false,
-        'excel_compatibility' => false,
-      ),
-    ),
-    'imports' => 
-    array (
-      'read_only' => true,
-      'heading_row' => 
-      array (
-        'formatter' => 'slug',
-      ),
-      'csv' => 
-      array (
-        'delimiter' => ',',
-        'enclosure' => '"',
-        'escape_character' => '\\',
-        'contiguous' => false,
-        'input_encoding' => 'UTF-8',
-      ),
-    ),
-    'extension_detector' => 
-    array (
-      'xlsx' => 'Xlsx',
-      'xlsm' => 'Xlsx',
-      'xltx' => 'Xlsx',
-      'xltm' => 'Xlsx',
-      'xls' => 'Xls',
-      'xlt' => 'Xls',
-      'ods' => 'Ods',
-      'ots' => 'Ods',
-      'slk' => 'Slk',
-      'xml' => 'Xml',
-      'gnumeric' => 'Gnumeric',
-      'htm' => 'Html',
-      'html' => 'Html',
-      'csv' => 'Csv',
-      'tsv' => 'Csv',
-      'pdf' => 'Dompdf',
-    ),
-    'value_binder' => 
-    array (
-      'default' => 'Maatwebsite\\Excel\\DefaultValueBinder',
-    ),
-    'transactions' => 
-    array (
-      'handler' => 'db',
-    ),
-    'temporary_files' => 
-    array (
-      'local_path' => '/tmp',
-      'remote_disk' => NULL,
-    ),
-  ),
   'features' => 
   array (
     'listing_types' => 
@@ -421,28 +358,15 @@
     array (
       'listing_type' => 
       array (
-        0 => 'By Owner',
+        0 => 'Open',
         1 => 'Exclusive',
       ),
       'pet_policy' => 
       array (
         0 => 'Cats Allowed',
         1 => 'Dogs Allowed',
-      ),
-      'unit_feature' => 
-      array (
-        0 => 'Furnished',
-        1 => 'Laundry In Unit',
-        2 => 'Parking Space',
-        3 => 'Outdoor Space',
-        4 => 'Abdullah',
-      ),
-      'building_feature' => 
-      array (
-        0 => 'Door Man',
-        1 => 'Fitness Centre',
-        2 => 'Storage Facility',
-        3 => 'Elevator',
+        2 => 'Pets Allowed',
+        3 => 'Pets Not Allowed',
       ),
       'amenities' => 
       array (
@@ -455,7 +379,17 @@
         6 => 'In-Unit Laundry',
         7 => 'On-Site Parking',
         8 => 'Terrace',
-        9 => 'Pets Allowed',
+        9 => 'Door Man',
+        10 => 'Fitness Centre',
+        11 => 'Storage Facility',
+        12 => 'Elevator',
+      ),
+      'unit_feature' => 
+      array (
+        0 => 'Furnished',
+        1 => 'Laundry In Unit',
+        2 => 'Parking Space',
+        3 => 'Outdoor Space',
       ),
     ),
     'available' => 
@@ -463,6 +397,7 @@
       0 => 'Not Available',
       1 => 'Available',
       2 => 'Immediately',
+      3 => 'By Specific Date',
     ),
   ),
   'filesystems' => 
@@ -474,13 +409,13 @@
       'local' => 
       array (
         'driver' => 'local',
-        'root' => '/var/www/html/no-fee-rental/storage/app',
+        'root' => '/home/deployer/no-fee-rental/storage/app',
       ),
       'public' => 
       array (
         'driver' => 'local',
-        'root' => '/var/www/html/no-fee-rental/storage/app/public',
-        'url' => 'http://no-fee-rental.test//storage',
+        'root' => '/home/deployer/no-fee-rental/storage/app/public',
+        'url' => 'http://no-fee-rental.teamtechverx.com//storage',
         'visibility' => 'public',
       ),
       's3' => 
@@ -489,7 +424,7 @@
         'key' => NULL,
         'secret' => NULL,
         'region' => NULL,
-        'bucket' => NULL,
+        'bucket' => 'ecs-staging',
         'url' => NULL,
       ),
     ),
@@ -533,13 +468,13 @@
       'single' => 
       array (
         'driver' => 'single',
-        'path' => '/var/www/html/no-fee-rental/storage/logs/laravel.log',
+        'path' => '/home/deployer/no-fee-rental/storage/logs/laravel.log',
         'level' => 'debug',
       ),
       'daily' => 
       array (
         'driver' => 'daily',
-        'path' => '/var/www/html/no-fee-rental/storage/logs/laravel.log',
+        'path' => '/home/deployer/no-fee-rental/storage/logs/laravel.log',
         'level' => 'debug',
         'days' => 14,
       ),
@@ -595,15 +530,15 @@
       'name' => 'Example',
     ),
     'encryption' => 'tls',
-    'username' => 'codinghackers@gmail.com',
-    'password' => '128232Yousuf',
+    'username' => 'muhammad.adeel@gems.techverx.com',
+    'password' => 'kammalik3256789',
     'sendmail' => '/usr/sbin/sendmail -bs',
     'markdown' => 
     array (
       'theme' => 'default',
       'paths' => 
       array (
-        0 => '/var/www/html/no-fee-rental/resources/views/vendor/mail',
+        0 => '/home/deployer/no-fee-rental/resources/views/vendor/mail',
       ),
     ),
     'log_channel' => NULL,
@@ -940,16 +875,72 @@
   ),
   'newsletter' => 
   array (
-    'apiKey' => NULL,
+    'apiKey' => 'd140b88234ac0ca14567286c3a62d2d7-us3',
     'defaultListName' => 'subscribers',
     'lists' => 
     array (
       'subscribers' => 
       array (
-        'id' => NULL,
+        'id' => '51938a6f62',
       ),
     ),
     'ssl' => true,
+  ),
+  'openHouse' => 
+  array (
+    0 => 'Select Time',
+    1 => '8:00 am',
+    2 => '8:15 am',
+    3 => '8:30 am',
+    4 => '8:45 am',
+    5 => '9:00 am',
+    6 => '9:15 am',
+    7 => '9:30 am',
+    8 => '9:45 am',
+    9 => '10:00 am',
+    10 => '10:15 am',
+    11 => '10:30 am',
+    12 => '10:45 am',
+    13 => '11:00 am',
+    14 => '11:15 am',
+    15 => '11:30 am',
+    16 => '11:45 am',
+    17 => '12:00 pm',
+    18 => '12:15 pm',
+    19 => '12:30 pm',
+    20 => '12:45 pm',
+    21 => '1:00 pm',
+    22 => '1:15 pm',
+    23 => '1:30 pm',
+    24 => '1:45 pm',
+    25 => '2:00 pm',
+    26 => '2:15 pm',
+    27 => '2:30 pm',
+    28 => '2:45 pm',
+    29 => '3:00 pm',
+    30 => '3:15 pm',
+    31 => '3:30 pm',
+    32 => '3:45 pm',
+    33 => '4:00 pm',
+    34 => '4:15 pm',
+    35 => '4:30 pm',
+    36 => '4:45 pm',
+    37 => '5:00 pm',
+    38 => '5:15 pm',
+    39 => '5:30 pm',
+    40 => '5:45 pm',
+    41 => '6:00 pm',
+    42 => '6:15 pm',
+    43 => '6:30 pm',
+    44 => '6:45 pm',
+    45 => '7:00 pm',
+    46 => '7:15 pm',
+    47 => '7:30 pm',
+    48 => '7:45 pm',
+    49 => '8:00 pm',
+    50 => '8:15 pm',
+    51 => '8:30 pm',
+    52 => '8:45 pm',
   ),
   'queue' => 
   array (
@@ -1038,7 +1029,7 @@
     'lifetime' => '120',
     'expire_on_close' => false,
     'encrypt' => false,
-    'files' => '/var/www/html/no-fee-rental/storage/framework/sessions',
+    'files' => '/home/deployer/no-fee-rental/storage/framework/sessions',
     'connection' => NULL,
     'table' => 'sessions',
     'store' => NULL,
@@ -1047,7 +1038,7 @@
       0 => 2,
       1 => 100,
     ),
-    'cookie' => 'no_fee_rental_session',
+    'cookie' => 'laravel_session',
     'path' => '/',
     'domain' => NULL,
     'secure' => false,
@@ -1058,9 +1049,9 @@
   array (
     'paths' => 
     array (
-      0 => '/var/www/html/no-fee-rental/resources/views',
+      0 => '/home/deployer/no-fee-rental/resources/views',
     ),
-    'compiled' => '/var/www/html/no-fee-rental/storage/framework/views',
+    'compiled' => '/home/deployer/no-fee-rental/storage/framework/views',
   ),
   'debug-server' => 
   array (
@@ -1070,6 +1061,265 @@
   array (
     'proxies' => NULL,
     'headers' => 30,
+  ),
+  'excel' => 
+  array (
+    'cache' => 
+    array (
+      'enable' => true,
+      'driver' => 'memory',
+      'settings' => 
+      array (
+        'memoryCacheSize' => '32MB',
+        'cacheTime' => 600,
+      ),
+      'memcache' => 
+      array (
+        'host' => 'localhost',
+        'port' => 11211,
+      ),
+      'dir' => '/home/deployer/no-fee-rental/storage/cache',
+    ),
+    'properties' => 
+    array (
+      'creator' => 'Maatwebsite',
+      'lastModifiedBy' => 'Maatwebsite',
+      'title' => 'Spreadsheet',
+      'description' => 'Default spreadsheet export',
+      'subject' => 'Spreadsheet export',
+      'keywords' => 'maatwebsite, excel, export',
+      'category' => 'Excel',
+      'manager' => 'Maatwebsite',
+      'company' => 'Maatwebsite',
+    ),
+    'sheets' => 
+    array (
+      'pageSetup' => 
+      array (
+        'orientation' => 'portrait',
+        'paperSize' => '9',
+        'scale' => '100',
+        'fitToPage' => false,
+        'fitToHeight' => true,
+        'fitToWidth' => true,
+        'columnsToRepeatAtLeft' => 
+        array (
+          0 => '',
+          1 => '',
+        ),
+        'rowsToRepeatAtTop' => 
+        array (
+          0 => 0,
+          1 => 0,
+        ),
+        'horizontalCentered' => false,
+        'verticalCentered' => false,
+        'printArea' => NULL,
+        'firstPageNumber' => NULL,
+      ),
+    ),
+    'creator' => 'Maatwebsite',
+    'csv' => 
+    array (
+      'delimiter' => ',',
+      'enclosure' => '"',
+      'line_ending' => '
+',
+      'use_bom' => false,
+    ),
+    'export' => 
+    array (
+      'autosize' => true,
+      'autosize-method' => 'approx',
+      'generate_heading_by_indices' => true,
+      'merged_cell_alignment' => 'left',
+      'calculate' => false,
+      'includeCharts' => false,
+      'sheets' => 
+      array (
+        'page_margin' => false,
+        'nullValue' => NULL,
+        'startCell' => 'A1',
+        'strictNullComparison' => false,
+      ),
+      'store' => 
+      array (
+        'path' => '/home/deployer/no-fee-rental/storage/exports',
+        'returnInfo' => false,
+      ),
+      'pdf' => 
+      array (
+        'driver' => 'DomPDF',
+        'drivers' => 
+        array (
+          'DomPDF' => 
+          array (
+            'path' => '/home/deployer/no-fee-rental/vendor/dompdf/dompdf/',
+          ),
+          'tcPDF' => 
+          array (
+            'path' => '/home/deployer/no-fee-rental/vendor/tecnick.com/tcpdf/',
+          ),
+          'mPDF' => 
+          array (
+            'path' => '/home/deployer/no-fee-rental/vendor/mpdf/mpdf/',
+          ),
+        ),
+      ),
+    ),
+    'filters' => 
+    array (
+      'registered' => 
+      array (
+        'chunk' => 'Maatwebsite\\Excel\\Filters\\ChunkReadFilter',
+      ),
+      'enabled' => 
+      array (
+      ),
+    ),
+    'import' => 
+    array (
+      'heading' => 'slugged',
+      'startRow' => 1,
+      'separator' => '_',
+      'slug_whitelist' => '._',
+      'includeCharts' => false,
+      'to_ascii' => true,
+      'encoding' => 
+      array (
+        'input' => 'UTF-8',
+        'output' => 'UTF-8',
+      ),
+      'calculate' => true,
+      'ignoreEmpty' => false,
+      'force_sheets_collection' => false,
+      'dates' => 
+      array (
+        'enabled' => true,
+        'format' => false,
+        'columns' => 
+        array (
+        ),
+      ),
+      'sheets' => 
+      array (
+        'test' => 
+        array (
+          'firstname' => 'A2',
+        ),
+      ),
+    ),
+    'views' => 
+    array (
+      'styles' => 
+      array (
+        'th' => 
+        array (
+          'font' => 
+          array (
+            'bold' => true,
+            'size' => 12,
+          ),
+        ),
+        'strong' => 
+        array (
+          'font' => 
+          array (
+            'bold' => true,
+            'size' => 12,
+          ),
+        ),
+        'b' => 
+        array (
+          'font' => 
+          array (
+            'bold' => true,
+            'size' => 12,
+          ),
+        ),
+        'i' => 
+        array (
+          'font' => 
+          array (
+            'italic' => true,
+            'size' => 12,
+          ),
+        ),
+        'h1' => 
+        array (
+          'font' => 
+          array (
+            'bold' => true,
+            'size' => 24,
+          ),
+        ),
+        'h2' => 
+        array (
+          'font' => 
+          array (
+            'bold' => true,
+            'size' => 18,
+          ),
+        ),
+        'h3' => 
+        array (
+          'font' => 
+          array (
+            'bold' => true,
+            'size' => 13.5,
+          ),
+        ),
+        'h4' => 
+        array (
+          'font' => 
+          array (
+            'bold' => true,
+            'size' => 12,
+          ),
+        ),
+        'h5' => 
+        array (
+          'font' => 
+          array (
+            'bold' => true,
+            'size' => 10,
+          ),
+        ),
+        'h6' => 
+        array (
+          'font' => 
+          array (
+            'bold' => true,
+            'size' => 7.5,
+          ),
+        ),
+        'a' => 
+        array (
+          'font' => 
+          array (
+            'underline' => true,
+            'color' => 
+            array (
+              'argb' => 'FF0000FF',
+            ),
+          ),
+        ),
+        'hr' => 
+        array (
+          'borders' => 
+          array (
+            'bottom' => 
+            array (
+              'style' => 'thin',
+              'color' => 
+              array (
+                0 => 'FF000000',
+              ),
+            ),
+          ),
+        ),
+      ),
+    ),
   ),
   'tinker' => 
   array (
