@@ -222,4 +222,23 @@ $(document).ready(function() {
     }
     togglefooterlink();
 
+
+    // range slider rent calculator
+
+    $('#price-range-submit').hide();
+
+    
+
+    $(function () {
+        $("#slider-range-4").slider({
+            range: true,
+            orientation: "horizontal",
+            //max: 10000,
+            disabled: true,
+            values: [ 0, 50 ]          
+        });
+
+
+    }); 
+
 });
