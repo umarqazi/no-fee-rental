@@ -4288,6 +4288,7 @@ footer .copyright .social-icons li a:hover {
         background-size: 100%;
         width: 40px;
         height: 40px;
+        border-radius: 50%;
     }
     
     .tab-content .property-listing .owl-nav button.owl-next {
@@ -4295,6 +4296,7 @@ footer .copyright .social-icons li a:hover {
         background-size: 100%;
         width: 40px;
         height: 40px;
+        border-radius: 50%;
     }
     
     .neighborhood-search {
