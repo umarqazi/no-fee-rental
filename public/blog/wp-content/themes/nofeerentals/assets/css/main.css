@@ -440,7 +440,7 @@ h3 {
     font-weight: 600;
     text-transform: capitalize;
     padding: 0px 15px;
-    font-size: 18px;
+    font-size: 16px;
 }
 
 .header-wrapper .header-container ul.menu-links li a:hover {
@@ -541,7 +541,7 @@ h3 {
     line-height: 43px;
     padding: 0px 24px;
     border: none;
-    font-size: 15px;
+    font-size: 13px;
     font-weight: 600;
     -webkit-border-top-left-radius: 30px;
     -webkit-border-bottom-left-radius: 30px;
@@ -584,7 +584,7 @@ h3 {
 
 .header-wrapper .header-container .header-right-wrapper .login-user a {
     display: block;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 600;
 }
 
@@ -1181,7 +1181,7 @@ footer .footer-wrapper .newsletter .newsletter-form .fld {
     height: 40px;
     flex: 60%;
     font-size: 13px;
-    padding-right: 10px;
+    padding-right: 90px;
     width: 100%;
 }
 
@@ -2802,7 +2802,9 @@ footer {
     margin-bottom: 30px;
 }
 
-
+.form-group label.error{
+    padding-top: 8px;
+}
 /*Responsive style*/
 
 @media only screen and (max-width: 1599px) {
@@ -3157,6 +3159,7 @@ footer .footer-wrapper img{
     width: 290px;
     margin: 0 auto;
     padding-top: 15px;
+}
 footer .footer-wrapper img{
   width: 210px;
   margin: 0 auto;

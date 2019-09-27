@@ -439,7 +439,7 @@ h3 {
 }
 
 .header-wrapper .header-container .logo {
-    max-width: 240px;
+    max-width: 210px;
     margin: 12px 0px;
 }
 
@@ -602,7 +602,7 @@ h3 {
 
 .header-wrapper .header-container .header-right-wrapper .login-user a {
     display: block;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 600;
 }
 
@@ -1948,7 +1948,7 @@ footer .copyright .social-icons li a:hover {
     background-color: #f36f21;
     color: #fff;
     font-size: 16px;
-    z-index: 99;
+    z-index: 19;
     line-height: normal;
     padding: 0;
     width: 32px;
@@ -2590,12 +2590,7 @@ footer .copyright .social-icons li a:hover {
     object-fit: cover;
 }
 
-.footer-wrapper .fa-sort-down {
-    display: none;
-    font-size: 12px;
-    position: relative;
-    bottom: 0;
-}
+
 
 .featured-properties .property-listing .info a {
     display: inline-block;
@@ -3367,7 +3362,9 @@ footer .copyright .social-icons li a:hover {
     border-bottom: #ddd solid 1px;
     margin-bottom: 30px;
 }
-
+.form-group label.error{
+    padding-top: 8px;
+}
 
 /*profile contact*/
 
@@ -3592,7 +3589,7 @@ footer .copyright .social-icons li a:hover {
     }
     
     .newsletter {
-        width: 300px;
+        width: 288px;
         margin: 0 auto;
         padding-top: 15px;
     }
@@ -3603,10 +3600,7 @@ footer .copyright .social-icons li a:hover {
         margin: 0 auto 10px auto;
     }
     
-    .footer-wrapper .fa-sort-down {
-        display: inline-block;
-    }
-    
+   
     footer .footer-wrapper .newsletter .newsletter-form {
         flex-direction: column;
     }
@@ -3624,7 +3618,7 @@ footer .copyright .social-icons li a:hover {
     
     footer .footer-wrapper h4 {
         margin-bottom: 15px;
-        width: 300px;
+        width: 288px;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -3669,6 +3663,9 @@ footer .copyright .social-icons li a:hover {
     
     .footer-wrapper .fas.fa-angle-down {
         display: block;
+    }
+    footer .footer-wrapper .newsletter .newsletter-form .fld{
+        padding-right: 10px;
     }
 }
 @media only screen and (max-width: 991px) {
@@ -3739,6 +3736,7 @@ footer .copyright .social-icons li a:hover {
         color: #fff;
         text-transform: uppercase;
         padding: 12px 0px;
+        font-size: 16px;
     }
     
     .mobile-menu .mobile-nav > ul > li > a i {
@@ -4291,6 +4289,7 @@ footer .copyright .social-icons li a:hover {
         position: relative;
         margin-top: 10px;
         bottom: 0;
+        width: 100%;
     }
     /*.listing-detail-container .listing-info .product-title {
     display: block;
