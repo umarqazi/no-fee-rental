@@ -21,20 +21,19 @@ $(() => {
     	$('#img').attr('style', 'width: 180px;height: 145px;margin-bottom: 15px;');
     });
 
-    $(".grid-view-btn").click(function(){
-        localStorage.setItem('grid-view', 1 );
+    $(".grid-view-btn").on('click', function(){
+        localStorage.setItem('grid-view', JSON.stringify(1));
     });
 
-    $(".list-view-btn").click(function(){
-        localStorage.removeItem('grid-view', 1 );
+    $(".list-view-btn").on('click', function(){
+        localStorage.removeItem('grid-view');
     });
 
     if(localStorage.getItem('tab')) {
         $body.find('.nav-item, .active').removeClass('active');
         $('span.page-link').parents('li.page-item').addClass('active');
         $(`a[href="#${localStorage.getItem('tab')}"]`).addClass('active');
-        $('.tab-content').find('#'+localStorage.getItem('tab')).removeClass('fade');
-        $('.tab-content').find('#'+localStorage.getItem('tab')).addClass('active');
+        $('.tab-content').find('#'+localStorage.getItem('tab')).addClass('active').removeClass('fade');
         localStorage.removeItem('tab');
     } else {
         $('.nav-link:first, .tab-content > .tab-pane:first').addClass('active');
@@ -70,6 +69,25 @@ $(() => {
         setTimeout(() => {
             $('#autofill').val($(this).val());
         }, 200)
+    });
+
+    $body.on('keyup', '#controls', function() {
+      autoComplete( document.getElementById('controls'));
+    });
+
+    $body.on('blur', '#controls', function() {
+        setTimeout(() => {
+            addrToLatLng($('body').find('#controls').val()).then(coords => {
+                coords = {
+                    latitude: coords[0].geometry.location.lat(),
+                    longitude: coords[0].geometry.location.lng()
+                };
+                $('input[name=map_location]').val(JSON.stringify(coords));
+                setMap(coords, document.getElementById('map'));
+                marker = addMarker(coords);
+                showInfoWindow($('body').find('#controls').val(), marker);
+            });
+        }, 500);
     });
 });
 

@@ -78,16 +78,14 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-sm-12 text-left contact-page">
+                        <button class="btn-default">Submit</button>
+                    </div>
                         {!! Form::close() !!}
                     </div>
                      <div class="col-lg-6">
                         <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3403.3395820921846!2d74.27331331448124!3d31.459843557277523!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2s!4v1569249518976!5m2!1sen!2s" width="100%" height="100%" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
                     </div>
-
-                    <div class="col-sm-12 text-left contact-page">
-                        <button class="btn-default">Submit</button>
-                    </div>
-
                 </div>
             </div>
         </div>

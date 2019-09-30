@@ -1370,7 +1370,9 @@ footer .copyright .social-icons li a:hover {
 }
 /*contact us*/
 .inner-pages.contact-us{
-  padding: 100px 0px 120px;
+  padding: 20px 0px 120px;
+  margin-top: 90px;
+  border-top: 1px solid #eee;
 }
 .contact-banner{
   background-image: url('..//images/rental-guide-img-6.jpg');
@@ -1385,14 +1387,14 @@ background-size: cover;
   margin-bottom: 30px;
 }
 .contact-info .info {
-  margin-bottom: 30px;
+  margin-bottom: 40px;
   border: 1px solid #D7D7D7;
   padding: 30px 15px;
   display: flex;
   justify-content: flex-start;
+  align-items: center;
 }
 .contact-info .info img {
-  margin-bottom: 15px;
   max-width: 60px;
   margin-right: 10px;
 }
@@ -1400,8 +1402,6 @@ background-size: cover;
   font-weight: 700;
   font-size: 22px;
   color: #000;
-  position: relative;
-  top: 15px;
 }
 .contact-info .info .title a{
   font-size: 14px;
@@ -1423,13 +1423,16 @@ background-size: cover;
   padding-top: 10px;
 }
 .contact-info .btn-default{
-  padding: 0px 80px;
-  margin-top: 20px;
+  padding: 0px 80px; 
 }
 .contact-info label{
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 700;
   margin-bottom: 10px;
+}
+.rowmt-5 h2{
+  margin-bottom: 20px;
+  color: #000;
 }
 /*Need help Modal*/
 .need-help-modal .modal-header .modal-title {
@@ -1664,6 +1667,7 @@ cursor: pointer;
 }
 .neighborhood-search .search-result-wrapper .search-listing .sort-by-wrapper .sort-by span {
   width: 120px;
+  color: #5F6368;
 }
 .neighborhood-search .search-result-wrapper .search-listing .sort-by-wrapper .listing-large-view {
   cursor: pointer;
@@ -2153,7 +2157,13 @@ cursor: pointer;
 .featured-properties .property-listing .info a{
   display: inline-block;
 }
-
+.featured-properties .property-listing .info a:hover, 
+.featured-properties .property-listing .info a:active, 
+.featured-properties .property-listing .info a:focus{
+  color: #fff;
+  background: #01091d;
+  transition: all 0.3s ease-in-out;
+}
 .featured-properties .property-listing .info p{
   display: inline-block;
   font-size: 13px;
@@ -2172,6 +2182,7 @@ cursor: pointer;
 .featured-properties .property-listing .info .info-link-text p:nth-of-type(2){
   font-size: 11px;
   font-weight: 600;
+  display: block;
 }
 .featured-properties .property-listing .viewfeature-btn{
   background-color: #fff;
@@ -2616,10 +2627,12 @@ border-color: #e17228;
 /*Client review section*/
 .profile-section-padding{
   padding-top: 50px;
-
 }
 .agent-listing-profile .search-result-wrapper .search-listing .featured-properties .property-listing .property-thumb{
     width: calc(100% / 4 - 30px);
+}
+.neighborhood-search.agent-listing-profile{
+  padding: 20px 0px 0px !important;
 }
 .clients-reviews-section h3{
   text-align: center;
@@ -2629,6 +2642,17 @@ border-color: #e17228;
   padding-left: 15px;
   padding-right: 15px;
   width: 100%;
+  color: #3D3A39;
+}
+.agent-listing-profile .search-bdr-top .btn-group__multiple > .btn.active{
+  background-color: #223971;
+  color: #fff;
+  border:1px solid #223971;
+}
+.price-dropdown .btn-default.active{
+  background-color: #223971;
+  color: #fff;
+  border:1px solid #223971;
 }
 .agent-listing-profile #boxscroll2{
   height:auto;
@@ -2748,7 +2772,7 @@ border-color: #e17228;
 }
 .profile-contact-section .form-group label{
     margin-bottom: 10px;
-    font-size: 20px;
+    font-size: 16px;
     color: #000;
     font-weight: 600;
 }
@@ -2777,7 +2801,11 @@ border-color: #e17228;
   color: #AFAFAF;
 }
 /*profile contact*/
-
+@media (min-width: 1366px){
+  .container-lg {
+    max-width: 80%;
+}
+}
 @media (max-width: 1260px){
   .modal-dialog {
     margin:.5rem !important;
@@ -2821,6 +2849,21 @@ border-color: #e17228;
     .search-result-wrapper .search-bdr-top{
       padding:12px 15px;
     }
+    .contact-info .btn-default{
+      margin-bottom: 20px; 
+  }
+  .neighborhood-search .search-result-wrapper .search-listing .featured-properties .property-listing .property-thumb{
+    width: calc(100% / 2 - 30px);
+  }
+  .inner-pages.contact-us {
+    padding: 20px 0px 50px;
+}
+.neighborhood-search{
+  margin:75px auto;
+}
+.inner-pages.contact-us{
+  margin-top: 75px;
+}
 }
 
 @media (min-width: 576px) {
@@ -2953,6 +2996,9 @@ margin-bottom: 10px;
 }
 .neighborhood-search.agent-listing-profile{
   padding: 20px 0px 0px !important;
+}
+.agent-listing-profile .search-result-wrapper .search-listing .featured-properties .property-listing .property-thumb{
+  width: calc(100% / 3 - 30px);
 }
 
 }
@@ -3264,7 +3310,7 @@ margin: 0 auto 20px auto;
 max-width: 370px;
 }
 .agent-profile-view .img-holder{
-  flex: 0 0 290px;
+  flex: 0 0 260px;
 }
 }
   /*end agent profile*/

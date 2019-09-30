@@ -26,7 +26,7 @@
 @else
     <div class="col-md-12 datepicker-withtime">
         <div class="form-group">
-            {!! Form::text('open_house[date][]', null, ['class' => 'input-style date']) !!}
+            {!! Form::text('open_house[date][]', null, ['class' => 'input-style open-house-date']) !!}
         </div>
         <div class="form-group">
             <label for="start">Start @:</label>

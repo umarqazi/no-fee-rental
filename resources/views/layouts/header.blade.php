@@ -4,7 +4,7 @@
             @if(Auth::guard(whoAmI())->check())
                 <a href="javascript:void(0);">
                     <img src = "{!! !empty(mySelf()->profile_image)
-                                    ? asset('storage/'.mySelf()->profile_image)
+                                    ? asset(mySelf()->profile_image)
                                     : asset('assets/images/agent-img.jpg') !!}" alt="" class="avtar" />
                     {{ mySelf()->first_name." ".mySelf()->last_name }} <i class="fa fa-angle-down"></i>
                 </a>

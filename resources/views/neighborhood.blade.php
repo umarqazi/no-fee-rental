@@ -3,13 +3,18 @@
 @section('content')
  <style>
      #advance-search {
-         z-index: 100;
+         z-index: 100 !important;
      }
  </style>
 <section class="neighborhood-search neighbourhood-pd wow fadeIn" data-wow-delay="0.2s">
     <div class="container-lg">
         <div class="sorting-listing">
-            {!! Form::text('neighborhoods', null, ['class' => 'input-style']) !!}
+            <div class="neighbor-autocomplete">
+                {!! Form::open(['url' => route('web.findNeighborhood'), 'type' => 'post']) !!}
+                {!! Form::text('neighborhood', $data->neighborhood->name, ['class' => 'input-style', 'placeholder' => 'Find Neighborhood']) !!}
+                <i class="fa fa-search submit-neighbor"></i>
+                {!! Form::close() !!}
+            </div>
             <div class="bettery-park">{{ $data->neighborhood->name }}</div>
         </div>
         <p>{{ $data->neighborhood->content ?? 'No Content Found' }}</p>
@@ -24,7 +29,7 @@
                         </div>
                         <div class="mobile-map-icon"><i class="fa fa-map-marker-alt"></i></div>
                         <div id="mobile-map-listing-view">
-{{--                            <div id="map"></div>--}}
+                            <div id="mobile-map"></div>
                         </div>
                         <div class="row" id="mobile-tabs-collapse">
                             <div class="col-lg-7 col-12 ">
@@ -190,6 +195,13 @@
     </div>
 </section>
 {{--Advance Search Modal--}}
-@include('features.advance_search')
-{!! HTML::script('assets/js/neighborhood.js') !!}
+@include('modals.advance_search')
+
+{!! HTML::script('assets/js/neighborhoods.js') !!}
+<script>
+    let coords = $('input[name=map_location]').val();
+    fetchNeighbours($('input[name=neighborhood]'));
+    mapWithMultiCoords(coords, document.getElementById('mobile-map'));
+    mapWithMultiCoords(coords, document.getElementById('map'));
+</script>
 @endsection {!! HTML::script('assets/js/input-to-dropdown.js') !!}

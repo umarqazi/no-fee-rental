@@ -7,7 +7,14 @@
 	</div>
 	<div class="block add-new-listing-wrapper">
 		<div class="block-body">
-			{!! Form::model($listing, ['id' => 'listing-form', 'url' => ($action == 'Update') ? route('admin.updateListing', $listing->id) : route('admin.createListing'), 'id' => 'listing_form', 'method' => 'post', 'enctype' => 'multipart/form-data']) !!}
+			{!! Form::model($listing,
+			    [
+			        'id' => 'listing-form',
+			        'url' => ($action == 'Update') ? route('admin.updateListing', $listing->id) : route('admin.createListing'),
+			        'id' => 'listing_form',
+			        'method' => 'post',
+			        'enctype' => 'multipart/form-data'
+			    ]) !!}
 				<div class="row">
                     {{--Listing Info--}}
 					@include('listing-features.listing_info')
@@ -27,6 +34,11 @@
 	</div>
 </div>
 
-{!! HTML::script('assets/js/map.js') !!}
 {!! HTML::script('assets/js/listing.js') !!}
+<script>
+    enableDatePicker('#availability_date');
+    enableDatePicker('.open-house-date', false);
+    initMap(document.getElementById('map'));
+    fetchNeighbours($('input[name=neighborhood]'));
+</script>
 @endsection

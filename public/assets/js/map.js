@@ -6,18 +6,31 @@ const RADIUS = 1500;
 const GEOCODER = new google.maps.Geocoder();
 let map, marker;
 let defaultCoords =  {latitude: 40.785091, longitude: -73.968285}; // New York Center point
-let searchSelector = document.getElementById('controls');
 let infowindow = new google.maps.InfoWindow();
 
+/**
+ *
+ * @param coords
+ * @returns {google.maps.LatLng}
+ */
 const setLatLng = (coords) => {
     return new google.maps.LatLng(coords.latitude, coords.longitude);
 };
 
+/**
+ *
+ * @param coords
+ * @param displaySelector
+ * @param radius
+ * @param types
+ * @param styles
+ * @returns {Map<any, any>}
+ */
 const setMap = (coords = defaultCoords, displaySelector, radius = 0, types = [], styles = null) => {
     map = new google.maps.Map(displaySelector, {
         center: setLatLng(coords),
         zoom: ZOOM,
-        radius: radius,
+        radius: radius !== 0 ? radius : RADIUS,
         types: types,
         styles: [
             {
@@ -33,6 +46,10 @@ const setMap = (coords = defaultCoords, displaySelector, radius = 0, types = [],
     return map;
 };
 
+/**
+ *
+ * @returns {Promise<unknown>}
+ */
 const myLocation = () => {
     if (NAVIGATOR) {
         return new Promise((res) => {
@@ -43,6 +60,11 @@ const myLocation = () => {
     }
 };
 
+/**
+ *
+ * @param coords
+ * @returns {Promise<unknown>}
+ */
 const latLngToAddr = (coords) => {
     return new Promise((res) => {
         GEOCODER.geocode({location: setLatLng(coords)}, async (address) => {
@@ -51,6 +73,11 @@ const latLngToAddr = (coords) => {
     });
 };
 
+/**
+ *
+ * @param address
+ * @returns {Promise<unknown>}
+ */
 const addrToLatLng = (address) => {
     return new Promise((res) => {
         GEOCODER.geocode({address: address}, (coords) => {
@@ -59,6 +86,13 @@ const addrToLatLng = (address) => {
     });
 };
 
+/**
+ *
+ * @param coords
+ * @param title
+ * @param icon
+ * @returns {google.maps.Marker}
+ */
 const addMarker = (coords, title = null, icon = null) => {
     marker = new google.maps.Marker({
         map: map,
@@ -74,6 +108,11 @@ const addMarker = (coords, title = null, icon = null) => {
     return marker;
 };
 
+/**
+ *
+ * @param coords
+ * @returns {[]}
+ */
 const setMultiMarkers = (coords) => {
     let markers = [];
     coords.forEach((cord) => {
@@ -86,6 +125,10 @@ const setMultiMarkers = (coords) => {
     return markers;
 };
 
+/**
+ *
+ * @param coords
+ */
 const markerClusters = (coords) => {
     let markers = coords.map(function(location) {
         setMap();
@@ -118,25 +161,50 @@ const markerClusters = (coords) => {
     });
 };
 
-const autoComplete = () => {
+/**
+ *
+ * @param searchSelector
+ * @returns {google.maps.places.Autocomplete}
+ */
+const autoComplete = (searchSelector) => {
     let autocomplete = new google.maps.places.Autocomplete(searchSelector);
     autocomplete.setFields(['adr_address']);
     return autocomplete;
 };
 
+/**
+ *
+ * @param content
+ * @param marker
+ */
 const showInfoWindow = (content, marker) => {
     infowindow.setContent(content);
     infowindow.open(map, marker);
 };
 
+/**
+ *
+ * @returns {Promise<void>}
+ */
 const closeInfoWindow = async () => {
     infowindow.close();
 };
 
+/**
+ *
+ * @param location
+ * @returns {boolean}
+ */
 const findIndex = (location) => {
     return location.formatted_address === $('.title-subtext').text();
 };
 
+/**
+ *
+ * @param position
+ * @param keyword
+ * @returns {Promise<unknown>}
+ */
 const nearByPlaces = async (position, keyword) => {
     let request = {
         location: setLatLng(position),
@@ -176,6 +244,10 @@ const findSubways = (coords) => {
     });
 };
 
+/**
+ *
+ * @param coords
+ */
 const findSchools = (coords) => {
     nearByPlaces(coords, 'school').then(res => {
         if(res.length > 0) {
@@ -196,39 +268,58 @@ const findSchools = (coords) => {
     });
 };
 
+/**
+ *
+ * @param title
+ */
 const setSubways = (title) => {
     $('#no-subway').remove();
     $('.location-map-sec').find('.row:last > div:first > ul').append(`<li>${title}</li>`);
 };
 
+/**
+ *
+ * @param title
+ */
 const setSchools = (title) => {
     $('#no-school').remove();
     $('.mob-top-mrg').find('ul').append(`<li>${title}</li>`);
 };
 
-// Document Ready Methods
-// $(() => {
-//   $body.on('keyup', '#controls', function() {
-//       autoComplete();
-//   });
-//
-//   $body.on('blur', '#controls', function() {
-//     setTimeout(() => {
-//       addrToLatLng($('body').find('#controls').val()).then(coords => {
-//           coords = {
-//               latitude: coords[0].geometry.location.lat(),
-//               longitude: coords[0].geometry.location.lng()
-//           };
-//           $('input[name=map_location]').val(JSON.stringify(coords));
-//           setMap(coords);
-//           marker = addMarker(coords);
-//           showInfoWindow($('body').find('#controls').val(), marker);
-//       });
-//     }, 500);
-//   });
-// });
+/**
+ *
+ * @param selector
+ */
+const initMap = (selector) => {
+    myLocation().then(coords => {
+        setMap(coords, selector);
+        latLngToAddr(coords).then(address => {
+            marker = addMarker(coords, address[0].formatted_address);
+            showInfoWindow(address[0].formatted_address, marker);
+        });
+    });
+};
 
-// Map Initialize
-
-
-
+const mapWithMultiCoords = (coords, mapSelector, nearByLocations = false) => {
+    if (coords !== null && coords !== '') {
+        coords = JSON.parse(coords);
+        let location = $('body').find('#controls').val();
+        ZOOM = 16;
+        setMap(coords, mapSelector);
+        if (location === undefined) {
+            latLngToAddr(coords).then(location => {
+                let index = location.findIndex(findIndex);
+                if(nearByLocations) {
+                    findSubways(coords); findSchools(coords);
+                }
+                if (index !== -1) {
+                    marker = addMarker(coords, location[index].formatted_address);
+                    showInfoWindow(location[index].formatted_address, marker);
+                }
+            });
+        } else {
+            marker = addMarker(coords, location);
+            showInfoWindow(location, marker);
+        }
+    }
+};

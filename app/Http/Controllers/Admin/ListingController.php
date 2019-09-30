@@ -41,7 +41,7 @@ class ListingController extends Controller {
 	public function showForm() {
 		$action = 'Create';
 		$listing = null;
-		return view('admin.add_listing', compact('listing', 'action'));
+		return view('listing-features.listing', compact('listing', 'action'));
 	}
 
 	/**
@@ -73,7 +73,7 @@ class ListingController extends Controller {
      */
 	public function createImages($id) {
         $action = 'Create';
-        return view('admin.add_listing_images', compact('id', 'action'));
+        return view('listing-features.listing_images', compact('id', 'action'));
     }
 
 	/**
@@ -98,7 +98,7 @@ class ListingController extends Controller {
 		$update = $this->service->update($id, $request);
 		$listing_images = $this->service->images($id)->get();
 		return $update
-		? view('admin.add_listing_images', compact('id', 'action', 'listing_images'))
+		? view('listing-features.listing_images', compact('id', 'action', 'listing_images'))
 		: error('Something went wrong');
 	}
 
@@ -148,7 +148,7 @@ class ListingController extends Controller {
 			$amenities[$key] = $value;
 		}
 		$listing->amenities = $amenities;
-		return view('admin.add_listing', compact('listing', 'action'));
+		return view('listing-features.listing', compact('listing', 'action'));
 	}
 
 	/**
@@ -211,7 +211,7 @@ class ListingController extends Controller {
         }
         $listing->amenities = $amenities;
 
-        return view('admin.add_listing', compact('listing', 'action'));
+        return view('listing-features.listing', compact('listing', 'action'));
     }
 
 }

@@ -18,4 +18,12 @@ class NeighborhoodRepo extends BaseRepo {
     public function __construct() {
         parent::__construct(new Neighborhoods());
     }
+
+    /**
+     * @return mixed
+     */
+    public function neighborhoods() {
+        return $this->model->neighborhoods();
+    }
+
 }
