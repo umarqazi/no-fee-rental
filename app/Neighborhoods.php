@@ -6,16 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Neighborhoods extends Model
 {
-    protected $fillable = [
-       'name','content'
-    ];
+    /**
+     * @var array
+     */
+    protected $fillable = ['name','content'];
 
     /**
-     * @param $query
-     *
-     * @return mixed
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function scopeNeighborhoods($query) {
-        return $query->latest()->get();
+    public function listings() {
+        return $this->hasMany(Listing::class, 'neighborhood_id', 'id');
     }
 }

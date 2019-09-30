@@ -14,8 +14,14 @@ use App\Repository\NotificationSettingRepo;
 
 class NotificationSettingService {
 
-    private $repo;
+    /**
+     * @var NotificationSettingRepo
+     */
+    protected $repo;
 
+    /**
+     * NotificationSettingService constructor.
+     */
     public function __construct() {
         $this->repo = new NotificationSettingRepo();
     }

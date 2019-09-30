@@ -42,7 +42,7 @@ class RealtyMXController extends Controller {
      *
      * @return string
      */
-	public function get($file) {
+	public function dispatchJob($file) {
 		$filePath = base_path('storage/app/realtyMXFeed/' . $file);
 		$xml = XmlParser::load($filePath);
 		$content = $xml->getContent();
@@ -67,7 +67,7 @@ class RealtyMXController extends Controller {
                 $this->makeReport($property, 'none', 'only no fee listings should be imported');
             }
         }
-        return $this->service->writeCSV($this->report, 'csv/realty.csv');
+        return $this->service->writeCSV($this->report, public_path().'/csv/realty.csv');
 	}
 
     /**

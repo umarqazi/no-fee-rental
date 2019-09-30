@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Services\AmenityTypeService;
 use App\Services\ListingService;
+use App\Services\NeighborhoodService;
 use Illuminate\Http\Request;
 
 class ListingController extends Controller {
@@ -11,27 +13,41 @@ class ListingController extends Controller {
 	/**
 	 * @var ListingService
 	 */
-	private $service;
+	private $listingService;
+
+    /**
+     * @var AmenityTypeService
+     */
+	private $amenityTypeService;
+
+    /**
+     * @var NeighborhoodService
+     */
+	private $neighborhoodService;
 
 	/**
 	 * @var int
 	 */
 	private $paginate = 5;
 
-	/**
-	 * ListingController constructor.
-	 *
-	 * @param ListingService $service
-	 */
-	public function __construct(ListingService $service) {
-		$this->service = $service;
+    /**
+     * ListingController constructor.
+     *
+     * @param ListingService $listingService
+     * @param AmenityTypeService $amenityTypeService
+     * @param NeighborhoodService $neighborhoodService
+     */
+	public function __construct(ListingService $listingService, AmenityTypeService $amenityTypeService, NeighborhoodService $neighborhoodService) {
+        $this->listingService = $listingService;
+        $this->amenityTypeService = $amenityTypeService;
+        $this->neighborhoodService = $neighborhoodService;
 	}
 
 	/**
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
 	public function index() {
-		$listing = toObject($this->service->get($this->paginate));
+		$listing = toObject($this->listingService->get($this->paginate));
 		return view('admin.listing_view', compact('listing'));
 	}
 
@@ -39,8 +55,8 @@ class ListingController extends Controller {
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
 	public function showForm() {
+        $listing = null;
 		$action = 'Create';
-		$listing = null;
 		return view('listing-features.listing', compact('listing', 'action'));
 	}
 
@@ -50,7 +66,7 @@ class ListingController extends Controller {
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function approve($id) {
-		return ($this->service->approve($id))
+		return ($this->listingService->approve($id))
 		? success('Listing has been approved successfully')
 		: error('Something went wrong');
 	}
@@ -62,7 +78,7 @@ class ListingController extends Controller {
      */
 	public function create(Request $request) {
 	    $request->visibility = ACTIVE;
-		$id = $this->service->create($request);
+		$id = $this->listingService->create($request);
 		return redirect(route('admin.createListingImages', $id));
 	}
 
@@ -95,8 +111,8 @@ class ListingController extends Controller {
 	public function update($id, Request $request) {
 		$action = 'Update';
         $request->visibility = ACTIVE;
-		$update = $this->service->update($id, $request);
-		$listing_images = $this->service->images($id)->get();
+		$update = $this->listingService->update($id, $request);
+		$listing_images = $this->listingService->images($id)->get();
 		return $update
 		? view('listing-features.listing_images', compact('id', 'action', 'listing_images'))
 		: error('Something went wrong');
@@ -119,7 +135,7 @@ class ListingController extends Controller {
      * @return \Illuminate\Http\JsonResponse
      */
 	public function uploadImages(Request $request, $id) {
-		return ($this->service->insertImages($id, $request))
+		return ($this->listingService->insertImages($id, $request))
 		? response()->json(['message' => 'success'], 200)
 		: response()->json(['message' => 'Something went wrong'], 500);
 	}
@@ -130,7 +146,7 @@ class ListingController extends Controller {
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function repost($id) {
-		return $this->service->repost($id)
+		return $this->listingService->repost($id)
 		? success('Property has been reposted')
 		: error('Something went wrong');
 	}
@@ -142,12 +158,7 @@ class ListingController extends Controller {
 	 */
 	public function edit($id) {
 		$action = 'Update';
-		$amenities = null;
-		$listing = $this->service->edit($id)->first();
-		foreach (features($listing->listingTypes) as $key => $value) {
-			$amenities[$key] = $value;
-		}
-		$listing->amenities = $amenities;
+		$listing = $this->listingService->edit($id)->first();
 		return view('listing-features.listing', compact('listing', 'action'));
 	}
 
@@ -157,7 +168,7 @@ class ListingController extends Controller {
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
 	public function searchWithFilters(Request $request) {
-		$listing = toObject($this->service->search($request, $this->paginate));
+		$listing = toObject($this->listingService->search($request, $this->paginate));
 		return view('admin.listing_view', compact('listing'));
 	}
 
@@ -167,7 +178,7 @@ class ListingController extends Controller {
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function status($id) {
-		$status = $this->service->visibility($id);
+		$status = $this->listingService->visibility($id);
 		return (isset($status))
 		? success(($status) ? 'Property has been published.' : 'Property has been unpublished')
 		: error('Something went wrong');
@@ -180,7 +191,7 @@ class ListingController extends Controller {
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
 	public function removeImage(Request $request, $id) {
-		$remove = $this->service->removeImage($id);
+		$remove = $this->listingService->removeImage($id);
 		return sendResponse($request, $remove, 'Image removed successfully.');
 	}
 
@@ -190,8 +201,8 @@ class ListingController extends Controller {
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
 	public function sortBy($order) {
-	    if(method_exists($this->service, $order)) {
-            $listing = toObject( $this->service->{$order}( $this->paginate ));
+	    if(method_exists($this->listingService, $order)) {
+            $listing = toObject( $this->listingService->{$order}( $this->paginate ));
         } else {
             return $this->index();
         }
@@ -204,14 +215,7 @@ class ListingController extends Controller {
      */
     public function copy($id) {
         $action = 'Copy';
-        $amenities = null;
-        $listing = $this->service->edit($id)->first();
-        foreach (features($listing->listingTypes) as $key => $value) {
-            $amenities[$key] = $value;
-        }
-        $listing->amenities = $amenities;
-
+        $listing = $this->listingService->edit($id)->first();
         return view('listing-features.listing', compact('listing', 'action'));
     }
-
 }

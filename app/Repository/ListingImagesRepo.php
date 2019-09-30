@@ -6,12 +6,11 @@
  * @project no-fee-rental
  */
 
-namespace App\Repository\Listing;
+namespace App\Repository;
 
 use App\ListingImages;
-use App\Repository\BaseRepo;
 
-class ListingImageRepo extends BaseRepo {
+class ListingImagesRepo extends BaseRepo {
 
 	/**
 	 * ListingImageRepo constructor.
@@ -29,12 +28,12 @@ class ListingImageRepo extends BaseRepo {
 		return $this->model->images($id);
 	}
 
-	/**
-	 * @param $id
-	 *
-	 * @return mixed
-	 */
-	public function first($id) {
-		return $this->edit($id);
-	}
+//	/**
+//	 * @param $id
+//	 *
+//	 * @return mixed
+//	 */
+//	public function first($id) {
+//		return $this->edit($id);
+//	}
 }

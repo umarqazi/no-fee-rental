@@ -10,16 +10,27 @@ class CompanyService {
     /**
      * @var CompanyRepo
      */
-	private $repo;
+	protected $repo;
 
     /**
      * CompanyService constructor.
-     *
-     * @param CompanyRepo $repo
      */
-	public function __construct(CompanyRepo $repo) {
-		$this->repo = $repo;
+	public function __construct() {
+		$this->repo = new CompanyRepo();
 	}
+
+    /**
+     * @param $request
+     *
+     * @return CompanyForm
+     */
+	private function validateForm($request) {
+        $form = new CompanyForm();
+        $form->company = $request->company;
+        $form->status  = $request->status;
+        $form->validate();
+        return $form;
+    }
 
     /**
      * @param $request
@@ -27,10 +38,7 @@ class CompanyService {
      * @return mixed
      */
 	public function create($request) {
-		$form = new CompanyForm();
-		$form->company = $request->company;
-		$form->status  = $request->status;
-		$form->validate();
+		$form = $this->validateForm($request);
 		return $this->repo->create($form->toArray());
 	}
 
@@ -41,11 +49,7 @@ class CompanyService {
      * @return mixed
      */
 	public function update($id, $request) {
-		$form = new CompanyForm();
-		$form->id = $id;
-		$form->company = $request->company;
-		$form->status = $request->status;
-		$form->validate();
+	    $form = $this->validateForm($request);
 		return $this->repo->update($id, $form->toArray());
 	}
 
@@ -65,17 +69,5 @@ class CompanyService {
      */
 	public function edit($id) {
 		return $this->repo->edit($id)->first();
-	}
-
-    /**
-     * @param $id
-     *
-     * @return int
-     */
-	public function status($id) {
-		$status = $this->repo->find(['id' => $id])->first();
-		$updateStatus = ($status->status) ? DEACTIVE : ACTIVE;
-		$this->repo->update($id, ['status' => $updateStatus]);
-		return $updateStatus;
 	}
 }

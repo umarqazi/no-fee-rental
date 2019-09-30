@@ -148,25 +148,8 @@
                         {{-- Building Features--}}
                         <div class="col-md-12">
                             <div class="form-group">
-                                <div class="row">@php $i = 1; @endphp
-                                    @foreach(features() as $key => $values)
-                                        <div class="col-lg-3 col-sm-4">
-                                            <label class="label">{{ucwords(str_replace('_', ' ', $key))}}</label>
-                                            <ul class="checkbox-listing">
-                                                @foreach($values as $id => $f)@php $id += 1; $i += 1; @endphp
-                                                @if($id == 6)
-                                                    </ul></div><div class="col-lg-3 col-sm-4"><ul class="checkbox-listing" style="margin-top: 28px;">
-                                                @endif
-                                                <li>
-                                                    <div class="custom-control custom-checkbox">
-                                                        {!! Form::checkbox('amenities['.$key.'][]', $id, null, ['class' => 'custom-control-input', 'id' => "listitem{$i}"]) !!}
-                                                        <label class="custom-control-label" for="listitem{{$i}}">{{$f}}</label>
-                                                    </div>
-                                                </li>
-                                                @endforeach
-                                            </ul>
-                                        </div>
-                                    @endforeach
+                                <div class="row">
+                                    {!! amenities() !!}
                                 </div>
                             </div>
                         </div>

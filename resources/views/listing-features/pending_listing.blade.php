@@ -7,7 +7,7 @@
                 <img src="{{ asset( $pl->thumbnail ?? DLI ) }}" alt="" style="height: 205px; width: 100%;" class="main-img" />
             </div>
             <div class="info">
-                <p class="title">{{ str_limit(is_exclusive($pl->listingTypes) ? $pl->unit.' '.$pl->street_address : $pl->display_address, STR_LIMIT_LIST_VIEW, ' ...') }}</p>
+                <p class="title">{{ str_limit(is_exclusive($pl), STR_LIMIT_LIST_VIEW, ' ...') }}</p>
                 <p><i class="fa fa-tag"></i> ${{ $pl->rent }}</p>
                 <p>Freshness Score : 90%</p>
                 <ul>
@@ -51,7 +51,7 @@
                 <div class="listing-thumb">
                     <img src="{{ asset( $pl->thumbnail ?? DLI) }}" alt="" style="height: 205px; width: 100%;" class="main-img" />
                     <div class="info">
-                        <p class="title">{{ str_limit(is_exclusive($pl->listingTypes) ? $pl->unit.' '.$pl->street_address : $pl->display_address, STR_LIMIT_GRID_VIEW, ' ...') }}</p>
+                        <p class="title">{{ str_limit(is_exclusive($pl), STR_LIMIT_GRID_VIEW, ' ...') }}</p>
                         <p><i class="fa fa-tag"></i> ${{ $pl->rent }}</p>
                         <p>Freshness Score : 90%</p>
                         <ul>
