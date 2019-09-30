@@ -43,3 +43,5 @@ Route::get('/messages-view', 'Agent\MessageController@index')->name('agent.messa
 Route::get('/load-chat/{id}', 'Agent\MessageController@inbox')->name('agent.loadChat');
 Route::post('/send-message/{id}', 'Agent\MessageController@send')->name('agent.sendMessage');
 Route::post('/accept-meeting/{id}', 'Agent\MessageController@confirmMeeting');
+
+Route::get('/listing-profile', 'Agent\ListingController@profile');

@@ -1369,30 +1369,67 @@ footer .copyright .social-icons li a:hover {
   color: #fff;
 }
 /*contact us*/
+.inner-pages.contact-us{
+  padding: 100px 0px 120px;
+}
+.contact-banner{
+  background-image: url('..//images/rental-guide-img-6.jpg');
+ height: 360px;
+background-repeat: no-repeat;
+width: 100%;
+max-width: 100%;
+background-size: cover;
+
+}
 .contact-info {
   margin-bottom: 30px;
 }
 .contact-info .info {
-  text-align: center;
   margin-bottom: 30px;
+  border: 1px solid #D7D7D7;
+  padding: 30px 15px;
+  display: flex;
+  justify-content: flex-start;
 }
 .contact-info .info img {
   margin-bottom: 15px;
   max-width: 60px;
+  margin-right: 10px;
 }
 .contact-info .info .title {
   font-weight: 700;
   font-size: 22px;
-  margin-bottom: 10px;
   color: #000;
+  position: relative;
+  top: 15px;
+}
+.contact-info .info .title a{
+  font-size: 14px;
+  font-weight: 500;
+  max-width: 300px;
+  margin: 0 auto;
+  color: #7A7A7A;
 }
 .contact-info .info p {
   max-width: 300px;
   margin: 0 auto;
+  color: #7A7A7A;
+  font-size: 14px;
+  margin-top: 5px;
+  font-weight: 500;
 }
 .contact-form .textArea {
   height: 180px;
   padding-top: 10px;
+}
+.contact-info .btn-default{
+  padding: 0px 80px;
+  margin-top: 20px;
+}
+.contact-info label{
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 10px;
 }
 /*Need help Modal*/
 .need-help-modal .modal-header .modal-title {
@@ -2486,9 +2523,261 @@ cursor: pointer;
 .login-form-wrapper .row.form-group .forgot-pass{
   text-align: right;
 }
-/*#login , #signup{*/
-  /*z-index: 99;*/
-/*}*/
+
+/*agent profile*/
+.agent-profile-view {
+display: flex;
+justify-content: space-between;
+}
+.agent-profile-view .img-holder {
+width: 370px;
+margin-right: 30px;
+flex: 0 0 370px;
+}
+.agent-profile-view .img-holder img {
+width: 100%;
+-webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.21);
+-moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.21);
+box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.21);
+object-fit: cover;
+}
+.agent-profile-view .agent-info h2 {
+color: #000;
+font-weight: 600;
+margin-bottom: 20px;
+font-size: 32px;
+}
+.agent-profile-view .agent-info p {
+line-height: 30px;
+font-size: 16px;
+margin-bottom: 15px;
+}
+.agent-profile-view .agent-info p.expertise {
+font-weight: 600;
+font-size: 16px;
+}
+.agent-profile-view .agent-info p.expertise a {
+display: inline-block;
+color: #e17228;
+font-weight: normal;
+}
+.agent-profile-view .agent-info p.expertise a:hover {
+color: #000;
+}
+.agent-profile-view .agent-info .contact-info {
+display: flex;
+align-items: center;
+}
+.agent-profile-view .agent-info .contact-info > div {
+display: flex;
+align-items: center;
+margin-right: 20px;
+}
+.agent-profile-view .agent-info .contact-info > div img {
+margin-right: 10px;
+max-width: 80%;
+}
+.agent-profile-view .agent-info .contact-info > div a {
+color: #7b7b7b;
+font-size: 16px;
+}
+.agent-profile-view .agent-info .contact-info > div a:hover {
+color: #e17228;
+}
+.agent-profile-view .agent-info .socail-icons {
+display: flex;
+align-items: center;
+}
+.agent-profile-view .agent-info .socail-icons a {
+width: 40px;
+height: 40px;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 16px;
+color: #888888;
+border: #888888 solid 2px;
+border-radius: 50%;
+margin-right: 15px;
+}
+.agent-profile-view .agent-info .socail-icons a:hover {
+background: #e17228;
+color: #fff;
+border-color: #e17228;
+}
+
+/*end agent profile*/
+.clients-reviews-section .container-lg {
+    max-width: 970px;
+}
+
+
+
+/*Client review section*/
+.profile-section-padding{
+  padding-top: 50px;
+
+}
+.agent-listing-profile .search-result-wrapper .search-listing .featured-properties .property-listing .property-thumb{
+    width: calc(100% / 4 - 30px);
+}
+.clients-reviews-section h3{
+  text-align: center;
+  color: #000;
+}
+.agent-listing-profile .search-bdr-top .btn-group__multiple > .btn{
+  padding-left: 15px;
+  padding-right: 15px;
+  width: 100%;
+}
+.agent-listing-profile #boxscroll2{
+  height:auto;
+  overflow-y: hidden;
+  overflow-x: hidden;
+
+}
+
+.clients-reviews-section .owl-slider{
+  display: block;
+  margin-top: 40px;
+}
+.clients-reviews-section .owl-nav button {
+  position: absolute;
+  top: 50%;
+  background-color: #000;
+  color: #fff;
+  margin: 0;
+  transition: all 0.3s ease-in-out;
+}
+.clients-reviews-section .owl-nav button.owl-prev {
+  left: -90px;
+  color: #828282 !important;
+}
+.clients-reviews-section .owl-nav button.owl-next {
+  right: -90px;
+  color: #828282 !important;
+}
+
+.clients-reviews-section .owl-dots {
+  text-align: center;
+  padding-top: 15px;
+}
+.clients-reviews-section .owl-dots button.owl-dot {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  display: inline-block;
+  background: #ccc;
+  margin: 0 3px;
+}
+.clients-reviews-section .owl-dots button.owl-dot.active {
+  background-color: #000;
+}
+.clients-reviews-section .owl-dots button.owl-dot:focus {
+  outline: none;
+}
+.clients-reviews-section .owl-nav button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.38) !important;
+}
+.clients-reviews-section span {
+    font-size: 70px;
+    position: relative;
+    top: -5px;
+}
+.clients-reviews-section .owl-nav button:focus {
+    outline: none;
+}
+.clients-reviews-section h2 {
+    margin-top: 50px;
+    font-size: 18px;
+    font-family: sans-serif;
+}
+.clients-reviews-section h2 span{
+  color: red;
+  font-size: 100%;
+  position: initial;
+}
+.clients-reviews-section #ClientCarousel .item{
+  background-color: #F4F5F8;
+  width: calc(100% - 40px);
+  text-align: center;
+  padding: 30px 15px;
+  margin: 0px 20px;
+
+}
+
+.clients-reviews-section #ClientCarousel .item .item-first-img img{
+  width: 25px;
+  height: 25px;
+  margin: 0 auto;
+}
+.clients-reviews-section #ClientCarousel .item p{
+  margin-top: 20px;
+  position: relative;
+}
+.clients-reviews-section #ClientCarousel .item p:after{
+  content: '';
+  border-top: 2px solid #EDB078;
+  width: 30px;
+  position: absolute;
+  margin: auto;
+  left: 0;
+  right: 0;
+  bottom: -20px;
+}
+
+.clients-reviews-section #ClientCarousel .item .item-profile-img img{
+  width: 65px;
+  height: 65px;
+  margin:35px auto 20px;
+  border-radius: 50%;
+}
+.clients-reviews-section #ClientCarousel .item strong{
+  color: #223971;
+}
+/*end client review section*/
+
+/*profile contact*/
+.profile-contact-section h3{
+  text-align: center;
+  margin-bottom: 35px;
+  color: #000;
+}
+.profile-contact-section .form-group label{
+    margin-bottom: 10px;
+    font-size: 20px;
+    color: #000;
+    font-weight: 600;
+}
+.profile-contact-section .form-group input{
+  height: 45px;
+  border: 1px solid #223971;
+}
+.profile-contact-section .form-group input:hover, .profile-contact-section .form-group input:active,.profile-contact-section .form-group input:focus{
+  box-shadow: none;
+}
+.profile-contact-section .form-group input::placeholder{
+  font-size: 16px;
+  color: #AFAFAF;
+}
+.profile-contact-section .form-group textarea{
+  height: 200px;
+  max-height: 250px;
+  border: 1px solid #223971;
+  margin-bottom: 30px;
+}
+.profile-contact-section .form-group textarea:hover,.profile-contact-section .form-group textarea:active,.profile-contact-section .form-group textarea:focus{
+  box-shadow: none;
+}
+.profile-contact-section .form-group textarea::placeholder{
+  font-size: 16px;
+  color: #AFAFAF;
+}
+/*profile contact*/
+
 @media (max-width: 1260px){
   .modal-dialog {
     margin:.5rem !important;
@@ -2644,6 +2933,28 @@ footer .footer-wrapper .logo-text{
 .listing-detail-container .lSSlideOuter .lSPager.lSGallery{
   display: none;
 }
+
+ /*agent profile responsive*/
+
+.agent-profile-view .agent-info .contact-info {
+display: block;
+}
+.agent-profile-view .agent-info .contact-info > div {
+margin-bottom: 10px;
+}
+
+  /*end agent profile responsive*/
+
+.clients-reviews-section .owl-nav button.owl-prev {
+  left: 0px;
+}
+.clients-reviews-section .owl-nav button.owl-next {
+  right: 0px;
+}
+.neighborhood-search.agent-listing-profile{
+  padding: 20px 0px 0px !important;
+}
+
 }
 @media only screen and (max-width: 991px) {
   .header-bg .search-property .search-fld {
@@ -2939,7 +3250,25 @@ footer .footer-wrapper .logo-text{
   .listing-Details .lSSlideOuter .lSPager.lSGallery img{
     height: 85px !important;
   }
+
+    /*agent profile */
+.agent-profile-view {
+justify-content: center;
+flex-direction: column;
 }
+.agent-profile-view .img-holder {
+width: auto;
+margin-right: 30px;
+flex: 0 0 370px;
+margin: 0 auto 20px auto;
+max-width: 370px;
+}
+.agent-profile-view .img-holder{
+  flex: 0 0 290px;
+}
+}
+  /*end agent profile*/
+
 @media only screen and (max-width: 767px) {
   .header-wrapper .header-container .logo {
     max-width: 200px;
@@ -3173,7 +3502,71 @@ footer .footer-wrapper .logo-text{
   .neighborhood-search .search-result-wrapper .search-listing{
     padding: 0px 0px 20px 0px;
   }
-
+  .clients-reviews-section button.owl-prev{
+    width: 40px;
+    height: 40px;
+  }
+  .clients-reviews-section button.owl-next{
+    width: 40px;
+    height: 40px;
+  }
+  .clients-reviews-section button.owl-prev span{
+    color: #f36f21;
+    font-size: 36px;
+    line-height: 16px;
+    height: auto;
+    line-height: 30px;
+  }
+   .clients-reviews-section button.owl-next span{
+    color: #f36f21;
+    font-size: 36px;
+    line-height: 16px;
+    height: auto;
+    line-height: 30px;
+  }
+  .clients-reviews-section #ClientCarousel .item{
+    background-color: #F4F5F8;
+    width: calc(100% - 10px);
+    text-align: center;
+    padding: 30px 15px;
+    margin: 0px 5px;
+  }
+  .profile-mbl-filter .dropdown-wrap{
+    display: block;
+  }
+  .profile-mbl-filter .radio-group-0, .profile-mbl-filter .radio-group-1, .profile-mbl-filter .radio-group-2 ,
+  .profile-mbl-filter .price-dropdown{
+    display: inline-block;
+  }
+  .profile-mbl-filter .btn-group__multiple > .btn {
+    margin-top: 10px;
+  }
+  .profile-mbl-filter .price-dropdown .btn-default{
+    margin-top: 10px;
+  }
+  .profile-contact-section .form-group label{
+    font-size: 14px;
+  }
+  .profile-section-padding {
+    padding-top: 15px;
+}
+.clients-reviews-section .owl-slider {
+    display: block;
+    margin-top: 20px;
+}
+.agent-profile-view .agent-info p {
+    line-height: 30px;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+.agent-profile-view .agent-info .contact-info > div a {
+    color: #7b7b7b;
+    font-size: 14px;
+}
+.agent-profile-view .agent-info h2{
+  font-size: 18px;
+  font-weight: 700;
+}
 }
 @media only screen and (min-width: 577px) and (max-width: 767px){
   .featured-properties .property-listing .info .info-link-text{
@@ -3249,6 +3642,11 @@ footer .footer-wrapper .logo-text{
   text-align: center;
   margin-top: 20px;
   }
+  .clients-reviews-section #ClientCarousel .item{
+    width: calc(100% - 0px);
+    margin: 0px 0px;
+  }
+
 }
 
 
