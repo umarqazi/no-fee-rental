@@ -13,6 +13,11 @@ class NeighborhoodForm extends BaseForm {
     /**
      * @var string
      */
+    public $name;
+
+    /**
+     * @var string
+     */
     public $content;
 
     /**
@@ -20,6 +25,7 @@ class NeighborhoodForm extends BaseForm {
      */
     public function toArray() {
         return [
+            'name' => $this->name,
             'content' => $this->content
         ];
     }
@@ -29,7 +35,7 @@ class NeighborhoodForm extends BaseForm {
      */
     public function rules() {
         return [
-            'content' => 'required'
+            'name' => 'required'
         ];
     }
 }

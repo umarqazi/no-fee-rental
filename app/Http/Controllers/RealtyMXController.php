@@ -146,6 +146,7 @@ class RealtyMXController extends Controller {
             });
         }
         $this->collection = null;
+//        dd($this->service->formCollection($this->batch));
         (empty($this->batch)) ?: $this->checkAndPush();
 	}
 

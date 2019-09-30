@@ -73,25 +73,18 @@
     </div>
 </div>
 {{--Login Modal--}}
-@include('features.login')
+@include('modals.login')
 {{--SignUp Modal--}}
-@include('features.signup')
+@include('modals.signup')
+
 {!! HTML::script('assets/js/login.js') !!}
-
-
 <script type="text/javascript">
     function togglefooterlink() {
-    if (window.matchMedia('(max-width: 1279px)').matches) {
-        $(".collapseabe-link").click(function(){
+        if (window.matchMedia('(max-width: 1279px)').matches) {
+            $(".collapseabe-link").click(function(){
                 $(this).parent().find('.collapse-menu').slideToggle();
             });
-    } else {
-        //...
+        }
     }
-}
-
-togglefooterlink();
-
-
-
+    togglefooterlink();
 </script>

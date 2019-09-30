@@ -7,8 +7,8 @@
         {!! Form::text('street_address', null,
         [
             ($action == 'Update') ? 'readonly' : '',
-            'id' => ($action !== 'Update') ? 'controls' : '',
-            'class' => 'controls input-style',
+            'id'           => ($action !== 'Update') ? 'controls' : '',
+            'class'        => 'controls input-style',
             'autocomplete' => 'off'
         ]) !!}
         <span class="invalid-feedback" role="alert">
@@ -19,7 +19,12 @@
 <div class="col-md-6">
     <div class="form-group">
         <label>Display Address</label>
-        {!! Form::text('display_address', null, [($action == 'Update') ? 'readonly' : '', 'class' => 'input-style']) !!}
+        {!! Form::text('display_address', null,
+        [
+            ($action == 'Update') ? 'readonly' : '',
+            'id'    => 'autofill',
+            'class' => 'input-style',
+        ]) !!}
         <span class="invalid-feedback" role="alert">
 			{!! $errors->first('display_address') !!}
 		</span>
@@ -91,15 +96,21 @@
 <div class="col-md-6 availability-date" style="display: none;">
     <div class="form-group">
         <label>Select Availability Date</label>
-        {!! Form::text('availability_date', null, ['autocomplete' => 'off', 'class' => 'input-style', 'id' => 'timePicker', 'data-language' => 'en']) !!}
+        {!! Form::text('availability_date', null,
+            [
+                'autocomplete' => 'off',
+                'class' => 'input-style',
+                'id' => 'availability_date',
+                'data-language' => 'en'
+            ]) !!}
         <span class="invalid-feedback" role="alert">
 			{!! $errors->first('availability_date') !!}
 		</span>
     </div>
 </div>
 
+{{--Open House--}}
 @include('listing-features.open_house')
-
 <div class="col-md-6">
     <div class="box">
         {!! Form::file('thumbnail', ['class' => 'inputfile inputfile-3', 'id' => 'file-3']) !!}
@@ -127,75 +138,3 @@
 		</span>
     </div>
 </div>
-<script>
-    // Create start date
-    var start = new Date(),
-        prevDay,
-        startHours = 9;
-
-    // 09:00 AM
-    start.setHours(9);
-    start.setMinutes(0);
-
-    // If today is Saturday or Sunday set 10:00 AM
-    if ([6, 0].indexOf(start.getDay()) != -1) {
-        start.setHours(10);
-        startHours = 10
-    }
-
-    $('#timePicker').datepicker(allowTime(true));
-    $('.date').datepicker(allowTime(false));
-
-    function allowTime(time) {
-        return {
-            timepicker: time,
-            language: 'en',
-            startDate: start,
-            minHours: startHours,
-            maxHours: 18,
-            onSelect: function (fd, d, picker) {
-                // Do nothing if selection was cleared
-                if (!d) return;
-
-                var day = d.getDay();
-
-                // Trigger only if date is changed
-                if (prevDay != undefined && prevDay == day) return;
-                prevDay = day;
-
-                // If chosen day is Saturday or Sunday when set
-                // hour value for weekends, else restore defaults
-                if (day == 6 || day == 0) {
-                    picker.update({
-                        minHours: 10,
-                        maxHours: 16
-                    })
-                } else {
-                    picker.update({
-                        minHours: 9,
-                        maxHours: 18
-                    })
-                }
-            }
-        };
-    }
-
-    let neighbours = @php echo json_encode(config('neighborhoods')); @endphp;
-    let $neighbour = $('input[name=neighborhood]');
-    $neighbour.autocomplete({
-        source: neighbours,
-        select: function (event, ui) {
-            $(this).val(ui.item ? ui.item : " ");
-        },
-
-        change: function (event, ui) {
-            if (!ui.item) {
-                this.value = '';
-                if($('.neigh').length > 0) return;
-                $neighbour.after('<label id="neighbors-error" class="error neigh" for="baths">Invalid Neighborhood.</label>');
-            } else {
-                $('#neighbors-error').remove();
-            }
-        }
-    });
-</script>

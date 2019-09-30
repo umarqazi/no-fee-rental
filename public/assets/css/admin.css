@@ -1176,6 +1176,15 @@ header .agent-avtar .avtar:hover div ul {
 .manage-accounts .action-btn:hover {
   color: #e77817;
 }
+
+.action-btn {
+  cursor: pointer;
+  -webkit-transition: all ease 0.4s;
+  transition: all ease 0.4s;
+}
+.action-btn:hover {
+  color: #e77817;
+}
 #invite-user h4 {
   font-size: 20px;
   color: #000;
@@ -1333,4 +1342,38 @@ header .agent-avtar .avtar:hover div ul {
 }
 .block-body .img-thumbnail {
   margin-top: 15px;
+}
+.modal-body textarea {
+  resize: none;
+}
+
+#add-neighborhood .modal-title{
+  font-size: 18px;
+  font-weight: 700;
+  color: #000;
+}
+#add-neighborhood textarea{
+  max-height: 400px;
+  height: 120px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+#view-content .modal-title{
+  font-size: 18px;
+  font-weight: 700;
+  color: #000;
+}
+#view-content textarea{
+  max-height: 400px;
+  height: 120px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+@media (min-width: 576px) {
+  #add-neighborhood .modal-dialog {
+    max-width: 600px;
+  }
+  #view-content .modal-dialog {
+    max-width: 600px;
+  }
 }

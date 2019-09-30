@@ -35,6 +35,7 @@
     {!! HTML::script('assets/js/vendor/toastr.js') !!}
     {!! HTML::script('assets/js/validate.js') !!}
     {!! HTML::script('assets/js/global.js') !!}
+    {!! HTML::script('assets/js/map.js') !!}
     {!! HTML::script('assets/js/vendor/datatable.min.js') !!}
     {!! HTML::script('assets/js/vendor/datepicker.min.js') !!}
 

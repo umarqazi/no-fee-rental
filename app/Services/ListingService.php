@@ -43,22 +43,12 @@ class ListingService {
 
     /**
      * ListingService constructor.
-     *
-     * @param ListingRepo $lRepo
-     * @param ListingImageRepo $lIRepo
-     * @param ListingTypeRepo $lARepo
-     * @param OpenHouseRepo $oRepo
      */
-    public function __construct(
-        ListingRepo $lRepo,
-        ListingImageRepo $lIRepo,
-        ListingTypeRepo $lARepo,
-        OpenHouseRepo $oRepo
-    ) {
-        $this->lRepo = $lRepo;
-        $this->lIRepo = $lIRepo;
-        $this->lARepo = $lARepo;
-        $this->oRepo = $oRepo;
+    public function __construct() {
+        $this->lRepo = new ListingRepo();
+        $this->lIRepo = new ListingImageRepo();
+        $this->lARepo = new ListingTypeRepo();
+        $this->oRepo = new OpenHouseRepo();
     }
 
     /**
@@ -68,34 +58,28 @@ class ListingService {
      */
     private function form($request) {
         $form = new CreateListingForm();
-        $form->user_id = myId();
+        $form->user_id = $request->user_id ?? myId();
         $form->realty_id = $request->realty_id ?? null;
         $form->realty_url = $request->realty_url ?? null;
         $form->name = $request->name ?? null;
-        $form->availability = $request->availability;
-        $form->visibility = !isAdmin() ? 2 : 1;
         $form->email = $request->email ?? null;
-        $form->description = $request->description ?? null;
         $form->phone_number = $request->phone_number ?? null;
+        $form->open_house = $request->open_house ?? null;
+        $form->amenities = $request->amenities ?? null;
         $form->street_address = $request->street_address ?? null;
         $form->display_address = $request->display_address ?? null;
-        $form->open_house = $request->open_house ?? null;
-        $form->city_state_zip = $request->city_state_zip ?? null;
+        $form->availability = $request->availability_date ?? $request->availability;
+        $form->visibility = $request->visibility ?? null;
+        $form->description = $request->description ?? null;
         $form->neighborhood = $request->neighborhood ?? null;
         $form->bedrooms = $request->bedrooms ?? null;
         $form->baths = $request->baths ?? null;
         $form->unit = $request->unit ?? null;
         $form->rent = $request->rent ?? null;
         $form->square_feet = $request->square_feet ?? null;
-        $form->listing_type = $request->listing_type ?? null;
-        $form->amenities = $request->amenities ?? null;
-        $form->unit_feature = $request->unit_feature ?? null;
-        $form->building_feature = $request->building_feature ?? null;
-        $form->pet_policy = $request->pet_policy ?? null;
-        $form->status = $request->status ?? null;
-        $form->map_location = $request->map_location ?? null;
-        $form->old_thumbnail = !empty($request->hasFile('thumbnail')) ? false : $request->old_thumbnail;
-        $form->thumbnail = empty($request->hasFile('thumbnail')) ? '' : $request->thumbnail ?? null;
+        $form->map_location = $request->map_location;
+        $form->old_thumbnail = $request->old_thumbnail ?? null;
+        $form->thumbnail = $request->thumbnail ?? '';
 		$form->validate();
         return $form;
     }
@@ -108,12 +92,13 @@ class ListingService {
     private function createList($data) {
         DB::beginTransaction();
         if (!empty($data->thumbnail))
-            $data->thumbnail = uploadImage($data->thumbnail, '/images/listing/thumbnails');
-        $list = $this->lRepo->create($data->toArray());
-        if (!empty($list)) {
-            $amenities = $this->createType($list->id, $data);
-            if($amenities) {
-                return $this->createOpenHouse($data);
+            $data->thumbnail = uploadImage($data->thumbnail, 'images/listing/thumbnails');
+        $data = collect($data->toArray());
+        $list = $this->lRepo->create($data->except('open_house', 'amenities')->toArray());
+        if ($list) {
+            if($this->createAmenities($list->id, $data['amenities'])) {
+                if($id = $this->createOpenHouse($list->id, $data['open_house'])) { DB::commit(); return $id; }
+                else { DB::rollBack(); return false; }
             }
         } else if(!empty($list) && $data->realty) {
             DB::commit();
@@ -129,32 +114,51 @@ class ListingService {
      *
      * @return bool
      */
-    private function createType($id, $data) {
+    private function createAmenities($id, $data) {
         $batch = [];
         foreach ($data as $key => $type) {
-            if (is_array($data->{$key})) {
-                $type = sprintf("%s", config("features.listing_types.{$key}"));
-                foreach ($data->{$key} as $value) {
-                    $batch[] = [
-                        'listing_id'    => $id,
-                        'property_type' => $type,
-                        'value'         => $value,
-                        'created_at'    => now(),
-                        'updated_at'    => now(),
-                    ];
-                }
+            $config_type = sprintf("%s", config("features.listing_types.{$key}"));
+            foreach ($data[$key] as $value) {
+                $batch[] = [
+                    'listing_id'    => $id,
+                    'property_type' => $config_type,
+                    'value'         => $value,
+                    'created_at'    => now(),
+                    'updated_at'    => now(),
+                ];
             }
         }
+
         if ($this->lARepo->insert($batch)) {
             DB::commit();
-            return $id;
+            return true;
         }
+
         DB::rollback();
         return false;
     }
 
-    private function createOpenHouse($listing) {
-        dd($listing);
+    /**
+     * @param $id
+     * @param $data
+     *
+     * @return mixed
+     */
+    private function createOpenHouse($id, $data) {
+        $batch = [];
+        for ($i = 0; $i < sizeof($data['date']); $i ++) {
+            $batch[] = [
+                'listing_id' => $id,
+                'date'       => $data['date'][$i],
+                'start_time' => $data['start_time'][$i],
+                'end_time'   => $data['end_time'][$i],
+                'only_appt'  => $data['by_appointment'][$i] ?? false,
+                'created_at' => now(),
+                'updated_at' => now()
+            ];
+        }
+        $this->oRepo->insert($batch);
+        return $id;
     }
 
     /**
@@ -174,7 +178,6 @@ class ListingService {
         $data = [
             'name'            => $listing->name,
             'email'           => $listing->email,
-            'open_house'      => $listing->open_house,
             'visibility'      => $listing->visibility,
             'description'     => $listing->description,
             'map_location'    => $listing->map_location,
@@ -182,7 +185,6 @@ class ListingService {
             'street_address'  => $listing->street_address,
             'display_address' => $listing->display_address,
             'availability'    => $listing->availability,
-            'city_state_zip'  => $listing->city_state_zip,
             'neighborhood'    => $listing->neighborhood,
             'bedrooms'        => $listing->bedrooms,
             'baths'           => $listing->baths,
@@ -192,8 +194,11 @@ class ListingService {
             'square_feet'     => $listing->square_feet,
         ];
 
-        if ($update = $this->lRepo->update($id, $data)) {
-            return $this->updateType($id, $listing);
+        if ($this->lRepo->update($id, $data)) {
+            if($this->updateOpenHouses($id, $listing->open_house)) {
+                DB::commit();
+                return true;
+            }
         }
 
         DB::rollBack();
@@ -204,11 +209,11 @@ class ListingService {
      * @param $id
      * @param $data
      *
-     * @return bool
+     * @return mixed
      */
-    private function updateType($id, $data) {
-        $this->lARepo->deleteMultiple(['listing_id' => $id]);
-        return $this->createType($id, $data);
+    private function updateOpenHouses($id, $data) {
+        $this->oRepo->deleteMultiple(['listing_id' => $id]);
+        return $this->createOpenHouse($id, $data);
     }
 
     /**
@@ -375,7 +380,7 @@ class ListingService {
      * @return mixed
      */
     public function edit($id) {
-        return $this->lRepo->edit($id)->withtypes();
+        return $this->lRepo->edit($id)->withtypes()->withopenhouses();
     }
 
     /**
@@ -476,5 +481,15 @@ class ListingService {
      */
     public function recent($paginate) {
         return $this->sortCollection($paginate, 'updated_at', RECENT);
+    }
+
+    /**
+     * @param $neighbour
+     * @param $paginate
+     *
+     * @return mixed
+     */
+    public function fetchByNeighbour($neighbour, $paginate) {
+        return $this->lRepo->find(['neighborhood' => $neighbour])->withImages()->paginate($paginate);
     }
 }

@@ -1518,3 +1518,17 @@ main {
         flex-direction: column ;
     }
 }
+
+.neighbor-autocomplete {
+    position: relative;
+    width: 40%;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.neighbor-autocomplete .fa-search {
+    cursor: pointer;
+    position: absolute;
+    right: 15px;
+    top: 15px;
+}
