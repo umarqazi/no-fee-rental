@@ -440,11 +440,20 @@ class UserService {
     }
 
     /**
-     * @param $request
+     * @param $id
      *
-     * @return bool
+     * @return mixed
      */
     public function associatedAgents($id) {
         return $this->userRepo->agents()->withCompany($id)->get();
+    }
+
+    /**
+     * @param $id
+     *
+     * @return mixed
+     */
+    public function agentWithListings($id) {
+        return $this->userRepo->withListing($id)->first();
     }
 }

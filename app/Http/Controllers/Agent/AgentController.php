@@ -2,24 +2,32 @@
 
 namespace App\Http\Controllers\Agent;
 
+use App\Services\ListingService;
 use App\Services\UserService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class AgentController extends Controller {
 
-	/**
-	 * @var AgentService
-	 */
-	private $service;
+    /**
+     * @var UserService
+     */
+	private $userService;
 
-	/**
-	 * AgentController constructor.
-	 *
-	 * @param AgentService $service
-	 */
-	public function __construct(UserService $service) {
-		$this->service = $service;
+    /**
+     * @var ListingService
+     */
+	private $listingService;
+
+    /**
+     * AgentController constructor.
+     *
+     * @param UserService $userService
+     * @param ListingService $listingService
+     */
+	public function __construct(UserService $userService, ListingService $listingService) {
+		$this->userService = $userService;
+		$this->listingService = $listingService;
 	}
 
 	/**
@@ -38,7 +46,7 @@ class AgentController extends Controller {
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function updateProfile(Request $request) {
-		$res = $this->service->updateProfile($request);
+		$res = $this->userService->updateProfile($request);
 		return sendResponse($request, $res, 'Profile has been updated.');
 	}
 
@@ -57,7 +65,16 @@ class AgentController extends Controller {
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function updatePassword(Request $request) {
-		$update = $this->service->changePassword($request);
+		$update = $this->userService->changePassword($request);
 		return sendResponse($request, $update, 'Password has been updated.');
 	}
+
+    /**
+     * @param $agentId
+     *
+     * @return mixed
+     */
+	public function profileListing($agentId) {
+	    return dd($this->userService->agentWithListings($agentId));
+    }
 }

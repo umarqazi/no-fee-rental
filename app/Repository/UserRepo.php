@@ -75,6 +75,15 @@ class UserRepo extends BaseRepo {
      * @return mixed
      */
     public function findById($id) {
-        return $this->find(['id' => $id])->first();
+        return parent::findById($id)->first();
+    }
+
+    /**
+     * @param $id
+     *
+     * @return mixed
+     */
+    public function withListing($id) {
+        return parent::findById($id)->withlistings();
     }
 }
