@@ -2939,8 +2939,6 @@ footer .footer-wrapper .logo-text{
   .listing-Details .lSSlideOuter .lSPager.lSGallery img{
     height: 85px !important;
   }
-
-
 }
 @media only screen and (max-width: 767px) {
   .header-wrapper .header-container .logo {
@@ -3259,5 +3257,6 @@ footer .footer-wrapper .logo-text{
 .neighborhood-search .search-result-wrapper .search-listing .sort-by-wrapper{
   padding-right:15px;
 }
-
 }
+
+

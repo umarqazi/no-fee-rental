@@ -36,7 +36,7 @@ $(() => {
         };
     }(jQuery));
 
-    $('input[name="baths"], input[name="bedrooms"], input[name=rent], input[name="unit"]').inputFilter(function(value) {
+    $('input[name="baths"], input[name="bedrooms"], input[name=rent], input[name=square_feet]').inputFilter(function(value) {
         return /^\d*$/.test(value);
     });
 

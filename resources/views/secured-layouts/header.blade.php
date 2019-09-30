@@ -27,7 +27,7 @@
             <i class="fa fa-bars"></i>
         </span>
         <div class="avtar">
-            <img src="{!! !empty(mySelf()->profile_image) ? asset('storage/'.mySelf()->profile_image) : asset('assets/images/default-image.jpeg')!!}" alt="" />
+            <img src="{!! asset(!empty(mySelf()->profile_image) ? mySelf()->profile_image : DUI) !!}" alt="" />
             <div>{!! mySelf()->first_name !!} {!! mySelf()->last_name !!} <i class="fa fa-chevron-down"></i>
                 <ul>
                     <li><a href="{!! route(whoAmI().'.showProfile') !!}">Account</a></li>
@@ -39,11 +39,3 @@
 </header>
 @include('secured-layouts.scripts')
 {!! HTML::script('assets/js/notification.js') !!}
-<script type="text/javascript">
-    $(".notiii").click(function() {
-        $(".notification-container").toggleClass("toggle-notification");
-    });
-       $(".notiofication-content .fa-times").click(function() {
-       $(this).closest('div.notiofication-content').fadeOut("slow", function() { $(this).remove();})
-    });
-</script>

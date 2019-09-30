@@ -19,7 +19,7 @@ Route::post('/add-listing', 'Agent\ListingController@create')->name('agent.creat
 Route::get('/add-listing', 'Agent\ListingController@showForm')->name('agent.addListing');
 Route::post('/upload-listing-images/{id}', 'Agent\ListingController@uploadImages')->name('agent.listingImages');
 Route::get('/remove-listing-image/{id}', 'Agent\ListingController@removeImage');
-Route::get('/listing-repost/{id}', 'Agent\ListingController@repost')->name('agent.listingRepost');
+Route::get('/listing-repost/{id}', 'Agent\ListingController@repost')->name('agent.repostListing');
 Route::match(['get', 'post'], '/search-listing', 'Agent\ListingController@searchWithFilters')->name('agent.listingSearch');
 Route::get('/listing-status/{id}', 'Agent\ListingController@status')->name('agent.listingStatus');
 Route::get('/edit-list/{id}', 'Agent\ListingController@edit')->name('agent.editListing');
