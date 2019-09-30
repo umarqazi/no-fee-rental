@@ -11,7 +11,7 @@ namespace App\Services;
 use App\Forms\NeighborhoodForm;
 use App\Repository\NeighborhoodRepo;
 
-class NeighborhoodService {
+class NeighborhoodService extends ListingService {
 
     /**
      * @var NeighborhoodRepo
@@ -24,6 +24,7 @@ class NeighborhoodService {
      * @param NeighborhoodRepo $repo
      */
     public function __construct(NeighborhoodRepo $repo) {
+        parent::__construct();
         $this->repo = $repo;
     }
 
@@ -37,5 +38,20 @@ class NeighborhoodService {
         $form->content = $request->content;
         $form->validate();
         return $this->repo->create($form->toArray());
+    }
+
+    /**
+     * @param $paginate
+     *
+     * @return array
+     */
+    public function fetchListing($paginate) {
+        $neighborhood = $this->repo->getFirst();
+        $collection = [
+            'neighborhood' => $neighborhood,
+            'listing'      => $this->fetchByNeighbour($neighborhood->name, $paginate)
+        ];
+
+        return $collection;
     }
 }

@@ -18,7 +18,7 @@
     <div class="mobile-nav">
         <ul>
             <li><a href="/rent">Rent</a></li>
-            <li><a href="/neighborhood">Neighborhood </a></li>
+            <li><a href="{{ route('web.neighborhood') }}">Neighborhood </a></li>
             <li>
                 <a class="" data-toggle="collapse" href="#menuToggle1" role="button" aria-expanded="false" aria-controls="menuToggle1">
                     Renters <i class="fa fa-angle-down"></i>
@@ -58,7 +58,7 @@
             <ul class="menu-links">
                 <li>
                     <a href="/rent">Rent </a>
-                    <a href="/neighborhood">Neighborhood </a>
+                    <a href="{{ route('web.neighborhood') }}">Neighborhood </a>
                 </li>
             </ul>
             <div class="header-right-wrapper">
@@ -72,10 +72,10 @@
                     <div class="login-user">
                         <a href="#">
                             <img
-                                src = "{!! !empty(mySelf()->profile_image)
-                                    ? asset('storage/'.mySelf()->profile_image)
-                                    : asset('assets/images/default.jpeg') !!}
-                                    " alt="" class="avtar" />
+                                src = "{!! asset(!empty(mySelf()->profile_image) ? mySelf()->profile_image : DUI) !!}"
+                                alt=""
+                                class="avtar"
+                            />
                             {{ mySelf()['first_name']." ".mySelf()['last_name'] }} <i class="fa fa-angle-down"></i>
                         </a>
                         <div class="user-dropdown">

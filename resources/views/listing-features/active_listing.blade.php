@@ -7,7 +7,7 @@
                 <img src="{{ asset(!empty($al->thumbnail) ? $al->thumbnail : DLI) }}" alt="" style="height: 205px; width: 100%;" class="main-img" />
             </div>
             <div class="info">
-                <p class="title">{{ str_limit(is_exclusive($al->listingTypes) ? $al->street_address : $al->display_address, STR_LIMIT_LIST_VIEW, ' ...') }}</p>
+                <p class="title">{{ str_limit(is_exclusive($al->listingTypes) ? $al->unit.' '.$al->street_address : $al->display_address, STR_LIMIT_LIST_VIEW, ' ...') }}</p>
                 <p><i class="fa fa-tag"></i> ${{ $al->rent }}</p>
                 <p>Freshness Score : 90%</p>
                 <ul>
@@ -57,7 +57,7 @@
                     <img src="{{ asset(!empty($al->thumbnail) ? $al->thumbnail : DLI) }}" alt="" style="height: 205px; width: 100%;" class="main-img" />
                     <div class="info">
                         <p class="title">
-                            {{ str_limit(is_exclusive($al->listingTypes) ? $al->street_address : $al->display_address, STR_LIMIT_GRID_VIEW, ' ...') }}
+                            {{ str_limit(is_exclusive($al->listingTypes) ? $al->unit.' '.$al->street_address : $al->display_address, STR_LIMIT_GRID_VIEW, ' ...') }}
                         </p>
                         <p><i class="fa fa-tag"></i> ${{ $al->rent }}</p>
                         <p>Freshness Score : 90%</p>

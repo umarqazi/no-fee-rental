@@ -44,6 +44,7 @@ class HomeController extends Controller {
 	 */
 	public function detail($id) {
 		$listing = $this->service->detail($id)->first();
+		if(empty($listing)) abort(404);
 		return view('listing_detail', compact('listing'));
 	}
 }

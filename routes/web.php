@@ -92,33 +92,14 @@ Route::post('/test', function (Request $request) {
     return 'false';
 });
 
-Route::get('/neighborhood', function() {
-	return view('neighborhood');
-});
-
 Route::get('/rent', function() {
     return view('rent');
 });
 
 Route::get('/reset', 'RecoverPasswordController@sendRequest');
 
-//neighborhood routes
-Route::post('/neighborhoods', 'NeighborhoodController@index')->name('neigborhoods');
+// Neighborhood Routes
+Route::get('/neighborhoods', 'NeighborhoodController@index')->name('web.neighborhood');
 Route::post('/neighborhood/create', 'NeighborhoodController@create')->name('neigborhood.create');
 Route::post('/neighborhood/edit/{id}', 'NeighborhoodController@edit')->name('neigborhood.edit');
 Route::post('/neighborhood/delete/{id}', 'NeighborhoodController@delete')->name('neigborhood.delete');
-
-Route::get('/create', function() {
-    $neigh = config('neighborhoods');
-    $array = [];
-    foreach ($neigh as $n) {
-        $tmp = [
-            'name' => $n,
-            'created_at' => 'now()',
-            'updated_at' => 'now()'
-        ];
-        array_push($array, $tmp);
-    }
-    print_r(array_values($array));
-    die();
-});

@@ -43,7 +43,7 @@ function uploadMultiImages($files, $path) {
  * @return bool
  */
 function removeFile($path) {
-	return @unlink('storage/' . $path ?? '');
+	return @unlink($path ?? '');
 }
 
 /**
@@ -262,6 +262,16 @@ function features($data = null, $readable = false) {
 	}
 
 	return $build;
+}
+
+/**
+ * @param $index
+ *
+ * @return mixed
+ */
+function fetchopenHouses($index) {
+    $time = config('openHouse');
+    return $time[$index];
 }
 
 /**

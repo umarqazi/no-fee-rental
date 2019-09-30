@@ -65,6 +65,12 @@ $(() => {
         }
             $selector.hide();
     });
+
+    $('.controls').on('blur', function() {
+        setTimeout(() => {
+            $('#autofill').val($(this).val());
+        }, 200)
+    });
 });
 
 /**

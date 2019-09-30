@@ -8,7 +8,7 @@
 
 namespace App\Repository;
 
-use App\Neighborhood;
+use App\Neighborhoods;
 
 class NeighborhoodRepo extends BaseRepo {
 
@@ -16,6 +16,6 @@ class NeighborhoodRepo extends BaseRepo {
      * NeighborhoodRepo constructor.
      */
     public function __construct() {
-        parent::__construct(new Neighborhood());
+        parent::__construct(new Neighborhoods());
     }
 }

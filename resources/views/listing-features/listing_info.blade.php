@@ -7,8 +7,8 @@
         {!! Form::text('street_address', null,
         [
             ($action == 'Update') ? 'readonly' : '',
-            'id' => ($action !== 'Update') ? 'controls' : '',
-            'class' => 'controls input-style',
+            'id'           => ($action !== 'Update') ? 'controls' : '',
+            'class'        => 'controls input-style',
             'autocomplete' => 'off'
         ]) !!}
         <span class="invalid-feedback" role="alert">
@@ -19,7 +19,12 @@
 <div class="col-md-6">
     <div class="form-group">
         <label>Display Address</label>
-        {!! Form::text('display_address', null, [($action == 'Update') ? 'readonly' : '', 'class' => 'input-style']) !!}
+        {!! Form::text('display_address', null,
+        [
+            ($action == 'Update') ? 'readonly' : '',
+            'id'    => 'autofill',
+            'class' => 'input-style',
+        ]) !!}
         <span class="invalid-feedback" role="alert">
 			{!! $errors->first('display_address') !!}
 		</span>

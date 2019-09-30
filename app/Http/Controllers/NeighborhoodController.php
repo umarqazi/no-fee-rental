@@ -13,12 +13,25 @@ class NeighborhoodController extends Controller {
     private $service;
 
     /**
+     * @var int
+     */
+    private $paginate = 20;
+
+    /**
      * NeighborhoodController constructor.
      *
      * @param NeighborhoodService $service
      */
     public function __construct(NeighborhoodService $service) {
         $this->service = $service;
+    }
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function index() {
+        $data = toObject($this->service->fetchListing($this->paginate));
+        return view('neighborhood', compact('data'));
     }
 
     /**
@@ -29,14 +42,6 @@ class NeighborhoodController extends Controller {
     public function create(Request $request) {
         $res = $this->service->create($request);
         return sendResponse($request, $res, 'Neighborhood content added.', null);
-    }
-    /**
-     * @param
-     *
-     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
-     */
-    public function index() {
-        return view('', compact('listing'));
     }
 
     /**
@@ -58,5 +63,4 @@ class NeighborhoodController extends Controller {
         $res = $this->service->create($request);
         return sendResponse($request, $res, 'Neighborhood content added.', null);
     }
-
 }

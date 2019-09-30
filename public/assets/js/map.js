@@ -1,14 +1,11 @@
 "use strict";
 
-let $body = $('body');
 let ZOOM = 10;
 const NAVIGATOR = navigator.geolocation;
 const RADIUS = 1500;
 const GEOCODER = new google.maps.Geocoder();
-
 let map, marker;
 let defaultCoords =  {latitude: 40.785091, longitude: -73.968285}; // New York Center point
-let mapDisplayTag = document.getElementById('map');
 let searchSelector = document.getElementById('controls');
 let infowindow = new google.maps.InfoWindow();
 
@@ -16,8 +13,8 @@ const setLatLng = (coords) => {
     return new google.maps.LatLng(coords.latitude, coords.longitude);
 };
 
-const setMap = (coords = defaultCoords, radius = 0, types = [], styles = null) => {
-    map = new google.maps.Map(mapDisplayTag, {
+const setMap = (coords = defaultCoords, displaySelector, radius = 0, types = [], styles = null) => {
+    map = new google.maps.Map(displaySelector, {
         center: setLatLng(coords),
         zoom: ZOOM,
         radius: radius,
@@ -159,7 +156,7 @@ const nearByPlaces = async (position, keyword) => {
  *
  * @param coords
  */
-const findSubways = async (coords) => {
+const findSubways = (coords) => {
     nearByPlaces(coords, 'station').then(res => {
         if(res.length > 0) {
             res.forEach(value => {
@@ -210,73 +207,28 @@ const setSchools = (title) => {
 };
 
 // Document Ready Methods
-$(() => {
-  $body.on('keyup', '#controls', function() {
-      autoComplete();
-  });
-
-  $body.on('blur', '#controls', function() {
-    setTimeout(() => {
-      addrToLatLng($('body').find('#controls').val()).then(coords => {
-          console.log(coords);
-          coords = {
-              latitude: coords[0].geometry.location.lat(),
-              longitude: coords[0].geometry.location.lng()
-          };
-          $('input[name=map_location]').val(JSON.stringify(coords));
-          setMap(coords);
-          marker = addMarker(coords);
-          showInfoWindow($('body').find('#controls').val(), marker);
-      });
-    }, 500);
-  });
-});
+// $(() => {
+//   $body.on('keyup', '#controls', function() {
+//       autoComplete();
+//   });
+//
+//   $body.on('blur', '#controls', function() {
+//     setTimeout(() => {
+//       addrToLatLng($('body').find('#controls').val()).then(coords => {
+//           coords = {
+//               latitude: coords[0].geometry.location.lat(),
+//               longitude: coords[0].geometry.location.lng()
+//           };
+//           $('input[name=map_location]').val(JSON.stringify(coords));
+//           setMap(coords);
+//           marker = addMarker(coords);
+//           showInfoWindow($('body').find('#controls').val(), marker);
+//       });
+//     }, 500);
+//   });
+// });
 
 // Map Initialize
-window.onload = function() {
-    // Search listing
-    let coords = $body.find('input[name=map_location]');
-    if(coords.length > 0 && window.location.pathname === '/search') {
-        let coordsCollection = [];
-        coords.each((index, value) => {
-            coordsCollection.push(JSON.parse($(value).val()));
-        });
-        markerClusters(coordsCollection);
-        return;
-    }
-
-    // Update listing
-    coords = coords.val();
-    if(coords !== null && coords !== '') {
-        coords = JSON.parse(coords);
-        let location = $('body').find('#controls').val();
-        ZOOM = 16;
-        setMap(coords);
-        if(location === undefined) {
-            latLngToAddr(coords).then(location => {
-                let index = location.findIndex(findIndex);
-                findSubways(coords);findSchools(coords);
-                if(index !== -1) {
-                    marker = addMarker(coords, location[index].formatted_address);
-                    showInfoWindow(location[index].formatted_address, marker);
-                }
-            });
-        } else {
-            marker = addMarker(coords, location);
-            showInfoWindow(location, marker);
-        }
-        return;
-    }
-
-    // Add listing
-    myLocation().then(coords => {
-        setMap(coords);
-        latLngToAddr(coords).then(address => {
-            marker = addMarker(coords, address[0].formatted_address);
-            showInfoWindow(address[0].formatted_address, marker);
-        });
-    });
-};
 
 
 
