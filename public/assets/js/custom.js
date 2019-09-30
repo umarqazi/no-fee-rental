@@ -1,10 +1,6 @@
 $(() => {
 	new WOW().init();
 
-    $("#signup-option1").trigger('click');
-    $(".license_num").hide();
-    $("#phone_number").addClass('col-sm-12');
-
 	$("header .menu-icon").click(function () {
 		$(".main-wrapper aside").slideDown();
 	});

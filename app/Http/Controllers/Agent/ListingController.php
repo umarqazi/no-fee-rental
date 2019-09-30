@@ -98,7 +98,7 @@ class ListingController extends Controller {
      * @return redirect URL
      */
     public function finishCreate() {
-        return redirect(route('admin.viewListing'))
+        return redirect(route('agent.index'))
             ->with(['message' => 'Property has been added.', 'alert_type' => 'success']);
     }
 
@@ -124,7 +124,7 @@ class ListingController extends Controller {
      * @return redirect URL
      */
     public function finishUpdate() {
-        return redirect(route('agent.viewListing'))
+        return redirect(route('agent.index'))
             ->with(['message' => 'Property has been updated.', 'alert_type' => 'success']);
     }
 
