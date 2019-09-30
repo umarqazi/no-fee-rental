@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Agent;
 
 use App\Http\Controllers\Controller;
 use App\Services\AmenityTypeService;
@@ -48,7 +48,7 @@ class ListingController extends Controller {
      */
     public function index() {
         $listing = toObject($this->listingService->get($this->paginate));
-        return view('admin.listing_view', compact('listing'));
+        return view('agent.index', compact('listing'));
     }
 
     /**
@@ -57,11 +57,7 @@ class ListingController extends Controller {
     public function showForm() {
         $listing = null;
         $action = 'Create';
-        $amenities = $this->amenityTypeService->get();
-        $neighborhoods = collect($this->neighborhoodService->get())->map(function($neighbour) {
-            return $neighbour->name;
-        });
-        return view('listing-features.listing', compact('listing', 'action', 'amenities', 'neighborhoods'));
+        return view('listing-features.listing', compact('listing', 'action'));
     }
 
     /**
@@ -81,9 +77,9 @@ class ListingController extends Controller {
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
     public function create(Request $request) {
-        $request->visibility = PENDINGLISTING;
+        $request->visibility = ACTIVE;
         $id = $this->listingService->create($request);
-        return redirect(route('admin.createListingImages', $id));
+        return redirect(route('agent.createListingImages', $id));
     }
 
     /**
@@ -128,7 +124,7 @@ class ListingController extends Controller {
      * @return redirect URL
      */
     public function finishUpdate() {
-        return redirect(route('admin.viewListing'))
+        return redirect(route('agent.viewListing'))
             ->with(['message' => 'Property has been updated.', 'alert_type' => 'success']);
     }
 
@@ -163,11 +159,7 @@ class ListingController extends Controller {
     public function edit($id) {
         $action = 'Update';
         $listing = $this->listingService->edit($id)->first();
-        $amenities = $this->amenityTypeService->get();
-        $neighborhoods = collect($this->neighborhoodService->get())->map(function($neighbour) {
-            return $neighbour->name;
-        });
-        return view('listing-features.listing', compact('listing', 'action', 'neighborhoods', 'amenities'));
+        return view('listing-features.listing', compact('listing', 'action'));
     }
 
     /**
@@ -177,7 +169,7 @@ class ListingController extends Controller {
      */
     public function searchWithFilters(Request $request) {
         $listing = toObject($this->listingService->search($request, $this->paginate));
-        return view('admin.listing_view', compact('listing'));
+        return view('agent.index', compact('listing'));
     }
 
     /**
@@ -214,7 +206,7 @@ class ListingController extends Controller {
         } else {
             return $this->index();
         }
-        return view('admin.listing_view', compact('listing'));
+        return view('agent.index', compact('listing'));
     }
     /**
      * @param $id
@@ -224,10 +216,6 @@ class ListingController extends Controller {
     public function copy($id) {
         $action = 'Copy';
         $listing = $this->listingService->edit($id)->first();
-        $amenities = $this->amenityTypeService->get();
-        $neighborhoods = collect($this->neighborhoodService->get())->map(function($neighbour) {
-            return $neighbour->name;
-        });
-        return view('listing-features.listing', compact('listing', 'action', 'amenities', 'neighborhoods'));
+        return view('listing-features.listing', compact('listing', 'action'));
     }
 }

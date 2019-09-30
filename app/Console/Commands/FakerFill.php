@@ -41,7 +41,6 @@ class FakerFill extends Command
         printf("Seeding Listing\n");
         $amount = $this->argument('amount') ?? 10;
         factory(\App\Listing::class, (int) $amount)->create();
-        printf("Seeding Listing Types\n");
-        factory(\App\ListingTypes::class, (int) $amount)->create();
+
     }
 }
