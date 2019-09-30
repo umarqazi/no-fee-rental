@@ -104,6 +104,7 @@
                 </div>
             </div>
             <h3>Manhattan, NY Rental</h3>
+            @dd($data->listings->total())
             <span>{{ str_formatting($data->listings->total(), 'place') }} available for rent </span>
             @if($data->listings->total() > 0)
                 <div id="boxscroll2">

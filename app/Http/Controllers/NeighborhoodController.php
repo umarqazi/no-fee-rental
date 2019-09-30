@@ -30,7 +30,7 @@ class NeighborhoodController extends Controller {
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index() {
-        $data = toObject($this->service->fetchListing($this->paginate));
+        $data = $this->service->first($this->paginate);
         return view('neighborhood', compact('data'));
     }
 

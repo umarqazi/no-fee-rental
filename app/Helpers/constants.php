@@ -97,7 +97,7 @@ if(!defined('PET_POLICY')) {
 }
 
 if(!defined('EXCLUSIVE')) {
-    define('EXCLUSIVE', '2');
+    define('EXCLUSIVE', 'exclusive');
 }
 
 if(!defined('STR_LIMIT_LIST_VIEW')) {

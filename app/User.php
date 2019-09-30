@@ -2,9 +2,9 @@
 
 namespace App;
 
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\CanResetPassword;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable implements CanResetPassword {
 	use Notifiable;
@@ -15,7 +15,8 @@ class User extends Authenticatable implements CanResetPassword {
 	 * @var array
 	 */
 	protected $fillable = [
-		'first_name', 'last_name', 'user_type', 'email', 'password', 'phone_number','remember_token','license_number'
+	    'company_id', 'first_name', 'last_name', 'user_type', 'email',
+        'password', 'phone_number','remember_token','license_number'
 	];
 
 	/**
@@ -44,10 +45,10 @@ class User extends Authenticatable implements CanResetPassword {
 	}
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function company() {
-        return $this->hasMany(AgentCompany::class, 'agent_id');
+        return $this->hasOne(Company::class);
     }
 
 	/**
@@ -83,16 +84,4 @@ class User extends Authenticatable implements CanResetPassword {
 	public function scopeRenters($query) {
 		return $query->whereuser_type(RENTER);
 	}
-	
-    /**
-     * @param $query
-     *
-     * @return mixed
-     */
-    public function scopeWithCompany($query, $id) {
-        return $query->whereHas('company', function($q) use ($id) {
-            $q->where('company_id', $id);
-        });
-    }
-
 }

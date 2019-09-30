@@ -20,10 +20,27 @@ class NeighborhoodRepo extends BaseRepo {
     }
 
     /**
+     * @param $paginate
+     *
      * @return mixed
      */
-    public function neighborhoods() {
-        return $this->model->neighborhoods();
+    public function fetch($paginate) {
+        return $this->model->listings()->paginate($paginate);
     }
 
+    /**
+     * @return mixed
+     */
+    public function appendQuery() {
+        return $this->model->query();
+    }
+
+    /**
+     * @param $query
+     *
+     * @return mixed
+     */
+    public function fetchQuery($query) {
+        return $query->orderBy('is_featured', '1');
+    }
 }

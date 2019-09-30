@@ -2,7 +2,6 @@ $(() => {
     let $body = $('body');
 
     $body.find('.submit-neighbor').on('click', function () {
-        alert('ehr')
         $(this).parents('form').submit();
     });
 

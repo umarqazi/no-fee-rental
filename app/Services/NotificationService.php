@@ -16,12 +16,12 @@ class NotificationService extends NotificationSettingService {
     /**
      * @var NotificationRepo
      */
-    private $repository;
+    protected $repo;
 
     /**
      * @var mixed
      */
-    private $data;
+    protected $data;
 
     /**
      * NotificationService constructor.
@@ -31,7 +31,7 @@ class NotificationService extends NotificationSettingService {
     public function __construct($data = null) {
         parent::__construct();
         $this->setter($data);
-        $this->repository = new NotificationRepo();
+        $this->repo = new NotificationRepo();
     }
 
     /**
@@ -40,7 +40,7 @@ class NotificationService extends NotificationSettingService {
      * @return $this
      */
     public function setter($data) {
-        $this->data = (is_object($data)) ?: $data = toObject($data);
+        $this->data = (is_object($data)) ?: toObject($data);
         return $this;
     }
 
@@ -61,7 +61,7 @@ class NotificationService extends NotificationSettingService {
         $settings = $this->receiverSettings($this->data->to);
 
         if(empty($settings)) {
-            \Illuminate\Support\Facades\Mail::to($this->data->toEmail)->send(new \App\Mail\MailHandler($this->data));
+            dispatchEmailQueue($this->data);
             event(new \App\Events\TriggerNotification($this->data));
         }
 
@@ -70,7 +70,7 @@ class NotificationService extends NotificationSettingService {
         }
 
         if(!empty($settings) && $settings->allow_email) {
-            \Illuminate\Support\Facades\Mail::to($this->data->toEmail)->send(new \App\Mail\MailHandler($this->data));
+            dispatchEmailQueue($this->data);
         }
     }
 
@@ -84,7 +84,7 @@ class NotificationService extends NotificationSettingService {
         $form->path = $this->data->path;
         $form->notification = $this->data->notification;
         $form->validate();
-        return $this->repository->create($form->toArray());
+        return $this->repo->create($form->toArray());
     }
 
     /**
@@ -93,7 +93,7 @@ class NotificationService extends NotificationSettingService {
      * @return mixed
      */
     public function markAsRead($request) {
-        return $this->repository->markAllAsRead($request->ids);
+        return $this->repo->markAllAsRead($request->ids);
     }
 
     /**
@@ -102,13 +102,13 @@ class NotificationService extends NotificationSettingService {
      * @return bool|mixed
      */
     public function delete($id) {
-        return $this->repository->remove($id);
+        return $this->repo->remove($id);
     }
 
     /**
      * @return mixed
      */
     public function get() {
-        return $this->repository->get();
+        return $this->repo->get();
     }
 }
