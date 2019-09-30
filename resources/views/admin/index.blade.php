@@ -61,7 +61,7 @@
 
                     </div>
                     <div class="tab-pane fade" id="tab-3">
-                        <a href="#" style="float: right;margin: 10px;" class="btn-default ml-3" data-toggle="modal" id="create-company" data-target="#add-company"><i class="fa fa-plus"></i> Add Company</a>
+
                         <div class="table-responsive">
                             <table class="datatable dataTable table table-hover display" style="width: 100%;" id="companies_table">
                                 <thead>

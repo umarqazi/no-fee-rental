@@ -1,8 +1,17 @@
+"use strict";
 
+let sortOrder;
 $(() => {
     let $body = $('body');
+
     let queries = JSON.parse(localStorage.getItem('search-queries'));
     let bath = null, bed = null, square_feet_min = null, square_feet_max = null, neighborhood = null, price_min = null, price_max = null, open_house = null;
+
+    $body.on('change', '.sorting', function() {
+        let url = window.location.href;
+        let sorting = $(this).val();
+        window.location = sortOrder === '' ? window.location.href + sortValue(sorting) : removeOldSort(url, sorting);
+    });
 
     $('#baths').find('li').on('click', function() {
         bath = $(this).text();
@@ -86,3 +95,52 @@ $(() => {
         $('.dropDown').append('<a href="javascript:void(0);" id="empty-keywords">You have no keywords yet to search</a>');
     }
 });
+
+window.onload = function() {
+    sortOrder = $('.sorting').val();
+};
+
+/**
+ *
+ * @param url
+ * @param newSort
+ * @returns {*}
+ */
+function removeOldSort(url, newSort) {
+     let oldSort = sortValue(sortOrder);
+     url = url.replace(`${oldSort}`, ' ');
+     url = url.split(' ');
+     return url[0] + sortValue(newSort);
+}
+
+/**
+ *
+ * @param sorting
+ * @returns {string}
+ */
+function sortValue(sorting) {
+    let sortBy = null;
+    switch (sorting) {
+        case 'recent':
+            sortBy = 'recent=recent';
+            break;
+        case 'cheaper':
+            sortBy = 'cheaper=cheaper';
+            break;
+        case 'petPolicy':
+            sortBy = 'petPolicy=petPolicy';
+            break;
+    }
+    let operator = str_has(window.location.href, '?') ? '&' : '?';
+    return  operator + sortBy;
+}
+
+/**
+ *
+ * @param $string
+ * @param $word
+ * @returns {*}
+ */
+function str_has($string, $word) {
+    return $string.includes($word);
+}
