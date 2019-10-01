@@ -1,14 +1,5 @@
 <div class="modal fade login-modal" id="signup">
     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
-        <style>
-            .neigh {
-                color: red;
-            }
-
-            .success {
-                color:4f984f;
-            }
-        </style>
         {{--Signup Container--}}
         <div class="modal-content">
             <img src="assets/images/modal-close-icon.png" alt="" class="close-modal" data-dismiss="modal" />
@@ -48,12 +39,6 @@
                                         {!! Form::text('license_number', null, ['class'=>'input-style', 'placeholder'=>'License Number'])!!}
                                     </div>
                                 </div>
-                                <div class="col-sm-6">
-                                    <div class="verified-icon">
-                                        <i class="fas fa-check-circle"></i>
-                                        <span>Liscence Verified</span>
-                                    </div>
-                                </div>
                              </div>
                         </div>
                         <div class="col-sm-6">
@@ -87,7 +72,7 @@
                                 <p class="finding-home-text">If you would like to syndicate listing into no fee rentals nyc, please use tha same email address that you use for your RealtyMX, Nestio or OLR account.</p>
                             </div>
                         </div>
-                       
+
                         <div class="col-sm-6" id="phone_number">
                             <div class="form-group">
                                 {!! Form::text('phone_number', null, ['class'=>'input-style agnet-input', 'placeholder'=>'Phone Number']) !!}
