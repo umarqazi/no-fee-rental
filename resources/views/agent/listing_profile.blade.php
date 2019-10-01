@@ -9,7 +9,7 @@
             </div>
             <div class="agent-info">
                 <h2>{{ $data->agent->first_name.' '.$data->agent->last_name }}</h2>
-                <p>Situated on the southernmost point of Manhattan, you will find the Financial District. As a district, it encompasses roughly the area south of City Hall Park, but does not include Battery Park or Battery Park City. The heart of the Financial District is considered to be the corner of Wall Street and Broad Street.</p>
+                <p>{{ $data->agent->description ?? 'No description found' }}</p>
                 <p class="expertise"><strong>Neighborhood Expertise:</strong> <a href="#">Nolita,</a>
                     <a href="#">Soho,</a>
                     <a href="#">Greenwich Village</a>

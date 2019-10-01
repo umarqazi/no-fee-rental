@@ -18,6 +18,16 @@ class SendEmailJob implements ShouldQueue
     private $data;
 
     /**
+     * @var int
+     */
+    public $tries = 5;
+
+    /**
+     * @var int
+     */
+    public $timeout = 10;
+
+    /**
      * SendEmailJob constructor.
      *
      * @param $data
