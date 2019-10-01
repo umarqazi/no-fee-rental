@@ -14,7 +14,6 @@ use App\Forms\User\AgentInvitationForm;
 use App\Forms\User\ChangePasswordForm;
 use App\Forms\User\EditProfileForm;
 use App\Forms\User\UserForm;
-use App\Repository\AgentCompanyRepo;
 use App\Repository\CompanyRepo;
 use App\Repository\MemberRepo;
 use App\Repository\AgentRepo;
@@ -45,6 +44,11 @@ class UserService {
     private $companyRepo;
 
     /**
+     * @var mixed
+     */
+    private $query;
+
+    /**
      * UserService constructor.
      */
     public function __construct() {
@@ -52,7 +56,7 @@ class UserService {
         $this->companyRepo = new CompanyRepo();
         $this->agentRepo = new AgentRepo();
         $this->memberRepo = new MemberRepo();
-
+        $this->query = $this->userRepo->appendQuery();
     }
 
     /**
@@ -454,7 +458,36 @@ class UserService {
      *
      * @return mixed
      */
-    public function agentWithListings($id) {
-        return $this->userRepo->withListing($id)->first();
+    public function getAgentWithListings($id) {
+        $data = $this->userRepo->withListing($id)->first();
+        return [
+            'agent'    => $data,
+            'listings' => $data->listings
+        ];
+    }
+
+    /**
+     * @param $id
+     */
+    public function cheaper($id) {
+        $this->query = $this->userRepo->cheaper($id);
+    }
+
+    /**
+     * @param $id
+     */
+    public function recent($id) {
+        $this->query = $this->userRepo->recent($id);
+    }
+
+    /**
+     * fetch Query
+     */
+    public function fetchQuery() {
+        $data = $this->query->first();
+        return [
+            'agent'    => $data,
+            'listings' => $data->listings
+        ];
     }
 }

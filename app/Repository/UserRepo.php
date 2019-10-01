@@ -61,29 +61,36 @@ class UserRepo extends BaseRepo {
     }
 
     /**
-     * @param $type
-     *
-     * @return mixed
-     */
-    public function findByUserType($type) {
-	    return $this->find(['user_type' => $type])->first();
-    }
-
-    /**
-     * @param $id
-     *
-     * @return mixed
-     */
-    public function findById($id) {
-        return parent::findById($id)->first();
-    }
-
-    /**
      * @param $id
      *
      * @return mixed
      */
     public function withListing($id) {
-        return parent::findById($id)->withlistings();
+        return $this->findById($id)->withlistings();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function appendQuery() {
+        return $this->model->query();
+    }
+
+    /**
+     * @param $id
+     *
+     * @return mixed
+     */
+    public function cheaper($id) {
+        return $this->findById($id)->cheaper();
+    }
+
+    /**
+     * @param $id
+     *
+     * @return mixed
+     */
+    public function recent($id) {
+        return $this->findById($id)->recent();
     }
 }

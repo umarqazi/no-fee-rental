@@ -57,12 +57,13 @@ class NeighborhoodController extends Controller {
     }
 
     /**
+     * @param $id
      * @param Request $request
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request,$id) {
-        $res = $this->service->update($request,$id);
+    public function update($id, Request $request) {
+        $res = $this->service->update($id, $request);
         return sendResponse($request, $res, 'Neighborhood has been updated.', null);
     }
 

@@ -90,6 +90,28 @@ class User extends Authenticatable implements CanResetPassword {
      *
      * @return mixed
      */
+	public function scopeCheaper($query) {
+	    return $query->with(['listings' => function($subQuery) {
+	        return $subQuery->orderBy('rent', CHEAPER);
+        }]);
+    }
+
+    /**
+     * @param $query
+     *
+     * @return mixed
+     */
+    public function scopeRecent($query) {
+	    return $query->with(['listings' => function($subQuery) {
+	        return $subQuery->orderBy('created_at', RECENT);
+        }]);
+    }
+
+    /**
+     * @param $query
+     *
+     * @return mixed
+     */
 	public function scopeWithListings($query) {
 	    return $query->with('listings');
     }
