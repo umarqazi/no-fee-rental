@@ -1,10 +1,6 @@
 $(() => {
 	new WOW().init();
 
-    $("#signup-option1").trigger('click');
-    $(".license_num").hide();
-    $("#phone_number").addClass('col-sm-12');
-
 	$("header .menu-icon").click(function () {
 		$(".main-wrapper aside").slideDown();
 	});
@@ -314,7 +310,7 @@ $('#price-range-submit').hide();
 	$('#image-gallery').lightSlider({
 		gallery: true,
 		item: 1,
-		thumbItem: 10,
+		thumbItem: 4,
 		slideMargin: 0,
 		speed: 900,
 		auto: false,
@@ -324,7 +320,7 @@ $('#price-range-submit').hide();
                 breakpoint:1279,
                 settings: {
                     item:1,
-                    thumbItem:8,
+                    thumbItem:4,
                     slideMove:1,
                   }
             },
@@ -332,19 +328,19 @@ $('#price-range-submit').hide();
                 breakpoint:1024,
                 settings: {
                     item:1,
-                    thumbItem:6,
+                    thumbItem:4,
                     slideMove:1
                   },
                   breakpoint:991,
                 settings: {
                     item:1,
-                    thumbItem:5,
+                    thumbItem:3,
                     slideMove:1
                   },
                   breakpoint:767,
                 settings: {
                     item:1,
-                    thumbItem:5,
+                    thumbItem:4,
                     slideMove:1
                   }
             }
@@ -370,6 +366,35 @@ $('#price-range-submit').hide();
 			}
 		}
 	});
+
+  $('.owl-slider #NearbyApartments').owlCarousel({
+        autoplay: true,
+        responsiveClass: true,
+        autoHeight: true,
+        autoplayTimeout: 7000,
+        smartSpeed: 800,
+        nav: true,
+        dots:false,
+        responsive: {
+            0: {
+                items: 1
+            },
+
+            600: {
+                items: 2
+            },
+
+            1024: {
+                items: 3
+            },
+
+            1366: {
+                items: 3
+            }
+        }
+    });
+
+
 
 	$('#subscribe').on('click', async function () {
 		let res = JSON.parse(await ajaxRequest(

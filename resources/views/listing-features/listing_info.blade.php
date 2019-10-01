@@ -33,7 +33,7 @@
 <div class="col-md-6">
     <div class="form-group">
         <label>Neighborhood</label>
-        {!! Form::text('neighborhood', null, ['class' => 'input-style']) !!}
+        {!! Form::select('neighborhood_id', neighborhoods(), null, ['class' => 'input-style']) !!}
         <span class="invalid-feedback" role="alert">
 			{!! $errors->first('neighborhood') !!}
 		</span>
@@ -87,7 +87,7 @@
 <div class="col-md-6">
     <div class="form-group">
         <label>Availability</label>
-        {!! Form::select('availability', config('features.available'), null, ['class' => 'input-style']) !!}
+        {!! Form::select('availability', config('formfields.listing.availability'), null, ['class' => 'input-style']) !!}
         <span class="invalid-feedback" role="alert">
 			{!! $errors->first('available') !!}
 		</span>
@@ -103,6 +103,20 @@
                 'id' => 'availability_date',
                 'data-language' => 'en'
             ]) !!}
+        <span class="invalid-feedback" role="alert">
+			{!! $errors->first('availability_date') !!}
+		</span>
+    </div>
+</div>
+<div class="col-md-6">
+    <div class="form-group">
+        <label>Building Type</label>
+        {!! Form::select('building_type',
+        [
+            ''          => 'Select Type',
+            'open'      => 'Open',
+            'exclusive' => 'Exclusive'
+        ], null, ['class' => 'input-style']) !!}
         <span class="invalid-feedback" role="alert">
 			{!! $errors->first('availability_date') !!}
 		</span>

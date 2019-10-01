@@ -32,13 +32,7 @@ class HomeController extends Controller {
 	 * @return \Illuminate\Contracts\View\View
 	 */
 	public function index() {
-		$roles = [
-		    ''     => 'Select Type',
-		    AGENT  => 'Agent',
-            OWNER  => 'Owner',
-            RENTER => 'Renter'
-        ];
-		return view('admin.index', compact('roles'));
+		return view('admin.index');
 	}
 
     /**
@@ -66,10 +60,12 @@ class HomeController extends Controller {
 	}
 
     /**
-     * @return mixed
-     * @throws \Exception
+     * @param Request $request
+     * @param $id
+     *
+     * @return bool
      */
-    public function associatedAgents(Request $request, $id) {
+    public function associatedAgents($id) {
         $agents= $this->service->associatedAgents($id);
 
         return $agents ;

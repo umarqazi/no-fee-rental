@@ -248,9 +248,9 @@
 
 <?php wp_footer(); ?>
 
-    <script type="text/javascript">
-        
-         $( document ).ready(function() {
+    <script >
+        $( document ).ready(function() {
+
         $(".menu-btn").click(function () {
           $(".mobile-menu").slideDown();
         });
@@ -258,7 +258,10 @@
         $(".close-menu-btn").click(function () {
           $(".mobile-menu").slideUp();
         });
+
+        
       });
+
     </script>
 
  </body>

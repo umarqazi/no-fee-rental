@@ -27,6 +27,9 @@ Route::post('/newsletter-subscribe', 'NewsletterController@subscribe')->name('ne
 Route::get('/press', 'ContactUsController@showPress')->name('press');
 Route::post('newsletter', 'NewsletterController@store');
 
+// Agent Profile Routes
+Route::get('/agent-profile/{agentId}', 'Agent\AgentController@profileListing');
+
 // Added User By Admin Change Password Routes
 Route::get('/change-password/{token}', 'UserController@changePassword')->name('user.change_password');
 Route::post('/change-password/{token}', 'UserController@updatePassword')->name('change-password');
@@ -60,7 +63,7 @@ Route::post('/agent/signup', 'UserController@invitedAgentSignup')->name('agent.s
 Route::post('/send-message', 'MessageController@send')->name('send.message');
 
 // Realty MX Routes
-Route::get('/test/{file}', 'RealtyMXController@get');
+Route::get('/test/{file}', 'RealtyMXController@dispatchJob');
 Route::get('/realty-mx/{client}/{listing}', 'RealtyMXController@detail')->name('web.realty');
 
 // Listing Routes
@@ -87,6 +90,20 @@ Route::get('/reset', 'RecoverPasswordController@sendRequest');
 
 // Neighborhood Routes
 Route::get('/neighborhood', 'NeighborhoodController@index')->name('web.neighborhood');
-Route::get('/neighborhood/{sort}', 'NeighborhoodController@find');
-Route::get('/neighborhood-listing', 'NeighborhoodController@find')->name('web.findNeighborhoodLists');
+Route::get('/neighborhood-listing', 'NeighborhoodController@index')->name('web.findNeighborhoodLists');
 Route::post('/all-neighborhoods', 'NeighborhoodController@all')->name('web.allNeighbours');
+
+// Application Controlling Routes
+Route::get('/all-clear', function() {
+    artisan(['config:cache', 'view:clear', 'route:clear']);
+    dd('Config Cleared, View Cleared, Routes Cleared..');
+});
+
+Route::get('/migrate-fresh-seed', function() {
+    artisan(['migrate:fresh', 'db:seed']);
+    dd('Migration fresh with seeding..');
+});
+
+Route::get('/test', function() {
+    dd(neighborhoods());
+});

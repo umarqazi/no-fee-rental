@@ -2,24 +2,25 @@
 
 namespace App\Console\Commands;
 
-use Faker\Factory;
+use App\Http\Controllers\RealtyMXController;
+use App\Services\RealtyMXService;
 use Illuminate\Console\Command;
 
-class FakerFill extends Command
+class RealtyMXFeedImport extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'listing:fill {amount}';
+    protected $signature = 'import:feed {feed-name}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Use to Seed all tables';
+    protected $description = 'Importing Listings From Realty MX Feed...';
 
     /**
      * Create a new command instance.
@@ -36,11 +37,9 @@ class FakerFill extends Command
      *
      * @return mixed
      */
-    public function handle()
-    {
-        printf("Seeding Listing\n");
-        $amount = $this->argument('amount') ?? 10;
-        factory(\App\Listing::class, (int) $amount)->create();
-
+    public function handle() {
+        printf("%s\n", $this->description);
+//        $realtyController = new RealtyMXController(new RealtyMXService);
+//        return $realtyController->dispatchJob($this->argument('feed-name'));
     }
 }

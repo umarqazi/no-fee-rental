@@ -10,20 +10,18 @@ class NeighborhoodsTableSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
-    {
+    public function run() {
         DB::table('neighborhoods')->delete();
-        $neigh = config('neighborhoods');
-        $array = [];
-        foreach ($neigh as $n) {
-            $tmp = [
-                'name' => $n,
+        $neighbours = collect(config('neighborhoods'))->map(function($neighbour) {
+            $collection = [
+                'name' => $neighbour,
                 'created_at' => now(),
                 'updated_at' => now()
             ];
-            array_push($array, $tmp);
-        }
-        DB::table('neighborhoods')->insert($array);
-        //
+
+            return $collection;
+        });
+
+        DB::table('neighborhoods')->insert($neighbours->toArray());
     }
 }

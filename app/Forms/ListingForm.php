@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Forms\Listing;
-use App\Forms\BaseForm;
+namespace App\Forms;
 
-class CreateListingForm extends BaseForm {
+class ListingForm extends BaseForm {
 
     /**
      * @var integer
@@ -13,12 +12,12 @@ class CreateListingForm extends BaseForm {
     /**
      * @var string
      */
-	public $realty_id;
+	public $old_thumbnail;
 
     /**
      * @var string
      */
-	public $realty_url;
+	public $unique_slug;
 
     /**
      * @var string
@@ -49,11 +48,6 @@ class CreateListingForm extends BaseForm {
      * @var string
      */
 	public $display_address;
-
-    /**
-     * @var string
-     */
-	public $open_house;
 
     /**
      * @var string
@@ -93,7 +87,7 @@ class CreateListingForm extends BaseForm {
     /**
      * @var string
      */
-	public $old_thumbnail;
+	public $building_type;
 
     /**
      * @var boolean
@@ -106,11 +100,6 @@ class CreateListingForm extends BaseForm {
 	public $square_feet;
 
     /**
-     * @var array
-     */
-	public $amenities;
-
-    /**
      * @var integer
      */
 	public $visibility;
@@ -121,8 +110,6 @@ class CreateListingForm extends BaseForm {
 	function toArray() {
 		return [
 			'user_id'          => $this->user_id,
-            'realty_id'        => $this->realty_id,
-            'realty_url'       => $this->realty_url,
             'description'      => $this->description,
 			'name'             => $this->name,
 			'email'            => $this->email,
@@ -130,17 +117,17 @@ class CreateListingForm extends BaseForm {
 			'phone_number'     => $this->phone_number,
 			'street_address'   => $this->street_address,
 			'display_address'  => $this->display_address,
-			'open_house'       => $this->open_house,
-			'neighborhood'     => $this->neighborhood,
+			'neighborhood_id'  => $this->neighborhood,
 			'bedrooms'         => $this->bedrooms,
 			'baths'            => $this->baths,
+            'unique_slug'      => $this->unique_slug,
 			'unit'             => $this->unit,
 			'rent'             => $this->rent,
 			'thumbnail'        => $this->thumbnail,
             'visibility'       => $this->visibility,
 			'square_feet'      => $this->square_feet,
-            'amenities'        => $this->amenities,
 			'map_location'     => $this->map_location,
+            'building_type'    => $this->building_type
 		];
 	}
 
@@ -155,9 +142,8 @@ class CreateListingForm extends BaseForm {
 			'street_address'  => 'required|string',
 			'display_address' => 'required|string',
             'visibility'      => 'required|integer',
-			'availability'    => 'required',
-			'map_location'    => 'required',
-			'neighborhood'    => 'required|string',
+			'availability'    => 'required|string',
+			'map_location'    => 'required|string',
 			'bedrooms'        => 'required|integer',
 			'baths'           => 'required|integer',
             'thumbnail'       => 'sometimes|mimes:jpg,png,jpeg',
@@ -165,6 +151,7 @@ class CreateListingForm extends BaseForm {
 			'unit'            => 'required',
 			'rent'            => 'required|integer',
 			'square_feet'     => 'required|integer',
+            'building_type'   => 'required|string'
 		];
 	}
 }

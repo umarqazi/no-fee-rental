@@ -2228,7 +2228,7 @@ footer .copyright .social-icons li a:hover {
     font-weight: 600;
     color: #223971;
     font-family: 'Raleway', sans-serif;
-    flex: 85%;
+    flex: 75%;
 }
 
 .listing-detail-container .listing-info .title-subtext {
@@ -2347,11 +2347,317 @@ footer .copyright .social-icons li a:hover {
     background: none;
     padding: 0px;
 }
-
-.appointment-iconDetails {
-    margin-right: 15px;
+.listing-Details .appointment-iconDetails ul{
+    display: flex;
+    justify-content: space-between;
 }
 
+.listing-Details .listing-info .available-btn span:first-child{
+    background-color: #e77817;
+}
+.listing-Details .listing-info .available-btn{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.listing-Details .listing-info .product-title .flag-icon{
+    width: 25px;
+    height: 25px;
+}
+.listing-Details .listing-info .available-btn{
+    margin-bottom: 20px;
+}
+.listing-Details .listing-info .available-btn label {
+    color: #6a6d72;
+    font-size: 14px;
+}
+.listing-Details .listing-info .available-btn i {
+    margin-left: 15px;
+    font-size: 18px;
+    color:  #6a6d72;
+}
+.listing-Details .Building-details h3{
+    color: #000;
+    margin-bottom: 30px;
+}
+.listing-Details .appointment-iconDetails{
+    margin-bottom: 10px;
+}
+.listing-Details .appointment-iconDetails ul li img{
+    display: inline-block;
+    vertical-align:middle;
+    width: 25px;
+    height: 25px;
+}
+.listing-Details .appointment-iconDetails ul li span{
+    font-size: 16px;
+    font-weight: 700;
+    color: #223971;
+    margin-left: 5px;
+}
+.listing-Details .open-house-section{
+    margin-top: 30px;
+}
+.listing-Details .open-house-inner{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.listing-Details .open-house-section h3{
+    margin-bottom: 15px;
+}
+.listing-Details .open-house-section .open-house-inner p{
+    margin-bottom: 3px;
+    font-size: 14px;
+    color: #5f6368;
+}
+.listing-Details .open-house-section .open-house-inner span{
+    font-size: 14px;
+    color: #e77817;
+}
+.listing-Details .apointment-interest-section .btn-default{
+    padding: 0px 20px;
+    line-height: 36px;
+    font-size: 14px;
+    border: 1px solid #E77817;
+}
+.listing-Details .apointment-interest-section .btn-default:hover,
+.listing-Details .apointment-interest-section .btn-default:active,
+.listing-Details .apointment-interest-section .btn-default:focus{
+    background-color: #EBEBEB;
+    border: 1px solid #EBEBEB;
+    color: #9E9E9E;
+}
+.request-send{
+    margin: 10px 0px;
+}
+.listing-Details .apointment-interest-section .btn-default:active .request-send,
+.listing-Details .apointment-interest-section .btn-default:focus .request-send{
+    display: block;
+}
+.listing-Details .apointment-interest-section .fa-check-circle{
+    color: #6AC359;
+    margin-right: 5px;
+}
+.apointment-interest-section{
+    font-size: 14px;
+    color: #223871;
+    font-weight: 600;
+}
+.listing-Details .appointment-section ul li {
+    display: inline-block;
+    margin-right: 15px;
+    color: #6A6D72;
+    font-size: 13px;
+}
+.listing-Details .appointment-section h5{
+    font-size: 18px;
+    font-weight: 700;
+    color: #000;
+} 
+.listing-Details .apointment-tabs ul li{
+    width: 50%;
+
+}
+.listing-Details .apointment-tabs ul li.active a{
+    background-color: #223971;
+     color: #fff;
+}
+.listing-Details .lease-term-section{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.listing-Details .Availability-date-sec .bdr-right {
+    border-right: 1px solid #ddd;
+}
+.listing-Details .apointment-tabs ul li a{
+    display: inline-block;
+    width: 100%;
+    background-color: #EBEBEB;
+    padding: 20px 0px;
+    color: #9E9E9E;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 500;
+}
+.apointment-tabs .login-signup-tab{
+    width: 50%;
+    margin: 0 auto;
+    padding: 50px 0px;
+    text-align: center;
+}
+.apointment-tabs .login-signup-tab a{ 
+    width: 200px;
+    text-align: center;
+    display: inline-block;
+    margin-top: 20px;
+}
+.apointment-tabs .login-signup{
+    display: none;
+}
+.apointment-tabs .successfull-msg{
+    display: none;
+}
+.apointment-tabs .successfull-msg .fa-check-circle{
+    color: #6ac359;
+    font-size: 50px;
+    margin-bottom: 10px;
+}
+
+.apointment-tabs .login-signup-tab h5{
+    font-size: 16px;
+    font-weight: 700;
+}
+.apointment-tabs .tab-content .form-group {
+    width: 75%;
+    margin: 0 auto;
+    padding: 20px 0px;
+    text-align: center;
+}
+.apointment-tabs .tab-content .form-group input{
+    margin-bottom: 10px;
+    background-color: #EBEBEB;
+    color: #9E9E9E;
+    height: 45px;
+    border: 1px solid #223971;
+}
+.apointment-tabs .tab-content .form-group input:active,
+.apointment-tabs .tab-content .form-group input:focus,
+.apointment-tabs .tab-content .form-group textarea:active,
+.apointment-tabs .tab-content .form-group textarea:focus{
+    box-shadow: none;
+}
+.apointment-tabs .tab-content .form-group input::placeholder{
+    font-size: 13px;
+}
+.apointment-tabs .tab-content .form-group textarea{
+    width: 100%;
+    height: 120px;
+    border: 1px solid #223971;
+}
+.apointment-tabs .tab-content .form-group textarea::placeholder{
+    font-size: 13px;
+}
+.apointment-tabs .tab-content .form-group .btn-default{
+    padding: 0px 80px; 
+    margin-top: 20px;
+}
+.apointment-tabs{
+    -webkit-box-shadow: 0px 0px 2px 0px rgba(235,235,235,1);
+    -moz-box-shadow: 0px 0px 2px 0px rgba(235,235,235,1);
+    box-shadow: 0px 0px 2px 0px rgba(235,235,235,1);
+}
+.nearbyapartment h3{
+    color: #000;
+}
+.listing-Details .listing-info .dropdown-toggle:after{
+    display: none;
+}
+.listing-Details .listing-info .dropdown-menu{
+    min-width: auto;
+    border-radius: 10px;
+    -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.22);
+    -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.22);
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.22);
+    border: none;
+}
+.listing-Details .listing-info .dropdown-menu li{
+    padding: 10px 20px 10px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+.listing-Details .listing-info .dropdown-menu li a{
+    color: #000;
+    font-size: 14px;
+    font-weight: 600;
+}
+.listing-Details .listing-info .dropdown-menu li a:hover,
+.listing-Details .listing-info .dropdown-menu li a:active,
+.listing-Details .listing-info .dropdown-menu li a:focus{
+    color: #e77817;
+    transition: all 0.3s ease-in-out;
+}
+.listing-Details .listing-info .dropdown-menu li:last-child{
+    border: none;
+}
+.listing-Details .listing-info .dropdown-menu li i{
+    padding-right: 5px;
+}
+
+
+
+ 
+#flag-icon .modal-footer {
+    border: none;
+}
+
+#flag-icon .modal-content {
+    padding: 15px;
+}
+
+#flag-icon .modal-body {
+    padding: 10px 0px 0px;
+}
+
+#flag-icon .modal-header {
+    padding: 0px 0px 10px;
+}
+
+#flag-icon .modal-footer button {
+    background-color: #f36f21;
+    border-color: #f36f21;
+    width: 50%;
+}
+
+#flag-icon .modal-footer button:hover,
+#flag-icon .modal-footer button:active,
+#flag-icon .modal-footer button:focus {
+    background-color: transparent;
+    color: #222;
+    box-shadow: none;
+}
+
+#flag-icon .text-message textarea {
+    width: 100%;
+    height: 100px;
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+    padding: 10px;
+}
+
+#flag-icon .modal-header h4 {
+    color: #213970;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+#flag-icon .modal-header .modal-title p {
+    font-size: 14px;
+    color: #000000;
+    margin-bottom: 0px;
+    font-weight: 500;
+}
+
+#flag-icon .modal-header {
+    border-bottom: 1px solid #ddd;
+}
+
+#flag-icon .profilecard-detaill h3 {
+    color: #434343;
+    margin-bottom: 15px;
+    font-size: 20px;
+}
+#flag-icon .profilecard-detaill select:active,
+#flag-icon .profilecard-detaill select:focus{
+    box-shadow: none;
+}
+#flag-icon .profilecard-detaill select{
+    font-size: 13px;
+}
+#flag-icon .profilecard-detaill textarea::placeholder{
+    font-size: 13px;
+}
 
 /*Blog page*/
 
@@ -2920,7 +3226,7 @@ footer .copyright .social-icons li a:hover {
 
 .property-listing.neighbourhood-listing {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     flex-wrap: wrap;
 }
 
@@ -3371,7 +3677,7 @@ footer .copyright .social-icons li a:hover {
 
 @media (min-width: 1367px) {
     .container-lg {
-        max-width: 1400px;
+        max-width: 1600px;
 
     }
     .featured-properties .property-listing .property-thumb {
@@ -3384,6 +3690,9 @@ footer .copyright .social-icons li a:hover {
 @media (max-width: 991px) {
     #appointmentModal {
         padding-left: 15px;
+    }
+    .listing-Details .Building-details h3{
+        margin-top: 20px;
     }
 
     #appointmentModal .modal-body a.btn {
@@ -3670,9 +3979,7 @@ footer .copyright .social-icons li a:hover {
         margin-bottom: 15px;
     }
 
-    .listing-detail-container .lSSlideOuter .lSPager.lSGallery {
-        display: none;
-    }
+   
     /*agent profile responsive*/
 
     .agent-profile-view .agent-info .contact-info {
@@ -4012,10 +4319,6 @@ footer .copyright .social-icons li a:hover {
         display: none;
     }
 
-    .listing-detail-container .listing-info .product-title {
-        margin-top: 30px;
-    }
-
     .lSSlideOuter .lSSlideWrapper #image-gallery > li img {
         max-height: 600px;
     }
@@ -4079,9 +4382,7 @@ footer .copyright .social-icons li a:hover {
         padding: 0px 0px 0px 0px;
     }
 
-    .listing-Details .lSSlideOuter .lSPager.lSGallery img {
-        height: 85px !important;
-    }
+   
     /*agent profile */
 
     .agent-profile-view {
@@ -4355,10 +4656,12 @@ footer .copyright .social-icons li a:hover {
 
     .listing-detail-container .listing-info .product-title p {
         margin-bottom: 15px;
+        font-size: 18px;
     }
 
     .listing-detail-container .listing-info .title-subtext {
         margin-top: 10px;
+        font-size: 14px;
     }
 
     .listing-detail-container .listing-info .near-by-info {
@@ -4378,7 +4681,6 @@ footer .copyright .social-icons li a:hover {
     .let-us-hlep-form .modal-header .modal-title {
         font-size: 18px;
     }
-
     .featured-properties .property-listing .info .info-link-text p:nth-of-type(2) {
         display: block;
     }
@@ -4490,6 +4792,23 @@ footer .copyright .social-icons li a:hover {
     #mobile-map-listing-view{
         height: 375px;
     }
+    .listing-Details .appointment-iconDetails ul li span{
+        font-size: 14px;    
+    }
+    .listing-Details .appointment-iconDetails ul li img{
+        width: 20px;
+        height: 20px;
+    }
+    .location-map-sec #map{
+        margin-top: 20px;
+    }
+    .nearbyapartment.featured-properties{
+        padding: 30px 0px;
+    }
+    .nearbyapartment h3{
+        margin-bottom: 20px;
+    }
+
 }
 @media only screen and (min-width: 577px) and (max-width: 767px) {
     .featured-properties .property-listing .info .info-link-text {
@@ -4500,11 +4819,30 @@ footer .copyright .social-icons li a:hover {
         width: 92% !important;
     }
 
-    .listing-Details .lSSlideOuter .lSPager.lSGallery img {
-        height: 60px !important;
-    }
+    
 }
 @media only screen and (max-width: 576px) {
+    .listing-Details .open-house-inner{
+        display: block;
+    }
+    .listing-detail-container .listing-info .product-title {
+        display: block;
+    }
+        .listing-Details .listing-info .available-btn{
+        display: block;
+    }
+    .listing-Details .listing-info .available-btn i{
+        margin-left: 0px;
+    }
+    .listing-Details .listing-info .estimation-time{
+        margin-top: 10px;
+    }
+    .location-map-sec h3{
+        margin-top: 20px;
+    }
+    .apointment-interest-section{
+        margin-top: 10px;
+    }
     .featured-properties .property-listing .property-thumb {
         width: calc(100% / 1);
         margin: 0;
@@ -4600,6 +4938,18 @@ footer .copyright .social-icons li a:hover {
     .clients-reviews-section #ClientCarousel .item {
         width: calc(100% - 0px);
         margin: 0px 0px;
+    }
+    .listing-Details .appointment-iconDetails ul{
+        flex-wrap: wrap;
+        justify-content: space-between;
+
+    }
+    .listing-Details .appointment-iconDetails ul li{
+        margin-bottom: 10px;
+        width: calc(100% / 2);
+    }
+    .listing-aminities-sec .container-lg .row .col-sm-3{
+        margin-bottom: 10px;
     }
 }
 

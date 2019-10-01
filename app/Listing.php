@@ -19,25 +19,18 @@ class Listing extends Model {
 	 * @var array $fillable
 	 */
 	protected $fillable = [
-		'user_id', 'realty_id', 'name', 'email', 'phone_number', 'street_address',
-		'display_address', 'neighborhood', 'thumbnail', 'baths', 'bedrooms', 'unit',
-		'rent', 'square_feet', 'open_house', 'description', 'is_featured', 'map_location',
-		'status', 'visibility', 'city_state_zip', 'realty_url', 'availability', 'unique_client_id'
+		'user_id', 'realty_id', 'unique_slug', 'neighborhood_id',
+        'name', 'email', 'phone_number', 'street_address', 'display_address',
+        'thumbnail', 'baths', 'bedrooms', 'unit', 'rent', 'square_feet',
+        'description', 'is_featured', 'map_location', 'building_type',
+		'visibility', 'city_state_zip', 'realty_url', 'availability'
 	];
 
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
 	 */
-	public function listingImages() {
+	public function images() {
 		return $this->hasMany(ListingImages::class, 'listing_id');
-	}
-
-	/**
-     * return listing types
-	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
-	 */
-	public function listingTypes() {
-		return $this->hasMany(ListingTypes::class, 'listing_id');
 	}
 
     /**
@@ -47,11 +40,18 @@ class Listing extends Model {
 	    return $this->hasMany(OpenHouse::class, 'listing_id');
     }
 
-	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-	 */
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function amenities() {
+	    return $this->belongsToMany(Amenities::class, 'listing_amenities', 'listing_id', 'amenity_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
 	public function agent() {
-		return $this->belongsTo(User::class, 'user_id');
+		return $this->hasOne(User::class, 'id', 'user_id');
 	}
 
 	/**
@@ -96,15 +96,6 @@ class Listing extends Model {
 		return $query->with('agent');
 	}
 
-	/**
-	 * @param $query
-	 *
-	 * @return mixed
-	 */
-	public function scopeWithTypes($query) {
-		return $query->with('listingTypes');
-	}
-
     /**
      * @param $query
      *
@@ -120,7 +111,7 @@ class Listing extends Model {
 	 * @return mixed
 	 */
 	public function scopeWithImages($query) {
-		return $query->with('listingImages');
+		return $query->with('images');
 	}
 
 	/**
@@ -129,7 +120,7 @@ class Listing extends Model {
 	 * @return mixed
 	 */
 	public function scopeWithAll($query) {
-		return $query->with(['agent.company.company', 'listingTypes', 'listingImages', 'openHouses']);
+		return $query->with(['agent.company', 'images', 'openHouses', 'amenities'])->first();
 	}
 
 	/**
@@ -138,7 +129,7 @@ class Listing extends Model {
 	 * @return mixed
 	 */
 	public function scopeFeatured($query) {
-		return $query->whereis_featured(APPROVEFEATURED)->withTypes();
+		return $query->whereis_featured(APPROVEFEATURED);
 	}
 
 	/**
@@ -218,8 +209,8 @@ class Listing extends Model {
      * @return mixed
      */
     public function scopePolicy($query) {
-	    return $query->whereHas('listingTypes', function($subQuery) {
-	        return $subQuery->where('property_type', PET_POLICY);
-        });
+//	    return $query->whereHas('listingTypes', function($subQuery) {
+//	        return $subQuery->where('property_type', PET_POLICY);
+//        });
     }
 }

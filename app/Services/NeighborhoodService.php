@@ -9,20 +9,15 @@
 namespace App\Services;
 
 use App\Forms\NeighborhoodForm;
-use App\Repository\Listing\ListingRepo;
+use App\Repository\ListingRepo;
 use App\Repository\NeighborhoodRepo;
 
 class NeighborhoodService {
 
     /**
-     * @var NeighborhoodRepo
-     */
-    private $repo;
-
-    /**
      * @var object
      */
-    private $neighbourhood;
+    protected $neighborhoodRepo;
 
     /**
      * @var string
@@ -30,20 +25,40 @@ class NeighborhoodService {
     private $query;
 
     /**
-     * @var ListingRepo
+     * NeighborhoodService constructor.
      */
-    protected $lRepo;
+    public function __construct() {
+        $this->neighborhoodRepo = new NeighborhoodRepo();
+        $this->query = $this->neighborhoodRepo->appendQuery();
+    }
 
     /**
-     * NeighborhoodService constructor.
+     * @param $request
      *
-     * @param NeighborhoodRepo $repo
-     * @param ListingRepo $lRepo
+     * @return NeighborhoodForm
      */
-    public function __construct(NeighborhoodRepo $repo, ListingRepo $lRepo) {
-        $this->repo = $repo;
-        $this->lRepo = $lRepo;
-        $this->query = $this->lRepo->appendQuery();
+    private function validateForm($request) {
+        $form = new NeighborhoodForm();
+        $form->name = $request->neighborhood_name;
+        $form->content = $request->neighborhood_content;
+        $form->validate();
+        return $form;
+    }
+
+    /**
+     * @param
+     *
+     * @return mixed
+     */
+    public function neighborhoods() {
+        return $this->neighborhoodRepo->neighborhoods();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function all() {
+        return $this->neighborhoodRepo->all();
     }
 
     /**
@@ -52,79 +67,89 @@ class NeighborhoodService {
      * @return mixed
      */
     public function create($request) {
-        $form = new NeighborhoodForm();
-        $form->name = $request->neighborhood_name;
-        $form->content = $request->neighborhood_content;
-        $form->validate();
-        return $this->repo->create($form->toArray());
+        $form = $this->validateForm($request);
+        return $this->neighborhoodRepo->create($form->toArray());
     }
 
     /**
-     * @param $neighbour
-     * @param $paginate
+     * @param $id
      *
      * @return mixed
      */
-    public function fetchByNeighbour($neighbour, $paginate) {
-        return $this->lRepo->find(['neighborhood' => $neighbour])
-                           ->orderBy('is_featured', '1')
-                           ->withImages()
-                           ->paginate($paginate);
+    public function edit($id) {
+        return $this->neighborhoodRepo->edit($id)->first();
     }
 
     /**
-     * @param null $neighbour
-     * @param $paginate
+     * @param $id
      *
-     * @return array
+     * @return bool
      */
-    public function fetchListing($paginate, $neighbour = null) {
-        $neighbour = $neighbour ?? $this->repo->getFirst();
-        return $this->collection($neighbour, $this->fetchByNeighbour($neighborhood->name ?? null, $paginate));
+
+    public function delete($id) {
+        return $this->neighborhoodRepo->delete($id);
     }
 
     /**
-     * @param $neighbourhood
-     * @param $listings
+     * @param $id
+     * @param $request
+     *
+     * @return mixed
+     */
+    public function update($id, $request) {
+        $form = $this->validateForm($request);
+        return $this->neighborhoodRepo->update($id, $form->toArray());
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function get() {
+        return $this->neighborhoodRepo->all();
+    }
+
+    /**
+     * @return array
+     */
+    public function index() {
+        $data = $this->neighborhoodRepo->fetch()->first();
+        return $this->collection($data);
+    }
+
+    /**
+     * @param $data
      *
      * @return array
      */
-    private function collection($neighbourhood, $listings) {
+    private function collection($data) {
         return [
-            'neighborhood'  => $neighbourhood,
-            'listings'      => $listings
+            'neighborhood'  => $data,
+            'listings'      => $data->listings
         ];
     }
+
+     // Filters for NeighbourHoods
 
     /**
      * @param $neighbour
      */
     public function neighborhood($neighbour) {
-        $this->neighbourhood = $this->repo->find(['name' => $neighbour])->first();
-        $this->query = $this->lRepo->find(['neighborhood' => $neighbour]);
+        $this->query = $this->neighborhoodRepo->findNeighborhood($neighbour);
     }
 
     /**
-     * @param $paginate
-     *
-     * @return mixed
+     * @param $neighbour
      */
-    public function fetchQuery($paginate) {
-        return $this->collection($this->neighbourhood, $this->query->orderBy('is_featured', '1')->paginate($paginate));
+    public function cheaper($neighbour) {
+        $this->query = $this->neighborhoodRepo->cheaper($neighbour);
     }
 
     /**
-     * sort result by rent
+     * @param $neighbour
      */
-    public function cheaper() {
-        $this->query->cheaper();
-    }
-
-    /**
-     * sort result by recent
-     */
-    public function recent() {
-        $this->query->recent();
+    public function recent($neighbour) {
+        $this->query = $this->neighborhoodRepo->recent($neighbour);
     }
 
     /**
@@ -135,51 +160,11 @@ class NeighborhoodService {
     }
 
     /**
-     * @param $id
-     *
-     * @return mixed
+     * Fetch appended Query Results
+     * @return array
      */
-    public function edit($id) {
-        return $this->repo->edit($id)->first();
-    }
-
-    /**
-     * @param $id
-     *
-     * @return bool
-     */
-
-    public function delete($id) {
-        return $this->repo->delete($id);
-    }
-
-    /**
-     * @param $id
-     * @param $request
-     *
-     * @return mixed
-     */
-    public function update($request,$id) {
-        $neighborhood = new NeighborhoodForm();
-        $neighborhood->name = $request->neighborhood_name;
-        $neighborhood->content = $request->neighborhood_content;
-        $neighborhood->validate();
-        return $this->repo->update($id, $neighborhood->toArray());
-    }
-
-    /**
-     * @param
-     *
-     * @return mixed
-     */
-    public function neighborhoods() {
-        return $this->repo->neighborhoods();
-    }
-
-    /**
-     * @return mixed
-     */
-    public function all() {
-        return $this->repo->all();
+    public function fetchQuery() {
+        $data = $this->query->first();
+        return $this->collection($data);
     }
 }

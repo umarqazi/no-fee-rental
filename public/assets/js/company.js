@@ -41,13 +41,13 @@ $(() => {
         let res = await toggleStatus(route, $(`#${$(this).parents('table').attr('id')}`).DataTable(), $(this));
     });
 
-    $('body').on('click', '#viewAssociatedAgents', async function(e) {
+    $('body').on('click', '#viewAssociatedAgents', async function() {
         let route = $(this).attr('route');
         let res = await ajaxRequest(route, 'get');
         $('#add-company').modal('show');
         $('.share_list_popup ul').empty();
         for(let i = 0 ; i < res.length ; i++)
-        {         console.log(res[i]['first_name']);
+        {
             $('.share_list_popup ul').append('<li>"' + res[i]['first_name'] + res[i]['last_name'] +'"</li><br>');
 
         }

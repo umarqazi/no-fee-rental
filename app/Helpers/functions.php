@@ -135,7 +135,7 @@ function compareDates($dateAlpha, $dateBeta) {
  *
  * @return mixed
  */
-function mailService($to, $data) {
+function dispatchMail($to, $data) {
 	return \Illuminate\Support\Facades\Mail::to($to)->send(new App\Mail\MailHandler($data));
 }
 
@@ -144,8 +144,28 @@ function mailService($to, $data) {
  *
  * @return \App\Services\NotificationService
  */
-function notificationService($data) {
+function dispatchNotification($data) {
     return new \App\Services\NotificationService(toObject($data));
+}
+
+/**
+ * @param $command
+ */
+function artisan($command) {
+    $commands = is_array($command) ? $command : collect($command)->toArray();
+    foreach ($commands as $command) {
+        \Illuminate\Support\Facades\Artisan::call($command);
+    }
+}
+
+/**
+ * @param $data
+ * @param int $delay
+ *
+ * @return \Illuminate\Foundation\Bus\PendingDispatch
+ */
+function dispatchEmailQueue($data, $delay = 10) {
+    return dispatch(new \App\Jobs\SendEmailJob($data))->delay(now()->addSeconds($delay));
 }
 
 /**
@@ -234,59 +254,159 @@ function dataTable($data) {
 }
 
 /**
- * @param null $data
- * @param bool $readable
+ * @param null $action
  *
- * @return array|mixed
+ * @return null
  */
-function features($data = null, $readable = false) {
-	$build = [];
-	$config = config('features');
-	$features = $config['listing_features'];
+function amenities($action = null) {
+    $html = null;
+    $service = new \App\Services\AmenityService();
+    foreach($service->get() as $amenity) {
+        $html .= "<div class='col-md-6'>
+        <h3>{$amenity->amenity_type }</h3><ul class='checkbox-listing'>".innerAmenity($amenity, $action)."</ul></div>";
+    }
 
-	if ($data == null) {
-		return $features;
-	}
-
-	$keys = array_keys($config['listing_types']);
-	foreach ($data as $value) {
-		$index = $value->property_type - 1;
-		$key = $keys[$index];
-		if ($readable) {
-			$feature = $features[$key][$value->value - 1];
-			$key = str_replace('_', ' ', ucfirst($key));
-			$build[$key][] = $feature;
-		} else {
-			$build[$key][] = $value->value;
-		}
-	}
-
-	return $build;
+    return $html;
 }
 
+/**
+ * @param $amenity
+ * @param $action
+ *
+ * @return string|null
+ */
+function innerAmenity($amenity, $action) {
+    $innerHtml = null;
+    foreach ( $amenity->amenities as $amenity_value ) {
+        $innerHtml .= "
+            <li><div class='custom-control custom-checkbox'>" .
+                Form::checkbox( "amenities[]", $amenity_value->id, null,
+                    [
+                        ( $action == 'Update' ) ? 'disabled' : '',
+                        'class' => 'custom-control-input',
+                        'id'    => "listitem{$amenity_value->id}"
+                    ])."<label class='custom-control-label' for='listitem{$amenity_value->id}'>" .
+                       $amenity_value->amenities . "</label></div></li>";
+    }
+
+    return $innerHtml;
+}
+
+/**
+ * @param $listings
+ *
+ * @return string|null
+ */
+function listingView($listings) {
+    $html = null;
+    $html .= "<h3>Manhattan, NY Rental</h3>
+            <span>".str_formatting(count($listings), 'place'). " available for rent </span>";
+            if(count($listings) > 0) {
+                $html .= '
+                    <div id="boxscroll2">
+                        <div class="featured-properties" id="contentscroll2">
+                            <div class="property-listing neighbourhood-listing">
+                                '.iterateListing($listings).'
+                            </div>
+                                '.listingMobileView($listings).'
+                        </div>
+                    </div>';
+            } else {
+                $html .= '<div>No Listing Found</div>';
+            }
+
+    return $html;
+}
+
+/**
+ * @param $listings
+ * @param bool $hasSlider
+ *
+ * @return string|null
+ */
+function iterateListing($listings, $hasSlider = false) {
+    $html = null;
+    foreach ( $listings as $key => $listing ) {
+        $html .= $hasSlider ? "<div class='items'>" : null;
+        $html .= !$hasSlider ? "<input type='hidden' name='map_location' value='{$listing->map_location}'>" : null;
+        $html .= "<div class='property-thumb'>
+                      <div class='check-btn'>
+                          <button class='btn-default' data-toggle='modal' data-target='#check-availability'>
+                              Check Availability
+                          </button>
+                      </div>
+                      <span class='heart-icon'></span>
+                      <img src=" . asset( $listing->thumbnail ?? DLI ) . " class='main-img'>
+                      <div class='info'>
+                           <div href='javascript:void(0);' class='info-link-text'>
+                                <p> $ {$listing->rent} </p>
+                                <small>" .
+                                    str_formatting( $listing->bedrooms, 'Bed' ) . ' ,' . str_formatting( $listing->baths, 'Bath' )
+                                . "</small>
+                                <p> {$listing->neighborhood} </p>
+                           </div>
+                           <a href=" . route( 'listing.detail', $listing->id ) . " class='btn viewfeature-btn'> View </a>
+                      </div>
+                      <div class='feaure-policy-text'>
+                           <p>$ {$listing->rent} / Month </p>
+                           <span>" . str_formatting( $listing->bedrooms, 'Bed' ) . ' ,' . str_formatting( $listing->baths, 'Bath' ) . "</span>
+                      </div>
+                  </div>";
+        $html .= $hasSlider ? "</div>" : null;
+    }
+
+    return $html;
+}
+
+/**
+ * @param $listings
+ *
+ * @return string|null
+ */
+function listingMobileView($listings) {
+    $html = null;
+    $html .= '<div class="property-listing mobile-listing">
+                  <div class="owl-carousel owl-theme">
+                       '.iterateListing($listings, true).'
+                  </div>
+              </div>';
+
+    return $html;
+}
+
+/**
+ * @return \Illuminate\Support\Collection|\Tightenco\Collect\Support\Collection
+ */
+function neighborhoods() {
+    $collection = null;
+    $neighbours = new \App\Services\NeighborhoodService();
+    foreach ( $neighbours->get() as $key => $value ) {
+        $collection[ $value->id ] = $value->name;
+    }
+
+    return $collection;
+}
 /**
  * @param $index
  *
  * @return mixed
  */
-function fetchopenHouses($index) {
+function fetchopenHouse($index) {
     $time = config('openHouse');
     return $time[$index];
 }
 
 /**
- * @param $amenities
+ * @param $listing
  *
- * @return bool
+ * @return string
  */
-function is_exclusive($amenities) {
-    foreach ($amenities as $amenity) {
-        if($amenity->property_type === 1 && $amenity->value === EXCLUSIVE) {
-            return true;
-        }
+function is_exclusive($listing) {
+    if($listing->building_type === EXCLUSIVE) {
+        return $listing->street_address.' - '.$listing->unit;
     }
 
-    return false;
+    return $listing->display_address;
 }
 
 /**

@@ -12,17 +12,12 @@ class CompanyForm extends BaseForm {
 	public $company;
 
     /**
-     * @var integer
+     * @return mixed
      */
-	public $status;
 
-    /**
-     * @return array|mixed
-     */
 	public function rules() {
 		return [
 			'company' => 'required|unique:companies',
-			'status' => 'required|integer',
 		];
 	}
 
@@ -32,7 +27,6 @@ class CompanyForm extends BaseForm {
 	public function toArray() {
 		return [
 			'company' => $this->company,
-			'status' => $this->status,
 		];
 	}
 }

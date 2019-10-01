@@ -2,14 +2,14 @@
 
 namespace App\Services;
 
-use App\Repository\Listing\ListingRepo;
+use App\Repository\ListingRepo;
 
 class FeatureListingService {
 
     /**
      * @var ListingRepo
      */
-	private $repo;
+	protected $repo;
 
     /**
      * FeatureListingService constructor.
@@ -143,7 +143,7 @@ class FeatureListingService {
 				'approved_by' => mySelf()->first_name,
 				'approved_on' => $list->updated_at,
 			];
-			notificationService(toObject($data));
+			dispatchNotification(toObject($data));
 			return true;
 		}
 

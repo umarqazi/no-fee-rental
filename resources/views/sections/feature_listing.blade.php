@@ -33,7 +33,7 @@
                                     <div class="info-link-text">
                                         <p> ${{ $fl->rent }} </p>
                                         <small> {{ str_formatting($fl->bedrooms, 'Bed') .' ,'. str_formatting($fl->baths, 'Bath') }} </small>
-                                        <p> {{ is_exclusive($fl->listingTypes) ? $fl->street_address.' - '.$fl->unit : $fl->display_address }}</p>
+                                        <p> {{ is_exclusive($fl) }}</p>
                                     </div>
                                     <a href="{{ route('listing.detail', $fl->id) }}" class="btn viewfeature-btn"> View </a>
                                 </div>
@@ -64,7 +64,7 @@
                                             <div class="info-link-text">
                                                 <p> ${{ $fl->rent }} </p>
                                                 <small> {{ str_formatting($fl->bedrooms, 'Bed') .' ,'. str_formatting($fl->baths, 'Bath') }} </small>
-                                                <p> {{ is_exclusive($fl->listingTypes) ? $fl->street_address.' - '.$fl->unit : $fl->display_address }}</p>
+                                                <p> {{ is_exclusive($fl) }}</p>
                                             </div>
                                             <a href="{{ route('listing.detail', $fl->id) }}" class="btn viewfeature-btn"> View </a>
                                         </div>
@@ -98,7 +98,7 @@
                                         <div class="info-link-text">
                                             <p> ${{ $fl->rent }} </p>
                                             <small> {{ str_formatting($fl->bedrooms, 'Bed') .' ,'. str_formatting($fl->baths, 'Bath') }} </small>
-                                            <p> {{ is_exclusive($fl->listingTypes) ? $fl->street_address.' - '.$fl->unit : $fl->display_address }}</p>
+                                            <p> {{ is_exclusive($fl) }}</p>
                                         </div>
                                         <a href="{{ route('listing.detail', $fl->id) }}" class="btn viewfeature-btn"> View </a>
                                     </div>
@@ -129,7 +129,7 @@
                                             <div class="info-link-text">
                                                 <p> ${{ $fl->rent }} </p>
                                                 <small> {{ str_formatting($fl->bedrooms, 'Bed') .' ,'. str_formatting($fl->baths, 'Bath') }} </small>
-                                                <p> {{ is_exclusive($fl->listingTypes) ? $fl->street_address.' - '.$fl->unit : $fl->display_address }}</p>
+                                                <p> {{ is_exclusive($fl) }}</p>
                                             </div>
                                             <a href="{{ route('listing.detail', $fl->id) }}" class="btn viewfeature-btn"> View </a>
                                         </div>
@@ -163,7 +163,7 @@
                                     <div class="info-link-text">
                                         <p> ${{ $fl->rent }} </p>
                                         <small> {{ str_formatting($fl->bedrooms, 'Bed') .' ,'. str_formatting($fl->baths, 'Bath') }} </small>
-                                        <p> {{ is_exclusive($fl->listingTypes) ? $fl->street_address.' - '.$fl->unit : $fl->display_address }}</p>
+                                        <p> {{ is_exclusive($fl) }}</p>
                                     </div>
                                     <a href="{{ route('listing.detail', $fl->id) }}" class="btn viewfeature-btn"> View </a>
                                 </div>
@@ -193,7 +193,7 @@
                                             <div class="info-link-text">
                                                 <p> ${{ $fl->rent }} </p>
                                                 <small> {{ str_formatting($fl->bedrooms, 'Bed') .' ,'. str_formatting($fl->baths, 'Bath') }} </small>
-                                                <p> {{ is_exclusive($fl->listingTypes) ? $fl->street_address.' - '.$fl->unit : $fl->display_address }}</p>
+                                                <p> {{ is_exclusive($fl) }}</p>
                                             </div>
                                             <a href="{{ route('listing.detail', $fl->id) }}" class="btn viewfeature-btn"> View </a>
                                         </div>
@@ -212,6 +212,7 @@
         <div class="text-center">
             {{--<a href="#" class="btn-default">view all</a>--}}
         </div>
+    </div>
 </section>
 
 <div class="container">

@@ -61,12 +61,19 @@ class UserRepo extends BaseRepo {
     }
 
     /**
-     * @param $type
+     * @param $id
      *
      * @return mixed
      */
-    public function findByUserType($type) {
-	    return $this->find(['user_type' => $type])->first();
+    public function withListing($id) {
+        return $this->findById($id)->withlistings();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function appendQuery() {
+        return $this->model->query();
     }
 
     /**
@@ -74,7 +81,16 @@ class UserRepo extends BaseRepo {
      *
      * @return mixed
      */
-    public function findById($id) {
-        return $this->find(['id' => $id])->first();
+    public function cheaper($id) {
+        return $this->findById($id)->cheaper();
+    }
+
+    /**
+     * @param $id
+     *
+     * @return mixed
+     */
+    public function recent($id) {
+        return $this->findById($id)->recent();
     }
 }
