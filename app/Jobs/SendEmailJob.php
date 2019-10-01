@@ -32,6 +32,6 @@ class SendEmailJob implements ShouldQueue
      * @return void
      */
     public function handle() {
-        mail($this->data->to, $this->data);
+        dispatchMail($this->data->to, $this->data);
     }
 }
