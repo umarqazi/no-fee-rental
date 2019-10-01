@@ -2198,7 +2198,10 @@ footer .copyright .social-icons li a:hover {
 
 
 /*Listing detail page*/
-
+.lSSlideOuter .lSPager.lSGallery img{
+    height: 103px !important; 
+    object-fit: cover; 
+}
 .listing-detail-container {
     background: #fff;
 }
@@ -2444,6 +2447,9 @@ footer .copyright .social-icons li a:hover {
     color: #223871;
     font-weight: 600;
 }
+.listing-Details .tab-content>.active{
+    opacity: 1 !important;
+}
 .listing-Details .appointment-section ul li {
     display: inline-block;
     margin-right: 15px;
@@ -2493,9 +2499,9 @@ footer .copyright .social-icons li a:hover {
     display: inline-block;
     margin-top: 20px;
 }
-.apointment-tabs .login-signup{
+/*.apointment-tabs .login-signup{
     display: none;
-}
+}*/
 .apointment-tabs .successfull-msg{
     display: none;
 }
@@ -2585,9 +2591,6 @@ footer .copyright .social-icons li a:hover {
     padding-right: 5px;
 }
 
-
-
-
 #flag-icon .modal-footer {
     border: none;
 }
@@ -2658,6 +2661,140 @@ footer .copyright .social-icons li a:hover {
 #flag-icon .profilecard-detaill textarea::placeholder{
     font-size: 13px;
 }
+
+/*liting detail radio button*/
+.appointment-radio-btn{
+    display: flex;
+    justify-content: flex-start;
+    padding: 0px 15px;
+    margin-top: 30px;
+}
+
+.appointment-radio-btn .selection label {
+    width: 110px;
+    background-color: transparent;
+    border-radius: 5px;
+    color: #f36f21;
+    padding: 10px 10px;
+    cursor: pointer;
+    height: 60px;
+    text-align: center;
+    border: 1px solid #f36f21;
+    line-height: 20px;
+    font-size: 14px;
+}
+
+.appointment-radio-btn .selection label:hover,
+.appointment-radio-btn .selection label:active,
+.appointment-radio-btn .selection label:focus{
+  background-color: #f36f21;
+  color: #fff;
+  border: 1px solid #f36f21;
+  transition: all 0.3s ease-in-out;
+}
+.appointment-radio-btn .selection{
+    margin-right: 10px;
+}
+.appointment-radio-btn .selection:last-child{
+    margin-right: 0px;
+}
+
+.appointment-radio-btn .selection input[type=radio] {
+  display: none;
+}
+
+.appointment-radio-btn .selection input[type=radio]:checked ~ label {
+  background-color: #f36f21;
+  color: #fff;
+}
+.after-radio-textarea{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 15px;
+    padding: 30px 0px;
+}
+.after-radio-textarea textarea{
+    margin-right: 10px;
+}
+.after-radio-textarea textarea::placeholder{
+    font-size: 14px;
+}
+.after-radio-textarea a{
+    background-color: #f36f21;
+    color: #fff;
+    padding: 10px 10px;
+    border-radius: 50%;
+    
+}
+.calendarCarasoule .owl-carousel .item .appointment-radio-btn{
+    display: block;
+    padding: 0;
+}
+.calendarCarasoule .owl-carousel .owl-nav i{
+    color: #fff;
+}
+.calendarCarasoule .owl-carousel .item .appointment-radio-btn label{
+    width: 75px;
+    background-color: transparent;
+    border-radius: 5px;
+    color: #f36f21;
+    padding: 10px 0px;
+    cursor: pointer;
+    height: 70px;
+    text-align: center;
+    border: 1px solid #f36f21;
+    line-height: 24px;
+    font-size: 11px;
+}
+.calendarCarasoule{
+    position: relative;
+    padding: 15px;
+}
+.calendarCarasoule .owl-carousel .owl-nav{
+    position: absolute;
+    top: -30px;
+    right: 0;
+    width: 75px;
+}
+.calendarCarasoule .owl-carousel .owl-nav .owl-prev{
+    background-color: #223971 !important;
+    width: 30px;
+    height: 30px;
+    line-height: normal;
+    padding: 2px !important;
+    color: #fff;
+    border-radius: 50%;
+}
+.calendarCarasoule .owl-carousel .owl-nav .owl-next{
+    background-color: #223971 !important;
+    width: 30px;
+    height: 30px;
+    line-height: normal;
+    padding: 2px !important;
+    color: #fff;
+    border-radius: 50%;
+}
+.calendarCarasoule .owl-carousel .owl-nav .owl-prev span{
+    font-size: 35px;
+    line-height: 0px;
+}
+.calendarCarasoule .owl-carousel .owl-nav .owl-next span{
+    font-size: 35px;
+    line-height: 0px;
+}
+.calendarCarasoule .owl-carousel .owl-dots{
+    display: none;
+}
+.calendarCarasoule .owl-carousel .owl-nav .owl-prev{
+
+}
+.calendarCarasoule .owl-carousel .item .appointment-radio-btn span{
+    font-size: 25px;
+    font-weight: 700;
+}
+/*end listing detail radio button*/
+
 
 /*Blog page*/
 
@@ -3676,12 +3813,24 @@ footer .copyright .social-icons li a:hover {
 .form-group label.error{
     padding-top: 8px;
 }
-
+.lSSlideOuter .lSPager.lSGallery img{
+    width: 100%;
+}
 /*profile contact*/
 
-@media (min-width: 1367px) {
+@media (min-width:1600px){
     .container-lg {
         max-width: 1600px;
+
+    }
+    .featured-properties .property-listing .property-thumb {
+        width: calc(100% / 4 - 30px);
+    }
+
+}
+@media only screen and (min-width: 1368px) and (max-width: 1599px) {
+    .container-lg {
+        max-width: 1400px;
 
     }
     .featured-properties .property-listing .property-thumb {
@@ -4412,6 +4561,12 @@ footer .copyright .social-icons li a:hover {
     .neighborhood-search .search-result-wrapper .search-listing .featured-properties .property-listing .property-thumb{
         width: calc(100% / 2 - 30px);
     }
+    .listing-detail-container .lSGallery li{
+        border: none;
+    }
+    .listing-detail-container .lSGallery li.active {
+        border: none !important;
+    }
 }
 
 /*end agent profile*/
@@ -4691,6 +4846,7 @@ footer .copyright .social-icons li a:hover {
 
     .owl-slider {
         display: block;
+        padding: 0px 15px;
     }
 
     .desktop-listiing {
@@ -4805,6 +4961,7 @@ footer .copyright .social-icons li a:hover {
     }
     .location-map-sec #map{
         margin-top: 20px;
+        height: 400px;
     }
     .nearbyapartment.featured-properties{
         padding: 30px 0px;
@@ -4812,6 +4969,18 @@ footer .copyright .social-icons li a:hover {
     .nearbyapartment h3{
         margin-bottom: 20px;
     }
+    .listing-Details .lSSlideOuter .lSPager.lSGallery img {
+        height: 80px !important;
+        object-fit: cover;
+    }
+    .apointment-tabs .login-signup-tab{
+        width: 100%;
+        padding: 15px;
+    }
+    .calendarCarasoule .owl-carousel .owl-nav{
+        top: -10px;
+    }
+
 
 }
 @media only screen and (min-width: 577px) and (max-width: 767px) {
@@ -4826,6 +4995,21 @@ footer .copyright .social-icons li a:hover {
 
 }
 @media only screen and (max-width: 576px) {
+    .appointment-radio-btn .selection label{
+        width: 100%;
+    }
+    .appointment-radio-btn{
+        display: block;
+    }
+  
+    .appointment-radio-btn .selection{
+        margin-bottom: 10px;
+        margin-right: 0px;
+    }
+    .listing-Details .lSSlideOuter .lSPager.lSGallery img {
+        height: 60px !important;
+        object-fit: cover;
+    }
     .listing-Details .open-house-inner{
         display: block;
     }
@@ -4929,11 +5113,6 @@ footer .copyright .social-icons li a:hover {
     .appointment-section .apointment-btn {
         margin-bottom: 10px;
     }
-
-    .listing-Details .lSSlideOuter .lSPager.lSGallery img {
-        height: auto !important;
-    }
-
     .login-form-wrapper .row.form-group .forgot-pass {
         text-align: center;
         margin-top: 20px;
