@@ -104,6 +104,28 @@
                                 @endif
                             </div>
                         </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Address</label>
+                                {!! Form::text('address', null, ['class' => 'input-style', 'placeholder' => 'Address']) !!}
+                                @if ($errors->has('address'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('address') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Description</label>
+                                {!! Form::textarea('description', null, ['class'=>'input-style', 'placeholder' => 'Description','style' => 'resize:none; height:100px;']) !!}
+                                @if ($errors->has('description'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('description') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
                         <div class="col-md-12 mt-4 text-center">
                             <a href="{{ route('agent.resetPassword') }}" class="btn-default large-btn" >Change Password</a>
                             <button type="button" class="btn-default large-btn edit-profile @if(!$errors->isEmpty()) d-none @endif" >Edit Profile</button>

@@ -120,7 +120,7 @@ class Listing extends Model {
 	 * @return mixed
 	 */
 	public function scopeWithAll($query) {
-		return $query->with(['agent.company', 'images', 'openHouses', 'amenities'])->first();
+		return $query->with(['agent.company', 'images', 'openHouses', 'amenities']);
 	}
 
 	/**

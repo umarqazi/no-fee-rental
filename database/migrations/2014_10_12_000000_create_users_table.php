@@ -17,16 +17,18 @@ class CreateUsersTable extends Migration {
 			$table->string('first_name')->nullable();
 			$table->string('last_name')->nullable();
 			$table->string('email')->unique()->nullable();
-			$table->integer('user_type')->nullable();
-			$table->string('profile_image')->nullable();
-			$table->string('phone_number')->nullable();
-			$table->timestamp('email_verified_at')->nullable();
-			$table->boolean('status')->default(0)->nullable();
-			$table->string('password')->nullable();
+            $table->integer('user_type')->nullable();
+            $table->string('profile_image')->nullable();
+            $table->string('phone_number')->nullable();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->boolean('status')->default(0)->nullable();
+            $table->string('password')->nullable();
             $table->string('neighbourhood_expertise')->nullable();
             $table->string('languages')->nullable();
             $table->string('license_number')->unique()->nullable();
-			$table->rememberToken();
+            $table->text('description')->nullable();
+            $table->string('address')->nullable();
+            $table->rememberToken();
 			$table->timestamps();
 
 			$table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
