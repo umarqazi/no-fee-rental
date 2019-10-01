@@ -338,19 +338,12 @@
 
 .listing-detail-container .lSGallery li.active {
     border: 2px solid #000;
-    border-radius: 50% !important;
+    
 }
 
-.listing-detail-container .lSGallery li {
-    border-radius: 50% !important;
-}
 
 .listing-detail-container .lSGallery li img {
     object-fit: cover;
-}
-
-.listing-Details .lSSlideOuter .lSPager.lSGallery img {
-    height: 47px;
 }
 
 .large-view img {
@@ -380,7 +373,7 @@
 }
 
 .available-btn span {
-    padding: 3px 10px;
+    padding: 3px 15px;
     border-radius: 5px;
     background-color: #51ab4c;
     color: #fff;
@@ -431,18 +424,24 @@
 }
 
 .Availability-date-sec {
-    margin-top: 20px;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
 
 .Availability-date-sec .row {
     line-height: 25px;
 }
+.Availability-date-sec .row-border-right{
+    border-right: 1px solid #ddd;
+}
 
-.appointment-iconDetails ul li {
+/*.appointment-iconDetails ul li {
     display: inline-block;
     margin-right: 15px;
     margin-bottom: 15px;
-}
+}*/
 
 .appointment-iconDetails ul li i {
     padding-right: 5px;
@@ -455,31 +454,36 @@
 }
 
 .Availability-date-sec span {
-    color: #525252;
+    color: #5f6368;
     font-size: 14px;
 }
 
 .Availability-date-sec strong {
-    color: #525252;
-    font-size: 14px;
+    color: #000;
+    font-size: 12px;
+    font-weight: 700;
 }
 
 .appointment-section {
     margin-top: 30px;
     background-color: #eee;
     padding: 15px 5px;
-    display: flex;
-    justify-content: space-between;
+    margin-bottom: 30px;
+
 }
 
 .appointment-section img {
-    width: 35px;
-    height: 35px;
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
 }
 
 .appointment-section p {
     font-size: 14px;
-    margin-bottom: 0px;
+    color: #6A6D72;
+    font-weight: 600;
+    margin-bottom: 5px;
+    margin-top: 5px;
 }
 
 .appointment-section .apointment-btn {
@@ -529,6 +533,7 @@
 
 .listing-aminities-sec h3 {
     margin-bottom: 10px;
+    color: #000;
 }
 
 .listing-aminities-sec p {
@@ -546,7 +551,7 @@
     display: inline-block;
     position: absolute;
     left: 0;
-    background-color: #717171;
+    background-color: #223971;
     width: 6px;
     height: 6px;
     border-radius: 100px;
@@ -554,18 +559,25 @@
 }
 
 .listing-aminities-sec ul li {
-    padding-bottom: 15px;
+    padding-bottom: 5px;
     color: #717171;
     font-size: 16px;
 }
-
-.location-map-sec {
+.listing-aminities-sec{
     background-color: #F4F5F8;
+     padding: 30px 0px;
+}
+.location-map-sec {
+    
     padding: 30px 0px;
 }
 
 .location-map-sec h3 {
     margin-bottom: 20px;
+    color: #000;
+}
+.listing-Details  .description-title{
+    color: #000;
 }
 
 .location-map-sec label {
@@ -577,10 +589,10 @@
 }
 
 .location-map-sec p {
-    margin-top: 20px;
-    margin-bottom: 0px;
+    margin-top: 10px;
+    margin-bottom: 10px;
     color: #717171;
-    font-size: 18px;
+    font-size: 16px;
 }
 
 .location-map-sec .span-box {
@@ -589,7 +601,7 @@
     border-radius: 50%;
     background-color: #eee;
     text-align: center;
-    font-size: 16px;
+    font-size: 12px;
     font-weight: 600;
     color: #fff;
     display: inline-block;
@@ -598,6 +610,21 @@
 
 .location-map-sec .text-a {
     background-color: #185286;
+}
+.location-map-sec .text-e {
+    background-color: #0039a6;
+}
+.location-map-sec .text-s{
+    background-color: #6d6e71;
+}
+.location-map-sec .text-7{
+    background-color: #9d3d97;
+}
+.location-map-sec .text-m {
+    background-color: #f58220;
+}
+.location-map-sec .text-6 {
+    background-color: #00a65c;
 }
 
 .location-map-sec .text-c {
@@ -639,7 +666,7 @@
     display: inline-block;
     position: absolute;
     left: 0;
-    background-color: #717171;
+    background-color: #223971;
     width: 6px;
     height: 6px;
     border-radius: 100px;
@@ -651,7 +678,7 @@
 }
 
 .location-map-sec .second-ul li {
-    padding-bottom: 15px;
+    padding-bottom: 5px;
     line-height: 20px;
     color: #717171;
     font-size: 16px;
