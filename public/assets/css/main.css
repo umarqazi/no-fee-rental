@@ -1667,13 +1667,24 @@ background-size: cover;
     font-size: 16px;
     z-index: 99;
     line-height: normal;
-    padding: 8px 12px;
+    padding:0;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border-radius: 50%;
     -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.22);
 -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.22);
 box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.22);
 cursor: pointer;
 }
+
+#desktop-map, #mobile-map{
+    width: 100%;
+    height: 100%;
+}
+
 .neighborhood-search .search-result-wrapper .map-wrapper.map-small-view {
   flex: 0 0 50%;
 }
@@ -3329,7 +3340,7 @@ margin-bottom: 10px;
 
   #mobile-map-listing-view{
     width: 100%;
-    height: 450px;
+    height: 370px;
     position: absolute;
     z-index: 9;
     top: 40px;
@@ -3749,5 +3760,3 @@ max-width: 370px;
 .inner-static-page-zero{
   padding-top: 0px 0px 120px !important;
 }
-
-
