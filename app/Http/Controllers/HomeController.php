@@ -43,7 +43,7 @@ class HomeController extends Controller {
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
 	public function detail($id) {
-		$listing = $this->service->detail($id)->first();
+		$listing = $this->service->detail($id);
 		if(empty($listing)) abort(404);
 		return view('listing_detail', compact('listing'));
 	}

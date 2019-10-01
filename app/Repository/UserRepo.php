@@ -42,13 +42,23 @@ class UserRepo extends BaseRepo {
 	public function isUniqueEmail($email) {
 		return $this->findByEmail($email) ? true : false;
 	}
+
     /**
-     * @param $License_number
+     * @param $license_number
      *
      * @return bool
      */
     public function isUniqueLicense($license_number) {
         return $this->find(['license_number' => $license_number])->first() ? true : false;
+    }
+
+    /**
+     * @param $id
+     *
+     * @return mixed
+     */
+    public function profileDetail($id) {
+        return $this->findById($id)->withListings()->withneighbors();
     }
 
     /**
@@ -58,15 +68,6 @@ class UserRepo extends BaseRepo {
      */
 	public function findByEmail($email) {
 	    return $this->find(['email' => $email])->first();
-    }
-
-    /**
-     * @param $id
-     *
-     * @return mixed
-     */
-    public function withListing($id) {
-        return $this->findById($id)->withlistings();
     }
 
     /**
