@@ -3,7 +3,7 @@
     .modal {
         z-index: 25;
     }
-    
+
     .modal-backdrop {
         z-index: 20;
     }
@@ -22,7 +22,7 @@
                                 <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
                                 <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
                                 <li><a href="#"><i class="fab fa-youtube"></i> Youtube</a></li>
-                              </ul> 
+                              </ul>
                             </a>
                             <a href="javascript:void(0);" class="ml-2"><img src="/assets/images/fav-icon.png" alt="" /> </a>
                             <a href="javascript:void(0);" class="ml-2" data-toggle="modal" data-target="#flag-icon"><img src="/assets/images/flag-icon.png" alt="" class="flag-icon" /> </a>
@@ -78,18 +78,18 @@
                             <div class="col-lg-6 col-sm-6 bdr-right">
                                 <div class="lease-term-section">
                                     <span>Lease term: </span>
-                                     <strong> 20-04-2019</strong> 
+                                     <strong> 20-04-2019</strong>
                                 </div>
                                 <div class="lease-term-section">
                                    <span>Days on market:</span>
-                                    <strong> 0 Days</strong> 
+                                    <strong> 0 Days</strong>
                                 </div>
                                 <div class="lease-term-section">
                                    <span>Free months:: </span>
                                     <strong> None</strong>
                                 </div>
                             </div>
-                       
+
                             <div class="col-lg-6 col-sm-6">
                                 <div class="lease-term-section">
                                     <span>Application fee: </span>
@@ -103,7 +103,7 @@
                                     <span>Availability: </span>
                                     <strong> Yes</strong>
                                 </div>
-                              
+
                             </div>
                         </div>
                     </div>
@@ -297,33 +297,19 @@
     <div class="listing-aminities-sec">
         <div class="container-lg">
             <div class="row">
-
-                <div class="col-sm-3">
-                    @dd($listing)
-                    <h3>Listing Type </h3>
-                    <ul class="second-ul"> 
-                        <li> Exclusive </li>
-                    </ul>
-                </div>
-                <div class="col-md-3 col-sm-4">
-                    <h3>Amenities </h3>
-                    <ul class="second-ul"> 
-                        <li> Furnished </li>
-                        <li> In-Unit Laundry </li>
-                    </ul>
-                </div>
-                <div class="col-md-3 col-sm-4">
-                    <h3>Unit Furnature </h3>
-                    <ul class="second-ul"> 
-                        <li> Outdoor Space </li>  
-                    </ul>
-                </div>
-                <div class="col-md-3 col-sm-4">
-                    <h3>Pet Policy </h3>
-                    <ul class="second-ul"> 
-                        <li> Pet Allowed</li>  
-                    </ul>
-                </div>
+                @foreach(fetchAmenities($listing->amenities) as $amenities)
+                    @php $types = array_keys($amenities); $amen = array_values($amenities); @endphp
+                    <div class="col-md-3 col-sm-4">
+                        <h3>{{ $types[0] }}</h3>
+                        <ul class="second-ul">
+                            @foreach($amen as $key => $a)
+                                @foreach($a as $key => $value)
+                                    <li>{{ $value }}</li>
+                                @endforeach
+                            @endforeach
+                        </ul>
+                    </div>
+                @endforeach
             </div>
         </div>
     </div>
@@ -361,7 +347,7 @@
                                 <li> St Mary Church Christian Academy</li>
                                 <li> Ciszek Hally</li>
                                 <li>Sis. Fox House</li>
-                                
+
                             </ul>
                         </div>
                     </div>
@@ -422,7 +408,7 @@
                     </div>
                 </div>
 
-                <div class="owl-slider"> 
+                <div class="owl-slider">
                     <div class="owl-carousel owl-theme" id="NearbyApartments">
 
                             <div class="item">
@@ -483,8 +469,8 @@
                 <div class="modal-content">
                     <!-- Modal Header -->
                     <div class="modal-header">
-                        <h4 class="modal-title">Report this listing <br> 
-                        <p> 223 Park Slope, 223 4th Avenue</p> 
+                        <h4 class="modal-title">Report this listing <br>
+                        <p> 223 Park Slope, 223 4th Avenue</p>
                         </h4>
                         <!--  <button type="button" class="close" data-dismiss="modal">&times;</button> -->
 
@@ -520,8 +506,6 @@
 <script>
     mapWithNearbyLocations(@php echo $listing -> map_location; @endphp, document.getElementById('map'), true ) ;
 </script>
-
-
 <script>
   $('.calendarCarasoule #calendar-slider').owlCarousel({
     loop:false,
@@ -556,7 +540,6 @@
     $(this).addClass('active');
  });
 });
-</script>
 @endsection
 
 

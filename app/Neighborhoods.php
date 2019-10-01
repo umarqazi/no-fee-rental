@@ -19,6 +19,13 @@ class Neighborhoods extends Model
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function agentExpertese() {
+        return $this->belongsToMany(User::class, 'agent_neighborhoods', 'neighborhood_id', 'id');
+    }
+
+    /**
      * @param $query
      *
      * @return mixed

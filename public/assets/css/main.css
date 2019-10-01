@@ -2460,7 +2460,7 @@ footer .copyright .social-icons li a:hover {
     font-size: 18px;
     font-weight: 700;
     color: #000;
-} 
+}
 .listing-Details .apointment-tabs ul li{
     width: 50%;
 
@@ -2493,7 +2493,7 @@ footer .copyright .social-icons li a:hover {
     padding: 50px 0px;
     text-align: center;
 }
-.apointment-tabs .login-signup-tab a{ 
+.apointment-tabs .login-signup-tab a{
     width: 200px;
     text-align: center;
     display: inline-block;
@@ -2546,7 +2546,7 @@ footer .copyright .social-icons li a:hover {
     font-size: 13px;
 }
 .apointment-tabs .tab-content .form-group .btn-default{
-    padding: 0px 80px; 
+    padding: 0px 80px;
     margin-top: 20px;
 }
 .apointment-tabs{
@@ -2590,7 +2590,7 @@ footer .copyright .social-icons li a:hover {
 .listing-Details .listing-info .dropdown-menu li i{
     padding-right: 5px;
 }
- 
+
 #flag-icon .modal-footer {
     border: none;
 }
@@ -3500,6 +3500,10 @@ footer .copyright .social-icons li a:hover {
     margin-bottom: 15px;
 }
 
+.agent-profile-view .agent-info{
+    flex: 0 0 calc(100% - 408px);
+}
+
 .agent-profile-view .agent-info p.expertise {
     font-weight: 600;
     font-size: 16px;
@@ -4128,7 +4132,7 @@ footer .copyright .social-icons li a:hover {
         margin-bottom: 15px;
     }
 
-   
+
     /*agent profile responsive*/
 
     .agent-profile-view .agent-info .contact-info {
@@ -4531,7 +4535,7 @@ footer .copyright .social-icons li a:hover {
         padding: 0px 0px 0px 0px;
     }
 
-   
+
     /*agent profile */
 
     .agent-profile-view {
@@ -4949,7 +4953,7 @@ footer .copyright .social-icons li a:hover {
         height: 375px;
     }
     .listing-Details .appointment-iconDetails ul li span{
-        font-size: 14px;    
+        font-size: 14px;
     }
     .listing-Details .appointment-iconDetails ul li img{
         width: 20px;
@@ -4988,7 +4992,7 @@ footer .copyright .social-icons li a:hover {
         width: 92% !important;
     }
 
-    
+
 }
 @media only screen and (max-width: 576px) {
     .appointment-radio-btn .selection label{
