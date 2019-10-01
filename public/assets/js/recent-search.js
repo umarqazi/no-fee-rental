@@ -10,7 +10,7 @@ $(() => {
     $body.on('change', '.sorting', function() {
         let url = window.location.href;
         let sorting = $(this).val();
-        window.location = sortOrder === '' ? window.location.href + sortValue(sorting) : removeOldSort(url, sorting);
+        window.location = sortOrder === '' ? window.location.href + sortValue(url, sorting) : removeOldSort(url, sorting);
     });
 
     $('#baths').find('li').on('click', function() {
@@ -107,18 +107,31 @@ window.onload = function() {
  * @returns {*}
  */
 function removeOldSort(url, newSort) {
-     let oldSort = sortValue(sortOrder);
+     let oldSort = sorting(sortOrder);
+     oldSort = str_has(url, `?${oldSort}`) ? `?${oldSort}` : `&${oldSort}`;
      url = url.replace(`${oldSort}`, ' ');
      url = url.split(' ');
-     return url[0] + sortValue(newSort);
+     return url[0] + sortValue(url, newSort);
+}
+
+/**
+ *
+ * @param url
+ * @param sort
+ * @returns {*}
+ */
+function sortValue(url, sort) {
+    let sortBy = null;
+    sortBy = sorting(sort);
+    let operator = str_has(url, '?') ? '&' : '?';
+    return  operator + sortBy;
 }
 
 /**
  *
  * @param sorting
- * @returns {string}
  */
-function sortValue(sorting) {
+function sorting(sorting) {
     let sortBy = null;
     switch (sorting) {
         case 'recent':
@@ -131,8 +144,8 @@ function sortValue(sorting) {
             sortBy = 'petPolicy=petPolicy';
             break;
     }
-    let operator = str_has(window.location.href, '?') ? '&' : '?';
-    return  operator + sortBy;
+
+    return sortBy;
 }
 
 /**

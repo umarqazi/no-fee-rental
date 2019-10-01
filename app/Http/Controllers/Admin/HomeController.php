@@ -65,7 +65,7 @@ class HomeController extends Controller {
      *
      * @return bool
      */
-    public function associatedAgents(Request $request, $id) {
+    public function associatedAgents($id) {
         $agents= $this->service->associatedAgents($id);
 
         return $agents ;

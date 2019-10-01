@@ -71,10 +71,34 @@ class AgentController extends Controller {
 
     /**
      * @param $agentId
+     * @param Request $request
      *
-     * @return mixed
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-	public function profileListing($agentId) {
-	    return dd($this->userService->agentWithListings($agentId));
+	public function profileListing($agentId, Request $request) {
+	    $data = null;
+	    $showMap = false;
+        if(!empty($request->all())) {
+            $data = $this->sortListing($agentId, $request->all());
+        } else {
+            $data = toObject($this->userService->getAgentWithListings($agentId));
+        }
+
+	    return view('agent.listing_profile', compact('data', 'showMap'));
+    }
+
+    /**
+     * @param $agentId
+     * @param $sortBy
+     *
+     * @return object
+     */
+    public function sortListing($agentId, $sortBy) {
+        collect($sortBy)->map(function($method) use ($agentId) {
+            if(method_exists($this->userService, $method)) {
+                $this->userService->{$method}( $agentId );
+            }
+        });
+        return toObject($this->userService->fetchQuery());
     }
 }

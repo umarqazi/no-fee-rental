@@ -27,14 +27,6 @@ class NeighborhoodController extends Controller {
     }
 
     /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function index() {
-        $data = $this->service->first($this->paginate);
-        return view('neighborhood', compact('data'));
-    }
-
-    /**
      * @param Request $request
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
@@ -49,13 +41,29 @@ class NeighborhoodController extends Controller {
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function find(Request $request) {
-        collect($request->all())->map(function($args, $method) {
+    public function index(Request $request) {
+        $data = null;
+        $showMap = true;
+        if(!empty($request->all())) {
+            $data = $this->sortListing($request->all(), 'Melrose');
+        } else {
+            $data = toObject($this->service->index());
+        }
+        return view('neighborhood', compact('data', 'showMap'));
+    }
+
+    /**
+     * @param $sort
+     * @param $neighbour
+     *
+     * @return object
+     */
+    public function sortListing($sort, $neighbour) {
+        collect($sort)->map(function($method) use ($neighbour) {
             if(method_exists($this->service, $method)) {
-                $this->service->{$method}($args);
+                $this->service->{$method}($neighbour);
             }
         });
-        $data = toObject($this->service->fetchQuery($this->paginate));
-        return view('neighborhood', compact('data'));
+        return toObject($this->service->fetchQuery());
     }
 }

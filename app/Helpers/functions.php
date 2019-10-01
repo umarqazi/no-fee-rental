@@ -293,6 +293,88 @@ function innerAmenity($amenity, $action) {
 }
 
 /**
+ * @param $listings
+ *
+ * @return string|null
+ */
+function listingView($listings) {
+    $html = null;
+    $html .= "<h3>Manhattan, NY Rental</h3>
+            <span>".str_formatting(count($listings), 'place'). " available for rent </span>";
+            if(count($listings) > 0) {
+                $html .= '
+                    <div id="boxscroll2">
+                        <div class="featured-properties" id="contentscroll2">
+                            <div class="property-listing neighbourhood-listing">
+                                '.iterateListing($listings).'
+                            </div>
+                                '.listingMobileView($listings).'
+                        </div>
+                    </div>';
+            } else {
+                $html .= '<div>No Listing Found</div>';
+            }
+
+    return $html;
+}
+
+/**
+ * @param $listings
+ * @param bool $hasSlider
+ *
+ * @return string|null
+ */
+function iterateListing($listings, $hasSlider = false) {
+    $html = null;
+    foreach ( $listings as $key => $listing ) {
+        $html .= $hasSlider ? "<div class='items'>" : null;
+        $html .= !$hasSlider ? "<input type='hidden' name='map_location' value='{$listing->map_location}'>" : null;
+        $html .= "<div class='property-thumb'>
+                      <div class='check-btn'>
+                          <button class='btn-default' data-toggle='modal' data-target='#check-availability'>
+                              Check Availability
+                          </button>
+                      </div>
+                      <span class='heart-icon'></span>
+                      <img src=" . asset( $listing->thumbnail ?? DLI ) . " class='main-img'>
+                      <div class='info'>
+                           <div href='javascript:void(0);' class='info-link-text'>
+                                <p> $ {$listing->rent} </p>
+                                <small>" .
+                                    str_formatting( $listing->bedrooms, 'Bed' ) . ' ,' . str_formatting( $listing->baths, 'Bath' )
+                                . "</small>
+                                <p> {$listing->neighborhood} </p>
+                           </div>
+                           <a href=" . route( 'listing.detail', $listing->id ) . " class='btn viewfeature-btn'> View </a>
+                      </div>
+                      <div class='feaure-policy-text'>
+                           <p>$ {$listing->rent} / Month </p>
+                           <span>" . str_formatting( $listing->bedrooms, 'Bed' ) . ' ,' . str_formatting( $listing->baths, 'Bath' ) . "</span>
+                      </div>
+                  </div>";
+        $html .= $hasSlider ? "</div>" : null;
+    }
+
+    return $html;
+}
+
+/**
+ * @param $listings
+ *
+ * @return string|null
+ */
+function listingMobileView($listings) {
+    $html = null;
+    $html .= '<div class="property-listing mobile-listing">
+                  <div class="owl-carousel owl-theme">
+                       '.iterateListing($listings, true).'
+                  </div>
+              </div>';
+
+    return $html;
+}
+
+/**
  * @return \Illuminate\Support\Collection|\Tightenco\Collect\Support\Collection
  */
 function neighborhoods() {

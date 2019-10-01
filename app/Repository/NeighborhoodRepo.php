@@ -9,6 +9,7 @@
 namespace App\Repository;
 
 use App\Neighborhoods;
+use Illuminate\Pagination\Paginator;
 
 class NeighborhoodRepo extends BaseRepo {
 
@@ -20,12 +21,10 @@ class NeighborhoodRepo extends BaseRepo {
     }
 
     /**
-     * @param $paginate
-     *
      * @return mixed
      */
-    public function fetch($paginate) {
-        return $this->model->listings()->paginate($paginate);
+    public function fetch() {
+        return $this->model->withlistings();
     }
 
     /**
@@ -36,11 +35,29 @@ class NeighborhoodRepo extends BaseRepo {
     }
 
     /**
-     * @param $query
+     * @param $neighbour
      *
      * @return mixed
      */
-    public function fetchQuery($query) {
-        return $query->orderBy('is_featured', '1');
+    public function findNeighborhood($neighbour) {
+        return $this->find(['name' => $neighbour])->withlistings();
+    }
+
+    /**
+     * @param $neighbour
+     *
+     * @return mixed
+     */
+    public function recent($neighbour) {
+        return $this->find(['name' => $neighbour])->recent();
+    }
+
+    /**
+     * @param $neighbour
+     *
+     * @return mixed
+     */
+    public function cheaper($neighbour) {
+        return $this->find(['name' => $neighbour])->cheaper();
     }
 }
