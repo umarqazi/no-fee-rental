@@ -354,7 +354,8 @@ class UserService {
             $cForm = new CompanyForm();
             $cForm->company = $request->company;
             if (!$cForm->fails()) {
-                $this->companyRepo->create($cForm->toArray());
+                $company= $this->companyRepo->create($cForm->toArray());
+                $this->userRepo->update($user->id,['company_id' => $company->id]);
             }
 
             $data = [
@@ -445,7 +446,7 @@ class UserService {
      * @return mixed
      */
     public function associatedAgents($id) {
-        return $this->userRepo->agents()->withCompany($id)->get();
+        return $this->userRepo->find(['company_id' => $id])->get();
     }
 
     /**
