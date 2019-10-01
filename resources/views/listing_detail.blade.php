@@ -153,8 +153,129 @@
                                         <i class="fas fa-check-circle"></i>
                                         <h5> Your request has been sent sucessfully</h5>
                                     </div>
+
                                 </div>
 
+                                <div class="calendar-wrap">
+                                <!--calendar slider -->
+                                <div class="calendarCarasoule">
+                                    <div class="owl-carousel owl-theme" id="calendar-slider">
+                                        <div class="item">
+                                             <div class="appointment-radio-btn">
+                                              <div class="selection">
+                                                <input id="Tommorow" name="hungry" type="radio">
+                                                <label for="Tommorow">Tommorow <br>
+                                                <span> 27 </span>
+                                                </label>
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <div class="item">
+                                             <div class="appointment-radio-btn ">
+                                              <div class="selection">
+                                                <input id="saturday" name="hungry" type="radio">
+                                                <label for="saturday">Saturday <br>
+                                                <span> 28 </span>
+                                                </label>
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <div class="item">
+                                             <div class="appointment-radio-btn ">
+                                              <div class="selection">
+                                                <input id="sunday" name="hungry" type="radio">
+                                                <label for="sunday">Sunday <br>
+                                                <span> 29 </span>
+                                                </label>
+                                              </div>
+                                          </div>
+                                      </div>
+                                       <div class="item">
+                                             <div class="appointment-radio-btn ">
+                                              <div class="selection">
+                                                <input id="monday" name="hungry" type="radio">
+                                                <label for="monday">Monday <br>
+                                                <span> 30 </span>
+                                                </label>
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <div class="item">
+                                             <div class="appointment-radio-btn ">
+                                              <div class="selection">
+                                                <input id="Tuesday" name="hungry" type="radio">
+                                                <label for="Tuesday">Tuesday <br>
+                                                <span> 31 </span>
+                                                </label>
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <div class="item">
+                                             <div class="appointment-radio-btn ">
+                                              <div class="selection">
+                                                <input id="Wednesday" name="hungry" type="radio">
+                                                <label for="Wednesday">Wednesday <br>
+                                                <span> 1 </span>
+                                                </label>
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <div class="item">
+                                             <div class="appointment-radio-btn ">
+                                              <div class="selection">
+                                                <input id="Thursday" name="hungry" type="radio">
+                                                <label for="Thursday">Thursday <br>
+                                                <span>2 </span>
+                                                </label>
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <div class="item">
+                                             <div class="appointment-radio-btn ">
+                                              <div class="selection">
+                                                <input id="Friday" name="hungry" type="radio">
+                                                <label for="Friday">Friday <br>
+                                                <span> 3 </span>
+                                                </label>
+                                              </div>
+                                          </div>
+                                      </div>
+                                      
+                                           
+                                            </div>
+                                        </div>
+                                        
+                                        
+                                   
+                                
+                                <!-- end calendar slider -->
+                                <!-- radio button -->
+                                <div class="appointment-radio-btn">
+                                  <div class="selection">
+                                    <input id="Morning" name="Appointment" type="radio">
+                                    <label for="Morning">Morning <br>
+                                    10am - 12pm 
+                                    </label>
+                                  </div>
+                                  <div class="selection">
+                                    <input id="Afternoon" name="Appointment" type="radio">
+                                    <label for="Afternoon">Afternoon <br>
+                                    12pm - 3pm 
+                                    </label>
+                                  </div>
+                                  <div class="selection">
+                                    <input id="Evening" name="Appointment" type="radio">
+                                    <label for="Evening">Evening <br>
+                                    3pm - 6pm 
+                                    </label>
+                                  </div>
+                                </div>
+                                <div class="after-radio-textarea">
+                                    <textarea class="form-control" placeholder="Message"></textarea>
+                                    <a href="#"> <img src="/assets/images/send-msg.png" alt="" /></a>
+                                </div>
+                                <!--end radio button -->
+                            </div>
                             </div>
                             <div id="menu1" class="tab-pane fade">
                                 <div class="form-group">
@@ -176,26 +297,26 @@
     <div class="listing-aminities-sec">
         <div class="container-lg">
             <div class="row">
-                <div class="col-sm-3">
+                <div class="col-md-3 col-sm-4">
                     <h3>Listing Type </h3>
                     <ul class="second-ul"> 
                         <li> Exclusive </li>
                     </ul>
                 </div>
-                <div class="col-sm-3">
+                <div class="col-md-3 col-sm-4">
                     <h3>Amenities </h3>
                     <ul class="second-ul"> 
                         <li> Furnished </li>
                         <li> In-Unit Laundry </li>
                     </ul>
                 </div>
-                <div class="col-sm-3">
+                <div class="col-md-3 col-sm-4">
                     <h3>Unit Furnature </h3>
                     <ul class="second-ul"> 
                         <li> Outdoor Space </li>  
                     </ul>
                 </div>
-                <div class="col-sm-3">
+                <div class="col-md-3 col-sm-4">
                     <h3>Pet Policy </h3>
                     <ul class="second-ul"> 
                         <li> Pet Allowed</li>  
@@ -207,15 +328,12 @@
 
     <div class="location-map-sec">
         <div class="container-lg">
-           
             <div class="row">
                 <div class="col-lg-6">
                     <div class="row">
                         <div class="col-lg-6 col-sm-6">
                             <h3> Transportation</h3>
-                            
                             <p> 51st St (0.25 mi) </p>
-
                             <span class="span-box text-s"> S </span>
                             <span class="span-box text-6"> 4 </span>
                             <span class="span-box text-6"> 5 </span>
@@ -358,7 +476,7 @@
     </div>
 
     <!-- The Modal -->
-        <div class="modal" id="flag-icon">
+        <div class="modal fade" id="flag-icon">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <!-- Modal Header -->
@@ -402,8 +520,40 @@
 </script>
 
 
-<script type="text/javascript">
-  
+<script>
+  $('.calendarCarasoule #calendar-slider').owlCarousel({
+    loop:false,
+    margin:10,
+    nav:true,
+    navText: ["<i class='fas fa-chevron-left'></i>","<i class='fas fa-chevron-right'></i>"],
+    responsive:{
+        0:{
+            items:3
+        },
+        600:{
+            items:3
+        },
+        768:{
+            items:7
+        },
+        1024:{
+            items:4
+        }
+    }
+})
+
+
+
+  $(document).ready(function(){
+  $(".after-radio-textarea a").click(function(){
+    $(".calendar-wrap").hide();
+    $(".successfull-msg").show();
+  });
+ $(".apointment-tabs ul li").click(function(){
+    $(".apointment-tabs ul li").removeClass('active');
+    $(this).addClass('active');
+ });
+});
 </script>
 @endsection
 
