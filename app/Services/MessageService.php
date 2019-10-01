@@ -11,7 +11,7 @@ namespace App\Services;
 use App\Forms\AppointmentForm;
 use App\Forms\MessageForm;
 use App\Repository\ContactRepo;
-use App\Repository\Listing\ListingRepo;
+use App\Repository\ListingRepo;
 use App\Repository\MessageRepo;
 use App\Repository\UserRepo;
 use Illuminate\Support\Facades\DB;

@@ -50,6 +50,16 @@ class EditProfileForm extends BaseForm {
      * @return array
      */
 
+    /**
+     * @var string
+     */
+    public $address;
+
+    /**
+     * @var string
+     */
+    public $description;
+
 	public function toArray() {
 		return [
 			'id' => $this->id,
@@ -59,7 +69,9 @@ class EditProfileForm extends BaseForm {
             'profile_image' => $this->profile,
 			'phone_number' => $this->phone_number,
             'neighbourhood_expertise' => $this->neighbourhood_expertise,
-            'languages' => $this->languages
+            'languages' => $this->languages,
+            'address' => $this->address,
+            'description' => $this->description
 		];
 	}
 

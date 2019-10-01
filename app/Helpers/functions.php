@@ -170,6 +170,7 @@ function dispatchEmailQueue($data, $delay = 10) {
 
 /**
  * @param $msg
+ * @param null $path
  *
  * @return \Illuminate\Http\RedirectResponse
  */
@@ -385,6 +386,25 @@ function neighborhoods() {
     }
 
     return $collection;
+}
+
+function fetchAmenities($amenities) {
+    $types = [];
+    foreach ($amenities as $amenity) {
+        if(in_array($amenity->type->amenity_type, $types)) continue;
+        $types[] = $amenity->type->amenity_type;
+    }
+    $amen = [];
+    foreach ($types as $type) {
+        $tmp = null;
+        foreach ($amenities as $amenity) {
+            if($type === $amenity->type->amenity_type) {
+                $tmp[$type][] = $amenity->amenities;
+            }
+        }
+        $amen[] = $tmp;
+    }
+    return $amen;
 }
 /**
  * @param $index

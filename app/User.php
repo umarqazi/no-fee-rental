@@ -15,8 +15,8 @@ class User extends Authenticatable implements CanResetPassword {
 	 * @var array
 	 */
 	protected $fillable = [
-	    'company_id', 'first_name', 'last_name', 'user_type', 'email',
-        'password', 'phone_number','remember_token','license_number'
+	    'company_id', 'first_name', 'last_name', 'user_type', 'email', 'description',
+        'password', 'phone_number','remember_token','license_number','address'
 	];
 
 	/**
@@ -57,6 +57,13 @@ class User extends Authenticatable implements CanResetPassword {
 	public function agentInvites() {
 		return $this->hasMany(AgentInvites::class, 'invited_by', 'id');
 	}
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+	public function neighborExpertese() {
+	    return $this->belongsToMany(Neighborhoods::class, 'agent_neighborhoods', 'agent_id', 'id');
+    }
 
 	/**
 	 * @param $query
@@ -114,5 +121,14 @@ class User extends Authenticatable implements CanResetPassword {
      */
 	public function scopeWithListings($query) {
 	    return $query->with('listings');
+    }
+
+    /**
+     * @param $query
+     *
+     * @return mixed
+     */
+    public function scopeWithNeighbors($query) {
+	    return $query->with('neighborExpertese');
     }
 }

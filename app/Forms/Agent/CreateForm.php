@@ -41,27 +41,31 @@ class CreateForm extends BaseForm {
 	 */
 	public $password_confirmation;
 
-	/**
-	 * Get the instance as an array.
-	 *
-	 * @return array
-	 */
+    /**
+     * @var string
+     */
     public $remember_token;
 
     /**
-     * Get the instance as an array.
-     *
-     * @return array
+     * @var string
      */
 
     public $license_number;
 
     /**
-     * Get the instance as an array.
-     *
-     * @return array
+     * @var string
      */
     public $company;
+
+    /**
+     * @var string
+     */
+    public $address;
+
+    /**
+     * @var string
+     */
+    public $description;
 
     /**
      * Get the instance as an array.
@@ -69,7 +73,8 @@ class CreateForm extends BaseForm {
      * @return array
      */
 
-	function toArray() {
+
+    function toArray() {
 		return [
 			'first_name' => $this->first_name,
 			'last_name' => $this->last_name,
@@ -79,8 +84,8 @@ class CreateForm extends BaseForm {
 			'password' => $this->password,
 			'password_confirmation' => $this->password_confirmation,
             'license_number' => $this->license_number,
-            'company' => $this->company,
             'remember_token' => $this->remember_token,
+            'address' => $this->address,
 		];
 	}
 

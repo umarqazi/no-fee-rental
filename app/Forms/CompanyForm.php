@@ -12,13 +12,9 @@ class CompanyForm extends BaseForm {
 	public $company;
 
     /**
-     * @var integer
+     * @return mixed
      */
-	public $status;
 
-    /**
-     * @return array|mixed
-     */
 	public function rules() {
 		return [
 			'company' => 'required|unique:companies',

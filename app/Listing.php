@@ -4,6 +4,7 @@ namespace App;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use PhpParser\Builder;
 
 /**
  * Class Listing
@@ -120,7 +121,7 @@ class Listing extends Model {
 	 * @return mixed
 	 */
 	public function scopeWithAll($query) {
-		return $query->with(['agent.company', 'images', 'openHouses', 'amenities'])->first();
+		return $query->with(['agent.company', 'images', 'openHouses', 'amenities']);
 	}
 
 	/**
