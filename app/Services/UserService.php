@@ -206,6 +206,8 @@ class UserService {
         $user->phone_number = $request->phone_number;
         $user->neighbourhood_expertise = $request->neighbourhood_expertise;
         $user->languages = $request->languages;
+        $user->address = $request->address;
+        $user->description = $request->description;
         $user->profile = $request->file('profile_image') ?? $request->old_profile;
         $user->validate();
         if ($request->hasFile('profile_image')) {
@@ -342,7 +344,7 @@ class UserService {
         $form->user_type = $request->user_type;
         $form->password = $request->password;
         $form->license_number = $request->license_number;
-        $form->company = $request->company;
+        $form->address = $request->address;
         $form->password_confirmation = $request->password_confirmation;
         $form->remember_token = str_random(60);
         $form->validate();
@@ -357,7 +359,12 @@ class UserService {
                 $company= $this->companyRepo->create($cForm->toArray());
                 $this->userRepo->update($user->id,['company_id' => $company->id]);
             }
+            else {
+                $company= $this->companyRepo->find(['company' => $request->company])->first();
+                $this->userRepo->update($user->id,['company_id' => $company->id]);
+            }
 
+            DB::commit();
             $data = [
                 'view'       => 'signup',
                 'subject'    => 'Verify Email',
