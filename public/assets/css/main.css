@@ -2369,6 +2369,7 @@ footer .copyright .social-icons li a:hover {
 }
 .listing-Details .listing-info .available-btn{
     margin-bottom: 20px;
+    margin-top: 20px;
 }
 .listing-Details .listing-info .available-btn label {
     color: #6a6d72;
@@ -2378,6 +2379,9 @@ footer .copyright .social-icons li a:hover {
     margin-left: 15px;
     font-size: 18px;
     color:  #6a6d72;
+}
+.listing-Details .calendar-wrap{
+    margin-top: 20px;
 }
 .listing-Details .Building-details h3{
     color: #000;
@@ -2399,7 +2403,7 @@ footer .copyright .social-icons li a:hover {
     margin-left: 5px;
 }
 .listing-Details .open-house-section{
-    margin-top: 30px;
+    margin-top: 10px;
 }
 .listing-Details .open-house-inner{
     display: flex;
@@ -2407,7 +2411,7 @@ footer .copyright .social-icons li a:hover {
     align-items: center;
 }
 .listing-Details .open-house-section h3{
-    margin-bottom: 15px;
+    margin-bottom: 5px;
 }
 .listing-Details .open-house-section .open-house-inner p{
     margin-bottom: 3px;
@@ -2446,6 +2450,7 @@ footer .copyright .social-icons li a:hover {
     font-size: 14px;
     color: #223871;
     font-weight: 600;
+    display: none;
 }
 .listing-Details .tab-content>.active{
     opacity: 1 !important;
@@ -2481,7 +2486,7 @@ footer .copyright .social-icons li a:hover {
     display: inline-block;
     width: 100%;
     background-color: #EBEBEB;
-    padding: 20px 0px;
+    padding: 15px 0px;
     color: #9E9E9E;
     text-align: center;
     font-size: 16px;
@@ -2490,8 +2495,13 @@ footer .copyright .social-icons li a:hover {
 .apointment-tabs .login-signup-tab{
     width: 50%;
     margin: 0 auto;
-    padding: 50px 0px;
+    padding: 10px 0px;
     text-align: center;
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: 270px;
+    display: none;
 }
 .apointment-tabs .login-signup-tab a{
     width: 200px;
@@ -2553,6 +2563,12 @@ footer .copyright .social-icons li a:hover {
     -webkit-box-shadow: 0px 0px 2px 0px rgba(235,235,235,1);
     -moz-box-shadow: 0px 0px 2px 0px rgba(235,235,235,1);
     box-shadow: 0px 0px 2px 0px rgba(235,235,235,1);
+}
+.appointment-iconDetails ul li svg{
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+    vertical-align: middle;
 }
 .nearbyapartment h3{
     color: #000;
@@ -2667,7 +2683,7 @@ footer .copyright .social-icons li a:hover {
     display: flex;
     justify-content: flex-start;
     padding: 0px 15px;
-    margin-top: 30px;
+    margin-top: 15px;
 }
 
 .appointment-radio-btn .selection label {
@@ -2693,7 +2709,7 @@ footer .copyright .social-icons li a:hover {
   transition: all 0.3s ease-in-out;
 }
 .appointment-radio-btn .selection{
-    margin-right: 10px;
+    margin-right: 13px;
 }
 .appointment-radio-btn .selection:last-child{
     margin-right: 0px;
@@ -2711,11 +2727,12 @@ footer .copyright .social-icons li a:hover {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 15px;
-    padding: 30px 0px;
+    margin: 6px 15px;
+    padding: 15px 0px;
 }
 .after-radio-textarea textarea{
     margin-right: 10px;
+    height: 45px;
 }
 .after-radio-textarea textarea::placeholder{
     font-size: 14px;
@@ -2749,7 +2766,7 @@ footer .copyright .social-icons li a:hover {
 }
 .calendarCarasoule{
     position: relative;
-    padding: 15px;
+    padding: 3px 15px;
 }
 .calendarCarasoule .owl-carousel .owl-nav{
     position: absolute;
@@ -2792,6 +2809,14 @@ footer .copyright .social-icons li a:hover {
 .calendarCarasoule .owl-carousel .item .appointment-radio-btn span{
     font-size: 25px;
     font-weight: 700;
+}
+.login-signup{
+    display: none;
+}
+.calendar-wrap h3{
+    font-size: 18px;
+    padding: 0px 15px;
+    margin-bottom: 0px !important;
 }
 /*end listing detail radio button*/
 
@@ -3818,6 +3843,12 @@ footer .copyright .social-icons li a:hover {
 }
 /*profile contact*/
 
+
+.nearbyapartment.featured-properties {
+    padding: 0px 0px;
+} 
+
+
 @media (min-width:1600px){
     .container-lg {
         max-width: 1600px;
@@ -3846,6 +3877,10 @@ footer .copyright .social-icons li a:hover {
     }
     .listing-Details .Building-details h3{
         margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    .calendar-wrap h3{
+        margin-top: 0px !important;
     }
 
     #appointmentModal .modal-body a.btn {
@@ -4964,7 +4999,7 @@ footer .copyright .social-icons li a:hover {
         height: 400px;
     }
     .nearbyapartment.featured-properties{
-        padding: 30px 0px;
+        padding: 20px 0px;
     }
     .nearbyapartment h3{
         margin-bottom: 20px;
@@ -4978,7 +5013,18 @@ footer .copyright .social-icons li a:hover {
         padding: 15px;
     }
     .calendarCarasoule .owl-carousel .owl-nav{
-        top: -10px;
+        top: -28px;
+    }
+    .listing-Details .description-title{
+        margin-top: 15px !important;
+        margin-bottom: 15px !important;
+    }
+    .location-map-sec {
+    padding: 0px 0px !important;
+    }
+    .appointment-section{
+        margin-top: 20px !important;
+        margin-bottom: 20px !important;
     }
 
 
@@ -5014,7 +5060,10 @@ footer .copyright .social-icons li a:hover {
         display: block;
     }
     .listing-detail-container .listing-info .product-title {
-        display: block;
+        align-items: end;
+    } 
+    .listing-detail-container .listing-info .product-title p{
+       flex:0 0 65%;
     }
         .listing-Details .listing-info .available-btn{
         display: block;
