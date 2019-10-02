@@ -5191,6 +5191,20 @@ footer .copyright .social-icons li a:hover {
         padding-right: 15px;
     }
 }
+
+
+
+
 .inner-static-page-zero {
     padding-top: 0px 0px 120px !important;
+}
+
+.agentSignup .form-group{
+    position: relative;
+}
+
+.agentSignup .form-group .fa-eye{
+    position:absolute;
+    top:15px;
+    right: 10px;
 }
