@@ -299,7 +299,7 @@
             <div class="row">
                 @foreach(fetchAmenities($listing->amenities) as $amenities)
                     @php $types = array_keys($amenities); $amen = array_values($amenities); @endphp
-                    <div class="col-sm-3">
+                    <div class="col-md-3 col-sm-4">
                         <h3>{{ $types[0] }}</h3>
                         <ul class="second-ul">
                             @foreach($amen as $key => $a)
