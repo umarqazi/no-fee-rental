@@ -299,7 +299,6 @@
             <div class="row">
 
                 <div class="col-sm-3">
-                    @dd($listing)
                     <h3>Listing Type </h3>
                     <ul class="second-ul"> 
                         <li> Exclusive </li>
