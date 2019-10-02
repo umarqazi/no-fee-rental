@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\RealtyMXService;
-use Illuminate\Http\Request;
 use Orchestra\Parser\Xml\Facade as XmlParser;
-use Illuminate\Support\Facades\Validator;
 
 class RealtyMXController extends Controller {
 
@@ -18,11 +16,6 @@ class RealtyMXController extends Controller {
      * @var array
      */
     private $report = [];
-
-    /**
-     * @var array
-     */
-    private $collection = [];
 
     /**
      * RealtyMXController constructor.
@@ -45,39 +38,11 @@ class RealtyMXController extends Controller {
     }
 
     /**
-     * @param $a
-     * @param $b
-     *
-     * @return bool
-     */
-    private function filter($a, $b) {
-        if ( is_array( $a ) && in_array( (string) $b, $this->filter ) )
-            return $a;
-        else if ( in_array( (string) $b, $this->filter ) )
-            return $a;
-        else if ( is_array( $a ) )
-            $this->assignStack( $a );
-        return false;
-    }
-
-    /**
-     *
-     */
-	private function recursiveIterator() {
-        collect($this->hold)->map(function ($a) {
-            $this->stack = $a;
-            $this->recursion();
-            $this->collection[] = $this->push;
-        });
-    }
-
-    /**
-     * @param Request $request
      * @param $file
      *
-     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
+     * @return string
      */
-	public function get(Request $request, $file) {
+	public function get($file) {
 		$filePath = base_path('storage/app/realtyMXFeed/' . $file);
 		$xml = XmlParser::load($filePath);
 		$content = $xml->getContent();
@@ -87,111 +52,21 @@ class RealtyMXController extends Controller {
                 $url = $this->service->createList($property);
                 if(is_array($url)) {
                     foreach ($url as $realty_url) {
-                        $this->report[] = [$this->webId($property) ?? null, $realty_url, 'none'];
+                        if($realty_url === false) {
+                            $this->report[] = [$this->service->webId($property) ?? null, 'none', 'listing with this info already taken'];
+                        } else {
+                            $this->report[] = [ $this->service->webId( $property ) ?? null, $realty_url, 'none' ];
+                        }
                     }
+                } else if ($url === false) {
+                    $this->report[] = [$this->service->webId($property) ?? null, 'none', 'listing with this info already taken'];
                 } else {
-                    $this->report[] = [$this->webId($property) ?? null, $url, 'none'];
+                    $this->report[] = [$this->service->webId($property) ?? null, $url, 'none'];
                 }
             } else {
-                $this->report[] = [$this->webId($property) ?? null, 'none', 'we import only no fee listing'];
+                $this->report[] = [$this->service->webId($property) ?? null, 'none', 'only no fee listings should be imported'];
             }
         }
-        return $this->writeCSV();
+        return $this->service->writeCSV($this->report, 'csv/realty.csv');
 	}
-
-    /**
-     * @param $list
-     *
-     * @return mixed
-     */
-	private function webId($list) {
-	    $list = collect($list)->toArray();
-	    return $list['@attributes']->id;
-    }
-
-    /**
-     * @param $list
-     *
-     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
-     */
-	public function writeCSV() {
-        $filename = 'csv/realty.csv';
-	    $headers = [
-            'Content-Type: text/csv',
-            'Content-Disposition: attachment; filename="realty.csv";',
-        ];
-        $file = fopen($filename, 'w');
-        $columns = ['Listing_web_id','URL','Reason_of_rejection'];
-        fputcsv($file, $columns);
-            foreach ( $this->report as $report ) {
-                fputcsv( $file, $report );
-            }
-        fclose($file);
-        return asset('csv/realty.csv');
-    }
-
-    /**
-     * @param $agent
-     *
-     * @return bool
-     */
-    private function validateAgent($agent) {
-
-        $validate = Validator::make($agent, [
-            'email' => 'email|unique:users'
-        ]);
-        if($validate->fails()) {
-            $this->agentFounded = $agent;
-            $message = $validate->failed();
-            if($message['email']['Unique']) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    /**
-     * @param $input
-     *
-     * @return bool
-     */
-    private function agentFilter($input) {
-	    if(isset($input['email'])) {
-            return $this->validateAgent($input);
-        } else {
-            foreach ( $input as $agent ) {
-               if($this->validateAgent( $agent )) {
-                   return true;
-               }
-            }
-            return false;
-        }
-    }
-
-    /**
-     * @param $input
-     *
-     * @return bool
-     */
-    private function listingFilter($input) {
-	    if(!is_array($input))
-	        $input = collect($input)->toArray();
-
-	    $validate = Validator::make($input, [
-            'neighborhood' => 'unique:listings',
-            'street_address' => 'unique:listings',
-            'square_feet' => 'unique:listings'
-        ]);
-
-        if($validate->fails()) {
-            $rules = $validate->failed();
-            if(
-                !empty($rules['neighborhood']['Unique']) &&
-                !empty($rules['street_address']['Unique']) &&
-                !empty($rules['square_feet']['Unique'])
-            )   return false;
-        }
-        return true;
-    }
 }
