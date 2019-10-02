@@ -18,8 +18,8 @@
             <li><a href="javascript:void(0)">Rent</a></li>
             <li><a href="{{ route('web.neighborhood') }}">Neighborhood </a></li>
             @if(!authenticated())
-                <li><a href="" data-toggle="modal" data-target="#login" class="signin-modal-btn close-menu">Login</a></li>
-                <li><a href="#" data-toggle="modal" data-target="#signup" class="signup-modal-btn close-menu">Signup</a></li>
+            <li><a href="" data-toggle="modal" data-target="#login" class="signin-modal-btn close-menu">Login</a></li>
+            <li><a href="#" data-toggle="modal" data-target="#signup" class="signup-modal-btn close-menu">Signup</a></li>
             @endif
         </ul>
     </div>
@@ -61,8 +61,8 @@
 
                 @else
                     <div class="actions-btns">
-                        <button type="button" class="signup-btn signup-modal-btn" data-toggle="modal" data-target="#signup">Signup</button>
-                        <button type="button" class="signup-btn login-btn signin-modal-btn" data-toggle="modal" data-target="#login">Login</button>
+                        <button type="button" class="signup-btn signup-modal-btn" data-toggle="modal" data-target="#login">Login</button>
+                        <button type="button" class="signup-btn login-btn signin-modal-btn" data-toggle="modal" data-target="#signup">Signup</button>
                     </div>
                 @endif
             </div>
