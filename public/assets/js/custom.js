@@ -296,6 +296,7 @@ $('#price-range-submit').hide();
 		if (radioId == 'signup-option1') {
 			$(".finding-home-text").hide();
             $(".license_num").hide();
+             $("#signup_form .btn-default").prop('disabled', false);
             $("#signup_form .agnet-input").prop('disabled', false);
 		} else {
             $("#signup_form .agnet-input").prop('disabled', true);

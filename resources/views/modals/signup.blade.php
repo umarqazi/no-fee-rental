@@ -32,13 +32,14 @@
                                 <strong>{{ $errors->first('user_type') }}</strong>
                             </span>
                         </div>
-                        <div class="col-sm-12 license_num">
-                             <div class="row align-items-center">
+                        <div class="col-sm-12 ">
+                             <div class="row align-items-center license_num">
                                 <div class="col-sm-6 ">
                                     <div class="form-group">
                                         {!! Form::text('license_number', null, ['class'=>'input-style', 'placeholder'=>'License Number'])!!}
                                     </div>
                                 </div>
+                        </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
@@ -104,9 +105,11 @@
                                 @endif
                             </div>
                         </div>
-                    </div>
-                    <div class="text-center mt-3 mb-4">
-                        {!! Form::submit('Signup', ['class' => 'btn-default']) !!}
+                    
+                    <div class="col-md-12">
+                        <div class="text-center mt-3 mb-4">
+                            {!! Form::submit('Signup', ['class' => 'btn-default']) !!}
+                        </div>
                     </div>
                 {!! Form::close() !!}
                 <p class="footer-text">Already have an account? <span class="signin-wrapper" id = "login-btn">Login</span></p>
