@@ -2206,8 +2206,8 @@ footer .copyright .social-icons li a:hover {
 
 /*Listing detail page*/
 .lSSlideOuter .lSPager.lSGallery img{
-    height: 103px !important; 
-    object-fit: cover; 
+    height: 103px !important;
+    object-fit: cover;
 }
 .listing-detail-container {
     background: #fff;
@@ -2371,8 +2371,11 @@ footer .copyright .social-icons li a:hover {
     align-items: center;
 }
 .listing-Details .listing-info .product-title .flag-icon{
-    width: 25px;
-    height: 25px;
+    width: 28px;
+    height: 28px;
+    position: relative;
+    top: 3px;
+
 }
 .listing-Details .listing-info .available-btn{
     margin-bottom: 20px;
@@ -2458,7 +2461,6 @@ footer .copyright .social-icons li a:hover {
     font-size: 14px;
     color: #223871;
     font-weight: 600;
-    display: none;
 }
 .listing-Details .tab-content>.active{
     opacity: 1 !important;
@@ -2509,7 +2511,6 @@ footer .copyright .social-icons li a:hover {
     display: flex;
     align-items: center;
     min-height: 270px;
-    display: none;
 }
 .apointment-tabs .login-signup-tab a{
     width: 200px;
@@ -2541,7 +2542,7 @@ footer .copyright .social-icons li a:hover {
 }
 .apointment-tabs .tab-content .form-group input{
     margin-bottom: 10px;
-    background-color: #EBEBEB;
+    background-color: #fff;
     color: #9E9E9E;
     height: 45px;
     border: 1px solid #223971;
@@ -2740,17 +2741,29 @@ footer .copyright .social-icons li a:hover {
 }
 .after-radio-textarea textarea{
     margin-right: 10px;
-    height: 45px;
+    height: 100px;
+    resize: none;
+    width: calc(100% - 53px);
 }
 .after-radio-textarea textarea::placeholder{
     font-size: 14px;
 }
-.after-radio-textarea a{
+.after-radio-textarea button{
     background-color: #f36f21;
     color: #fff;
-    padding: 10px 10px;
+    border: none;
+    padding: 0;
     border-radius: 50%;
-    
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.after-radio-textarea button img{
+    width: 18px;
 }
 .calendarCarasoule .owl-carousel .item .appointment-radio-btn{
     display: block;
@@ -2818,9 +2831,7 @@ footer .copyright .social-icons li a:hover {
     font-size: 25px;
     font-weight: 700;
 }
-.login-signup{
-    display: none;
-}
+
 .calendar-wrap h3{
     font-size: 18px;
     padding: 0px 15px;
@@ -3857,7 +3868,7 @@ footer .copyright .social-icons li a:hover {
 
 .nearbyapartment.featured-properties {
     padding: 0px 0px;
-} 
+}
 
 #signup_form .submit-clm{
     position: inherit;
@@ -5093,7 +5104,7 @@ footer .copyright .social-icons li a:hover {
     .appointment-radio-btn{
         display: block;
     }
-  
+
     .appointment-radio-btn .selection{
         margin-bottom: 10px;
         margin-right: 0px;
@@ -5107,7 +5118,7 @@ footer .copyright .social-icons li a:hover {
     }
     .listing-detail-container .listing-info .product-title {
         align-items: end;
-    } 
+    }
     .listing-detail-container .listing-info .product-title p{
        flex:0 0 65%;
     }
