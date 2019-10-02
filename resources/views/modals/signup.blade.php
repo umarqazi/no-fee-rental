@@ -6,10 +6,15 @@
             <div class="logo-info-wrapper">
                 <img src="assets/images/modal-logo.png" alt="" class="logo" />
                 <h3>Create Account</h3>
-                <ul>
-                    <li>Save your searches</li>
-                    <li>Save your favorite listings</li>
-                    <li>Get email notifications for new listings in neighborhoods that you like Access to showing on demand</li>
+                <ul class="create-client-listing">
+                    <li>Explore Various Options</li>
+                    <li>Mark Listing as Favourite</li>
+                    <li>Save Your Researches</li>
+                    <li>Get Notified When we find a home for you</li>
+                </ul>
+                <ul class="create-agent-listing">
+                    <li>Publish your listing</li>
+                    <li>Syndicate listing from Various marketplaces</li>
                 </ul>
             </div>
 
@@ -19,14 +24,14 @@
                 </div>
                 {!! Form::open(['url' => route('user.signup'), 'class' => 'ajax', 'reset' => 'true' , 'method' => 'post', 'id' => 'signup_form']) !!}
                 <div class="row">
-                    <div class="col-sm-12 mb-3">
+                    <div class="col-sm-12 mb-2">
                         <div class="custom-control custom-radio custom-control-inline">
                             <input type="radio" value="3" class="custom-control-input" id="signup-option1" name="user_type">
-                            <label class="custom-control-label" for="signup-option1">Finding a Home ( Client )</label>
+                            <label class="custom-control-label" for="signup-option1">Find a Home ( Client )</label>
                         </div>
                         <div class="custom-control custom-radio custom-control-inline">
                             <input type="radio" value="2" class="custom-control-input" id="signup-option2" name="user_type">
-                            <label class="custom-control-label" for="signup-option2">Finding a Home ( Agent )</label>
+                            <label class="custom-control-label" for="signup-option2">List With Us ( Agent )</label>
                         </div>
                         <span class="invalid-feedback" role="alert">
                                 <strong>{{ $errors->first('user_type') }}</strong>
@@ -66,7 +71,7 @@
                             <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('email') }}</strong>
                                     </span> @endif
-                            <p class="finding-home-text">If you would like to syndicate listing into no fee rentals nyc, please use tha same email address that you use for your RealtyMX, Nestio or OLR account.</p>
+                            <p class="finding-home-text">If you would like to syndicate listing into no fee rentals nyc, please use tha same email address that you use for your RealtyMX.</p>
                         </div>
                     </div>
 
@@ -95,7 +100,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-12">
+                    <div class="col-md-12 submit-clm">
                         <div class="text-center mt-3 mb-4">
                             {!! Form::submit('Signup', ['class' => 'btn-default']) !!}
                         </div>
