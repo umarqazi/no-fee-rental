@@ -53,20 +53,29 @@ class RealtyMXController extends Controller {
                 if(is_array($url)) {
                     foreach ($url as $realty_url) {
                         if($realty_url === false) {
-                            $this->report[] = [$this->service->webId($property) ?? null, 'none', 'listing with this info already taken'];
+                            $this->makeReport($property, 'none', 'listing with this info already taken');
                         } else {
-                            $this->report[] = [ $this->service->webId( $property ) ?? null, $realty_url, 'none' ];
+                            $this->makeReport($property, $realty_url, 'none');
                         }
                     }
                 } else if ($url === false) {
-                    $this->report[] = [$this->service->webId($property) ?? null, 'none', 'listing with this info already taken'];
+                    $this->makeReport($property, 'none', 'listing with this info already taken');
                 } else {
-                    $this->report[] = [$this->service->webId($property) ?? null, $url, 'none'];
+                    $this->makeReport($property, $url, 'none');
                 }
             } else {
-                $this->report[] = [$this->service->webId($property) ?? null, 'none', 'only no fee listings should be imported'];
+                $this->makeReport($property, 'none', 'only no fee listings should be imported');
             }
         }
         return $this->service->writeCSV($this->report, 'csv/realty.csv');
 	}
+
+    /**
+     * @param $property
+     * @param $url
+     * @param $ror
+     */
+    private function makeReport($property, $url, $ror) {
+        $this->report[] = [$this->service->webId($property), $url, $ror];
+    }
 }
