@@ -39,7 +39,7 @@ class RealtyMXFeedImport extends Command
      */
     public function handle() {
         printf("%s\n", $this->description);
-//        $realtyController = new RealtyMXController(new RealtyMXService);
-//        return $realtyController->dispatchJob($this->argument('feed-name'));
+        $realtyController = new RealtyMXController(new RealtyMXService);
+        return $realtyController->dispatchJob($this->argument('feed-name'));
     }
 }

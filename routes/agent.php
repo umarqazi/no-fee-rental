@@ -31,7 +31,7 @@ Route::get('/listing/{sortBy}', 'Agent\ListingController@sortBy')->name('agent.s
 Route::get('/copy-list/{id}', 'Agent\ListingController@copy')->name('agent.copyListing');
 
 // Featured Listing
-Route::get('/request-featured/{id}', 'Agent\ListingController@request')->name('agent.requestFeatured');
+Route::get('/request-featured/{id}', 'Agent\ListingController@requestFeatured')->name('agent.requestFeatured');
 
 // Agent Members Routes
 Route::get('/team', 'Agent\MemberController@index')->name('agent.team');
