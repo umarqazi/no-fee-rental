@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Services\UserService;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class HomeController extends Controller {
 
@@ -61,6 +62,17 @@ class HomeController extends Controller {
      * @throws \Exception
      */
 	public function companies() {
-		return dataTable($this->service->companies());
+        return dataTable($this->service->companies());
 	}
+
+    /**
+     * @return mixed
+     * @throws \Exception
+     */
+    public function associatedAgents(Request $request, $id) {
+        $agents= $this->service->associatedAgents($id);
+
+        return $agents ;
+    }
+
 }

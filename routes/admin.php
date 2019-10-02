@@ -64,7 +64,7 @@ Route::post('/unique-email', 'Admin\UserController@unique');
 
 Route::get('/get-renters', 'Admin\HomeController@renters');
 Route::get('/get-agents', 'Admin\HomeController@agents');
-Route::get('/get-companies', 'Admin\HomeController@companies');
+Route::get('/get-companies-with-agents', 'Admin\HomeController@companies');
 
 // Company Routes
 Route::post('/add-company', 'Admin\CompanyController@create')->name('admin.createCompany');
@@ -80,3 +80,5 @@ Route::post('/neighborhood/create', 'Admin\NeighborhoodController@create')->name
 Route::post('/neighborhood/edit/{id}', 'Admin\NeighborhoodController@edit')->name('neighborhood.edit');
 Route::post('/neighborhood/update/{id}', 'Admin\NeighborhoodController@update')->name('neighborhood.update');
 Route::post('/neighborhood/delete/{id}', 'Admin\NeighborhoodController@delete')->name('neighborhood.delete');
+
+Route::get('/view-associated-agents/{id}', 'Admin\HomeController@associatedAgents');

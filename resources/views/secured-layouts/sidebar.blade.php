@@ -1,12 +1,12 @@
 <aside>
     <span class="close-menu"><i class="fa fa-times-circle"></i></span>
     <div class="avtar">
-        <img src="{{ asset('assets/images/agent-image.jpg') }}" alt="" />
+        <img src="{!! asset(!empty(mySelf()->profile_image) ? mySelf()->profile_image : DUI) !!}" alt="" />
         <span>Agent George <i class="fa fa-chevron-down"></i></span>
         <ul>
-            <li><a href="profile.html">Dashboard</a></li>
-            <li><a href="profile.html">Dashboard</a></li>
-            <li><a href="profile.html">Dashboard</a></li>
+            <li><a href="{{ route(whoAmI().'.index') }}">Dashboard </a></li>
+            <li><a href="{{ route(whoAmI().'.showProfile') }}">Profile Setting </a></li>
+            <li><a href="{{ route(whoAmI().'.logout') }}">Log Out </a></li>
         </ul>
     </div>
     <ul class="main-men">
