@@ -22,7 +22,7 @@ class Listing extends Model {
 		'user_id', 'realty_id', 'name', 'email', 'phone_number', 'street_address',
 		'display_address', 'neighborhood', 'thumbnail', 'baths', 'bedrooms', 'unit',
 		'rent', 'square_feet', 'open_house', 'description', 'is_featured', 'map_location',
-		'status', 'visibility', 'city_state_zip', 'realty_url', 'availability'
+		'status', 'visibility', 'city_state_zip', 'realty_url', 'availability', 'unique_client_id'
 	];
 
 	/**
