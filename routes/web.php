@@ -11,16 +11,10 @@
 |
  */
 
-use Illuminate\Http\Request;
-
 Route::get('/', 'HomeController@index')->name('web.index');
 
 // Search Listing Route
 Route::get('/search', 'SearchController@advanceSearch')->name('list.search');
-
-Route::get('/renter-guide', function () {
-	return view('pages.renter-guide');
-});
 
 // Contact Us Routes
 Route::get('/contact-us', 'ContactUsController@showForm')->name('contact-us');
@@ -49,7 +43,7 @@ Route::get('/confirm-email/{token}', 'UserController@confirmEmail')->name('user.
 // Email Validation
 Route::post('/verify-email', 'UserController@verifyEmail');
 
-//License Validations
+// License Validations
 Route::post('/verify-license', 'UserController@verifyLicense');
 
 // Login route for all user type
@@ -84,13 +78,6 @@ Route::get('/all-notifications', 'NotificationController@all');
 Route::get('/noti', function() {
 	return view('secured-layouts.notifications');
 });
-Route::get('/rent', function() {
-	return view('rent');
-});
-
-Route::post('/test', function (Request $request) {
-    return 'false';
-});
 
 Route::get('/rent', function() {
     return view('rent');
@@ -101,7 +88,4 @@ Route::get('/reset', 'RecoverPasswordController@sendRequest');
 // Neighborhood Routes
 Route::get('/neighborhood', 'NeighborhoodController@index')->name('web.neighborhood');
 Route::get('/neighborhood-listing', 'NeighborhoodController@find')->name('web.findNeighborhoodLists');
-Route::post('/neighborhood/create', 'NeighborhoodController@create')->name('neigborhood.create');
-Route::post('/neighborhood/edit/{id}', 'NeighborhoodController@edit')->name('neigborhood.edit');
-Route::post('/neighborhood/delete/{id}', 'NeighborhoodController@delete')->name('neigborhood.delete');
 Route::post('/all-neighborhoods', 'NeighborhoodController@all')->name('web.allNeighbours');

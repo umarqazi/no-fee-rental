@@ -256,7 +256,7 @@
         </div>
     </div>
 </div>
-
+@include('modals.check_availability')
 <script type="text/javascript">
     $('.owl-slider #carousel-1, .owl-slider #carousel-2, .owl-slider #carousel-3').owlCarousel({
         autoplay: true,

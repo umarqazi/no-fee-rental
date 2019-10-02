@@ -95,6 +95,11 @@ class NeighborhoodController extends Controller {
         return sendResponse($request, $neighbors, null);
     }
 
+    /**
+     * @param Request $request
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function find(Request $request) {
         $data = toObject($this->service->fetchListing($this->paginate, $request->neighborhood));
         return view('neighborhood', compact('data'));
