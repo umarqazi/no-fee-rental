@@ -3,17 +3,45 @@
 namespace App\Http\Controllers;
 
 use App\Services\FavouriteService;
+use App\Services\ListingService;
 use Illuminate\Http\Request;
 
-class ListingController extends Controller
-{
+class ListingController extends Controller {
 
-    private $service;
+    /**
+     * @var FavouriteService
+     */
+    private $favouriteService;
 
-    public function __construct(FavouriteService $service) {
-        $this->service = $service;
+    /**
+     * @var ListingService
+     */
+    private $listingService;
+
+    /**
+     * ListingController constructor.
+     *
+     * @param FavouriteService $favouriteService
+     * @param ListingService $listingService
+     */
+    public function __construct(FavouriteService $favouriteService, ListingService $listingService) {
+        $this->favouriteService = $favouriteService;
+        $this->listingService = $listingService;
     }
 
+    public function checkAvailability(Request $request, $id) {
+
+    }
+
+    public function makeAppointment(Request $request, $id) {
+
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
+     */
     public function detail(Request $request) {
         $list = \App\Listing::where('map_location', $request->map_location)
                             ->select('rent', 'id', 'street_address', 'bedrooms', 'baths', 'thumbnail')->first();

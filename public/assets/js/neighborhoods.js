@@ -109,11 +109,6 @@ $(() => {
          "ajax": {
              "url": "/admin/get-neighborhoods"
         },
-         "columns": [
-             {data: "id", name: "id"},
-            {data: "name", name: "name"},
-             {data: "content", name: "content"}
-         ],
          columnDefs: [
              {
                  render: (data, type, row) => {

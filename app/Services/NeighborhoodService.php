@@ -55,13 +55,6 @@ class NeighborhoodService {
     }
 
     /**
-     * @return mixed
-     */
-    public function all() {
-        return $this->neighborhoodRepo->all();
-    }
-
-    /**
      * @param $request
      *
      * @return mixed
