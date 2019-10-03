@@ -50,7 +50,12 @@ class NeighborhoodController extends Controller {
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function find(Request $request) {
-        $data = toObject($this->service->fetchListing($this->paginate, $request->neighborhood));
+        collect($request->all())->map(function($args, $method) {
+            if(method_exists($this->service, $method)) {
+                $this->service->{$method}($args);
+            }
+        });
+        $data = toObject($this->service->fetchQuery($this->paginate));
         return view('neighborhood', compact('data'));
     }
 }

@@ -87,13 +87,16 @@
                             <div class="sort-by-wrapper">
                                 <div class="sort-by">
                                     <span>Sort By: </span>
-                                    <select class="custom-select-list">
-                                        <option value="">-- Select --</option>
-                                        <option value="1">Recent</option>
-                                        <option value="2">Cheapest</option>
-                                        <option value="3">Popular</option>
-                                        <option value="4">Pet Policy</option>
-                                    </select>
+                                    {!! Form::select('sorting',
+                                        [
+                                            '' => '-- Select --',
+                                            'recent' => 'Recent',
+                                            'cheaper' => 'Cheapest',
+                                            'petPolicy' => 'Pet Policy'
+                                        ],
+                                        request()->get('recent') ??
+                                        request()->get('petPolicy') ??
+                                        request()->get('cheaper'), ['class' => "custom-select-list sorting"]) !!}
                                 </div>
                             </div>
                         </div>
@@ -181,6 +184,7 @@
 {{--Advance Search Modal--}}
 @include('modals.advance_search')
 {!! HTML::script('assets/js/neighborhoods.js') !!}
+{{--{!! HTML::script('assets/js/recent-search.js') !!}--}}
 {!! HTML::script('assets/js/input-to-dropdown.js') !!}
 {!! HTML::script("https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js") !!}
 <script>

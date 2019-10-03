@@ -32,7 +32,7 @@ class SearchController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function advanceSearch(Request $request) {
-        $filter = collect($request->all())->reject(function ($args) {
+        collect($request->all())->reject(function ($args) {
             if (is_array($args)) {
                 $args = array_filter($args, function($value) { return !is_null($value) && $value !== ''; });
             }

@@ -196,7 +196,24 @@ class Listing extends Model {
 
     /**
      * @param $query
-     * @param $for
+     *
+     * @return mixed
+     */
+    public function scopeCheaper($query) {
+	    return $query->orderBy('rent', CHEAPER);
+    }
+
+    /**
+     * @param $query
+     *
+     * @return mixed
+     */
+    public function scopeRecent($query) {
+        return $query->orderBy('created_at', RECENT);
+    }
+
+    /**
+     * @param $query
      *
      * @return mixed
      */
