@@ -16,7 +16,7 @@
     <div class="mobile-nav">
         <ul>
             <li><a href="javascript:void(0)">Rent</a></li>
-            <li><a href="{{ route('web.neighborhood') }}">Neighborhood </a></li>
+            <li><a href="{{ route('web.findListsByNeighborhood') }}">Neighborhood </a></li>
             @if(!authenticated())
             <li><a href="" data-toggle="modal" data-target="#login" class="signin-modal-btn close-menu">Login</a></li>
             <li><a href="#" data-toggle="modal" data-target="#signup" class="signup-modal-btn close-menu">Signup</a></li>
@@ -32,7 +32,7 @@
             <ul class="menu-links">
                 <li>
                     <a href="javascript:void(0)">Rent </a>
-                    <a href="{{ route('web.neighborhood') }}">Neighborhood </a>
+                    <a href="{{ route('web.findListsByNeighborhood') }}">Neighborhood </a>
                 </li>
             </ul>
             <div class="header-right-wrapper">
