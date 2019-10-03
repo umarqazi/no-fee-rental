@@ -10,20 +10,15 @@ class NeighborhoodController extends Controller {
     /**
      * @var NeighborhoodService
      */
-    private $service;
-
-    /**
-     * @var int
-     */
-    private $paginate = 20;
+    private $neighborhoodService;
 
     /**
      * NeighborhoodController constructor.
      *
-     * @param NeighborhoodService $service
+     * @param NeighborhoodService $neighborhoodService
      */
-    public function __construct(NeighborhoodService $service) {
-        $this->service = $service;
+    public function __construct(NeighborhoodService $neighborhoodService) {
+        $this->neighborhoodService = $neighborhoodService;
     }
 
     /**
@@ -32,7 +27,7 @@ class NeighborhoodController extends Controller {
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
     public function all(Request $request) {
-        $neighbors = $this->service->all();
+        $neighbors = $this->neighborhoodService->get();
         return sendResponse($request, $neighbors, null);
     }
 
@@ -44,10 +39,10 @@ class NeighborhoodController extends Controller {
     public function index(Request $request) {
         $data = null;
         $showMap = true;
-        if(!empty($request->all())) {
-            $data = $this->sortListing($request->all(), 'Melrose');
+        if(count($request->all()) < 1) {
+//            $data = $this->sortListing($request->all());
         } else {
-            $data = toObject($this->service->index());
+            $data = toObject($this->neighborhoodService->index());
         }
         return view('neighborhood', compact('data', 'showMap'));
     }
@@ -60,10 +55,10 @@ class NeighborhoodController extends Controller {
      */
     public function sortListing($sort, $neighbour) {
         collect($sort)->map(function($method) use ($neighbour) {
-            if(method_exists($this->service, $method)) {
-                $this->service->{$method}($neighbour);
+            if(method_exists($this->neighborhoodService, $method)) {
+                $this->neighborhoodService->{$method}($neighbour);
             }
         });
-        return toObject($this->service->fetchQuery());
+        return toObject($this->neighborhoodService->fetchQuery());
     }
 }

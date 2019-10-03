@@ -20,7 +20,7 @@ $(() => {
         $('.modal-title').text('Update User');
         $('.modal-footer input').val('Update');
         $('#add-member').modal('show');
-        let res = await updateRecord('#update_user', route);
+        await updateRecord('#update_user', route);
     });
 
     $body.on('click', '#add-user', function() {
@@ -29,6 +29,11 @@ $(() => {
         $('#update_user').attr({'action': '/admin/create-user', 'id': 'add_user'});
         $('.modal-title').text('Add User');
         $('.modal-footer input').val('Add User');
+        $('#first_name').val('');
+        $('#last_name').val('');
+        $('#email').val('');
+        $('#phone_number').val('');
+        $('#user_type').val('');
         $(this).find('form').trigger('reset');
     });
 
@@ -42,92 +47,68 @@ $(() => {
         await toggleStatus(route, $(`#${$(this).parents('table').attr('id')}`).DataTable(), $(this));
     });
 
-    // +++++ Agents Table +++++ //
-	$('#agents_table').DataTable({
-        serverSide: true,
-        processing: true,
-        "ajax": {
-            "url": "/admin/get-agents"
-        },
-        "columns": [
-            { data: "id" },
-            { data: "first_name", name: "first_name" },
-            { data: "email" ,name: "email" },
-            { data: "phone_number",name: "phone_number" }
-        ],
-
-        columnDefs: [
-            {
-                render: (data, type, row, a) => {
-                    return row.first_name+' '+row.last_name;
-                },
-                targets: 0
-            },
-            {
-                render: (data, type, row) => {
-                    return row.email;
-                },
-                targets: 1
-            },
-            {
-                render: (data, type, row) => {
-                    return row.phone_number
-                },
-                targets: 2
-            },
-            {
-                render: (data, type, row) => {
-                    return row.license_number;
-                },
-                targets: 3
-            },
-            {
-                render: (data, type, row) => {
-                    return `<i class="fa fa-edit px-2 action-btn" id="updateUser" ref_id="${row.id}" route="/admin/edit-user/${row.id}"></i>
-                            <i class="fa fa-trash action-btn" id="deleteUser" ref_id="${row.id}" route="/admin/delete-user/${row.id}"></i>`;
-                },
-                targets: 4
-            }
-        ]
+    $body.on('click', '#viewAssociatedAgents', async function() {
+        let route = $(this).attr('route');
+        let count = 0 ;
+        $('.agents_list_popup ol').empty();
+        let res = await ajaxRequest(route, 'get');
+        $('#add-company').modal('show');
+        $('.share_list_popup ul').empty();
+        $('.modal-header h4').empty();
+        $('.modal-header h4').append(res[0]['company']['company'] +' Agent(s)');
+        for(let i = 0 ; i < res.length ; i++) {
+            count = i + 1 ;
+            $('.agents_list_popup ol').append('<li style="color: black ; ">' + count +'- '+ res[i]['first_name'] +' '+res[i]['last_name'] +'</li></b><br>');
+        }
     });
+
+    let columns = ['id', 'first_name', 'email', 'phone_number'];
+    // +++++ Agents Table +++++ //
+    let columnDefs = [{
+            render: (data, type, row) => {
+                return row.first_name+' '+row.last_name;
+            },
+            targets: 0
+        },
+        {
+            render: (data, type, row) => {
+                return `<i class="fa fa-edit px-2 action-btn" id="updateUser" ref_id="${row.id}" route="/admin/edit-user/${row.id}"></i>
+                        <i class="fa fa-trash action-btn" id="deleteUser" ref_id="${row.id}" route="/admin/delete-user/${row.id}"></i>`;
+            },
+            targets: 4
+        }];
+    dataTables('#agents_table', '/admin/get-agents', columns, columnDefs);
 
     // +++++ Renters Table +++++ //
-    $('#renters_table').DataTable({
-        serverSide: true,
-        processing: true,
-        "ajax": {
-            "url": "/admin/get-renters"
+    columnDefs = [{
+        render: (data, type, row) => {
+            return row.first_name+' '+row.last_name;
         },
-        "columns": [
-            { data: "id", name: 'id' },
-            { data: "first_name", name: "first_name" },
-            { data: "email" ,name: "email" },
-            { data: "phone_number",name: "phone_number" }
-        ],
+        targets: 0
+        },
+        {
+        render: (data, type, row) => {
+            return `<i class="fa ${row.status ? 'fa-eye' : 'fa-eye-slash'} action-btn" id="updateUserStatus" ref_id="${row.id}" route="/admin/status-update/${row.id}"></i>
+                    <i class="fa fa-edit px-2 action-btn" id="updateUser" ref_id="${row.id}" route="/admin/edit-user/${row.id}"></i>
+                    <i class="fa fa-trash action-btn" id="deleteUser" ref_id="${row.id}" route="/admin/delete-user/${row.id}"></i>`;
+        },
+        targets: 4
+    }];
+    dataTables('#renters_table', '/admin/get-renters', columns, columnDefs);
 
-        columnDefs: [
-            {
-                render: (data, type, row, a) => {
-                    return ++ a.row;
-                },
-                targets: 0
+    // +++++ Companies Table +++++ //
+    columnDefs = [{
+            render: (data, type, row, a) => {
+                return ++ a.row;
+                }, targets: 0
             },
-            {
-                render: (data, type, row) => {
-                    return row.first_name+' '+row.last_name;
-                },
-                targets: 1
+        {
+            render: (data, type, row) => {
+                return `<i class="fa  fa-eye action-btn" id="viewAssociatedAgents" ref_id="${row.id}" route="/admin/view-associated-agents/${row.id}"></i>`;
             },
-            {
-                render: (data, type, row) => {
-                    return `<i class="fa ${row.status ? 'fa-eye' : 'fa-eye-slash'} action-btn" id="updateUserStatus" ref_id="${row.id}" route="/admin/status-update/${row.id}"></i>
-                            <i class="fa fa-edit px-2 action-btn" id="updateUser" ref_id="${row.id}" route="/admin/edit-user/${row.id}"></i>
-                            <i class="fa fa-trash action-btn" id="deleteUser" ref_id="${row.id}" route="/admin/delete-user/${row.id}"></i>`;
-                },
-                targets: 4
-            }
-        ]
-    });
+            targets: 2
+    }];
+    dataTables('#companies_table', '/admin/get-companies-with-agents', ['id', 'company', 'status'], columnDefs);
 });
 
 function reloadAllTables() {
