@@ -124,7 +124,7 @@ class UserService {
      *
      * @return mixed
      */
-    public function update($request) {
+    public function update($id, $request) {
         $user = $this->form($request);
         return $this->userRepo->update($user->id, $user->toArray());
     }
