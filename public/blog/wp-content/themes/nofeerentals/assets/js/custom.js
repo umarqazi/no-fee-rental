@@ -4,6 +4,7 @@ $(document).ready(function() {
 
     $("#signup-option1").trigger('click');
     $(".license_num").hide();
+
     $("#phone_number").addClass('col-sm-12');
 
     $(".property-thumb .heart-icon").click(function() {
@@ -114,6 +115,8 @@ $(document).ready(function() {
         if (radioId == 'signup-option1') {
             $(".finding-home-text").hide();
             $(".license_num").hide();
+            $(".create-client-listing").show();
+            $(".create-agent-listing").hide();
             $("#signup_form .btn-default").prop('disabled', false);
             $("#signup_form .agnet-input").prop('disabled', false);
         } else {
@@ -121,6 +124,8 @@ $(document).ready(function() {
             $("#signup_form .btn-default").prop('disabled', true);
             $(".finding-home-text").show();
             $(".license_num").show();
+            $(".create-client-listing").hide();
+            $(".create-agent-listing").show();
         }
     });
 
