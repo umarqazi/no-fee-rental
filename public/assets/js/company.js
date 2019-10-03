@@ -43,12 +43,15 @@ $(() => {
 
     $('body').on('click', '#viewAssociatedAgents', async function() {
         let route = $(this).attr('route');
+        let count = 0 ;
+        $('.agents_list_popup ol').empty();
         let res = await ajaxRequest(route, 'get');
         $('#add-company').modal('show');
         $('.share_list_popup ul').empty();
         for(let i = 0 ; i < res.length ; i++)
         {
-            $('.share_list_popup ul').append('<li>"' + res[i]['first_name'] + res[i]['last_name'] +'"</li><br>');
+            count = i + 1 ;
+            $('.agents_list_popup ol').append('<strong><li>' + count +'- '+ res[i]['first_name'] +' '+res[i]['last_name'] +'</li></strong><br>');
 
         }
     });
