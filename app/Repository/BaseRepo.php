@@ -22,7 +22,7 @@ class BaseRepo implements IRepo {
 	 * @return mixed
 	 */
 	public function all() {
-		return $this->model->get();
+		return $this->model->all();
 	}
 
 	/**

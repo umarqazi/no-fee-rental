@@ -219,6 +219,7 @@ label {
   height: 45px;
   border-radius: 5px;
   outline: none;
+    background: #fff;
 }
 .input-style:focus {
   border-color: #e77817;
@@ -1340,9 +1341,7 @@ header .agent-avtar .avtar:hover div ul {
 .swal-footer {
   text-align: center !important;
 }
-.block-body .img-thumbnail {
-  margin-top: 15px;
-}
+
 .modal-body textarea {
   resize: none;
 }
@@ -1368,6 +1367,9 @@ header .agent-avtar .avtar:hover div ul {
   height: 120px;
   padding-top: 10px;
   padding-bottom: 10px;
+}
+.neighbourhood-table{
+    padding: 30px 0px;
 }
 @media only screen and (max-width:767px){
   .dataTables_filter{

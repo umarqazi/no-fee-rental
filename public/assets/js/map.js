@@ -169,6 +169,9 @@ const markerClusters = (coords, selector) => {
 const autoComplete = (searchSelector) => {
     let autocomplete = new google.maps.places.Autocomplete(searchSelector);
     autocomplete.setFields(['adr_address']);
+    autocomplete.setComponentRestrictions(
+        {'country': ['us']});
+    console.log(autocomplete);
     return autocomplete;
 };
 
@@ -289,8 +292,10 @@ const setSchools = (title) => {
 /**
  *
  * @param selector
+ * @param zoom
  */
-const initMap = (selector) => {
+const initMap = (selector, zoom = ZOOM) => {
+    ZOOM = zoom;
     myLocation().then(coords => {
         setMap(coords, selector);
         latLngToAddr(coords).then(address => {

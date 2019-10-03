@@ -67,8 +67,10 @@ $(() => {
 
     $('.controls').on('keydown blur', function() {
         setTimeout(() => {
-            $('#autofill').val($(this).val());
-        }, 200)
+            let val = $(this).val();
+            val = val.replace(', New York, NY, USA', '');
+            $('#autofill').val(val);
+        }, 5);
     });
 
     $body.on('keyup', '#controls', function() {
