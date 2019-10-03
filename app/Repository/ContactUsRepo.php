@@ -8,18 +8,14 @@
 
 namespace App\Repository;
 
-
 use App\ContactUs;
 
-class ContactUsRepo
-{
-    protected $contact_model;
+class ContactUsRepo extends BaseRepo {
 
-    public function __construct()
-    {
-        $this->contact_model    =   new ContactUs();
-    }
-    public function save($data){
-        $this->contact_model->create($data);
-    }
+    /**
+     * ContactUsRepo constructor.
+     */
+	public function __construct() {
+	    parent::__construct(new ContactUs());
+	}
 }

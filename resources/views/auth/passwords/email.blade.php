@@ -1,4 +1,4 @@
-@extends('layouts.base-static')
+@extends('layouts.app')
 @section('title', 'Forgot Password')
 @section('content')
     <section class="inner-pages wow fadeIn" data-wow-delay="0.2s">
@@ -7,7 +7,7 @@
             <div class="contact-info">
                 <div class="row justify-content-center mt-5">
                     <div class="col-lg-6">
-                        {!! Form::open(['url'=>route('password.email'), 'class'=>'contact-form', 'method'=>'post', 'enctype'=>'multipart/form-data']) !!}
+                        {!! Form::open(['url'=>route('password.email'), 'class'=>'contact-form ajax', 'id' => 'forgot-password', 'reset' => 'true', 'method'=>'post', 'enctype'=>'multipart/form-data']) !!}
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="form-group">

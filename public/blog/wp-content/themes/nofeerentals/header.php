@@ -14,7 +14,8 @@
 <html <?php language_attributes(); ?>>
 <head>
   <meta charset="<?php bloginfo( 'charset' ); ?>">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"">
+  <meta name="viewport" content="width=device-width">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="profile" href="https://gmpg.org/xfn/11">
 
   <?php wp_head(); ?>
@@ -25,56 +26,20 @@
 
   <div class="mobile-menu">
     <i class="fa fa-times close-menu-btn"></i>
-    <div class="user-avtar">
-      <a href="#"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/agent-img.jpg" alt="" class="avtar" /> Jhone Doe <i class="fa fa-angle-down"></i></a>
-      <div class="user-dropdown">
-        <a href="#">Dashboard </a>
-        <a href="#">Profile Setting </a>
-        <a href="#">Log Out </a>
-      </div>
-    </div>
     <div class="mobile-nav">
-      <ul>
-        <li><a href="#">Rent</a></li>
-        <li><a href="#">Neighborhood </a></li>
-        <li>
-          <a class="" data-toggle="collapse" href="#menuToggle1" role="button" aria-expanded="false" aria-controls="menuToggle1">
-            Renters <i class="fa fa-angle-down"></i>
-          </a>
-          <div class="collapse" id="menuToggle1">
-            <ul>
-              <li>
-                <a href="#">Some Link</a>
-              </li>
-              <li>
-                <a href="#">Some Link</a>
-              </li>
-              <li>
-                <a href="#">Some Link</a>
-              </li>
-            </ul>
-          </div>
-        </li>
-        <li>
-          <a class="" data-toggle="collapse" href="#menuToggle2" role="button" aria-expanded="false" aria-controls="menuToggle2">
-            Company <i class="fa fa-angle-down"></i>
-          </a>
-          <div class="collapse" id="menuToggle2">
-            <ul>
-              <li>
-                <a href="#">Some Link</a>
-              </li>
-              <li>
-                <a href="#">Some Link</a>
-              </li>
-              <li>
-                <a href="#">Some Link</a>
-              </li>
-            </ul>
-          </div>
-        </li>
-        <li><a href="#">Login</a></li>
-        <li><a href="#">signup</a></li>
+        <ul id="menu-header-menu" class="menu-links">
+          <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-29">
+            <a href="http://no-fee-rental.teamtechverx.com/rent">Rent</a>
+          </li>
+          <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-33">
+            <a href="http://no-fee-rental.teamtechverx.com/neighborhood">Neighborhood</a>
+          </li>
+          <li>
+            <a href="" data-toggle="modal" data-target="#login" class="signin-modal-btn close-menu">Login</a>
+          </li>
+          <li>
+            <a href="" data-toggle="modal" data-target="#signup" class="signup-modal-btn close-menu">Signup</a>
+          </li>
       </ul>
     </div>
   </div>
@@ -85,17 +50,26 @@
         <a href="/">
           <img src="<?php echo get_template_directory_uri(); ?>/assets/images/logo.png" class="logo" />
         </a>
-        <?php
-          if ( has_nav_menu( 'header-menu' ) ) {
-            wp_nav_menu(
-              array(
-                'theme_location' => 'header-menu',
-                'container' => 'false',
-                'menu_class' => 'menu-links'
-              )
-            );
-          }
-        ?>
+
+            <div class="header-right-wrapper">
+                <i class="fa fa-bars menu-btn"></i>
+                  <?php
+                    if ( has_nav_menu( 'header-menu' ) ) {
+                      wp_nav_menu(
+                        array(
+                          'theme_location' => 'header-menu',
+                          'container' => 'false',
+                          'menu_class' => 'menu-links'
+                        )
+                      );
+                    }
+                  ?>
+                  <div class="actions-btns">
+                      <button type="button" class="signup-btn signup-modal-btn" data-toggle="modal" data-target="#signup">Signup</button>
+                      <button type="button" class="signup-btn login-btn signin-modal-btn" data-toggle="modal" data-target="#login">Login</button>
+                  </div>
+            </div>
+
       </div>
     </div>
   </div>
@@ -125,15 +99,22 @@
     if(!is_singular('post')){
       ?>
 
-      <div class="header-bg inner-pages-banner" style="background: url(<?php echo $featured_image; ?>) no-repeat center center;">
-        <div class="banner-wrapper">
+      <!-- <div class="header-bg inner-pages-banner" style="background: url(<?php echo $featured_image; ?>) no-repeat center center;"> -->
+        <!-- <div class="banner-wrapper">
           <h1 class="mb-1"><?php echo $title; ?></h1>
           <?php if($sub_title){ ?>
             <p><?php echo $sub_title; ?></p>
           <?php } ?>
-        </div>
-      </div>
+        </div> -->
+      <!-- </div> -->
 
     <?php } ?>
+
+
+
+
+
+
+</div>
 
 </header>

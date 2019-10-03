@@ -2,32 +2,49 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
+use App\Services\FeatureListingService;
+use Zend\Diactoros\Request;
+use Newsletter;
 
-class HomeController extends Controller
-{
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+class HomeController extends Controller {
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function index()
-    {
-        if(Auth::user()->hasRole('admin')){
-            return Redirect::to('/admin/dashboard');
-        }
-        return view('home');
-    }
+	/**
+	 * @var FeatureListingService
+	 */
+	private $service;
+
+	/**
+	 * @var int
+	 */
+	private $paginate = 20;
+
+	/**
+	 * HomeController constructor.
+	 *
+	 * @param FeatureListingService $service
+	 */
+	public function __construct(FeatureListingService $service) {
+        $this->service = $service;
+	}
+
+	/**
+	 * Show the application dashboard.
+	 *
+	 * @return \Illuminate\Contracts\Support\Renderable
+	 */
+	public function index() {
+		$featured_listings = $this->service->featured_listing($this->paginate);
+		return view('index', compact('featured_listings'));
+	}
+
+	/**
+	 * @param $id
+	 *
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 */
+	public function detail($id) {
+		$listing = $this->service->detail($id)->first();
+		if(empty($listing)) abort(404);
+		return view('listing_detail', compact('listing'));
+	}
 }

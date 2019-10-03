@@ -11,6 +11,14 @@
 |
 */
 
-Broadcast::channel('App.User.{id}', function ($user, $id) {
-    return (int) $user->id === (int) $id;
+use Illuminate\Support\Facades\Broadcast;
+
+// Real Time notifications Route
+Broadcast::channel('notification-channel.{id}', function(){
+    return true;
+});
+
+// Real Time Chat Broadcaster Route
+Broadcast::channel('messaging-channel.{id}', function() {
+    return true;
 });

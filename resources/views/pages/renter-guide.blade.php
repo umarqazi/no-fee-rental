@@ -1,4 +1,4 @@
-@extends('layouts.base')
+@extends('layouts.app')
 @section('title', 'Renter Guide')
 @section('content')
     <section class="inner-pages rental-guides-container">

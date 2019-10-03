@@ -1,86 +1,135 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: adi
+ * Author: Yousuf
  * Date: 6/14/19
  * Time: 3:57 PM
  */
 
 namespace App\Http\Controllers;
 
-
-use App\Forms\Users\ChangePasswordForm;
-use App\Forms\Users\ProfileForm;
-use App\Http\Requests\ChangePassword;
-use App\Http\Requests\User;
-use App\Services\UserServices;
-use Illuminate\Support\Facades\Redirect;
+use App\Services\UserService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\View;
-use Illuminate\Support\Facades\Hash;
 
-class UserController extends Controller
-{
-    protected $user_service;
+class UserController extends Controller {
 
-    protected $user_id;
+    /**
+     * @var UserService
+     */
+	private $service;
 
     /**
      * UserController constructor.
+     *
+     * @param UserService $service
      */
-    public function __construct()
-    {
-        $this->user_service =   new UserServices();
-    }
+	public function __construct(UserService $service) {
+		$this->service = $service;
+	}
+
+	/**
+	 * @param Request $request
+	 *
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
+	public function editProfile(Request $request) {
+		$update_data = $this->service->updateProfile($request);
+		if ($request->hasFile('profile_image')) {
+			$update_data = $this->service->updateProfileImage($request->file('profile_image'), myId(), $request->old_profile ?? null);
+		}
+
+		return $update_data
+		? success('Profile has been updated successfully')
+		: error('Something went wrong');
+	}
 
     /**
-     * @param User $request
+     * @param $token
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+	public function changePassword($token) {
+		return view('change_password', compact('token'));
+	}
+
+	/**
+	 * @param Request $request
+	 * @param $token
+	 *
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
+	public function updatePassword(Request $request, $token) {
+		if ($user = $this->service->validateEncodedToken($token)) {
+			$request->id = $user->id;
+			$this->service->changePassword($request);
+			return success('Password has been updated');
+		}
+		return error('Invalid token request cannot be processed.');
+
+	}
+
+    /**
+     * @param Request $request
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function editProfile(Request $request){
-        $form           =   new ProfileForm();
-        $form->user_id  =   $request->id;
-        $form->first_name=$request->first_name;
-        $form->last_name=$request->last_name;
-        $form->email=$request->email;
-        $form->phone_number=$request->phone_number;
-        $form->profile_image=$request->profile_image;
-        $update_data    =   $this->user_service->updateAdminProfile($form);
-        if ($request->hasFile('profile_image')) {
-            $update_data    =   $this->user_service->updateProfileImage($request->file('profile_image'), $form);
-        }
-        $notification   =   [
-            'message'   =>  'ProfileForm has been updated successfully',
-            'alert_type'      =>  'success'
-        ];
+	public function invitedAgentSignup(Request $request) {
+		$res = $this->service->invitedAgentSignup($request);
+		return sendResponse($request, $res, 'Account has been created', '/');
+	}
 
-        return Redirect::back()->with($notification);
+    /**
+     * @param $token
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
+	public function invitedAgentSignupForm($token) {
+		$authenticate_token = $this->service->getAgentToken($token)->first();
+		if (!empty($authenticate_token) && $authenticate_token->token == $token) {
+			return view('invited_agent_signup', compact('authenticate_token'));
+		}
+
+		return error('Invalid token request cannot be processed.');
+	}
+
+	/**
+	 * @param Request $request
+	 *
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
+	public function signup(Request $request){
+		$response = $this->service->signup($request);
+		return sendResponse($request, $response, 'We send an email to your account. Kindly verify your email');
+	}
+
+	/**
+	 * @param $token
+	 *
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
+	public function confirmEmail($token) {
+		if ($this->service->verifyEmail($token)) {
+			return success('Email has been verified.', '/');
+		}
+
+		return error('Something went wrong');
+	}
+
+    /**
+     * @param Request $request
+     *
+     * @return bool
+     */
+	public function verifyEmail(Request $request) {
+	    return $this->service->isUniqueEmail($request);
     }
 
     /**
-     * @return \Illuminate\Contracts\View\View
+     * @param Request $request
+     *
+     * @return bool
      */
-    public function changePassword(){
-        return view::make('change-password');
-    }
-
-    /**
-     * @param ChangePassword $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function updatePassword(Request $request){
-        $change_password            =   new ChangePasswordForm();
-        $change_password->password  =   $request->password;
-        $change_password->password_confirmation  =   $request->password_confirmation;
-        $change_password->user_id  =   Auth::user()->id;
-        $this->user_service->changePassword($change_password);
-        $notification   =   [
-            'message'   =>  'Password has been updated successfully',
-            'alert_type'      =>  'success'
-        ];
-
-        return Redirect::to(route('profile'))->with($notification);
-
+    public function verifyLicense(Request $request) {
+        return $this->service->isUniqueLicense($request);
     }
 }

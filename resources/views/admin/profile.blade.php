@@ -1,7 +1,5 @@
-@extends('admin.layouts.base')
-
+@extends('secured-layouts.app')
 @section('title', 'Nofee Rental')
-
 @section('content')
     <div class="wrapper">
         <div class="heading-wrapper">
@@ -9,16 +7,15 @@
         </div>
         <div class="block profile-container">
             <div class="block-body">
-                {!! Form::open(['url'=>route('edit-profile'), 'method'=>'post', 'enctype'=>'multipart/form-data']) !!}
+                {!! Form::model($user, ['url' => route('admin.updateProfile'), 'method' => 'post', 'enctype' => 'multipart/form-data']) !!}
                 <div class="user-avtar">
                     <div class="img-holder">
-                        @if(Auth::user()->profile_image)
-                            <img src="{!! asset('storage/'.Auth::user()->profile_image) !!}" alt="" />
-                        @else
-                            <img src="{!! asset('assets/images/default.jpg') !!}" alt="" />
+                        <img id="view_profile" src="{{ asset($user->profile_image ?? DUI ) }}" alt="" />
+                        @if(!empty($user->profile_image))
+                            <input type="hidden" name="old_profile" value="{{ $user->profile_image }}">
                         @endif
-                        <label @if($errors->isEmpty()) class="d-none" @endif id="image-picker">
-                            <i class="fa fa-edit edit-btn"></i><input type="file" hidden name="profile_image">
+                        <label @if($errors->isEmpty()) @endif id="image-picker">
+                            <i class="fa fa-edit edit-btn" ></i>{!! Form::file('profile_image', ['class' => 'd-none']) !!}
                         </label>
                         <div class="col-12">
                             @if ($errors->has('profile_image'))
@@ -30,19 +27,18 @@
                     </div>
                     <div class="detail">
                         <p class="title">Username / Email</p>
-                        <p class="mb-4">{!! Auth::user()->email !!}</p>
+                        <p class="mb-4">{{ $user->email }}</p>
                         <p class="title">Your Cell Phone</p>
-                        <p>{!! Auth::user()->phone_number !!} </p>
+                        <p>{{ $user->phone_number }} </p>
                     </div>
                 </div>
-                {!! Form::hidden('id', Auth::user()->id) !!}
                 <div class="additional-info">
                     <div class="row">
 
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>First Name</label>
-                                {!! Form::text('first_name', Auth::user()->first_name, ['class'=>'input-style', ($errors->isEmpty())? 'disabled':'']) !!}
+                                {!! Form::text('first_name', null, ['class' => 'input-style']) !!}
                                 @if ($errors->has('first_name'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('first_name') }}</strong>
@@ -54,7 +50,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Last Name</label>
-                                {!! Form::text('last_name', Auth::user()->last_name, ['class'=>'input-style', ($errors->isEmpty())? 'disabled':'']) !!}
+                                {!! Form::text('last_name', null, ['class' => 'input-style']) !!}
                                 @if ($errors->has('last_name'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('last_name') }}</strong>
@@ -66,7 +62,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Email</label>
-                                {!! Form::text('email', Auth::user()->email, ['class'=>'input-style', ($errors->isEmpty())? 'disabled':'']) !!}
+                                {!! Form::text('email', null, ['class'=>'input-style']) !!}
                                 @if ($errors->has('email'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('email') }}</strong>
@@ -78,7 +74,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Phone Number</label>
-                                {!! Form::text('phone_number', Auth::user()->phone_number, ['class'=>'input-style', ($errors->isEmpty())? 'disabled':'']) !!}
+                                {!! Form::text('phone_number', null, ['class' => 'input-style']) !!}
                                 @if ($errors->has('phone_number'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('phone_number') }}</strong>
@@ -88,9 +84,9 @@
                         </div>
 
                         <div class="col-md-12 mt-4 text-center">
-                            <a href="{!! route('change-password') !!}" class="btn-default large-btn edit-profile" >Change Password</a>
+                            <a href="{{ route('admin.resetPassword') }}" class="btn-default large-btn edit-profile" >Change Password</a>
                             <button type="button" class="btn-default large-btn edit-profile @if(!$errors->isEmpty()) d-none @endif" >Edit Profile</button>
-                            <button type="submit" class="btn-default large-btn update-profile @if(!$errors->isEmpty()) d-inline @endif">Update Profile</button>
+                            {!! Form::submit('Update Profile', ['class' => "btn-default large-btn update-profile"]) !!}
                         </div>
 
                     </div>
@@ -99,4 +95,5 @@
             </div>
         </div>
     </div>
+    {!! HTML::script('assets/js/profile.js') !!}
 @endsection

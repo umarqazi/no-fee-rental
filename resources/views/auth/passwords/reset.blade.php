@@ -1,5 +1,7 @@
-@extends('layouts.base-static')
-@section('title', 'Reset Password')
+@extends('layouts.app')
+
+@section('title', 'Nofee Rental')
+
 @section('content')
     <section class="inner-pages wow fadeIn" data-wow-delay="0.2s">
         <div class="container-lg">
@@ -7,7 +9,7 @@
             <div class="contact-info">
                 <div class="row justify-content-center mt-5">
                     <div class="col-lg-6">
-                        <form method="POST" action="{{ route('password.update') }}">
+                        <form class="ajax" reset="true" method="POST" id="reset-password" action="{{ route('password.update') }}">
                             <div class="row">
                                 <div class="col-sm-12">
                                     @csrf

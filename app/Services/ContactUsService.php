@@ -8,22 +8,35 @@
 
 namespace App\Services;
 
-
 use App\Repository\ContactUsRepo;
 
-class ContactUsService
-{
-    protected $contact_repo;
+class ContactUsService {
+
+    /**
+     * @var ContactUsRepo
+     */
+	private $repo;
 
     /**
      * ContactUsService constructor.
      */
-    public function __construct()
-    {
-        $this->contact_repo =   new ContactUsRepo();
-    }
+	public function __construct() {
+		$this->repo = new ContactUsRepo();
+	}
 
-    public function saveRecord($data){
-        return $this->contact_repo->save($data);
-    }
+	/**
+	 * @param $data
+	 *
+	 * @return mixed
+	 */
+	public function saveRecord($data) {
+		return $this->repo->create($data);
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function showMessages() {
+		return $this->repo->all();
+	}
 }

@@ -2,39 +2,97 @@
 
 namespace App;
 
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Contracts\Auth\CanResetPassword;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
-{
-    use Notifiable, HasRoles;
+class User extends Authenticatable implements CanResetPassword {
+	use Notifiable;
+
+	/**
+	 * The attributes that are mass assignable.
+	 *
+	 * @var array
+	 */
+	protected $fillable = [
+		'first_name', 'last_name', 'user_type', 'email', 'password', 'phone_number','remember_token','license_number'
+	];
+
+	/**
+	 * The attributes that should be hidden for arrays.
+	 *
+	 * @var array
+	 */
+	protected $hidden = [
+		'password',
+	];
+
+	/**
+	 * The attributes that should be cast to native types.
+	 *
+	 * @var array
+	 */
+	protected $casts = [
+		'email_verified_at' => 'datetime',
+	];
+
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function listing() {
+		return $this->hasMany(Listing::class);
+	}
 
     /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    protected $fillable = [
-        'first_name','last_name','user_type', 'email', 'password', 'phone_number'
-    ];
+    public function withCompany() {
+        return $this->hasMany(AgentCompany::class, 'agent_id');
+    }
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function agentInvites() {
+		return $this->hasMany(AgentInvites::class, 'invited_by', 'id');
+	}
 
+	/**
+	 * @param $query
+	 *
+	 * @return mixed
+	 */
+	public function scopeAdmins($query) {
+		return $query->whereuser_type(ADMIN);
+	}
+
+	/**
+	 * @param $query
+	 *
+	 * @return mixed
+	 */
+	public function scopeAgents($query) {
+		return $query->whereuser_type(AGENT);
+	}
+
+	/**
+	 * @param $query
+	 *
+	 * @return mixed
+	 */
+	public function scopeRenters($query) {
+		return $query->whereuser_type(RENTER);
+	}
+	
     /**
-     * The attributes that should be cast to native types.
+     * @param $query
      *
-     * @var array
+     * @return mixed
      */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+    public function scopeWithCompany($query, $id) {
+        return $query->whereHas('withCompany', function($q) use ($id) {
+            $q->where('company_id', $id);
+        });
+    }
+
 }

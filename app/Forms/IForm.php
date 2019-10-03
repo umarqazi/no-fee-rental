@@ -8,40 +8,39 @@
 
 namespace App\Forms;
 
-
 use Illuminate\Contracts\Support\Arrayable;
 
-interface IForm extends Arrayable
-{
-    /**
-     * @return mixed
-     */
-    public function rules();
+interface IForm extends Arrayable {
 
-    /**
-     * @return bool
-     */
-    public function passes();
+	/**
+	 * @return mixed
+	 */
+	public function rules();
 
-    /**
-     * @return boolean
-     */
-    public function fails();
+	/**
+	 * @return bool
+	 */
+	public function passes();
 
-    /**
-     * @return mixed
-     * @throws ValidationException
-     */
-    public function validate();
+	/**
+	 * @return boolean
+	 */
+	public function fails();
 
-    /**
-     *
-     * @return mixed
-     */
-    public function errorMessages();
+	/**
+	 * @return mixed
+	 * @throws ValidationException
+	 */
+	public function validate();
 
-    /**
-     * @return mixed
-     */
-    public function errors();
+	/**
+	 *
+	 * @return mixed
+	 */
+	public function errorMessages();
+
+	/**
+	 * @return mixed
+	 */
+	public function errors();
 }

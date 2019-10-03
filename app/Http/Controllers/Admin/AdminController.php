@@ -1,47 +1,62 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: adi
- * Date: 6/11/19
- * Time: 4:30 PM
- */
 
 namespace App\Http\Controllers\Admin;
 
-
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\View;
+use App\Services\UserService;
+use Illuminate\Http\Request;
 
-class AdminController extends Controller
-{
+class AdminController extends Controller {
+
     /**
-     * Create a new controller instance.
+     * @var UserService
+     */
+	private $service;
+
+    /**
+     * AdminController constructor.
      *
-     * @return void
+     * @param UserService $service
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+	public function __construct(UserService $service) {
+		$this->service = $service;
+	}
 
-    /**
-     * @return \Illuminate\Contracts\View\View
-     */
-    public function dashboard(){
-        return view::make('admin.index');
-    }
+	/**
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 */
+	public function showProfile() {
+		$user = mySelf();
+		return view('admin.profile', compact('user'));
+	}
 
-    /**
-     * @return \Illuminate\Contracts\View\View
-     */
-    public function viewPropertyListing(){
-        return view::make('admin.listing.property-listing');
-    }
+	/**
+	 * @param Request $request
+	 *
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
+	public function updateProfile(Request $request) {
+		return ($this->service->updateProfile($request))
+		? success('Profile has been updated')
+		: error('Something went wrong');
+	}
 
-    /**
-     *
-     */
-    public function profile(){
-        return view::make('admin.profile');
-    }
+	/**
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 */
+	public function resetPassword() {
+		return view('admin.update_password');
+	}
+
+	/**
+	 * @param Request $request
+	 *
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
+	public function updatePassword(Request $request) {
+		return $this->service->changePassword($request)
+		? success('Password has been updated successfully.', route('admin.showProfile'))
+		: error('Something went wrong');
+
+	}
 }
