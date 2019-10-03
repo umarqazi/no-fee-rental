@@ -30,6 +30,7 @@
                         <button type="button" class="btn-default submit">{{ $action }} Listing</button>
                     </div>
                 </div>
+                </div>
                 {!! Form::close() !!}
             </div>
         </div>
@@ -39,7 +40,7 @@
     enableDatePicker('#availability_date');
     enableDatePicker('.open-house-date', false);
     autoComplete(document.getElementById('controls'));
-    initMap(document.getElementById('map'));
+    initMap(document.getElementById('map'), 17);
     fetchNeighbours($('input[name=neighborhood]'));
 </script>
 @endsection

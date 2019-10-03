@@ -27,6 +27,13 @@ class Listing extends Model {
 		'visibility', 'city_state_zip', 'realty_url', 'availability'
 	];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function amenities() {
+        return $this->belongsToMany(Amenities::class, 'listing_amenities', 'listing_id', 'amenity_id');
+    }
+
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
 	 */
@@ -42,10 +49,10 @@ class Listing extends Model {
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function amenities() {
-	    return $this->belongsToMany(Amenities::class, 'listing_amenities', 'listing_id', 'amenity_id');
+    public function neighborhood() {
+        return $this->hasOne(Neighborhoods::class, 'id', 'neighborhood_id');
     }
 
     /**
@@ -121,7 +128,7 @@ class Listing extends Model {
 	 * @return mixed
 	 */
 	public function scopeWithAll($query) {
-		return $query->with(['agent.company', 'images', 'openHouses', 'amenities']);
+		return $query->with(['agent.company', 'images', 'openHouses', 'amenities', 'neighborhood']);
 	}
 
 	/**

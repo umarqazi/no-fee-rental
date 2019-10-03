@@ -1,6 +1,10 @@
 
 $(() => {
 	$('body').on('form-success-login_form', function(event, res) {
+	    if(window.location.pathname !== '/') {
+	        window.location.reload();
+	        return;
+        }
 		window.location.href = res.url;
 	});
 

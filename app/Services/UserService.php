@@ -471,7 +471,7 @@ class UserService {
      * @return mixed
      */
     public function getAgentWithListings($id) {
-        $data = dd($this->userRepo->profileDetail($id)->first());
+        $data = $this->userRepo->profileDetail($id)->first();
         return [
             'agent'    => $data,
             'listings' => $data->listings

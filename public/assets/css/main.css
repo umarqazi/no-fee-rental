@@ -765,6 +765,13 @@ h3 {
     background: url(../images/modal-check-icon.png) no-repeat left top 5px;
     font-size: 16px;
     padding-left: 20px;
+    text-transform: capitalize;
+}
+
+@media (min-width: 576px){
+    .modal-dialog-centered {
+        min-height: calc(100% - (0.75rem * 2)) !important;
+    }
 }
 
 .login-modal .modal-dialog .login-form-wrapper {
@@ -782,7 +789,7 @@ h3 {
     padding-left: 30px;
     color: #223971;
     position: relative;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 .login-modal .modal-dialog .login-form-wrapper .login-heading:after {
@@ -2199,8 +2206,8 @@ footer .copyright .social-icons li a:hover {
 
 /*Listing detail page*/
 .lSSlideOuter .lSPager.lSGallery img{
-    height: 103px !important; 
-    object-fit: cover; 
+    height: 103px !important;
+    object-fit: cover;
 }
 .listing-detail-container {
     background: #fff;
@@ -2364,8 +2371,11 @@ footer .copyright .social-icons li a:hover {
     align-items: center;
 }
 .listing-Details .listing-info .product-title .flag-icon{
-    width: 25px;
-    height: 25px;
+    width: 28px;
+    height: 28px;
+    position: relative;
+    top: 3px;
+
 }
 .listing-Details .listing-info .available-btn{
     margin-bottom: 20px;
@@ -2383,6 +2393,7 @@ footer .copyright .social-icons li a:hover {
 .listing-Details .calendar-wrap{
     margin-top: 20px;
 }
+
 .listing-Details .Building-details h3{
     color: #000;
     margin-bottom: 30px;
@@ -2450,7 +2461,6 @@ footer .copyright .social-icons li a:hover {
     font-size: 14px;
     color: #223871;
     font-weight: 600;
-    display: none;
 }
 .listing-Details .tab-content>.active{
     opacity: 1 !important;
@@ -2501,7 +2511,6 @@ footer .copyright .social-icons li a:hover {
     display: flex;
     align-items: center;
     min-height: 270px;
-    display: none;
 }
 .apointment-tabs .login-signup-tab a{
     width: 200px;
@@ -2533,7 +2542,7 @@ footer .copyright .social-icons li a:hover {
 }
 .apointment-tabs .tab-content .form-group input{
     margin-bottom: 10px;
-    background-color: #EBEBEB;
+    background-color: #fff;
     color: #9E9E9E;
     height: 45px;
     border: 1px solid #223971;
@@ -2732,17 +2741,29 @@ footer .copyright .social-icons li a:hover {
 }
 .after-radio-textarea textarea{
     margin-right: 10px;
-    height: 45px;
+    height: 100px;
+    resize: none;
+    width: calc(100% - 53px);
 }
 .after-radio-textarea textarea::placeholder{
     font-size: 14px;
 }
-.after-radio-textarea a{
+.after-radio-textarea button{
     background-color: #f36f21;
     color: #fff;
-    padding: 10px 10px;
+    border: none;
+    padding: 0;
     border-radius: 50%;
-    
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.after-radio-textarea button img{
+    width: 18px;
 }
 .calendarCarasoule .owl-carousel .item .appointment-radio-btn{
     display: block;
@@ -2810,9 +2831,7 @@ footer .copyright .social-icons li a:hover {
     font-size: 25px;
     font-weight: 700;
 }
-.login-signup{
-    display: none;
-}
+
 .calendar-wrap h3{
     font-size: 18px;
     padding: 0px 15px;
@@ -3824,7 +3843,7 @@ footer .copyright .social-icons li a:hover {
 
 .license_valid-text {
     color: #223971;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
 .license_num .form-group {
@@ -3833,7 +3852,7 @@ footer .copyright .social-icons li a:hover {
 
 .license_num {
     border-bottom: #ddd solid 1px;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
 }
 .form-group label.error{
     padding-top: 8px;
@@ -3841,13 +3860,44 @@ footer .copyright .social-icons li a:hover {
 .lSSlideOuter .lSPager.lSGallery img{
     width: 100%;
 }
+.create-agent-listing{
+    display: none;
+}
 /*profile contact*/
 
 
 .nearbyapartment.featured-properties {
     padding: 0px 0px;
-} 
+}
 
+#signup_form .submit-clm{
+    position: inherit;
+}
+
+#signup_form {
+    min-height: 495px;
+}
+
+#signup_form .submit-clm .btn-default{
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 45px;
+    margin: 0 auto;
+}
+
+@media (min-width: 576px){
+
+    .modal-dialog{
+        margin: 0.75rem auto !important;
+    }
+}
+
+@media (max-width: 1024px){
+    .modal-dialog{
+     margin: 0.75rem 15px !important;
+    }
+}
 
 @media (min-width:1600px){
     .container-lg {
@@ -4209,6 +4259,11 @@ footer .copyright .social-icons li a:hover {
     }
     .neighborhood-search .search-result-wrapper .search-listing{
         padding: 0px 0px 0px 15px;
+    }
+    #signup_form .submit-clm .btn-default{
+        position: inherit;
+        padding: 0px 0px;
+        width: 100%;    
     }
 }
 @media only screen and (max-width: 991px) {
@@ -5028,6 +5083,8 @@ footer .copyright .social-icons li a:hover {
     }
 
 
+
+
 }
 @media only screen and (min-width: 577px) and (max-width: 767px) {
     .featured-properties .property-listing .info .info-link-text {
@@ -5047,7 +5104,7 @@ footer .copyright .social-icons li a:hover {
     .appointment-radio-btn{
         display: block;
     }
-  
+
     .appointment-radio-btn .selection{
         margin-bottom: 10px;
         margin-right: 0px;
@@ -5061,7 +5118,7 @@ footer .copyright .social-icons li a:hover {
     }
     .listing-detail-container .listing-info .product-title {
         align-items: end;
-    } 
+    }
     .listing-detail-container .listing-info .product-title p{
        flex:0 0 65%;
     }
