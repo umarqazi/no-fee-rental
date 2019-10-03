@@ -239,13 +239,13 @@ $(() => {
         email: {
           required: true,
           email: true,
-          remote: {
-              headers: {
-                'X-CSRF-TOKEN': TOKEN
-              },
-              url: "/verfiy-email",
-              type: "post",
-          }
+            remote: {
+                headers: {
+                    'X-CSRF-TOKEN': TOKEN
+                },
+                url: "/verify-email",
+                type: "post",
+            }
         },
       },
       messages: {
@@ -258,17 +258,16 @@ $(() => {
             last_name: {
                 required: "Last name is required."
             },
-            email: {
-                remote: "Email already taken",
-                required: "Email is required.",
-                email: "Please enter valid email"
-            },
+          email: {
+              remote: "Email already taken",
+              required: "Email is required.",
+              email: "Please enter valid email"
+          },
             phone_number: {
               required: "Phone number is requried."
             },
       }
     });
-
     // Agent Invite Form Validation
     $('#agent_invite').validate({
       rules: {

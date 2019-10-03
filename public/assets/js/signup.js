@@ -4,7 +4,6 @@ $(() => {
     });
 
     $("#signup-option2").trigger('click');
-//    $('.input-style').prop("disabled",true);
     $('input[name=license_number]').prop("disabled",false);
     let form = $('#signup_form');
     let $selector = $('input[name=license_number]');
@@ -27,6 +26,9 @@ $(() => {
 
             if (res.length > 0) {
                 form.append(`<input type="hidden" name="company" value="${res[0].business_name}">
+                             <input type="hidden" name="address" value="${res[0].business_address_1}">`);
+
+                $('#invited_agent_signup_form').append(`<input type="hidden" name="company" value="${res[0].business_name}">
                              <input type="hidden" name="address" value="${res[0].business_address_1}">`);
                 $('.input-style').removeAttr("disabled");
                 $('.license_valid-text').text("You provided a valid license. You are welcome to fill the details below and and become a part of NO FEE Rentals NYC.");

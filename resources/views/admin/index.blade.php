@@ -25,7 +25,6 @@
                 <!-- Tab panes -->
                 <div class="tab-content">
                     <div class="tab-pane active" id="tab-1">
-
                         <div class="table-responsive">
                             <table id="agents_table" style="width: 100%;" class="datatable dataTable table table-hover display">
                                 <thead>
@@ -40,10 +39,8 @@
                                 <tbody></tbody>
                             </table>
                         </div>
-
                     </div>
                     <div class="tab-pane fade" id="tab-2">
-
                         <div class="table-responsive">
                             <table class="datatable dataTable table table-hover display" style="width: 100%;" id="renters_table">
                                 <thead>
@@ -58,10 +55,8 @@
                                 <tbody></tbody>
                             </table>
                         </div>
-
                     </div>
                     <div class="tab-pane fade" id="tab-3">
-
                         <div class="table-responsive">
                             <table class="datatable dataTable table table-hover display" style="width: 100%;" id="companies_table">
                                 <thead>
@@ -74,33 +69,25 @@
                                 <tbody></tbody>
                             </table>
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-
  <!-- Add User Modal -->
 @include('admin.modals.add_user')
-
 <!-- Invite User Modal -->
 @include('admin.modals.invite_agent')
-
 <!-- Add Company Modal -->
 @include('admin.modals.add_company')
-
 <div class="modal fade user-modal-wrapper" id="user-modal">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-
             <!-- Modal Header -->
             <div class="modal-header">
                 <h4 class="modal-title">Abraham Pigeon</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
-
             <!-- Modal body -->
             <div class="modal-body">
                 <div class="user-thumb">
@@ -113,7 +100,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
