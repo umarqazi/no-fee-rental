@@ -51,9 +51,9 @@
           <img src="<?php echo get_template_directory_uri(); ?>/assets/images/logo.png" class="logo" />
         </a>
 
-            <div class="header-right-wrapper">
-                <i class="fa fa-bars menu-btn"></i>
-                  <?php
+                        <div class="header-right-wrapper">
+                            <i class="fa fa-bars menu-btn"></i>
+                            <?php
                     if ( has_nav_menu( 'header-menu' ) ) {
                       wp_nav_menu(
                         array(
@@ -64,17 +64,17 @@
                       );
                     }
                   ?>
-                  <div class="actions-btns">
-                      <button type="button" class="signup-btn signup-modal-btn" data-toggle="modal" data-target="#signup">Signup</button>
-                      <button type="button" class="signup-btn login-btn signin-modal-btn" data-toggle="modal" data-target="#login">Login</button>
-                  </div>
+                                <div class="actions-btns">
+                                    <button type="button" class="signup-btn signup-modal-btn" data-toggle="modal" data-target="#signup">Signup</button>
+                                    <button type="button" class="signup-btn login-btn signin-modal-btn" data-toggle="modal" data-target="#login">Login</button>
+                                </div>
+                        </div>
+
+                    </div>
+                </div>
             </div>
 
-      </div>
-    </div>
-  </div>
-
-  <?php
+            <?php
 
     $featured_image = $title = $sub_title = "";
 
@@ -99,8 +99,8 @@
     if(!is_singular('post')){
       ?>
 
-      <!-- <div class="header-bg inner-pages-banner" style="background: url(<?php echo $featured_image; ?>) no-repeat center center;"> -->
-        <!-- <div class="banner-wrapper">
+                <!-- <div class="header-bg inner-pages-banner" style="background: url(<?php echo $featured_image; ?>) no-repeat center center;"> -->
+                <!-- <div class="banner-wrapper">
           <h1 class="mb-1"><?php echo $title; ?></h1>
           <?php if($sub_title){ ?>
             <p><?php echo $sub_title; ?></p>
@@ -109,12 +109,110 @@
       <!-- </div> -->
 
     <?php } ?>
+    <div class="modal fade login-modal show" id="signup">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
+        
+        <div class="modal-content">
+            <img src="<?php bloginfo('template_url')?>/assets/images/modal-close-icon.png" alt="" class="close-modal close-signup-modal" data-dismiss="modal">
+            <div class="logo-info-wrapper">
+                <img src="assets/images/modal-logo.png" alt="" class="logo">
+                <h3>Create Account</h3>
+                <ul>
+                    <li>Save your searches</li>
+                    <li>Save your favorite listings</li>
+                    <li>Get email notifications for new listings in neighborhoods that you like Access to showing on demand</li>
+                </ul>
+            </div>
 
+            <div class="login-form-wrapper">
+                <div class="login-heading">
+                    Signup
+                </div>
+                <form method="POST" action="http://no-fee-rental.teamtechverx.com/user-signup" accept-charset="UTF-8" class="ajax" reset="true" id="signup_form" novalidate="novalidate"><input name="_token" type="hidden" value="wgtYrzIjKZeqRuv67Xf1mCwnwFUW8JlmJKzf0lre">
+                    <div class="row">
+                        <div class="col-sm-12 mb-3">
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" value="3" class="custom-control-input" id="signup-option1" name="user_type">
+                                <label class="custom-control-label" for="signup-option1">Finding a Home ( Client )</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" value="2" class="custom-control-input" id="signup-option2" name="user_type">
+                                <label class="custom-control-label" for="signup-option2">Finding a Home ( Agent )</label>
+                            </div>
+                            <span class="invalid-feedback" role="alert">
+                                <strong></strong>
+                            </span>
+                        </div>
+                        <div class="col-sm-12 ">
+                             <div class="row align-items-center license_num">
+                                <div class="col-sm-6 ">
+                                    <div class="form-group">
+                                        <input class="input-style" placeholder="License Number" name="license_number" type="text">
+                                    </div>
+                                </div>
+                        </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <input class="input-style agnet-input" placeholder="First Name" name="first_name" type="text">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <input class="input-style agnet-input" placeholder="Last Name" name="last_name" type="text">
+                              </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <input class="input-style agnet-input" id="email" placeholder="Email" name="email" type="text">
+                                <p class="finding-home-text">If you would like to syndicate listing into no fee rentals nyc, please use tha same email address that you use for your RealtyMX, Nestio or OLR account.</p>
+                            </div>
+                        </div>
 
-
-
-
-
+                        <div class="col-sm-6 col-sm-12" id="phone_number">
+                            <div class="form-group">
+                                <input class="input-style agnet-input" placeholder="Phone Number" name="phone_number" type="text">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <i class="fa fa-eye"></i>
+                                <input class="input-style agnet-input" placeholder="Password" id="password" name="password" type="password" value="">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group eye-form">
+                                <i class="fa fa-eye"></i>
+                                <input class="input-style agnet-input" placeholder="Confirm Password" name="password_confirmation" type="password" value="">
+                            </div>
+                        </div>
+                    
+                    <div class="col-md-12">
+                        <div class="text-center mt-3 mb-4">
+                            <input class="btn-default" type="submit" value="Signup">
+                        </div>
+                    </div>
+                
+                <p class="footer-text">Already have an account? <span class="signin-wrapper" id="login-btn">Login</span></p>
+            </div></form>
+        </div>
+    </div>
 </div>
 
-</header>
+<script src="http://no-fee-rental.teamtechverx.com/assets/js/signup.js"></script>
+
+<script src="http://no-fee-rental.teamtechverx.com/assets/js/login.js"></script>
+<script type="text/javascript">
+    function togglefooterlink() {
+        if (window.matchMedia('(max-width: 1279px)').matches) {
+            $(".collapseabe-link").click(function(){
+                $(this).parent().find('.collapse-menu').slideToggle();
+            });
+        }
+    }
+    togglefooterlink();
+</script>
+
+                    </div>
+
+        </header>
