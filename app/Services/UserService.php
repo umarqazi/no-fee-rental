@@ -107,17 +107,20 @@ class UserService {
         $user = $this->form($request);
         $response = $this->userRepo->create($user->toArray());
         if (!empty($response)) {
+
             $email = [
-                'first_name' => $user->first_name,
-                'subject'    => 'Account Created',
                 'view'       => 'create-user',
-                'link'       => route('user.change_password', $user->remember_token),
-            ];
+                'first_name' =>  $response->first_name,
+                'to'         =>  $response->email,
+                'subject'    => 'Account Created',
+                'link'       =>  route('user.change_password', $user->remember_token),       ];
+
             dispatchEmailQueue($email);
             return $response;
         }
         return false;
     }
+
 
     /**
      * @param $request
