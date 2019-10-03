@@ -8,7 +8,7 @@
  * @param contentType
  * @returns {Promise<void>}
  */
-async function ajaxRequest(url, type, data, loading = true, form = null, contentType = 'true') {
+const ajaxRequest = async function(url, type, data, loading = true, form = null, contentType = 'true') {
 	setHeaders();
 	let settings = {
         url: url,
@@ -56,14 +56,14 @@ async function ajaxRequest(url, type, data, loading = true, form = null, content
     }
 
 	return await $.ajax(settings);
-}
+};
 
 /**
  *
  * @param form
  * @param data
  */
-function populateFields(form, data) {
+const populateFields = function (form, data) {
     $.each(data, function(key, value) {
         var ctrl = $('[name='+key+']', form);
         switch(ctrl.prop("type")) {
@@ -76,82 +76,49 @@ function populateFields(form, data) {
                 ctrl.val(value);
         }
     });
-}
+};
 
 /**
  * Set Default Request Headers
  */
-function setHeaders() {
+const setHeaders = function () {
 	$.ajaxSetup({
 		headers: {
 			'X-CSRF-TOKEN': $('meta[name=csrf-token]').attr('content')
 		}
 	});
-}
+};
 
 /**
  *
  * @param form
  * @param errors
  */
-function populateErrors(form, errors) {
+const populateErrors = function (form, errors) {
 	$.each(errors, function (key, msg) {
 		$(form).find(`input[name=${key}]`).after(`<label class="error">${msg}</label>`);
 	});
-}
-
-$(() => {
-
-	$('body').on('submit', '.ajax', async function(e) {
-		e.preventDefault();
-		let form    = $(this);
-		let id      = $(this).attr('id');
-		let url     = $(this).attr('action');
-		let type    = $(this).attr('method');
-		let data    = $(this).serialize();
-		let reset   = $(this).attr('reset');
-        let loading = $(this).attr('loading');
-        let content = $(this).attr('content');
-
-		if(!form.valid()) {
-			return;
-		}
-
-		let res = await ajaxRequest(url, type, data, (loading !== 'false'), form, content);
-
-		if(reset === 'true'){
-            $(form).trigger("reset");
-        }
-
-		if(res.status){
-			form.trigger(`form-success-${id}`, res.data);
-		}
-	});
-});
+};
 
 /**
  *
  * @param msg
  * @returns {*}
  */
-function confirm(msg) {
-	return swal({
-		title: "Are you sure?",
-		text: msg,
-		icon: "warning",
-		buttons: [
-			'No, cancel it!',
-			'Yes, I am sure!'
-		],
-		dangerMode: true,
-	}).then(function(isConfirm) {
-		return !!(isConfirm);
-	});
-}
-
-function reset(form) {
-    $(form)
-}
+const confirm = function (msg) {
+    return swal({
+        title: "Are you sure?",
+        text: msg,
+        icon: "warning",
+        buttons: [
+            'No, cancel it!',
+            'Yes, I am sure!'
+        ],
+        dangerMode: true,
+    }).then(function(isConfirm) {
+        return !!(isConfirm);
+    });
+};
 
 /**
  *
@@ -210,6 +177,11 @@ async function livePreview(file, target) {
     reader.readAsDataURL(file);
 }
 
+/**
+ *
+ * @param selector
+ * @returns {Promise<void>}
+ */
 const fetchNeighbours = async (selector) => {
     await ajaxRequest('/all-neighborhoods', 'post', null, false).then(neighbours => {
         let data = [];
@@ -242,17 +214,12 @@ const fetchNeighbours = async (selector) => {
  * @param allowTime
  */
 const enableDatePicker = (selector, allowTime = true) => {
-    console.log(selector);
-    // Create start date
     var start = new Date(),
         prevDay,
         startHours = 9;
 
-    // 09:00 AM
     start.setHours(9);
     start.setMinutes(0);
-
-    // If today is Saturday or Sunday set 10:00 AM
     if ([6, 0].indexOf(start.getDay()) != -1) {
         start.setHours(10);
         startHours = 10
@@ -265,17 +232,10 @@ const enableDatePicker = (selector, allowTime = true) => {
         minHours: startHours,
         maxHours: 18,
         onSelect: function (fd, d, picker) {
-            // Do nothing if selection was cleared
             if (!d) return;
-
             var day = d.getDay();
-
-            // Trigger only if date is changed
             if (prevDay != undefined && prevDay == day) return;
             prevDay = day;
-
-            // If chosen day is Saturday or Sunday when set
-            // hour value for weekends, else restore defaults
             if (day == 6 || day == 0) {
                 picker.update({
                     minHours: 10,
@@ -290,3 +250,94 @@ const enableDatePicker = (selector, allowTime = true) => {
         }
     });
 };
+
+/**
+ *
+ * @returns {{serverSide: boolean, processing: boolean}}
+ */
+const dataTableSettings = function() {
+    return {
+        serverSide: true,
+        processing: true,
+    };
+};
+
+/**
+ *
+ * @param selector
+ * @param url
+ * @param column
+ * @param columnDef
+ * @param target
+ */
+const dataTables = function (selector, url, column = null, columnDef = null, target = null) {
+    let columns = column === null ? setBySelector(selector) : pushColumns(column);
+    let settings = dataTableSettings();
+    $(selector).DataTable({
+        serverSide: settings.serverSide,
+        processing: settings.processing,
+        "ajax": {
+            "url": url
+        },
+        "columns": columns,
+        columnDefs: columnDef
+    });
+};
+
+/**
+ *
+ * @param column
+ * @returns {[]}
+ */
+const pushColumns = function (column) {
+    let columns = [];
+    column.forEach(col => {
+        columns.push({ data: col });
+    });
+    return columns;
+};
+
+/**
+ *
+ * @param selector
+ * @returns {*[]}
+ */
+const setBySelector = function (selector) {
+    let columns = [];
+    $(selector).find('th').each((i, a) => {
+        if($(a).text() !== 'action') {
+            columns.push($(a).text().replace(/\s+/g, '_').toLowerCase());
+        }
+    });
+    return pushColumns(columns);
+};
+
+
+$(() => {
+
+	$('body').on('submit', '.ajax', async function(e) {
+		e.preventDefault();
+		let form    = $(this);
+		let id      = $(this).attr('id');
+		let url     = $(this).attr('action');
+		let type    = $(this).attr('method');
+		let data    = $(this).serialize();
+		let reset   = $(this).attr('reset');
+        let loading = $(this).attr('loading');
+        let content = $(this).attr('content');
+
+		if(!form.valid()) {
+			return;
+		}
+
+		let res = await ajaxRequest(url, type, data, (loading !== 'false'), form, content);
+
+		if(reset === 'true'){
+            $(form).trigger("reset");
+        }
+
+		if(res.status){
+			form.trigger(`form-success-${id}`, res.data);
+		}
+	});
+});

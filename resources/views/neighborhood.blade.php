@@ -10,8 +10,8 @@
     <div class="container-lg">
         <div class="sorting-listing">
             <div class="neighbor-autocomplete">
-                {!! Form::open(['url' => route('web.findNeighborhoodLists'), 'method' => 'get']) !!}
-                {!! Form::text('neighborhood', $data->neighborhood->name ?? null,
+                {!! Form::open(['url' => route('web.findListsByNeighborhood'), 'method' => 'get']) !!}
+                {!! Form::text('neighborhoods', $data->neighborhood->name ?? null,
                     [
                         'class' => 'input-style',
                         'placeholder' => 'Find Neighborhood'
@@ -26,7 +26,4 @@
     {{--Search Results--}}
     @include('sections.search_results')
 </section>
- <script>
-     fetchNeighbours($('input[name=neighborhood]'));
- </script>
 @endsection
