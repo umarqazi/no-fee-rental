@@ -1185,7 +1185,7 @@
 
 @media only screen and (max-width: 767px) {
     .neighborhood-search {
-        margin: 70px auto;
+        margin: 70px auto 30px;
     }
     .property-wrap .listing-wrapper .listing-row {
         display: block;
@@ -1817,6 +1817,10 @@ main {
     .neighbor-autocomplete {
         width: 60%;
     }
+    #check-availability .modal-body h3{
+    margin-top: 15px ;
+    font-size: 18px;
+}
 }
 
 @media (min-width: 576px) {

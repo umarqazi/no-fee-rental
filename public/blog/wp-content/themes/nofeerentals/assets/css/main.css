@@ -2310,8 +2310,8 @@
     @media only screen and (max-width: 1279px) {
         #signup_form .submit-clm .btn-default {
             position: inherit;
-            padding: 0px 0px;
-            width: 100%;
+            padding: 0px 100px;
+           
         }
         .header-bg .search-property .search-fld {
             flex: 0 0 46%;
@@ -2650,6 +2650,9 @@
     }
   
     @media only screen and (max-width: 991px) {
+        .calculator-container .calculator-wrapper .graph-clm p{
+            font-size: 14px;
+        }
         .menu-btn {
             font-size: 26px;
             display: inline-block !important;
@@ -3148,16 +3151,40 @@
     }
    
     @media (min-width: 576px) {
-        .modal-dialog {
+        #login .modal-dialog {
             margin: 0.75rem auto !important;
         }
-        .modal-dialog-centered {
+        #login .modal-dialog-centered {
+            min-height: calc(100% - (0.75rem * 2)) !important;
+        }
+        #signup .modal-dialog {
+            margin: 0.75rem auto !important;
+        }
+        #signup .modal-dialog-centered {
             min-height: calc(100% - (0.75rem * 2)) !important;
         }
     }
 
+    @media (max-width: 576px){
+        #signup_form .submit-clm .btn-default {
+            position: inherit;
+            padding: 0px 0px;
+           width: 100%;
+        }
+        .col-md-12.submit-clm{
+            padding: 0px;
+        }
+        .login-modal .btn-default{
+            width: 100%;
+            padding: 0px 0px;
+        }
+    }
+
       @media (max-width: 1024px){
-        .modal-dialog {
-        margin: 0.75rem 15px !important;
+        #login .modal-dialog {
+            margin: 0.75rem 15px !important;
+        }
+        #signup .modal-dialog {
+            margin: 0.75rem 15px !important;
         }
     }
