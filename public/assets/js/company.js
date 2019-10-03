@@ -48,10 +48,12 @@ $(() => {
         let res = await ajaxRequest(route, 'get');
         $('#add-company').modal('show');
         $('.share_list_popup ul').empty();
+        $('.modal-header h4').empty();
+        $('.modal-header h4').append(res[0]['company']['company'] +' Agent(s)');
         for(let i = 0 ; i < res.length ; i++)
         {
             count = i + 1 ;
-            $('.agents_list_popup ol').append('<strong><li>' + count +'- '+ res[i]['first_name'] +' '+res[i]['last_name'] +'</li></strong><br>');
+            $('.agents_list_popup ol').append('<li style="color: black ; ">' + count +'- '+ res[i]['first_name'] +' '+res[i]['last_name'] +'</li></b><br>');
 
         }
     });

@@ -465,7 +465,7 @@ class UserService {
      * @return mixed
      */
     public function associatedAgents($id) {
-        return $this->userRepo->find(['company_id' => $id])->get();
+        return $this->userRepo->find(['company_id' => $id])->withcompany()->get();
     }
 
     /**
