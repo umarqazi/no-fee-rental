@@ -2479,7 +2479,7 @@ cursor: pointer;
   font-size: 15px;
 }
 .search-bdr-top .btn-default:hover,
-.search-bdr-top .btn-default:active;
+.search-bdr-top .btn-default:active,
 .search-bdr-top .btn-default:focus{
   background-color: #223971;
   color: #fff;
@@ -2860,13 +2860,9 @@ border-color: #e17228;
     max-width: 80%;
 }
 }
-/*@media (max-width: 1260px){
-  .modal-dialog {
-    margin:.5rem !important;
-  }*/
-}
+
 @media (max-width: 991px) {
-    #appointmentModal .padding-leftt-0 {
+    #appointmentModal {
         padding-left: 15px;
     }
     #appointmentModal .modal-body a.btn {
@@ -2875,6 +2871,8 @@ border-color: #e17228;
     #appointmentModal .modal-body img {
         margin-bottom: 10px;
     }
+
+
     .neighborhood-search .search-result-wrapper .search-listing .sort-by-wrapper{
     padding-right:15px;
     margin-top: 15px;
@@ -2926,7 +2924,7 @@ border-color: #e17228;
   height: 18px;
 }
 #advance-search .search-input-wrap{
-  text-align: center; 
+  text-align: center;
 }
 }
 

@@ -18,8 +18,6 @@ class RealtyMXController extends Controller {
     private $report = [];
 
     /**
-
-    /**
      * RealtyMXController constructor.
      *
      * @param RealtyMXService $service
@@ -28,7 +26,7 @@ class RealtyMXController extends Controller {
 	    $this->service = $service;
     }
 
-    /**\
+    /**
      * @param $unique_id
      * @param $realty_id
      *

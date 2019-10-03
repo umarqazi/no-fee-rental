@@ -1,14 +1,14 @@
 Listing_web_id,URL,Reason_of_rejection
-KW_231593,none,"listing with this info already taken"
+KW_231593,http://localhost:8000/realty-mx/VKgPphU1rW/231593,none
 KW_231593,none,"listing with this info already taken"
 KW_178440,none,"only no fee listings should be imported"
 KW_231409,none,"only no fee listings should be imported"
 KW_231568,none,"only no fee listings should be imported"
-KW_230289,none,"listing with this info already taken"
+KW_230289,http://localhost:8000/realty-mx/kM9sjyOWXG/230289,none
 KW_231473,none,"only no fee listings should be imported"
 KW_231561,none,"only no fee listings should be imported"
-KW_231560,none,"listing with this info already taken"
-KW_231560,none,"listing with this info already taken"
+KW_231560,http://localhost:8000/realty-mx/SHr4EiXZDs/231560,none
+KW_231560,http://localhost:8000/realty-mx/8TmG5OLakU/231560,none
 KW_231456,none,"only no fee listings should be imported"
 KW_231457,none,"only no fee listings should be imported"
 KW_230782,none,"only no fee listings should be imported"
@@ -20,8 +20,8 @@ KW_230467,none,"only no fee listings should be imported"
 KW_181476,none,"only no fee listings should be imported"
 KW_231368,none,"only no fee listings should be imported"
 KW_231417,none,"only no fee listings should be imported"
-KW_231546,none,"listing with this info already taken"
-KW_231548,none,"listing with this info already taken"
+KW_231546,http://localhost:8000/realty-mx/Yd4JbNQS8R/231546,none
+KW_231548,http://localhost:8000/realty-mx/ySfiyafhOK/231548,none
 KW_231194,none,"only no fee listings should be imported"
 KW_230974,none,"only no fee listings should be imported"
 KW_231419,none,"only no fee listings should be imported"
@@ -29,12 +29,12 @@ KW_231421,none,"only no fee listings should be imported"
 KW_231485,none,"only no fee listings should be imported"
 KW_231497,none,"only no fee listings should be imported"
 KW_231544,none,"only no fee listings should be imported"
-KW_231466,none,"listing with this info already taken"
+KW_231466,http://localhost:8000/realty-mx/nYpBJVB6Ey/231466,none
 KW_231466,none,"listing with this info already taken"
 KW_231085,none,"only no fee listings should be imported"
 KW_231463,none,"only no fee listings should be imported"
-KW_230089,none,"listing with this info already taken"
-KW_230089,none,"listing with this info already taken"
+KW_230089,http://localhost:8000/realty-mx/Mb008adsC8/230089,none
+KW_230089,http://localhost:8000/realty-mx/KarDmCGjW2/230089,none
 KW_231021,none,"only no fee listings should be imported"
 KW_231509,none,"only no fee listings should be imported"
 KW_231532,none,"only no fee listings should be imported"
@@ -44,22 +44,22 @@ KW_231374,none,"only no fee listings should be imported"
 KW_231182,none,"only no fee listings should be imported"
 KW_231381,none,"only no fee listings should be imported"
 KW_228042,none,"only no fee listings should be imported"
-KW_231455,none,"listing with this info already taken"
+KW_231455,http://localhost:8000/realty-mx/LFCXjb6KQi/231455,none
 KW_231204,none,"only no fee listings should be imported"
 KW_231363,none,"only no fee listings should be imported"
 KW_231494,none,"only no fee listings should be imported"
 KW_229341,none,"only no fee listings should be imported"
 KW_230973,none,"only no fee listings should be imported"
 KW_231523,none,"only no fee listings should be imported"
-KW_230941,none,"listing with this info already taken"
-KW_231354,none,"listing with this info already taken"
+KW_230941,http://localhost:8000/realty-mx/sXuut21LR3/230941,none
+KW_231354,http://localhost:8000/realty-mx/KWuX0zA2Sh/231354,none
 KW_230976,none,"only no fee listings should be imported"
 KW_230316,none,"only no fee listings should be imported"
 KW_206851,none,"only no fee listings should be imported"
 KW_230293,none,"only no fee listings should be imported"
-KW_230252,none,"listing with this info already taken"
-KW_230252,none,"listing with this info already taken"
-KW_230588,none,"listing with this info already taken"
+KW_230252,http://localhost:8000/realty-mx/mz87MnycJ1/230252,none
+KW_230252,http://localhost:8000/realty-mx/ExxHKI0221/230252,none
+KW_230588,http://localhost:8000/realty-mx/FBlp69D8P5/230588,none
 KW_231507,none,"only no fee listings should be imported"
 KW_231495,none,"only no fee listings should be imported"
 KW_231510,none,"only no fee listings should be imported"
@@ -71,12 +71,12 @@ KW_230176,none,"only no fee listings should be imported"
 KW_231412,none,"only no fee listings should be imported"
 KW_231443,none,"only no fee listings should be imported"
 KW_231031,none,"only no fee listings should be imported"
-KW_231498,none,"listing with this info already taken"
+KW_231498,http://localhost:8000/realty-mx/SiJ7sFrkFa/231498,none
 KW_231422,none,"only no fee listings should be imported"
 KW_231458,none,"only no fee listings should be imported"
 KW_231173,none,"only no fee listings should be imported"
-KW_230179,none,"listing with this info already taken"
-KW_230179,none,"listing with this info already taken"
+KW_230179,http://localhost:8000/realty-mx/ruurPHuWg5/230179,none
+KW_230179,http://localhost:8000/realty-mx/UIgMYRPuWF/230179,none
 KW_231439,none,"only no fee listings should be imported"
 KW_231231,none,"only no fee listings should be imported"
 KW_231220,none,"only no fee listings should be imported"
@@ -96,31 +96,31 @@ KW_230910,none,"only no fee listings should be imported"
 KW_230913,none,"only no fee listings should be imported"
 KW_230507,none,"only no fee listings should be imported"
 KW_230528,none,"only no fee listings should be imported"
-KW_228861,none,"listing with this info already taken"
+KW_228861,http://localhost:8000/realty-mx/MOC3k4WvN6/228861,none
 KW_230905,none,"only no fee listings should be imported"
 KW_230579,none,"only no fee listings should be imported"
-KW_230514,none,"listing with this info already taken"
+KW_230514,http://localhost:8000/realty-mx/GKyAwAmttL/230514,none
 KW_230605,none,"only no fee listings should be imported"
 KW_230965,none,"only no fee listings should be imported"
 KW_230695,none,"only no fee listings should be imported"
 KW_231459,none,"only no fee listings should be imported"
-KW_231471,none,"listing with this info already taken"
-KW_231471,none,"listing with this info already taken"
+KW_231471,http://localhost:8000/realty-mx/otHNKVH2bp/231471,none
+KW_231471,http://localhost:8000/realty-mx/iJjTAQJWdI/231471,none
 KW_231039,none,"only no fee listings should be imported"
 KW_231376,none,"only no fee listings should be imported"
 KW_231223,none,"only no fee listings should be imported"
 KW_231232,none,"only no fee listings should be imported"
 KW_231449,none,"only no fee listings should be imported"
 KW_231081,none,"only no fee listings should be imported"
-KW_231429,none,"listing with this info already taken"
+KW_231429,http://localhost:8000/realty-mx/QnnHLJb89Y/231429,none
 KW_231441,none,"only no fee listings should be imported"
 KW_230903,none,"only no fee listings should be imported"
 KW_230915,none,"only no fee listings should be imported"
 KW_230907,none,"only no fee listings should be imported"
 KW_231442,none,"only no fee listings should be imported"
-KW_231454,none,"listing with this info already taken"
-KW_231454,none,"listing with this info already taken"
-KW_231453,none,"listing with this info already taken"
+KW_231454,http://localhost:8000/realty-mx/zjjfG4JZRY/231454,none
+KW_231454,http://localhost:8000/realty-mx/okegzKd3RV/231454,none
+KW_231453,http://localhost:8000/realty-mx/b2A8WYYphy/231453,none
 KW_231447,none,"only no fee listings should be imported"
 KW_230181,none,"only no fee listings should be imported"
 KW_231331,none,"only no fee listings should be imported"
@@ -133,14 +133,14 @@ KW_231330,none,"only no fee listings should be imported"
 KW_231430,none,"only no fee listings should be imported"
 KW_231431,none,"only no fee listings should be imported"
 KW_230702,none,"only no fee listings should be imported"
-KW_223840,none,"listing with this info already taken"
-KW_223840,none,"listing with this info already taken"
+KW_223840,http://localhost:8000/realty-mx/ezRqt3j8uu/223840,none
+KW_223840,http://localhost:8000/realty-mx/B1mdk04zcG/223840,none
 KW_231420,none,"only no fee listings should be imported"
 KW_207074,none,"only no fee listings should be imported"
 KW_231398,none,"only no fee listings should be imported"
 KW_231406,none,"only no fee listings should be imported"
 KW_231024,none,"only no fee listings should be imported"
-KW_231181,none,"listing with this info already taken"
+KW_231181,http://localhost:8000/realty-mx/mWaj00QRNc/231181,none
 KW_231205,none,"only no fee listings should be imported"
 KW_231396,none,"only no fee listings should be imported"
 KW_231395,none,"only no fee listings should be imported"
@@ -149,21 +149,21 @@ KW_231358,none,"only no fee listings should be imported"
 KW_231373,none,"only no fee listings should be imported"
 KW_230949,none,"only no fee listings should be imported"
 KW_231091,none,"only no fee listings should be imported"
-KW_229834,none,"listing with this info already taken"
-KW_227992,none,"listing with this info already taken"
+KW_229834,http://localhost:8000/realty-mx/Thv9MCdtaw/229834,none
+KW_227992,http://localhost:8000/realty-mx/qhZhoepqfO/227992,none
 KW_230657,none,"only no fee listings should be imported"
 KW_229515,none,"only no fee listings should be imported"
-KW_231180,none,"listing with this info already taken"
+KW_231180,http://localhost:8000/realty-mx/pLmWEJNb3l/231180,none
 KW_231339,none,"only no fee listings should be imported"
 KW_230295,none,"only no fee listings should be imported"
 KW_231121,none,"only no fee listings should be imported"
 KW_230840,none,"only no fee listings should be imported"
-KW_230096,none,"listing with this info already taken"
+KW_230096,http://localhost:8000/realty-mx/4B5LXKOEko/230096,none
 KW_231208,none,"only no fee listings should be imported"
 KW_231209,none,"only no fee listings should be imported"
 KW_229106,none,"only no fee listings should be imported"
-KW_231187,none,"listing with this info already taken"
-KW_231187,none,"listing with this info already taken"
+KW_231187,http://localhost:8000/realty-mx/9pUoMC6eYk/231187,none
+KW_231187,http://localhost:8000/realty-mx/RpSsox8YX7/231187,none
 KW_230105,none,"only no fee listings should be imported"
 KW_230547,none,"only no fee listings should be imported"
 KW_230023,none,"only no fee listings should be imported"
@@ -172,18 +172,18 @@ KW_227618,none,"only no fee listings should be imported"
 KW_230900,none,"only no fee listings should be imported"
 KW_230658,none,"only no fee listings should be imported"
 KW_231086,none,"only no fee listings should be imported"
-KW_227036,none,"listing with this info already taken"
+KW_227036,http://localhost:8000/realty-mx/Q6aTZNsRGC/227036,none
 KW_230604,none,"only no fee listings should be imported"
-KW_230158,none,"listing with this info already taken"
+KW_230158,http://localhost:8000/realty-mx/BeJNgu8Mpw/230158,none
 KW_230975,none,"only no fee listings should be imported"
-KW_230937,none,"listing with this info already taken"
-KW_230937,none,"listing with this info already taken"
-KW_230937,none,"listing with this info already taken"
-KW_230665,none,"listing with this info already taken"
-KW_230760,none,"listing with this info already taken"
-KW_230761,none,"listing with this info already taken"
-KW_230815,none,"listing with this info already taken"
-KW_230762,none,"listing with this info already taken"
+KW_230937,http://localhost:8000/realty-mx/GhnpcXhJEG/230937,none
+KW_230937,http://localhost:8000/realty-mx/gBxCUiOaGi/230937,none
+KW_230937,http://localhost:8000/realty-mx/rBYoVi1gJ8/230937,none
+KW_230665,http://localhost:8000/realty-mx/YZtsL2OfrI/230665,none
+KW_230760,http://localhost:8000/realty-mx/nEDvYIkqRo/230760,none
+KW_230761,http://localhost:8000/realty-mx/6nnlzv8K5R/230761,none
+KW_230815,http://localhost:8000/realty-mx/RZEaToc4wi/230815,none
+KW_230762,http://localhost:8000/realty-mx/KttgcquV6d/230762,none
 KW_230820,none,"only no fee listings should be imported"
 KW_228298,none,"only no fee listings should be imported"
 KW_230785,none,"only no fee listings should be imported"
@@ -191,42 +191,42 @@ KW_230786,none,"only no fee listings should be imported"
 KW_230787,none,"only no fee listings should be imported"
 KW_230532,none,"only no fee listings should be imported"
 KW_230652,none,"only no fee listings should be imported"
-KW_230306,none,"listing with this info already taken"
+KW_230306,http://localhost:8000/realty-mx/5nLJEUCKmb/230306,none
 KW_230582,none,"only no fee listings should be imported"
 KW_230757,none,"only no fee listings should be imported"
-KW_230596,none,"listing with this info already taken"
+KW_230596,http://localhost:8000/realty-mx/DXCy7pjxwC/230596,none
 KW_229587,none,"only no fee listings should be imported"
-KW_229748,none,"listing with this info already taken"
+KW_229748,http://localhost:8000/realty-mx/ko6zHl2HZJ/229748,none
 KW_222446,none,"only no fee listings should be imported"
 KW_229992,none,"only no fee listings should be imported"
 KW_230358,none,"only no fee listings should be imported"
 KW_230466,none,"only no fee listings should be imported"
-KW_230231,none,"listing with this info already taken"
+KW_230231,http://localhost:8000/realty-mx/gBiTzqPlpq/230231,none
 KW_230327,none,"only no fee listings should be imported"
 KW_230250,none,"only no fee listings should be imported"
 KW_230243,none,"only no fee listings should be imported"
 KW_227089,none,"only no fee listings should be imported"
 KW_230156,none,"only no fee listings should be imported"
-KW_227480,none,"listing with this info already taken"
-KW_230086,none,"listing with this info already taken"
-KW_230086,none,"listing with this info already taken"
+KW_227480,http://localhost:8000/realty-mx/YkeDb839ZE/227480,none
+KW_230086,http://localhost:8000/realty-mx/c62cKGDy8C/230086,none
+KW_230086,http://localhost:8000/realty-mx/qSy7Z25MiR/230086,none
 KW_226908,none,"only no fee listings should be imported"
 KW_226909,none,"only no fee listings should be imported"
+KW_230053,http://localhost:8000/realty-mx/3TvjldnpuD/230053,none
 KW_230053,none,"listing with this info already taken"
-KW_230053,none,"listing with this info already taken"
+KW_230057,http://localhost:8000/realty-mx/V3nX4wVYWK/230057,none
 KW_230057,none,"listing with this info already taken"
-KW_230057,none,"listing with this info already taken"
-KW_230059,none,"listing with this info already taken"
+KW_230059,http://localhost:8000/realty-mx/WKjHvKgV6f/230059,none
 KW_230059,none,"listing with this info already taken"
 KW_229842,none,"only no fee listings should be imported"
+KW_229999,http://localhost:8000/realty-mx/zcyN9geI95/229999,none
 KW_229999,none,"listing with this info already taken"
-KW_229999,none,"listing with this info already taken"
-KW_229998,none,"listing with this info already taken"
-KW_229998,none,"listing with this info already taken"
+KW_229998,http://localhost:8000/realty-mx/RT053YvYLq/229998,none
+KW_229998,http://localhost:8000/realty-mx/wT3FbI3Dvo/229998,none
+KW_229993,http://localhost:8000/realty-mx/h5MR4qYC5H/229993,none
 KW_229993,none,"listing with this info already taken"
-KW_229993,none,"listing with this info already taken"
-KW_229560,none,"listing with this info already taken"
-KW_229560,none,"listing with this info already taken"
+KW_229560,http://localhost:8000/realty-mx/jVPwRfvBG1/229560,none
+KW_229560,http://localhost:8000/realty-mx/h8OrXg7qDi/229560,none
 KW_229109,none,"only no fee listings should be imported"
 KW_222657,none,"only no fee listings should be imported"
 KW_228958,none,"only no fee listings should be imported"
