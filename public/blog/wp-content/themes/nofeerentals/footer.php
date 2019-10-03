@@ -147,9 +147,8 @@
                 <img src="<?php bloginfo('template_url')?>/assets/images/modal-close-icon.png" alt="" class="close-modal close-signup-modal" data-dismiss="modal">
                 <div class="logo-info-wrapper">
                     <img src="<?php echo get_template_directory_uri(); ?>/assets/images/modal-logo.png" alt="" class="logo">
-                    
                     <ul class="create-client-listing">
-                        <h3>join us</h3>
+			<h3>join us</h3>
                         <li>Explore Various Options</li>
                         <li>Mark Listing as Favourite</li>
                         <li>Save Your Researches</li>

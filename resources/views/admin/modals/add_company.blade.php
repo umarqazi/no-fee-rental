@@ -12,9 +12,9 @@
             <!-- Modal body -->
             <div class="modal-body">
                 <p class="white text-center"></p>
-                <div class="share_list_popup">
-                    <ul>
-                    </ul>
+                <div class="agents_list_popup">
+                    <ol>
+                    </ol>
                 </div>
             </div>
         </div>
