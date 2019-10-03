@@ -12,20 +12,15 @@ class NeighborhoodController extends Controller {
     /**
      * @var NeighborhoodService
      */
-    private $service;
-
-    /**
-     * @var int
-     */
-    private $paginate = 20;
+    private $neighborhoodService;
 
     /**
      * NeighborhoodController constructor.
      *
-     * @param NeighborhoodService $service
+     * @param NeighborhoodService $neighborhoodService
      */
-    public function __construct(NeighborhoodService $service) {
-        $this->service = $service;
+    public function __construct(NeighborhoodService $neighborhoodService) {
+        $this->neighborhoodService = $neighborhoodService;
     }
 
     /**
@@ -41,7 +36,7 @@ class NeighborhoodController extends Controller {
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
     public function create(Request $request) {
-        $neighborhood = $this->service->create($request);
+        $neighborhood = $this->neighborhoodService->create($request);
         return sendResponse($request, $neighborhood, 'Neighborhood has been added');
     }
 
@@ -52,7 +47,7 @@ class NeighborhoodController extends Controller {
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
     public function edit(Request $request, $id) {
-        $neighborhood = $this->service->edit($id);
+        $neighborhood = $this->neighborhoodService->edit($id);
         return sendResponse($request, $neighborhood, null);
     }
 
@@ -63,7 +58,7 @@ class NeighborhoodController extends Controller {
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
     public function update($id, Request $request) {
-        $res = $this->service->update($id, $request);
+        $res = $this->neighborhoodService->update($id, $request);
         return sendResponse($request, $res, 'Neighborhood has been updated.', null);
     }
 
@@ -74,7 +69,7 @@ class NeighborhoodController extends Controller {
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
     public function delete(Request $request, $id) {
-        $user = $this->service->delete($id);
+        $user = $this->neighborhoodService->delete($id);
         return sendResponse($request, $user, 'Neghborhoood has been deleted.');
     }
 
@@ -83,7 +78,7 @@ class NeighborhoodController extends Controller {
      * @throws \Exception
      */
     public function get() {
-        return dataTable($this->service->all());
+        return dataTable($this->neighborhoodService->get());
     }
 
 }

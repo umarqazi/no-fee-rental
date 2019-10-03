@@ -74,16 +74,7 @@
 
 
 <?php wp_footer(); ?>
-<script type="text/javascript">
-    function togglefooterlink() {
-        if (window.matchMedia('(max-width: 1279px)').matches) {
-            $(".collapseabe-link").click(function(){
-                $(this).parent().find('.collapse-menu').slideToggle();
-            });
-        }
-    }
-    togglefooterlink();
-</script>
+
 <!-- Login Modal -->
     <div class="modal fade login-modal" id="login">
         <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
@@ -157,10 +148,15 @@
                 <div class="logo-info-wrapper">
                     <img src="<?php echo get_template_directory_uri(); ?>/assets/images/modal-logo.png" alt="" class="logo">
                     <h3>Create Account</h3>
-                    <ul>
-                        <li>Save your searches</li>
-                        <li>Save your favorite listings</li>
-                        <li>Get email notifications for new listings in neighborhoods that you like Access to showing on demand</li>
+                    <ul class="create-client-listing">
+                        <li>Explore Various Options</li>
+                        <li>Mark Listing as Favourite</li>
+                        <li>Save Your Researches</li>
+                        <li>Get Notified When we find a home for you</li>
+                    </ul>
+                    <ul class="create-agent-listing">
+                        <li>Publish your listing</li>
+                        <li>Syndicate listing from Various marketplaces</li>
                     </ul>
                 </div>
 
@@ -209,7 +205,7 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <input class="input-style agnet-input" id="email" placeholder="Email" name="email" type="text">
-                                    <p class="finding-home-text">If you would like to syndicate listing into no fee rentals nyc, please use tha same email address that you use for your RealtyMX, Nestio or OLR account.</p>
+                                    <p class="finding-home-text">If you would like to syndicate listing into no fee rentals nyc, please use tha same email address that you use for your RealtyMX..</p>
                                 </div>
                             </div>
 
@@ -232,7 +228,7 @@
                             </div>
                         </div>
                     
-                    <div class="col-md-12">
+                    <div class="col-md-12 submit-clm">
                         <div class="text-center mt-3 mb-4">
                             <input class="btn-default" type="submit" value="Signup">
                         </div>
@@ -259,7 +255,6 @@
           $(".mobile-menu").slideUp();
         });
 
-        
       });
 
     </script>

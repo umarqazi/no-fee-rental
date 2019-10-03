@@ -65,10 +65,10 @@
                       );
                     }
                   ?>
-                                <div class="actions-btns">
-                                    <button type="button" class="signup-btn signup-modal-btn" data-toggle="modal" data-target="#signup">Signup</button>
-                                    <button type="button" class="signup-btn login-btn signin-modal-btn" data-toggle="modal" data-target="#login">Login</button>
-                                </div>
+                          <div class="actions-btns">
+                              <button type="button" class="signup-btn signup-modal-btn" data-toggle="modal" data-target="#login">Login</button>
+                              <button type="button" class="signup-btn login-btn signin-modal-btn" data-toggle="modal" data-target="#signup"> Signup</button>
+                          </div>
                         </div>
 
                     </div>
@@ -114,17 +114,6 @@
                     <script src="http://no-fee-rental.teamtechverx.com/assets/js/signup.js"></script>
 
                     <script src="http://no-fee-rental.teamtechverx.com/assets/js/login.js"></script>
-                    <script type="text/javascript">
-                        function togglefooterlink() {
-                            if (window.matchMedia('(max-width: 1279px)').matches) {
-                                $(".collapseabe-link").click(function() {
-                                    $(this).parent().find('.collapse-menu').slideToggle();
-                                });
-                            }
-                        }
-                        togglefooterlink();
-                    </script>
-
                     </div>
 
         </header>
