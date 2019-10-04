@@ -5,13 +5,12 @@
 
             <!-- Modal Header -->
             <div class="modal-header">
-                <h4>Associated Agent(s)</h4>
+                <h4 class="company-name" ></h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
 
             <!-- Modal body -->
             <div class="modal-body">
-                <p class="white text-center"></p>
                 <div class="agents_list_popup">
                     <ol>
                     </ol>

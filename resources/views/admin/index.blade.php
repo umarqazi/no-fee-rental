@@ -4,7 +4,7 @@
     <div class="wrapper">
         <div class="heading-wrapper">
             <h1>User Accounts</h1>
-            <a href="#" class="btn-default ml-auto" data-toggle="modal" data-target="#invite-user"><i class="fa fa-share"></i> Send Invites</a>
+            {{--<a href="#" class="btn-default ml-auto" data-toggle="modal" data-target="#invite-user"><i class="fa fa-share"></i> Send Invites</a>--}}
             <a href="#" class="btn-default ml-3" data-toggle="modal" id="add-user" data-target="#add-member"><i class="fa fa-plus"></i> Add Users</a>
         </div>
         <div class="block listing-container manage-accounts">
@@ -62,7 +62,7 @@
                                 <thead>
                                 <tr>
                                     <th>Serial Number</th>
-                                    <th>Name</th>
+                                    <th>Business Name</th>
                                     <th>View Associated Agent</th>
                                 </tr>
                                 </thead>

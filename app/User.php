@@ -131,4 +131,13 @@ class User extends Authenticatable implements CanResetPassword {
     public function scopeWithNeighbors($query) {
 	    return $query->with('neighborExpertese');
     }
+
+    /**
+     * @param $query
+     *
+     * @return mixed
+     */
+    public function scopeWithCompany($query) {
+        return $query->with('company');
+    }
 }
