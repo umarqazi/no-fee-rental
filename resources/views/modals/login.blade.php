@@ -5,11 +5,10 @@
             <img src="assets/images/modal-close-icon.png" alt="" class="close-modal close-signup-modal" data-dismiss="modal" />
             <div class="logo-info-wrapper">
                 <img src="assets/images/modal-logo.png" alt="" class="logo" />
-                <h3>Login</h3>
                 <ul>
-                    <li>Save your searches</li>
-                    <li>Save your favorite listings</li>
-                    <li>Get email notifications for new listings in neighborhoods that you like Access to showing on demand</li>
+                    <li>loremp ipsum lorem ipsum</li>
+                    <li>loremp ipsum lorem ipsum</li>
+                    <li>loremp ipsum lorem ipsum</li>
                 </ul>
             </div>
             <div class="login-form-wrapper">

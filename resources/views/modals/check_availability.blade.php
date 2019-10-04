@@ -1,5 +1,5 @@
-<div class="modal" id="check-availability">
-    <div class="modal-dialog">
+<div class="modal fade" id="check-availability">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             {{-- Modal body --}}
             <div class="modal-body">

@@ -2,7 +2,8 @@
     <div class="search-result-wrapper">
         <div class="search-listing">
             <div class="row">
-                <div class="search-bdr-top col-lg-12">
+                <div class="col-lg-12 listing-right-padd">
+                    <div class="search-bdr-top">
                     <div class="mobile-view-dropdown">
                         <i class="fa fa-bars"></i> Filters
                     </div>
@@ -101,6 +102,7 @@
                             </div>
                         </div>
                     </div>
+                </div>
                 </div>
             </div>
             {!! listingView($data->listings) !!}

@@ -491,8 +491,8 @@ h3 {
 .header-wrapper .header-container .header-right-wrapper .recent-search-dropdown .dropDown {
     position: absolute;
     left: 0;
-    background: rgba(0, 0, 0, 0.79);
-    top: 88px;
+    background-color: #fff;
+    top: 70px;
     -webkit-transition: all ease 0.4s;
     transition: all ease 0.4s;
     visibility: hidden;
@@ -501,18 +501,37 @@ h3 {
     line-height: normal;
     z-index: 3;
     width: 300px;
+    padding: 5px 5px;
+    -webkit-box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.33);
+    -moz-box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.33);
+    box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.33);
+}
+.header-wrapper .header-container .header-right-wrapper .recent-search-dropdown .dropDown ul{
+    line-height: 17px;
+}
+.header-wrapper .header-container .header-right-wrapper .recent-search-dropdown .dropDown ul li{
+    display: inline;
 }
 
-.header-wrapper .header-container .header-right-wrapper .recent-search-dropdown .dropDown > a {
-    display: flex;
-    padding: 10px 10px;
-    color: #fff;
-    font-size: 16px;
+.header-wrapper .header-container .header-right-wrapper .recent-search-dropdown .dropDown ul li a {
+    display: inline;
+    padding: 0px 0px;
+    color: #000;
+    font-size: 13px;
     width: 100%;
     align-items: center;
 }
+.header-wrapper .header-container .header-right-wrapper .recent-search-dropdown .dropDown .ul-border-top{
+    border-top: 1px solid #ddd; 
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.header-wrapper .header-container .header-right-wrapper .recent-search-dropdown .dropDown .ul-border-top li{
+    position: relative;
+    top: 5px;
+}
 
-.header-wrapper .header-container .header-right-wrapper .recent-search-dropdown .dropDown > a:hover {
+.header-wrapper .header-container .header-right-wrapper .recent-search-dropdown .dropDown ul li a:hover {
     color: #f36f21;
 }
 
@@ -703,7 +722,9 @@ h3 {
     padding: 0px 22px;
 }
 
-.need-help-container .wrapper .btn-default:hover {
+.need-help-container .wrapper .btn-default:hover,
+.need-help-container .wrapper .btn-default:active,
+.need-help-container .wrapper .btn-default:focus {
     background: #fff;
     color: #f36f21;
 }
@@ -750,6 +771,7 @@ h3 {
     color: #fff;
     text-transform: uppercase;
     margin-bottom: 20px;
+    font-weight: 600;
 }
 
 .login-modal .modal-dialog .logo-info-wrapper ul {
@@ -769,7 +791,7 @@ h3 {
 }
 
 @media (min-width: 576px){
-    .modal-dialog-centered {
+    .login .modal-dialog-centered {
         min-height: calc(100% - (0.75rem * 2)) !important;
     }
 }
@@ -1279,7 +1301,9 @@ footer .copyright .social-icons li {
 footer .copyright .social-icons li a:hover {
     opacity: 0.7;
 }
-
+.lSSlideWrapper .lSPrev, .lSSlideWrapper .lSNext{
+    z-index: 9;
+}
 #advance-search .bdr-top-btn {
     border-top: 1px solid #cecaca;
     padding-top: 20px;
@@ -1292,13 +1316,12 @@ footer .copyright .social-icons li a:hover {
     font-weight: 700;
 }
 
-
-/*#advance-search .slider-wrapper {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}*/
-
+#advance-search .modal-body .form-group label{
+    color: #223871;
+}
+#advance-search .modal-body .form-group h3{
+    margin-bottom: 15px;
+}
 #advance-search .slider-wrapper .input-style {
     width: 125px;
     -webkit-appearance: none;
@@ -3340,6 +3363,9 @@ footer .copyright .social-icons li a:hover {
     text-transform: initial;
     margin-right: 5px;
 }
+.search-listing .row .listing-right-padd {
+    padding: 0;
+}
 
 .search-bdr-top .btn-default {
     background: #223971;
@@ -3893,14 +3919,26 @@ footer .copyright .social-icons li a:hover {
 
 @media (min-width: 576px){
 
-    .modal-dialog{
+   #login .modal-dialog {
         margin: 0.75rem auto !important;
+    }
+    #login .modal-dialog-centered {
+        min-height: calc(100% - (0.75rem * 2)) !important;
+    }
+    #signup .modal-dialog {
+        margin: 0.75rem auto !important;
+    }
+    #signup .modal-dialog-centered {
+        min-height: calc(100% - (0.75rem * 2)) !important;
     }
 }
 
 @media (max-width: 1024px){
-    .modal-dialog{
-     margin: 0.75rem 15px !important;
+    #login .modal-dialog {
+        margin: 0.75rem 15px !important;
+    }
+    #signup .modal-dialog {
+        margin: 0.75rem 15px !important;
     }
 }
 
@@ -3979,7 +4017,8 @@ footer .copyright .social-icons li a:hover {
     }
 
     .search-result-wrapper .search-bdr-top {
-        padding: 12px 15px;
+        padding: 15px 15px;
+        position: relative;
     }
 
     .contact-info .btn-default {
@@ -4054,6 +4093,7 @@ footer .copyright .social-icons li a:hover {
 #advance-search .search-input-wrap{
   text-align: center;
 }
+
 }
 @media (min-width: 576px) {
     #appointmentModal .modal-dialog {
@@ -4082,6 +4122,9 @@ footer .copyright .social-icons li a:hover {
     }
 }
 @media only screen and (max-width: 1279px) {
+    .header-wrapper {
+        background: rgba(255, 255, 255, 0.71);
+    }
     .header-bg .search-property .search-fld {
         flex: 0 0 46%;
     }
@@ -4201,6 +4244,10 @@ footer .copyright .social-icons li a:hover {
         left: 0;
         top: 0;
     }
+    footer .footer-wrapper .newsletter .newsletter-form .btn-default:active,
+    footer .footer-wrapper .newsletter .newsletter-form .btn-default:focus{
+        background-color: #061c50;
+    }
 
     footer .footer-wrapper .newsletter .newsletter-form .fld {
         flex: auto;
@@ -4267,8 +4314,8 @@ footer .copyright .social-icons li a:hover {
     }
     #signup_form .submit-clm .btn-default{
         position: inherit;
-        padding: 0px 0px;
-        width: 100%;    
+        padding: 0px 100px;
+            
     }   
 }
 @media only screen and (max-width: 991px) {
@@ -4668,6 +4715,9 @@ footer .copyright .social-icons li a:hover {
 @media only screen and (min-width: 768px) and (max-width: 991px) {
     #advance-search .slider-wrapper .input-style {
         width: 105px;
+    }
+    .neighborhood-search .search-result-wrapper .search-listing .featured-properties .property-listing{
+        margin: 15px -15px 0px;
     }
 }
 @media only screen and (max-width: 767px) {
@@ -5244,6 +5294,16 @@ footer .copyright .social-icons li a:hover {
     }
     .listing-aminities-sec .container-lg .row .col-sm-3{
         margin-bottom: 10px;
+    }
+    #signup_form .submit-clm .btn-default{
+        position: inherit;
+        padding: 0px 0px;
+        width: 100%;
+    }
+
+    .login-modal .btn-default{
+        width: 100%;
+        padding: 0px 0px;
     }
 }
 

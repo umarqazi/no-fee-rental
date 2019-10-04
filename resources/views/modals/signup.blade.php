@@ -5,14 +5,16 @@
             <img src="assets/images/modal-close-icon.png" alt="" class="close-modal close-signup-modal" data-dismiss="modal" />
             <div class="logo-info-wrapper">
                 <img src="assets/images/modal-logo.png" alt="" class="logo" />
-                <h3>Create Account</h3>
+                
                 <ul class="create-client-listing">
+                    <h3>LET'S STARTED</h3>
                     <li>Explore Various Options</li>
                     <li>Mark Listing as Favourite</li>
                     <li>Save Your Researches</li>
                     <li>Get Notified When we find a home for you</li>
                 </ul>
                 <ul class="create-agent-listing">
+                    <h3>JOIN US </h3>
                     <li>Publish your listing</li>
                     <li>Syndicate listing from Various marketplaces</li>
                 </ul>
@@ -65,7 +67,7 @@
                                     </span> @endif
                         </div>
                     </div>
-                    <div class="col-sm-12">
+                    <div class="col-sm-6">
                         <div class="form-group">
                             {!! Form::text('email', null, ['class'=>'input-style agnet-input', 'id' => 'email', 'placeholder'=>'Email']) !!} @if ($errors->has('email'))
                             <span class="invalid-feedback" role="alert">

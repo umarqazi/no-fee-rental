@@ -12,7 +12,7 @@
                 <div class="collapse-menu">
                     <a href="http://no-fee-rental.teamtechverx.com/blog/?page_id=49" class="ft-links">Renters Guide</a>
                     <a href="http://no-fee-rental.teamtechverx.com//blog/?page_id=68" class="ft-links">Help and Answers</a>
-                    <a href="http://no-fee-rental.teamtechverx.com/blog/?page_id=198" class="ft-links">Rent Calculator</a>
+                    <a href="http://no-fee-rental.teamtechverx.com/blog/?page_id=233" class="ft-links">Rent Calculator</a>
                     <a href="http://no-fee-rental.teamtechverx.com/blog" class="ft-links">Blog</a>
                 </div>
             </li>
