@@ -85,9 +85,9 @@
                     <img src="<?php echo get_template_directory_uri(); ?>/assets/images/modal-logo.png" alt="" class="logo">
                     <h3>Login</h3>
                     <ul>
-                        <li>Save your searches</li>
-                        <li>Save your favorite listings</li>
-                        <li>Get email notifications for new listings in neighborhoods that you like Access to showing on demand</li>
+                        <li>loremp ipsum lorem ipsum</li>
+                        <li>loremp ipsum lorem ipsum</li>
+                        <li>loremp ipsum lorem ipsum</li>
                     </ul>
                 </div>
                 <div class="login-form-wrapper">
@@ -149,7 +149,7 @@
                     <img src="<?php echo get_template_directory_uri(); ?>/assets/images/modal-logo.png" alt="" class="logo">
                     
                     <ul class="create-client-listing">
-                        <h3>Let's started</h3>
+                        <h3>Get's started</h3>
                         <li>Explore Various Options</li>
                         <li>Mark Listing as Favourite</li>
                         <li>Save Your Researches</li>
@@ -204,18 +204,19 @@
                                     <input class="input-style agnet-input" placeholder="Last Name" name="last_name" type="text">
                                 </div>
                             </div>
-                            <div class="col-sm-12">
+                            <div class="col-sm-6">
                                 <div class="form-group">
                                     <input class="input-style agnet-input" id="email" placeholder="Email" name="email" type="text">
                                     <p class="finding-home-text">If you would like to syndicate listing into no fee rentals nyc, please use tha same email address that you use for your RealtyMX..</p>
                                 </div>
                             </div>
 
-                            <div class="col-sm-6 col-sm-12" id="phone_number">
+                            <div class="col-sm-6">
                                 <div class="form-group">
                                     <input class="input-style agnet-input" placeholder="Phone Number" name="phone_number" type="text">
                                 </div>
                             </div>
+
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <i class="fa fa-eye"></i>

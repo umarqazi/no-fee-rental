@@ -210,8 +210,8 @@ $(document).ready(function() {
     $('.close-signup-modal').click(function() {
         $('body').removeClass('signup-modal-scroll');
     });
-    $(document).on("click", function(e) {
-        if ($(e.target).is("#signup-btn") == false && $(e.target).parents('#signup').length == 0) {
+    $(document).on("click", function (e) {
+        if ($(e.target).is("#signup-btn")==false && $(e.target).parents('#signup').length==0 && $(e.target).parents('#login').length==0) {
             $("body").removeClass("signup-modal-scroll");
         }
     });

@@ -612,6 +612,7 @@
         color: #fff;
         text-transform: uppercase;
         margin-bottom: 20px;
+        font-weight: 600;
     }
     .login-modal .modal-dialog .logo-info-wrapper ul {
         margin-bottom: 30px;
