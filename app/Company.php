@@ -25,6 +25,6 @@ class Company extends Model {
      * @return mixed
      */
     public function scopeWithAgents($query) {
-        return $query->with('agents');
+        return $query->has('agents');
     }
 }

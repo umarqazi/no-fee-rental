@@ -1781,6 +1781,11 @@ main {
     padding-left: 0px;
 }
 
+.company-name {
+    color: black;
+    font-size: 15px;
+    font-weight: 700;
+}
 #check-availability .after-border {
     border-top: 1px solid #B7B7B7;
     margin-top: 15px;

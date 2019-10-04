@@ -11,10 +11,12 @@ $(() => {
         $(".neighborhood-search .search-result-wrapper .map-wrapper").toggleClass('full-map');
     });
 
+/*
     $(".mobile-view-dropdown").on('click', function () {
         $(this).find("i").toggleClass('fa-bars fa-times');
         $("#mobile-tabs-collapse").slideToggle();
     });
+*/
 
     $(".mobile-map-icon").on('click', function () {
         $(this).find("i").toggleClass('fa-map-marker-alt fa-times');
