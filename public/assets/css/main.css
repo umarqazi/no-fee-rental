@@ -1714,7 +1714,12 @@ footer .copyright .social-icons li a:hover {
 .contact-info .btn-default {
     padding: 0px 80px;
 }
-
+.contact-info .set-pass .btn-default {
+    padding: 0px 45px;
+}
+.contact-info .set-pass{
+    text-align: center;
+}
 .contact-info label {
     font-size: 16px;
     font-weight: 700;

@@ -14,7 +14,7 @@ $(() => {
     $body.on('click', '#updateUser', async function(e) {
         let id = $(this).attr('ref_id');
         let route = $(this).attr('route');
-        $('#add_user, #update_user').attr({'action': `/admin/update-user/${id}`, 'id': 'update_user'});
+        $('#add_user, #update_user').prop({'action': `/admin/update-user/${id}`, 'id': 'update_user','reset' : 'true' });
         $('label.error').remove();
         $('.error').removeClass('error');
         $('.modal-title').text('Update User');
@@ -62,7 +62,7 @@ $(() => {
         }
     });
 
-    let columns = ['id', 'first_name', 'email', 'phone_number'];
+    let columns = ['first_name', 'email', 'phone_number','license_number'];
     // +++++ Agents Table +++++ //
     let columnDefs = [{
             render: (data, type, row) => {

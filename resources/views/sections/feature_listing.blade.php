@@ -9,8 +9,13 @@
                 <a class="nav-link" data-toggle="pill" href="#tab2">Cheapest</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" data-toggle="pill" href="#tab3">Popular</a>
+            </li>
+
+            <li class="nav-item">
                 <a class="nav-link" data-toggle="pill" href="#tab3">Pet Policy</a>
             </li>
+
         </ul>
         <!-- Tab panes -->
         <div class="tab-content wow fadeInUp" data-wow-delay="0.2s">
