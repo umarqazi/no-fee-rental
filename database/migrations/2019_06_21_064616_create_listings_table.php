@@ -14,14 +14,14 @@ class CreateListingsTable extends Migration {
 		Schema::create('listings', function (Blueprint $table) {
 			$table->increments('id');
             $table->unsignedInteger('user_id')->nullable();
+            $table->string('unique_slug')->unique();
             $table->string('realty_id')->nullable();
-            $table->string('unique_client_id')->nullable();
+            $table->unsignedInteger('neighborhood_id')->nullable();
 			$table->string('name')->nullable();
             $table->string('email')->nullable();
 			$table->string('phone_number')->nullable();
 			$table->string('street_address')->nullable();
 			$table->string('display_address')->nullable();
-			$table->string('neighborhood')->nullable();
 			$table->string('thumbnail')->nullable();
 			$table->integer('baths')->nullable();
 			$table->integer('bedrooms')->nullable();
@@ -31,12 +31,14 @@ class CreateListingsTable extends Migration {
 			$table->text('description')->nullable();
 			$table->string('map_location')->nullable();
 			$table->string('realty_url')->nullable();
+			$table->enum('building_type', ['open', 'exclusive'])->default('open')->nullable();
 			$table->integer('is_featured')->default(0)->comment = "0-Non-Featured, 1-Featured, 2-Request-Featured";
             $table->integer('visibility')->default(2)->comment = "0-Inactive, 1-Active, 2-Pending";
             $table->string('availability')->nullable()->comment = "0-Not Available, 1-Available, 2-Immediately, 3-Date";
 			$table->timestamps();
 
-			$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onEdit('cascade');
+			$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+			$table->foreign('neighborhood_id')->references('id')->on('neighborhoods')->onDelete('cascade');
 		});
 	}
 

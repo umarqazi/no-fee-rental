@@ -14,7 +14,6 @@ class CreateCompaniesTable extends Migration {
 		Schema::create('companies', function (Blueprint $table) {
 			$table->increments('id');
 			$table->string('company');
-			$table->boolean('status')->comment = "0-Not Approved, 1-Approved";
 			$table->timestamps();
 		});
 	}

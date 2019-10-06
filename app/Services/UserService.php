@@ -19,6 +19,7 @@ use App\Repository\CompanyRepo;
 use App\Repository\MemberRepo;
 use App\Repository\AgentRepo;
 use App\Repository\UserRepo;
+use App\User;
 use Illuminate\Support\Facades\DB;
 
 class UserService {
@@ -26,42 +27,31 @@ class UserService {
     /**
      * @var UserRepo
      */
-    private $uRepo;
+    private $userRepo;
 
     /**
      * @var AgentRepo
      */
-    private $aRepo;
+    private $agentRepo;
 
     /**
      * @var MemberRepo
      */
-    private $mRepo;
+    private $memberRepo;
 
     /**
      * @var CompanyRepo
      */
-    private $cRepo;
-
-    /**
-     * @var AgentCompanyRepo
-     */
-    private $acRepo;
+    private $companyRepo;
 
     /**
      * UserService constructor.
-     *
-     * @param UserRepo $uRepo
-     * @param AgentRepo $aRepo
-     * @param MemberRepo $mRepo
-     * @param CompanyRepo $cRepo
      */
-    public function __construct(UserRepo $uRepo, AgentRepo $aRepo, MemberRepo $mRepo, CompanyRepo $cRepo , AgentCompanyRepo $acRepo) {
-        $this->uRepo = $uRepo;
-        $this->cRepo = $cRepo;
-        $this->aRepo = $aRepo;
-        $this->mRepo = $mRepo;
-        $this->acRepo = $acRepo;
+    public function __construct() {
+        $this->userRepo = new UserRepo();
+        $this->companyRepo = new CompanyRepo();
+        $this->agentRepo = new AgentRepo();
+        $this->memberRepo = new MemberRepo();
 
     }
 
@@ -111,7 +101,7 @@ class UserService {
      */
     public function create($request) {
         $user = $this->form($request);
-        $response = $this->uRepo->create($user->toArray());
+        $response = $this->userRepo->create($user->toArray());
         if (!empty($response)) {
             $email = [
                 'first_name' => $user->first_name,
@@ -119,7 +109,7 @@ class UserService {
                 'view'       => 'create-user',
                 'link'       => route('user.change_password', $user->remember_token),
             ];
-            mailService($user->email, toObject($email));
+            dispatchEmailQueue($email);
             return $response;
         }
         return false;
@@ -132,28 +122,28 @@ class UserService {
      */
     public function update($request) {
         $user = $this->form($request);
-        return $this->uRepo->update($user->id, $user->toArray());
+        return $this->userRepo->update($user->id, $user->toArray());
     }
 
     /**
      * @return mixed
      */
     public function agents() {
-        return $this->uRepo->agents()->get();
+        return $this->userRepo->agents()->get();
     }
 
     /**
      * @return mixed
      */
     public function renters() {
-        return $this->uRepo->renters()->get();
+        return $this->userRepo->renters()->get();
     }
 
     /**
      * @return mixed
      */
     public function companies() {
-        return $this->cRepo->companies()->withAgents()->get();
+        return $this->companyRepo->companies()->get();
     }
 
     /**
@@ -162,8 +152,8 @@ class UserService {
      * @return bool
      */
     public function isUniqueEmail($request) {
-        if (!$this->aRepo->isUniqueEmail($request->email)) {
-            if (!$this->uRepo->isUniqueEmail($request->email)) {
+        if (!$this->agentRepo->isUniqueEmail($request->email)) {
+            if (!$this->userRepo->isUniqueEmail($request->email)) {
                 return 'true';
             }
 
@@ -179,7 +169,7 @@ class UserService {
      * @return bool
      */
     public function isUniqueLicense($request) {
-        if (!$this->uRepo->isUniqueLicense($request->license_number)) {
+        if (!$this->userRepo->isUniqueLicense($request->license_number)) {
             return 'true';
         }
         return 'false';
@@ -190,7 +180,7 @@ class UserService {
      * @return mixed
      */
     public function edit($id) {
-        return $this->uRepo->edit($id)->first();
+        return $this->userRepo->edit($id)->first();
     }
 
     /**
@@ -199,7 +189,7 @@ class UserService {
      * @return bool
      */
     public function delete($id) {
-        return $this->uRepo->delete($id);
+        return $this->userRepo->delete($id);
     }
 
     /**
@@ -221,7 +211,7 @@ class UserService {
         if ($request->hasFile('profile_image')) {
             $user->profile = $this->updateProfileImage($user->profile, myId(), $request->old_profile ?? '');
         }
-        return $this->uRepo->update($user->id, $user->toArray());
+        return $this->userRepo->update($user->id, $user->toArray());
     }
 
     /**
@@ -245,11 +235,12 @@ class UserService {
         $email = [
             'view'    => 'agent-invitation',
             'from'    => mySelf()->email,
+            'to'      => $agent->email,
             'subject' => 'Invitation By ' . mySelf()->email,
             'link'    => route('agent.signup_form', $agent->token),
         ];
 
-        return mailService($agent->email, toObject($email));
+        return dispatchEmailQueue($email);
     }
 
     /**
@@ -261,11 +252,12 @@ class UserService {
         $email = [
             'view'    => 'member-invitation',
             'from'    => mySelf()->email,
+            'to'      => $agent->email,
             'subject' => 'Invitation By ' . mySelf()->email,
             'link'    => route('agent.acceptInvitation', $agent->token),
         ];
 
-        return mailService($agent->email, toObject($email));
+        return dispatchEmailQueue($email);
     }
 
     /**
@@ -285,20 +277,20 @@ class UserService {
             $agent->accept = 0 ;
         }
         if ($agent->fails()) {
-            if($InviteRes = $this->aRepo->find(['email' => $request->email])->first()) {
-                if($UserRes = $this->uRepo->find(['email' => $request->email])->first()) {
+            if($InviteRes = $this->agentRepo->find(['email' => $request->email])->first()) {
+                if($UserRes = $this->userRepo->find(['email' => $request->email])->first()) {
                     $this->memberMail($agent);
-                    $this->aRepo->update($InviteRes->id, ['token' => $agent->token]);
+                    $this->agentRepo->update($InviteRes->id, ['token' => $agent->token]);
                     return true ;
                 }
-                $this->aRepo->update($InviteRes->id, ['token' => $agent->token]);
+                $this->agentRepo->update($InviteRes->id, ['token' => $agent->token]);
                 $this->agentMail($agent);
                 return true;
             }
 
             return $agent->validate();
         }
-        $this->aRepo->invite($agent->toArray());
+        $this->agentRepo->invite($agent->toArray());
         $this->agentMail($agent);
         return true;
     }
@@ -314,7 +306,7 @@ class UserService {
         $form->password = $request->password;
         $form->password_confirmation = $request->password_confirmation;
         $form->validate();
-        return $this->uRepo->update($form->id, ['password' => bcrypt($form->password)]);
+        return $this->userRepo->update($form->id, ['password' => bcrypt($form->password)]);
     }
 
     /**
@@ -323,7 +315,7 @@ class UserService {
      * @return mixed
      */
     public function first($clause) {
-        return $this->uRepo->find($clause);
+        return $this->userRepo->find($clause);
     }
 
     /**
@@ -357,24 +349,14 @@ class UserService {
 
         DB::beginTransaction();
         $form->password = bcrypt($form->password);
-        $user = $this->uRepo->create($form->toArray());
+        $user = $this->userRepo->create($form->toArray());
         if ($user && $sendMail) {
             $cForm = new CompanyForm();
             $cForm->company = $request->company;
-            $cForm->status = DEACTIVE;
             if (!$cForm->fails()) {
-                $company = $this->cRepo->create($cForm->toArray());
-                $this->acRepo->create([
-                    'agent_id' => $user->id,
-                    'company_id' => $company->id,
-                ]);
-            } else {
-                $company = $this->cRepo->find(['company' => $request->company])->first();
-                $this->acRepo->create([
-                    'agent_id' => $user->id,
-                    'company_id' => $company->id,
-                ]);
+                $this->companyRepo->create($cForm->toArray());
             }
+
             $data = [
                 'view'       => 'signup',
                 'subject'    => 'Verify Email',
@@ -382,7 +364,7 @@ class UserService {
                 'link'       => route('user.confirmEmail', $user->remember_token),
 
             ];
-            mailService($user->email, toObject($data));
+            dispatchEmailQueue($data);
             DB::commit();
             return true;
         }
@@ -392,21 +374,12 @@ class UserService {
             $cForm->company = $request->company;
             $cForm->status = DEACTIVE;
             if (!$cForm->fails()) {
-                $company = $this->cRepo->create($cForm->toArray());
-                $this->acRepo->create([
-                    'agent_id' => $user->id,
-                    'company_id' => $company->id,
-                ]);
-            } else {
-                $company = $this->cRepo->find(['company' => $request->company])->first();
-                $this->acRepo->create([
-                    'agent_id' => $user->id,
-                    'company_id' => $company->id,
-                ]);
+                $this->companyRepo->create($cForm->toArray());
             }
-            $invitedBy = $this->aRepo->inviteBy($request->token);
+
+            $invitedBy = $this->agentRepo->inviteBy($request->token);
             if($invitedBy->user->user_type == AGENT) {
-                $this->mRepo->create([
+                $this->memberRepo->create([
                     'agent_id' => $invitedBy->invited_by,
                     'member_id' => $user->id
                 ]);
@@ -424,7 +397,7 @@ class UserService {
      * @return bool
      */
     public function validateEncodedToken($token) {
-        $record = $this->uRepo->find(['remember_token' => $token])->first();
+        $record = $this->userRepo->find(['remember_token' => $token])->first();
         return $record ? $record : false;
     }
 
@@ -436,7 +409,7 @@ class UserService {
     public function verifyEmail($token) {
         $res = $this->validateEncodedToken($token);
         if ($res) {
-            $this->uRepo->update($res->id, ['email_verified_at' => now()]);
+            $this->userRepo->update($res->id, ['email_verified_at' => now()]);
             return true;
         }
 
@@ -449,7 +422,7 @@ class UserService {
      * @return mixed
      */
     public function getAgentToken($token) {
-        return $this->aRepo->find(['token' => $token]);
+        return $this->agentRepo->find(['token' => $token]);
     }
 
     /**
@@ -458,8 +431,8 @@ class UserService {
      * @return bool
      */
     public function addMember($request) {
-        $UserRes = $this->uRepo->find(['email' => $request->email])->first() ;
-        $this->mRepo->create([
+        $UserRes = $this->userRepo->find(['email' => $request->email])->first() ;
+        $this->memberRepo->create([
             'agent_id' => mySelf()->id,
             'member_id' => $UserRes->id
         ]);
@@ -472,6 +445,6 @@ class UserService {
      * @return bool
      */
     public function associatedAgents($id) {
-        return $this->uRepo->agents()->withCompany($id)->get();
+        return $this->userRepo->agents()->withCompany($id)->get();
     }
 }

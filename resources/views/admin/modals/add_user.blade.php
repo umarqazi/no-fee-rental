@@ -44,12 +44,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label>Type </label>
-                            {!! Form::select('user_type', [
-                                        ''     => 'Select Type',
-                                        AGENT  => 'Agent',
-                                        OWNER  => 'Owner',
-                                        RENTER => 'Renter'
-                                       ], '', ['class' => 'input-style', 'id' => 'user_type']) !!}
+                            {!! Form::select('user_type', config('formfields.user.roles'), '', ['class' => 'input-style', 'id' => 'user_type']) !!}
                             {{ $errors->first('user_type') }}
                         </div>
                     </div>

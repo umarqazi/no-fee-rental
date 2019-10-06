@@ -57,4 +57,16 @@ interface IRepo {
 	 * @return mixed
 	 */
 	public function find($clause);
+
+    /**
+     * @param $id
+     *
+     * @return mixed
+     */
+	public function findById($id);
+
+    /**
+     * @return mixed
+     */
+	public function first();
 }

@@ -7,18 +7,17 @@ use App\Repository\BaseRepo;
 
 class CompanyRepo extends BaseRepo {
 
-	/**
-	 * AgentRepo constructor.
-	 */
+    /**
+     * CompanyRepo constructor.
+     */
 	public function __construct() {
 		parent::__construct(new Company);
 	}
 
-	/**
-	 * @return mixed
-	 */
+    /**
+     * @return mixed
+     */
 	public function companies() {
-		return $this->model->companies();
-	}
-
+	    return $this->model->withAgents();
+    }
 }

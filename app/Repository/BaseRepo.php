@@ -80,6 +80,15 @@ class BaseRepo implements IRepo {
 		return $this->model->where($clause);
 	}
 
+    /**
+     * @param $id
+     *
+     * @return mixed
+     */
+	public function findById($id) {
+	    return $this->model->where(['id' => $id]);
+    }
+
 	/**
 	 * @param $id
 	 * @param $data
@@ -113,7 +122,7 @@ class BaseRepo implements IRepo {
     /**
      * @return mixed
      */
-    public function getFirst() {
+    public function first() {
         return $this->model->first();
     }
 }

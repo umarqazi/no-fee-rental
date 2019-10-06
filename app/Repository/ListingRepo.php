@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Repository\Listing;
+namespace App\Repository;
 
 use App\Listing;
-use App\Repository\BaseRepo;
 
 class ListingRepo extends BaseRepo {
 

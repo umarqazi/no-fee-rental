@@ -17,14 +17,12 @@ class FavouriteService {
     /**
      * @var FavouriteRepo
      */
-    private $repo;
+    protected $repo;
 
     /**
      * FavouriteService constructor.
-     *
-     * @param FavouriteRepo $repo
      */
-    public function __construct(FavouriteRepo $repo) {
-        $this->repo = $repo;
+    public function __construct() {
+        $this->repo = new FavouriteRepo();
     }
 }

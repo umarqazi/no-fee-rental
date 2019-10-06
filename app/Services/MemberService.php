@@ -10,7 +10,6 @@
 namespace App\Services;
 
 use App\Repository\MemberRepo;
-use App\Repository\UserRepo;
 
 class MemberService extends UserService {
 
@@ -25,6 +24,7 @@ class MemberService extends UserService {
      * @param MemberRepo $repo
      */
     public function __construct(MemberRepo $repo) {
+        parent::__construct();
         $this->repo = $repo;
     }
 

@@ -16,7 +16,7 @@
                 <div class="item">
                     <div class="clearfix" style="max-width:100%;">
                         <ul id="image-gallery" class="gallery list-unstyled cS-hidden">
-                            @foreach($listing->listingImages as $images)
+                            @foreach($listing->images as $images)
                                 <li data-thumb="{{ asset($images->listing_image ?? DLI) }}" class="large-view">
                                     <a target="_blank" href="{{ asset($images->listing_image ??  DLI) }}">
                                         <img src="{{ asset($images->listing_image ?? DLI) }}" alt=""/>
@@ -30,7 +30,7 @@
             <div class="col-lg-6">
                 <div class="listing-info">
                     <div class="product-title">
-                        <p> {{ is_exclusive($listing->listingTypes) ? $listing->street_address.' - '.$listing->unit : $listing->display_address }} </p>
+                        <p> {{ is_exclusive($listing) }} </p>
                         <span>
                             <a href="javascript:void(0);"><img src="/assets/images/share-icon.png" alt="" /> </a>
                             <a href="javascript:void(0);" class="ml-2"><img src="/assets/images/fav-icon.png" alt="" /> </a>
@@ -136,7 +136,7 @@
         <div class="listing-aminities-sec">
             <h3>Amenities </h3>
             <div class="row">
-                @php $amenities = features($listing->listingTypes, true); @endphp
+                @dd($listing)
                 @foreach($amenities as $key => $amenity)
                     <div class="col-lg-3 col-sm-4 col-6">
                         <p> {{ $key }}</p>

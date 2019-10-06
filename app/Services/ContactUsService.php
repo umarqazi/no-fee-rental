@@ -15,7 +15,7 @@ class ContactUsService {
     /**
      * @var ContactUsRepo
      */
-	private $repo;
+	protected $repo;
 
     /**
      * ContactUsService constructor.
