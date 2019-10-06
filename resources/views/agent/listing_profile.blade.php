@@ -1,5 +1,7 @@
-@extends('layouts.app') @section('title', 'No Fee Rental | Dashboard') @section('content')
-<section class=" press-section wow fadeIn featured-properties neighborhood-search agent-listing-profile" data-wow-delay="0.2s"> 
+@extends('layouts.app')
+@section('title', 'No Fee Rental | Profile')
+@section('content')
+<section class=" press-section wow fadeIn featured-properties neighborhood-search agent-listing-profile" data-wow-delay="0.2s">
     <div class="container-lg">
     <div class="agent-profile-view">
         <div class="img-holder">
@@ -429,55 +431,55 @@
     <div class="item">
         <!-- <img src="/assest/images/check.png" alt="item-img"> -->
         <div class="item-first-img">
-            <img src="{{asset('assets/images/check.png')}}"/> 
+            <img src="{{asset('assets/images/check.png')}}"/>
         </div>
         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's .</p>
         <div class="item-profile-img">
-            <img src="{{asset('assets/images/account-img.jpg')}}"/> 
+            <img src="{{asset('assets/images/account-img.jpg')}}"/>
         </div>
         <strong>Allan Collins</strong>
     </div>
     <div class="item">
         <!-- <img src="/assest/images/check.png" alt="item-img"> -->
         <div class="item-first-img">
-            <img src="{{asset('assets/images/check.png')}}"/> 
+            <img src="{{asset('assets/images/check.png')}}"/>
         </div>
         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's .</p>
         <div class="item-profile-img">
-            <img src="{{asset('assets/images/account-img.jpg')}}"/> 
+            <img src="{{asset('assets/images/account-img.jpg')}}"/>
         </div>
         <strong>Allan Collins</strong>
     </div>
     <div class="item">
         <!-- <img src="/assest/images/check.png" alt="item-img"> -->
         <div class="item-first-img">
-            <img src="{{asset('assets/images/check.png')}}"/> 
+            <img src="{{asset('assets/images/check.png')}}"/>
         </div>
         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's .</p>
         <div class="item-profile-img">
-            <img src="{{asset('assets/images/account-img.jpg')}}"/> 
+            <img src="{{asset('assets/images/account-img.jpg')}}"/>
         </div>
         <strong>Allan Collins</strong>
     </div>
     <div class="item">
         <!-- <img src="/assest/images/check.png" alt="item-img"> -->
         <div class="item-first-img">
-            <img src="{{asset('assets/images/check.png')}}"/> 
+            <img src="{{asset('assets/images/check.png')}}"/>
         </div>
         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's .</p>
         <div class="item-profile-img">
-            <img src="{{asset('assets/images/account-img.jpg')}}"/> 
+            <img src="{{asset('assets/images/account-img.jpg')}}"/>
         </div>
         <strong>Allan Collins</strong>
     </div>
     <div class="item">
         <!-- <img src="/assest/images/check.png" alt="item-img"> -->
         <div class="item-first-img">
-            <img src="{{asset('assets/images/check.png')}}"/> 
+            <img src="{{asset('assets/images/check.png')}}"/>
         </div>
         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's .</p>
         <div class="item-profile-img">
-            <img src="{{asset('assets/images/account-img.jpg')}}"/> 
+            <img src="{{asset('assets/images/account-img.jpg')}}"/>
         </div>
         <strong>Allan Collins</strong>
     </div>

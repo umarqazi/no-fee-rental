@@ -40,15 +40,15 @@ class User extends Authenticatable implements CanResetPassword {
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
 	 */
-	public function listing() {
-		return $this->hasMany(Listing::class);
+	public function listings() {
+		return $this->hasMany(Listing::class, 'user_id', 'id');
 	}
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function company() {
-        return $this->hasOne(Company::class);
+        return $this->hasOne(Company::class, 'id', 'company_id');
     }
 
 	/**
@@ -84,4 +84,13 @@ class User extends Authenticatable implements CanResetPassword {
 	public function scopeRenters($query) {
 		return $query->whereuser_type(RENTER);
 	}
+
+    /**
+     * @param $query
+     *
+     * @return mixed
+     */
+	public function scopeWithListings($query) {
+	    return $query->with('listings');
+    }
 }
