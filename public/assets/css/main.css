@@ -2920,7 +2920,7 @@ footer .copyright .social-icons li a:hover {
 
 .property-listing.neighbourhood-listing {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     flex-wrap: wrap;
 }
 
