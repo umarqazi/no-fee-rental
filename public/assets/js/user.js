@@ -14,12 +14,13 @@ $(() => {
     $body.on('click', '#updateUser', async function(e) {
         let id = $(this).attr('ref_id');
         let route = $(this).attr('route');
-        $('#add_user, #update_user').prop({'action': `/admin/update-user/${id}`, 'id': 'update_user','reset' : 'true' });
+        $('#add_user, #update_user').attr({'action': `/admin/update-user/${id}`, 'id': 'update_user','reset' : 'true' });
         $('label.error').remove();
         $('.error').removeClass('error');
         $('.modal-title').text('Update User');
         $('.modal-footer input').val('Update');
         $('#add-member').modal('show');
+        $('[name="email"]').rules('remove', 'remote') ;
         await updateRecord('#update_user', route);
     });
 
@@ -34,6 +35,18 @@ $(() => {
         $('#email').val('');
         $('#phone_number').val('');
         $('#user_type').val('');
+        $('[name="email"]').rules('add', {
+            remote : {
+                headers: {
+                'X-CSRF-TOKEN': $('[name="_token"]').val()
+            },
+            url: "/verify-email",
+            type: "post",
+            },
+            messages: {
+                remote: "Email already taken."
+            }
+        });
         $(this).find('form').trigger('reset');
     });
 

@@ -42,7 +42,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="sel1">End @:</label>
-                        {!! Form::select('open_house[end_time][]', config('openHouse'), null, ['class' => 'form-control', 'id' => 'start']) !!}
+                        {!! Form::select('open_house[end_time][]', config('openHouse'), null, ['class' => 'form-control', 'id' => 'end']) !!}
                     </div>
                 </div>
             </div>
