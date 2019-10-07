@@ -218,4 +218,15 @@ class ListingController extends Controller {
         $listing = $this->listingService->edit($id)->first();
         return view('listing-features.listing', compact('listing', 'action'));
     }
+
+    /**
+     * @param $id
+     * @param Request $request
+     *
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
+     */
+    public function requestFeatured($id, Request $request) {
+        $res = $this->listingService->requestForFeatured($id);
+        return sendResponse($request, $res, 'Request Send for Featured');
+    }
 }

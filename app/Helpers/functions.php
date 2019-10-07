@@ -170,6 +170,7 @@ function dispatchEmailQueue($data, $delay = 10) {
 
 /**
  * @param $msg
+ * @param null $path
  *
  * @return \Illuminate\Http\RedirectResponse
  */
