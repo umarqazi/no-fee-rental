@@ -14,7 +14,7 @@
                     <a href="#">Soho,</a>
                     <a href="#">Greenwich Village</a>
                 </p>
-                <div class="contact-info">
+                <div class="contact-info contact-info-mobile">
                     <div>
                         <img src="assets/images/email.jpg" alt="" /> <a href="#">{{ $data->agent->email }}</a>
                     </div>
