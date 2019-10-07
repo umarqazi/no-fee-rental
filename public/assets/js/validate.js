@@ -230,7 +230,7 @@ $(() => {
     });
 
     // Create User Form Validations
-    $('#add_user').validate({
+   /* $('#add_user').validate({
       rules: {
         user_type: "required",
         first_name: "required",
@@ -259,7 +259,7 @@ $(() => {
                 required: "Last name is required."
             },
           email: {
-              remote: "Email already taken",
+              remote: "Email already taken.",
               required: "Email is required.",
               email: "Please enter valid email"
           },
@@ -268,6 +268,7 @@ $(() => {
             },
       }
     });
+    */
     // Agent Invite Form Validation
     $('#agent_invite').validate({
       rules: {
