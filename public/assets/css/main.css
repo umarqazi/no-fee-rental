@@ -3604,7 +3604,8 @@ footer .copyright .social-icons li a:hover {
 
 .agent-profile-view .agent-info .contact-info > div img {
     margin-right: 10px;
-    max-width: 80%;
+    max-width: 30px;
+    max-height: 30px;
 }
 
 .agent-profile-view .agent-info .contact-info > div a {
@@ -4283,10 +4284,12 @@ footer .copyright .social-icons li a:hover {
 
     .clients-reviews-section .owl-nav button.owl-prev {
         left: 0px;
+        border-radius: 50%;
     }
 
     .clients-reviews-section .owl-nav button.owl-next {
         right: 0px;
+        border-radius: 50%;
     }
 
     .neighborhood-search.agent-listing-profile {
@@ -4870,6 +4873,7 @@ footer .copyright .social-icons li a:hover {
         margin: 0px !important;
         padding: 0px;
         outline: none !important;
+        border-radius: 50%;
     }
 
     .neighborhood-search .search-result-wrapper #contentscroll2 .property-listing .owl-nav button.owl-prev {
@@ -4960,10 +4964,6 @@ footer .copyright .social-icons li a:hover {
         bottom: 0;
         width: 100%;
     }
-    /*.listing-detail-container .listing-info .product-title {
-    display: block;
-  }*/
-
     .listing-detail-container .listing-info .product-title p {
         margin-bottom: 15px;
         font-size: 18px;
@@ -5157,15 +5157,16 @@ footer .copyright .social-icons li a:hover {
         margin-bottom: 15px !important;
     }
     .location-map-sec {
-    padding: 0px 0px !important;
+        padding: 0px 0px !important;
     }
     .appointment-section{
         margin-top: 20px !important;
         margin-bottom: 20px !important;
     }
-
-
-
+    .agent-profile-view .agent-info .contact-info > div img {
+        max-width: 22px;
+        max-height: 22px;
+    }
 
 }
 @media only screen and (min-width: 577px) and (max-width: 767px) {
