@@ -1962,7 +1962,7 @@ footer .copyright .social-icons li a:hover {
 
 .neighborhood-search .search-result-wrapper .map-wrapper {
     flex: 0 0 50%;
-    padding: 0px 15px;
+    padding: 0px 0px;
     position: relative;
     height: 618px;
 }
@@ -2005,7 +2005,7 @@ footer .copyright .social-icons li a:hover {
 }
 
 .neighborhood-search .search-result-wrapper .search-listing {
-    padding: 0px 0px 20px 15px;
+    padding: 0px 0px 20px 0px;
     flex: auto;
     transition: all ease-in-out 0.3s;
 }
@@ -3358,9 +3358,6 @@ footer .copyright .social-icons li a:hover {
     text-transform: initial;
     margin-right: 5px;
 }
-.search-listing .row .listing-right-padd {
-    padding: 0;
-}
 
 .search-bdr-top .btn-default {
     background: #223971;
@@ -3409,8 +3406,8 @@ footer .copyright .social-icons li a:hover {
 .search-bdr-top .btn-default:hover,
 .search-bdr-top .btn-default:active,
 .search-bdr-top .btn-default:focus{
-  background-color: #223971;
-  color: #fff;
+  background-color: #223971 !important;
+  color: #fff !important;
 }
 
 .search-bdr-top .price-dropdown .btn-default {
@@ -3960,6 +3957,9 @@ footer .copyright .social-icons li a:hover {
 
 
 @media (max-width: 991px) {
+    .profile-section-padding{
+        padding-top: 20px;
+    }
     #appointmentModal {
         padding-left: 15px;
     }
@@ -4306,6 +4306,9 @@ footer .copyright .social-icons li a:hover {
     }
     .neighborhood-search .search-result-wrapper .search-listing{
         padding: 0px 0px 0px 15px;
+    }
+    .agent-listing-profile .search-result-wrapper .search-listing{
+        padding: 0px 0px 0px 0px;
     }
     #signup_form .submit-clm .btn-default{
         position: inherit;
@@ -4714,6 +4717,9 @@ footer .copyright .social-icons li a:hover {
     .neighborhood-search .search-result-wrapper .search-listing .featured-properties .property-listing{
         margin: 15px -15px 0px;
     }
+    .neighborhood-search{
+        margin:75px auto !important;
+    }
 }
 @media only screen and (max-width: 767px) {
     .header-wrapper .header-container .logo {
@@ -5080,6 +5086,27 @@ footer .copyright .social-icons li a:hover {
     .agent-profile-view .agent-info .contact-info > div a {
         color: #7b7b7b;
         font-size: 14px;
+    }
+    .agent-profile-view .contact-info-mobile{
+        margin-bottom: 0px;
+    }
+    .agent-listing-profile .search-result-wrapper .search-listing h3{
+        padding-top: 0px;
+    }
+    .agent-listing-profile .search-result-wrapper .search-listing .featured-properties .property-listing.mobile-listing {
+        margin:0px 0px;
+    }
+   .agent-listing-profile .search-result-wrapper .search-listing #boxscroll2{
+    margin-top: 15px;
+   }
+   .agent-listing-profile .profile-contact-section h3{
+        margin-bottom: 15px;
+   }
+    .agent-listing-profile .search-result-wrapper .search-listing {
+        padding: 0px 0px 0px 0px;
+    }
+    .agent-listing-profile .owl-slider{
+        padding: 0px 0px;
     }
 
     .agent-profile-view .agent-info h2 {

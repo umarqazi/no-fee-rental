@@ -1195,7 +1195,7 @@
 
 @media only screen and (max-width: 767px) {
     .neighborhood-search {
-        margin: 70px auto 30px;
+        margin: 70px auto;
     }
     .property-wrap .listing-wrapper .listing-row {
         display: block;
