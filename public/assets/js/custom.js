@@ -34,6 +34,8 @@ $(() => {
 		$(this).toggleClass('favourite');
 	});
 
+
+
 	//
 
 	$('#price-range-submit').hide();
@@ -259,6 +261,11 @@ $('#price-range-submit').hide();
 
 	$(".close-menu-btn").click(function () {
 		$(".mobile-menu").slideUp();
+	});
+
+	$(".mobile-view-dropdown").on('click', function () {
+    	$(this).find("i").toggleClass('fa-bars fa-times');
+    	$("#mobile-tabs-collapse").slideToggle();
 	});
 
 	$(".listing-large-view").click(function () {
