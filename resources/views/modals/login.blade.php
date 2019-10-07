@@ -6,6 +6,7 @@
             <div class="logo-info-wrapper">
                 <img src="assets/images/modal-logo.png" alt="" class="logo" />
                 <ul>
+                    <h3> Login</h3>
                     <li>loremp ipsum lorem ipsum</li>
                     <li>loremp ipsum lorem ipsum</li>
                     <li>loremp ipsum lorem ipsum</li>

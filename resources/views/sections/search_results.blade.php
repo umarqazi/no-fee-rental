@@ -1,4 +1,3 @@
-<div class="container-lg">
     <div class="search-result-wrapper">
         <div class="search-listing">
             <div class="row">
@@ -117,7 +116,6 @@
             </div>
         @endif
 
-</div>
 {{--Advance Search Modal--}}
 @include('modals.advance_search')
 {!! HTML::script('assets/js/neighborhoods.js') !!}
