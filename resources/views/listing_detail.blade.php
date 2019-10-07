@@ -28,10 +28,10 @@
                             <a href="javascript:void(0);" class="ml-2" data-toggle="modal" data-target="#flag-icon"><img src="/assets/images/flag-icon.png" alt="" class="flag-icon" /> </a>
 
                         </span>
-                    </div>
+                    </div>{{--
                     <p class="title-subtext">
                         555 10th Avenue, New York, NY 10036
-                    </p>
+                    </p>--}}
 
                     <div class="available-btn">
                         <div class="">
@@ -67,10 +67,10 @@
                             <!-- <li> <i class="fas fa-bed"></i> {{ str_formatting($listing->bedrooms, 'Bed') }} </li>
                             <li> <i class="fas fa-bath"> </i> {{ str_formatting($listing->baths, 'Bath') }} </li>
                             <li> <i class="fas fa-ruler"> </i> {{$listing->square_feet}} ft </li> -->
-                            <li> <img src="/assets/images/price-icon.png" alt="" /> <span> $5,500</span></li>
-                            <li> <img src="/assets/images/bed-icon.png" alt="" /> <span> 2 Bedrooms</span></li>
-                            <li> <img src="/assets/images/bath-icon.png" alt="" /> <span> 2 Baths</span></li>
-                            <li> <img src="/assets/images/size-icon.png" alt="" /> <span> 14,987</span></li>
+                            <li> <img src="/assets/images/price-icon.png" alt="" /> <span> ${{ $listing->rent }}</span></li>
+                            <li> <img src="/assets/images/bed-icon.png" alt="" /> <span> {{ $listing->bedrooms }} Bedrooms</span></li>
+                            <li> <img src="/assets/images/bath-icon.png" alt="" /> <span> {{ $listing->baths }} Baths</span></li>
+                            <li> <img src="/assets/images/size-icon.png" alt="" /> <span> {{ $listing->square_feet}}</span></li>
                         </ul>
                     </div>
                     <div class="Availability-date-sec">
@@ -129,8 +129,8 @@
                                 <a href="#"><img src="/assets/images/account-img.jpg" alt="apointment"></a>
                             </li>
                             <li>
-                                <h5> Jeff Clarke</h5>
-                                <p>DiGiulio Group Real Estate </p>
+                                <h5> {{ $listing->agent->first_name.' '.$listing->agent->last_name }}</h5>
+                                <p> {{ $listing->agent->company->company ?? 'None' }} </p>
                                 <i class="far fa-comments"></i> 2 Renter Reviews </li>
                         </ul>
                     </div>
@@ -177,6 +177,7 @@
         <div class="container-lg">
             <div class="row">
                 <div class="col-sm-3">
+                    @dd($listing)
                     <h3>Listing Type </h3>
                     <ul class="second-ul"> 
                         <li> Exclusive </li>

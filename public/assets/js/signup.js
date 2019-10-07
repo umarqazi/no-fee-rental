@@ -26,7 +26,7 @@ $(() => {
                 false);
 
             if (res.length > 0) {
-                form.append(`<input type="hidden" name="company" value="${res[0].business_name} ?? null">
+                form.append(`<input type="hidden" name="company" value="${res[0].business_name}">
                              <input type="hidden" name="address" value="${res[0].business_address_1}">`);
                 $('.input-style').removeAttr("disabled");
                 $('.license_valid-text').text("You provided a valid license. You are welcome to fill the details below and and become a part of NO FEE Rentals NYC.");
@@ -34,7 +34,7 @@ $(() => {
                 if ($('.check').length > 0) return;
                 let str_split = res[0].license_holder_name ?  res[0].license_holder_name.split(" ") : null ;
                 str_split !== null ? $first_name.val(str_split[1]):'' ;
-                str_split !== null ? $last_name.val(str_split[1]):'' ;
+                str_split !== null ? $last_name.val(str_split[0]):'' ;
                 $('input[type=submit]').removeAttr('disabled');
                 message('check', 'Verified');
             } else {
