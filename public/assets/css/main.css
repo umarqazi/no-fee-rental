@@ -1967,7 +1967,7 @@ footer .copyright .social-icons li a:hover {
 
 .neighborhood-search .search-result-wrapper .map-wrapper {
     flex: 0 0 50%;
-    padding: 0px 15px;
+    padding: 0px 0px;
     position: relative;
     height: 618px;
 }
@@ -2010,7 +2010,7 @@ footer .copyright .social-icons li a:hover {
 }
 
 .neighborhood-search .search-result-wrapper .search-listing {
-    padding: 0px 0px 20px 15px;
+    padding: 0px 0px 20px 0px;
     flex: auto;
     transition: all ease-in-out 0.3s;
 }
@@ -3363,9 +3363,6 @@ footer .copyright .social-icons li a:hover {
     text-transform: initial;
     margin-right: 5px;
 }
-.search-listing .row .listing-right-padd {
-    padding: 0;
-}
 
 .search-bdr-top .btn-default {
     background: #223971;
@@ -3414,8 +3411,8 @@ footer .copyright .social-icons li a:hover {
 .search-bdr-top .btn-default:hover,
 .search-bdr-top .btn-default:active,
 .search-bdr-top .btn-default:focus{
-  background-color: #223971;
-  color: #fff;
+  background-color: #223971 !important;
+  color: #fff !important;
 }
 
 .search-bdr-top .price-dropdown .btn-default {
@@ -3607,7 +3604,8 @@ footer .copyright .social-icons li a:hover {
 
 .agent-profile-view .agent-info .contact-info > div img {
     margin-right: 10px;
-    max-width: 80%;
+    max-width: 30px;
+    max-height: 30px;
 }
 
 .agent-profile-view .agent-info .contact-info > div a {
@@ -3965,6 +3963,9 @@ footer .copyright .social-icons li a:hover {
 
 
 @media (max-width: 991px) {
+    .profile-section-padding{
+        padding-top: 20px;
+    }
     #appointmentModal {
         padding-left: 15px;
     }
@@ -4283,10 +4284,12 @@ footer .copyright .social-icons li a:hover {
 
     .clients-reviews-section .owl-nav button.owl-prev {
         left: 0px;
+        border-radius: 50%;
     }
 
     .clients-reviews-section .owl-nav button.owl-next {
         right: 0px;
+        border-radius: 50%;
     }
 
     .neighborhood-search.agent-listing-profile {
@@ -4311,6 +4314,9 @@ footer .copyright .social-icons li a:hover {
     }
     .neighborhood-search .search-result-wrapper .search-listing{
         padding: 0px 0px 0px 15px;
+    }
+    .agent-listing-profile .search-result-wrapper .search-listing{
+        padding: 0px 0px 0px 0px;
     }
     #signup_form .submit-clm .btn-default{
         position: inherit;
@@ -4719,6 +4725,9 @@ footer .copyright .social-icons li a:hover {
     .neighborhood-search .search-result-wrapper .search-listing .featured-properties .property-listing{
         margin: 15px -15px 0px;
     }
+    .neighborhood-search{
+        margin:75px auto !important;
+    }
 }
 @media only screen and (max-width: 767px) {
     .header-wrapper .header-container .logo {
@@ -4864,6 +4873,7 @@ footer .copyright .social-icons li a:hover {
         margin: 0px !important;
         padding: 0px;
         outline: none !important;
+        border-radius: 50%;
     }
 
     .neighborhood-search .search-result-wrapper #contentscroll2 .property-listing .owl-nav button.owl-prev {
@@ -4954,10 +4964,6 @@ footer .copyright .social-icons li a:hover {
         bottom: 0;
         width: 100%;
     }
-    /*.listing-detail-container .listing-info .product-title {
-    display: block;
-  }*/
-
     .listing-detail-container .listing-info .product-title p {
         margin-bottom: 15px;
         font-size: 18px;
@@ -5086,6 +5092,27 @@ footer .copyright .social-icons li a:hover {
         color: #7b7b7b;
         font-size: 14px;
     }
+    .agent-profile-view .contact-info-mobile{
+        margin-bottom: 0px;
+    }
+    .agent-listing-profile .search-result-wrapper .search-listing h3{
+        padding-top: 0px;
+    }
+    .agent-listing-profile .search-result-wrapper .search-listing .featured-properties .property-listing.mobile-listing {
+        margin:0px 0px;
+    }
+   .agent-listing-profile .search-result-wrapper .search-listing #boxscroll2{
+    margin-top: 15px;
+   }
+   .agent-listing-profile .profile-contact-section h3{
+        margin-bottom: 15px;
+   }
+    .agent-listing-profile .search-result-wrapper .search-listing {
+        padding: 0px 0px 0px 0px;
+    }
+    .agent-listing-profile .owl-slider{
+        padding: 0px 0px;
+    }
 
     .agent-profile-view .agent-info h2 {
         font-size: 18px;
@@ -5130,15 +5157,16 @@ footer .copyright .social-icons li a:hover {
         margin-bottom: 15px !important;
     }
     .location-map-sec {
-    padding: 0px 0px !important;
+        padding: 0px 0px !important;
     }
     .appointment-section{
         margin-top: 20px !important;
         margin-bottom: 20px !important;
     }
-
-
-
+    .agent-profile-view .agent-info .contact-info > div img {
+        max-width: 22px;
+        max-height: 22px;
+    }
 
 }
 @media only screen and (min-width: 577px) and (max-width: 767px) {

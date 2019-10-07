@@ -14,16 +14,16 @@
                     <a href="#">Soho,</a>
                     <a href="#">Greenwich Village</a>
                 </p>
-                <div class="contact-info">
+                <div class="contact-info contact-info-mobile">
                     <div>
-                        <img src="assets/images/email.jpg" alt="" /> <a href="#">{{ $data->agent->email }}</a>
+                        <img src="../assets/images/close-envelope-new.png" alt="" /> <a href="#">{{ $data->agent->email }}</a>
                     </div>
                     <div>
-                        <img src="assets/images/phone-icon.jpg" alt="" />
+                        <img src="../assets/images/call-icon.png" alt="" />
                         <a href="javascript:void(0);">{{ $data->agent->phone_number ?? 'Null' }}</a>
                     </div>
                     <div>
-                        <img src="assets/images/map.jpg" alt="" /> <a href="#">1534 Some where st. san Diego, CA 92101</a>
+                        <img src="../assets/images/location.png" alt="" /> <a href="#">1534 Some where st. san Diego, CA 92101</a>
                     </div>
                 </div>
             </div>
