@@ -28,8 +28,7 @@
                         <i class="fa fa-sort-amount-down"></i>
                         <div class="custom-dropdown">
                             <ul>
-                                <li><a href="{{ route('agent.sorting', 'cheaper') }}">Cheaper</a></li>
-                                <li><a href="{{ route('agent.sorting', 'petPolicy') }}" >Pet Policy </a></li>
+                                <li><a href="{{ route('agent.sorting', 'cheaper') }}">Cheapest</a></li>
                                 <li><a href="{{ route('agent.sorting', 'recent') }}" >Recent</a></li>
                             </ul>
                         </div>
