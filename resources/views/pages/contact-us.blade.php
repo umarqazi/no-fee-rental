@@ -42,10 +42,10 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label> Your Name</label>
-                                    {!! Form::text('first_name', null, ['class'=>'input-style', 'placeholder'=>'First Name']) !!}
-                                    @if ($errors->has('first_name'))
+                                    {!! Form::text('name', null, ['class'=>'input-style', 'placeholder'=>'Name']) !!}
+                                    @if ($errors->has('name'))
                                         <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('first_name') }}</strong>
+                                        <strong>{{ $errors->first('name') }}</strong>
                                     </span>
                                     @endif
                                 </div>
@@ -62,7 +62,18 @@
                                     @endif
                                 </div>
                             </div>
-                            
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label> Your Phone Number </label>
+                                    {!! Form::text('phone_number', null, ['class'=>'input-style', 'placeholder'=>'Phone Number']) !!}
+                                    @if ($errors->has('phone_number'))
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('phone_number') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label>Write a Message </label>
