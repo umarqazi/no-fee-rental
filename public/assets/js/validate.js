@@ -41,39 +41,56 @@ $(() => {
     });
 
     // Add Listing Form Validations
-   $('#listing_form').validate({
+   $('#listing-form').validate({
        rules: {
            street_address: "required",
            display_address: "required",
-           city_state_zip: "required",
-           neighborhood: "required",
+           neighborhood_id: "required",
            bedrooms: "required",
            baths: "required",
-           description: "required",
-           name: "required",
-           email: "required",
-           phone_number: "required",
-           website: "required",
-           available: {
+           unit: {
                required: true,
-               validateSelect: true
+               greaterThan: 0
            },
            rent : {
                required: true,
                greaterThan: 0
            },
-           unit: {
-               required: true,
-               greaterThan: 0
-           },
+
            square_feet: {
                required: true,
                greaterThan: 0
            },
-           thumbnail: {
-               required: ($('input[name="old_thumbnail"]').val()) ? false : true,
-               validateExtension: ($('input[name="old_thumbnail"]').val()) ? false : true,
+           availability: {
+               required: true,
+               validateSelect: true
            },
+           building_type: {
+               required: true,
+               validateSelect: true
+           },
+           "open_house[date][]" : "required",
+
+           "open_house[start_time][]": {
+               required: true,
+               validateSelect: true
+           },
+
+           "open_house[end_time][]": {
+               required: true,
+               validateSelect: true
+           },
+
+           thumbnail: {
+               required :  true,
+               //required: ($('input[name="old_thumbnail"]').val()) ? false : true,
+               validateExtension: ["jpg", "png", "gif","jpeg"]
+           },
+
+           description : "required",
+           name : "required",
+           phone_number: "required",
+           email: "required",
        },
 
        messages: {
@@ -83,53 +100,66 @@ $(() => {
            display_address: {
                required: "Display address is required."
            },
-           city_state_zip: {
-               required: "City, Zip code, State any one is required."
-           },
-           neighborhood: {
+           neighborhood_id: {
                required: "Neighborhood is required."
            },
            bedrooms: {
-               required: "Bedrooms is required."
+               required: "Bedroom is required."
             },
            baths: {
-               required: "Baths is required."
+               required: "Bath is required."
            },
+           unit: {
+               required: "Unit is required.",
+               greaterThan: "Unit must be greater than 0"
+           },
+           rent: {
+               required: "Rent is required.",
+               greaterThan: "Rent must be greater than 0"
+           },
+           square_feet: {
+               required: "Square feet is required.",
+               greaterThan: "Square feet must be greater than 0"
+           },
+           availability: {
+               required: "Select Availability.",
+               validateSelect: "Select any one option."
+           },
+
+           building_type: {
+               required: "Select Building Type.",
+               validateSelect: "Select any one option."
+           },
+
+           'open_house[date][]' : "Open House is required.",
+
+           'open_house[start_time][]': {
+               required: "Select Start Time.",
+               validateSelect: "Select any one option."
+           },
+
+           'open_house[end_time][]': {
+               required: "Select End Time.",
+               validateSelect: "Select any one option."
+           },
+
+           thumbnail: {
+               required: "Thumbnail is required",
+               validateExtension: "Choose valid thumbnail file"
+           },
+
            description: {
                required: "Description is required."
            },
            name: {
                required: "Name is required."
            },
-           email: {
-               required: "Email is required."
-           },
            phone_number: {
                required: "Phone number is required."
            },
-           website: {
-               required: "Website is required."
+           email: {
+               required: "Email is required."
            },
-           available: {
-               required: "Select availability.",
-               validateSelect: "Select any one option."
-           },
-           rent: {
-               required: "Rent is required.",
-               greaterThan: "Rent must be greater than 0"
-           },
-           unit: {
-               required: "Unit is required.",
-               greaterThan: "Unit must be greater than 0"
-           },
-           square_feet: {
-               required: "Square feet is required.",
-               greaterThan: "Square feet must be greater than 0"
-           },
-           thumbnail: {
-               required: "Thumbnail is required",
-               validateExtension: "Choose valid thumbnail file"
-           }
        }
    });
 
@@ -230,7 +260,7 @@ $(() => {
     });
 
     // Create User Form Validations
-   /* $('#add_user').validate({
+    $('#add_user').validate({
       rules: {
         user_type: "required",
         first_name: "required",
@@ -268,7 +298,7 @@ $(() => {
             },
       }
     });
-    */
+
     // Agent Invite Form Validation
     $('#agent_invite').validate({
       rules: {
