@@ -371,11 +371,12 @@ class UserService {
             DB::commit();
             $data = [
                 'view'       => 'signup',
+                'to'         =>  $user->email,
+                'first_name' =>  $user->first_name,
                 'subject'    => 'Verify Email',
-                'first_name' => $user->first_name,
-                'link'       => route('user.confirmEmail', $user->remember_token),
-
+                'link'       =>  route('user.confirmEmail', $user->remember_token),
             ];
+
             dispatchEmailQueue($data);
             DB::commit();
             return true;
@@ -384,11 +385,15 @@ class UserService {
         if ($user) {
             $cForm = new CompanyForm();
             $cForm->company = $request->company;
-            $cForm->status = DEACTIVE;
-            if (!$cForm->fails()) {
-                $this->companyRepo->create($cForm->toArray());
-            }
 
+            if (!$cForm->fails()) {
+                $company= $this->companyRepo->create($cForm->toArray());
+                $this->userRepo->update($user->id,['company_id' => $company->id]);
+            }
+            else {
+                $company= $this->companyRepo->find(['company' => $request->company])->first();
+                $this->userRepo->update($user->id,['company_id' => $company->id]);
+            }
             $invitedBy = $this->agentRepo->inviteBy($request->token);
             if($invitedBy->user->user_type == AGENT) {
                 $this->memberRepo->create([
