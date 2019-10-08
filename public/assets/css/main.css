@@ -5290,3 +5290,11 @@ footer .copyright .social-icons li a:hover {
   top: 15px;
   right: 10px;
 }
+
+#mobile-tabs-collapse .search-btn{
+    margin-left: 5px;
+}
+#mobile-tabs-collapse .search-btn .btn-default{
+    padding: 0px 10px;
+    text-transform: initial !important;
+}

@@ -56,6 +56,7 @@ class RealtyMXService extends ListingService {
         $list['name']             = $agent->name ?? null;
         $list['email']            = $agent->email ?? null;
         $list['phone_number']     = $agent->phone_numbers->main ?? null;
+        $list['square_feet']      = $property->details->squareFeet ?? 0;
         $list['street_address']   = $property->location->address   ?? null;
         $list['display_address']  = $property->location->address   ?? null;
         $list['unit']             = $property->location->apartment ?? null;

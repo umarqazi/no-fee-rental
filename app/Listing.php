@@ -198,22 +198,6 @@ class Listing extends Model {
 	}
 
     /**
-     * Scope year range filter
-     * @param $query
-     * @param $start_year
-     * @param $end_year
-     * @param string $date
-     *
-     * @return mixed
-     */
-	public function scopeBetweenYear($query, $start_year, $end_year, $date = 'created_at') {
-	    return $query->whereBetween($date, [
-            Carbon::create($start_year)->startOfYear(),
-            Carbon::create($end_year)->endOfYear(),
-        ]);
-    }
-
-    /**
      * @param $query
      *
      * @return mixed
