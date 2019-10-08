@@ -2834,7 +2834,9 @@ footer {
 .form-group label.error {
   padding-top: 8px;
 }
-
+.sec-padding-bottom-zero{
+  padding-bottom: 0px;
+}
 
 /*Responsive style*/
 
@@ -2869,6 +2871,12 @@ footer {
 }
 
 @media only screen and (max-width: 1279px) {
+  .sec-padding-bottom-zero{
+    padding-bottom: 0px !important;
+  }
+  .inner-pages.inner-page-terms{
+    padding: 0px 0px 100px;
+  }
   #signup_form .submit-clm .btn-default {
     position: inherit;
     padding: 0px 100px;
@@ -3546,6 +3554,11 @@ footer {
   }
 }
 
+@media only screen and (min-width: 768px) and (max-width: 991px){
+    #signup .modal-dialog-scrollable .modal-content {
+    max-height: initial !important;
+}
+}
 @media only screen and (max-width: 767px) {
   .header-wrapper .header-container .logo {
     max-width: 200px;

@@ -680,7 +680,10 @@ h3 {
   display: inline-block;
   vertical-align: middle;
 }
-
+.login-form-wrapper .form-check-input{
+  display: inline-block;
+  vertical-align: middle;
+}
 
 /*Need help modal*/
 
@@ -1497,6 +1500,56 @@ footer .copyright .social-icons li a:hover {
   font-weight: 600;
   color: #f36f21;
 }
+
+/*advance search checkbox*/
+#advance-search-chkbox input[type=checkbox] {
+        display: none;
+}    
+#advance-search-chkbox ul{
+    border: 1px solid #f36f21;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+#advance-search-chkbox ul li{
+    width: 100%;
+    border-right: 1px solid #f36f21;
+}
+#advance-search-chkbox ul li:last-child{
+    border-right:none;
+}
+#advance-search-chkbox input[type=checkbox] + label {
+  display: inline-block;
+  padding: 12px 0px;
+  width: 100%;
+  color: #223871;
+  cursor: pointer;
+  text-align: center;
+  font-size: 14px;
+}
+
+
+#advance-search-chkbox input[type=checkbox]:checked + label {
+  background: #f36f21;
+  color: #fff;
+  font-weight: 600;
+}
+
+#advance-search-chkbox input[type=checkbox]:checked + label:first-child{
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+#advance-search-chkbox input[type=checkbox]:checked +label span.label-name {
+    text-align: center;
+}
+#advance-search-chkbox .white-border-chkbox{
+    border-right: 1px solid #fff !important;
+}
+#advance-search-chkbox .white-border-chkbox:last-child{
+    border: none !important;
+}
+/*end advance search checkbox*/
 
 .menu-btn,
 .mobile-menu {
@@ -4020,6 +4073,10 @@ footer .copyright .social-icons li a:hover {
   #signup .modal-dialog-centered {
     min-height: calc(100% - (0.75rem * 2)) !important;
   }
+  #appointmentModal .modal-dialog {
+    max-width: 555px;
+    margin: 1.75rem auto;
+  }
 }
 
 @media (max-width: 1024px) {
@@ -4165,12 +4222,6 @@ footer .copyright .social-icons li a:hover {
   }
 }
 
-@media (min-width: 576px) {
-  #appointmentModal .modal-dialog {
-    max-width: 555px;
-    margin: 1.75rem auto;
-  }
-}
 
 
 /*Responsive style*/
@@ -4693,6 +4744,9 @@ footer .copyright .social-icons li a:hover {
   .neighborhood-search {
     margin: 75px auto !important;
   }
+  #signup .modal-dialog-scrollable .modal-content {
+    max-height: initial !important;
+}
 }
 
 @media only screen and (max-width: 767px) {
@@ -5208,6 +5262,9 @@ footer .copyright .social-icons li a:hover {
   .login-modal .btn-default {
     width: 100%;
     padding: 0px 0px;
+  }
+  #advance-search-chkbox input[type=checkbox] + label{
+    font-size: 13px;
   }
 }
 

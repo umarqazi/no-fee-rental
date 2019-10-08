@@ -1362,7 +1362,7 @@
 }
 
 .inputfile {
-    display: none !important;
+    opacity: 0 ;
 }
 
 .choose-cover{

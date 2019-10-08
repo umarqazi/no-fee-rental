@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'Select Time',
+    '' => 'Select Time',
     '8:00 am',
     '8:15 am',
     '8:30 am',

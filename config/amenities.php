@@ -28,9 +28,5 @@ return [
         10 => 'Fitness Centre',
         11 => 'Storage Facility',
         12 => 'Elevator',
-    ],
-
-    'other' => [
-
     ]
 ];

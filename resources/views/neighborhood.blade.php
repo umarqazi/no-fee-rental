@@ -10,7 +10,7 @@
     <div class="container-lg">
         <div class="sorting-listing">
             <div class="neighbor-autocomplete">
-                {!! Form::open(['url' => route('web.findListsByNeighborhood'), 'method' => 'get']) !!}
+                {!! Form::open(['url' => route('web.ListsByNeighborhood', $data->neighborhood->name), 'method' => 'post']) !!}
                 {!! Form::text('neighborhoods', $data->neighborhood->name ?? null,
                     [
                         'class' => 'input-style',

@@ -13,8 +13,7 @@ class CreateContactUsesTable extends Migration {
 	public function up() {
 		Schema::create('contact_us', function (Blueprint $table) {
 			$table->increments('id');
-			$table->string('first_name');
-			$table->string('last_name');
+			$table->string('name');
 			$table->string('email');
 			$table->string('phone_number');
 			$table->text('comment');

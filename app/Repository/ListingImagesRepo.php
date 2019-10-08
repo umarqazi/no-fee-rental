@@ -24,16 +24,7 @@ class ListingImagesRepo extends BaseRepo {
 	 *
 	 * @return mixed
 	 */
-	public function get($id) {
+	public function images($id) {
 		return $this->model->images($id);
 	}
-
-//	/**
-//	 * @param $id
-//	 *
-//	 * @return mixed
-//	 */
-//	public function first($id) {
-//		return $this->edit($id);
-//	}
 }

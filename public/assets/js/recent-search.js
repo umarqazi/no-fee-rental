@@ -7,11 +7,11 @@ $(() => {
     let queries = JSON.parse(localStorage.getItem('search-queries'));
     let bath = null, bed = null, square_feet_min = null, square_feet_max = null, neighborhood = null, price_min = null, price_max = null, open_house = null;
 
-    $body.on('change', '.sorting', function() {
-        let url = window.location.href;
-        let sorting = $(this).val();
-        window.location = sortOrder === '' ? window.location.href + sortValue(url, sorting) : removeOldSort(url, sorting);
-    });
+    // $body.on('change', '.sorting', function() {
+    //     let url = window.location.href;
+    //     let sorting = $(this).val();
+    //     window.location = sortOrder === '' ? window.location.href + sortValue(url, sorting) : removeOldSort(url, sorting);
+    // });
 
     $('#baths').find('li').on('click', function() {
         bath = $(this).text();
