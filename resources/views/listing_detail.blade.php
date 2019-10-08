@@ -240,33 +240,33 @@
                                               </div>
                                           </div>
                                       </div>
-                                      
-                                           
+
+
                                             </div>
                                         </div>
-                                        
-                                        
-                                   
-                                
+
+
+
+
                                 <!-- end calendar slider -->
                                 <!-- radio button -->
                                 <div class="appointment-radio-btn">
                                   <div class="selection">
                                     <input id="Morning" name="Appointment" type="radio">
                                     <label for="Morning">Morning <br>
-                                    10am - 12pm 
+                                    10am - 12pm
                                     </label>
                                   </div>
                                   <div class="selection">
                                     <input id="Afternoon" name="Appointment" type="radio">
                                     <label for="Afternoon">Afternoon <br>
-                                    12pm - 3pm 
+                                    12pm - 3pm
                                     </label>
                                   </div>
                                   <div class="selection">
                                     <input id="Evening" name="Appointment" type="radio">
                                     <label for="Evening">Evening <br>
-                                    3pm - 6pm 
+                                    3pm - 6pm
                                     </label>
                                   </div>
                                 </div>
@@ -504,7 +504,7 @@
 </section>
 {{--Check Availability--}} @include('modals.check_availability') {{--Make Appointment--}} @include('modals.appointment')
 <script>
-    mapWithNearbyLocations(@php echo $listing -> map_location; @endphp, document.getElementById('map'), true ) ;
+    mapWithNearbyLocations(@php echo $listing->map_location; @endphp, document.getElementById('map'), true ) ;
 </script>
 <script>
   $('.calendarCarasoule #calendar-slider').owlCarousel({
@@ -540,6 +540,7 @@
     $(this).addClass('active');
  });
 });
+  </script>
 @endsection
 
 

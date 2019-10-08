@@ -242,6 +242,7 @@ const fetchNeighbours = async (selector) => {
  * @param allowTime
  */
 const enableDatePicker = (selector, allowTime = true) => {
+    console.log(selector);
     // Create start date
     var start = new Date(),
         prevDay,

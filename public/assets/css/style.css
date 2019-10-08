@@ -338,7 +338,7 @@
 
 .listing-detail-container .lSGallery li.active {
     border: 2px solid #000;
-    
+
 }
 
 
@@ -568,7 +568,7 @@
      padding: 30px 0px;
 }
 .location-map-sec {
-    
+
     padding: 30px 0px;
 }
 
@@ -1354,9 +1354,27 @@
     display: none !important;
 }
 
+.choose-cover{
+    display: flex;
+    padding: 15px 0px;
+    align-items: center;
+}
+
+.choose-cover .img-thumbnail {
+    margin-top: 0px;
+    width: 150px;
+    height: 100px;
+    object-fit: cover;
+}
+
+.choose-cover .box{
+    flex: 0 0 calc(100% - 150px);
+    padding-left: 15px;
+}
+
 .box label {
-    margin-left: -20px;
-    margin-bottom: -25px;
+    padding: 0px 0px 0px;
+    margin: 0px;
 }
 
 
@@ -1649,25 +1667,37 @@ main {
 }
 
 .datepicker-withtime {
-    display: flex;
+    display: block;
     align-items: center;
+    flex-wrap: wrap;
+}
+
+.datepicker-withtime .add-more-btn{
+    flex: 0 0 100%;
+    justify-content: center;
+    text-align: center;
 }
 
 .datepicker-withtime .form-group {
     margin-right: 5px;
-}
-
-.datepicker-withtime label {
-    display: inline-block;
-    font-size: 14px;
-    font-weight: 500;
+    margin-bottom: 10px;
 }
 
 .datepicker-withtime select {
-    width: 110px !important;
+    width: 100% !important;
     display: inline-block;
-    background-color: #cccc;
+    background-color: #fff;
     font-weight: 600;
+    height: 45px !important;
+}
+
+.datepicker-withtime .by-add-only{
+    flex: 0 0 100%;
+}
+
+.open-house-admin-section{
+    background: #eee;
+    padding: 15px;
 }
 
 .datepicker-withtime select:hover,
