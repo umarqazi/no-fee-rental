@@ -42,7 +42,8 @@ $(() => {
 
     // Add Listing Form Validations
    $('#listing-form').validate({
-       rules: {
+
+           rules: {
            street_address: "required",
            display_address: "required",
            neighborhood_id: "required",
@@ -84,7 +85,8 @@ $(() => {
            thumbnail: {
                required :  true,
                //required: ($('input[name="old_thumbnail"]').val()) ? false : true,
-               validateExtension: ["jpg", "png", "gif","jpeg"]
+               validateExtension: ["jpg", "png", "gif","jpeg"],
+
            },
 
            description : "required",
@@ -160,6 +162,17 @@ $(() => {
            email: {
                required: "Email is required."
            },
+       },
+
+       errorPlacement: function(error, element) {
+           if ( element.attr("name") === "thumbnail" )
+           {
+               error.insertAfter("#error-message");
+           }
+           else
+           {
+               error.insertAfter(element);
+           }
        }
    });
 
