@@ -35,6 +35,7 @@ Route::get('/change-password/{token}', 'UserController@changePassword')->name('u
 Route::post('/change-password/{token}', 'UserController@updatePassword')->name('change-password');
 
 // Forgot Password
+Route::get('/reset', 'RecoverPasswordController@sendRequest');
 Route::get('/forgot-password', 'RecoverPasswordController@resetForm')->name('forgot.password');
 Route::post('/reset-password', 'RecoverPasswordController@sendRequest')->name('password.email');
 Route::post('/update-password', 'RecoverPasswordController@recover')->name('password.update');
@@ -63,7 +64,7 @@ Route::post('/agent/signup', 'UserController@invitedAgentSignup')->name('agent.s
 Route::post('/send-message', 'MessageController@send')->name('send.message');
 
 // Realty MX Routes
-Route::get('/test/{file}', 'RealtyMXController@dispatchJob');
+Route::get('/realty/{file}', 'RealtyMXController@dispatchJob');
 Route::get('/realty-mx/{client}/{listing}', 'RealtyMXController@detail')->name('web.realty');
 
 // Listing Routes
@@ -77,21 +78,16 @@ Route::post('/push-notification', 'NotificationController@push');
 Route::post('/fetch-notifications', 'NotificationController@get');
 Route::get('/all-notifications', 'NotificationController@all');
 
-
-Route::get('/noti', function() {
-	return view('secured-layouts.notifications');
-});
-
-Route::get('/rent', function() {
-    return view('rent');
-});
-
-Route::get('/reset', 'RecoverPasswordController@sendRequest');
-
 // Neighborhood Routes
-//Route::get('/neighborhood', 'NeighborhoodController@index')->name('web.neighborhood');
-Route::get('/neighborhood-listing', 'NeighborhoodController@index')->name('web.findListsByNeighborhood');
-Route::post('/all-neighborhoods', 'NeighborhoodController@all')->name('web.allNeighbours');
+Route::post('/all-neighborhoods', 'NeighborhoodController@all')->name('web.allNeigetghbours');
+Route::get('/listing-by-neighborhood/{neighborhood}/{sort}', 'NeighborhoodController@sort');
+Route::get('/listing-by-neighborhood', 'NeighborhoodController@index')->name('web.neighborhood');
+Route::match(['get', 'post'], '/listing-by-neighborhood/{neighborhood}', 'NeighborhoodController@find')->name('web.ListsByNeighborhood');
+
+// Rent Routes
+Route::get('/listing-by-rent/{sort}', 'RentController@sort');
+Route::get('/listing-by-rent', 'RentController@index')->name('web.ListsByRent');
+Route::get('/listing-by-rent/search', 'RentController@advanceSearch')->name('web.advanceRentSearch');
 
 // Application Controlling Routes
 Route::get('/all-clear', function() {
@@ -102,8 +98,4 @@ Route::get('/all-clear', function() {
 Route::get('/migrate-fresh-seed', function() {
     artisan(['migrate:fresh', 'db:seed']);
     dd('Migration fresh with seeding..');
-});
-
-Route::get('/test', function() {
-    dd(neighborhoods());
 });

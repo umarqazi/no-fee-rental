@@ -58,7 +58,7 @@ class UserRepo extends BaseRepo {
      * @return mixed
      */
     public function profileDetail($id) {
-        return $this->findById($id)->withListings()->withneighbors();
+        return $this->findById($id)->withlistings()->withneighbors();
     }
 
     /**

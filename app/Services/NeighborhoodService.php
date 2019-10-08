@@ -9,10 +9,18 @@
 namespace App\Services;
 
 use App\Forms\NeighborhoodForm;
-use App\Repository\ListingRepo;
+use App\Neighborhoods;
 use App\Repository\NeighborhoodRepo;
 
+/**
+ * Class NeighborhoodService
+ * @package App\Services
+ */
 class NeighborhoodService {
+
+    use SortListingService {
+        SortListingService::__construct as private __sortConstruct;
+    }
 
     /**
      * @var object
@@ -20,16 +28,11 @@ class NeighborhoodService {
     protected $neighborhoodRepo;
 
     /**
-     * @var string
-     */
-    private $query;
-
-    /**
      * NeighborhoodService constructor.
      */
     public function __construct() {
+        $this->__sortConstruct(new Neighborhoods());
         $this->neighborhoodRepo = new NeighborhoodRepo();
-        $this->query = $this->neighborhoodRepo->appendQuery();
     }
 
     /**
@@ -43,15 +46,6 @@ class NeighborhoodService {
         $form->content = $request->neighborhood_content;
         $form->validate();
         return $form;
-    }
-
-    /**
-     * @param
-     *
-     * @return mixed
-     */
-    public function neighborhoods() {
-        return $this->neighborhoodRepo->neighborhoods();
     }
 
     /**
@@ -78,7 +72,6 @@ class NeighborhoodService {
      *
      * @return bool
      */
-
     public function delete($id) {
         return $this->neighborhoodRepo->delete($id);
     }
@@ -94,7 +87,6 @@ class NeighborhoodService {
         return $this->neighborhoodRepo->update($id, $form->toArray());
     }
 
-
     /**
      * @return mixed
      */
@@ -103,11 +95,10 @@ class NeighborhoodService {
     }
 
     /**
-     * @return array
+     * @return mixed
      */
-    public function index() {
-        $data = $this->neighborhoodRepo->fetch()->first();
-        return $this->collection($data);
+    public function first() {
+        return $this->neighborhoodRepo->first();
     }
 
     /**
@@ -118,46 +109,25 @@ class NeighborhoodService {
     private function collection($data) {
         return [
             'neighborhood'  => $data,
-            'listings'      => $data->listings
+            'listings'      => $data->listings ?? []
         ];
     }
 
-     // Filters for NeighbourHoods
-
     /**
-     * @param $neighbour
+     * @param $neighborhood
+     *
+     * @return mixed
      */
-    public function neighborhood($neighbour) {
-        $this->query = $this->neighborhoodRepo->findNeighborhood($neighbour);
+    public function find($neighborhood) {
+        $data = $this->neighborhoodRepo->getNeighborhoodWithListing($neighborhood)->first();
+        return $this->collection($data);
     }
 
     /**
-     * @param $neighbour
-     */
-    public function cheaper($neighbour) {
-        $this->query = $this->neighborhoodRepo->cheaper($neighbour);
-    }
-
-    /**
-     * @param $neighbour
-     */
-    public function recent($neighbour) {
-        $this->query = $this->neighborhoodRepo->recent($neighbour);
-    }
-
-    /**
-     * sort result by pet policy
-     */
-    public function petPolicy() {
-        $this->query->policy();
-    }
-
-    /**
-     * Fetch appended Query Results
      * @return array
      */
-    public function fetchQuery() {
-        $data = $this->query->first();
+    public function fetch() {
+        $data = $this->fetchQuery()->first();
         return $this->collection($data);
     }
 }

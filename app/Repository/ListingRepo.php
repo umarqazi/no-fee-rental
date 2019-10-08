@@ -13,6 +13,15 @@ class ListingRepo extends BaseRepo {
 		parent::__construct(new Listing);
 	}
 
+    /**
+     * @param $apartment_address
+     *
+     * @return mixed
+     */
+	public function isExistingApartment($apartment_address) {
+	    return $this->find(['street_address' => $apartment_address]);
+    }
+
 	/**
 	 * @return mixed
 	 */
@@ -84,9 +93,11 @@ class ListingRepo extends BaseRepo {
 		return $this->model->requestFeatured();
 	}
 
-	/**
-	 * @return boolean
-	 */
+    /**
+     * @param $id
+     *
+     * @return mixed
+     */
 	public function sendRequest($id) {
 		return $this->update($id, ['is_featured' => REQUESTFEATURED]);
 	}
@@ -98,5 +109,12 @@ class ListingRepo extends BaseRepo {
      */
 	public function agent($id) {
 	    return $this->find(['id' => $id])->withagent()->first();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function withNeighborhood() {
+	   return $this->model->withneighborhood();
     }
 }

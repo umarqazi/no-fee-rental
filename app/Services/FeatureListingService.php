@@ -219,10 +219,7 @@ class FeatureListingService {
                             ->paginate($paginate, ['*'], 'recent'),
             'cheapest' => $this->featured()
                             ->orderBy( 'rent' ,'ASC')
-                            ->paginate($paginate, ['*'], 'cheapest'),
-            'pet_policy' => $this->featured()
-                            ->policy()
-                            ->paginate($paginate, ['*'], 'pet_policy'),
+                            ->paginate($paginate, ['*'], 'cheapest')
         ];
     }
 }

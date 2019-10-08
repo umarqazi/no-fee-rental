@@ -125,4 +125,11 @@ class BaseRepo implements IRepo {
     public function first() {
         return $this->model->first();
     }
+
+    /**
+     * @return mixed
+     */
+    public function get() {
+        return $this->model->get();
+    }
 }
