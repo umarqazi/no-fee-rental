@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ContactUs;
+use Illuminate\Http\Request;
 use App\Services\ContactUsService;
 use Illuminate\Support\Facades\Redirect;
+
 
 class ContactUsController extends Controller {
 	protected $contact_service;
@@ -17,16 +18,27 @@ class ContactUsController extends Controller {
 	}
 
 	/**
-	 * @param ContactUs $contactUs
+	 * @param Request $contactUs
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function contactUs(ContactUs $contactUs) {
+	public function contactUs(Request $contactUs) {
 		$data_array = $contactUs->all();
 		$contact_us = $this->contact_service->saveRecord($data_array);
-		$contact_us->view = 'contact-us';
-		$contact_us->subject = 'New Message';
-		mailService('muhammad.adeel@gems.techverx.com', $contact_us);
+
+        $email = [
+            'view' => 'contact-us',
+            'name' => $contact_us->name,
+            'email' => $contact_us->email,
+            'phone_number' => $contact_us->phone_number,
+            'comment' => $contact_us->comment,
+            'to' => 'bilal.saqib@techverx.com',
+            'from' => $contact_us->email,
+            'subject' => 'New Message',
+            ];
+
+        dispatchEmailQueue($email);
+
 		$notification = array(
 			'message' => 'Thank you for your message, Our representative will contact you soon',
 			'alert_type' => 'success',
