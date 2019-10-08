@@ -54,7 +54,7 @@ class Neighborhoods extends Model
      */
     public function scopeWithListings($query) {
         return $query->with(['listings' => function($subQuery) {
-            return $subQuery->orderBy('is_featured', '1');
+            return $subQuery->orderBy('is_featured', APPROVEFEATURED);
         }]);
     }
 }

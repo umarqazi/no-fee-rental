@@ -680,7 +680,10 @@ h3 {
   display: inline-block;
   vertical-align: middle;
 }
-
+.login-form-wrapper .form-check-input{
+  display: inline-block;
+  vertical-align: middle;
+}
 
 /*Need help modal*/
 
@@ -4693,6 +4696,9 @@ footer .copyright .social-icons li a:hover {
   .neighborhood-search {
     margin: 75px auto !important;
   }
+  #signup .modal-dialog-scrollable .modal-content {
+    max-height: initial !important;
+}
 }
 
 @media only screen and (max-width: 767px) {

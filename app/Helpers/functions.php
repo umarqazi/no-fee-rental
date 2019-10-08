@@ -344,7 +344,7 @@ function iterateListing($listings, $hasSlider = false) {
                                 <small>" .
                                     str_formatting( $listing->bedrooms, 'Bed' ) . ' ,' . str_formatting( $listing->baths, 'Bath' )
                                 . "</small>
-                                <p> {$listing->neighborhood} </p>
+                                <p> {$listing->display_address}, {$listing->neighborhood->name} </p>
                            </div>
                            <a href=" . route( 'listing.detail', $listing->id ) . " class='btn viewfeature-btn'> View </a>
                       </div>

@@ -81,4 +81,7 @@ Route::post('/neighborhood/edit/{id}', 'Admin\NeighborhoodController@edit')->nam
 Route::post('/neighborhood/update/{id}', 'Admin\NeighborhoodController@update')->name('neighborhood.update');
 Route::post('/neighborhood/delete/{id}', 'Admin\NeighborhoodController@delete')->name('neighborhood.delete');
 
+// Manage Building Routes
+Route::get('/all-buildings', 'Admin\ManageBuildingController@index')->name('admin.manageBuildingIndex');
+
 Route::get('/view-associated-agents/{id}', 'Admin\HomeController@associatedAgents');

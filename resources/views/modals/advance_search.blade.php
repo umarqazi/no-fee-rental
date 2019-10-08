@@ -19,7 +19,7 @@
             </div>
             {{--Modal body--}}
             <div class="modal-body">
-                {!! Form::open(['url' => route('list.search'), 'method' => 'get']) !!}
+                {!! Form::open(['url' => route($route ?? 'list.search'), 'method' => 'get']) !!}
                 <div class="row">
                         <div class="col-md-6 search-form-grou-mrg-btm">
                             <div class="form-group">
@@ -134,7 +134,8 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="label">Neighbourhoods</label>
-                                {!! Form::text('neighborhoods', null, ['class' => 'input-style', 'placeholder' => 'Enter Neighborhood']) !!}
+                                {!! Form::select('neighborhoods', neighborhoods(), null, ['class' => 'input-style']) !!}
+{{--                                {!! Form::text('neighborhoods', null, ['class' => 'input-style', 'placeholder' => 'Enter Neighborhood']) !!}--}}
                             </div>
                         </div>
                         <div class="col-md-6">
