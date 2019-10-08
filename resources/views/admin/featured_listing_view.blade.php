@@ -24,8 +24,7 @@
                             <i class="fa fa-sort-amount-down"></i>
                             <div class="custom-dropdown">
                                 <ul>
-                                    <li><a href="{{ route('admin.featureSorting', 'cheaper') }}">Cheaper</a></li>
-                                    <li><a href="{{ route('admin.featureSorting', 'petPolicy') }}" >Pet Policy </a></li>
+                                    <li><a href="{{ route('admin.featureSorting', 'cheaper') }}">Cheapest</a></li>
                                     <li><a href="{{ route('admin.featureSorting', 'recent') }}" >Recent</a></li>
                                 </ul>
                             </div>

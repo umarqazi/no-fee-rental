@@ -123,7 +123,15 @@ class RecoverPasswordService {
             $response = $this->makeHistory( $request );
             if ( ! empty( $response ) ) {
                 $this->setExpiry( $response->token );
-                mailService( $response->email, toObject( $this->mailData( $response ) ) );
+                $email = [
+                    'view' => 'reset-password',
+                    'to' => $response->email,
+                    'subject' => 'Reset Password',
+                    'route' => route('recover.password', $response->token),];
+
+                dispatchEmailQueue($email);
+
+                //mailService( $response->email, toObject( $this->mailData( $response ) ) );
                 DB::commit();
 
                 return true;
