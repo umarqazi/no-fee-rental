@@ -137,10 +137,10 @@
                 </svg>
                 <span>Choose a Cover&hellip;</span>
             </label>
-        </div>
+        </div>{{--
         <span class="invalid-feedback" role="alert">
 			{!! $errors->first('thumbnail') !!}
-		</span>
+		</span>--}}
         @if(isset($listing->thumbnail))
             {!! Form::hidden('old_thumbnail', $listing->thumbnail) !!}
         @endif
