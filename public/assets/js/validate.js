@@ -86,7 +86,6 @@ $(() => {
                required :  true,
                //required: ($('input[name="old_thumbnail"]').val()) ? false : true,
                validateExtension: ["jpg", "png", "gif","jpeg"],
-               maxsize: 5000,
            },
 
            description : "required",
@@ -148,8 +147,7 @@ $(() => {
            thumbnail: {
                required: "Thumbnail is required.",
                validateExtension: "Choose valid thumbnail file.",
-               maxsize :  "Image Size should not be greater then 5mb"
-           },
+                    },
 
            description: {
                required: "Description is required."
