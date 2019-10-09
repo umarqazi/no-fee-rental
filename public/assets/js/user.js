@@ -29,6 +29,11 @@ $(() => {
         $('#update_user').attr({'action': '/admin/create-user', 'id': 'add_user'});
         $('.modal-title').text('Add User');
         $('.modal-footer input').val('Add User');
+        $('#first_name').val('');
+        $('#last_name').val('');
+        $('#email').val('');
+        $('#phone_number').val('');
+        $('#user_type').val('');
         $(this).find('form').trigger('reset');
     });
 
@@ -42,54 +47,18 @@ $(() => {
         await toggleStatus(route, $(`#${$(this).parents('table').attr('id')}`).DataTable(), $(this));
     });
 
-    $body.on('form-success-add_company', function(res, data) {
-        $('#companies_table').DataTable().ajax.reload();
-    });
-
-    $body.on('form-success-update_company', function(res, data) {
-        $('#companies_table').DataTable().ajax.reload();
-        $('#add-company').modal('hide');
-    });
-
-    $body.on('click', '#updateCompany', async function(e) {
-        let selector = $('#add-company');
-        let id = $(this).attr('ref_id');
-        let route = $(this).attr('route');
-        $('#add_company, #update_company').attr({'action': `/admin/update-company/${id}`, 'id': 'update_company', 'reset': 'false'});
-        $('label.error').remove();
-        $('.error').removeClass('error');
-        selector.find('.modal-body > .invites > label').text('Update Company');
-        selector.find('.modal-body input[type=submit]').val('Update');
-        selector.modal('show');
-        let res = await ajaxRequest(route, 'post');
-        populateFields('#update_company', res.data);
-        return res;
-    });
-
-    $body.on('click', '#create-company', function(e) {
-        let selector = $('#add-company');
-        selector.find('.modal-body > .invites > label').text('Add Company');
-        selector.find('.modal-body input[type=submit]').val('Add');
-        $('#update_company').attr({'action': `/admin/add-company`, 'id': 'add_company', 'reset': 'true'});
-    });
-
-    $body.on('click', '#deleteCompany', async function(e) {
-        let route = $(this).attr('route');
-        await deleteRecord(route, $(`#${$(this).parents('table').attr('id')}`).DataTable(), $(this));
-    });
-
-    $body.on('click', '#updateCompanyStatus', async function(e) {
-        let route = $(this).attr('route');
-        await toggleStatus(route, $(`#${$(this).parents('table').attr('id')}`).DataTable(), $(this));
-    });
-
     $body.on('click', '#viewAssociatedAgents', async function() {
         let route = $(this).attr('route');
+        let count = 0 ;
+        $('.agents_list_popup ol').empty();
         let res = await ajaxRequest(route, 'get');
         $('#add-company').modal('show');
-        $('.share_list_popup > ul').empty();
+        $('.share_list_popup ul').empty();
+        $('.modal-header h4').empty();
+        $('.modal-header h4').append(res[0]['company']['company'] +' Agent(s)');
         for(let i = 0 ; i < res.length ; i++) {
-            $('.share_list_popup ul').append('<li>"' + res[i]['first_name'] + res[i]['last_name'] +'"</li><br>');
+            count = i + 1 ;
+            $('.agents_list_popup ol').append('<li style="color: black ; ">' + count +'- '+ res[i]['first_name'] +' '+res[i]['last_name'] +'</li></b><br>');
         }
     });
 
