@@ -115,6 +115,25 @@
                                 @endif
                             </div>
                         </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label> Exclusive Settings</label>
+                                <div class="exclusive-chkboxes">
+                                    <div class="custom-control custom-checkbox">
+                                        <input class="custom-control-input" id="exclusive-1" name="amenities[]" type="checkbox" value="two">
+                                        <label class="custom-control-label" for="exclusive-1">Allow Web Notifications</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox">
+                                        <input class="custom-control-input" id="exclusive-2" name="amenities[]" type="checkbox" value="two">
+                                        <label class="custom-control-label" for="exclusive-2">Allow Email Notifications</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox">
+                                        <input class="custom-control-input" id="exclusive-3" name="amenities[]" type="checkbox" value="one">
+                                        <label class="custom-control-label" for="exclusive-3">Disable All</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label>Description</label>

@@ -32,6 +32,23 @@ $(() => {
 	$(".property-thumb .heart-icon").click(function () {
 		$(this).toggleClass('favourite');
 	});
+	// disable enable exclusive settings checkboxes
+	$(function() {
+	  $('#exclusive-3').change(function() {
+	    var val = $(this).val();
+
+	    if (val == "one") {
+
+	      $(".exclusive-chkboxes .custom-checkbox input[value='two']").prop("disabled", $(this).is(":checked"));
+
+	    } else if (val == "two") {
+
+	      $(".exclusive-chkboxes .custom-checkbox input[value='one']").prop("disabled", $(this).is(":checked"));
+
+	    }
+	  });
+	});
+	
 
 
 

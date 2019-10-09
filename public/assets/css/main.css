@@ -1504,7 +1504,7 @@ footer .copyright .social-icons li a:hover {
 /*advance search checkbox*/
 #advance-search-chkbox input[type=checkbox] {
         display: none;
-}    
+}
 #advance-search-chkbox ul{
     border: 1px solid #f36f21;
     border-radius: 5px;
@@ -5298,3 +5298,6 @@ footer .copyright .social-icons li a:hover {
     padding: 0px 10px;
     text-transform: initial !important;
 }
+
+
+
