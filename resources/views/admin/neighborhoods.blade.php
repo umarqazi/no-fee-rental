@@ -11,8 +11,8 @@
                 <table class="datatable dataTable table table-hover display" style="width: 100%;" id="neighborhoods_table">
                     <thead>
                     <tr>
-                        <th>Neighborhood Id</th>
-                        <th>Neighborhood Name</th>
+                        <th>Id</th>
+                        <th>Name</th>
                         <th>Content</th>
                         <th>Action</th>
                     </tr>
@@ -27,5 +27,17 @@
     {{--View Content--}}
     @include('admin.modals.view_neighborhood_content')
     {!! HTML::script('assets/js/neighborhoods.js') !!}
+    <script>
+        let column = [{
+            render: (data, type, row) => {
+                return `
+                <i class="fa fa-eye action-btn" id="viewNeighborhoodContent" ref_id="${row.id}" route="/admin/neighborhood/edit/${row.id}"></i>
+                <i class="fa fa-edit px-2 action-btn" id="updateNeighborhood" ref_id="${row.id}" route="/admin/neighborhood/edit/${row.id}"></i>
+                <i class="fa fa-trash action-btn" id="deleteNeighborhood" ref_id="${row.id}" route="/admin/neighborhood/delete/${row.id}"></i>`;
+            }, targets: 3
+        }];
+
+        dataTables('#neighborhoods_table', '/admin/get-neighborhoods', null, column);
+    </script>
 @endsection
 

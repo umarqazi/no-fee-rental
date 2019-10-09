@@ -32,6 +32,7 @@ class SearchController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function advanceSearch(Request $request) {
+        $showMap = true;
         collect($request->all())->reject(function ($args) {
             if (is_array($args)) {
                 $args = array_filter($args, function($value) { return !is_null($value) && $value !== ''; });
@@ -45,6 +46,6 @@ class SearchController extends Controller
             }
         });
         $data = toObject($this->service->fetchQuery($this->paginate));
-        return view('listing_search_results', compact('data'));
+        return view('listing_search_results', compact('data', 'showMap'));
     }
 }
