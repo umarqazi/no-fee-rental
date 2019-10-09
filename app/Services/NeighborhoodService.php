@@ -28,10 +28,16 @@ class NeighborhoodService {
     protected $neighborhoodRepo;
 
     /**
+     * @var SearchService
+     */
+    private $searchService;
+
+    /**
      * NeighborhoodService constructor.
      */
     public function __construct() {
         $this->__sortConstruct(new Neighborhoods());
+        $this->searchService = new SearchService();
         $this->neighborhoodRepo = new NeighborhoodRepo();
     }
 
@@ -129,5 +135,18 @@ class NeighborhoodService {
     public function fetch() {
         $data = $this->fetchQuery()->first();
         return $this->collection($data);
+    }
+
+    /**
+     * @param $request
+     *
+     * @return object
+     */
+    public function advanceSearch($request) {
+        $data = $this->searchService->search($request);
+        return toObject([
+            'listings'     => $data,
+            'neighborhood' => $data[0]->neighborhood ?? null,
+        ]);
     }
 }

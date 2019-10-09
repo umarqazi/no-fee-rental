@@ -24,14 +24,17 @@ class RentService {
      */
     protected $listingRepo;
 
+    private $searchService;
+
     /**
      * RentService constructor.
      *
      * @param ListingRepo $listingRepo
      */
     public function __construct(ListingRepo $listingRepo) {
-        $this->__sortConstruct(new Listing());
         $this->listingRepo = $listingRepo;
+        $this->__sortConstruct(new Listing());
+        $this->searchService = new SearchService();
     }
 
     /**
@@ -56,5 +59,15 @@ class RentService {
      */
     public function fetch() {
         return $this->collection($this->fetchQuery()->get());
+    }
+
+    /**
+     * @param $request
+     *
+     * @return array
+     */
+    public function advanceSearch($request) {
+        $data = $this->searchService->search($request);
+        return $this->collection($data);
     }
 }

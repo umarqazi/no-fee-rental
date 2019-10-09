@@ -169,8 +169,8 @@
                                 <label class="label">Square feet</label>
                                 <div class="slider-wrapper">
                                     <div class="search-input-wrap">
-                                    {!! Form::number('priceRange[min_price_2]', null, ['min' => 0, 'max' => 9900, 'id' => 'min_price_2', 'class' => 'price-range-field input-style', 'oninput' => 'validity.valid||(value=0);']) !!} -
-                                    {!! Form::number('priceRange[max_price_2]', null, ['min' => 0, 'max' => 10000, 'id' => 'max_price_2', 'class' => 'price-range-field input-style', 'oninput' => 'validity.valid||(value=10000);']) !!}
+                                    {!! Form::number('squareRange[square_min]', null, ['min' => 0, 'max' => 9900, 'id' => 'min_price_2', 'class' => 'price-range-field input-style', 'oninput' => 'validity.valid||(value=0);']) !!} -
+                                    {!! Form::number('squareRange[square_max]', null, ['min' => 0, 'max' => 10000, 'id' => 'max_price_2', 'class' => 'price-range-field input-style', 'oninput' => 'validity.valid||(value=10000);']) !!}
                                     </div>
                                     <div id="slider-range-2" class="price-filter-range" name="rangeInput"></div>
                                 </div>
@@ -180,14 +180,14 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="label">Neighbourhoods</label>
-                                {!! Form::select('neighborhoods', neighborhoods(), null, ['class' => 'input-style']) !!}
+                                {!! Form::select('neighborhood', neighborhoods(), null, ['class' => 'input-style']) !!}
 {{--                                {!! Form::text('neighborhoods', null, ['class' => 'input-style', 'placeholder' => 'Enter Neighborhood']) !!}--}}
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="label">Open House</label>
-                                {!! Form::text('open_house', null, ['autocomplete' => 'off', 'id' => 'open_house', 'placeholder', 'Open House', 'class' => 'input-style']) !!}
+                                {!! Form::text('openHouse', null, ['autocomplete' => 'off', 'id' => 'open_house', 'placeholder', 'Open House', 'class' => 'input-style']) !!}
                             </div>
                         </div>
                         {{-- Building Features--}}
@@ -212,5 +212,5 @@
 
 <script>
     fetchNeighbours($('input[name=neighborhoods]'));
-    enableDatePicker('#open_house');
+    enableDatePicker('#open_house', false);
 </script>

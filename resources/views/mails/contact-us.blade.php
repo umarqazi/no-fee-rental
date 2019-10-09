@@ -15,7 +15,7 @@
 	<table>
 		<tr>
 			<td><h2>Name:</h2></td>
-			<td><span>{{ $data->first_name.' '.$data->last_name }}</span></td>
+			<td><span>{{ $data->name }}</span></td>
 		</tr>
 		<tr>
 			<td><h2>Email:</h2></td>
