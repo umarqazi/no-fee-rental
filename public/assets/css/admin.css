@@ -227,6 +227,13 @@ label {
 .input-style:disabled {
   background: #ebebe4;
 }
+.exclusive-chkboxes{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
 .text-area {
   border: #d7d7d7 solid 1px;
   width: 100%;
@@ -263,6 +270,12 @@ label {
   border-color: #f36f21;
   box-shadow: none;
   outline: none;
+}
+.exclusive-chkboxes input:disabled:checked~.custom-control-label::before {
+    background-color: rgb(233, 236, 239) !important;
+}
+.exclusive-chkboxes .custom-checkbox .custom-control-input:disabled:checked~.custom-control-label::after{
+  background:none !important;
 }
 h3 {
   color: #000;
