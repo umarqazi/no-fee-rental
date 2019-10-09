@@ -7,6 +7,7 @@ Route::get('/home', 'Agent\ListingController@index')->name('agent.index');
 Route::get('/logout', 'Agent\AuthController@logout')->name('agent.logout');
 
 // Profile Routes
+Route::get('/listing-profile', 'Agent\ListingController@profile');
 Route::get('/show-profile', 'Agent\AgentController@profile')->name('agent.showProfile');
 Route::post('/update-profile', 'Agent\AgentController@updateProfile')->name('agent.profileUpdate');
 
@@ -45,4 +46,6 @@ Route::get('/load-chat/{id}', 'Agent\MessageController@inbox')->name('agent.load
 Route::post('/send-message/{id}', 'Agent\MessageController@send')->name('agent.sendMessage');
 Route::post('/accept-meeting/{id}', 'Agent\MessageController@confirmMeeting');
 
-Route::get('/listing-profile', 'Agent\ListingController@profile');
+// Calender Routes
+Route::post('/add-event', 'Agent\CalendarController@create')->name('agent.addEvent');
+Route::get('/show-calendar', 'Agent\CalendarController@index')->name('agent.showCalendar');

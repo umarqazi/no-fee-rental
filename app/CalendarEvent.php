@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class EventModel extends Model implements \MaddHatter\LaravelFullcalendar\Event {
+class CalendarEvent extends Model implements \MaddHatter\LaravelFullcalendar\Event {
 
     /**
      * @var array
@@ -16,15 +16,14 @@ class EventModel extends Model implements \MaddHatter\LaravelFullcalendar\Event 
     /**
      * @var array
      */
-    protected $fillable = ['start', 'end', 'id_branch', 'title'];
+    protected $fillable = ['start', 'end', 'title'];
 
     /**
      * Get the event's title
      *
      * @return string
      */
-    public function getTitle()
-    {
+    public function getTitle() {
         return $this->title;
     }
 
@@ -33,8 +32,7 @@ class EventModel extends Model implements \MaddHatter\LaravelFullcalendar\Event 
      *
      * @return bool
      */
-    public function isAllDay()
-    {
+    public function isAllDay() {
         return (bool)$this->all_day;
     }
 
@@ -43,8 +41,7 @@ class EventModel extends Model implements \MaddHatter\LaravelFullcalendar\Event 
      *
      * @return DateTime
      */
-    public function getStart()
-    {
+    public function getStart() {
         return $this->start;
     }
 
@@ -53,8 +50,7 @@ class EventModel extends Model implements \MaddHatter\LaravelFullcalendar\Event 
      *
      * @return DateTime
      */
-    public function getEnd()
-    {
+    public function getEnd() {
         return $this->end;
     }
 }

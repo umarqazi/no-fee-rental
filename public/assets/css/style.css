@@ -1844,3 +1844,10 @@ main {
         margin: 1.75rem auto;
     }
 }
+
+
+#addevent .modal-header .modal-title{
+    font-size: 16px;
+    font-weight: 700;
+    color: #000;
+}

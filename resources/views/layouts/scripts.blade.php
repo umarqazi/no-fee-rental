@@ -10,7 +10,7 @@
 <script src="{{asset('assets/js/vendor/popper.min.js')}}"></script>
 <script src="{{asset('assets/js/vendor/bootstrap.min.js')}}"></script>
 <script src="{{asset('assets/js/vendor/wow.min.js')}}"></script>
-<script src="{{asset('assets/js/vendor/pignose.calendar.full.min.js')}}"></script>
+{{--<script src="{{asset('assets/js/vendor/pignose.calendar.full.min.js')}}"></script>--}}
 <script src="{{asset('assets/js/vendor/jquery.validate.min.js')}}"></script>
 <script src="{{asset('assets/js/custom.js')}}"></script>
 <script src="{{asset('assets/js/vendor/lightslider.js')}}"></script>
