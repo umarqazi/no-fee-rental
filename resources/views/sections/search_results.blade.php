@@ -1,3 +1,4 @@
+<div class="container-lg">
     <div class="search-result-wrapper">
         <div class="search-listing">
             <div class="row">
@@ -127,7 +128,7 @@
                                         <small>{{ str_formatting($listing->bedrooms, ' Bed').', '.str_formatting($listing->baths, ' Bath') }}</small>
                                         <p> {{ is_exclusive($listing).', '. $listing->neighborhood->name }} </p>
                                     </div>
-                                    <a href=http://localhost:8000/listing-detail/61 class='btn viewfeature-btn'> View </a>
+                                    <a href="{{ route('listing.detail', $listing->id) }}" class='btn viewfeature-btn'> View </a>
                                 </div>
                                 <div class='feaure-policy-text'>
                                     <p>${{ $listing->rent }} / Month </p>
@@ -175,6 +176,7 @@
                 <div id="desktop-map"></div>
             </div>
         @endif
+</div>
 </div>
 
 {{--Advance Search Modal--}}

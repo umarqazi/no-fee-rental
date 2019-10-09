@@ -81,13 +81,14 @@ Route::get('/all-notifications', 'NotificationController@all');
 // Neighborhood Routes
 Route::post('/all-neighborhoods', 'NeighborhoodController@all')->name('web.allNeigetghbours');
 Route::get('/listing-by-neighborhood/{neighborhood}/{sort}', 'NeighborhoodController@sort');
+Route::get('/listing-by-neighborhood/search', 'NeighborhoodController@advanceSearch')->name('web.advanceNeighborhoodSearch');
 Route::get('/listing-by-neighborhood', 'NeighborhoodController@index')->name('web.neighborhood');
 Route::match(['get', 'post'], '/listing-by-neighborhood/{neighborhood}', 'NeighborhoodController@find')->name('web.ListsByNeighborhood');
 
 // Rent Routes
 Route::get('/listing-by-rent/{sort}', 'RentController@sort');
 Route::get('/listing-by-rent', 'RentController@index')->name('web.ListsByRent');
-Route::get('/listing-by-rent/search', 'RentController@advanceSearch')->name('web.advanceRentSearch');
+Route::get('/listing-by-rent-search', 'RentController@advanceSearch')->name('web.advanceRentSearch');
 
 // Application Controlling Routes
 Route::get('/all-clear', function() {

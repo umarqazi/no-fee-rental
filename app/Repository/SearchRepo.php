@@ -9,6 +9,7 @@
 namespace App\Repository;
 
 use App\Listing;
+use Carbon\Carbon;
 
 class SearchRepo extends BaseRepo {
 
@@ -23,15 +24,28 @@ class SearchRepo extends BaseRepo {
      * @return mixed
      */
     public function appendQuery() {
-        return $this->model::query();
+        return $this->model->query();
     }
 
     /**
-     * @param $query
+     * @param $values
      *
      * @return mixed
      */
-    public function fetch($query) {
-        return $query;
+    public function amenities($values) {
+        return $this->model->whereHas('amenities', function($subQuery) use ($values) {
+            return $subQuery->whereIn('amenity_id', $values);
+        });
+    }
+
+    /**
+     * @param $date
+     *
+     * @return mixed
+     */
+    public function openHouse($date) {
+        return $this->model->whereHas('openHouses', function($subQuery) use ($date) {
+            return $subQuery->where('date', $date);
+        });
     }
 }

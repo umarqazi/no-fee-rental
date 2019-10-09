@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class OpenHouse extends Model {
 
@@ -17,4 +18,11 @@ class OpenHouse extends Model {
     protected $casts = [
         'date'
     ];
+
+    /**
+     * @return BelongsTo
+     */
+    public function listing() {
+        return $this->belongsTo(Listing::class, 'id', 'listing_id');
+    }
 }
