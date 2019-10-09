@@ -17,6 +17,7 @@ use App\Forms\User\UserForm;
 use App\Repository\CompanyRepo;
 use App\Repository\MemberRepo;
 use App\Repository\AgentRepo;
+use App\Repository\NeighborhoodRepo;
 use App\Repository\UserRepo;
 use App\User;
 use Illuminate\Support\Facades\DB;
@@ -44,6 +45,11 @@ class UserService {
     private $companyRepo;
 
     /**
+     * @var neighborhoodRepo
+     */
+    private $neighborhoodRepo;
+
+    /**
      * @var mixed
      */
     private $query;
@@ -56,6 +62,7 @@ class UserService {
         $this->companyRepo = new CompanyRepo();
         $this->agentRepo = new AgentRepo();
         $this->memberRepo = new MemberRepo();
+        $this->neighborhoodRepo = new NeighborhoodRepo();
         $this->query = $this->userRepo->appendQuery();
     }
 
@@ -221,7 +228,6 @@ class UserService {
         $user->last_name = $request->last_name;
         $user->email = $request->email;
         $user->phone_number = $request->phone_number;
-        $user->neighbourhood_expertise = $request->neighbourhood_expertise;
         $user->languages = $request->languages;
         $user->address = $request->address;
         $user->description = $request->description;
@@ -230,6 +236,7 @@ class UserService {
         if ($request->hasFile('profile_image')) {
             $user->profile = $this->updateProfileImage($user->profile, myId(), $request->old_profile ?? '');
         }
+        $this->neighborhoodRepo->attach($this->userRepo->edit($user->id)->first(), $request->neighborhood_expertise);
         return $this->userRepo->update($user->id, $user->toArray());
     }
 
