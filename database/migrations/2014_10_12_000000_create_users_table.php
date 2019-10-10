@@ -23,7 +23,6 @@ class CreateUsersTable extends Migration {
             $table->timestamp('email_verified_at')->nullable();
             $table->boolean('status')->default(0)->nullable();
             $table->string('password')->nullable();
-            $table->string('neighbourhood_expertise')->nullable();
             $table->string('languages')->nullable();
             $table->string('license_number')->unique()->nullable();
             $table->text('description')->nullable();
