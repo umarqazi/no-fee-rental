@@ -15,6 +15,7 @@ use App\Forms\User\ChangePasswordForm;
 use App\Forms\User\EditProfileForm;
 use App\Forms\User\UserForm;
 use App\Repository\CompanyRepo;
+use App\Repository\ExclusiveSettingRepo;
 use App\Repository\MemberRepo;
 use App\Repository\AgentRepo;
 use App\Repository\NeighborhoodRepo;
@@ -52,6 +53,11 @@ class UserService {
     /**
      * @var mixed
      */
+    private $exclusiveSettingRepo;
+
+    /**
+     * @var mixed
+     */
     private $query;
 
     /**
@@ -63,6 +69,7 @@ class UserService {
         $this->agentRepo = new AgentRepo();
         $this->memberRepo = new MemberRepo();
         $this->neighborhoodRepo = new NeighborhoodRepo();
+        $this->exclusiveSettingRepo = new ExclusiveSettingRepo();
         $this->query = $this->userRepo->appendQuery();
     }
 
@@ -236,7 +243,7 @@ class UserService {
         if ($request->hasFile('profile_image')) {
             $user->profile = $this->updateProfileImage($user->profile, myId(), $request->old_profile ?? '');
         }
-        $this->neighborhoodRepo->attach($this->userRepo->edit($user->id)->first(), $request->neighborhood_expertise);
+        //$this->neighborhoodRepo->attach($this->userRepo->edit($user->id)->first(), $request->neighborhood_expertise);
         return $this->userRepo->update($user->id, $user->toArray());
     }
 
