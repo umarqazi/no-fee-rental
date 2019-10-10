@@ -577,7 +577,7 @@ h3 {
   left: 0;
   width: 100%;
   z-index: 4;
-  border-bottom:1px solid #eee;
+  /*border-bottom:1px solid #eee;*/
 }
 
 .header-wrapper .header-container {
@@ -1031,9 +1031,7 @@ h3 {
 
 .login-modal .modal-dialog .login-form-wrapper .finding-home-text {
   font-size: 14px;
-  margin-top: 10px;
-  display: none;
-  opacity: 0.3;
+  margin-top: 10px; 
 }
 
 .login-form-wrapper .form-group {
@@ -1045,6 +1043,7 @@ h3 {
   right: 15px;
   top: 15px;
   color: #223971;
+  font-size: 15px;
   cursor: pointer;
 }
 
@@ -1061,6 +1060,10 @@ h3 {
   opacity: 0.3;
   pointer-events: none;
 }
+.login-form-wrapper .finding-home-text:disabled{
+  opacity: 0.3;
+}
+
 
 .license_num .fas.fa-check-circle {
   color: #6EC45E;

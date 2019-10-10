@@ -730,6 +730,7 @@ h3 {
   top: 15px;
   color: #223971;
   cursor: pointer;
+  font-size: 15px;
 }
 
 .login-form-wrapper .agnet-input:disabled {
@@ -2829,7 +2830,7 @@ footer {
 
 .license_valid-text {
   color: #223971;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
 .license_num .form-group {
