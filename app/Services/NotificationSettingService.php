@@ -10,12 +10,12 @@
 namespace App\Services;
 
 
-use App\Repository\NotificationSettingRepo;
+use App\Repository\ExclusiveSettingRepo;
 
 class NotificationSettingService {
 
     /**
-     * @var NotificationSettingRepo
+     * @var ExclusiveSettingRepo
      */
     protected $repo;
 
@@ -23,7 +23,7 @@ class NotificationSettingService {
      * NotificationSettingService constructor.
      */
     public function __construct() {
-        $this->repo = new NotificationSettingRepo();
+        $this->repo = new ExclusiveSettingRepo();
     }
 
     /**
