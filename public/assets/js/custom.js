@@ -21,6 +21,23 @@ $(() => {
 		$(".listing-wrapper").hide();
 		$(".grid-view-wrapper").show();
 	});
+	// $(".dropdown-wrap button").click(function() {
+	// 	$(this).addClass("addbackground");
+	// 	// $(this).addClass('addbackground');
+	// });
+	 
+	 $('.dropdown-wrap ul li .radio-button').click(function() {
+	 	var input_checked = $(this).find("input").attr('checked', true);
+	 	if($(input_checked).is(':checked')){
+	 		var get_parent = $(this).parent().parent().parent().parent().find(".btn-default").addClass("addbackground");
+        	console.log(get_parent);
+	 	}else{
+	 	}
+	 	
+	});
+	
+
+	
 
 	$(".additional-info .input-style").attr("disabled", true);
 
@@ -32,6 +49,23 @@ $(() => {
 	$(".property-thumb .heart-icon").click(function () {
 		$(this).toggleClass('favourite');
 	});
+	// disable enable exclusive settings checkboxes
+	$(function() {
+	  $('#exclusive-3').change(function() {
+	    var val = $(this).val();
+
+	    if (val == "one") {
+
+	      $(".exclusive-chkboxes .custom-checkbox input[value='two']").prop("disabled", $(this).is(":checked"));
+
+	    } else if (val == "two") {
+
+	      $(".exclusive-chkboxes .custom-checkbox input[value='one']").prop("disabled", $(this).is(":checked"));
+
+	    }
+	  });
+	});
+	
 
 
 
