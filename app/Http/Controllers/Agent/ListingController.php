@@ -6,7 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Services\AmenityTypeService;
 use App\Services\ListingService;
 use App\Services\NeighborhoodService;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class ListingController extends Controller {
 
@@ -44,7 +47,7 @@ class ListingController extends Controller {
     }
 
     /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function index() {
         $listing = toObject($this->listingService->get($this->paginate));
@@ -52,7 +55,7 @@ class ListingController extends Controller {
     }
 
     /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function showForm() {
         $listing = null;
@@ -63,7 +66,7 @@ class ListingController extends Controller {
     /**
      * @param $id
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function approve($id) {
         return ($this->listingService->approve($id))
@@ -74,10 +77,10 @@ class ListingController extends Controller {
     /**
      * @param Request $request
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     * @return Factory|RedirectResponse|View
      */
     public function create(Request $request) {
-        $request->visibility = ACTIVE;
+        $request->visibility = PENDINGLISTING;
         $id = $this->listingService->create($request);
         return redirect(route('agent.createListingImages', $id));
     }
@@ -85,7 +88,7 @@ class ListingController extends Controller {
     /**
      * @param $id
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function createImages($id) {
         $action = 'Create';
@@ -106,7 +109,7 @@ class ListingController extends Controller {
      * @param $id
      * @param Request $request
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     * @return Factory|RedirectResponse|View
      */
     public function update($id, Request $request) {
         $action = 'Update';
@@ -143,7 +146,7 @@ class ListingController extends Controller {
     /**
      * @param $id
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function repost($id) {
         return $this->listingService->repost($id)
@@ -154,7 +157,7 @@ class ListingController extends Controller {
     /**
      * @param $id
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function edit($id) {
         $action = 'Update';
@@ -165,7 +168,7 @@ class ListingController extends Controller {
     /**
      * @param Request $request
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function searchWithFilters(Request $request) {
         $listing = toObject($this->listingService->search($request, $this->paginate));
@@ -175,7 +178,7 @@ class ListingController extends Controller {
     /**
      * @param $id
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function status($id) {
         $status = $this->listingService->visibility($id);
@@ -188,7 +191,7 @@ class ListingController extends Controller {
      * @param Request $request
      * @param $id
      *
-     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Http\JsonResponse|RedirectResponse
      */
     public function removeImage(Request $request, $id) {
         $remove = $this->listingService->removeImage($id);
@@ -198,7 +201,7 @@ class ListingController extends Controller {
     /**
      * @param $order
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function sortBy($order) {
         if(method_exists($this->listingService, $order)) {
@@ -211,7 +214,7 @@ class ListingController extends Controller {
     /**
      * @param $id
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function copy($id) {
         $action = 'Copy';
@@ -223,7 +226,7 @@ class ListingController extends Controller {
      * @param $id
      * @param Request $request
      *
-     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Http\JsonResponse|RedirectResponse
      */
     public function requestFeatured($id, Request $request) {
         $res = $this->listingService->requestForFeatured($id);

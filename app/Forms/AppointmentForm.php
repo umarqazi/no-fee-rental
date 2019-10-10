@@ -6,33 +6,30 @@
  * @project no-fee-rental
  */
 
-
 namespace App\Forms;
-
 
 use Illuminate\Support\Facades\Validator;
 
+/**
+ * Class AppointmentForm
+ * @package App\Forms
+ */
 class AppointmentForm extends BaseForm {
 
     /**
      * @var string
      */
-    public $first_name;
+    public $appointment_date;
 
     /**
      * @var string
      */
-    public $email;
+    public $appointment_time;
 
     /**
      * @var string
      */
-    public $phone_number;
-
-    /**
-     * @var string
-     */
-    public $appointment_at;
+    public $message;
 
     /**
      * @var integer
@@ -45,11 +42,6 @@ class AppointmentForm extends BaseForm {
     public $to;
 
     /**
-     * @var string
-     */
-    public $message;
-
-    /**
      * @var integer
      */
     public $listing_id;
@@ -59,10 +51,11 @@ class AppointmentForm extends BaseForm {
      */
     public function toArray() {
         return [
-            'listing_id'     => $this->listing_id,
-            'from'           => $this->from,
-            'to'             => $this->to,
-            'appointment_at' => $this->appointment_at
+            'listing_id'       => $this->listing_id,
+            'from'             => $this->from,
+            'to'               => $this->to,
+            'appointment_date' => $this->appointment_date,
+            'appointment_time' => $this->appointment_time
         ];
     }
 
@@ -71,39 +64,11 @@ class AppointmentForm extends BaseForm {
      */
     public function rules() {
         return [
-            'listing_id'     => 'required|integer',
-            'from'           => 'required|integer',
-            'to'             => 'required|integer',
-            'appointment_at' => 'required'
+            'listing_id'       => 'required|integer',
+            'from'             => 'required|integer',
+            'to'               => 'required|integer',
+            'appointment_date' => 'required',
+            'appointment_time' => 'required'
         ];
-    }
-
-    /**
-     * @return array
-     */
-    public function newRequestArray() {
-        return [
-            'first_name'   => $this->first_name,
-            'email'        => $this->email,
-            'phone_number' => $this->phone_number
-        ];
-    }
-
-    /**
-     * @return array
-     */
-    public function newRequestRules() {
-        return [
-            'first_name'   => 'required|string',
-            'email'        => 'required|email|unique:users',
-            'phone_number' => 'required'
-        ];
-    }
-
-    /**
-     * @return array
-     */
-    public function newRequestValidate() {
-        return Validator::make($this->newRequestArray(), $this->newRequestRules())->validate();
     }
 }

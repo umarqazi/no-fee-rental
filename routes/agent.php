@@ -41,10 +41,10 @@ Route::post('/invite-agent', 'Agent\MemberController@invite')->name('agent.invit
 Route::get('/accept-invitation/{token}', 'Agent\MemberController@acceptInvitation')->name('agent.acceptInvitation');
 
 // Messaging Routes
-Route::get('/messages-view', 'Agent\MessageController@index')->name('agent.messageIndex');
-Route::get('/load-chat/{id}', 'Agent\MessageController@inbox')->name('agent.loadChat');
-Route::post('/send-message/{id}', 'Agent\MessageController@send')->name('agent.sendMessage');
-Route::post('/accept-meeting/{id}', 'Agent\MessageController@confirmMeeting');
+Route::post('/accept-meeting/{id}', 'Agent\AppointmentController@accept');
+Route::get('/view-appointments', 'Agent\AppointmentController@index')->name('agent.messageIndex');
+Route::get('/load-chat/{id}', 'Agent\AppointmentController@inbox')->name('agent.loadChat');
+Route::post('/send-message/{id}', 'Agent\AppointmentController@reply')->name('agent.sendMessage');
 
 // Calender Routes
 Route::post('/add-event', 'Agent\CalendarController@create')->name('agent.addEvent');

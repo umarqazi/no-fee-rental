@@ -15,7 +15,7 @@
     {!! HTML::style('assets/css/jquery-ui.css') !!}
     {!! HTML::style('assets/css/toastr.css') !!}
     {!! HTML::style('assets/css/animate.min.css') !!}
-    {!! HTML::style('assets/css/pignose.calendar.min.css') !!}
+{{--    {!! HTML::style('assets/css/pignose.calendar.min.css') !!}--}}
     {!! HTML::style('assets/css/main.css') !!}
     {!! HTML::style('assets/css/style.css') !!}
     {!! HTML::style('assets/css/lightslider.css') !!}

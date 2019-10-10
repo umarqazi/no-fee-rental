@@ -23,6 +23,9 @@
             <div class="tab-content">
                 <div class="tab-pane active" id="listing-active">
                     <ul class="team-listing">
+                        @if(count($team) < 1)
+                            <div>No Member Found</div>
+                        @endif
                         @foreach($team as $member)
                         <li>
                             <img src="{{ asset($member->friends->profile_image ?? DUI)}}" alt="" class="main-img" />
