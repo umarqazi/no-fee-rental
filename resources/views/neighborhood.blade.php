@@ -24,6 +24,8 @@
         <p>{{ $data->neighborhood->content ?? 'No Content Found' }}</p>
     </div>
     {{--Search Results--}}
-    @include('sections.search_results')
+    <div class="container-lg">
+        @include('sections.search_results')
+    </div>
 </section>
 @endsection
