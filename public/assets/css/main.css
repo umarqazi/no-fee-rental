@@ -577,6 +577,7 @@ h3 {
   left: 0;
   width: 100%;
   z-index: 4;
+  border-bottom:1px solid #eee;
 }
 
 .header-wrapper .header-container {
@@ -5313,10 +5314,6 @@ footer .copyright .social-icons li a:hover {
 
 
 /*Neighbourhood*/
-
-
-
-
 #mobile-tabs-collapse .search-btn{
     margin-left: 5px;
 }
