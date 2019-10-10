@@ -85,7 +85,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Neighbourhood Expertise</label>
-                                {!! Form::text('neighbourhood_expertise', null, ['class' => 'input-style', 'placeholder' => 'Neighborhoods Expertise']) !!}
+                                {!! Form::text('neighborhood_expertise', null, ['class' => 'input-style', 'placeholder' => 'Neighborhoods Expertise']) !!}
                                 @if ($errors->has('neighbourhood_expertise'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('neighbourhood_expertise') }}</strong>
@@ -163,24 +163,29 @@
     <script>
         $('.edit-profile').on('click', function(e) {
             let lang = [];
-            let neighbors = [];
+            let neighbors = []
             let languages = @php echo json_encode(config('languages')); @endphp;
-            let neighborhoods = @php echo json_encode(config('neighborhoods')) @endphp;
-
+            ajaxRequest('/all-neighborhoods', 'post', null, false).then(neighborhoods => {
+                neighborhoods.data.forEach(v => {
+                    neighbors.push(v.name);
+                });
+            });
             for(let language in languages) {
                 lang.push(languages[language]);
             }
 
-            for(let neighbor in neighborhoods) {
-                neighbors.push(neighborhoods[neighbor]);
-            }
+            /*
+                        for(let neighbor in neighbors) {
+                            neighbors.push(neighbors[neighbo]);
+                        }console.log(neighbors);
+            */
 
             $('input[name="languages"]').amsifySuggestags({
                 suggestions: lang,
                 whiteList: true
             });
 
-            $('input[name="neighbourhood_expertise"]').amsifySuggestags ({
+            $('input[name="neighborhood_expertise"]').amsifySuggestags ({
                 suggestions: neighbors,
                 whiteList: true,
             });

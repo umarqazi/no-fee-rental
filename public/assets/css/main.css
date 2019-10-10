@@ -1647,7 +1647,7 @@ footer .copyright .social-icons li a:hover {
 /*advance search checkbox*/
 #advance-search-chkbox input[type=checkbox] {
         display: none;
-}    
+}
 #advance-search-chkbox ul{
     border: 1px solid #f36f21;
     border-radius: 5px;
@@ -5315,4 +5315,13 @@ footer .copyright .social-icons li a:hover {
 /*Neighbourhood*/
 
 
+
+
+#mobile-tabs-collapse .search-btn{
+    margin-left: 5px;
+}
+#mobile-tabs-collapse .search-btn .btn-default{
+    padding: 0px 10px;
+    text-transform: initial !important;
+}
 
