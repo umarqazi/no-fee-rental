@@ -577,7 +577,7 @@ h3 {
   left: 0;
   width: 100%;
   z-index: 4;
-  border-bottom:1px solid #eee;
+  /*border-bottom:1px solid #eee;*/
 }
 
 .header-wrapper .header-container {
@@ -1043,6 +1043,7 @@ h3 {
   right: 15px;
   top: 15px;
   color: #223971;
+  font-size: 15px;
   cursor: pointer;
 }
 

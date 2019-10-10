@@ -323,10 +323,10 @@ $('#price-range-submit').hide();
             $(".create-agent-listing").hide();
              $("#signup_form .btn-default").prop('disabled', false);
             $("#signup_form .agnet-input").prop('disabled', false);
-            $("#signup_form .finding-home-text").prop('disabled', false);
+            
 		} else {
             $("#signup_form .agnet-input").prop('disabled', true);
-            $("#signup_form .finding-home-text").prop('disabled', true);
+            $("#signup_form .finding-home-text").css('opacity', '0.3');
             $("#signup_form .btn-default").prop('disabled', true);
 			$(".finding-home-text").show();
 			$(".create-client-listing").hide();
