@@ -207,13 +207,18 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <input class="input-style agnet-input" id="email" placeholder="Email" name="email" type="text">
-                                    <p class="finding-home-text">If you would like to syndicate listing into no fee rentals nyc, please use tha same email address that you use for your RealtyMX..</p>
+                                    
                                 </div>
                             </div>
 
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <input class="input-style agnet-input" placeholder="Phone Number" name="phone_number" type="text">
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <p class="finding-home-text">If you would like to syndicate listing into no fee rentals nyc, please use tha same email address that you use for your RealtyMX..</p>
                                 </div>
                             </div>
 

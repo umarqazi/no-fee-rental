@@ -1031,9 +1031,7 @@ h3 {
 
 .login-modal .modal-dialog .login-form-wrapper .finding-home-text {
   font-size: 14px;
-  margin-top: 10px;
-  display: none;
-  opacity: 0.3;
+  margin-top: 10px; 
 }
 
 .login-form-wrapper .form-group {
@@ -1061,6 +1059,10 @@ h3 {
   opacity: 0.3;
   pointer-events: none;
 }
+.login-form-wrapper .finding-home-text:disabled{
+  opacity: 0.3;
+}
+
 
 .license_num .fas.fa-check-circle {
   color: #6EC45E;

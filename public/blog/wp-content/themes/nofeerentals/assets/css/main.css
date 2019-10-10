@@ -641,6 +641,7 @@ h3 {
 .login-form-wrapper .form-check-label{
   display: inline-block;
   vertical-align: middle;
+  font-size: 16px;
 }
 
 /*Need help modal*/
@@ -732,6 +733,9 @@ h3 {
 }
 
 .login-form-wrapper .agnet-input:disabled {
+  opacity: 0.3;
+}
+.finding-home-text:disabled{
   opacity: 0.3;
 }
 
@@ -850,7 +854,7 @@ h3 {
   padding-left: 30px;
   color: #223971;
   position: relative;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 .login-modal .modal-dialog .login-form-wrapper .login-heading:after {
@@ -921,7 +925,12 @@ h3 {
   display: none;
   opacity: 0.;
 }
-
+.login-form-wrapper .row.form-group .forgot-pass {
+    text-align: right;
+}
+.login-form-wrapper .row.form-group .forgot-pass a{
+  font-size: 16px;
+}
 .about-us-container {
   background: url(../images/about-bg.jpg) no-repeat center center #ffffff;
   min-height: 520px;
@@ -3758,6 +3767,10 @@ footer {
     width: 100%;
     padding: 0px 0px;
   }
+  .login-form-wrapper .row.form-group .forgot-pass {
+    text-align: center;
+    margin-top: 20px;
+}
 }
 
 @media (max-width: 1024px) {
