@@ -11380,11 +11380,11 @@ function () {
 
           case 3:
             if (!_context.sent) {
-              _context.next = 25;
+              _context.next = 24;
               break;
             }
 
-            meeting_id = $(this).attr('meeting_id');
+            meeting_id = $(this).attr('request_id');
             _context.next = 7;
             return ajaxRequest("accept-meeting/".concat(meeting_id), 'post');
 
@@ -11392,14 +11392,13 @@ function () {
             res = _context.sent;
 
             if (!res.status) {
-              _context.next = 25;
+              _context.next = 24;
               break;
             }
 
-            console.log(res);
             $userSelector = $('.user-info');
             $listingSelector = $('.info:last');
-            $userSelector.find('p:eq(3) > strong').text(res.data.msgs[0].message);
+            $userSelector.find('p:eq(3) > strong').text(res.data.messages[0].message);
             $userSelector.find('p:eq(0) > strong').text(res.data.sender.first_name);
             $userSelector.find('p:eq(1) > strong').text(res.data.sender.email);
             $userSelector.find('p:eq(2) > strong').text(res.data.sender.phone_number ? res.data.sender.phone_number : 'N/A');
@@ -11408,12 +11407,12 @@ function () {
             $listingSelector.find('ul > li:eq(0)').text(res.data.listing.bedrooms + " Bed");
             $listingSelector.find('ul > li:eq(1)').text(res.data.listing.baths + " Bath");
             $listingSelector.find('p:last').text(res.data.listing.street_address);
-            $('.property-info > img').attr('src', 'storage' + res.data.listing.thumbnail);
-            $('form').attr('action', 'send-message/' + res.data.msgs[0].contact_id);
+            $('.property-info > img').attr('src', res.data.listing.thumbnail);
+            $('form').attr('action', 'send-message/' + res.data.id);
             $('#message-modal').modal('show');
             return _context.abrupt("return", true);
 
-          case 25:
+          case 24:
           case "end":
             return _context.stop();
         }
@@ -11429,7 +11428,7 @@ $('#send-message').on('submit', function (e) {
   e.preventDefault();
   var src = $('.avtar').find('img').attr('src');
   $('.messages > ul').append("<li class=\"replies\"><img style=\"width: 35px;height: 35px;\" src=\"".concat(src, "\"><p>").concat($('input[type=text]').val(), "</p></li>"));
-  scrollDown();
+  scrollDown($ulSelector);
 });
 /**
  * load chat history
@@ -11492,7 +11491,7 @@ _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function 
 
           window.Echo.channel("messaging-channel." + Window.Laravel.user).listen('.message', function (res) {
             $ulSelector.append("\n            <li class=\"sent\">\n                <img style=\"width: 35px;height: 35px;\" src=\"".concat(res.sender.profile_image, "\">\n                <p>").concat(res.message, "</p>\n            </li>"));
-            scrollDown();
+            scrollDown($ulSelector);
           });
 
         case 2:
@@ -11505,18 +11504,6 @@ _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function 
 /**
  * scroll down
  */
-
-
-function scrollDown() {
-  $ulSelector.animate({
-    scrollTop: $ulSelector[0].scrollHeight
-  });
-} // Scroll to end of chat area
-
-
-window.onload = function () {
-  scrollDown();
-};
 
 /***/ }),
 

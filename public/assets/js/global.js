@@ -312,6 +312,13 @@ const setBySelector = function (selector) {
     return pushColumns(columns);
 };
 
+/**
+ *
+ * @param selector
+ */
+const scrollDown = (selector) => {
+    selector.animate({scrollTop: selector[0].scrollHeight});
+};
 
 $(() => {
 
