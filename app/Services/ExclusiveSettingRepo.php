@@ -6,13 +6,11 @@
  * @project no-fee-rental
  */
 
-
 namespace App\Repository;
-
 
 use App\ExclusiveSettings;
 
-class NotificationSettingRepo extends BaseRepo {
+class ExclusiveSettingRepo extends BaseRepo {
 
     /**
      * NotificationSettingRepo constructor.
