@@ -36,11 +36,6 @@ class EditProfileForm extends BaseForm {
 	 */
 	public $phone_number;
 
-	/**
-	 * @return array
-	 */
-    public $neighbourhood_expertise;
-
     /**
      * @return array
      */
@@ -68,7 +63,6 @@ class EditProfileForm extends BaseForm {
 			'email' => $this->email,
             'profile_image' => $this->profile,
 			'phone_number' => $this->phone_number,
-            'neighbourhood_expertise' => $this->neighbourhood_expertise,
             'languages' => $this->languages,
             'address' => $this->address,
             'description' => $this->description
