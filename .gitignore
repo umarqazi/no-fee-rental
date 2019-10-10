@@ -2,7 +2,7 @@
 /public/hot
 /public/storage
 /storage/*.key
-/bootstrap/cache/packages.php
+/bootstrap/cache/
 .idea/workspace.xml
 /vendor
 .env
