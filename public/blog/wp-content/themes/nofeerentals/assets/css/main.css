@@ -415,6 +415,9 @@ h3 {
   width: 100%;
   z-index: 4;
 }
+.inner-pages{
+  border-top: 1px solid #eee;
+}
 
 .header-wrapper .header-container {
   display: flex;
@@ -2729,7 +2732,6 @@ footer {
 
 .header-wrapper {
   box-shadow: none;
-  border-bottom: 1px solid #eee;
   padding: 10px 0px;
 }
 
