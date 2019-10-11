@@ -11,16 +11,17 @@ class CreateMessagesTable extends Migration
      *
      * @return void
      */
-    public function up()
-    {
+    public function up() {
         Schema::create('messages', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('contact_id');
+            $table->unsignedInteger('appointment_id')->nullable();
+            $table->unsignedInteger('check_availability_id')->nullable();
             $table->integer('align');
             $table->text('message');
             $table->timestamps();
 
-            $table->foreign('contact_id')->references('id')->on('contacts')->onDelete('cascade');
+            $table->foreign('appointment_id')->references('id')->on('appointments')->onDelete('cascade');
+            $table->foreign('check_availability_id')->references('id')->on('check_availabilities')->onDelete('cascade');
         });
     }
 
@@ -29,8 +30,7 @@ class CreateMessagesTable extends Migration
      *
      * @return void
      */
-    public function down()
-    {
+    public function down() {
         Schema::dropIfExists('messages');
     }
 }

@@ -1852,3 +1852,35 @@ main {
     font-weight: 700;
     color: #000;
 }
+
+.view-chat-view{
+    position: absolute;
+    right: 130px;
+    top: 5px;
+    font-size: 15px;
+    background: #223970;
+    color: #fff;
+    padding: 5px 12px;
+    border-radius: 20px;
+}
+.view-chat-archive{
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    font-size: 15px;
+    background: #223970;
+    color: #fff;
+    padding: 5px 12px;
+    border-radius: 20px;
+}
+.view-chat-view:hover,.view-chat-view:active,.view-chat-view:focus{
+    color: #fff;
+}
+.view-chat-archive:hover,.view-chat-archive:active,.view-chat-archive:focus{
+    color: #fff;
+}
+@media only screen and (max-width: 576px){
+.view-buttons{
+    margin-bottom: 30px;
+}
+}

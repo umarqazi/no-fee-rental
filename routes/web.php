@@ -63,6 +63,12 @@ Route::post('/agent/signup', 'UserController@invitedAgentSignup')->name('agent.s
 // Messaging Routes
 Route::post('/send-message', 'MessageController@send')->name('send.message');
 
+// Appointment Routes
+Route::post('/make-appointment', 'AppointmentController@create')->name('web.makeAppointment');
+
+// Check Availability Routes
+Route::post('/check-availability', 'CheckAvailabilityController@create')->name('web.checkAvailability');
+
 // Realty MX Routes
 Route::get('/realty/{file}', 'RealtyMXController@dispatchJob');
 Route::get('/realty-mx/{client}/{listing}', 'RealtyMXController@detail')->name('web.realty');
@@ -100,7 +106,12 @@ Route::get('/migrate-fresh-seed', function() {
     artisan(['migrate:fresh', 'db:seed']);
     dd('Migration fresh with seeding..');
 });
+
 Route::get('/email-notification', function() {
     return view('mails.email_notifcation');
 });
 
+Route::get('/composer-dump', function() {
+    exec('composer dump-autoload');
+    dd('composer dump-succeed');
+});

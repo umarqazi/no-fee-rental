@@ -3,15 +3,23 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Message extends Model
-{
-    protected $fillable = ['message', 'contact_id', 'align'];
+/**
+ * Class AppointmentMessage
+ * @package App
+ */
+class Message extends Model {
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @var array
      */
-    public function contact() {
-        return $this->belongsTo(Contact::class, 'contact_id', 'id');
+    protected $fillable = ['message', 'appointment_id', 'check_availability_id', 'align'];
+
+    /**
+     * @return BelongsTo
+     */
+    public function sender() {
+        return $this->belongsTo(Appointment::class, 'appointment_id', 'id');
     }
 }

@@ -15,6 +15,7 @@ use App\Forms\User\ChangePasswordForm;
 use App\Forms\User\EditProfileForm;
 use App\Forms\User\UserForm;
 use App\Repository\CompanyRepo;
+use App\Repository\ExclusiveSettingRepo;
 use App\Repository\MemberRepo;
 use App\Repository\AgentRepo;
 use App\Repository\NeighborhoodRepo;
@@ -52,6 +53,11 @@ class UserService {
     /**
      * @var mixed
      */
+    private $exclusiveSettingRepo;
+
+    /**
+     * @var mixed
+     */
     private $query;
 
     /**
@@ -63,6 +69,7 @@ class UserService {
         $this->agentRepo = new AgentRepo();
         $this->memberRepo = new MemberRepo();
         $this->neighborhoodRepo = new NeighborhoodRepo();
+        $this->exclusiveSettingRepo = new ExclusiveSettingRepo();
         $this->query = $this->userRepo->appendQuery();
     }
 
@@ -236,7 +243,30 @@ class UserService {
         if ($request->hasFile('profile_image')) {
             $user->profile = $this->updateProfileImage($user->profile, myId(), $request->old_profile ?? '');
         }
-        $this->neighborhoodRepo->attach($this->userRepo->edit($user->id)->first(), $request->neighborhood_expertise);
+        $exclusive = $this->exclusiveSettingRepo->find(['user_id' => myId()])->first() ;
+
+        if ($request->has('allow_web_notifications')){
+            $this->exclusiveSettingRepo->update($exclusive->id, ['allow_web_notification' => 1]);
+        }
+
+        else {
+            $this->exclusiveSettingRepo->update($exclusive->id, ['allow_web_notification' => 0]);
+        }
+
+        if ($request->has('allow_email_notifications')){
+            $this->exclusiveSettingRepo->update($exclusive->id, ['allow_email' => 1]);
+        }
+
+        else {
+            $this->exclusiveSettingRepo->update($exclusive->id, ['allow_email' => 0]);
+        }
+
+        if ($request->has('disable')){
+            $this->exclusiveSettingRepo->update($exclusive->id, ['allow_web_notification' => 0,'allow_email' => 0 ]);
+        }
+
+
+        //$this->neighborhoodRepo->attach($this->userRepo->edit($user->id)->first(), $request->neighborhood_expertise);
         return $this->userRepo->update($user->id, $user->toArray());
     }
 
@@ -396,7 +426,9 @@ class UserService {
                 'subject'    => 'Verify Email',
                 'link'       =>  route('user.confirmEmail', $user->remember_token),
             ];
-
+            $this->exclusiveSettingRepo->create([
+                'user_id' => $user->id,
+            ]);
             dispatchEmailQueue($data);
             DB::commit();
             return true;
@@ -521,5 +553,12 @@ class UserService {
             'agent'    => $data,
             'listings' => $data->listings
         ];
+    }
+
+    /**
+     * fetch Query
+     */
+    public function getExclusiveSettings($id) {
+        return $this->exclusiveSettingRepo->find(['user_id'=> $id])->first();
     }
 }

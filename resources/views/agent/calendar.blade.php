@@ -9,8 +9,8 @@
         <h1>Calendar</h1>
         <a href="javascript:void(0);" class="btn btn-default" data-toggle="modal" data-target="#add-event">Add Event</a>
     </div>
-    {!! $calendar->calendar() !!}
-    {!! $calendar->script() !!}
+    {!! $calendar !== null ? $calendar->calendar() : 'No Event Found' !!}
+    {!! $calendar !== null ? $calendar->script() : '' !!}
 </div>
     {{--Add Event Modal--}}
     @include('agent.modals.add_event')

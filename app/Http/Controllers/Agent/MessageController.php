@@ -1,22 +1,17 @@
 <?php
-/**
- * @author yousaf
- * @package
- * @copyright 2019 Techverx.com
- * @project no-fee-rental
- */
+
 namespace App\Http\Controllers\Agent;
 
-use App\Services\MessageService;
+use App\Services\AppointmentService;
+use App\Services\CheckAvailabilityService;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\View\View;
 
-class MessageController extends Controller
-{
-    /**
-     * @var MessageService
-     */
-    private $service;
+class MessageController extends Controller {
 
     /**
      * @var int
@@ -24,19 +19,31 @@ class MessageController extends Controller
     private $paginate = 20;
 
     /**
-     * MessageController constructor.
-     *
-     * @param MessageService $service
+     * @var AppointmentService
      */
-    public function __construct(MessageService $service) {
-        $this->service = $service;
+    private $appointmentService;
+
+    /**
+     * @var CheckAvailabilityService
+     */
+    private $checkAvailabilityService;
+
+    /**
+     * MessageController constructor.
+     */
+    public function __construct() {
+        $this->appointmentService = new AppointmentService();
+        $this->checkAvailabilityService = new CheckAvailabilityService();
     }
 
     /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function index() {
-        $data = $this->service->get($this->paginate);
+        $data = toObject([
+            'appointments'   => $this->appointmentService->fetchAppointments($this->paginate),
+            'availabilities' => $this->checkAvailabilityService->fetchAvailabilities($this->paginate)
+        ]);
         return view('agent.message', compact('data'));
     }
 
@@ -44,33 +51,80 @@ class MessageController extends Controller
      * @param Request $request
      * @param $id
      *
-     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
+     * @return JsonResponse|RedirectResponse
      */
-    public function confirmMeeting(Request $request, $id) {
+    public function accept(Request $request, $id) {
         $data = null;
-        if($this->service->approveAppointment($id))
-            $data = $this->service->messages($id)->first();
+        if($this->appointmentService->accept($id))
+            $data = $this->appointmentService->messages($id);
         return sendResponse($request, $data);
     }
 
-    /**
-     * @param $id
-     *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function inbox($id) {
-        $collection = $this->service->loadMessages($id)->first();
-        return view('agent.inbox', compact('collection'));
+    public function deny() {
+
     }
 
     /**
      * @param Request $request
      * @param $id
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse|RedirectResponse
      */
-    public function send(Request $request, $id) {
-        $res = $this->service->send($id, $request);
+    public function archiveInbox(Request $request, $id) {
+        $response = $this->appointmentService->archive($id);
+        return sendResponse($request, $response, 'Chat added to Archive.');
+    }
+
+    /**
+     * @param Request $request
+     * @param $id
+     *
+     * @return JsonResponse|RedirectResponse
+     */
+    public function archiveAvailability(Request $request, $id) {
+        $response = $this->checkAvailabilityService->archive($id);
+        return sendResponse($request, $response, 'Chat added to Archive.');
+    }
+
+    /**
+     * @param $id
+     *
+     * @return Factory|View
+     */
+    public function loadInbox($id) {
+        $collection = toObject($this->appointmentService->messages($id));
+        return view('agent.inbox', compact('collection'))->with('route', 'agent.sendInboxMessage');
+    }
+
+    /**
+     * @param $id
+     *
+     * @return Factory|View
+     */
+    public function loadAvailability($id) {
+        $collection = toObject($this->checkAvailabilityService->messages($id));
+        return view('agent.inbox', compact('collection'))->with('route', 'agent.sendAvailabilityMessage');
+    }
+
+    /**
+     * @param Request $request
+     * @param $id
+     *
+     * @return JsonResponse
+     */
+    public function replyInbox(Request $request, $id) {
+        $res = $this->appointmentService->reply($id, $request);
+        return sendResponse($request, $res, null);
+    }
+
+    /**
+     * @param Request $request
+     * @param $id
+     *
+     * @return JsonResponse|RedirectResponse
+     */
+    public function replyAvailability(Request $request, $id) {
+        $res = $this->checkAvailabilityService->reply($id, $request);
         return sendResponse($request, $res, null);
     }
 }

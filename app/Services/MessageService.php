@@ -10,16 +10,16 @@ namespace App\Services;
 
 use App\Forms\AppointmentForm;
 use App\Forms\MessageForm;
-use App\Repository\ContactRepo;
+use App\Repository\AppointmentRepo;
 use App\Repository\ListingRepo;
-use App\Repository\MessageRepo;
+use App\Repository\AppointmentMessageRepo;
 use App\Repository\UserRepo;
 use Illuminate\Support\Facades\DB;
 
 class MessageService {
 
     /**
-     * @var MessageRepo
+     * @var AppointmentMessageRepo
      */
     private $cRepo;
 
@@ -29,7 +29,7 @@ class MessageService {
     private $uRepo;
 
     /**
-     * @var MessageRepo
+     * @var AppointmentMessageRepo
      */
     private $mRepo;
 
@@ -41,12 +41,12 @@ class MessageService {
     /**
      * MessageService constructor.
      *
-     * @param ContactRepo $cRepo
+     * @param AppointmentRepo $cRepo
      * @param UserRepo $uRepo
-     * @param MessageRepo $mRepo
+     * @param AppointmentMessageRepo $mRepo
      * @param ListingRepo $lRepo
      */
-    public function __construct(ContactRepo $cRepo, UserRepo $uRepo, MessageRepo $mRepo, ListingRepo $lRepo) {
+    public function __construct(AppointmentRepo $cRepo, UserRepo $uRepo, AppointmentMessageRepo $mRepo, ListingRepo $lRepo) {
         $this->cRepo = $cRepo;
         $this->lRepo = $lRepo;
         $this->mRepo = $mRepo;

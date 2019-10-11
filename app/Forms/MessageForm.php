@@ -6,9 +6,12 @@
  * @project no-fee-rental
  */
 
-
 namespace App\Forms;
 
+/**
+ * Class AppointmentMessageForm
+ * @package App\Forms
+ */
 class MessageForm extends BaseForm {
 
     /**
@@ -19,7 +22,12 @@ class MessageForm extends BaseForm {
     /**
      * @var integer
      */
-    public $contact_id;
+    public $appointment_id;
+
+    /**
+     * @var integer
+     */
+    public $check_availability_id;
 
     /**
      * @var integer
@@ -31,9 +39,10 @@ class MessageForm extends BaseForm {
      */
     public function toArray() {
         return [
-            'message'    => $this->message,
-            'contact_id' => $this->contact_id,
-            'align'      => $this->align
+            'message'               => $this->message,
+            'appointment_id'        => $this->appointment_id,
+            'check_availability_id' => $this->check_availability_id,
+            'align'                 => $this->align
         ];
     }
 
@@ -42,9 +51,8 @@ class MessageForm extends BaseForm {
      */
     public function rules() {
         return [
-            'message'    => 'required',
-            'contact_id' => 'required',
-            'align'      => 'required'
+            'message'        => 'required',
+            'align'          => 'required'
         ];
     }
 }

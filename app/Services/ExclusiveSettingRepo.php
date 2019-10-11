@@ -6,19 +6,17 @@
  * @project no-fee-rental
  */
 
-
 namespace App\Repository;
 
+use App\ExclusiveSettings;
 
-use App\NotificationSettings;
-
-class NotificationSettingRepo extends BaseRepo {
+class ExclusiveSettingRepo extends BaseRepo {
 
     /**
      * NotificationSettingRepo constructor.
      */
     public function __construct() {
-        parent::__construct(new NotificationSettings());
+        parent::__construct(new ExclusiveSettings());
     }
 
     /**
