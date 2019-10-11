@@ -28,12 +28,20 @@
                         @endif
                         @foreach($team as $member)
                         <li>
-                            <img src="{{ asset($member->friends->profile_image ?? DUI)}}" alt="" class="main-img" />
+                            <div class="unfriend-user">
+                                <a href="{{ route('agent.unFriend', $member->id) }}" class="">Unfriend</a>
+                            </div>
+
+                            <div class="img-wrapp">
+                                <img src="{{ asset($member->friends->profile_image ?? DUI)}}" alt="" class="main-img" />
+                            </div>
+
                             <div class="name">{{ $member->friends->first_name.' '.$member->friends->last_name }}</div>
                             <a href="#" class="team-mail">{{ $member->friends->email }}</a>
                             <div class="actions-btns">
                                 <a href="#" class="btn-default"><i class="fa fa-user"></i> Profile</a>
                                 <a href="#" class="btn-default"><i class="fa fa-envelope"></i> Contact</a>
+
                             </div>
                         </li>
                         @endforeach

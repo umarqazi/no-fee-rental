@@ -1384,6 +1384,21 @@ header .agent-avtar .avtar:hover div ul {
 .neighbourhood-table{
     padding: 30px 0px;
 }
+.unfriend-user{
+  text-align: right;
+}
+.unfriend-user a{
+  border: #ddd solid 1px;
+  background: none;
+  color: #929292;
+  padding: 5px 20px;
+  border-radius:50px;
+}
+.unfriend-user a:hover{
+  background: #223971;
+  color: #fff;
+  border: #223971 solid 1px;;
+}
 @media only screen and (max-width:767px){
   .dataTables_filter{
     float: left !important;

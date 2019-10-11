@@ -39,6 +39,7 @@ Route::get('/team', 'Agent\MemberController@index')->name('agent.team');
 Route::get('/all-invites', 'Agent\MemberController@get')->name('agent.getInvites');
 Route::post('/invite-agent', 'Agent\MemberController@invite')->name('agent.inviteMember');
 Route::get('/accept-invitation/{token}', 'Agent\MemberController@acceptInvitation')->name('agent.acceptInvitation');
+Route::get('/un-friend/{id}', 'Agent\MemberController@unFriend')->name('agent.unFriend');
 
 // Messaging Routes
 Route::post('/accept-meeting/{id}', 'Agent\AppointmentController@accept');
