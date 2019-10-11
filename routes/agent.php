@@ -42,10 +42,14 @@ Route::get('/accept-invitation/{token}', 'Agent\MemberController@acceptInvitatio
 Route::get('/un-friend/{id}', 'Agent\MemberController@unFriend')->name('agent.unFriend');
 
 // Messaging Routes
-Route::post('/accept-meeting/{id}', 'Agent\AppointmentController@accept');
-Route::get('/view-appointments', 'Agent\AppointmentController@index')->name('agent.messageIndex');
-Route::get('/load-chat/{id}', 'Agent\AppointmentController@inbox')->name('agent.loadChat');
-Route::post('/send-message/{id}', 'Agent\AppointmentController@reply')->name('agent.sendMessage');
+Route::post('/accept-meeting/{id}', 'Agent\MessageController@accept');
+Route::get('/view-contacts', 'Agent\MessageController@index')->name('agent.messageIndex');
+Route::get('/load-chat/inbox/{id}', 'Agent\MessageController@loadInbox')->name('agent.loadAppointmentChat');
+Route::get('/load-chat/availabilities/{id}', 'Agent\MessageController@loadAvailability')->name('agent.loadAvailabilityChat');
+Route::post('/send-message/inbox/{id}', 'Agent\MessageController@replyInbox')->name('agent.sendInboxMessage');
+Route::post('/send-message/availability/{id}', 'Agent\MessageController@replyAvailability')->name('agent.sendAvailabilityMessage');
+Route::get('/archive-inbox-chat/{id}', 'Agent\MessageController@archiveInbox')->name('agent.archiveAppointmentChat');
+Route::get('/archive-availability-chat/{id}', 'Agent\MessageController@archiveAvailability')->name('agent.archiveAvailabilityChat');
 
 // Calender Routes
 Route::post('/add-event', 'Agent\CalendarController@create')->name('agent.addEvent');

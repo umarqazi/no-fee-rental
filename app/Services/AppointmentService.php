@@ -9,10 +9,10 @@
 namespace App\Services;
 
 use App\Forms\AppointmentForm;
-use App\Forms\AppointmentMessageForm;
+use App\Forms\MessageForm;
 use Illuminate\Support\Facades\DB;
 use App\Repository\AppointmentRepo;
-use App\Repository\AppointmentMessageRepo;
+use App\Repository\MessageRepo;
 
 /**
  * Class AppointmentService
@@ -26,16 +26,16 @@ class AppointmentService {
     protected $appointmentRepo;
 
     /**
-     * @var AppointmentMessageRepo
+     * @var MessageRepo
      */
-    protected $appointmentMessageRepo;
+    protected $messageRepo;
 
     /**
      * AppointmentService constructor.
      */
     public function __construct() {
+        $this->messageRepo = new MessageRepo();
         $this->appointmentRepo = new AppointmentRepo();
-        $this->appointmentMessageRepo = new AppointmentMessageRepo();
     }
 
     /**
@@ -46,11 +46,11 @@ class AppointmentService {
     public function create($request) {
         DB::beginTransaction();
         $appointment = $this->__isNewAppointment($request);
-        if($appointment === true) {
+        if(!$appointment) {
             $appointment = $this->__validateAppointmentForm($request);
             $appointment = $this->appointmentRepo->create($appointment->toArray());
             if($appointment) {
-                $appointmentMessage = $this->__validateAppointmentMessageForm($appointment->id, $request);
+                $appointmentMessage = $this->__validateMessageForm($appointment->id, $request);
                 $this->__sendMessage($appointmentMessage->toArray());
                 DB::commit();
                 return true;
@@ -70,7 +70,7 @@ class AppointmentService {
      * @return mixed
      */
     public function reply($id, $request) {
-        $appointmentMessage = $this->__validateAppointmentMessageForm($id, $request);
+        $appointmentMessage = $this->__validateMessageForm($id, $request);
         return $this->__sendMessage($appointmentMessage->toArray());
     }
 
@@ -96,8 +96,13 @@ class AppointmentService {
 
     }
 
-    public function archive() {
-
+    /**
+     * @param $id
+     *
+     * @return mixed
+     */
+    public function archive($id) {
+        return $this->appointmentRepo->update($id, ['is_archived' => true]);
     }
 
     /**
@@ -106,10 +111,10 @@ class AppointmentService {
      * @return mixed
      */
     public function fetchAppointments($paginate) {
-        return [
+        return toObject([
             'active'   => $this->appointmentRepo->getActiveAppointments($paginate),
             'inactive' => $this->appointmentRepo->getInactiveAppointments($paginate)
-        ];
+        ]);
     }
 
     /**
@@ -118,7 +123,7 @@ class AppointmentService {
      * @return mixed
      */
     private function __sendMessage($appointmentMessage) {
-        return $this->appointmentMessageRepo->create($appointmentMessage);
+        return $this->messageRepo->create($appointmentMessage);
     }
 
     /**
@@ -150,10 +155,10 @@ class AppointmentService {
      * @param $appointment_id
      * @param $request
      *
-     * @return AppointmentMessageForm
+     * @return MessageForm
      */
-    private function __validateAppointmentMessageForm($appointment_id, $request) {
-        $form = new AppointmentMessageForm();
+    private function __validateMessageForm($appointment_id, $request) {
+        $form = new MessageForm();
         $form->appointment_id = $appointment_id;
         $form->align          = myId();
         $form->message        = $request->message;

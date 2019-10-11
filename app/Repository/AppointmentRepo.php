@@ -39,13 +39,17 @@ class AppointmentRepo extends BaseRepo {
         return $this->model->inactiveappointments()->paginate($paginate, ['*'], 'request');
     }
 
+    public function getArchived() {
+
+    }
+
     /**
      * @param $id
      *
      * @return mixed
      */
     public function getMessages($id) {
-        return $this->find(['id' =>$id])->withall();
+        return $this->find(['id' => $id])->withall();
     }
 
     /**
@@ -55,6 +59,6 @@ class AppointmentRepo extends BaseRepo {
      */
     public function isNewRequest($listing_id) {
         $appointment = $this->find(['listing_id' => $listing_id, 'from' => myId()])->first();
-        return $appointment ?? true;
+        return $appointment ? true : false;
     }
 }

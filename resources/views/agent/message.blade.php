@@ -10,7 +10,12 @@
                 <ul class="nav nav-pills">
                     <li class="nav-item">
                         <a class="nav-link active" data-toggle="pill" href="#tab-1">
-                            Inbox ({{ $data->active->total() }})
+                            Inbox ({{ $data->appointments->active->total() }})
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="pill" href="#tab-4">
+                            Checking Availability ({{ $data->availabilities->total() }})
                         </a>
                     </li>
                     <li class="nav-item">
@@ -20,7 +25,7 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="pill" href="#tab-3">
-                            Meeting Request ({{ $data->inactive->total() }})
+                            Meeting Request ({{ $data->appointments->inactive->total() }})
                         </a>
                     </li>
                 </ul>
@@ -32,8 +37,8 @@
                     <div class="tab-pane active" id="tab-1">
                         @include('agent.message-tabs.inbox')
                     </div>
+                    {{--Archive--}}
                     <div class="tab-pane fade" id="tab-2">
-
                         <div class="message-row">
                             <h3>Elitan</h3>
                             <p>Reminder from nofeerentals: You have still not replied to Ethan in regards Reminder from RentHop: You have still not replied to... <a href="" data-toggle="modal" data-target="#message-modal">Read More</a></p>
@@ -51,10 +56,13 @@
                             <div class="date-text"> Sun, 05/5/19, 10:14 am</div>
                         </div>
                     </div>
-
                     {{--Request Meeting--}}
                     <div class="tab-pane fade" id="tab-3">
                         @include('agent.message-tabs.meeting_request')
+                    </div>
+                    {{--Availability--}}
+                    <div class="tab-pane fade" id="tab-4">
+                        @include('agent.message-tabs.availabilities')
                     </div>
                 </div>
             </div>

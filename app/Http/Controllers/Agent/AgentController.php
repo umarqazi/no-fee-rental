@@ -37,7 +37,8 @@ class AgentController extends Controller {
 	 */
 	public function profile() {
 		$user = mySelf();
-		return view('agent.profile', compact('user'));
+		$exclusiveSettings = $this->userService->getExclusiveSettings(myId());
+		return view('agent.profile', compact('user','exclusiveSettings'));
 	}
 
 	/**

@@ -9,15 +9,15 @@
 namespace App\Repository;
 
 use App\Appointment;
-use App\AppointmentMessage;
+use App\Message;
 
-class AppointmentMessageRepo extends BaseRepo {
+class MessageRepo extends BaseRepo {
 
     /**
      * MessageRepo constructor.
      */
     public function __construct() {
-        parent::__construct(new AppointmentMessage());
+        parent::__construct(new Message());
     }
 
     /**
