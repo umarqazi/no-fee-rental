@@ -1,6 +1,6 @@
 
-@if( $data->inactive->total() > 0)
-    @foreach ($data->inactive as $request)
+@if( $data->appointments->inactive->total() > 0)
+    @foreach ($data->appointments->inactive as $request)
         <div class="message-row">
             <h3>{{ $request->sender->first_name.' '.$request->sender->last_name }}</h3>
             <p>Reminder from nofeerentals: You have still not replied to {{ $request->sender->first_name }} in regards Reminder from RentHop<a href="" data-toggle="modal" data-target="#message-modal">Read More</a></p>

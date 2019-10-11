@@ -25,19 +25,19 @@
         </div>
         <div class="appointment-radio-btn">
             <div class="selection">
-                <input id="Morning" name="appointment_time" type="radio">
+                <input id="Morning" name="appointment_time" value="10:00 am" type="radio">
                 <label for="Morning">Morning <br>
                     10am - 12pm
                 </label>
             </div>
             <div class="selection">
-                <input id="Afternoon" name="appointment_time" type="radio">
+                <input id="Afternoon" name="appointment_time" value="12:00 pm" type="radio">
                 <label for="Afternoon">Afternoon <br>
                     12pm - 3pm
                 </label>
             </div>
             <div class="selection">
-                <input id="Evening" name="appointment_time" type="radio">
+                <input id="Evening" name="appointment_time" value="03:00 pm" type="radio">
                 <label for="Evening">Evening <br>
                     3pm - 6pm
                 </label>
@@ -48,7 +48,6 @@
             <button type="submit"><img src="{{ asset('assets/images/send-msg.png') }}" alt="" /></button>
         </div>
         {!! Form::close() !!}
-        <!--end radio button -->
     </div>
 @else
     <div>You are not allowed to make appointment request</div>

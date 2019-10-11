@@ -1,12 +1,13 @@
 
-@if( $data->active->total() > 0)
-    @foreach ($data->active as $appointment)
+@if( $data->appointments->active->total() > 0)
+    @foreach ($data->appointments->active as $appointment)
         <div class="message-row row">
-            <div class="col-sm-10">
+            <div class="col-sm-6 col-lg-10 col-12">
                 <h3>{{ $appointment->sender->first_name.' '.$appointment->sender->last_name }}</h3>
             </div>
-            <div class="col-sm-2">
-                <a href="{{ route('agent.loadChat', $appointment->id) }}" class="view-chat"> View</a>
+            <div class="col-sm-6 col-lg-2 col-12 view-buttons">
+                <a href="{{ route('agent.loadAppointmentChat', $appointment->id) }}" class="view-chat-view"> View</a>
+                <a href="{{ route('agent.archiveAppointmentChat', $appointment->id) }}" class="view-chat-archive"> Archive Chat</a>
             </div>
             <div class="property">
                 <img src="{{ asset($appointment->listing->thumbnail ?? DLI) }}" alt="" />
