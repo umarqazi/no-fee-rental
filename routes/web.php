@@ -100,3 +100,7 @@ Route::get('/migrate-fresh-seed', function() {
     artisan(['migrate:fresh', 'db:seed']);
     dd('Migration fresh with seeding..');
 });
+Route::get('/email-notification', function() {
+    return view('mails.email_notifcation');
+});
+

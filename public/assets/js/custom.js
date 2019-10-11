@@ -1,5 +1,7 @@
 $(() => {
-	new WOW().init();	
+	new WOW().init();
+
+
 	$("header .menu-icon").click(function () {
 		$(".main-wrapper aside").slideDown();
 	});

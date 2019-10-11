@@ -217,9 +217,7 @@
                                 </div>
                             </div>
                             <div class="col-sm-12">
-                                <div class="form-group">
                                     <p class="finding-home-text">If you would like to syndicate listing into no fee rentals nyc, please use tha same email address that you use for your RealtyMX..</p>
-                                </div>
                             </div>
 
                             <div class="col-sm-6">

@@ -5,8 +5,6 @@ $(document).ready(function() {
     $("#signup-option1").trigger('click');
     $(".license_num").hide();
 
-    $("#phone_number").addClass('col-sm-12');
-
     $(".property-thumb .heart-icon").click(function() {
         $(this).toggleClass('favourite');
     });
