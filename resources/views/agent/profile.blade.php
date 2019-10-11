@@ -120,15 +120,18 @@
                                 <label> Exclusive Settings</label>
                                 <div class="exclusive-chkboxes">
                                     <div class="custom-control custom-checkbox">
-                                        <input class="custom-control-input" id="exclusive-1" name="amenities[]" type="checkbox" value="two">
+                                        <input class="custom-control-input" id="exclusive-1" name="allow_web_notifications" type="checkbox"
+                                               value="two" {{ $exclusiveSettings->allow_web_notification === 1 ? 'checked' : null }}>
                                         <label class="custom-control-label" for="exclusive-1">Allow Web Notifications</label>
                                     </div>
                                     <div class="custom-control custom-checkbox">
-                                        <input class="custom-control-input" id="exclusive-2" name="amenities[]" type="checkbox" value="two">
+                                        <input class="custom-control-input" id="exclusive-2" name="allow_email_notifications" type="checkbox"
+                                               value="two" {{ $exclusiveSettings->allow_email === 1 ? 'checked' : null }}>
                                         <label class="custom-control-label" for="exclusive-2">Allow Email Notifications</label>
                                     </div>
                                     <div class="custom-control custom-checkbox">
-                                        <input class="custom-control-input" id="exclusive-3" name="amenities[]" type="checkbox" value="one">
+                                        <input class="custom-control-input" id="exclusive-3" name="disable" type="checkbox"
+                                               value="one" {{ $exclusiveSettings->allow_web_notification === 0 && $exclusiveSettings->allow_email === 0 ? 'checked' : null }}>
                                         <label class="custom-control-label" for="exclusive-3">Disable All</label>
                                     </div>
                                 </div>
@@ -161,6 +164,7 @@
     {!! HTML::script('assets/js/vendor/amsify.js') !!}
     {!! HTML::script('assets/js/profile.js') !!}
     <script>
+
         $('.edit-profile').on('click', function(e) {
             let lang = [];
             let neighbors = []
