@@ -21,43 +21,11 @@ class NeighborhoodRepo extends BaseRepo {
     }
 
     /**
-     * @return mixed
-     */
-    public function fetch() {
-        return $this->model->withlistings();
-    }
-
-    /**
-     * @return mixed
-     */
-    public function appendQuery() {
-        return $this->model->query();
-    }
-
-    /**
      * @param $neighbour
      *
      * @return mixed
      */
-    public function findNeighborhood($neighbour) {
+    public function getNeighborhoodWithListing($neighbour) {
         return $this->find(['name' => $neighbour])->withlistings();
-    }
-
-    /**
-     * @param $neighbour
-     *
-     * @return mixed
-     */
-    public function recent($neighbour) {
-        return $this->find(['name' => $neighbour])->recent();
-    }
-
-    /**
-     * @param $neighbour
-     *
-     * @return mixed
-     */
-    public function cheaper($neighbour) {
-        return $this->find(['name' => $neighbour])->cheaper();
     }
 }

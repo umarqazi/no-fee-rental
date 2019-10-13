@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Services\NeighborhoodService;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class NeighborhoodController extends Controller {
 
@@ -24,7 +28,7 @@ class NeighborhoodController extends Controller {
     /**
      * @param Request $request
      *
-     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
+     * @return JsonResponse|RedirectResponse
      */
     public function all(Request $request) {
         $neighbors = $this->neighborhoodService->get();
@@ -32,33 +36,35 @@ class NeighborhoodController extends Controller {
     }
 
     /**
-     * @param Request $request
-     *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return RedirectResponse
      */
-    public function index(Request $request) {
-        $data = null;
-        $showMap = true;
-        if(count($request->all()) < 1) {
-//            $data = $this->sortListing($request->all());
-        } else {
-            $data = toObject($this->neighborhoodService->index());
-        }
-        return view('neighborhood', compact('data', 'showMap'));
+    public function index() {
+        $neighborhood = $this->neighborhoodService->first();
+        return redirect()->route('web.ListsByNeighborhood', $neighborhood->name);
     }
 
     /**
-     * @param $sort
-     * @param $neighbour
+     * @param $neighborhood
+     *
+     * @return Factory|View
+     */
+    public function find($neighborhood) {
+        $data = toObject($this->neighborhoodService->find($neighborhood));
+        return view('neighborhood', compact('data'));
+    }
+
+    /**
+     * @param $neighborhood
+     * @param $order
      *
      * @return object
      */
-    public function sortListing($sort, $neighbour) {
-        collect($sort)->map(function($method) use ($neighbour) {
-            if(method_exists($this->neighborhoodService, $method)) {
-                $this->neighborhoodService->{$method}($neighbour);
-            }
-        });
-        return toObject($this->neighborhoodService->fetchQuery());
+    public function sort($neighborhood, $order) {
+        if(method_exists($this->neighborhoodService, $order)) {
+            $data = toObject($this->neighborhoodService->sortBase([ 'name' => $neighborhood ], 'listings', $order)->fetch());
+            return view('neighborhood', compact('data'))->with('sort', $order);
+        }
+
+        return redirect()->back();
     }
 }

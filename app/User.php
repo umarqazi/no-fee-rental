@@ -61,7 +61,7 @@ class User extends Authenticatable implements CanResetPassword {
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-	public function neighborExpertese() {
+	public function neighborExpertise() {
 	    return $this->belongsToMany(Neighborhoods::class, 'agent_neighborhoods', 'agent_id', 'id');
     }
 
@@ -130,5 +130,14 @@ class User extends Authenticatable implements CanResetPassword {
      */
     public function scopeWithNeighbors($query) {
 	    return $query->with('neighborExpertese');
+    }
+
+    /**
+     * @param $query
+     *
+     * @return mixed
+     */
+    public function scopeWithAll($query) {
+        return $query->with('listings', 'company', 'agentInvites', 'neighborExpertise');
     }
 }

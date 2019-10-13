@@ -4291,8 +4291,8 @@ footer .copyright .social-icons li a:hover {
     #signup_form .submit-clm .btn-default{
         position: inherit;
         padding: 0px 100px;
-            
-    }   
+
+    }
 }
 @media only screen and (max-width: 991px) {
     .header-bg .search-property .search-fld {
@@ -5290,9 +5290,6 @@ footer .copyright .social-icons li a:hover {
     }
 }
 
-
-
-
 .inner-static-page-zero {
     padding-top: 0px 0px 120px !important;
 }
@@ -5305,4 +5302,9 @@ footer .copyright .social-icons li a:hover {
     position:absolute;
     top:15px;
     right: 10px;
+}
+.search-btn button{
+    margin-left: 10px;
+    padding: 0px 10px !important;
+    text-transform: initial !important;
 }

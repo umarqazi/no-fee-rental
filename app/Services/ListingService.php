@@ -19,12 +19,7 @@ use App\Repository\ListingImagesRepo;
  * Class ListingService
  * @package App\Services
  */
-class ListingService {
-
-    /**
-     * @var ListingRepo
-     */
-    protected $listingRepo;
+class ListingService extends ManageBuildingService {
 
     /**
      * @var AmenityRepo
@@ -45,7 +40,7 @@ class ListingService {
      * ListingService constructor.
      */
     public function __construct() {
-        $this->listingRepo  = new ListingRepo();
+        parent::__construct();
         $this->listingImagesRepo = new ListingImagesRepo();
         $this->amenitiesRepo = new AmenityRepo();
         $this->openHouseRepo  = new OpenHouseRepo();
@@ -243,6 +238,7 @@ class ListingService {
         if($listing = $this->createList($this->validateForm($request))) {
             $this->amenitiesRepo->attach($listing, $request->amenities);
             $this->createOpenHouse($listing->id, $request->open_house);
+            $this->addBuilding($listing);
             DB::commit();
             return $listing->id;
         }

@@ -29,35 +29,35 @@ if (!defined('RENTER')) {
 }
 
 /**
- * Publish Status
+ * Active status
  */
 if (!defined('ACTIVE')) {
 	define('ACTIVE', 1);
 }
 
 /**
- * Unpublish Status
+ * Inactive status
  */
 if (!defined('DEACTIVE')) {
 	define('DEACTIVE', 0);
 }
 
 /**
- * Reject Feature
+ * Reject feature
  */
 if (!defined('REJECTFEATURED')) {
 	define('REJECTFEATURED', 0);
 }
 
 /**
- * Approve Feature
+ * Approve feature
  */
 if (!defined('APPROVEFEATURED')) {
 	define('APPROVEFEATURED', 1);
 }
 
 /**
- * Request Feature
+ * Request feature
  */
 if (!defined('REQUESTFEATURED')) {
 	define('REQUESTFEATURED', 2);
@@ -84,34 +84,72 @@ if (!defined('PENDINGLISTING')) {
 	define('PENDINGLISTING', 2);
 }
 
-if(!defined('CHEAPER')) {
-    define('CHEAPER', 'ASC');
+/**
+ * Cheapest listing
+ */
+if(!defined('CHEAPEST')) {
+    define('CHEAPEST', 'ASC');
 }
 
+/**
+ * Recent listing
+ */
 if(!defined('RECENT')) {
     define('RECENT', 'DSC');
 }
 
-if(!defined('PET_POLICY')) {
-    define('PET_POLICY', 2);
+/**
+ * Expensive listing
+ */
+if(!defined('EXPENSIVE')) {
+    define('EXPENSIVE', 'DSC');
 }
 
+/**
+ * Oldest listing
+ */
+if(!defined('OLDEST')) {
+    define('OLDEST', 'ASC');
+}
+
+/**
+ * Exclusive Listing
+ */
 if(!defined('EXCLUSIVE')) {
     define('EXCLUSIVE', 'exclusive');
 }
 
+/**
+ * Listing Title Limiter (List View)
+ */
 if(!defined('STR_LIMIT_LIST_VIEW')) {
     define('STR_LIMIT_LIST_VIEW', 40);
 }
 
+/**
+ * Listing Title Limiter (Grid View)
+ */
 if(!defined('STR_LIMIT_GRID_VIEW')) {
     define('STR_LIMIT_GRID_VIEW', 25);
 }
 
+/**
+ * Default Listing Image
+ */
 if(!defined('DLI')) {
     define('DLI', 'assets/images/default-images/listing-thumb.jpg');
 }
 
+/**
+ * Default User Image
+ */
 if(!defined('DUI')) {
     define('DUI', 'assets/images/default-images/user.jpeg');
+}
+
+/**
+ * Default Image Placeholder
+ */
+if(!defined('DIP')) {
+    define('DIP', 'assets/images/default-images/user.jpeg');
 }

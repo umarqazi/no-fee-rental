@@ -4,7 +4,9 @@ namespace App;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
-use PhpParser\Builder;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * Class Listing
@@ -28,35 +30,35 @@ class Listing extends Model {
 	];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return BelongsToMany
      */
     public function amenities() {
         return $this->belongsToMany(Amenities::class, 'listing_amenities', 'listing_id', 'amenity_id');
     }
 
 	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 * @return HasMany
 	 */
 	public function images() {
 		return $this->hasMany(ListingImages::class, 'listing_id');
 	}
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
 	public function openHouses() {
 	    return $this->hasMany(OpenHouse::class, 'listing_id');
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return HasOne
      */
     public function neighborhood() {
         return $this->hasOne(Neighborhoods::class, 'id', 'neighborhood_id');
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return HasOne
      */
 	public function agent() {
 		return $this->hasOne(User::class, 'id', 'user_id');
@@ -95,6 +97,42 @@ class Listing extends Model {
 		return $query->where($clause);
 	}
 
+    /**
+     * @param $query
+     *
+     * @return mixed
+     */
+    public function scopeFeatured($query) {
+        return $query->whereis_featured(APPROVEFEATURED);
+    }
+
+    /**
+     * @param $query
+     *
+     * @return mixed
+     */
+    public function scopeRequestFeatured($query) {
+        return $query->whereis_featured(REQUESTFEATURED)->latest();
+    }
+
+    /**
+     * @param $query
+     *
+     * @return mixed
+     */
+    public function scopeActiveFeatured($query) {
+        return $query->featured()->whereVisibility(ACTIVE);
+    }
+
+    /**
+     * @param $query
+     *
+     * @return mixed
+     */
+    public function scopeInactiveFeatured($query) {
+        return $query->featured()->whereVisibility(DEACTIVE);
+    }
+
 	/**
 	 * @param $query
 	 *
@@ -103,6 +141,24 @@ class Listing extends Model {
 	public function scopeWithAgent($query) {
 		return $query->with('agent');
 	}
+
+    /**
+     * @param $query
+     *
+     * @return mixed
+     */
+    public function scopeWithAmenities($query) {
+        return $query->with('amenities');
+    }
+
+    /**
+     * @param $query
+     *
+     * @return mixed
+     */
+    public function scopeWithNeighborhood($query) {
+        return $query->with('neighborhood');
+    }
 
     /**
      * @param $query
@@ -129,42 +185,6 @@ class Listing extends Model {
 	 */
 	public function scopeWithAll($query) {
 		return $query->with(['agent.company', 'images', 'openHouses', 'amenities', 'neighborhood']);
-	}
-
-	/**
-	 * @param $query
-	 *
-	 * @return mixed
-	 */
-	public function scopeFeatured($query) {
-		return $query->whereis_featured(APPROVEFEATURED);
-	}
-
-	/**
-	 * @param $query
-	 *
-	 * @return mixed
-	 */
-	public function scopeRequestFeatured($query) {
-		return $query->whereis_featured(REQUESTFEATURED)->latest();
-	}
-
-	/**
-	 * @param $query
-	 *
-	 * @return mixed
-	 */
-	public function scopeActiveFeatured($query) {
-		return $query->featured()->whereVisibility(ACTIVE);
-	}
-
-	/**
-	 * @param $query
-	 *
-	 * @return mixed
-	 */
-	public function scopeInactiveFeatured($query) {
-		return $query->featured()->whereVisibility(DEACTIVE);
 	}
 
 	/**
@@ -198,15 +218,6 @@ class Listing extends Model {
      *
      * @return mixed
      */
-    public function scopeCheaper($query) {
-	    return $query->orderBy('rent', CHEAPER);
-    }
-
-    /**
-     * @param $query
-     *
-     * @return mixed
-     */
     public function scopeRecent($query) {
         return $query->orderBy('created_at', RECENT);
     }
@@ -216,9 +227,25 @@ class Listing extends Model {
      *
      * @return mixed
      */
-    public function scopePolicy($query) {
-//	    return $query->whereHas('listingTypes', function($subQuery) {
-//	        return $subQuery->where('property_type', PET_POLICY);
-//        });
+    public function scopeOldest($query) {
+        return $query->orderBy('created_at', OLDEST);
+    }
+
+    /**
+     * @param $query
+     *
+     * @return mixed
+     */
+    public function scopeCheapest($query) {
+	    return $query->orderBy('rent', CHEAPEST);
+    }
+
+    /**
+     * @param $query
+     *
+     * @return mixed
+     */
+    public function scopeExpensive($query) {
+        return $query->orderBy('rent', EXPENSIVE);
     }
 }

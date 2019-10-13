@@ -48,7 +48,7 @@ class RealtyMXService extends ListingService {
         $realty_id = explode('_', $realty_id);
         $images = $this->imageCollection($property->media->photo);
         $list['realty_id']        = $realty_id[1] ?? str_random(12);
-        $list['unique_slug']      = str_random(10);
+        $list['unique_slug']      = str_random(20);
         $list['user_id']          = $user_id;
         $list['name']             = $agent->name ?? null;
         $list['email']            = $agent->email ?? null;
