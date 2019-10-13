@@ -34,6 +34,8 @@ $(() => {
 		$(this).toggleClass('favourite');
 	});
 
+
+
 	//
 
 	$('#price-range-submit').hide();
@@ -261,6 +263,11 @@ $('#price-range-submit').hide();
 		$(".mobile-menu").slideUp();
 	});
 
+	$(".mobile-view-dropdown").on('click', function () {
+    	$(this).find("i").toggleClass('fa-bars fa-times');
+    	$("#mobile-tabs-collapse").slideToggle();
+	});
+
 	$(".listing-large-view").click(function () {
 		$(this).toggleClass("fa-th fa-th-large")
 		$(".map-wrapper").toggleClass("map-small-view");
@@ -431,12 +438,26 @@ $('#price-range-submit').hide();
     	$('.close-signup-modal').click(function(){
     		$('body').removeClass('signup-modal-scroll');
     	});
+
+    	$("#need-help-btn2").click(function(){
+            $("body").addClass("signup-modal-scroll-getStart");
+        });
+
+        $(".need-help-modal .close").click(function(){
+            $("body").removeClass("signup-modal-scroll-getStart");
+        });
+    	
     	$(document).on("click", function (e) {
 	        if ($(e.target).is("#signup-btn")==false && $(e.target).parents('#signup').length==0 && $(e.target).parents('#login').length==0) {
 	            $("body").removeClass("signup-modal-scroll");
 	        }
     	});
 
+    	$(document).on("click", function (e) {
+	        if ($(e.target).parents(".need-help-modal").length==0) {
+	            $("body").removeClass("signup-modal-scroll-getStart");
+	        }
+    	});
     });
 
 });

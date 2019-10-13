@@ -360,6 +360,16 @@
     overflow-y: auto;
 }
 
+.signup-modal-scroll-getStart {
+    overflow: hidden;
+    padding-right: 17px;
+}
+
+.signup-modal-scroll-getStart .modal {
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
 
 /**/
 
@@ -1185,7 +1195,7 @@
 
 @media only screen and (max-width: 767px) {
     .neighborhood-search {
-        margin: 70px auto 30px;
+        margin: 70px auto;
     }
     .property-wrap .listing-wrapper .listing-row {
         display: block;
@@ -1771,6 +1781,11 @@ main {
     padding-left: 0px;
 }
 
+.company-name {
+    color: black;
+    font-size: 15px;
+    font-weight: 700;
+}
 #check-availability .after-border {
     border-top: 1px solid #B7B7B7;
     margin-top: 15px;

@@ -105,20 +105,30 @@ class UserService {
      */
     public function create($request) {
         $user = $this->form($request);
-        $response = $this->userRepo->create($user->toArray());
-        if (!empty($response)) {
 
-            $email = [
-                'view'       => 'create-user',
-                'first_name' =>  $response->first_name,
-                'to'         =>  $response->email,
-                'subject'    => 'Account Created',
-                'link'       =>  route('user.change_password', $user->remember_token),       ];
+            if ($request->user_type == AGENT) {
+                $agent = new AgentInvitationForm();
+                $agent->invite_by = myId();
+                $agent->email = $request->email;
+                $agent->token = str_random(60);
+                $agent->accept = NULL;
+                $this->agentRepo->invite($agent->toArray());
+                $this->agentMail($agent);
+                return true;
 
-            dispatchEmailQueue($email);
-            return $response;
-        }
-        return false;
+            } else {
+                $response = $this->userRepo->create($user->toArray());
+                $email = [
+                    'view' => 'create-user',
+                    'first_name' => $response->first_name,
+                    'to' => $response->email,
+                    'subject' => 'Account Created',
+                    'link' => route('user.change_password', $user->remember_token),];
+
+                dispatchEmailQueue($email);
+                return $response;
+            }
+
     }
 
 
@@ -465,7 +475,7 @@ class UserService {
      * @return mixed
      */
     public function associatedAgents($id) {
-        return $this->userRepo->find(['company_id' => $id])->get();
+        return $this->userRepo->find(['company_id' => $id])->withcompany()->get();
     }
 
     /**

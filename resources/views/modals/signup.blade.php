@@ -67,7 +67,7 @@
                                     </span> @endif
                         </div>
                     </div>
-                    <div class="col-sm-12">
+                    <div class="col-sm-6">
                         <div class="form-group">
                             {!! Form::text('email', null, ['class'=>'input-style agnet-input', 'id' => 'email', 'placeholder'=>'Email']) !!} @if ($errors->has('email'))
                             <span class="invalid-feedback" role="alert">

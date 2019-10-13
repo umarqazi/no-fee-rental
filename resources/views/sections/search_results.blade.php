@@ -1,4 +1,3 @@
-<div class="container-lg">
     <div class="search-result-wrapper">
         <div class="search-listing">
             <div class="row">
@@ -176,7 +175,6 @@
                 <div id="desktop-map"></div>
             </div>
         @endif
-    </div>
 </div>
 
 {{--Advance Search Modal--}}
