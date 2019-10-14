@@ -22,6 +22,7 @@ use App\Repository\NeighborhoodRepo;
 use App\Repository\UserRepo;
 use App\User;
 use Illuminate\Support\Facades\DB;
+use Zend\Diactoros\Request;
 
 class UserService {
 
@@ -346,6 +347,11 @@ class UserService {
 
             return $agent->validate();
         }
+        if($UserRes = $this->userRepo->find(['email' => $request->email])->first()) {
+            $this->memberMail($agent);
+            $this->agentRepo->invite($agent->toArray());
+            return true ;
+        }
         $this->agentRepo->invite($agent->toArray());
         $this->agentMail($agent);
         return true;
@@ -556,8 +562,13 @@ class UserService {
     }
 
     /**
-     * fetch Query
+     * Un Friend Agent
      */
+    public function unFriend($id) {
+       return $this->memberRepo->delete($id);
+     /**
+      * fetch Query
+      */
     public function getExclusiveSettings($id) {
         return $this->exclusiveSettingRepo->find(['user_id'=> $id])->first();
     }

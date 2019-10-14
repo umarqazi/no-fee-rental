@@ -72,5 +72,17 @@ class MemberController extends Controller
                ->with(['message' => 'You have been added to Team', 'alert_type' => 'success']);
        }
     }
+
+    /**
+     * un friend Agent
+     */
+    public function unFriend($id) {
+        $this->uService->unFriend($id);
+
+        return redirect(route('agent.team'))
+            ->with(['message' => 'Member Removed Successfully', 'alert_type' => 'success']);
+
+    }
+
 }
 
