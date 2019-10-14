@@ -42,7 +42,8 @@ $(() => {
 
     // Add Listing Form Validations
    $('#listing-form').validate({
-       rules: {
+
+           rules: {
            street_address: "required",
            display_address: "required",
            neighborhood_id: "required",
@@ -84,7 +85,8 @@ $(() => {
            thumbnail: {
                required :  true,
                //required: ($('input[name="old_thumbnail"]').val()) ? false : true,
-               validateExtension: ["jpg", "png", "gif","jpeg"]
+               validateExtension: ["jpg", "png", "gif","jpeg"],
+               maxsize: 5000,
            },
 
            description : "required",
@@ -144,8 +146,9 @@ $(() => {
            },
 
            thumbnail: {
-               required: "Thumbnail is required",
-               validateExtension: "Choose valid thumbnail file"
+               required: "Thumbnail is required.",
+               validateExtension: "Choose valid thumbnail file.",
+               maxsize :  "Image Size should not be greater then 5mb"
            },
 
            description: {
@@ -160,6 +163,16 @@ $(() => {
            email: {
                required: "Email is required."
            },
+       },
+       errorPlacement: function(error, element) {
+           if ( element.attr("name") === "thumbnail" )
+           {
+               error.insertAfter("#error-message");
+           }
+           else
+           {
+               error.insertAfter(element);
+           }
        }
    });
 
@@ -365,4 +378,38 @@ $(() => {
             },
         }
     });
+
+    // Contact_us Form Validations
+    $('#contact_us_form').validate({
+        rules: {
+            name: {
+                required: true,
+            },
+            email: {
+                required: true,
+            },
+            phone_number: {
+                required: true,
+            },
+            comment: {
+                required: true,
+            },
+        },
+
+        messages: {
+            name: {
+                required: "Name is required.",
+            },
+            email: {
+                required: "Email is required.",
+            },
+            phone_number: {
+                required: "Phone Number is required.",
+            },
+            comment: {
+                required: "Message is required.",
+            },
+        }
+    });
+
 });

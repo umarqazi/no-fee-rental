@@ -457,6 +457,15 @@ $('#price-range-submit').hide();
 	            $("body").removeClass("signup-modal-scroll-getStart");
 	        }
     	});
+
+    	// 
+    	$("#advance-search-chkbox input[type='checkbox']").change(function(){
+    	if($(this).is(":checked")){
+        	$(this).parent('#advance-search-chkbox ul li').addClass("white-border-chkbox"); 
+    	}else{
+        	$(this).parent('#advance-search-chkbox ul li').removeClass("white-border-chkbox");  
+    		}
+		});
     });
 
 });

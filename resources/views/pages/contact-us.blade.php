@@ -37,15 +37,15 @@
                     <div class="col-lg-6">
                         <h2 class="text-left">Contact Us</h2>
                         <p> Reach out to us for any enquery</p>
-                        {!! Form::open(['url'=>route('contact-us'), 'class'=>'contact-form', 'method'=>'post', 'enctype'=>'multipart/form-data']) !!}
+                        {!! Form::open(['url'=>route('contact-us'), 'class'=>'contact-form', 'method'=>'post','id'=>'contact_us_form', 'enctype'=>'multipart/form-data']) !!}
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label> Your Name</label>
-                                    {!! Form::text('first_name', null, ['class'=>'input-style', 'placeholder'=>'First Name']) !!}
-                                    @if ($errors->has('first_name'))
+                                    {!! Form::text('name', null, ['class'=>'input-style', 'placeholder'=>'Name']) !!}
+                                    @if ($errors->has('name'))
                                         <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('first_name') }}</strong>
+                                        <strong>{{ $errors->first('name') }}</strong>
                                     </span>
                                     @endif
                                 </div>
@@ -62,11 +62,22 @@
                                     @endif
                                 </div>
                             </div>
-                            
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label> Your Phone Number </label>
+                                    {!! Form::text('phone_number', null, ['class'=>'input-style', 'placeholder'=>'Phone Number']) !!}
+                                    @if ($errors->has('phone_number'))
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('phone_number') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label>Write a Message </label>
-                                    {!! Form::textarea('comment', null, ['class'=>'input-style textArea', 'placeholder'=>'Comment']) !!}
+                                    {!! Form::textarea('comment', null, ['class'=>'input-style textArea', 'placeholder'=>'Message']) !!}
                                     @if ($errors->has('comment'))
                                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('comment') }}</strong>
