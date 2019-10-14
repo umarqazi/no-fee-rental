@@ -2,13 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Listing;
 use App\Services\NeighborhoodService;
+use App\Services\SearchService;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
+/**
+ * Class NeighborhoodController
+ * @package App\Http\Controllers
+ */
 class NeighborhoodController extends Controller {
 
     /**
@@ -50,7 +56,7 @@ class NeighborhoodController extends Controller {
      */
     public function find($neighborhood) {
         $data = toObject($this->neighborhoodService->find($neighborhood));
-        return view('neighborhood', compact('data'))->with('route', 'web.index');
+        return view('neighborhood', compact('data'))->with('route', 'web.advanceNeighborhoodSearch');
     }
 
     /**
@@ -61,10 +67,24 @@ class NeighborhoodController extends Controller {
      */
     public function sort($neighborhood, $order) {
         if(method_exists($this->neighborhoodService, $order)) {
-            $data = toObject($this->neighborhoodService->sortBase([ 'name' => $neighborhood ], 'listings', $order)->fetch());
-            return view('neighborhood', compact('data'))->with('sort', $order);
+            $data = toObject($this->neighborhoodService
+                                  ->sortBase(['name' => $neighborhood ], 'listings', $order)
+                                  ->fetch());
+            return view('neighborhood', compact('data'))
+                    ->with('sort', $order)
+                    ->with('route', 'web.advanceNeighborhoodSearch');
         }
 
         return redirect()->back();
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return Factory|View
+     */
+    public function advanceSearch(Request $request) {
+        $data = toObject($this->neighborhoodService->advanceSearch($request));
+        return view('neighborhood', compact('data'))->with('route', 'web.advanceNeighborhoodSearch');
     }
 }

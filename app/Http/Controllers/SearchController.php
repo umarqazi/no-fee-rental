@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
 use App\Services\SearchService;
+use Illuminate\View\View;
 
 class SearchController extends Controller
 {
@@ -29,23 +31,10 @@ class SearchController extends Controller
     /**
      * @param Request $request
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function advanceSearch(Request $request) {
-        $showMap = true;
-        collect($request->all())->reject(function ($args) {
-            if (is_array($args)) {
-                $args = array_filter($args, function($value) { return !is_null($value) && $value !== ''; });
-            }
-            return empty($args);
-        })->map(function($args, $method) {
-            if(method_exists($this->service, $method)) {
-                $this->service->args = collect($args);
-                $this->service->{$method}();
-                $this->service->args = null;
-            }
-        });
-        $data = toObject($this->service->fetchQuery($this->paginate));
+        $data = toObject(['listings' => $this->service->search($request)]);
         return view('listing_search_results', compact('data', 'showMap'));
     }
 }

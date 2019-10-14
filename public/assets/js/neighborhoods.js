@@ -19,24 +19,6 @@ $(() => {
         }
     });
 
-    $body.on('change', '.sorting', function() {
-        let append = true;
-        let url = window.location.href;
-        $('select[name=sorting]').find('option').each((i, v) => {
-            let value = $(v).attr('value');
-            if(value !== '' && url.includes(value)) {
-                append = false;
-            }
-        });
-        url = url.split('/');
-        if(append) {
-            url.push($(this).val());
-        } else {
-            url[url.length - 1] = $(this).val();
-        }
-        window.location.href = url.join('/');
-    });
-
     $(".neighborhood-search .search-result-wrapper .map-wrapper .swipe-btn").on('click', function () {
         $(this).find('i').toggleClass('fa-angle-left fa-angle-right');
         $(".neighborhood-search .search-result-wrapper .search-listing").toggleClass('hide-list');

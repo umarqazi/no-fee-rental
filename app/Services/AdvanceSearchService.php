@@ -1,18 +1,10 @@
 <?php
-/**
- * @author yousaf
- * @package
- * @copyright 2019 Techverx.com
- * @project no-fee-rental
- */
 
 namespace App\Services;
 
-use App\Listing;
-use App\OpenHouse;
 use App\Repository\SearchRepo;
 
-class SearchService {
+trait AdvanceSearchService {
 
     /**
      * @var string|array|mixed
@@ -30,10 +22,12 @@ class SearchService {
     private $query;
 
     /**
-     * SearchService constructor.\
+     * AdvanceSearchService constructor.
+     *
+     * @param $model
      */
-    public function __construct() {
-        $this->searchRepo = new SearchRepo();
+    public function __construct($model) {
+        $this->searchRepo = new SearchRepo($model);
         $this->query = $this->searchRepo->appendQuery();
     }
 
@@ -51,6 +45,10 @@ class SearchService {
         });
 
         return $this->fetchQuery();
+    }
+
+    public function searchBase($keyword, $relation, $request) {
+
     }
 
     /**
@@ -86,8 +84,8 @@ class SearchService {
      */
     private function priceRange() {
         $this->query->whereBetween('rent', [
-                $this->args->{__FUNCTION__}['min_price'],
-                $this->args->{__FUNCTION__}['max_price']
+            $this->args->{__FUNCTION__}['min_price'],
+            $this->args->{__FUNCTION__}['max_price']
         ]);
     }
 
@@ -103,8 +101,8 @@ class SearchService {
      */
     private function squareRange() {
         $this->query->whereBetween('square_feet', [
-                $this->args->{__FUNCTION__}['square_min'],
-                $this->args->{__FUNCTION__}['square_max']
+            $this->args->{__FUNCTION__}['square_min'],
+            $this->args->{__FUNCTION__}['square_max']
         ]);
     }
 
@@ -112,6 +110,6 @@ class SearchService {
      * @return mixed|String
      */
     private function fetchQuery() {
-        return $this->query->where('visibility', true)->withall()->orderBy('is_featured', '1')->get();
+        return $this->query->withall()->where('visibility', true)->orderBy('is_featured', '1')->get();
     }
 }

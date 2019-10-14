@@ -47,7 +47,13 @@ class RentController extends Controller {
         return redirect()->back();
     }
 
+    /**
+     * @param Request $request
+     *
+     * @return Factory|View
+     */
     public function advanceSearch(Request $request) {
-        dd($request);
+        $data = toObject($this->rentService->advanceSearch($request));
+        return view('rent', compact('data'))->with('route', 'web.advanceRentSearch');
     }
 }
