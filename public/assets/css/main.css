@@ -1244,7 +1244,7 @@ h3 {
   transform: translateY(-50%);
   -webkit-transition: all ease 0.4s;
   transition: all ease 0.4s;
-  z-index: 2;
+  z-index: 3;
 }
 
 .featured-properties .property-listing .property-thumb .check-btn .btn-default {

@@ -89,6 +89,7 @@
 		.notification-main-footer a{
 			text-decoration: none;
 			margin-right: 5px;
+			display: inline-block;
 		}
 		.notification-main-footer a:last-child{
 			margin-right: 0;
