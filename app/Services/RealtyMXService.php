@@ -24,6 +24,9 @@ class RealtyMXService extends ListingService {
      */
     protected $userRepo;
 
+    /**
+     * @var NeighborhoodRepo
+     */
     protected $neighbourRepo;
 
     /**
@@ -97,7 +100,7 @@ class RealtyMXService extends ListingService {
                 } else {
                     $collection = [
                         'amenities'       => $amenity,
-                        'amenity_type_id' => 4,
+                        'amenity_type_id' => 3,
                         'created_at'      => now(),
                         'updated_at'      => now()
                     ];

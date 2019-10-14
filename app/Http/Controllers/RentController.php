@@ -6,6 +6,7 @@ use App\Services\ListingService;
 use App\Services\RentService;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class RentController extends Controller {
@@ -29,7 +30,7 @@ class RentController extends Controller {
      */
     public function index() {
         $data = toObject($this->rentService->get());
-        return view('rent', compact('data'));
+        return view('rent', compact('data'))->with('route', 'web.advanceRentSearch');
     }
 
     /**
@@ -40,9 +41,13 @@ class RentController extends Controller {
     public function sort($order) {
         if(method_exists($this->rentService, $order)) {
             $data = toObject($this->rentService->{$order}()->fetch());
-            return view('rent', compact('data'))->with('sort', $order);
+            return view('rent', compact('data'))->with('sort', $order)->with('route', 'web.advanceRentSearch');
         }
 
         return redirect()->back();
+    }
+
+    public function advanceSearch(Request $request) {
+        dd($request);
     }
 }

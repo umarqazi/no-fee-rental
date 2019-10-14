@@ -50,7 +50,7 @@ class NeighborhoodController extends Controller {
      */
     public function find($neighborhood) {
         $data = toObject($this->neighborhoodService->find($neighborhood));
-        return view('neighborhood', compact('data'));
+        return view('neighborhood', compact('data'))->with('route', 'web.index');
     }
 
     /**

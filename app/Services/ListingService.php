@@ -302,7 +302,7 @@ class ListingService extends ManageBuildingService {
      * @return mixed
      */
     public function images($id) {
-        return $this->listingImagesRepo->get($id);
+        return $this->listingImagesRepo->images($id);
     }
 
     /**

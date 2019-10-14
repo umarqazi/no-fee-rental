@@ -85,8 +85,9 @@ Route::get('/listing-by-neighborhood', 'NeighborhoodController@index')->name('we
 Route::match(['get', 'post'], '/listing-by-neighborhood/{neighborhood}', 'NeighborhoodController@find')->name('web.ListsByNeighborhood');
 
 // Rent Routes
-Route::get('/listing-by-rent', 'RentController@index')->name('web.ListsByRent');
 Route::get('/listing-by-rent/{sort}', 'RentController@sort');
+Route::get('/listing-by-rent', 'RentController@index')->name('web.ListsByRent');
+Route::get('/listing-by-rent/search', 'RentController@advanceSearch')->name('web.advanceRentSearch');
 
 // Application Controlling Routes
 Route::get('/all-clear', function() {
