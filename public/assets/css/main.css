@@ -1031,9 +1031,9 @@ h3 {
 
 .login-modal .modal-dialog .login-form-wrapper .finding-home-text {
   font-size: 14px;
-  margin-top: 10px; 
+  margin:0px 0px 15px;
+  display: none;
 }
-
 .login-form-wrapper .form-group {
   position: relative;
 }
@@ -1244,7 +1244,7 @@ h3 {
   transform: translateY(-50%);
   -webkit-transition: all ease 0.4s;
   transition: all ease 0.4s;
-  z-index: 2;
+  z-index: 3;
 }
 
 .featured-properties .property-listing .property-thumb .check-btn .btn-default {
