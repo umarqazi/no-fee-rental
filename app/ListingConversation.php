@@ -8,17 +8,21 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class Appointment extends Model {
+class ListingConversation extends Model {
 
     /**
      * @var array
      */
-    protected $fillable = ['from', 'to', 'listing_id', 'appointment_date', 'appointment_time'];
+    protected $fillable = [
+        'from', 'to', 'listing_id', 'appointment_date', 'appointment_time',
+        'username', 'email', 'phone_number', 'is_archived', 'meeting_request',
+        'conversation_type'
+    ];
 
     /**
      * @var array
      */
-    protected $casts = ['appointment_date', 'appointment_time'];
+    protected $dates = ['appointment_date', 'appointment_time'];
 
     /**
      * @return HasOne
@@ -31,7 +35,7 @@ class Appointment extends Model {
      * @return HasMany
      */
     public function messages() {
-        return $this->hasMany(Message::class, 'appointment_id', 'id');
+        return $this->hasMany(Message::class, 'id', 'conversation_id');
     }
 
     /**

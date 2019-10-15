@@ -7,7 +7,7 @@
  * Time: 4:30 PM
  */
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Owner;
 
 use App\Http\Controllers\Controller;
 use App\Services\AuthService;
@@ -16,19 +16,23 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * Class AuthController
+ * @package App\Http\Controllers\Owner
+ */
 class AuthController extends Controller {
 
     /**
      * @var AuthService
      */
-    private $service;
+    private $authService;
 
     /**
      * AuthController constructor.
      */
 	public function __construct() {
-        $this->service = new AuthService('admin');
-		$this->middleware('guest:admin')->except('logout');
+	    $this->authService = new AuthService('owner');
+		$this->middleware('guest:owner')->except('logout');
 	}
 
     /**
@@ -38,7 +42,7 @@ class AuthController extends Controller {
      * @throws ValidationException
      */
 	public function login(Request $request) {
-		return $this->service->login($request);
+        return $this->authService->login($request);
 	}
 
     /**
@@ -46,7 +50,7 @@ class AuthController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-	public function logout(Request $request) {
-	    return $this->service->logout($request);
+    public function logout(Request $request) {
+        return $this->authService->logout($request);
     }
 }

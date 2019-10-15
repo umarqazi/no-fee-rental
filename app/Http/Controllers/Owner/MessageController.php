@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Agent;
+namespace App\Http\Controllers\Owner;
 
 use App\Services\ListingConversationService;
 use App\Services\CheckAvailabilityService;
@@ -11,6 +11,10 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\View\View;
 
+/**
+ * Class MessageController
+ * @package App\Http\Controllers\Owner
+ */
 class MessageController extends Controller {
 
     /**
@@ -58,10 +62,6 @@ class MessageController extends Controller {
         if($this->appointmentService->accept($id))
             $data = $this->appointmentService->messages($id);
         return sendResponse($request, $data);
-    }
-
-    public function deny() {
-
     }
 
     /**

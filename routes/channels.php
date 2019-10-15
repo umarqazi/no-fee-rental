@@ -13,12 +13,12 @@
 
 use Illuminate\Support\Facades\Broadcast;
 
-// Real Time notifications Route
+// Notification Broadcasting Channel
 Broadcast::channel('notification-channel.{id}', function(){
     return true;
 });
 
-// Real Time Chat Broadcaster Route
+// Chat Broadcasting Channel
 Broadcast::channel('messaging-channel.{id}', function() {
     return true;
 });

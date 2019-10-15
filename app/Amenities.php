@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Amenities extends Model {
 
@@ -12,14 +14,14 @@ class Amenities extends Model {
     protected $fillable = ['amenity_type_id', 'amenities'];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return HasOne
      */
     public function type() {
         return $this->hasOne(AmenityType::class, 'id', 'amenity_type_id');
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return BelongsToMany
      */
     public function listing() {
         return $this->belongsToMany(Listing::class, 'listing_amenities', 'amenity_id', 'listing_id');

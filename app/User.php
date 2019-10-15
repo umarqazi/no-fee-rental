@@ -2,6 +2,9 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\CanResetPassword;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -38,28 +41,28 @@ class User extends Authenticatable implements CanResetPassword {
 	];
 
 	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 * @return HasMany
 	 */
 	public function listings() {
 		return $this->hasMany(Listing::class, 'user_id', 'id');
 	}
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return HasOne
      */
     public function company() {
         return $this->hasOne(Company::class, 'id', 'company_id');
     }
 
 	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 * @return HasMany
 	 */
 	public function agentInvites() {
 		return $this->hasMany(AgentInvites::class, 'invited_by', 'id');
 	}
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return BelongsToMany
      */
 	public function neighborExpertise() {
 	    return $this->belongsToMany(Neighborhoods::class, 'agent_neighborhoods', 'agent_id', 'neighborhood_id');
@@ -91,6 +94,15 @@ class User extends Authenticatable implements CanResetPassword {
 	public function scopeRenters($query) {
 		return $query->whereuser_type(RENTER);
 	}
+
+    /**
+     * @param $query
+     *
+     * @return mixed
+     */
+	public function scopeOwners($query) {
+	    return $query->whereuser_type(OWNER);
+    }
 
     /**
      * @param $query

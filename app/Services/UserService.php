@@ -174,6 +174,13 @@ class UserService {
     /**
      * @return mixed
      */
+    public function owners() {
+        return $this->userRepo->owners()->get();
+    }
+
+    /**
+     * @return mixed
+     */
     public function companies() {
         return $this->companyRepo->companies()->get();
     }
@@ -571,7 +578,7 @@ class UserService {
     }
 
     /**
-     * fetch Query
+     * @return array
      */
     public function fetchQuery() {
         $data = $this->query->first();
@@ -582,21 +589,27 @@ class UserService {
     }
 
     /**
-     * Un Friend Agent
+     * @param $id
+     *
+     * @return bool|mixed
      */
-    public function unFriend($id)
-    {
+    public function unFriend($id) {
         return $this->memberRepo->delete($id);
     }
-     /**
-      * fetch Query
-      */
+
+    /**
+     * @param $id
+     *
+     * @return mixed
+     */
     public function getExclusiveSettings($id) {
         return $this->exclusiveSettingRepo->find(['user_id'=> $id])->first();
     }
 
     /**
-     * get neighborhoods of Agent
+     * @param $id
+     *
+     * @return array
      */
     public function getNeighborhoods($id) {
         $user = $this->userRepo->profileDetail($id)->get();
@@ -608,6 +621,4 @@ class UserService {
 
         return $neighborhoods;
     }
-
-
 }
