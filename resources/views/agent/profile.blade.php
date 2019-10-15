@@ -83,7 +83,7 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="form-group">
+                            <div class="form-group neighborhood_expertise">
                                 <label>Neighbourhood Expertise</label>
                                 {!! Form::text('neighborhood_expertise', null, ['class' => 'input-style', 'placeholder' => 'Neighborhoods Expertise']) !!}
                                 @if ($errors->has('neighbourhood_expertise'))
@@ -94,7 +94,7 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="form-group">
+                            <div class="form-group languages">
                                 <label>Languages</label>
                                 {!! Form::text('languages', null, ['class'=>'input-style', 'placeholder' => 'Languages', 'disabled' => 'disabled']) !!}
                                 @if ($errors->has('languages'))
@@ -185,11 +185,11 @@
                     suggestions: neighbors,
                     whiteList: true,
                     afterAdd:function(value) {
-                        if($(".amsify-suggestags-input-area > span").length > 2){
-                            $(".amsify-suggestags-input").attr('readonly', true);
+                        if($(".neighborhood_expertise > .amsify-suggestags-area > .amsify-suggestags-input-area> span").length > 2){
+                            $(".neighborhood_expertise > .amsify-suggestags-area > .amsify-suggestags-input-area > .amsify-suggestags-input").attr('readonly', true);
                         }
                         else{
-                            $(".amsify-suggestags-input").attr('readonly', false);
+                            $(".neighborhood_expertise > .amsify-suggestags-area > .amsify-suggestags-input-area > .amsify-suggestags-input").attr('readonly', false);
                         }
                     },
 
@@ -202,7 +202,15 @@
 
                 $('input[name="languages"]').amsifySuggestags({
                 suggestions: lang,
-                whiteList: true
+                whiteList: true,
+                    afterAdd:function(value) {
+                        if ($(".languages > .amsify-suggestags-area > .amsify-suggestags-input-area > span").length > 2) {
+                            $(".languages > .amsify-suggestags-area > .amsify-suggestags-input-area > .amsify-suggestags-input").attr('readonly', true);
+                        }
+                        else {
+                            $(".languages > .amsify-suggestags-area > .amsify-suggestags-input-area > .amsify-suggestags-input").attr('readonly', false);
+                        }
+                    }
                 });
 
         });
