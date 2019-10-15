@@ -266,8 +266,28 @@ class UserService {
             $this->exclusiveSettingRepo->update($exclusive->id, ['allow_web_notification' => 0,'allow_email' => 0 ]);
         }
 
+        $old = [];
+        $old = $this->getNeighborhoods(myId());
+        $old_neighborhoods = [];
 
-        //$this->neighborhoodRepo->attach($this->userRepo->edit($user->id)->first(), $request->neighborhood_expertise);
+        for ($i = 0; $i  < sizeof($old) ; $i++) {
+
+            $old_neighborhoods[$i] =  $this->neighborhoodRepo->find(['name'=> $old[$i]])->first()->id ;
+
+        }
+
+        $this->neighborhoodRepo->detach($this->userRepo->edit($user->id)->first(), $old_neighborhoods);
+
+        $myArray = explode(',', $request->neighborhood_expertise);
+        $neighborhoods = [];
+
+        for ($i = 0; $i  < sizeof($myArray) && sizeof($myArray) > 1 ; $i++) {
+
+            $neighborhoods[$i] =  $this->neighborhoodRepo->find(['name'=> $myArray[$i]])->first()->id ;
+
+        }
+
+        $this->neighborhoodRepo->attach($this->userRepo->edit($user->id)->first(), $neighborhoods);
         return $this->userRepo->update($user->id, $user->toArray());
     }
 
@@ -572,4 +592,20 @@ class UserService {
     public function getExclusiveSettings($id) {
         return $this->exclusiveSettingRepo->find(['user_id'=> $id])->first();
     }
+
+    /**
+     * get neighborhoods of Agent
+     */
+    public function getNeighborhoods($id) {
+        $user = $this->userRepo->profileDetail($id)->get();
+        $neighborhoods = [] ;
+
+        for($i = 0 ; $i < sizeof($user[0]->neighborExpertise); $i++) {
+           $neighborhoods[$i] =  $user[0]->neighborExpertise[$i]->name ;
+        };
+
+        return $neighborhoods;
+    }
+
+
 }

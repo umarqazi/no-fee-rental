@@ -169,32 +169,29 @@
             let lang = [];
             let neighbors = []
             let languages = @php echo json_encode(config('languages')); @endphp;
+
             ajaxRequest('/all-neighborhoods', 'post', null, false).then(neighborhoods => {
                 neighborhoods.data.forEach(v => {
                     neighbors.push(v.name);
                 });
+
+                $('input[name="neighborhood_expertise"]').amsifySuggestags ({
+                    suggestions: neighbors,
+                    whiteList: true,
+                });
+
             });
             for(let language in languages) {
                 lang.push(languages[language]);
             }
-
-            /*
-                        for(let neighbor in neighbors) {
-                            neighbors.push(neighbors[neighbo]);
-                        }console.log(neighbors);
-            */
 
             $('input[name="languages"]').amsifySuggestags({
                 suggestions: lang,
                 whiteList: true
             });
 
-            $('input[name="neighborhood_expertise"]').amsifySuggestags ({
-                suggestions: neighbors,
-                whiteList: true,
-            });
-
-
         });
+
+
     </script>
 @endsection
