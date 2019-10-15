@@ -325,14 +325,14 @@ function fetchAmenities($amenities) {
     }
     return $amen;
 }
+
 /**
- * @param $index
+ * @param $data
  *
  * @return mixed
  */
-function fetchopenHouse($index) {
-    $time = config('openHouse');
-    return $time[$index];
+function addCalendarEvent($data) {
+    return (new \App\Services\CalendarService())->addEvent(toObject($data));
 }
 
 /**
