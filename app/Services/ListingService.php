@@ -420,7 +420,7 @@ class ListingService extends ManageBuildingService {
      * @return array
      */
     public function cheaper($paginate) {
-        return $this->sortCollection($paginate, 'rent', CHEAPER);
+        return $this->sortCollection($paginate, 'rent', CHEAPEST);
     }
 
     /**
