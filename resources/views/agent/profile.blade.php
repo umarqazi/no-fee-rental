@@ -120,17 +120,17 @@
                                 <label> Exclusive Settings</label>
                                 <div class="exclusive-chkboxes">
                                     <div class="custom-control custom-checkbox">
-                                        <input class="custom-control-input" id="exclusive-1" name="allow_web_notifications" type="checkbox"
+                                        <input class="custom-control-input input-style" id="exclusive-1" name="allow_web_notifications" type="checkbox"
                                                value="two" {{ $exclusiveSettings->allow_web_notification === 1 ? 'checked' : null }}>
                                         <label class="custom-control-label" for="exclusive-1">Allow Web Notifications</label>
                                     </div>
                                     <div class="custom-control custom-checkbox">
-                                        <input class="custom-control-input" id="exclusive-2" name="allow_email_notifications" type="checkbox"
+                                        <input class="custom-control-input input-style" id="exclusive-2" name="allow_email_notifications" type="checkbox"
                                                value="two" {{ $exclusiveSettings->allow_email === 1 ? 'checked' : null }}>
                                         <label class="custom-control-label" for="exclusive-2">Allow Email Notifications</label>
                                     </div>
                                     <div class="custom-control custom-checkbox">
-                                        <input class="custom-control-input" id="exclusive-3" name="disable" type="checkbox"
+                                        <input class="custom-control-input input-style" id="exclusive-3" name="disable" type="checkbox"
                                                value="one" {{ $exclusiveSettings->allow_web_notification === 0 && $exclusiveSettings->allow_email === 0 ? 'checked' : null }}>
                                         <label class="custom-control-label" for="exclusive-3">Disable All</label>
                                     </div>
@@ -165,30 +165,45 @@
     {!! HTML::script('assets/js/profile.js') !!}
     <script>
 
-        $('.edit-profile').on('click', function(e) {
+        if($('#exclusive-3').is(":checked")){
+            $('#exclusive-1').attr('disabled', true);
+            $('#exclusive-2').attr('disabled', true);
+        }
+
+        $('.edit-profile').on('click', function (e) {
             let lang = [];
             let neighbors = []
             let languages = @php echo json_encode(config('languages')); @endphp;
+
 
             ajaxRequest('/all-neighborhoods', 'post', null, false).then(neighborhoods => {
                 neighborhoods.data.forEach(v => {
                     neighbors.push(v.name);
                 });
 
-                $('input[name="neighborhood_expertise"]').amsifySuggestags ({
+                $('input[name="neighborhood_expertise"]').amsifySuggestags({
                     suggestions: neighbors,
                     whiteList: true,
+                    afterAdd:function(value) {
+                        if($(".amsify-suggestags-input-area > span").length > 2){
+                            $(".amsify-suggestags-input").attr('readonly', true);
+                        }
+                        else{
+                            $(".amsify-suggestags-input").attr('readonly', false);
+                        }
+                    },
+
                 });
+             });
 
-            });
-            for(let language in languages) {
+                for (let language in languages) {
                 lang.push(languages[language]);
-            }
+                }
 
-            $('input[name="languages"]').amsifySuggestags({
+                $('input[name="languages"]').amsifySuggestags({
                 suggestions: lang,
                 whiteList: true
-            });
+                });
 
         });
 
