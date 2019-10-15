@@ -19,6 +19,12 @@ $(() => {
         $('#image-picker').show();
         $(".additional-info .input-style").attr("disabled", false);
         $(this).hide();
+
+        if($('#exclusive-3').is(":checked")){
+            $('#exclusive-1').attr('disabled', true);
+            $('#exclusive-2').attr('disabled', true);
+        }
+
         $(".update-profile").show();
     });
 

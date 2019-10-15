@@ -584,8 +584,10 @@ class UserService {
     /**
      * Un Friend Agent
      */
-    public function unFriend($id) {
-       return $this->memberRepo->delete($id);
+    public function unFriend($id)
+    {
+        return $this->memberRepo->delete($id);
+    }
      /**
       * fetch Query
       */
