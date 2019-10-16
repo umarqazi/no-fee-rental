@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Services\AuthService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
@@ -11,32 +14,32 @@ class AuthController extends Controller
     /**
      * @var AuthService
      */
-    private $service;
+    private $authService;
 
     /**
      * AuthController constructor.
      */
     public function __construct() {
-        $this->service = new AuthService('');
+        $this->authService = new AuthService('');
         $this->middleware('guest')->except('logout');
     }
 
     /**
      * @param Request $request
      *
-     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Response|\Symfony\Component\HttpFoundation\Response|void
-     * @throws \Illuminate\Validation\ValidationException
+     * @return JsonResponse|Response|\Symfony\Component\HttpFoundation\Response|void
+     * @throws ValidationException
      */
     public function login(Request $request) {
-        return $this->service->login($request);
+        return $this->authService->login($request);
     }
 
     /**
      * @param Request $request
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function logout(Request $request) {
-        return $this->service->logout($request);
+        return $this->authService->logout($request);
     }
 }

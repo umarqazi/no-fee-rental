@@ -42,8 +42,7 @@ $(() => {
 
     // Add Listing Form Validations
    $('#listing-form').validate({
-
-           rules: {
+       rules: {
            street_address: "required",
            display_address: "required",
            neighborhood_id: "required",
@@ -71,7 +70,6 @@ $(() => {
                validateSelect: true
            },
            "open_house[date][]" : "required",
-
            "open_house[start_time][]": {
                required: true,
                validateSelect: true
@@ -83,10 +81,10 @@ $(() => {
            },
 
            thumbnail: {
-               required :  true,
-               //required: ($('input[name="old_thumbnail"]').val()) ? false : true,
+               // required :  true,
+               required: ($('input[name="old_thumbnail"]').val()) ? false : true,
                validateExtension: ["jpg", "png", "gif","jpeg"],
-               maxsize: 5000,
+               // maxsize: 5000,
            },
 
            description : "required",
@@ -148,7 +146,7 @@ $(() => {
            thumbnail: {
                required: "Thumbnail is required.",
                validateExtension: "Choose valid thumbnail file.",
-               maxsize :  "Image Size should not be greater then 5mb"
+               // maxsize :  "Image Size should not be greater then 5mb"
            },
 
            description: {

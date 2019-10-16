@@ -57,4 +57,10 @@
     </div>
     {!! HTML::style('assets/css/chat.css') !!}
     {!! HTML::script('assets/js/message.js') !!}
+    <script>
+        // Scroll to end of chat area
+        window.onload = function () {
+            scrollDown($('.messages > ul'));
+        };
+    </script>
 @endsection

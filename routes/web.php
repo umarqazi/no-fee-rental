@@ -63,6 +63,9 @@ Route::post('/agent/signup', 'UserController@invitedAgentSignup')->name('agent.s
 // Messaging Routes
 Route::post('/send-message', 'MessageController@send')->name('send.message');
 
+// Appointment Routes
+Route::post('/make-appointment', 'MakeAppointmentController@create')->name('web.makeAppointment');
+
 // Realty MX Routes
 Route::get('/realty/{file}', 'RealtyMXController@dispatchJob');
 Route::get('/realty-mx/{client}/{listing}', 'RealtyMXController@detail')->name('web.realty');
