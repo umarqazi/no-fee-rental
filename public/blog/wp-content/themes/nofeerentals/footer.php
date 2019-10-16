@@ -149,7 +149,7 @@
                     <img src="<?php echo get_template_directory_uri(); ?>/assets/images/modal-logo.png" alt="" class="logo">
                     
                     <ul class="create-client-listing">
-                        <h3>Get's started</h3>
+                        <h3>Let's started</h3>
                         <li>Explore Various Options</li>
                         <li>Mark Listing as Favourite</li>
                         <li>Save Your Researches</li>
@@ -169,14 +169,14 @@
                     <form method="POST" action="http://no-fee-rental.teamtechverx.com/user-signup" accept-charset="UTF-8" class="ajax" reset="true" id="signup_form" novalidate="novalidate">
                         <input name="_token" type="hidden" value="wgtYrzIjKZeqRuv67Xf1mCwnwFUW8JlmJKzf0lre">
                         <div class="row">
-                            <div class="col-sm-12 mb-3">
+                            <div class="col-sm-12 mb-2">
                                 <div class="custom-control custom-radio custom-control-inline">
                                     <input type="radio" value="3" class="custom-control-input" id="signup-option1" name="user_type">
-                                    <label class="custom-control-label" for="signup-option1">Finding a Home ( Client )</label>
+                                    <label class="custom-control-label" for="signup-option1">Find a Home ( Client )</label>
                                 </div>
                                 <div class="custom-control custom-radio custom-control-inline">
                                     <input type="radio" value="2" class="custom-control-input" id="signup-option2" name="user_type">
-                                    <label class="custom-control-label" for="signup-option2">Finding a Home ( Agent )</label>
+                                    <label class="custom-control-label" for="signup-option2">List With Us ( Agent )</label>
                                 </div>
                                 <span class="invalid-feedback" role="alert">
                                 <strong></strong>
@@ -217,9 +217,7 @@
                                 </div>
                             </div>
                             <div class="col-sm-12">
-                                <div class="form-group">
                                     <p class="finding-home-text">If you would like to syndicate listing into no fee rentals nyc, please use tha same email address that you use for your RealtyMX..</p>
-                                </div>
                             </div>
 
                             <div class="col-sm-6">
