@@ -64,6 +64,13 @@ class Listing extends Model {
 		return $this->hasOne(User::class, 'id', 'user_id');
 	}
 
+    /**
+     * @return BelongsToMany
+     */
+	public function buildings() {
+	    return $this->belongsToMany(Building::class, 'building_apartments', 'apartment_id', 'building_id');
+    }
+
 	/**
 	 * @param $query
 	 *

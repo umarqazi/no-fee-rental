@@ -32,6 +32,7 @@ $('#reply').on('click', async function(e) {
             $('#message-modal').modal('show');
             return true;
         }
+
     }
 });
 

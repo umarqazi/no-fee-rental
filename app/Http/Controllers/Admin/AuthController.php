@@ -11,7 +11,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Services\AuthService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpFoundation\Response;
 
 class AuthController extends Controller {
 
@@ -21,7 +24,7 @@ class AuthController extends Controller {
     private $service;
 
     /**
-     * LoginController constructor.
+     * AuthController constructor.
      */
 	public function __construct() {
         $this->service = new AuthService('admin');
@@ -31,8 +34,8 @@ class AuthController extends Controller {
     /**
      * @param Request $request
      *
-     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Response|\Symfony\Component\HttpFoundation\Response|void
-     * @throws \Illuminate\Validation\ValidationException
+     * @return JsonResponse|\Illuminate\Http\Response|Response|void
+     * @throws ValidationException
      */
 	public function login(Request $request) {
 		return $this->service->login($request);

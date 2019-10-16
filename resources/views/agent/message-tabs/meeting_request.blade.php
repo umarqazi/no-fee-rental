@@ -1,9 +1,9 @@
 
-@if( $data->inactive->total() > 0)
-    @foreach ($data->inactive as $request)
+@if($conversations->inactive->total() > 0)
+    @foreach ($conversations->inactive as $request)
         <div class="message-row">
-            <h3>{{ $request->sender->first_name.' '.$request->sender->last_name }}</h3>
-            <p>Reminder from nofeerentals: You have still not replied to {{ $request->sender->first_name }} in regards Reminder from RentHop<a href="" data-toggle="modal" data-target="#message-modal">Read More</a></p>
+            <h3>{{ sprintf("%s %s", $request->sender->first_name ?? $request->username, $request->sender->last_name ?? null) }}</h3>
+            <p>Reminder from nofeerentals: You have still not replied to {{ $request->sender->first_name ?? $request->username }} in regards Reminder from RentHop<a href="" data-toggle="modal" data-target="#message-modal">Read More</a></p>
             <div class="property">
                 <img src="{{ asset($request->listing->thumbnail ?? DLI ) }}" alt="" />
                 <div class="info">
@@ -16,7 +16,7 @@
                 </div>
             </div>
             <div class="date-text">
-                {{ $request->appointment_date->format('D, d/m/y').' '.$request->appointment_time->format('h:i a') }}
+                {{ sprintf("%s on %s", ucfirst($request->appointment_time ?? 'Requested'), $request->appointment_date->format('D, d/m/y')) }}
             </div>
             <div class="actions-btns">
                 <button class="border-btn" request_id="{{ $request->id }}" id="reply">Reply</button>

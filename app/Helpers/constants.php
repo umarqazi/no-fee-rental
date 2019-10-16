@@ -153,3 +153,11 @@ if(!defined('DUI')) {
 if(!defined('DIP')) {
     define('DIP', 'assets/images/default-images/user.jpeg');
 }
+
+if(!defined('APPOINTMENT')) {
+    define('APPOINTMENT', 1);
+}
+
+if(!defined('AVAILABILITY')) {
+    define('AVAILABILITY', 2);
+}

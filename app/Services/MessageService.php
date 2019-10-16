@@ -9,8 +9,8 @@
 namespace App\Services;
 
 use App\Forms\AppointmentForm;
-use App\Forms\AppointmentMessageForm;
-use App\Repository\AppointmentRepo;
+use App\Forms\MessageForm;
+use App\Repository\ListingConversationRepo;
 use App\Repository\ListingRepo;
 use App\Repository\AppointmentMessageRepo;
 use App\Repository\UserRepo;
@@ -41,12 +41,12 @@ class MessageService {
     /**
      * MessageService constructor.
      *
-     * @param AppointmentRepo $cRepo
+     * @param ListingConversationRepo $cRepo
      * @param UserRepo $uRepo
      * @param AppointmentMessageRepo $mRepo
      * @param ListingRepo $lRepo
      */
-    public function __construct(AppointmentRepo $cRepo, UserRepo $uRepo, AppointmentMessageRepo $mRepo, ListingRepo $lRepo) {
+    public function __construct(ListingConversationRepo $cRepo, UserRepo $uRepo, AppointmentMessageRepo $mRepo, ListingRepo $lRepo) {
         $this->cRepo = $cRepo;
         $this->lRepo = $lRepo;
         $this->mRepo = $mRepo;
@@ -130,7 +130,7 @@ class MessageService {
      * @return bool
      */
     private function saveMessage($contact, $request) {
-        $form = new AppointmentMessageForm();
+        $form = new MessageForm();
         $form->message = $request->message;
         $form->contact_id = $contact->id;
         $form->align = $request->from;
@@ -248,7 +248,7 @@ class MessageService {
      * @return mixed
      */
     public function send($id, $request) {
-        $form = new AppointmentMessageForm();
+        $form = new MessageForm();
         $form->message = $request->message;
         $form->align = myId();
         $form->contact_id = $id;

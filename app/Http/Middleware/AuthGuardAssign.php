@@ -3,6 +3,10 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Response;
+use Illuminate\Validation\ValidationException;
 
 class AuthGuardAssign {
 
@@ -15,8 +19,8 @@ class AuthGuardAssign {
      * @param $request
      * @param Closure $next
      *
-     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Symfony\Component\HttpFoundation\Response|void
-     * @throws \Illuminate\Validation\ValidationException
+     * @return JsonResponse|RedirectResponse|Response|\Symfony\Component\HttpFoundation\Response|void
+     * @throws ValidationException
      */
 	public function handle($request, Closure $next) {
 		$this->request = $request;
@@ -29,6 +33,7 @@ class AuthGuardAssign {
             return sendResponse($request, false, null, null, $msg);
         }
 		switch ($user->user_type) {
+
 		case ADMIN:
 			return (new \App\Http\Controllers\Admin\AuthController)->login($this->request);
 			break;
@@ -36,6 +41,10 @@ class AuthGuardAssign {
 		case AGENT:
 			return (new \App\Http\Controllers\Agent\AuthController)->login($this->request);
 			break;
+
+		case OWNER:
+		    return (new \App\Http\Controllers\Owner\AuthController)->login($this->request);
+		    break;
 
 		case RENTER:
 			return (new \App\Http\Controllers\AuthController)->login($this->request);

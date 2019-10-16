@@ -16,6 +16,20 @@
                         'method' => 'post',
                         'enctype' => 'multipart/form-data'
                     ]) !!}
+                @if(isAdmin())
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>List Belongs To:</label>
+                                {!! Form::select('user_id', agents(), [],
+                                [
+                                    'class'        => 'controls input-style',
+                                    'autocomplete' => 'off'
+                                ]) !!}
+                            </div>
+                        </div>
+                    </div>
+                @endif
                 <div class="row">
                     {{--Listing Info--}}
                     @include('listing-features.listing_info')
@@ -30,12 +44,11 @@
                         <button type="button" class="btn-default submit">{{ $action }} Listing</button>
                     </div>
                 </div>
-                </div>
-                {!! Form::close() !!}
             </div>
+            {!! Form::close() !!}
         </div>
     </div>
-{!! HTML::script('assets/js/listing.js') !!}
+    {!! HTML::script('assets/js/listing.js') !!}
 <script>
     enableDatePicker('#availability_date');
     enableDatePicker('.open-house-date', false);

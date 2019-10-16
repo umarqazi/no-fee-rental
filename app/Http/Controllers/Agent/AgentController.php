@@ -37,7 +37,10 @@ class AgentController extends Controller {
 	 */
 	public function profile() {
 		$user = mySelf();
-		return view('agent.profile', compact('user'));
+		$user->neighborhood_expertise = $this->userService->getNeighborhoods($user->id);
+        $user->neighborhood_expertise = implode(', ', $user->neighborhood_expertise);
+		$exclusiveSettings = $this->userService->getExclusiveSettings(myId());
+		return view('agent.profile', compact('user','exclusiveSettings'));
 	}
 
 	/**

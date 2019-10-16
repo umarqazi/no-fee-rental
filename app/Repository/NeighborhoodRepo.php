@@ -36,4 +36,11 @@ class NeighborhoodRepo extends BaseRepo {
     public function attach($user, $data) {
         $user->neighborExpertise()->attach($data);
     }
+    /**
+     * @param $user
+     * @param $data
+     */
+    public function detach($user, $data) {
+        $user->neighborExpertise()->detach($data);
+    }
 }

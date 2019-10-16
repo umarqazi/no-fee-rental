@@ -75,8 +75,8 @@ $(() => {
         }
     });
 
-    let columns = ['first_name', 'email', 'phone_number','license_number'];
     // +++++ Agents Table +++++ //
+    let columns = ['first_name', 'email', 'phone_number','license_number'];
     let columnDefs = [{
             render: (data, type, row) => {
                 return row.first_name+' '+row.last_name;
@@ -92,7 +92,8 @@ $(() => {
         }];
     dataTables('#agents_table', '/admin/get-agents', columns, columnDefs);
 
-    // +++++ Renters Table +++++ //
+    // +++++ Owner Table +++++ //
+    columns = ['first_name', 'email', 'phone_number'];
     columnDefs = [{
         render: (data, type, row) => {
             return row.first_name+' '+row.last_name;
@@ -102,11 +103,28 @@ $(() => {
         {
         render: (data, type, row) => {
             return `<i class="fa ${row.status ? 'fa-eye' : 'fa-eye-slash'} action-btn" id="updateUserStatus" ref_id="${row.id}" route="/admin/status-update/${row.id}"></i>
-                    <i class="fa fa-edit px-2 action-btn" id="updateUser" ref_id="${row.id}" route="/admin/edit-user/${row.id}"></i>
-                    <i class="fa fa-trash action-btn" id="deleteUser" ref_id="${row.id}" route="/admin/delete-user/${row.id}"></i>`;
+                     <i class="fa fa-edit px-2 action-btn" id="updateUser" ref_id="${row.id}" route="/admin/edit-user/${row.id}"></i>
+                     <i class="fa fa-trash action-btn" id="deleteUser" ref_id="${row.id}" route="/admin/delete-user/${row.id}"></i>`;
         },
-        targets: 4
+        targets: 3
     }];
+    dataTables('#owners_table', '/admin/get-owners', columns, columnDefs);
+
+    // +++++ Renters Table +++++ //
+    columnDefs = [{
+        render: (data, type, row) => {
+            return row.first_name+' '+row.last_name;
+        },
+        targets: 0
+    },
+        {
+            render: (data, type, row) => {
+                return `<i class="fa ${row.status ? 'fa-eye' : 'fa-eye-slash'} action-btn" id="updateUserStatus" ref_id="${row.id}" route="/admin/status-update/${row.id}"></i>
+                     <i class="fa fa-edit px-2 action-btn" id="updateUser" ref_id="${row.id}" route="/admin/edit-user/${row.id}"></i>
+                     <i class="fa fa-trash action-btn" id="deleteUser" ref_id="${row.id}" route="/admin/delete-user/${row.id}"></i>`;
+            },
+            targets: 3
+        }];
     dataTables('#renters_table', '/admin/get-renters', columns, columnDefs);
 
     // +++++ Companies Table +++++ //
@@ -127,4 +145,6 @@ $(() => {
 function reloadAllTables() {
     $('#agents_table').DataTable().ajax.reload();
     $('#renters_table').DataTable().ajax.reload();
+    $('#owners_table').DataTable().ajax.reload();
+    $('#companies_table').DataTable().ajax.reload();
 }

@@ -72,12 +72,11 @@
                             {!! Form::text('email', null, ['class'=>'input-style agnet-input', 'id' => 'email', 'placeholder'=>'Email']) !!} @if ($errors->has('email'))
                             <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('email') }}</strong>
-                                    </span> @endif
-                            <p class="finding-home-text">If you would like to syndicate listing into no fee rentals nyc, please use tha same email address that you use for your RealtyMX.</p>
+                            </span> @endif
+                            
                         </div>
                     </div>
-
-                    <div class="col-sm-6" id="phone_number">
+                     <div class="col-sm-6" id="phone_number">
                         <div class="form-group">
                             {!! Form::text('phone_number', null, ['class'=>'input-style agnet-input', 'placeholder'=>'Phone Number']) !!} @if ($errors->has('phone_number'))
                             <span class="invalid-feedback" role="alert">
@@ -85,6 +84,12 @@
                                     </span> @endif
                         </div>
                     </div>
+                    <div class="col-sm-12">
+                        <p class="finding-home-text">If you would like to syndicate listing into no fee rentals nyc, please use tha same email address that you use for your RealtyMX.</p>
+                    </div>
+                   
+
+                   
                     <div class="col-sm-6">
                         <div class="form-group">
                             <i class="fa fa-eye"></i> {!! Form::password('password', ['class'=>'input-style agnet-input', 'placeholder'=>'Password', 'id' => 'password']) !!} @if ($errors->has('password'))

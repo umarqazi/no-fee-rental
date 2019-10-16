@@ -1,5 +1,16 @@
 <?php
 
+/*
+|--------------------------------------------------------------------------
+| Agent Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+
 // Home Routes
 Route::get('/home', 'Agent\ListingController@index')->name('agent.index');
 
@@ -39,12 +50,15 @@ Route::get('/team', 'Agent\MemberController@index')->name('agent.team');
 Route::get('/all-invites', 'Agent\MemberController@get')->name('agent.getInvites');
 Route::post('/invite-agent', 'Agent\MemberController@invite')->name('agent.inviteMember');
 Route::get('/accept-invitation/{token}', 'Agent\MemberController@acceptInvitation')->name('agent.acceptInvitation');
+Route::get('/un-friend/{id}', 'Agent\MemberController@unFriend')->name('agent.unFriend');
 
-// Messaging Routes
-Route::post('/accept-meeting/{id}', 'Agent\AppointmentController@accept');
-Route::get('/view-appointments', 'Agent\AppointmentController@index')->name('agent.messageIndex');
-Route::get('/load-chat/{id}', 'Agent\AppointmentController@inbox')->name('agent.loadChat');
-Route::post('/send-message/{id}', 'Agent\AppointmentController@reply')->name('agent.sendMessage');
+// Listing Conversation Routes
+Route::post('/accept-meeting/{id}', 'Agent\ListingConversationController@accept');
+Route::get('/view-conversations', 'Agent\ListingConversationController@index')->name('agent.conversations');
+Route::get('/load-conversation/inbox/{id}', 'Agent\ListingConversationController@load')->name('agent.loadConversation');
+Route::post('/send-message/{id}', 'Agent\ListingConversationController@reply')->name('agent.sendMessage');
+Route::get('/archive-conversation/{id}', 'Agent\ListingConversationController@archive')->name('agent.archiveConversation');
+Route::get('/unArchive-conversation/{id}', 'Agent\ListingConversationController@unArchive')->name('agent.unArchiveConversation');
 
 // Calender Routes
 Route::post('/add-event', 'Agent\CalendarController@create')->name('agent.addEvent');

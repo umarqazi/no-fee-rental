@@ -63,9 +63,6 @@ Route::post('/agent/signup', 'UserController@invitedAgentSignup')->name('agent.s
 // Messaging Routes
 Route::post('/send-message', 'MessageController@send')->name('send.message');
 
-// Appointment Routes
-Route::post('/make-appointment', 'MakeAppointmentController@create')->name('web.makeAppointment');
-
 // Realty MX Routes
 Route::get('/realty/{file}', 'RealtyMXController@dispatchJob');
 Route::get('/realty-mx/{client}/{listing}', 'RealtyMXController@detail')->name('web.realty');
@@ -73,6 +70,9 @@ Route::get('/realty-mx/{client}/{listing}', 'RealtyMXController@detail')->name('
 // Listing Routes
 Route::post('/listing-detail', 'ListingController@detail');
 Route::get('/listing-detail/{id}', 'HomeController@detail')->name('listing.detail');
+
+// Listing Conversation Routes
+Route::post('/send-request', 'ListingConversationController@create')->name('web.listConversation');
 
 // Notification Routes
 Route::post('/delete-notification/{id}', 'NotificationController@delete');
@@ -104,7 +104,16 @@ Route::get('/migrate-fresh-seed', function() {
     dd('Migration fresh with seeding..');
 });
 
+Route::get('/email-notification', function() {
+    return view('mails.email_notifcation');
+});
+
 Route::get('/composer-dump', function() {
     exec('composer dump-autoload');
     dd('composer dump-succeed');
+});
+
+Route::get('/test', function() {
+    auth()->guard('owner')->logout();
+    dd('done;');
 });
