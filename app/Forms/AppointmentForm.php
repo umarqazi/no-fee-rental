@@ -8,8 +8,6 @@
 
 namespace App\Forms;
 
-use Illuminate\Support\Facades\Validator;
-
 /**
  * Class AppointmentForm
  * @package App\Forms
@@ -27,11 +25,6 @@ class AppointmentForm extends BaseForm {
     public $appointment_time;
 
     /**
-     * @var string
-     */
-    public $message;
-
-    /**
      * @var integer
      */
     public $from;
@@ -47,15 +40,21 @@ class AppointmentForm extends BaseForm {
     public $listing_id;
 
     /**
+     * @var integer
+     */
+    public $conversation_type;
+
+    /**
      * @return array
      */
     public function toArray() {
         return [
-            'listing_id'       => $this->listing_id,
-            'from'             => $this->from,
-            'to'               => $this->to,
-            'appointment_date' => $this->appointment_date,
-            'appointment_time' => $this->appointment_time
+            'listing_id'        => $this->listing_id,
+            'from'              => $this->from,
+            'to'                => $this->to,
+            'conversation_type' => $this->conversation_type,
+            'appointment_date'  => $this->appointment_date,
+            'appointment_time'  => $this->appointment_time
         ];
     }
 

@@ -43,7 +43,7 @@
                 </div>
                 <div class="message-input">
                     <div class="wrap">
-                        {!! Form::open(['id' => 'send-message', 'loading' => 'false', 'url' => route($route, $collection->id), 'class' => 'ajax', 'reset' => 'true']) !!}
+                        {!! Form::open(['id' => 'send-message', 'loading' => 'false', 'url' => route('agent.sendMessage', $collection->id), 'class' => 'ajax', 'reset' => 'true']) !!}
                         {!! Form::text('message', null, ['placeholder' => 'Write your message...']) !!}
                         {!! Form::hidden('to', myId() == $collection->to ? $collection->from : $collection->to) !!}
                         <i class="fa fa-paperclip attachment" aria-hidden="true"></i>

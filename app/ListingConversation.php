@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
+/**
+ * Class ListingConversation
+ * @package App
+ */
 class ListingConversation extends Model {
 
     /**
@@ -22,7 +26,7 @@ class ListingConversation extends Model {
     /**
      * @var array
      */
-    protected $dates = ['appointment_date', 'appointment_time'];
+    protected $dates = ['appointment_date'];
 
     /**
      * @return HasOne
@@ -35,7 +39,7 @@ class ListingConversation extends Model {
      * @return HasMany
      */
     public function messages() {
-        return $this->hasMany(Message::class, 'id', 'conversation_id');
+        return $this->hasMany(Message::class, 'conversation_id','id');
     }
 
     /**
@@ -55,20 +59,11 @@ class ListingConversation extends Model {
     }
 
     /**
-     * @param $value
-     *
-     * @return Carbon
-     */
-    public function getAppointmentTimeAttribute($value) {
-        return new Carbon($value);
-    }
-
-    /**
      * @param $query
      *
      * @return mixed
      */
-    public function scopeActiveAppointments($query) {
+    public function scopeActiveConversations($query) {
         return $query->where('meeting_request', ACTIVE)->where('is_archived', false)->with(['listing', 'sender']);
     }
 
@@ -77,8 +72,17 @@ class ListingConversation extends Model {
      *
      * @return mixed
      */
-    public function scopeInactiveAppointments($query) {
+    public function scopeInactiveConversations($query) {
         return $query->where('meeting_request', DEACTIVE)->where('is_archived', false)->with(['listing', 'sender']);
+    }
+
+    /**
+     * @param $query
+     *
+     * @return mixed
+     */
+    public function scopeArchiveConversations($query) {
+        return $this->where('is_archived', TRUE)->with(['listing', 'sender']);
     }
 
     /**
@@ -97,6 +101,6 @@ class ListingConversation extends Model {
      * @return mixed
      */
     public function scopeWithAll($query) {
-        return $query->with(['sender', 'listing', 'messages'])->where('is_archived', false);
+        return $query->with(['sender', 'listing', 'messages']);
     }
 }
