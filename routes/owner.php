@@ -12,7 +12,7 @@
 */
 
 // Home Routes
-Route::get('/home', 'Owner\HomeController@index')->name('owner.index');
+Route::get('/home', 'Owner\ListingController@index')->name('owner.index');
 
 // Auth Routes
 Route::get('/logout', 'Owner\AuthController@logout')->name('owner.logout');

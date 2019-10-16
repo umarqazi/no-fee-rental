@@ -45,7 +45,7 @@ class OwnerController extends Controller {
 	public function profile() {
 		$user = mySelf();
 		$exclusiveSettings = $this->userService->getExclusiveSettings(myId());
-		return view('agent.profile', compact('user','exclusiveSettings'));
+		return view('owner.profile', compact('user','exclusiveSettings'));
 	}
 
 	/**
