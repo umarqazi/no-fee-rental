@@ -9,7 +9,7 @@
 namespace App\Repository;
 
 use App\Notification;
-use App\NotificationSettings;
+use App\ExclusiveSettings;
 
 class NotificationRepo extends BaseRepo {
 

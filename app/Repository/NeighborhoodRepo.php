@@ -28,4 +28,12 @@ class NeighborhoodRepo extends BaseRepo {
     public function getNeighborhoodWithListing($neighbour) {
         return $this->find(['name' => $neighbour])->withlistings();
     }
+
+    /**
+     * @param $user
+     * @param $data
+     */
+    public function attach($user, $data) {
+        $user->neighborExpertise()->attach($data);
+    }
 }
