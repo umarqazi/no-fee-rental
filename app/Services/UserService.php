@@ -133,6 +133,9 @@ class UserService {
 
             } else {
                 $response = $this->userRepo->create($user->toArray());
+                $this->exclusiveSettingRepo->create([
+                    'user_id' => $response->id,
+                ]);
                 $email = [
                     'view' => 'create-user',
                     'first_name' => $response->first_name,

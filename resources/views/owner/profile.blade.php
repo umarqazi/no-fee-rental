@@ -7,12 +7,12 @@
         </div>
         <div class="block profile-container">
             <div class="block-body">
-                {!! Form::model($user, ['url' => route(/*'agent.profileUpdate'*/), 'method' => 'post', 'enctype' => 'multipart/form-data']) !!}
+                {!! Form::model($user, ['url' => route('owner.profileUpdate'), 'method' => 'post', 'enctype' => 'multipart/form-data']) !!}
                 <div class="user-avtar">
                     <div class="img-holder">
-                        <img id="view_profile" src="{{--{{ asset( $user->profile_image ?? DUI ) }}--}}" alt="" />
+                        <img id="view_profile" src="{{ asset( $user->profile_image ?? DUI ) }}" alt="" />
                         @if(!empty($user->profile_image))
-                            <input type="hidden" name="old_profile" value="{{--{{ $user->profile_image }}--}}">
+                            <input type="hidden" name="old_profile" value="{{ $user->profile_image }}">
                         @endif
                         <label @if($errors->isEmpty()) @endif id="image-picker">
                             <i class="fa fa-edit edit-btn"></i>{!! Form::file('profile_image', ['class' => 'd-none']) !!}
@@ -84,28 +84,6 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>Neighbourhood Expertise</label>
-                                {!! Form::text('neighborhood_expertise', null, ['class' => 'input-style', 'placeholder' => 'Neighborhoods Expertise']) !!}
-                                @if ($errors->has('neighbourhood_expertise'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('neighbourhood_expertise') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Languages</label>
-                                {!! Form::text('languages', null, ['class'=>'input-style', 'placeholder' => 'Languages', 'disabled' => 'disabled']) !!}
-                                @if ($errors->has('languages'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('languages') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
                                 <label>Address</label>
                                 {!! Form::text('address', null, ['class' => 'input-style', 'placeholder' => 'Address']) !!}
                                 @if ($errors->has('address'))
@@ -120,18 +98,18 @@
                                 <label> Exclusive Settings</label>
                                 <div class="exclusive-chkboxes">
                                     <div class="custom-control custom-checkbox">
-                                        <input class="custom-control-input" id="exclusive-1" name="allow_web_notifications" type="checkbox"
-                                               value="two" {{--{{ $exclusiveSettings->allow_web_notification === 1 ? 'checked' : null }}--}}>
+                                        <input class="custom-control-input input-style" id="exclusive-1" name="allow_web_notifications" type="checkbox"
+                                               value="two" {{ $exclusiveSettings->allow_web_notification === 1 ? 'checked' : null }}>
                                         <label class="custom-control-label" for="exclusive-1">Allow Web Notifications</label>
                                     </div>
                                     <div class="custom-control custom-checkbox">
-                                        <input class="custom-control-input" id="exclusive-2" name="allow_email_notifications" type="checkbox"
-                                               value="two" {{--{{ $exclusiveSettings->allow_email === 1 ? 'checked' : null }}--}}>
+                                        <input class="custom-control-input input-style" id="exclusive-2" name="allow_email_notifications" type="checkbox"
+                                               value="two" {{ $exclusiveSettings->allow_email === 1 ? 'checked' : null }}>
                                         <label class="custom-control-label" for="exclusive-2">Allow Email Notifications</label>
                                     </div>
                                     <div class="custom-control custom-checkbox">
-                                        <input class="custom-control-input" id="exclusive-3" name="disable" type="checkbox"
-                                               value="one" {{--{{ $exclusiveSettings->allow_web_notification === 0 && $exclusiveSettings->allow_email === 0 ? 'checked' : null }}--}}>
+                                        <input class="custom-control-input input-style" id="exclusive-3" name="disable" type="checkbox"
+                                               value="one" {{ $exclusiveSettings->allow_web_notification === 0 && $exclusiveSettings->allow_email === 0 ? 'checked' : null }}>
                                         <label class="custom-control-label" for="exclusive-3">Disable All</label>
                                     </div>
                                 </div>
@@ -149,7 +127,7 @@
                             </div>
                         </div>
                         <div class="col-md-12 mt-4 text-center">
-                            <a href="{{ route('agent.resetPassword') }}" class="btn-default large-btn" >Change Password</a>
+                            <a href="{{ route('owner.resetPassword') }}" class="btn-default large-btn" >Change Password</a>
                             <button type="button" class="btn-default large-btn edit-profile @if(!$errors->isEmpty()) d-none @endif" >Edit Profile</button>
                             {!! Form::submit('Update Profile', ['class' => "btn-default large-btn update-profile"]) !!}
                         </div>
@@ -163,38 +141,10 @@
     {!! HTML::style('assets/css/amsify.css') !!}
     {!! HTML::script('assets/js/vendor/amsify.js') !!}
     {!! HTML::script('assets/js/profile.js') !!}
-    <script>
-
-        $('.edit-profile').on('click', function(e) {
-            let lang = [];
-            let neighbors = []
-            let languages = @php echo json_encode(config('languages')); @endphp;
-            ajaxRequest('/all-neighborhoods', 'post', null, false).then(neighborhoods => {
-                neighborhoods.data.forEach(v => {
-                    neighbors.push(v.name);
-                });
-            });
-            for(let language in languages) {
-                lang.push(languages[language]);
-            }
-
-            /*
-                        for(let neighbor in neighbors) {
-                            neighbors.push(neighbors[neighbo]);
-                        }console.log(neighbors);
-            */
-
-            $('input[name="languages"]').amsifySuggestags({
-                suggestions: lang,
-                whiteList: true
-            });
-
-            $('input[name="neighborhood_expertise"]').amsifySuggestags ({
-                suggestions: neighbors,
-                whiteList: true,
-            });
-
-
-        });
+     <script>
+         if($('#exclusive-3').is(":checked")){
+             $('#exclusive-1').attr('disabled', true);
+             $('#exclusive-2').attr('disabled', true);
+         }
     </script>
 @endsection

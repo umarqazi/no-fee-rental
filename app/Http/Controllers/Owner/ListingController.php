@@ -56,7 +56,7 @@ class ListingController extends Controller {
      */
     public function index() {
         $listing = toObject($this->listingService->get($this->paginate));
-        return view('agent.index', compact('listing'));
+        return view('owner.index', compact('listing'));
     }
 
     /**
@@ -87,7 +87,7 @@ class ListingController extends Controller {
     public function create(Request $request) {
         $request->visibility = PENDINGLISTING;
         $id = $this->listingService->create($request);
-        return redirect(route('agent.createListingImages', $id));
+        return redirect(route('owner.createListingImages', $id));
     }
 
     /**
@@ -106,7 +106,7 @@ class ListingController extends Controller {
      * @return redirect URL
      */
     public function finishCreate() {
-        return redirect(route('agent.index'))
+        return redirect(route('owner.index'))
             ->with(['message' => 'Property has been added.', 'alert_type' => 'success']);
     }
 
@@ -130,7 +130,7 @@ class ListingController extends Controller {
      * @return RedirectResponse
      */
     public function finishUpdate() {
-        return redirect(route('agent.index'))
+        return redirect(route('owner.index'))
             ->with(['message' => 'Property has been updated.', 'alert_type' => 'success']);
     }
 
@@ -212,7 +212,7 @@ class ListingController extends Controller {
         } else {
             return $this->index();
         }
-        return view('agent.index', compact('listing'));
+        return view('owner.index', compact('listing'));
     }
     /**
      * @param $id
