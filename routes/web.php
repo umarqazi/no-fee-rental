@@ -103,3 +103,8 @@ Route::get('/migrate-fresh-seed', function() {
     artisan(['migrate:fresh', 'db:seed']);
     dd('Migration fresh with seeding..');
 });
+
+Route::get('/composer-dump', function() {
+    exec('composer dump-autoload');
+    dd('composer dump-succeed');
+});
