@@ -3796,7 +3796,7 @@ footer .copyright .social-icons li a:hover {
 }
 
 .agent-listing-profile .search-result-wrapper .search-listing .featured-properties .property-listing .property-thumb {
-  width: calc(100% / 4 - 30px);
+  width: calc(100% / 2 - 30px);
 }
 
 .neighborhood-search.agent-listing-profile {
