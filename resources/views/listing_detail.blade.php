@@ -174,19 +174,12 @@
                                     </div>
                                 @else
                                     {{--Calender--}}
-                                    @include('sections.calender')
+                                    @include('sections.make_appointment')
                                 @endif
                             </div>
                             <div id="menu1" class="tab-pane fade">
-                                <div class="form-group">
-                                    {!! Form::model(mySelf() ?? null, ['url' => '#']) !!}
-                                    {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'User Name']) !!}
-                                    {!! Form::text('email', null, ['class' => 'form-control', 'placeholder' => 'email@example.com']) !!}
-                                    {!! Form::text('phone_number', null, ['class' => 'form-control', 'placeholder' => 'Phone Number']) !!}
-                                    {!! Form::textarea('message', null, ['class' => 'form-control', 'style' => 'resize:none;', 'placeholder' => 'Message']) !!}
-                                    {!! Form::button('send', ['class' => 'btn btn-default text-center', 'type' => 'submit']) !!}
-                                    {!! Form::close() !!}
-                                </div>
+                                {{--Check Availability--}}
+                                @include('sections.check_availability')
                             </div>
                         </div>
                     </div>

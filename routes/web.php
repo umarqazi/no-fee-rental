@@ -64,7 +64,10 @@ Route::post('/agent/signup', 'UserController@invitedAgentSignup')->name('agent.s
 Route::post('/send-message', 'MessageController@send')->name('send.message');
 
 // Appointment Routes
-Route::post('/make-appointment', 'MakeAppointmentController@create')->name('web.makeAppointment');
+Route::post('/make-appointment', 'AppointmentController@create')->name('web.makeAppointment');
+
+// Check Availability Routes
+Route::post('/check-availability', 'CheckAvailabilityController@create')->name('web.checkAvailability');
 
 // Realty MX Routes
 Route::get('/realty/{file}', 'RealtyMXController@dispatchJob');

@@ -9,12 +9,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * Class AppointmentMessage
  * @package App
  */
-class AppointmentMessage extends Model {
+class Message extends Model {
 
     /**
      * @var array
      */
-    protected $fillable = ['message', 'appointment_id', 'align', 'seen'];
+    protected $fillable = ['message', 'appointment_id', 'check_availability_id', 'align'];
 
     /**
      * @return BelongsTo

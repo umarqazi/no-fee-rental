@@ -31,7 +31,7 @@ class Appointment extends Model {
      * @return HasMany
      */
     public function messages() {
-        return $this->hasMany(AppointmentMessage::class, 'appointment_id', 'id');
+        return $this->hasMany(Message::class, 'appointment_id', 'id');
     }
 
     /**
@@ -65,7 +65,7 @@ class Appointment extends Model {
      * @return mixed
      */
     public function scopeActiveAppointments($query) {
-        return $query->where('meeting_request', ACTIVE)->with(['listing', 'sender']);
+        return $query->where('meeting_request', ACTIVE)->where('is_archived', false)->with(['listing', 'sender']);
     }
 
     /**
@@ -74,7 +74,16 @@ class Appointment extends Model {
      * @return mixed
      */
     public function scopeInactiveAppointments($query) {
-        return $query->where('meeting_request', DEACTIVE)->with(['listing', 'sender']);
+        return $query->where('meeting_request', DEACTIVE)->where('is_archived', false)->with(['listing', 'sender']);
+    }
+
+    /**
+     * @param $query
+     *
+     * @return mixed
+     */
+    public function scopeArchived($query) {
+        return $query->where('is_archived', true)->with(['listing', 'sender']);
     }
 
     /**
@@ -84,6 +93,6 @@ class Appointment extends Model {
      * @return mixed
      */
     public function scopeWithAll($query) {
-        return $query->with(['sender', 'listing', 'messages']);
+        return $query->with(['sender', 'listing', 'messages'])->where('is_archived', false);
     }
 }

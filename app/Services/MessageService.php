@@ -9,7 +9,7 @@
 namespace App\Services;
 
 use App\Forms\AppointmentForm;
-use App\Forms\AppointmentMessageForm;
+use App\Forms\MessageForm;
 use App\Repository\AppointmentRepo;
 use App\Repository\ListingRepo;
 use App\Repository\AppointmentMessageRepo;
@@ -130,7 +130,7 @@ class MessageService {
      * @return bool
      */
     private function saveMessage($contact, $request) {
-        $form = new AppointmentMessageForm();
+        $form = new MessageForm();
         $form->message = $request->message;
         $form->contact_id = $contact->id;
         $form->align = $request->from;
@@ -248,7 +248,7 @@ class MessageService {
      * @return mixed
      */
     public function send($id, $request) {
-        $form = new AppointmentMessageForm();
+        $form = new MessageForm();
         $form->message = $request->message;
         $form->align = myId();
         $form->contact_id = $id;
