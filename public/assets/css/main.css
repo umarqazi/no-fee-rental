@@ -2756,7 +2756,10 @@ footer .copyright .social-icons li a:hover {
   background-color: #223971;
   color: #fff;
 }
-
+.not-allowed-appointment{
+  text-align: center;
+  padding: 30px 0px;
+}
 .listing-Details .lease-term-section {
   display: flex;
   justify-content: space-between;
