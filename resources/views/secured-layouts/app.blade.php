@@ -51,11 +51,14 @@
 		@if(authenticated())
 			@switch(whoAmI())
                 @case('admin')
-				    @include('secured-layouts.sidebar')
-                @break
+				    @include('secured-layouts.admin_sidebar')
+                    @break
                 @case('agent')
-    				@include('secured-layouts.agent-sidebar')
-                @break
+    				@include('secured-layouts.agent_sidebar')
+                    @break
+                @case('owner')
+                    @include('secured-layouts.owner_sidebar')
+                    @break
             @endswitch
 		@endif
 	@show

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Agent;
+namespace App\Http\Controllers\Owner;
 
-use App\Services\AppointmentService;
+use App\Services\ListingConversationService;
 use App\Services\CheckAvailabilityService;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\JsonResponse;
@@ -11,6 +11,10 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\View\View;
 
+/**
+ * Class MessageController
+ * @package App\Http\Controllers\Owner
+ */
 class MessageController extends Controller {
 
     /**
@@ -19,7 +23,7 @@ class MessageController extends Controller {
     private $paginate = 20;
 
     /**
-     * @var AppointmentService
+     * @var ListingConversationService
      */
     private $appointmentService;
 
@@ -32,7 +36,7 @@ class MessageController extends Controller {
      * MessageController constructor.
      */
     public function __construct() {
-        $this->appointmentService = new AppointmentService();
+        $this->appointmentService = new ListingConversationService();
         $this->checkAvailabilityService = new CheckAvailabilityService();
     }
 
@@ -58,10 +62,6 @@ class MessageController extends Controller {
         if($this->appointmentService->accept($id))
             $data = $this->appointmentService->messages($id);
         return sendResponse($request, $data);
-    }
-
-    public function deny() {
-
     }
 
     /**

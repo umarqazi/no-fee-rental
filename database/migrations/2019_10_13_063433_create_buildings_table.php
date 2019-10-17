@@ -4,24 +4,20 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateManageBuildingsTable extends Migration
+class CreateBuildingsTable extends Migration
 {
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up()
-    {
-        Schema::create('manage_buildings', function (Blueprint $table) {
+    public function up() {
+        Schema::create('buildings', function (Blueprint $table) {
             $table->increments('id');
             $table->string('building');
-            $table->unsignedInteger('apartment_id');
             $table->enum('type', ['no fee', 'fee'])->default('no fee');
-            $table->boolean('approved')->default(false);
+            $table->boolean('is_verified')->default(false);
             $table->timestamps();
-
-            $table->foreign('apartment_id')->references('id')->on('listings');
         });
     }
 
@@ -32,6 +28,6 @@ class CreateManageBuildingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('manage_buildings');
+        Schema::dropIfExists('buildings');
     }
 }

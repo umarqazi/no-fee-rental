@@ -38,7 +38,9 @@ class RouteServiceProvider extends ServiceProvider {
 
 		$this->mapAdminRoutes();
 
-		$this->mapAgentRoutes();
+        $this->mapAgentRoutes();
+
+        $this->mapOwnerRoutes();
 	}
 
 	/**
@@ -95,4 +97,18 @@ class RouteServiceProvider extends ServiceProvider {
 			->namespace($this->namespace)
 			->group(base_path('routes/agent.php'));
 	}
+
+    /**
+     * Define the "owner" routes for the application.
+     *
+     * These routes are typically stateless.
+     *
+     * @return void
+     */
+    protected function mapOwnerRoutes() {
+        Route::prefix('owner')
+             ->middleware(['web', 'auth:owner'])
+             ->namespace($this->namespace)
+             ->group(base_path('routes/owner.php'));
+    }
 }

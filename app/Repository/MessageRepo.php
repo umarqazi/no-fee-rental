@@ -8,7 +8,7 @@
 
 namespace App\Repository;
 
-use App\Appointment;
+use App\ListingConversation;
 use App\Message;
 
 class MessageRepo extends BaseRepo {

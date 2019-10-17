@@ -14,12 +14,12 @@ class Message extends Model {
     /**
      * @var array
      */
-    protected $fillable = ['message', 'appointment_id', 'check_availability_id', 'align'];
+    protected $fillable = ['message', 'conversation_id', 'align'];
 
     /**
      * @return BelongsTo
      */
     public function sender() {
-        return $this->belongsTo(Appointment::class, 'appointment_id', 'id');
+        return $this->belongsTo(ListingConversation::class, 'conversation_id', 'id');
     }
 }

@@ -9,8 +9,11 @@
 namespace App\Services;
 
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpFoundation\Response;
 
 class AuthService {
 
@@ -33,8 +36,8 @@ class AuthService {
     /**
      * @param Request $request
      *
-     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Response|\Symfony\Component\HttpFoundation\Response|void
-     * @throws \Illuminate\Validation\ValidationException
+     * @return JsonResponse|\Illuminate\Http\Response|Response|void
+     * @throws ValidationException
      */
     public function login(Request $request) {
         $this->validateLogin($request);
@@ -49,7 +52,7 @@ class AuthService {
         }
 
         if ($this->attemptLogin($request)) {
-            return sendResponse($request, ['url' => "/{$this->guard}/home"], null);
+            return sendResponse($request, ['url' => route("{$this->guard}.index")], null);
         }
 
         // If the login attempt was unsuccessful we will increment the number of attempts

@@ -22,6 +22,7 @@ use App\Repository\NeighborhoodRepo;
 use App\Repository\UserRepo;
 use App\User;
 use Illuminate\Support\Facades\DB;
+use Zend\Diactoros\Request;
 
 class UserService {
 
@@ -132,6 +133,9 @@ class UserService {
 
             } else {
                 $response = $this->userRepo->create($user->toArray());
+                $this->exclusiveSettingRepo->create([
+                    'user_id' => $response->id,
+                ]);
                 $email = [
                     'view' => 'create-user',
                     'first_name' => $response->first_name,
@@ -168,6 +172,13 @@ class UserService {
      */
     public function renters() {
         return $this->userRepo->renters()->get();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function owners() {
+        return $this->userRepo->owners()->get();
     }
 
     /**
@@ -265,8 +276,28 @@ class UserService {
             $this->exclusiveSettingRepo->update($exclusive->id, ['allow_web_notification' => 0,'allow_email' => 0 ]);
         }
 
+        $old = [];
+        $old = $this->getNeighborhoods(myId());
+        $old_neighborhoods = [];
 
-        //$this->neighborhoodRepo->attach($this->userRepo->edit($user->id)->first(), $request->neighborhood_expertise);
+        for ($i = 0; $i  < sizeof($old) ; $i++) {
+
+            $old_neighborhoods[$i] =  $this->neighborhoodRepo->find(['name'=> $old[$i]])->first()->id ;
+
+        }
+
+        $this->neighborhoodRepo->detach($this->userRepo->edit($user->id)->first(), $old_neighborhoods);
+
+        $myArray = explode(',', $request->neighborhood_expertise);
+        $neighborhoods = [];
+
+        for ($i = 0; $i  < sizeof($myArray) && sizeof($myArray) > 1 ; $i++) {
+
+            $neighborhoods[$i] =  $this->neighborhoodRepo->find(['name'=> $myArray[$i]])->first()->id ;
+
+        }
+
+        $this->neighborhoodRepo->attach($this->userRepo->edit($user->id)->first(), $neighborhoods);
         return $this->userRepo->update($user->id, $user->toArray());
     }
 
@@ -345,6 +376,11 @@ class UserService {
             }
 
             return $agent->validate();
+        }
+        if($UserRes = $this->userRepo->find(['email' => $request->email])->first()) {
+            $this->memberMail($agent);
+            $this->agentRepo->invite($agent->toArray());
+            return true ;
         }
         $this->agentRepo->invite($agent->toArray());
         $this->agentMail($agent);
@@ -545,7 +581,7 @@ class UserService {
     }
 
     /**
-     * fetch Query
+     * @return array
      */
     public function fetchQuery() {
         $data = $this->query->first();
@@ -556,9 +592,36 @@ class UserService {
     }
 
     /**
-     * fetch Query
+     * @param $id
+     *
+     * @return bool|mixed
+     */
+    public function unFriend($id) {
+        return $this->memberRepo->delete($id);
+    }
+
+    /**
+     * @param $id
+     *
+     * @return mixed
      */
     public function getExclusiveSettings($id) {
         return $this->exclusiveSettingRepo->find(['user_id'=> $id])->first();
+    }
+
+    /**
+     * @param $id
+     *
+     * @return array
+     */
+    public function getNeighborhoods($id) {
+        $user = $this->userRepo->profileDetail($id)->get();
+        $neighborhoods = [] ;
+
+        for($i = 0 ; $i < sizeof($user[0]->neighborExpertise); $i++) {
+           $neighborhoods[$i] =  $user[0]->neighborExpertise[$i]->name ;
+        };
+
+        return $neighborhoods;
     }
 }

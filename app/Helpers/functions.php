@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
@@ -294,19 +295,36 @@ function innerAmenity($amenity, $action) {
 }
 
 /**
- * @return \Illuminate\Support\Collection|\Tightenco\Collect\Support\Collection
+ * @return array|null
  */
 function neighborhoods() {
-    $collection = null;
-    $neighbours = new \App\Services\NeighborhoodService();
-    $collection[''] = 'Select Neighborhood';
-    foreach ( $neighbours->get() as $key => $value ) {
-        $collection[ $value->id ] = $value->name;
+    $data = (new \App\Services\NeighborhoodService())->get();
+    $neighborhoods[] = 'Select Neighborhood';
+    foreach ($data as $key => $value) {
+        $neighborhoods[$value->id] = $value->name;
     }
 
-    return $collection;
+    return $neighborhoods;
 }
 
+/**
+ * @return array
+ */
+function agents() {
+    $data = (new \App\Services\UserService())->agents();
+    $agents[] = "Select Agent";
+    foreach ($data as $agent) {
+        $agents[$agent->id] = sprintf("%s %s", $agent->first_name, $agent->last_name);
+    }
+
+    return $agents;
+}
+
+/**
+ * @param $amenities
+ *
+ * @return array
+ */
 function fetchAmenities($amenities) {
     $types = [];
     foreach ($amenities as $amenity) {

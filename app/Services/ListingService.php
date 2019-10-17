@@ -19,7 +19,7 @@ use App\Repository\ListingImagesRepo;
  * Class ListingService
  * @package App\Services
  */
-class ListingService extends ManageBuildingService {
+class ListingService extends BuildingService {
 
     /**
      * @var AmenityRepo
@@ -235,16 +235,15 @@ class ListingService extends ManageBuildingService {
      */
     public function create($request) {
         DB::beginTransaction();
-        if($listing = $this->createList($this->validateForm($request))) {
-            $this->amenitiesRepo->attach($listing, $request->amenities);
-            $this->createOpenHouse($listing->id, $request->open_house);
-            $this->addBuilding($listing);
-            DB::commit();
-            return $listing->id;
-        }
-
-        DB::rollBack();
-        return false;
+        $building = $this->isUnique($request->street_address);
+        $listing = $this->validateForm($request);
+        $listing->visibility = $building->is_verified ?? $listing->visibility;
+        $listing = $this->createList($listing);
+        $this->amenitiesRepo->attach($listing, $request->amenities);
+        $this->createOpenHouse($listing->id, $request->open_house);
+        $this->addBuilding($building, $listing);
+        DB::commit();
+        return $listing->id;
     }
 
     /**

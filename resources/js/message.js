@@ -28,10 +28,11 @@ $('#reply').on('click', async function(e) {
             $listingSelector.find('ul > li:eq(1)').text(res.data.listing.baths+" Bath");
             $listingSelector.find('p:last').text(res.data.listing.street_address);
             $('.property-info > img').attr('src', res.data.listing.thumbnail);
-            $('form').attr('action', 'send-message/inbox/'+res.data.id);
+            $('form').attr('action', 'send-message/'+res.data.id);
             $('#message-modal').modal('show');
             return true;
         }
+
     }
 });
 

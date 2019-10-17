@@ -8,17 +8,25 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class Appointment extends Model {
+/**
+ * Class ListingConversation
+ * @package App
+ */
+class ListingConversation extends Model {
 
     /**
      * @var array
      */
-    protected $fillable = ['from', 'to', 'listing_id', 'appointment_date', 'appointment_time'];
+    protected $fillable = [
+        'from', 'to', 'listing_id', 'appointment_date', 'appointment_time',
+        'username', 'email', 'phone_number', 'is_archived', 'meeting_request',
+        'conversation_type'
+    ];
 
     /**
      * @var array
      */
-    protected $casts = ['appointment_date', 'appointment_time'];
+    protected $dates = ['appointment_date'];
 
     /**
      * @return HasOne
@@ -31,7 +39,7 @@ class Appointment extends Model {
      * @return HasMany
      */
     public function messages() {
-        return $this->hasMany(Message::class, 'appointment_id', 'id');
+        return $this->hasMany(Message::class, 'conversation_id','id');
     }
 
     /**
@@ -51,20 +59,11 @@ class Appointment extends Model {
     }
 
     /**
-     * @param $value
-     *
-     * @return Carbon
-     */
-    public function getAppointmentTimeAttribute($value) {
-        return new Carbon($value);
-    }
-
-    /**
      * @param $query
      *
      * @return mixed
      */
-    public function scopeActiveAppointments($query) {
+    public function scopeActiveConversations($query) {
         return $query->where('meeting_request', ACTIVE)->where('is_archived', false)->with(['listing', 'sender']);
     }
 
@@ -73,8 +72,17 @@ class Appointment extends Model {
      *
      * @return mixed
      */
-    public function scopeInactiveAppointments($query) {
+    public function scopeInactiveConversations($query) {
         return $query->where('meeting_request', DEACTIVE)->where('is_archived', false)->with(['listing', 'sender']);
+    }
+
+    /**
+     * @param $query
+     *
+     * @return mixed
+     */
+    public function scopeArchiveConversations($query) {
+        return $this->where('is_archived', TRUE)->with(['listing', 'sender']);
     }
 
     /**
@@ -93,6 +101,6 @@ class Appointment extends Model {
      * @return mixed
      */
     public function scopeWithAll($query) {
-        return $query->with(['sender', 'listing', 'messages'])->where('is_archived', false);
+        return $query->with(['sender', 'listing', 'messages']);
     }
 }

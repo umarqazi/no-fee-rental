@@ -3,8 +3,9 @@
     <div class="calendar-wrap">
         <!--calendar slider -->
         <h3>Request for Schedule </h3>
-        {!! Form::open(['url' => route('web.makeAppointment')]) !!}
+        {!! Form::open(['url' => route('web.listConversation')]) !!}
         {!! Form::hidden('to', $listing->agent->id) !!}
+        {!! Form::hidden('type', APPOINTMENT) !!}
         {!! Form::hidden('listing_id', $listing->id) !!}
         <div class="calendarCarasoule">
             <div class="owl-carousel owl-theme" id="calendar-slider">
@@ -25,19 +26,19 @@
         </div>
         <div class="appointment-radio-btn">
             <div class="selection">
-                <input id="Morning" name="appointment_time" value="10:00 am" type="radio">
+                <input id="Morning" name="appointment_time" value="morning" type="radio">
                 <label for="Morning">Morning <br>
                     10am - 12pm
                 </label>
             </div>
             <div class="selection">
-                <input id="Afternoon" name="appointment_time" value="12:00 pm" type="radio">
+                <input id="Afternoon" name="appointment_time" value="afternoon" type="radio">
                 <label for="Afternoon">Afternoon <br>
                     12pm - 3pm
                 </label>
             </div>
             <div class="selection">
-                <input id="Evening" name="appointment_time" value="03:00 pm" type="radio">
+                <input id="Evening" name="appointment_time" value="evening" type="radio">
                 <label for="Evening">Evening <br>
                     3pm - 6pm
                 </label>

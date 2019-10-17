@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\AppointmentService;
+use App\Services\ListingConversationService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -10,16 +10,16 @@ use Illuminate\Http\Request;
 class AppointmentController extends Controller {
 
     /**
-     * @var AppointmentService
+     * @var ListingConversationService
      */
     private $appointmentService;
 
     /**
      * MakeAppointmentController constructor.
      *
-     * @param AppointmentService $appointmentService
+     * @param ListingConversationService $appointmentService
      */
-    public function __construct(AppointmentService $appointmentService) {
+    public function __construct(ListingConversationService $appointmentService) {
         $this->appointmentService = $appointmentService;
     }
 

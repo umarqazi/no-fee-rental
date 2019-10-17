@@ -23,7 +23,7 @@
 										<div class="actions-btns">
 											<a href="{{ route('admin.editListing', $rf->id) }}"><span><img src="{{asset('admin/images/edit-icon.png')}}" alt=""></span></a>
 											<span><img src="{{asset('admin/images/copy-icon.png')}}" alt=""></span>
-											<a href="{{ route('admin.listingRepost', $rf->id) }}"><button type="button" class="border-btn">Repost</button></a>
+											<a href="{{ route('admin.repostListing', $rf->id) }}"><button type="button" class="border-btn">Repost</button></a>
 										</div>
 									</div>
 								</div>
@@ -54,7 +54,7 @@
 												<a href="{{ route('admin.approveFeature', $rf->id )}}" title="Make this property featured"><span class="status-approve" style="background: blue;">Approve</span></a>
 												<a href="{{ route('admin.removeFeatured', $rf->id )}}" title="Reject feature request"><span class="status" style="background: red;">Cancel</span></a>
 												<div class="actions-btns">
-													<a href="{{ route('admin.listingRepost', $rf->id) }}"><button type="button" class="border-btn">Repost</button></a>
+													<a href="{{ route('admin.repostListing', $rf->id) }}"><button type="button" class="border-btn">Repost</button></a>
 												</div>
 												<div class="list-actions-icons">
 													<a href="{{ route('admin.editListing', $rf->id) }}"><button><i class="fa fa-edit"></i></button></a>
