@@ -1,7 +1,6 @@
 @extends('secured-layouts.app')
 @section('title', 'Calendar')
 @section('content')
-{{--
     {!! HTML::style('//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.css') !!}
 
 <div class="wrapper">
@@ -12,11 +11,10 @@
     {!! $calendar !== null ? $calendar->calendar() : 'No Event Found' !!}
     {!! $calendar !== null ? $calendar->script() : '' !!}
 </div>
-    --}}{{--Add Event Modal--}}{{--
-    @include('agent.modals.add_event')
+    @include('owner.modals.add_event')
     {!! HTML::script('//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.js') !!}
     <script>
         enableDatePicker('input[name=start]', false);
         enableDatePicker('input[name=end]', false);
-    </script>--}}
+    </script>
 @endsection
