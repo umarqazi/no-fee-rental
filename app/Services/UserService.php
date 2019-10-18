@@ -239,7 +239,8 @@ class UserService {
      *
      * @return mixed
      */
-    public function updateProfile($request) {
+    public function updateProfile($request)
+    {
         $user = new EditProfileForm();
         $user->id = $request->id ?? myId();
         $user->first_name = $request->first_name;
@@ -254,35 +255,54 @@ class UserService {
         if ($request->hasFile('profile_image')) {
             $user->profile = $this->updateProfileImage($user->profile, myId(), $request->old_profile ?? '');
         }
-        $exclusive = $this->exclusiveSettingRepo->find(['user_id' => myId()])->first() ;
+        $exclusive = $this->exclusiveSettingRepo->find(['user_id' => myId()])->first();
 
-        if ($request->has('allow_web_notifications')){
-            $this->exclusiveSettingRepo->update($exclusive->id, ['allow_web_notification' => 1]);
-        }
+        if ($exclusive) {
+            if ($request->has('allow_web_notifications')) {
+                $this->exclusiveSettingRepo->update($exclusive->id, ['allow_web_notification' => 1]);
+            } else {
+                $this->exclusiveSettingRepo->update($exclusive->id, ['allow_web_notification' => 0]);
+            }
 
-        else {
-            $this->exclusiveSettingRepo->update($exclusive->id, ['allow_web_notification' => 0]);
-        }
+            if ($request->has('allow_email_notifications')) {
+                $this->exclusiveSettingRepo->update($exclusive->id, ['allow_email' => 1]);
+            } else {
+                $this->exclusiveSettingRepo->update($exclusive->id, ['allow_email' => 0]);
+            }
 
-        if ($request->has('allow_email_notifications')){
-            $this->exclusiveSettingRepo->update($exclusive->id, ['allow_email' => 1]);
-        }
+            if ($request->has('disable')) {
+                $this->exclusiveSettingRepo->update($exclusive->id, ['allow_web_notification' => 0, 'allow_email' => 0]);
+            }
+        } else {
+            $exclusive = $this->exclusiveSettingRepo->create([
+                'user_id' => $user->id,
+            ]);
 
-        else {
-            $this->exclusiveSettingRepo->update($exclusive->id, ['allow_email' => 0]);
-        }
+            if ($request->has('allow_web_notifications')) {
+                $this->exclusiveSettingRepo->update($exclusive->id, ['allow_web_notification' => 1]);
+            } else {
+                $this->exclusiveSettingRepo->update($exclusive->id, ['allow_web_notification' => 0]);
+            }
 
-        if ($request->has('disable')){
-            $this->exclusiveSettingRepo->update($exclusive->id, ['allow_web_notification' => 0,'allow_email' => 0 ]);
+            if ($request->has('allow_email_notifications')) {
+                $this->exclusiveSettingRepo->update($exclusive->id, ['allow_email' => 1]);
+            } else {
+                $this->exclusiveSettingRepo->update($exclusive->id, ['allow_email' => 0]);
+            }
+
+            if ($request->has('disable')) {
+                $this->exclusiveSettingRepo->update($exclusive->id, ['allow_web_notification' => 0, 'allow_email' => 0]);
+            }
+
         }
 
         $old = [];
         $old = $this->getNeighborhoods(myId());
         $old_neighborhoods = [];
 
-        for ($i = 0; $i  < sizeof($old) ; $i++) {
+        for ($i = 0; $i < sizeof($old); $i++) {
 
-            $old_neighborhoods[$i] =  $this->neighborhoodRepo->find(['name'=> $old[$i]])->first()->id ;
+            $old_neighborhoods[$i] = $this->neighborhoodRepo->find(['name' => $old[$i]])->first()->id;
 
         }
 
@@ -291,9 +311,9 @@ class UserService {
         $myArray = explode(',', $request->neighborhood_expertise);
         $neighborhoods = [];
 
-        for ($i = 0; $i  < sizeof($myArray) && sizeof($myArray) > 1 ; $i++) {
+        for ($i = 0; $i < sizeof($myArray) && sizeof($myArray) > 1; $i++) {
 
-            $neighborhoods[$i] =  $this->neighborhoodRepo->find(['name'=> $myArray[$i]])->first()->id ;
+            $neighborhoods[$i] = $this->neighborhoodRepo->find(['name' => $myArray[$i]])->first()->id;
 
         }
 

@@ -2,9 +2,9 @@
     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
         {{--Signup Container--}}
         <div class="modal-content">
-            <img src="assets/images/modal-close-icon.png" alt="" class="close-modal close-signup-modal" data-dismiss="modal" />
+            <img src="{{asset('assets/images/modal-close-icon.png')}}" alt="" class="close-modal close-signup-modal" data-dismiss="modal" />
             <div class="logo-info-wrapper">
-                <img src="assets/images/modal-logo.png" alt="" class="logo" />
+                <img src="{{asset('assets/images/modal-logo.png')}}" alt="" class="logo" />
                 
                 <ul class="create-client-listing">
                     <h3>LET'S STARTED</h3>
