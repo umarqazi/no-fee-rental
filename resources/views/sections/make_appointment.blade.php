@@ -51,5 +51,5 @@
         {!! Form::close() !!}
     </div>
 @else
-    <div>You are not allowed to make appointment request</div>
+    <div class="not-allowed-appointment"> You are not allowed to make appointment request</div>
 @endif

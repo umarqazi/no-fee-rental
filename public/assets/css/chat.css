@@ -7,7 +7,9 @@
 }
 
 .user-info .property-info{
-    flex: 0 0 20%;
+    display: flex;
+    flex: 0 0 80%;
+    margin-top: 10px;
 }
 
 .user-info .property-info ul{
@@ -18,16 +20,48 @@
 .user-info .property-info ul li{
     margin-right: 10px;
 }
-
+.property-info .img-wrap{
+    flex: 0 0 30%;
+    margin-right: 20px;
+}
+.property-info .img-wrap img{
+    width: 100%;
+    max-height: 190px;
+    object-fit: cover;
+}
+.user-info .clients-info {
+    flex: auto;
+}
+.user-info .clients-info {
+    font-size: 14px;
+    color: #808080;
+}
+.user-info .info{
+    width: 100%;
+}
+.user-info .info h3{
+    color: #223971;
+    margin-bottom: 0px;
+}
+.user-info .info small{
+    color: #808080;
+    font-weight: 600;
+    font-size: 14px;
+}
+.user-info .info svg{
+    width: 25px;
+    height: 25px;
+    fill: #f36f21;
+    display: inline-block;
+    vertical-align: middle;
+}
+.user-info .info span{
+    font-size: 14px;
+    color: #808080;
+}
 #frame {
     width: 100%;
     background: #E6EAEA;
-}
-@media screen and (max-width: 360px) {
-    #frame {
-        width: 100%;
-        height: 100vh;
-    }
 }
 #frame #sidepanel {
     float: left;
@@ -39,24 +73,6 @@
     color: #f5f5f5;
     overflow: hidden;
     position: relative;
-}
-@media screen and (max-width: 735px) {
-    #frame #sidepanel {
-        width: 58px;
-        min-width: 58px;
-    }
-}
-#frame #sidepanel #profile {
-    width: 80%;
-    margin: 25px auto;
-}
-@media screen and (max-width: 735px) {
-    #frame #sidepanel #profile {
-        width: 100%;
-        margin: 0 auto;
-        padding: 5px 0 0 0;
-        background: #32465a;
-    }
 }
 #frame #sidepanel #profile.expanded .wrap {
     height: 210px;
@@ -82,10 +98,9 @@
     -webkit-transition: 0.3s height ease;
     transition: 0.3s height ease;
 }
-@media screen and (max-width: 735px) {
-    #frame #sidepanel #profile .wrap {
-        height: 55px;
-    }
+#frame #sidepanel #profile {
+    width: 80%;
+    margin: 25px auto;
 }
 #frame #sidepanel #profile .wrap img {
     width: 50px;
@@ -99,12 +114,6 @@
     -o-transition: 0.3s border ease;
     -webkit-transition: 0.3s border ease;
     transition: 0.3s border ease;
-}
-@media screen and (max-width: 735px) {
-    #frame #sidepanel #profile .wrap img {
-        width: 40px;
-        margin-left: 4px;
-    }
 }
 #frame #sidepanel #profile .wrap img.online {
     border: 2px solid #2ecc71;
@@ -124,15 +133,7 @@
 }
 
 #frame .content {
-    /*-webkit-box-shadow: 0px 0px 5px 3px rgba(0, 0, 0, 0.75);*/
-    /*-moz-box-shadow: 0px 0px 5px 3px rgba(0, 0, 0, 0.75);*/
-    /*box-shadow: 0px 0px 5px 3px rgba(0, 0, 0, 0.75);*/
     background-color: #fff;
-}
-@media screen and (max-width: 735px) {
-    #frame #sidepanel #profile .wrap p {
-        display: none;
-    }
 }
 #frame #sidepanel #profile .wrap i.expand-button {
     float: right;
@@ -140,11 +141,6 @@
     font-size: 0.8em;
     cursor: pointer;
     color: #435f7a;
-}
-@media screen and (max-width: 735px) {
-    #frame #sidepanel #profile .wrap i.expand-button {
-        display: none;
-    }
 }
 #frame #sidepanel #profile .wrap #status-options {
     position: absolute;
@@ -161,22 +157,96 @@
     -webkit-transition: 0.3s all ease;
     transition: 0.3s all ease;
 }
-@media screen and (max-width: 735px) {
-    #frame #sidepanel #profile .wrap #status-options {
-        width: 58px;
-        margin-top: 57px;
-    }
-}
 #frame #sidepanel #profile .wrap #status-options.active {
     opacity: 1;
     visibility: visible;
     margin: 75px 0 0 0;
 }
+@media only screen and (max-width: 1199px) {
+    .clients-info strong{
+        word-break: break-all;
+    }
+}
+@media only screen and (max-width:767px){
+    .user-info{
+        display: block;
+    }
+    .user-info .property-info{
+        display: block;
+        width: 100%;
+    }
+    .property-info .img-wrap{
+        margin-right: 0px;
+        margin-bottom: 10px;
+    }
+    .user-info .clients-info{
+        display: block;
+        width: 100%;
+    } 
+}
+
+@media only screen and (max-width: 576px){
+    .user-info .property-info ul{
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin: 10px 0px;
+    }
+    .user-info .property-info ul li{
+        margin-bottom: 10px;
+        margin-right: 0px;
+        width: 50%;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    #frame {
+        width: 100%;
+        height: auto;
+    }
+}
+
 @media screen and (max-width: 735px) {
-    #frame #sidepanel #profile .wrap #status-options.active {
+    #frame #sidepanel {
+        width: 58px;
+        min-width: 58px;
+    }
+    #frame #sidepanel #profile {
+        width: 100%;
+        margin: 0 auto;
+        padding: 5px 0 0 0;
+        background: #32465a;
+    }
+     #frame #sidepanel #profile .wrap {
+        height: 55px;
+    }
+    #frame #sidepanel #profile .wrap img {
+        width: 40px;
+        margin-left: 4px;
+    }
+    #frame #sidepanel #profile .wrap p {
+        display: none;
+    }
+    #frame #sidepanel #profile .wrap i.expand-button {
+        display: none;
+    }
+     #frame #sidepanel #profile .wrap #status-options {
+        width: 58px;
+        margin-top: 57px;
+    }
+     #frame #sidepanel #profile .wrap #status-options.active {
         margin-top: 62px;
     }
 }
+
+
+
+
+
+
+
+
+
+
 #frame #sidepanel #profile .wrap #status-options:before {
     content: '';
     position: absolute;
@@ -504,14 +574,13 @@
 }
 #frame .content {
     float: right;
-    width: 60%;
-
+    width: 100%;
     position: relative;
 }
 @media screen and (max-width: 735px) {
     #frame .content {
         width: calc(100% - 58px);
-        min-width: 300px !important;
+        min-width: 100% !important;
     }
 }
 @media screen and (min-width: 900px) {
@@ -592,6 +661,7 @@
     border-radius: 20px;
     max-width: 205px;
     line-height: 130%;
+    word-break: break-all;
 }
 @media screen and (min-width: 735px) {
     #frame .content .messages ul li p {
@@ -602,12 +672,14 @@
     bottom: 0;
     width: 100%;
     z-index: 99;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
 }
 #frame .content .message-input .wrap {
     position: relative;
 }
 #frame .content .messages > ul{
-    height: calc(100vh - 285px);
+    height: calc(100vh - 180px);
     overflow: auto;
 }
 #frame .content .message-input .wrap input {
@@ -615,13 +687,13 @@
     float: left;
     border: none;
     width: calc(100% - 90px);
-    padding: 11px 32px 10px 8px;
+    padding: 11px 8px 10px 8px;
     font-size: 15px;
     color: #32465a;
 }
 @media screen and (max-width: 735px) {
     #frame .content .message-input .wrap input {
-        padding: 15px 32px 16px 8px;
+        padding: 12px 8px 12px 8px;
     }
 }
 #frame .content .message-input .wrap input:focus {
@@ -657,7 +729,7 @@
 }
 @media screen and (max-width: 735px) {
     #frame .content .message-input .wrap button {
-        padding: 16px 0;
+        padding: 12px 0;
     }
 }
 #frame .content .message-input .wrap button:hover {
