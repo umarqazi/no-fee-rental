@@ -35,7 +35,7 @@ class CalendarController extends Controller {
      */
     public function index() {
         $calendar = $this->calendarService->index();
-        return view('agent.calendar', compact('calendar'));
+        return view('owner.calendar', compact('calendar'));
     }
 
     /**
