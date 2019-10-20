@@ -26,28 +26,33 @@ class AmenitiesTableSeeder extends Seeder {
      * @return void
      */
     public function run() {
+        $batch = [];
         DB::table('amenities')->delete();
-        DB::table('amenity_types')->delete();
-        $amenities = config('amenities');
-        collect($amenities)->map(function($amenities, $amenity_type) {
-            $batch = [];
-            $amenity_type =  $this->service->createType(
-                [
-                    'amenity_type' => ucwords(str_replace('_', ' ', $amenity_type))
-                ]);
+        $amenities = [
+            0  => 'Balcony',
+            1  => 'Dishwasher',
+            2  => 'Concierge',
+            3  => 'Elevator',
+            4  => 'Furnished',
+            5  => 'Gym',
+            6  => 'In-Unit Laundry',
+            7  => 'On-Site Parking',
+            8  => 'Terrace',
+            9  => 'Door Man',
+            10 => 'Fitness Centre',
+            11 => 'Storage Facility',
+            12 => 'Elevator',
+        ];
+        foreach ($amenities as $amenity) {
+            $collect = [
+                'amenities'       => $amenity,
+                'created_at'      => now(),
+                'updated_at'      => now(),
+            ];
 
-            foreach ($amenities as $amenity) {
-                $collect = [
-                    'amenity_type_id' => $amenity_type->id,
-                    'amenities'       => $amenity,
-                    'created_at'      => now(),
-                    'updated_at'      => now(),
-                ];
-
-                array_push($batch, $collect);
-            }
+            array_push($batch, $collect);
+        }
 
             $this->service->insert($batch);
-        });
     }
 }

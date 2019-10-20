@@ -10,10 +10,14 @@ namespace App\Services;
 
 use App\Repository\AmenityRepo;
 
-class AmenityService extends AmenityTypeService {
+/**
+ * Class AmenityService
+ * @package App\Services
+ */
+class AmenityService {
 
     /**
-     * @var
+     * @var AmenityRepo
      */
     protected $amenityRepo;
 
@@ -21,8 +25,14 @@ class AmenityService extends AmenityTypeService {
      * AmenityService constructor.
      */
     public function __construct() {
-        parent::__construct();
         $this->amenityRepo = new AmenityRepo();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function get() {
+        return $this->amenityRepo->all();
     }
 
     /**
@@ -32,14 +42,5 @@ class AmenityService extends AmenityTypeService {
      */
     public function insert($data) {
         return $this->amenityRepo->insert($data);
-    }
-
-    /**
-     * @param $data
-     *
-     * @return mixed
-     */
-    public function createType($data) {
-        return parent::create($data);
     }
 }

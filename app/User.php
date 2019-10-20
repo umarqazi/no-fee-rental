@@ -7,9 +7,13 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\CanResetPassword;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Foundation\Auth\User as Authenticate;
 
-class User extends Authenticatable implements CanResetPassword {
+/**
+ * Class User
+ * @package App
+ */
+class User extends Authenticate implements CanResetPassword {
 	use Notifiable;
 
 	/**
@@ -19,7 +23,7 @@ class User extends Authenticatable implements CanResetPassword {
 	 */
 	protected $fillable = [
 	    'company_id', 'first_name', 'last_name', 'user_type', 'email', 'description',
-        'password', 'phone_number','remember_token','license_number','address'
+        'password', 'phone_number', 'remember_token', 'license_number', 'address'
 	];
 
 	/**
@@ -58,7 +62,7 @@ class User extends Authenticatable implements CanResetPassword {
 	 * @return HasMany
 	 */
 	public function agentInvites() {
-		return $this->hasMany(AgentInvites::class, 'invited_by', 'id');
+		return $this->hasMany(AgentInvite::class, 'invited_by', 'id');
 	}
 
     /**

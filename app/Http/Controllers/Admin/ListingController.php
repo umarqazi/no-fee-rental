@@ -3,26 +3,25 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Services\AmenityTypeService;
 use App\Services\ListingService;
 use App\Services\NeighborhoodService;
 use App\Services\UserService;
 use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
+/**
+ * Class ListingController
+ * @package App\Http\Controllers\Admin
+ */
 class ListingController extends Controller {
 
 	/**
 	 * @var ListingService
 	 */
 	private $listingService;
-
-    /**
-     * @var AmenityTypeService
-     */
-	private $amenityTypeService;
 
     /**
      * @var NeighborhoodService
@@ -44,18 +43,15 @@ class ListingController extends Controller {
      *
      * @param UserService $userService
      * @param ListingService $listingService
-     * @param AmenityTypeService $amenityTypeService
      * @param NeighborhoodService $neighborhoodService
      */
 	public function __construct(
         UserService $userService,
 	    ListingService $listingService,
-        AmenityTypeService $amenityTypeService,
         NeighborhoodService $neighborhoodService
     ) {
 	    $this->userService = $userService;
         $this->listingService = $listingService;
-        $this->amenityTypeService = $amenityTypeService;
         $this->neighborhoodService = $neighborhoodService;
 	}
 
@@ -63,7 +59,7 @@ class ListingController extends Controller {
 	 * @return Factory|View
 	 */
 	public function index() {
-		$listing = toObject($this->listingService->get($this->paginate));
+		$listing = $this->listingService->get($this->paginate);
 		return view('admin.listing_view', compact('listing'));
 	}
 
@@ -108,11 +104,9 @@ class ListingController extends Controller {
         return view('listing-features.listing_images', compact('id', 'action'));
     }
 
-	/**
-	 * finish add listing
-	 *
-	 * @return redirect URL
-	 */
+    /**
+     * @return RedirectResponse
+     */
 	public function finishCreate() {
 		return redirect(route('admin.viewListing'))
 			->with(['message' => 'Property has been added.', 'alert_type' => 'success']);
@@ -134,11 +128,9 @@ class ListingController extends Controller {
 		: error('Something went wrong');
 	}
 
-	/**
-	 * finish update listing
-	 *
-	 * @return redirect URL
-	 */
+    /**
+     * @return RedirectResponse
+     */
 	public function finishUpdate() {
 		return redirect(route('admin.viewListing'))
 			->with(['message' => 'Property has been updated.', 'alert_type' => 'success']);
@@ -148,7 +140,7 @@ class ListingController extends Controller {
      * @param Request $request
      * @param $id
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
 	public function uploadImages(Request $request, $id) {
 		return ($this->listingService->insertImages($id, $request))
@@ -175,6 +167,8 @@ class ListingController extends Controller {
 	public function edit($id) {
 		$action = 'Update';
 		$listing = $this->listingService->edit($id)->first();
+		$listing->features = findFeatures($listing->features);
+		$listing->user_id = $listing->agent->id;
 		return view('listing-features.listing', compact('listing', 'action'));
 	}
 
@@ -184,17 +178,18 @@ class ListingController extends Controller {
 	 * @return Factory|View
 	 */
 	public function searchWithFilters(Request $request) {
-		$listing = toObject($this->listingService->search($request, $this->paginate));
+		$listing = $this->listingService->search($request, $this->paginate);
 		return view('admin.listing_view', compact('listing'));
 	}
 
-	/**
-	 * @param $id
-	 *
-	 * @return RedirectResponse
-	 */
-	public function status($id) {
-		$status = $this->listingService->visibility($id);
+    /**
+     * @param $id
+     * @param Request $request
+     *
+     * @return RedirectResponse
+     */
+	public function status($id, Request $request) {
+		$status = $this->listingService->visibility($id, $request);
 		return (isset($status))
 		? success(($status) ? 'Property has been published.' : 'Property has been unpublished')
 		: error('Something went wrong');
@@ -204,7 +199,7 @@ class ListingController extends Controller {
      * @param Request $request
      * @param $id
      *
-     * @return \Illuminate\Http\JsonResponse|RedirectResponse
+     * @return JsonResponse|RedirectResponse
      */
 	public function removeImage(Request $request, $id) {
 		$remove = $this->listingService->removeImage($id);
@@ -218,12 +213,13 @@ class ListingController extends Controller {
      */
 	public function sortBy($order) {
 	    if(method_exists($this->listingService, $order)) {
-            $listing = toObject( $this->listingService->{$order}( $this->paginate ));
+            $listing =  $this->listingService->{$order}( $this->paginate );
         } else {
             return $this->index();
         }
         return view('admin.listing_view', compact('listing'));
     }
+
     /**
      * @param $id
      *
@@ -232,6 +228,8 @@ class ListingController extends Controller {
     public function copy($id) {
         $action = 'Copy';
         $listing = $this->listingService->edit($id)->first();
+        $listing->features = findFeatures($listing->features);
+        $listing->user_id = $listing->agent->id;
         return view('listing-features.listing', compact('listing', 'action'));
     }
 }

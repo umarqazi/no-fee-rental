@@ -8,7 +8,7 @@
 
 namespace App\Repository;
 
-use App\Amenities;
+use App\Amenity;
 
 class AmenityRepo extends BaseRepo {
 
@@ -16,21 +16,16 @@ class AmenityRepo extends BaseRepo {
      * AmenityRepo constructor.
      */
     public function __construct() {
-        parent::__construct(new Amenities());
-    }
-
-    /**
-     * @return mixed
-     */
-    public function get() {
-        return $this->model->amenities()->get();
+        parent::__construct(new Amenity());
     }
 
     /**
      * @param $listing
      * @param $data
+     *
+     * @return mixed
      */
     public function attach($listing, $data) {
-        $listing->amenities()->attach($data);
+        return $listing->buildings()->attach($data);
     }
 }

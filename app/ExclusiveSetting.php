@@ -5,12 +5,16 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class ExclusiveSettings extends Model
-{
+/**
+ * Class ExclusiveSetting
+ * @package App
+ */
+class ExclusiveSetting extends Model {
+
     /**
      * @var array
      */
-    protected $fillable = ['user_id', 'allow_email', 'allow_wen_notification'];
+    protected $fillable = ['user_id', 'allow_email', 'allow_web_notification'];
 
     /**
      * @return HasOne

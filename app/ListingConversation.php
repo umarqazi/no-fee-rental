@@ -4,7 +4,6 @@ namespace App;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
@@ -43,10 +42,10 @@ class ListingConversation extends Model {
     }
 
     /**
-     * @return BelongsTo
+     * @return HasOne
      */
     public function sender() {
-        return $this->belongsTo(User::class, 'from', 'id');
+        return $this->hasOne(User::class, 'from', 'id');
     }
 
     /**
@@ -83,15 +82,6 @@ class ListingConversation extends Model {
      */
     public function scopeArchiveConversations($query) {
         return $this->where('is_archived', TRUE)->with(['listing', 'sender']);
-    }
-
-    /**
-     * @param $query
-     *
-     * @return mixed
-     */
-    public function scopeArchived($query) {
-        return $query->where('is_archived', true)->with(['listing', 'sender']);
     }
 
     /**

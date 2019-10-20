@@ -115,11 +115,16 @@
                         <div class="open-house-section">
                             <h3> Open House</h3>
                             @foreach($listing->openHouses as $openHouse)
-                                @if($openHouse->date == now()->format('m/d/Y') && formattedDate('h:i a', $openHouse->end_time) > now()->format('h:i a'))
+                                @if($openHouse->date == now()->format('m/d/Y') &&
+                                openHouseTimeSlot($openHouse->start_time)->format('h:i a') >
+                                now()->format('h:i a'))
                                 <div class="open-house-inner">
                                     <div class="open-timings">
-                                        <p>
-                                            {{ formattedDate('D, M d' ,$openHouse->date). ' | '. formattedDate('h:i a', $openHouse->start_time). ' - ' .formattedDate('h:i a', $openHouse->end_time)}}</p>
+                                        <p>{{
+                                        formattedDate('D, M d' ,$openHouse->date). ' | '.
+                                        openHouseTimeSlot($openHouse->start_time)->format('h:i a'). ' - ' .
+                                        openHouseTimeSlot($openHouse->end_time)->format('h:i a')
+                                        }}</p>
                                     </div>
                                     <div class="apointment-interest-section">
                                         @if($openHouse->only_appt)
@@ -192,19 +197,43 @@
     <div class="listing-aminities-sec">
         <div class="container-lg">
             <div class="row">
-                @foreach(fetchAmenities($listing->amenities) as $amenities)
-                    @php $types = array_keys($amenities); $amen = array_values($amenities); @endphp
-                    <div class="col-md-3 col-sm-4">
-                        <h3>{{ $types[0] }}</h3>
+                <div class="col-md-3 col-sm-4">
+                <h3>Pet Policy</h3>
+                    @php $pet = petPolicy($listing->features); @endphp
+                    @if(count($pet) < 1)
+                        None
+                    @endif
+                    @foreach($pet as $feature)
                         <ul class="second-ul">
-                            @foreach($amen as $key => $a)
-                                @foreach($a as $key => $value)
-                                    <li>{{ $value }}</li>
-                                @endforeach
-                            @endforeach
+                            <li>{{ $feature }}</li>
                         </ul>
-                    </div>
-                @endforeach
+                    @endforeach
+                </div>
+
+                <div class="col-md-3 col-sm-4">
+                    <h3>Unit Feature</h3>
+                    @php $unit = unitFeature($listing->features); @endphp
+                    @if(count($unit) < 1)
+                        None
+                    @endif
+                    @foreach($unit as $feature)
+                        <ul class="second-ul">
+                            <li>{{ $feature }}</li>
+                        </ul>
+                    @endforeach
+                </div>
+
+                <div class="col-md-3 col-sm-4">
+                    <h3>Amenities</h3>
+                    @if(count($listing->listingBuilding->amenities) < 1)
+                        None
+                    @endif
+                    @foreach($listing->listingBuilding->amenities as $feature)
+                        <ul class="second-ul">
+                            <li>{{ $feature->amenities }}</li>
+                        </ul>
+                    @endforeach
+                </div>
             </div>
         </div>
     </div>
@@ -259,48 +288,36 @@
             <h3> Nearby Apartments</h3>
             <div class="property-listing">
                 <div class="desktop-listiing">
-                    <div class="property-thumb">
-                        <div class="check-btn">
-                            <a href="javascript:void(0);">
-                                <button class="btn-default" data-toggle="modal" data-target="#check-availability">Check Availability</button>
-                            </a>
-                        </div>
-                        <span class="heart-icon"></span>
-                        <img src="http://localhost:8000/storage/images/listing/thumbnails/CiUjEIe1GWdVVY7p6Rq1.jpg" alt="" class="main-img">
-                        <div class="info">
-                            <div class="info-link-text">
-                                <p> $12444 </p>
-                                <small> 4 Beds ,3 Baths </small>
-                                <p> Fort Lauderdale, FL, USA</p>
+                    @if(count($listing->listingBuilding->building->listings) > 1)
+                        @foreach($listing->listingBuilding->building->listings as $apartment)
+                            @if($listing->id === $apartment->id) @continue @endif
+                            <div class="property-thumb">
+                                <div class="check-btn">
+                                    <a href="javascript:void(0);">
+                                        <button class="btn-default" data-toggle="modal" data-target="#check-availability">
+                                            Check Availability
+                                        </button>
+                                    </a>
+                                </div>
+                            <span class="heart-icon"></span>
+                            <img src="{{ asset($apartment->thumbnail ?? DLI) }}" alt="" class="main-img">
+                            <div class="info">
+                                <div class="info-link-text">
+                                    <p> ${{ $apartment->rent }} </p>
+                                    <small>{{ str_formatting($apartment->bedrooms, 'Bed').' ,'.str_formatting($apartment->baths, 'Bath') }} </small>
+                                    <p> {{ is_exclusive($apartment) }}</p>
+                                </div>
+                                <a href="{{ route('listing.detail', $apartment->id) }}" class="btn viewfeature-btn"> View </a>
                             </div>
-                            <a href="http://localhost:8000/listing-detail/2" class="btn viewfeature-btn"> View </a>
-                        </div>
-                        <div class="feaure-policy-text">
-                            <p>$12444 / Month </p>
-                            <span>4 Beds ,3 Baths </span>
-                        </div>
-                    </div>
-                    <div class="property-thumb">
-                        <div class="check-btn">
-                            <a href="javascript:void(0);">
-                                <button class="btn-default" data-toggle="modal" data-target="#check-availability">Check Availability</button>
-                            </a>
-                        </div>
-                        <span class="heart-icon"></span>
-                        <img src="http://localhost:8000/storage/images/listing/thumbnails/J8Zn8iCVOXTkvClFPICE.jpg" alt="" class="main-img">
-                        <div class="info">
-                            <div class="info-link-text">
-                                <p> $2323 </p>
-                                <small> 1 Bed ,1 Bath </small>
-                                <p> Utrecht, Netherlands - 1</p>
+                            <div class="feaure-policy-text">
+                                <p>${{ $apartment->rent }} / Month </p>
+                                <span>{{ str_formatting($apartment->bedrooms, 'Bed').' ,'.str_formatting($apartment->baths, 'Bath') }}</span>
                             </div>
-                            <a href="http://localhost:8000/listing-detail/1" class="btn viewfeature-btn"> View </a>
                         </div>
-                        <div class="feaure-policy-text">
-                            <p>$2323 / Month </p>
-                            <span>1 Bed ,1 Bath </span>
-                        </div>
-                    </div>
+                        @endforeach
+                    @else
+                        No nearby apartment found
+                    @endif
                 </div>
 
                 <div class="owl-slider">

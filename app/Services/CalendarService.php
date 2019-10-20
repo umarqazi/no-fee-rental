@@ -6,13 +6,15 @@
  * @project no-fee-rental
  */
 
-
 namespace App\Services;
-
 
 use App\Forms\AddEventForm;
 use App\Repository\CalendarRepo;
 
+/**
+ * Class CalendarService
+ * @package App\Services
+ */
 class CalendarService {
 
     /**
@@ -40,7 +42,7 @@ class CalendarService {
      * @return mixed
      */
     public function addEvent($request) {
-        $event = $this->validateForm($request);
+        $event = $this->__validateForm($request);
         return $this->calendarRepo->create($event->toArray());
     }
 
@@ -60,7 +62,7 @@ class CalendarService {
      * @return mixed
      */
     public function updateEvent($id, $request) {
-        $event = $this->validateForm($request);
+        $event = $this->__validateForm($request);
         return $this->calendarRepo->update($id, $event->toArray());
     }
 
@@ -78,11 +80,11 @@ class CalendarService {
      *
      * @return AddEventForm
      */
-    private function validateForm($request) {
-        $form = new AddEventForm();
+    private function __validateForm($request) {
+        $form        = new AddEventForm();
         $form->title = $request->title;
         $form->start = $request->start;
-        $form->end = $request->end;
+        $form->end   = $request->end;
         $form->validate();
         return $form;
     }

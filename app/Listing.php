@@ -2,7 +2,6 @@
 
 namespace App;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -26,14 +25,14 @@ class Listing extends Model {
         'name', 'email', 'phone_number', 'street_address', 'display_address',
         'thumbnail', 'baths', 'bedrooms', 'unit', 'rent', 'square_feet',
         'description', 'is_featured', 'map_location', 'building_type',
-		'visibility', 'city_state_zip', 'realty_url', 'availability'
+		'visibility', 'realty_url', 'availability'
 	];
 
     /**
-     * @return BelongsToMany
+     * @return HasMany
      */
-    public function amenities() {
-        return $this->belongsToMany(Amenities::class, 'listing_amenities', 'listing_id', 'amenity_id');
+    public function features() {
+        return $this->hasMany(ListingFeature::class, 'listing_id');
     }
 
 	/**
@@ -54,7 +53,7 @@ class Listing extends Model {
      * @return HasOne
      */
     public function neighborhood() {
-        return $this->hasOne(Neighborhoods::class, 'id', 'neighborhood_id');
+        return $this->hasOne(Neighborhoods::class, 'id','neighborhood_id');
     }
 
     /**
@@ -68,7 +67,19 @@ class Listing extends Model {
      * @return BelongsToMany
      */
 	public function buildings() {
-	    return $this->belongsToMany(Building::class, 'building_apartments', 'apartment_id', 'building_id');
+	    return $this->belongsToMany(
+	        Building::class,
+            'building_apartments',
+            'apartment_id',
+            'building_id'
+        );
+    }
+
+    /**
+     * @return HasOne
+     */
+    public function listingBuilding() {
+	    return $this->hasOne(BuildingApartment::class, 'apartment_id', 'id');
     }
 
 	/**
@@ -145,53 +156,11 @@ class Listing extends Model {
 	 *
 	 * @return mixed
 	 */
-	public function scopeWithAgent($query) {
-		return $query->with('agent');
-	}
-
-    /**
-     * @param $query
-     *
-     * @return mixed
-     */
-    public function scopeWithAmenities($query) {
-        return $query->with('amenities');
-    }
-
-    /**
-     * @param $query
-     *
-     * @return mixed
-     */
-    public function scopeWithNeighborhood($query) {
-        return $query->with('neighborhood');
-    }
-
-    /**
-     * @param $query
-     *
-     * @return mixed
-     */
-    public function scopeWithOpenHouses($query) {
-        return $query->with('openHouses');
-    }
-
-	/**
-	 * @param $query
-	 *
-	 * @return mixed
-	 */
-	public function scopeWithImages($query) {
-		return $query->with('images');
-	}
-
-	/**
-	 * @param $query
-	 *
-	 * @return mixed
-	 */
 	public function scopeWithAll($query) {
-		return $query->with(['agent.company', 'images', 'openHouses', 'amenities', 'neighborhood']);
+		return $query->with([
+		    'agent.company', 'images', 'listingBuilding.amenities',
+            'openHouses', 'features', 'listingBuilding.listings', 'neighborhood'
+        ]);
 	}
 
 	/**

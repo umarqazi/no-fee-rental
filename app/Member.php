@@ -3,23 +3,32 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class Member extends Model
-{
+/**
+ * Class Member
+ * @package App
+ */
+class Member extends Model {
+
+    /**
+     * @var array
+     */
     protected $fillable = ['agent_id', 'member_id'];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return HasOne
      */
     public function friends() {
         return $this->hasOne(User::class, 'id', 'member_id');
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function invitedAgents() {
-        return $this->hasMany(AgentInvites::class, 'invited_by', 'agent_id');
+        return $this->hasMany(AgentInvite::class, 'invited_by', 'agent_id');
     }
 
     /**

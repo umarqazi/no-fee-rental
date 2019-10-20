@@ -3,7 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
+/**
+ * Class ListingImages
+ * @package App
+ */
 class ListingImages extends Model {
 
 	/**
@@ -12,10 +17,10 @@ class ListingImages extends Model {
 	protected $fillable = ['listing_id', 'listing_image'];
 
 	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\HasOne
+	 * @return HasOne
 	 */
 	public function listing() {
-		return $this->belongsTo(Listing::class, 'id', 'listing_id');
+		return $this->hasOne(Listing::class, 'id', 'listing_id');
 	}
 
 	/**

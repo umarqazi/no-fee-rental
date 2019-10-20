@@ -4,13 +4,16 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Favourite extends Model
-{
-    protected $fillable = ['user_id', 'listing_id'];
+/**
+ * Class Favourite
+ * @package App
+ */
+class Favourite extends Model {
 
-    public function favourite() {
-//        return $this->belongsToMany();
-    }
+    /**
+     * @var array
+     */
+    protected $fillable = ['user_id', 'listing_id'];
 
     /**
      * @param $query

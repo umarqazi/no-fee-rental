@@ -8,7 +8,7 @@
 
 namespace App\Repository;
 
-use App\ExclusiveSettings;
+use App\ExclusiveSetting;
 
 class ExclusiveSettingRepo extends BaseRepo {
 
@@ -16,7 +16,7 @@ class ExclusiveSettingRepo extends BaseRepo {
      * NotificationSettingRepo constructor.
      */
     public function __construct() {
-        parent::__construct(new ExclusiveSettings());
+        parent::__construct(new ExclusiveSetting());
     }
 
     /**

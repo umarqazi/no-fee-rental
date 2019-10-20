@@ -34,7 +34,7 @@ class BuildingRepo extends BaseRepo {
      * @return mixed
      */
     public function active($paginate) {
-        return $this->model->where('is_verified', ACTIVE)->with('apartments.agent')->paginate($paginate, ['*'], 'active-buildings');
+        return $this->model->where('is_verified', ACTIVE)->with('listings.agent')->paginate($paginate, ['*'], 'active-buildings');
     }
 
     /**
@@ -43,7 +43,7 @@ class BuildingRepo extends BaseRepo {
      * @return mixed
      */
     public function inactive($paginate) {
-        return $this->model->where('is_verified', DEACTIVE)->with('apartments.agent')->paginate($paginate, ['*'], 'inactive-buildings');
+        return $this->model->where('is_verified', DEACTIVE)->with('listings.agent')->paginate($paginate, ['*'], 'inactive-buildings');
     }
 
     /**
@@ -52,7 +52,26 @@ class BuildingRepo extends BaseRepo {
      *
      * @return mixed
      */
-    public function attach($building, $apartment_id) {
-        return $building->apartments()->attach($apartment_id->id);
+    public function attachApartment($building, $apartment_id) {
+        return $building->listings()->attach($apartment_id->id);
+    }
+
+    /**
+     * @param $building
+     * @param $data
+     *
+     * @return mixed
+     */
+    public function attachAmenities($building, $data) {
+        return $building->amenities()->attach($data);
+    }
+
+    /**
+     * @param $id
+     *
+     * @return mixed
+     */
+    public function getApartments($id) {
+        return $this->findById($id)->with('listings');
     }
 }

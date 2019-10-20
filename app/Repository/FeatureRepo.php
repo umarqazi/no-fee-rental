@@ -8,21 +8,18 @@
 
 namespace App\Repository;
 
-use App\AmenityType;
+use App\ListingFeature;
 
-class AmenityTypeRepo extends BaseRepo {
+/**
+ * Class FeatureRepo
+ * @package App\Repository
+ */
+class FeatureRepo extends BaseRepo {
 
     /**
      * AmenityTypeRepo constructor.
      */
     public function __construct() {
-        parent::__construct(new AmenityType());
-    }
-
-    /**
-     * @return mixed
-     */
-    public function get() {
-        return $this->model->withAmenities();
+        parent::__construct(new ListingFeature());
     }
 }

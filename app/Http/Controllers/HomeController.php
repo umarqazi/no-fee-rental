@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Services\FeatureListingService;
-use Zend\Diactoros\Request;
-use Newsletter;
+use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\View\View;
 
 class HomeController extends Controller {
 
@@ -30,7 +31,7 @@ class HomeController extends Controller {
 	/**
 	 * Show the application dashboard.
 	 *
-	 * @return \Illuminate\Contracts\Support\Renderable
+	 * @return Renderable
 	 */
 	public function index() {
 		$featured_listings = $this->service->featured_listing($this->paginate);
@@ -40,7 +41,7 @@ class HomeController extends Controller {
 	/**
 	 * @param $id
 	 *
-	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 * @return Factory|View
 	 */
 	public function detail($id) {
 		$listing = $this->service->detail($id);

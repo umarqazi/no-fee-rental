@@ -5,8 +5,15 @@ namespace App\Http\Controllers\Admin;
 use App\Services\BuildingService;
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 
+/**
+ * Class BuildingController
+ * @package App\Http\Controllers\Admin
+ */
 class BuildingController extends Controller {
 
     /**
@@ -34,5 +41,38 @@ class BuildingController extends Controller {
     public function index() {
         $buildings = $this->buildingService->index($this->paginate);
         return view('admin.buildings', compact('buildings'));
+    }
+
+    /**
+     * @param $id
+     * @param Request $request
+     *
+     * @return JsonResponse|RedirectResponse
+     */
+    public function verify($id, Request $request) {
+        $response = $this->buildingService->verify($id);
+        return sendResponse($request, $response, 'Building has been verified.');
+    }
+
+    /**
+     * @param $id
+     * @param Request $request
+     *
+     * @return JsonResponse|RedirectResponse
+     */
+    public function noFee($id, Request $request) {
+        $response = $this->buildingService->nofee($id);
+        return sendResponse($request, $response, 'Building marked as no fee');
+    }
+
+    /**
+     * @param $id
+     * @param Request $request
+     *
+     * @return JsonResponse|RedirectResponse
+     */
+    public function fee($id, Request $request) {
+        $response = $this->buildingService->fee($id);
+        return sendResponse($request, $response, 'Building marked as fee');
     }
 }

@@ -5,9 +5,9 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 /**
- * Class CreateAmenitiesTable
+ * Class CreateListingFeaturesTable
  */
-class CreateAmenitiesTable extends Migration {
+class CreateListingFeaturesTable extends Migration {
 
     /**
      * Run the migrations.
@@ -15,10 +15,13 @@ class CreateAmenitiesTable extends Migration {
      * @return void
      */
     public function up() {
-        Schema::create('amenities', function (Blueprint $table) {
+        Schema::create('listing_features', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('amenities');
+            $table->unsignedInteger('listing_id');
+            $table->string('value');
             $table->timestamps();
+
+            $table->foreign('listing_id')->references('id')->on('listings');
         });
     }
 
@@ -28,6 +31,6 @@ class CreateAmenitiesTable extends Migration {
      * @return void
      */
     public function down() {
-        Schema::dropIfExists('amenities');
+        Schema::dropIfExists('listing_features');
     }
 }

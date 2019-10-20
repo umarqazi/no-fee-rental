@@ -3,7 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * Class ListingTypes
+ * @package App
+ */
 class ListingTypes extends Model {
 
     /**
@@ -17,7 +22,7 @@ class ListingTypes extends Model {
 	protected $table = 'amenities';
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
 	public function listing() {
 		return $this->belongsTo(Listing::class, 'id', 'listing_id');

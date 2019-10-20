@@ -8,15 +8,20 @@
 
 namespace App\Services;
 
+use App\Repository\AmenityRepo;
 use App\Repository\ListingRepo;
 use App\Repository\BuildingRepo;
 
+/**
+ * Class BuildingService
+ * @package App\Services
+ */
 class BuildingService {
 
     /**
      * @var BuildingRepo
      */
-    protected $manageBuildingRepo;
+    protected $buildingRepo;
 
     /**
      * @var ListingRepo
@@ -24,11 +29,17 @@ class BuildingService {
     protected $listingRepo;
 
     /**
+     * @var AmenityRepo
+     */
+    protected $amenitiesRepo;
+
+    /**
      * ManageBuildingService constructor.
      */
     public function __construct() {
-        $this->listingRepo = new ListingRepo();
-        $this->manageBuildingRepo = new BuildingRepo();
+        $this->amenitiesRepo = new AmenityRepo();
+        $this->listingRepo   = new ListingRepo();
+        $this->buildingRepo  = new BuildingRepo();
     }
 
     /**
@@ -41,30 +52,47 @@ class BuildingService {
     }
 
     /**
-     * @param $paginate
+     * @param $id
      *
-     * @return array
+     * @return mixed
      */
-    private function __collection($paginate) {
-        return [
-            'active'   => $this->manageBuildingRepo->active($paginate),
-            'inactive' => $this->manageBuildingRepo->inactive($paginate)
-        ];
+    public function verify($id) {
+        $this->__apartmentAction($id, ACTIVE);
+        return $this->buildingRepo->update($id, ['is_verified' => TRUE]);
     }
 
     /**
-     * @param $apartment_address
+     * @param $id
      *
-     * @return bool
+     * @return mixed
      */
-    public function isUnique($apartment_address) {
-        $apartment = $this->listingRepo->isExistingApartment($apartment_address)->first();
-        if(!empty($apartment)) {
-            $building = $this->manageBuildingRepo->existing($apartment);
-            return $building ?? false;
+    public function fee($id) {
+        $this->__apartmentAction($id, DEACTIVE);
+        return $this->buildingRepo->update($id, ['type' => FEE]);
+    }
+
+    /**
+     * @param $id
+     *
+     * @return mixed
+     */
+    public function noFee($id) {
+        $this->__apartmentAction($id, ACTIVE);
+        return $this->buildingRepo->update($id, ['type' => NOFEE]);
+    }
+
+    /**
+     * @param $apartment_addr
+     *
+     * @return bool|mixed
+     */
+    public function manageBuilding($apartment_addr) {
+        $building = $this->__isExistingApartment($apartment_addr);
+        if(!$building) {
+            $building = $this->buildingRepo->create(['building' => str_random(10), 'is_verified' => false]);
         }
 
-        return true;
+        return $building;
     }
 
     /**
@@ -73,12 +101,59 @@ class BuildingService {
      *
      * @return mixed
      */
-    public function addBuilding($building, $apartment) {
-        $data = null;
-        if($building === true) {
-            $building = $this->manageBuildingRepo->create(['building' => str_random(10)]);
+    public function attachApartment($building, $apartment) {
+        return $this->buildingRepo->attachApartment($building, $apartment);
+    }
+
+    /**
+     * @param $building
+     * @param $data
+     *
+     * @return mixed
+     */
+    public function addAmenities($building, $data) {
+        return $this->buildingRepo->attachAmenities($building, $data);
+    }
+
+    /**
+     * @param $apartment_address
+     *
+     * @return bool
+     */
+    private function __isExistingApartment($apartment_address) {
+        $apartment = $this->listingRepo->isExistingApartment($apartment_address)->first();
+        if(!empty($apartment)) {
+            $building = $this->buildingRepo->existing($apartment);
+            return $building ?? true;
         }
 
-        return $this->manageBuildingRepo->attach($building, $apartment);
+        return false;
+    }
+
+    /**
+     * @param $id
+     * @param $action
+     *
+     * @return mixed
+     */
+    private function __apartmentAction($id, $action) {
+        $rows = [];
+        $building = $this->buildingRepo->getApartments($id)->first();
+        foreach ($building->listings as $apartment) {
+            $rows[] = $apartment->id;
+        }
+        return $this->listingRepo->updateMultiRows($rows, ['visibility' => $action]);
+    }
+
+    /**
+     * @param $paginate
+     *
+     * @return array
+     */
+    private function __collection($paginate) {
+        return [
+            'verified'   => $this->buildingRepo->active($paginate),
+            'non_verified' => $this->buildingRepo->inactive($paginate)
+        ];
     }
 }

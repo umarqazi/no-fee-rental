@@ -9,10 +9,14 @@
             <div class="heading-wrapper pl-0">
                 <ul class="nav nav-pills">
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="pill" href="#buildings-active">Active ( {{ $buildings->active->total() }} )</a>
+                        <a class="nav-link" data-toggle="pill" href="#buildings-active">
+                            Verified ( {{ $buildings->verified->total() }} )
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="pill" href="#buildings-inactive">Inactive ( {{ $buildings->inactive->total() }} )</a>
+                        <a class="nav-link" data-toggle="pill" href="#buildings-inactive">
+                            Not Verified ( {{ $buildings->non_verified->total() }} )
+                        </a>
                     </li>
                 </ul>
                 <div class="filter-wrapper">
@@ -42,11 +46,11 @@
             <div class="block-body">
                 <!-- Tab panes -->
                 <div class="tab-content">
-                    <div class="tab-pane" id="listing-active">
-                        @include('admin.sections.active_building')
+                    <div class="tab-pane" id="buildings-active">
+                        @include('admin.sections.verified_building')
                     </div>
-                    <div class="tab-pane fade" id="listing-inactive">
-{{--                        @include('listing-features.inactive_listing')--}}
+                    <div class="tab-pane fade" id="buildings-inactive">
+                        @include('admin.sections.non_verified_building')
                     </div>
                 </div>
             </div>
