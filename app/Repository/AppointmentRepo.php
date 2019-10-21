@@ -10,7 +10,7 @@
 namespace App\Repository;
 
 
-use App\Appointment;
+use App\ListingConversation;
 
 class AppointmentRepo extends BaseRepo {
 
@@ -18,7 +18,7 @@ class AppointmentRepo extends BaseRepo {
      * ContactRepo constructor.
      */
     public function __construct() {
-        parent::__construct(new Appointment());
+        parent::__construct(new ListingConversation());
     }
 
     /**
@@ -39,10 +39,6 @@ class AppointmentRepo extends BaseRepo {
         return $this->model->inactiveappointments()->paginate($paginate, ['*'], 'request');
     }
 
-    public function getArchived() {
-
-    }
-
     /**
      * @param $id
      *
@@ -57,8 +53,19 @@ class AppointmentRepo extends BaseRepo {
      *
      * @return bool
      */
-    public function isNewRequest($listing_id) {
+    public function isNewAppointment($listing_id) {
         $appointment = $this->find(['listing_id' => $listing_id, 'from' => myId()])->first();
         return $appointment ? true : false;
+    }
+
+    /**
+     * @param $email
+     * @param $listing_id
+     *
+     * @return bool
+     */
+    public function isNewGuest($email, $listing_id) {
+        $response = $this->find(['email' => $email, 'listing_id' => $listing_id])->first();
+        return $response ? true : false;
     }
 }

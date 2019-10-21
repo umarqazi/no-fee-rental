@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Agent;
 
-use App\Services\AppointmentService;
+use App\Services\ListingConversationService;
 use App\Services\CheckAvailabilityService;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\JsonResponse;
@@ -19,7 +19,7 @@ class MessageController extends Controller {
     private $paginate = 20;
 
     /**
-     * @var AppointmentService
+     * @var ListingConversationService
      */
     private $appointmentService;
 
@@ -32,7 +32,7 @@ class MessageController extends Controller {
      * MessageController constructor.
      */
     public function __construct() {
-        $this->appointmentService = new AppointmentService();
+        $this->appointmentService = new ListingConversationService();
         $this->checkAvailabilityService = new CheckAvailabilityService();
     }
 

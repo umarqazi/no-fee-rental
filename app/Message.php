@@ -20,6 +20,6 @@ class Message extends Model {
      * @return BelongsTo
      */
     public function sender() {
-        return $this->belongsTo(Appointment::class, 'appointment_id', 'id');
+        return $this->belongsTo(ListingConversation::class, 'appointment_id', 'id');
     }
 }

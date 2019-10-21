@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAppointmentsTable extends Migration
+class CreateListingConversationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,14 +12,18 @@ class CreateAppointmentsTable extends Migration
      * @return void
      */
     public function up() {
-        Schema::create('appointments', function (Blueprint $table) {
+        Schema::create('listing_conversations', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('listing_id');
-            $table->unsignedInteger('from');
+            $table->unsignedInteger('from')->nullable();
             $table->unsignedInteger('to');
-            $table->date('appointment_date');
-            $table->string('appointment_time');
+            $table->string('username')->nullable();
+            $table->string('email')->nullable();
+            $table->string('phone_number')->nullable();
+            $table->date('appointment_date')->nullable();
+            $table->string('appointment_time')->nullable();
             $table->boolean('is_archived')->default(false);
+            $table->enum('conversation_type', ['1', '2'])->comment = "1-Appointment, 2-Check Availability";
             $table->boolean('meeting_request')->default(0)->comment = "0-Not Accept Yet, 1-Accepted";
             $table->timestamps();
 
@@ -36,6 +40,6 @@ class CreateAppointmentsTable extends Migration
      * @return void
      */
     public function down() {
-        Schema::dropIfExists('appointments');
+        Schema::dropIfExists('listing_conversations');
     }
 }
