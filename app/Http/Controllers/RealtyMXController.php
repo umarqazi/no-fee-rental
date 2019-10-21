@@ -3,14 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Services\RealtyMXService;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\View\View;
 use Orchestra\Parser\Xml\Facade as XmlParser;
 
+/**
+ * Class RealtyMXController
+ * @package App\Http\Controllers
+ */
 class RealtyMXController extends Controller {
 
     /**
      * @var RealtyMXService
      */
-    private $service;
+    private $realtyService;
 
     /**
      * @var array
@@ -20,20 +26,20 @@ class RealtyMXController extends Controller {
     /**
      * RealtyMXController constructor.
      *
-     * @param RealtyMXService $service
+     * @param RealtyMXService $realtyService
      */
-	public function __construct(RealtyMXService $service) {
-	    $this->service = $service;
+	public function __construct(RealtyMXService $realtyService) {
+	    $this->realtyService = $realtyService;
     }
 
     /**
      * @param $unique_id
      * @param $realty_id
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function detail($unique_id, $realty_id) {
-        $listing = $this->service->detail($unique_id, $realty_id);
+        $listing = $this->realtyService->detail($unique_id, $realty_id);
         return view('listing_detail', compact('listing'));
     }
 
@@ -49,7 +55,7 @@ class RealtyMXController extends Controller {
         foreach ($content->properties->property as $property) {
             $property = json_decode(json_encode($property));
             if(isset($property->details->noFee) && $property->details->noFee === "Y") {
-                $url = $this->service->createList($property);
+                $url = $this->realtyService->createList($property);
                 if(is_array($url)) {
                     foreach ($url as $realty_url) {
                         if($realty_url === false) {
@@ -67,7 +73,7 @@ class RealtyMXController extends Controller {
                 $this->makeReport($property, 'none', 'only no fee listings should be imported');
             }
         }
-        return $this->service->writeCSV($this->report, public_path().'/csv/realty.csv');
+        return $this->realtyService->writeCSV($this->report, public_path().'/csv/realty.csv');
 	}
 
     /**
@@ -76,6 +82,6 @@ class RealtyMXController extends Controller {
      * @param $ror
      */
     private function makeReport($property, $url, $ror) {
-        $this->report[] = [$this->service->webId($property), $url, $ror];
+        $this->report[] = [$this->realtyService->webId($property), $url, $ror];
     }
 }

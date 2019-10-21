@@ -30,10 +30,11 @@ class CalendarRepo extends BaseRepo {
      */
     public function fetchEvents() {
         $collection = null;
-        $events = $this->model->all();
+        $events = $this->model->where('user_id', myId())->get();
         foreach ($events as $event) {
             $collection = Calendar::addEvent($event, [
-                'color' => $this->colors(),
+                'color' => $event->color,
+                'url'   => $event->url,
                 'id' => $event->id
             ]);
         }

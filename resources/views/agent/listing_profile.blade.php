@@ -11,15 +11,9 @@
                 <h2>{{ $data->agent->first_name.' '.$data->agent->last_name }}</h2>
                 <p>{{ $data->agent->description ?? 'No description found' }}</p>
                 <p class="expertise"><strong>Neighborhood Expertise:</strong>
-                    @if (sizeof($data->agent->neighborexpertise) > 0)
-                    @for($i = 0 ; $i < sizeof($data->agent->neighborexpertise) ; $i++)
-                    <a href="#">{{$data->agent->neighborexpertise[$i]->name }},</a>
-                    @endfor
-                    @else
-                    <a href="#">Null</a>
-                    @endif
+                    <a href="javascript:void(0);">{{ neighborhoodExpertise($data->agent->neighborExpertise) }}</a>
                 </p>
-                <p class="expertise"><strong>Languages:</strong> <a href="#">{{$data->agent->languages  ?? 'Null'}}</a>
+                <p class="expertise"><strong>Languages:</strong> <a href="#">{{ $data->agent->languages  ?? 'Null' }}</a>
                 </p>
                 <div class="contact-info contact-info-mobile">
                     <div>

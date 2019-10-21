@@ -181,11 +181,11 @@
                                     {{--Calender--}}
                                     @include('sections.make_appointment')
                                 @endif
-                            </div>
-                            <div id="menu1" class="tab-pane fade">
-                                {{--Check Availability--}}
-                                @include('sections.check_availability')
-                            </div>
+                                </div>
+                                <div id="menu1" class="tab-pane fade">
+                                    {{--Check Availability--}}
+                                    @include('sections.check_availability')
+                                </div>
                         </div>
                     </div>
                 </div>

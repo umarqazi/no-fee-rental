@@ -85,33 +85,13 @@ class RealtyMXService extends ListingService {
                 return false;
             }
         }
-        $listing = $this->listingRepo->create($list);
-        if($listing && isset($property->details->amenities)) {
-            $amenities = array_keys(collect($property->details->amenities)->toArray());
-            $amenitiesBatch = [];
-            foreach ($amenities as $amenity) {
-                if($amenity === 'other') continue;
-                $validate = $this->validateAmenities(['amenities' => $amenity]);
-                if($validate->fails()) {
-                    $failed_rules = $validate->failed();
-                    if(isset($failed_rules['amenities']['Unique'])) {
-                        $amenity = $this->amenitiesRepo->find(['amenities' => $amenity])->first();
-                        $amenitiesBatch[] = $amenity->id;
-                    }
-                } else {
-                    $collection = [
-                        'amenities'       => $amenity,
-                        'amenity_type_id' => 3,
-                        'created_at'      => now(),
-                        'updated_at'      => now()
-                    ];
-                    $amenity = $this->amenitiesRepo->create($collection);
-                    $amenitiesBatch[] = $amenity->id;
-                }
-            }
-            $this->amenitiesRepo->attach($listing, $amenitiesBatch);
-        }
+
+        $building = $this->addBuilding($list['street_address']);
+        $list['visibility'] = $building->is_verified;
+        $listing = $this->__addList($list);
         $this->createImages($listing, $images);
+        parent::attachApartment($building, $listing);
+        dd($building, $listing);
 //        $this->sendEmail($agent->email);
         return route('web.realty', [$list['unique_slug'], $list['realty_id']]);
     }

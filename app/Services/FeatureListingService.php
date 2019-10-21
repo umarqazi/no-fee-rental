@@ -219,9 +219,11 @@ class FeatureListingService {
     public function featured_listing($paginate) {
         return [
             'recent'   => $this->featured()
+                            ->where('visibility', ACTIVE)
                             ->latest('created_at')
                             ->paginate($paginate, ['*'], 'recent'),
             'cheapest' => $this->featured()
+                            ->where('visibility', ACTIVE)
                             ->orderBy( 'rent' ,'ASC')
                             ->paginate($paginate, ['*'], 'cheapest')
         ];
