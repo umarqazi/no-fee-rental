@@ -10,7 +10,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Services\UserService;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use Illuminate\Contracts\View\View;
 
 class HomeController extends Controller {
 
@@ -29,7 +29,7 @@ class HomeController extends Controller {
 	}
 
 	/**
-	 * @return \Illuminate\Contracts\View\View
+	 * @return View
 	 */
 	public function index() {
 		return view('admin.index');
@@ -55,20 +55,25 @@ class HomeController extends Controller {
      * @return mixed
      * @throws \Exception
      */
+    public function owners() {
+        return dataTable($this->service->owners());
+    }
+
+    /**
+     * @return mixed
+     * @throws \Exception
+     */
 	public function companies() {
         return dataTable($this->service->companies());
 	}
 
     /**
-     * @param Request $request
      * @param $id
      *
-     * @return bool
+     * @return mixed
      */
     public function associatedAgents($id) {
         $agents= $this->service->associatedAgents($id);
-
         return $agents ;
     }
-
 }

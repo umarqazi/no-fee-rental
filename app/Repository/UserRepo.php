@@ -27,6 +27,13 @@ class UserRepo extends BaseRepo {
 		return $this->model->renters();
 	}
 
+    /**
+     * @return mixed
+     */
+	public function owners() {
+	    return $this->model->owners();
+    }
+
 	/**
 	 * @return mixed
 	 */

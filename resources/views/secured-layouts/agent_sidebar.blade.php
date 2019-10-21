@@ -4,9 +4,8 @@
         <img src="{{ asset('assets/images/agent-image.jpg')}}" alt="" />
         <span>Agent George <i class="fa fa-chevron-down"></i></span>
         <ul>
-            <li><a href="profile.html">Dashboard</a></li>
-            <li><a href="profile.html">Dashboard</a></li>
-            <li><a href="profile.html">Dashboard</a></li>
+            <li><a href="{{ route(whoAmI().".showProfile") }}">Profile Settings</a></li>
+            <li><a href="{{ route(whoAmI().".logout") }}">Logout</a></li>
         </ul>
     </div>
     <ul class="main-men">

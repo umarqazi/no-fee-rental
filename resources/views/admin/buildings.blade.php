@@ -3,17 +3,16 @@
 @section('content')
     <div class="wrapper">
         <div class="heading-wrapper">
-            <h1>Listings</h1>
-            <a href="{{ route('admin.addListing') }}" class="btn-default">New Listing</a>
+            <h1>Buildings</h1>
         </div>
         <div class="block listing-container" id="app">
             <div class="heading-wrapper pl-0">
                 <ul class="nav nav-pills">
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="pill" href="#listing-active">Active ( {{ $listing->active->total() }} )</a>
+                        <a class="nav-link" data-toggle="pill" href="#buildings-active">Active ( {{ $buildings->active->total() }} )</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="pill" href="#listing-inactive">Inactive ( {{ $listing->inactive->total() }} )</a>
+                        <a class="nav-link" data-toggle="pill" href="#buildings-inactive">Inactive ( {{ $buildings->inactive->total() }} )</a>
                     </li>
                 </ul>
                 <div class="filter-wrapper">
@@ -44,10 +43,10 @@
                 <!-- Tab panes -->
                 <div class="tab-content">
                     <div class="tab-pane" id="listing-active">
-                        @include('listing-features.active_listing')
+                        @include('admin.sections.active_building')
                     </div>
                     <div class="tab-pane fade" id="listing-inactive">
-                        @include('listing-features.inactive_listing')
+{{--                        @include('listing-features.inactive_listing')--}}
                     </div>
                 </div>
             </div>

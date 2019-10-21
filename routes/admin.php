@@ -9,8 +9,9 @@
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
- */
-// Index Routes
+*/
+
+// Home Routes
 Route::get('/home', 'Admin\HomeController@index')->name('admin.index');
 
 // Auth Routes
@@ -64,6 +65,7 @@ Route::post('/unique-email', 'Admin\UserController@unique');
 
 Route::get('/get-renters', 'Admin\HomeController@renters');
 Route::get('/get-agents', 'Admin\HomeController@agents');
+Route::get('/get-owners', 'Admin\HomeController@owners');
 Route::get('/get-companies-with-agents', 'Admin\HomeController@companies');
 
 // Company Routes
@@ -82,6 +84,6 @@ Route::post('/neighborhood/update/{id}', 'Admin\NeighborhoodController@update')-
 Route::post('/neighborhood/delete/{id}', 'Admin\NeighborhoodController@delete')->name('neighborhood.delete');
 
 // Manage Building Routes
-Route::get('/all-buildings', 'Admin\ManageBuildingController@index')->name('admin.manageBuildingIndex');
+Route::get('/all-buildings', 'Admin\BuildingController@index')->name('admin.manageBuildingIndex');
 
 Route::get('/view-associated-agents/{id}', 'Admin\HomeController@associatedAgents');

@@ -115,3 +115,8 @@ Route::get('/composer-dump', function() {
     exec('composer dump-autoload');
     dd('composer dump-succeed');
 });
+
+Route::get('/test', function() {
+    auth()->guard('owner')->logout();
+    dd('done;');
+});
