@@ -65,7 +65,7 @@ class User extends Authenticatable implements CanResetPassword {
      * @return BelongsToMany
      */
 	public function neighborExpertise() {
-	    return $this->belongsToMany(Neighborhoods::class, 'agent_neighborhoods', 'agent_id', 'id');
+	    return $this->belongsToMany(Neighborhoods::class, 'agent_neighborhoods', 'agent_id', 'neighborhood_id');
     }
 
 	/**
@@ -141,7 +141,7 @@ class User extends Authenticatable implements CanResetPassword {
      * @return mixed
      */
     public function scopeWithNeighbors($query) {
-	    return $query->with('neighborExpertese');
+	    return $query->with('neighborExpertise');
     }
 
     /**
@@ -160,5 +160,14 @@ class User extends Authenticatable implements CanResetPassword {
      */
     public function scopeWithCompany($query) {
         return $query->with('company');
+    }
+
+    /**
+     * @param $query
+     *
+     * @return mixed
+     */
+    public function scopeWithNeighborhoods($query) {
+        return $query->with('neighborExpertise');
     }
 }
