@@ -107,6 +107,10 @@ Route::get('/migrate-fresh-seed', function() {
     dd('Migration fresh with seeding..');
 });
 
+Route::get('/email-notification', function() {
+    return view('mails.email_notifcation');
+});
+
 Route::get('/composer-dump', function() {
     exec('composer dump-autoload');
     dd('composer dump-succeed');

@@ -415,10 +415,9 @@ h3 {
   width: 100%;
   z-index: 4;
 }
-.inner-pages{
+.inner-pages-border, .blog-page{
   border-top: 1px solid #eee;
 }
-
 .header-wrapper .header-container {
   display: flex;
   justify-content: space-between;
@@ -925,9 +924,11 @@ h3 {
 
 .login-modal .modal-dialog .login-form-wrapper .finding-home-text {
   font-size: 14px;
-  margin-top: 10px;
+  margin:0px 0px 15px;
   display: none;
-  opacity: 0.;
+}
+.finding-text-wrap .form-group{
+  margin-bottom: 0px ;
 }
 .login-form-wrapper .row.form-group .forgot-pass {
     text-align: right;

@@ -1,5 +1,7 @@
 $(() => {
-	new WOW().init();	
+	new WOW().init();
+
+
 	$("header .menu-icon").click(function () {
 		$(".main-wrapper aside").slideDown();
 	});
@@ -467,13 +469,7 @@ $('#price-range-submit').hide();
     	$("#login-btn").click(function() {
 		    $('body').addClass('signup-modal-scroll');
 		});
-		$("#login").click(function() {
-		    $('body').addClass('signup-modal-scroll');
-		});
-    	$('.close-signup-modal').click(function(){
-    		$('body').removeClass('signup-modal-scroll');
-    	});
-
+    	
     	$("#need-help-btn2").click(function(){
             $("body").addClass("signup-modal-scroll-getStart");
         });
@@ -486,7 +482,13 @@ $('#price-range-submit').hide();
 	        if ($(e.target).is("#signup-btn")==false && $(e.target).parents('#signup').length==0 && $(e.target).parents('#login').length==0) {
 	            $("body").removeClass("signup-modal-scroll");
 	        }
+	        
     	});
+
+    	$('.close-signup-modal').click(function(){
+    		$('body').removeClass('signup-modal-scroll');
+    	});
+    	
 
     	$(document).on("click", function (e) {
 	        if ($(e.target).parents(".need-help-modal").length==0) {

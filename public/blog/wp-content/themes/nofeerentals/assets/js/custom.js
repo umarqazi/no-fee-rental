@@ -5,8 +5,6 @@ $(document).ready(function() {
     $("#signup-option1").trigger('click');
     $(".license_num").hide();
 
-    $("#phone_number").addClass('col-sm-12');
-
     $(".property-thumb .heart-icon").click(function() {
         $(this).toggleClass('favourite');
     });
@@ -206,9 +204,9 @@ $(document).ready(function() {
     $("#login-btn").click(function() {
         $('body').addClass('signup-modal-scroll');
     });
-    $("#login").click(function() {
-        $('body').addClass('signup-modal-scroll');
-    });
+    // $("#login").click(function() {
+    //     $('body').addClass('signup-modal-scroll');
+    // });
     $('.close-signup-modal').click(function() {
         $('body').removeClass('signup-modal-scroll');
     });
