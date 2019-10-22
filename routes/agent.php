@@ -52,15 +52,13 @@ Route::post('/invite-agent', 'Agent\MemberController@invite')->name('agent.invit
 Route::get('/accept-invitation/{token}', 'Agent\MemberController@acceptInvitation')->name('agent.acceptInvitation');
 Route::get('/un-friend/{id}', 'Agent\MemberController@unFriend')->name('agent.unFriend');
 
-// Messaging Routes
-Route::post('/accept-meeting/{id}', 'Agent\MessageController@accept');
-Route::get('/view-contacts', 'Agent\MessageController@index')->name('agent.messageIndex');
-Route::get('/load-chat/inbox/{id}', 'Agent\MessageController@loadInbox')->name('agent.loadAppointmentChat');
-Route::get('/load-chat/availabilities/{id}', 'Agent\MessageController@loadAvailability')->name('agent.loadAvailabilityChat');
-Route::post('/send-message/inbox/{id}', 'Agent\MessageController@replyInbox')->name('agent.sendInboxMessage');
-Route::post('/send-message/availability/{id}', 'Agent\MessageController@replyAvailability')->name('agent.sendAvailabilityMessage');
-Route::get('/archive-inbox-chat/{id}', 'Agent\MessageController@archiveInbox')->name('agent.archiveAppointmentChat');
-Route::get('/archive-availability-chat/{id}', 'Agent\MessageController@archiveAvailability')->name('agent.archiveAvailabilityChat');
+// Listing Conversation Routes
+Route::post('/accept-meeting/{id}', 'Agent\ListingConversationController@accept');
+Route::get('/view-conversations', 'Agent\ListingConversationController@index')->name('agent.conversations');
+Route::get('/load-conversation/inbox/{id}', 'Agent\ListingConversationController@load')->name('agent.loadConversation');
+Route::post('/send-message/{id}', 'Agent\ListingConversationController@reply')->name('agent.sendMessage');
+Route::get('/archive-conversation/{id}', 'Agent\ListingConversationController@archive')->name('agent.archiveConversation');
+Route::get('/unArchive-conversation/{id}', 'Agent\ListingConversationController@unArchive')->name('agent.unArchiveConversation');
 
 // Calender Routes
 Route::post('/add-event', 'Agent\CalendarController@create')->name('agent.addEvent');

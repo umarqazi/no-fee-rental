@@ -36,15 +36,21 @@ class CheckAvailabilityForm extends BaseForm {
     public $to;
 
     /**
+     * @var integer
+     */
+    public $conversation_type;
+
+    /**
      * @return array
      */
     public function toArray() {
         return [
-            'to'           => $this->to,
-            'username'     => $this->username,
-            'email'        => $this->email,
-            'phone_number' => $this->phone_number,
-            'listing_id'   => $this->listing_id,
+            'to'                => $this->to,
+            'username'          => $this->username,
+            'email'             => $this->email,
+            'phone_number'      => $this->phone_number,
+            'listing_id'        => $this->listing_id,
+            'conversation_type' => $this->conversation_type
         ];
     }
 

@@ -9,7 +9,7 @@
             <!-- Modal body -->
             <div class="modal-body">
                 <p class="mb-3">Renter choose to anonymize their contact info:</p>
-                {!! Form::open(['url' => null]) !!}
+                {!! Form::open() !!}
                 <textarea name="message" class="text-area" placeholder="Reply here.."></textarea>
                 <div class="actions-btns">
                     <button type="submit" id="send-message" class="btn-default">Reply</button>

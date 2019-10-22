@@ -12,7 +12,7 @@ namespace App\Repository;
 
 use App\ListingConversation;
 
-class AppointmentRepo extends BaseRepo {
+class ListingConversationRepo extends BaseRepo {
 
     /**
      * ContactRepo constructor.
@@ -26,8 +26,8 @@ class AppointmentRepo extends BaseRepo {
      *
      * @return mixed
      */
-    public function getActiveAppointments($paginate) {
-        return $this->model->activeappointments()->paginate($paginate, ['*'], 'inbox');
+    public function getActiveConversations($paginate) {
+        return $this->model->activeconversations()->paginate($paginate, ['*'], 'inbox');
     }
 
     /**
@@ -35,8 +35,17 @@ class AppointmentRepo extends BaseRepo {
      *
      * @return mixed
      */
-    public function getInactiveAppointments($paginate) {
-        return $this->model->inactiveappointments()->paginate($paginate, ['*'], 'request');
+    public function getInactiveConversations($paginate) {
+        return $this->model->inactiveconversations()->paginate($paginate, ['*'], 'request');
+    }
+
+    /**
+     * @param $paginate
+     *
+     * @return mixed
+     */
+    public function getArchivedConversations($paginate) {
+        return $this->model->archiveconversations()->paginate($paginate, ['*'], 'archived');
     }
 
     /**

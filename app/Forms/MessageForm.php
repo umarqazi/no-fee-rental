@@ -22,12 +22,7 @@ class MessageForm extends BaseForm {
     /**
      * @var integer
      */
-    public $appointment_id;
-
-    /**
-     * @var integer
-     */
-    public $check_availability_id;
+    public $conversation_id;
 
     /**
      * @var integer
@@ -39,10 +34,9 @@ class MessageForm extends BaseForm {
      */
     public function toArray() {
         return [
-            'message'               => $this->message,
-            'appointment_id'        => $this->appointment_id,
-            'check_availability_id' => $this->check_availability_id,
-            'align'                 => $this->align
+            'message'         => $this->message,
+            'conversation_id' => $this->conversation_id,
+            'align'           => $this->align
         ];
     }
 
@@ -51,8 +45,8 @@ class MessageForm extends BaseForm {
      */
     public function rules() {
         return [
-            'message'        => 'required',
-            'align'          => 'required'
+            'message'   => 'required',
+            'align'     => 'required'
         ];
     }
 }

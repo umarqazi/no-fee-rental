@@ -12,7 +12,7 @@ use App\Forms\AppointmentForm;
 use App\Forms\CheckAvailabilityForm;
 use App\Forms\MessageForm;
 use Illuminate\Support\Facades\DB;
-use App\Repository\AppointmentRepo;
+use App\Repository\ListingConversationRepo;
 use App\Repository\MessageRepo;
 
 /**
@@ -27,7 +27,7 @@ class ListingConversationService {
     protected $messageRepo;
 
     /**
-     * @var AppointmentRepo
+     * @var ListingConversationRepo
      */
     protected $listingConversationRepo;
 
@@ -36,7 +36,7 @@ class ListingConversationService {
      */
     public function __construct() {
         $this->messageRepo = new MessageRepo();
-        $this->listingConversationRepo = new AppointmentRepo();
+        $this->listingConversationRepo = new ListingConversationRepo();
     }
 
     /**
@@ -57,8 +57,7 @@ class ListingConversationService {
         }
 
         if ($conversation) {
-            $message = $this->__validateMessageForm( $conversation->id, $request );
-            $this->__sendMessage($message->toArray());
+            $this->__sendMessage($conversation->id, $request);
             DB::commit();
             return true;
         }
@@ -74,8 +73,7 @@ class ListingConversationService {
      * @return mixed
      */
     public function reply($id, $request) {
-        $appointmentMessage = $this->__validateMessageForm($id, $request);
-        return $this->__sendMessage($appointmentMessage->toArray());
+        return $this->__sendMessage($id, $request);
     }
 
     /**
@@ -83,7 +81,7 @@ class ListingConversationService {
      *
      * @return mixed
      */
-    public function messages($id) {
+    public function loadMessages($id) {
         return $this->listingConversationRepo->getMessages($id)->first();
     }
 
@@ -106,15 +104,25 @@ class ListingConversationService {
     }
 
     /**
-     * @param $paginate
+     * @param $id
      *
      * @return mixed
      */
-    public function fetchAppointments($paginate) {
-        return toObject([
-            'active'   => $this->listingConversationRepo->getActiveAppointments($paginate),
-            'inactive' => $this->listingConversationRepo->getInactiveAppointments($paginate)
-        ]);
+    public function unArchive($id) {
+        return $this->listingConversationRepo->update($id, ['is_archived' => false]);
+    }
+
+    /**
+     * @param $paginate
+     *
+     * @return array
+     */
+    public function fetchConversations($paginate) {
+        return [
+            'active'   => $this->listingConversationRepo->getActiveConversations($paginate),
+            'archived' => $this->listingConversationRepo->getArchivedConversations($paginate),
+            'inactive' => $this->listingConversationRepo->getInactiveConversations($paginate)
+        ];
     }
 
     /**
@@ -148,12 +156,14 @@ class ListingConversationService {
     }
 
     /**
-     * @param $appointmentMessage
+     * @param $conversation_id
+     * @param $request
      *
      * @return mixed
      */
-    private function __sendMessage($appointmentMessage) {
-        return $this->messageRepo->create($appointmentMessage);
+    private function __sendMessage($conversation_id, $request) {
+        $message = $this->__validateMessageForm($conversation_id, $request);
+        return $this->messageRepo->create($message->toArray());
     }
 
     /**
@@ -180,12 +190,13 @@ class ListingConversationService {
      * @return AppointmentForm
      */
     private function __validateAppointmentForm($request) {
-        $form                   = new AppointmentForm();
-        $form->from             = myId();
-        $form->to               = $request->to;
-        $form->listing_id       = $request->listing_id;
-        $form->appointment_date = $request->appointment_date;
-        $form->appointment_time = $request->appointment_time;
+        $form                    = new AppointmentForm();
+        $form->from              = myId();
+        $form->to                = $request->to;
+        $form->listing_id        = $request->listing_id;
+        $form->conversation_type = $request->type;
+        $form->appointment_date  = $request->appointment_date;
+        $form->appointment_time  = $request->appointment_time;
         $form->validate();
         return $form;
     }
@@ -196,27 +207,28 @@ class ListingConversationService {
      * @return CheckAvailabilityForm
      */
     private function __validateAvailabilityForm($request) {
-        $form               = new CheckAvailabilityForm();
-        $form->to           = $request->to;
-        $form->username     = $request->username;
-        $form->email        = $request->email;
-        $form->phone_number = $request->phone_number;
-        $form->listing_id   = $request->listing_id;
+        $form                    = new CheckAvailabilityForm();
+        $form->to                = $request->to;
+        $form->username          = $request->username;
+        $form->email             = $request->email;
+        $form->conversation_type = $request->type;
+        $form->phone_number      = $request->phone_number;
+        $form->listing_id        = $request->listing_id;
         $form->validate();
         return $form;
     }
 
     /**
-     * @param $appointment_id
+     * @param $conversation_id
      * @param $request
      *
      * @return MessageForm
      */
-    private function __validateMessageForm($appointment_id, $request) {
-        $form                 = new MessageForm();
-        $form->appointment_id = $appointment_id;
-        $form->align          = myId();
-        $form->message        = $request->message;
+    private function __validateMessageForm($conversation_id, $request) {
+        $form                  = new MessageForm();
+        $form->align           = myId();
+        $form->conversation_id = $conversation_id;
+        $form->message         = $request->message;
         $form->validate();
         return $form;
     }
