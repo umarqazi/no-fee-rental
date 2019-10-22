@@ -5,7 +5,7 @@ $(() => {
     let $body = $('body');
 
     let queries = JSON.parse(localStorage.getItem('search-queries'));
-    let bath = null, bed = null, square_feet_min = null, square_feet_max = null, neighborhood = null, price_min = null, price_max = null, open_house = null;
+    let bath = [], bed = [], square_feet_min = null, square_feet_max = null, neighborhood = null, price_min = null, price_max = null, open_house = null;
 
     // $body.on('change', '.sorting', function() {
     //     let url = window.location.href;
@@ -13,14 +13,14 @@ $(() => {
     //     window.location = sortOrder === '' ? window.location.href + sortValue(url, sorting) : removeOldSort(url, sorting);
     // });
 
-    $('#baths').find('li').on('click', function() {
-        bath = $(this).text();
-        bath = bath.replace(/\s/g, '');
+    $('#baths').find('li').one('click', function() {
+        bath.push($(this).text().replace(/\s/g, ''));
+        //bath = bath.replace(/\s/g, '');
     });
 
-    $('#beds').find('li').on('click', function() {
-        bed = $(this).text();
-        bed = bed.replace(/\s/g, '');
+    $('#beds').find('li').one('click', function() {
+        bed.push($(this).text().replace(/\s/g, ''));
+      //  bed = bed.replace(/\s/g, '');
     });
 
     $('input[name=neighborhoods] , select[name=neighborhoods]').on('change', function(e) {
@@ -78,7 +78,7 @@ $(() => {
         }
     });
 
-    if(queries && queries.length > 0) {
+    if(queries && queries.length > 0) {console.log(queries);
         queries.forEach((v, i) => {
             let url = window.location.origin + `/search?neighborhoods=${v.neighborhood !== null ? v.neighborhood : '' + v.beds !== null ? '&beds=' + v.beds : '' + v.baths !== null ? '&baths=' + v.baths : '' + v.price_min !== null ? '&priceRange%5Bmin_price%5D=' + v.price_min : '' + v.price_max !== null ? '&priceRange%5Bmax_price%5D=' + v.price_max : '' + v.square_feet_min !== null ? '&priceRange%5Bmin_price_2%5D=' + v.square_feet_min : '' + v.square_feet_max !== null ? '&priceRange%5Bmax_price_2%5D=' + v.square_feet_max : ''}`;
             $('#empty-keywords').remove();
