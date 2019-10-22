@@ -28,7 +28,17 @@ class AddEventForm extends BaseForm {
     /**
      * @var string
      */
-    public $branchId;
+    public $user_id;
+
+    /**
+     * @var string
+     */
+    public $color;
+
+    /**
+     * @var string
+     */
+    public $url;
 
     /**
      * @return array
@@ -38,7 +48,9 @@ class AddEventForm extends BaseForm {
             'title'     => $this->title,
             'start'     => $this->start,
             'end'       => $this->end,
-            'id_branch' => $this->branchId
+            'color'     => $this->color,
+            'url'       => $this->url,
+            'user_id'   => $this->user_id
         ];
     }
 
@@ -49,7 +61,9 @@ class AddEventForm extends BaseForm {
         return [
             'title' => 'required',
             'start' => 'required',
-            'end'   => 'required'
+            'color' => 'required',
+            'end'   => 'required',
+            'url'   => 'required'
         ];
     }
 }

@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * Class CalendarEvent
@@ -20,7 +21,14 @@ class CalendarEvent extends Model implements \MaddHatter\LaravelFullcalendar\Eve
     /**
      * @var array
      */
-    protected $fillable = ['start', 'end', 'title'];
+    protected $fillable = ['start', 'end', 'title', 'color', 'user_id', 'url'];
+
+    /**
+     * @return HasOne
+     */
+    public function user() {
+        return $this->hasOne(User::class, 'id', 'user_id');
+    }
 
     /**
      * Get the event's title

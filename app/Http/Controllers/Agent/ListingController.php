@@ -231,4 +231,15 @@ class ListingController extends Controller {
         $listing->user_id = $listing->agent->id;
         return view('listing-features.listing', compact('listing', 'action'));
     }
+
+    /**
+     * @param $id
+     *
+     * @return RedirectResponse
+     */
+    public function requestFeatured($id) {
+        return $this->listingService->requestForFeatured($id)
+            ? success('Feature Request has been sent.')
+            : error('Something went wrong');
+    }
 }

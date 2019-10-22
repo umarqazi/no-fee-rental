@@ -273,6 +273,20 @@ function findFeatures($features) {
 }
 
 /**
+ * @param $neighborhoods
+ *
+ * @return string
+ */
+function neighborhoodExpertise($neighborhoods) {
+    $collect = [];
+    foreach($neighborhoods as $neighbours) {
+        $collect[] = $neighbours->name;
+    }
+
+    return (count($collect) > 0) ? implode(', ', $collect) : 'Null';
+}
+
+/**
  * @param $features
  *
  * @return array
@@ -312,7 +326,7 @@ function unitFeature($features) {
  * @return mixed|null
  */
 function openHouseTimeSlot($index) {
-    $slots = config('open_house');
+    $slots = config('openHouse');
     return new Carbon($slots[$index]) ?? null;
 }
 
@@ -363,12 +377,12 @@ function features() {
         <h3>".ucwords(str_replace('_', ' ', $type))."</h3><ul class='checkbox-listing'>";
         foreach ($feature as $index => $value) {
             $html .= "<li><div class='custom-control custom-checkbox'>" .
-                     Form::checkbox( "features[]", $index, null,
-                         [
-                             'class' => 'custom-control-input',
-                             'id'    => "listitem{$index}"
-                         ] ) . "<label class='custom-control-label' for='listitem{$index}'>" .
-                     $value . "</label></div></li>";
+                 Form::checkbox( "features[]", $index, null,
+                     [
+                         'class' => 'custom-control-input',
+                         'id'    => "listitem{$index}"
+                     ] ) . "<label class='custom-control-label' for='listitem{$index}'>" .
+                 $value . "</label></div></li>";
         }
         $html .= "</ul></div>";
     }
@@ -403,30 +417,6 @@ function owners() {
 }
 
 /**
- * @param $amenities
- *
- * @return array
- */
-function fetchAmenities($amenities) {
-    $types = [];
-    foreach ($amenities as $amenity) {
-        if(in_array($amenity->type->amenity_type, $types)) continue;
-        $types[] = $amenity->type->amenity_type;
-    }
-    $amen = [];
-    foreach ($types as $type) {
-        $tmp = null;
-        foreach ($amenities as $amenity) {
-            if($type === $amenity->type->amenity_type) {
-                $tmp[$type][] = $amenity->amenities;
-            }
-        }
-        $amen[] = $tmp;
-    }
-    return $amen;
-}
-
-/**
  * @param $data
  *
  * @return mixed
@@ -442,7 +432,7 @@ function addCalendarEvent($data) {
  */
 function is_exclusive($listing) {
     if($listing->building_type === EXCLUSIVE) {
-        return $listing->street_address.' - '.$listing->unit;
+        return sprintf("%s - (%s)", $listing->street_address, $listing->unit);
     }
 
     return $listing->display_address;

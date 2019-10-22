@@ -14,7 +14,7 @@
     @include('owner.modals.add_event')
     {!! HTML::script('//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.js') !!}
     <script>
-        enableDatePicker('input[name=start]', false);
-        enableDatePicker('input[name=end]', false);
+        enableDatePicker('input[name=start]', true);
+        enableDatePicker('input[name=end]', true);
     </script>
 @endsection

@@ -35,7 +35,11 @@
                     </a>
                     @if($al->is_featured != APPROVEFEATURED)
                         <a href="{{ route(whoAmI().(isAdmin() ? '.approveFeature' : '.requestFeatured'), $al->id) }}">
-                            <button type="button" class="border-btn">{{ isAdmin() ? 'Make Featured' : 'Request for Featured' }}</button>
+                            @if(isAdmin())
+                                <button type="button" class="border-btn">Make Featured</button>
+                            @elseif($al->is_featured !== REQUESTFEATURED)
+                                <button type="button" class="border-btn">Request Featured</button>
+                            @endif
                         </a>
                     @endif
                 </div>

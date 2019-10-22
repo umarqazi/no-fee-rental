@@ -118,25 +118,6 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label> Exclusive Settings</label>
-                                {{--<div class="exclusive-chkboxes">
-                                    <div class="custom-control custom-checkbox">
-                                        {!! Form::checkbox('allow_web_notifications', 'two', isset($exclusiveSettings->allow_web_notification) ?? null, ['class' => 'custom-control-input input-style', 'id' => 'exclusive-1']) !!}
---}}{{--                                        <input class="custom-control-input input-style" id="exclusive-1" name="allow_web_notifications" type="checkbox" value="two" {{ $exclusiveSettings->allow_web_notification ?? }}>--}}{{--
-                                        <label class="custom-control-label" for="exclusive-1">Allow Web Notifications</label>
-                                    </div>
-                                    <div class="custom-control custom-checkbox">
-                                        {!! Form::checkbox('allow_email_notifications', 'two', isset($exclusiveSettings->allow_email_notifications) ?? null, ['class' => 'custom-control-input input-style', 'id' => 'exclusive-2']) !!}
---}}{{--                                        <input class="custom-control-input input-style" id="exclusive-2" name="allow_email_notifications" type="checkbox"--}}{{--
---}}{{--                                               value="two" {{ $exclusiveSettings->allow_email === 1 ? 'checked' : null }}>--}}{{--
-                                        <label class="custom-control-label" for="exclusive-2">Allow Email Notifications</label>
-                                    </div>
-                                    <div class="custom-control custom-checkbox">
-                                        {!! Form::checkbox('disable', 'one', isset($exclusiveSettings->allow_web_notification) && isset($exclusiveSettings->allow_email) ? 'checked' : null, ['class' => 'custom-control-input input-style', 'id' => 'exclusive-3']) !!}
---}}{{--                                        <input class="custom-control-input input-style" id="exclusive-3" name="disable" type="checkbox"--}}{{--
---}}{{--                                               value="one" {{ $exclusiveSettings->allow_web_notification === 0 && $exclusiveSettings->allow_email === 0 ? 'checked' : null }}>--}}{{--
-                                        <label class="custom-control-label" for="exclusive-3">Disable All</label>
-                                    </div>
-                                </div>--}}
                                 <div class="exclusive-chkboxes">
                                     <div class="custom-control custom-checkbox">
                                         <input class="custom-control-input input-style" id="exclusive-1" name="allow_web_notifications" type="checkbox"

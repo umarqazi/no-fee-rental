@@ -81,10 +81,13 @@ class CalendarService {
      * @return AddEventForm
      */
     private function __validateForm($request) {
-        $form        = new AddEventForm();
-        $form->title = $request->title;
-        $form->start = $request->start;
-        $form->end   = $request->end;
+        $form          = new AddEventForm();
+        $form->user_id = myId();
+        $form->title   = $request->title;
+        $form->color   = $request->color;
+        $form->start   = $request->start;
+        $form->end     = $request->end;
+        $form->url     = $request->url;
         $form->validate();
         return $form;
     }
