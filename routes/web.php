@@ -93,6 +93,9 @@ Route::get('/listing-by-rent/{sort}', 'RentController@sort');
 Route::get('/listing-by-rent', 'RentController@index')->name('web.ListsByRent');
 Route::get('/listing-by-rent-search', 'RentController@advanceSearch')->name('web.advanceRentSearch');
 
+Route::get('/test-all', function() {
+   return view('admin.building_detail');
+});
 // Application Controlling Routes
 Route::get('/all-clear', function() {
     artisan(['config:cache', 'view:clear', 'route:clear']);

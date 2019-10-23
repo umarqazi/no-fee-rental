@@ -53,11 +53,13 @@ class BuildingService {
 
     /**
      * @param $id
+     * @param $request
      *
      * @return mixed
      */
-    public function verify($id) {
+    public function verify($id, $request) {
         $this->__apartmentAction($id, ACTIVE);
+        $this->addAmenities($this->buildingRepo->findById($id)->first(), $request->amenities);
         return $this->buildingRepo->update($id, ['is_verified' => TRUE]);
     }
 
@@ -103,6 +105,22 @@ class BuildingService {
      */
     public function attachApartment($building, $apartment) {
         return $this->buildingRepo->attachApartment($building, $apartment);
+    }
+
+    /**
+     * @param $id
+     *
+     * @return mixed
+     */
+    public function detail($id) {
+        return $this->buildingRepo->getApartments($id)->first();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function amenities() {
+        return $this->amenitiesRepo->all();
     }
 
     /**

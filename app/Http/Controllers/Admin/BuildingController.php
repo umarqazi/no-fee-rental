@@ -45,13 +45,26 @@ class BuildingController extends Controller {
 
     /**
      * @param $id
+     *
+     * @return Factory|View
+     */
+    public function buildingDetail($id) {
+        $status = 'Verify';
+        $route = 'admin.verifyBuilding';
+        $amenities = $this->buildingService->amenities();
+        $building = $this->buildingService->detail($id);
+        return view('admin.building_detail', compact('building', 'status', 'amenities', 'route'));
+    }
+
+    /**
+     * @param $id
      * @param Request $request
      *
      * @return JsonResponse|RedirectResponse
      */
     public function verify($id, Request $request) {
-        $response = $this->buildingService->verify($id);
-        return sendResponse($request, $response, 'Building has been verified.');
+        $response = $this->buildingService->verify($id, $request);
+        return sendResponse($request, $response, 'Building has been verified.', route('admin.manageBuildingIndex'));
     }
 
     /**

@@ -104,7 +104,7 @@ class UserController extends Controller {
 	 * @return RedirectResponse
 	 */
 	public function signup(Request $request){
-		$response = $this->service->signUpBySelf($request);
+		$response = $this->service->signup($request);
 		return sendResponse($request, $response, 'We send an email to your account. Kindly verify your email');
 	}
 
