@@ -22,7 +22,7 @@ $(() => {
     });
 
     $.validator.addMethod('time_validation', function(value, element, param) {
-        return ($('select[name="open_house[start_time][]"]').val() > $('select[name="open_house[end_time][]"]').val())  ? false : true ;
+        return ($('select[name="open_house[start_time][]"]').val() >= $('select[name="open_house[end_time][]"]').val())  ? false : true ;
     }, 'End Time should be greater than start time.');
 
     (function($) {

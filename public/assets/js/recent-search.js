@@ -78,17 +78,31 @@ $(() => {
         }
     });
 
-    if(queries && queries.length > 0) {console.log(queries);
+    if(queries && queries.length > 0) {
         queries.forEach((v, i) => {
-            let url = window.location.origin + `/search?neighborhoods=${v.neighborhood !== null ? v.neighborhood : '' + v.beds !== null ? '&beds=' + v.beds : '' + v.baths !== null ? '&baths=' + v.baths : '' + v.price_min !== null ? '&priceRange%5Bmin_price%5D=' + v.price_min : '' + v.price_max !== null ? '&priceRange%5Bmax_price%5D=' + v.price_max : '' + v.square_feet_min !== null ? '&priceRange%5Bmin_price_2%5D=' + v.square_feet_min : '' + v.square_feet_max !== null ? '&priceRange%5Bmax_price_2%5D=' + v.square_feet_max : ''}`;
+            var result = Object.entries(v).reduce((a,[key,val])=>{
+                if(val && val.length)
+                    a.push({name : key, value : val});
+                return a;
+            },[]);
+
+            let url = window.location.origin + `/search?neighborhoods=${v.neighborhood !== null ? v.neighborhood : '' + v.beds.length > 0 ? '&beds=' + v.beds : '' + v.baths.length > 0 ? '&baths=' + v.baths : '' + v.price_min !== null ? '&priceRange%5Bmin_price%5D=' + v.price_min : '' + v.price_max !== null ? '&priceRange%5Bmax_price%5D=' + v.price_max : '' + v.square_feet_min !== null ? '&priceRange%5Bmin_price_2%5D=' + v.square_feet_min : '' + v.square_feet_max !== null ? '&priceRange%5Bmax_price_2%5D=' + v.square_feet_max : ''}`;
+            
             $('#empty-keywords').remove();
-            $('.dropDown > ul.neighborhoods_amenities > li ').prepend(`
+            if(result.length > 1) {
+                $('.dropDown > ul.ul-border-top > li ').prepend(`
                 <a href="${url}">
-                    <!--<span>-->
-                       NYC ${(v.neighborhood !== "" ? ' - ' + v.neighborhood : '') + (v.beds !== null ? ' ' + v.beds + ' bed' : '') + (v.baths !== null ? ' ' + v.baths + ' bath' : '')}
-                    <!--</span>-->
+                       NYC ${(v.neighborhood !== "" ? ' - ' + v.neighborhood : '') + (v.beds.length > 0  ? ' ' + v.beds + ' bed' : '') + (v.baths.length > 0 ? ' ' + v.baths + ' bath' : '')}
                 </a>
              `);
+            }
+            else {
+                $('.dropDown > ul.neighborhoods_amenities > li ').prepend(`
+                <a href="${url}">
+                       NYC ${(v.neighborhood !== "" ? ' - ' + v.neighborhood : '') + (v.beds.length > 0  ? ' ' + v.beds + ' bed' : '') + (v.baths.length > 0  ? ' ' + v.baths + ' bath' : '')}
+                </a>
+             `);
+            }
         });
     } else {
         if($('#empty-keywords').length > 0) return;
