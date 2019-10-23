@@ -23,7 +23,7 @@ $(() => {
 
     $.validator.addMethod('time_validation', function(value, element, param) {
         return ($('select[name="open_house[start_time][]"]').val() >= $('select[name="open_house[end_time][]"]').val())  ? false : true ;
-    }, 'End Time should be greater than start time.');
+    },);
 
     (function($) {
         $.fn.inputFilter = function(inputFilter) {
@@ -144,6 +144,7 @@ $(() => {
            'open_house[end_time][]': {
                required: "Select End Time.",
                validateSelect: "Select any one option.",
+               time_validation :  "End Time should be greater than start time."
            },
 
            thumbnail: {
@@ -196,10 +197,26 @@ $(() => {
            },
             password: {
                required: "Password is required.",
-                greaterThan: "Password should be greater than 8 characters."
+               greaterThan: "Password should be greater than 8 characters."
             }
         }
     });
+
+    // Neighborhood Search Form Validations
+    $('#search').validate({
+        rules: {
+            neighborhoods: {
+                required :  true
+            }
+        },
+
+        messages: {
+            neighborhoods: {
+                required : 'neighborhood is required',
+            }
+        }
+    });
+
 
     // Sign Up Form Validations
     $('#signup_form').validate({
