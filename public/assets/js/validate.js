@@ -11,8 +11,17 @@ $(() => {
     });
 
     $.validator.addMethod("validateExtension", function(value, ele) {
-        let val = $(ele).val();
-        switch(val.substring(val.lastIndexOf('.') + 1).toLowerCase()){
+        let val ;
+
+        if($(ele).val()) {
+            val = $(ele).val() ;
+        }
+
+        else {
+             val = $('input[name="old_thumbnail"]').val() ;
+        }
+
+            switch(val.substring(val.lastIndexOf('.') + 1).toLowerCase()){
             case 'jpeg': case 'jpg': case 'png' : case 'gif':
                 return true;
             default:
@@ -87,7 +96,7 @@ $(() => {
 
            thumbnail: {
                required: ($('input[name="old_thumbnail"]').val()) ? false : true,
-               validateExtension: ($('input[name="old_thumbnail"]').val()) ? false : ["jpg", "png", "gif","jpeg"],
+               validateExtension: 'thumbnail'
            },
 
            description : "required",
