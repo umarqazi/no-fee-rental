@@ -13,13 +13,17 @@ $(() => {
     $.validator.addMethod("validateExtension", function(value, ele) {
         let val = $(ele).val();
         switch(val.substring(val.lastIndexOf('.') + 1).toLowerCase()){
-            case 'jpeg': case 'jpg': case 'png':
+            case 'jpeg': case 'jpg': case 'png' : case 'gif':
                 return true;
             default:
                 $(this).val('');
                 return false;
         }
     });
+
+    $.validator.addMethod('time_validation', function(value, element, param) {
+        return ($('select[name="open_house[start_time][]"]').val() > $('select[name="open_house[end_time][]"]').val())  ? false : true ;
+    }, 'End Time should be greater than start time.');
 
     (function($) {
         $.fn.inputFilter = function(inputFilter) {
@@ -72,18 +76,18 @@ $(() => {
            "open_house[date][]" : "required",
            "open_house[start_time][]": {
                required: true,
-               validateSelect: true
+               validateSelect: true,
            },
 
            "open_house[end_time][]": {
                required: true,
-               validateSelect: true
-           },
+               validateSelect: true,
+               time_validation : $('input[name="open_house[start_time][]"]')
+               },
 
            thumbnail: {
-               // required :  true,
                required: ($('input[name="old_thumbnail"]').val()) ? false : true,
-               validateExtension: ["jpg", "png", "gif","jpeg"],
+               validateExtension: ($('input[name="old_thumbnail"]').val()) ? false : ["jpg", "png", "gif","jpeg"],
            },
 
            description : "required",
@@ -134,12 +138,12 @@ $(() => {
 
            'open_house[start_time][]': {
                required: "Select Start Time.",
-               validateSelect: "Select any one option."
+               validateSelect: "Select any one option.",
            },
 
            'open_house[end_time][]': {
                required: "Select End Time.",
-               validateSelect: "Select any one option."
+               validateSelect: "Select any one option.",
            },
 
            thumbnail: {

@@ -5,7 +5,7 @@ $(() => {
     let $body = $('body');
 
     let queries = JSON.parse(localStorage.getItem('search-queries'));
-    let bath = null, bed = null, square_feet_min = null, square_feet_max = null, neighborhood = null, price_min = null, price_max = null, open_house = null;
+    let bath = [], bed = [], square_feet_min = null, square_feet_max = null, neighborhood = null, price_min = null, price_max = null, open_house = null;
 
     // $body.on('change', '.sorting', function() {
     //     let url = window.location.href;
@@ -13,19 +13,19 @@ $(() => {
     //     window.location = sortOrder === '' ? window.location.href + sortValue(url, sorting) : removeOldSort(url, sorting);
     // });
 
-    $('#baths').find('li').on('click', function() {
-        bath = $(this).text();
-        bath = bath.replace(/\s/g, '');
+    $('#baths').find('li').one('click', function() {
+        bath.push($(this).text().replace(/\s/g, ''));
+        //bath = bath.replace(/\s/g, '');
     });
 
-    $('#beds').find('li').on('click', function() {
-        bed = $(this).text();
-        bed = bed.replace(/\s/g, '');
+    $('#beds').find('li').one('click', function() {
+        bed.push($(this).text().replace(/\s/g, ''));
+      //  bed = bed.replace(/\s/g, '');
     });
 
-    $('input[name=neighborhoods]').on('keydown', function(e) {
+    $('input[name=neighborhoods] , select[name=neighborhoods]').on('change', function(e) {
         let $val = $('input[name=neighborhoods]').val();
-        neighborhood = $val.length > 0 ? $val : null;
+        neighborhood = $val.length > 0 ? $val : ($("select[name=neighborhoods] option:selected").text().length > 0 ? $("select[name=neighborhoods] option:selected").text() :null);
     });
 
     $body.on('min-price', function(e, res) {
@@ -44,8 +44,8 @@ $(() => {
         square_feet_max = res;
     });
 
-    $body.on('submit', '#search', function(e) {
-        neighborhood = $(this).find('#neigh').val();
+    $body.on('submit', '#search , #advance-search', function(e) {
+        /*neighborhood = $(this).find('#neigh').val();*/
         let searchQuery = {
             baths: bath,
             neighborhood: neighborhood,
@@ -78,15 +78,15 @@ $(() => {
         }
     });
 
-    if(queries && queries.length > 0) {
+    if(queries && queries.length > 0) {console.log(queries);
         queries.forEach((v, i) => {
             let url = window.location.origin + `/search?neighborhoods=${v.neighborhood !== null ? v.neighborhood : '' + v.beds !== null ? '&beds=' + v.beds : '' + v.baths !== null ? '&baths=' + v.baths : '' + v.price_min !== null ? '&priceRange%5Bmin_price%5D=' + v.price_min : '' + v.price_max !== null ? '&priceRange%5Bmax_price%5D=' + v.price_max : '' + v.square_feet_min !== null ? '&priceRange%5Bmin_price_2%5D=' + v.square_feet_min : '' + v.square_feet_max !== null ? '&priceRange%5Bmax_price_2%5D=' + v.square_feet_max : ''}`;
             $('#empty-keywords').remove();
-            $('.dropDown').prepend(`
+            $('.dropDown > ul.neighborhoods_amenities > li ').prepend(`
                 <a href="${url}">
-                    <span>
+                    <!--<span>-->
                        NYC ${(v.neighborhood !== "" ? ' - ' + v.neighborhood : '') + (v.beds !== null ? ' ' + v.beds + ' bed' : '') + (v.baths !== null ? ' ' + v.baths + ' bath' : '')}
-                    </span>
+                    <!--</span>-->
                 </a>
              `);
         });

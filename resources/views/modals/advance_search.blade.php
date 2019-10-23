@@ -65,7 +65,7 @@
                             </div> -->
                             <div class="form-group" id="advance-search-chkbox">
                                 <label class="label">Beds <span>(Select all that applies)</span></label>
-                                <ul>
+                                <ul id="beds">
                                 <li> <input type="checkbox" id="Checkbox" name="Checkbox">
                                     <label for="Checkbox"><span class="label-name">Studio</span></label>
                                 </li>
@@ -131,7 +131,7 @@
                             </div> -->
                             <div class="form-group" id="advance-search-chkbox">
                                 <label class="label">Baths <span>(Select all that applies)</span></label>
-                                <ul>
+                                <ul id="baths">
                                 <li> <input type="checkbox" id="Checkbox-6" name="Checkbox-6">
                                     <label for="Checkbox-6"><span class="label-name">Any</span></label>
                                 </li>
@@ -180,7 +180,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="label">Neighbourhoods</label>
-                                {!! Form::select('neighborhood', neighborhoods(), null, ['class' => 'input-style']) !!}
+                                {!! Form::select('neighborhoods', neighborhoods(), null, ['class' => 'input-style']) !!}
 {{--                                {!! Form::text('neighborhoods', null, ['class' => 'input-style', 'placeholder' => 'Enter Neighborhood']) !!}--}}
                             </div>
                         </div>

@@ -35,6 +35,6 @@ class SearchController extends Controller
      */
     public function advanceSearch(Request $request) {
         $data = toObject(['listings' => $this->service->search($request)]);
-        return view('listing_search_results', compact('data', 'showMap'));
+        return view('listing_search_results', compact('data'));
     }
 }
