@@ -41,6 +41,8 @@ class RouteServiceProvider extends ServiceProvider {
         $this->mapAgentRoutes();
 
         $this->mapOwnerRoutes();
+
+        $this->mapRenterRoutes();
 	}
 
 	/**
@@ -110,5 +112,19 @@ class RouteServiceProvider extends ServiceProvider {
              ->middleware(['web', 'auth:owner'])
              ->namespace($this->namespace)
              ->group(base_path('routes/owner.php'));
+    }
+
+    /**
+     * Define the "renter" routes for the application.
+     *
+     * These routes are typically stateless.
+     *
+     * @return void
+     */
+    protected function mapRenterRoutes() {
+        Route::prefix('renter')
+             ->middleware(['web', 'auth:renter'])
+             ->namespace($this->namespace)
+             ->group(base_path('routes/renter.php'));
     }
 }
