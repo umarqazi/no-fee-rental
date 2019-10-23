@@ -4,6 +4,10 @@ namespace App\Repository;
 
 use App\AgentInvite;
 
+/**
+ * Class AgentRepo
+ * @package App\Repository
+ */
 class AgentRepo extends BaseRepo {
 
 	/**
