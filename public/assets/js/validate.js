@@ -11,8 +11,17 @@ $(() => {
     });
 
     $.validator.addMethod("validateExtension", function(value, ele) {
-        let val = $(ele).val();
-        switch(val.substring(val.lastIndexOf('.') + 1).toLowerCase()){
+        let val ;
+
+        if($(ele).val()) {
+            val = $(ele).val() ;
+        }
+
+        else {
+             val = $('input[name="old_thumbnail"]').val() ;
+        }
+
+            switch(val.substring(val.lastIndexOf('.') + 1).toLowerCase()){
             case 'jpeg': case 'jpg': case 'png' : case 'gif':
                 return true;
             default:
@@ -22,8 +31,8 @@ $(() => {
     });
 
     $.validator.addMethod('time_validation', function(value, element, param) {
-        return ($('select[name="open_house[start_time][]"]').val() > $('select[name="open_house[end_time][]"]').val())  ? false : true ;
-    }, 'End Time should be greater than start time.');
+        return ($('select[name="open_house[start_time][]"]').val() >= $('select[name="open_house[end_time][]"]').val())  ? false : true ;
+    },);
 
     (function($) {
         $.fn.inputFilter = function(inputFilter) {
@@ -87,7 +96,7 @@ $(() => {
 
            thumbnail: {
                required: ($('input[name="old_thumbnail"]').val()) ? false : true,
-               validateExtension: ($('input[name="old_thumbnail"]').val()) ? false : ["jpg", "png", "gif","jpeg"],
+               validateExtension: 'thumbnail'
            },
 
            description : "required",
@@ -144,6 +153,7 @@ $(() => {
            'open_house[end_time][]': {
                required: "Select End Time.",
                validateSelect: "Select any one option.",
+               time_validation :  "End Time should be greater than start time."
            },
 
            thumbnail: {
@@ -196,10 +206,26 @@ $(() => {
            },
             password: {
                required: "Password is required.",
-                greaterThan: "Password should be greater than 8 characters."
+               greaterThan: "Password should be greater than 8 characters."
             }
         }
     });
+
+    // Neighborhood Search Form Validations
+    $('#search').validate({
+        rules: {
+            neighborhoods: {
+                required :  true
+            }
+        },
+
+        messages: {
+            neighborhoods: {
+                required : 'neighborhood is required',
+            }
+        }
+    });
+
 
     // Sign Up Form Validations
     $('#signup_form').validate({

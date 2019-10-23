@@ -10,7 +10,7 @@
         {!! Form::open(['url' => route('list.search'), 'method' => 'get', 'id' => 'search']) !!}
         <div class="search-property">
             <i class="fas fa-search"></i>
-            {!! Form::text('neighborhoods', null, ['id' => 'neigh', 'placeholder' => 'Enter Neighborhood', 'class' => 'search-fld']) !!}
+            <div>{!! Form::text('neighborhoods', null, ['id' => 'neigh', 'placeholder' => 'Enter Neighborhood', 'class' => 'search-fld']) !!}</div>
             {!! Form::button('Search', ['class' => 'search-btn', 'type' => 'submit']) !!}
         </div>
         {!! Form::close() !!}
