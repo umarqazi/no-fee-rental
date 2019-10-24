@@ -54,7 +54,7 @@ class ListingService extends BuildingService {
         DB::beginTransaction();
         $listing = $this->__validateForm($request);
         $building = $this->addBuilding($listing->street_address);
-        $listing->visibility = $building->is_verified;
+        $listing->visibility = (!$building->is_verified && isAgent()) ? PENDINGLISTING : $building->is_verified;
         $listing = $this->__addList($listing);
         $this->__addOpenHouse($listing->id, $listing->user_id, $request->open_house);
         $this->__addFeatures($listing->id, $request->features);

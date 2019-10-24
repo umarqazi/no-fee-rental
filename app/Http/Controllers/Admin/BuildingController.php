@@ -62,8 +62,8 @@ class BuildingController extends Controller {
      * @return JsonResponse|RedirectResponse
      */
     public function update($id, Request $request) {
-        $res = $this->buildingService->update($id, $request);
-        return sendResponse($request, $res, 'Building has been updated.', route('admin.manageBuildingIndex'));
+        $this->buildingService->update($id, $request);
+        return success('Building has been updated.', route('admin.manageBuildingIndex'));
     }
 
     /**
