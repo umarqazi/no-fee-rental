@@ -285,6 +285,8 @@ class ListingService extends BuildingService {
         $form->building_type   = $request->building_type;
         $form->thumbnail       = $request->thumbnail ?? '';
         $form->old_thumbnail   = $request->old_thumbnail ?? null;
+        $form->application_fee = $request->application_fee;
+        $form->deposit         = $request->deposit;
         $form->validate();
         return $form;
     }

@@ -107,7 +107,19 @@ class ListingForm extends BaseForm {
     /**
      * @return array
      */
-	function toArray() {
+
+    /**
+     * @var integer
+     */
+    public $application_fee;
+
+    /**
+     * @var integer
+     */
+    public $deposit;
+
+
+    function toArray() {
 		return [
 			'user_id'          => $this->user_id,
             'description'      => $this->description,
@@ -127,8 +139,10 @@ class ListingForm extends BaseForm {
             'visibility'       => $this->visibility,
 			'square_feet'      => $this->square_feet,
 			'map_location'     => $this->map_location,
-            'building_type'    => $this->building_type
-		];
+            'building_type'    => $this->building_type,
+            'application_fee'  => $this->application_fee,
+            'deposit'          => $this->deposit
+        ];
 	}
 
     /**
@@ -148,7 +162,6 @@ class ListingForm extends BaseForm {
 			'baths'           => 'required|integer',
             'thumbnail'       => 'sometimes|mimes:jpg,png,jpeg',
 			'description'     => 'required',
-			'unit'            => 'required',
 			'rent'            => 'required|integer',
 			'square_feet'     => 'required|integer',
             'building_type'   => 'required|string'
