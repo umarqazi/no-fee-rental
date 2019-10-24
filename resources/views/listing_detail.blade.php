@@ -97,11 +97,11 @@
                             <div class="col-lg-6 col-sm-6">
                                 <div class="lease-term-section">
                                     <span>Application fee: </span>
-                                     <strong> $100.00</strong>
+                                     <strong> {{ $listing->application_fee ?? 'Null' }}</strong>
                                 </div>
                                 <div class="lease-term-section">
                                     <span>Deposit: </span>
-                                    <strong> $5,600.00</strong>
+                                    <strong> {{ $listing->deposit ?? 'Null' }}</strong>
                                 </div>
                                 <div class="lease-term-section">
                                     <span>Availability: </span>
