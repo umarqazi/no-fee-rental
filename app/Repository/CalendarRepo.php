@@ -32,12 +32,16 @@ class CalendarRepo extends BaseRepo {
         $collection = null;
         $events = $this->model->where('user_id', myId())->get();
         foreach ($events as $event) {
-            $collection = Calendar::addEvent($event, [
-                'color' => $event->color,
-                'url'   => $event->url,
-                'id' => $event->id
-            ]);
+            $tmp = \Calendar::event(
+                $event->title,
+                null,
+                carbon($event->start)->format('y-m-d h:i:s a'),
+                carbon($event->end)->format('y-m-d h:i:s a')
+            );
+
+            $collection = Calendar::addEvent($tmp, ['color' => $event->color, 'url' => $event->url]);
         }
+
         return $collection;
     }
 }

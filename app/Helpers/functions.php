@@ -1,6 +1,8 @@
 <?php
 
+use App\Events\TriggerMessage;
 use App\Services\NotificationService;
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Foundation\Bus\PendingDispatch;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -86,6 +88,20 @@ function isAgent() {
 }
 
 /**
+ * @return mixed
+ */
+function isRenter() {
+    return auth()->guard('renter')->check();
+}
+
+/**
+ * @return mixed
+ */
+function isOwner() {
+    return auth()->guard('renter')->check();
+}
+
+/**
  * @return int|null
  */
 function myId() {
@@ -93,7 +109,7 @@ function myId() {
 }
 
 /**
- * @return \Illuminate\Contracts\Auth\Authenticatable|null
+ * @return Authenticatable|null
  */
 function mySelf() {
 	return auth()->guard(whoAmI())->user();
@@ -114,6 +130,15 @@ function dateReadable($date) {
 }
 
 /**
+ * @param $string
+ *
+ * @return Carbon
+ */
+function carbon($string) {
+    return new Carbon($string);
+}
+
+/**
  * @param $date
  * @param $format
  *
@@ -121,16 +146,6 @@ function dateReadable($date) {
  */
 function formattedDate($format, $date) {
     return date($format, strtotime($date));
-}
-
-/**
- * @param $dateAlpha
- * @param $dateBeta
- *
- * @return bool
- */
-function compareDates($dateAlpha, $dateBeta) {
-    return formattedDate('y/m/d', $dateAlpha) >= formattedDate('y/m/d', $dateBeta);
 }
 
 /**
@@ -149,7 +164,16 @@ function dispatchMail($to, $data) {
  * @return NotificationService
  */
 function dispatchNotification($data) {
-    return new NotificationService(toObject($data));
+    return new NotificationService($data);
+}
+
+/**
+ * @param $data
+ *
+ * @return array|null
+ */
+function dispatchMessageEvent($data) {
+    return event(new TriggerMessage($data));
 }
 
 /**

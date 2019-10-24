@@ -85,8 +85,8 @@ class CalendarService {
         $form->user_id = myId();
         $form->title   = $request->title;
         $form->color   = $request->color;
-        $form->start   = $request->start;
-        $form->end     = $request->end;
+        $form->start   = carbon($request->start)->format('Y-m-d h:i:s');
+        $form->end     = carbon($request->end)->format('Y-m-d h:i:s');
         $form->url     = $request->url;
         $form->validate();
         return $form;

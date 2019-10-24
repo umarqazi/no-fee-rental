@@ -54,15 +54,15 @@ class CalendarEvent extends Model implements \MaddHatter\LaravelFullcalendar\Eve
      * @return DateTime
      */
     public function getStart() {
-        return $this->start;
+        return now();
     }
-
-    /**
-     * Get the end time
-     *
-     * @return DateTime
-     */
+//
+//    /**
+//     * Get the end time
+//     *
+//     * @return DateTime
+//     */
     public function getEnd() {
-        return $this->end;
+        return now();
     }
 }

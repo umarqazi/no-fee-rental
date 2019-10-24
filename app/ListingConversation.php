@@ -45,7 +45,7 @@ class ListingConversation extends Model {
      * @return HasOne
      */
     public function sender() {
-        return $this->hasOne(User::class, 'id', 'from');
+        return $this->hasOne(User::class, 'id', isRenter() ? 'to' : 'from');
     }
 
     /**
@@ -63,7 +63,11 @@ class ListingConversation extends Model {
      * @return mixed
      */
     public function scopeActiveConversations($query) {
-        return $query->where('meeting_request', ACTIVE)->where('is_archived', false)->with(['listing', 'sender']);
+        return $query->where([
+            'meeting_request' => ACTIVE,
+            'is_archived' => FALSE,
+            isRenter() ? 'from' : 'to' => myId()
+        ])->with(['listing', 'sender']);
     }
 
     /**
@@ -72,7 +76,11 @@ class ListingConversation extends Model {
      * @return mixed
      */
     public function scopeInactiveConversations($query) {
-        return $query->where('meeting_request', DEACTIVE)->where('is_archived', false)->with(['listing', 'sender']);
+        return $query->where([
+            'meeting_request' => DEACTIVE,
+            'is_archived' => FALSE,
+            isRenter() ? 'from' : 'to' => myId()
+        ])->with(['listing', 'sender']);
     }
 
     /**

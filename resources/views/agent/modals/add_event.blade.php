@@ -7,9 +7,7 @@
         z-index: 15;
     }
 </style>
-
 {!! HTML::style('assets/css/datepicker.min.css') !!}
-
 <div class="modal fade" id="add-event">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -21,15 +19,15 @@
             <div class="modal-body">
                 <div class="form-group">
                     <label> Event Title</label>
-                    <input type="text" class="input-style" name="title" />
+                    {!! Form::text('title', null, ['class' => 'input-style']) !!}
                 </div>
                 <div class="form-group">
                     <label> Start Date</label>
-                    {!! Form::text('start', null, ['class' => 'input-style', 'data-date-format' => 'yyyy-mm-dd']) !!}
+                    {!! Form::text('start', null, ['class' => 'input-style', 'autocomplete' => 'off']) !!}
                 </div>
                 <div class="form-group">
                     <label> End Date</label>
-                    {!! Form::text('end', null, ['class' => 'input-style', 'data-date-format' => 'yyyy-mm-dd']) !!}
+                    {!! Form::text('end', null, ['class' => 'input-style', 'autocomplete' => 'off']) !!}
                 </div>
             </div>
             <div class="modal-footer">

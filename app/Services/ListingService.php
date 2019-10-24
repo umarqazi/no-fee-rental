@@ -313,7 +313,7 @@ class ListingService extends BuildingService {
      */
     protected function __addOpenHouse($id, $user_id, $data) {
         $batch = [];
-        if(is_array($data['date'])) {
+        if(is_array($data['date'][0])) {
             for ($i = 0; $i < sizeof($data['date']); $i++) {
                 $batch[] = [
                     'listing_id' => $id,

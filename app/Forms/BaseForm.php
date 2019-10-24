@@ -2,6 +2,7 @@
 namespace App\Forms;
 
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\MessageBag;
 
 /**
  * Class BaseValidator
@@ -10,7 +11,7 @@ use Illuminate\Support\Facades\Validator;
  */
 abstract class BaseForm implements IForm {
 /**
- * @return \Illuminate\Support\MessageBag|mixed
+ * @return MessageBag|mixed
  */
 	public function errors() {
 		return $this->getValidator()->errors();

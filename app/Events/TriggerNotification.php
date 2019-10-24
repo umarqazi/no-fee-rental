@@ -22,13 +22,13 @@ class TriggerNotification implements ShouldBroadcast {
      * @param $data
      */
     public function __construct($data) {
-        $this->data = $data;
+        $this->data = (is_object($data)) ? $data : toObject($data);
     }
 
     /**
      * Get the channels the event should broadcast on.
      *
-     * @return \Illuminate\Broadcasting\Channel|array
+     * @return Channel|array
      */
     public function broadcastOn() {
         return new Channel('notification-channel.'. $this->data->to);

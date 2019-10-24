@@ -19,9 +19,9 @@ class CreateCalendarEventsTable extends Migration {
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->string('title');
-            $table->datetime('start');
-            $table->datetime('end');
-            $table->string('color');
+            $table->dateTime('start');
+            $table->dateTime('end');
+            $table->string('color')->nullable();
             $table->string('url')->nullable();
             $table->timestamps();
 

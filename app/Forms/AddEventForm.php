@@ -61,9 +61,7 @@ class AddEventForm extends BaseForm {
         return [
             'title' => 'required',
             'start' => 'required',
-            'color' => 'required',
             'end'   => 'required',
-            'url'   => 'required'
         ];
     }
 }

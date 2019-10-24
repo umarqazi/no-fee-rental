@@ -1,5 +1,5 @@
 
-@if($listing->agent->id !== myId())
+@if(isRenter())
     <div class="calendar-wrap">
         <!--calendar slider -->
         <h3>Request for Schedule </h3>
