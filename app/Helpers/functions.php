@@ -331,20 +331,19 @@ function openHouseTimeSlot($index) {
 }
 
 /**
- * @param null $action
- *
- * @return null
+ * @return string|null
  */
-//function amenities($action = null) {
-//    $html = null;
-//    $service = new \App\Services\AmenityService();
-//    foreach($service->get() as $amenity) {
-//        $html .= "<div class='col-md-6'>
-//        <h3>{$amenity->amenity_type }</h3><ul class='checkbox-listing'>".innerAmenity($amenity, $action)."</ul></div>";
-//    }
-//
-//    return $html;
-//}
+function amenities() {
+    $html = null;
+    $service = new \App\Services\AmenityService();
+    foreach ($service->get() as $key => $amenity) {
+        $html .= '<ul class="checkbox-listing"><li><div class="custom-control custom-checkbox">';
+        $html .= Form::checkbox('amenities[]', $amenity->id, null, ['class' => 'custom-control-input', 'id' => $key]);
+        $html .= '<label class="custom-control-label" for="'.$key.'">'.$amenity->amenities.'</label></div></li></ul>';
+    }
+
+    return $html;
+}
 
 /**
  * @param $amenity
