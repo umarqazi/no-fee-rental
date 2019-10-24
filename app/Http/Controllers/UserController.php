@@ -108,6 +108,16 @@ class UserController extends Controller {
 		return sendResponse($request, $response, 'We send an email to your account. Kindly verify your email');
 	}
 
+    /**
+     * @param Request $request
+     *
+     * @return RedirectResponse
+     */
+    public function renterSignup(Request $request){
+        $response = $this->service->renterSignup($request);
+        return sendResponse($request, $response, 'We send an email to your account. Kindly verify your email');
+    }
+
 	/**
 	 * @param $token
 	 *

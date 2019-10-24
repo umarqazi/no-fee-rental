@@ -441,6 +441,39 @@ class UserService {
 
     /**
      * @param $request
+     *
+     * @return bool
+     */
+    public function renterSignup($request){
+        $form = new CreateForm();
+        $form->first_name = $request->first_name;
+        $form->last_name = $request->last_name;
+        $form->email = $request->email;
+        $form->phone_number = $request->phone_number;
+        $form->user_type = $request->user_type;
+        $form->password = $request->password;
+        $form->license_number = $request->license_number;
+        $form->address = $request->address;
+        $form->password_confirmation = $request->password_confirmation;
+        $form->remember_token = str_random(60);
+        $form->validate();
+        $form->password = bcrypt($form->password);
+        $user = $this->userRepo->create($form->toArray());
+
+        $data = [
+            'view'       => 'signup',
+            'to'         =>  $user->email,
+            'first_name' =>  $user->first_name,
+            'subject'    => 'Verify Email',
+            'link'       =>  route('user.confirmEmail', $user->remember_token),
+        ];
+
+        dispatchEmailQueue($data);
+        return true ;
+    }
+
+        /**
+     * @param $request
      * @param bool $sendMail
      *
      * @return bool

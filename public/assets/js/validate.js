@@ -99,6 +99,7 @@ $(() => {
            name : "required",
            phone_number: "required",
            email: "required",
+           user_id : "required"
        },
 
        messages: {
@@ -161,6 +162,9 @@ $(() => {
            },
            email: {
                required: "Email is required."
+           },
+           user_id: {
+               required: "Owner is required."
            },
        },
        errorPlacement: function(error, element) {
