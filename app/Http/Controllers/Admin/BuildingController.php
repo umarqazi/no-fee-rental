@@ -45,15 +45,47 @@ class BuildingController extends Controller {
 
     /**
      * @param $id
+     * @param $status
+     * @param $route
      *
      * @return Factory|View
      */
-    public function buildingDetail($id) {
-        $status = 'Verify';
-        $route = 'admin.verifyBuilding';
-        $amenities = $this->buildingService->amenities();
+    public function detail($id, $status, $route) {
         $building = $this->buildingService->detail($id);
         return view('admin.building_detail', compact('building', 'status', 'amenities', 'route'));
+    }
+
+    /**
+     * @param $id
+     * @param Request $request
+     *
+     * @return JsonResponse|RedirectResponse
+     */
+    public function update($id, Request $request) {
+        $res = $this->buildingService->update($id, $request);
+        return sendResponse($request, $res, 'Building has been updated.', route('admin.manageBuildingIndex'));
+    }
+
+    /**
+     * @param $id
+     *
+     * @return Factory|View
+     */
+    public function verifying($id) {
+        $status = 'Verify';
+        $route = 'admin.verifyBuilding';
+        return $this->detail($id, $status, $route);
+    }
+
+    /**
+     * @param $id
+     *
+     * @return Factory|View
+     */
+    public function edit($id) {
+        $status = 'Update';
+        $route = 'admin.updateBuilding';
+        return $this->detail($id, $status, $route);
     }
 
     /**

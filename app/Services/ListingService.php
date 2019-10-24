@@ -55,7 +55,7 @@ class ListingService extends BuildingService {
         $listing = $this->__validateForm($request);
         $building = $this->addBuilding($listing->street_address);
         $listing->visibility = $building->is_verified;
-        $listing = $this->__addList($listing->toArray());
+        $listing = $this->__addList($listing);
         $this->__addOpenHouse($listing->id, $listing->user_id, $request->open_house);
         $this->__addFeatures($listing->id, $request->features);
         parent::attachApartment($building, $listing);
@@ -299,7 +299,7 @@ class ListingService extends BuildingService {
             $form->thumbnail = uploadImage( $form->thumbnail, 'images/listing/thumbnails' );
         }
 
-        return $this->listingRepo->create($form);
+        return $this->listingRepo->create($form->toArray());
     }
 
     /**

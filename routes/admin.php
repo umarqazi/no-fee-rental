@@ -86,7 +86,9 @@ Route::post('/neighborhood/delete/{id}', 'Admin\NeighborhoodController@delete')-
 // Manage Building Routes
 Route::get('/all-buildings', 'Admin\BuildingController@index')->name('admin.manageBuildingIndex');
 Route::post('/verify-building/{id}', 'Admin\BuildingController@verify')->name('admin.verifyBuilding');
-Route::get('/building-details/{id}', 'Admin\BuildingController@buildingDetail')->name('admin.buildingDetails');
+Route::get('/verifying-building/{id}', 'Admin\BuildingController@verifying')->name('admin.buildingDetails');
+Route::get('/edit-building/{id}', 'Admin\BuildingController@edit')->name('admin.editBuilding');
+Route::post('/update-building/{id}', 'Admin\BuildingController@update')->name('admin.updateBuilding');
 Route::get('/no-fee-building/{id}', 'Admin\BuildingController@noFee')->name('admin.noFeeBuilding');
 Route::get('/fee-building/{id}', 'Admin\BuildingController@fee')->name('admin.feeBuilding');
 
