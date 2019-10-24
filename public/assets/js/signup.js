@@ -3,6 +3,15 @@ $(() => {
         $('.check').remove();
     });
 
+    $('body').on('click', '#signup-option1', function(e) {
+        $('#signup_form').attr({'action': `${window.location.origin}/renter-signup`});
+
+    });
+
+    $('body').on('click', '#signup-option2', function(e) {
+        $('#signup_form').attr({'action': `${window.location.origin}/user-signup`});
+    })
+
     $("#signup-option2").trigger('click');
     let form = $('#signup_form');
     let $selector = $('input[name=license_number]');

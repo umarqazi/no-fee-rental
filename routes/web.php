@@ -59,6 +59,7 @@ Route::get('/signup/{token}', 'UserController@invitedAgentSignupForm')->name('ag
 // User Signup Routes
 Route::post('/user-signup', 'UserController@signup')->name('user.signup');
 Route::post('/agent/signup', 'UserController@invitedAgentSignup')->name('agent.signup');
+Route::post('/renter-signup', 'UserController@renterSignup')->name('renter.signup');
 
 // Messaging Routes
 Route::post('/send-message', 'MessageController@send')->name('send.message');
