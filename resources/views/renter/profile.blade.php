@@ -7,7 +7,7 @@
         </div>
         <div class="block profile-container">
             <div class="block-body">
-                {!! Form::model($user, ['url' => route('agent.profileUpdate'), 'method' => 'post', 'enctype' => 'multipart/form-data']) !!}
+                {!! Form::model($user, ['url' => route('renter.profileUpdate'), 'method' => 'post', 'enctype' => 'multipart/form-data']) !!}
                 <div class="user-avtar">
                     <div class="img-holder">
                         <img id="view_profile" src="{{ asset( $user->profile_image ?? DUI ) }}" alt="" />
@@ -78,17 +78,6 @@
                                 @if ($errors->has('phone_number'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('phone_number') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group neighborhood_expertise">
-                                <label>Neighbourhood Expertise</label>
-                                {!! Form::text('neighborhood_expertise', null, ['class' => 'input-style', 'placeholder' => 'Neighborhoods Expertise']) !!}
-                                @if ($errors->has('neighbourhood_expertise'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('neighbourhood_expertise') }}</strong>
                                     </span>
                                 @endif
                             </div>
