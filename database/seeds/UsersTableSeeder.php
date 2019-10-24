@@ -158,6 +158,33 @@ class UsersTableSeeder extends Seeder {
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
+            // Renters
+            [
+                'first_name' => 'Yousuf',
+                'last_name' => 'Khalid',
+                'email' => 'codinghackers@renter.com',
+                'user_type' => RENTER,
+                'password' => bcrypt('123456789'),
+                'email_verified_at' => now(),
+                'phone_number' => '123456789',
+                'license_number' => NULL,
+                'remember_token' => str_random(60),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'first_name' => 'Muhammad',
+                'last_name' => 'Adeel',
+                'email' => 'adeel@renter.com',
+                'user_type' => RENTER,
+                'password' => bcrypt('123456789'),
+                'email_verified_at' => now(),
+                'phone_number' => '123456789',
+                'license_number' => NULL,
+                'remember_token' => str_random(60),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
 		]);
 	}
 }

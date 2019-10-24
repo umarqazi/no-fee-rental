@@ -4,8 +4,11 @@ namespace App\Http\Controllers\Agent;
 
 use App\Services\ListingService;
 use App\Services\UserService;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\View\View;
 
 class AgentController extends Controller {
 
@@ -46,18 +49,16 @@ class AgentController extends Controller {
 	/**
 	 * @param Request $request
 	 *
-	 * @return \Illuminate\Http\RedirectResponse
+	 * @return RedirectResponse
 	 */
 	public function updateProfile(Request $request) {
 		$res = $this->userService->updateProfile($request);
 		return sendResponse($request, $res, 'Profile has been updated.');
 	}
 
-	/**
-	 * use to show admin reset password form.
-	 *
-	 * @return view
-	 */
+    /**
+     * @return Factory|View
+     */
 	public function resetPassword() {
 		return view('agent.update_password');
 	}
@@ -65,7 +66,7 @@ class AgentController extends Controller {
 	/**
 	 * @param Request $request
 	 *
-	 * @return \Illuminate\Http\RedirectResponse
+	 * @return RedirectResponse
 	 */
 	public function updatePassword(Request $request) {
 		$update = $this->userService->changePassword($request);
@@ -76,7 +77,7 @@ class AgentController extends Controller {
      * @param $agentId
      * @param Request $request
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
 	public function profileListing($agentId, Request $request) {
 	    $data = null;
