@@ -63,10 +63,6 @@ $(() => {
            neighborhood_id: "required",
            bedrooms: "required",
            baths: "required",
-           unit: {
-               required: true,
-               greaterThan: 0
-           },
            rent : {
                required: true,
                greaterThan: 0
@@ -84,14 +80,12 @@ $(() => {
                required: true,
                validateSelect: true
            },
-           "open_house[date][]" : "required",
            "open_house[start_time][]": {
-               required: true,
                validateSelect: true,
+               time_validation : $('input[name="open_house[end_time][]"]')
            },
 
            "open_house[end_time][]": {
-               required: true,
                validateSelect: true,
                time_validation : $('input[name="open_house[start_time][]"]')
                },
@@ -123,10 +117,6 @@ $(() => {
            baths: {
                required: "Bath is required."
            },
-           unit: {
-               required: "Unit is required.",
-               greaterThan: "Unit must be greater than 0"
-           },
            rent: {
                required: "Rent is required.",
                greaterThan: "Rent must be greater than 0"
@@ -141,19 +131,16 @@ $(() => {
            },
 
            building_type: {
-               required: "Select Building Type.",
+               required: "Select Listing Type.",
                validateSelect: "Select any one option."
            },
 
-           'open_house[date][]' : "Open House is required.",
-
            'open_house[start_time][]': {
-               required: "Select Start Time.",
                validateSelect: "Select any one option.",
+               time_validation :  "Start Time should be smaller than end time."
            },
 
            'open_house[end_time][]': {
-               required: "Select End Time.",
                validateSelect: "Select any one option.",
                time_validation :  "End Time should be greater than start time."
            },

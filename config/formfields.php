@@ -4,7 +4,6 @@ return [
     'listing' => [
         'availability' => [
             1 => 'immediately',
-            2 => 'Available',
             3 => 'By Date Only',
             4 => 'Not Available',
         ]

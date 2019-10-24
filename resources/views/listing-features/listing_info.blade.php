@@ -86,6 +86,24 @@
 </div>
 <div class="col-md-6">
     <div class="form-group">
+        <label>Application Fee</label>
+        {!! Form::text('application_fee', null, ['class' => 'input-style']) !!}
+        <span class="invalid-feedback" role="alert">
+			{!! $errors->first('application_fee') !!}
+		</span>
+    </div>
+</div>
+<div class="col-md-6">
+    <div class="form-group">
+        <label>Deposit</label>
+        {!! Form::text('deposit', null, ['class' => 'input-style']) !!}
+        <span class="invalid-feedback" role="alert">
+            {!! $errors->first('deposit') !!}
+        </span>
+    </div>
+</div>
+<div class="col-md-6">
+    <div class="form-group">
         <label>Availability</label>
         {!! Form::select('availability', config('formfields.listing.availability'), null, ['class' => 'input-style']) !!}
         <span class="invalid-feedback" role="alert">
@@ -110,7 +128,7 @@
 </div>
 <div class="col-md-6">
     <div class="form-group">
-        <label>Building Type</label>
+        <label>Listing Type</label>
         {!! Form::select('building_type',
         [
             ''          => 'Select Type',
@@ -122,7 +140,6 @@
 		</span>
     </div>
 </div>
-
 {{--Open House--}}
 @include('listing-features.open_house')
 <div class="row">
