@@ -58,7 +58,7 @@ class BuildingService {
      * @return mixed
      */
     public function verify($id, $request) {
-        $this->__apartmentAction($id, ACTIVE);
+        $this->__apartmentAction($id, ACTIVE, $request->neighborhood);
         $this->addAmenities($this->buildingRepo->findById($id)->first(), $request->amenities);
         return $this->buildingRepo->update($id, ['is_verified' => TRUE]);
     }
@@ -151,16 +151,19 @@ class BuildingService {
     /**
      * @param $id
      * @param $action
+     * @param null $neighborhood
      *
      * @return mixed
      */
-    private function __apartmentAction($id, $action) {
+    private function __apartmentAction($id, $action, $neighborhood = null) {
         $rows = [];
+        $neighbor = null;
         $building = $this->buildingRepo->getApartments($id)->first();
         foreach ($building->listings as $apartment) {
+            $neighbor = $apartment->neighborhood_id;
             $rows[] = $apartment->id;
         }
-        return $this->listingRepo->updateMultiRows($rows, ['visibility' => $action]);
+        return $this->listingRepo->updateMultiRows($rows, ['visibility' => $action, 'neighborhood_id' => $neighborhood ?? $neighbor]);
     }
 
     /**
