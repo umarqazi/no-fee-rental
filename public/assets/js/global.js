@@ -312,6 +312,17 @@ const setBySelector = function (selector) {
     return pushColumns(columns);
 };
 
+const checkAvailability = function (listing) {
+    let $body = $('body');
+    $body.find('#listing_id').val(listing.id)
+    $body.find('#agent_id').val(listing.user_id);
+    $body.find('#listing-image > img').attr("src",listing.thumbnail);
+    $body.find('#address').text(listing.display_address);
+    $body.find('#availability-beds').text(listing.bedrooms);
+    $body.find('#availability-baths').text(listing.baths);
+    $body.find('#availability-rent').text(listing.rent.toLocaleString());
+}
+
 /**
  *
  * @param selector

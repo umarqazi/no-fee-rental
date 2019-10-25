@@ -1813,6 +1813,25 @@ main {
     background-color: transparent;
     text-transform: uppercase;
 }
+#check-availability .send-availablity-btn{
+    width: 100%;
+    text-align: center;
+    border: 1px solid #F36F21;
+    color: #F36F21;
+    background-color: transparent;
+    text-transform: uppercase;
+}
+#check-availability .send-availablity-btn:hover,
+#check-availability .send-availablity-btn:active,
+#check-availability .send-availablity-btn:focus{
+    background-color: #F36F21;
+    transition: all 0.5s ease-out;
+    color: #fff;
+    box-shadow: none;
+}
+#listing-image{
+    margin-bottom: 1rem;
+}
 
 #check-availability .modal-body a.btn:hover,
 #check-availability .modal-body a.btn:active,

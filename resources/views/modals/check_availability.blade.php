@@ -4,20 +4,46 @@
             {{-- Modal body --}}
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-lg-4">
-                        <img src="{{ asset(DLI) }}">
+                    <div class="col-lg-4" id="listing-image">
+                        <img src="">
                     </div>
                     <div class="col-lg-8 padding-leftt-0">
-                        <h3> 345 SOUTH END AVENUE, #5P</h3>
-                        <strong> $2,815 </strong> <small>For Rental</small>
+                        <h3 id="address"></h3>
+                        <strong id="availability-rent"></strong> <small>For Rental</small>
                         <div class="after-border"></div>
                         <div class="bedroms-baths-text">
-                            <i class="fas fa-home"></i> <span> 2 Bedrooms, 3 Rooms, 2 Baths</span>
+                            <i class="fas fa-home"></i> <span id="availability-beds"></span> Bedrooms, <span id="availability-baths"></span> Baths
                         </div>
                     </div>
                 </div>
-                <textarea placeholder="Message"></textarea>
-                <div class="row">
+                <div  class="form-group">
+                    {!! Form::model(mySelf() ?? null, ['url' => route('web.listConversation')]) !!}
+                    {!! Form::hidden('listing_id','' , ['id' => 'listing_id']) !!}
+                    {!! Form::hidden('to', '',['id' => 'agent_id']) !!}
+                    {!! Form::hidden('type', AVAILABILITY) !!}
+                <div class="form-group">
+                    {!! Form::text('username', null, ['class' => 'form-control', 'placeholder' => 'User Name']) !!}
+                </div>
+                <div class="form-group">
+                    {!! Form::text('email', null, ['class' => 'form-control', 'placeholder' => 'email@example.com']) !!}
+                </div>
+                <div class="form-group">
+                    {!! Form::text('phone_number', null, ['class' => 'form-control', 'placeholder' => 'Phone Number']) !!}
+                </div>
+                <div class="form-group">
+                    {!! Form::textarea('message', null, ['class' => 'form-control', 'style' => 'resize:none;', 'placeholder' => 'Message']) !!}
+                </div>
+                    <div class="row">
+                <div class="form-group col-lg-6">
+                    {!! Form::button('send', ['class' => 'btn send-availablity-btn', 'type' => 'submit']) !!}
+                </div>
+                     <div class="col-lg-6">
+                          <a href="#" class="btn " data-dismiss='modal'> Cancel</a>
+                     </div>
+                    </div>
+                {!! Form::close() !!}
+                </div>
+            {{--    <div class="row">
                     <div class="col-lg-6">
                         <a href="#" class="btn "> Send Request</a>
                     </div>
@@ -25,7 +51,7 @@
                         <a href="#" class="btn " data-dismiss='modal'> Cancel</a>
                     </div>
                 </div>
-            </div>
+            --}}</div>
         </div>
         <!-- Modal footer -->
     </div>

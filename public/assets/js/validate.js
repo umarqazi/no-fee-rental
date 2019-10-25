@@ -82,12 +82,12 @@ $(() => {
            },
            "open_house[start_time][]": {
                validateSelect: true,
-               time_validation : $('input[name="open_house[end_time][]"]')
+               time_validation : $('select[name="open_house[end_time][]"]')
            },
 
            "open_house[end_time][]": {
                validateSelect: true,
-               time_validation : $('input[name="open_house[start_time][]"]')
+               time_validation : $('select[name="open_house[start_time][]"]')
                },
 
            thumbnail: {
