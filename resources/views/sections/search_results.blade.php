@@ -121,7 +121,7 @@
                                         Check Availability
                                     </button>
                                 </div>
-                                <span class='heart-icon'></span>
+                                <span class='heart-icon' list_id="{{ $listing->id }}"></span>
                                 <img src='{{ asset($listing->thumbnail ?? DLI) }}' alt="" class='main-img'>
                                 <div class='info'>
                                     <div href='javascript:void(0);' class='info-link-text'>
@@ -193,4 +193,8 @@
         markerClusters(coords, document.getElementById('mobile-map'));
         markerClusters(coords, document.getElementById('desktop-map'));
     }
+
+    $('.heart-icon').on('click', function() {
+        alert('clicked');
+    });
 </script>

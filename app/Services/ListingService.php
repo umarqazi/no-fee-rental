@@ -201,7 +201,7 @@ class ListingService extends BuildingService {
     public function approve($id) {
         DB::beginTransaction();
         if ($this->listingRepo->update($id, ['visibility' => 1])) {
-            $list = $this->listingRepo->find(['id' => $id])->withagent()->first();
+            $list = $this->listingRepo->find(['id' => $id])->with('agent')->first();
             dispatchNotification([
                 'name'        => $list->agent->first_name,
                 'approved_by' => mySelf()->first_name,

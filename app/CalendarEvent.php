@@ -4,12 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use MaddHatter\LaravelFullcalendar\Event;
 
 /**
  * Class CalendarEvent
  * @package App
  */
-class CalendarEvent extends Model implements \MaddHatter\LaravelFullcalendar\Event {
+class CalendarEvent extends Model implements Event {
 
     /**
      * @var array
@@ -54,15 +55,15 @@ class CalendarEvent extends Model implements \MaddHatter\LaravelFullcalendar\Eve
      * @return DateTime
      */
     public function getStart() {
-        return now();
+        return $this->start;
     }
-//
-//    /**
-//     * Get the end time
-//     *
-//     * @return DateTime
-//     */
+
+    /**
+     * Get the end time
+     *
+     * @return DateTime
+     */
     public function getEnd() {
-        return now();
+        return $this->end;
     }
 }
