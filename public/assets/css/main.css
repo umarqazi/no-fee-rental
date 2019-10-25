@@ -5165,7 +5165,7 @@ footer .copyright .social-icons li a:hover {
     height: auto;
     padding-right: 0px;
   }
-  
+
 }
 
 @media only screen and (min-width: 577px) and (max-width: 767px) {
@@ -5313,7 +5313,7 @@ footer .copyright .social-icons li a:hover {
   }
   .dropdown-wrap{
     display: flex;
-    
+
   }
   .listing-wrapp{
     display: block;

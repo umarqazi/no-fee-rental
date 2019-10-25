@@ -1903,3 +1903,15 @@ main {
     margin-bottom: 30px;
 }
 }
+
+
+
+.listing-info .fill-heart{
+    display: inline-block;
+    font-size: 25px;
+    color: #e7781b;
+}
+.listing-info .empty-heart{
+    display: inline-block;
+    font-size: 25px;
+}

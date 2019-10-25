@@ -25,7 +25,11 @@
                                 <li><a href="#"><i class="fab fa-youtube"></i> Youtube</a></li>
                               </ul>
                             </a>
-                            <a href="javascript:void(0);" class="ml-2"><img src="/assets/images/fav-icon.png" alt="" /> </a>
+                            @if(!empty($listing->agent->favourite) && $listing->agent->favourite->listing_id === $listing->id)
+                                <a href="javascript:void(0);" class="ml-2"><i class="fas fa-heart fill-heart"></i></a>
+                            @else
+                                <a href="javascript:void(0);" class="ml-2"><i class="far fa-heart empty-heart"></i></a>
+                            @endif
                             <a href="javascript:void(0);" class="ml-2" data-toggle="modal" data-target="#flag-icon"><img src="/assets/images/flag-icon.png" alt="" class="flag-icon" /></a>
                         </span>
                     </div>
