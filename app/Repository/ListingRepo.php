@@ -19,7 +19,7 @@ class ListingRepo extends BaseRepo {
      * @return mixed
      */
 	public function isExistingApartment($apartment_address) {
-	    return $this->find(['street_address' => $apartment_address]);
+	    return $this->model->where('street_address', $apartment_address);
     }
 
 	/**
@@ -56,6 +56,7 @@ class ListingRepo extends BaseRepo {
 	 * @return int
 	 */
 	public function status($id) {
+	    if($this->isFee($id)) return false;
 		$query = $this->find(['id' => $id]);
 		$status = $query->select('visibility')->first();
 		$updateStatus = ($status->visibility) ? 0 : 1;
@@ -108,7 +109,7 @@ class ListingRepo extends BaseRepo {
      * @return mixed
      */
 	public function agent($id) {
-	    return $this->find(['id' => $id])->withagent()->first();
+	    return $this->find(['id' => $id])->withall()->first();
     }
 
     /**
@@ -116,5 +117,24 @@ class ListingRepo extends BaseRepo {
      */
     public function withNeighborhood() {
 	   return $this->model->withneighborhood();
+    }
+
+    /**
+     * @param $id
+     *
+     * @return mixed
+     */
+    public function getBuilding($id) {
+        return $this->findById($id)->with('listingBuilding.building')->first();
+    }
+
+    /**
+     * @param $id
+     *
+     * @return bool
+     */
+    public function isFee($id) {
+        $belongsTo = $this->getBuilding($id);
+        return $belongsTo->listingBuilding->building->type === FEE;
     }
 }

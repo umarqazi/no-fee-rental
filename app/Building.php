@@ -19,7 +19,24 @@ class Building extends Model {
     /**
      * @return BelongsToMany
      */
-    public function apartments() {
-        return $this->belongsToMany(Listing::class, 'building_apartments', 'building_id', 'apartment_id');
+    public function listings() {
+        return $this->belongsToMany(
+            Listing::class,
+            'building_apartments',
+            'building_id',
+            'apartment_id'
+        );
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function amenities() {
+        return $this->belongsToMany(
+            Amenity::class,
+            'building_amenities',
+            'building_id',
+            'amenity_id'
+        );
     }
 }

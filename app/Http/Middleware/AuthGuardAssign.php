@@ -8,10 +8,14 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 use Illuminate\Validation\ValidationException;
 
+/**
+ * Class AuthGuardAssign
+ * @package App\Http\Middleware
+ */
 class AuthGuardAssign {
 
     /**
-     * @var
+     * @var mixed
      */
 	protected $request;
 
@@ -24,14 +28,15 @@ class AuthGuardAssign {
      */
 	public function handle($request, Closure $next) {
 		$this->request = $request;
-		$user = $this->check_type();
+		$user = $this->__userType();
 		if (empty($user)) {
 			$msg = 'Wrong Email or Password.';
             return sendResponse($request, false, null, null, $msg);
 		} else if(empty($user->email_verified_at)) {
-		    $msg = 'Email is not verified';
+		    $msg = 'Your Email is not verified';
             return sendResponse($request, false, null, null, $msg);
         }
+
 		switch ($user->user_type) {
 
 		case ADMIN:
@@ -56,7 +61,7 @@ class AuthGuardAssign {
 	/**
 	 * @return mixed
 	 */
-	private function check_type() {
+	private function __userType() {
 		return \App\User::whereEmail($this->request->email)->select(['user_type', 'email_verified_at'])->first();
 	}
 }

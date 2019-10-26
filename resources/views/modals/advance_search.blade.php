@@ -71,7 +71,7 @@
                                 </li>
                                 <li> <input type="checkbox" id="Checkbox-1" name="Checkbox-1">
                                     <label for="Checkbox-1"><span class="label-name">1</span></label>
-                                </li> 
+                                </li>
                                 <li> <input type="checkbox" id="Checkbox-2" name="Checkbox-2">
                                     <label for="Checkbox-2"><span class="label-name">2</span></label>
                                 </li>
@@ -80,7 +80,7 @@
                                 </li>
                                 <li> <input type="checkbox" id="Checkbox-4" name="Checkbox-4">
                                     <label for="Checkbox-4"><span class="label-name">4</span></label>
-                                </li> 
+                                </li>
                                 <li> <input type="checkbox" id="Checkbox-5" name="Checkbox-5">
                                     <label for="Checkbox-5"><span class="label-name">5+</span></label>
                                 </li>
@@ -137,7 +137,7 @@
                                 </li>
                                 <li> <input type="checkbox" id="Checkbox-7" name="Checkbox-7">
                                     <label for="Checkbox-7"><span class="label-name">1</span></label>
-                                </li> 
+                                </li>
                                 <li> <input type="checkbox" id="Checkbox-9" name="Checkbox-9">
                                     <label for="Checkbox-9"><span class="label-name">2</span></label>
                                 </li>
@@ -146,7 +146,7 @@
                                 </li>
                                 <li> <input type="checkbox" id="Checkbox-11" name="Checkbox-11">
                                     <label for="Checkbox-11"><span class="label-name">4</span></label>
-                                </li> 
+                                </li>
                                 <li> <input type="checkbox" id="Checkbox-12" name="Checkbox-12">
                                     <label for="Checkbox-12"><span class="label-name">5+</span></label>
                                 </li>
@@ -194,7 +194,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <div class="row">
-                                    {!! amenities() !!}
+{{--                                    {!! amenities() !!}--}}
                                 </div>
                             </div>
                         </div>
@@ -206,7 +206,7 @@
             </div>
         </div>
     </div>
-    
+
 
 </div>
 

@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use App\AgentInvites;
+use App\AgentInvite;
 
 class AgentRepo extends BaseRepo {
 
@@ -10,7 +10,7 @@ class AgentRepo extends BaseRepo {
 	 * AgentRepo constructor.
 	 */
 	public function __construct() {
-		parent::__construct(new AgentInvites);
+		parent::__construct(new AgentInvite);
 	}
 
 	/**

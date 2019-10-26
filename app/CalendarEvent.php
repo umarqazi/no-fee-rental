@@ -4,6 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class CalendarEvent
+ * @package App
+ */
 class CalendarEvent extends Model implements \MaddHatter\LaravelFullcalendar\Event {
 
     /**

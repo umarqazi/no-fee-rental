@@ -4,18 +4,22 @@ namespace App\Services;
 
 use App\Repository\ListingRepo;
 
+/**
+ * Class FeatureListingService
+ * @package App\Services
+ */
 class FeatureListingService {
 
     /**
      * @var ListingRepo
      */
-	protected $repo;
+	protected $listingRepo;
 
     /**
      * FeatureListingService constructor.
      */
 	public function __construct() {
-	    $this->repo = new ListingRepo();
+	    $this->listingRepo = new ListingRepo();
     }
 
     /**
@@ -49,10 +53,10 @@ class FeatureListingService {
      */
     private function searchCollection($keywords, $paginate) {
         return [
-            'featured'         => $this->repo->search($keywords)
+            'featured'         => $this->listingRepo->search($keywords)
                                              ->featured()
                                              ->paginate($paginate, ['*'], 'featured'),
-            'request_featured' => $this->repo->search($keywords)
+            'request_featured' => $this->listingRepo->search($keywords)
                                              ->requestfeatured()
                                              ->paginate($paginate, ['*'], 'request-featured'),
         ];
@@ -105,21 +109,21 @@ class FeatureListingService {
 	 * @return mixed
 	 */
 	public function featured() {
-		return $this->repo->featured();
+		return $this->listingRepo->featured();
 	}
 
 	/**
 	 * @return mixed
 	 */
 	public function requestFeatured() {
-		return $this->repo->requestfeatured();
+		return $this->listingRepo->requestfeatured();
 	}
 
     /**
      * @return mixed
      */
 	public function activeFeatured() {
-	    return $this->repo->activeFeatured();
+	    return $this->listingRepo->activeFeatured();
     }
 
 	/**
@@ -128,8 +132,8 @@ class FeatureListingService {
 	 * @return mixed
 	 */
 	public function mark($id) {
-		if ($this->repo->update($id, ['is_featured' => APPROVEFEATURED])) {
-			$list = $this->repo->find(['id' => $id])->withagent()->first();
+		if ($this->listingRepo->update($id, ['is_featured' => APPROVEFEATURED])) {
+			$list = $this->listingRepo->find(['id' => $id])->with('agent')->first();
 			$data = [
 				'subject'     => 'Featured Request Approved',
 				'view'        => 'request-featured-approved',
@@ -156,7 +160,7 @@ class FeatureListingService {
 	 * @return mixed
 	 */
 	public function unmark($id) {
-		return $this->repo->update($id, ['is_featured' => REJECTFEATURED]);
+		return $this->listingRepo->update($id, ['is_featured' => REJECTFEATURED]);
 	}
 
 	/**
@@ -165,7 +169,7 @@ class FeatureListingService {
 	 * @return mixed
 	 */
 	public function request($id) {
-		return $this->repo->update($id, ['is_featured' => REQUESTFEATURED]);
+		return $this->listingRepo->update($id, ['is_featured' => REQUESTFEATURED]);
 	}
 
 	/**
@@ -174,7 +178,7 @@ class FeatureListingService {
 	 * @return mixed
 	 */
 	public function detail($id) {
-		return $this->repo->find(['id' => $id, 'visibility' => true])->withall()->first();
+		return $this->listingRepo->find(['id' => $id, 'visibility' => true])->withall()->first();
 	}
 
     /**

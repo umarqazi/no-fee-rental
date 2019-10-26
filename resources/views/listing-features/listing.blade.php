@@ -21,9 +21,9 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>List Belongs To:</label>
-                                {!! Form::select('user_id', agents(), [],
+                                {!! Form::select('user_id', owners(), null,
                                 [
-                                    'class'        => 'controls input-style',
+                                    'class'        => 'input-style',
                                     'autocomplete' => 'off'
                                 ]) !!}
                             </div>
@@ -33,8 +33,8 @@
                 <div class="row">
                     {{--Listing Info--}}
                     @include('listing-features.listing_info')
-                    {{--Amenities--}}
-                    @include('listing-features.amenities')
+                    {{--Features--}}
+                    {!! features() !!}
                     {{--Basic User Info--}}
                     @include('listing-features.basic_info')
                     <div class="col-md-12 mt-4">

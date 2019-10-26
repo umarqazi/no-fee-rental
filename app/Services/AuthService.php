@@ -15,6 +15,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * Class AuthService
+ * @package App\Services
+ */
 class AuthService {
 
     use AuthenticatesUsers;
@@ -66,9 +70,7 @@ class AuthService {
     }
 
     /**
-     * Use to override custom guard
-     *
-     * @return guard instance
+     * @return mixed
      */
     protected function guard() {
         return Auth::guard($this->guard);

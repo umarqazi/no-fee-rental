@@ -68,6 +68,7 @@ $(() => {
     $('.controls').on('keydown blur', function() {
         setTimeout(() => {
             let val = $(this).val();
+            val = val.replace(', USA', '');
             val = val.replace(', NY, USA', '');
             val = val.replace(', New York', '');
             $('#autofill').val(val);

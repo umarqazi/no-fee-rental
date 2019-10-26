@@ -3,16 +3,21 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class AgentInvites extends Model {
+/**
+ * Class AgentInvites
+ * @package App
+ */
+class AgentInvite extends Model {
 
     /**
      * @var array
      */
-	protected $fillable = ['invited_by', 'email', 'token', 'created_at', 'updated_at','accept'];
+	protected $fillable = ['invited_by', 'email', 'token','accept'];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return HasOne
      */
 	public function user() {
 		return $this->hasOne(User::class, 'id', 'invited_by');

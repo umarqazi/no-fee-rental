@@ -5,6 +5,10 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * Class OpenHouse
+ * @package App
+ */
 class OpenHouse extends Model {
 
     /**

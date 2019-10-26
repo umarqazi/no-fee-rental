@@ -3,7 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ * Class Company
+ * @package App
+ */
 class Company extends Model {
 
     /**
@@ -13,7 +18,7 @@ class Company extends Model {
 
     /**
      * return companies with agents
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function agents() {
         return $this->hasMany(User::class, 'company_id');

@@ -3,23 +3,29 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Neighborhoods extends Model
-{
+/**
+ * Class Neighborhoods
+ * @package App
+ */
+class Neighborhoods extends Model {
+
     /**
      * @var array
      */
     protected $fillable = ['name','content'];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function listings() {
         return $this->hasMany(Listing::class, 'neighborhood_id', 'id');
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return BelongsToMany
      */
     public function agentExpertese() {
         return $this->belongsToMany(User::class, 'agent_neighborhoods', 'neighborhood_id', 'id');

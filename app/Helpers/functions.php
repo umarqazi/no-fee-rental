@@ -1,8 +1,11 @@
 <?php
 
-use Illuminate\Support\Collection;
+use App\Services\NotificationService;
+use Illuminate\Foundation\Bus\PendingDispatch;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Carbon\Carbon;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Storage;
 
 /**
@@ -143,10 +146,10 @@ function dispatchMail($to, $data) {
 /**
  * @param $data
  *
- * @return \App\Services\NotificationService
+ * @return NotificationService
  */
 function dispatchNotification($data) {
-    return new \App\Services\NotificationService(toObject($data));
+    return new NotificationService(toObject($data));
 }
 
 /**
@@ -163,7 +166,7 @@ function artisan($command) {
  * @param $data
  * @param int $delay
  *
- * @return \Illuminate\Foundation\Bus\PendingDispatch
+ * @return PendingDispatch
  */
 function dispatchEmailQueue($data, $delay = 10) {
     return dispatch(new \App\Jobs\SendEmailJob($data))->delay(now()->addSeconds($delay));
@@ -173,7 +176,7 @@ function dispatchEmailQueue($data, $delay = 10) {
  * @param $msg
  * @param null $path
  *
- * @return \Illuminate\Http\RedirectResponse
+ * @return RedirectResponse
  */
 function error($msg, $path = null) {
 	return ($path == null)
@@ -187,7 +190,7 @@ function error($msg, $path = null) {
  * @param bool $status
  * @param int $code
  *
- * @return \Illuminate\Http\JsonResponse
+ * @return JsonResponse
  */
 function json($msg, $data = null, $status = true, $code = 200) {
 	return response()->json(['msg' => $msg, 'data' => $data, 'status' => $status], $code);
@@ -197,7 +200,7 @@ function json($msg, $data = null, $status = true, $code = 200) {
  * @param $msg
  * @param null $path
  *
- * @return \Illuminate\Http\RedirectResponse
+ * @return RedirectResponse
  */
 function success($msg, $path = null) {
 	return ($path == null)
@@ -213,7 +216,7 @@ function success($msg, $path = null) {
  * @param null $errorMsg
  * @param int $code
  *
- * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
+ * @return JsonResponse|RedirectResponse
  */
 function sendResponse($request, $data = null, $msg = null, $path = null, $errorMsg = null, $code = 200) {
     if($request->ajax())
@@ -256,20 +259,78 @@ function dataTable($data) {
 }
 
 /**
+ * @param $features
+ *
+ * @return array|mixed
+ */
+function findFeatures($features) {
+    $collection = [];
+    foreach ($features as $feature) {
+        $collection[] = $feature->value;
+    }
+
+    return $collection;
+}
+
+/**
+ * @param $features
+ *
+ * @return array
+ */
+function petPolicy($features) {
+    $collection = [];
+    $configFeature = config('features.pet_policy');
+    foreach ($features as $feature) {
+        if(strpos($feature->value, 'p') !== false) {
+            $collection[] = $configFeature[$feature->value];
+        }
+    }
+
+    return $collection;
+}
+
+/**
+ * @param $features
+ *
+ * @return array
+ */
+function unitFeature($features) {
+    $collection = [];
+    $configFeature = config('features.unit_feature');
+    foreach ($features as $feature) {
+        if(strpos($feature->value, 'u') !== false) {
+            $collection[] = $configFeature[$feature->value];
+        }
+    }
+
+    return $collection;
+}
+
+/**
+ * @param $index
+ *
+ * @return mixed|null
+ */
+function openHouseTimeSlot($index) {
+    $slots = config('open_house');
+    return new Carbon($slots[$index]) ?? null;
+}
+
+/**
  * @param null $action
  *
  * @return null
  */
-function amenities($action = null) {
-    $html = null;
-    $service = new \App\Services\AmenityService();
-    foreach($service->get() as $amenity) {
-        $html .= "<div class='col-md-6'>
-        <h3>{$amenity->amenity_type }</h3><ul class='checkbox-listing'>".innerAmenity($amenity, $action)."</ul></div>";
-    }
-
-    return $html;
-}
+//function amenities($action = null) {
+//    $html = null;
+//    $service = new \App\Services\AmenityService();
+//    foreach($service->get() as $amenity) {
+//        $html .= "<div class='col-md-6'>
+//        <h3>{$amenity->amenity_type }</h3><ul class='checkbox-listing'>".innerAmenity($amenity, $action)."</ul></div>";
+//    }
+//
+//    return $html;
+//}
 
 /**
  * @param $amenity
@@ -277,21 +338,42 @@ function amenities($action = null) {
  *
  * @return string|null
  */
-function innerAmenity($amenity, $action) {
-    $innerHtml = null;
-    foreach ( $amenity->amenities as $amenity_value ) {
-        $innerHtml .= "
-            <li><div class='custom-control custom-checkbox'>" .
-                Form::checkbox( "amenities[]", $amenity_value->id, null,
-                    [
-                        ( $action == 'Update' ) ? 'disabled' : '',
-                        'class' => 'custom-control-input',
-                        'id'    => "listitem{$amenity_value->id}"
-                    ])."<label class='custom-control-label' for='listitem{$amenity_value->id}'>" .
-                       $amenity_value->amenities . "</label></div></li>";
+//function innerAmenity($amenity, $action) {
+//    $innerHtml = null;
+//    foreach ( $amenity->amenities as $amenity_value ) {
+//        $innerHtml .= "
+//            <li><div class='custom-control custom-checkbox'>" .
+//                Form::checkbox( "amenities[]", $amenity_value->id, null,
+//                    [
+//                        ( $action == 'Update' ) ? 'disabled' : '',
+//                        'class' => 'custom-control-input',
+//                        'id'    => "listitem{$amenity_value->id}"
+//                    ])."<label class='custom-control-label' for='listitem{$amenity_value->id}'>" .
+//                       $amenity_value->amenities . "</label></div></li>";
+//    }
+//
+//    return $innerHtml;
+//}
+
+function features() {
+    $html = null;
+    $features = config('features');
+    foreach ($features as $type => $feature) {
+        $html .= "<div class='col-md-6'>
+        <h3>".ucwords(str_replace('_', ' ', $type))."</h3><ul class='checkbox-listing'>";
+        foreach ($feature as $index => $value) {
+            $html .= "<li><div class='custom-control custom-checkbox'>" .
+                     Form::checkbox( "features[]", $index, null,
+                         [
+                             'class' => 'custom-control-input',
+                             'id'    => "listitem{$index}"
+                         ] ) . "<label class='custom-control-label' for='listitem{$index}'>" .
+                     $value . "</label></div></li>";
+        }
+        $html .= "</ul></div>";
     }
 
-    return $innerHtml;
+    return $html;
 }
 
 /**
@@ -299,7 +381,7 @@ function innerAmenity($amenity, $action) {
  */
 function neighborhoods() {
     $data = (new \App\Services\NeighborhoodService())->get();
-    $neighborhoods[] = 'Select Neighborhood';
+    $neighborhoods[''] = 'Select Neighborhood';
     foreach ($data as $key => $value) {
         $neighborhoods[$value->id] = $value->name;
     }
@@ -310,14 +392,14 @@ function neighborhoods() {
 /**
  * @return array
  */
-function agents() {
-    $data = (new \App\Services\UserService())->agents();
-    $agents[] = "Select Agent";
-    foreach ($data as $agent) {
-        $agents[$agent->id] = sprintf("%s %s", $agent->first_name, $agent->last_name);
+function owners() {
+    $data = (new \App\Services\UserService())->owners();
+    $owners[''] = "Select Owner";
+    foreach ($data as $owner) {
+        $owners[$owner->id] = sprintf("%s %s", $owner->first_name, $owner->last_name);
     }
 
-    return $agents;
+    return $owners;
 }
 
 /**

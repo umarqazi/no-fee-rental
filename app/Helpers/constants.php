@@ -154,10 +154,30 @@ if(!defined('DIP')) {
     define('DIP', 'assets/images/default-images/user.jpeg');
 }
 
+/**
+ * Listing Conversation Type (Appointment)
+ */
 if(!defined('APPOINTMENT')) {
     define('APPOINTMENT', 1);
 }
 
+/**
+ * Listing Conversation Type (Check Availability)
+ */
 if(!defined('AVAILABILITY')) {
     define('AVAILABILITY', 2);
+}
+
+/**
+ * Building Type No Fee
+ */
+if(!defined('NOFEE')) {
+    define('NOFEE', 'no fee');
+}
+
+/**
+ * Building Type FEE
+ */
+if(!defined('FEE')) {
+    define('FEE', 'fee');
 }
