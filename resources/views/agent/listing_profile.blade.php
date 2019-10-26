@@ -10,20 +10,27 @@
             <div class="agent-info">
                 <h2>{{ $data->agent->first_name.' '.$data->agent->last_name }}</h2>
                 <p>{{ $data->agent->description ?? 'No description found' }}</p>
-                <p class="expertise"><strong>Neighborhood Expertise:</strong> <a href="#">Nolita,</a>
-                    <a href="#">Soho,</a>
-                    <a href="#">Greenwich Village</a>
+                <p class="expertise"><strong>Neighborhood Expertise:</strong>
+                    @if (sizeof($data->agent->neighborexpertise) > 0)
+                    @for($i = 0 ; $i < sizeof($data->agent->neighborexpertise) ; $i++)
+                    <a href="#">{{$data->agent->neighborexpertise[$i]->name }},</a>
+                    @endfor
+                    @else
+                    <a href="#">Null</a>
+                    @endif
+                </p>
+                <p class="expertise"><strong>Languages:</strong> <a href="#">{{$data->agent->languages  ?? 'Null'}}</a>
                 </p>
                 <div class="contact-info contact-info-mobile">
                     <div>
-                        <img src="../assets/images/close-envelope-new.png" alt="" /> <a href="#">{{ $data->agent->email }}</a>
+                        <img  src="{{ asset('assets/images/close-envelope-new.png') }}" alt="" /> <a href="#">{{ $data->agent->email }}</a>
                     </div>
                     <div>
-                        <img src="../assets/images/call-icon.png" alt="" />
+                        <img  src="{{ asset('assets/images/call-icon.png') }}" alt="" />
                         <a href="javascript:void(0);">{{ $data->agent->phone_number ?? 'Null' }}</a>
                     </div>
                     <div>
-                        <img src="../assets/images/location.png" alt="" /> <a href="#">1534 Some where st. san Diego, CA 92101</a>
+                        <img src="{{ asset('assets/images/location.png') }}" alt="" /> <a href="#">{{ $data->agent->address ?? 'Null' }}</a>
                     </div>
                 </div>
             </div>

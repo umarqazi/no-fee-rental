@@ -99,17 +99,17 @@
                                 <div class="exclusive-chkboxes">
                                     <div class="custom-control custom-checkbox">
                                         <input class="custom-control-input input-style" id="exclusive-1" name="allow_web_notifications" type="checkbox"
-                                               value="two" {{ $exclusiveSettings->allow_web_notification === 1 ? 'checked' : null }}>
+                                               value="two"   {{  $exclusiveSettings ? ($exclusiveSettings->allow_web_notification === 1 ? 'checked' : null) : 'checked'  }}>
                                         <label class="custom-control-label" for="exclusive-1">Allow Web Notifications</label>
                                     </div>
                                     <div class="custom-control custom-checkbox">
                                         <input class="custom-control-input input-style" id="exclusive-2" name="allow_email_notifications" type="checkbox"
-                                               value="two" {{ $exclusiveSettings->allow_email === 1 ? 'checked' : null }}>
+                                               value="two"  {{ $exclusiveSettings  ? ($exclusiveSettings->allow_email === 1 ? 'checked' : null) : 'checked' }}>
                                         <label class="custom-control-label" for="exclusive-2">Allow Email Notifications</label>
                                     </div>
                                     <div class="custom-control custom-checkbox">
                                         <input class="custom-control-input input-style" id="exclusive-3" name="disable" type="checkbox"
-                                               value="one" {{ $exclusiveSettings->allow_web_notification === 0 && $exclusiveSettings->allow_email === 0 ? 'checked' : null }}>
+                                               value="one" {{ $exclusiveSettings  ? ($exclusiveSettings->allow_web_notification === 0 && $exclusiveSettings->allow_email === 0 ? 'checked' : null) : null }}>
                                         <label class="custom-control-label" for="exclusive-3">Disable All</label>
                                     </div>
                                 </div>
