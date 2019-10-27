@@ -45,7 +45,7 @@ class ListingConversation extends Model {
      * @return HasOne
      */
     public function sender() {
-        return $this->hasOne(User::class, 'from', 'id');
+        return $this->hasOne(User::class, 'id', 'from');
     }
 
     /**
@@ -91,6 +91,6 @@ class ListingConversation extends Model {
      * @return mixed
      */
     public function scopeWithAll($query) {
-        return $query->with(['sender', 'listing', 'messages']);
+        return $query->with(['sender', 'listing.neighborhood', 'messages']);
     }
 }

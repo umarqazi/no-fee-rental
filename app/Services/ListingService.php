@@ -9,9 +9,7 @@
 namespace App\Services;
 
 use App\Forms\ListingForm;
-use App\Repository\AmenityRepo;
 use App\Repository\FeatureRepo;
-use App\Repository\ListingRepo;
 use App\Repository\OpenHouseRepo;
 use Illuminate\Support\Facades\DB;
 use App\Repository\ListingImagesRepo;
@@ -55,14 +53,23 @@ class ListingService extends BuildingService {
     public function create($request) {
         DB::beginTransaction();
         $listing = $this->__validateForm($request);
-        $building = parent::manageBuilding($listing->street_address);
+        $building = $this->addBuilding($listing);
         $listing->visibility = $building->is_verified;
-        $listing = $this->__addList($listing);
-        $this->__addOpenHouse($listing->id, $request->open_house);
+        $listing = $this->__addList($listing->toArray());
+        $this->__addOpenHouse($listing->id, $listing->user_id, $request->open_house);
         $this->__addFeatures($listing->id, $request->features);
         parent::attachApartment($building, $listing);
         DB::commit();
         return $listing->id;
+    }
+
+    /**
+     * @param $address
+     *
+     * @return bool|mixed
+     */
+    public function addBuilding($address) {
+        return parent::manageBuilding($address);
     }
 
     /**
@@ -95,7 +102,7 @@ class ListingService extends BuildingService {
     public function update($id, $request) {
         DB::beginTransaction();
         if($this->__updateList( $id, $this->__validateForm( $request ) )) {
-            $this->__updateOpenHouses($id, $request->open_house);
+            $this->__updateOpenHouses($id, $request->user_id, $request->open_house);
             $this->__updateFeatures($id, $request->features);
             DB::commit();
             return true;
@@ -257,7 +264,7 @@ class ListingService extends BuildingService {
      *
      * @return ListingForm
      */
-    private function __validateForm($request) {
+    protected function __validateForm($request) {
         $form                  = new ListingForm();
         $form->user_id         = $request->user_id ?? myId();
         $form->unique_slug     = str_random(20);
@@ -288,21 +295,22 @@ class ListingService extends BuildingService {
      *
      * @return mixed
      */
-    private function __addList($form) {
-        if (!empty($form->thumbnail)) {
+    protected function __addList($form) {
+        if (!empty($form->thumbnail) && strpos($form->thumbnail, 'http') === false) {
             $form->thumbnail = uploadImage( $form->thumbnail, 'images/listing/thumbnails' );
         }
 
-        return $this->listingRepo->create($form->toArray());
+        return $this->listingRepo->create($form);
     }
 
     /**
      * @param $id
+     * @param $user_id
      * @param $data
      *
      * @return mixed
      */
-    private function __addOpenHouse($id, $data) {
+    protected function __addOpenHouse($id, $user_id, $data) {
         $batch = [];
         if(is_array($data['date'])) {
             for ($i = 0; $i < sizeof($data['date']); $i++) {
@@ -315,6 +323,15 @@ class ListingService extends BuildingService {
                     'created_at' => now(),
                     'updated_at' => now()
                 ];
+
+                addCalendarEvent([
+                    'color'   => 'yellow',
+                    'title'   => 'Open House (Pending)',
+                    'user_id' => $user_id,
+                    'url'     => route('listing.detail', $id),
+                    'start'   => $data['date'][$i].' '.openHouseTimeSlot($data['start_time'][$i])->format('H:i:s'),
+                    'end'     => $data['date'][$i].' '.openHouseTimeSlot($data['end_time'][$i])->format('H:i:s'),
+                ]);
             }
         }
         $this->openHouseRepo->insert($batch);
@@ -327,7 +344,7 @@ class ListingService extends BuildingService {
      *
      * @return mixed
      */
-    private function __addFeatures($id, $features) {
+    protected function __addFeatures($id, $features) {
         $batch = [];
         if(!empty($features) && count($features) > 0) {
             foreach ( $features as $feature ) {
@@ -335,7 +352,7 @@ class ListingService extends BuildingService {
                     'listing_id' => $id,
                     'value'      => $feature,
                     'created_at' => now(),
-                    'updated_at' => now(),
+                    'updated_at' => now()
                 ];
             }
         }
@@ -348,7 +365,7 @@ class ListingService extends BuildingService {
      *
      * @return bool
      */
-    private function __updateList($id, $listing) {
+    protected function __updateList($id, $listing) {
         if (!empty($listing->thumbnail)) {
             $listing->thumbnail = uploadImage(
                 $listing->thumbnail,
@@ -364,13 +381,14 @@ class ListingService extends BuildingService {
 
     /**
      * @param $id
+     * @param $user_id
      * @param $data
      *
      * @return mixed
      */
-    private function __updateOpenHouses($id, $data) {
+    protected function __updateOpenHouses($id, $user_id, $data) {
         $this->openHouseRepo->deleteMultiple(['listing_id' => $id]);
-        return $this->__addOpenHouse($id, $data);
+        return $this->__addOpenHouse($id, $user_id, $data);
     }
 
     /**
@@ -379,7 +397,7 @@ class ListingService extends BuildingService {
      *
      * @return mixed
      */
-    private function __updateFeatures($id, $data) {
+    protected function __updateFeatures($id, $data) {
         $this->featureRepo->deleteMultiple(['listing_id' => $id]);
         return $this->__addFeatures($id, $data);
     }
@@ -389,7 +407,7 @@ class ListingService extends BuildingService {
      *
      * @return array
      */
-    private function __collection($paginate) {
+    protected function __collection($paginate) {
         return [
             'active'   => $this->active()
                                ->latest('updated_at')
@@ -409,7 +427,7 @@ class ListingService extends BuildingService {
      *
      * @return array
      */
-    private function __searchCollection($keywords, $paginate) {
+    protected function __searchCollection($keywords, $paginate) {
         return [
             'pending'  => $this->listingRepo->search($keywords)
                                             ->pending()
@@ -433,7 +451,7 @@ class ListingService extends BuildingService {
      *
      * @return array
      */
-    private function __sortCollection($paginate, $col, $order) {
+    protected function __sortCollection($paginate, $col, $order) {
         return [
             'active'   => $this->active()
                                ->orderBy($col, $order)

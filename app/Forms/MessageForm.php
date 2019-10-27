@@ -45,8 +45,7 @@ class MessageForm extends BaseForm {
      */
     public function rules() {
         return [
-            'message'   => 'required',
-            'align'     => 'required'
+            'message'   => 'required'
         ];
     }
 }

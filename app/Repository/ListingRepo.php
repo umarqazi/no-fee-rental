@@ -116,7 +116,7 @@ class ListingRepo extends BaseRepo {
      * @return mixed
      */
     public function withNeighborhood() {
-	   return $this->model->withneighborhood();
+	   return $this->model->with('neighborhood');
     }
 
     /**

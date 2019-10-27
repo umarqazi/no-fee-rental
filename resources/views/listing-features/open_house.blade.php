@@ -7,7 +7,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <label>Date</label>
-                            {!! Form::text('open_house[date][]', $value->date, ['class' => 'input-style open-house-date', 'autocomplete' => 'off']) !!}
+                            {!! Form::text('open_house[date][]', $value->date, ['class' => 'input-style open-house-date', 'autocomplete' => 'off', 'data-date-format' => 'yyyy-mm-dd']) !!}
                         </div>
 
                         <div class="col-md-6">
@@ -40,7 +40,7 @@
         <div class="row">
             <div class="col-md-6">
                 <label>Date</label>
-                {!! Form::text('open_house[date][]', null, ['class' => 'input-style open-house-date', 'autocomplete' => 'off']) !!}
+                {!! Form::text('open_house[date][]', null, ['class' => 'input-style open-house-date', 'autocomplete' => 'off', 'data-date-format' => 'yyyy-mm-dd']) !!}
             </div>
 
             <div class="col-md-6">

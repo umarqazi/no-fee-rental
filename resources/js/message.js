@@ -18,10 +18,11 @@ $('#reply').on('click', async function(e) {
             let $userSelector = $('.user-info');
             let $listingSelector = $('.info:last');
             $userSelector.find('p:eq(3) > strong').text(res.data.messages[0].message);
-            $userSelector.find('p:eq(0) > strong').text(res.data.sender.first_name);
-            $userSelector.find('p:eq(1) > strong').text(res.data.sender.email);
-            $userSelector.find('p:eq(2) > strong').text((res.data.sender.phone_number)
-                ? res.data.sender.phone_number : 'N/A');
+            $userSelector.find('p:eq(0) > strong').text(
+                (res.data.sender !== null) ? res.data.sender.first_name : res.data.username
+            );
+            $userSelector.find('p:eq(1) > strong').text((res.data.sender !== null) ? res.data.sender.email : res.data.email);
+            $userSelector.find('p:eq(2) > strong').text((res.data.sender !== null) ? res.data.sender.phone_number : res.data.phone_number);
             $listingSelector.find('div > p:eq(0)').text("$ "+res.data.listing.rent);
             $listingSelector.find('div > p:eq(1)').text(res.data.listing.created_at);
             $listingSelector.find('ul > li:eq(0)').text(res.data.listing.bedrooms+" Bed");
