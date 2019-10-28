@@ -2,8 +2,8 @@
     <div class="open-house-admin-section">
         <h3>Open House</h3>
     @if($action == 'Update' || $action == 'Copy')
-        @foreach($listing->openHouses as $key => $value)
-                <div class="datepicker-withtime">
+            <div class="datepicker-withtime">
+                @foreach($listing->openHouses as $key => $value)
                     <div class="row">
                         <div class="col-md-6">
                             <label>Date</label>
@@ -29,11 +29,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="add-more-btn">
-                        <a href="javascript:void(0);" class="btn-default add-more">Add more</a>
-                    </div>
-                </div>
-        @endforeach
+                @endforeach
+            <div class="add-more-btn">
+                <a href="javascript:void(0);" class="btn-default add-more">Add more</a>
+            </div>
+        </div>
 </div>
 @else
     <div class="datepicker-withtime">

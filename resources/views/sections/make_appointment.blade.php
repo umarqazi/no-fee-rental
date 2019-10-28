@@ -26,19 +26,19 @@
         </div>
         <div class="appointment-radio-btn">
             <div class="selection">
-                <input id="Morning" name="appointment_time" value="morning" type="radio">
+                <input id="Morning" name="appointment_time" value="10am" type="radio">
                 <label for="Morning">Morning <br>
                     10am - 12pm
                 </label>
             </div>
             <div class="selection">
-                <input id="Afternoon" name="appointment_time" value="afternoon" type="radio">
+                <input id="Afternoon" name="appointment_time" value="12pm" type="radio">
                 <label for="Afternoon">Afternoon <br>
                     12pm - 3pm
                 </label>
             </div>
             <div class="selection">
-                <input id="Evening" name="appointment_time" value="evening" type="radio">
+                <input id="Evening" name="appointment_time" value="3pm" type="radio">
                 <label for="Evening">Evening <br>
                     3pm - 6pm
                 </label>

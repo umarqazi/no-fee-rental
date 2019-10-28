@@ -14,3 +14,15 @@
 <script src="{{asset('assets/js/vendor/jquery.validate.min.js')}}"></script>
 <script src="{{asset('assets/js/custom.js')}}"></script>
 <script src="{{asset('assets/js/vendor/lightslider.js')}}"></script>
+    <script>
+        $(() => {
+            $('button[data-target="#check-availability"]').on('click', function() {
+                @if(!authenticated())
+                    $('#login').modal('show');
+                @else
+                    $('#check-availability').modal('show');
+                @endif
+            });
+        });
+
+    </script>

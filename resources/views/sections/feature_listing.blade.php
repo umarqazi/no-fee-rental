@@ -29,7 +29,7 @@
                             <div class="property-thumb">
                                 <div class="check-btn">
                                     <a href="javascript:void(0);">
-                                        <button class="btn-default" data-toggle="modal" onclick="checkAvailability({{$fl}})"  data-target="#check-availability">Check Availability</button>
+                                        <button class="btn-default" list_id="{{ $fl->id }}" to="{{ $fl->agent->id }}"  data-target="#check-availability">Check Availability</button>
                                     </a>
                                 </div>
                                 @if(sizeof($fl->favourite) > '0')
@@ -73,7 +73,7 @@
                                     <div class="property-thumb">
                                         <div class="check-btn">
                                             <a href="javascript:void(0);">
-                                                <button class="btn-default" data-toggle="modal" id ="checkAvailability" onclick="checkAvailability({{$fl}})"  data-target="#check-availability">Check Availability</button>
+                                                <button class="btn-default" data-toggle="modal" id ="checkAvailability"  data-target="#check-availability">Check Availability</button>
                                             </a>
                                         </div>
                                         <span class="heart-icon"></span>
@@ -107,7 +107,7 @@
                                 <div class="property-thumb">
                                     <div class="check-btn">
                                         <a href="javascript:void(0);">
-                                            <button class="btn-default" data-toggle="modal" id ="checkAvailability" onclick="checkAvailability({{$fl}})" data-target="#check-availability">Check Availability</button>
+                                            <button class="btn-default" data-toggle="modal" id ="checkAvailability" data-target="#check-availability">Check Availability</button>
                                         </a>
                                     </div>
                                     <span class="heart-icon"></span>
@@ -138,7 +138,7 @@
                                     <div class="property-thumb">
                                         <div class="check-btn">
                                             <a href="javascript:void(0);">
-                                                <button class="btn-default" data-toggle="modal" id ="checkAvailability" onclick="checkAvailability({{$fl}})" data-target="#check-availability">Check Availability</button>
+                                                <button class="btn-default" data-toggle="modal" id ="checkAvailability" data-target="#check-availability">Check Availability</button>
                                             </a>
                                         </div>
                                         <span class="heart-icon"></span>

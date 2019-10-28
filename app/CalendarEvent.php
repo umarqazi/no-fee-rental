@@ -3,7 +3,6 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use MaddHatter\LaravelFullcalendar\Event;
 
 /**
@@ -20,15 +19,22 @@ class CalendarEvent extends Model implements Event {
     ];
 
     /**
-     * @var array
+     * @var string
      */
-    protected $fillable = ['start', 'end', 'title', 'color', 'user_id', 'url'];
+    protected $table = 'events';
 
     /**
-     * @return HasOne
+     * @var array
      */
-    public function user() {
-        return $this->hasOne(User::class, 'id', 'user_id');
+    protected $fillable = ['start', 'end', 'title', 'color', 'url', 'from', 'to', 'linked_id'];
+
+    /**
+     * @param $query
+     *
+     * @return mixed
+     */
+    public function scopeAllEvents($query) {
+        return $query->where('from', myId())->orWhere('to', myId());
     }
 
     /**

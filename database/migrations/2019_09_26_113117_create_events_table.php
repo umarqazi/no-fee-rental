@@ -7,7 +7,7 @@ use Illuminate\Database\Migrations\Migration;
 /**
  * Class CreateCalendarEventsTable
  */
-class CreateCalendarEventsTable extends Migration {
+class CreateEventsTable extends Migration {
 
     /**
      * Run the migrations.
@@ -15,9 +15,11 @@ class CreateCalendarEventsTable extends Migration {
      * @return void
      */
     public function up() {
-        Schema::create('calendar_events', function (Blueprint $table) {
+        Schema::create('events', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('user_id');
+            $table->unsignedInteger('from');
+            $table->unsignedInteger('to')->nullable();
+            $table->unsignedInteger('linked_id')->nullable();
             $table->string('title');
             $table->dateTime('start');
             $table->dateTime('end');
@@ -25,7 +27,8 @@ class CreateCalendarEventsTable extends Migration {
             $table->string('url')->nullable();
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('to')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('from')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -35,6 +38,6 @@ class CreateCalendarEventsTable extends Migration {
      * @return void
      */
     public function down() {
-        Schema::dropIfExists('calendar_events');
+        Schema::dropIfExists('events');
     }
 }
