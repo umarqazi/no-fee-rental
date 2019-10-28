@@ -156,7 +156,7 @@ class ListingForm extends BaseForm {
 			'street_address'  => 'required|string',
 			'display_address' => 'required|string',
             'visibility'      => 'required|integer',
-			'availability'    => 'required|string',
+			'availability'    => 'required',
 			'map_location'    => 'required|string',
 			'bedrooms'        => 'required|integer',
 			'baths'           => 'required|integer',

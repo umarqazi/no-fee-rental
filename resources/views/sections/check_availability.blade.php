@@ -1,4 +1,4 @@
-@if(!isAgent() && !isAdmin() && !isOwner())
+@if(isRenter())
     <div class="form-group">
         {!! Form::model(mySelf() ?? null, ['url' => route('web.listConversation')]) !!}
         {!! Form::hidden('listing_id', $listing->id) !!}
@@ -11,4 +11,6 @@
         {!! Form::button('send', ['class' => 'btn btn-default text-center', 'type' => 'submit']) !!}
         {!! Form::close() !!}
     </div>
+@else
+    <div class="not-allowed-appointment"> You are not allowed to sent availability request</div>
 @endif

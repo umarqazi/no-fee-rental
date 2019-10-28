@@ -181,3 +181,11 @@ if(!defined('NOFEE')) {
 if(!defined('FEE')) {
     define('FEE', 'fee');
 }
+
+if(!defined('ADDOPENHOUSECOLOR')) {
+    define('ADDOPENHOUSECOLOR', 'dark yellow');
+}
+
+if(!defined('UPDATEOPENHOUSECOLOR')) {
+    define('UPDATEOPENHOUSECOLOR', 'red');
+}

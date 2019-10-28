@@ -9,13 +9,15 @@
             <div class="block-body">
                 {!! Form::model($listing,
                     [
-                        'id' => 'listing-form',
+                        'id'  => 'listing-form',
                         'url' => ($action == 'Update')
                                 ? route(whoAmI().'.updateListing', $listing->id)
                                 : route(whoAmI().'.createListing'),
-                        'method' => 'post',
+                        'method'  => 'post',
                         'enctype' => 'multipart/form-data'
                     ]) !!}
+                {!! Form::hidden('visibility') !!}
+                {!! Form::hidden('user_id') !!}
                 @if(isAdmin())
                     <div class="row">
                         <div class="col-md-6">

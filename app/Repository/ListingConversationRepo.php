@@ -63,7 +63,7 @@ class ListingConversationRepo extends BaseRepo {
      * @return bool
      */
     public function isNewAppointment($listing_id) {
-        $appointment = $this->find(['listing_id' => $listing_id, 'from' => myId()])->first();
+        $appointment = $this->find(['listing_id' => $listing_id, 'from' => myId(), 'conversation_type' => APPOINTMENT])->first();
         return $appointment ? true : false;
     }
 
@@ -74,7 +74,7 @@ class ListingConversationRepo extends BaseRepo {
      * @return bool
      */
     public function isNewGuest($email, $listing_id) {
-        $response = $this->find(['email' => $email, 'listing_id' => $listing_id])->first();
+        $response = $this->find(['email' => $email, 'listing_id' => $listing_id, 'conversation_type' => AVAILABILITY])->first();
         return $response ? true : false;
     }
 }

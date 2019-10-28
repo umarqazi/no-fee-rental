@@ -91,6 +91,11 @@ class ListingConversationService {
      * @return mixed
      */
     public function accept($id) {
+        calendarEvent([
+            'title' => 'Request Approved',
+            'url'   => '.loadConversation',
+            'color' => 'red'
+        ], true, $id);
         return $this->listingConversationRepo->update($id, ['meeting_request' => 1]);
     }
 
@@ -134,7 +139,19 @@ class ListingConversationService {
         $appointment = $this->__isNewAppointment($request);
         if(!$appointment) {
             $appointment = $this->__validateAppointmentForm( $request );
-            return $this->listingConversationRepo->create($appointment->toArray());
+            $appointment = $this->listingConversationRepo->create($appointment->toArray());
+            calendarEvent([
+                'title'      => 'Appointment Request Sent',
+                'linked_id'  => $appointment->id,
+                'from'       => $appointment->from,
+                'to'         => $appointment->to,
+                'start'      => $appointment->appointment_date->format('Y-m-d').' '.$appointment->appointment_time,
+                'end'        => $appointment->appointment_date->format('Y-m-d').' '.$appointment->appointment_time,
+                'color'      => 'light green',
+                'url'        => 'javascript:void(0)'
+            ]);
+
+            return $appointment;
         }
 
         return false;
@@ -211,6 +228,7 @@ class ListingConversationService {
     private function __validateAvailabilityForm($request) {
         $form                    = new CheckAvailabilityForm();
         $form->to                = $request->to;
+        $form->from              = myId();
         $form->username          = $request->username;
         $form->email             = $request->email;
         $form->conversation_type = $request->type;

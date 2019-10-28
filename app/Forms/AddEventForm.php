@@ -26,9 +26,14 @@ class AddEventForm extends BaseForm {
     public $end;
 
     /**
-     * @var string
+     * @var integer
      */
-    public $user_id;
+    public $from;
+
+    /**
+     * @var integer
+     */
+    public $to;
 
     /**
      * @var string
@@ -41,16 +46,23 @@ class AddEventForm extends BaseForm {
     public $url;
 
     /**
+     * @var string
+     */
+    public $linked_id;
+
+    /**
      * @return array
      */
     public function toArray() {
         return [
-            'title'     => $this->title,
-            'start'     => $this->start,
-            'end'       => $this->end,
-            'color'     => $this->color,
-            'url'       => $this->url,
-            'user_id'   => $this->user_id
+            'title'      => $this->title,
+            'start'      => $this->start,
+            'end'        => $this->end,
+            'color'      => $this->color,
+            'url'        => $this->url,
+            'from'       => $this->from,
+            'to'         => $this->to,
+            'linked_id'  => $this->linked_id
         ];
     }
 

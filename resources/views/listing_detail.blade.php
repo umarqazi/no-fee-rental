@@ -40,7 +40,13 @@
                     <div class="available-btn">
                         <div class="">
                             <span>NO FEE</span>
-                            <span style="{{ $listing->availability ? '' : 'background: red;' }}">{{ $listing->availability ? 'Available' : 'Unavailable' }}</span>
+                            @if(
+                            $listing->availability !== false &&
+                            carbon($listing->availability)->format('Y-m-d') <= now()->format('Y-m-d'))
+                            <span>Available</span>
+                            @else
+                                <span style="background-color: red;">Unavailable</span>
+                            @endif
                         </div>
                         <div class="estimation-time">
                             <i class="far fa-clock"></i>
@@ -90,10 +96,10 @@
                                 </div>
                                 <div class="lease-term-section">
                                    <span>Days on market:</span>
-                                    <strong> 0 Days</strong>
+                                    <strong> {{ dateReadable($listing->created_at) }}</strong>
                                 </div>
                                 <div class="lease-term-section">
-                                   <span>Free months:: </span>
+                                   <span>Free months: </span>
                                     <strong> None</strong>
                                 </div>
                             </div>
@@ -101,7 +107,9 @@
                             <div class="col-lg-6 col-sm-6">
                                 <div class="lease-term-section">
                                     <span>Application fee: </span>
-                                     <strong>{{ ($listing->application_fee) ?  '$' . number_format($listing->application_fee,0) : 'Null' }}</strong>
+                                     <strong>
+                                         {{ ($listing->application_fee) ?  '$' . number_format($listing->application_fee,0) : 'Null' }}
+                                     </strong>
                                 </div>
                                 <div class="lease-term-section">
                                     <span>Deposit: </span>
@@ -109,9 +117,8 @@
                                 </div>
                                 <div class="lease-term-section">
                                     <span>Availability: </span>
-                                    <strong> Yes</strong>
+                                    <strong> {{ $listing->availability !== false && carbon($listing->availability)->format('Y-m-d') <= now()->format('Y-m-d') ? 'Yes' : 'No' }}</strong>
                                 </div>
-
                             </div>
                         </div>
                     </div>

@@ -117,11 +117,9 @@
                             <input type='hidden' name='map_location' value={{ $listing->map_location }}>
                             <div class='property-thumb'>
                                 <div class='check-btn'>
-                                    @if(isRenter())
-                                        <button class='btn-default' data-toggle='modal' onclick="checkAvailability({{$listing}})" data-target='#check-availability'>
-                                            Check Availability
-                                        </button>
-                                    @endif
+                                    <button class='btn-default' list_id="{{ $listing->id }}" to="{{ $listing->agent->id }}" data-target='#check-availability'>
+                                        Check Availability
+                                    </button>
                                 </div>
                                 <span class='heart-icon' list_id="{{ $listing->id }}"></span>
                                 <img src='{{ asset($listing->thumbnail ?? DLI) }}' alt="" class='main-img'>
@@ -146,11 +144,9 @@
                                 <div class="items">
                                     <div class='property-thumb'>
                                         <div class='check-btn'>
-                                            @if(isRenter())
-                                                <button class='btn-default' data-toggle='modal' onclick="checkAvailability({{$listing}})" data-target='#check-availability'>
-                                                    Check Availability
-                                                </button>
-                                            @endif
+                                            <button class='btn-default'  list_id="{{ $listing->id }}" to="{{ $listing->agent->id }}" data-target='#check-availability'>
+                                                Check Availability
+                                            </button>
                                         </div>
                                         <span class='heart-icon'></span>
                                         <img src='{{ asset($listing->thumbnail ?? DLI) }}' alt="" class='main-img'>
