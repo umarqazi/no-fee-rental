@@ -141,7 +141,7 @@ class ListingConversationService {
             $appointment = $this->__validateAppointmentForm( $request );
             $appointment = $this->listingConversationRepo->create($appointment->toArray());
             calendarEvent([
-                'title'      => 'Appointment Request Sent',
+                'title'      => 'Appointment Request Sent (Pending)',
                 'linked_id'  => $appointment->id,
                 'from'       => $appointment->from,
                 'to'         => $appointment->to,

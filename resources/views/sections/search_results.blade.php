@@ -189,11 +189,22 @@
 {!! HTML::script('assets/js/input-to-dropdown.js') !!}
 {!! HTML::script("https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js") !!}
 <script>
-    let coords = $('input[name=map_location]').val();
+    let coords = [];
+    $('input[name=map_location]').each(function(i, v) {
+        coords.push($(v).val());
+    });
     inputsToDropdown('.radio-group-1', 'Beds', 'radio', '.radio-group-1', '');
     inputsToDropdown('.radio-group-2', 'Baths', 'radio', '.radio-group-2', '');
-    if(coords !== undefined) {
+    if(coords !== []) {
         markerClusters(coords, document.getElementById('mobile-map'));
         markerClusters(coords, document.getElementById('desktop-map'));
     }
+
+    $('body').on('change', '.sorting', function() {
+        let url = window.location.href;
+        url = url.replace('/recent', '');
+        url = url.replace('/cheapest', '');
+        url = url.replace('/oldest', '');
+        window.location.href = `${url}/${$(this).val()}`;
+    });
 </script>
