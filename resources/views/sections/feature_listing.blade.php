@@ -32,7 +32,20 @@
                                         <button class="btn-default" data-toggle="modal" onclick="checkAvailability({{$fl}})"  data-target="#check-availability">Check Availability</button>
                                     </a>
                                 </div>
-                                <span class="heart-icon"></span>
+                                @if(sizeof($fl->favourite) > '0')
+                                    @foreach($fl->favourite as $key => $check_favourite)
+                                        @if($check_favourite->user_id == myid())
+                                        <a href="{!! route('web.removeFavouriteListing', $fl->id) !!}" class="ml-2 filled-heart-icon"><i class="fas fa-heart fill-heart"></i></a>
+                                                 @break
+                                        @else
+                                            <a href="{!! route('web.favouriteListing', $fl->id) !!}" class="ml-2 empty-heart-icon"><i class="far fa-heart empty-heart"></i></a>
+                                                 @break
+                                        @endif
+                                    @endforeach
+                                @else
+                                <a href="{!! route('web.favouriteListing', $fl->id) !!}" class="ml-2 empty-heart-icon"><i class="far fa-heart empty-heart "></i></a>
+                                @endif
+                                {{--<span class="heart-icon"></span>--}}
                                 <img src="{{ asset($fl->thumbnail ?? DLI) }}" alt="" class="main-img" />
                                 <div class="info">
                                     <div class="info-link-text">
@@ -67,14 +80,14 @@
                                         <img src="{{ asset($fl->thumbnail ?? DLI) }}" alt="" class="main-img" />
                                         <div class="info">
                                             <div class="info-link-text">
-                                                <p>{{--${{ $fl->rent }}--}}<?php echo ($fl->rent) ?   '$' .number_format($fl->rent,0) : 'Null' ; ?></p>
+                                                <p>{{--${{ $fl->rent }}--}}{{ ($fl->rent) ?   '$' .number_format($fl->rent,0) : 'Null' }}</p>
                                                 <small> {{ str_formatting($fl->bedrooms, 'Bed') .' ,'. str_formatting($fl->baths, 'Bath') }} </small>
                                                 <p> {{ is_exclusive($fl) }}</p>
                                             </div>
                                             <a href="{{ route('listing.detail', $fl->id) }}" class="btn viewfeature-btn"> View </a>
                                         </div>
                                         <div class="feaure-policy-text">
-                                            <p>{{--{{ $fl->rent }}--}}<?php echo ($fl->rent) ?   '$' .number_format($fl->rent,0) : 'Null' ; ?> / Month </p>
+                                            <p>{{--{{ $fl->rent }}--}}{{ ($fl->rent) ?   '$' .number_format($fl->rent,0) : 'Null' }} / Month </p>
                                             <span>{{ str_formatting($fl->bedrooms, 'Bed') .' ,'. str_formatting($fl->baths, 'Bath') }} </span>
                                         </div>
                                     </div>
@@ -101,14 +114,14 @@
                                     <img src="{{ asset($fl->thumbnail ?? DLI) }}" alt="" class="main-img" />
                                     <div class="info">
                                         <div class="info-link-text">
-                                            <p>{{--${{ $fl->rent }}--}}<?php echo ($fl->rent) ?   '$' .number_format($fl->rent,0) : 'Null' ; ?></p>
+                                            <p>{{--${{ $fl->rent }}--}}{{ ($fl->rent) ?   '$' .number_format($fl->rent,0) : 'Null' }}</p>
                                             <small> {{ str_formatting($fl->bedrooms, 'Bed') .' ,'. str_formatting($fl->baths, 'Bath') }} </small>
                                             <p> {{ is_exclusive($fl) }}</p>
                                         </div>
                                         <a href="{{ route('listing.detail', $fl->id) }}" class="btn viewfeature-btn"> View </a>
                                     </div>
                                     <div class="feaure-policy-text">
-                                        <p>{{--{{ $fl->rent }}--}}<?php echo ($fl->rent) ?   '$' .number_format($fl->rent,0) : 'Null' ; ?> / Month </p>
+                                        <p>{{--{{ $fl->rent }}--}}{{ ($fl->rent) ?   '$' .number_format($fl->rent,0) : 'Null' }} / Month </p>
                                         <span>{{ str_formatting($fl->bedrooms, 'Bed') .' ,'. str_formatting($fl->baths, 'Bath') }} </span>
                                     </div>
                                 </div>
@@ -132,14 +145,14 @@
                                         <img src="{{ asset($fl->thumbnail ?? DLI) }}" alt="" class="main-img" />
                                         <div class="info">
                                             <div class="info-link-text">
-                                                <p>{{--${{ $fl->rent }}--}}<?php echo ($fl->rent) ?   '$' .number_format($fl->rent,0) : 'Null' ; ?></p>
+                                                <p>{{--${{ $fl->rent }}--}}{{ ($fl->rent) ?   '$' .number_format($fl->rent,0) : 'Null' }}</p>
                                                 <small> {{ str_formatting($fl->bedrooms, 'Bed') .' ,'. str_formatting($fl->baths, 'Bath') }} </small>
                                                 <p> {{ is_exclusive($fl) }}</p>
                                             </div>
                                             <a href="{{ route('listing.detail', $fl->id) }}" class="btn viewfeature-btn"> View </a>
                                         </div>
                                         <div class="feaure-policy-text">
-                                            <p>{{--{{ $fl->rent }}--}}<?php echo ($fl->rent) ?   '$' .number_format($fl->rent,0) : 'Null' ; ?> / Month </p>
+                                            <p>{{--{{ $fl->rent }}--}}{{ ($fl->rent) ?   '$' .number_format($fl->rent,0) : 'Null' }} / Month </p>
                                             <span>{{ str_formatting($fl->bedrooms, 'Bed') .' ,'. str_formatting($fl->baths, 'Bath') }} </span>
                                         </div>
                                     </div>

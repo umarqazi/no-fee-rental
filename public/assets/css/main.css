@@ -5329,4 +5329,27 @@ footer .copyright .social-icons li a:hover {
     padding: 0px 10px;
     text-transform: initial !important;
 }
+.empty-heart-icon{
+    position: absolute;
+    z-index: 9;
+    right: 15px;
+    top: 15px;
+    font-size: 30px;
+    font-weight: bold;
+    color: #000;
+
+}
+
+.filled-heart-icon{
+    position: absolute;
+    z-index: 9;
+    right: 15px;
+    top: 15px;
+    font-size: 30px;
+    font-weight: bold;
+    color: #e7781b;/*
+    border-color: #e7781b;
+    background-color:#e7781b;*/
+
+}
 
