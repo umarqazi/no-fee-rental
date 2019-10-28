@@ -1,7 +1,7 @@
 <div class="col-sm-12">
     <div class="open-house-admin-section">
         <h3>Open House</h3>
-    @if($action == 'Update' || $action == 'Copy')
+        @if(count($listing->openHouses) > 0)
             <div class="datepicker-withtime">
                 @foreach($listing->openHouses as $key => $value)
                     <div class="row">
@@ -25,7 +25,10 @@
                         <div class="col-md-12 mt-2 mb-2">
                             <div class="custom-control custom-checkbox by-add-only">
                                 {!! Form::checkbox('open_house[by_appointment][]', null, $value->only_appt, ['class' => 'custom-control-input', 'id' => 'chk1']) !!}
-                                <label class="custom-control-label" for="chk1"> By appt only</label>
+                                <div class="remove-btn-wrapper">
+                                    <label class="custom-control-label" for="chk1"> By appt only</label>
+                                    <span class="remove-open-house">Remove</span>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -11,4 +11,8 @@ $(() => {
             $(this).siblings('label').attr('for', id);
         });
     });
+
+    $('body').on('click', '.remove-open-house', function() {
+        $(this).parents('.row:first').remove();
+    })
 });

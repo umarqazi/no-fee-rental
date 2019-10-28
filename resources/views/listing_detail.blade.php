@@ -41,7 +41,7 @@
                         <div class="">
                             <span>NO FEE</span>
                             @if(
-                            $listing->availability !== false &&
+                            $listing->availability !== '0' &&
                             carbon($listing->availability)->format('Y-m-d') <= now()->format('Y-m-d'))
                             <span>Available</span>
                             @else
@@ -117,7 +117,7 @@
                                 </div>
                                 <div class="lease-term-section">
                                     <span>Availability: </span>
-                                    <strong> {{ $listing->availability !== false ? dateReadable($listing->availability) : 'Not Available' }}</strong>
+                                    <strong> {{ $listing->availability !== '0' ? dateReadable($listing->availability) : 'Not Available' }}</strong>
                                 </div>
                             </div>
                         </div>
@@ -126,7 +126,7 @@
                         <div class="open-house-section">
                             <h3> Open House</h3>
                             @foreach($listing->openHouses as $openHouse)
-                                @if($openHouse->date == now()->format('m/d/Y') &&
+                                @if(carbon($openHouse->date)->format('m-d-Y') == now()->format('m-d-Y') &&
                                 openHouseTimeSlot($openHouse->start_time)->format('h:i a') >
                                 now()->format('h:i a'))
                                 <div class="open-house-inner">
@@ -148,8 +148,6 @@
 {{--                                        </div>--}}
                                     </div>
                                 </div>
-                                @else
-                                    <div>Closed</div>
                                 @endif
                             @endforeach
                         </div>
@@ -158,7 +156,7 @@
                         <a href="{{ route('web.agentProfile', $listing->agent->id) }}">
                             <ul>
                                 <li>
-                                    <img src="{{ asset($listing->agent->thumbnail ?? DUI) }}" alt="">
+                                    <img src="{{ asset($listing->agent->profile_image ?? DUI) }}" alt="">
                                 </li>
                                 <li>
                                     <h5> {{ $listing->agent->first_name.' '.$listing->agent->last_name }}</h5>

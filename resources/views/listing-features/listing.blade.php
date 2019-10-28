@@ -55,7 +55,12 @@
     enableDatePicker('#availability_date');
     enableDatePicker('.open-house-date', false);
     autoComplete(document.getElementById('controls'));
-    initMap(document.getElementById('map'), 17);
+    @if($action === 'Copy' || $action === 'Update')
+        ZOOM = 15;
+        setMap($('input[name=map_location]').val(), document.getElementById('map'));
+    @else
+        initMap(document.getElementById('map'), 17);
+    @endif
     fetchNeighbours($('input[name=neighborhood]'));
 </script>
 @endsection
