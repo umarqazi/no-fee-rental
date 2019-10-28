@@ -147,5 +147,38 @@ class UserController extends Controller {
      */
     public function verifyLicense(Request $request) {
         return $this->service->isUniqueLicense($request);
+	}
+
+    /**
+     * @param listing_id
+     *
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
+     */
+    public function favourite(Request $request,$id) {
+        if(myid()){
+		 $favourite = $this->service->favourite($id);
+		 if($favourite){
+			return sendResponse($request, $favourite, 'Listing has been added to favourites!');
+		 }
+        }
+        else {
+            return 'false';
+        }
+    }
+    /**
+     * @param listing_id
+     *
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
+     */
+    public function removeFavourite(Request $request,$id) {
+        if(myid()){
+            $favourite = $this->service->removeFavourite($id);
+            if($favourite){
+                return sendResponse($request, $favourite, 'Listing has been removed from favourites!');
+            }
+        }
+        else {
+            return 'false';
+        }
     }
 }

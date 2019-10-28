@@ -94,6 +94,11 @@ Route::get('/listing-by-rent/{sort}', 'RentController@sort');
 Route::get('/listing-by-rent', 'RentController@index')->name('web.ListsByRent');
 Route::get('/listing-by-rent-search', 'RentController@advanceSearch')->name('web.advanceRentSearch');
 
+
+//Favourite
+Route::get('/favourite/{listing_id}', 'UserController@favourite')->name('web.favouriteListing');
+Route::get('/remove/favourite/{listing_id}', 'UserController@removeFavourite')->name('web.removeFavouriteListing');
+
 Route::get('/test-all', function() {
    return view('admin.building_detail');
 });

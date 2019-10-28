@@ -677,4 +677,24 @@ class UserService {
 
         return $neighborhoods;
     }
+
+    /**
+     * param listing_id.
+     */
+    public function favourite($listing_id) {
+
+        $this->userRepo->attach($this->userRepo->edit(myid())->first(), $listing_id);
+        return true ;
+
+    }
+
+    /**
+     * param listing_id.
+     */
+    public function removeFavourite($listing_id) {
+
+        $this->userRepo->detach($this->userRepo->edit(myid())->first(), $listing_id);
+        return true ;
+
+    }
 }

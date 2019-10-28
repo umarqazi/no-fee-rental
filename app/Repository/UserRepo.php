@@ -101,4 +101,20 @@ class UserRepo extends BaseRepo {
     public function recent($id) {
         return $this->findById($id)->recent();
     }
+
+    /**
+     * @param $user
+     * @param $listing
+     */
+    public function attach($user, $listing) {
+        $user->favourites()->attach($listing);
+    }
+
+    /**
+     * @param $user
+     * @param $listing
+     */
+    public function detach($user, $listing) {
+        $user->favourites()->detach($listing);
+    }
 }
