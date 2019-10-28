@@ -35,6 +35,16 @@ class HomeController extends Controller {
 	 */
 	public function index() {
 		$featured_listings = $this->service->featured_listing($this->paginate);
+		foreach($featured_listings['recent'] as $key => $favourite){
+		       foreach($favourite->favourite as $key => $fav) {
+		           if($fav->user_id == myId()){
+                       $favourite->is_favourite = true ;
+                   }
+		           else {
+                       $favourite->is_favourite = false ;
+                   }
+            }
+        }
 		return view('index', compact('featured_listings'));
 	}
 

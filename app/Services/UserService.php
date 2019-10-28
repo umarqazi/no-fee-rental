@@ -697,4 +697,15 @@ class UserService {
         return true ;
 
     }
+    /**
+     * param user_id.
+     */
+    public function status($id) {
+        $user = $this->userRepo->edit($id);
+        $status = $user->first();
+        $update = $status->status !== 1;
+        $user->update(['status' => $update]);
+        return $update;
+    }
+
 }

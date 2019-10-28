@@ -64,11 +64,11 @@ class Listing extends Model {
 		return $this->hasOne(User::class, 'id', 'user_id');
 	}
 
-	/**
-     * @return HasMany
+    /**
+     * @return BelongsToMany
      */
-    public function favourite() {
-        return $this->hasMany(Favourite::class, 'listing_id');
+    public function favourites() {
+        return $this->belongsToMany(User::class, 'favourites', 'user_id', 'listing_id');
     }
 
     /**
