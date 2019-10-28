@@ -137,7 +137,6 @@ const markerClusters = (coords, selector) => {
     setMap(null, selector);
     markers = coords.map(function(coords) {
         coords = JSON.parse(coords);
-        console.log(coords);
         let mark = addMarker(coords);
         mark.addListener("click", async function(e) {
             let coords = JSON.stringify({latitude: e.latLng.lat(), longitude: e.latLng.lng()});

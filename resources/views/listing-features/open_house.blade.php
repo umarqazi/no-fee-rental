@@ -1,7 +1,7 @@
 <div class="col-sm-12">
     <div class="open-house-admin-section">
         <h3>Open House</h3>
-        @if(count($listing->openHouses) > 0)
+        @if(isset($listing->openHouses) && count($listing->openHouses) > 0)
             <div class="datepicker-withtime">
                 @foreach($listing->openHouses as $key => $value)
                     <div class="row">
