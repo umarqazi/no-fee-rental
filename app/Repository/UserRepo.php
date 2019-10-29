@@ -117,4 +117,14 @@ class UserRepo extends BaseRepo {
     public function detach($user, $listing) {
         $user->favourites()->detach($listing);
     }
+
+    /**
+     * @param $id
+     * @return favourite listings
+     */
+
+    public function favouriteListing($id) {
+        return $this->findById($id)->withfavourites();
+    }
+
 }

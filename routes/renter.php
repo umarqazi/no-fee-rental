@@ -35,3 +35,6 @@ Route::get('/unArchive-conversation/{id}', 'Renter\ListingConversationController
 // Calender Routes
 Route::post('/add-event', 'Renter\CalendarController@create')->name('renter.addEvent');
 Route::get('/show-calendar', 'Renter\CalendarController@index')->name('renter.showCalendar');
+
+//Listing Routes
+Route::get('/favourite/listing-view', 'Renter\ListingController@wishList')->name('renter.viewListing');

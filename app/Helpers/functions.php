@@ -83,6 +83,19 @@ function isAdmin() {
 /**
  * @return mixed
  */
+function is_created_by_owner($listing_id) {
+    $listing_creator = (new \App\Services\ListingService())->created_by($listing_id);
+    if($listing_creator == 3) {
+        return true ;
+    }
+    else  {
+        return false ;
+    }
+}
+
+/**
+ * @return mixed
+ */
 function isAgent() {
 	return auth()->guard('agent')->check();
 }
