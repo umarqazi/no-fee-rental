@@ -4,11 +4,11 @@ $(() => {
     });
 
     $("#signup-option2").trigger('click');
-    $('input[name=license_number]').prop("disabled",false);
     let form = $('#signup_form');
     let $selector = $('input[name=license_number]');
     let $first_name = $('input[name=first_name]');
     let $last_name = $('input[name=last_name]');
+    $selector.prop("disabled",false);
     $selector.on('keyup', async () => {
         let license_number = $selector.val();
         let license_verify = await ajaxRequest(
