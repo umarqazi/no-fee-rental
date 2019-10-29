@@ -13,7 +13,7 @@
                 <p class="expertise"><strong>Neighborhood Expertise:</strong>
                     <a href="javascript:void(0);">{{ neighborhoodExpertise($data->agent->neighborExpertise) }}</a>
                 </p>
-                <p class="expertise"><strong>Languages:</strong> <a href="#">{{ $data->agent->languages  ?? 'Null' }}</a>
+                <p class="expertise"><strong>Languages:</strong> <a href="javascript:void(0);">{{ $data->agent->languages  ?? 'Null' }}</a>
                 </p>
                 <div class="contact-info contact-info-mobile">
                     <div>

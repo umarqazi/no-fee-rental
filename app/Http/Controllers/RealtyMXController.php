@@ -39,7 +39,7 @@ class RealtyMXController extends Controller {
      * @return Factory|View
      */
     public function detail($unique_id, $realty_id) {
-        $listing = $this->realtyService->detail($unique_id, $realty_id);
+        $listing = $this->realtyService->details($unique_id, $realty_id);
         return view('listing_detail', compact('listing'));
     }
 
