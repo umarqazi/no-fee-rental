@@ -28,13 +28,13 @@ window.io = require('socket.io-client');
     });
 
     // Listener for incoming messages
-    window.Echo.channel(`messaging-channel.`+ Window.Laravel.user).listen('.message', async (res) => {
-        let url = window.location.href;
-        url = url.split('/');
-        if(url[4] !== 'load-chat') {
-            await ajaxRequest('/push-notification', 'post', res, false);
-        }
-    });
+    // window.Echo.channel(`messaging-channel.`+ Window.Laravel.user).listen('.message', async (res) => {
+    //     let url = window.location.href;
+    //     url = url.split('/');
+    //     if(url[4] !== 'load-chat') {
+    //         await ajaxRequest('/push-notification', 'post', res, false);
+    //     }
+    // });
 
     // Mark As Read
     $('.mark-read').on('click', async function (e) {

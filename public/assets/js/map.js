@@ -212,7 +212,7 @@ const findIndex = (location) => {
 const nearByPlaces = async (position, keyword) => {
     let request = {
         location: setLatLng(position),
-        radius: 250,
+        radius: 1000,
         keyword: keyword
     };
 

@@ -1,13 +1,7 @@
 <aside>
     <span class="close-menu"><i class="fa fa-times-circle"></i></span>
-    <div class="avtar">
-        <img src="{{ asset('assets/images/agent-image.jpg')}}" alt="" />
-        <span>Agent George <i class="fa fa-chevron-down"></i></span>
-        <ul>
-            <li><a href="{{ route(whoAmI().".showProfile") }}">Profile Settings</a></li>
-            <li><a href="{{ route(whoAmI().".logout") }}">Logout</a></li>
-        </ul>
-    </div>
+    {{--Profile With DropDown--}}
+    @include('secured-layouts.user_avatar')
     <ul class="main-men">
         <li>
             <a href="{{ route(whoAmI().'.index') }}">

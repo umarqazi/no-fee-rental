@@ -74,14 +74,9 @@ $(".message-block .users-listing .header-text .fa-times").click(function () {
     window.Echo.channel(`messaging-channel.`+ Window.Laravel.user).listen('.message', (res) => {
         $ulSelector.append(`
             <li class="sent">
-                <img style="width: 35px;height: 35px;" src="${res.sender.profile_image}">
-                <p>${res.message}</p>
+                <img style="width: 35px;height: 35px;" alt="" src="${window.location.origin}/${res.sender.profile_image === null ? 'assets/images/default-images/user.jpeg' : res.sender.profile_image}">
+                <p>${res.message.message}</p>
             </li>`);
         scrollDown($ulSelector);
     });
 })();
-
-/**
- * scroll down
- */
-

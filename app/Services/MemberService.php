@@ -20,19 +20,19 @@ class MemberService extends UserService {
 
     /**
      * MemberService constructor.
-     *
-     * @param MemberRepo $repo
      */
-    public function __construct(MemberRepo $repo) {
+    public function __construct() {
         parent::__construct();
-        $this->repo = $repo;
+        $this->repo = new MemberRepo;
     }
 
     /**
+     * @param null $id
+     *
      * @return mixed
      */
-    public function team() {
-        return $this->repo->friends()->get();
+    public function team($id = null) {
+        return $this->repo->friends($id)->get();
     }
 
     /**

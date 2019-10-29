@@ -52,15 +52,18 @@
     </div>
     {!! HTML::script('assets/js/listing.js') !!}
 <script>
-    enableDatePicker('#availability_date');
-    enableDatePicker('.open-house-date', false);
-    autoComplete(document.getElementById('controls'));
-    @if($action === 'Copy' || $action === 'Update')
-        ZOOM = 15;
-        setMap($('input[name=map_location]').val(), document.getElementById('map'));
-    @else
-        initMap(document.getElementById('map'), 17);
-    @endif
-    fetchNeighbours($('input[name=neighborhood]'));
+    $(document).ready(function() {
+        enableDatePicker('#availability_date');
+        enableDatePicker('.open-house-date', false);
+        autoComplete(document.getElementById('controls'));
+        // fetchNeighbours($('input[name=neighborhood]'));
+
+        @if($action === 'Copy' || $action === 'Update')
+            ZOOM = 15;
+            setMap($('input[name=map_location]').val(), document.getElementById('map'));
+        @else
+            initMap(document.getElementById('map'), 17);
+        @endif
+    });
 </script>
 @endsection
