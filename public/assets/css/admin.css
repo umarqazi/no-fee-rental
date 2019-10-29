@@ -759,14 +759,15 @@ header .agent-avtar .avtar:hover div ul {
 }
 .add-new-listing-wrapper .dropzone.dz-clickable {
   cursor: pointer;
-  height: 200px;
-  min-height: inherit;
+  height: auto;
+  min-height: 200px;
   display: flex;
   padding: 0px;
   align-items: center;
   justify-content: center;
   border: #636363 dashed 1px;
   border-radius: 5px;
+  flex-wrap: wrap;
 }
 .add-new-listing-wrapper .dz-default.dz-message {
   padding: 0px;
