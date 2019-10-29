@@ -11,6 +11,7 @@ namespace App\Services;
 
 
 use App\Repository\FavouriteRepo;
+use App\Repository\UserRepo;
 
 class FavouriteService {
 
@@ -23,6 +24,24 @@ class FavouriteService {
      * FavouriteService constructor.
      */
     public function __construct() {
-        $this->repo = new FavouriteRepo();
+        $this->repo = new UserRepo();
     }
+    /**
+     * get favourite listing.
+     */
+
+
+    public function getFavouriteListing($paginate, $id) {
+          $this->repo->favouriteListing($id);
+        /*     return [
+            'active' => $this->active()
+                ->latest('updated_at')
+                ->paginate($paginate, ['*'], 'active'),
+
+            'closed' => $this->pending()
+                ->latest()
+                ->paginate($paginate, ['*'], 'closed'),
+        ];
+   */ }
+
 }

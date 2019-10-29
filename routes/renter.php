@@ -37,4 +37,4 @@ Route::post('/add-event', 'Renter\CalendarController@create')->name('renter.addE
 Route::get('/show-calendar', 'Renter\CalendarController@index')->name('renter.showCalendar');
 
 //Listing Routes
-Route::get('/listing-view', 'Renter\ListingController@index')->name('renter.viewListing');
+Route::get('/favourite/listing-view', 'Renter\ListingController@wishList')->name('renter.viewListing');
