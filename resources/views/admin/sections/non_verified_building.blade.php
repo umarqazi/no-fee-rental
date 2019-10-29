@@ -10,7 +10,7 @@
                 <p class="title">{{ str_limit(is_exclusive($al->listings[0]), STR_LIMIT_LIST_VIEW, ' ...') }}</p>
                 <p class="title">Total Agents: {{ count($al->listings) }}</p>
                 <p>Posted On: {{ $al->created_at->format("m/d/y H:m A") }}</p>
-                <a href="{{ route(whoAmI().'.verifyBuilding', $al->id) }}" title="Verify this building">
+                <a href="{{ route(whoAmI().'.buildingDetails', $al->id) }}" title="Verify this building">
                     <span class="status" style="background-color:red;">Verify</span>
                 </a>
                 <div class="actions-btns">

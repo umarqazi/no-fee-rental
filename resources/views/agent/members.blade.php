@@ -59,7 +59,6 @@
                        </table>
                     <tbody></tbody>
                 </div>
-
             </div>
         </div>
     </div>
@@ -67,8 +66,6 @@
 
 {{--Invite Member--}}
 @include('agent.modals.invite_member')
-
 {{--Agent Members Script--}}
 {!! HTML::script('assets/js/members.js') !!}
-
 @endsection

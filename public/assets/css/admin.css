@@ -600,6 +600,33 @@ header .agent-avtar .avtar:hover div ul {
 .main-wrapper .grid-view-wrapper {
   display: none;
 }
+.building-details-wrapper .grid-view-wrapper{
+    background-color:#fff;
+    padding: 10px;
+}
+.building-details-wrapper .building-detail-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 15px 0px 25px;
+    border-bottom: 1px solid #eee;
+
+}
+.building-details-wrapper .building-detail-header h3{
+    color: #e77817;
+}
+
+.building-details-wrapper .building-detail-header h3 small {
+    font-size: 15px;
+    font-weight: 600;
+    color: #e77817;
+}
+.building-details-wrapper .amenities-section {
+    margin: 20px 0px;
+}
+.building-details-wrapper .amenities-section .after-amenities-inputs{
+    margin-top: 20px;
+}
 .main-wrapper .grid-view-wrapper .listing-thumb {
   position: relative;
   margin-bottom: 30px;

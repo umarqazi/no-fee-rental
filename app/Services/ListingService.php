@@ -53,7 +53,7 @@ class ListingService extends BuildingService {
     public function create($request) {
         DB::beginTransaction();
         $listing = $this->__validateForm($request);
-        $building = $this->addBuilding($listing);
+        $building = $this->addBuilding($listing->street_address);
         $listing->visibility = $building->is_verified;
         $listing = $this->__addList($listing->toArray());
         $this->__addOpenHouse($listing->id, $listing->user_id, $request->open_house);
