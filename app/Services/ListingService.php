@@ -157,6 +157,15 @@ class ListingService extends BuildingService {
     public function edit($id) {
         return $this->listingRepo->edit($id)->withall();
     }
+    /**
+     * @param $id
+     *
+     * @return listing
+     */
+    public function created_by($id) {
+        $listing_creator =  $this->listingRepo->edit($id)->withall()->first();
+        return $listing_creator->agent->user_type;
+    }
 
     /**
      * @param $request

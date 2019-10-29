@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Renter;
 
+use App\Services\FavouriteService;
 use App\Services\ListingService;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\JsonResponse;
@@ -27,17 +28,23 @@ class ListingController extends Controller {
     private $listingService;
 
     /**
+     * @var ListingService
+     */
+    private $favouriteService;
+
+    /**
      * MessageController constructor.
      */
     public function __construct() {
         $this->listingService = new ListingService();
+        $this->favouriteService = new FavouriteService();
     }
 
     /**
-     * @return Factory|View
+     * @return favourite listing
      */
-    public function index() {
-        $listing = $this->listingService->get($this->paginate);
+    public function wishList() {
+        $listing = $this->favouriteService->getFavouriteListing($this->paginate,myId());dd($listing);
         return view('renter.listing_view', compact('listing'));
     }
 
