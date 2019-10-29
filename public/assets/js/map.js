@@ -28,7 +28,7 @@ const setLatLng = (coords) => {
  */
 const setMap = (coords = defaultCoords, displaySelector, radius = 0, types = [], styles = null) => {
     map = new google.maps.Map(displaySelector, {
-        center: setLatLng(coords),
+        center: setLatLng(coords === null ? defaultCoords : coords),
         zoom: ZOOM,
         radius: radius !== 0 ? radius : RADIUS,
         types: types,
@@ -97,7 +97,6 @@ const addMarker = (coords, title = null, icon = null) => {
     marker = new google.maps.Marker({
         map: map,
         title: title,
-        animation: google.maps.Animation.DROP,
         position: setLatLng(coords),
         icon: {
             url: icon !== null ? icon : `${document.location.origin}/assets/images/map-icon.png`, // url
@@ -131,34 +130,34 @@ const setMultiMarkers = (coords) => {
  * @param selector
  */
 const markerClusters = (coords, selector) => {
-    coords = [JSON.parse(coords)];
-    let markers = coords.map(function(location) {
-        setMap(location, selector);
-        let mark = addMarker(location);
-        google.maps.event.addListener(mark, "click", async function (e) {
-            console.log(e);
+    let markers = null; ZOOM = 10;
+    setMap(null, selector);
+    markers = coords.map(function(coords) {
+        coords = JSON.parse(coords);
+        let mark = addMarker(coords);
+        mark.addListener("click", async function(e) {
             let coords = JSON.stringify({latitude: e.latLng.lat(), longitude: e.latLng.lng()});
-            let res = await ajaxRequest(`listing-detail`, 'post', {map_location: coords});
-            showInfoWindow(`<a href="javascript:void(0)"><div class="location-thumbnaail"><img src="${document.location.origin}/storage/${res.data.thumbnail}"><div class="price-wrapp"><p class="price"> $${res.data.rent} </p><div class="additional-info"><p>${res.data.street_address} #2</p><ul><li><p>${res.data.bedrooms}</p>Beds</li><li><p>${res.data.baths}</p>Rooms</li></ul></div></div></div></a>`, mark);
-        google.maps.event.addListener(map, 'click', function(e) {closeInfoWindow();});
+            let res = await ajaxRequest(`/listing-detail`, 'post', {map_location: coords});
+            showInfoWindow(showListInfo(res), mark);
+                google.maps.event.addListener(map, 'click', function(e) {closeInfoWindow();});
         });
+
         return mark;
     });
 
     let cluster = new MarkerClusterer(map, markers, {
         imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
     });
-    google.maps.event.addListener(cluster, 'clusterclick', function (e) {
-        let markers = e.markerClusterer_.markers_;
-        markers.forEach(val => {
-            let coord = {
-                latitude: val.position.lat(),
-                longitude: val.position.lng()
-            };
+};
 
-            console.log(coord);
-        });
-    });
+/**
+ *
+ * @param res
+ * @returns {string}
+ */
+const showListInfo = (res) => {
+    let domain = window.location.origin;
+    return `<a href="${domain}/listing-detail/${res.data.id}"><div class="location-thumbnaail"><img style="height: 170px; width: 300px;" src="${domain}/${res.data.thumbnail}"><div class="price-wrapp"><p class="price"> $${res.data.rent} </p><div class="additional-info"><p>${res.data.street_address} #2</p><ul><li><p>${res.data.bedrooms}</p>Beds</li><li><p>${res.data.baths}</p>Rooms</li></ul></div></div></div></a>`;
 };
 
 /**
@@ -171,7 +170,6 @@ const autoComplete = (searchSelector) => {
     autocomplete.setFields(['adr_address']);
     autocomplete.setComponentRestrictions(
         {'country': ['us']});
-    console.log(autocomplete);
     return autocomplete;
 };
 

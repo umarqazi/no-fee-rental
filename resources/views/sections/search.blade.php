@@ -14,7 +14,7 @@
             {!! Form::button('Search', ['class' => 'search-btn', 'type' => 'submit']) !!}
         </div>
         {!! Form::close() !!}
-        <a href="" class="advance-search" data-toggle="modal" data-target="#advance-search">+ Advanced Search</a>
+        <a href="javascript:void(0);" class="advance-search" data-toggle="modal" data-target="#advance-search">+ Advanced Search</a>
     </div>
 </div>
 {{--Advance Search--}}

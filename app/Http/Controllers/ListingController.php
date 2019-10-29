@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Services\FavouriteService;
 use App\Services\ListingService;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class ListingController extends Controller {
@@ -40,10 +42,10 @@ class ListingController extends Controller {
     /**
      * @param Request $request
      *
-     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
+     * @return JsonResponse|RedirectResponse
      */
     public function detail(Request $request) {
-        $list = \App\Listing::where('map_location', $request->map_location)
+        $list = \App\Listing::where('map_location', 'like', $request->map_location)
                             ->select('rent', 'id', 'street_address', 'bedrooms', 'baths', 'thumbnail')->first();
         return sendResponse($request, $list);
     }

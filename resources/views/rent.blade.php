@@ -6,11 +6,6 @@
         	@include('sections.search_results')
     	</div>
     </section>
-    <script>
-        $('body').on('change', '.sorting', function() {
-            window.location.href = `${window.location.origin}/listing-by-rent/${$(this).val()}`;
-        });
-    </script>
 @endsection
 
 

@@ -8,8 +8,6 @@
 
 namespace App\Services;
 
-use App\Listing;
-use App\OpenHouse;
 use App\Repository\SearchRepo;
 
 class SearchService {
@@ -71,14 +69,24 @@ class SearchService {
      * filter for beds
      */
     private function beds() {
-        $this->query->where('bedrooms', ($this->args->{__FUNCTION__} > 4) ? '>' : '=', $this->args->{__FUNCTION__});
+        if(in_array(5, $this->args->{__FUNCTION__})) {
+            $this->query->where('bedrooms', '>=', 5)->orWhereIn('bedrooms', [$this->args->{__FUNCTION__}]);
+        } else {
+            $this->query->whereIn( 'bedrooms', [ $this->args->{__FUNCTION__} ] );
+        }
     }
 
     /**
      * filter for baths
      */
     private function baths() {
-        $this->query->where('baths', ($this->args->{__FUNCTION__} > 4) ? '>' : '=', $this->args->{__FUNCTION__});
+        if (in_array('any', $this->args->{__FUNCTION__})) {
+            $this->query->where('baths', '>', 0);
+        } elseif (in_array(5, $this->args->{__FUNCTION__})) {
+            $this->query->where( 'baths', '>=', 5 )->orWhereIn( 'baths', [ $this->args->{__FUNCTION__} ] );
+        } else {
+            $this->query->whereIn( 'baths', [ $this->args->{__FUNCTION__} ] );
+        }
     }
 
     /**
