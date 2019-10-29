@@ -486,7 +486,7 @@ class ListingService extends BuildingService {
      * @return array
      */
     protected function __sortCollection($paginate, $col, $order) {
-        return [
+        return toObject([
             'active'   => $this->active()
                                ->orderBy($col, $order)
                                ->paginate($paginate, ['*'], 'active'),
@@ -496,6 +496,6 @@ class ListingService extends BuildingService {
             'pending'  => $this->pending()
                                ->orderBy($col, $order)
                                ->paginate($paginate, ['*'], 'pending')
-        ];
+        ]);
     }
 }

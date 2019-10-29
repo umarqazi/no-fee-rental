@@ -107,7 +107,7 @@ class UserRepo extends BaseRepo {
      * @param $listing
      */
     public function attach($user, $listing) {
-        $user->favourites()->attach($listing);
+        $user->favourite()->attach($listing);
     }
 
     /**
@@ -115,7 +115,7 @@ class UserRepo extends BaseRepo {
      * @param $listing
      */
     public function detach($user, $listing) {
-        $user->favourites()->detach($listing);
+        $user->favourite()->detach($listing);
     }
 
     /**

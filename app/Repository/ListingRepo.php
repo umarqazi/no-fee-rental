@@ -77,7 +77,7 @@ class ListingRepo extends BaseRepo {
 	 * @return mixed
 	 */
 	public function featured() {
-		return $this->model->featured();
+		return $this->model->featured()->withfavourite();
 	}
 
 	/**

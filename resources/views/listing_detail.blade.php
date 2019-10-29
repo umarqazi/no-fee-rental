@@ -234,14 +234,14 @@
 
                 <div class="col-md-3 col-sm-4">
                     <h3>Amenities</h3>
-                    @if(count($listing->listingBuilding->amenities) < 1)
+                    @if( isset($listing->listingBuilding->amenities) && count($listing->listingBuilding->amenities) < 1)
                         None
-                    @endif
                     @foreach($listing->listingBuilding->amenities as $feature)
                         <ul class="second-ul">
                             <li>{{ $feature->amenities }}</li>
                         </ul>
                     @endforeach
+                    @endif
                 </div>
             </div>
         </div>
@@ -297,7 +297,7 @@
             <h3> Nearby Apartments</h3>
             <div class="property-listing">
                 <div class="desktop-listiing">
-                    @if(count($listing->listingBuilding->building->listings) > 1)
+                    @if(isset($listing->listingBuilding->building->listings) && count($listing->listingBuilding->building->listings) > 1)
                         @foreach($listing->listingBuilding->building->listings as $apartment)
                             @if($listing->id === $apartment->id) @continue @endif
                             <div class="property-thumb">

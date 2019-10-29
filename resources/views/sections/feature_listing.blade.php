@@ -44,13 +44,25 @@
                                 @else
                                 <a href="{!! route('web.favouriteListing', $fl->id) !!}" class="ml-2 empty-heart-icon"><i class="far fa-heart empty-heart "></i></a>
                                 @endif--}}
-                                {{--<span class="heart-icon"></span>
-                                --}}
-                                @if($fl->is_favourite == true)
-                                    <span {{--href="{!! route('web.removeFavouriteListing', $fl->id) !!}"--}} onClick="unLike({{$fl->id}})" id="unlike" class="ml-2 filled-heart-icon"><i class="fas fa-heart {{--fill-heart--}}"></i></span>
-                                @else
-                                    <span {{--href="{!! route('web.favouriteListing', $fl->id) !!}"--}} onClick="like({{$fl->id}})" id="like" class="ml-2 empty-heart-icon"><i class="far fa-heart {{--empty-heart--}}"></i></span>
+                                @if(!isRenter() && !isAdmin() && !isAgent() && !isOwner())
+                                    <span class="display-heart-icon"></span>
                                 @endif
+                                @if(isAdmin() || isAgent() || isOwner())
+
+                                @endif
+                                @if(isRenter())
+                                @if(isFavourite($fl["favourites"],$fl->id))
+                                <span class="heart-icon favourite"></span>
+                                @else
+                                 <span class="heart-icon"></span>
+                                @endif
+                                @endif
+                                {{--
+                                @if($fl->is_favourite == true)
+                                    <span --}}{{--href="{!! route('web.removeFavouriteListing', $fl->id) !!}"--}}{{-- onClick="unLike({{$fl->id}})" id="unlike" class="ml-2 filled-heart-icon"><i class="fas fa-heart --}}{{--fill-heart--}}{{--"></i></span>
+                                @else
+                                    <span --}}{{--href="{!! route('web.favouriteListing', $fl->id) !!}"--}}{{-- onClick="like({{$fl->id}})" id="like" class="ml-2 empty-heart-icon"><i class="far fa-heart --}}{{--empty-heart--}}{{--"></i></span>
+                                @endif--}}
                                 <img src="{{ asset($fl->thumbnail ?? DLI) }}" alt="" class="main-img" />
                                 <div class="info">
                                     <div class="info-link-text">
@@ -310,28 +322,4 @@
             }
         }
     });
-
-    function like(id) {
-        let res =  ajaxRequest(
-            `/favourite/`+id,
-            'GET',
-            true);
-        $("#like").removeClass("empty-heart-icon");
-        $("#like > i").removeClass("far");
-        $("#like > i").addClass("fas");
-        $("#like").addClass("filled-heart-icon");
-
-    }
-
-    function unLike(id) {
-        let res =  ajaxRequest(
-            `/remove/favourite/`+id,
-            'GET',
-            true);
-        $("#unlike").addClass("empty-heart-icon");
-        $("#unlike > i").addClass("far");
-        $("#unlike > i").removeClass("fas");
-        $("#unlike").removeClass("filled-heart-icon");
-    }
-
 </script>
