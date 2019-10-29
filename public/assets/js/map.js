@@ -14,6 +14,7 @@ let infowindow = new google.maps.InfoWindow();
  * @returns {google.maps.LatLng}
  */
 const setLatLng = (coords) => {
+    if(coords === null) return;
     return new google.maps.LatLng(coords.latitude, coords.longitude);
 };
 
@@ -27,6 +28,7 @@ const setLatLng = (coords) => {
  * @returns {Map<any, any>}
  */
 const setMap = (coords = defaultCoords, displaySelector, radius = 0, types = [], styles = null) => {
+    coords = (typeof coords === 'object') ? coords : JSON.parse(coords);
     map = new google.maps.Map(displaySelector, {
         center: setLatLng(coords === null ? defaultCoords : coords),
         zoom: ZOOM,
@@ -43,6 +45,7 @@ const setMap = (coords = defaultCoords, displaySelector, radius = 0, types = [],
         ]
     });
 
+    addMarker(coords);
     return map;
 };
 
@@ -134,6 +137,7 @@ const markerClusters = (coords, selector) => {
     setMap(null, selector);
     markers = coords.map(function(coords) {
         coords = JSON.parse(coords);
+        console.log(coords);
         let mark = addMarker(coords);
         mark.addListener("click", async function(e) {
             let coords = JSON.stringify({latitude: e.latLng.lat(), longitude: e.latLng.lng()});
@@ -157,7 +161,7 @@ const markerClusters = (coords, selector) => {
  */
 const showListInfo = (res) => {
     let domain = window.location.origin;
-    return `<a href="${domain}/listing-detail/${res.data.id}"><div class="location-thumbnaail"><img style="height: 170px; width: 300px;" src="${domain}/${res.data.thumbnail}"><div class="price-wrapp"><p class="price"> $${res.data.rent} </p><div class="additional-info"><p>${res.data.street_address} #2</p><ul><li><p>${res.data.bedrooms}</p>Beds</li><li><p>${res.data.baths}</p>Rooms</li></ul></div></div></div></a>`;
+    return `<a href="${domain}/listing-detail/${res.data.id}"><div class="location-thumbnaail"><img style="height: 170px; width: 300px;" src="${domain}/${res.data.thumbnail}"><div class="price-wrapp"><p class="price"> $${res.data.rent} </p><div class="additional-info"><p>${res.data.street_address} #2</p><ul><li><p>${res.data.bedrooms}</p>Beds</li><li><p>${res.data.baths}</p>Baths</li></ul></div></div></div></a>`;
 };
 
 /**
@@ -312,7 +316,6 @@ const initMap = (selector, zoom = ZOOM) => {
  */
 const mapWithNearbyLocations = (coords, mapSelector, nearByLocations = false, Zoom = 16) => {
     if (coords !== null && coords !== '') {
-        coords = (typeof coords !== 'object') ? JSON.parse(coords) : coords;
         ZOOM = Zoom;
         setMap(coords, mapSelector);
         latLngToAddr(coords).then(location => {

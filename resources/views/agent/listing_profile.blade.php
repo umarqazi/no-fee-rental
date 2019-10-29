@@ -5,7 +5,7 @@
     <div class="container-lg">
         <div class="agent-profile-view">
             <div class="img-holder">
-                <img src="{{ asset($data->agent->thumbnail ?? DUI) }}" alt="" />
+                <img src="{{ asset($data->agent->profile_image ?? DUI) }}" alt="" />
             </div>
             <div class="agent-info">
                 <h2>{{ $data->agent->first_name.' '.$data->agent->last_name }}</h2>

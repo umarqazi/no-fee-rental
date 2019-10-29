@@ -31,14 +31,6 @@ class ListingController extends Controller {
         $this->listingService = $listingService;
     }
 
-    public function checkAvailability(Request $request, $id) {
-
-    }
-
-    public function makeAppointment(Request $request, $id) {
-
-    }
-
     /**
      * @param Request $request
      *
@@ -47,6 +39,6 @@ class ListingController extends Controller {
     public function detail(Request $request) {
         $list = \App\Listing::where('map_location', 'like', $request->map_location)
                             ->select('rent', 'id', 'street_address', 'bedrooms', 'baths', 'thumbnail')->first();
-        return sendResponse($request, $list);
+        return sendResponse($request, $list, null, null, null);
     }
 }
