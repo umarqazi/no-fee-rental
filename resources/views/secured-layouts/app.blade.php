@@ -59,6 +59,9 @@
                 @case('owner')
                     @include('secured-layouts.owner_sidebar')
                     @break
+                @case('renter')
+                    @include('secured-layouts.renter_sidebar')
+                    @break
             @endswitch
 		@endif
 	@show

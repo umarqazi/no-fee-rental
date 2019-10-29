@@ -202,7 +202,7 @@ class ListingService extends BuildingService {
         DB::beginTransaction();
         if ($this->listingRepo->update($id, ['visibility' => 1])) {
             $list = $this->listingRepo->find(['id' => $id])->withagent()->first();
-            $data = [
+            dispatchNotification([
                 'name'        => $list->agent->first_name,
                 'approved_by' => mySelf()->first_name,
                 'approved_on' => $list->updated_at,
@@ -214,8 +214,7 @@ class ListingService extends BuildingService {
                 'fromEmail'   => mySelf()->email,
                 'to'          => $list->agent->id,
                 'notification'=> 'Listing has been approved',
-            ];
-            dispatchNotification($data);
+            ]);
             DB::commit();
             return true;
         }

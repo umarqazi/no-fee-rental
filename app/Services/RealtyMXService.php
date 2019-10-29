@@ -91,7 +91,6 @@ class RealtyMXService extends ListingService {
         $listing = $this->__addList($list);
         $this->createImages($listing, $images);
         parent::attachApartment($building, $listing);
-        dd($building, $listing);
 //        $this->sendEmail($agent->email);
         return route('web.realty', [$list['unique_slug'], $list['realty_id']]);
     }

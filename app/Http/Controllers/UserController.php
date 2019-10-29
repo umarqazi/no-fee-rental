@@ -9,7 +9,10 @@
 namespace App\Http\Controllers;
 
 use App\Services\UserService;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class UserController extends Controller {
 
@@ -30,7 +33,7 @@ class UserController extends Controller {
 	/**
 	 * @param Request $request
 	 *
-	 * @return \Illuminate\Http\RedirectResponse
+	 * @return RedirectResponse
 	 */
 	public function editProfile(Request $request) {
 		$update_data = $this->service->updateProfile($request);
@@ -46,7 +49,7 @@ class UserController extends Controller {
     /**
      * @param $token
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
 	public function changePassword($token) {
 		return view('change_password', compact('token'));
@@ -56,7 +59,7 @@ class UserController extends Controller {
 	 * @param Request $request
 	 * @param $token
 	 *
-	 * @return \Illuminate\Http\RedirectResponse
+	 * @return RedirectResponse
 	 */
 	public function updatePassword(Request $request, $token) {
 		if ($user = $this->service->validateEncodedToken($token)) {
@@ -74,7 +77,7 @@ class UserController extends Controller {
     /**
      * @param Request $request
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
 	public function invitedAgentSignup(Request $request) {
 		$res = $this->service->invitedAgentSignup($request);
@@ -84,7 +87,7 @@ class UserController extends Controller {
     /**
      * @param $token
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     * @return Factory|RedirectResponse|View
      */
 	public function invitedAgentSignupForm($token) {
 		$authenticate_token = $this->service->getAgentToken($token)->first();
@@ -98,17 +101,17 @@ class UserController extends Controller {
 	/**
 	 * @param Request $request
 	 *
-	 * @return \Illuminate\Http\RedirectResponse
+	 * @return RedirectResponse
 	 */
 	public function signup(Request $request){
-		$response = $this->service->signup($request);
+		$response = $this->service->signUpBySelf($request);
 		return sendResponse($request, $response, 'We send an email to your account. Kindly verify your email');
 	}
 
 	/**
 	 * @param $token
 	 *
-	 * @return \Illuminate\Http\RedirectResponse
+	 * @return RedirectResponse
 	 */
 	public function confirmEmail($token) {
 		if ($this->service->verifyEmail($token)) {
