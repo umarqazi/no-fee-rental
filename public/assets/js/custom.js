@@ -1,117 +1,4 @@
 $(() => {
-	new WOW().init();
-
-
-	$("header .menu-icon").click(function () {
-		$(".main-wrapper aside").slideDown();
-	});
-
-	$("aside .close-menu").click(function () {
-		$(".main-wrapper aside").slideUp();
-	});
-
-	$(".list-view-btn").click(function () {
-		$(".grid-view-btn").removeClass('active');
-		$(this).addClass('active');
-		$(".grid-view-wrapper").hide();
-		$(".listing-wrapper").show();
-	});
-
-	$(".grid-view-btn").click(function () {
-		$(".list-view-btn").removeClass('active');
-		$(this).addClass('active');
-		$(".listing-wrapper").hide();
-		$(".grid-view-wrapper").show();
-	});
-	// $(".dropdown-wrap button").click(function() {
-	// 	$(this).addClass("addbackground");
-	// 	// $(this).addClass('addbackground');
-	// });
-
-	 $('.dropdown-wrap ul li .radio-button').click(function() {
-	 	var input_checked = $(this).find("input").attr('checked', true);
-	 	if($(input_checked).is(':checked')){
-	 		var get_parent = $(this).parent().parent().parent().parent().find(".btn-default").addClass("addbackground");
-        	console.log(get_parent);
-	 	}else{
-	 	}
-
-	});
-
-
-
-
-	$(".additional-info .input-style").attr("disabled", true);
-
-
-	$('#datepicker').datepicker({
-		uiLibrary: 'bootstrap4'
-	});
-
-	// disable enable exclusive settings checkboxes
-	$(function() {
-	  $('#exclusive-3').change(function() {
-	    var val = $(this).val();
-
-	    if (val == "one") {
-
-	      $(".exclusive-chkboxes .custom-checkbox input[value='two']").prop("disabled", $(this).is(":checked"));
-
-	    } else if (val == "two") {
-
-	      $(".exclusive-chkboxes .custom-checkbox input[value='one']").prop("disabled", $(this).is(":checked"));
-
-	    }
-	  });
-	});
-
-
-
-
-	//
-
-	$('#price-range-submit').hide();
-
-	$("#min_price,#max_price").on('change', function () {
-		$('#price-range-submit').show();
-		let min_price_range = parseInt($("#min_price").val());
-		let max_price_range = parseInt($("#max_price").val());
-		if (min_price_range > max_price_range) {
-			$('#max_price').val(min_price_range);
-		}
-		$("#slider-range").slider({
-			values: [min_price_range, max_price_range]
-		});
-	});
-
-	$("#min_price,#max_price").on("paste keyup", function () {
-		$('#price-range-submit').show();
-		var min_price_range = parseInt($("#min_price").val());
-		var max_price_range = parseInt($("#max_price").val());
-		if (min_price_range == max_price_range) {
-			max_price_range = min_price_range + 100;
-			$("#min_price").val(min_price_range);
-			$("#max_price").val(max_price_range);
-		}
-		$("#slider-range").slider({
-			values: [min_price_range, max_price_range]
-		});
-	});
-
-	$(function () {
-		$("#slider-range").slider({
-			range: true,
-			orientation: "horizontal",
-			min: 0,
-			max: 10000,
-			values: [0, 10000],
-			step: 1,
-			slide: function (event, ui) {
-				if (ui.values[0] == ui.values[1]) {
-					return false;
-				}
-				$("#min_price").val(ui.values[0]);
-				$("#max_price").val(ui.values[1]);
     new WOW().init();
 
 
@@ -439,8 +326,8 @@ $(() => {
             $("#signup_form .btn-default").prop('disabled', false);
             $("#signup_form .agnet-input").prop('disabled', false);
 
-		} else {
-         $("#signup_form .agnet-input").prop('disabled', true);
+        } else {
+            $("#signup_form .agnet-input").prop('disabled', true);
             $("#signup_form .finding-home-text").css('opacity', '0.3');
             $("#signup_form .btn-default").prop('disabled', true);
             $(".finding-home-text").show();
@@ -477,13 +364,13 @@ $(() => {
         auto: false,
         loop: false,
         responsive: [{
-                breakpoint: 1279,
-                settings: {
-                    item: 1,
-                    thumbItem: 4,
-                    slideMove: 1,
-                }
-            },
+            breakpoint: 1279,
+            settings: {
+                item: 1,
+                thumbItem: 4,
+                slideMove: 1,
+            }
+        },
             {
                 breakpoint: 1024,
                 settings: {
@@ -576,18 +463,6 @@ $(() => {
         $('#divNewNotifications li').on('click', function () {
             $('#dropdown_title').html($(this).find('a').html());
         });
-    	$("#signup-btn").click(function(){
-      		$('body').addClass('signup-modal-scroll');
-    	});
-    	$("#login-btn").click(function() {
-		    $('body').addClass('signup-modal-scroll');
-		});
-
-        $(".display-heart-icon").click(function() {
-            $('#login').modal('show');
-        });
-
-    	$("#need-help-btn2").click(function(){
         $("#signup-btn").click(function () {
             $('body').addClass('signup-modal-scroll');
         });
@@ -603,32 +478,6 @@ $(() => {
             $("body").removeClass("signup-modal-scroll-getStart");
         });
 
-    	$(document).on("click", function (e) {
-	        if ($(e.target).is("#signup-btn")==false && $(e.target).parents('#signup').length==0 && $(e.target).parents('#login').length==0) {
-	            $("body").removeClass("signup-modal-scroll");
-	        }
-
-    	});
-
-    	$('.close-signup-modal').click(function(){
-    		$('body').removeClass('signup-modal-scroll');
-    	});
-
-
-    	$(document).on("click", function (e) {
-	        if ($(e.target).parents(".need-help-modal").length==0) {
-	            $("body").removeClass("signup-modal-scroll-getStart");
-	        }
-    	});
-
-    	//
-    	$("#advance-search-chkbox input[type='checkbox']").change(function(){
-    	if($(this).is(":checked")){
-        	$(this).parent('#advance-search-chkbox ul li').addClass("white-border-chkbox");
-    	}else{
-        	$(this).parent('#advance-search-chkbox ul li').removeClass("white-border-chkbox");
-    		}
-		});
         $(document).on("click", function (e) {
             if ($(e.target).is("#signup-btn") == false && $(e.target).parents('#signup').length == 0 && $(e.target).parents('#login').length == 0) {
                 $("body").removeClass("signup-modal-scroll");
@@ -647,7 +496,7 @@ $(() => {
             }
         });
 
-        //
+        // 
         $("#advance-search-chkbox input[type='checkbox']").change(function () {
             if ($(this).is(":checked")) {
                 $(this).parent('#advance-search-chkbox ul li').addClass("white-border-chkbox");
