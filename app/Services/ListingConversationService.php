@@ -150,7 +150,7 @@ class ListingConversationService {
                 'color'      => 'light green',
                 'url'        => 'javascript:void(0)'
             ]);
-
+            $this->__sendCCEmails($appointment);
             return $appointment;
         }
 
@@ -180,9 +180,29 @@ class ListingConversationService {
      */
     private function __sendMessage($conversation_id, $request) {
         $message = $this->__validateMessageForm($conversation_id, $request);
-        $message->to = $request->to;
-        dispatchMessageEvent($message);
+        $data = [
+            'message' => $message,
+            'sender'  => mySelf()
+        ];
+        dispatchMessageEvent($data);
         return $this->messageRepo->create($message->toArray());
+    }
+
+    /**
+     * @param $data
+     */
+    private function __sendCCEmails($data) {
+        $members = getMembers($data->to);
+        foreach ($members as $member) {
+            $data = [
+                'to'   => $member->friends->email,
+                'from' => mySelf()->email,
+                'view' => 'meeting-request',
+                'body' => 'New meeting request received'
+            ];
+
+            dispatchEmailQueue($data);
+        }
     }
 
     /**

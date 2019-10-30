@@ -11358,10 +11358,10 @@ window.io = __webpack_require__(/*! socket.io-client */ "./node_modules/socket.i
 
 _asyncToGenerator(
 /*#__PURE__*/
-_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
-  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
     while (1) {
-      switch (_context4.prev = _context4.next) {
+      switch (_context3.prev = _context3.next) {
         case 0:
           $(".notiii").click(function () {
             $(".notification-container").toggleClass("toggle-notification");
@@ -11386,28 +11386,37 @@ _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function 
           window.Echo.channel("notification-channel." + Window.Laravel.user).listen('.notification', function (res) {
             pushNotification(res);
           }); // Listener for incoming messages
+          // window.Echo.channel(`messaging-channel.`+ Window.Laravel.user).listen('.message', async (res) => {
+          //     let url = window.location.href;
+          //     url = url.split('/');
+          //     if(url[4] !== 'load-chat') {
+          //         await ajaxRequest('/push-notification', 'post', res, false);
+          //     }
+          // });
+          // Mark As Read
 
-          window.Echo.channel("messaging-channel." + Window.Laravel.user).listen('.message',
+          $('.mark-read').on('click',
           /*#__PURE__*/
           function () {
             var _ref2 = _asyncToGenerator(
             /*#__PURE__*/
-            _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(res) {
-              var url;
+            _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(e) {
+              var ids;
               return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
                 while (1) {
                   switch (_context.prev = _context.next) {
                     case 0:
-                      url = window.location.href;
-                      url = url.split('/');
+                      ids = [];
+                      $('.unread').each(function (index, value) {
+                        ids.push($(value).attr('data-id'));
+                      });
+                      _context.next = 4;
+                      return ajaxRequest('/mark-all-as-read', 'post', {
+                        ids: ids
+                      }, false);
 
-                      if (!(url[4] !== 'load-chat')) {
-                        _context.next = 5;
-                        break;
-                      }
-
-                      _context.next = 5;
-                      return ajaxRequest('/push-notification', 'post', res, false);
+                    case 4:
+                      $('body').find('.unread').addClass('notification-bg-read').removeClass('unread');
 
                     case 5:
                     case "end":
@@ -11420,58 +11429,22 @@ _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function 
             return function (_x) {
               return _ref2.apply(this, arguments);
             };
-          }()); // Mark As Read
-
-          $('.mark-read').on('click',
-          /*#__PURE__*/
-          function () {
-            var _ref3 = _asyncToGenerator(
-            /*#__PURE__*/
-            _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(e) {
-              var ids;
-              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
-                while (1) {
-                  switch (_context2.prev = _context2.next) {
-                    case 0:
-                      ids = [];
-                      $('.unread').each(function (index, value) {
-                        ids.push($(value).attr('data-id'));
-                      });
-                      _context2.next = 4;
-                      return ajaxRequest('/mark-all-as-read', 'post', {
-                        ids: ids
-                      }, false);
-
-                    case 4:
-                      $('body').find('.unread').addClass('notification-bg-read').removeClass('unread');
-
-                    case 5:
-                    case "end":
-                      return _context2.stop();
-                  }
-                }
-              }, _callee2);
-            }));
-
-            return function (_x2) {
-              return _ref3.apply(this, arguments);
-            };
           }()); // Remove a notification
 
           $('body').on('click', '.fa-times',
           /*#__PURE__*/
           function () {
-            var _ref4 = _asyncToGenerator(
+            var _ref3 = _asyncToGenerator(
             /*#__PURE__*/
-            _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(e) {
+            _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(e) {
               var $selector, id;
-              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
                 while (1) {
-                  switch (_context3.prev = _context3.next) {
+                  switch (_context2.prev = _context2.next) {
                     case 0:
                       $selector = $(this).parents('div.notiofication-content');
                       id = $selector.attr('data-id');
-                      _context3.next = 4;
+                      _context2.next = 4;
                       return ajaxRequest("/delete-notification/".concat(id), 'post', null, false);
 
                     case 4:
@@ -11480,23 +11453,23 @@ _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function 
 
                     case 6:
                     case "end":
-                      return _context3.stop();
+                      return _context2.stop();
                   }
                 }
-              }, _callee3, this);
+              }, _callee2, this);
             }));
 
-            return function (_x3) {
-              return _ref4.apply(this, arguments);
+            return function (_x2) {
+              return _ref3.apply(this, arguments);
             };
           }());
 
-        case 8:
+        case 7:
         case "end":
-          return _context4.stop();
+          return _context3.stop();
       }
     }
-  }, _callee4);
+  }, _callee3);
 }))(); // Whether to show null message or not
 
 
@@ -11538,17 +11511,17 @@ window.onload =
 /*#__PURE__*/
 _asyncToGenerator(
 /*#__PURE__*/
-_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5() {
+_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
   var res;
-  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
+  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
     while (1) {
-      switch (_context5.prev = _context5.next) {
+      switch (_context4.prev = _context4.next) {
         case 0:
-          _context5.next = 2;
+          _context4.next = 2;
           return ajaxRequest('/fetch-notifications', 'post', null, false);
 
         case 2:
-          res = _context5.sent;
+          res = _context4.sent;
           res.data.forEach(function (collection) {
             var obj = {
               'id': collection.id,
@@ -11563,10 +11536,10 @@ _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function 
 
         case 5:
         case "end":
-          return _context5.stop();
+          return _context4.stop();
       }
     }
-  }, _callee5);
+  }, _callee4);
 }));
 
 /***/ }),

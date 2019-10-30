@@ -11491,7 +11491,7 @@ _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function 
           }
 
           window.Echo.channel("messaging-channel." + Window.Laravel.user).listen('.message', function (res) {
-            $ulSelector.append("\n            <li class=\"sent\">\n                <img style=\"width: 35px;height: 35px;\" src=\"".concat(res.sender.profile_image, "\">\n                <p>").concat(res.message, "</p>\n            </li>"));
+            $ulSelector.append("\n            <li class=\"sent\">\n                <img style=\"width: 35px;height: 35px;\" alt=\"\" src=\"".concat(window.location.origin, "/").concat(res.sender.profile_image === null ? 'assets/images/default-images/user.jpeg' : res.sender.profile_image, "\">\n                <p>").concat(res.message.message, "</p>\n            </li>"));
             scrollDown($ulSelector);
           });
 
@@ -11502,9 +11502,6 @@ _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function 
     }
   }, _callee3);
 }))();
-/**
- * scroll down
- */
 
 /***/ }),
 

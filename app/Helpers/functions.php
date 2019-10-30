@@ -480,3 +480,12 @@ function is_exclusive($listing) {
 function str_formatting($string, $phrase) {
     return $string.' '.($string > 1 ? $phrase.'s' : $phrase);
 }
+
+/**
+ * @param $id
+ *
+ * @return mixed
+ */
+function getMembers($id) {
+    return (new \App\Services\MemberService)->team($id);
+}

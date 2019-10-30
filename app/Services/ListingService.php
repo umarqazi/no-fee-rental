@@ -157,10 +157,11 @@ class ListingService extends BuildingService {
     public function edit($id) {
         return $this->listingRepo->edit($id)->withall();
     }
+
     /**
      * @param $id
      *
-     * @return listing
+     * @return mixed
      */
     public function created_by($id) {
         $listing_creator =  $this->listingRepo->edit($id)->withall()->first();
@@ -313,6 +314,8 @@ class ListingService extends BuildingService {
     protected function __addList($form) {
         if (!empty($form->thumbnail) && strpos($form->thumbnail, 'http') === false) {
             $form->thumbnail = uploadImage( $form->thumbnail, 'images/listing/thumbnails' );
+        } elseif(!empty($form->old_thumbnail)) {
+            $form->thumbnail = $form->old_thumbnail;
         }
 
         return $this->listingRepo->create($form->toArray());
