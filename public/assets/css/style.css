@@ -73,8 +73,8 @@
     -webkit-animation: spin 2s linear infinite;
     animation: spin 2s linear infinite;
     position: fixed;
-    top: 35%;
-    left: 45%;
+    top: 50%;
+    left: 50%;
     transform: translate(-50%, -50%);
     z-index: 1100;
     margin-left: -50px;
@@ -1637,6 +1637,7 @@ main {
 
 .fc-event-container .fc-content {
     color: #fff;
+    white-space: normal !important;
 }
 
 .fc-view.fc-month-view.fc-basic-view {
