@@ -1443,3 +1443,8 @@ header .agent-avtar .avtar:hover div ul {
     max-width: 600px;
   }
 }
+
+
+.svg-icon-color{
+    fill: blue;
+}

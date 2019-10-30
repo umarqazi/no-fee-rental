@@ -496,7 +496,7 @@ $(() => {
             }
         });
 
-        // 
+        //
         $("#advance-search-chkbox input[type='checkbox']").change(function () {
             if ($(this).is(":checked")) {
                 $(this).parent('#advance-search-chkbox ul li').addClass("white-border-chkbox");

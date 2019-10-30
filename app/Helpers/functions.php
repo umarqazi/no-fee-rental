@@ -8,6 +8,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
 /**
@@ -81,7 +82,9 @@ function isAdmin() {
 }
 
 /**
- * @return mixed
+ * @param $listing_id
+ *
+ * @return bool
  */
 function is_created_by_owner($listing_id) {
     $listing_creator = (new \App\Services\ListingService())->created_by($listing_id);
@@ -106,8 +109,12 @@ function isAgent() {
 function isRenter() {
     return auth()->guard('renter')->check();
 }
+
 /**
- * @return mixed
+ * @param $favourites
+ * @param $listing_id
+ *
+ * @return bool
  */
 function isFavourite($favourites , $listing_id) {
     foreach ($favourites as $key => $fav){
@@ -475,11 +482,15 @@ function deleteCalendarEvent($id) {
  * @return string
  */
 function is_exclusive($listing) {
-    if($listing->building_type === EXCLUSIVE) {
-        return sprintf("%s - (%s)", $listing->street_address, $listing->unit ?? '#');
+    if($listing !== null) {
+        if ( $listing->building_type === EXCLUSIVE ) {
+            return sprintf( "%s - (%s)", $listing->street_address, $listing->unit ?? '#' );
+        }
+
+        return $listing->display_address;
     }
 
-    return $listing->display_address;
+    return 'N/A';
 }
 
 /**
