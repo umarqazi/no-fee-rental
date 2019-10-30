@@ -1,4 +1,3 @@
-
 .loader.invalid-feedback {
     display: inline-block;
     font-size: 15px;
@@ -40,6 +39,7 @@
         height: 0;
         opacity: 1;
     }
+
     100% {
         top: -1px;
         left: -1px;
@@ -73,16 +73,19 @@
     -webkit-animation: spin 2s linear infinite;
     animation: spin 2s linear infinite;
     position: fixed;
-    top: 35%;
-    left: 45%;
+    top: 50%;
+    left: 50%;
     transform: translate(-50%, -50%);
     z-index: 1100;
+    margin-left: -50px;
+    margin-top: -50px;
 }
 
 @-webkit-keyframes spin {
     0% {
         -webkit-transform: rotate(0deg);
     }
+
     100% {
         -webkit-transform: rotate(360deg);
     }
@@ -92,6 +95,7 @@
     0% {
         transform: rotate(0deg);
     }
+
     100% {
         transform: rotate(360deg);
     }
@@ -444,7 +448,8 @@
 .Availability-date-sec .row {
     line-height: 25px;
 }
-.Availability-date-sec .row-border-right{
+
+.Availability-date-sec .row-border-right {
     border-right: 1px solid #ddd;
 }
 
@@ -575,10 +580,12 @@
     color: #717171;
     font-size: 16px;
 }
-.listing-aminities-sec{
+
+.listing-aminities-sec {
     background-color: #F4F5F8;
-     padding: 30px 0px;
+    padding: 30px 0px;
 }
+
 .location-map-sec {
 
     padding: 30px 0px;
@@ -588,7 +595,8 @@
     margin-bottom: 20px;
     color: #000;
 }
-.listing-Details  .description-title{
+
+.listing-Details .description-title {
     color: #000;
 }
 
@@ -623,18 +631,23 @@
 .location-map-sec .text-a {
     background-color: #185286;
 }
+
 .location-map-sec .text-e {
     background-color: #0039a6;
 }
-.location-map-sec .text-s{
+
+.location-map-sec .text-s {
     background-color: #6d6e71;
 }
-.location-map-sec .text-7{
+
+.location-map-sec .text-7 {
     background-color: #9d3d97;
 }
+
 .location-map-sec .text-m {
     background-color: #f58220;
 }
+
 .location-map-sec .text-6 {
     background-color: #00a65c;
 }
@@ -1189,6 +1202,7 @@
     .property-wrap .listing-wrapper .listing-row .info {
         padding-bottom: 45px;
     }
+
     .property-wrap .listing-wrapper .listing-row .img-holder {
         flex: 0 0 30%;
     }
@@ -1198,47 +1212,58 @@
     .neighborhood-search {
         margin: 70px auto;
     }
+
     .property-wrap .listing-wrapper .listing-row {
         display: block;
         position: relative;
     }
+
     .property-wrap .listing-wrapper .listing-row .img-holder {
         margin-right: 0;
     }
+
     .property-wrap .listing-wrapper .listing-row .img-holder .main-img {
         object-fit: cover;
         width: 100%;
         height: 220px;
     }
+
     .property-wrap .listing-wrapper .listing-row .info .actions-btns {
         position: initial;
         text-align: center;
         width: 100%;
         margin-top: 20px;
     }
+
     .property-wrap .listing-wrapper .listing-row .info {
         padding: 15px;
         position: initial;
     }
+
     .property-wrap .listing-wrapper .listing-row .info .actions-btns button {
         display: block;
         width: 100%;
         text-align: center;
         margin: 10px 0px 0px;
     }
+
     .search-box {
         margin-bottom: 10px;
     }
+
     .dropdown-price-range {
         margin-bottom: 10px;
     }
+
     .new-found-results h4 {
         margin-bottom: 10px;
         font-size: 20px;
     }
+
     .property-wrap {
         padding: 30px 0px 30px;
     }
+
     #signup .modal-dialog-scrollable .modal-content {
         max-height: inherit !important;
     }
@@ -1311,7 +1336,7 @@
     z-index: -1;
 }
 
-.inputfile + label {
+.inputfile+label {
     max-width: 80%;
     font-size: 1.25rem;
     /* 20px */
@@ -1325,22 +1350,22 @@
     /* 10px 20px */
 }
 
-.no-js .inputfile + label {
+.no-js .inputfile+label {
     display: none;
 }
 
-.inputfile:focus + label,
-.inputfile.has-focus + label {
+.inputfile:focus+label,
+.inputfile.has-focus+label {
     outline: 1px dotted #000;
     outline: -webkit-focus-ring-color auto 5px;
 }
 
-.inputfile + label * {
+.inputfile+label * {
     /* pointer-events: none; */
     /* in case of FastClick lib use */
 }
 
-.inputfile + label svg {
+.inputfile+label svg {
     width: 1em;
     height: 1em;
     vertical-align: middle;
@@ -1351,22 +1376,22 @@
     /* 4px */
 }
 
-.inputfile-2 + label {
+.inputfile-2+label {
     color: #d3394c;
     border: 2px solid currentColor;
 }
 
-.inputfile-2:focus + label,
-.inputfile-2.has-focus + label,
-.inputfile-2 + label:hover {
+.inputfile-2:focus+label,
+.inputfile-2.has-focus+label,
+.inputfile-2+label:hover {
     color: #722040;
 }
 
 .inputfile {
-    opacity: 0 ;
+    opacity: 0;
 }
 
-.choose-cover{
+.choose-cover {
     display: flex;
     padding: 15px 0px;
     align-items: center;
@@ -1379,7 +1404,7 @@
     object-fit: cover;
 }
 
-.choose-cover .box{
+.choose-cover .box {
     flex: 0 0 calc(100% - 150px);
     padding-left: 15px;
 }
@@ -1393,6 +1418,7 @@
 /* notification */
 
 @charset "UTF-8";
+
 .notification-container {
     cursor: default;
     position: absolute;
@@ -1611,6 +1637,7 @@ main {
 
 .fc-event-container .fc-content {
     color: #fff;
+    white-space: normal !important;
 }
 
 .fc-view.fc-month-view.fc-basic-view {
@@ -1622,21 +1649,27 @@ main {
         right: -40px;
         width: 303px;
     }
+
     .notiofication-content a {
         width: 75%;
     }
+
     .notification-container:before {
         right: 40px;
     }
+
     .notification-container h3 {
         padding: 20px 10px;
     }
+
     .notification-container i.right {
         right: 10px;
     }
+
     .notiofication-content {
         padding: 15px 10px 5px;
     }
+
     .notiofication-content .fa-times {
         right: 5px;
     }
@@ -1684,7 +1717,7 @@ main {
     flex-wrap: wrap;
 }
 
-.datepicker-withtime .add-more-btn{
+.datepicker-withtime .add-more-btn {
     flex: 0 0 100%;
     justify-content: center;
     text-align: center;
@@ -1703,11 +1736,11 @@ main {
     height: 45px !important;
 }
 
-.datepicker-withtime .by-add-only{
+.datepicker-withtime .by-add-only {
     flex: 0 0 100%;
 }
 
-.open-house-admin-section{
+.open-house-admin-section {
     background: #eee;
     padding: 15px;
 }
@@ -1752,55 +1785,56 @@ main {
     color: red;
 }
 
-.price-wrapp{
+.price-wrapp {
     margin-top: 10px;
 }
 
-.price-wrapp .price{
+.price-wrapp .price {
     font-weight: bold;
 }
 
-.price-wrapp .additional-info ul{
+.price-wrapp .additional-info ul {
     display: flex;
     align-items: center;
 }
 
-.price-wrapp .additional-info ul li{
+.price-wrapp .additional-info ul li {
     margin-right: 8px;
     text-align: center;
     border-right: #ddd solid 1px;
     padding-right: 8px;
 }
 
-.price-wrapp .additional-info ul li:last-child{
+.price-wrapp .additional-info ul li:last-child {
     border-right: 0px;
 }
 
-.remove-btn-wrapper{
+.remove-btn-wrapper {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
-.remove-btn-wrapper .remove-open-house{
+
+.remove-btn-wrapper .remove-open-house {
     color: #e7781b;
     font-weight: 600;
     font-size: 14px;
     cursor: pointer;
 }
 
-.datepicker-withtime .row:first-child .remove-open-house{
+.datepicker-withtime .row:first-child .remove-open-house {
     display: none;
 }
 
-.price-wrapp .additional-info ul li p{
+.price-wrapp .additional-info ul li p {
     margin: 0;
 }
 
-.gm-style .gm-style-iw-c{
+.gm-style .gm-style-iw-c {
     padding: 0px !important;
 }
 
-.gm-ui-hover-effect{
+.gm-ui-hover-effect {
     top: 3px !important;
     right: 5px !important;
     width: 30px !important;
@@ -1810,7 +1844,7 @@ main {
     border-radius: 50% !important;
 }
 
-.gm-style-iw-d{
+.gm-style-iw-d {
     overflow: inherit !important;
     padding: 12px;
 }
@@ -1849,6 +1883,7 @@ main {
     font-size: 15px;
     font-weight: 700;
 }
+
 #check-availability .after-border {
     border-top: 1px solid #B7B7B7;
     margin-top: 15px;
@@ -1875,7 +1910,8 @@ main {
     background-color: transparent;
     text-transform: uppercase;
 }
-#check-availability .send-availablity-btn{
+
+#check-availability .send-availablity-btn {
     width: 100%;
     text-align: center;
     border: 1px solid #F36F21;
@@ -1883,15 +1919,17 @@ main {
     background-color: transparent;
     text-transform: uppercase;
 }
+
 #check-availability .send-availablity-btn:hover,
 #check-availability .send-availablity-btn:active,
-#check-availability .send-availablity-btn:focus{
+#check-availability .send-availablity-btn:focus {
     background-color: #F36F21;
     transition: all 0.5s ease-out;
     color: #fff;
     box-shadow: none;
 }
-#listing-image{
+
+#listing-image {
     margin-bottom: 1rem;
 }
 
@@ -1908,16 +1946,19 @@ main {
     .padding-leftt-0 {
         padding-left: 15px;
     }
+
     #check-availability .modal-body a.btn {
         margin-bottom: 10px;
     }
+
     .neighbor-autocomplete {
         width: 60%;
     }
-    #check-availability .modal-body h3{
-    margin-top: 15px ;
-    font-size: 18px;
-}
+
+    #check-availability .modal-body h3 {
+        margin-top: 15px;
+        font-size: 18px;
+    }
 }
 
 @media (min-width: 576px) {
@@ -1928,13 +1969,13 @@ main {
 }
 
 
-#addevent .modal-header .modal-title{
+#addevent .modal-header .modal-title {
     font-size: 16px;
     font-weight: 700;
     color: #000;
 }
 
-.view-chat-view{
+.view-chat-view {
     position: absolute;
     right: 130px;
     top: 5px;
@@ -1944,7 +1985,8 @@ main {
     padding: 5px 12px;
     border-radius: 20px;
 }
-.view-chat-archive{
+
+.view-chat-archive {
     position: absolute;
     right: 10px;
     top: 5px;
@@ -1954,26 +1996,34 @@ main {
     padding: 5px 20px;
     border-radius: 20px;
 }
-.view-chat-view:hover,.view-chat-view:active,.view-chat-view:focus{
+
+.view-chat-view:hover,
+.view-chat-view:active,
+.view-chat-view:focus {
     color: #fff;
 }
-.view-chat-archive:hover,.view-chat-archive:active,.view-chat-archive:focus{
+
+.view-chat-archive:hover,
+.view-chat-archive:active,
+.view-chat-archive:focus {
     color: #fff;
 }
-@media only screen and (max-width: 576px){
-.view-buttons{
-    margin-bottom: 30px;
+
+@media only screen and (max-width: 576px) {
+    .view-buttons {
+        margin-bottom: 30px;
+    }
 }
-}
 
 
 
-.listing-info .fill-heart{
+.listing-info .fill-heart {
     display: inline-block;
     font-size: 25px;
     color: #e7781b;
 }
-.listing-info .empty-heart{
+
+.listing-info .empty-heart {
     display: inline-block;
     font-size: 25px;
 }
