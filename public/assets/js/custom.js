@@ -35,11 +35,11 @@ $(() => {
         	console.log(get_parent);
 	 	}else{
 	 	}
-	 	
-	});
-	
 
-	
+	});
+
+
+
 
 	$(".additional-info .input-style").attr("disabled", true);
 
@@ -48,9 +48,6 @@ $(() => {
 		uiLibrary: 'bootstrap4'
 	});
 
-	$(".property-thumb .heart-icon").click(function () {
-		$(this).toggleClass('favourite');
-	});
 	// disable enable exclusive settings checkboxes
 	$(function() {
 	  $('#exclusive-3').change(function() {
@@ -67,7 +64,7 @@ $(() => {
 	    }
 	  });
 	});
-	
+
 
 
 
@@ -325,7 +322,7 @@ $('#price-range-submit').hide();
             $(".create-agent-listing").hide();
              $("#signup_form .btn-default").prop('disabled', false);
             $("#signup_form .agnet-input").prop('disabled', false);
-            
+
 		} else {
             $("#signup_form .agnet-input").prop('disabled', true);
             $("#signup_form .finding-home-text").css('opacity', '0.3');
@@ -469,7 +466,11 @@ $('#price-range-submit').hide();
     	$("#login-btn").click(function() {
 		    $('body').addClass('signup-modal-scroll');
 		});
-    	
+
+        $(".display-heart-icon").click(function() {
+            $('#login').modal('show');
+        });
+
     	$("#need-help-btn2").click(function(){
             $("body").addClass("signup-modal-scroll-getStart");
         });
@@ -477,18 +478,18 @@ $('#price-range-submit').hide();
         $(".need-help-modal .close").click(function(){
             $("body").removeClass("signup-modal-scroll-getStart");
         });
-    	
+
     	$(document).on("click", function (e) {
 	        if ($(e.target).is("#signup-btn")==false && $(e.target).parents('#signup').length==0 && $(e.target).parents('#login').length==0) {
 	            $("body").removeClass("signup-modal-scroll");
 	        }
-	        
+
     	});
 
     	$('.close-signup-modal').click(function(){
     		$('body').removeClass('signup-modal-scroll');
     	});
-    	
+
 
     	$(document).on("click", function (e) {
 	        if ($(e.target).parents(".need-help-modal").length==0) {
@@ -496,12 +497,12 @@ $('#price-range-submit').hide();
 	        }
     	});
 
-    	// 
+    	//
     	$("#advance-search-chkbox input[type='checkbox']").change(function(){
     	if($(this).is(":checked")){
-        	$(this).parent('#advance-search-chkbox ul li').addClass("white-border-chkbox"); 
+        	$(this).parent('#advance-search-chkbox ul li').addClass("white-border-chkbox");
     	}else{
-        	$(this).parent('#advance-search-chkbox ul li').removeClass("white-border-chkbox");  
+        	$(this).parent('#advance-search-chkbox ul li').removeClass("white-border-chkbox");
     		}
 		});
     });

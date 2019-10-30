@@ -61,9 +61,9 @@ class User extends Authenticate implements CanResetPassword {
     /**
      * @return HasOne
      */
-    public function favourite() {
+/*    public function favourite() {
         return $this->hasOne(Favourite::class, 'user_id');
-    }
+    }*/
 
 	/**
 	 * @return HasMany
@@ -77,6 +77,13 @@ class User extends Authenticate implements CanResetPassword {
      */
 	public function neighborExpertise() {
 	    return $this->belongsToMany(Neighborhoods::class, 'agent_neighborhoods', 'agent_id', 'neighborhood_id');
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function favourite() {
+        return $this->belongsToMany(Listing::class, 'favourites', 'user_id', 'listing_id');
     }
 
 	/**
