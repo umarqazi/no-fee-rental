@@ -72,6 +72,6 @@ class BuildingRepo extends BaseRepo {
      * @return mixed
      */
     public function getApartments($id) {
-        return $this->findById($id)->with('listings');
+        return $this->findById($id)->with('listings', 'amenities');
     }
 }

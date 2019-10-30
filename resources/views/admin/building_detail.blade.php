@@ -47,16 +47,7 @@
             <div class="row">
                 <ul class="col-md-3">
                     <h3>Amenities</h3>
-                    @foreach($amenities as $key => $amenity)
-                        <ul class="checkbox-listing">
-                            <li>
-                                <div class="custom-control custom-checkbox">
-                                    <input class="custom-control-input" id="{{ $key }}" name="amenities[]" type="checkbox" value="{{ $amenity->id }}">
-                                    <label class="custom-control-label" for="{{ $key }}">{{ $amenity->amenities }}</label>
-                                </div>
-                            </li>
-                        </ul>
-                    @endforeach
+                    {!! amenities() !!}
                 </ul>
             </div>
         </div>
@@ -72,6 +63,6 @@
                 {!! Form::submit($status, ['class' => 'btn-default']) !!}
             </div>
         {!! Form::close() !!}
-        </div>
+    </div>
 </div>
 @endsection

@@ -20,7 +20,7 @@
                     </a>
                 @endif
                 <div class="actions-btns">
-                    <a href="{{ route(whoAmI().'.editListing', $ab->listings[0]->id) }}">
+                    <a href="{{ route(whoAmI().'.editBuilding', $ab->id) }}">
                         <span><img src="{{asset('assets/images/edit-icon.png')}}" alt=""></span>
                     </a>
                     <a href="{{ route(whoAmI().'.copyListing', $ab->listings[0]->id) }}">

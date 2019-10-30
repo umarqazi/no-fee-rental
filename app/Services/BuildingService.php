@@ -59,8 +59,12 @@ class BuildingService {
      */
     public function verify($id, $request) {
         $this->__apartmentAction($id, ACTIVE, $request->neighborhood);
-        $this->addAmenities($this->buildingRepo->findById($id)->first(), $request->amenities);
+        $this->attachAmenities($this->buildingRepo->findById($id)->first(), $request->amenities);
         return $this->buildingRepo->update($id, ['is_verified' => TRUE]);
+    }
+
+    public function update($id, $request) {
+        dd($id, $request);
     }
 
     /**
@@ -91,7 +95,10 @@ class BuildingService {
     public function manageBuilding($apartment_addr) {
         $building = $this->__isExistingApartment($apartment_addr);
         if(!$building) {
-            $building = $this->buildingRepo->create(['building' => str_random(10), 'is_verified' => false]);
+            $building = $this->buildingRepo->create([
+                'building'    => str_random(10),
+                'is_verified' => isAgent() ? false : true
+            ]);
         }
 
         return $building;
@@ -117,19 +124,12 @@ class BuildingService {
     }
 
     /**
-     * @return mixed
-     */
-    public function amenities() {
-        return $this->amenitiesRepo->all();
-    }
-
-    /**
      * @param $building
      * @param $data
      *
      * @return mixed
      */
-    public function addAmenities($building, $data) {
+    public function attachAmenities($building, $data) {
         return $this->buildingRepo->attachAmenities($building, $data);
     }
 
@@ -173,7 +173,7 @@ class BuildingService {
      */
     private function __collection($paginate) {
         return [
-            'verified'   => $this->buildingRepo->active($paginate),
+            'verified'     => $this->buildingRepo->active($paginate),
             'non_verified' => $this->buildingRepo->inactive($paginate)
         ];
     }
