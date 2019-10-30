@@ -354,16 +354,34 @@ $(() => {
 	    let info = $listing.find('.info > div');
 	    let rent = info.find('p:first').text();
 	    let data = info.find('small').text();
+        let address = info.find('p:last').text();
 	    data = data.split(',');
 	    let bed = parseInt(data[0]);
 	    let bath = parseInt(data[1]);
 	    let modal = $('body').find('#check-availability');
 	    modal.find('.row > div > img').attr('src', img);
-	    modal.find('#address').text('asd');
+	    modal.find('#address').text(address);
         modal.find('.bedroms-baths-text > span:first').text(bed);
         modal.find('.bedroms-baths-text > span:last').text(bath);
         modal.find('.row > div:eq(1) > small').text(rent);
         modal.find('input[name=listing_id]').val($(this).attr('list_id'));
         modal.find('input[name=to]').val($(this).attr('to'));
+    });
+
+    $(".property-thumb .heart-icon").click(function () {
+        let id = $(this).siblings('div.check-btn').find('a > button').attr('list_id');
+        $(this).toggleClass('favourite');
+        if($(this).hasClass('favourite')){
+            let res =  ajaxRequest(
+                `/favourite/`+id,
+                'GET',
+                true);
+        }
+        else  {
+            let res =  ajaxRequest(
+                `/remove/favourite/`+id,
+                'GET',
+                true);
+        }
     });
 });

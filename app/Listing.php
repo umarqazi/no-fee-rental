@@ -68,7 +68,7 @@ class Listing extends Model {
      * @return BelongsToMany
      */
     public function favourites() {
-        return $this->belongsToMany(User::class, 'favourites', 'user_id', 'listing_id');
+        return $this->belongsToMany(User::class, 'favourites', 'listing_id', 'user_id');
     }
 
     /**
@@ -170,6 +170,14 @@ class Listing extends Model {
             'openHouses', 'features', 'listingBuilding.listings', 'neighborhood'
         ]);
 	}
+    /**
+     * @param $query
+     *
+     * @return mixed
+     */
+    public function scopeWithFavourite($query) {
+        return $query->with('favourites');
+    }
 
 	/**
 	 * @param $query

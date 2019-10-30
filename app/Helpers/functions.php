@@ -106,6 +106,17 @@ function isAgent() {
 function isRenter() {
     return auth()->guard('renter')->check();
 }
+/**
+ * @return mixed
+ */
+function isFavourite($favourites , $listing_id) {
+    foreach ($favourites as $key => $fav){
+        if($fav["pivot"]->user_id == myId() && $fav["pivot"]->listing_id ==$listing_id ){
+            return true ;
+        }
+    }
+    return false ;
+}
 
 /**
  * @return mixed
