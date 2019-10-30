@@ -2,12 +2,12 @@ import Echo from "laravel-echo"
 window.io = require('socket.io-client');
 let $ulSelector = $('.messages > ul');
 
-$('body').on('form-success-appointment', function (event, res) {
+$('body').on('form-success-appointment', function () {
     $('#check-availability').modal('hide');
 });
 
 /**
- * Confirm the accepted chat
+ * Accept Meeting Request
  */
 $('#reply').on('click', async function(e) {
     e.preventDefault();
@@ -50,6 +50,7 @@ $('#send-message').on('submit', function(e) {
  */
 $('#load_chat').on('click', async function(e) {
     e.preventDefault();
+    alert('yes');
     let inbox_id = $(this).attr('inbox_id');
     if(await ajaxRequest(`load-chat/${inbox_id}`,'post')) {
     }

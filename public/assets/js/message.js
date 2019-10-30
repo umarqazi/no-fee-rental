@@ -11356,11 +11356,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 window.io = __webpack_require__(/*! socket.io-client */ "./node_modules/socket.io-client/lib/index.js");
 var $ulSelector = $('.messages > ul');
-$('body').on('form-success-appointment', function (event, res) {
+$('body').on('form-success-appointment', function () {
   $('#check-availability').modal('hide');
 });
 /**
- * Confirm the accepted chat
+ * Accept Meeting Request
  */
 
 $('#reply').on('click',
@@ -11446,17 +11446,18 @@ function () {
         switch (_context2.prev = _context2.next) {
           case 0:
             e.preventDefault();
+            alert('yes');
             inbox_id = $(this).attr('inbox_id');
-            _context2.next = 4;
+            _context2.next = 5;
             return ajaxRequest("load-chat/".concat(inbox_id), 'post');
 
-          case 4:
+          case 5:
             if (!_context2.sent) {
-              _context2.next = 5;
+              _context2.next = 6;
               break;
             }
 
-          case 5:
+          case 6:
           case "end":
             return _context2.stop();
         }

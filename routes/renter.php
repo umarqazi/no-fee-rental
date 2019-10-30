@@ -22,5 +22,16 @@ Route::get('/show-profile', 'Renter\ProfileController@profile')->name('renter.sh
 Route::post('/update-profile', 'Renter\ProfileController@updateProfile')->name('renter.profileUpdate');
 
 // Password Routes
-//Route::post('/password-update', 'Renter\RenterController@updatePassword')->name('renter.updatePassword');
-//Route::get('/password-reset', 'Renter\RenterController@resetPassword')->name('renter.resetPassword');
+Route::post('/password-update', 'Renter\ProfileController@updatePassword')->name('renter.updatePassword');
+Route::get('/password-reset', 'Renter\ProfileController@resetPassword')->name('renter.resetPassword');
+
+// Listing Conversation Routes
+Route::get('/view-conversations', 'Renter\ListingConversationController@index')->name('renter.conversations');
+Route::get('/load-conversation/inbox/{id}', 'Renter\ListingConversationController@load')->name('renter.loadConversation');
+Route::post('/send-message/{id}', 'Renter\ListingConversationController@reply')->name('renter.sendMessage');
+Route::get('/archive-conversation/{id}', 'Renter\ListingConversationController@archive')->name('renter.archiveConversation');
+Route::get('/unArchive-conversation/{id}', 'Renter\ListingConversationController@unArchive')->name('renter.unArchiveConversation');
+
+// Calender Routes
+Route::post('/add-event', 'Renter\CalendarController@create')->name('renter.addEvent');
+Route::get('/show-calendar', 'Renter\CalendarController@index')->name('renter.showCalendar');

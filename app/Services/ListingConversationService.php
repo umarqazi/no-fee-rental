@@ -159,10 +159,12 @@ class ListingConversationService {
      * @param $conversation_id
      * @param $request
      *
-     * @return mixed
+     * @return array|mixed|null
      */
     private function __sendMessage($conversation_id, $request) {
         $message = $this->__validateMessageForm($conversation_id, $request);
+        $message->to = $request->to;
+        dispatchMessageEvent($message);
         return $this->messageRepo->create($message->toArray());
     }
 

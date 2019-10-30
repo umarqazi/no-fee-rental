@@ -8,6 +8,10 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
+/**
+ * Class TriggerMessage
+ * @package App\Events
+ */
 class TriggerMessage implements ShouldBroadcast {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -22,8 +26,7 @@ class TriggerMessage implements ShouldBroadcast {
      * @param $data
      */
     public function __construct($data) {
-        (is_object($data)) ?: $data = toObject($data);
-        $this->data = $data;
+        $this->data = (is_object($data)) ? $data : toObject($data);
     }
 
     /**
@@ -34,7 +37,7 @@ class TriggerMessage implements ShouldBroadcast {
     }
 
     /**
-     * @return Channel|\Illuminate\Broadcasting\Channel|\Illuminate\Broadcasting\Channel[]
+     * @return Channel|Channel|Channel[]
      */
     public function broadcastOn() {
         return new Channel('messaging-channel.'.$this->data->to);
