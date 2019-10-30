@@ -93,5 +93,6 @@ Route::get('/edit-building/{id}', 'Admin\BuildingController@edit')->name('admin.
 Route::post('/update-building/{id}', 'Admin\BuildingController@update')->name('admin.updateBuilding');
 Route::get('/no-fee-building/{id}', 'Admin\BuildingController@noFee')->name('admin.noFeeBuilding');
 Route::get('/fee-building/{id}', 'Admin\BuildingController@fee')->name('admin.feeBuilding');
+Route::get('/add-apartment/{id}', 'Admin\BuildingController@addApartment')->name('admin.addApartment');
 
 Route::get('/view-associated-agents/{id}', 'Admin\HomeController@associatedAgents');

@@ -182,10 +182,16 @@ if(!defined('FEE')) {
     define('FEE', 'fee');
 }
 
+/**
+ * Default Open House Color
+ */
 if(!defined('ADDOPENHOUSECOLOR')) {
     define('ADDOPENHOUSECOLOR', 'dark yellow');
 }
 
+/**
+ * Update Open House Color
+ */
 if(!defined('UPDATEOPENHOUSECOLOR')) {
     define('UPDATEOPENHOUSECOLOR', 'red');
 }

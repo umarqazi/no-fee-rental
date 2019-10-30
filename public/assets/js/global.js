@@ -348,7 +348,7 @@ $(() => {
 		}
 	});
 
-	$('button[data-target="#check-availability"]').on('click', function() {
+	$('BODY').on('click', 'button[data-target="#check-availability"]', function () {
 	    let $listing = $(this).parents('.property-thumb');
 	    let img = $listing.find('img').attr('src');
 	    let info = $listing.find('.info > div');
@@ -368,20 +368,17 @@ $(() => {
         modal.find('input[name=to]').val($(this).attr('to'));
     });
 
-    $(".property-thumb .heart-icon").click(function () {
+    /**
+     * Do Listing Favourite/Remove Favourite
+     */
+    $("body").on('click', '.heart-icon', async function () {
         let id = $(this).siblings('div.check-btn').find('a > button').attr('list_id');
         $(this).toggleClass('favourite');
-        if($(this).hasClass('favourite')){
-            let res =  ajaxRequest(
-                `/favourite/`+id,
-                'GET',
-                true);
+        if ($(this).hasClass('favourite')) {
+            return await ajaxRequest(`/favourite/${id}`, 'GET', true);
         }
-        else  {
-            let res =  ajaxRequest(
-                `/remove/favourite/`+id,
-                'GET',
-                true);
-        }
+
+        return await ajaxRequest(`/remove/favourite/${id}`, 'GET', true);
     });
+
 });

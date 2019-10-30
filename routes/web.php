@@ -94,8 +94,11 @@ Route::get('/listing-by-rent/{sort}', 'RentController@sort');
 Route::get('/listing-by-rent', 'RentController@index')->name('web.ListsByRent');
 Route::get('/listing-by-rent-search', 'RentController@advanceSearch')->name('web.advanceRentSearch');
 
+// Review Routes
+Route::get('/send-a-review/{token}', 'ReviewController@index')->name('web.makeReview');
+Route::post('/create-review', 'ReviewController@create')->name('web.createReview');
 
-//Favourite
+// Favourite Routes
 Route::get('/favourite/{listing_id}', 'UserController@favourite')->name('web.favouriteListing');
 Route::get('/remove/favourite/{listing_id}', 'UserController@removeFavourite')->name('web.removeFavouriteListing');
 
@@ -123,5 +126,5 @@ Route::get('/composer-dump', function() {
 });
 
 Route::get('/test', function() {
-    dd(isActiveTab('agent.index'));
+//    dd(isActiveTab('agent.index'));
 });

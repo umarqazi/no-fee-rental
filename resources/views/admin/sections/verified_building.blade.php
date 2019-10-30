@@ -8,7 +8,7 @@
             </div>
             <div class="info">
                 <p class="title">{{ str_limit(is_exclusive(isset($ab->listings[0]) ? $ab->listings[0] : null), STR_LIMIT_LIST_VIEW, ' ...') }}</p>
-                <p class="title">Total Agents: {{ count($ab->listings) }}</p>
+                <p class="title">Total Apartments: {{ count($ab->listings) }}</p>
                 <p>Posted On: {{ $ab->created_at->format("m/d/y H:m A") }}</p>
                 @if($ab->type === FEE)
                     <a href="{{ route(whoAmI().'.noFeeBuilding', $ab->id) }}" title="Make this building no fee">
@@ -22,6 +22,9 @@
                 <div class="actions-btns">
                     <a href="{{ route(whoAmI().'.editBuilding', $ab->id) }}">
                         <span><img src="{{asset('assets/images/edit-icon.png')}}" alt=""></span>
+                    </a>
+                    <a href="{{ route('admin.addApartment', collect($ab->listings)->first()->id) }}">
+                        <button type="button" class="border-btn">Add Apartment</button>
                     </a>
                 </div>
             </div>
