@@ -31,7 +31,9 @@ $(() => {
     });
 
     $.validator.addMethod('time_validation', function(value, element, param) {
-        return ($('select[name="open_house[start_time][]"]').val() >= $('select[name="open_house[end_time][]"]').val())  ? false : true ;
+        let start_time = parseInt($('select[name="open_house[start_time][]"]').val());
+        let end_time = parseInt($('select[name="open_house[end_time][]"]').val());
+        return (start_time >= end_time)  ? false : true ;
     },);
 
     (function($) {
