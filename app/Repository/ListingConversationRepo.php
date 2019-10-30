@@ -77,4 +77,11 @@ class ListingConversationRepo extends BaseRepo {
         $response = $this->find(['email' => $email, 'listing_id' => $listing_id, 'conversation_type' => AVAILABILITY])->first();
         return $response ? true : false;
     }
+
+    /**
+     * @return mixed
+     */
+    public function sender() {
+        return $this->model->with('sender');
+    }
 }

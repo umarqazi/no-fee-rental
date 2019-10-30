@@ -64,8 +64,8 @@ class ListingConversation extends Model {
      */
     public function scopeActiveConversations($query) {
         return $query->where([
-            'meeting_request' => ACTIVE,
-            'is_archived' => FALSE,
+            'meeting_request'          => ACTIVE,
+            'is_archived'              => FALSE,
             isRenter() ? 'from' : 'to' => myId()
         ])->with(['listing', 'sender']);
     }
@@ -77,8 +77,8 @@ class ListingConversation extends Model {
      */
     public function scopeInactiveConversations($query) {
         return $query->where([
-            'meeting_request' => DEACTIVE,
-            'is_archived' => FALSE,
+            'meeting_request'          => DEACTIVE,
+            'is_archived'              => FALSE,
             isRenter() ? 'from' : 'to' => myId()
         ])->with(['listing', 'sender']);
     }
