@@ -25,7 +25,8 @@ class Listing extends Model {
         'name', 'email', 'phone_number', 'street_address', 'display_address',
         'thumbnail', 'baths', 'bedrooms', 'unit', 'rent', 'square_feet',
         'description', 'is_featured', 'map_location', 'building_type',
-		'visibility', 'realty_url', 'availability'
+		'visibility', 'realty_url', 'availability', 'application_fee',
+        'deposit'
 	];
 
     /**
