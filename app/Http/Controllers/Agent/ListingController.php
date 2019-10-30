@@ -89,7 +89,7 @@ class ListingController extends Controller {
      * @return Factory|RedirectResponse|View
      */
     public function create(Request $request) {
-        $request->visibility = DEACTIVE;
+        $request->visibility = PENDINGLISTING;
         $id = $this->listingService->create($request);
         return redirect(route('agent.createListingImages', $id));
     }

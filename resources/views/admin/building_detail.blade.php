@@ -10,7 +10,7 @@
     <div class="grid-view-wrapper" style="display: block;">
         <div class="building-detail-header">
             <div class="building-address">
-                <h3> Building Address: <small> {{ is_exclusive(collect($building->listings)->first()) }}</small></h3>
+                <h3> Building Address: <small> {{ collect($building->listings)->first()->street_address }}</small></h3>
             </div>
             <div class="building-appartments">
                 <h3> Total Apartments: <small> {{ count($building->listings) }}</small></h3>
@@ -36,7 +36,7 @@
                             @endif
                         </div>
                         <div class="list-actions-icons">
-                            <a href="#"><button><i class="fa fa-eye"></i></button></a>
+                            <a href="{{ route('listing.detail', $apartment->id) }}"><button><i class="fa fa-eye"></i></button></a>
                         </div>
                     </div>
                 </div>

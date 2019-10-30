@@ -13,20 +13,20 @@
                 <a href="{{ route(whoAmI().'.buildingDetails', $al->id) }}" title="Verify this building">
                     <span class="status" style="background-color:red;">Verify</span>
                 </a>
-                <div class="actions-btns">
-                    <a href="{{ route(whoAmI().'.editListing', $al->listings[0]->id) }}">
-                        <span><img src="{{asset('assets/images/edit-icon.png')}}" alt=""></span>
-                    </a>
-                    <a href="{{ route(whoAmI().'.copyListing', $al->listings[0]->id) }}">
-                        <span><img src="{{asset('assets/images/copy-icon.png')}}" alt=""></span>
-                    </a>
-                    <a href="{{ route('listing.detail', $al->listings[0]->id) }}">
-                        <i class="fa fa-eye" style="font-size: 24px;position: relative;top: 5px;"></i>
-                    </a>
-                    <a href="{{ route(whoAmI().'.repostListing', $al->listings[0]->id) }}">
-                        <button type="button" class="border-btn">Repost</button>
-                    </a>
-                </div>
+{{--                <div class="actions-btns">--}}
+{{--                    <a href="{{ route(whoAmI().'.editListing', $al->listings[0]->id) }}">--}}
+{{--                        <span><img src="{{asset('assets/images/edit-icon.png')}}" alt=""></span>--}}
+{{--                    </a>--}}
+{{--                    <a href="{{ route(whoAmI().'.copyListing', $al->listings[0]->id) }}">--}}
+{{--                        <span><img src="{{asset('assets/images/copy-icon.png')}}" alt=""></span>--}}
+{{--                    </a>--}}
+{{--                    <a href="{{ route('listing.detail', $al->listings[0]->id) }}">--}}
+{{--                        <i class="fa fa-eye" style="font-size: 24px;position: relative;top: 5px;"></i>--}}
+{{--                    </a>--}}
+{{--                    <a href="{{ route(whoAmI().'.repostListing', $al->listings[0]->id) }}">--}}
+{{--                        <button type="button" class="border-btn">Repost</button>--}}
+{{--                    </a>--}}
+{{--                </div>--}}
             </div>
         </div>
     @endforeach
@@ -62,15 +62,15 @@
                             <span class="status" style="margin-right: 60px;background: blueviolet;">{{($al->listings[0]->is_featured == REQUESTFEATURED) ? 'Requested for feature' : 'Featured' }}</span>
                         @endif
                         <div class="actions-btns">
-                            <a href="{{ route(whoAmI().'.repostListing', $al->listings[0]->id) }}">
-                                <button type="button" class="border-btn">Repost</button>
-                            </a>
+{{--                            <a href="{{ route(whoAmI().'.repostListing', $al->listings[0]->id) }}">--}}
+{{--                                <button type="button" class="border-btn">Repost</button>--}}
+{{--                            </a>--}}
                         </div>
-                        <div class="list-actions-icons">
-                            <a href="{{ route(whoAmI().'.editListing', $al->listings[0]->id) }}"><button><i class="fa fa-edit"></i></button></a>
-                            <a href="{{ route(whoAmI().'.copyListing', $al->listings[0]->id) }}"><button><i class="fa fa-copy"></i></button></a>
-                            <a href="{{ route('listing.detail', $al->listings[0]->id) }}"><button><i class="fa fa-eye"></i></button></a>
-                        </div>
+{{--                        <div class="list-actions-icons">--}}
+{{--                            <a href="{{ route(whoAmI().'.editListing', $al->listings[0]->id) }}"><button><i class="fa fa-edit"></i></button></a>--}}
+{{--                            <a href="{{ route(whoAmI().'.copyListing', $al->listings[0]->id) }}"><button><i class="fa fa-copy"></i></button></a>--}}
+{{--                            <a href="{{ route('listing.detail', $al->listings[0]->id) }}"><button><i class="fa fa-eye"></i></button></a>--}}
+{{--                        </div>--}}
                     </div>
                 </div>
             </div>
