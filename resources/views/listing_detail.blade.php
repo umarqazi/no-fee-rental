@@ -25,11 +25,26 @@
                                 <li><a href="#"><i class="fab fa-youtube"></i> Youtube</a></li>
                               </ul>
                             </a>
-                            @if(!empty($listing->agent->favourite) && $listing->agent->favourite->listing_id === $listing->id)
+                            {{--@if(!empty($listing->agent->favourite) && $listing->agent->favourite->listing_id === $listing->id)
                                 <a href="javascript:void(0);" class="ml-2"><i class="fas fa-heart fill-heart"></i></a>
                             @else
                                 <a href="javascript:void(0);" class="ml-2"><i class="far fa-heart empty-heart"></i></a>
+                            @endif--}}
+
+                            @if(!isRenter() && !isAdmin() && !isAgent() && !isOwner())
+                                <span class="display-heart-icon"></span>
                             @endif
+                            @if(isAdmin() || isAgent() || isOwner())
+
+                            @endif
+                            @if(isRenter())
+                                @if(isFavourite($listing["favourites"],$listing->id))
+                                    <span class="heart-icon favourite"></span>
+                                @else
+                                    <span class="heart-icon"></span>
+                                @endif
+                            @endif
+
                             <a href="javascript:void(0);" class="ml-2" data-toggle="modal" data-target="#flag-icon"><img src="/assets/images/flag-icon.png" alt="" class="flag-icon" /></a>
                         </span>
                     </div>
@@ -331,7 +346,7 @@
 
                 <div class="owl-slider">
                     <div class="owl-carousel owl-theme" id="NearbyApartments">
-                        @if(count($listing->listingBuilding->building->listings) > 1)
+                        @if( isset($listing->listingBuilding->building->listings) && count($listing->listingBuilding->building->listings) > 1)
                             @foreach($listing->listingBuilding->building->listings as $apartment)
                             @if($listing->id === $apartment->id) @continue @endif
                                 <div class="item">

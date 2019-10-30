@@ -48,9 +48,9 @@ $(() => {
         uiLibrary: 'bootstrap4'
     });
 
-    $(".property-thumb .heart-icon").click(function () {
+    /*$(".property-thumb .heart-icon").click(function () {
         $(this).toggleClass('favourite');
-    });
+    });*/
     // disable enable exclusive settings checkboxes
     $(function () {
         $('#exclusive-3').change(function () {
