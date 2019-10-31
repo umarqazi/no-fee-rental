@@ -167,7 +167,7 @@ class User extends Authenticate implements CanResetPassword {
      * @return mixed
      */
     public function scopeWithFavourites($query) {
-        return $query->with('favourqweites');
+        return $query->with('favourite');
     }
 
     /**
@@ -195,5 +195,25 @@ class User extends Authenticate implements CanResetPassword {
      */
     public function scopeWithNeighborhoods($query) {
         return $query->with('neighborExpertise');
+    }
+
+    /**
+     * @param $query
+     * @return mixed
+     */
+    public function scopeActiveFavourites($query) {
+        return $query->with(['favourite' => function($sub) {
+            return $sub->where('visibility', ACTIVE);
+        }]);
+    }
+
+    /**
+     * @param $query
+     * @return mixed
+     */
+    public function scopeInactiveFavourites($query) {
+        return $query->with(['favourite' => function($sub) {
+            return $sub->where('visibility', DEACTIVE);
+        }]);
     }
 }
