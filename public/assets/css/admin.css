@@ -1823,3 +1823,8 @@ margin-top: 20px;
         max-width: 600px;
     }
 }
+
+
+.svg-icon-color{
+    fill: blue;
+}

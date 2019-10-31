@@ -17,7 +17,7 @@
                 {!! $il->realty_id ? "<p><i class='fa fa-map-marker-alt'></i> RealtyMX ID: {$il->realty_id}</p>" : '' !!}
                 <p>Posted On: {{ $il->created_at->format("m/d/y H:m A") }}</p>
                 <a href="{{ route(whoAmI().'.listingStatus', $il->id) }}" title="Publish this property">
-                    <span class="status" style="background: red;">Deactive</span>
+                    <span class="status" style="background: red;">Inactive</span>
                 </a>
                 <div class="actions-btns">
                     <a href="{{ route(whoAmI().'.editListing', $il->id) }}">

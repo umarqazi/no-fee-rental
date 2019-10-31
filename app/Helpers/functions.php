@@ -8,6 +8,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
 /**
@@ -81,7 +82,9 @@ function isAdmin() {
 }
 
 /**
- * @return mixed
+ * @param $listing_id
+ *
+ * @return bool
  */
 function is_created_by_owner($listing_id) {
     $listing_creator = (new \App\Services\ListingService())->created_by($listing_id);
@@ -106,8 +109,12 @@ function isAgent() {
 function isRenter() {
     return auth()->guard('renter')->check();
 }
+
 /**
- * @return mixed
+ * @param $favourites
+ * @param $listing_id
+ *
+ * @return bool
  */
 function isFavourite($favourites , $listing_id) {
     foreach ($favourites as $key => $fav){
@@ -379,15 +386,20 @@ function openHouseTimeSlot($index) {
 }
 
 /**
- * @return string|null
+ * @param int $perColumn
+ *
+ * @return string
  */
-function amenities() {
-    $html = null;
+function amenities($perColumn = 5) {
+    $html = '<div class="col-md-4"><h3>Amenities</h3>';
     $service = new \App\Services\AmenityService();
     foreach ($service->get() as $key => $amenity) {
         $html .= '<ul class="checkbox-listing"><li><div class="custom-control custom-checkbox">';
         $html .= Form::checkbox('amenities[]', $amenity->id, null, ['class' => 'custom-control-input', 'id' => $key]);
         $html .= '<label class="custom-control-label" for="'.$key.'">'.$amenity->amenities.'</label></div></li></ul>';
+        if(($key + 1) % $perColumn === 0) {
+            $html .= '</div><div class="col-sm-4"><h3>&nbsp;</h3>';
+        }
     }
 
     return $html;
@@ -475,11 +487,15 @@ function deleteCalendarEvent($id) {
  * @return string
  */
 function is_exclusive($listing) {
-    if($listing->building_type === EXCLUSIVE) {
-        return sprintf("%s - (%s)", $listing->street_address, $listing->unit ?? '#');
+    if($listing !== null) {
+        if ( $listing->building_type === EXCLUSIVE ) {
+            return sprintf( "%s - (%s)", $listing->street_address, $listing->unit ?? '#' );
+        }
+
+        return $listing->display_address;
     }
 
-    return $listing->display_address;
+    return 'N/A';
 }
 
 /**
