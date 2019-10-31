@@ -117,9 +117,11 @@
                             <input type='hidden' name='map_location' value={{ $listing->map_location }}>
                             <div class='property-thumb'>
                                 <div class='check-btn'>
-                                    <button class='btn-default' data-toggle='modal' data-target='#check-availability'>
-                                        Check Availability
-                                    </button>
+                                    @if(isRenter())
+                                        <button class='btn-default' data-toggle='modal' onclick="checkAvailability({{$listing}})" data-target='#check-availability'>
+                                            Check Availability
+                                        </button>
+                                    @endif
                                 </div>
                                 <span class='heart-icon' list_id="{{ $listing->id }}"></span>
                                 <img src='{{ asset($listing->thumbnail ?? DLI) }}' alt="" class='main-img'>
@@ -144,9 +146,11 @@
                                 <div class="items">
                                     <div class='property-thumb'>
                                         <div class='check-btn'>
-                                            <button class='btn-default' data-toggle='modal' data-target='#check-availability'>
-                                                Check Availability
-                                            </button>
+                                            @if(isRenter())
+                                                <button class='btn-default' data-toggle='modal' onclick="checkAvailability({{$listing}})" data-target='#check-availability'>
+                                                    Check Availability
+                                                </button>
+                                            @endif
                                         </div>
                                         <span class='heart-icon'></span>
                                         <img src='{{ asset($listing->thumbnail ?? DLI) }}' alt="" class='main-img'>
@@ -182,6 +186,9 @@
 
 {{--Advance Search Modal--}}
 @include('modals.advance_search')
+{{--Check Availability--}}
+@include('modals.check_availability')
+
 {!! HTML::script('assets/js/neighborhoods.js') !!}
 {!! HTML::script('assets/js/input-to-dropdown.js') !!}
 {!! HTML::script("https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js") !!}
@@ -193,8 +200,4 @@
         markerClusters(coords, document.getElementById('mobile-map'));
         markerClusters(coords, document.getElementById('desktop-map'));
     }
-
-    $('.heart-icon').on('click', function() {
-        alert('clicked');
-    });
 </script>

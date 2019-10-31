@@ -58,6 +58,13 @@ class User extends Authenticate implements CanResetPassword {
         return $this->hasOne(Company::class, 'id', 'company_id');
     }
 
+    /**
+     * @return HasOne
+     */
+    public function favourite() {
+        return $this->hasOne(Favourite::class, 'user_id');
+    }
+
 	/**
 	 * @return HasMany
 	 */

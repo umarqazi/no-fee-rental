@@ -36,14 +36,14 @@
                                 <img src="{{ asset($fl->thumbnail ?? DLI) }}" alt="" class="main-img" />
                                 <div class="info">
                                     <div class="info-link-text">
-                                        <p>{{--${{ $fl->rent }}--}}<?php echo ($fl->rent) ?   '$' .number_format($fl->rent,0) : 'Null' ; ?></p>
+                                        <p>{{ ($fl->rent) ?   '$' .number_format($fl->rent,0) : 'Null' }}</p>
                                         <small> {{ str_formatting($fl->bedrooms, 'Bed') .' ,'. str_formatting($fl->baths, 'Bath') }} </small>
                                         <p> {{ is_exclusive($fl) }}</p>
                                     </div>
                                     <a href="{{ route('listing.detail', $fl->id) }}" class="btn viewfeature-btn"> View </a>
                                 </div>
                                 <div class="feaure-policy-text">
-                                    <p>{{--{{ $fl->rent }}--}}<?php echo ($fl->rent) ?   '$' .number_format($fl->rent,0) : 'Null' ; ?> / Month </p>
+                                    <p>{{ ($fl->rent) ? '$' .number_format($fl->rent,0) : 'Null' }} / Month </p>
                                     <span>{{ str_formatting($fl->bedrooms, 'Bed') .' ,'. str_formatting($fl->baths, 'Bath') }} </span>
                                 </div>
                             </div>
@@ -262,7 +262,9 @@
         </div>
     </div>
 </div>
+{{--Check Availability--}}
 @include('modals.check_availability')
+
 <script type="text/javascript">
     $('.owl-slider #carousel-1, .owl-slider #carousel-2, .owl-slider #carousel-3').owlCarousel({
         autoplay: true,
