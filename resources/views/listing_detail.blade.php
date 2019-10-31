@@ -16,26 +16,17 @@
                 <div class="listing-info">
                     <div class="product-title">
                         <p> {{ is_exclusive($listing) }} </p>
-                        <span>
-                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown"><img src="/assets/images/share-icon.png" alt="" />
+                        <div class="right-share-icons-side">
+                            <div class="dropdown-toggle share-icon-div" data-toggle="dropdown"><img src="/assets/images/share-icon.png" alt="" />
                              <ul class="dropdown-menu">
                                 <li> <a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
                                 <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
                                 <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
                                 <li><a href="#"><i class="fab fa-youtube"></i> Youtube</a></li>
                               </ul>
-                            </a>
-                            {{--@if(!empty($listing->agent->favourite) && $listing->agent->favourite->listing_id === $listing->id)
-                                <a href="javascript:void(0);" class="ml-2"><i class="fas fa-heart fill-heart"></i></a>
-                            @else
-                                <a href="javascript:void(0);" class="ml-2"><i class="far fa-heart empty-heart"></i></a>
-                            @endif--}}
-
-                            @if(!isRenter() && !isAdmin() && !isAgent() && !isOwner())
-                                <span class="display-heart-icon"></span>
-                            @endif
-                            @if(isAdmin() || isAgent() || isOwner())
-
+                            </div>
+                            @if(!authenticated())
+                               <span class="display-heart-icon"></span>
                             @endif
                             @if(isRenter())
                                 @if(isFavourite($listing["favourites"],$listing->id))
@@ -45,8 +36,8 @@
                                 @endif
                             @endif
 
-                            <a href="javascript:void(0);" class="ml-2" data-toggle="modal" data-target="#flag-icon"><img src="/assets/images/flag-icon.png" alt="" class="flag-icon" /></a>
-                        </span>
+                            <a href="javascript:void(0);" class="" data-toggle="modal" data-target="#flag-icon"><img src="/assets/images/flag-icon.png" alt="" class="flag-icon" /></a>
+                        </div>
                     </div>
                     <p class="title-subtext">
                         {{ $listing->display_address.', '.$listing->neighborhood->name }}

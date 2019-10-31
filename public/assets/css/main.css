@@ -1154,7 +1154,7 @@ h3 {
     max-width: 100%;
 }
 
-.featured-properties .property-listing .property-thumb .heart-icon {
+/*.featured-properties .property-listing .property-thumb*/ .heart-icon {
     background: url(../images/heart-icon.png) no-repeat 0px 0px;
     position: absolute;
     right: 10px;
@@ -1167,7 +1167,7 @@ h3 {
     transition: all ease 0.4s;
 }
 
-.featured-properties .property-listing .property-thumb .heart-icon.favourite {
+/*.featured-properties .property-listing .property-thumb */.heart-icon.favourite {
     background: url(../images/heart-icon.png) no-repeat 0px -56px;
 }
 
@@ -2504,7 +2504,25 @@ footer .copyright .social-icons li a:hover {
     justify-content: space-between;
     align-items: center;
 }
-
+.listing-detail-container .listing-info .product-title .right-share-icons-side{
+   display: flex;
+    align-items: center;
+}
+.listing-detail-container .listing-info .product-title .share-icon-div{
+    cursor:pointer;
+    display: inline-block;
+    vertical-align: middle;
+}
+.listing-detail-container .listing-info .product-title .heart-icon.favourite{
+    background:url(../images/heart-icon.png) no-repeat 0px -65px;
+}
+.listing-detail-container .listing-info .product-title .heart-icon {
+    width: 45px;
+    height: 28px;
+    position: relative;
+    top: 0px;
+    left: -2px;
+}
 .listing-detail-container .listing-info .product-title p {
     margin: 0px;
     line-height: normal;
@@ -2650,8 +2668,8 @@ footer .copyright .social-icons li a:hover {
 .listing-Details .listing-info .product-title .flag-icon {
     width: 28px;
     height: 28px;
-    position: relative;
-    top: 3px;
+    display: inline-block;
+    vertical-align: middle;
 }
 
 .listing-Details .listing-info .available-btn {

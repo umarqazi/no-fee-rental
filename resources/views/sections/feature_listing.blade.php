@@ -32,23 +32,8 @@
                                         <button class="btn-default" list_id="{{ $fl->id }}" to="{{ $fl->agent->id }}"  data-target="#check-availability">Check Availability</button>
                                     </a>
                                 </div>
-                                {{--@if(sizeof($fl->favourite) > '0')
-                                    @foreach($fl->favourite as $key => $check_favourite)
-                                        @if($check_favourite->user_id == myid())
-                                        <a href="{!! route('web.removeFavouriteListing', $fl->id) !!}" class="ml-2 filled-heart-icon"><i class="fas fa-heart fill-heart"></i></a>
-                                                 @break
-                                        @else
-                                            <a href="{!! route('web.favouriteListing', $fl->id) !!}" class="ml-2 empty-heart-icon"><i class="far fa-heart empty-heart"></i></a>
-                                        @endif
-                                    @endforeach
-                                @else
-                                <a href="{!! route('web.favouriteListing', $fl->id) !!}" class="ml-2 empty-heart-icon"><i class="far fa-heart empty-heart "></i></a>
-                                @endif--}}
-                                @if(!isRenter() && !isAdmin() && !isAgent() && !isOwner())
+                                @if(!authenticated())
                                     <span class="display-heart-icon"></span>
-                                @endif
-                                @if(isAdmin() || isAgent() || isOwner())
-
                                 @endif
                                 @if(isRenter())
                                 @if(isFavourite($fl["favourites"],$fl->id))
@@ -57,12 +42,6 @@
                                  <span class="heart-icon "></span>
                                 @endif
                                 @endif
-                                {{--
-                                @if($fl->is_favourite == true)
-                                    <span --}}{{--href="{!! route('web.removeFavouriteListing', $fl->id) !!}"--}}{{-- onClick="unLike({{$fl->id}})" id="unlike" class="ml-2 filled-heart-icon"><i class="fas fa-heart --}}{{--fill-heart--}}{{--"></i></span>
-                                @else
-                                    <span --}}{{--href="{!! route('web.favouriteListing', $fl->id) !!}"--}}{{-- onClick="like({{$fl->id}})" id="like" class="ml-2 empty-heart-icon"><i class="far fa-heart --}}{{--empty-heart--}}{{--"></i></span>
-                                @endif--}}
                                 <img src="{{ asset($fl->thumbnail ?? DLI) }}" alt="" class="main-img" />
                                 <div class="info">
                                     <div class="info-link-text">
