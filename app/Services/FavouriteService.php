@@ -26,22 +26,15 @@ class FavouriteService {
     public function __construct() {
         $this->repo = new UserRepo();
     }
+
     /**
-     * get favourite listing.
+     * @param $paginate
+     * @return array
      */
-
-
-    public function getFavouriteListing($paginate, $id) {
-          $this->repo->favouriteListing($id);
-        /*     return [
-            'active' => $this->active()
-                ->latest('updated_at')
-                ->paginate($paginate, ['*'], 'active'),
-
-            'closed' => $this->pending()
-                ->latest()
-                ->paginate($paginate, ['*'], 'closed'),
-        ];
-   */ }
+    public function getFavouriteListing($paginate) {
+        $active = $this->repo->activeFav()->paginate($paginate, ['*'], 'active-favourites');
+        $inactive = $this->repo->inActiveFav()->paginate($paginate, ['*'], 'inactive-favourites');
+        return compact('active', 'inactive');
+    }
 
 }

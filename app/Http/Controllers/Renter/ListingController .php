@@ -44,8 +44,8 @@ class ListingController extends Controller {
      * @return favourite listing
      */
     public function wishList() {
-        $listing = $this->favouriteService->getFavouriteListing($this->paginate,myId());dd($listing);
-        return view('renter.listing_view', compact('listing'));
+        $favourites = toObject($this->favouriteService->getFavouriteListing($this->paginate));
+        return view('renter.listing_view', compact('favourites'));
     }
 
 }
