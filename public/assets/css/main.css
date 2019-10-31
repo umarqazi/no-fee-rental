@@ -468,15 +468,6 @@ h3 {
     align-items: center;
 }
 
-.header-bg:before {
-    /*content: "";
-  position: absolute;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.4);*/
-}
-
 .header-bg .banner-wrapper {
     width: 850px;
     position: relative;
@@ -675,11 +666,11 @@ h3 {
 }
 
 .header-wrapper .header-container .header-right-wrapper .recent-search-dropdown .dropDown ul li a {
+    width: 100%;
     display: inline;
     padding: 0px 0px;
     color: #000;
     font-size: 13px;
-    width: 100%;
     align-items: center;
 }
 
@@ -3178,8 +3169,6 @@ footer .copyright .social-icons li a:hover {
 .calendarCarasoule .owl-carousel .owl-dots {
     display: none;
 }
-
-.calendarCarasoule .owl-carousel .owl-nav .owl-prev {}
 
 .calendarCarasoule .owl-carousel .item .appointment-radio-btn span {
     font-size: 25px;

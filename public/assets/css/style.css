@@ -1165,7 +1165,8 @@
     left: 0;
     top: 0;
     right: 0;
-    bottom: 0 opacity: 0;
+    bottom: 0;
+    opacity: 0;
     transition: all 0.3s ease-out;
 }
 
@@ -1371,9 +1372,7 @@
     vertical-align: middle;
     fill: currentColor;
     margin-top: -0.25em;
-    /* 4px */
     margin-right: 0.25em;
-    /* 4px */
 }
 
 .inputfile-2+label {
@@ -1416,7 +1415,6 @@
 
 
 /* notification */
-
 @charset "UTF-8";
 
 .notification-container {
@@ -1474,7 +1472,7 @@
 .notification-container i {
     color: #b5c4d2;
     font-size: 140%;
-    @vertical-align (50%);
+    vertical-align: (50%);
     position: absolute;
 }
 
@@ -1757,7 +1755,6 @@ main {
     font-size: 14px;
     background-color: #dddddd;
     color: #000;
-    hgray;
 }
 
 @media only screen and (max-width: 767px) {
