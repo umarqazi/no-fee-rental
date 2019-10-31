@@ -158,7 +158,7 @@ class UserController extends Controller {
         if(myid()){
 		 $favourite = $this->service->favourite($id);
 		 if($favourite){
-			return sendResponse($request, $favourite, 'Listing has been added to favourites!');
+			return sendResponse($request, $favourite, null);
 		 }
         }
         else {
@@ -174,7 +174,7 @@ class UserController extends Controller {
         if(myid()){
             $favourite = $this->service->removeFavourite($id);
             if($favourite){
-                return sendResponse($request, $favourite, 'Listing has been removed from favourites!');
+                return sendResponse($request, $favourite, null);
             }
         }
         else {

@@ -42,10 +42,11 @@ class Member extends Model {
 
     /**
      * @param $query
+     * @param $id
      *
      * @return mixed
      */
-    public function scopeMyFriends($query) {
-        return $query->where('agent_id', myId())->with('friends');
+    public function scopeMyFriends($query, $id) {
+        return $query->where('agent_id', $id ?? myId())->with('friends');
     }
 }

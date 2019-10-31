@@ -6,6 +6,10 @@ $(() => {
         return a.length > c;
     });
 
+    $.validator.addMethod("squareFeet", function(a, b, c) {
+        return parseInt(a) > c;
+    });
+
     $.validator.addMethod("validateSelect", function(val, ele, arg) {
             return arg !== val;
     });
@@ -70,7 +74,7 @@ $(() => {
 
            square_feet: {
                required: true,
-               greaterThan: 0
+               squareFeet: 0
            },
            availability: {
                required: true,
@@ -124,7 +128,7 @@ $(() => {
            },
            square_feet: {
                required: "Square feet is required.",
-               greaterThan: "Square feet must be greater than 0"
+               squareFeet: "Square feet must be greater than 0"
            },
            availability: {
                required: "Select Availability.",

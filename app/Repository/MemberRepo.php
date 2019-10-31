@@ -26,9 +26,11 @@ class MemberRepo extends BaseRepo {
     }
 
     /**
+     * @param null $id
+     *
      * @return mixed
      */
-    public function friends() {
-        return $this->model->myfriends();
+    public function friends($id = null) {
+        return $this->model->myfriends($id);
     }
 }

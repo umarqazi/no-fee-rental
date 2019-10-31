@@ -364,13 +364,13 @@ $(() => {
         auto: false,
         loop: false,
         responsive: [{
-                breakpoint: 1279,
-                settings: {
-                    item: 1,
-                    thumbItem: 4,
-                    slideMove: 1,
-                }
-            },
+            breakpoint: 1279,
+            settings: {
+                item: 1,
+                thumbItem: 4,
+                slideMove: 1,
+            }
+        },
             {
                 breakpoint: 1024,
                 settings: {

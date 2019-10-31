@@ -234,14 +234,14 @@
 
                 <div class="col-md-3 col-sm-4">
                     <h3>Amenities</h3>
-                    @if(count($listing->listingBuilding->amenities) < 1)
+                    @if( isset($listing->listingBuilding->amenities) && count($listing->listingBuilding->amenities) < 1)
                         None
-                    @endif
                     @foreach($listing->listingBuilding->amenities as $feature)
                         <ul class="second-ul">
                             <li>{{ $feature->amenities }}</li>
                         </ul>
                     @endforeach
+                    @endif
                 </div>
             </div>
         </div>
@@ -297,7 +297,7 @@
             <h3> Nearby Apartments</h3>
             <div class="property-listing">
                 <div class="desktop-listiing">
-                    @if(count($listing->listingBuilding->building->listings) > 1)
+                    @if(isset($listing->listingBuilding->building->listings) && count($listing->listingBuilding->building->listings) > 1)
                         @foreach($listing->listingBuilding->building->listings as $apartment)
                             @if($listing->id === $apartment->id) @continue @endif
                             <div class="property-thumb">
@@ -331,53 +331,36 @@
 
                 <div class="owl-slider">
                     <div class="owl-carousel owl-theme" id="NearbyApartments">
-
-                            <div class="item">
-                                <div class="property-thumb">
-                                <div class="check-btn">
-                                    <a href="javascript:void(0);">
-                                        <button class="btn-default" data-toggle="modal" data-target="#check-availability">Check Availability</button>
-                                    </a>
-                                </div>
-                                <span class="heart-icon"></span>
-                                <img src="http://localhost:8000/storage/images/listing/thumbnails/CiUjEIe1GWdVVY7p6Rq1.jpg" alt="" class="main-img">
-                                <div class="info">
-                                    <div class="info-link-text">
-                                        <p> $12444 </p>
-                                        <small> 4 Beds ,3 Baths </small>
-                                        <p> Fort Lauderdale, FL, USA</p>
+                        @if(count($listing->listingBuilding->building->listings) > 1)
+                            @foreach($listing->listingBuilding->building->listings as $apartment)
+                            @if($listing->id === $apartment->id) @continue @endif
+                                <div class="item">
+                                    <div class="property-thumb">
+                                    <div class="check-btn">
+                                        <a href="javascript:void(0);">
+                                            <button class="btn-default" data-toggle="modal" data-target="#check-availability">Check Availability</button>
+                                        </a>
                                     </div>
-                                    <a href="http://localhost:8000/listing-detail/2" class="btn viewfeature-btn"> View </a>
+                                    <span class="heart-icon"></span>
+                                    <img src="{{ asset($apartment->thumbnail ?? DLI) }}" alt="" class="main-img">
+                                        <div class="info">
+                                            <div class="info-link-text">
+                                                <p> ${{ $apartment->rent }} </p>
+                                                <small>{{ str_formatting($apartment->bedrooms, 'Bed').' ,'.str_formatting($apartment->baths, 'Bath') }} </small>
+                                                <p> {{ is_exclusive($apartment) }}</p>
+                                            </div>
+                                            <a href="{{ route('listing.detail', $apartment->id) }}" class="btn viewfeature-btn"> View </a>
+                                        </div>
+                                        <div class="feaure-policy-text">
+                                            <p>${{ $apartment->rent }} / Month </p>
+                                            <span>{{ str_formatting($apartment->bedrooms, 'Bed').' ,'.str_formatting($apartment->baths, 'Bath') }}</span>
+                                        </div>
                                 </div>
-                                <div class="feaure-policy-text">
-                                    <p>$12444 / Month </p>
-                                    <span>4 Beds ,3 Baths </span>
                                 </div>
-                            </div>
-                            </div>
-                            <div class="item">
-                                <div class="property-thumb">
-                                <div class="check-btn">
-                                    <a href="javascript:void(0);">
-                                        <button class="btn-default" data-toggle="modal" data-target="#check-availability">Check Availability</button>
-                                    </a>
-                                </div>
-                                <span class="heart-icon"></span>
-                                <img src="http://localhost:8000/storage/images/listing/thumbnails/CiUjEIe1GWdVVY7p6Rq1.jpg" alt="" class="main-img">
-                                <div class="info">
-                                    <div class="info-link-text">
-                                        <p> $12444 </p>
-                                        <small> 4 Beds ,3 Baths </small>
-                                        <p> Fort Lauderdale, FL, USA</p>
-                                    </div>
-                                    <a href="http://localhost:8000/listing-detail/2" class="btn viewfeature-btn"> View </a>
-                                </div>
-                                <div class="feaure-policy-text">
-                                    <p>$12444 / Month </p>
-                                    <span>4 Beds ,3 Baths </span>
-                                </div>
-                            </div>
-                            </div>
+                            @endforeach
+                        @else
+                            No nearby apartment found
+                        @endif
                     </div>
                 </div>
             </div>
