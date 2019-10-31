@@ -4,7 +4,7 @@
 <div class="wrapper building-details-wrapper">
     <div class="heading-wrapper">
         <h1>{{ $status }} Building</h1>
-        <a href="#" class="btn-default" data-toggle="modal" data-target="#invite-member">Add Member</a>
+        <a href="{{ route('admin.addApartment', collect($building->listings)->first()->id) }}" class="btn-default" >Add Apartment</a>
     </div>
     <!--Grid view listing-->
     <div class="grid-view-wrapper" style="display: block;">
@@ -31,12 +31,33 @@
                                 <li><i class="fa fa-bath"></i> {{ str_formatting($apartment->baths, 'Bath') }}</li>
                             </ul>
                             <p>Posted On: {{ $apartment->created_at->format('m/d/y h:i a') }}</p>
-                            @if($apartment->is_featured === APPROVEFEATURED)
-                                <span class="status" style="background: blueviolet;">Featured</span>
+                            @if($apartment->visibility === ACTIVE)
+                                <a href="{{ route(whoAmI().'.listingStatus', $apartment->id) }}" title="Unpublish this property">
+                                    <span class="status">Active</span>
+                                </a>
+                            @elseif($apartment->visibility === DEACTIVE)
+                                <a href="{{ route(whoAmI().'.listingStatus', $apartment->id) }}" title="Publish this property">
+                                    <span class="status" style="background: red;">Inactive</span>
+                                </a>
                             @endif
-                        </div>
-                        <div class="list-actions-icons">
-                            <a href="{{ route('listing.detail', $apartment->id) }}"><button><i class="fa fa-eye"></i></button></a>
+                            @if($apartment->is_featured === APPROVEFEATURED)
+                                <span class="status" style="background: blueviolet;right: 75px;">Featured</span>
+                            @endif
+                            <div class="actions-btns">
+                                <a href="{{ route(whoAmI().'.repostListing', $apartment->id) }}">
+                                    <button type="button" class="border-btn">Repost</button>
+                                </a>
+                                @if($apartment->is_featured != APPROVEFEATURED)
+                                    <a href="{{ route(whoAmI().(isAdmin() ? '.approveFeature' : '.requestFeatured'), $apartment->id) }}">
+                                        <button type="button" class="border-btn">{{ isAdmin() ? 'Make Featured' : 'Request for Featured' }}</button>
+                                    </a>
+                                @endif
+                            </div>
+                            <div class="list-actions-icons">
+                                <a href="{{ route(whoAmI().'.editListing', $apartment->id) }}"><button><i class="fa fa-edit"></i></button></a>
+                                <a href="{{ route(whoAmI().'.copyListing', $apartment->id) }}"><button><i class="fa fa-copy"></i></button></a>
+                                <a href="{{ route('listing.detail', $apartment->id) }}"><button><i class="fa fa-eye"></i></button></a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -45,10 +66,7 @@
         {!! Form::model($building, ['url' => route($route, $building->id)]) !!}
         <div class="amenities-section">
             <div class="row">
-                <ul class="col-md-3">
-                    <h3>Amenities</h3>
-                    {!! amenities() !!}
-                </ul>
+               {!! amenities() !!}
             </div>
         </div>
             <div class="after-amenities-inputs">
@@ -65,4 +83,5 @@
         {!! Form::close() !!}
     </div>
 </div>
+    {!! HTML::script('assets/js/listing.js') !!}
 @endsection
