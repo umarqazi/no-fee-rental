@@ -120,4 +120,17 @@ class BuildingController extends Controller {
         $response = $this->buildingService->fee($id);
         return sendResponse($request, $response, 'Building marked as fee');
     }
+
+    /**
+     * @param $id
+     *
+     * @return Factory|View
+     */
+    public function addApartment($id) {
+        $action = 'Create';
+        $listing = $this->buildingService->addApartment($id);
+        $listing->features = findFeatures($listing->features);
+        $listing->user_id = $listing->agent->id;
+        return view('listing-features.listing', compact('listing', 'action'));
+    }
 }
