@@ -126,5 +126,4 @@ Route::get('/composer-dump', function() {
 });
 
 Route::get('/test', function() {
-//    dd(isActiveTab('agent.index'));
 });

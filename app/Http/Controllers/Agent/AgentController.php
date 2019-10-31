@@ -105,4 +105,12 @@ class AgentController extends Controller {
         });
         return toObject($this->userService->fetchQuery());
     }
+
+    /**
+     *
+     * @return view
+     */
+    public function reviews() {
+      return view('agent.reviews');
+     }
 }

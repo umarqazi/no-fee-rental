@@ -63,3 +63,6 @@ Route::get('/unArchive-conversation/{id}', 'Agent\ListingConversationController@
 // Calender Routes
 Route::post('/add-event', 'Agent\CalendarController@create')->name('agent.addEvent');
 Route::get('/show-calendar', 'Agent\CalendarController@index')->name('agent.showCalendar');
+
+//reviews
+Route::get('/reviews' , 'Agent\AgentController@reviews')->name('agent.reviews');
