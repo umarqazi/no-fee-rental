@@ -24,10 +24,6 @@ $(() => {
         $(".listing-wrapper").hide();
         $(".grid-view-wrapper").show();
     });
-    // $(".dropdown-wrap button").click(function() {
-    // 	$(this).addClass("addbackground");
-    // 	// $(this).addClass('addbackground');
-    // });
 
     $('.dropdown-wrap ul li .radio-button').click(function () {
         var input_checked = $(this).find("input").attr('checked', true);
@@ -37,9 +33,6 @@ $(() => {
         } else {}
 
     });
-
-
-
 
     $(".additional-info .input-style").attr("disabled", true);
 
@@ -67,11 +60,6 @@ $(() => {
             }
         });
     });
-
-
-
-
-    //
 
     $('#price-range-submit').hide();
 
@@ -364,13 +352,13 @@ $(() => {
         auto: false,
         loop: false,
         responsive: [{
-            breakpoint: 1279,
-            settings: {
-                item: 1,
-                thumbItem: 4,
-                slideMove: 1,
-            }
-        },
+                breakpoint: 1279,
+                settings: {
+                    item: 1,
+                    thumbItem: 4,
+                    slideMove: 1,
+                }
+            },
             {
                 breakpoint: 1024,
                 settings: {
@@ -440,8 +428,6 @@ $(() => {
             }
         }
     });
-
-
 
     $('#subscribe').on('click', async function () {
         let res = JSON.parse(await ajaxRequest(

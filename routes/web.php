@@ -123,6 +123,5 @@ Route::get('/composer-dump', function() {
 });
 
 Route::get('/test', function() {
-    auth()->guard('owner')->logout();
-    dd('done;');
+    return view("make_review");
 });
