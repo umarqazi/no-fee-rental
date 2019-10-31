@@ -54,7 +54,7 @@
                                 @if(isFavourite($fl["favourites"],$fl->id))
                                 <span class="heart-icon favourite"></span>
                                 @else
-                                 <span class="heart-icon"></span>
+                                 <span class="heart-icon "></span>
                                 @endif
                                 @endif
                                 {{--
