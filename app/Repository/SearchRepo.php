@@ -33,9 +33,10 @@ class SearchRepo extends BaseRepo {
      * @return mixed
      */
     public function amenities($values) {
-        return $this->model->whereHas('amenities', function($subQuery) use ($values) {
+        /*return $this->model->whereHas('amenities', function($subQuery) use ($values) {
             return $subQuery->whereIn('amenity_id', $values);
-        });
+        });*/
+        return $this->model->active();
     }
 
     /**
