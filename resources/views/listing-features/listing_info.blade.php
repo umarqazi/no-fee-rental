@@ -104,6 +104,24 @@
 </div>
 <div class="col-md-6">
     <div class="form-group">
+        <label>Lease Term</label>
+        {!! Form::text('lease_term', null, ['class' => 'input-style','id' => 'lease_term']) !!}
+        <span class="invalid-feedback" role="alert">
+			{!! $errors->first('lease_term') !!}
+		</span>
+    </div>
+</div>
+<div class="col-md-6">
+    <div class="form-group">
+        <label>Free Months</label>
+        {!! Form::text('free_months', null, ['class' => 'input-style']) !!}
+        <span class="invalid-feedback" role="alert">
+            {!! $errors->first('free_months') !!}
+        </span>
+    </div>
+</div>
+<div class="col-md-6">
+    <div class="form-group">
         <label>Availability</label>
         {!! Form::select('availability', config('formfields.listing.availability'), null, ['class' => 'input-style']) !!}
         <span class="invalid-feedback" role="alert">
