@@ -81,6 +81,13 @@ class ListingRepo extends BaseRepo {
 	}
 
 	/**
+     * @return mixed
+     */
+    public function popular() {
+        return $this->model->featured()->popular();
+    }
+
+	/**
 	 * @return mixed
 	 */
 	public function activeFeatured() {

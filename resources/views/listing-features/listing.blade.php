@@ -18,7 +18,7 @@
                     ]) !!}
                 {!! Form::hidden('visibility') !!}
                 {!! Form::hidden('user_id') !!}
-                @if(isAdmin() && isset($listing->id) && is_created_by_owner($listing->id))
+                @if(isAdmin() && $action != 'Create' ? isset($listing->id) && is_created_by_owner($listing->id) : true )
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
@@ -54,6 +54,7 @@
 <script>
     $(document).ready(function() {
         enableDatePicker('#availability_date');
+        enableDatePicker('#lease_term');
         enableDatePicker('.open-house-date', false);
         autoComplete(document.getElementById('controls'));
         // fetchNeighbours($('input[name=neighborhood]'));

@@ -1881,7 +1881,14 @@ main {
     height: 47px;
     cursor: pointer;
 }
-
+.listing-Details .listing-info #display-heart-icon {
+    background: url(../images/heart-icon.png) no-repeat 0px 0px;
+    width: 51px;
+    z-index: 1;
+    height: 47px;
+    cursor: pointer;
+    position: static;
+}
 .padding-leftt-0 {
     padding-left: 0px;
 }

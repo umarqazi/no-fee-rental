@@ -26,13 +26,13 @@
                               </ul>
                             </div>
                             @if(!authenticated())
-                               <span class="display-heart-icon"></span>
+                               <span id="display-heart-icon" class="display-heart-icon"></span>
                             @endif
                             @if(isRenter())
                                 @if(isFavourite($listing["favourites"],$listing->id))
-                                    <span class="heart-icon favourite"></span>
+                                    <span id = "{{$listing->id}}" class="heart-icon favourite"></span>
                                 @else
-                                    <span class="heart-icon"></span>
+                                    <span id = "{{$listing->id}}" class="heart-icon"></span>
                                 @endif
                             @endif
 
@@ -97,16 +97,16 @@
                         <div class="row ">
                             <div class="col-lg-6 col-sm-6 bdr-right">
                                 <div class="lease-term-section">
-                                    <span>Lease term: </span>
-                                     <strong> 20-04-2019</strong>
+                                    <span>Lease term: {{ $listing->lease_term ?? 'Null' }}</span>
+                                     {{--<strong> 20-04-2019</strong>--}}
                                 </div>
                                 <div class="lease-term-section">
                                    <span>Days on market:</span>
                                     <strong> {{ dateReadable($listing->created_at) }}</strong>
                                 </div>
                                 <div class="lease-term-section">
-                                   <span>Free months: </span>
-                                    <strong> None</strong>
+                                   <span>Free months: {{ $listing->free_months ?? 'Null' }}</span>
+                                    {{--<strong> None</strong>--}}
                                 </div>
                             </div>
 
@@ -314,8 +314,17 @@
                                         </button>
                                     </a>
                                 </div>
-                            <span class="heart-icon"></span>
-                            <img src="{{ asset($apartment->thumbnail ?? DLI) }}" alt="" class="main-img">
+                                @if(!authenticated())
+                                    <span class="display-heart-icon"></span>
+                                @endif
+                                @if(isRenter())
+                                    @if(isFavourite($apartment["favourites"],$fl->id))
+                                        <span id = "{{$apartment->id}}" class="heart-icon favourite"></span>
+                                    @else
+                                        <span id = "{{$apartment->id}}" class="heart-icon "></span>
+                                    @endif
+                                @endif
+                                <img src="{{ asset($apartment->thumbnail ?? DLI) }}" alt="" class="main-img">
                             <div class="info">
                                 <div class="info-link-text">
                                     <p> ${{ $apartment->rent }} </p>
