@@ -318,7 +318,7 @@
                                     <span class="display-heart-icon"></span>
                                 @endif
                                 @if(isRenter())
-                                    @if(isFavourite($apartment["favourites"],$fl->id))
+                                    @if(isFavourite($apartment["favourites"],$apartment->id))
                                         <span id = "{{$apartment->id}}" class="heart-icon favourite"></span>
                                     @else
                                         <span id = "{{$apartment->id}}" class="heart-icon "></span>
@@ -356,7 +356,16 @@
                                             <button class="btn-default" data-toggle="modal" data-target="#check-availability">Check Availability</button>
                                         </a>
                                     </div>
-                                    <span class="heart-icon"></span>
+                                        @if(!authenticated())
+                                            <span class="display-heart-icon"></span>
+                                        @endif
+                                        @if(isRenter())
+                                            @if(isFavourite($apartment["favourites"],$apartment->id))
+                                                <span id = "{{$apartment->id}}" class="heart-icon favourite"></span>
+                                            @else
+                                                <span id = "{{$apartment->id}}" class="heart-icon "></span>
+                                            @endif
+                                        @endif
                                     <img src="{{ asset($apartment->thumbnail ?? DLI) }}" alt="" class="main-img">
                                         <div class="info">
                                             <div class="info-link-text">
