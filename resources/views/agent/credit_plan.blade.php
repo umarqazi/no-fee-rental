@@ -14,17 +14,17 @@
                 It has survived not only five centuries.</p>
             <div class="plans-wrapper">
                 <div class="inner-plans-wrapper">
-                        <div class="current-plans">
-                            <h3> Basic Plan</h3>
-                            <h2>$30</h2> <small>/Month</small>
-                            <div class="text-with-tick-image">
-                                <ul>
-                                    <li>0  Featured Listings </li>
-                                    <li>20 reposts monthly</li>
-                                </ul>
-                            </div>
-                            <a herf="javascript:void(0)" class="btn btn-default">Your Current Plan</a>
+                    <div class="current-plans">
+                        <h3> Basic Plan</h3>
+                        <h2>$30</h2> <small>/Month</small>
+                        <div class="text-with-tick-image">
+                            <ul>
+                                <li>0  Featured Listings </li>
+                                <li>20 reposts monthly</li>
+                            </ul>
                         </div>
+                        <a href="{{route('agent.basicPlan')  }}" class="btn btn-default"> Current plan </a>
+                    </div>
                     <div class="current-plans gold-plan">
                         <h3> Gold Plan</h3>
                         <h2>$60</h2> <small>/Month</small>
@@ -34,7 +34,7 @@
                                 <li>100 reposts monthly</li>
                             </ul>
                         </div>
-                        <a herf="javascript:void(0)" class="btn btn-default">Get Started</a>
+                        <a href="#" class="btn btn-default"> Get started </a>
                     </div>
                     <div class="current-plans platinum-plan">
                         <h3> Platinum Plan</h3>
@@ -45,7 +45,7 @@
                                 <li>500 reposts monthly</li>
                             </ul>
                         </div>
-                        <a herf="javascript:void(0)" class="btn btn-default">Get Started</a>
+                        <a href="#" class="btn btn-default"> Get started </a>
                     </div>
                 </div>
             </div>

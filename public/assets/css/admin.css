@@ -1673,7 +1673,7 @@ header .agent-avtar .avtar:hover div ul {
     background: #223971;
     color: #fff;
     border: #223971 solid 1px;
-    ;
+;
 }
 
 
@@ -1698,18 +1698,18 @@ header .agent-avtar .avtar:hover div ul {
     border: 1px solid #223971;
     margin-bottom: 30px;
 }
- .btn-default {
-     background: #e77817;
-     display: inline-block;
-     padding: 0px 30px;
-     line-height: 32px;
-     color: #fff;
-     border-radius: 50px;
-     outline: none !important;
-     border: none;
-     cursor: pointer;
-     -webkit-transition: all ease 0.4s;
-     transition: all ease 0.4s;
+.btn-default {
+    background: #e77817;
+    display: inline-block;
+    padding: 0px 30px;
+    line-height: 32px;
+    color: #fff;
+    border-radius: 50px;
+    outline: none !important;
+    border: none;
+    cursor: pointer;
+    -webkit-transition: all ease 0.4s;
+    transition: all ease 0.4s;
 }
 .btn-default:hover, .btn-default:focus {
     background: #223971;
@@ -1743,44 +1743,46 @@ header .agent-avtar .avtar:hover div ul {
 }
 
 .review-box-wrapper{
-width: 100%;
-padding: 30px 15px;
-border: 1px solid #ddd;
-border-radius: 5px;
+    width: 100%;
+    padding: 30px 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
 }
 .review-inner-box-content{
-display: flex;
-justify-content: space-between;
-padding: 20px 0px;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 0px;
+    align-items: center;
 }
 .review-box-wrapper h4{
-color: #3c3c3c;
-font-size: 20px;
+    color: #3c3c3c;
+    font-size: 20px;
     display: inline-block;
     vertical-align: middle;
     margin-left: 10px;
 }
 .review-box-wrapper .stars-icons{
-color: #ed8a19;
-font-size: 20px;
+    color: #ed8a19;
+    font-size: 20px;
 }
 .review-box-wrapper p{
-color: #838f9a;
-font-size: 16px;
-margin-bottom: 20px;
+    color: #838f9a;
+    font-size: 16px;
+    margin-bottom: 20px;
 }
 .review-box-wrapper span{
-font-size: 14px;
-color: #838f9a;
+    font-size: 14px;
+    color: #838f9a;
 }
 .your-reviews-section .mrg-top{
-margin-top: 20px;
+    margin-top: 20px;
 }
 .review-inner-box-content .agent-name img{
     width: 40px;
     height: 40px;
     display: inline-block;
     vertical-align: middle;
+    border-radius: 50%;
 }
 #request-review textarea{
     width: 100%;
@@ -1821,9 +1823,9 @@ margin-top: 20px;
     align-items: center;
 }
 .plans-wrapper .current-plans{
-    width: calc(27% - 20px);
+    /*width: calc(27% - 20px);*/
     box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.12);
-    padding: 20px 15px;
+    padding: 20px 30px;
     border-radius: 10px;
     text-align: center;
     margin-right: 20px;
@@ -1834,6 +1836,7 @@ margin-top: 20px;
 .plans-wrapper .current-plans h3{
     font-size: 25px;
     color: #a1a1a1;
+    font-weight: 600;
     text-align: center;
     padding-bottom: 20px;
     border-bottom: 1px solid #a1a1a1;
@@ -1882,16 +1885,128 @@ margin-top: 20px;
     font-size: 18px;
     min-width:215px;
 }
-  .plans-wrapper .gold-plan .btn-default{
-      background-color: #023672;
-  }
+.plans-wrapper .gold-plan .btn-default{
+    background-color: #023672;
+}
 .plans-wrapper .platinum-plan .btn-default{
     background-color: #ff6e0d;
 }
-.plans-wrapper .current-plans .btn-default:hover, .plans-wrapper .gold-plan .btn-default:hover , .plans-wrapper .platinum-plan .btn-default:hover{
+.plans-wrapper .current-plans .btn-default:hover,
+.plans-wrapper .gold-plan .btn-default:hover ,
+.plans-wrapper .platinum-plan .btn-default:hover{
     color: #fff;
 }
+.credit-plans p{
+    font-size: 16px;
+    line-height: 1.5;
+}
 /*Credit Plans page Css*/
+
+/*basic plan page css*/
+.basic-plan-wrapper .pg-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+.basic-plan-wrapper .pg-header a{
+    flex: 0 0 10%;
+}
+.basic-plan-wrapper .change-card {
+    text-decoration-line: underline;
+    font-weight: 600;
+}
+
+.basic-plan-wrapper .switching-plans {
+    margin-top: 65px;
+}
+.basic-plan-wrapper .switching-plans p{
+    margin-bottom: 10px;
+}
+.basic-plan-wrapper .switching-plans p > b{
+    font-weight: 600;
+    color: #000;
+}
+.basic-plan-wrapper .switch-buttons{
+    margin-top: 50px;
+}
+.basic-plan-wrapper .switch-buttons .switch-gold{
+    display: inline-block;
+    vertical-align: middle;
+}
+.basic-plan-wrapper .switch-buttons .gold-btn-bg{
+    background-color:#223971 ;
+}
+.basic-plan-wrapper .switch-buttons .platinum-btn-bg{
+    background-color:#e77817 ;
+}
+.basic-plan-wrapper .switch-buttons .switch-gold:last-child{
+    margin-left: 10px;
+}
+.basic-plan-wrapper .switch-buttons .switch-gold a{
+    line-height: 50px;
+    padding: 0 50px;
+    font-size: 20px;
+}
+.basic-plan-wrapper .switch-buttons .switch-gold p{
+    text-align: center;
+    padding-top: 10px;
+    font-size: 20px;
+}
+.basic-plan-wrapper .switch-buttons .desc-gold{
+    color: #223971;
+}
+.basic-plan-wrapper .switch-buttons .desc-platinum{
+    color: #e77817;
+}
+
+.basic-plan-wrapper .plans-table .table{
+    border: 1px solid #ddd;
+}
+.basic-plan-wrapper .plans-table .table thead th{
+    border-bottom: 1px solid #dee2e6;
+    font-size: 18px;
+    color: #000;
+    font-weight: 600;
+    padding: 10px 10px;
+}
+.basic-plan-wrapper .plans-table .table tbody td{
+    padding: 10px 10px;
+}
+.basic-plan-wrapper .plans-table .table td, .table th{
+    border-top: 0;
+}
+
+.basic-plan-wrapper .plans-table .table td a{
+    text-decoration-line: underline;
+}
+
+.basic-plan-wrapper .plans-table .desktop-table-td{
+    display: block;
+}
+.basic-plan-wrapper .plans-table .mobile-table-td{
+    display: none;
+}
+
+/*basic plan page css*/
+@media only screen and (max-width:1200px){
+    .basic-plan-wrapper .pg-header{
+        display: block;
+        text-align: center;
+    }
+    .basic-plan-wrapper .pg-header p{
+        text-align: left;
+    }
+    .basic-plan-wrapper .pg-header a{
+        background-color: #e77817;
+        color: #fff;
+        padding: 10px 30px;
+        border-radius: 50px;
+        text-decoration-line: none;
+    }
+    .basic-plan-wrapper .pg-header > p{
+        margin-bottom: 20px;
+    }
+}
 @media only screen and (max-width:767px) {
     .dataTables_filter {
         float: left !important;
@@ -1899,6 +2014,98 @@ margin-top: 20px;
 
     div.table-responsive>div.dataTables_wrapper>div.row>div[class^="col-"]:last-child {
         padding-left: 0px;
+    }
+
+    .credit-plans .inner-plans-wrapper{
+        display: block;
+    }
+    .plans-wrapper .current-plans{
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    .basic-plan-wrapper .switch-buttons .switch-gold{
+        margin-bottom: 10px;
+        display: block;
+        text-align: center;
+    }
+    .basic-plan-wrapper .switch-buttons .switch-gold a{
+        width: 230px;
+        padding: 0px 15px;
+        font-size: 16px;
+    }
+    .basic-plan-wrapper .switch-buttons .switch-gold p{
+        font-size: 16px;
+    }
+    .basic-plan-wrapper .switch-buttons .switch-gold:last-child{
+        margin-left: 0px;
+    }
+    .basic-plan-wrapper .switch-buttons , .basic-plan-wrapper .switching-plans{
+        margin-top: 20px;
+    }
+    .review-box-wrapper{
+        padding: 15px 15px;
+    }
+    .review-inner-box-content{
+        padding: 0px 0px 20px;
+    }
+    .plans-table .desktop-table-td{
+        display: none !important;
+    }
+    .plans-table .mobile-table-td{
+        display: block !important;
+    }
+    .plans-table .mobile-table-td i{
+        color: #808080;
+    }
+    .basic-plan-wrapper .plans-table .table thead {
+        background-color: #233972;
+    }
+    .basic-plan-wrapper .plans-table .table thead tr th{
+        color: #fff;
+        min-width: 110px;
+        padding: 15px 10px;
+    }
+    .basic-plan-wrapper .plans-table .table tbody tr td{
+        min-width:110px;
+        padding: 15px 10px;
+    }
+    .basic-plan-wrapper .plans-table .table tr{
+        padding: 10px;
+        margin-bottom: 5px;
+        box-shadow: 0px 0px 7px 0px rgba(0,0,0,0.16)
+    }
+    .basic-plan-wrapper .plans-table .table{
+        display: table;
+        width:100%;
+        overflow-x: auto;
+    }
+}
+@media only screen and (max-width: 576px){
+
+    .review-inner-box-content .agent-name{
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+    .review-inner-box-content{
+        display: block;
+    }
+    .credit-plans.basic-plan-wrapper{
+        padding: 15px 10px 30px;
+    }
+    .plans-wrapper .current-plans .btn-default {
+        min-width: auto;
+    }
+    .credit-plans .plans-wrapper{
+        margin-top: 30px;
+    }
+    .plans-wrapper .current-plans{
+        padding: 20px 10px;
+    }
+
+
+    .basic-plan-wrapper .plans-table .table thead th{
+        font-size: 16px;
     }
 }
 
