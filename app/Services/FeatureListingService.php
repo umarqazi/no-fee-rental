@@ -113,6 +113,13 @@ class FeatureListingService {
 	}
 
 	/**
+     * @return mixed
+     */
+    public function popular() {
+        return $this->listingRepo->featured()->hasfavourite();
+    }
+
+	/**
 	 * @return mixed
 	 */
 	public function requestFeatured() {
@@ -225,7 +232,14 @@ class FeatureListingService {
             'cheapest' => $this->featured()
                             ->where('visibility', ACTIVE)
                             ->orderBy( 'rent' ,'ASC')
-                            ->paginate($paginate, ['*'], 'cheapest')
+                            ->paginate($paginate, ['*'], 'cheapest'),
+            'popular' => $this->popular()
+                            ->where('visibility', ACTIVE)
+                            ->paginate($paginate, ['*'], 'likes'),
+          /*  'pet_policy' => $this->policy($paginate)
+                ->where('visibility', ACTIVE)
+                ->paginate($paginate, ['*'], 'likes'),*/
+
         ];
     }
 }

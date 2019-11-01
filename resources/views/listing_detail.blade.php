@@ -30,9 +30,9 @@
                             @endif
                             @if(isRenter())
                                 @if(isFavourite($listing["favourites"],$listing->id))
-                                    <span class="heart-icon favourite"></span>
+                                    <span id = "{{$listing->id}}" class="heart-icon favourite"></span>
                                 @else
-                                    <span class="heart-icon"></span>
+                                    <span id = "{{$listing->id}}" class="heart-icon"></span>
                                 @endif
                             @endif
 
@@ -97,16 +97,16 @@
                         <div class="row ">
                             <div class="col-lg-6 col-sm-6 bdr-right">
                                 <div class="lease-term-section">
-                                    <span>Lease term: </span>
-                                     <strong> 20-04-2019</strong>
+                                    <span>Lease term: {{ $listing->lease_term ?? 'Null' }}</span>
+                                     {{--<strong> 20-04-2019</strong>--}}
                                 </div>
                                 <div class="lease-term-section">
                                    <span>Days on market:</span>
                                     <strong> {{ dateReadable($listing->created_at) }}</strong>
                                 </div>
                                 <div class="lease-term-section">
-                                   <span>Free months: </span>
-                                    <strong> None</strong>
+                                   <span>Free months: {{ $listing->free_months ?? 'Null' }}</span>
+                                    {{--<strong> None</strong>--}}
                                 </div>
                             </div>
 

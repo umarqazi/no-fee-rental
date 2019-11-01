@@ -26,7 +26,7 @@ class Listing extends Model {
         'thumbnail', 'baths', 'bedrooms', 'unit', 'rent', 'square_feet',
         'description', 'is_featured', 'map_location', 'building_type',
 		'visibility', 'realty_url', 'availability', 'application_fee',
-        'deposit'
+        'deposit','lease_term','free_months'
 	];
 
     /**
@@ -177,6 +177,15 @@ class Listing extends Model {
      */
     public function scopeWithFavourite($query) {
         return $query->with('favourites');
+    }
+
+    /**
+     * @param $query
+     *
+     * @return mixed
+     */
+    public function scopeHasFavourite($query) {
+        return $query->wherehas('favourites');
     }
 
 	/**

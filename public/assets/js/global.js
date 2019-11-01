@@ -372,7 +372,7 @@ $(() => {
      * Do Listing Favourite/Remove Favourite
      */
     $("body").on('click', '.heart-icon', async function () {
-        let id = $(this).siblings('div.check-btn').find('a > button').attr('list_id');
+        let id = $(this).attr('id');
         $(this).toggleClass('favourite');
         if ($(this).hasClass('favourite')) {
             return await ajaxRequest(`/favourite/${id}`, 'GET', true);
