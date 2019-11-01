@@ -18,7 +18,7 @@
                     ]) !!}
                 {!! Form::hidden('visibility') !!}
                 {!! Form::hidden('user_id') !!}
-                @if(isAdmin() && $action != 'Create' ? isset($listing->id) && is_created_by_owner($listing->id) : true )
+                @if(isAdmin() && $action == 'Create' ? true : isset($listing->id) && is_created_by_owner($listing->id) )
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
