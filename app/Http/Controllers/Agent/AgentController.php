@@ -113,4 +113,12 @@ class AgentController extends Controller {
     public function reviews() {
       return view('agent.reviews');
      }
+
+     /**
+     *
+     * @return view
+     */
+    public function creditPlan() {
+        return view('agent.credit_plan');
+    }
 }
