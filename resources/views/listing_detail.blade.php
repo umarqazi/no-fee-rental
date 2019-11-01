@@ -26,7 +26,7 @@
                               </ul>
                             </div>
                             @if(!authenticated())
-                               <span class="display-heart-icon"></span>
+                               <span id="display-heart-icon" class="display-heart-icon"></span>
                             @endif
                             @if(isRenter())
                                 @if(isFavourite($listing["favourites"],$listing->id))
@@ -314,8 +314,17 @@
                                         </button>
                                     </a>
                                 </div>
-                            <span class="heart-icon"></span>
-                            <img src="{{ asset($apartment->thumbnail ?? DLI) }}" alt="" class="main-img">
+                                @if(!authenticated())
+                                    <span class="display-heart-icon"></span>
+                                @endif
+                                @if(isRenter())
+                                    @if(isFavourite($apartment["favourites"],$fl->id))
+                                        <span id = "{{$apartment->id}}" class="heart-icon favourite"></span>
+                                    @else
+                                        <span id = "{{$apartment->id}}" class="heart-icon "></span>
+                                    @endif
+                                @endif
+                                <img src="{{ asset($apartment->thumbnail ?? DLI) }}" alt="" class="main-img">
                             <div class="info">
                                 <div class="info-link-text">
                                     <p> ${{ $apartment->rent }} </p>

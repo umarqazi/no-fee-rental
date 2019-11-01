@@ -381,4 +381,11 @@ $(() => {
         return await ajaxRequest(`/remove/favourite/${id}`, 'GET', true);
     });
 
+    /**
+     * Open Log in Modal when a guest click on favourite Icon
+     */
+    $("body").on('click', '.display-heart-icon', async function () {
+        $('#login').modal('show');
+    });
+
 });

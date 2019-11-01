@@ -105,7 +105,7 @@
 <div class="col-md-6">
     <div class="form-group">
         <label>Lease Term</label>
-        {!! Form::text('lease_term', null, ['class' => 'input-style']) !!}
+        {!! Form::text('lease_term', null, ['class' => 'input-style','id' => 'lease_term']) !!}
         <span class="invalid-feedback" role="alert">
 			{!! $errors->first('lease_term') !!}
 		</span>
