@@ -109,7 +109,7 @@
                     <div class="amenities-section">
                         <div class="row">
                             <ul class="col-md-3">
-                                <h3>Amenities</h3>
+                                {{--<h3>Amenities</h3>--}}
                                 {!! amenities() !!}
                             </ul>
                         </div>
