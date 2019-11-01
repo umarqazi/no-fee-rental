@@ -66,3 +66,6 @@ Route::get('/show-calendar', 'Agent\CalendarController@index')->name('agent.show
 
 //reviews
 Route::get('/reviews' , 'Agent\AgentController@reviews')->name('agent.reviews');
+
+//credit plan
+Route::get('/credit-plan' , 'Agent\AgentController@creditPlan')->name('agent.creditPlan');
