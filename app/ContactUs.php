@@ -18,4 +18,9 @@ class ContactUs extends Model {
     protected $fillable = [
         'name','email', 'phone_number', 'comment'
     ];
+
+    /**
+     * @var string
+     */
+    protected  $table = "contact_us";
 }
