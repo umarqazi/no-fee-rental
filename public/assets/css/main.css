@@ -227,7 +227,7 @@ strong {
     outline: none;
 }
 
-.custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
+.custom-checkbox .custom-control-input:checked~.custom-control-label::before {
     background: #f36f21;
     border-color: #f36f21;
     box-shadow: none;
@@ -306,7 +306,7 @@ h3 {
 }
 
 /*Styling Selectbox*/
-.search-bdr-top .btn-group__multiple > .btn {
+.search-bdr-top .btn-group__multiple>.btn {
     width: 70px;
     background-color: #fff;
     color: blue;
@@ -372,7 +372,7 @@ h3 {
 }
 
 /* When the radio button is checked, add a blue background */
-.radio-button input:checked ~ label .checkmark {
+.radio-button input:checked~label .checkmark {
     background-color: #ffffff;
     border: 1px solid #223971;
 }
@@ -385,7 +385,7 @@ h3 {
 }
 
 /* Show the indicator (dot/circle) when checked */
-.radio-button input:checked ~ label .checkmark:after {
+.radio-button input:checked~label .checkmark:after {
     display: block;
 }
 
@@ -623,18 +623,18 @@ h3 {
     line-height: 87px;
 }
 
-.header-wrapper .header-container .header-right-wrapper .recent-search-dropdown > a {
+.header-wrapper .header-container .header-right-wrapper .recent-search-dropdown>a {
     font-size: 16px;
     color: #223971;
     font-weight: 600;
     text-transform: capitalize;
 }
 
-.header-wrapper .header-container .header-right-wrapper .recent-search-dropdown > a i {
+.header-wrapper .header-container .header-right-wrapper .recent-search-dropdown>a i {
     padding-left: 10px;
 }
 
-.header-wrapper .header-container .header-right-wrapper .recent-search-dropdown > a:hover {
+.header-wrapper .header-container .header-right-wrapper .recent-search-dropdown>a:hover {
     color: #f36f21;
 }
 
@@ -689,7 +689,7 @@ h3 {
     color: #f36f21;
 }
 
-.header-wrapper .header-container .header-right-wrapper .recent-search-dropdown .dropDown > a img {
+.header-wrapper .header-container .header-right-wrapper .recent-search-dropdown .dropDown>a img {
     max-width: 60px;
     height: 40px;
     object-fit: cover;
@@ -699,11 +699,11 @@ h3 {
     padding: 2px;
 }
 
-.header-wrapper .header-container .header-right-wrapper .recent-search-dropdown:hover > a {
+.header-wrapper .header-container .header-right-wrapper .recent-search-dropdown:hover>a {
     color: #f36f21;
 }
 
-.header-wrapper .header-container .header-right-wrapper .recent-search-dropdown:hover > a i {
+.header-wrapper .header-container .header-right-wrapper .recent-search-dropdown:hover>a i {
     transform: rotateX(180deg);
 }
 
@@ -815,11 +815,11 @@ h3 {
     color: #f36f21;
 }
 
-.header-wrapper .header-container .header-right-wrapper .login-user:hover > a {
+.header-wrapper .header-container .header-right-wrapper .login-user:hover>a {
     color: #f36f21;
 }
 
-.header-wrapper .header-container .header-right-wrapper .login-user:hover > a i {
+.header-wrapper .header-container .header-right-wrapper .login-user:hover>a i {
     transform: rotateX(180deg);
 }
 
@@ -1025,11 +1025,11 @@ h3 {
     border: 2px solid #f36f21;
 }
 
-.login-modal .modal-dialog .login-form-wrapper .custom-radio .custom-control-input:checked ~ .custom-control-label::before {
+.login-modal .modal-dialog .login-form-wrapper .custom-radio .custom-control-input:checked~.custom-control-label::before {
     background: none;
 }
 
-.login-modal .modal-dialog .login-form-wrapper .custom-radio .custom-control-input:checked ~ .custom-control-label::after {
+.login-modal .modal-dialog .login-form-wrapper .custom-radio .custom-control-input:checked~.custom-control-label::after {
     background-image: none;
     background: #f36f21;
 }
@@ -1145,7 +1145,8 @@ h3 {
     max-width: 100%;
 }
 
-/*.featured-properties .property-listing .property-thumb*/ .heart-icon {
+/*.featured-properties .property-listing .property-thumb*/
+.heart-icon {
     background: url(../images/heart-icon.png) no-repeat 0px 0px;
     position: absolute;
     right: 10px;
@@ -1158,7 +1159,8 @@ h3 {
     transition: all ease 0.4s;
 }
 
-/*.featured-properties .property-listing .property-thumb */.heart-icon.favourite {
+/*.featured-properties .property-listing .property-thumb */
+.heart-icon.favourite {
     background: url(../images/heart-icon.png) no-repeat 0px -56px;
 }
 
@@ -1337,16 +1339,16 @@ footer .footer-wrapper {
     justify-content: space-between;
 }
 
-footer .footer-wrapper > li {
+footer .footer-wrapper>li {
     flex: auto;
     width: calc(60% / 5);
 }
 
-footer .footer-wrapper > li:nth-child(1) {
+footer .footer-wrapper>li:nth-child(1) {
     width: 20%;
 }
 
-footer .footer-wrapper > li:nth-last-of-type(1) {
+footer .footer-wrapper>li:nth-last-of-type(1) {
     width: 20%;
 }
 
@@ -1579,7 +1581,7 @@ footer .copyright .social-icons li a:hover {
     display: block;
 }
 
-#advance-search .select-bed-options li .custom-radio .custom-control-input:checked ~ .custom-control-label {
+#advance-search .select-bed-options li .custom-radio .custom-control-input:checked~.custom-control-label {
     background: #f36f21;
     padding: 12px 0px;
     display: block;
@@ -1677,7 +1679,7 @@ footer .copyright .social-icons li a:hover {
     border-right: none;
 }
 
-#advance-search-chkbox input[type=checkbox] + label {
+#advance-search-chkbox input[type=checkbox]+label {
     display: inline-block;
     padding: 12px 0px;
     width: 100%;
@@ -1688,18 +1690,18 @@ footer .copyright .social-icons li a:hover {
 }
 
 
-#advance-search-chkbox input[type=checkbox]:checked + label {
+#advance-search-chkbox input[type=checkbox]:checked+label {
     background: #f36f21;
     color: #fff;
     font-weight: 600;
 }
 
-#advance-search-chkbox input[type=checkbox]:checked + label:first-child {
+#advance-search-chkbox input[type=checkbox]:checked+label:first-child {
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
 }
 
-#advance-search-chkbox input[type=checkbox]:checked + label span.label-name {
+#advance-search-chkbox input[type=checkbox]:checked+label span.label-name {
     text-align: center;
 }
 
@@ -2033,7 +2035,7 @@ footer .copyright .social-icons li a:hover {
     display: block;
 }
 
-.need-help-modal .select-bed-options li .custom-radio .custom-control-input:checked ~ .custom-control-label {
+.need-help-modal .select-bed-options li .custom-radio .custom-control-input:checked~.custom-control-label {
     background: #f36f21;
     padding: 12px 0px;
     display: block;
@@ -2339,7 +2341,7 @@ footer .copyright .social-icons li a:hover {
     border-bottom: solid #e1e1e1 2px;
 }
 
-.calculator-container .calculator-wrapper > div {
+.calculator-container .calculator-wrapper>div {
     flex: 50%;
 }
 
@@ -2495,25 +2497,31 @@ footer .copyright .social-icons li a:hover {
     justify-content: space-between;
     align-items: center;
 }
-.listing-detail-container .listing-info .product-title .right-share-icons-side{
-   display: flex;
+
+.listing-detail-container .listing-info .product-title .right-share-icons-side {
+    display: flex;
     align-items: center;
 }
-.listing-detail-container .listing-info .product-title .share-icon-div{
-    cursor:pointer;
+
+.listing-detail-container .listing-info .product-title .share-icon-div {
+    cursor: pointer;
     display: inline-block;
     vertical-align: middle;
 }
+
 .listing-detail-container .listing-info .product-title .heart-icon.favourite{
     background:url(../images/heart-icon.png) no-repeat 0px -65px;
+    top: 12px;
 }
+
 .listing-detail-container .listing-info .product-title .heart-icon {
     width: 45px;
-    height: 28px;
+    /*height: 28px;*/
     position: relative;
-    top: 0px;
+    top: 3px;
     left: -2px;
 }
+
 .listing-detail-container .listing-info .product-title p {
     margin: 0px;
     line-height: normal;
@@ -2585,7 +2593,7 @@ footer .copyright .social-icons li a:hover {
     align-items: center;
 }
 
-.listing-detail-container .listing-info .near-by-info > div {
+.listing-detail-container .listing-info .near-by-info>div {
     flex: 0 0 50%;
 }
 
@@ -2766,7 +2774,7 @@ footer .copyright .social-icons li a:hover {
     font-weight: 600;
 }
 
-.listing-Details .tab-content > .active {
+.listing-Details .tab-content>.active {
     opacity: 1 !important;
 }
 
@@ -3078,7 +3086,7 @@ footer .copyright .social-icons li a:hover {
     display: none;
 }
 
-.appointment-radio-btn .selection input[type=radio]:checked ~ label {
+.appointment-radio-btn .selection input[type=radio]:checked~label {
     background-color: #f36f21;
     color: #fff;
 }
@@ -3617,7 +3625,8 @@ footer .copyright .social-icons li a:hover {
     border: none;
     border: 1px solid #B7B7B7;
     color: #F36F21;
-    font-size: 14px;;
+    font-size: 14px;
+    ;
 }
 
 #timepicker-actions-exmpl:active,
@@ -3772,24 +3781,24 @@ footer .copyright .social-icons li a:hover {
     align-items: center;
 }
 
-.agent-profile-view .agent-info .contact-info > div {
+.agent-profile-view .agent-info .contact-info>div {
     display: flex;
     align-items: center;
     margin-right: 20px;
 }
 
-.agent-profile-view .agent-info .contact-info > div img {
+.agent-profile-view .agent-info .contact-info>div img {
     margin-right: 10px;
     max-width: 30px;
     max-height: 30px;
 }
 
-.agent-profile-view .agent-info .contact-info > div a {
+.agent-profile-view .agent-info .contact-info>div a {
     color: #7b7b7b;
     font-size: 16px;
 }
 
-.agent-profile-view .agent-info .contact-info > div a:hover {
+.agent-profile-view .agent-info .contact-info>div a:hover {
     color: #e17228;
 }
 
@@ -3847,14 +3856,14 @@ footer .copyright .social-icons li a:hover {
     color: #000;
 }
 
-.agent-listing-profile .search-bdr-top .btn-group__multiple > .btn {
+.agent-listing-profile .search-bdr-top .btn-group__multiple>.btn {
     padding-left: 15px;
     padding-right: 15px;
     width: 100%;
     color: #3D3A39;
 }
 
-.agent-listing-profile .search-bdr-top .btn-group__multiple > .btn.active {
+.agent-listing-profile .search-bdr-top .btn-group__multiple>.btn.active {
     background-color: #223971;
     color: #fff;
     border: 1px solid #223971;
@@ -4123,7 +4132,7 @@ footer .copyright .social-icons li a:hover {
 }
 
 /*make-review*/
-.make-review-wrapper{
+.make-review-wrapper {
     padding: 88px 0px;
 }
 
@@ -4415,7 +4424,7 @@ footer .copyright .social-icons li a:hover {
         flex-wrap: wrap;
     }
 
-    footer .footer-wrapper > li {
+    footer .footer-wrapper>li {
         width: calc(100% / 2);
     }
 
@@ -4437,7 +4446,7 @@ footer .copyright .social-icons li a:hover {
         padding: 0px 18px;
     }
 
-    .lSSlideOuter .lSSlideWrapper #image-gallery > li img {
+    .lSSlideOuter .lSSlideWrapper #image-gallery>li img {
         max-height: 600px;
     }
 
@@ -4449,22 +4458,22 @@ footer .copyright .social-icons li a:hover {
         background: url(../images/your-life-bg.jpg) no-repeat center right -270px;
     }
 
-    footer .footer-wrapper > li {
+    footer .footer-wrapper>li {
         width: 100% !important;
         text-align: left;
     }
 
-    footer .footer-wrapper > li:first-child {
+    footer .footer-wrapper>li:first-child {
         text-align: center;
         width: auto;
     }
 
-    footer .footer-wrapper > li:last-child {
+    footer .footer-wrapper>li:last-child {
         margin-top: 15px;
         text-align: center;
     }
 
-    footer .footer-wrapper > li:last-child h4 {
+    footer .footer-wrapper>li:last-child h4 {
         width: auto;
         text-align: center;
         display: block;
@@ -4522,7 +4531,7 @@ footer .copyright .social-icons li a:hover {
         display: block;
     }
 
-    .agent-profile-view .agent-info .contact-info > div {
+    .agent-profile-view .agent-info .contact-info>div {
         margin-bottom: 10px;
     }
 
@@ -4628,16 +4637,16 @@ footer .copyright .social-icons li a:hover {
         text-align: left;
     }
 
-    .mobile-menu .mobile-nav > ul {
+    .mobile-menu .mobile-nav>ul {
         display: block;
     }
 
-    .mobile-menu .mobile-nav > ul > li {
+    .mobile-menu .mobile-nav>ul>li {
         display: block;
         position: relative;
     }
 
-    .mobile-menu .mobile-nav > ul > li > a {
+    .mobile-menu .mobile-nav>ul>li>a {
         display: block;
         color: #fff;
         text-transform: uppercase;
@@ -4645,21 +4654,21 @@ footer .copyright .social-icons li a:hover {
         font-size: 16px;
     }
 
-    .mobile-menu .mobile-nav > ul > li > a i {
+    .mobile-menu .mobile-nav>ul>li>a i {
         float: right;
     }
 
-    .mobile-menu .mobile-nav > ul > li ul {
+    .mobile-menu .mobile-nav>ul>li ul {
         padding: 5px;
         border-top: 1px solid #fff;
         border-bottom: #fff solid 1px;
     }
 
-    .mobile-menu .mobile-nav > ul > li ul li {
+    .mobile-menu .mobile-nav>ul>li ul li {
         display: block;
     }
 
-    .mobile-menu .mobile-nav > ul > li ul li a {
+    .mobile-menu .mobile-nav>ul>li ul li a {
         color: #fff;
         padding: 8px 0px;
         display: block;
@@ -4870,7 +4879,7 @@ footer .copyright .social-icons li a:hover {
         display: none;
     }
 
-    .lSSlideOuter .lSSlideWrapper #image-gallery > li img {
+    .lSSlideOuter .lSSlideWrapper #image-gallery>li img {
         max-height: 600px;
     }
 
@@ -5017,7 +5026,7 @@ footer .copyright .social-icons li a:hover {
         margin-top: 15px;
     }
 
-    footer .footer-wrapper > li {
+    footer .footer-wrapper>li {
         width: calc(100% / 1);
     }
 
@@ -5084,7 +5093,8 @@ footer .copyright .social-icons li a:hover {
         display: block;
         height: auto;
         overflow: inherit;
-        /*margin: 30px 0px*/;
+        /*margin: 30px 0px*/
+        ;
         width: 100%;
     }
 
@@ -5332,7 +5342,7 @@ footer .copyright .social-icons li a:hover {
         display: inline-block;
     }
 
-    .profile-mbl-filter .btn-group__multiple > .btn {
+    .profile-mbl-filter .btn-group__multiple>.btn {
         margin-top: 10px;
     }
 
@@ -5359,7 +5369,7 @@ footer .copyright .social-icons li a:hover {
         margin-bottom: 15px;
     }
 
-    .agent-profile-view .agent-info .contact-info > div a {
+    .agent-profile-view .agent-info .contact-info>div a {
         color: #7b7b7b;
         font-size: 14px;
     }
@@ -5455,7 +5465,7 @@ footer .copyright .social-icons li a:hover {
         margin-bottom: 20px !important;
     }
 
-    .agent-profile-view .agent-info .contact-info > div img {
+    .agent-profile-view .agent-info .contact-info>div img {
         max-width: 22px;
         max-height: 22px;
     }
@@ -5582,7 +5592,7 @@ footer .copyright .social-icons li a:hover {
         margin-right: 0;
     }
 
-    .lSSlideOuter .lSSlideWrapper #image-gallery > li img {
+    .lSSlideOuter .lSSlideWrapper #image-gallery>li img {
         max-height: 300px;
     }
 
@@ -5646,7 +5656,7 @@ footer .copyright .social-icons li a:hover {
         padding: 0px 0px;
     }
 
-    #advance-search-chkbox input[type=checkbox] + label {
+    #advance-search-chkbox input[type=checkbox]+label {
         font-size: 13px;
     }
 
@@ -5658,7 +5668,7 @@ footer .copyright .social-icons li a:hover {
         display: flex;
     }
 
-    .search-bdr-top .btn-group__multiple > .btn {
+    .search-bdr-top .btn-group__multiple>.btn {
         width: 50px;
     }
 

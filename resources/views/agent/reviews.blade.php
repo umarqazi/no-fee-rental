@@ -4,7 +4,8 @@
     <div class="wrapper profile-contact-section">
         <div class="heading-wrapper">
             <h1>Listings</h1>
-            <a href="http://localhost:8000/agent/add-listing" class="btn-default" data-toggle="modal" data-target="#request-review">Request a Review</a>
+            <a href="http://localhost:8000/agent/add-listing" class="btn-default" data-toggle="modal"
+               data-target="#request-review">Request a Review</a>
         </div>
         <div class="block listing-container">
             <div class="heading-wrapper pl-0">
@@ -62,13 +63,10 @@
                         No Record Found
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
-
-{{--    modal--}}
-    <!-- The Modal -->
+    {{--Modal--}}
     <div class="modal fade" id="request-review">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -101,5 +99,4 @@
             </div>
         </div>
     </div>
-
 @endsection

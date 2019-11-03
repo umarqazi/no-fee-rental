@@ -118,6 +118,16 @@ class ListingForm extends BaseForm {
      */
     public $deposit;
 
+    /**
+     * @var string
+     */
+    public $lease_term;
+
+    /**
+     * @var string
+     */
+    public $free_months;
+
 
     function toArray() {
 		return [
@@ -141,7 +151,9 @@ class ListingForm extends BaseForm {
 			'map_location'     => $this->map_location,
             'building_type'    => $this->building_type,
             'application_fee'  => $this->application_fee,
-            'deposit'          => $this->deposit
+            'deposit'          => $this->deposit,
+            'lease_term'       => $this->lease_term,
+            'free_months'      => $this->free_months
         ];
 	}
 

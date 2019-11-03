@@ -302,6 +302,8 @@ class ListingService extends BuildingService {
         $form->old_thumbnail   = $request->old_thumbnail ?? null;
         $form->application_fee = $request->application_fee;
         $form->deposit         = $request->deposit;
+        $form->lease_term      = $request->lease_term;
+        $form->free_months     = $request->free_months;
         $form->validate();
         return $form;
     }

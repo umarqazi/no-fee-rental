@@ -31,7 +31,9 @@ class CreateListingsTable extends Migration {
 			$table->text('description')->nullable();
 			$table->string('map_location')->nullable();
 			$table->string('realty_url')->nullable();
-			$table->enum('building_type', ['open', 'exclusive'])->default('open')->nullable();
+            $table->string('lease_term')->nullable();
+            $table->string('free_months')->nullable();
+            $table->enum('building_type', ['open', 'exclusive'])->default('open')->nullable();
             $table->string('application_fee')->nullable();
             $table->string('deposit')->nullable();
 			$table->integer('is_featured')->default(0)->comment = "0-Non-Featured, 1-Featured, 2-Request-Featured";

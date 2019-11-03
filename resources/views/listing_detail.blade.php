@@ -26,13 +26,13 @@
                               </ul>
                             </div>
                             @if(!authenticated())
-                               <span class="display-heart-icon"></span>
+                               <span id="display-heart-icon" class="display-heart-icon"></span>
                             @endif
                             @if(isRenter())
                                 @if(isFavourite($listing["favourites"],$listing->id))
-                                    <span class="heart-icon favourite"></span>
+                                    <span id = "{{$listing->id}}" class="heart-icon favourite"></span>
                                 @else
-                                    <span class="heart-icon"></span>
+                                    <span id = "{{$listing->id}}" class="heart-icon"></span>
                                 @endif
                             @endif
 
@@ -98,7 +98,7 @@
                             <div class="col-lg-6 col-sm-6 bdr-right">
                                 <div class="lease-term-section">
                                     <span>Lease term: </span>
-                                     <strong> 20-04-2019</strong>
+                                     <strong> {{ $listing->lease_term ?? 'Null' }}</strong>
                                 </div>
                                 <div class="lease-term-section">
                                    <span>Days on market:</span>
@@ -106,7 +106,7 @@
                                 </div>
                                 <div class="lease-term-section">
                                    <span>Free months: </span>
-                                    <strong> None</strong>
+                                    <strong> {{ $listing->free_months ?? 'Null' }}</strong>
                                 </div>
                             </div>
 
@@ -314,8 +314,17 @@
                                         </button>
                                     </a>
                                 </div>
-                            <span class="heart-icon"></span>
-                            <img src="{{ asset($apartment->thumbnail ?? DLI) }}" alt="" class="main-img">
+                                @if(!authenticated())
+                                    <span class="display-heart-icon"></span>
+                                @endif
+                                @if(isRenter())
+                                    @if(isFavourite($apartment["favourites"],$apartment->id))
+                                        <span id = "{{$apartment->id}}" class="heart-icon favourite"></span>
+                                    @else
+                                        <span id = "{{$apartment->id}}" class="heart-icon "></span>
+                                    @endif
+                                @endif
+                                <img src="{{ asset($apartment->thumbnail ?? DLI) }}" alt="" class="main-img">
                             <div class="info">
                                 <div class="info-link-text">
                                     <p> ${{ $apartment->rent }} </p>
@@ -347,7 +356,16 @@
                                             <button class="btn-default" data-toggle="modal" data-target="#check-availability">Check Availability</button>
                                         </a>
                                     </div>
-                                    <span class="heart-icon"></span>
+                                        @if(!authenticated())
+                                            <span class="display-heart-icon"></span>
+                                        @endif
+                                        @if(isRenter())
+                                            @if(isFavourite($apartment["favourites"],$apartment->id))
+                                                <span id = "{{$apartment->id}}" class="heart-icon favourite"></span>
+                                            @else
+                                                <span id = "{{$apartment->id}}" class="heart-icon "></span>
+                                            @endif
+                                        @endif
                                     <img src="{{ asset($apartment->thumbnail ?? DLI) }}" alt="" class="main-img">
                                         <div class="info">
                                             <div class="info-link-text">
