@@ -10,6 +10,10 @@ namespace App\Services;
 
 use App\Repository\SearchRepo;
 
+/**
+ * Class SearchService
+ * @package App\Services
+ */
 class SearchService {
 
     /**
@@ -41,7 +45,19 @@ class SearchService {
      * @return mixed|String
      */
     public function search($request) {
-        collect($request->all())->map(function($args, $method) {
+        $data = [
+            'amenities'    => $request->amenities,
+            'features'     => $request->features,
+            'openHouse'    => $request->openHouse,
+            'neighborhood' => $request->neighborhoods,
+            'beds'         => $request->beds,
+            'baths'        => $request->baths,
+            'rent'         => $request->rent,
+            'priceRange'   => $request->priceRange,
+            'squareRange'  => $request->squareRange,
+        ];
+
+        collect($data)->map(function($args, $method) {
             if(method_exists($this, $method) && !empty($args)) {
                 $this->args = toObject([$method => $args]);
                 $this->{$method}();
@@ -55,14 +71,20 @@ class SearchService {
      * filter for neighborhoods
      */
     private function neighborhood() {
-        $this->query->where('neighborhood_id', $this->args->{__FUNCTION__});
+        $neighborhood = $this->args->{__FUNCTION__};
+        $this->query->orWhereHas('neighborhood', function($query) use ($neighborhood) {
+            return $query->where('neighborhood_id', $neighborhood);
+        });
     }
 
     /**
      * filter for open house
      */
     private function openHouse() {
-        $this->query = $this->searchRepo->openHouse($this->args->{__FUNCTION__});
+        $date = carbon($this->args->{__FUNCTION__})->format('Y-m-d');
+        $this->query->orWhereHas('openHouses', function($query) use ($date) {
+            return $query->where('open_houses.date', 'like', $date);
+        });
     }
 
     /**
@@ -81,11 +103,11 @@ class SearchService {
      */
     private function baths() {
         if (in_array('any', $this->args->{__FUNCTION__})) {
-            $this->query->where('baths', '>', 0);
+            $this->query = $this->query->where('baths', '>', 0);
         } elseif (in_array(5, $this->args->{__FUNCTION__})) {
-            $this->query->where( 'baths', '>=', 5 )->orWhereIn( 'baths', [ $this->args->{__FUNCTION__} ] );
+            $this->query = $this->query->where( 'baths', '>=', 5 )->orWhereIn( 'baths', [ $this->args->{__FUNCTION__} ] );
         } else {
-            $this->query->whereIn( 'baths', [ $this->args->{__FUNCTION__} ] );
+            $this->query = $this->query->whereIn( 'baths', [ $this->args->{__FUNCTION__} ] );
         }
     }
 
@@ -103,7 +125,20 @@ class SearchService {
      * filter for amenities
      */
     private function amenities() {
-        $this->query = $this->searchRepo->amenities($this->args->{__FUNCTION__});
+        $amenities = $this->args->{__FUNCTION__};
+        $this->query->whereHas('listingBuilding.amenities', function ($query) use ($amenities) {
+            return $query->whereIn('amenity_id', $amenities);
+        });
+    }
+
+    /**
+     * filter for amenities
+     */
+    private function features() {
+        $features = $this->args->{__FUNCTION__};
+        $this->query->orWhereHas('features', function($query) use ($features) {
+            return $query->whereIn('value', $features);
+        });
     }
 
     /**
@@ -120,6 +155,6 @@ class SearchService {
      * @return mixed|String
      */
     private function fetchQuery() {
-        return $this->query->where('visibility', true)->withall()->orderBy('is_featured', '1')->get();
+        return $this->query->where('visibility', ACTIVE)->orderBy('is_featured', TRUE)->get();
     }
 }
