@@ -4,15 +4,17 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateOpenHousesTable extends Migration
-{
+/**
+ * Class CreateOpenHousesTable
+ */
+class CreateOpenHousesTable extends Migration {
+
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up()
-    {
+    public function up() {
         Schema::create('open_houses', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('listing_id');
@@ -31,8 +33,7 @@ class CreateOpenHousesTable extends Migration
      *
      * @return void
      */
-    public function down()
-    {
+    public function down() {
         Schema::dropIfExists('open_houses');
     }
 }
