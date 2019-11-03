@@ -3,8 +3,8 @@ $(() => {
     $('.add-more').on('click', function() {
         let i = 0, $body = $('body');
         if($body.find('.datepicker-withtime > div.row').length > 4) return;
-        $('.add-more-btn').before($body.find('.datepicker-withtime > div.row:first').clone());
-        enableDatePicker('.open-house-date', false);
+        $('.open-house-admin-section > div > .row:last').after($body.find('.datepicker-withtime > div.row:last').clone());
+        enableDatePicker('.open-house-date:last', false);
         $('.by-add-only > input').each(function() {
             let id = 'chk' + (++ i);
             $(this).attr('id', id);

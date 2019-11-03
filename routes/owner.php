@@ -53,15 +53,6 @@ Route::get('/accept-invitation/{token}', 'Owner\MemberController@acceptInvitatio
 Route::get('/un-friend/{id}', 'Owner\MemberController@unFriend')->name('owner.unFriend');
 
 // Messaging Routes
-/*Route::post('/accept-meeting/{id}', 'Owner\MessageController@accept');
-Route::get('/view-contacts', 'Owner\MessageController@index')->name('owner.messageIndex');
-Route::get('/load-chat/inbox/{id}', 'Owner\MessageController@loadInbox')->name('owner.loadAppointmentChat');
-Route::get('/load-chat/availabilities/{id}', 'Owner\MessageController@loadAvailability')->name('owner.loadAvailabilityChat');
-Route::post('/send-message/inbox/{id}', 'Owner\MessageController@replyInbox')->name('owner.sendInboxMessage');
-Route::post('/send-message/availability/{id}', 'Owner\MessageController@replyAvailability')->name('owner.sendAvailabilityMessage');
-Route::get('/archive-inbox-chat/{id}', 'Owner\MessageController@archiveInbox')->name('owner.archiveAppointmentChat');
-Route::get('/archive-availability-chat/{id}', 'Owner\MessageController@archiveAvailability')->name('owner.archiveAvailabilityChat');*/
-
 Route::post('/accept-meeting/{id}', 'Owner\MessageController@accept');
 Route::get('/view-conversations', 'Owner\MessageController@index')->name('owner.conversations');
 Route::get('/load-conversation/inbox/{id}', 'Owner\MessageController@load')->name('owner.loadConversation');
@@ -69,7 +60,10 @@ Route::post('/send-message/{id}', 'Owner\MessageController@reply')->name('owner.
 Route::get('/archive-conversation/{id}', 'Owner\MessageController@archive')->name('owner.archiveConversation');
 Route::get('/unArchive-conversation/{id}', 'Owner\MessageController@unArchive')->name('owner.unArchiveConversation');
 
-
 // Calender Routes
 Route::post('/add-event', 'Owner\CalendarController@create')->name('owner.addEvent');
 Route::get('/show-calendar', 'Owner\CalendarController@index')->name('owner.showCalendar');
+
+// Manage Building Routes
+Route::post('/add-building', 'Owner\BuildingController@create')->name('owner.addBuilding');
+Route::get('/all-buildings', 'Owner\BuildingController@index')->name('owner.viewBuildings');

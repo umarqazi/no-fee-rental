@@ -314,21 +314,6 @@ const setBySelector = function (selector) {
 
 /**
  *
- * @param listing
- */
-const checkAvailability = function (listing) {
-    let $body = $('body');
-    $body.find('#listing_id').val(listing.id);
-    $body.find('#agent_id').val(listing.user_id);
-    $body.find('#listing-image > img').attr("src", `/${listing.thumbnail}`);
-    $body.find('#address').text(listing.display_address);
-    $body.find('#availability-beds').text(listing.bedrooms);
-    $body.find('#availability-baths').text(listing.baths);
-    $body.find('#availability-rent').text('$'+listing.rent.toLocaleString());
-};
-
-/**
- *
  * @param selector
  */
 const scrollDown = (selector) => {
@@ -362,4 +347,23 @@ $(() => {
 			form.trigger(`form-success-${id}`, res.data);
 		}
 	});
+
+	$('button[data-target="#check-availability"]').on('click', function() {
+	    let $listing = $(this).parents('.property-thumb');
+	    let img = $listing.find('img').attr('src');
+	    let info = $listing.find('.info > div');
+	    let rent = info.find('p:first').text();
+	    let data = info.find('small').text();
+	    data = data.split(',');
+	    let bed = parseInt(data[0]);
+	    let bath = parseInt(data[1]);
+	    let modal = $('body').find('#check-availability');
+	    modal.find('.row > div > img').attr('src', img);
+	    modal.find('#address').text('asd');
+        modal.find('.bedroms-baths-text > span:first').text(bed);
+        modal.find('.bedroms-baths-text > span:last').text(bath);
+        modal.find('.row > div:eq(1) > small').text(rent);
+        modal.find('input[name=listing_id]').val($(this).attr('list_id'));
+        modal.find('input[name=to]').val($(this).attr('to'));
+    });
 });

@@ -1,11 +1,11 @@
 <div class="modal fade" id="check-availability">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            {{-- Modal body --}}
+            <img src="{{ asset('assets/images/modal-close-icon.png') }}" alt="" class="close-modal close-signup-modal closemodal-check-availablility" data-dismiss="modal">
             <div class="modal-body">
                 <div class="row">
                     <div class="col-lg-4" id="listing-image">
-                        <img src="">
+                        <img src="{{ asset('assets/images/modal-logo.png') }}" alt="" class="logo" />
                     </div>
                     <div class="col-lg-8 padding-leftt-0">
                         <h3 id="address"></h3>
@@ -16,8 +16,9 @@
                         </div>
                     </div>
                 </div>
+                @if(isRenter())
                 <div  class="form-group">
-                    {!! Form::model(mySelf() ?? null, ['url' => route('web.listConversation')]) !!}
+                    {!! Form::model(mySelf() ?? null, ['url' => route('web.listConversation'), 'class' => 'ajax', 'reset' => 'true']) !!}
                     {!! Form::hidden('listing_id','' , ['id' => 'listing_id']) !!}
                     {!! Form::hidden('to', '',['id' => 'agent_id']) !!}
                     {!! Form::hidden('type', AVAILABILITY) !!}
@@ -43,16 +44,10 @@
                     </div>
                 {!! Form::close() !!}
                 </div>
-            {{--    <div class="row">
-                    <div class="col-lg-6">
-                        <a href="#" class="btn "> Send Request</a>
-                    </div>
-                    <div class="col-lg-6">
-                        <a href="#" class="btn " data-dismiss='modal'> Cancel</a>
-                    </div>
-                </div>
-            --}}</div>
+                @else
+                    You not allowed to send request
+                @endif
+            </div>
         </div>
-        <!-- Modal footer -->
     </div>
 </div>

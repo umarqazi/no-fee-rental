@@ -5329,4 +5329,13 @@ footer .copyright .social-icons li a:hover {
     padding: 0px 10px;
     text-transform: initial !important;
 }
-
+#check-availability .modal-content{
+    position: relative;
+}
+.closemodal-check-availablility{
+    position: absolute;
+    top: 5px;
+    right:15px;
+    z-index: 9;
+    cursor:pointer;
+}

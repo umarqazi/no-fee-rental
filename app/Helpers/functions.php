@@ -370,28 +370,8 @@ function amenities() {
 }
 
 /**
- * @param $amenity
- * @param $action
- *
  * @return string|null
  */
-//function innerAmenity($amenity, $action) {
-//    $innerHtml = null;
-//    foreach ( $amenity->amenities as $amenity_value ) {
-//        $innerHtml .= "
-//            <li><div class='custom-control custom-checkbox'>" .
-//                Form::checkbox( "amenities[]", $amenity_value->id, null,
-//                    [
-//                        ( $action == 'Update' ) ? 'disabled' : '',
-//                        'class' => 'custom-control-input',
-//                        'id'    => "listitem{$amenity_value->id}"
-//                    ])."<label class='custom-control-label' for='listitem{$amenity_value->id}'>" .
-//                       $amenity_value->amenities . "</label></div></li>";
-//    }
-//
-//    return $innerHtml;
-//}
-
 function features() {
     $html = null;
     $features = config('features');
@@ -441,11 +421,28 @@ function owners() {
 
 /**
  * @param $data
+ * @param bool $update
+ * @param null $id
  *
  * @return mixed
  */
-function addCalendarEvent($data) {
-    return (new \App\Services\CalendarService())->addEvent(toObject($data));
+function calendarEvent($data, $update = false, $id = null) {
+    if($update) {
+        $calendar = ( new \App\Services\CalendarService() )->updateEvent($id, $data);
+    } else {
+        $calendar = ( new \App\Services\CalendarService() )->addEvent(toObject($data));
+    }
+
+    return $calendar;
+}
+
+/**
+ * @param $id
+ *
+ * @return bool|mixed
+ */
+function deleteCalendarEvent($id) {
+    return (new \App\Services\CalendarService())->removeEvent($id);
 }
 
 /**
@@ -455,7 +452,7 @@ function addCalendarEvent($data) {
  */
 function is_exclusive($listing) {
     if($listing->building_type === EXCLUSIVE) {
-        return sprintf("%s - (%s)", $listing->street_address, $listing->unit);
+        return sprintf("%s - (%s)", $listing->street_address, $listing->unit ?? '#');
     }
 
     return $listing->display_address;

@@ -52,11 +52,11 @@ class ListingService extends BuildingService {
      */
     public function create($request) {
         DB::beginTransaction();
-        $listing = $this->__validateForm($request);
-        $building = $this->addBuilding($listing->street_address);
+        $listing             = $this->__validateForm($request);
+        $building            = $this->addBuilding($listing->street_address);
         $listing->visibility = (!$building->is_verified && isAgent()) ? PENDINGLISTING : $building->is_verified;
-        $listing = $this->__addList($listing);
-        $this->__addOpenHouse($listing->id, $listing->user_id, $request->open_house);
+        $listing             = $this->__addList($listing);
+        $this->__addOpenHouse($listing->id, $listing, $request->open_house);
         $this->__addFeatures($listing->id, $request->features);
         parent::attachApartment($building, $listing);
         DB::commit();
@@ -102,7 +102,7 @@ class ListingService extends BuildingService {
     public function update($id, $request) {
         DB::beginTransaction();
         if($this->__updateList( $id, $this->__validateForm( $request ) )) {
-            $this->__updateOpenHouses($id, $request->user_id, $request->open_house);
+            $this->__updateOpenHouses($id, $request, $request->open_house);
             $this->__updateFeatures($id, $request->features);
             DB::commit();
             return true;
@@ -142,12 +142,11 @@ class ListingService extends BuildingService {
 
     /**
      * @param $id
-     * @param $request
      *
      * @return int
      */
-    public function visibility($id, $request) {
-        return $this->listingRepo->status($id, $request);
+    public function visibility($id) {
+        return $this->listingRepo->status($id);
     }
 
     /**
@@ -203,18 +202,24 @@ class ListingService extends BuildingService {
         if ($this->listingRepo->update($id, ['visibility' => 1])) {
             $list = $this->listingRepo->find(['id' => $id])->with('agent')->first();
             dispatchNotification([
-                'name'        => $list->agent->first_name,
-                'approved_by' => mySelf()->first_name,
-                'approved_on' => $list->updated_at,
-                'view'        => 'approve-request',
-                'subject'     => 'Request Approved for listing',
-                'path'        => route('listing.detail', $list->id),
-                'from'        => myId(),
-                'toEmail'     => $list->agent->email,
-                'fromEmail'   => mySelf()->email,
-                'to'          => $list->agent->id,
-                'notification'=> 'Listing has been approved',
+                'name'         => $list->agent->first_name,
+                'approved_by'  => mySelf()->first_name,
+                'approved_on'  => $list->updated_at,
+                'view'         => 'approve-request',
+                'subject'      => 'Request Approved for listing',
+                'path'         => route('listing.detail', $list->id),
+                'from'         => myId(),
+                'toEmail'      => $list->agent->email,
+                'fromEmail'    => mySelf()->email,
+                'to'           => $list->agent->id,
+                'notification' => 'Listing has been approved',
             ]);
+
+            calendarEvent([
+                'color' => UPDATEOPENHOUSECOLOR,
+                'url'   => route('listing.detail', $id),
+            ], true, $list->id);
+
             DB::commit();
             return true;
         }
@@ -272,7 +277,7 @@ class ListingService extends BuildingService {
         $form->phone_number    = $request->phone_number;
         $form->street_address  = $request->street_address;
         $form->display_address = $request->display_address;
-        $form->availability    = $request->availability_date ?? $request->availability;
+        $form->availability    = $request->availability_date ?? $request->availability === '1' ? now() : false;
         $form->visibility      = $request->visibility;
         $form->description     = $request->description;
         $form->neighborhood    = $request->neighborhood_id;
@@ -306,37 +311,53 @@ class ListingService extends BuildingService {
 
     /**
      * @param $id
-     * @param $user_id
+     * @param $listing
      * @param $data
+     * @param bool $is_update
      *
      * @return mixed
      */
-    protected function __addOpenHouse($id, $user_id, $data) {
+    protected function __addOpenHouse($id, $listing, $data, $is_update = false) {
         $batch = [];
-        if(is_array($data['date'][0])) {
+        if(isset($data['date'][0])) {
+            if($is_update) deleteCalendarEvent($id);
             for ($i = 0; $i < sizeof($data['date']); $i++) {
                 $batch[] = [
                     'listing_id' => $id,
                     'date' => $data['date'][$i],
                     'start_time' => $data['start_time'][$i],
                     'end_time' => $data['end_time'][$i],
-                    'only_appt' => isset($data['by_appointment']) && $data['by_appointment'][$i] !== 'on' ?: true ?? false,
+                    'only_appt' => isset($data['by_appointment'][$i]) && $data['by_appointment'][$i] !== 'on' ? false : true,
                     'created_at' => now(),
                     'updated_at' => now()
                 ];
 
-                addCalendarEvent([
-                    'color'   => 'yellow',
-                    'title'   => 'Open House (Pending)',
-                    'user_id' => $user_id,
-                    'url'     => route('listing.detail', $id),
-                    'start'   => $data['date'][$i].' '.openHouseTimeSlot($data['start_time'][$i])->format('H:i:s'),
-                    'end'     => $data['date'][$i].' '.openHouseTimeSlot($data['end_time'][$i])->format('H:i:s'),
-                ]);
+                $this->__addCalendarEvents($listing, $is_update, $id, $data, $i);
             }
         }
         $this->openHouseRepo->insert($batch);
         return $id;
+    }
+
+    /**
+     * @param $listing
+     * @param $is_update
+     * @param $id
+     * @param $data
+     * @param $i
+     */
+    private function __addCalendarEvents($listing, $is_update, $id, $data, $i) {
+        calendarEvent([
+            'color'      => $is_update && $listing->visibility !== PENDINGLISTING
+                            ? UPDATEOPENHOUSECOLOR : ADDOPENHOUSECOLOR,
+            'title'      => is_exclusive( $listing ),
+            'from'       => $listing->user_id,
+            'linked_id'  => $listing->id,
+            'url'        => !isAgent() && $listing->visibility !== PENDINGLISTING
+                            ? 'listing.detail' : 'javascript:void(0)',
+            'start'      => $data['date'][ $i ] . ' ' . openHouseTimeSlot( $data['start_time'][ $i ] )->format( 'H:i:s' ),
+            'end'        => $data['date'][ $i ] . ' ' . openHouseTimeSlot( $data['end_time'][ $i ] )->format( 'H:i:s' ),
+        ]);
     }
 
     /**
@@ -382,14 +403,14 @@ class ListingService extends BuildingService {
 
     /**
      * @param $id
-     * @param $user_id
+     * @param $listing
      * @param $data
      *
      * @return mixed
      */
-    protected function __updateOpenHouses($id, $user_id, $data) {
+    protected function __updateOpenHouses($id, $listing, $data) {
         $this->openHouseRepo->deleteMultiple(['listing_id' => $id]);
-        return $this->__addOpenHouse($id, $user_id, $data);
+        return $this->__addOpenHouse($id, $listing, $data, true);
     }
 
     /**
