@@ -78,6 +78,12 @@ class User extends Authenticate implements CanResetPassword {
 	public function neighborExpertise() {
 	    return $this->belongsToMany(Neighborhoods::class, 'agent_neighborhoods', 'agent_id', 'neighborhood_id');
     }
+    /**
+     * @return BelongsToMany
+     */
+	public function favourites() {
+	    return $this->belongsToMany(Listing::class, 'favourites', 'user_id', 'listing_id');
+    }
 
 	/**
 	 * @param $query

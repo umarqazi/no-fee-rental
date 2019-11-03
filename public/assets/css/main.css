@@ -5329,13 +5329,39 @@ footer .copyright .social-icons li a:hover {
     padding: 0px 10px;
     text-transform: initial !important;
 }
+
 #check-availability .modal-content{
     position: relative;
 }
+
 .closemodal-check-availablility{
     position: absolute;
     top: 5px;
     right:15px;
     z-index: 9;
     cursor:pointer;
+}
+
+.empty-heart-icon{
+    position: absolute;
+    z-index: 9;
+    right: 15px;
+    top: 15px;
+    font-size: 30px;
+    font-weight: bold;
+    color: #000;
+
+}
+
+.filled-heart-icon{
+    position: absolute;
+    z-index: 9;
+    right: 15px;
+    top: 15px;
+    font-size: 30px;
+    font-weight: bold;
+    color: #e7781b;/*
+    border-color: #e7781b;
+    background-color:#e7781b;*/
+
 }
