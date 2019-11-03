@@ -65,4 +65,5 @@ Route::post('/add-event', 'Agent\CalendarController@create')->name('agent.addEve
 Route::get('/show-calendar', 'Agent\CalendarController@index')->name('agent.showCalendar');
 
 //reviews
-Route::get('/reviews' , 'Agent\AgentController@reviews')->name('agent.reviews');
+Route::get('/all-reviews' , 'Agent\ReviewController@index')->name('agent.viewReviews');
+Route::post('/send-review-request' , 'Agent\ReviewController@request')->name('agent.requestReview');

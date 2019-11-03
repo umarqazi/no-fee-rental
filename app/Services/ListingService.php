@@ -318,7 +318,7 @@ class ListingService extends BuildingService {
             $form->thumbnail = $form->old_thumbnail;
         }
 
-        return $this->listingRepo->create($form->toArray());
+        return $this->listingRepo->create(is_array($form) ? $form : $form->toArray());
     }
 
     /**

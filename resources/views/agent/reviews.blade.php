@@ -24,123 +24,40 @@
             <div class="block-body">
                 <!-- Tab panes -->
                 <div class="tab-content">
-
                     <div class="tab-pane active" id="tab-1">
                         <div class="profile-contact-section profile-section-padding">
                             <div class="container-lg">
                                 <div class="your-reviews-section">
-                                    <h3>Your Reviews</h3>
+{{--                                    <h3>Your Reviews</h3>--}}
                                     <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="review-box-wrapper">
-                                                <div class="review-inner-box-content">
-                                                    <div class="agent-name">
-                                                        <img src="/assets/images/default-image.jpeg" alt="user-icon">
-                                                    <h4> I like that its a beautiful location </h4>
-                                                    </div>
-                                                    <div class="stars-icons">
-                                                        <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-                                                            class="fas fa-star"> </i> <i class="fas fa-star"> </i> <i
-                                                            class="fas fa-star"> </i>
-                                                    </div>
-                                                </div>
-                                                <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                                                    eiusmod tempor
-                                                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                                                    veniam, quis nostrud
-                                                    exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                                    consequat. Duis aute
-                                                    irure dolor in
-                                                    reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                                                    pariatur.
-                                                    Excepteur sint occaecat cupidatat non proident.</p>
-                                                <span> By Ubaid 1 Hour ago</span>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-12 mrg-top">
-                                            <div class="review-box-wrapper">
-                                                <div class="review-inner-box-content">
-                                                    <div class="agent-name">
-                                                        <img src="/assets/images/default-image.jpeg" alt="user-icon">
-                                                        <h4> I like that its a beautiful location </h4>
-                                                    </div>
-                                                    <div class="stars-icons">
-                                                        <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-                                                            class="fas fa-star"> </i> <i class="fas fa-star"> </i> <i
-                                                            class="fas fa-star"> </i>
+                                        @if($reviews->isNotEmpty())
+                                            @foreach($reviews as $review)
+                                                <div class="col-sm-12 mrg-top">
+                                                    <div class="review-box-wrapper">
+                                                        <div class="review-inner-box-content">
+                                                            <div class="agent-name">
+                                                                <img src="{{ asset($review->from->profile_image ?? DUI) }}" alt="user-icon">
+                                                                <h4> {{ $review->from->first_name.' '.$review->from->last_name }} </h4>
+                                                            </div>
+                                                            <div class="stars-icons">
+                                                                @for($i = 0; $i < $review->rating; $i ++)
+                                                                    <i class="fas fa-star"></i>
+                                                                @endfor
+                                                            </div>
+                                                        </div>
+                                                        <p> {{ $review->message }}</p>
+                                                        <span> {{ dateReadable($review->created_at) }}</span>
                                                     </div>
                                                 </div>
-                                                <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                                                    eiusmod tempor
-                                                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                                                    veniam, quis nostrud
-                                                    exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                                    consequat. Duis aute
-                                                    irure dolor in
-                                                    reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                                                    pariatur.
-                                                    Excepteur sint occaecat cupidatat non proident.</p>
-                                                <span> By Ubaid 1 Hour ago</span>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-12 mrg-top">
-                                            <div class="review-box-wrapper">
-                                                <div class="review-inner-box-content">
-                                                    <div class="agent-name">
-                                                        <img src="/assets/images/default-image.jpeg" alt="user-icon">
-                                                        <h4> I like that its a beautiful location </h4>
-                                                    </div>
-                                                    <div class="stars-icons">
-                                                        <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-                                                            class="fas fa-star"> </i> <i class="fas fa-star"> </i> <i
-                                                            class="fas fa-star"> </i>
-                                                    </div>
-                                                </div>
-                                                <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                                                    eiusmod tempor
-                                                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                                                    veniam, quis nostrud
-                                                    exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                                    consequat. Duis aute
-                                                    irure dolor in
-                                                    reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                                                    pariatur.
-                                                    Excepteur sint occaecat cupidatat non proident.</p>
-                                                <span> By Ubaid 1 Hour ago</span>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-12 mrg-top">
-                                            <div class="review-box-wrapper">
-                                                <div class="review-inner-box-content">
-                                                    <div class="agent-name">
-                                                        <img src="/assets/images/default-image.jpeg" alt="user-icon">
-                                                        <h4> I like that its a beautiful location </h4>
-                                                    </div>
-                                                    <div class="stars-icons">
-                                                        <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-                                                            class="fas fa-star"> </i> <i class="fas fa-star"> </i> <i
-                                                            class="fas fa-star"> </i>
-                                                    </div>
-                                                </div>
-                                                <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                                                    eiusmod tempor
-                                                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                                                    veniam, quis nostrud
-                                                    exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                                    consequat. Duis aute
-                                                    irure dolor in
-                                                    reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                                                    pariatur.
-                                                    Excepteur sint occaecat cupidatat non proident.</p>
-                                                <span> By Ubaid 1 Hour ago</span>
-                                            </div>
-                                        </div>
+                                            @endforeach
+                                        @else
+                                            <span>No Reviews Found</span>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
                     <div class="tab-pane fade" id="tab-2">
                         No Record Found
                     </div>
@@ -155,34 +72,32 @@
     <div class="modal fade" id="request-review">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-
                 <!-- Modal Header -->
                 <div class="modal-header">
                     <h4 class="modal-title">Request a Review</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
-
+                {!! Form::open(['url' => route('agent.requestReview')]) !!}
                 <!-- Modal body -->
                 <div class="modal-body">
                    <div class="row">
                        <div class="col-sm-12">
                            <div class="form-group">
                                <label>Email</label>
-                               <input type="email" class="input-style" placeholder="Write Email">
+                               {!! Form::text('email', null, ['class' => 'input-style', 'placeholder' => 'Request Email', 'type' => 'email']) !!}
                            </div>
                            <div class="form-group">
                                <label>Message</label>
-                               <textarea class="input-style" placeholder="Message"></textarea>
+                               {!! Form::textarea('message', null, ['class' => 'input-style', 'placeholder' => 'Message']) !!}
                            </div>
                        </div>
                    </div>
                 </div>
-
                 <!-- Modal footer -->
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Send Mail</button>
+                    {!! Form::submit('Send Request', ['class' => 'btn btn-danger']) !!}
                 </div>
-
+                {!! Form::close() !!}
             </div>
         </div>
     </div>
