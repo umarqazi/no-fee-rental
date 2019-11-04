@@ -62,7 +62,6 @@
                                     <td><a href="javascript:void(0)" class="desktop-table-td"> View Receipt </a>
                                         <a href="javascript:void(0)" class="mobile-table-td"> <i class="far fa-eye"></i> </a>
                                     </td>
-
                                 </tr>
                                 <tr>
                                     <td>2019-05-05 </td>

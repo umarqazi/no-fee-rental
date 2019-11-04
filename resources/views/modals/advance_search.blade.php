@@ -105,15 +105,22 @@
                             {!! Form::text('openHouse', null, ['autocomplete' => 'off', 'id' => 'open_house', 'placeholder', 'Open House', 'class' => 'input-style']) !!}
                         </div>
                     </div>
+
                     {{-- Building Features--}}
-                    <div class="amenities-section">
+                    <div class="col-md-12">
                         <div class="row">
-                            <ul class="col-md-3">
-                                {{--<h3>Amenities</h3>--}}
-                                {!! amenities() !!}
-                            </ul>
+                            {!! amenities() !!}
                         </div>
                     </div>
+                </div>
+
+                    {{--Apartment Features--}}
+                    <div class="col-md-12" style="margin-top: 20px;">
+                        <div class="row">
+                            {!! features() !!}
+                        </div>
+                    </div>
+
                     <div class="col-md-12 text-left mt-4 mb-4 bdr-top-btn">
                         <button type="submit" class="btn-default">Search</button>
                     </div>
@@ -122,7 +129,6 @@
             </div>
         </div>
     </div>
-</div>
 <script>
     fetchNeighbours($('input[name=neighborhoods]'));
     enableDatePicker('#open_house', false);
