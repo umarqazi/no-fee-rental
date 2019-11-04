@@ -26,27 +26,4 @@ class SearchRepo extends BaseRepo {
     public function appendQuery() {
         return $this->model->query();
     }
-
-    /**
-     * @param $values
-     *
-     * @return mixed
-     */
-    public function amenities($values) {
-        /*return $this->model->whereHas('amenities', function($subQuery) use ($values) {
-            return $subQuery->whereIn('amenity_id', $values);
-        });*/
-        return $this->model->active();
-    }
-
-    /**
-     * @param $date
-     *
-     * @return mixed
-     */
-    public function openHouse($date) {
-        return $this->model->whereHas('openHouses', function($subQuery) use ($date) {
-            return $subQuery->where('date', $date);
-        });
-    }
 }

@@ -85,4 +85,15 @@ class BuildingRepo extends BaseRepo {
     public function getApartments($id) {
         return $this->findById($id)->with('listings', 'amenities');
     }
+
+    /**
+     * @param $amenities
+     *
+     * @return mixed
+     */
+    public function getAmenities($amenities) {
+        return $this->model->whereHas('amenities', function($query) use ($amenities) {
+            return $query->whereIn('amenity_id', $amenities);
+        });
+    }
 }

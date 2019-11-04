@@ -90,6 +90,15 @@ class Listing extends Model {
 	    return $this->hasOne(BuildingApartment::class, 'apartment_id', 'id');
     }
 
+    /**
+     * @param $query
+     *
+     * @return mixed
+     */
+    public function scopeAmenities($query) {
+        return $query->with('listingBuilding.amenities');
+    }
+
 	/**
 	 * @param $query
 	 *
