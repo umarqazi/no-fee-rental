@@ -2123,3 +2123,25 @@ header .agent-avtar .avtar:hover div ul {
 .svg-icon-color{
     fill: blue;
 }
+
+
+.filter-mobile-data{
+    display: none;
+    position: relative;
+}
+.filter-mobile-data i{
+    font-size: 16px;
+    color: #000;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #e77817;
+}
+
+.filter-mobile-data .filter-wrapper-mobile.listing-container .filter-wrapper {
+    position: absolute;
+    top: 40px;
+    background-color: #fff;
+    z-index: 1;
+    width: 100%;
+    padding: 20px 2px;
+}

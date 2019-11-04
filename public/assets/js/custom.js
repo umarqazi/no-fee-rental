@@ -292,7 +292,7 @@ $(() => {
     });
 
     $(".listing-large-view").click(function () {
-        $(this).toggleClass("fa-th fa-th-large")
+        $(this).toggleClass("fa-th fa-th-large");
         $(".map-wrapper").toggleClass("map-small-view");
         $(".featured-properties .property-listing").toggleClass("grid-view");
     });
@@ -491,5 +491,11 @@ $(() => {
             }
         });
     });
+
+//    filter data for agent dashboard
+    $('.filter-mobile-data i').click( function () {
+        $(this).toggleClass('fa-bars fa-times');
+        $('.filter-wrapper-mobile .filter-wrapper').slideToggle();
+    })
 
 });
