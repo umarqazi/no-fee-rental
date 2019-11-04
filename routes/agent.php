@@ -69,3 +69,4 @@ Route::get('/reviews' , 'Agent\AgentController@reviews')->name('agent.reviews');
 
 //credit plan
 Route::get('/credit-plan' , 'Agent\AgentController@creditPlan')->name('agent.creditPlan');
+Route::get('/basic-plan' , 'Agent\AgentController@basicPlan')->name('agent.basicPlan');
