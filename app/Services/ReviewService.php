@@ -48,7 +48,7 @@ class ReviewService {
      * @return mixed
      */
     public function get() {
-        return $this->reviewRepo->reviews();
+        return $this->reviewRepo->reviews()->get();
     }
 
     public function show() {

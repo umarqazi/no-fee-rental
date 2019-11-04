@@ -64,8 +64,11 @@ Route::get('/unArchive-conversation/{id}', 'Agent\ListingConversationController@
 Route::post('/add-event', 'Agent\CalendarController@create')->name('agent.addEvent');
 Route::get('/show-calendar', 'Agent\CalendarController@index')->name('agent.showCalendar');
 
-//reviews
+// Reviews Routes
+Route::get('/all-reviews' , 'Agent\ReviewController@index')->name('agent.viewReviews');
+Route::post('/send-review-request' , 'Agent\ReviewController@request')->name('agent.requestReview');
 Route::get('/reviews' , 'Agent\AgentController@reviews')->name('agent.reviews');
 
-//credit plan
+// Credit Plan Routes
 Route::get('/credit-plan' , 'Agent\AgentController@creditPlan')->name('agent.creditPlan');
+Route::get('/basic-plan' , 'Agent\AgentController@basicPlan')->name('agent.basicPlan');

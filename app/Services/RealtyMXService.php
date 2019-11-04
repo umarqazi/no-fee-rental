@@ -88,7 +88,7 @@ class RealtyMXService extends ListingService {
 
         $building = $this->addBuilding($list['street_address']);
         $list['visibility'] = $building->is_verified;
-        $listing = $this->__addList($validate);
+        $listing = $this->__addList($list);
         $this->createImages($listing, $images);
         parent::attachApartment($building, $listing);
 //        $this->sendEmail($agent->email);
