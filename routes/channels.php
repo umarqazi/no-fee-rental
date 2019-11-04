@@ -22,3 +22,8 @@ Broadcast::channel('notification-channel.{id}', function(){
 Broadcast::channel('messaging-channel.{id}', function() {
     return true;
 });
+
+// Save Search List Broadcasting Channel
+Broadcast::channel('listing-channel.{id}', function() {
+    return true;
+});

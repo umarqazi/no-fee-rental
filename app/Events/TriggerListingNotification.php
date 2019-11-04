@@ -9,10 +9,10 @@ use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
 /**
- * Class TriggerNotification
+ * Class TriggerListingNotification
  * @package App\Events
  */
-class TriggerNotification implements ShouldBroadcast {
+class TriggerListingNotification implements ShouldBroadcast {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     /**
@@ -21,7 +21,7 @@ class TriggerNotification implements ShouldBroadcast {
     private $data;
 
     /**
-     * TriggerNotification constructor.
+     * TriggerMessage constructor.
      *
      * @param $data
      */
@@ -30,19 +30,17 @@ class TriggerNotification implements ShouldBroadcast {
     }
 
     /**
-     * Get the channels the event should broadcast on.
-     *
-     * @return Channel|array
-     */
-    public function broadcastOn() {
-        return new Channel('notification-channel.'. $this->data->to);
-    }
-
-    /**
      * @return string
      */
     public function broadcastAs() {
-        return 'notification';
+        return 'listing';
+    }
+
+    /**
+     * @return Channel|Channel|Channel[]
+     */
+    public function broadcastOn() {
+        return new Channel('listing-channel.'.$this->data->to);
     }
 
     /**

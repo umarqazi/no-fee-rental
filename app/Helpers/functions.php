@@ -208,6 +208,15 @@ function dispatchMessageEvent($data) {
 }
 
 /**
+ * @param $data
+ *
+ * @return NotificationService
+ */
+function dispatchListingNotification($data) {
+    return new NotificationService($data);
+}
+
+/**
  * @param $command
  */
 function artisan($command) {

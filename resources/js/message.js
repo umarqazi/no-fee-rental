@@ -1,7 +1,6 @@
-import Echo from "laravel-echo"
-window.io = require('socket.io-client');
-let $ulSelector = $('.messages > ul');
+"use strict";
 
+let $ulSelector = $('.messages > ul');
 $('body').on('form-success-appointment', function () {
     $('#check-availability').modal('hide');
 });
@@ -52,9 +51,9 @@ $('#load_chat').on('click', async function(e) {
     e.preventDefault();
     alert('yes');
     let inbox_id = $(this).attr('inbox_id');
-    if(await ajaxRequest(`load-chat/${inbox_id}`,'post')) {
-    }
+    await ajaxRequest(`load-chat/${inbox_id}`,'post');
 });
+
 $(".message-block .message-box .fa-users").click(function () {
     $(".message-block .users-listing").toggleClass('active_listing_bar');
 });
@@ -64,13 +63,6 @@ $(".message-block .users-listing .header-text .fa-times").click(function () {
 
 (async () => {
 
-    if (typeof io !== undefined) {
-        window.Echo = new Echo({
-            broadcaster: 'socket.io',
-            host: window.location.hostname + ':6001',
-        });
-    }
-
     window.Echo.channel(`messaging-channel.`+ Window.Laravel.user).listen('.message', (res) => {
         $ulSelector.append(`
             <li class="sent">
@@ -79,4 +71,5 @@ $(".message-block .users-listing .header-text .fa-times").click(function () {
             </li>`);
         scrollDown($ulSelector);
     });
+
 })();

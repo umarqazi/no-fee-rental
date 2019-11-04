@@ -15,7 +15,6 @@
     {!! HTML::style('assets/css/jquery-ui.css') !!}
     {!! HTML::style('assets/css/toastr.css') !!}
     {!! HTML::style('assets/css/animate.min.css') !!}
-{{--    {!! HTML::style('assets/css/pignose.calendar.min.css') !!}--}}
     {!! HTML::style('assets/css/main.css') !!}
     {!! HTML::style('assets/css/style.css') !!}
     {!! HTML::style('assets/css/lightslider.css') !!}
@@ -23,9 +22,13 @@
     {!! HTML::style('assets/owlcarousel/assets/owl.theme.default.min.css') !!}
 
     <!-- JS -->
+    {!! HTML::script('assets/js/vendor/jquery-3.2.1.min.js') !!}
     {!! HTML::script('https://maps.googleapis.com/maps/api/js?key='.config('services.google.map_api').'&libraries=places') !!}
     {!! HTML::script("https://maps.googleapis.com/maps/api/place/autocomplete/json?input=1600+Amphitheatre&key=".config('services.google.map_api')) !!}
-    {!! HTML::script('assets/js/vendor/jquery-3.2.1.min.js') !!}
+    {!! HTML::script('assets/js/notification.js') !!}
+    @if(isRenter())
+        {!! HTML::script('assets/js/listing-notification.js') !!}
+    @endif
     {!! HTML::script('assets/js/vendor/toastr.js') !!}
     {!! HTML::script('assets/js/vendor/jquery.validate.min.js') !!}
     {!! HTML::script('assets/js/global.js') !!}
