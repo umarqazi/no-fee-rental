@@ -20,7 +20,7 @@ class Review extends Model {
      * @return HasOne
      */
     public function from() {
-        return $this->hasOne(User::class, 'review_from','id');
+        return $this->hasOne(User::class, 'id','review_from');
     }
 
     /**
@@ -29,6 +29,6 @@ class Review extends Model {
      * @return mixed
      */
     public function scopeMyReviews($query) {
-        return $query->where('id', myId())->with('from');
+        return $query->where('review_for', myId())->with('from');
     }
 }

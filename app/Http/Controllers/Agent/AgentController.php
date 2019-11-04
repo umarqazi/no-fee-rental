@@ -105,27 +105,4 @@ class AgentController extends Controller {
         });
         return toObject($this->userService->fetchQuery());
     }
-
-    /**
-     *
-     * @return view
-     */
-    public function reviews() {
-      return view('agent.reviews');
-     }
-
-     /**
-     *
-     * @return view
-     */
-    public function creditPlan() {
-        return view('agent.credit_plan');
-    }
-    /**
-     *
-     * @return view
-     */
-    public function basicPlan() {
-        return view('agent.basic_plan');
-    }
 }
