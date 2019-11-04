@@ -2509,14 +2509,16 @@ footer .copyright .social-icons li a:hover {
     vertical-align: middle;
 }
 
-.listing-detail-container .listing-info .product-title .heart-icon.favourite {
-    background: url(../images/heart-icon.png) no-repeat 0px -65px;
+
+.listing-detail-container .listing-info .product-title .heart-icon.favourite{
+    background:url(../images/heart-icon-without-shadow.png) no-repeat 0px -65px;
     top: 12px;
 }
 
 .listing-detail-container .listing-info .product-title .heart-icon {
     width: 45px;
     /*height: 28px;*/
+    background: url(../images/heart-icon-without-shadow.png) no-repeat 0px 0px;
     position: relative;
     top: 3px;
     left: -2px;
