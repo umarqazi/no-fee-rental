@@ -4,8 +4,11 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AgentNeighborhoods extends Migration
-{
+/**
+ * Class AgentNeighborhoods
+ */
+class AgentNeighborhoods extends Migration {
+
     /**
      * Run the migrations.
      *
@@ -13,7 +16,6 @@ class AgentNeighborhoods extends Migration
      */
     public function up() {
         Schema::create('agent_neighborhoods', function(Blueprint $table) {
-            $table->increments('id');
             $table->unsignedInteger('agent_id');
             $table->unsignedInteger('neighborhood_id');
 
@@ -27,8 +29,7 @@ class AgentNeighborhoods extends Migration
      *
      * @return void
      */
-    public function down()
-    {
-        //
+    public function down() {
+        Schema::dropIfExists('agent_neighborhoods');
     }
 }

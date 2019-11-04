@@ -4,15 +4,17 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFavouritesTable extends Migration
-{
+/**
+ * Class CreateFavouritesTable
+ */
+class CreateFavouritesTable extends Migration {
+
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up()
-    {
+    public function up() {
         Schema::create('favourites', function (Blueprint $table) {
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('listing_id');
@@ -26,8 +28,7 @@ class CreateFavouritesTable extends Migration
      *
      * @return void
      */
-    public function down()
-    {
+    public function down() {
         Schema::dropIfExists('favourites');
     }
 }
