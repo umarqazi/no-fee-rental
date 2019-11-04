@@ -39,12 +39,9 @@ class ContactUsController extends Controller {
 
         dispatchEmailQueue($email);
 
-		$notification = array(
-			'message' => 'Thank you for your message, Our representative will contact you soon',
-			'alert_type' => 'success',
-		);
-		return Redirect::to('/contact-us')->with($notification);
-	}
+        return sendResponse($contactUs, $email, 'Thank you for your message, Our representative will contact you soon');
+
+    }
 
 	/**
 	 * @return mixed
