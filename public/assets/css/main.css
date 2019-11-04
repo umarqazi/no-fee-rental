@@ -2509,8 +2509,8 @@ footer .copyright .social-icons li a:hover {
     vertical-align: middle;
 }
 
-.listing-detail-container .listing-info .product-title .heart-icon.favourite{
-    background:url(../images/heart-icon.png) no-repeat 0px -65px;
+.listing-detail-container .listing-info .product-title .heart-icon.favourite {
+    background: url(../images/heart-icon.png) no-repeat 0px -65px;
     top: 12px;
 }
 
@@ -3626,7 +3626,6 @@ footer .copyright .social-icons li a:hover {
     border: 1px solid #B7B7B7;
     color: #F36F21;
     font-size: 14px;
-;
 }
 
 #timepicker-actions-exmpl:active,
@@ -5093,8 +5092,6 @@ footer .copyright .social-icons li a:hover {
         display: block;
         height: auto;
         overflow: inherit;
-        /*margin: 30px 0px*/
-    ;
         width: 100%;
     }
 
