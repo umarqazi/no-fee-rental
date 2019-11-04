@@ -39,6 +39,10 @@ $(() => {
         let end_time = parseInt($('select[name="open_house[end_time][]"]').val());
         return (start_time >= end_time)  ? false : true ;
     },);
+    $.validator.addMethod("format", function(number, element) {
+        number = number.replace(/\s+/g, "");
+        return number.length > 9 && number.match(/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/);
+    }, "Please Enter a valid phone number");
 
     (function($) {
         $.fn.inputFilter = function(inputFilter) {
@@ -230,7 +234,10 @@ $(() => {
             user_type: "required",
             first_name: "required",
             last_name: "required",
-            phone_number: "required",
+            phone_number: {
+            required : true ,
+            format: true ,
+             },
             license_number: {
             required:true,
             remote: {
@@ -282,7 +289,7 @@ $(() => {
                 email: "Please enter valid email"
             },
             phone_number: {
-              required: "Phone number is requried."
+              required: "Phone number is required."
             },
             password: {
                 required: "Password is required.",

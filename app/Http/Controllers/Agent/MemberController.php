@@ -54,8 +54,14 @@ class MemberController extends Controller
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
     public function invite(Request $request) {
-        $invite = $this->uService->sendInvite($request);
-        return sendResponse($request, $invite, 'Invitation has been sent.');
+        if($request->email == mySelf()->email){
+            $invite = 'false' ;
+            return sendResponse($request, $invite, 'Invitation cannot be sent to yourself.');
+        }
+        else {
+            $invite = $this->uService->sendInvite($request);
+            return sendResponse($request, $invite, 'Invitation has been sent.');
+        }
     }
     /**
      *  Accept Invitation
