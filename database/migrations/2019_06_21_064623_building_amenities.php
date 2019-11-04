@@ -16,7 +16,6 @@ class BuildingAmenities extends Migration {
      */
     public function up() {
         Schema::create('building_amenities', function (Blueprint $table) {
-            $table->increments('id');
             $table->unsignedInteger('building_id');
             $table->unsignedInteger('amenity_id');
 

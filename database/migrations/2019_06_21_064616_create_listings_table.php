@@ -4,7 +4,11 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+/**
+ * Class CreateListingsTable
+ */
 class CreateListingsTable extends Migration {
+
 	/**
 	 * Run the migrations.
 	 *
@@ -14,9 +18,9 @@ class CreateListingsTable extends Migration {
 		Schema::create('listings', function (Blueprint $table) {
 			$table->increments('id');
             $table->unsignedInteger('user_id')->nullable();
+            $table->unsignedInteger('neighborhood_id')->nullable();
             $table->string('unique_slug')->unique();
             $table->string('realty_id')->nullable();
-            $table->unsignedInteger('neighborhood_id')->nullable();
 			$table->string('name')->nullable();
             $table->string('email')->nullable();
 			$table->string('phone_number')->nullable();
