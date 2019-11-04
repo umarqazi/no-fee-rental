@@ -1882,7 +1882,7 @@ main {
     cursor: pointer;
 }
 .listing-Details .listing-info #display-heart-icon {
-    background: url(../images/heart-icon.png) no-repeat 0px 0px;
+    background: url(../images/heart-icon-without-shadow.png) no-repeat 0px 0px;
     width: 51px;
     z-index: 1;
     height: 47px;
