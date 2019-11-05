@@ -37,7 +37,7 @@
                     <div class="col-lg-6">
                         <h2 class="text-left">Contact Us</h2>
                         <p> Reach out to us for any enquery</p>
-                        {!! Form::open(['url'=>route('contact-us'), 'class'=>'contact-form ajax', 'method'=>'post','id'=>'contact_us_form', 'enctype'=>'multipart/form-data']) !!}
+                        {!! Form::open(['url'=>route('contact-us'), 'class'=>'contact-form ajax', 'method'=>'post','reset'=> 'true' ,'id'=>'contact_us_form', 'enctype'=>'multipart/form-data']) !!}
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="form-group">
