@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -835,10 +835,10 @@ try {
 
 /***/ }),
 
-/***/ "./resources/js/message.js":
-/*!*********************************!*\
-  !*** ./resources/js/message.js ***!
-  \*********************************/
+/***/ "./resources/js/listing-notification.js":
+/*!**********************************************!*\
+  !*** ./resources/js/listing-notification.js ***!
+  \**********************************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -854,151 +854,33 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-var $ulSelector = $('.messages > ul');
-$('body').on('form-success-appointment', function () {
-  $('#check-availability').modal('hide');
-});
-/**
- * Accept Meeting Request
- */
-
-$('#reply').on('click',
-/*#__PURE__*/
-function () {
-  var _ref = _asyncToGenerator(
-  /*#__PURE__*/
-  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(e) {
-    var meeting_id, res, $userSelector, $listingSelector;
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            e.preventDefault();
-            _context.next = 3;
-            return confirm('You want to set a meeting?');
-
-          case 3:
-            if (!_context.sent) {
-              _context.next = 24;
-              break;
-            }
-
-            meeting_id = $(this).attr('request_id');
-            _context.next = 7;
-            return ajaxRequest("accept-meeting/".concat(meeting_id), 'post');
-
-          case 7:
-            res = _context.sent;
-
-            if (!res.status) {
-              _context.next = 24;
-              break;
-            }
-
-            $userSelector = $('.user-info');
-            $listingSelector = $('.info:last');
-            $userSelector.find('p:eq(3) > strong').text(res.data.messages[0].message);
-            $userSelector.find('p:eq(0) > strong').text(res.data.sender !== null ? res.data.sender.first_name : res.data.username);
-            $userSelector.find('p:eq(1) > strong').text(res.data.sender !== null ? res.data.sender.email : res.data.email);
-            $userSelector.find('p:eq(2) > strong').text(res.data.sender !== null ? res.data.sender.phone_number : res.data.phone_number);
-            $listingSelector.find('div > p:eq(0)').text("$ " + res.data.listing.rent);
-            $listingSelector.find('div > p:eq(1)').text(res.data.listing.created_at);
-            $listingSelector.find('ul > li:eq(0)').text(res.data.listing.bedrooms + " Bed");
-            $listingSelector.find('ul > li:eq(1)').text(res.data.listing.baths + " Bath");
-            $listingSelector.find('p:last').text(res.data.listing.street_address);
-            $('.property-info > img').attr('src', res.data.listing.thumbnail);
-            $('form').attr('action', 'send-message/' + res.data.id);
-            $('#message-modal').modal('show');
-            return _context.abrupt("return", true);
-
-          case 24:
-          case "end":
-            return _context.stop();
-        }
-      }
-    }, _callee, this);
-  }));
-
-  return function (_x) {
-    return _ref.apply(this, arguments);
-  };
-}());
-$('#send-message').on('submit', function (e) {
-  e.preventDefault();
-  var src = $('.avtar').find('img').attr('src');
-  $('.messages > ul').append("<li class=\"replies\"><img style=\"width: 35px;height: 35px;\" src=\"".concat(src, "\"><p>").concat($('input[type=text]').val(), "</p></li>"));
-  scrollDown($ulSelector);
-});
-/**
- * load chat history
- */
-
-$('#load_chat').on('click',
-/*#__PURE__*/
-function () {
-  var _ref2 = _asyncToGenerator(
-  /*#__PURE__*/
-  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(e) {
-    var inbox_id;
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
-      while (1) {
-        switch (_context2.prev = _context2.next) {
-          case 0:
-            e.preventDefault();
-            alert('yes');
-            inbox_id = $(this).attr('inbox_id');
-            _context2.next = 5;
-            return ajaxRequest("load-chat/".concat(inbox_id), 'post');
-
-          case 5:
-          case "end":
-            return _context2.stop();
-        }
-      }
-    }, _callee2, this);
-  }));
-
-  return function (_x2) {
-    return _ref2.apply(this, arguments);
-  };
-}());
-$(".message-block .message-box .fa-users").click(function () {
-  $(".message-block .users-listing").toggleClass('active_listing_bar');
-});
-$(".message-block .users-listing .header-text .fa-times").click(function () {
-  $(".message-block .users-listing").removeClass('active_listing_bar');
-});
-
 _asyncToGenerator(
 /*#__PURE__*/
-_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
-  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
     while (1) {
-      switch (_context3.prev = _context3.next) {
+      switch (_context.prev = _context.next) {
         case 0:
-          window.Echo.channel("messaging-channel." + Window.Laravel.user).listen('.message', function (res) {
-            $ulSelector.append("\n            <li class=\"sent\">\n                <img style=\"width: 35px;height: 35px;\" alt=\"\" src=\"".concat(window.location.origin, "/").concat(res.sender.profile_image === null ? 'assets/images/default-images/user.jpeg' : res.sender.profile_image, "\">\n                <p>").concat(res.message.message, "</p>\n            </li>"));
-            scrollDown($ulSelector);
-          });
+          window.Echo.channel("listing-channel." + Window.Laravel.user).listen('.listing', function (res) {});
 
         case 1:
         case "end":
-          return _context3.stop();
+          return _context.stop();
       }
     }
-  }, _callee3);
+  }, _callee);
 }))();
 
 /***/ }),
 
-/***/ 3:
-/*!***************************************!*\
-  !*** multi ./resources/js/message.js ***!
-  \***************************************/
+/***/ 2:
+/*!****************************************************!*\
+  !*** multi ./resources/js/listing-notification.js ***!
+  \****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /var/www/html/no-fee-rental/resources/js/message.js */"./resources/js/message.js");
+module.exports = __webpack_require__(/*! /var/www/html/no-fee-rental/resources/js/listing-notification.js */"./resources/js/listing-notification.js");
 
 
 /***/ })

@@ -38,4 +38,3 @@
     </div>
 </header>
 @include('secured-layouts.scripts')
-{!! HTML::script('assets/js/notification.js') !!}

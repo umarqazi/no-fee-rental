@@ -23,8 +23,12 @@
 	{!! HTML::style('assets/css/style.css') !!}
     {!! HTML::style('assets/css/toastr.css') !!}
 
-	 <!-- JS -->
+    {{-- JS --}}
     {!! HTML::script('assets/js/vendor/jquery-3.2.1.min.js') !!}
+    {!! HTML::script('assets/js/notification.js') !!}
+    @if(isRenter())
+        {!! HTML::script('assets/js/listing-notification.js') !!}
+    @endif
 	{!! HTML::script('assets/js/vendor/jquery.validate.min.js') !!}
     {!! HTML::script('assets/js/vendor/jquery-ui.min.js') !!}
 	{!! HTML::script('assets/js/vendor/lightslider.js') !!}

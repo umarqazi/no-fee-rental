@@ -65,7 +65,7 @@ const ajaxRequest = async function(url, type, data, loading = true, form = null,
  */
 const populateFields = function (form, data) {
     $.each(data, function(key, value) {
-        var ctrl = $('[name='+key+']', form);
+        let ctrl = $('[name='+key+']', form);
         switch(ctrl.prop("type")) {
             case "radio": case "checkbox":
                 ctrl.each(function() {
@@ -123,11 +123,13 @@ const confirm = function (msg) {
 /**
  *
  * @param route
+ * @param table
+ * @param form
  * @returns {Promise<void>}
  */
 async function deleteRecord(route, table, form) {
     if(await confirm('You want to delete?')) {
-        let res = await ajaxRequest(route, 'post', null);
+        await ajaxRequest(route, 'post', null);
         table.row($(form).parents('tr')).remove().draw();
     }
 }
