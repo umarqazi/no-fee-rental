@@ -19,11 +19,12 @@ class CreateNotificationsTable extends Migration {
             $table->increments('id');
             $table->unsignedInteger('from');
             $table->unsignedInteger('to');
-            $table->string('notification');
-            $table->string('path');
+            $table->text('message');
+            $table->text('url');
             $table->boolean('is_read')->default(0)->comment = "0-Unread, 1-Read";
             $table->timestamps();
 
+            $table->foreign('to')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('from')->references('id')->on('users')->onDelete('cascade');
         });
     }

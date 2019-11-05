@@ -14,7 +14,7 @@ class Building extends Model {
     /**
      * @var array
      */
-    protected $fillable = ['building', 'is_verified', 'type'];
+    protected $fillable = ['building', 'is_verified', 'type', 'address'];
 
     /**
      * @return BelongsToMany

@@ -11,6 +11,8 @@ namespace App\Services;
 use App\Forms\ListingForm;
 use App\Repository\FeatureRepo;
 use App\Repository\OpenHouseRepo;
+use App\Repository\UserRepo;
+use Illuminate\Foundation\Bus\PendingDispatch;
 use Illuminate\Support\Facades\DB;
 use App\Repository\ListingImagesRepo;
 
@@ -36,10 +38,16 @@ class ListingService extends BuildingService {
     protected $featureRepo;
 
     /**
+     * @var UserRepo
+     */
+    protected $userRepo;
+
+    /**
      * ListingService constructor.
      */
     public function __construct() {
         parent::__construct();
+        $this->userRepo          = new UserRepo();
         $this->featureRepo       = new FeatureRepo();
         $this->openHouseRepo     = new OpenHouseRepo();
         $this->listingImagesRepo = new ListingImagesRepo();
@@ -58,6 +66,7 @@ class ListingService extends BuildingService {
         $listing             = $this->__addList($listing);
         $this->__addOpenHouse($listing->id, $listing, $request->open_house);
         $this->__addFeatures($listing->id, $request->features);
+        $this->__manageSaveSearch($listing, $request->features);
         parent::attachApartment($building, $listing);
         DB::commit();
         return $listing->id;
@@ -499,5 +508,35 @@ class ListingService extends BuildingService {
                                ->orderBy($col, $order)
                                ->paginate($paginate, ['*'], 'pending')
         ]);
+    }
+
+    /**
+     * @param $data
+     * @param $features
+     *
+     * @return PendingDispatch
+     */
+    private function __manageSaveSearch($data, $features) {
+        $array = [
+            'list_id'      => $data->id,
+            'baths'        => $data->baths,
+            'beds'         => $data->bedrooms,
+            'neighborhood' => $data->neighborhood_id,
+            'squareRange'  => $data->square_feet,
+            'priceRange'   => $data->square_feet,
+            'features'     => $features,
+            'sender'       => isAdmin() ? $this->__sender($data->user_id) : mySelf()
+        ];
+
+        return dispatchListingNotification($array, 2);
+    }
+
+    /**
+     * @param $id
+     *
+     * @return mixed
+     */
+    private function __sender($id) {
+        return $this->userRepo->findById($id)->first();
     }
 }

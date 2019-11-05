@@ -16,6 +16,7 @@ class BuildingApartments extends Migration {
      */
     public function up() {
         Schema::create('building_apartments', function(Blueprint $table) {
+            $table->bigIncrements('id');
             $table->unsignedInteger('building_id');
             $table->unsignedInteger('apartment_id');
 
