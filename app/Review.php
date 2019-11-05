@@ -14,7 +14,7 @@ class Review extends Model {
     /**
      * @var array
      */
-    protected $fillable = ['review_for', 'review_from', 'message', 'rating'];
+    protected $fillable = ['review_for', 'review_from', 'request_message', 'review_message', 'rating','token','is_token_used'];
 
     /**
      * @return HasOne

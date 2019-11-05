@@ -31,8 +31,9 @@ class ReviewController extends Controller {
     /**
      * @return Factory|View
      */
-    public function index() {
-        return view('make_review');
+    public function index(Request $request) {
+        $token =  $request->token ;
+            return view('make_review' , compact('token'));
     }
 
     /**
@@ -44,6 +45,20 @@ class ReviewController extends Controller {
         $res = $this->reviewService->sendRequest($request);
         return sendResponse($request, $res, 'Request has been sent.');
     }
+
+    /**
+     * @param Request $request
+     * @return JsonResponse|RedirectResponse
+     */
+    public function create(Request $request) {
+      $review = $this->reviewService->create($request);
+      if($review){
+          return sendResponse($request, $review, 'Thank you for your response.');
+      } else {
+          return sendResponse($request, $review, null, null, 'Token Expired.');
+      }
+    }
+
 
     public function show() {
 

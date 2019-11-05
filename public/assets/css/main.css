@@ -1471,7 +1471,9 @@ footer .copyright .social-icons li a:hover {
 .lSSlideWrapper .lSNext {
     z-index: 9;
 }
-
+#advance-search{
+    z-index: 25 !important;
+}
 #advance-search .bdr-top-btn {
     border-top: 1px solid #cecaca;
     padding-top: 20px;

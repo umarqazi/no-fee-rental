@@ -181,4 +181,13 @@ class UserController extends Controller {
             return 'false';
         }
     }
+    /**
+     *
+     * return Renters
+     */
+    public function getRenters() {
+        $renters = $this->service->getRenters();
+        return $renters;
+        return sendResponse(null , $renters, null);
+    }
 }
