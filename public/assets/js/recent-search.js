@@ -1,17 +1,11 @@
 "use strict";
 
-let sortOrder;
 $(() => {
     let $body = $('body');
 
     let queries = JSON.parse(localStorage.getItem('search-queries'));
     let bath = [], bed = [], square_feet_min = null, square_feet_max = null, neighborhood = null, price_min = null, price_max = null, open_house = null;
 
-    // $body.on('change', '.sorting', function() {
-    //     let url = window.location.href;
-    //     let sorting = $(this).val();
-    //     window.location = sortOrder === '' ? window.location.href + sortValue(url, sorting) : removeOldSort(url, sorting);
-    // });
 
     $('#baths').find('li').one('click', function() {
         bath.push($(this).text().replace(/\s/g, ''));
@@ -44,16 +38,22 @@ $(() => {
         square_feet_max = res;
     });
 
+    $body.on('blur' ,'input[name=openHouse]', function() {
+        open_house = $(this).val();
+    });
+
     $body.on('submit', '#search , #advance-search', function(e) {
         /*neighborhood = $(this).find('#neigh').val();*/
         let searchQuery = {
+            isNew: true,
             baths: bath,
             neighborhood: neighborhood,
             beds: bed,
             price_min: price_min,
             price_max: price_max,
             square_feet_min: square_feet_min,
-            square_feet_max: square_feet_max
+            square_feet_max: square_feet_max,
+            open_house  : open_house
         };
 
         let query = [];
@@ -80,28 +80,30 @@ $(() => {
 
     if(queries && queries.length > 0) {
         queries.forEach((v, i) => {
-            var result = Object.entries(v).reduce((a,[key,val])=>{
+            if(v.isNew === true) {
+                let currentQuery = queries[i];
+                currentQuery.isNew = false;
+                currentQuery.url = window.location.href;
+                localStorage.setItem('search-queries', JSON.stringify(queries));
+            }
+
+            let result = Object.entries(v).reduce((a,[key,val]) => {
                 if(val && val.length)
                     a.push({name : key, value : val});
                 return a;
             },[]);
 
-            let url = window.location.origin + `/search?neighborhoods=${v.neighborhood !== null ? v.neighborhood : '' + v.beds.length > 0 ? '&beds=' + v.beds : '' + v.baths.length > 0 ? '&baths=' + v.baths : '' + v.price_min !== null ? '&priceRange%5Bmin_price%5D=' + v.price_min : '' + v.price_max !== null ? '&priceRange%5Bmax_price%5D=' + v.price_max : '' + v.square_feet_min !== null ? '&priceRange%5Bmin_price_2%5D=' + v.square_feet_min : '' + v.square_feet_max !== null ? '&priceRange%5Bmax_price_2%5D=' + v.square_feet_max : ''}`;
-            
             $('#empty-keywords').remove();
-            if(result.length > 1) {
+            if(result.length > 2) {
                 $('.dropDown > ul.ul-border-top > li ').prepend(`
-                <a href="${url}">
-                       NYC ${(v.neighborhood !== "" ? ' - ' + v.neighborhood : '') + (v.beds.length > 0  ? ' ' + v.beds + ' bed' : '') + (v.baths.length > 0 ? ' ' + v.baths + ' bath' : '')}
-                </a>
-             `);
-            }
-            else {
+                <a href="${v.url}">
+                       NYC ${(v.neighborhood !== "" ? ' - ' + v.neighborhood : '') + (v.beds.length > 0  ? ' ' + v.beds + ' beds' : '') + (v.baths.length > 0 ? ' ' + v.baths + ' baths' : '')+(v.price_min !== "" ? ' - ' + v.price_min + ' Min Price' : '')+(v.price_max !== "" ? ' - ' + v.price_max+ ' Max Price' : '')+(v.square_feet_min !== "" ? ' - ' + v.square_feet_min + ' Min Square Feet' : '')+(v.square_feet_max !== "" ? ' - ' + v.square_feet_max + ' Max Square Feet' : '')+(v.open_house !== "" ? ' - ' + v.open_house  + ' Open House' : '')}
+                </a>`);
+            } else {
                 $('.dropDown > ul.neighborhoods_amenities > li ').prepend(`
-                <a href="${url}">
+                <a href="${v.url}">
                        NYC ${(v.neighborhood !== "" ? ' - ' + v.neighborhood : '') + (v.beds.length > 0  ? ' ' + v.beds + ' bed' : '') + (v.baths.length > 0  ? ' ' + v.baths + ' bath' : '')}
-                </a>
-             `);
+                </a>`);
             }
         });
     } else {
@@ -109,65 +111,3 @@ $(() => {
         $('.dropDown').append('<a href="javascript:void(0);" id="empty-keywords">You have no keywords yet to search</a>');
     }
 });
-
-window.onload = function() {
-    sortOrder = $('.sorting').val();
-};
-
-/**
- *
- * @param url
- * @param newSort
- * @returns {*}
- */
-function removeOldSort(url, newSort) {
-     let oldSort = sorting(sortOrder);
-     oldSort = str_has(url, `?${oldSort}`) ? `?${oldSort}` : `&${oldSort}`;
-     url = url.replace(`${oldSort}`, ' ');
-     url = url.split(' ');
-     return url[0] + sortValue(url, newSort);
-}
-
-/**
- *
- * @param url
- * @param sort
- * @returns {*}
- */
-function sortValue(url, sort) {
-    let sortBy = null;
-    sortBy = sorting(sort);
-    let operator = str_has(url, '?') ? '&' : '?';
-    return  operator + sortBy;
-}
-
-/**
- *
- * @param sorting
- */
-function sorting(sorting) {
-    let sortBy = null;
-    switch (sorting) {
-        case 'recent':
-            sortBy = 'recent=recent';
-            break;
-        case 'cheaper':
-            sortBy = 'cheaper=cheaper';
-            break;
-        case 'petPolicy':
-            sortBy = 'petPolicy=petPolicy';
-            break;
-    }
-
-    return sortBy;
-}
-
-/**
- *
- * @param $string
- * @param $word
- * @returns {*}
- */
-function str_has($string, $word) {
-    return $string.includes($word);
-}
