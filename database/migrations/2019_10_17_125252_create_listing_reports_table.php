@@ -4,8 +4,11 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateListingReportsTable extends Migration
-{
+/**
+ * Class CreateListingReportsTable
+ */
+class CreateListingReportsTable extends Migration {
+
     /**
      * Run the migrations.
      *

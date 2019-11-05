@@ -43,13 +43,6 @@ class ListingRepo extends BaseRepo {
 		return $this->model->pending()->withall();
 	}
 
-    /**
-     * @return mixed
-     */
-    public function appendQuery() {
-        return $this->model::query();
-    }
-
 	/**
 	 * @param $id
 	 *

@@ -97,24 +97,6 @@ $(() => {
             });
         }, 500);
     });
-
-    // disable enable exclusive settings checkboxes
-        $('#listitemp4 , #listitemp3').change(function() {
-            var val = $(this).val();
-
-            if (val == "p4") {
-                $(".row > .col-md-6 > ul > li > .custom-checkbox > input[value='p1'] ,input[value='p2'] ,input[value='p3']").prop("disabled", $(this).is(":checked"));
-                $(".row > .col-md-6 > ul > li > .custom-checkbox > input[value='p1'] ,input[value='p2'] ,input[value='p3']").prop("checked", false);
-
-            }
-
-            if (val == "p3") {
-                $(".row > .col-md-6 > ul > li > .custom-checkbox > input[value='p1'] ,input[value='p2']").prop("disabled", $(this).is(":checked"));
-                $(".row > .col-md-6 > ul > li > .custom-checkbox > input[value='p1'] ,input[value='p2']").prop("checked", false);
-
-            }
-
-        });
 });
 
 /**

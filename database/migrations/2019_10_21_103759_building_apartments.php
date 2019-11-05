@@ -4,8 +4,11 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class BuildingApartments extends Migration
-{
+/**
+ * Class BuildingApartments
+ */
+class BuildingApartments extends Migration {
+
     /**
      * Run the migrations.
      *
@@ -13,7 +16,6 @@ class BuildingApartments extends Migration
      */
     public function up() {
         Schema::create('building_apartments', function(Blueprint $table) {
-            $table->bigIncrements('id');
             $table->unsignedInteger('building_id');
             $table->unsignedInteger('apartment_id');
 

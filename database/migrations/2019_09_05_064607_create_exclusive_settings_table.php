@@ -4,15 +4,17 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateExclusiveSettingsTable extends Migration
-{
+/**
+ * Class CreateExclusiveSettingsTable
+ */
+class CreateExclusiveSettingsTable extends Migration {
+
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up()
-    {
+    public function up() {
         Schema::create('exclusive_settings', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('user_id');
@@ -27,8 +29,7 @@ class CreateExclusiveSettingsTable extends Migration
      *
      * @return void
      */
-    public function down()
-    {
+    public function down() {
         Schema::dropIfExists('exclusive_settings');
     }
 }

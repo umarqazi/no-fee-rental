@@ -5,19 +5,18 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 /**
- * Class CreateNeighborhoodsTable
+ * Class CreateCreditPlansTable
  */
-class CreateNeighborhoodsTable extends Migration {
+class CreateCreditPlansTable extends Migration {
+
     /**
      * Run the migrations.
      *
      * @return void
      */
     public function up() {
-        Schema::create('neighborhoods', function (Blueprint $table) {
+        Schema::create('credit_plans', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->text('content')->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ class CreateNeighborhoodsTable extends Migration {
      * @return void
      */
     public function down() {
-        Schema::dropIfExists('neighborhoods');
+        Schema::dropIfExists('credit_plans');
     }
 }
