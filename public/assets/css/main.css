@@ -5824,3 +5824,9 @@ list .property-info .info p {
     margin-right: 10px;
     position: relative;
 }
+.main-wrapper .saved-search-container .search-header{
+    padding: 0px 0px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+
+}

@@ -61,7 +61,7 @@ $(".message-block .users-listing .header-text .fa-times").click(function () {
     $(".message-block .users-listing").removeClass('active_listing_bar');
 });
 
-(async () => {
+$(() => {
 
     window.Echo.channel(`messaging-channel.`+ Window.Laravel.user).listen('.message', (res) => {
         $ulSelector.append(`
@@ -72,4 +72,4 @@ $(".message-block .users-listing .header-text .fa-times").click(function () {
         scrollDown($ulSelector);
     });
 
-})();
+});
