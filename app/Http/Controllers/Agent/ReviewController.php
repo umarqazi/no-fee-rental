@@ -42,7 +42,6 @@ class ReviewController extends Controller {
      * @return JsonResponse|RedirectResponse
      */
     public function request(Request $request) {
-        dd($request->all());
         $res = $this->reviewService->sendRequest($request);
         return sendResponse($request, $res, 'Request has been sent.');
     }

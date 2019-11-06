@@ -707,5 +707,16 @@ class UserService {
         $user->update(['status' => $update]);
         return $update;
     }
+    /**
+     * return Renters.
+     */
+    public function getRenters() {
+        $data = $this->userRepo->find(['user_type' => 4])->get();
+        $renters_email = [];
+        foreach ($data as $key=> $renter){
+            array_push($renters_email,$renter->email);
+        }
+        return $renters_email;
+    }
 
 }

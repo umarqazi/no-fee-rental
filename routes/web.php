@@ -102,6 +102,9 @@ Route::post('/create-review', 'ReviewController@create')->name('web.createReview
 Route::get('/favourite/{listing_id}', 'UserController@favourite')->name('web.favouriteListing');
 Route::get('/remove/favourite/{listing_id}', 'UserController@removeFavourite')->name('web.removeFavouriteListing');
 
+//get Renters
+Route::get('/get-renters', 'UserController@getRenters')->name('web.getRenters');
+
 Route::get('/test-all', function() {
    return view('admin.building_detail');
 });
