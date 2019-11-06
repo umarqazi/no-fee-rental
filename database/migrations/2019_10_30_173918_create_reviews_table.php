@@ -18,8 +18,11 @@ class CreateReviewsTable extends Migration {
             $table->increments('id');
             $table->unsignedInteger('review_for');
             $table->unsignedInteger('review_from');
-            $table->integer('rating');
-            $table->text('message');
+            $table->integer('rating')->nullable();
+            $table->text('request_message');
+            $table->text('review_message')->nullable();
+            $table->string('token', 60);
+            $table->integer('is_token_used');
             $table->timestamps();
 
             $table->foreign('review_for')->references('id')->on('users')->onDelete('cascade');

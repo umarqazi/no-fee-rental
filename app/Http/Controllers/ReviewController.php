@@ -32,16 +32,8 @@ class ReviewController extends Controller {
      * @return Factory|View
      */
     public function index(Request $request) {
-        $data = $this->reviewService->acceptReviewRequest($request->token);
         $token =  $request->token ;
-        if($data){
             return view('make_review' , compact('token'));
-        }
-        else {
-            return redirect(route('web.index'))
-                ->with(['message' => 'Invalid token request cannot be processed.', 'alert_type' => 'error']);
-        }
-
     }
 
     /**
@@ -56,16 +48,14 @@ class ReviewController extends Controller {
 
     /**
      * @param Request $request
-     *
+     * @return JsonResponse|RedirectResponse
      */
     public function create(Request $request) {
       $review = $this->reviewService->create($request);
       if($review){
           return sendResponse($request, $review, 'Thank you for your response.');
-
-      }
-      else {
-          return sendResponse($request, $review, 'Something went wrong.');
+      } else {
+          return sendResponse($request, $review, null, null, 'Token Expired.');
       }
     }
 

@@ -39,7 +39,6 @@ class ReviewService {
      */
     public function __construct() {
         $this->reviewRepo = new ReviewRepo();
-        $this->userReviewRepo = new UserReviewRepo();
         $this->userRepo = new UserRepo();
     }
 
@@ -50,10 +49,10 @@ class ReviewService {
      */
     public function sendRequest($request) {
        $renter = $this->userRepo->find(['email' => $request->email])->first();
-       $review = $this->userReviewRepo->create([
-           'to'=> $renter->id ,
-           'from'=> myId(),
-           'message' => $request->message,
+       $review = $this->reviewRepo->create([
+           'review_for'=>  myId() ,
+           'review_from'=>$renter->id,
+           'request_message' => $request->message,
            'token' => str_random(50),
            'is_token_used' => 0
         ]);
@@ -73,7 +72,7 @@ class ReviewService {
      * @return mixed
      */
     public function get() {
-        return $this->reviewRepo->reviews()->get();
+        return $this->reviewRepo->reviews()->get()->find(['review_message' !== null]);
     }
 
     public function show() {
@@ -87,33 +86,15 @@ class ReviewService {
     private function __validateForm($request) {
 
     }
-    /**
-     * accept review request
-     */
-    public function acceptReviewRequest($token){
-        $data = $this->userReviewRepo->find(['token' => $token])->first();
-        if($data){
-            $this->userReviewRepo->update($data->id, ['is_token_used' => 1]);
-            return true ;
-        }
-        else {
-            return false ;
-        }
-    }
-
+    
     /**
      * @param $request
      *
      * @return PendingDispatch
      */
-    public function create($request) {
-        $reviewRequest = $this->userReviewRepo->find(['token' => $request->ReviewToken])->first();
-        $review = $this->reviewRepo->create([
-            'review_for'=> $reviewRequest->from ,
-            'review_from'=> $reviewRequest->to,
-            'rating' => 3,
-            'message' => $request->review
-            ]);
+    public function create($request){
+        $reviewRequest = $this->reviewRepo->find(['token' => $request->ReviewToken])->first();
+        $review = $reviewRequest->is_token_used == 0  ? $this->reviewRepo->update($reviewRequest->id , ['rating' => 3 , 'review_message' => $request->review ,'is_token_used' => 1]) : false ;
         return $review ;
     }
 }

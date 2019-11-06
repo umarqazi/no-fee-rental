@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'No Fee Rental | Profile')
+@section('title', 'No Fee Rental | Make Review')
 @section('content')
     <section class=" press-section wow fadeIn featured-properties neighborhood-search agent-listing-profile"
              data-wow-delay="0.2s">
@@ -37,7 +37,7 @@
                                 <div class="form-group">
                                     <label>Write a review here </label>
                                     {!! Form::textarea('review', null, ['class'=>'input-style', 'placeholder' => 'Write your review here','style' => 'resize:none; height:100px;']) !!}
-                                    @if ($errors->has('description'))
+                                    @if ($errors->has('review'))
                                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('review') }}</strong>
                                     </span>

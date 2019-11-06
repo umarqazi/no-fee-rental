@@ -3,7 +3,7 @@
 @section('content')
     <div class="wrapper profile-contact-section">
         <div class="heading-wrapper">
-            <h1>Listings</h1>
+            <h1>Reviews</h1>
             <a href="http://localhost:8000/agent/add-listing" class="btn-default" data-toggle="modal"
                data-target="#request-review">Request a Review</a>
         </div>
@@ -46,7 +46,7 @@
                                                                 @endfor
                                                             </div>
                                                         </div>
-                                                        <p> {{ $review->message }}</p>
+                                                        <p> {{ $review->review_message }}</p>
                                                         <span> {{ dateReadable($review->created_at) }}</span>
                                                     </div>
                                                 </div>
@@ -75,7 +75,7 @@
                     <h4 class="modal-title">Request a Review</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
-                {!! Form::open(['url' => route('agent.requestReview'),'class' => 'ajax']) !!}
+                {!! Form::open(['url' => route('agent.requestReview'),'class' => 'ajax','reset' => 'true']) !!}
                 <!-- Modal body -->
                 <div class="modal-body">
                    <div class="row">
