@@ -75,14 +75,14 @@
                     <h4 class="modal-title">Request a Review</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
-                {!! Form::open(['url' => route('agent.requestReview')]) !!}
+                {!! Form::open(['url' => route('agent.requestReview'),'class' => 'ajax']) !!}
                 <!-- Modal body -->
                 <div class="modal-body">
                    <div class="row">
                        <div class="col-sm-12">
                            <div class="form-group">
                                <label>Email</label>
-                               {!! Form::text('email', null, ['class' => 'input-style', 'placeholder' => 'Request Email', 'type' => 'email']) !!}
+                               {!! Form::text('email', null, ['class' => 'input-style','id' => 'renter_email', 'placeholder' => 'Request Email', 'type' => 'email']) !!}
                            </div>
                            <div class="form-group">
                                <label>Message</label>
@@ -99,4 +99,8 @@
             </div>
         </div>
     </div>
+    <script>
+        fetchRenters($('input[name=email]'));
+    </script>
 @endsection
+

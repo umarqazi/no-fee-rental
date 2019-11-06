@@ -31,8 +31,17 @@ class ReviewController extends Controller {
     /**
      * @return Factory|View
      */
-    public function index() {
-        return view('make_review');
+    public function index(Request $request) {
+        $data = $this->reviewService->acceptReviewRequest($request->token);
+        $token =  $request->token ;
+        if($data){
+            return view('make_review' , compact('token'));
+        }
+        else {
+            return redirect(route('web.index'))
+                ->with(['message' => 'Invalid token request cannot be processed.', 'alert_type' => 'error']);
+        }
+
     }
 
     /**
@@ -44,6 +53,22 @@ class ReviewController extends Controller {
         $res = $this->reviewService->sendRequest($request);
         return sendResponse($request, $res, 'Request has been sent.');
     }
+
+    /**
+     * @param Request $request
+     *
+     */
+    public function create(Request $request) {
+      $review = $this->reviewService->create($request);
+      if($review){
+          return sendResponse($request, $review, 'Thank you for your response.');
+
+      }
+      else {
+          return sendResponse($request, $review, 'Something went wrong.');
+      }
+    }
+
 
     public function show() {
 
