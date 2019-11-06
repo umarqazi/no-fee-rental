@@ -12,7 +12,7 @@
 */
 
 // Home Routes
-Route::get('/home', 'Renter\HomeController@index')->name('renter.index');
+//Route::get('/home', 'Renter\HomeController@index')->name('renter.index');
 
 // Auth Routes
 Route::get('/logout', 'Renter\AuthController@logout')->name('renter.logout');
@@ -36,8 +36,8 @@ Route::get('/unArchive-conversation/{id}', 'Renter\ListingConversationController
 Route::post('/add-event', 'Renter\CalendarController@create')->name('renter.addEvent');
 Route::get('/show-calendar', 'Renter\CalendarController@index')->name('renter.showCalendar');
 
-// Favourites Routes
-Route::get('/favourite/listing-view', 'Renter\ListingController@wishList')->name('renter.viewListing');
+// Favourites(Wishlist) Routes
+Route::get('/favourite/listing-view', 'Renter\ListingController@wishList')->name('renter.index');
 
 // Save Search Routes
 Route::get('/save-searches', 'Renter\SaveSearchController@index')->name('renter.viewSaveSearch');

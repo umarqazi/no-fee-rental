@@ -110,6 +110,17 @@ class Listing extends Model {
 		return $query->where($clause);
 	}
 
+    /**
+     * @param $query
+     *
+     * @return mixed active listing
+     */
+    public function scopeRentActive($query) {
+        $clause['visibility'] = ACTIVELISTING;
+        return $query->where($clause);
+    }
+
+
 	/**
 	 * @param $query
 	 *

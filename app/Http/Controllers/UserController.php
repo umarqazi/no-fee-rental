@@ -68,7 +68,7 @@ class UserController extends Controller {
         }
 			$request->id = $user->id;
 			$this->service->changePassword($request);
-            return success('Password has been updated');
+            return redirect('/')->with(['message' => 'Password has been updated', 'alert_type' => 'success']);
 		}
 		return error('Invalid token request cannot be processed.');
 

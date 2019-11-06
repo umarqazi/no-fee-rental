@@ -30,6 +30,13 @@ class ListingRepo extends BaseRepo {
 	}
 
 	/**
+     * @return mixed
+     */
+    public function rentActive() {
+        return $this->model->rentActive()->withall();
+    }
+
+	/**
 	 * @return mixed
 	 */
 	public function inactive() {
