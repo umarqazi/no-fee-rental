@@ -36,5 +36,9 @@ Route::get('/unArchive-conversation/{id}', 'Renter\ListingConversationController
 Route::post('/add-event', 'Renter\CalendarController@create')->name('renter.addEvent');
 Route::get('/show-calendar', 'Renter\CalendarController@index')->name('renter.showCalendar');
 
-//Listing Routes
+// Favourites Routes
 Route::get('/favourite/listing-view', 'Renter\ListingController@wishList')->name('renter.viewListing');
+
+// Save Search Routes
+Route::get('/save-searches', 'Renter\SaveSearchController@index')->name('renter.viewSaveSearch');
+Route::get('/delete-save-search/{id}', 'Renter\SaveSearchController@remove')->name('renter.removeSaveSearch');

@@ -17,6 +17,15 @@ class SaveSearch extends Model {
     protected $fillable = ['user_id', 'keywords', 'url'];
 
     /**
+     * @param $value
+     *
+     * @return mixed
+     */
+    public function getKeywordsAttribute($value) {
+        return \Opis\Closure\unserialize($value);
+    }
+
+    /**
      * @return HasOne
      */
     public function user() {

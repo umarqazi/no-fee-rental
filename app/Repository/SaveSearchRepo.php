@@ -22,4 +22,11 @@ class SaveSearchRepo extends BaseRepo {
     public function __construct() {
         parent::__construct(new SaveSearch());
     }
+
+    /**
+     * @return mixed
+     */
+    public function getKeywords() {
+        return $this->find(['user_id' => myId()])->latest();
+    }
 }

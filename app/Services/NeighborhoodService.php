@@ -76,6 +76,15 @@ class NeighborhoodService {
     /**
      * @param $id
      *
+     * @return mixed
+     */
+    public function findById($id) {
+        return $this->neighborhoodRepo->findById($id)->first();
+    }
+
+    /**
+     * @param $id
+     *
      * @return bool
      */
     public function delete($id) {
