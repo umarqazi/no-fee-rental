@@ -1144,6 +1144,61 @@ header .agent-avtar .avtar:hover div ul {
 .credit-plans-container .table.table-bordered {
     min-width: 550px;
 }
+#myModal-currentPlan{
+    padding-right: 0 !important;
+}
+#myModal-currentPlan .modal-header{
+    display: block;
+    position: relative;
+}
+#myModal-currentPlan .modal-header button.close{
+    position: absolute;
+    top: 35px;
+    right: 30px;
+    border: 1px solid #000;
+    padding: 2px 6px;
+    font-size: 20px;
+    color: #000;
+    border-radius: 50%;
+}
+#myModal-currentPlan .modal-header button.close:active,
+#myModal-currentPlan .modal-header button.close:focus{
+    outline: none;
+}
+
+#myModal-currentPlan .modal-title{
+    text-align: center;
+    font-size: 20px;
+    color: #000;
+    font-weight: normal;
+}
+#myModal-currentPlan .modal-body{
+    padding: 15px 25px;
+}
+#myModal-currentPlan .modal-body .form-group{
+    position: re;
+}
+#myModal-currentPlan .modal-body .form-group label{
+    color: #808080;
+}
+#myModal-currentPlan .modal-body .form-group .fa-calendar-alt{
+    position: absolute;
+    top: 43px;
+    right: 25px;
+    color: #e77817;
+    cursor:pointer;
+}
+#myModal-currentPlan .modal-footer{
+    display: block;
+    text-align: center;
+    border: none;
+}
+#myModal-currentPlan .modal-footer .checkout-popup-btn{
+    padding: 2px 60px;
+}
+.datepickers-container{
+    z-index: 9999;
+}
 
 .message-row {
     border: #ddd solid 1px;
@@ -1841,6 +1896,24 @@ header .agent-avtar .avtar:hover div ul {
     padding-bottom: 20px;
     border-bottom: 1px solid #a1a1a1;
 }
+.plans-wrapper .current-plans .btn-default:hover,
+.plans-wrapper .current-plans .btn-default:focus {
+    background-color: #ff6e0d;
+    transition: 0.3s ease-in-out;
+    box-shadow: none;
+}
+.plans-wrapper .gold-plan .btn-default:hover,
+.plans-wrapper .gold-plan .btn-default:focus{
+    background-color: #ff6e0d;
+    transition: 0.3s ease-in-out;
+    box-shadow: none;
+}
+.plans-wrapper .platinum-plan .btn-default:hover,
+.plans-wrapper .platinum-plan .btn-default:focus{
+    background-color: #023672;
+    transition: 0.3s ease-in-out;
+    box-shadow: none;
+}
 .plans-wrapper .gold-plan h3{
     color: #023672;
 }
@@ -2102,6 +2175,9 @@ header .agent-avtar .avtar:hover div ul {
     .plans-wrapper .current-plans{
         padding: 20px 10px;
     }
+    .plans-wrapper .current-plans h2{
+        font-size: 35px;
+    }
 
 
     .basic-plan-wrapper .plans-table .table thead th{
@@ -2116,6 +2192,9 @@ header .agent-avtar .avtar:hover div ul {
 
     #view-content .modal-dialog {
         max-width: 600px;
+    }
+    #myModal-currentPlan .modal-dialog{
+        max-width:420px;
     }
 }
 

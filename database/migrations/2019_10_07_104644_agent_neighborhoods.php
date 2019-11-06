@@ -16,6 +16,7 @@ class AgentNeighborhoods extends Migration {
      */
     public function up() {
         Schema::create('agent_neighborhoods', function(Blueprint $table) {
+            $table->bigIncrements('id');
             $table->unsignedInteger('agent_id');
             $table->unsignedInteger('neighborhood_id');
 

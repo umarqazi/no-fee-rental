@@ -1,25 +1,24 @@
 "use strict";
 
 $(() => {
-    let $body = $('body');
 
+    let $body = $('body');
     let queries = JSON.parse(localStorage.getItem('search-queries'));
     let bath = [], bed = [], square_feet_min = null, square_feet_max = null, neighborhood = null, price_min = null, price_max = null, open_house = null;
 
 
     $('#baths').find('li').one('click', function() {
         bath.push($(this).text().replace(/\s/g, ''));
-        //bath = bath.replace(/\s/g, '');
     });
 
     $('#beds').find('li').one('click', function() {
         bed.push($(this).text().replace(/\s/g, ''));
-      //  bed = bed.replace(/\s/g, '');
     });
 
-    $('input[name=neighborhoods] , select[name=neighborhoods]').on('change', function(e) {
+    $('input[name=neighborhoods] , select[name=neighborhoods]').on('change', function() {
+        let $nSelector = $("select[name=neighborhoods] option:selected");
         let $val = $('input[name=neighborhoods]').val();
-        neighborhood = $val.length > 0 ? $val : ($("select[name=neighborhoods] option:selected").text().length > 0 ? $("select[name=neighborhoods] option:selected").text() :null);
+        neighborhood = $val.length > 0 ? $val : ($nSelector.text().length > 0 ? $nSelector.text() :null);
     });
 
     $body.on('min-price', function(e, res) {
@@ -42,8 +41,7 @@ $(() => {
         open_house = $(this).val();
     });
 
-    $body.on('submit', '#search , #advance-search', function(e) {
-        /*neighborhood = $(this).find('#neigh').val();*/
+    $body.on('submit', '#search , #advance-search', async function() {
         let searchQuery = {
             isNew: true,
             baths: bath,
@@ -79,7 +77,7 @@ $(() => {
     });
 
     if(queries && queries.length > 0) {
-        queries.forEach((v, i) => {
+        queries.forEach(async (v, i) => {
             if(v.isNew === true) {
                 let currentQuery = queries[i];
                 currentQuery.isNew = false;
@@ -98,12 +96,12 @@ $(() => {
                 $('.dropDown > ul.ul-border-top > li ').prepend(`
                 <a href="${v.url}">
                        NYC ${(v.neighborhood !== "" ? ' - ' + v.neighborhood : '') + (v.beds.length > 0  ? ' ' + v.beds + ' beds' : '') + (v.baths.length > 0 ? ' ' + v.baths + ' baths' : '')+(v.price_min !== "" ? ' - ' + v.price_min + ' Min Price' : '')+(v.price_max !== "" ? ' - ' + v.price_max+ ' Max Price' : '')+(v.square_feet_min !== "" ? ' - ' + v.square_feet_min + ' Min Square Feet' : '')+(v.square_feet_max !== "" ? ' - ' + v.square_feet_max + ' Max Square Feet' : '')+(v.open_house !== "" ? ' - ' + v.open_house  + ' Open House' : '')}
-                </a>`);
+                </a> | `);
             } else {
                 $('.dropDown > ul.neighborhoods_amenities > li ').prepend(`
                 <a href="${v.url}">
                        NYC ${(v.neighborhood !== "" ? ' - ' + v.neighborhood : '') + (v.beds.length > 0  ? ' ' + v.beds + ' bed' : '') + (v.baths.length > 0  ? ' ' + v.baths + ' bath' : '')}
-                </a>`);
+                </a> | `);
             }
         });
     } else {

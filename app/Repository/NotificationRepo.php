@@ -11,6 +11,10 @@ namespace App\Repository;
 use App\Notification;
 use App\ExclusiveSetting;
 
+/**
+ * Class NotificationRepo
+ * @package App\Repository
+ */
 class NotificationRepo extends BaseRepo {
 
     /**

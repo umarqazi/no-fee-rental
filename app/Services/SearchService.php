@@ -14,7 +14,7 @@ use App\Repository\SearchRepo;
  * Class SearchService
  * @package App\Services
  */
-class SearchService {
+class SearchService extends SaveSearchService {
 
     /**
      * @var string|array|mixed
@@ -35,6 +35,7 @@ class SearchService {
      * SearchService constructor.\
      */
     public function __construct() {
+        parent::__construct();
         $this->searchRepo = new SearchRepo();
         $this->query = $this->searchRepo->appendQuery();
     }
@@ -52,7 +53,6 @@ class SearchService {
             'neighborhood' => $request->neighborhoods,
             'beds'         => $request->beds,
             'baths'        => $request->baths,
-            'rent'         => $request->rent,
             'priceRange'   => $request->priceRange,
             'squareRange'  => $request->squareRange,
         ];
@@ -63,7 +63,7 @@ class SearchService {
                 $this->{$method}();
             }
         });
-
+        $this->__saveSearch($data);
         return $this->fetchQuery();
     }
 

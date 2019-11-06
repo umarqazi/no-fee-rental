@@ -102,6 +102,7 @@ class BuildingService {
         $building = $this->__isExistingApartment($apartment_addr);
         if(!$building) {
             $building = $this->buildingRepo->create([
+                'address'     => $apartment_addr,
                 'building'    => str_random(10),
                 'is_verified' => isAgent() ? false : true
             ]);
