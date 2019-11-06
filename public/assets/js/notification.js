@@ -11347,133 +11347,43 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var laravel_echo__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! laravel-echo */ "./node_modules/laravel-echo/dist/echo.js");
 
 
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
 
 window.io = __webpack_require__(/*! socket.io-client */ "./node_modules/socket.io-client/lib/index.js");
 
-_asyncToGenerator(
-/*#__PURE__*/
-_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
-  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
-    while (1) {
-      switch (_context3.prev = _context3.next) {
-        case 0:
-          $(".notiii").click(function () {
-            $(".notification-container").toggleClass("toggle-notification");
-          });
-          $(".notiofication-content .fa-times").click(function () {
-            $(this).closest('div.notiofication-content').fadeOut("slow", function () {
-              $(this).remove();
-            });
-          });
-          $('.notifications').on('click', function () {
-            hideAlert();
-          }); // Exception handler
-
-          if ((typeof io === "undefined" ? "undefined" : _typeof(io)) !== undefined) {
-            window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_1__["default"]({
-              broadcaster: 'socket.io',
-              host: window.location.hostname + ':6001'
-            });
-          } // Listener for new web notification
+if ((typeof io === "undefined" ? "undefined" : _typeof(io)) !== undefined) {
+  window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_1__["default"]({
+    broadcaster: 'socket.io',
+    host: window.location.hostname + ':6001'
+  });
+}
+/**
+ * Hide Notification alert icon
+ */
 
 
-          window.Echo.channel("notification-channel." + Window.Laravel.user).listen('.notification', function (res) {
-            pushNotification(res);
-          }); // Listener for incoming messages
-          // window.Echo.channel(`messaging-channel.`+ Window.Laravel.user).listen('.message', async (res) => {
-          //     let url = window.location.href;
-          //     url = url.split('/');
-          //     if(url[4] !== 'load-chat') {
-          //         await ajaxRequest('/push-notification', 'post', res, false);
-          //     }
-          // });
-          // Mark As Read
-
-          $('.mark-read').on('click',
-          /*#__PURE__*/
-          function () {
-            var _ref2 = _asyncToGenerator(
-            /*#__PURE__*/
-            _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(e) {
-              var ids;
-              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-                while (1) {
-                  switch (_context.prev = _context.next) {
-                    case 0:
-                      ids = [];
-                      $('.unread').each(function (index, value) {
-                        ids.push($(value).attr('data-id'));
-                      });
-                      _context.next = 4;
-                      return ajaxRequest('/mark-all-as-read', 'post', {
-                        ids: ids
-                      }, false);
-
-                    case 4:
-                      $('body').find('.unread').addClass('notification-bg-read').removeClass('unread');
-
-                    case 5:
-                    case "end":
-                      return _context.stop();
-                  }
-                }
-              }, _callee);
-            }));
-
-            return function (_x) {
-              return _ref2.apply(this, arguments);
-            };
-          }()); // Remove a notification
-
-          $('body').on('click', '.fa-times',
-          /*#__PURE__*/
-          function () {
-            var _ref3 = _asyncToGenerator(
-            /*#__PURE__*/
-            _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(e) {
-              var $selector, id;
-              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
-                while (1) {
-                  switch (_context2.prev = _context2.next) {
-                    case 0:
-                      $selector = $(this).parents('div.notiofication-content');
-                      id = $selector.attr('data-id');
-                      _context2.next = 4;
-                      return ajaxRequest("/delete-notification/".concat(id), 'post', null, false);
-
-                    case 4:
-                      $selector.remove();
-                      isNull();
-
-                    case 6:
-                    case "end":
-                      return _context2.stop();
-                  }
-                }
-              }, _callee2, this);
-            }));
-
-            return function (_x2) {
-              return _ref3.apply(this, arguments);
-            };
-          }());
-
-        case 7:
-        case "end":
-          return _context3.stop();
-      }
-    }
-  }, _callee3);
-}))(); // Whether to show null message or not
+var hideAlert = function hideAlert() {
+  $('body').find('.notification-alert').hide();
+};
+/**
+ * Show Notification alert icon
+ */
 
 
-function isNull() {
+var showAlert = function showAlert() {
+  $('body').find('.notification-alert').show();
+};
+/**
+ * Whether to show null message or not
+ */
+
+
+var isNull = function isNull() {
   if ($('.notiofication-content').length < 1) {
     hideAlert();
     $('.notification-inner-scroll').append('<p style="text-align: center;" id="null">No notification found</p>');
@@ -11481,25 +11391,111 @@ function isNull() {
     showAlert();
     $('body').find('#null').remove();
   }
-}
+};
+
+$(function () {
+  $("body").on('click', '.notification-listener', function () {
+    $(".notification-container").toggleClass("toggle-notification");
+    hideAlert();
+  });
+  $(".notiofication-content .fa-times").on('click', function () {
+    $(this).closest('div.notiofication-content').fadeOut("slow", function () {
+      $(this).remove();
+    });
+  }); // Exception handler
+  // Listener for new web notification
+
+  window.Echo.channel("notification-channel." + Window.Laravel.user).listen('.notification', function (res) {
+    pushNotification(res);
+    console.log(res);
+  }); // Listener for incoming messages
+  // window.Echo.channel(`messaging-channel.`+ Window.Laravel.user).listen('.message', async (res) => {
+  //     let url = window.location.href;
+  //     url = url.split('/');
+  //     if(url[4] !== 'load-chat') {
+  //         await ajaxRequest('/push-notification', 'post', res, false);
+  //     }
+  // });
+  // Mark As Read
+
+  $('.mark-read').on('click',
+  /*#__PURE__*/
+  function () {
+    var _ref = _asyncToGenerator(
+    /*#__PURE__*/
+    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(e) {
+      var ids;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              ids = [];
+              $('.unread').each(function (index, value) {
+                ids.push($(value).attr('data-id'));
+              });
+              _context.next = 4;
+              return ajaxRequest('/mark-all-as-read', 'post', {
+                ids: ids
+              }, false);
+
+            case 4:
+              $('body').find('.unread').addClass('notification-bg-read').removeClass('unread');
+
+            case 5:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    return function (_x) {
+      return _ref.apply(this, arguments);
+    };
+  }()); // Remove a notification
+
+  $('body').on('click', '.fa-times',
+  /*#__PURE__*/
+  function () {
+    var _ref2 = _asyncToGenerator(
+    /*#__PURE__*/
+    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(e) {
+      var $selector, id;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              $selector = $(this).parents('div.notiofication-content');
+              id = $selector.attr('data-id');
+              _context2.next = 4;
+              return ajaxRequest("/delete-notification/".concat(id), 'post', null, false);
+
+            case 4:
+              $selector.remove();
+              isNull();
+
+            case 6:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2, this);
+    }));
+
+    return function (_x2) {
+      return _ref2.apply(this, arguments);
+    };
+  }());
+});
 /**
  *
  * @param data
  */
 
-
 function pushNotification(data) {
-  var src = data.sender.profile_image !== null ? '/storage/' + data.sender.profile_image : window.location.origin + '/assets/images/default-image.jpeg';
-  $('.notification-inner-scroll').prepend("\n        <div class=\"notiofication-content ".concat(data.is_read ? 'notification-bg-read' : 'unread', "\" data-id=\"").concat(data.id, "\">\n            <img src=\"").concat(src, "\" alt=\"\">\n            <a href=\"").concat(data.path, "\">").concat(data.notification, "</a> <i class=\"fas fa-times\"></i>\n        </div>\n    "));
+  var src = data.sender.profile_image !== null ? '/storage/' + data.sender.profile_image : window.location.origin + '/assets/images/default-images/user.jpeg';
+  $('.notification-inner-scroll').prepend("\n        <div class=\"notiofication-content ".concat(data.is_read ? 'notification-bg-read' : 'unread', "\" data-id=\"").concat(data.id, "\">\n            <img src=\"").concat(src, "\" alt=\"\">\n            <a href=\"").concat(data.url, "\">").concat(data.message, "</a> <i class=\"fas fa-times\"></i>\n        </div>\n    "));
   isNull();
-}
-
-function hideAlert() {
-  $('body').find('.noti-alert').removeClass('noti-alert').addClass('hide-alert');
-}
-
-function showAlert() {
-  $('body').find('.hide-alert').removeClass('hide-alert').addClass('noti-alert');
 }
 /**
  *
@@ -11511,24 +11507,24 @@ window.onload =
 /*#__PURE__*/
 _asyncToGenerator(
 /*#__PURE__*/
-_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
+_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
   var res;
-  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
     while (1) {
-      switch (_context4.prev = _context4.next) {
+      switch (_context3.prev = _context3.next) {
         case 0:
-          _context4.next = 2;
+          _context3.next = 2;
           return ajaxRequest('/fetch-notifications', 'post', null, false);
 
         case 2:
-          res = _context4.sent;
+          res = _context3.sent;
           res.data.forEach(function (collection) {
             var obj = {
               'id': collection.id,
               'is_read': collection.is_read,
               'sender': collection.from,
-              'path': collection.path,
-              'notification': collection.notification
+              'url': collection.url,
+              'message': collection.message
             };
             pushNotification(obj);
           });
@@ -11536,10 +11532,10 @@ _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function 
 
         case 5:
         case "end":
-          return _context4.stop();
+          return _context3.stop();
       }
     }
-  }, _callee4);
+  }, _callee3);
 }));
 
 /***/ }),

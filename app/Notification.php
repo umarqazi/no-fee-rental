@@ -14,7 +14,7 @@ class Notification extends Model {
     /**
      * @var array
      */
-    protected $fillable = ['from', 'to', 'notification', 'is_read', 'path'];
+    protected $fillable = ['from', 'to', 'message', 'is_read', 'url'];
 
     /**
      * @return BelongsTo

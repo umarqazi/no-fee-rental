@@ -11,12 +11,11 @@ namespace App\Services;
 use App\Forms\NotificationForm;
 use App\Repository\NotificationRepo;
 
+/**
+ * Class NotificationService
+ * @package App\Services
+ */
 class NotificationService extends NotificationSettingService {
-
-    /**
-     * @var NotificationRepo
-     */
-    protected $repo;
 
     /**
      * @var mixed
@@ -24,14 +23,19 @@ class NotificationService extends NotificationSettingService {
     protected $data;
 
     /**
+     * @var NotificationRepo
+     */
+    protected $notificationRepo;
+
+    /**
      * NotificationService constructor.
      *
      * @param $data
      */
-    public function __construct($data = null) {
+    public function __construct( $data = null ) {
+        $this->setter( $data );
         parent::__construct();
-        $this->setter($data);
-        $this->repo = new NotificationRepo();
+        $this->notificationRepo = new NotificationRepo();
     }
 
     /**
@@ -39,8 +43,9 @@ class NotificationService extends NotificationSettingService {
      *
      * @return $this
      */
-    public function setter($data) {
-        $this->data = (is_object($data)) ?: toObject($data);
+    public function setter( $data ) {
+        $this->data = ( is_object( $data ) ) ?: toObject( $data );
+
         return $this;
     }
 
@@ -49,42 +54,44 @@ class NotificationService extends NotificationSettingService {
      *
      * @return mixed
      */
-    private function receiverSettings($id) {
-        return $this->getSettings($id);
+    private function receiverSettings( $id ) {
+        return $this->getSettings( $id );
     }
 
     /**
-     * @return void
+     * @return bool
      */
     public function send() {
         $this->save();
-        $settings = $this->receiverSettings($this->data->to);
-
-        if(empty($settings)) {
-            dispatchEmailQueue($this->data);
-            event(new \App\Events\TriggerNotification($this->data));
+        $settings = $this->receiverSettings( $this->data->to );
+        if ( empty( $settings ) ) {
+            event( new \App\Events\TriggerNotification( $this->data ) );
+            dispatchEmailQueue( $this->data );
         }
 
-        if(!empty($settings) && $settings->allow_web_notification) {
-            event(new \App\Events\TriggerNotification($this->data));
+        if ( ! empty( $settings ) && $settings->allow_web_notification ) {
+            event( new \App\Events\TriggerNotification( $this->data ) );
         }
 
-        if(!empty($settings) && $settings->allow_email) {
-            dispatchEmailQueue($this->data);
+        if ( ! empty( $settings ) && $settings->allow_email ) {
+            dispatchEmailQueue( $this->data );
         }
+
+        return true;
     }
 
     /**
      * @return mixed
      */
     private function save() {
-        $form = new NotificationForm();
-        $form->from = $this->data->from;
-        $form->to = $this->data->to;
-        $form->path = $this->data->path;
-        $form->notification = $this->data->notification;
+        $form          = new NotificationForm();
+        $form->from    = $this->data->from;
+        $form->to      = $this->data->to;
+        $form->url     = $this->data->url;
+        $form->message = $this->data->message;
         $form->validate();
-        return $this->repo->create($form->toArray());
+
+        return $this->notificationRepo->create( $form->toArray() );
     }
 
     /**
@@ -92,8 +99,8 @@ class NotificationService extends NotificationSettingService {
      *
      * @return mixed
      */
-    public function markAsRead($request) {
-        return $this->repo->markAllAsRead($request->ids);
+    public function markAsRead( $request ) {
+        return $this->notificationRepo->markAllAsRead( $request->ids );
     }
 
     /**
@@ -101,14 +108,14 @@ class NotificationService extends NotificationSettingService {
      *
      * @return bool|mixed
      */
-    public function delete($id) {
-        return $this->repo->remove($id);
+    public function delete( $id ) {
+        return $this->notificationRepo->remove( $id );
     }
 
     /**
      * @return mixed
      */
     public function get() {
-        return $this->repo->get();
+        return $this->notificationRepo->get();
     }
 }

@@ -20,7 +20,7 @@ class SendEmailJob implements ShouldQueue
     /**
      * @var int
      */
-    public $tries = 5;
+    public $tries = 1;
 
     /**
      * @var int

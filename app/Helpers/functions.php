@@ -1,6 +1,7 @@
 <?php
 
 use App\Events\TriggerMessage;
+use App\Jobs\SaveSearchMatchJob;
 use App\Services\NotificationService;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Foundation\Bus\PendingDispatch;
@@ -19,15 +20,16 @@ use Illuminate\Support\Facades\Storage;
  *
  * @return string
  */
-function uploadImage($image, $path, $unlinkOld = false, $old_image = null) {
-	$name = str_random(20) . '.' . $image->getClientOriginalExtension();
-	if (!File::isDirectory($path)) {
-		File::makeDirectory($path, 0777, true, true);
-	}
-	Storage::disk('public')->putFileAs($path, $image, $name);
-	$full_image_name = 'storage/' . $path . '/' . $name;
-	(!$unlinkOld) ?: removeFile($old_image);
-	return $full_image_name;
+function uploadImage( $image, $path, $unlinkOld = false, $old_image = null ) {
+    $name = str_random( 20 ) . '.' . $image->getClientOriginalExtension();
+    if ( ! File::isDirectory( $path ) ) {
+        File::makeDirectory( $path, 0777, true, true );
+    }
+    Storage::disk( 'public' )->putFileAs( $path, $image, $name );
+    $full_image_name = 'storage/' . $path . '/' . $name;
+    ( ! $unlinkOld ) ?: removeFile( $old_image );
+
+    return $full_image_name;
 }
 
 /**
@@ -36,12 +38,13 @@ function uploadImage($image, $path, $unlinkOld = false, $old_image = null) {
  *
  * @return array
  */
-function uploadMultiImages($files, $path) {
-	$paths = [];
-	foreach ($files as $file) {
-		array_push($paths, uploadImage($file, $path));
-	}
-	return $paths;
+function uploadMultiImages( $files, $path ) {
+    $paths = [];
+    foreach ( $files as $file ) {
+        array_push( $paths, uploadImage( $file, $path ) );
+    }
+
+    return $paths;
 }
 
 /**
@@ -49,36 +52,36 @@ function uploadMultiImages($files, $path) {
  *
  * @return bool
  */
-function removeFile($path) {
-	return @unlink($path ?? '');
+function removeFile( $path ) {
+    return @unlink( $path ?? '' );
 }
 
 /**
  * @return bool
  */
 function whoAmI() {
-	$guards = array_keys(config('auth.guards'));
-	foreach ($guards as $guard) {
-		if (Auth::guard($guard)->check()) {
-			return $guard;
-		}
-	}
+    $guards = array_keys( config( 'auth.guards' ) );
+    foreach ( $guards as $guard ) {
+        if ( Auth::guard( $guard )->check() ) {
+            return $guard;
+        }
+    }
 
-	return 'web';
+    return 'web';
 }
 
 /**
  * @return mixed
  */
 function authenticated() {
-    return Auth::guard(whoAmI())->check();
+    return Auth::guard( whoAmI() )->check();
 }
 
 /**
  * @return mixed
  */
 function isAdmin() {
-	return auth()->guard('admin')->check();
+    return auth()->guard( 'admin' )->check();
 }
 
 /**
@@ -86,13 +89,12 @@ function isAdmin() {
  *
  * @return bool
  */
-function is_created_by_owner($listing_id) {
-    $listing_creator = (new \App\Services\ListingService())->created_by($listing_id);
-    if($listing_creator == 3) {
-        return true ;
-    }
-    else  {
-        return false ;
+function is_created_by_owner( $listing_id ) {
+    $listing_creator = ( new \App\Services\ListingService() )->created_by( $listing_id );
+    if ( $listing_creator == 3 ) {
+        return true;
+    } else {
+        return false;
     }
 }
 
@@ -100,14 +102,14 @@ function is_created_by_owner($listing_id) {
  * @return mixed
  */
 function isAgent() {
-	return auth()->guard('agent')->check();
+    return auth()->guard( 'agent' )->check();
 }
 
 /**
  * @return mixed
  */
 function isRenter() {
-    return auth()->guard('renter')->check();
+    return auth()->guard( 'renter' )->check();
 }
 
 /**
@@ -116,34 +118,35 @@ function isRenter() {
  *
  * @return bool
  */
-function isFavourite($favourites , $listing_id) {
-    foreach ($favourites as $key => $fav){
-        if($fav["pivot"]->user_id == myId() && $fav["pivot"]->listing_id ==$listing_id ){
-            return true ;
+function isFavourite( $favourites, $listing_id ) {
+    foreach ( $favourites as $key => $fav ) {
+        if ( $fav["pivot"]->user_id == myId() && $fav["pivot"]->listing_id == $listing_id ) {
+            return true;
         }
     }
-    return false ;
+
+    return false;
 }
 
 /**
  * @return mixed
  */
 function isOwner() {
-    return auth()->guard('renter')->check();
+    return auth()->guard( 'renter' )->check();
 }
 
 /**
  * @return int|null
  */
 function myId() {
-	return (authenticated()) ? mySelf()->id : null;
+    return ( authenticated() ) ? mySelf()->id : null;
 }
 
 /**
  * @return Authenticatable|null
  */
 function mySelf() {
-	return auth()->guard(whoAmI())->user();
+    return auth()->guard( whoAmI() )->user();
 }
 
 /**
@@ -151,13 +154,13 @@ function mySelf() {
  *
  * @return mixed
  */
-function dateReadable($date) {
+function dateReadable( $date ) {
 
-	if ($date instanceof Carbon) {
-		return $date->diffForHumans();
-	}
+    if ( $date instanceof Carbon ) {
+        return $date->diffForHumans();
+    }
 
-	return \Carbon\Carbon::createFromTimestamp(strtotime($date))->diffForHumans();
+    return \Carbon\Carbon::createFromTimestamp( strtotime( $date ) )->diffForHumans();
 }
 
 /**
@@ -165,8 +168,8 @@ function dateReadable($date) {
  *
  * @return Carbon
  */
-function carbon($string) {
-    return new Carbon($string);
+function carbon( $string ) {
+    return new Carbon( $string );
 }
 
 /**
@@ -175,8 +178,8 @@ function carbon($string) {
  *
  * @return false|string
  */
-function formattedDate($format, $date) {
-    return date($format, strtotime($date));
+function formattedDate( $format, $date ) {
+    return date( $format, strtotime( $date ) );
 }
 
 /**
@@ -185,17 +188,17 @@ function formattedDate($format, $date) {
  *
  * @return mixed
  */
-function dispatchMail($to, $data) {
-	return \Illuminate\Support\Facades\Mail::to($to)->send(new App\Mail\MailHandler($data));
+function dispatchMail( $to, $data ) {
+    return \Illuminate\Support\Facades\Mail::to( $to )->send( new App\Mail\MailHandler( $data ) );
 }
 
 /**
  * @param $data
  *
- * @return NotificationService
+ * @return bool
  */
-function dispatchNotification($data) {
-    return new NotificationService($data);
+function dispatchNotification( $data ) {
+    return ( new NotificationService( $data ) )->send();
 }
 
 /**
@@ -203,27 +206,8 @@ function dispatchNotification($data) {
  *
  * @return array|null
  */
-function dispatchMessageEvent($data) {
-    return event(new TriggerMessage($data));
-}
-
-/**
- * @param $data
- *
- * @return NotificationService
- */
-function dispatchListingNotification($data) {
-    return new NotificationService($data);
-}
-
-/**
- * @param $command
- */
-function artisan($command) {
-    $commands = is_array($command) ? $command : collect($command)->toArray();
-    foreach ($commands as $command) {
-        \Illuminate\Support\Facades\Artisan::call($command);
-    }
+function dispatchMessageEvent( $data ) {
+    return event( new TriggerMessage( $data ) );
 }
 
 /**
@@ -232,8 +216,28 @@ function artisan($command) {
  *
  * @return PendingDispatch
  */
-function dispatchEmailQueue($data, $delay = 10) {
-    return dispatch(new \App\Jobs\SendEmailJob($data))->delay(now()->addSeconds($delay));
+function dispatchListingNotification( $data, $delay = 5 ) {
+    return dispatch( new SaveSearchMatchJob( $data ) )->delay( now()->addSeconds( $delay ) );
+}
+
+/**
+ * @param $data
+ * @param int $delay
+ *
+ * @return PendingDispatch
+ */
+function dispatchEmailQueue( $data, $delay = 10 ) {
+    return dispatch( new \App\Jobs\SendEmailJob( $data ) )->delay( now()->addSeconds( $delay ) );
+}
+
+/**
+ * @param $command
+ */
+function artisan( $command ) {
+    $commands = is_array( $command ) ? $command : collect( $command )->toArray();
+    foreach ( $commands as $command ) {
+        \Illuminate\Support\Facades\Artisan::call( $command );
+    }
 }
 
 /**
@@ -242,10 +246,10 @@ function dispatchEmailQueue($data, $delay = 10) {
  *
  * @return RedirectResponse
  */
-function error($msg, $path = null) {
-	return ($path == null)
-	? redirect()->back()->with(['message' => $msg, 'alert_type' => 'error'])
-	: redirect($path)->with(['message' => $msg, 'alert_type' => 'error']);
+function error( $msg, $path = null ) {
+    return ( $path == null )
+        ? redirect()->back()->with( [ 'message' => $msg, 'alert_type' => 'error' ] )
+        : redirect( $path )->with( [ 'message' => $msg, 'alert_type' => 'error' ] );
 }
 
 /**
@@ -256,8 +260,8 @@ function error($msg, $path = null) {
  *
  * @return JsonResponse
  */
-function json($msg, $data = null, $status = true, $code = 200) {
-	return response()->json(['msg' => $msg, 'data' => $data, 'status' => $status], $code);
+function json( $msg, $data = null, $status = true, $code = 200 ) {
+    return response()->json( [ 'msg' => $msg, 'data' => $data, 'status' => $status ], $code );
 }
 
 /**
@@ -266,10 +270,10 @@ function json($msg, $data = null, $status = true, $code = 200) {
  *
  * @return RedirectResponse
  */
-function success($msg, $path = null) {
-	return ($path == null)
-	? redirect()->back()->with(['message' => $msg, 'alert_type' => 'success'])
-	: redirect($path)->with(['message' => $msg, 'alert_type' => 'success']);
+function success( $msg, $path = null ) {
+    return ( $path == null )
+        ? redirect()->back()->with( [ 'message' => $msg, 'alert_type' => 'success' ] )
+        : redirect( $path )->with( [ 'message' => $msg, 'alert_type' => 'success' ] );
 }
 
 /**
@@ -282,15 +286,16 @@ function success($msg, $path = null) {
  *
  * @return JsonResponse|RedirectResponse
  */
-function sendResponse($request, $data = null, $msg = null, $path = null, $errorMsg = null, $code = 200) {
-    if($request->ajax())
-        return ($data)
-            ? json($msg, $data, true, $code)
-            : json($errorMsg ?? 'Something went wrong', null, false, 500);
-    else
-        return ($data)
-            ? success($msg, $path)
-            : error($errorMsg ?? 'Something went wrong');
+function sendResponse( $request, $data = null, $msg = null, $path = null, $errorMsg = null, $code = 200 ) {
+    if ( $request->ajax() ) {
+        return ( $data )
+            ? json( $msg, $data, true, $code )
+            : json( $errorMsg ?? 'Something went wrong', null, false, 500 );
+    } else {
+        return ( $data )
+            ? success( $msg, $path )
+            : error( $errorMsg ?? 'Something went wrong' );
+    }
 }
 
 /**
@@ -299,8 +304,8 @@ function sendResponse($request, $data = null, $msg = null, $path = null, $errorM
  *
  * @return string
  */
-function toast($message, $type) {
-	return "<script>toastr.{$type}('{$message}');</script>";
+function toast( $message, $type ) {
+    return "<script>toastr.{$type}('{$message}');</script>";
 }
 
 /**
@@ -308,8 +313,8 @@ function toast($message, $type) {
  *
  * @return object
  */
-function toObject($data) {
-	return (object) $data;
+function toObject( $data ) {
+    return (object) $data;
 }
 
 /**
@@ -318,8 +323,8 @@ function toObject($data) {
  * @return mixed
  * @throws Exception
  */
-function dataTable($data) {
-	return datatables()->of($data)->toJson();
+function dataTable( $data ) {
+    return datatables()->of( $data )->toJson();
 }
 
 /**
@@ -327,9 +332,9 @@ function dataTable($data) {
  *
  * @return array|mixed
  */
-function findFeatures($features) {
+function findFeatures( $features ) {
     $collection = [];
-    foreach ($features as $feature) {
+    foreach ( $features as $feature ) {
         $collection[] = $feature->value;
     }
 
@@ -341,13 +346,13 @@ function findFeatures($features) {
  *
  * @return string
  */
-function neighborhoodExpertise($neighborhoods) {
+function neighborhoodExpertise( $neighborhoods ) {
     $collect = [];
-    foreach($neighborhoods as $neighbours) {
+    foreach ( $neighborhoods as $neighbours ) {
         $collect[] = $neighbours->name;
     }
 
-    return (count($collect) > 0) ? implode(', ', $collect) : 'Null';
+    return ( count( $collect ) > 0 ) ? implode( ', ', $collect ) : 'Null';
 }
 
 /**
@@ -355,12 +360,12 @@ function neighborhoodExpertise($neighborhoods) {
  *
  * @return array
  */
-function petPolicy($features) {
-    $collection = [];
-    $configFeature = config('features.pet_policy');
-    foreach ($features as $feature) {
-        if(strpos($feature->value, 'p') !== false) {
-            $collection[] = $configFeature[$feature->value];
+function petPolicy( $features ) {
+    $collection    = [];
+    $configFeature = config( 'features.pet_policy' );
+    foreach ( $features as $feature ) {
+        if ( strpos( $feature->value, 'p' ) !== false ) {
+            $collection[] = $configFeature[ $feature->value ];
         }
     }
 
@@ -372,12 +377,12 @@ function petPolicy($features) {
  *
  * @return array
  */
-function unitFeature($features) {
-    $collection = [];
-    $configFeature = config('features.unit_feature');
-    foreach ($features as $feature) {
-        if(strpos($feature->value, 'u') !== false) {
-            $collection[] = $configFeature[$feature->value];
+function unitFeature( $features ) {
+    $collection    = [];
+    $configFeature = config( 'features.unit_feature' );
+    foreach ( $features as $feature ) {
+        if ( strpos( $feature->value, 'u' ) !== false ) {
+            $collection[] = $configFeature[ $feature->value ];
         }
     }
 
@@ -389,9 +394,10 @@ function unitFeature($features) {
  *
  * @return mixed|null
  */
-function openHouseTimeSlot($index) {
-    $slots = config('openHouse');
-    return new Carbon($slots[$index]) ?? null;
+function openHouseTimeSlot( $index ) {
+    $slots = config( 'openHouse' );
+
+    return new Carbon( $slots[ $index ] ) ?? null;
 }
 
 /**
@@ -399,14 +405,17 @@ function openHouseTimeSlot($index) {
  *
  * @return string
  */
-function amenities($perColumn = 5) {
-    $html = '<div class="col-md-4"><h3>Amenities</h3>';
+function amenities( $perColumn = 5 ) {
+    $html    = '<div class="col-md-4"><h3>Amenities</h3>';
     $service = new \App\Services\AmenityService();
-    foreach ($service->get() as $key => $amenity) {
+    foreach ( $service->get() as $key => $amenity ) {
         $html .= '<ul class="checkbox-listing"><li><div class="custom-control custom-checkbox">';
-        $html .= Form::checkbox('amenities[]', $amenity->id, null, ['class' => 'custom-control-input', 'id' => $key]);
-        $html .= '<label class="custom-control-label" for="'.$key.'">'.$amenity->amenities.'</label></div></li></ul>';
-        if(($key + 1) % $perColumn === 0) {
+        $html .= Form::checkbox( 'amenities[]', $amenity->id, null, [
+            'class' => 'custom-control-input',
+            'id'    => $key
+        ] );
+        $html .= '<label class="custom-control-label" for="' . $key . '">' . $amenity->amenities . '</label></div></li></ul>';
+        if ( ( $key + 1 ) % $perColumn === 0 ) {
             $html .= '</div><div class="col-sm-4"><h3>&nbsp;</h3>';
         }
     }
@@ -418,19 +427,19 @@ function amenities($perColumn = 5) {
  * @return string|null
  */
 function features() {
-    $html = null;
-    $features = config('features');
-    foreach ($features as $type => $feature) {
+    $html     = null;
+    $features = config( 'features' );
+    foreach ( $features as $type => $feature ) {
         $html .= "<div class='col-md-6'>
-        <h3>".ucwords(str_replace('_', ' ', $type))."</h3><ul class='checkbox-listing'>";
-        foreach ($feature as $index => $value) {
+        <h3>" . ucwords( str_replace( '_', ' ', $type ) ) . "</h3><ul class='checkbox-listing'>";
+        foreach ( $feature as $index => $value ) {
             $html .= "<li><div class='custom-control custom-checkbox'>" .
-                 Form::checkbox( "features[]", $index, null,
-                     [
-                         'class' => 'custom-control-input',
-                         'id'    => "listitem{$index}"
-                     ] ) . "<label class='custom-control-label' for='listitem{$index}'>" .
-                 $value . "</label></div></li>";
+                     Form::checkbox( "features[]", $index, null,
+                         [
+                             'class' => 'custom-control-input',
+                             'id'    => "listitem{$index}"
+                         ] ) . "<label class='custom-control-label' for='listitem{$index}'>" .
+                     $value . "</label></div></li>";
         }
         $html .= "</ul></div>";
     }
@@ -475,10 +484,10 @@ function features() {
  * @return array|null
  */
 function neighborhoods() {
-    $data = (new \App\Services\NeighborhoodService())->get();
+    $data              = ( new \App\Services\NeighborhoodService() )->get();
     $neighborhoods[''] = 'Select Neighborhood';
-    foreach ($data as $key => $value) {
-        $neighborhoods[$value->id] = $value->name;
+    foreach ( $data as $key => $value ) {
+        $neighborhoods[ $value->id ] = $value->name;
     }
 
     return $neighborhoods;
@@ -488,10 +497,10 @@ function neighborhoods() {
  * @return array
  */
 function owners() {
-    $data = (new \App\Services\UserService())->owners();
+    $data       = ( new \App\Services\UserService() )->owners();
     $owners[''] = "Select Owner";
-    foreach ($data as $owner) {
-        $owners[$owner->id] = sprintf("%s %s", $owner->first_name, $owner->last_name);
+    foreach ( $data as $owner ) {
+        $owners[ $owner->id ] = sprintf( "%s %s", $owner->first_name, $owner->last_name );
     }
 
     return $owners;
@@ -504,11 +513,11 @@ function owners() {
  *
  * @return mixed
  */
-function calendarEvent($data, $update = false, $id = null) {
-    if($update) {
-        $calendar = ( new \App\Services\CalendarService() )->updateEvent($id, $data);
+function calendarEvent( $data, $update = false, $id = null ) {
+    if ( $update ) {
+        $calendar = ( new \App\Services\CalendarService() )->updateEvent( $id, $data );
     } else {
-        $calendar = ( new \App\Services\CalendarService() )->addEvent(toObject($data));
+        $calendar = ( new \App\Services\CalendarService() )->addEvent( toObject( $data ) );
     }
 
     return $calendar;
@@ -519,8 +528,8 @@ function calendarEvent($data, $update = false, $id = null) {
  *
  * @return bool|mixed
  */
-function deleteCalendarEvent($id) {
-    return (new \App\Services\CalendarService())->removeEvent($id);
+function deleteCalendarEvent( $id ) {
+    return ( new \App\Services\CalendarService() )->removeEvent( $id );
 }
 
 /**
@@ -528,8 +537,8 @@ function deleteCalendarEvent($id) {
  *
  * @return string
  */
-function is_exclusive($listing) {
-    if($listing !== null) {
+function is_exclusive( $listing ) {
+    if ( $listing !== null ) {
         if ( $listing->building_type === EXCLUSIVE ) {
             return sprintf( "%s - (%s)", $listing->street_address, $listing->unit ?? '#' );
         }
@@ -546,8 +555,8 @@ function is_exclusive($listing) {
  *
  * @return string
  */
-function str_formatting($string, $phrase) {
-    return $string.' '.($string > 1 ? $phrase.'s' : $phrase);
+function str_formatting( $string, $phrase ) {
+    return $string . ' ' . ( $string > 1 ? $phrase . 's' : $phrase );
 }
 
 /**
@@ -555,6 +564,6 @@ function str_formatting($string, $phrase) {
  *
  * @return mixed
  */
-function getMembers($id) {
-    return (new \App\Services\MemberService)->team($id);
+function getMembers( $id ) {
+    return ( new \App\Services\MemberService )->team( $id );
 }

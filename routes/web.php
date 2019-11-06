@@ -129,4 +129,11 @@ Route::get('/composer-dump', function() {
 });
 
 Route::get('/test', function() {
+    $data = [
+        'from'         => 1,
+        'to'           => 6,
+        'message'      => 'Listing Found',
+        'url'          => 'asd'
+    ];
+ dispatchNotification($data);
 });

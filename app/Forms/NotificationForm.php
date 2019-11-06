@@ -8,22 +8,41 @@
 
 namespace App\Forms;
 
+/**
+ * Class NotificationForm
+ * @package App\Forms
+ */
 class NotificationForm extends BaseForm {
 
+    /**
+     * @var integer
+     */
     public $from;
+
+    /**
+     * @var integer
+     */
     public $to;
-    public $path;
-    public $notification;
+
+    /**
+     * @var string
+     */
+    public $url;
+
+    /**
+     * @var string
+     */
+    public $message;
 
     /**
      * @return array
      */
     public function toArray() {
         return [
-            'from' => $this->from,
-            'to' => $this->to,
-            'path' => $this->path,
-            'notification' => $this->notification
+            'from'    => $this->from,
+            'to'      => $this->to,
+            'url'     => $this->url,
+            'message' => $this->message,
         ];
     }
 
@@ -32,10 +51,8 @@ class NotificationForm extends BaseForm {
      */
     public function rules() {
         return [
-            'from' => 'required|integer',
-            'to' => 'required|integer',
-            'path' => 'required',
-            'notification' => 'required'
+            'from' => 'required',
+            'to'   => 'required',
         ];
     }
 }
