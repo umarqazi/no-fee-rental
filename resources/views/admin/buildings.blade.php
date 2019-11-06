@@ -10,12 +10,12 @@
                 <ul class="nav nav-pills">
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="pill" href="#buildings-active">
-                            Verified ( {{ $buildings->verified->total() }} )
+                            No Fee ( {{ $buildings->verified->total() }} )
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="pill" href="#buildings-inactive">
-                            Not Verified ( {{ $buildings->non_verified->total() }} )
+                            Pending Requests  ( {{ $buildings->non_verified->total() }} )
                         </a>
                     </li>
                 </ul>

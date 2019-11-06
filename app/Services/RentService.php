@@ -51,14 +51,14 @@ class RentService {
      * @return mixed
      */
     public function get() {
-        return $this->collection($this->listingRepo->withNeighborhood()->get());
+        return $this->collection($this->listingRepo->withNeighborhood()->rentActive()->get());
     }
 
     /**
      * @return array
      */
     public function fetch() {
-        return $this->collection($this->fetchQuery()->get());
+        return $this->collection($this->fetchQuery()->rentActive()->get());
     }
 
     /**

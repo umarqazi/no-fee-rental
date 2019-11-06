@@ -132,9 +132,7 @@
                         <div class="open-house-section">
                             <h3> Open House</h3>
                             @foreach($listing->openHouses as $openHouse)
-                                @if(carbon($openHouse->date)->format('m-d-Y') == now()->format('m-d-Y') &&
-                                openHouseTimeSlot($openHouse->start_time)->format('h:i a') >
-                                now()->format('h:i a'))
+                                @if(carbon($openHouse->date)->format('m-d-Y') == now()->format('m-d-Y'))
                                 <div class="open-house-inner">
                                     <div class="open-timings">
                                         <p>{{

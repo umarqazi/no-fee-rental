@@ -12,7 +12,7 @@
 */
 
 // Home Routes
-Route::get('/home', 'Renter\HomeController@index')->name('renter.index');
+//Route::get('/home', 'Renter\HomeController@index')->name('renter.index');
 
 // Auth Routes
 Route::get('/logout', 'Renter\AuthController@logout')->name('renter.logout');
@@ -37,4 +37,4 @@ Route::post('/add-event', 'Renter\CalendarController@create')->name('renter.addE
 Route::get('/show-calendar', 'Renter\CalendarController@index')->name('renter.showCalendar');
 
 //Listing Routes
-Route::get('/favourite/listing-view', 'Renter\ListingController@wishList')->name('renter.viewListing');
+Route::get('/favourite/listing-view', 'Renter\ListingController@wishList')->name('renter.index');

@@ -113,9 +113,15 @@ class NeighborhoodService {
      * @return array
      */
     private function collection($data) {
+        $listings = [];
+        foreach($data->listings as $key => $listing){
+            if($listing->visibility == 1 ){
+                array_push($listings,$listing);
+            }
+        }
         return [
             'neighborhood'  => $data,
-            'listings'      => $data->listings ?? []
+            'listings'      => $listings
         ];
     }
 

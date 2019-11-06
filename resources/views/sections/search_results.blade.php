@@ -121,7 +121,16 @@
                                         Check Availability
                                     </button>
                                 </div>
-                                <span class='heart-icon' list_id="{{ $listing->id }}"></span>
+                                @if(!authenticated())
+                                    <span class="display-heart-icon"></span>
+                                @endif
+                                @if(isRenter())
+                                    @if(isFavourite($listing["favourites"],$listing->id))
+                                        <span id = "{{$listing->id}}" class="heart-icon favourite"></span>
+                                    @else
+                                        <span id = "{{$listing->id}}" class="heart-icon "></span>
+                                    @endif
+                                @endif
                                 <img src='{{ asset($listing->thumbnail ?? DLI) }}' alt="" class='main-img'>
                                 <div class='info'>
                                     <div href='javascript:void(0);' class='info-link-text'>
@@ -148,7 +157,16 @@
                                                 Check Availability
                                             </button>
                                         </div>
-                                        <span class='heart-icon'></span>
+                                        @if(!authenticated())
+                                            <span class="display-heart-icon"></span>
+                                        @endif
+                                        @if(isRenter())
+                                            @if(isFavourite($listing["favourites"],$listing->id))
+                                                <span id = "{{$listing->id}}" class="heart-icon favourite"></span>
+                                            @else
+                                                <span id = "{{$listing->id}}" class="heart-icon "></span>
+                                            @endif
+                                        @endif
                                         <img src='{{ asset($listing->thumbnail ?? DLI) }}' alt="" class='main-img'>
                                         <div class='info'>
                                             <div href='javascript:void(0);' class='info-link-text'>

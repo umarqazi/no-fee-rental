@@ -408,10 +408,10 @@ $(() => {
         let id = $(this).attr('id');
         $(this).toggleClass('favourite');
         if ($(this).hasClass('favourite')) {
-            return await ajaxRequest(`/favourite/${id}`, 'GET', true);
+            return await ajaxRequest(`/favourite/${id}`, 'GET', true, false );
         }
 
-        return await ajaxRequest(`/remove/favourite/${id}`, 'GET', true);
+        return await ajaxRequest(`/remove/favourite/${id}`, 'GET', true,  false);
     });
 
     /**
