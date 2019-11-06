@@ -65,5 +65,6 @@ Route::post('/add-event', 'Owner\CalendarController@create')->name('owner.addEve
 Route::get('/show-calendar', 'Owner\CalendarController@index')->name('owner.showCalendar');
 
 // Manage Building Routes
+Route::post('/is-unique-address', 'Owner\BuildingController@isUnique');
 Route::post('/add-building', 'Owner\BuildingController@create')->name('owner.addBuilding');
 Route::get('/all-buildings', 'Owner\BuildingController@index')->name('owner.viewBuildings');

@@ -54,6 +54,15 @@ class BuildingService {
     }
 
     /**
+     * @param $paginate
+     *
+     * @return mixed
+     */
+    public function ownerBuildings($paginate) {
+        return $this->buildingRepo->find(['user_id' => myId()])->paginate($paginate);
+    }
+
+    /**
      * @param $id
      * @param $request
      *
@@ -64,6 +73,15 @@ class BuildingService {
         $this->attachAmenities( $this->__currentBuilding( $id ), $request->amenities );
 
         return $this->buildingRepo->update( $id, [ 'is_verified' => true ] );
+    }
+
+    /**
+     * @param $address
+     *
+     * @return string
+     */
+    public function isUniqueAddress($address) {
+        return $this->buildingRepo->find(['address' => $address])->count() > 0 ? 'false' : 'true';
     }
 
     /**
