@@ -278,6 +278,10 @@ $(() => {
     // end range slider 3
 
 
+    $('.listing-Details .apointment-tabs ul li').click(function () {
+        $('.listing-Details .apointment-tabs ul li').removeClass('active');
+        $(this).addClass('active');
+    })
     $(".menu-btn").click(function () {
         $(".mobile-menu").slideDown();
     });
