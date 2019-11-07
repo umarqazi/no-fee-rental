@@ -182,6 +182,7 @@ class ListingConversationService {
         $message = $this->__validateMessageForm($conversation_id, $request);
         $data = [
             'message' => $message,
+            'to'      => $request->to,
             'sender'  => mySelf()
         ];
         dispatchMessageEvent($data);

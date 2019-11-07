@@ -226,12 +226,12 @@ class ListingService extends BuildingService {
                 'approved_on'  => $list->updated_at,
                 'view'         => 'approve-request',
                 'subject'      => 'Request Approved for listing',
-                'path'         => route('listing.detail', $list->id),
+                'url'          => route('listing.detail', $list->id),
                 'from'         => myId(),
                 'toEmail'      => $list->agent->email,
                 'fromEmail'    => mySelf()->email,
                 'to'           => $list->agent->id,
-                'notification' => 'Listing has been approved',
+                'message'      => 'Listing has been approved',
             ]);
 
             calendarEvent([
