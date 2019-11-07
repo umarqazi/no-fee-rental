@@ -195,3 +195,17 @@ if(!defined('ADDOPENHOUSECOLOR')) {
 if(!defined('UPDATEOPENHOUSECOLOR')) {
     define('UPDATEOPENHOUSECOLOR', 'red');
 }
+
+/**
+ * Owner Only
+ */
+if(!defined('OWNERONLY')) {
+    define('OWNERONLY', 'OO');
+}
+
+/**
+ * Allow Agent
+ */
+if(!defined('ALLOWAGENT')) {
+    define('ALLOWAGENT', 'AA');
+}

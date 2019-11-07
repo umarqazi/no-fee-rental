@@ -67,13 +67,23 @@ class BuildingController extends Controller {
     }
 
     /**
+     * @param Request $request
+     *
+     * @return JsonResponse|RedirectResponse
+     */
+    public function create(Request $request) {
+        $building = $this->buildingService->create($request);
+        return sendResponse($request, $building, 'Building has been added.');
+    }
+
+    /**
      * @param $id
      *
      * @return Factory|View
      */
     public function edit($id) {
         $status = 'Update';
-        $route = 'admin.updateBuilding';
+        $route = 'owner.updateBuilding';
         return $this->detail($id, $status, $route);
     }
 }
