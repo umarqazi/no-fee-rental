@@ -3111,6 +3111,7 @@ footer .copyright .social-icons li a:hover {
     align-items: center;
     margin: 6px 15px;
     padding: 15px 0px;
+    position: relative;
 }
 
 .after-radio-textarea textarea {
@@ -3118,6 +3119,12 @@ footer .copyright .social-icons li a:hover {
     height: 100px;
     resize: none;
     width: calc(100% - 53px);
+}
+.after-radio-textarea p{
+    position: absolute;
+    bottom: 5px;
+    right: 65px;
+    font-size: 12px;
 }
 
 .after-radio-textarea textarea::placeholder {

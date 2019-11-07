@@ -502,4 +502,8 @@ $(() => {
         $('.filter-wrapper-mobile .filter-wrapper').slideToggle();
     })
 
+//appointment message counter
+    $("#appointment-message").on('input', function(){
+        $("#counter").text(500 - $("#appointment-message").val().length);
+    });
 });
