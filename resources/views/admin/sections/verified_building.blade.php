@@ -1,14 +1,14 @@
 
 <!--List view listing-->
 <div class="listing-wrapper">
-    @foreach($buildings->verified as $ab)
+    @foreach($buildings as $ab)
         <div class="listing-row">
             <div class="img-holder">
-                <img src="{{ asset(isset($ab->listings[0]->thumbnail) ? $ab->listings[0]->thumbnail : null ?? DLI) }}" alt="" style="height: 205px; width: 100%;" class="main-img" />
+                <img src="{{ DLI }}" alt="" style="height: 205px; width: 100%;" class="main-img" />
             </div>
             <div class="info">
-                <p class="title">{{ str_limit(is_exclusive(isset($ab->listings[0]) ? $ab->listings[0] : null), STR_LIMIT_LIST_VIEW, ' ...') }}</p>
-                <p class="title">Total Apartments: {{ count($ab->listings) }}</p>
+                <p class="title">{{ $ab->address }}</p>
+                <p class="title">Total Apartments: {{ 0 }}</p>
                 <p>Posted On: {{ $ab->created_at->format("m/d/y H:m A") }}</p>
                 @if($ab->type === FEE)
                     <a href="{{ route(whoAmI().'.noFeeBuilding', $ab->id) }}" title="Make this building no fee">
@@ -23,17 +23,17 @@
                     <a href="{{ route(whoAmI().'.editBuilding', $ab->id) }}">
                         <span><img src="{{asset('assets/images/edit-icon.png')}}" alt=""></span>
                     </a>
-                    <a href="{{ route('admin.addApartment', collect($ab->listings)->first()->id) }}">
-                        <button type="button" class="border-btn">Add Apartment</button>
-                    </a>
+{{--                    <a href="{{ route('admin.addApartment', collect($ab->listings)->first()->id) }}">--}}
+{{--                        <button type="button" class="border-btn">Add Apartment</button>--}}
+{{--                    </a>--}}
                 </div>
             </div>
         </div>
     @endforeach
-    @if($buildings->verified->total() < 1)
+    @if($buildings->total() < 1)
         <p class="null">No Record Found</p>
     @endif
-    {!! $buildings->verified->render() !!}
+    {!! $buildings->render() !!}
 </div>
 
 <!--Grid view listing-->

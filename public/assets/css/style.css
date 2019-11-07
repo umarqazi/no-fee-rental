@@ -1849,6 +1849,13 @@ main {
     overflow: inherit !important;
     padding: 12px;
 }
+.search-result-wrapper .map-wrapper #desktop-map .gm-style-iw-d > div {
+    height: 200px;
+    overflow-y: auto;
+}
+.map-wrapper .location-thumbnaail.location-image-btm {
+    margin-bottom: 15px;
+}
 
 /*Check Availability*/
 
