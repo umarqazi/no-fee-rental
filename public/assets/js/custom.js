@@ -502,12 +502,8 @@ $(() => {
         $('.filter-wrapper-mobile .filter-wrapper').slideToggle();
     })
 
-//
-//     $('#building-popup .Allowagent').click (function () {
-//         $('#building-popup .selectAgent').addClass('show-select-box');
-//     });
-    // $('#building-popup .hide-select-agent').click (function () {
-    //     $('#building-popup .selectAgent').addClass('selectAgent');
-    // });
-
+//appointment message counter
+    $("#appointment-message").on('input', function(){
+        $("#counter").text(500 - $("#appointment-message").val().length);
+    });
 });

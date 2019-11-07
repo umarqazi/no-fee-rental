@@ -39,11 +39,11 @@ $(() => {
         let end_time = parseInt($('select[name="open_house[end_time][]"]').val());
         return (start_time >= end_time)  ? false : true ;
     },);
-    $.validator.addMethod("format", function(number, element) {
+    /*$.validator.addMethod("format", function(number, element) {
         number = number.replace(/\s+/g, "");
         return number.length > 9 && number.match(/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/);
     }, "Please Enter a valid phone number");
-
+*/
     (function($) {
         $.fn.inputFilter = function(inputFilter) {
             return this.on("input keydown keyup mousedown mouseup select contextmenu drop", function() {
@@ -236,8 +236,8 @@ $(() => {
             last_name: "required",
             phone_number: {
             required : true ,
-            format: true ,
-             },
+           /* format: true ,
+           */  },
             license_number: {
             required:true,
             remote: {
@@ -441,5 +441,32 @@ $(() => {
             },
         }
     });
+    // Contact_us Form Validations
+    $('#appointment-form').validate({
+        rules: {/*
+            appointment_date: {
+                required: true,
+            },
+            appointment_time: {
+                required: true,
+            },*/
+            message: {
+                required: true,
+            },
+        },
+
+        messages: {/*
+            appointment_date: {
+                required: "Appointment Date is required.",
+            },
+            appointment_time: {
+                required: "Appointment Time is required.",
+            },*/
+            message: {
+                required: "Message is required.",
+            },
+        }
+    });
+
 
 });

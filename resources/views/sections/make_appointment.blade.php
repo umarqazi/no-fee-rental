@@ -3,7 +3,7 @@
     <div class="calendar-wrap">
         <!--calendar slider -->
         <h3>Request for Schedule </h3>
-        {!! Form::open(['url' => route('web.listConversation')]) !!}
+        {!! Form::open(['url' => route('web.listConversation'), 'id' => 'appointment-form']) !!}
         {!! Form::hidden('to', $listing->agent->id) !!}
         {!! Form::hidden('type', APPOINTMENT) !!}
         {!! Form::hidden('listing_id', $listing->id) !!}
@@ -45,7 +45,8 @@
             </div>
         </div>
         <div class="after-radio-textarea">
-            {!! Form::textarea('message', null, ['class' => 'form-control', 'placeholder' => 'Message']) !!}
+            {!! Form::textarea('message', null, ['class' => 'form-control', 'placeholder' => 'Message','id'=>'appointment-message','maxlength' => '500']) !!}
+            <p id="counter"></p>
             <button type="submit"><img src="{{ asset('assets/images/send-msg.png') }}" alt="" /></button>
         </div>
         {!! Form::close() !!}
