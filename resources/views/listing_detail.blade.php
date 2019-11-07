@@ -102,7 +102,7 @@
                                 </div>
                                 <div class="lease-term-section">
                                    <span>Days on market:</span>
-                                    <strong> {{ dateReadable($listing->created_at) }}</strong>
+                                    <strong> {{ daysReadable($listing->created_at) }}</strong>
                                 </div>
                                 <div class="lease-term-section">
                                    <span>Free months: </span>
@@ -123,7 +123,7 @@
                                 </div>
                                 <div class="lease-term-section">
                                     <span>Availability: </span>
-                                    <strong> {{ $listing->availability !== '0' ? dateReadable($listing->availability) : 'Not Available' }}</strong>
+                                    <strong> {{ $listing->availability !== '0' ? $listing->availability : 'Not Available' }}</strong>
                                 </div>
                             </div>
                         </div>

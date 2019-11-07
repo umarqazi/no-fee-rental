@@ -163,6 +163,19 @@ function dateReadable( $date ) {
 }
 
 /**
+ * @param $date
+ *
+ * @return mixed
+ */
+function daysReadable( $date ) {
+    $created = new Carbon($date);
+    $now = Carbon::now();
+    return $difference = ($created->diff($now)->days < 1)
+        ? 'today'
+        : $created->diffForHumans($now);
+}
+
+/**
  * @param $string
  *
  * @return Carbon
