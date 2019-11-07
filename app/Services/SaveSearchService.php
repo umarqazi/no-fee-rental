@@ -34,6 +34,24 @@ class SaveSearchService {
     }
 
     /**
+     * @param $paginate
+     *
+     * @return mixed
+     */
+    public function get($paginate) {
+        return $this->saveSearchRepo->getKeywords()->paginate($paginate, ['*']);
+    }
+
+    /**
+     * @param $id
+     *
+     * @return bool|mixed
+     */
+    public function remove($id) {
+        return $this->saveSearchRepo->delete($id);
+    }
+
+    /**
      * @param $data
      *
      * @return bool|mixed

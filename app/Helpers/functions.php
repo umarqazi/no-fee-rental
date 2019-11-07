@@ -358,14 +358,27 @@ function neighborhoodExpertise( $neighborhoods ) {
 /**
  * @param $features
  *
+ * @return string
+ */
+function apartmentFeatures($features) {
+    $unit = unitFeature($features);
+    $policy = petPolicy($features);
+    $unit = implode(', ', $unit);
+    $policy = implode(', ', $policy);
+    return $unit.', '.$policy;
+}
+
+/**
+ * @param $features
+ *
  * @return array
  */
 function petPolicy( $features ) {
     $collection    = [];
     $configFeature = config( 'features.pet_policy' );
     foreach ( $features as $feature ) {
-        if ( strpos( $feature->value, 'p' ) !== false ) {
-            $collection[] = $configFeature[ $feature->value ];
+        if ( strpos( $feature->value ?? $feature, 'p' ) !== false ) {
+            $collection[] = $configFeature[ $feature->value ?? $feature ];
         }
     }
 
@@ -381,8 +394,8 @@ function unitFeature( $features ) {
     $collection    = [];
     $configFeature = config( 'features.unit_feature' );
     foreach ( $features as $feature ) {
-        if ( strpos( $feature->value, 'u' ) !== false ) {
-            $collection[] = $configFeature[ $feature->value ];
+        if ( strpos( $feature->value ?? $feature, 'u' ) !== false ) {
+            $collection[] = $configFeature[ $feature->value ?? $feature ];
         }
     }
 
@@ -481,12 +494,18 @@ function features() {
 }
 
 /**
- * @return array|null
+ * @param null $id
+ *
+ * @return mixed
  */
-function neighborhoods() {
-    $data              = ( new \App\Services\NeighborhoodService() )->get();
+function neighborhoods($id = null) {
+    $service = new \App\Services\NeighborhoodService();
+    if($id !== null) {
+        return $service->findById($id)->name;
+    }
+
     $neighborhoods[''] = 'Select Neighborhood';
-    foreach ( $data as $key => $value ) {
+    foreach ( $service->get() as $key => $value ) {
         $neighborhoods[ $value->id ] = $value->name;
     }
 

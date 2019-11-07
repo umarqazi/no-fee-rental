@@ -28,6 +28,9 @@
     {!! HTML::script('assets/js/notification.js') !!}
     @if(isRenter())
         {!! HTML::script('assets/js/listing-notification.js') !!}
+        {!! HTML::style('assets/css/main.css') !!}
+        {!! HTML::style('assets/css/admin.css') !!}
+        {!! HTML::style('assets/css/responsive.css') !!}
     @endif
 	{!! HTML::script('assets/js/vendor/jquery.validate.min.js') !!}
     {!! HTML::script('assets/js/vendor/jquery-ui.min.js') !!}

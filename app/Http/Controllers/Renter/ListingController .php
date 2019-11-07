@@ -41,7 +41,7 @@ class ListingController extends Controller {
     }
 
     /**
-     * @return favourite listing
+     * @return Factory|View
      */
     public function wishList() {
         $favourites = toObject($this->favouriteService->getFavouriteListing($this->paginate));
