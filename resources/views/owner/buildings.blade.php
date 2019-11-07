@@ -11,14 +11,14 @@
                 <ul class="nav nav-pills">
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="pill" href="#buildings-active">
-                            No Fee ( 0 )
+                            No Fee ( {{ $buildings->total() }} )
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="pill" href="#buildings-inactive">
-                            Pending Requests  ( 2 )
-                        </a>
-                    </li>
+{{--                    <li class="nav-item">--}}
+{{--                        <a class="nav-link" data-toggle="pill" href="#buildings-inactive">--}}
+{{--                            Pending Requests  ( 2 )--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
                 </ul>
                 <div class="filter-wrapper">
                     <div class="listing-views">

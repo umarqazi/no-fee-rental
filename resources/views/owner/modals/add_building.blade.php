@@ -12,7 +12,7 @@
                 <h4 class="modal-title">Add Building</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
-            {!! Form::open(['url' => route('owner.addBuilding'), 'reset' => 'true', 'method' => 'post', 'class' => 'ajax']) !!}
+            {!! Form::open(['url' => route('owner.addBuilding'), 'reset' => 'true', 'method' => 'post', 'class' => 'ajax', 'id' => 'add_building']) !!}
             <!-- Modal body -->
             <div class="modal-body">
                 <div class="row">
@@ -70,5 +70,11 @@
         if(e.keyCode === 13) {
             e.preventDefault();
         }
-    })
+    });
+
+    $('#add_building').on('submit', function(e) {
+        if(!$('#add_building').valid()) {
+            e.preventDefault();
+        }
+    });
 </script>
