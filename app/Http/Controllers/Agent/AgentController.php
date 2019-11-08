@@ -82,11 +82,11 @@ class AgentController extends Controller {
 	public function profileListing($agentId, Request $request) {
 	    $data = null;
 	    $showMap = false;
-        if(!empty($request->all())) {
-            $data = $this->sortListing($agentId, $request->all());
-        } else {
+//        if(!empty($request->all())) {
+//            $data = $this->sortListing($agentId, $request->all());
+//        } else {
             $data = toObject($this->userService->getAgentWithListings($agentId));
-        }
+//        }
 
 	    return view('agent.listing_profile', compact('data', 'showMap'));
     }

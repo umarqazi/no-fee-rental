@@ -170,8 +170,8 @@ function dateReadable( $date ) {
 function daysReadable( $date ) {
     $created = new Carbon($date);
     $now = Carbon::now();
-    return $difference = ($created->diff($now)->days < 1)
-        ? 'today'
+    return $difference = ($created->diff(now())->days < 1)
+        ? 'Today'
         : $created->diffForHumans($now);
 }
 

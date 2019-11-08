@@ -38,7 +38,7 @@ class ListingController extends Controller {
      */
     public function detail(Request $request) {
         $list = \App\Listing::where('map_location', 'like', $request->map_location)
-                            ->select('rent', 'id', 'street_address', 'bedrooms', 'baths', 'thumbnail')->first();
+                            ->select('rent', 'id', 'street_address', 'bedrooms', 'baths', 'thumbnail')->get();
         return sendResponse($request, $list, null, null, null);
     }
 }
