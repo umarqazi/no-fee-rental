@@ -97,7 +97,7 @@
                             <div class="col-lg-6 col-sm-6 bdr-right">
                                 <div class="lease-term-section">
                                     <span>Lease term: </span>
-                                     <strong> {{ $listing->lease_term ?? 'Null' }}</strong>
+                                     <strong> {{ $listing->lease_term ?? 'None' }}</strong>
                                 </div>
                                 <div class="lease-term-section">
                                    <span>Days on market:</span>
@@ -105,7 +105,7 @@
                                 </div>
                                 <div class="lease-term-section">
                                    <span>Free months: </span>
-                                    <strong> {{ !empty($listing->free_months) ? str_formatting($listing->free_months, 'Month') : 'Null' }}</strong>
+                                    <strong> {{ !empty($listing->free_months) ? str_formatting($listing->free_months, 'Month') : 'None' }}</strong>
                                 </div>
                             </div>
 
@@ -113,16 +113,16 @@
                                 <div class="lease-term-section">
                                     <span>Application fee: </span>
                                      <strong>
-                                         {{ ($listing->application_fee) ?  '$' . number_format($listing->application_fee, 0) : 'Null' }}
+                                         {{ ($listing->application_fee) ?  '$' . number_format($listing->application_fee, 0) : 'None' }}
                                      </strong>
                                 </div>
                                 <div class="lease-term-section">
                                     <span>Deposit: </span>
-                                    <strong>{{ ($listing->deposit) ?  '$' . number_format($listing->deposit,0) : 'Null' }}</strong>
+                                    <strong>{{ ($listing->deposit) ?  '$' . number_format($listing->deposit,0) : 'None' }}</strong>
                                 </div>
                                 <div class="lease-term-section">
                                     <span>Availability: </span>
-                                    <strong> {{ $listing->availability !== '0' ? carbon($listing->availability)->format('d-M-Y') : 'Not Available' }}</strong>
+                                    <strong> {{ $listing->availability !== '0' ? carbon($listing->availability)->format('M d, Y') : 'Not Available' }}</strong>
                                 </div>
                             </div>
                         </div>
