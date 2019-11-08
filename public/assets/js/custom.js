@@ -506,4 +506,7 @@ $(() => {
     $("#appointment-message").on('input', function(){
         $("#counter").text(500 - $("#appointment-message").val().length);
     });
+
 });
+
+

@@ -162,8 +162,10 @@ const showListInfo = (resp) => {
     let html = '';
     let domain = window.location.origin;
     resp.data.forEach((res, b) => {
-        console.log(res);
-        html += `<a href="${domain}/listing-detail/${res.id}"><div class="location-thumbnaail location-image-btm"><img style="height: 170px; width: 300px;" src="${domain}/${res.thumbnail}"><div class="price-wrapp"><p class="price"> $${res.rent} </p><div class="additional-info"><p>${res.street_address} #2</p><ul><li><p>${res.bedrooms}</p>Beds</li><li><p>${res.baths}</p>Baths</li></ul></div></div></div></a>`;
+        html += `<a href="${domain}/listing-detail/${res.id}"><div class="location-thumbnaail location-image-btm"><img style="height: 170px; width: 300px;" src="${domain}/${res.thumbnail}"><div class="price-wrapp price-wrap-location">
+<p class="price" style="color:#223971"> $${res.rent} </p><div class="additional-info">
+<ul><li><p>${res.bedrooms}</p>Beds</li><li><p>${res.baths}</p>Baths</li></ul>
+<p>${res.street_address} #2</p></div></div></div></a>`;
     });
     return html;
 };

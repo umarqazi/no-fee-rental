@@ -2240,10 +2240,11 @@ footer .copyright .social-icons li a:hover {
     align-items: center;
 }
 .map-wrapper .location-thumbnaail img{
-    width:150px;
-    height: 150px;
+    width:130px !important;
+    height: 100px !important;
     object-fit: cover;
     margin-right: 10px;
+    border-radius: 5px;
 }
 #desktop-map,
 #mobile-map {
@@ -2251,6 +2252,7 @@ footer .copyright .social-icons li a:hover {
     height: 100%;
 }
 
+}
 .neighborhood-search .search-result-wrapper .map-wrapper.map-small-view {
     flex: 0 0 50%;
 }
