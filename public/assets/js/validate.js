@@ -441,33 +441,34 @@ $(() => {
             },
         }
     });
-    // Contact_us Form Validations
-    $('#appointment-form').validate({
-        rules: {/*
+
+    // appointment Form Validations
+    /*$('#appointment-form').validate({
+        rules: {
             appointment_date: {
                 required: true,
             },
             appointment_time: {
                 required: true,
-            },*/
+            },
             message: {
                 required: true,
             },
         },
 
-        messages: {/*
+        messages: {
             appointment_date: {
                 required: "Appointment Date is required.",
             },
             appointment_time: {
                 required: "Appointment Time is required.",
-            },*/
+            },
             message: {
                 required: "Message is required.",
             },
         }
     });
-
+*/
     // Add Building Rules
     $('#add_building').validate({
         rules: {

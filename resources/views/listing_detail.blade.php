@@ -77,7 +77,6 @@
             </div>
             <div class="col-lg-5">
                 <div class="listing-info Building-details">
-                    <h3> Listing Details</h3>
                     <div class="appointment-iconDetails">
                         <ul>
                             <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60"><defs><style>.cls-1{fill:#e77817;}</style></defs><title>Asset 4</title><g id="Layer_2" data-name="Layer 2"><g id="Capa_1" data-name="Capa 1"><path class="cls-1" d="M51.21,8.79a30,30,0,0,0-42.42,0,30,30,0,0,0,0,42.42,30,30,0,0,0,42.42,0,30,30,0,0,0,0-42.42ZM31.89,43.05h-.13V47a1.76,1.76,0,0,1-3.52,0v-3.9H24.35a1.76,1.76,0,1,1,0-3.51h7.54a3.89,3.89,0,1,0,0-7.78H28.13a7.41,7.41,0,1,1,0-14.81h.12v-3.9a1.76,1.76,0,0,1,3.52,0V17h3.89a1.76,1.76,0,1,1,0,3.51H28.13a3.89,3.89,0,1,0,0,7.78h3.76a7.41,7.41,0,0,1,0,14.81Z"/></g></g></svg>
@@ -106,7 +105,7 @@
                                 </div>
                                 <div class="lease-term-section">
                                    <span>Free months: </span>
-                                    <strong> {{ $listing->free_months ?? 'Null' }}</strong>
+                                    <strong> {{ !empty($listing->free_months) ? str_formatting($listing->free_months, 'Month') : 'Null' }}</strong>
                                 </div>
                             </div>
 
@@ -114,7 +113,7 @@
                                 <div class="lease-term-section">
                                     <span>Application fee: </span>
                                      <strong>
-                                         {{ ($listing->application_fee) ?  '$' . number_format($listing->application_fee,0) : 'Null' }}
+                                         {{ ($listing->application_fee) ?  '$' . number_format($listing->application_fee, 0) : 'Null' }}
                                      </strong>
                                 </div>
                                 <div class="lease-term-section">
@@ -123,7 +122,7 @@
                                 </div>
                                 <div class="lease-term-section">
                                     <span>Availability: </span>
-                                    <strong> {{ $listing->availability !== '0' ? $listing->availability : 'Not Available' }}</strong>
+                                    <strong> {{ $listing->availability !== '0' ? carbon($listing->availability)->format('d-M-Y') : 'Not Available' }}</strong>
                                 </div>
                             </div>
                         </div>
@@ -210,6 +209,11 @@
     <div class="listing-aminities-sec">
         <div class="container-lg">
             <div class="row">
+                <div class="col-md-3 col-sm-4">
+                    <h3>Listing Type</h3>
+                    {{ ucfirst($listing->building_type) }}
+                </div>
+
                 <div class="col-md-3 col-sm-4">
                 <h3>Pet Policy</h3>
                     @php $pet = petPolicy($listing->features); @endphp
