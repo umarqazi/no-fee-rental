@@ -148,9 +148,9 @@ const markerClusters = (coords, selector) => {
         return mark;
     });
 
-    let cluster = new MarkerClusterer(map, markers, {
-        imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
-    });
+    // let cluster = new MarkerClusterer(map, markers, {
+    //     imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
+    // });
 };
 
 /**
@@ -158,9 +158,14 @@ const markerClusters = (coords, selector) => {
  * @param res
  * @returns {string}
  */
-const showListInfo = (res) => {
+const showListInfo = (resp) => {
+    let html = '';
     let domain = window.location.origin;
-    return `<a href="${domain}/listing-detail/${res.data.id}"><div class="location-thumbnaail"><img style="height: 170px; width: 300px;" src="${domain}/${res.data.thumbnail}"><div class="price-wrapp"><p class="price"> $${res.data.rent} </p><div class="additional-info"><p>${res.data.street_address} #2</p><ul><li><p>${res.data.bedrooms}</p>Beds</li><li><p>${res.data.baths}</p>Baths</li></ul></div></div></div></a>`;
+    resp.data.forEach((res, b) => {
+        console.log(res);
+        html += `<a href="${domain}/listing-detail/${res.id}"><div class="location-thumbnaail location-image-btm"><img style="height: 170px; width: 300px;" src="${domain}/${res.thumbnail}"><div class="price-wrapp"><p class="price"> $${res.rent} </p><div class="additional-info"><p>${res.street_address} #2</p><ul><li><p>${res.bedrooms}</p>Beds</li><li><p>${res.baths}</p>Baths</li></ul></div></div></div></a>`;
+    });
+    return html;
 };
 
 /**
@@ -170,7 +175,6 @@ const showListInfo = (res) => {
  */
 const autoComplete = (searchSelector) => {
     let autocomplete = new google.maps.places.Autocomplete(searchSelector);
-    autocomplete.setFields(['adr_address']);
     autocomplete.setComponentRestrictions(
         {'country': ['us']});
     return autocomplete;
