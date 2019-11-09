@@ -81,6 +81,10 @@ class MailHandler extends Mailable {
         case 'request-review':
                 $view = 'mails.request_review';
                 break;
+
+        case 'realty-import':
+            $view = 'mails.realty';
+            break;
 		default:
 			// code...
 			break;

@@ -9,8 +9,9 @@
 
 namespace App\Services;
 
-use App\Repository\UserRepo;
+use App\Repository\CompanyRepo;
 use App\Repository\NeighborhoodRepo;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 /**
@@ -20,9 +21,9 @@ use Illuminate\Support\Facades\Validator;
 class RealtyMXService extends ListingService {
 
     /**
-     * @var UserRepo
+     * @var CompanyRepo
      */
-    protected $userRepo;
+    protected $companyRepo;
 
     /**
      * @var NeighborhoodRepo
@@ -30,69 +31,171 @@ class RealtyMXService extends ListingService {
     protected $neighbourRepo;
 
     /**
+     * @var array
+     */
+    private $agents = [];
+
+    /**
+     * @var array
+     */
+    private $report = [];
+
+    /**
      * RealtyMXService constructor.
      */
     public function __construct() {
         parent::__construct();
-        $this->userRepo = new UserRepo();
+        $this->companyRepo   = new CompanyRepo();
         $this->neighbourRepo = new NeighborhoodRepo();
     }
 
     /**
-     * @param $property
-     * @param $agent
-     * @param $user_id
+     * @param $properties
      *
-     * @return string
+     * @return bool
      */
-    private function list($property, $agent, $user_id) {
-        $property_array = collect($property)->toArray();
-        $realty_id = $property_array['@attributes']->id;
-        $realty_id = explode('_', $realty_id);
-        $images = $this->imageCollection($property->media->photo);
-        $list['realty_id']        = $realty_id[1] ?? str_random(12);
-        $list['unique_slug']      = str_random(20);
-        $list['user_id']          = $user_id;
-        $list['name']             = $agent->name ?? null;
-        $list['email']            = $agent->email ?? null;
-        $list['phone_number']     = $agent->phone_numbers->main ?? null;
-        $list['square_feet']      = $property->details->squareFeet ?? 0;
-        $list['street_address']   = $property->location->address   ?? null;
-        $list['display_address']  = $property->location->address   ?? null;
-        $list['unit']             = $property->location->apartment ?? null;
-        $list['neighborhood_id']  = $this->neighborhood($property->location->neighborhood);
-        $list['bedrooms']         = $property->details->bedrooms  ?? null;
-        $list['baths']            = $property->details->bathrooms ?? null;
-        $list['building_type']    = isset($property->details->exclusive) ? 'exclusive' : 'open';
-        $list['thumbnail']        = $images[0];
-        $list['rent']             = $property->details->price ?? null;
-        $list['availability']     = $property->details->availableOn ?? null;
-        $list['description']      = $property->details->description ?? null;
-        $list['visibility']       = $user_id ? ACTIVE : DEACTIVE;
-        $list['realty_url']       = $property_array['@attributes']->url ?? null;
-        $list['map_location']     = json_encode([
-                                        'latitude' => $property->location->latitude,
-                                        'longitude' => $property->location->longitude ]);
-        $validate = $this->validListing($list);
-        if($validate->fails()) {
-            $failed_rules = $validate->failed();
-            if(
-                isset($failed_rules['name']['Unique']) &&
-                isset($failed_rules['realty_id']['Unique']) &&
-                isset($failed_rules['email']['Unique']) &&
-                isset($failed_rules['phone_number']['Unique'])
-            ) {
-                return false;
+    public function fetch( $properties ) {
+        if ( is_object( $properties ) ) {
+            foreach ( $properties as $property ) {
+                $collection = collect( json_decode( json_encode( $property ) ) );
+                if ( $this->__isNoFeeListing( $collection ) ) {
+                    $this->__create( $collection->get( 'agents' )->agent, $collection );
+                } else {
+                    $this->__generateFeeListErrorReport( $collection );
+                }
+            }
+            $this->__sendMails();
+            return $this->__writeProgressCSVFile(now()->format('Ymd'));
+        }
+
+        return false;
+    }
+
+    /**
+     * @param $unique_id
+     * @param $realty_id
+     */
+    public function details( $unique_id, $realty_id ) {
+        $listing = $this->listingRepo
+            ->find
+            ( [
+                'visibility'  => true,
+                'realty_id'   => $realty_id,
+                'unique_slug' => $unique_id,
+            ] )
+            ->first();
+
+        return $listing ?? abort( 404 );
+    }
+
+    /**
+     * @param $agents
+     * @param $listing
+     */
+    private function __create( $agents, $listing ) {
+        if ( is_array( $agents ) ) {
+            foreach ( $agents as $agent ) {
+                $this->__createList( $this->__pushAgent( $agent ), $listing );
+            }
+        } else {
+            $this->__createList( $this->__pushAgent( $agents ), $listing );
+        }
+    }
+
+    /**
+     * @param $user
+     * @param $listing
+     *
+     * @return mixed|void
+     */
+    private function __createList( $user, $listing ) {
+        if ( $this->__isNewListing( $listing, $user ) ) {
+            $attrib       = $listing->get( '@attributes' );
+            $details      = $listing->get( 'details' );
+            $images       = $this->__images( $listing->get( 'media' )->photo );
+            $location     = $listing->get( 'location' );
+            $map_location = json_encode( [
+                'latitude'  => $location->latitude,
+                'longitude' => $location->longitude
+            ] );
+            $list         = $this->listingRepo->create( [
+                'realty_id'       => $attrib->id ?? null,
+                'realty_url'      => $attrib->url ?? null,
+                'user_id'         => $user->id ?? null,
+                'building_type'   => $attrib->status ?? null,
+                'unique_slug'     => str_random( 10 ) ?? null,
+                'neighborhood_id' => $this->__createNeighborhood( $location->neighborhood ) ?? null,
+                'rent'            => $details->price ?? null,
+                'name'            => $user->first_name ?? null,
+                'email'           => $user->email ?? null,
+                'phone_number'    => $user->phone_number ?? null,
+                'thumbnail'       => $images[0] ?? null,
+                'availability'    => $details->availableOn ?? null,
+                'street_address'  => $location->address ?? null,
+                'display_address' => $location->address ?? null,
+                'bedrooms'        => $details->bedrooms ?? null,
+                'baths'           => $details->bathrooms ?? null,
+                'square_feet'     => $details->squareFeet ?? null,
+                'unit'            => $location->apartment ?? null,
+                'description'     => $details->description ?? null,
+                'visibility'      => INACTIVELISTING ?? null,
+                'is_featured'     => DEACTIVE ?? null,
+                'map_location'    => $map_location
+            ] );
+
+            $this->__createImages( $list->id, $images );
+            $this->__generateSuccessImportListingReport($list);
+        }
+
+        return $this->__generateExistingListErrorReport( $listing );
+    }
+
+    /**
+     * @param $agent
+     *
+     * @return mixed
+     */
+    private function __pushAgent( $agent ) {
+        $uniqueAgent = $this->__isNewAgent( $agent );
+        if ( ! $uniqueAgent ) {
+            $username = collect( explode( ' ', $agent->name ) );
+            $agent    = $this->userRepo->create( [
+                'first_name'     => $username->first(),
+                'last_name'      => $username->last(),
+                'email'          => $agent->email,
+                'profile_image'  => $agent->photo,
+                'remember_token' => str_random( 60 ),
+                'user_type'      => AGENT,
+                'phone_number'   => $agent->phone_numbers->main,
+                'company_id'     => $this->__agentBelongsTo( $agent->company ),
+            ] );
+
+            if ( $agent ) {
+                array_push( $this->agents, $agent );
+
+                return $agent;
             }
         }
 
-        $building = $this->addBuilding($list['street_address']);
-        $list['visibility'] = $building->is_verified;
-        $listing = $this->__addList($list);
-        $this->createImages($listing, $images);
-        parent::attachApartment($building, $listing);
-//        $this->sendEmail($agent->email);
-        return route('web.realty', [$list['unique_slug'], $list['realty_id']]);
+        return $uniqueAgent;
+    }
+
+    /**
+     * @param $company
+     *
+     * @return mixed
+     */
+    private function __agentBelongsTo( $company ) {
+        $uniqueCompany = $this->__isNewCompany( $company );
+        if ( ! $uniqueCompany ) {
+            $company = $this->companyRepo->create( [
+                'company' => $company
+            ] );
+
+            return $company->id;
+        }
+
+        return $uniqueCompany->id;
     }
 
     /**
@@ -100,79 +203,35 @@ class RealtyMXService extends ListingService {
      *
      * @return int|null
      */
-    private function neighborhood($neighbour) {
-        if(!empty($neighbour)) {
-            $neighborhood_id = $this->neighbourRepo->find(['name' => $neighbour])->first();
-            if(!empty($neighborhood_id)) {
-                return $neighborhood_id->id;
-            } else {
-                $neighborhood_id = $this->neighbourRepo->create(['name' => $neighbour]);
-                return $neighborhood_id->id;
-            }
+    private function __createNeighborhood( $neighbour ) {
+        $uniqueNeighborhood = $this->__isNewNeighborhood( $neighbour );
+        if ( ! $uniqueNeighborhood ) {
+            $neighbour = $this->neighbourRepo->create( [ 'name' => $neighbour ] );
+
+            return $neighbour->id;
         }
 
-        return null;
+        return $uniqueNeighborhood->id;
     }
 
     /**
-     * @param $email
-     */
-    private function sendEmail($email) {
-        $data = [
-            'to'    => $email,
-            'link'  => route(''),
-            'view'  => 'realty-import-list',
-            'msg'   => 'We import your listing from realty mx. if you want to publish this list on no fee platform you can signup using this link given below',
-        ];
-
-        dispatchEmailQueue($data);
-    }
-
-    /**
-     * @param $list
-     *
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    private function validListing($list) {
-        $validate = Validator::make($list, [
-            'realty_id'      => 'unique:listings',
-            'name'           => 'unique:listings',
-            'email'          => 'unique:listings',
-            'phone_number'   => 'unique:listings',
-        ]);
-
-        return $validate;
-    }
-
-    /**
-     * @param $amenity
-     *
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    private function validateAmenities($amenity) {
-        $validate = Validator::make($amenity, [
-            'amenities' => 'unique:amenities'
-        ]);
-
-        return $validate;
-    }
-
-    /**
-     * @param $listing
+     * @param $list_id
      * @param $images
+     *
+     * @return mixed
      */
-    private function createImages($listing, $images) {
+    private function __createImages( $list_id, $images ) {
         $collection = null;
-        foreach ($images as $image) {
+        foreach ( $images as $image ) {
             $collection[] = [
-                'listing_id'    => $listing->id,
+                'listing_id'    => $list_id,
                 'listing_image' => $image,
                 'created_at'    => now(),
                 'updated_at'    => now()
             ];
         }
 
-        $this->listingImagesRepo->insert($collection);
+        return $this->listingImagesRepo->insert( $collection );
 
     }
 
@@ -181,94 +240,180 @@ class RealtyMXService extends ListingService {
      *
      * @return array
      */
-    private function imageCollection($images) {
+    private function __images( $images ) {
         $collection = [];
-        foreach ($images as $image) {
-            $image_array = collect($image)->toArray();
-            $collection[] = $image_array['@attributes']->url ?? null;
+        foreach ( $images as $image ) {
+            $image = collect( json_decode( json_encode( $image ) ) );
+            array_push( $collection, $image->get( '@attributes' )->url );
         }
 
         return $collection;
     }
 
-    /**
-     * @param $email
-     *
-     * @return int|null
-     */
-    private function findAgent($email) {
-        $user = $this->userRepo->find(['email' => $email])->first();
-        return $user->id ?? null;
+    private function __manageBuilding( $listing ) {
+        $this->buildingRepo->existing( $listing );
     }
 
     /**
-     * @param $agents
-     * @param $property
+     * @param $neighbour
      *
-     * @return array|string
+     * @return mixed
      */
-    private function fetchAgents($agents, $property) {
-        if(is_array($agents)) {
-            $collection = [];
-            foreach ($agents as $agent) {
-                $collection[] = $this->list($property, $agent, $this->findAgent($agent->email));
-            }
-
-            return $collection;
-        } else {
-            return $this->list($property, $agents, $this->findAgent($agents->email));
-        }
-    }
-
-    /**
-     * @param $property
-     *
-     * @return array|bool|string
-     */
-    public function createList($property) {
-        return $this->fetchAgents($property->agents->agent, $property);
-    }
-
-    /**
-     * @param $data
-     * @param $filepath
-     *
-     * @return string
-     */
-    public function writeCSV($data, $filepath) {
-        $file = fopen($filepath, 'w');
-        $columns = ['Listing_web_id','URL','Reason_of_rejection'];
-        fputcsv($file, $columns);
-        foreach ( $data as $report ) {
-            fputcsv( $file, $report );
-        }
-        fclose($file);
-        return asset('csv/realty.csv');
+    private function __isNewNeighborhood( $neighbour ) {
+        return $this->neighbourRepo->find( [ 'name' => $neighbour ] )->first();
     }
 
     /**
      * @param $list
      *
-     * @return mixed
+     * @return bool
      */
-    public function webId($list) {
-        $list = collect($list)->toArray();
-        return $list['@attributes']->id;
+    private function __isNoFeeListing( $list ) {
+        return isset( $list->get( 'details' )->noFee ) && $list->get( 'details' )->noFee;
     }
 
     /**
-     * @param $unique_id
-     * @param $realty_id
+     * @param $listing
+     * @param $user
+     *
+     * @return bool
      */
-    public function details($unique_id, $realty_id) {
-        $listing = $this->listingRepo
-                        ->find
-                            ([
-                                'visibility' => true,
-                                'realty_id' => $realty_id,
-                                'unique_slug' => $unique_id,
-                            ])
-                        ->first();
-        return $listing ?? abort(404);
+    private function __isNewListing( $listing, $user ) {
+        return $this->__validate(
+            [
+                'email'     => $user->email,
+                'realty_id' => $listing->get( '@attributes' )->id
+            ],
+            [
+                'realty_id' => 'unique:listings',
+                'email'     => 'unique:listings'
+            ]
+        );
+    }
+
+    /**
+     * @param $company
+     *
+     * @return mixed
+     */
+    private function __isNewCompany( $company ) {
+        return $this->companyRepo->find( [ 'company' => $company ] )->first();
+    }
+
+    /**
+     * @param $agent
+     *
+     * @return mixed
+     */
+    private function __isNewAgent( $agent ) {
+        return $this->userRepo->find( [ 'email' => $agent->email ] )->first();
+    }
+
+    /**
+     * @param $collection
+     * @param $rules
+     *
+     * @return bool
+     */
+    private function __validate( $collection, $rules ) {
+        $validate = Validator::make( collect( $collection )->toArray(), $rules );
+        if ( $validate->fails() ) {
+            $failed = $validate->failed();
+
+            return isset( $failed['realty_id']['Unique'] ) && isset( $failed['email']['Unique'] )
+                ? false : true;
+        }
+
+        return true;
+    }
+
+    /**
+     * @param $list
+     */
+    private function __generateFeeListErrorReport( $list ) {
+        array_push($this->report, $this->__errorReporting($list, 'We import only no fee listings'));
+    }
+
+    /**
+     * @param $list
+     */
+    private function __generateExistingListErrorReport( $list ) {
+        array_push($this->report, $this->__errorReporting($list, 'We already import this list on no fee platform'));
+    }
+
+    /**
+     * @param $list
+     */
+    private function __generateSuccessImportListingReport($list) {
+        array_push($this->report, [
+            $list->realty_id,
+            route('web.realty', [$list->unique_slug, $list->realty_id]),
+            'none'
+        ]);
+    }
+
+    /**
+     * @param $list
+     * @param $message
+     *
+     * @return array
+     */
+    private function __errorReporting($list, $message) {
+        return [$list->get('@attributes')->id, 'none', $message];
+    }
+
+    /**
+     * @param $amenity
+     *
+     * @return \Illuminate\Contracts\Validation\Validator
+     */
+    private function validateAmenities( $amenity ) {
+        $validate = Validator::make( $amenity, [
+            'amenities' => 'unique:amenities'
+        ] );
+
+        return $validate;
+    }
+
+    /**
+     * @param $filepath
+     *
+     * @return string
+     */
+    private function __writeProgressCSVFile( $filepath ) {
+        $path = "storage/realty/csv/Realty-$filepath";
+        if(makeDir($path)) {
+            $path = sprintf("%s/%s.csv", base_path(str_replace('storage', 'storage/app/public', $path)), str_random(10));
+            $file    = fopen( $path, "w") or die ('Failed to create & open file');
+            $header = ['Date', now()->format('d M, Y')];
+            fputcsv($file, $header);
+            $columns = [ 'Listing_web_id', 'URL', 'Reason_of_rejection' ];
+            fputcsv( $file, $columns );
+            foreach ( $this->report as $report ) {
+                fputcsv( $file, $report );
+            }
+
+            fclose( $file );
+        }
+        return $path;
+    }
+
+    /**
+     * Trigger Emails to New Agents
+     */
+    private function __sendMails() {
+        foreach ( $this->agents as $agent ) {
+            if ( $agent->email === 'codinghackers@gmail.com' ) {
+                $data = [
+                    'to'      => $agent->email,
+                    'subject' => 'Lists Imported',
+                    'view'    => 'realty-import',
+                    'agent'   => $agent,
+                    'url'     => route( 'user.change_password', $agent->remember_token ),
+                    'message' => 'We import your listing from realty MX to active and publish your listings on no fee rentals NYC follow the link given below.',
+                ];
+                dispatchEmailQueue( $data, 2 );
+            }
+        }
     }
 }

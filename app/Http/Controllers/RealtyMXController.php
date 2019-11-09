@@ -16,7 +16,7 @@ class RealtyMXController extends Controller {
     /**
      * @var RealtyMXService
      */
-    private $realtyService;
+    protected $realtyService;
 
     /**
      * @var array
@@ -52,28 +52,9 @@ class RealtyMXController extends Controller {
 		$filePath = base_path('storage/app/realtyMXFeed/' . $file);
 		$xml = XmlParser::load($filePath);
 		$content = $xml->getContent();
-        foreach ($content->properties->property as $property) {
-            $property = json_decode(json_encode($property));
-            if(isset($property->details->noFee) && $property->details->noFee === "Y") {
-                $url = $this->realtyService->createList($property);
-                if(is_array($url)) {
-                    foreach ($url as $realty_url) {
-                        if($realty_url === false) {
-                            $this->makeReport($property, 'none', 'listing with this info already taken');
-                        } else {
-                            $this->makeReport($property, $realty_url, 'none');
-                        }
-                    }
-                } else if ($url === false) {
-                    $this->makeReport($property, 'none', 'listing with this info already taken');
-                } else {
-                    $this->makeReport($property, $url, 'none');
-                }
-            } else {
-                $this->makeReport($property, 'none', 'only no fee listings should be imported');
-            }
-        }
-        return $this->realtyService->writeCSV($this->report, public_path().'/csv/realty.csv');
+		return $this->realtyService->fetch($content->properties->property);
+
+//        return $this->realtyService->writeCSV($this->report, public_path().'/csv/realty.csv');
 	}
 
     /**

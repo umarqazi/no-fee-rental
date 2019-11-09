@@ -17,18 +17,42 @@ use Illuminate\Support\Facades\Storage;
  * @param bool $unlinkOld
  * @param null $old_image
  *
- * @return string
+ * @return string|bool
  */
 function uploadImage( $image, $path, $unlinkOld = false, $old_image = null ) {
     $name = str_random( 20 ) . '.' . $image->getClientOriginalExtension();
+    if(makeDir($path)) {
+        makeFile($path, $image, $name);
+        $full_image_name = 'storage/' . $path . '/' . $name;
+        ( ! $unlinkOld ) ?: removeFile( $old_image );
+        return $full_image_name;
+    }
+
+    return false;
+}
+
+/**
+ * @param $path
+ * @param $data
+ * @param $name
+ *
+ * @return mixed
+ */
+function makeFile($path, $data, $name) {
+    return Storage::disk( 'public' )->putFileAs( $path, $data, $name );
+}
+
+/**
+ * @param $path
+ *
+ * @return bool
+ */
+function makeDir($path) {
     if ( ! File::isDirectory( $path ) ) {
         File::makeDirectory( $path, 0777, true, true );
     }
-    Storage::disk( 'public' )->putFileAs( $path, $image, $name );
-    $full_image_name = 'storage/' . $path . '/' . $name;
-    ( ! $unlinkOld ) ?: removeFile( $old_image );
 
-    return $full_image_name;
+    return true;
 }
 
 /**

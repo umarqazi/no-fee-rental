@@ -16,11 +16,13 @@ class CreateListingsTable extends Migration {
 	 */
 	public function up() {
 		Schema::create('listings', function (Blueprint $table) {
-			$table->increments('id');
+            $table->increments('id');
+//            $table->unsignedInteger('building_id')->nullable();
             $table->unsignedInteger('user_id')->nullable();
             $table->unsignedInteger('neighborhood_id')->nullable();
-            $table->string('unique_slug')->unique();
             $table->string('realty_id')->nullable();
+            $table->string('realty_url')->nullable();
+            $table->string('unique_slug')->unique();
 			$table->string('name')->nullable();
             $table->string('email')->nullable();
 			$table->string('phone_number')->nullable();
@@ -34,7 +36,6 @@ class CreateListingsTable extends Migration {
 			$table->integer('square_feet')->nullable();
 			$table->text('description')->nullable();
 			$table->string('map_location')->nullable();
-			$table->string('realty_url')->nullable();
             $table->string('lease_term')->nullable();
             $table->string('free_months')->nullable();
             $table->enum('building_type', ['open', 'exclusive'])->default('open')->nullable();
@@ -45,7 +46,8 @@ class CreateListingsTable extends Migration {
             $table->string('availability')->nullable()->comment = "0-Not Available, 1-Available, 2-Immediately, 3-Date";
 			$table->timestamps();
 
-			$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+//            $table->foreign('building_id')->references('id')->on('buildings')->onDelete('cascade');
 			$table->foreign('neighborhood_id')->references('id')->on('neighborhoods')->onDelete('cascade');
 		});
 	}
