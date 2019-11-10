@@ -1,6 +1,11 @@
 @extends('secured-layouts.app')
 @section('title', 'Nofee Rental')
 @section('content')
+    <style>
+        .checkbox-listing {
+            margin-bottom: 0px !important;
+        }
+    </style>
     <div class="wrapper">
         <div class="heading-wrapper">
             <h1>{{$action}} Listing</h1>
@@ -33,12 +38,25 @@
                     </div>
                 @endif
                 <div class="row">
+
                     {{--Listing Info--}}
                     @include('listing-features.listing_info')
+
                     {{--Features--}}
                     {!! features() !!}
+
+                    <div class="col-md-12" style="margin-top: 20px;" id="amenities">
+                        <div class="row" style="display: none;">
+                            <div class="amities-flex" style="display: flex; justify-content: space-between">
+                            {!! amenities() !!}
+                            </div>
+                        </div>
+                    </div>
+
                     {{--Basic User Info--}}
+
                     @include('listing-features.basic_info')
+
                     <div class="col-md-12 mt-4">
                         <div id="map"></div>
                     </div>

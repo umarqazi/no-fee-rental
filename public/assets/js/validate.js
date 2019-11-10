@@ -66,7 +66,9 @@ $(() => {
     // Add Listing Form Validations
    $('#listing-form').validate({
        rules: {
-           street_address: "required",
+           street_address: {
+               required: true,
+           },
            display_address: "required",
            neighborhood_id: "required",
            bedrooms: "required",

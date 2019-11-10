@@ -449,11 +449,14 @@ function openHouseTimeSlot( $index ) {
  * @return string
  */
 function amenities() {
+    $i = 0;
     $html    = '<div class="col-md-4"><h3>Amenities</h3>';
     $service = new \App\Services\AmenityService();
     $amenities = $service->get();
-    $perColumn = ceil($amenities->count() / 3);
+    $total = $amenities->count();
+    $perColumn = ceil($total / 3);
     foreach ($amenities as $key => $amenity ) {
+        $i ++;
         $html .= '<ul class="checkbox-listing"><li><div class="custom-control custom-checkbox">';
         $html .= Form::checkbox( 'amenities[]', $amenity->id, null, [
             'class' => 'custom-control-input',
@@ -462,6 +465,8 @@ function amenities() {
         $html .= '<label class="custom-control-label" for="' . $key . '">' . $amenity->amenities . '</label></div></li></ul>';
         if ( ( $key + 1 ) % $perColumn === 0 ) {
             $html .= '</div><div class="col-sm-4"><h3>&nbsp;</h3>';
+        } elseif ( $i === $total ) {
+            $html .= '</div>';
         }
     }
 
