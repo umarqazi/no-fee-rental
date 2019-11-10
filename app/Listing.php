@@ -21,12 +21,12 @@ class Listing extends Model {
 	 * @var array $fillable
 	 */
 	protected $fillable = [
-		'user_id', 'realty_id', 'unique_slug', 'neighborhood_id',
+		'user_id', 'realty_id', 'unique_slug', 'neighborhood_id', 'building_id',
         'name', 'email', 'phone_number', 'street_address', 'display_address',
         'thumbnail', 'baths', 'bedrooms', 'unit', 'rent', 'square_feet',
         'description', 'is_featured', 'map_location', 'building_type',
 		'visibility', 'realty_url', 'availability', 'application_fee',
-        'deposit','lease_term','free_months'
+        'deposit', 'lease_term', 'free_months'
 	];
 
     /**

@@ -11,6 +11,7 @@ namespace App\Services;
 
 use App\Repository\CompanyRepo;
 use App\Repository\NeighborhoodRepo;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
@@ -118,7 +119,8 @@ class RealtyMXService extends ListingService {
                 'latitude'  => $location->latitude,
                 'longitude' => $location->longitude
             ] );
-            $list         = $this->listingRepo->create( [
+
+            $data = [
                 'realty_id'       => $attrib->id ?? null,
                 'realty_url'      => $attrib->url ?? null,
                 'user_id'         => $user->id ?? null,
@@ -141,13 +143,44 @@ class RealtyMXService extends ListingService {
                 'visibility'      => INACTIVELISTING ?? null,
                 'is_featured'     => DEACTIVE ?? null,
                 'map_location'    => $map_location
-            ] );
+            ];
 
+            $building_id  = $this->__addBuilding( toObject( $data ) );
+            $amenities = $this->__addAmenities($building_id, $details->amenities);
+            $data['building_id'] = $building_id;
+            $list = $this->listingRepo->create( $data );
             $this->__createImages( $list->id, $images );
-            $this->__generateSuccessImportListingReport($list);
+            $this->__generateSuccessImportListingReport( $list );
         }
 
         return $this->__generateExistingListErrorReport( $listing );
+    }
+
+    private function __addBuilding($data) {
+        $this->manageBuilding($data);
+    }
+
+    /**
+     * @param $building
+     * @param $amenities
+     *
+     * @return array
+     */
+    private function __addAmenities($building, $amenities) {
+        $collection = [];
+        $amenities = collect($amenities)->keys();
+        $amenities = $amenities->reject(function($key) {
+            return $key === 'other';
+        });
+
+        foreach ($amenities as $amenity){
+            if($this->__isNewAmenity($amenity)) {
+                $amenity = $this->amenitiesRepo->create(['amenities'  => $amenity]);
+                array_push($collection, $amenity->id);
+            }
+        }
+
+        return $collection;
     }
 
     /**
@@ -264,6 +297,20 @@ class RealtyMXService extends ListingService {
     }
 
     /**
+     * @param $amenity
+     *
+     * @return bool
+     */
+    private function __isNewAmenity($amenity) {
+        $failed =$this->__validate(
+            ['amenities' => $amenity],
+            ['amenities' => 'unique:amenities']
+        );
+
+        return isset( $failed['amenities']['Unique'] ) ? false : true;
+    }
+
+    /**
      * @param $list
      *
      * @return bool
@@ -279,7 +326,7 @@ class RealtyMXService extends ListingService {
      * @return bool
      */
     private function __isNewListing( $listing, $user ) {
-        return $this->__validate(
+        $failed = $this->__validate(
             [
                 'email'     => $user->email,
                 'realty_id' => $listing->get( '@attributes' )->id
@@ -289,6 +336,9 @@ class RealtyMXService extends ListingService {
                 'email'     => 'unique:listings'
             ]
         );
+
+        return isset( $failed['realty_id']['Unique'] ) && isset( $failed['email']['Unique'] )
+            ? false : true;
     }
 
     /**
@@ -313,15 +363,13 @@ class RealtyMXService extends ListingService {
      * @param $collection
      * @param $rules
      *
-     * @return bool
+     * @return array|bool
      */
     private function __validate( $collection, $rules ) {
         $validate = Validator::make( collect( $collection )->toArray(), $rules );
         if ( $validate->fails() ) {
             $failed = $validate->failed();
-
-            return isset( $failed['realty_id']['Unique'] ) && isset( $failed['email']['Unique'] )
-                ? false : true;
+            return $failed;
         }
 
         return true;

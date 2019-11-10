@@ -60,25 +60,29 @@ class ListingService extends BuildingService {
      */
     public function create($request) {
         DB::beginTransaction();
-        $listing             = $this->__validateForm($request);
-        $building            = $this->addBuilding($listing->street_address);
-        $listing->visibility = (!$building->is_verified && isAgent()) ? PENDINGLISTING : $building->is_verified;
-        $listing             = $this->__addList($listing);
+        $listing              = $this->__validateForm( $request );
+        dd($listing);
+        $listing->thumbnail   = $this->__uploadImage( $listing );
+        $building             = $this->addBuilding( $listing );
+        $listing->building_id = $building->id;
+        $listing->visibility  = ( ! $building->is_verified && isAgent() )
+            ? PENDINGLISTING : $building->is_verified;
+        dd($listing);
+        $listing              = $this->__addList( $listing );
         $this->__addOpenHouse($listing->id, $listing, $request->open_house);
         $this->__addFeatures($listing->id, $request->features);
         $this->__manageSaveSearch($listing, $request->features);
-        parent::attachApartment($building, $listing);
         DB::commit();
         return $listing->id;
     }
 
     /**
-     * @param $address
+     * @param $listing
      *
      * @return bool|mixed
      */
-    public function addBuilding($address) {
-        return parent::manageBuilding($address);
+    public function addBuilding($listing) {
+        return parent::manageBuilding($listing);
     }
 
     /**
@@ -299,7 +303,7 @@ class ListingService extends BuildingService {
         $form->availability    = $request->availability_date ?? $request->availability === '1' ? now() : false;
         $form->visibility      = $request->visibility;
         $form->description     = $request->description;
-        $form->neighborhood    = $request->neighborhood_id;
+        $form->neighborhood_id = $request->neighborhood;
         $form->bedrooms        = $request->bedrooms;
         $form->baths           = $request->baths;
         $form->unit            = $request->unit;
@@ -318,18 +322,27 @@ class ListingService extends BuildingService {
     }
 
     /**
+     * @param $listing
+     *
+     * @return bool|string
+     */
+    protected function __uploadImage($listing) {
+        if (!empty($listing->thumbnail) && strpos($listing->thumbnail, 'http') === false) {
+            $listing->thumbnail = uploadImage( $listing->thumbnail, 'images/listing/thumbnails' );
+        } elseif(!empty($listing->old_thumbnail)) {
+            $listing->thumbnail = $listing->old_thumbnail;
+        }
+
+        return $listing->thumbnail;
+    }
+
+    /**
      * @param $form
      *
      * @return mixed
      */
     protected function __addList($form) {
-        if (!empty($form->thumbnail) && strpos($form->thumbnail, 'http') === false) {
-            $form->thumbnail = uploadImage( $form->thumbnail, 'images/listing/thumbnails' );
-        } elseif(!empty($form->old_thumbnail)) {
-            $form->thumbnail = $form->old_thumbnail;
-        }
-
-        return $this->listingRepo->create(is_array($form) ? $form : $form->toArray());
+        return $this->listingRepo->create($form->toArray());
     }
 
     /**
