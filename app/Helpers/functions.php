@@ -446,14 +446,14 @@ function openHouseTimeSlot( $index ) {
 }
 
 /**
- * @param int $perColumn
- *
  * @return string
  */
-function amenities( $perColumn = 5 ) {
+function amenities() {
     $html    = '<div class="col-md-4"><h3>Amenities</h3>';
     $service = new \App\Services\AmenityService();
-    foreach ( $service->get() as $key => $amenity ) {
+    $amenities = $service->get();
+    $perColumn = ceil($amenities->count() / 3);
+    foreach ($amenities as $key => $amenity ) {
         $html .= '<ul class="checkbox-listing"><li><div class="custom-control custom-checkbox">';
         $html .= Form::checkbox( 'amenities[]', $amenity->id, null, [
             'class' => 'custom-control-input',

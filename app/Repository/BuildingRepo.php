@@ -10,6 +10,10 @@ namespace App\Repository;
 
 use App\Building;
 
+/**
+ * Class BuildingRepo
+ * @package App\Repository
+ */
 class BuildingRepo extends BaseRepo {
 
     /**
@@ -17,15 +21,6 @@ class BuildingRepo extends BaseRepo {
      */
     public function __construct() {
         parent::__construct(new Building());
-    }
-
-    /**
-     * @param $apartment
-     *
-     * @return bool
-     */
-    public function existing($apartment) {
-        return $apartment->buildings()->whereapartment_id($apartment->id)->first();
     }
 
     /**
@@ -45,7 +40,9 @@ class BuildingRepo extends BaseRepo {
      * @return mixed
      */
     public function active($paginate) {
-        return $this->model->where('is_verified', ACTIVE)->with('listings.agent')->paginate($paginate, ['*'], 'active-buildings');
+        return $this->find(['is_verified' => ACTIVE])
+                    ->withLists()
+                    ->paginate($paginate, ['*'], 'active-buildings');
     }
 
     /**
@@ -54,17 +51,9 @@ class BuildingRepo extends BaseRepo {
      * @return mixed
      */
     public function inactive($paginate) {
-        return $this->model->where('is_verified', DEACTIVE)->with('listings.agent')->paginate($paginate, ['*'], 'inactive-buildings');
-    }
-
-    /**
-     * @param $building
-     * @param $apartment_id
-     *
-     * @return mixed
-     */
-    public function attachApartment($building, $apartment_id) {
-        return $building->listings()->attach($apartment_id->id);
+        return $this->find(['is_verified' => DEACTIVE])
+                    ->withLists()
+                    ->paginate($paginate, ['*'], 'inactive-buildings');
     }
 
     /**
@@ -83,7 +72,7 @@ class BuildingRepo extends BaseRepo {
      * @return mixed
      */
     public function getApartments($id) {
-        return $this->findById($id)->with('listings', 'amenities');
+        return $this->findById($id)->withLists();
     }
 
     /**

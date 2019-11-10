@@ -11,8 +11,6 @@ namespace App\Services;
 
 use App\Repository\CompanyRepo;
 use App\Repository\NeighborhoodRepo;
-use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 /**
@@ -107,7 +105,7 @@ class RealtyMXService extends ListingService {
      * @param $user
      * @param $listing
      *
-     * @return mixed|void
+     * @return mixed|void|bool
      */
     private function __createList( $user, $listing ) {
         if ( $this->__isNewListing( $listing, $user ) ) {
@@ -145,28 +143,34 @@ class RealtyMXService extends ListingService {
                 'map_location'    => $map_location
             ];
 
-            $building_id  = $this->__addBuilding( toObject( $data ) );
-            $amenities = $this->__addAmenities($building_id, $details->amenities);
-            $data['building_id'] = $building_id;
+            $building  = $this->__addBuilding( toObject( $data ) );
+            $this->attachAmenities($building, $this->__addAmenities($details->amenities));
+            $data['building_id'] = $building->id;
             $list = $this->listingRepo->create( $data );
             $this->__createImages( $list->id, $images );
             $this->__generateSuccessImportListingReport( $list );
+            return true;
         }
 
-        return $this->__generateExistingListErrorReport( $listing );
-    }
-
-    private function __addBuilding($data) {
-        $this->manageBuilding($data);
+        $this->__generateExistingListErrorReport( $listing );
+        return false;
     }
 
     /**
-     * @param $building
+     * @param $data
+     *
+     * @return bool|mixed
+     */
+    private function __addBuilding($data) {
+        return $this->manageBuilding($data);
+    }
+
+    /**
      * @param $amenities
      *
      * @return array
      */
-    private function __addAmenities($building, $amenities) {
+    private function __addAmenities($amenities) {
         $collection = [];
         $amenities = collect($amenities)->keys();
         $amenities = $amenities->reject(function($key) {

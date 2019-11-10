@@ -53,6 +53,11 @@
                             @else
                                 <span style="background-color: red;">Unavailable</span>
                             @endif
+                            @if($listing->building_type === EXCLUSIVE)
+                                <span style="background-color: #223970;">Exclusive</span>
+                            @else
+                                <span style="background-color: red;">Open</span>
+                            @endif
                         </div>
                         <div class="estimation-time">
                             <i class="far fa-clock"></i>
@@ -209,10 +214,20 @@
     <div class="listing-aminities-sec">
         <div class="container-lg">
             <div class="row">
+
                 <div class="col-md-3 col-sm-4">
-                    <h3>Listing Type</h3>
-                    {{ ucfirst($listing->building_type) }}
+                    <h3>Amenities</h3>
+                    @foreach($listing->building->amenities as $amenity)
+                        <ul class="second-ul">
+                            <li>{{ $amenity->amenities }}</li>
+                        </ul>
+                    @endforeach
                 </div>
+
+{{--                <div class="col-md-3 col-sm-4">--}}
+{{--                    <h3>Listing Type</h3>--}}
+{{--                    {{ ucfirst($listing->building_type) }}--}}
+{{--                </div>--}}
 
                 <div class="col-md-3 col-sm-4">
                 <h3>Pet Policy</h3>
@@ -238,18 +253,6 @@
                             <li>{{ $feature }}</li>
                         </ul>
                     @endforeach
-                </div>
-
-                <div class="col-md-3 col-sm-4">
-                    <h3>Amenities</h3>
-                    @if( isset($listing->listingBuilding->amenities) && count($listing->listingBuilding->amenities) < 1)
-                        None
-                    @foreach($listing->listingBuilding->amenities as $feature)
-                        <ul class="second-ul">
-                            <li>{{ $feature->amenities }}</li>
-                        </ul>
-                    @endforeach
-                    @endif
                 </div>
             </div>
         </div>
