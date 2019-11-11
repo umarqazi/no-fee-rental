@@ -43,6 +43,11 @@ class ListingService extends BuildingService {
     protected $userRepo;
 
     /**
+     * @var SearchService
+     */
+    private $searchService;
+
+    /**
      * ListingService constructor.
      */
     public function __construct() {
@@ -51,6 +56,7 @@ class ListingService extends BuildingService {
         $this->featureRepo       = new FeatureRepo();
         $this->openHouseRepo     = new OpenHouseRepo();
         $this->listingImagesRepo = new ListingImagesRepo();
+        $this->searchService = new SearchService();
     }
 
     /**
@@ -551,5 +557,23 @@ class ListingService extends BuildingService {
      */
     private function __sender($id) {
         return $this->userRepo->findById($id)->first();
+    }
+
+    /**
+     * @param $request
+     *
+     * @return object
+     */
+    public function profileAdvanceSearch($request,$agentId) {
+        $data = $this->searchService->search($request);
+        $listings = [];
+        foreach($data as $key => $listing){
+           if($listing->user_id == $agentId){
+               array_push($listings,$listing);
+           }
+        }
+        return toObject([
+            'listings'     => $listings,
+        ]);
     }
 }

@@ -29,6 +29,7 @@ Route::post('newsletter', 'NewsletterController@store');
 
 // Agent Profile Routes
 Route::get('/agent-profile/{agentId}', 'Agent\AgentController@profileListing')->name('web.agentProfile');
+Route::get('/agent-profile-search/{agentId}', 'Agent\AgentController@search')->name('web.agentProfileSearch');
 
 // Add User By Admin Change Password Routes
 Route::get('/change-password/{token}', 'UserController@changePassword')->name('user.change_password');
