@@ -2,6 +2,10 @@
 
 namespace App\Forms;
 
+/**
+ * Class ListingForm
+ * @package App\Forms
+ */
 class ListingForm extends BaseForm {
 
     /**
@@ -12,12 +16,22 @@ class ListingForm extends BaseForm {
     /**
      * @var string
      */
-	public $old_thumbnail;
+    public $unique_slug;
+
+    /**
+     * @var integer
+     */
+    public $neighborhood_id;
+
+    /**
+     * @var integer
+     */
+    public $building_id;
 
     /**
      * @var string
      */
-	public $unique_slug;
+	public $old_thumbnail;
 
     /**
      * @var string
@@ -48,11 +62,6 @@ class ListingForm extends BaseForm {
      * @var string
      */
 	public $display_address;
-
-    /**
-     * @var string
-     */
-	public $neighborhood;
 
     /**
      * @var string
@@ -97,16 +106,12 @@ class ListingForm extends BaseForm {
     /**
      * @var integer
      */
-	public $square_feet;
+    public $visibility;
 
     /**
      * @var integer
      */
-	public $visibility;
-
-    /**
-     * @return array
-     */
+	public $square_feet;
 
     /**
      * @var integer
@@ -129,9 +134,13 @@ class ListingForm extends BaseForm {
     public $free_months;
 
 
+    /**
+     * @return array
+     */
     function toArray() {
 		return [
 			'user_id'          => $this->user_id,
+            'building_id'      => $this->building_id,
             'description'      => $this->description,
 			'name'             => $this->name,
 			'email'            => $this->email,
@@ -139,7 +148,7 @@ class ListingForm extends BaseForm {
 			'phone_number'     => $this->phone_number,
 			'street_address'   => $this->street_address,
 			'display_address'  => $this->display_address,
-			'neighborhood_id'  => $this->neighborhood,
+			'neighborhood_id'  => $this->neighborhood_id,
 			'bedrooms'         => $this->bedrooms,
 			'baths'            => $this->baths,
             'unique_slug'      => $this->unique_slug,

@@ -58,7 +58,7 @@ class BuildingService {
      *
      * @return mixed
      */
-    public function ownerBuildings($paginate) {
+    public function ownerIndex($paginate) {
         return $this->buildingRepo->find(['user_id' => myId()])->paginate($paginate);
     }
 
@@ -73,25 +73,6 @@ class BuildingService {
         $this->attachAmenities( $this->__currentBuilding( $id ), $request->amenities );
 
         return $this->buildingRepo->update( $id, [ 'is_verified' => true ] );
-    }
-
-    /**
-     * @param $address
-     *
-     * @return string
-     */
-    public function isUniqueAddress($address) {
-        return $this->buildingRepo->find(['address' => $address])->count() > 0 ? 'false' : 'true';
-    }
-
-    /**
-     * @param $id
-     * @param $request
-     *
-     * @return mixed
-     */
-    public function update( $id, $request ) {
-        return $this->buildingRepo->updateAmenities( $this->__currentBuilding( $id ), $request->amenities );
     }
 
     /**
@@ -117,18 +98,40 @@ class BuildingService {
     }
 
     /**
-     * @param $apartment_addr
+     * @param $address
+     *
+     * @return string
+     */
+    public function isUniqueAddress($address) {
+        return $this->buildingRepo->find(['address' => $address])->count() > 0 ? 'false' : 'true';
+    }
+
+    /**
+     * @param $id
+     * @param $request
+     *
+     * @return mixed
+     */
+    public function update( $id, $request ) {
+        return $this->buildingRepo->updateAmenities( $this->__currentBuilding( $id ), $request->amenities );
+    }
+
+    /**
+     * @param $listing
      *
      * @return bool|mixed
      */
-    public function manageBuilding( $apartment_addr ) {
-        $building = $this->__isExistingApartment( $apartment_addr );
+    public function manageBuilding( $listing ) {
+        $building = $this->__isAlreadyExist( $listing->street_address );
         if ( ! $building ) {
             $building = $this->buildingRepo->create( [
-                'address'     => $apartment_addr,
-                'building'    => str_random( 10 ),
-                'is_verified' => isAgent() ? false : true
+                'thumbnail'       => $listing->thumbnail,
+                'address'         => $listing->street_address,
+                'neighborhood_id' => $listing->neighborhood_id,
+                'is_verified'     => isAgent() ? false : true
             ] );
+
+            return $building;
         }
 
         return $building;
@@ -208,16 +211,14 @@ class BuildingService {
     }
 
     /**
-     * @param $apartment_address
+     * @param $building_address
      *
      * @return bool
      */
-    private function __isExistingApartment( $apartment_address ) {
-        $apartment = $this->listingRepo->isExistingApartment( $apartment_address )->first();
-        if ( ! empty( $apartment ) ) {
-            $building = $this->buildingRepo->existing( $apartment );
-
-            return $building ?? true;
+    private function __isAlreadyExist( $building_address ) {
+        $building = $this->buildingRepo->find(['address' => $building_address])->first();
+        if(!empty($building)) {
+            return $building;
         }
 
         return false;

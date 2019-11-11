@@ -15,7 +15,10 @@ class Building extends Model {
     /**
      * @var array
      */
-    protected $fillable = ['building', 'is_verified', 'type', 'address', 'neighborhood', 'contact_representative', 'user_id', 'building_action'];
+    protected $fillable = [
+        'is_verified', 'type', 'address', 'neighborhood_id', 'contact_representative',
+        'user_id', 'building_action', 'thumbnail'
+    ];
 
     /**
      * @return BelongsToMany
