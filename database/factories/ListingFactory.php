@@ -37,7 +37,7 @@ $factory->define(\App\Listing::class, function (Faker $faker) use ($neighbours) 
         'bedrooms' => random_int(1, 20),
         'unit' => random_int(1, 200),
         'visibility' => ACTIVE,
-        'availability' => random_int(1, 200),
+        'availability' => '2019-11-11 07:39:03',
         'is_featured' => random_int(0, 1),
         'thumbnail' => $faker->image()
     ];

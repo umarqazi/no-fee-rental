@@ -87,8 +87,7 @@ class AgentController extends Controller {
 //        } else {
             $data = toObject($this->userService->getAgentWithListings($agentId));
 //        }
-
-	    return view('agent.listing_profile', compact('data', 'showMap'));
+	    return view('agent.listing_profile', compact('data', 'showMap'))->with('route', 'web.agentProfileSearch')->with('param', $agentId);
     }
 
     /**
@@ -104,5 +103,16 @@ class AgentController extends Controller {
             }
         });
         return toObject($this->userService->fetchQuery());
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return Factory|View
+     */
+    public function search(Request $request, $agentId) {
+        $data = toObject($this->listingService->profileAdvanceSearch($request,$agentId));
+        $data->agent = $this->userService->edit($agentId);
+        return view('agent.listing_profile', compact('data'))->with('route', 'web.agentProfileSearch')->with('param', $agentId);
     }
 }

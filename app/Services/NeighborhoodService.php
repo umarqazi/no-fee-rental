@@ -106,7 +106,7 @@ class NeighborhoodService {
      * @return mixed
      */
     public function get() {
-        return $this->neighborhoodRepo->all();
+        return $this->neighborhoodRepo->all()->sortBy('name');
     }
 
     /**
