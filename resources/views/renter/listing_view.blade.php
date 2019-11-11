@@ -3,7 +3,7 @@
 @section('content')
     <div class="wrapper">
         <div class="heading-wrapper">
-            <h1>Wish List</h1>
+            <h1>Wishlist</h1>
         </div>
         <div class="block listing-container">
             <div class="heading-wrapper pl-0">
