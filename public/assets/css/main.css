@@ -2509,12 +2509,13 @@ footer .copyright .social-icons li a:hover {
 .listing-detail-container .listing-info .product-title {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
 }
 
 .listing-detail-container .listing-info .product-title .right-share-icons-side {
     display: flex;
-    align-items: center;
+    justify-content: space-between;
+    flex: auto;
 }
 
 .listing-detail-container .listing-info .product-title .share-icon-div {
