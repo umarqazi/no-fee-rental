@@ -57,9 +57,10 @@
                 <div class="message-input">
                     <div class="wrap">
                         {!! Form::open(['id' => 'send-message', 'loading' => 'false', 'url' => route('agent.sendMessage', $collection->id), 'class' => 'ajax', 'reset' => 'true']) !!}
+                        <p id="error"></p>
                         {!! Form::text('message', null, ['placeholder' => 'Write your message...', 'autocomplete' => 'off']) !!}
                         {!! Form::hidden('to', myId() == $collection->to ? $collection->from : $collection->to) !!}
-                        <i class="fa fa-paperclip attachment" aria-hidden="true"></i>
+                        {{--<i class="fa fa-paperclip attachment" aria-hidden="true"></i>--}}
                         <button class="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
                         {!! Form::close() !!}
                     </div>

@@ -106,7 +106,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label> Exclusive Settings</label>
+                                <label> Notification Settings</label>
                                 <div class="exclusive-chkboxes">
                                     <div class="custom-control custom-checkbox">
                                         <input class="custom-control-input input-style" id="exclusive-1" name="allow_web_notifications" type="checkbox"
@@ -124,17 +124,6 @@
                                         <label class="custom-control-label" for="exclusive-3">Disable All</label>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label>Description</label>
-                                {!! Form::textarea('description', null, ['class'=>'input-style', 'placeholder' => 'Description','style' => 'resize:none; height:100px;']) !!}
-                                @if ($errors->has('description'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('description') }}</strong>
-                                    </span>
-                                @endif
                             </div>
                         </div>
                         <div class="col-md-12 mt-4 text-center">
