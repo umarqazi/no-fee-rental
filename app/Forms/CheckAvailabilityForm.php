@@ -56,6 +56,7 @@ class CheckAvailabilityForm extends BaseForm {
             'email'             => $this->email,
             'phone_number'      => $this->phone_number,
             'listing_id'        => $this->listing_id,
+            'meeting_request'   => $this->conversation_type == AVAILABILITY ? true : false,
             'conversation_type' => $this->conversation_type
         ];
     }

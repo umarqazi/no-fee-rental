@@ -1792,8 +1792,15 @@ main {
 
 .price-wrapp .price {
     font-weight: bold;
-}
 
+}
+.price-wrap-location p{
+    margin-bottom: 0px;
+
+}
+.price-wrap-location .additional-info ul{
+    margin-bottom: 5px;
+}
 .price-wrapp .additional-info ul {
     display: flex;
     align-items: center;
@@ -1804,6 +1811,10 @@ main {
     text-align: center;
     border-right: #ddd solid 1px;
     padding-right: 8px;
+}
+
+.price-wrapp.price-wrap-location  .additional-info ul li{
+    color: #272a31;
 }
 
 .price-wrapp .additional-info ul li:last-child {
@@ -1833,6 +1844,7 @@ main {
 
 .gm-style .gm-style-iw-c {
     padding: 0px !important;
+    max-width: 425px !important;
 }
 
 .gm-ui-hover-effect {
@@ -1849,8 +1861,16 @@ main {
     overflow: inherit !important;
     padding: 12px;
 }
+.search-result-wrapper .map-wrapper #desktop-map .gm-style-iw-d > div {
+    height: 200px;
+    overflow-y: auto;
+}
+.map-wrapper .location-thumbnaail.location-image-btm {
+    margin-bottom: 15px;
+}
 
-/*Check Availability*/
+
+    /*Check Availability*/
 
 #check-availability .modal-content {
     border-radius: 15px;

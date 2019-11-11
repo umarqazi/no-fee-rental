@@ -2224,3 +2224,16 @@ header .agent-avtar .avtar:hover div ul {
     width: 100%;
     padding: 20px 2px;
 }
+
+.custom-radio .custom-control-input:checked~.custom-control-label::before {
+    background-color: #e77817;
+}
+#building-popup .btn-default {
+    line-height: 50px;
+}
+@media (min-width: 576px) {
+    #building-popup .modal-dialog {
+        max-width: 1000px;
+    }
+}
+

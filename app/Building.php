@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * Class Building
@@ -14,7 +15,7 @@ class Building extends Model {
     /**
      * @var array
      */
-    protected $fillable = ['building', 'is_verified', 'type', 'address'];
+    protected $fillable = ['building', 'is_verified', 'type', 'address', 'neighborhood', 'contact_representative', 'user_id', 'building_action'];
 
     /**
      * @return BelongsToMany
@@ -38,5 +39,12 @@ class Building extends Model {
             'building_id',
             'amenity_id'
         );
+    }
+
+    /**
+     * @return HasOne
+     */
+    public function contact() {
+        return $this->hasOne(User::class, 'id', 'contact_representative');
     }
 }

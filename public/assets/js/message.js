@@ -968,26 +968,12 @@ $(".message-block .message-box .fa-users").click(function () {
 $(".message-block .users-listing .header-text .fa-times").click(function () {
   $(".message-block .users-listing").removeClass('active_listing_bar');
 });
-
-_asyncToGenerator(
-/*#__PURE__*/
-_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
-  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
-    while (1) {
-      switch (_context3.prev = _context3.next) {
-        case 0:
-          window.Echo.channel("messaging-channel." + Window.Laravel.user).listen('.message', function (res) {
-            $ulSelector.append("\n            <li class=\"sent\">\n                <img style=\"width: 35px;height: 35px;\" alt=\"\" src=\"".concat(window.location.origin, "/").concat(res.sender.profile_image === null ? 'assets/images/default-images/user.jpeg' : res.sender.profile_image, "\">\n                <p>").concat(res.message.message, "</p>\n            </li>"));
-            scrollDown($ulSelector);
-          });
-
-        case 1:
-        case "end":
-          return _context3.stop();
-      }
-    }
-  }, _callee3);
-}))();
+$(function () {
+  window.Echo.channel("messaging-channel." + Window.Laravel.user).listen('.message', function (res) {
+    $ulSelector.append("\n            <li class=\"sent\">\n                <img style=\"width: 35px;height: 35px;\" alt=\"\" src=\"".concat(window.location.origin, "/").concat(res.sender.profile_image === null ? 'assets/images/default-images/user.jpeg' : res.sender.profile_image, "\">\n                <p>").concat(res.message.message, "</p>\n            </li>"));
+    scrollDown($ulSelector);
+  });
+});
 
 /***/ }),
 

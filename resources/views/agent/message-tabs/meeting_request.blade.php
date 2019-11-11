@@ -20,7 +20,7 @@
             </div>
             <div class="actions-btns">
                 <button class="border-btn" request_id="{{ $request->id }}" id="reply">Reply</button>
-                <button class="border-btn">Deny</button>
+                <a href="{{ route('agent.archiveConversation', $request->id) }}" ><button class="border-btn">Deny</button></a>
             </div>
         </div>
     @endforeach

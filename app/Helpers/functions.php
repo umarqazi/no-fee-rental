@@ -1,6 +1,5 @@
 <?php
 
-use App\Events\TriggerMessage;
 use App\Jobs\SaveSearchMatchJob;
 use App\Services\NotificationService;
 use Illuminate\Contracts\Auth\Authenticatable;
@@ -85,20 +84,6 @@ function isAdmin() {
 }
 
 /**
- * @param $listing_id
- *
- * @return bool
- */
-function is_created_by_owner( $listing_id ) {
-    $listing_creator = ( new \App\Services\ListingService() )->created_by( $listing_id );
-    if ( $listing_creator == 3 ) {
-        return true;
-    } else {
-        return false;
-    }
-}
-
-/**
  * @return mixed
  */
 function isAgent() {
@@ -110,6 +95,27 @@ function isAgent() {
  */
 function isRenter() {
     return auth()->guard( 'renter' )->check();
+}
+
+/**
+ * @return mixed
+ */
+function isOwner() {
+    return auth()->guard( 'owner' )->check();
+}
+
+/**
+ * @param $listing_id
+ *
+ * @return bool
+ */
+function is_created_by_owner( $listing_id ) {
+    $listing_creator = ( new \App\Services\ListingService() )->created_by( $listing_id );
+    if ( $listing_creator == 3 ) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 /**
@@ -126,13 +132,6 @@ function isFavourite( $favourites, $listing_id ) {
     }
 
     return false;
-}
-
-/**
- * @return mixed
- */
-function isOwner() {
-    return auth()->guard( 'renter' )->check();
 }
 
 /**
@@ -161,6 +160,15 @@ function dateReadable( $date ) {
     }
 
     return \Carbon\Carbon::createFromTimestamp( strtotime( $date ) )->diffForHumans();
+}
+
+/**
+ * @param $date
+ *
+ * @return mixed
+ */
+function daysReadable( $date ) {
+    return $difference = str_formatting($date->diffInDays(now()), 'Day');
 }
 
 /**
@@ -207,7 +215,7 @@ function dispatchNotification( $data ) {
  * @return array|null
  */
 function dispatchMessageEvent( $data ) {
-    return event( new TriggerMessage( $data ) );
+    return event( new \App\Events\TriggerMessage( $data ) );
 }
 
 /**
@@ -523,6 +531,19 @@ function owners() {
     }
 
     return $owners;
+}
+
+/**
+ * @return mixed
+ */
+function agents() {
+    $agents = ['Select Representative'];
+    $records = (new \App\Services\UserService())->agents();
+    foreach ($records as $agent) {
+        $agents[$agent->id] = $agent->first_name.' '.$agent->last_name;
+    }
+
+    return $agents;
 }
 
 /**

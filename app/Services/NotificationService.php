@@ -44,7 +44,7 @@ class NotificationService extends NotificationSettingService {
      * @return $this
      */
     public function setter( $data ) {
-        $this->data = ( is_object( $data ) ) ?: toObject( $data );
+        $this->data = ( is_object( $data ) ) ? $data : toObject( $data );
 
         return $this;
     }

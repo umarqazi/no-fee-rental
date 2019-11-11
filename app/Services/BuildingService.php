@@ -8,9 +8,11 @@
 
 namespace App\Services;
 
+use App\Forms\AddBuildingForm;
 use App\Repository\AmenityRepo;
 use App\Repository\ListingRepo;
 use App\Repository\BuildingRepo;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class BuildingService
@@ -47,8 +49,17 @@ class BuildingService {
      *
      * @return array
      */
-    public function index($paginate) {
-        return toObject($this->__collection($paginate));
+    public function index( $paginate ) {
+        return toObject( $this->__collection( $paginate ) );
+    }
+
+    /**
+     * @param $paginate
+     *
+     * @return mixed
+     */
+    public function ownerBuildings($paginate) {
+        return $this->buildingRepo->find(['user_id' => myId()])->paginate($paginate);
     }
 
     /**
@@ -57,10 +68,20 @@ class BuildingService {
      *
      * @return mixed
      */
-    public function verify($id, $request) {
-        $this->__apartmentAction($id, ACTIVE, $request->neighborhood);
-        $this->attachAmenities($this->__currentBuilding($id), $request->amenities);
-        return $this->buildingRepo->update($id, ['is_verified' => TRUE]);
+    public function verify( $id, $request ) {
+        $this->__apartmentAction( $id, ACTIVE, $request->neighborhood );
+        $this->attachAmenities( $this->__currentBuilding( $id ), $request->amenities );
+
+        return $this->buildingRepo->update( $id, [ 'is_verified' => true ] );
+    }
+
+    /**
+     * @param $address
+     *
+     * @return string
+     */
+    public function isUniqueAddress($address) {
+        return $this->buildingRepo->find(['address' => $address])->count() > 0 ? 'false' : 'true';
     }
 
     /**
@@ -69,8 +90,8 @@ class BuildingService {
      *
      * @return mixed
      */
-    public function update($id, $request) {
-        return $this->buildingRepo->updateAmenities($this->__currentBuilding($id), $request->amenities);
+    public function update( $id, $request ) {
+        return $this->buildingRepo->updateAmenities( $this->__currentBuilding( $id ), $request->amenities );
     }
 
     /**
@@ -78,9 +99,10 @@ class BuildingService {
      *
      * @return mixed
      */
-    public function fee($id) {
-        $this->__apartmentAction($id, DEACTIVE);
-        return $this->buildingRepo->update($id, ['type' => FEE]);
+    public function fee( $id ) {
+        $this->__apartmentAction( $id, DEACTIVE );
+
+        return $this->buildingRepo->update( $id, [ 'type' => FEE ] );
     }
 
     /**
@@ -88,9 +110,10 @@ class BuildingService {
      *
      * @return mixed
      */
-    public function noFee($id) {
-        $this->__apartmentAction($id, ACTIVE);
-        return $this->buildingRepo->update($id, ['type' => NOFEE]);
+    public function noFee( $id ) {
+        $this->__apartmentAction( $id, ACTIVE );
+
+        return $this->buildingRepo->update( $id, [ 'type' => NOFEE ] );
     }
 
     /**
@@ -98,17 +121,36 @@ class BuildingService {
      *
      * @return bool|mixed
      */
-    public function manageBuilding($apartment_addr) {
-        $building = $this->__isExistingApartment($apartment_addr);
-        if(!$building) {
-            $building = $this->buildingRepo->create([
+    public function manageBuilding( $apartment_addr ) {
+        $building = $this->__isExistingApartment( $apartment_addr );
+        if ( ! $building ) {
+            $building = $this->buildingRepo->create( [
                 'address'     => $apartment_addr,
-                'building'    => str_random(10),
+                'building'    => str_random( 10 ),
                 'is_verified' => isAgent() ? false : true
-            ]);
+            ] );
         }
 
         return $building;
+    }
+
+    /**
+     * @param $request
+     *
+     * @return bool
+     */
+    public function create( $request ) {
+        DB::beginTransaction();
+        $building = $this->__validateForm($request);
+        $building = $this->buildingRepo->create($building->toArray());
+        if($building) {
+            $this->attachAmenities($building, $request->amenities);
+            DB::commit();
+            return true;
+        }
+
+        DB::rollBack();
+        return false;
     }
 
     /**
@@ -117,8 +159,8 @@ class BuildingService {
      *
      * @return mixed
      */
-    public function attachApartment($building, $apartment) {
-        return $this->buildingRepo->attachApartment($building, $apartment);
+    public function attachApartment( $building, $apartment ) {
+        return $this->buildingRepo->attachApartment( $building, $apartment );
     }
 
     /**
@@ -126,8 +168,8 @@ class BuildingService {
      *
      * @return mixed
      */
-    public function detail($id) {
-        return $this->buildingRepo->getApartments($id)->first();
+    public function detail( $id ) {
+        return $this->buildingRepo->getApartments( $id )->first();
     }
 
     /**
@@ -136,8 +178,8 @@ class BuildingService {
      *
      * @return mixed
      */
-    public function attachAmenities($building, $data) {
-        return $this->buildingRepo->attachAmenities($building, $data);
+    public function attachAmenities( $building, $data ) {
+        return $this->buildingRepo->attachAmenities( $building, $data );
     }
 
     /**
@@ -145,8 +187,24 @@ class BuildingService {
      *
      * @return mixed
      */
-    public function addApartment($id) {
-        return $this->listingRepo->findById($id)->first();
+    public function addApartment( $id ) {
+        return $this->listingRepo->findById( $id )->first();
+    }
+
+    /**
+     * @param $request
+     *
+     * @return AddBuildingForm
+     */
+    private function __validateForm( $request ) {
+        $form                         = new AddBuildingForm();
+        $form->user_id                = myId();
+        $form->address                = $request->address;
+        $form->neighborhood           = $request->neighborhood;
+        $form->building_action        = $request->building_action;
+        $form->contact_representative = $request->contact_representative;
+        $form->validate();
+        return $form;
     }
 
     /**
@@ -154,10 +212,11 @@ class BuildingService {
      *
      * @return bool
      */
-    private function __isExistingApartment($apartment_address) {
-        $apartment = $this->listingRepo->isExistingApartment($apartment_address)->first();
-        if(!empty($apartment)) {
-            $building = $this->buildingRepo->existing($apartment);
+    private function __isExistingApartment( $apartment_address ) {
+        $apartment = $this->listingRepo->isExistingApartment( $apartment_address )->first();
+        if ( ! empty( $apartment ) ) {
+            $building = $this->buildingRepo->existing( $apartment );
+
             return $building ?? true;
         }
 
@@ -171,15 +230,18 @@ class BuildingService {
      *
      * @return mixed
      */
-    private function __apartmentAction($id, $action, $neighborhood = null) {
-        $rows = [];
+    private function __apartmentAction( $id, $action, $neighborhood = null ) {
+        $rows     = [];
         $neighbor = null;
-        $building = $this->buildingRepo->getApartments($id)->first();
-        foreach ($building->listings as $apartment) {
+        $building = $this->buildingRepo->getApartments( $id )->first();
+        foreach ( $building->listings as $apartment ) {
             $neighbor = $apartment->neighborhood_id;
-            $rows[] = $apartment->id;
+            $rows[]   = $apartment->id;
         }
-        return $this->listingRepo->updateMultiRows($rows, ['visibility' => $action, 'neighborhood_id' => $neighborhood ?? $neighbor]);
+
+        return $this->listingRepo->updateMultiRows( $rows, [ 'visibility'      => $action,
+                                                             'neighborhood_id' => $neighborhood ?? $neighbor
+        ] );
     }
 
     /**
@@ -187,8 +249,8 @@ class BuildingService {
      *
      * @return mixed
      */
-    private function __currentBuilding($id) {
-        return $this->buildingRepo->findById($id)->first();
+    private function __currentBuilding( $id ) {
+        return $this->buildingRepo->findById( $id )->first();
     }
 
     /**
@@ -196,10 +258,10 @@ class BuildingService {
      *
      * @return array
      */
-    private function __collection($paginate) {
+    private function __collection( $paginate ) {
         return [
-            'verified'     => $this->buildingRepo->active($paginate),
-            'non_verified' => $this->buildingRepo->inactive($paginate)
+            'verified'     => $this->buildingRepo->active( $paginate ),
+            'non_verified' => $this->buildingRepo->inactive( $paginate )
         ];
     }
 }
