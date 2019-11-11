@@ -39,7 +39,7 @@ class BuildingController extends Controller {
      * @return Factory|View
      */
     public function index() {
-        $buildings = $this->buildingService->ownerBuildings($this->paginate);
+        $buildings = $this->buildingService->ownerIndex($this->paginate);
         return view('owner.buildings', compact('buildings'));
     }
 
@@ -69,11 +69,11 @@ class BuildingController extends Controller {
     /**
      * @param Request $request
      *
-     * @return JsonResponse|RedirectResponse
+     * @return Factory|View
      */
     public function create(Request $request) {
-        $building = $this->buildingService->create($request);
-        return sendResponse($request, $building, 'Building has been added.');
+        $this->buildingService->create($request);
+        return success('Building has been added', route('owner.viewBuildings'));
     }
 
     /**

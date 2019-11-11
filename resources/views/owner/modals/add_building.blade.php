@@ -12,7 +12,7 @@
                 <h4 class="modal-title">Add Building</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
-            {!! Form::open(['url' => route('owner.addBuilding'), 'reset' => 'true', 'method' => 'post', 'class' => 'ajax', 'id' => 'add_building']) !!}
+            {!! Form::open(['url' => route('owner.addBuilding'), 'method' => 'post', 'id' => 'add_building', 'enctype' => 'multipart/form-data']) !!}
             <!-- Modal body -->
             <div class="modal-body">
                 <div class="row">
@@ -25,7 +25,7 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="sel1">Neighborhood:</label>
-                            {!! Form::select('neighborhood', neighborhoods(), null, ['class' => 'input-style']) !!}
+                            {!! Form::select('neighborhood_id', neighborhoods(), null, ['class' => 'input-style']) !!}
                         </div>
                     </div>
                     <div class="col-sm-6">
@@ -45,6 +45,11 @@
                                 {!! Form::radio('building_action', ALLOWAGENT, false, ['class' => 'custom-control-input', 'id' => 'radio2']) !!}
                                 <label class="custom-control-label" for="radio2">Allow Agent</label>
                             </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            {!! Form::file('thumbnail', null, ['class' => 'input-style']) !!}
                         </div>
                     </div>
                     <div class="col-sm-12">

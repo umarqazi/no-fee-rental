@@ -22,13 +22,12 @@ class CreateBuildingsTable extends Migration {
             $table->unsignedInteger('neighborhood_id')->nullable();
             $table->string('address');
             $table->string('thumbnail');
-            $table->enum('building_action', ['OO', 'AA'])->nullable()->comment = 'Owner Only(OO), Allow Agent(AA)';
+            $table->enum('building_action', ['OO', 'AA'])->default('AA')->comment = 'Owner Only(OO), Allow Agent(AA)';
             $table->enum('type', ['no fee', 'fee'])->default('no fee');
             $table->boolean('is_verified')->default(false);
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('contact_representative')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('neighborhood_id')->references('id')->on('neighborhoods')->onDelete('cascade');
         });
     }

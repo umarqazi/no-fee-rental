@@ -22,7 +22,12 @@ class AddBuildingForm extends BaseForm {
     /**
      * @var int
      */
-    public $neighborhood;
+    public $neighborhood_id;
+
+    /**
+     * @var string
+     */
+    public $thumbnail;
 
     /**
      * @var int
@@ -45,9 +50,9 @@ class AddBuildingForm extends BaseForm {
     public function toArray() {
         return [
             'user_id'                => $this->user_id,
-            'building'               => str_random(10),
+            'thumbnail'              => $this->thumbnail,
             'address'                => $this->address,
-            'neighborhood'           => $this->neighborhood,
+            'neighborhood_id'        => $this->neighborhood_id,
             'building_action'        => $this->building_action,
             'is_verified'            => isOwner() ? ACTIVE : DEACTIVE,
             'contact_representative' => $this->contact_representative,
@@ -60,7 +65,8 @@ class AddBuildingForm extends BaseForm {
     public function rules() {
         return [
             'address'         => 'required',
-            'neighborhood'    => 'required',
+            'thumbnail'       => 'required',
+            'neighborhood_id' => 'required',
             'building_action' => 'required',
         ];
     }

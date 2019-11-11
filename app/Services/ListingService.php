@@ -67,13 +67,11 @@ class ListingService extends BuildingService {
     public function create($request) {
         DB::beginTransaction();
         $listing              = $this->__validateForm( $request );
-        dd($listing);
         $listing->thumbnail   = $this->__uploadImage( $listing );
         $building             = $this->addBuilding( $listing );
         $listing->building_id = $building->id;
         $listing->visibility  = ( ! $building->is_verified && isAgent() )
             ? PENDINGLISTING : $building->is_verified;
-        dd($listing);
         $listing              = $this->__addList( $listing );
         $this->__addOpenHouse($listing->id, $listing, $request->open_house);
         $this->__addFeatures($listing->id, $request->features);
@@ -137,7 +135,7 @@ class ListingService extends BuildingService {
      * @return mixed
      */
     public function removeImage($id) {
-        removeFile($this->listingImagesRepo->first($id));
+        removeFile($this->listingImagesRepo->findById($id)->first());
         return $this->listingImagesRepo->delete($id);
     }
 
@@ -165,6 +163,9 @@ class ListingService extends BuildingService {
      * @return int
      */
     public function visibility($id) {
+        if($this->listingRepo->isFee($id)) {
+            return false;
+        }
         return $this->listingRepo->status($id);
     }
 
@@ -309,7 +310,7 @@ class ListingService extends BuildingService {
         $form->availability    = $request->availability_date ?? $request->availability === '1' ? now() : false;
         $form->visibility      = $request->visibility;
         $form->description     = $request->description;
-        $form->neighborhood_id = $request->neighborhood;
+        $form->neighborhood_id = $request->neighborhood_id;
         $form->bedrooms        = $request->bedrooms;
         $form->baths           = $request->baths;
         $form->unit            = $request->unit;

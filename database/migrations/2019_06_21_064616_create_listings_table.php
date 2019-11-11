@@ -42,7 +42,7 @@ class CreateListingsTable extends Migration {
             $table->string('application_fee')->nullable();
             $table->string('deposit')->nullable();
 			$table->integer('is_featured')->default(0)->comment = "0-Non-Featured, 1-Featured, 2-Request-Featured";
-            $table->integer('visibility')->default(2)->comment = "0-Inactive, 1-Active, 2-Pending";
+            $table->integer('visibility')->default(2)->comment = "0-Inactive, 1-Active, 2-Pending, 3-Archived";
             $table->string('availability')->nullable()->comment = "0-Not Available, 1-Available, 2-Immediately, 3-Date";
 			$table->timestamps();
 

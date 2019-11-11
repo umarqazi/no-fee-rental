@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
@@ -21,15 +22,10 @@ class Building extends Model {
     ];
 
     /**
-     * @return BelongsToMany
+     * @return HasMany
      */
     public function listings() {
-        return $this->belongsToMany(
-            Listing::class,
-            'building_apartments',
-            'building_id',
-            'apartment_id'
-        );
+        return $this->hasMany(Listing::class, 'building_id', 'id');
     }
 
     /**
@@ -49,5 +45,14 @@ class Building extends Model {
      */
     public function contact() {
         return $this->hasOne(User::class, 'id', 'contact_representative');
+    }
+
+    /**
+     * @param $query
+     *
+     * @return mixed
+     */
+    public function scopeWithLists($query) {
+        return $query->with('listings');
     }
 }
