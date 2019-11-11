@@ -1349,7 +1349,7 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     cursor: pointer;
-    display: inline-block;
+    display: block;
     overflow: hidden;
     padding: 0.625rem 1.25rem;
     /* 10px 20px */
@@ -1405,6 +1405,7 @@
     width: 150px;
     height: 100px;
     object-fit: cover;
+    padding: 0px !important;
 }
 
 .choose-cover .box {
@@ -2051,6 +2052,14 @@ main {
 @media only screen and (max-width: 576px) {
     .view-buttons {
         margin-bottom: 30px;
+    }
+    .choose-cover{
+        display: block;
+    }
+    .inputfile+label{
+        max-width: 100%;
+        font-size: 16px;
+        display: block;
     }
 }
 

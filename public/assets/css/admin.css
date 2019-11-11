@@ -757,6 +757,7 @@ header .agent-avtar .avtar:hover div ul {
     color: #e77817;
     font-size: 18px;
     font-weight: bold;
+    margin-top: 15px;
 }
 
 .main-wrapper .grid-view-wrapper .listing-thumb .info ul {
@@ -2060,6 +2061,14 @@ header .agent-avtar .avtar:hover div ul {
     display: none;
 }
 
+@media only screen and (min-width: 1280px) and (max-width: 1349px) {
+    .main-wrapper .grid-view-wrapper .listing-thumb .actions-btns{
+        display: block;
+    }
+    .main-wrapper .grid-view-wrapper .listing-thumb .actions-btns .border-btn {
+        margin-top: 15px;
+    }
+}
 /*basic plan page css*/
 @media only screen and (max-width:1200px){
     .basic-plan-wrapper .pg-header{
@@ -2078,6 +2087,14 @@ header .agent-avtar .avtar:hover div ul {
     }
     .basic-plan-wrapper .pg-header > p{
         margin-bottom: 20px;
+    }
+}
+@media only screen and (max-width: 991px){
+    .main-wrapper .grid-view-wrapper > .row .col-lg-3 {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 100% !important;
+        flex: 0 0 100% !important;
+        max-width: 100% !important;
     }
 }
 @media only screen and (max-width:767px) {
@@ -2152,6 +2169,7 @@ header .agent-avtar .avtar:hover div ul {
         width:100%;
         overflow-x: auto;
     }
+
 }
 @media only screen and (max-width: 576px){
 
@@ -2178,10 +2196,14 @@ header .agent-avtar .avtar:hover div ul {
     .plans-wrapper .current-plans h2{
         font-size: 35px;
     }
-
-
     .basic-plan-wrapper .plans-table .table thead th{
         font-size: 16px;
+    }
+    .main-wrapper .grid-view-wrapper .listing-thumb .actions-btns{
+        display: block;
+    }
+    .main-wrapper .grid-view-wrapper .listing-thumb .actions-btns .border-btn{
+        margin-top: 10px;
     }
 }
 
