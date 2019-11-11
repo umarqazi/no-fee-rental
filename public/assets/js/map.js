@@ -177,8 +177,7 @@ const showListInfo = (resp) => {
  */
 const autoComplete = (searchSelector) => {
     let autocomplete = new google.maps.places.Autocomplete(searchSelector);
-    autocomplete.setComponentRestrictions(
-        {'country': ['us']});
+    autocomplete.setComponentRestrictions({'country': ['us']});
     return autocomplete;
 };
 

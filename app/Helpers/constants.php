@@ -85,6 +85,13 @@ if (!defined('PENDINGLISTING')) {
 }
 
 /**
+ * Pending listing
+ */
+if (!defined('ARCHIVED')) {
+    define('ARCHIVED', 3);
+}
+
+/**
  * Cheapest listing
  */
 if(!defined('CHEAPEST')) {

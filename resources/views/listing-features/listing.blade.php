@@ -57,7 +57,6 @@
         enableDatePicker('#lease_term');
         enableDatePicker('.open-house-date', false);
         autoComplete(document.getElementById('controls'));
-        // fetchNeighbours($('input[name=neighborhood]'));
 
         @if($action === 'Copy' || $action === 'Update')
             ZOOM = 15;

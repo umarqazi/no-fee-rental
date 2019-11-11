@@ -81,7 +81,7 @@ class BuildingService {
      * @return mixed
      */
     public function fee( $id ) {
-        $this->__apartmentAction( $id, DEACTIVE );
+        $this->__apartmentAction( $id, ['visibility' => ARCHIVED, 'is_featured' => DEACTIVE] );
 
         return $this->buildingRepo->update( $id, [ 'type' => FEE ] );
     }
@@ -92,7 +92,7 @@ class BuildingService {
      * @return mixed
      */
     public function noFee( $id ) {
-        $this->__apartmentAction( $id, ACTIVE );
+        $this->__apartmentAction( $id, ['visibility' => ACTIVE] );
 
         return $this->buildingRepo->update( $id, [ 'type' => NOFEE ] );
     }
@@ -113,7 +113,12 @@ class BuildingService {
      * @return mixed
      */
     public function update( $id, $request ) {
-        return $this->buildingRepo->updateAmenities( $this->__currentBuilding( $id ), $request->amenities );
+        if($this->buildingRepo->update($id, ['neighborhood_id' => $request->neighborhood_id])) {
+            $this->__apartmentNeighborhoods($id, $request->neighborhood_id);
+            return $this->buildingRepo->updateAmenities( $this->__currentBuilding( $id ), $request->amenities );
+        }
+
+        return false;
     }
 
     /**
@@ -157,16 +162,6 @@ class BuildingService {
     }
 
     /**
-     * @param $building
-     * @param $apartment
-     *
-     * @return mixed
-     */
-    public function attachApartment( $building, $apartment ) {
-        return $this->buildingRepo->attachApartment( $building, $apartment );
-    }
-
-    /**
      * @param $id
      *
      * @return mixed
@@ -186,15 +181,6 @@ class BuildingService {
     }
 
     /**
-     * @param $id
-     *
-     * @return mixed
-     */
-    public function addApartment( $id ) {
-        return $this->listingRepo->findById( $id )->first();
-    }
-
-    /**
      * @param $request
      *
      * @return AddBuildingForm
@@ -203,7 +189,8 @@ class BuildingService {
         $form                         = new AddBuildingForm();
         $form->user_id                = myId();
         $form->address                = $request->address;
-        $form->neighborhood           = $request->neighborhood;
+        $form->thumbnail              = uploadImage($request->thumbnail, 'images/listing/thumbnails');
+        $form->neighborhood_id        = $request->neighborhood_id;
         $form->building_action        = $request->building_action;
         $form->contact_representative = $request->contact_representative;
         $form->validate();
@@ -227,22 +214,36 @@ class BuildingService {
     /**
      * @param $id
      * @param $action
-     * @param null $neighborhood
      *
      * @return mixed
      */
-    private function __apartmentAction( $id, $action, $neighborhood = null ) {
-        $rows     = [];
-        $neighbor = null;
+    private function __apartmentAction( $id, $action ) {
+        return $this->listingRepo->updateMultiRows( $this->__getApartmentsIds($id), $action );
+    }
+
+    /**
+     * @param $id
+     * @param $neighborhood
+     *
+     * @return mixed
+     */
+    private function __apartmentNeighborhoods($id, $neighborhood) {
+        return $this->__apartmentAction($this->__getApartmentsIds($id), ['neighborhood_id' => $neighborhood]);
+    }
+
+    /**
+     * @param $id
+     *
+     * @return array
+     */
+    private function __getApartmentsIds($id) {
+        $ids     = [];
         $building = $this->buildingRepo->getApartments( $id )->first();
         foreach ( $building->listings as $apartment ) {
-            $neighbor = $apartment->neighborhood_id;
-            $rows[]   = $apartment->id;
+            $ids[]   = $apartment->id;
         }
 
-        return $this->listingRepo->updateMultiRows( $rows, [ 'visibility'      => $action,
-                                                             'neighborhood_id' => $neighborhood ?? $neighbor
-        ] );
+        return $ids;
     }
 
     /**

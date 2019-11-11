@@ -72,22 +72,10 @@ class Listing extends Model {
     }
 
     /**
-     * @return BelongsToMany
-     */
-	public function buildings() {
-	    return $this->belongsToMany(
-	        Building::class,
-            'building_apartments',
-            'apartment_id',
-            'building_id'
-        );
-    }
-
-    /**
      * @return HasOne
      */
-    public function listingBuilding() {
-	    return $this->hasOne(BuildingApartment::class, 'apartment_id', 'id');
+    public function building() {
+	    return $this->hasOne(Building::class, 'id', 'building_id');
     }
 
     /**
@@ -96,7 +84,7 @@ class Listing extends Model {
      * @return mixed
      */
     public function scopeAmenities($query) {
-        return $query->with('listingBuilding.amenities');
+        return $query->with('building.amenities');
     }
 
 	/**
@@ -186,8 +174,8 @@ class Listing extends Model {
 	 */
 	public function scopeWithAll($query) {
 		return $query->with([
-		    'agent.company', 'images', 'listingBuilding.amenities', 'favourites',
-            'openHouses', 'features', 'listingBuilding.listings', 'neighborhood'
+		    'agent.company', 'images', 'building.amenities', 'favourites',
+            'openHouses', 'features', 'neighborhood'
         ]);
 	}
     /**
