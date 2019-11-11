@@ -505,5 +505,28 @@ $(() => {
             },
         }
     });
+// Agent Inbox Rule
+    $('#send-message').validate({
+        rules: {
+            message: {
+                required: true,
+            },
+        },
+        messages: {
+            message: {
+                required: "Message is required",
+            },
+        },
 
+        errorPlacement: function(error, element) {
+            if ( element.attr("name") === "message" )
+            {
+                error.insertAfter("#error");
+            }
+            else
+            {
+                error.insertAfter(element);
+            }
+        }
+    });
 });

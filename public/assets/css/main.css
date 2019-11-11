@@ -3125,8 +3125,8 @@ footer .copyright .social-icons li a:hover {
 }
 .after-radio-textarea p{
     position: absolute;
-    bottom: 5px;
-    right: 65px;
+    bottom: -15px;
+    left: 5px;
     font-size: 12px;
 }
 
