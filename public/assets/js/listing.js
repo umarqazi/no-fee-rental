@@ -66,8 +66,13 @@ $(() => {
     });
 
     $('.controls').on('keydown blur', function() {
-        setTimeout(() => {
+        setTimeout(async () => {
             let val = $(this).val();
+            await ajaxRequest('/is-unique-address', 'post', {address: val}, false).then(res => {
+                if(res === 'true') {
+                    $('body').find('#amenities > .row').show();
+                }
+            });
             val = val.replace(', USA', '');
             val = val.replace(', NY, USA', '');
             val = val.replace(', New York', '');

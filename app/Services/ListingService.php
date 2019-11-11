@@ -62,7 +62,7 @@ class ListingService extends BuildingService {
         DB::beginTransaction();
         $listing              = $this->__validateForm( $request );
         $listing->thumbnail   = $this->__uploadImage( $listing );
-        $building             = $this->addBuilding( $listing );
+        $building             = $this->addBuilding( $listing, $request );
         $listing->building_id = $building->id;
         $listing->visibility  = ( ! $building->is_verified && isAgent() )
             ? PENDINGLISTING : $building->is_verified;
@@ -76,11 +76,14 @@ class ListingService extends BuildingService {
 
     /**
      * @param $listing
+     * @param $request
      *
      * @return bool|mixed
      */
-    public function addBuilding($listing) {
-        return parent::manageBuilding($listing);
+    public function addBuilding($listing, $request) {
+        $building = parent::manageBuilding($listing);
+        if($request->has('amenities')) $this->attachAmenities($building, $request->amenities);
+        return $building;
     }
 
     /**

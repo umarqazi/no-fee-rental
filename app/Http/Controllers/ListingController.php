@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\BuildingService;
 use App\Services\FavouriteService;
 use App\Services\ListingService;
 use Illuminate\Http\JsonResponse;
@@ -21,14 +22,17 @@ class ListingController extends Controller {
     private $listingService;
 
     /**
-     * ListingController constructor.
-     *
-     * @param FavouriteService $favouriteService
-     * @param ListingService $listingService
+     * @var BuildingService
      */
-    public function __construct(FavouriteService $favouriteService, ListingService $listingService) {
-        $this->favouriteService = $favouriteService;
-        $this->listingService = $listingService;
+    private $buildingService;
+
+    /**
+     * ListingController constructor.
+     */
+    public function __construct() {
+        $this->buildingService = new BuildingService();
+        $this->favouriteService = new FavouriteService();
+        $this->listingService = new ListingService();
     }
 
     /**
@@ -40,5 +44,14 @@ class ListingController extends Controller {
         $list = \App\Listing::where('map_location', 'like', $request->map_location)
                             ->select('rent', 'id', 'street_address', 'bedrooms', 'baths', 'thumbnail')->get();
         return sendResponse($request, $list, null, null, null);
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return string
+     */
+    public function isUnique(Request $request) {
+        return $this->buildingService->isUniqueAddress($request->address);
     }
 }

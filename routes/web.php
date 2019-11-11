@@ -71,6 +71,7 @@ Route::get('/realty-mx/{client}/{listing}', 'RealtyMXController@detail')->name('
 // Listing Routes
 Route::post('/listing-detail', 'ListingController@detail');
 Route::get('/listing-detail/{id}', 'HomeController@detail')->name('listing.detail');
+Route::post('/is-unique-address', 'ListingController@isUnique');
 
 // Listing Conversation Routes
 Route::post('/send-request', 'ListingConversationController@create')->name('web.listConversation');
