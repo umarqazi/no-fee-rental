@@ -72,7 +72,6 @@
 <script>
     $(document).ready(function() {
         enableDatePicker('#availability_date');
-        enableDatePicker('#lease_term');
         enableDatePicker('.open-house-date', false);
         autoComplete(document.getElementById('controls'));
 

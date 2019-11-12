@@ -505,6 +505,7 @@ $(() => {
             },
         }
     });
+
 // Agent Inbox Rule
     $('#send-message').validate({
         rules: {
@@ -529,4 +530,38 @@ $(() => {
             }
         }
     });
+
+    // check availability Rules
+    /*$('#check-availability').validate({
+        rules: {
+            username: {
+                required: true
+            },
+            email: {
+                required:true,
+            },
+            phone_number: {
+                required: true
+            },
+            message: {
+                required:true,
+            },
+        },
+
+        messages: {
+            username: {
+                required: "User Name is required.",
+            },
+            email: {
+                required: "Email is required.",
+            },
+            phone_number: {
+                required: "Phone Number is required.",
+            },
+            message: {
+                required: "Message is required.",
+            },
+        }
+    });*/
+
 });
