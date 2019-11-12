@@ -216,3 +216,38 @@ if(!defined('OWNERONLY')) {
 if(!defined('ALLOWAGENT')) {
     define('ALLOWAGENT', 'AA');
 }
+
+/**
+ * Stripe Gateway
+ */
+if(!defined('STRIPE')) {
+    define('STRIPE', 1);
+}
+
+/**
+ * Stripe Gateway
+ */
+if(!defined('BASIC')) {
+    define('BASIC', 1);
+}
+
+/**
+ * Stripe Gateway
+ */
+if(!defined('GOLD')) {
+    define('GOLD', 2);
+}
+
+/**
+ * Stripe Gateway
+ */
+if(!defined('PREMIUM')) {
+    define('PREMIUM', 3);
+}
+
+/**
+ * Stripe Gateway
+ */
+if(!defined('NOTEXPIRED')) {
+    define('NOTEXPIRED', false);
+}

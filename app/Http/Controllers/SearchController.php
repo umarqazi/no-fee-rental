@@ -34,7 +34,27 @@ class SearchController extends Controller
      * @return Factory|View
      */
     public function advanceSearch(Request $request) {
-        $data = toObject(['listings' => $this->service->search($request)]);
+        $data = $this->__search($request);
         return view('listing_search_results', compact('data'));
+    }
+
+    /**
+     * @param Request $request
+     */
+    public function letUsHelp(Request $request) {
+        $request->agentsWithPremiumPlan = true;
+        $data = $this->__search($request);
+        foreach ($data->listings as $user) {
+            dd(agents($user->user_id));
+        }
+    }
+
+    /**
+     * @param $data
+     *
+     * @return object
+     */
+    private function __search($data) {
+        return toObject(['listings' => $this->service->search($data)]);
     }
 }

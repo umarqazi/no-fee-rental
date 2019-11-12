@@ -84,7 +84,7 @@ class ListingService extends BuildingService {
      * @param $listing
      * @param $request
      *
-     * @return bool|mixed
+     * @return bool
      */
     public function addBuilding($listing, $request) {
         $building = parent::manageBuilding($listing);
@@ -306,6 +306,7 @@ class ListingService extends BuildingService {
         $form->user_id         = $request->user_id ?? myId();
         $form->unique_slug     = str_random(20);
         $form->name            = $request->name;
+        $form->building_id     = $request->building_id;
         $form->email           = $request->email;
         $form->phone_number    = $request->phone_number;
         $form->street_address  = $request->street_address;
@@ -565,10 +566,11 @@ class ListingService extends BuildingService {
 
     /**
      * @param $request
+     * @param $agentId
      *
      * @return object
      */
-    public function profileAdvanceSearch($request,$agentId) {
+    public function profileAdvanceSearch($request, $agentId) {
         $data = $this->searchService->search($request);
         $listings = [];
         foreach($data as $key => $listing){

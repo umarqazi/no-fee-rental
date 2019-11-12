@@ -563,11 +563,20 @@ function owners() {
 }
 
 /**
- * @return mixed
+ * @param null $id
+ *
+ * @return array|null
  */
-function agents() {
+function agents($id = null) {
+    $agents = null;
+    $service = new \App\Services\UserService();
+
+    if($id !== null) {
+        return $service->edit($id);
+    }
+
     $agents = ['Select Representative'];
-    $records = (new \App\Services\UserService())->agents();
+    $records = $service->agents();
     foreach ($records as $agent) {
         $agents[$agent->id] = $agent->first_name.' '.$agent->last_name;
     }

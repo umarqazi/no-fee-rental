@@ -69,7 +69,8 @@ class BuildingService {
      * @return mixed
      */
     public function verify( $id, $request ) {
-        $this->__apartmentAction( $id, ACTIVE, $request->neighborhood );
+        $this->__apartmentAction( $id, ['visibility' => ACTIVE] );
+        $this->__apartmentNeighborhoods($id, $request->neighborhood_id);
         $this->attachAmenities( $this->__currentBuilding( $id ), $request->amenities );
 
         return $this->buildingRepo->update( $id, [ 'is_verified' => true ] );

@@ -73,10 +73,18 @@ $(() => {
                     $('body').find('#amenities > .row').show();
                 }
             });
+            val = val.replace(', NY', '');
+            val = val.replace(', MO', '');
+            val = val.replace(', CA', '');
+            val = val.replace(', FL', '');
+            val = val.replace(', PA', '');
+            val = val.replace(', GA', '');
+            val = val.replace(', TX', '');
+            val = val.replace(', DC', '');
             val = val.replace(', USA', '');
-            val = val.replace(', NY, USA', '');
             val = val.replace(', New York', '');
             $('#autofill').val(val);
+            $(this).val(val);
         }, 5);
     });
 

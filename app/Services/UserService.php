@@ -184,6 +184,13 @@ class UserService {
     /**
      * @return mixed
      */
+    public function agentsWitPlan() {
+        return $this->userRepo->agentsWitPlan()->get();
+    }
+
+    /**
+     * @return mixed
+     */
     public function companies() {
         return $this->companyRepo->companies()->get();
     }
