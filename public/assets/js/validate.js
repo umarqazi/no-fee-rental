@@ -442,33 +442,6 @@ $(() => {
         }
     });
 
-    // appointment Form Validations
-    /*$('#appointment-form').validate({
-        rules: {
-            appointment_date: {
-                required: true,
-            },
-            appointment_time: {
-                required: true,
-            },
-            message: {
-                required: true,
-            },
-        },
-
-        messages: {
-            appointment_date: {
-                required: "Appointment Date is required.",
-            },
-            appointment_time: {
-                required: "Appointment Time is required.",
-            },
-            message: {
-                required: "Message is required.",
-            },
-        }
-    });
-*/
     // Add Building Rules
     $('#add_building').validate({
         rules: {
@@ -530,7 +503,7 @@ $(() => {
     });
 
     // check availability Rules
-    /*$('#check-availability').validate({
+    $('#check-availability').validate({
         rules: {
             username: {
                 required: true
@@ -560,6 +533,6 @@ $(() => {
                 required: "Message is required.",
             },
         }
-    });*/
+    });
 
 });

@@ -3,7 +3,7 @@
 <div class="col-md-6">
 	<div class="form-group">
 		<label>Your Name </label>
-		{!! Form::text('name', mySelf()->first_name, ['class' => 'input-style']) !!}
+		{!! Form::text('name', $listing->name ?? mySelf()->first_name, ['class' => 'input-style']) !!}
 		<span class="invalid-feedback" role="alert">
 			{!! $errors->first('name') !!}
 		</span>
@@ -12,7 +12,7 @@
 <div class="col-md-6">
 	<div class="form-group">
 		<label>Phone Number</label>
-		{!! Form::text('phone_number', mySelf()->phone_number ?? null, ['class' => 'input-style']) !!}
+		{!! Form::text('phone_number', $listing->phone_number ?? mySelf()->phone_number ?? null, ['class' => 'input-style']) !!}
 		<span class="invalid-feedback" role="alert">
 			{!! $errors->first('phone_number') !!}
 		</span>
@@ -21,7 +21,7 @@
 <div class="col-md-6">
 	<div class="form-group">
 		<label>Email </label>
-		{!! Form::text('email', mySelf()->email, ['class' => 'input-style']) !!}
+		{!! Form::text('email', $listing->email ?? mySelf()->email, ['class' => 'input-style']) !!}
 		<span class="invalid-feedback" role="alert">
 			{!! $errors->first('email') !!}
 		</span>

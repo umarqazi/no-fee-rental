@@ -196,6 +196,15 @@ function daysReadable( $date ) {
 }
 
 /**
+ * @param $date
+ *
+ * @return mixed
+ */
+function daysNumReadable( $date ) {
+    return $difference = $date->diffInDays(now());
+}
+
+/**
  * @param $string
  *
  * @return Carbon
@@ -542,7 +551,7 @@ function neighborhoods($id = null) {
     }
 
     $neighborhoods[''] = 'Select Neighborhood';
-    foreach ( $service->get() as $key => $value ) {
+    foreach ( $service->get()->sortBy('name') as $key => $value ) {
         $neighborhoods[ $value->id ] = $value->name;
     }
 
