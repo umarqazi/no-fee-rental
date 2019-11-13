@@ -70,9 +70,8 @@ Route::post('/send-review-request' , 'Agent\ReviewController@request')->name('ag
 Route::get('/reviews' , 'Agent\AgentController@reviews')->name('agent.reviews');
 
 // Credit Plan Routes
-Route::get('/credit-plan', function() {
-    return view('agent.credit_plan');
-})->name('agent.creditPlan');
+Route::get('/credit-plan', 'Agent\CreditPlanController@index')->name('agent.creditPlan');
+Route::post('/purchase-plan', 'Agent\CreditPlanController@create')->name('agent.purchasePlan');
 
 Route::get('/basic-plan', function() {
     return view('agent.credit_plan');

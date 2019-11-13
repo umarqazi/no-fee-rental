@@ -50,7 +50,7 @@
                         @include('admin.sections.verified_buildings')
                     </div>
                     <div class="tab-pane fade" id="buildings-inactive">
-{{--                        @include('admin.sections.non_verified_buildings')--}}
+                        @include('admin.sections.non_verified_buildings')
                     </div>
                 </div>
             </div>

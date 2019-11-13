@@ -169,6 +169,7 @@ return [
         Orchestra\Parser\XmlServiceProvider::class,
 		Yajra\DataTables\DataTablesServiceProvider::class,
         MaddHatter\LaravelFullcalendar\ServiceProvider::class,
+        Cartalyst\Stripe\Laravel\StripeServiceProvider::class,
 
 		/*
 	     * Application Service Providers...
@@ -232,5 +233,6 @@ return [
 		'DataTables' => Yajra\DataTables\Facades\DataTables::class,
         'Calendar' => MaddHatter\LaravelFullcalendar\Facades\Calendar::class,
         'XmlParser' => Orchestra\Parser\Xml\Facade::class,
+        'Stripe' => Cartalyst\Stripe\Laravel\Facades\Stripe::class,
 	],
 ];

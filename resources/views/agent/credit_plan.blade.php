@@ -7,8 +7,6 @@
     <div class="wrapper">
         <div class="heading-wrapper">
             <h1>Credits Plan</h1>
-            {{--            <a href="http://localhost:8000/agent/add-listing" class="btn-default" data-toggle="modal"--}}
-            {{--               data-target="#request-review">Request a Review</a>--}}
         </div>
         <div class="credit-plans">
             <h3>NOFE Rental Plans</h3>
@@ -26,7 +24,7 @@
                                 <li>20 reposts monthly</li>
                             </ul>
                         </div>
-                        <a href="{{route('agent.basicPlan')  }}" class="btn btn-default" data-toggle="modal" data-target="#myModal-currentPlan"> Current plan </a>
+                        <a href="javascript:void(0);" class="btn btn-default credit" data-toggle="modal" data-target="#myModal-currentPlan" id="30"> Current plan </a>
                     </div>
                     <div class="current-plans gold-plan">
                         <h3> Gold Plan</h3>
@@ -37,7 +35,8 @@
                                 <li>100 reposts monthly</li>
                             </ul>
                         </div>
-                        <a href="#" class="btn btn-default"> Get started </a>
+                        <a href="javascript:void(0);" class="btn btn-default credit" data-toggle="modal" data-target="#myModal-currentPlan" id="60"> Get Started </a>
+{{--                        <a href="#" class="btn btn-default"> Get started </a>--}}
                     </div>
                     <div class="current-plans platinum-plan">
                         <h3> Platinum Plan</h3>
@@ -48,7 +47,7 @@
                                 <li>500 reposts monthly</li>
                             </ul>
                         </div>
-                        <a href="#" class="btn btn-default"> Get started </a>
+                        <a href="javascript:void(0);" class="btn btn-default credit" data-toggle="modal" data-target="#myModal-currentPlan" id="100"> Get Started </a>
                     </div>
                 </div>
             </div>
@@ -60,49 +59,69 @@
     <div class="modal fade" id="myModal-currentPlan">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-
                 <!-- Modal Header -->
                 <div class="modal-header">
                     <h4 class="modal-title text-center">Purchase Basic Plan</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
-
+                {!! Form::open(['url' => route('agent.purchasePlan'), 'method' => 'post', 'class' => 'ajax', 'reset' => 'true']) !!}
                 <!-- Modal body -->
                 <div class="modal-body">
                     <div class="form-group">
                         <label>Cardholder Name</label>
-                        <input type="text" class="input-style" />
+                        {!! Form::text('card_holder_name', null, ['class' => 'input-style']) !!}
                     </div>
                     <div class="form-group">
                         <label>Card Number</label>
-                        <input type="text" class="input-style" />
+                        {!! Form::hidden('amount', null, ['class' => 'amount']) !!}
+                        {!! Form::text('card_number', null, ['class' => 'input-style']) !!}
                     </div>
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label>Expiration date</label>
-                                <input autocomplete="off" id="open_checkout-calendar" class="input-style" name="opencheckout" type="text">
+                                <label>Expiration Month</label>
+                                {!! Form::text('exp_month', null, ['class' => 'input-style', 'id' => 'exp_month', 'data-min-view' => "months",
+       'data-view' => "months", 'data-date-format' => "mm"]) !!}
                                 <i class="far fa-calendar-alt"></i>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label>Cw</label>
-                                <input type="text" class="input-style" />
+                                <label>Expiration Year</label>
+                                {!! Form::text('exp_year', null, ['class' => 'input-style', 'data-min-view' => "years",
+       'data-view' => "years", 'id' => 'exp_year', 'data-date-format' => "yyyy"]) !!}
+                                <i class="far fa-calendar-alt"></i>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label>CVC</label>
+                                {!! Form::text('cvc', null, ['class' => 'input-style']) !!}
                             </div>
                         </div>
                     </div>
                 </div>
-
                 <!-- Modal footer -->
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default checkout-popup-btn" data-dismiss="modal">Checkout</button>
+                    {!! Form::submit('Checkout', ['class' => 'btn btn-default checkout-popup-btn']) !!}
                 </div>
-
+                {!! Form::close() !!}
             </div>
         </div>
     </div>
     <script>
-        enableDatePicker('#open_checkout-calendar', false);
+        enableDatePicker('#exp_year', false);
+        enableDatePicker('#exp_month', false);
+        let plan;
+        $('.credit').on('click', function() {
+            plan = $(this).attr('id');
+            let plan_name = $(this).closest('.current-plans').find('h3').text();
+            $('.modal-header > h4').text(`Purchase ${plan_name}`);
+            $('.modal-footer > input').attr('value', `Checkout ($${plan})`);
+        });
+
+        $('form').on('submit', function() {
+            $('.amount').attr('value', plan);
+        });
     </script>
 @endsection

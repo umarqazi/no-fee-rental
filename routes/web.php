@@ -107,6 +107,9 @@ Route::get('/remove/favourite/{listing_id}', 'UserController@removeFavourite')->
 //get Renters
 Route::get('/get-renters', 'UserController@getRenters')->name('web.getRenters');
 
+// Let Us Help
+Route::post('/let-us-help', 'SearchController@letUsHelp')->name('web.letUsHelp');
+
 Route::get('/test-all', function() {
    return view('admin.building_detail');
 });
@@ -130,12 +133,12 @@ Route::get('/composer-dump', function() {
     dd('composer dump-succeed');
 });
 
-Route::get('/test', function() {
+Route::get('/test', function (\Illuminate\Http\Request $request) {
     $data = [
-        'from'         => 1,
-        'to'           => 6,
-        'message'      => 'Listing Found',
-        'url'          => 'asd'
+        'rent' => $request->rent,
+        'beds' => $request->beds,
     ];
- dispatchNotification($data);
-});
+//    dd($data);
+    dd((new \App\Services\SearchService())->search($data));
+    dd($request->all());
+})->name('web.test');

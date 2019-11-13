@@ -36,8 +36,8 @@ return [
 
 	'stripe' => [
 		'model' => App\User::class,
-		'key' => env('STRIPE_KEY'),
-		'secret' => env('STRIPE_SECRET'),
+		'key' => 'pk_test_FGS4D7JZPfxAbwATTFl3JPyo00awKvNLfx',
+		'secret' => 'sk_test_2cdA9lXvYPNoUKdXCqxaH93j00ttw3qgMi',
 		'webhook' => [
 			'secret' => env('STRIPE_WEBHOOK_SECRET'),
 			'tolerance' => env('STRIPE_WEBHOOK_TOLERANCE', 300),
