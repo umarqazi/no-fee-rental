@@ -132,4 +132,11 @@ class UserRepo extends BaseRepo {
     public function inActiveFav() {
         return $this->find(['id' => myId()])->inactivefavourites();
     }
+
+    /**
+     * @return mixed
+     */
+    public function agentsWitPlan() {
+        return $this->model->agentWithPremiumPlan();
+    }
 }

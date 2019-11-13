@@ -52,7 +52,8 @@ class AuthService {
         if ($this->hasTooManyLoginAttempts($request)) {
             $this->fireLockoutEvent($request);
 
-            $this->sendLockoutResponse($request);
+//            $this->sendLockoutResponse($request);
+            return sendResponse($request, false, null, null, 'Too many wrong attempts. Try to login after 1 minute');
         }
 
         if ($this->attemptLogin($request)) {

@@ -47,16 +47,18 @@ class SearchService extends SaveSearchService {
      */
     public function search($request) {
         $data = [
-            'amenities'    => $request->amenities,
-            'features'     => $request->features,
-            'openHouse'    => $request->openHouse,
-            'neighborhood' => $request->neighborhoods,
-            'beds'         => $request->beds,
-            'baths'        => $request->baths,
-            'priceRange'   => $request->priceRange,
-            'squareRange'  => $request->squareRange,
+            'amenities'             => $request->amenities ?? null,
+            'features'              => $request->features ?? null,
+            'openHouse'             => $request->openHouse ?? null,
+            'neighborhood'          => $request->neighborhoods ?? null,
+            'beds'                  => $request->beds ?? null,
+            'baths'                 => $request->baths ?? null,
+            'priceRange'            => is_array($request->priceRange)
+                ? $request->priceRange : ['min_price' => '0', 'max_price' => $request->priceRange],
+            'squareRange'           => $request->squareRange ?? null,
+            'agentsWithPremiumPlan' => $request->agentsWithPremiumPlan ?? null
         ];
-
+//dd($data);
         collect($data)->map(function($args, $method) {
             if(method_exists($this, $method) && !empty($args)) {
                 $this->args = toObject([$method => $args]);
@@ -94,7 +96,8 @@ class SearchService extends SaveSearchService {
         if(in_array(5, $this->args->{__FUNCTION__})) {
             $this->query->where('bedrooms', '>=', 5)->orWhereIn('bedrooms', [$this->args->{__FUNCTION__}]);
         } else {
-            $this->query->whereIn( 'bedrooms', [ $this->args->{__FUNCTION__} ] );
+            $this->query->whereIn( 'bedrooms', is_array($this->args->{__FUNCTION__})
+                ? $this->args->{__FUNCTION__} : [ $this->args->{__FUNCTION__} ] );
         }
     }
 
@@ -126,7 +129,7 @@ class SearchService extends SaveSearchService {
      */
     private function amenities() {
         $amenities = $this->args->{__FUNCTION__};
-        $this->query->whereHas('listingBuilding.amenities', function ($query) use ($amenities) {
+        $this->query->whereHas('building.amenities', function ($query) use ($amenities) {
             return $query->whereIn('amenity_id', $amenities);
         });
     }
@@ -149,6 +152,15 @@ class SearchService extends SaveSearchService {
                 $this->args->{__FUNCTION__}['square_min'],
                 $this->args->{__FUNCTION__}['square_max']
         ]);
+    }
+
+    /**
+     * filter for agents with premium plan
+     */
+    private function agentsWithPremiumPlan() {
+        $this->query->whereHas('agent.plan', function($subQuery) {
+            return $subQuery->where(['plan' => PREMIUM, 'is_expired' => NOTEXPIRED]);
+        });
     }
 
     /**

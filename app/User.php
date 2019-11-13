@@ -62,9 +62,9 @@ class User extends Authenticate implements CanResetPassword {
     /**
      * @return HasOne
      */
-/*    public function favourite() {
-        return $this->hasOne(Favourite::class, 'user_id');
-    }*/
+    public function plan() {
+        return $this->hasOne(CreditPlan::class, 'user_id', 'id');
+    }
 
 	/**
 	 * @return HasMany
@@ -102,7 +102,7 @@ class User extends Authenticate implements CanResetPassword {
 	 * @return mixed
 	 */
 	public function scopeAgents($query) {
-		return $query->whereuser_type(AGENT);
+		return $query->whereuser_type(AGENT)->with('plan');
 	}
 
 	/**
@@ -177,7 +177,7 @@ class User extends Authenticate implements CanResetPassword {
      * @return mixed
      */
     public function scopeWithAll($query) {
-        return $query->with( 'listings', 'company', 'agentInvites', 'neighborExpertise' );
+        return $query->with( 'listings', 'company', 'agentInvites', 'neighborExpertise', 'plan' );
     }
 
     /**
@@ -216,5 +216,16 @@ class User extends Authenticate implements CanResetPassword {
         return $query->with(['favourite' => function($sub) {
             return $sub->where('visibility', DEACTIVE);
         }]);
+    }
+
+    /**
+     * @param $query
+     *
+     * @return mixed
+     */
+    public function scopeAgentWithPremiumPlan($query) {
+        return $query->whereuser_type(AGENT)->whereHas('plan', function($subQuery) {
+            return $subQuery->where(['plan' => PREMIUM, 'is_expired' => NOTEXPIRED]);
+        });
     }
 }
