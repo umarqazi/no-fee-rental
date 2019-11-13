@@ -1,6 +1,6 @@
 @if(isRenter())
     <div class="form-group">
-        {!! Form::model(mySelf() ?? null, ['url' => route('web.listConversation')]) !!}
+        {!! Form::model(mySelf() ?? null, ['url' => route('web.listConversation'),'id'=> 'check-availability']) !!}
         {!! Form::hidden('listing_id', $listing->id) !!}
         {!! Form::hidden('to', $listing->agent->id) !!}
         {!! Form::hidden('type', AVAILABILITY) !!}

@@ -541,6 +541,62 @@ $(() => {
         $('input[name="rating"]').val(ratingValue);
     });
 
+    //custom validation on schedule appointment
+    $(document).on('click', '.appointment-submit-button', function () {
+        let date= true;
+        let time= true;
+        let message= true;
+
+        if($("input[name='appointment_date']").is(':checked')) {
+            date=true;
+        }
+
+        else {
+            date = false ;
+            $(".app-date-error").text('Appointment Date is Required.');
+        }
+
+        if($("input[name='appointment_time']").is(':checked')) {
+            time=true;
+        }
+
+        else {
+            time = false ;
+            $(".app-time-error").text('Appointment Time is Required.');
+        }
+
+        if($("textarea[name='message']").val() !== '') {
+            message=true;
+        }
+
+        else {
+            message = false ;
+            $(".app-message-error").text('Appointment Message is Required.');
+        }
+
+        if(date && time && message){
+            $('#appointment-form').submit();
+        }
+    });
+
+    $("input[name='appointment_date']").on("change", function() {
+
+        if(!$('.app-date-error').is(':empty')){
+            $('.app-date-error').text('') ;
+        }
+    });
+    $("input[name='appointment_time']").on("change", function() {
+
+        if(!$('.app-time-error').is(':empty')){
+            $('.app-time-error').text('') ;
+        }
+    });
+    $("textarea[name='message']").on("input", function() {console.log("???");
+
+        if(!$('.app-message-error').is(':empty')){
+            $('.app-message-error').text('') ;
+        }
+    });
 });
 
 
