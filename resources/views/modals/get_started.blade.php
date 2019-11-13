@@ -2,6 +2,10 @@
     #need-help-step4 {
         z-index: 20;
     }
+
+    #need-help-step1 {
+        z-index: 20;
+    }
     .modal-backdrop {
         z-index: 15;
     }
@@ -47,27 +51,27 @@
                         <ul id="baths">
                             <li>
                                 {!! Form::checkbox('beds[]', 'studio', false, ['id' => 'checkbox-111']) !!}
-                                <label for="Checkbox-111"><span class="label-name">Studio</span></label>
+                                <label for="checkbox-111"><span class="label-name">Studio</span></label>
                             </li>
                             <li>
                                 {!! Form::checkbox('beds[]', 1, false, ['id' => 'checkbox-112']) !!}
-                                <label for="Checkbox-112"><span class="label-name">1</span></label>
+                                <label for="checkbox-112"><span class="label-name">1</span></label>
                             </li>
                             <li>
                                 {!! Form::checkbox('beds[]', 2, false, ['id' => 'checkbox-113']) !!}
-                                <label for="Checkbox-113"><span class="label-name">2</span></label>
+                                <label for="checkbox-113"><span class="label-name">2</span></label>
                             </li>
                             <li>
                                 {!! Form::checkbox('beds[]', 3, false, ['id' => 'checkbox-114']) !!}
-                                <label for="Checkbox-114"><span class="label-name">3</span></label>
+                                <label for="checkbox-114"><span class="label-name">3</span></label>
                             </li>
                             <li>
                                 {!! Form::checkbox('beds[]', 4, false, ['id' => 'checkbox-115']) !!}
-                                <label for="Checkbox-115"><span class="label-name">4</span></label>
+                                <label for="checkbox-115"><span class="label-name">4</span></label>
                             </li>
                             <li>
                                 {!! Form::checkbox('beds[]', 5, false, ['id' => 'checkbox-116']) !!}
-                                <label for="Checkbox-116"><span class="label-name">5+</span></label>
+                                <label for="checkbox-116"><span class="label-name">5+</span></label>
                             </li>
                         </ul>
                     </div>

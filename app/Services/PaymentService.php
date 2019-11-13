@@ -8,8 +8,10 @@
 
 namespace App\Services;
 
+use App\Forms\CreditPlanForm;
 use App\Forms\PaymentForm;
-use App\Repository\PaymentRepo;
+use App\Repository\CreditPlanRepo;
+use App\Repository\ManageCustomerRepo;
 use Cartalyst\Stripe\Stripe;
 
 /**
@@ -19,16 +21,6 @@ use Cartalyst\Stripe\Stripe;
 class PaymentService {
 
     /**
-     * @var
-     */
-    protected $paymentRepo;
-
-    /**
-     * @var object
-     */
-    private $paymentMethod;
-
-    /**
      * @var integer
      */
     private $gateway;
@@ -36,12 +28,32 @@ class PaymentService {
     /**
      * @var object
      */
-    private $data;
+    private $stripe;
+
+    /**
+     * @var object
+     */
+    private $request;
 
     /**
      * @var string
      */
     private $customer;
+
+    /**
+     * @var ManageCustomerRepo
+     */
+    protected $customerRepo;
+
+    /**
+     * @var CreditPlanRepo
+     */
+    protected $creditPlanRepo;
+
+    /**
+     * @var object
+     */
+    private $paymentMethod;
 
     /**
      * PaymentService constructor.
@@ -51,7 +63,8 @@ class PaymentService {
     public function __construct( $gateway = STRIPE ) {
         $this->gateway = $gateway;
         $this->__setGateway();
-        $this->paymentRepo = new PaymentRepo();
+        $this->creditPlanRepo = new CreditPlanRepo();
+        $this->customerRepo   = new ManageCustomerRepo();
     }
 
     /**
@@ -60,7 +73,8 @@ class PaymentService {
      * @return mixed
      */
     public function makePayment( $data ) {
-        $this->data = toObject( $this->__validateForm( $data ) );
+        $this->request = toObject($data);
+        $this->stripe = toObject( $this->__validateForm( $this->request ) );
         $customer   = $this->__isNewCustomer();
         if ( $customer ) {
             return $this->__createTransaction( $customer );
@@ -78,10 +92,28 @@ class PaymentService {
         $charge = $this->paymentMethod->charges()->create( [
             'currency' => 'usd',
             'customer' => $customer,
-            'amount'   => $this->data->amount,
+            'amount'   => $this->stripe->amount,
         ] );
 
+        $this->__createPlan(toObject($charge));
         return $charge;
+    }
+
+    /**
+     * @param $data
+     *
+     * @return mixed
+     */
+    private function __createPlan($data) {
+        $data = [
+            'plan'               => $this->request->credit_plan,
+            'remaining_repost'   => $this->request->remaining_repost ?? 60,
+            'txn_id'             => $data->balance_transaction ?? null,
+            'remaining_featured' => $this->request->remaining_featured ?? 60,
+        ];
+
+        $credit = $this->__validateCreditPlanForm(toObject($data));
+        return $this->creditPlanRepo->create($credit->toArray());
     }
 
     /**
@@ -93,6 +125,13 @@ class PaymentService {
         ] );
 
         $this->customer = $customer['id'];
+
+        if ($customer) {
+            $this->customerRepo->create([
+                'email'       => mySelf()->email,
+                'customer_id' => $this->customer
+            ]);
+        }
 
         return $this->customer;
     }
@@ -114,11 +153,11 @@ class PaymentService {
     private function __createToken() {
         $token = $this->paymentMethod->tokens()->create( [
             'card' => [
-                'name'      => $this->data->card_holder_name,
-                'number'    => $this->data->card_number,
-                'exp_month' => $this->data->exp_month,
-                'cvc'       => $this->data->cvc,
-                'exp_year'  => $this->data->exp_year,
+                'name'      => $this->stripe->card_holder_name,
+                'number'    => $this->stripe->card_number,
+                'exp_month' => $this->stripe->exp_month,
+                'cvc'       => $this->stripe->cvc,
+                'exp_year'  => $this->stripe->exp_year,
             ]
         ] );
 
@@ -126,21 +165,25 @@ class PaymentService {
     }
 
     /**
-     * Set Gateway for payment
+     * @return bool
      */
     private function __setGateway() {
         switch ( $this->gateway ) {
             case STRIPE:
                 $this->paymentMethod = new Stripe( config( 'services.stripe.secret' ) );
                 break;
+            default:
+                return false;
         }
+
+        return false;
     }
 
     /**
      * @return bool|mixed
      */
     private function __isNewCustomer() {
-        $customer = $this->paymentRepo->find( [ 'user_id' => myId() ] )->first();
+        $customer = $this->customerRepo->find( [ 'email' => mySelf()->email ] )->first();
 
         return $customer ? $this->__findCustomer( $customer->customer_id ) : false;
     }
@@ -153,7 +196,7 @@ class PaymentService {
     private function __findCustomer( $customer_id ) {
         $stripeResponse = $this->paymentMethod->customers()->find( $customer_id );
 
-        return $stripeResponse['deleted'] !== true ? $customer_id : false;
+        return $stripeResponse ? $customer_id : false;
     }
 
     /**
@@ -171,6 +214,23 @@ class PaymentService {
         $form->exp_year         = $request->exp_year;
         $form->validate();
 
+        return $form;
+    }
+
+    /**
+     * @param $request
+     *
+     * @return CreditPlanForm
+     */
+    private function __validateCreditPlanForm($request) {
+        $form                     = new CreditPlanForm();
+        $form->user_id            = myId();
+        $form->txn_id             = $request->txn_id;
+        $form->plan               = $request->plan;
+        $form->is_expired         = FALSE;
+        $form->remaining_repost   = $request->remaining_repost;
+        $form->remaining_featured = $request->remaining_featured;
+        $form->validate();
         return $form;
     }
 }
