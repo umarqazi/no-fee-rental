@@ -4078,7 +4078,7 @@ footer .copyright .social-icons li a:hover {
 
 /* Idle State of the stars */
 .rating-stars ul > li.star > i.fa {
-    font-size:2.5em; /* Change the size of the stars */
+    font-size:28px; /* Change the size of the stars */
     color:#ccc; /* Color on idle state */
 }
 
@@ -4090,6 +4090,7 @@ footer .copyright .social-icons li a:hover {
 /* Selected state of the stars */
 .rating-stars ul > li.star.selected > i.fa {
     color:#FF912C;
+    font-size: 28px ;
 }
 
 .profile-contact-section .form-group textarea:hover,

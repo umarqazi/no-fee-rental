@@ -53,6 +53,13 @@ class User extends Authenticate implements CanResetPassword {
 	}
 
     /**
+     * @return HasMany
+     */
+    public function reviews() {
+        return $this->hasMany(Review::class, 'review_for', 'id');
+    }
+
+    /**
      * @return HasOne
      */
     public function company() {
@@ -197,6 +204,16 @@ class User extends Authenticate implements CanResetPassword {
     public function scopeWithNeighborhoods($query) {
         return $query->with('neighborExpertise');
     }
+
+    /**
+     * @param $query
+     *
+     * @return mixed
+     */
+    public function scopeWithReviews($query) {
+        return $query->with('reviews.from');
+    }
+
 
     /**
      * @param $query

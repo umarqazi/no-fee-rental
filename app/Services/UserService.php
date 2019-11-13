@@ -615,7 +615,8 @@ class UserService {
         $data = $this->userRepo->profileDetail($id)->first();
         return [
             'agent'    => $data,
-            'listings' => $data->listings
+            'listings' => $data->listings,
+            'reviews'  => $data->reviews
         ];
     }
 

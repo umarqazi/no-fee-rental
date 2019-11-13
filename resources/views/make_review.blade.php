@@ -58,7 +58,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Write a review here </label>
-                                    {!! Form::textarea('review', null, ['class'=>'input-style', 'placeholder' => 'Write your review here','style' => 'resize:none; height:100px;']) !!}
+                                    {!! Form::textarea('review', null, ['class'=>'input-style', 'placeholder' => 'Write your review here','style' => 'resize:none; height:131px;']) !!}
                                     @if ($errors->has('review'))
                                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('review') }}</strong>
