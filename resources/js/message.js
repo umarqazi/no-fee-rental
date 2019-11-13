@@ -12,24 +12,9 @@ $('#reply').on('click', async function(e) {
     e.preventDefault();
     if(await confirm('You want to set a meeting?')) {
         let meeting_id = $(this).attr('request_id');
-        let res = await ajaxRequest(`accept-meeting/${meeting_id}`, 'post');
+        let res = await ajaxRequest(`accept-meeting/${meeting_id}`, 'post', null,false);
         if(res.status) {
-            let $userSelector = $('.user-info');
-            let $listingSelector = $('.info:last');
-            $userSelector.find('p:eq(3) > strong').text(res.data.messages[0].message);
-            $userSelector.find('p:eq(0) > strong').text(
-                (res.data.sender !== null) ? res.data.sender.first_name : res.data.username
-            );
-            $userSelector.find('p:eq(1) > strong').text((res.data.sender !== null) ? res.data.sender.email : res.data.email);
-            $userSelector.find('p:eq(2) > strong').text((res.data.sender !== null) ? res.data.sender.phone_number : res.data.phone_number);
-            $listingSelector.find('div > p:eq(0)').text("$ "+res.data.listing.rent);
-            $listingSelector.find('div > p:eq(1)').text(res.data.listing.created_at);
-            $listingSelector.find('ul > li:eq(0)').text(res.data.listing.bedrooms+" Bed");
-            $listingSelector.find('ul > li:eq(1)').text(res.data.listing.baths+" Bath");
-            $listingSelector.find('p:last').text(res.data.listing.street_address);
-            $('.property-info > img').attr('src', res.data.listing.thumbnail);
-            $('form').attr('action', 'send-message/'+res.data.id);
-            $('#message-modal').modal('show');
+            location.reload();
             return true;
         }
 

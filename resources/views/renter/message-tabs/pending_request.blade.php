@@ -2,7 +2,7 @@
 @if($conversations->inactive->total() > 0)
     @foreach ($conversations->inactive as $request)
         <div class="message-row">
-            <h3>{{ sprintf("%s %s", $request->sender->first_name ?? $request->username, $request->sender->last_name ?? null) }}</h3>
+            <a href="{{ route('renter.loadConversation', $request->id) }}"><h3>{{ sprintf("%s %s", $request->sender->first_name ?? $request->username, $request->sender->last_name ?? null) }}</h3></a>
             <div class="property">
                 <img src="{{ asset($request->listing->thumbnail ?? DLI ) }}" alt="" />
                 <div class="info">

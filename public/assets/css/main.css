@@ -2515,7 +2515,7 @@ footer .copyright .social-icons li a:hover {
 .listing-detail-container .listing-info .product-title .right-share-icons-side {
     display: flex;
     justify-content: space-between;
-    flex: auto;
+    /*flex: auto;*/
 }
 
 .listing-detail-container .listing-info .product-title .share-icon-div {
@@ -2527,7 +2527,7 @@ footer .copyright .social-icons li a:hover {
 
 .listing-detail-container .listing-info .product-title .heart-icon.favourite{
     background:url(../images/heart-icon-without-shadow.png) no-repeat 0px -65px;
-    top: 12px;
+    top: 0px;
 }
 
 .listing-detail-container .listing-info .product-title .heart-icon {
@@ -2535,7 +2535,7 @@ footer .copyright .social-icons li a:hover {
     /*height: 28px;*/
     background: url(../images/heart-icon-without-shadow.png) no-repeat 0px 0px;
     position: relative;
-    top: 3px;
+    top: -10px;
     left: -2px;
 }
 
