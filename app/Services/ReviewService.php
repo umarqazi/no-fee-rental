@@ -86,7 +86,7 @@ class ReviewService {
     private function __validateForm($request) {
 
     }
-    
+
     /**
      * @param $request
      *
@@ -94,7 +94,7 @@ class ReviewService {
      */
     public function create($request){
         $reviewRequest = $this->reviewRepo->find(['token' => $request->ReviewToken])->first();
-        $review = $reviewRequest->is_token_used == 0  ? $this->reviewRepo->update($reviewRequest->id , ['rating' => 3 , 'review_message' => $request->review ,'is_token_used' => 1]) : false ;
+        $review = $reviewRequest->is_token_used == 0  ? $this->reviewRepo->update($reviewRequest->id , ['rating' => $request->rating , 'review_message' => $request->review ,'is_token_used' => 1]) : false ;
         return $review ;
     }
 }

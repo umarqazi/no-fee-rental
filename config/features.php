@@ -8,10 +8,11 @@ return [
         'p4' => 'Pets Not Allowed',
     ],
 
-    'unit_feature' => [
+    'unit_features' => [
         'u1' => 'Furnished',
         'u2' => 'Laundry In Unit',
-        'u3' => 'Parking Space',
-        'u4' => 'Outdoor Space',
+        'u3' => 'Dishwasher',
+        'u4' => 'High Ceilings',
+        'u5' => 'Hardwood Floors',
     ],
 ];

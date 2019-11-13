@@ -2515,7 +2515,7 @@ footer .copyright .social-icons li a:hover {
 .listing-detail-container .listing-info .product-title .right-share-icons-side {
     display: flex;
     justify-content: space-between;
-    flex: auto;
+    /*flex: auto;*/
 }
 
 .listing-detail-container .listing-info .product-title .share-icon-div {
@@ -2527,7 +2527,7 @@ footer .copyright .social-icons li a:hover {
 
 .listing-detail-container .listing-info .product-title .heart-icon.favourite{
     background:url(../images/heart-icon-without-shadow.png) no-repeat 0px -65px;
-    top: 12px;
+    top: 0px;
 }
 
 .listing-detail-container .listing-info .product-title .heart-icon {
@@ -2535,7 +2535,7 @@ footer .copyright .social-icons li a:hover {
     /*height: 28px;*/
     background: url(../images/heart-icon-without-shadow.png) no-repeat 0px 0px;
     position: relative;
-    top: 3px;
+    top: -10px;
     left: -2px;
 }
 
@@ -4060,6 +4060,37 @@ footer .copyright .social-icons li a:hover {
     max-height: 250px;
     border: 1px solid #223971;
     margin-bottom: 30px;
+    padding:10px;
+}
+
+
+.rating-stars ul {
+    list-style-type:none;
+    padding:0;
+
+    -moz-user-select:none;
+    -webkit-user-select:none;
+}
+.rating-stars ul > li.star {
+    display:inline-block;
+
+}
+
+/* Idle State of the stars */
+.rating-stars ul > li.star > i.fa {
+    font-size:28px; /* Change the size of the stars */
+    color:#ccc; /* Color on idle state */
+}
+
+/* Hover state of the stars */
+.rating-stars ul > li.star.hover > i.fa {
+    color:#FFCC36;
+}
+
+/* Selected state of the stars */
+.rating-stars ul > li.star.selected > i.fa {
+    color:#FF912C;
+    font-size: 28px ;
 }
 
 .profile-contact-section .form-group textarea:hover,

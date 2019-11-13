@@ -424,7 +424,7 @@ function petPolicy( $features ) {
  */
 function unitFeature( $features ) {
     $collection    = [];
-    $configFeature = config( 'features.unit_feature' );
+    $configFeature = config( 'features.unit_features' );
     foreach ( $features as $feature ) {
         if ( strpos( $feature->value ?? $feature, 'u' ) !== false ) {
             $collection[] = $configFeature[ $feature->value ?? $feature ];

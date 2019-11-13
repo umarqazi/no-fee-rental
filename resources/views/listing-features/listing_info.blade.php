@@ -105,7 +105,14 @@
 <div class="col-md-6">
     <div class="form-group">
         <label>Lease Term</label>
-        {!! Form::text('lease_term', null, ['class' => 'input-style','id' => 'lease_term']) !!}
+        {!! Form::select('lease_term', [
+           "" => "Select Lease Term",
+           '3 Months' => "3 Months",
+           '6 Months' => "6 Months",
+           '12 Months' => "12 Months",
+           '16 Months' => "16 Months",
+           '20 Months' => "20 Months",
+           '24 Months' => "24 Months", ],null, ['class' => 'input-style']) !!}
         <span class="invalid-feedback" role="alert">
 			{!! $errors->first('lease_term') !!}
 		</span>

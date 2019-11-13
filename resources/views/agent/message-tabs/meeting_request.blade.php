@@ -2,9 +2,9 @@
 @if($conversations->inactive->total() > 0)
     @foreach ($conversations->inactive as $request)
         <div class="message-row">
-            <h3>{{ sprintf("%s %s", $request->sender->first_name ?? $request->username, $request->sender->last_name ?? null) }}</h3>
-            <p>Reminder from nofeerentals: You have still not replied to {{ $request->sender->first_name ?? $request->username }} in regards Reminder from RentHop<a href="" data-toggle="modal" data-target="#message-modal">Read More</a></p>
-            <div class="property">
+            <a href="{{ route('agent.loadConversation', $request->id) }}"><h3>{{ sprintf("%s %s", $request->sender->first_name ?? $request->username, $request->sender->last_name ?? null) }}</h3></a>
+           {{-- <p>Reminder from nofeerentals: You have still not replied to {{ $request->sender->first_name ?? $request->username }} in regards Reminder from RentHop<a href="" data-toggle="modal" data-target="#message-modal">Read More</a></p>
+           --}} <div class="property">
                 <img src="{{ asset($request->listing->thumbnail ?? DLI ) }}" alt="" />
                 <div class="info">
                     <ul>
@@ -19,7 +19,7 @@
                 {{ sprintf("%s on %s", ucfirst($request->appointment_time ?? 'Requested'), $request->appointment_date->format('D, d/m/y')) }}
             </div>
             <div class="actions-btns">
-                <button class="border-btn" request_id="{{ $request->id }}" id="reply">Reply</button>
+                <button class="border-btn" request_id="{{ $request->id }}" id="reply">Approve</button>
                 <a href="{{ route('agent.archiveConversation', $request->id) }}" ><button class="border-btn">Deny</button></a>
             </div>
         </div>

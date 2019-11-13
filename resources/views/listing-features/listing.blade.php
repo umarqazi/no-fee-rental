@@ -45,11 +45,9 @@
                     {{--Features--}}
                     {!! features() !!}
 
-                    <div class="col-md-12" style="margin-top: 20px;" id="amenities">
+                    <div class="col-md-12" style="margin-top: 20px; margin-bottom: 20px;" id="amenities">
                         <div class="row" style="display: none;">
-                            <div class="amities-flex" style="display: flex; justify-content: space-between">
                             {!! amenities() !!}
-                            </div>
                         </div>
                     </div>
 
@@ -72,7 +70,6 @@
 <script>
     $(document).ready(function() {
         enableDatePicker('#availability_date');
-        enableDatePicker('#lease_term');
         enableDatePicker('.open-house-date', false);
         autoComplete(document.getElementById('controls'));
 

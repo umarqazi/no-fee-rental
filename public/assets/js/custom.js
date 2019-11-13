@@ -506,6 +506,40 @@ $(() => {
     $("#appointment-message").on('input', function(){
         $("#counter").text(500 - $("#appointment-message").val().length);
     });
+    $('.stars-rating i').click (function () {
+        $(this).toggleClass('far fa-star fas fa-star');
+    })
+
+    $('#stars li').on('mouseover', function(){
+        let onStar = parseInt($(this).data('value'), 10); // The star currently mouse on
+
+        $(this).parent().children('li.star').each(function(e){
+            if (e < onStar) {
+                $(this).addClass('hover');
+            }
+            else {
+                $(this).removeClass('hover');
+            }
+        });
+
+    }).on('mouseout', function(){
+        $(this).parent().children('li.star').each(function(e){
+            $(this).removeClass('hover');
+        });
+    });
+
+    $('#stars li').on('click', function(){
+        let onStar = parseInt($(this).data('value'), 10); // The star currently selected
+        let stars = $(this).parent().children('li.star');
+        for (i = 0; i < stars.length; i++) {
+            $(stars[i]).removeClass('selected');
+        }
+        for (i = 0; i < onStar; i++) {
+            $(stars[i]).addClass('selected');
+        }
+        let ratingValue = parseInt($('#stars li.selected').last().data('value'), 10);
+        $('input[name="rating"]').val(ratingValue);
+    });
 
 });
 

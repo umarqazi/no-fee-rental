@@ -45,77 +45,33 @@
                 </div>
             </div>
         </div>
+        @if(sizeof($data->reviews) > 0)
         <div class="clients-reviews-section">
             <div class="container-lg">
                 <h3> What our clients say about him</h3>
                 <div class="owl-slider">
                     <div id="ClientCarousel" class="owl-carousel">
+                        @foreach($data->reviews as $key => $review)
                         <div class="item">
                             <!-- <img src="/assest/images/check.png" alt="item-img"> -->
                             <div class="item-first-img">
                                 <img src="{{asset('assets/images/check.png')}}"/>
                             </div>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-                                has been the industry's .</p>
+                            <p>{{$review->review_message}}</p>
                             <div class="item-profile-img">
-                                <img src="{{asset('assets/images/account-img.jpg')}}"/>
+                                <img src="{{asset($review->from->profile_image)}}"/>
                             </div>
-                            <strong>Allan Collins</strong>
+                            <strong>{{$review->from->first_name}} {{$review->from->last_name}}</strong>
                         </div>
-                        <div class="item">
-                            <!-- <img src="/assest/images/check.png" alt="item-img"> -->
-                            <div class="item-first-img">
-                                <img src="{{asset('assets/images/check.png')}}"/>
-                            </div>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-                                has been the industry's .</p>
-                            <div class="item-profile-img">
-                                <img src="{{asset('assets/images/account-img.jpg')}}"/>
-                            </div>
-                            <strong>Allan Collins</strong>
-                        </div>
-                        <div class="item">
-                            <!-- <img src="/assest/images/check.png" alt="item-img"> -->
-                            <div class="item-first-img">
-                                <img src="{{asset('assets/images/check.png')}}"/>
-                            </div>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-                                has been the industry's .</p>
-                            <div class="item-profile-img">
-                                <img src="{{asset('assets/images/account-img.jpg')}}"/>
-                            </div>
-                            <strong>Allan Collins</strong>
-                        </div>
-                        <div class="item">
-                            <!-- <img src="/assest/images/check.png" alt="item-img"> -->
-                            <div class="item-first-img">
-                                <img src="{{asset('assets/images/check.png')}}"/>
-                            </div>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-                                has been the industry's .</p>
-                            <div class="item-profile-img">
-                                <img src="{{asset('assets/images/account-img.jpg')}}"/>
-                            </div>
-                            <strong>Allan Collins</strong>
-                        </div>
-                        <div class="item">
-                            <!-- <img src="/assest/images/check.png" alt="item-img"> -->
-                            <div class="item-first-img">
-                                <img src="{{asset('assets/images/check.png')}}"/>
-                            </div>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-                                has been the industry's .</p>
-                            <div class="item-profile-img">
-                                <img src="{{asset('assets/images/account-img.jpg')}}"/>
-                            </div>
-                            <strong>Allan Collins</strong>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
 
             </div>
         </div>
+         @else
 
+        @endif
 {{--        <div class="profile-contact-section profile-section-padding">--}}
 {{--            <div class="container-lg">--}}
 {{--                <h3>Leave a review </h3>--}}

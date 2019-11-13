@@ -247,7 +247,7 @@
                 </div>
 
                 <div class="col-md-3 col-sm-4">
-                    <h3>Unit Feature</h3>
+                    <h3>Unit Features</h3>
                     @php $unit = unitFeature($listing->features); @endphp
                     @if(count($unit) < 1)
                         None
