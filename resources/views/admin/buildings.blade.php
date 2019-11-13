@@ -9,12 +9,22 @@
             <div class="heading-wrapper pl-0">
                 <ul class="nav nav-pills">
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="pill" href="#buildings-active">
-                            No Fee ( {{ $buildings->verified->total() }} )
+                        <a class="nav-link" data-toggle="pill" href="#buildings-no-fee">
+                            No Fee ( {{ $buildings->no_fee->total() }} )
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="pill" href="#buildings-inactive">
+                        <a class="nav-link" data-toggle="pill" href="#buildings-fee">
+                            Fee ( {{ $buildings->fee->total() }} )
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="pill" href="#buildings-owner-only">
+                            Owner Only ( {{ $buildings->owner_only->total() }} )
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="pill" href="#buildings-pending">
                             Pending Requests  ( {{ $buildings->non_verified->total() }} )
                         </a>
                     </li>
@@ -24,32 +34,21 @@
                         <span><i class="fa fa-th-list list-view-btn active"></i></span>
                         <span><i class="fa fa-th grid-view-btn"></i></span>
                     </div>
-{{--                    <div class="sort-bt">--}}
-{{--                        <i class="fa fa-sort-amount-down"></i>--}}
-{{--                        <div class="custom-dropdown">--}}
-{{--                            <ul>--}}
-{{--                                <li><a href="{{ route('admin.sorting', 'cheaper') }}">Cheaper</a></li>--}}
-{{--                                <li><a href="{{ route('admin.sorting', 'petPolicy') }}" >Pet Policy </a></li>--}}
-{{--                                <li><a href="{{ route('admin.sorting', 'recent') }}" >Recent</a></li>--}}
-{{--                            </ul>--}}
-{{--                        </div>--}}
-{{--                        <span>Sort By</span>--}}
-{{--                    </div>--}}
-{{--                    <form action="{{ route('admin.listingSearch') }}" id="search" method="post">--}}
-{{--                        @csrf--}}
-{{--                        <input value="{{ !empty(Request::get('beds')) ? Request::get('beds') : '' }}" type="number" name="beds" class="filter-input" placeholder="All Beds" />--}}
-{{--                        <input value="{{ !empty(Request::get('baths')) ? Request::get('baths') : '' }}" type="number" name="baths" class="filter-input" placeholder="All Baths" />--}}
-{{--                        <button type="submit" class="btn-default">Filter</button>--}}
-{{--                    </form>--}}
                 </div>
             </div>
             <div class="block-body">
                 <!-- Tab panes -->
                 <div class="tab-content">
-                    <div class="tab-pane" id="buildings-active">
+                    <div class="tab-pane" id="buildings-no-fee">
                         @include('admin.sections.verified_buildings')
                     </div>
-                    <div class="tab-pane fade" id="buildings-inactive">
+                    <div class="tab-pane" id="buildings-fee">
+                        @include('admin.sections.fee_buildings')
+                    </div>
+                    <div class="tab-pane" id="buildings-owner-only">
+                        @include('admin.sections.owner_only_building')
+                    </div>
+                    <div class="tab-pane fade" id="buildings-pending">
                         @include('admin.sections.non_verified_buildings')
                     </div>
                 </div>

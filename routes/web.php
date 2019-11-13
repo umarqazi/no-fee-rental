@@ -108,11 +108,11 @@ Route::get('/remove/favourite/{listing_id}', 'UserController@removeFavourite')->
 Route::get('/get-renters', 'UserController@getRenters')->name('web.getRenters');
 
 // Let Us Help
-Route::post('/let-us-help', 'SearchController@letUsHelp')->name('web.letUsHelp');
+Route::post('/let-us-help', 'HomeController@letUsHelp')->name('web.letUsHelp');
 
-Route::get('/test-all', function() {
-   return view('admin.building_detail');
-});
+// Get Started
+Route::post('/get-started', 'HomeController@getStarted')->name('web.getStarted');
+
 // Application Controlling Routes
 Route::get('/all-clear', function() {
     artisan(['config:cache', 'view:clear', 'route:clear']);
@@ -124,15 +124,12 @@ Route::get('/migrate-fresh-seed', function() {
     dd('Migration fresh with seeding..');
 });
 
-Route::get('/email-notification', function() {
-    return view('mails.email_notifcation');
-});
-
 Route::get('/composer-dump', function() {
     exec('composer dump-autoload');
     dd('composer dump-succeed');
 });
 
+// Test Route
 Route::get('/test', function (\Illuminate\Http\Request $request) {
     $data = [
         'rent' => $request->rent,

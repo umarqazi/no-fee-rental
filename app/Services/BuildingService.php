@@ -263,8 +263,10 @@ class BuildingService {
      */
     private function __collection( $paginate ) {
         return [
-            'verified'     => $this->buildingRepo->active( $paginate ),
-            'non_verified' => $this->buildingRepo->inactive( $paginate )
+            'no_fee'       => $this->buildingRepo->noFee( $paginate ),
+            'fee'          => $this->buildingRepo->fee($paginate),
+            'owner_only'   => $this->buildingRepo->ownerOnly($paginate),
+            'non_verified' => $this->buildingRepo->pending( $paginate )
         ];
     }
 }

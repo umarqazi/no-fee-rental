@@ -1,7 +1,6 @@
-
+{!! Form::open(['url' => route('web.letUsHelp'), 'method' => 'post']) !!}
 <div class="modal fade need-help-modal let-us-help-modal" id="let-us-help">
     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
-        {!! Form::open(['url' => route('web.letUsHelp'), 'method' => 'post']) !!}
         <div class="modal-content">
             <div class="let-us-hlep-form" id="let-us-step1">
                 <!-- Modal Header -->
@@ -684,9 +683,9 @@
                 </div>
             </div>
         </div>
-        {!! Form::close() !!}
     </div>
 </div>
+{!! Form::close() !!}
 
 <script>
     $('#let-us-step1').on('')
