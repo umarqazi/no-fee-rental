@@ -144,6 +144,15 @@ class BuildingService {
     }
 
     /**
+     * @param $id
+     *
+     * @return mixed
+     */
+    public function addApartment($id) {
+        return $this->buildingRepo->findById($id)->first();
+    }
+
+    /**
      * @param $request
      *
      * @return bool

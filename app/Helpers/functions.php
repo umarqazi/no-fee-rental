@@ -224,6 +224,13 @@ function formattedDate( $format, $date ) {
 }
 
 /**
+ * @return bool|mixed
+ */
+function dispatchPlanExpiryCheckListener() {
+    return (new \App\Services\CreditPlanService())->listenForExpiry();
+}
+
+/**
  * @param $to
  * @param $data
  *

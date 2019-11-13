@@ -227,7 +227,7 @@ class PaymentService {
         $form->user_id            = myId();
         $form->txn_id             = $request->txn_id;
         $form->plan               = $request->plan;
-        $form->is_expired         = FALSE;
+        $form->is_expired         = NOTEXPIRED;
         $form->remaining_repost   = $request->remaining_repost;
         $form->remaining_featured = $request->remaining_featured;
         $form->validate();

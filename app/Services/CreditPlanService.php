@@ -27,4 +27,42 @@ class CreditPlanService {
     public function __construct() {
         $this->creditPlanRepo = new CreditPlanRepo();
     }
+
+    /**
+     * @return bool
+     */
+    public function agentHasPlan() {
+        return $this->creditPlanRepo
+            ->find(['user_id' => myId(), 'is_expired' => NOTEXPIRED])
+            ->count() > 0 ? true : false;
+    }
+
+    /**
+     * @return bool|mixed
+     */
+    public function listenForExpiry() {
+        if($this->isExpired()) {
+            return $this->creditPlanRepo->updateByClause(
+                ['user_id' => myId()],
+                ['is_expired' => EXPIRED]
+            );
+        }
+
+        return true;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isExpired() {
+        return $this->__remainingTime() > MAXPLANDAYS ? true : false;
+    }
+
+    /**
+     * @return mixed
+     */
+    private function __remainingTime() {
+        $plan = $this->creditPlanRepo->find(['user_id' => myId()])->first();
+        return $plan ? $plan->created_at->diffInDays(now()) : 0;
+    }
 }

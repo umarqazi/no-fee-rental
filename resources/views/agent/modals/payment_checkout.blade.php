@@ -18,18 +18,18 @@
             <div class="modal-body">
                 <div class="form-group">
                     <label>Cardholder Name</label>
-                    {!! Form::text('card_holder_name', null, ['class' => 'input-style']) !!}
+                    {!! Form::text('card_holder_name', null, ['class' => 'input-style', 'autocomplete' => 'off']) !!}
                 </div>
                 <div class="form-group">
                     <label>Card Number</label>
-                    {!! Form::text('card_number', null, ['class' => 'input-style']) !!}
+                    {!! Form::text('card_number', null, ['class' => 'input-style', 'autocomplete' => 'off']) !!}
                 </div>
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label>Expiration Month</label>
                             {!! Form::text('exp_month', null, ['class' => 'input-style', 'id' => 'exp_month', 'data-min-view' => "months",
-   'data-view' => "months", 'data-date-format' => "mm"]) !!}
+   'data-view' => "months", 'data-date-format' => "mm", 'autocomplete' => 'off']) !!}
                             <i class="far fa-calendar-alt"></i>
                         </div>
                     </div>
@@ -37,14 +37,14 @@
                         <div class="form-group">
                             <label>Expiration Year</label>
                             {!! Form::text('exp_year', null, ['class' => 'input-style', 'data-min-view' => "years",
-   'data-view' => "years", 'id' => 'exp_year', 'data-date-format' => "yyyy"]) !!}
+   'data-view' => "years", 'id' => 'exp_year', 'data-date-format' => "yyyy", 'autocomplete' => 'off']) !!}
                             <i class="far fa-calendar-alt"></i>
                         </div>
                     </div>
                     <div class="col-sm-12">
                         <div class="form-group">
                             <label>CVC</label>
-                            {!! Form::text('cvc', null, ['class' => 'input-style', 'maxlength' => '3']) !!}
+                            {!! Form::text('cvc', null, ['class' => 'input-style', 'maxlength' => '3', 'autocomplete' => 'off']) !!}
                         </div>
                     </div>
                 </div>

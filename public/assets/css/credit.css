@@ -3,7 +3,7 @@
  * Version: 1.0.0
  * Author: Ron Masas
  */
- 
+
 .credit {
 	display: none;
 }
@@ -23,10 +23,10 @@
 }
 
 .credit-input {
-	display: block;
-	width: 93%;
-	max-width: 400px;
-	height: 34px;
+    display: block;
+    width: 100%;
+    max-width: 400px;
+    height: 45px;
 	padding: 6px 12px;
 	font-size: 14px;
 	line-height: 1.42857143;

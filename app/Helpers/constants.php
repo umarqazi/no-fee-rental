@@ -251,3 +251,11 @@ if(!defined('PREMIUM')) {
 if(!defined('NOTEXPIRED')) {
     define('NOTEXPIRED', false);
 }
+
+if(!define('EXPIRED')) {
+    define('EXPIRED', true);
+}
+
+if(!defined('MAXPLANDAYS')) {
+    define('MAXPLANDAYS', 30);
+}

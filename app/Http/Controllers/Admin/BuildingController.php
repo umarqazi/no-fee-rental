@@ -129,8 +129,8 @@ class BuildingController extends Controller {
     public function addApartment($id) {
         $action = 'Create';
         $listing = $this->buildingService->addApartment($id);
-        $listing->features = findFeatures($listing->features);
-        $listing->user_id = $listing->agent->id;
+        $listing->street_address = $listing->address;
+        $listing->display_address = $listing->address;
         return view('listing-features.listing', compact('listing', 'action'));
     }
 }
