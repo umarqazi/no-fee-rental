@@ -551,7 +551,7 @@ function neighborhoods($id = null) {
     }
 
     $neighborhoods[''] = 'Select Neighborhood';
-    foreach ( $service->get() as $key => $value ) {
+    foreach ( $service->get()->sortBy('name') as $key => $value ) {
         $neighborhoods[ $value->id ] = $value->name;
     }
 

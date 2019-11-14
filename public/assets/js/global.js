@@ -421,4 +421,9 @@ $(() => {
         $('#login').modal('show');
     });
 
+    //add US format phone masking on phone number filed
+    $("input[name=phone_number]").focus(function(){
+        $("input[name=phone_number]").mask('+0000-000-0000');
+    });
+
 });

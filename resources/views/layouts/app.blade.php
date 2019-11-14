@@ -28,6 +28,7 @@
     {!! HTML::script('https://maps.googleapis.com/maps/api/js?key='.config('services.google.map_api').'&libraries=places') !!}
     {!! HTML::script("https://maps.googleapis.com/maps/api/place/autocomplete/json?input=1600+Amphitheatre&key=".config('services.google.map_api')) !!}
     {!! HTML::script('assets/js/notification.js') !!}
+    {!! HTML::script('https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js') !!}
     @if(isRenter())
         {!! HTML::script('assets/js/listing-notification.js') !!}
     @endif
