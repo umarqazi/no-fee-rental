@@ -8,18 +8,18 @@
 
 namespace App\Repository;
 
-use App\ManageCustomer;
+use App\CreditPlan;
 
 /**
- * Class PaymentRepo
+ * Class CreditPlanRepo
  * @package App\Repository
  */
-class PaymentRepo extends BaseRepo {
+class CreditPlanRepo extends BaseRepo {
 
     /**
-     * PaymentRepo constructor.
+     * CreditPlanRepo constructor.
      */
     public function __construct() {
-        parent::__construct(new ManageCustomer());
+        parent::__construct(new CreditPlan());
     }
 }

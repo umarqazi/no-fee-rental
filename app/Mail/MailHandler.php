@@ -89,7 +89,7 @@ class MailHandler extends Mailable {
 			// code...
 			break;
 		}
-		return $this->from($this->data->fromEmail ?? config('mail.username'))
+		return $this->from($this->data->to ?? config('mail.username'))
                     ->subject($this->data->subject)
                     ->view($view, compact('data'));
 	}
