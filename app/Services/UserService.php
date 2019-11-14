@@ -368,7 +368,7 @@ class UserService {
             'from'    => mySelf()->email,
             'to'      => $agent->email,
             'subject' => 'Invitation By ' . mySelf()->email,
-            'link'    => route('agent.acceptInvitation', $agent->token),
+            'link'    => route('member.acceptInvitation', $agent->token),
         ];
 
         return dispatchEmailQueue($email);
@@ -549,6 +549,18 @@ class UserService {
                     'member_id' => $user->id
                 ]);
             }
+            $data = [
+                'view'       => 'signup',
+                'to'         =>  $user->email,
+                'first_name' =>  $user->first_name,
+                'subject'    => 'Verify Email',
+                'link'       =>  route('user.confirmEmail', $user->remember_token),
+            ];
+            $this->exclusiveSettingRepo->create([
+                'user_id' => $user->id,
+            ]);
+            dispatchEmailQueue($data);
+
             DB::commit();
             return true;
         }
@@ -598,7 +610,7 @@ class UserService {
     public function addMember($request) {
         $UserRes = $this->userRepo->find(['email' => $request->email])->first() ;
         $this->memberRepo->create([
-            'agent_id' => mySelf()->id,
+            'agent_id' => $request->invited_by,
             'member_id' => $UserRes->id
         ]);
         return true;
