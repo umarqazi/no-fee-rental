@@ -103,6 +103,17 @@ class Listing extends Model {
      *
      * @return mixed active listing
      */
+    public function scopeArchived($query) {
+        isAdmin() ?: $clause['user_id'] = myId();
+        $clause['visibility'] = ARCHIVED;
+        return $query->where($clause);
+    }
+
+    /**
+     * @param $query
+     *
+     * @return mixed active listing
+     */
     public function scopeRentActive($query) {
         $clause['visibility'] = ACTIVELISTING;
         return $query->where($clause);

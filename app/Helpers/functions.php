@@ -516,13 +516,13 @@ function features() {
                 });
                 
                 function p3(action) {
-                    row.find('input[value=p1], input[value=p2]').prop('checked', false);
+                    row.find('input[value=p1], input[value=p2], input[value=p4]').prop('checked', false);
                     row.find('input[value=p1], input[value=p2]').prop('disabled', action);
                 }
                 
                 function p4(action) {
                     row.find('input[value=p1], input[value=p2], input[value=p3]').prop('checked', false);
-                    row.find('input[value=p1], input[value=p2], input[value=p3]').prop('disabled', action);
+                    row.find('input[value=p1], input[value=p2]').prop('disabled', action);
                 }
                 
                 $('#listitemp4, #listitemp3').change(function() {

@@ -221,6 +221,13 @@ class ListingService extends BuildingService {
     /**
      * @return mixed
      */
+    public function archived() {
+        return $this->listingRepo->archived();
+    }
+
+    /**
+     * @return mixed
+     */
     public function pending() {
         return $this->listingRepo->pending();
     }
@@ -487,6 +494,9 @@ class ListingService extends BuildingService {
             'inactive' => $this->inactive()
                                ->latest()
                                ->paginate($paginate, ['*'], 'inactive'),
+            'archived' => $this->archived()
+                               ->latest()
+                               ->paginate($paginate, ['*'], 'archived'),
         ];
     }
 
@@ -510,6 +520,10 @@ class ListingService extends BuildingService {
                                             ->inactive()
                                             ->latest()
                                             ->paginate($paginate, ['*'], 'inactive'),
+            'archived' => $this->listingRepo->search($keywords)
+                                            ->archived()
+                                            ->latest()
+                                            ->paginate($paginate, ['*'], 'archived'),
         ];
     }
 
@@ -530,7 +544,10 @@ class ListingService extends BuildingService {
                                ->paginate($paginate, ['*'], 'inactive'),
             'pending'  => $this->pending()
                                ->orderBy($col, $order)
-                               ->paginate($paginate, ['*'], 'pending')
+                               ->paginate($paginate, ['*'], 'pending'),
+            'archived' => $this->archived()
+                               ->orderBy($col, $order)
+                               ->paginate($paginate, ['*'], 'archived')
         ]);
     }
 

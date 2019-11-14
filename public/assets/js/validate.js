@@ -1,7 +1,9 @@
 
 
 $(() => {
+
     const TOKEN = $('meta[name=csrf-token]').attr('content');
+
     $.validator.addMethod("greaterThan", function(a, b, c) {
         return a.length > c;
     });
@@ -37,13 +39,9 @@ $(() => {
     $.validator.addMethod('time_validation', function(value, element, param) {
         let start_time = parseInt($('select[name="open_house[start_time][]"]').val());
         let end_time = parseInt($('select[name="open_house[end_time][]"]').val());
-        return (start_time >= end_time)  ? false : true ;
-    },);
-    /*$.validator.addMethod("format", function(number, element) {
-        number = number.replace(/\s+/g, "");
-        return number.length > 9 && number.match(/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/);
-    }, "Please Enter a valid phone number");
-*/
+        return (!(start_time >= end_time)) ;
+    });
+
     (function($) {
         $.fn.inputFilter = function(inputFilter) {
             return this.on("input keydown keyup mousedown mouseup select contextmenu drop", function() {
@@ -59,7 +57,7 @@ $(() => {
         };
     }(jQuery));
 
-    $('input[name="baths"], input[name="bedrooms"], input[name=rent], input[name=square_feet]').inputFilter(function(value) {
+    $('input[name="baths"], input[name=application_fee], input[name=deposit], input[name="bedrooms"], input[name=free_months], input[name=rent], input[name=square_feet]').inputFilter(function(value) {
         return /^\d*$/.test(value);
     });
 

@@ -7,25 +7,22 @@ use Illuminate\Http\Request;
 use App\Services\SearchService;
 use Illuminate\View\View;
 
-class SearchController extends Controller
-{
+/**
+ * Class SearchController
+ * @package App\Http\Controllers
+ */
+class SearchController extends Controller {
+
     /**
      * @var SearchService
      */
-    private $service;
-
-    /**
-     * @var int
-     */
-    private $paginate = 20;
+    private $searchService;
 
     /**
      * SearchController constructor.
-     *
-     * @param SearchService $service
      */
-    public function __construct(SearchService $service) {
-        $this->service = $service;
+    public function __construct() {
+        $this->searchService = new SearchService();
     }
 
     /**
@@ -34,27 +31,7 @@ class SearchController extends Controller
      * @return Factory|View
      */
     public function advanceSearch(Request $request) {
-        $data = $this->__search($request);
+        $data = toObject(['listings' => $this->searchService->search($request)]);
         return view('listing_search_results', compact('data'));
-    }
-
-    /**
-     * @param Request $request
-     */
-    public function letUsHelp(Request $request) {
-        $request->agentsWithPremiumPlan = true;
-        $data = $this->__search($request);
-        foreach ($data->listings as $user) {
-            dd(agents($user->user_id));
-        }
-    }
-
-    /**
-     * @param $data
-     *
-     * @return object
-     */
-    private function __search($data) {
-        return toObject(['listings' => $this->service->search($data)]);
     }
 }

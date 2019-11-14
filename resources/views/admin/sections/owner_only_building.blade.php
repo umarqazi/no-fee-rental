@@ -1,7 +1,7 @@
 
 <!--List view listing-->
 <div class="listing-wrapper">
-    @foreach($buildings->no_fee as $building)
+    @foreach($buildings->owner_only as $building)
         <div class="listing-row">
             <div class="img-holder">
                 <img src="{{ asset($building->thumbnail ?? DLI) }}" alt="" style="height: 205px; width: 100%;" class="main-img" />
@@ -27,16 +27,16 @@
             </div>
         </div>
     @endforeach
-    @if($buildings->no_fee->total() < 1)
+    @if($buildings->owner_only->total() < 1)
         <p class="null">No Record Found</p>
     @endif
-    {!! $buildings->no_fee->render() !!}
+    {!! $buildings->owner_only->render() !!}
 </div>
 
 <!--Grid view listing-->
 <div class="grid-view-wrapper">
     <div class="row">
-        @foreach($buildings->no_fee as $building)
+        @foreach($buildings->owner_only as $building)
             <div class="col-lg-3 col-md-4 col-sm-6">
                 <div class="listing-thumb">
                     <img src="{{ asset( $building->thumbnail ?? DLI ) }}" alt="" style="height: 205px; width: 100%;" class="main-img" />
@@ -63,9 +63,9 @@
                 </div>
             </div>
         @endforeach
-        @if($buildings->no_fee->total() < 1)
+        @if($buildings->owner_only->total() < 1)
             <p class="null">No Record Found</p>
         @endif
     </div>
-    {!! $buildings->no_fee->render() !!}
+    {!! $buildings->owner_only->render() !!}
 </div>

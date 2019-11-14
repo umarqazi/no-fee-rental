@@ -31,8 +31,8 @@
     </div>
 </section>
 
-{{--Need Help--}}
-@include('modals.need_help')
+{{--Get Started--}}
+@include('modals.get_started')
 
 {{--Let us Help Modal--}}
 @include('modals.let_us_help')

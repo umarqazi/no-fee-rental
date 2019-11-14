@@ -41,6 +41,13 @@ class ListingRepo extends BaseRepo {
 		return $this->model->pending()->withall();
 	}
 
+    /**
+     * @return mixed
+     */
+    public function archived() {
+        return $this->model->archived()->withall();
+    }
+
 	/**
 	 * @param $id
 	 *
