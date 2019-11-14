@@ -27,7 +27,7 @@
                         <div class="info">
                             <div class="title">
                                 <p>{{ $listing->street_address ?? null }}</p>
-                                <p><span class="price">${{ $listing->rent }}</span> For Rental</p>
+                                <p><span class="price">${{ ($listing->rent) ?   number_format($listing->rent,0) : 'None' }}</span> For Rental</p>
                             </div>
                             <div class="additional-info">
                                 <p><i class="fa fa-building"></i> {{ str_formatting($listing->bedrooms, 'Bath') }}</p>

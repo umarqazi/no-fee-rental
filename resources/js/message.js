@@ -22,10 +22,19 @@ $('#reply').on('click', async function(e) {
 });
 
 $('#send-message').on('submit', function(e) {
-    e.preventDefault();
+    e.preventDefault(e);
     let src = $('.avtar').find('img').attr('src');
-    $('.messages > ul').append(`<li class="replies"><img style="width: 35px;height: 35px;" src="${src}"><p>${$('input[type=text]').val()}</p></li>`);
-    scrollDown($ulSelector);
+    let value  =$('input[name="message"]').val();
+    if(value !== '') {
+        $('input[name="message"]').css('border', '');
+        $('#error').css('display' , 'none') ;
+        $('.messages > ul').append(`<li class="replies"><img style="width: 35px;height: 35px;" src="${src}"><p>${$('input[type=text]').val()}</p></li>`);
+        scrollDown($ulSelector);
+    }
+    else {
+        $('#error').css('display' , 'block') ;
+        $('input[name="message"]').css('border', '1px solid red');
+    }
 });
 
 
