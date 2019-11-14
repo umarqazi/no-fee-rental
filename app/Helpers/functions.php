@@ -196,6 +196,15 @@ function daysReadable( $date ) {
 }
 
 /**
+ * @param $date
+ *
+ * @return mixed
+ */
+function daysNumReadable( $date ) {
+    return $difference = $date->diffInDays(now());
+}
+
+/**
  * @param $string
  *
  * @return Carbon

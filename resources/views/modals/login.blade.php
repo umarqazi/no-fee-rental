@@ -56,7 +56,7 @@
                         </div>
                     </div>
                             <div class="col-lg-6 col-sm-6 forgot-pass">
-                                <a href="{{ route('forgot.password') }}">Forgot Password.</a>
+                                <a href="{{ route('forgot.password') }}">Forgot Password</a>
                             </div>
 
                     <div class="col-md-12">
@@ -73,7 +73,7 @@
                     </div>
                 </div>
                 {!! Form::close() !!}
-                <p class="footer-text">Don’t have an account? <span class="signup-modal-btn" 
+                <p class="footer-text">Don’t have an account? <span class="signup-modal-btn"
                     id="signup-btn">Signup</span></p>
             </div>
 
