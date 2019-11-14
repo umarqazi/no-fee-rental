@@ -134,11 +134,5 @@ Route::get('/accept-invitation/{token}', 'Agent\MemberController@acceptInvitatio
 
 // Test Route
 Route::get('/test', function (\Illuminate\Http\Request $request) {
-    $data = [
-        'rent' => $request->rent,
-        'beds' => $request->beds,
-    ];
-//    dd($data);
-    dd((new \App\Services\SearchService())->search($data));
-    dd($request->all());
+    (new \App\Services\CreditPlanService())->__remainingTime();
 })->name('web.test');
