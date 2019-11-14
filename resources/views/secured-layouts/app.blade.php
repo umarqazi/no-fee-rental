@@ -26,7 +26,9 @@
     {{-- JS --}}
     {!! HTML::script('assets/js/vendor/jquery-3.2.1.min.js') !!}
     {!! HTML::script('assets/js/notification.js') !!}
-    @if(isRenter())
+    {!! HTML::script('https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js') !!}
+
+@if(isRenter())
         {!! HTML::script('assets/js/listing-notification.js') !!}
         {!! HTML::style('assets/css/main.css') !!}
         {!! HTML::style('assets/css/admin.css') !!}

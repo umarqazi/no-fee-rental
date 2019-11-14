@@ -192,7 +192,7 @@
                                         </div>
                                         <div class="successfull-msg">
                                             <i class="fas fa-check-circle"></i>
-                                            <h5> Your request has been sent sucessfully</h5>
+                                            <h5> Your request has been sent successfully</h5>
                                         </div>
                                     </div>
                                 @else
