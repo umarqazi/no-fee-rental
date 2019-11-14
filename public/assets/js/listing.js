@@ -82,6 +82,7 @@ $(() => {
             val = val.replace(', TX', '');
             val = val.replace(', DC', '');
             val = val.replace(', USA', '');
+            val = val.replace(', IL', '');
             val = val.replace(', New York', '');
             $('#autofill').val(val);
             $(this).val(val);
