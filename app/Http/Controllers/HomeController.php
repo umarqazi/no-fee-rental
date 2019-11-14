@@ -49,7 +49,26 @@ class HomeController extends Controller {
 	}
 
 	public function getStarted(Request $request) {
-	    dd($request->all());
+        $data = [
+            'from'    => $request->email,
+            'to'      => config('mail.from.address'),
+            'message' => 'New Get Started Request Received',
+            'view'    => 'realty-import',
+            'subject' => 'Get Started Request',
+            'data'    => [
+                'first_name'   => $request->first_name,
+                'last_name'    => $request->last_name,
+                'email'        => $request->email,
+                'rent'         => $request->priceRange,
+                'neighborhood' => $request->neighborhood,
+                'availability' => $request->availability,
+                'phone_number' => $request->phone_number,
+                'bedrooms'     => implode( ',', $request->beds ),
+                'comment' => $request->description,
+            ],
+        ];
+        dispatchEmailQueue($data);
+        return sendResponse($request, true, 'Request has been sent successfully');
     }
 
     /**

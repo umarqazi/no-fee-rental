@@ -57,7 +57,7 @@ $(() => {
         };
     }(jQuery));
 
-    $('input[name="baths"], input[name=application_fee], input[name=deposit], input[name="bedrooms"], input[name=free_months], input[name=rent], input[name=square_feet]').inputFilter(function(value) {
+    $('input[name="baths"], input[name=application_fee], input[name=deposit], input[name="bedrooms"], input[name=free_months], input[name=rent], input[name=square_feet], input[name=cvc]').inputFilter(function(value) {
         return /^\d*$/.test(value);
     });
 
@@ -534,5 +534,45 @@ $(() => {
             },
         }
     });
+
+    // Payment Checkout Form validations
+    $('#stripe-checkout').validate({
+        rules: {
+            card_holder_name: {
+                required: true
+            },
+            card_number: {
+                required: true,
+            },
+            cvc: {
+                required: true,
+            },
+            exp_month: {
+                required: true,
+            },
+            exp_year: {
+                required: true,
+            }
+        },
+
+        messages: {
+            card_holder_name: {
+                required: "Card Holder Name is required"
+            },
+            card_number: {
+                required: "Card Number is required"
+            },
+            cvc: {
+                required: "CVC Number is required",
+                maxLength: "CVC Not be greater than 3 numbers"
+            },
+            exp_month: {
+                required: "Expiry month is required"
+            },
+            exp_year: {
+                required: "Expiry year is required"
+            }
+        }
+    })
 
 });
