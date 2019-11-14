@@ -1,8 +1,8 @@
 <html>
     <head>
-        <title>Hello world</title>
+        <title>Reset Password</title>
     </head>
     <body>
-        {{ $data->body }}
+        {{ $data }}
     </body>
 </html>

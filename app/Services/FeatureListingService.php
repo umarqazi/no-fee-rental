@@ -3,12 +3,15 @@
 namespace App\Services;
 
 use App\Repository\ListingRepo;
+use App\Traits\DispatchNotificationService;
 
 /**
  * Class FeatureListingService
  * @package App\Services
  */
 class FeatureListingService {
+
+    use DispatchNotificationService;
 
     /**
      * @var ListingRepo
@@ -141,20 +144,12 @@ class FeatureListingService {
 	public function mark($id) {
 		if ($this->listingRepo->update($id, ['is_featured' => APPROVEFEATURED])) {
 			$list = $this->listingRepo->find(['id' => $id])->with('agent')->first();
-			$data = [
-				'subject'     => 'Featured Request Approved',
-				'view'        => 'request-featured-approved',
-                'from'        => myId(),
-                'to'          => $list->agent->id,
-                'url'        => route('listing.detail', $list->id),
-                'fromEmail'   => mySelf()->email,
-                'toEmail'     => $list->agent->email,
-                'message'=> 'Your listing marked as featured',
-				'name'        => $list->agent->name,
-				'approved_by' => mySelf()->first_name,
-				'approved_on' => $list->updated_at,
-			];
-			dispatchNotification(toObject($data));
+			DispatchNotificationService::LISTINGFEATUREAPPROVED(toObject([
+			    'from' => myId(),
+                'to'   => $list->agent->id,
+                'data' => $list
+            ]));
+
 			return true;
 		}
 

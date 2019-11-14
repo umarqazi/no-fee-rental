@@ -252,7 +252,7 @@ if(!defined('NOTEXPIRED')) {
     define('NOTEXPIRED', false);
 }
 
-if(!define('EXPIRED')) {
+if(!defined('EXPIRED')) {
     define('EXPIRED', true);
 }
 

@@ -2,6 +2,7 @@
 
 use App\Jobs\SaveSearchMatchJob;
 use App\Services\NotificationService;
+use Illuminate\Config\Repository;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Foundation\Bus\PendingDispatch;
 use Illuminate\Http\JsonResponse;
@@ -29,6 +30,17 @@ function uploadImage( $image, $path, $unlinkOld = false, $old_image = null ) {
     }
 
     return false;
+}
+
+/**
+ * @return Repository|mixed
+ */
+function mailToAdmin() {
+    $admin = (new \App\Services\UserService())
+        ->first(['email' => config('mail.from.address')])
+        ->first();
+
+    return $admin->id ?? null;
 }
 
 /**
@@ -221,6 +233,13 @@ function carbon( $string ) {
  */
 function formattedDate( $format, $date ) {
     return date( $format, strtotime( $date ) );
+}
+
+/**
+ * @return bool
+ */
+function agentHasPlan() {
+    return (new \App\Services\CreditPlanService())->agentHasPlan();
 }
 
 /**

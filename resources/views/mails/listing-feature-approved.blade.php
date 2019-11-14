@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
   	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Email Notifications</title>
+	<title>Listing Feature Approve</title>
 	<style type="text/css">
 		body{
 			background-color: #edeff0;
@@ -15,7 +15,7 @@
 		.main-wrapper{
 			width: 100%;
 			padding:40px 15px;
-			text-align: center; 
+			text-align: center;
 			box-sizing: border-box;
 		}
 		.logo-img{
@@ -34,7 +34,7 @@
 			border-radius: 10px;
 
 		}
-		
+
 		.Notification-wrapper h2{
 			color: #233772;
 			font-size: 30px;
@@ -77,7 +77,7 @@
 		.Notification-wrap-footer b{
 			color: #283e74;
 		}
-		
+
 		.notification-main-footer p{
 			color: #aaaaaa;
 			font-size: 16px;
@@ -96,7 +96,7 @@
 		}
 		@media only screen and (max-width: 991px){
 			.main-wrapper {
-    			padding: 20px 15px; 
+    			padding: 20px 15px;
     		}
     		.logo-img {
 			    margin-bottom: 20px;
@@ -128,13 +128,13 @@
 			    margin-bottom: 15px;
 			}
 		}
-		
+
 	</style>
 </head>
 <body>
 	<div class="main-wrapper">
 		<div class="logo-img">
-			<a href="javascript:void(0)"><img src="../assets/images/logo.png" alt="logo"> </a>
+			<a href="javascript:void(0)"><img src="../assets/images/logo.png" alt="logo"><?php print_r($data); ?> </a>
 		</div>
 		<div class="Notification-wrapper">
 			<img src="../assets/images/notification.png" alt="notification-bell-icon">
@@ -150,7 +150,7 @@
 		<div class="notification-main-footer">
 			<p> Problems or questions? Call us at (123) 254 658 <br> or email  info@nofeerental.com   </p>
 			<p> @NOFEE Rental NYC all rights reserved </p>
-			
+
 				<a href="javascript:void(0)"><img src="../assets/images/fb-icon.png"> </a>
 				<a href="javascript:void(0)"><img src="../assets/images/twitter-icon.png"> </a>
 				<a href="javascript:void(0)"><img src="../assets/images/google-icon.png"> </a>

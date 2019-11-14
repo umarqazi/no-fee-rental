@@ -134,5 +134,5 @@ Route::get('/accept-invitation/{token}', 'Agent\MemberController@acceptInvitatio
 
 // Test Route
 Route::get('/test', function (\Illuminate\Http\Request $request) {
-    (new \App\Services\CreditPlanService())->__remainingTime();
+    dd();
 })->name('web.test');
