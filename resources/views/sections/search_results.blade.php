@@ -134,14 +134,14 @@
                                 <img src='{{ asset($listing->thumbnail ?? DLI) }}' alt="" class='main-img'>
                                 <div class='info'>
                                     <div href='javascript:void(0);' class='info-link-text'>
-                                        <p> $ {{ $listing->rent }} </p>
+                                        <p> ${{ ($listing->rent) ?   number_format($listing->rent,0) : 'None' }} </p>
                                         <small>{{ str_formatting($listing->bedrooms, ' Bed').', '.str_formatting($listing->baths, ' Bath') }}</small>
                                         <p> {{ is_exclusive($listing).', '. $listing->neighborhood->name }} </p>
                                     </div>
                                     <a href="{{ route('listing.detail', $listing->id) }}" class='btn viewfeature-btn'> View </a>
                                 </div>
                                 <div class='feaure-policy-text'>
-                                    <p>${{ $listing->rent }} / Month </p>
+                                    <p>${{ ($listing->rent) ?   number_format($listing->rent,0) : 'None' }} / Month </p>
                                     <span>{{ str_formatting($listing->bedrooms, ' Bed').', '.str_formatting($listing->baths, ' Bath') }}</span>
                                 </div>
                             </div>
@@ -170,14 +170,14 @@
                                         <img src='{{ asset($listing->thumbnail ?? DLI) }}' alt="" class='main-img'>
                                         <div class='info'>
                                             <div href='javascript:void(0);' class='info-link-text'>
-                                                <p> $ {{ $listing->rent }} </p>
+                                                <p> $ {{ ($listing->rent) ?   number_format($listing->rent,0) : 'None' }} </p>
                                                 <small>{{ str_formatting($listing->bedrooms, ' Bed').', '.str_formatting($listing->baths, ' Bath') }}</small>
                                                 <p> {{ is_exclusive($listing).', '.  $listing->neighborhood->name }} </p>
                                             </div>
                                             <a href="{{ route('listing.detail', $listing->id) }}" class='btn viewfeature-btn'> View </a>
                                         </div>
                                         <div class='feaure-policy-text'>
-                                            <p>${{ $listing->rent }} / Month </p>
+                                            <p>${{ ($listing->rent) ?   number_format($listing->rent,0) : 'None' }} / Month </p>
                                             <span>{{ str_formatting($listing->bedrooms, ' Bed').', '.str_formatting($listing->baths, ' Bath') }}</span>
                                         </div>
                                     </div>

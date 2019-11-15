@@ -28,7 +28,7 @@
                     <div class="listing-thumb">
                         <img src="{{ asset( $apartment->thumbnail ?? DLI ) }}" alt="" style="height: 205px; width: 100%;" class="main-img" />
                         <div class="info">
-                            <p><i class="fa fa-tag"></i> ${{ $apartment->rent }}</p>
+                            <p><i class="fa fa-tag"></i> ${{ ($apartment->rent) ?   number_format($apartment->rent,0) : 'None' }}</p>
                             <ul>
                                 <li><i class="fa fa-bed"></i> {{ str_formatting($apartment->bedrooms, 'Bed') }}</li>
                                 <li><i class="fa fa-bath"></i> {{ str_formatting($apartment->baths, 'Bath') }}</li>

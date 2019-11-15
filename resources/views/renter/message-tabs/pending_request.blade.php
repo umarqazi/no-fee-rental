@@ -11,7 +11,7 @@
                         <li><i class="fa fa-bath"></i> {{ str_formatting($request->listing->baths, 'Bath') }}</li>
                     </ul>
                     <p>{{ is_exclusive($request->listing) }}</p>
-                    <div class="price"><i class="fa fa-tag"></i> ${{ $request->listing->rent }}</div>
+                    <div class="price"><i class="fa fa-tag"></i> ${{ ($request->listing->rent) ?   number_format($request->listing->rent,0) : 'None' }}</div>
                 </div>
             </div>
             <div class="date-text">
