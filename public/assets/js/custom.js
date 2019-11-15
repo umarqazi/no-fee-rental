@@ -591,7 +591,7 @@ $(() => {
             $('.app-time-error').text('') ;
         }
     });
-    $("textarea[name='message']").on("input", function() {console.log("???");
+    $("textarea[name='message']").on("input", function() {
 
         if(!$('.app-message-error').is(':empty')){
             $('.app-message-error').text('') ;
