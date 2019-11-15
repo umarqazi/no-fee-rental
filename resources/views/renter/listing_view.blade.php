@@ -36,7 +36,7 @@
                                         </div>
                                         <div class="info">
                                             <p class="title">{{ str_limit(is_exclusive($al), STR_LIMIT_LIST_VIEW, ' ...') }}</p>
-                                            <p><i class="fa fa-tag"></i> ${{ $al->rent }}</p>
+                                            <p><i class="fa fa-tag"></i> ${{ ($al->rent) ?   number_format($al->rent,0) : 'None' }}</p>
                                             <p>Freshness Score : 90%</p>
                                             <ul>
                                                 <li><i class="fa fa-bed"></i> {{ str_formatting($al->bedrooms, 'Bed') }}</li>
@@ -73,7 +73,7 @@
                                                     <p class="title">
                                                         {{ str_limit(is_exclusive($al), STR_LIMIT_GRID_VIEW, ' ...') }}
                                                     </p>
-                                                    <p><i class="fa fa-tag"></i> ${{ $al->rent }}</p>
+                                                    <p><i class="fa fa-tag"></i> ${{ ($al->rent) ?   number_format($al->rent,0) : 'None' }}</p>
                                                     <p>Freshness Score : 90%</p>
                                                     <ul>
                                                         <li><i class="fa fa-bed"></i> {{ str_formatting($al->bedrooms, 'Bed') }}</li>
@@ -112,7 +112,7 @@
                                     </div>
                                     <div class="info">
                                         <p class="title">{{ str_limit(is_exclusive($il), STR_LIMIT_LIST_VIEW, ' ...') }}</p>
-                                        <p><i class="fa fa-tag"></i> ${{ $il->rent }}</p>
+                                        <p><i class="fa fa-tag"></i> ${{ ($il->rent) ?   number_format($il->rent,0) : 'None' }}</p>
                                         <p>Freshness Score : 90%</p>
                                         <ul>
                                             <li><i class="fa fa-bed"></i> {{ str_formatting($il->bedrooms, 'Bed') }}</li>
@@ -140,7 +140,7 @@
                                             <img src="{{ asset( $il->thumbnail ?? DLI ) }}" alt="" style="height:205px;" class="main-img" />
                                             <div class="info">
                                                 <p class="title">{{ str_limit(is_exclusive($il), STR_LIMIT_GRID_VIEW, ' ...') }}</p>
-                                                <p><i class="fa fa-tag"></i> ${{ $il->rent }}</p>
+                                                <p><i class="fa fa-tag"></i> ${{ ($il->rent) ?   number_format($il->rent,0) : 'None' }}</p>
                                                 <p>Freshness Score : 90%</p>
                                                 <ul>
                                                     <li><i class="fa fa-bed"></i> {{ str_formatting($il->bedrooms, 'Bed') }}</li>

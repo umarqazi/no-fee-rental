@@ -486,20 +486,16 @@ $(() => {
         },
         messages: {
             message: {
-                required: "Message is required",
+                required: "",
             },
         },
 
         errorPlacement: function(error, element) {
             if ( element.attr("name") === "message" )
             {
-                error.insertAfter("#error");
+                error.css('display' , 'none') ;
             }
-            else
-            {
-                error.insertAfter(element);
-            }
-        }
+        },
     });
 
     // check availability Rules

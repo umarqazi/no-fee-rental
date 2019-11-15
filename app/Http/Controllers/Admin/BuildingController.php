@@ -52,7 +52,7 @@ class BuildingController extends Controller {
      */
     public function detail($id, $status, $route) {
         $building = $this->buildingService->detail($id);
-        return view('admin.building_detail', compact('building', 'status', 'amenities', 'route'));
+        return view('admin.building_detail', compact('building', 'status', 'route'));
     }
 
     /**

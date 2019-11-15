@@ -9,7 +9,7 @@
 									</div>
 									<div class="info">
 										<p class="title">{{ $rf->display_address }}</p>
-										<p><i class="fa fa-tag"></i> ${{ $rf->rent }}</p>
+										<p><i class="fa fa-tag"></i> ${{ ($rf->rent) ?   number_format($rf->rent,0) : 'None' }}</p>
 										<p>Freshness Score : 90%</p>
 										<ul>
 											<li><i class="fa fa-bed"></i> {{ $rf->bedrooms }} Bed</li>
@@ -43,7 +43,7 @@
 											<img src="{{ asset($rf->thumbnail ?? DLI) }}" alt="" style="height:205px;" class="main-img" />
 											<div class="info">
 												<p class="title">{{ str_limit($rf->display_address, $limit = 25, $end = '...') }}</p>
-												<p><i class="fa fa-tag"></i> ${{ $rf->rent }}</p>
+												<p><i class="fa fa-tag"></i> ${{ ($rf->rent) ?   number_format($rf->rent,0) : 'None' }}</p>
 												<p>Freshness Score : 90%</p>
 												<ul>
 													<li><i class="fa fa-bed"></i> {{ $rf->bedrooms }} Bed</li>
