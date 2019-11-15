@@ -11,6 +11,7 @@ namespace App\Services;
 use App\Forms\AppointmentForm;
 use App\Forms\CheckAvailabilityForm;
 use App\Forms\MessageForm;
+use App\Traits\DispatchNotificationService;
 use Illuminate\Support\Facades\DB;
 use App\Repository\ListingConversationRepo;
 use App\Repository\MessageRepo;
@@ -20,6 +21,8 @@ use App\Repository\MessageRepo;
  * @package App\Services
  */
 class ListingConversationService {
+
+    use DispatchNotificationService;
 
     /**
      * @var MessageRepo
@@ -150,6 +153,13 @@ class ListingConversationService {
                 'color'      => 'light green',
                 'url'        => 'javascript:void(0)'
             ]);
+
+            DispatchNotificationService::MEETINGREQUEST(toObject([
+                'from' => $appointment->from,
+                'to'   => $appointment->to,
+                'data' => $appointment
+            ]));
+
             $this->__sendCCEmails($appointment);
             return $appointment;
         }
@@ -195,14 +205,11 @@ class ListingConversationService {
     private function __sendCCEmails($data) {
         $members = getMembers($data->to);
         foreach ($members as $member) {
-            $data = [
-                'to'   => $member->friends->email,
-                'from' => mySelf()->email,
-                'view' => 'meeting-request',
-                'body' => 'New meeting request received'
-            ];
-
-            dispatchEmailQueue($data);
+            DispatchNotificationService::MEETINGREQUEST(toObject([
+                'to'   => $member->friends->id,
+                'from' => myId(),
+                'data' => $member
+            ]));
         }
     }
 

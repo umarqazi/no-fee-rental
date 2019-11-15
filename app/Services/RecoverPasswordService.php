@@ -9,12 +9,15 @@
 namespace App\Services;
 
 use App\Repository\UserRepo;
+use App\Traits\DispatchNotificationService;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 use App\Forms\ResetPasswordForm;
 use App\Repository\PasswordResetRepo;
 
 class RecoverPasswordService {
+
+    use DispatchNotificationService;
 
     /**
      * @var PasswordResetRepo
@@ -123,15 +126,12 @@ class RecoverPasswordService {
             $response = $this->makeHistory( $request );
             if ( ! empty( $response ) ) {
                 $this->setExpiry( $response->token );
-                $email = [
-                    'view' => 'reset-password',
-                    'to' => $response->email,
-                    'subject' => 'Reset Password',
-                    'route' => route('recover.password', $response->token),];
+                DispatchNotificationService::RESETPASSWORD(toObject([
+                    'from' => mailToAdmin(),
+                    'to'   => $response->email,
+                    'data' => $response
+                ]));
 
-                dispatchEmailQueue($email);
-
-                //mailService( $response->email, toObject( $this->mailData( $response ) ) );
                 DB::commit();
 
                 return true;

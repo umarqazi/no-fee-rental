@@ -12,6 +12,7 @@ use App\Forms\CreditPlanForm;
 use App\Forms\PaymentForm;
 use App\Repository\CreditPlanRepo;
 use App\Repository\ManageCustomerRepo;
+use App\Traits\DispatchNotificationService;
 use Cartalyst\Stripe\Stripe;
 
 /**
@@ -19,6 +20,8 @@ use Cartalyst\Stripe\Stripe;
  * @package App\Services
  */
 class PaymentService {
+
+    use DispatchNotificationService;
 
     /**
      * @var integer
@@ -113,7 +116,14 @@ class PaymentService {
         ];
 
         $credit = $this->__validateCreditPlanForm(toObject($data));
-        return $this->creditPlanRepo->create($credit->toArray());
+        $plan = $this->creditPlanRepo->create($credit->toArray());
+        DispatchNotificationService::PLANPURCHASED(toObject([
+            'to' => myId(),
+            'from' => mailToAdmin(),
+            'data' => $plan
+        ]));
+
+        return $plan;
     }
 
     /**

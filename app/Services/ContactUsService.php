@@ -9,9 +9,15 @@
 namespace App\Services;
 
 use App\Repository\ContactUsRepo;
+use App\Traits\DispatchNotificationService;
 
+/**
+ * Class ContactUsService
+ * @package App\Services
+ */
 class ContactUsService {
 
+    use DispatchNotificationService;
     /**
      * @var ContactUsRepo
      */

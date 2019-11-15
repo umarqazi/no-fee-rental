@@ -11,6 +11,7 @@ namespace App\Services;
 
 use App\Repository\CompanyRepo;
 use App\Repository\NeighborhoodRepo;
+use App\Traits\DispatchNotificationService;
 use Illuminate\Support\Facades\Validator;
 
 /**
@@ -18,6 +19,8 @@ use Illuminate\Support\Facades\Validator;
  * @package App\Services
  */
 class RealtyMXService extends ListingService {
+
+    use DispatchNotificationService;
 
     /**
      * @var CompanyRepo
@@ -456,15 +459,11 @@ class RealtyMXService extends ListingService {
     private function __sendMails() {
         foreach ( $this->agents as $agent ) {
             if ( $agent->email === 'codinghackers@gmail.com' ) {
-                $data = [
-                    'to'      => $agent->email,
-                    'subject' => 'Lists Imported',
-                    'view'    => 'realty-import',
-                    'agent'   => $agent,
-                    'url'     => route( 'user.change_password', $agent->remember_token ),
-                    'message' => 'We import your listing from realty MX to active and publish your listings on no fee rentals NYC follow the link given below.',
-                ];
-                dispatchEmailQueue( $data, 2 );
+                DispatchNotificationService::REALTYAGENTINVITE(toObject([
+                    'to' => $agent->id,
+                    'from' => mailToAdmin(),
+                    'data' => $agent
+                ]));
             }
         }
     }

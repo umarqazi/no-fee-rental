@@ -9,12 +9,15 @@
 namespace App\Services;
 
 use App\Repository\CreditPlanRepo;
+use App\Traits\DispatchNotificationService;
 
 /**
  * Class CreditPlanService
  * @package App\Services
  */
 class CreditPlanService {
+
+    use DispatchNotificationService;
 
     /**
      * @var CreditPlanRepo
@@ -55,7 +58,7 @@ class CreditPlanService {
      * @return bool
      */
     public function isExpired() {
-        return $this->__remainingTime() > MAXPLANDAYS ? true : false;
+        return $this->__remainingTime() > MAXPLANDAYS ? $this->__sendMail() : false;
     }
 
     /**
@@ -64,5 +67,18 @@ class CreditPlanService {
     private function __remainingTime() {
         $plan = $this->creditPlanRepo->find(['user_id' => myId()])->first();
         return $plan ? $plan->created_at->diffInDays(now()) : 0;
+    }
+
+    /**
+     * @return bool
+     */
+    private function __sendMail() {
+        DispatchNotificationService::PLANEXPIRED(toObject([
+            'from' => mailToAdmin(),
+            'to'   => myId(),
+            'data' => null
+        ]));
+
+        return true;
     }
 }

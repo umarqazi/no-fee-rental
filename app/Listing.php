@@ -131,6 +131,20 @@ class Listing extends Model {
 		return $query->where($clause);
 	}
 
+    /**
+     * @param $query
+     *
+     * @return mixed
+     */
+	public function scopeRealty($query) {
+        $query = $query->where('realty_id', '!=', NULL);
+	    if(!isAdmin()) {
+            $query->where( 'user_id', myId() );
+        }
+
+	    return $query;
+    }
+
 	/**
 	 * @param $query
 	 *

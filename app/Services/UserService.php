@@ -20,11 +20,14 @@ use App\Repository\MemberRepo;
 use App\Repository\AgentRepo;
 use App\Repository\NeighborhoodRepo;
 use App\Repository\UserRepo;
+use App\Traits\DispatchNotificationService;
 use App\User;
 use Illuminate\Support\Facades\DB;
 use Zend\Diactoros\Request;
 
 class UserService {
+
+    use DispatchNotificationService;
 
     /**
      * @var UserRepo
@@ -136,14 +139,12 @@ class UserService {
                 $this->exclusiveSettingRepo->create([
                     'user_id' => $response->id,
                 ]);
-                $email = [
-                    'view' => 'create-user',
-                    'first_name' => $response->first_name,
-                    'to' => $response->email,
-                    'subject' => 'Account Created',
-                    'link' => route('user.change_password', $user->remember_token),];
 
-                dispatchEmailQueue($email);
+                DispatchNotificationService::ADDUSERBYADMIN(toObject([
+                    'to' => $response->id,
+                    'from' => myId(),
+                    'data' => $response
+                ]));
                 return $response;
             }
 
@@ -342,36 +343,24 @@ class UserService {
 
     /**
      * @param $agent
-     *
-     * @return mixed
      */
     private function agentMail($agent) {
-        $email = [
-            'view'    => 'agent-invitation',
-            'from'    => mySelf()->email,
-            'to'      => $agent->email,
-            'subject' => 'Invitation By ' . mySelf()->email,
-            'link'    => route('agent.signup_form', $agent->token),
-        ];
-
-        return dispatchEmailQueue($email);
+        DispatchNotificationService::AGENTINVITE(toObject([
+            'from' => myId(),
+            'to'   => $agent->id,
+            'data' => $agent
+        ]));
     }
 
     /**
      * @param $agent
-     *
-     * @return mixed
      */
     private function memberMail($agent) {
-        $email = [
-            'view'    => 'member-invitation',
-            'from'    => mySelf()->email,
-            'to'      => $agent->email,
-            'subject' => 'Invitation By ' . mySelf()->email,
-            'link'    => route('member.acceptInvitation', $agent->token),
-        ];
-
-        return dispatchEmailQueue($email);
+        DispatchNotificationService::ADDMEMBER(toObject([
+            'from' => myId(),
+            'to'   => $agent->id,
+            'data' => $agent
+        ]));
     }
 
     /**
@@ -467,15 +456,11 @@ class UserService {
         $form->password = bcrypt($form->password);
         $user = $this->userRepo->create($form->toArray());
 
-        $data = [
-            'view'       => 'signup',
-            'to'         =>  $user->email,
-            'first_name' =>  $user->first_name,
-            'subject'    => 'Verify Email',
-            'link'       =>  route('user.confirmEmail', $user->remember_token),
-        ];
-
-        dispatchEmailQueue($data);
+        DispatchNotificationService::USERSIGNUP(toObject([
+            'to'   =>  $user->id,
+            'from' => mailToAdmin(),
+            'data' => $user
+        ]));
         return true ;
     }
 
@@ -515,18 +500,16 @@ class UserService {
             }
 
             DB::commit();
-            $data = [
-                'view'       => 'signup',
-                'to'         =>  $user->email,
-                'first_name' =>  $user->first_name,
-                'subject'    => 'Verify Email',
-                'link'       =>  route('user.confirmEmail', $user->remember_token),
-            ];
+            DispatchNotificationService::USERSIGNUP(toObject([
+                'to'   =>  $user->id,
+                'from' => mailToAdmin(),
+                'data' => $user
+            ]));
+
             $this->exclusiveSettingRepo->create([
                 'user_id' => $user->id,
             ]);
-            dispatchEmailQueue($data);
-            DB::commit();
+
             return true;
         }
 
@@ -549,17 +532,16 @@ class UserService {
                     'member_id' => $user->id
                 ]);
             }
-            $data = [
-                'view'       => 'signup',
-                'to'         =>  $user->email,
-                'first_name' =>  $user->first_name,
-                'subject'    => 'Verify Email',
-                'link'       =>  route('user.confirmEmail', $user->remember_token),
-            ];
+
+            DispatchNotificationService::USERSIGNUP(toObject([
+                'to'   =>  $user->id,
+                'from' => mailToAdmin(),
+                'data' => $user
+            ]));
+
             $this->exclusiveSettingRepo->create([
                 'user_id' => $user->id,
             ]);
-            dispatchEmailQueue($data);
 
             DB::commit();
             return true;
@@ -699,7 +681,9 @@ class UserService {
     }
 
     /**
-     * param listing_id.
+     * @param $listing_id
+     *
+     * @return bool
      */
     public function favourite($listing_id) {
 
@@ -709,7 +693,9 @@ class UserService {
     }
 
     /**
-     * param listing_id.
+     * @param $listing_id
+     *
+     * @return bool
      */
     public function removeFavourite($listing_id) {
 
@@ -717,8 +703,11 @@ class UserService {
         return true ;
 
     }
+
     /**
-     * param user_id.
+     * @param $id
+     *
+     * @return bool
      */
     public function status($id) {
         $user = $this->userRepo->edit($id);
@@ -727,8 +716,9 @@ class UserService {
         $user->update(['status' => $update]);
         return $update;
     }
+
     /**
-     * return Renters.
+     * @return array
      */
     public function getRenters() {
         $data = $this->userRepo->find(['user_type' => 4])->get();
@@ -738,5 +728,4 @@ class UserService {
         }
         return $renters_email;
     }
-
 }

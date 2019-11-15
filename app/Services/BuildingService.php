@@ -12,6 +12,7 @@ use App\Forms\AddBuildingForm;
 use App\Repository\AmenityRepo;
 use App\Repository\ListingRepo;
 use App\Repository\BuildingRepo;
+use App\Traits\DispatchNotificationService;
 use Illuminate\Support\Facades\DB;
 
 /**
@@ -19,6 +20,8 @@ use Illuminate\Support\Facades\DB;
  * @package App\Services
  */
 class BuildingService {
+
+    use DispatchNotificationService;
 
     /**
      * @var BuildingRepo
