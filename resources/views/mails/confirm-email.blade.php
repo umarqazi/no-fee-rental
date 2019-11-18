@@ -138,10 +138,10 @@
 	</div>
 	<div class="Notification-wrapper">
 		<img src="{{ asset('assets/images/feature-listing.png') }}" alt="notification-bell-icon">
-		<h2> Notification Title</h2>
-		<p> <b>Hi  </b> Converted 2 Bedroom and 1 Bath with double exposure in a condo located in Midtown East. Windowed Kitchen and Bath. Comfortable living and dining area. The building is located within 5 minutes walking distance to the United Nations. Modest post-war building </p>
+		<h2> Account Created</h2>
+		<p> <b>Hi Shaban! </b> Converted 2 Bedroom and 1 Bath with double exposure in a condo located in Midtown East. Windowed Kitchen and Bath. Comfortable living and dining area. The building is located within 5 minutes walking distance to the United Nations. Modest post-war building </p>
 		<div class="action-button">
-			<button type="submit">Action Button</button>
+			<a href="{{ $data->url }}">Click To Verify</a>
 		</div>
 		<div class="Notification-wrap-footer">
 			<p> <b>Lorem Ipsum </b>  is simply dummy text of the printing and typesetting industry. </p>
