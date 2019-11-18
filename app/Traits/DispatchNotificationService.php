@@ -301,10 +301,10 @@ trait DispatchNotificationService
             'toEmail' => is_int($data->to) ? $toAgent->email : $data->to,
             'fromEmail' => is_int($data->from) ? $fromAgent->email : $data->from,
             'data' => $data,
-            'p2p' => [
+            'user' => toObject([
                 'to' => $toAgent,
                 'from' => $fromAgent,
-            ]
+            ])
         ]);
     }
 }
