@@ -161,12 +161,25 @@ const markerClusters = (coords, selector) => {
 const showListInfo = (resp) => {
     let html = '';
     let domain = window.location.origin;
+    if(resp.data.length > 1) {
     resp.data.forEach((res, b) => {
         html += `<a href="${domain}/listing-detail/${res.id}"><div class="location-thumbnaail location-image-btm"><img style="height: 170px; width: 300px;" src="${domain}/${res.thumbnail}"><div class="price-wrapp price-wrap-location">
-<p class="price" style="color:#223971"> $${res.rent} </p><div class="additional-info">
+<p class="price" style="color:#223971">`+ '$'+res.rent.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') +`</p><div class="additional-info">
 <ul><li><p>${res.bedrooms}</p>Beds</li><li><p>${res.baths}</p>Baths</li></ul>
-<p>${res.street_address} #2</p></div></div></div></a>`;
+</div></div></div> <p>${res.street_address} </p></a>`;
     });
+    }
+    else {
+
+        html += `<a href="${domain}/listing-detail/${resp.data[0].id}"><div class="location-thumbnaail location-image-btm"><img style="height: 170px; width: 300px;" src="${domain}/${resp.data[0].thumbnail}"><div class="price-wrapp price-wrap-location">
+<p class="price" style="color:#223971">`+ '$'+resp.data[0].rent.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')+`</p><div class="additional-info">
+<ul><li><p>${resp.data[0].bedrooms}</p>Beds</li><li><p>${resp.data[0].baths}</p>Baths</li></ul>
+</div></div></div> <p>${resp.data[0].street_address} </p></a>`;
+        setTimeout(() => {
+        $('body').find('.gm-style-iw-d > div').addClass('single');
+        $('.single').css({height: '100px', overflow: 'hidden'});
+        },500);
+    }
     return html;
 };
 
