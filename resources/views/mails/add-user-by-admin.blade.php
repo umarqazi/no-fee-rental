@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Listing Feature Approve</title>
+    <title>Confirm Email</title>
     <style type="text/css">
         body{
             background-color: #edeff0;
@@ -51,18 +51,19 @@
             line-height: 25px;
 
         }
-        .action-button button{
+        .action-button a{
             padding: 10px 35px;
             background-color: #e77817;
             color: #fff;
             border: #e77817 solid 1px;
             border-radius: 5px;
+            text-decoration: none;
             font-size: 16px;
             font-weight: normal;
             cursor: pointer;
             margin: 60px 0px;
         }
-        .action-button button:hover{
+        .action-button a:hover{
             background-color: #223971;
             border: #223971 solid 1px;
             transition: 0.3s ease-in-out;
@@ -139,21 +140,22 @@
     <div class="Notification-wrapper">
         <img src="{{ asset('assets/images/feature-listing.png') }}" alt="notification-bell-icon">
         <h2> Account Created</h2>
-        <p> <b>Hi {{ $data->p2p->from->first_name }} </b> Converted 2 Bedroom and 1 Bath with double exposure in a condo located in Midtown East. Windowed Kitchen and Bath. Comfortable living and dining area. The building is located within 5 minutes walking distance to the United Nations. Modest post-war building </p>
+        <p> <b>Hi {{ ucfirst($data->user->to->first_name) }}! </b> Your account was successfully creaded on no fee rental. </p>
         <div class="action-button">
-            <a href="{{ $data->url }}">Click To Login</a>
+            <a href="{{ $data->url }}">Click To Set Password.</a>
         </div>
         <div class="Notification-wrap-footer">
             <p> <b>Lorem Ipsum </b>  is simply dummy text of the printing and typesetting industry. </p>
         </div>
     </div>
     <div class="notification-main-footer">
-        <p> Problems or questions? Call us at (123) 254 658 <br> or email  info@nofeerental.com   </p>
+        <p> Problems or questions? Call us at (123) 254 658 <br> or email  {{ config('mail.from.address') }}   </p>
         <p> @NOFEE Rental NYC all rights reserved </p>
 
         <a href="javascript:void(0)"><img src="{{ asset('assets/images/fb-icon.png') }}"> </a>
         <a href="javascript:void(0)"><img src="{{ asset('assets/images/twitter-icon.png') }}"> </a>
         <a href="javascript:void(0)"><img src="{{ asset('assets/images/google-icon.png') }}"> </a>
     </div>
+</div>
 </body>
 </html>

@@ -120,7 +120,8 @@ trait DispatchNotificationService
         self::$data->view = 'agent-invite';
         self::$data->subject = 'No Fee Rental Invitation';
         self::$data->message = 'You received an invitation from no fee rental.';
-        self::$data->url = route('agent.signup_form', self::$data->data->agent->token);
+        self::$data->data->token = $data->data->token;
+        self::$data->url = route('agent.signup_form', self::$data->data->token);
         self::send();
     }
 
