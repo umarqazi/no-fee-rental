@@ -75,7 +75,7 @@ trait DispatchNotificationService {
         self::$data->view = 'confirm-email';
         self::$data->subject = 'Email Confirmation';
         self::$data->message = 'You can confirm your email by clicking the button below.';
-        self::$data->url = route('user.confirmEmail', self::$data->data->user->remember_token);
+        self::$data->url = route('user.confirmEmail', self::$data->data->data->remember_token);
         self::send();
     }
 
@@ -87,7 +87,7 @@ trait DispatchNotificationService {
         self::$data->view = 'add-user-by-admin';
         self::$data->subject = 'Account Created';
         self::$data->message = 'Your account was created on no fee rental follow link below to set password.';
-        self::$data->url = route('user.change_password', self::$data->data->user->remember_token);
+        self::$data->url = route('user.change_password', self::$data->data->data->remember_token);
         self::send();
     }
 
