@@ -569,6 +569,26 @@ $(() => {
                 required: "Expiry year is required"
             }
         }
-    })
+    });
 
+    // Add Neighborhoods Form validations
+    $('#add_neighborhood').validate({
+        rules: {
+            neighborhood_name: {
+                required: true
+            },
+            neighborhood_content: {
+                required: true,
+            },
+        },
+
+        messages: {
+            neighborhood_name: {
+                required: "Name is required."
+            },
+            neighborhood_content: {
+                required: "Content is required.",
+            },
+        }
+    });
 });

@@ -12,14 +12,14 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label>Neighborhood Name </label>
+                            <label>Name </label>
                             {!! Form::text('neighborhood_name', '', ['class' => 'input-style', 'id' => 'neighborhood_name']) !!}
                             {{ $errors->first('neighborhood_name') }}
                         </div>
                     </div>
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label>Neighborhood Content</label>
+                            <label>Content</label>
                             {!! Form::textarea('neighborhood_content', null, ['id' => 'neighborhood_content', 'class' => 'input-style']) !!}
                             {{ $errors->first('neighborhood_content') }}
                         </div>
