@@ -87,16 +87,26 @@ class Listing extends Model {
         return $query->with('building.amenities');
     }
 
-	/**
-	 * @param $query
-	 *
-	 * @return mixed active listing
-	 */
-	public function scopeActive($query) {
-		isAdmin() ?: $clause['user_id'] = myId();
-		$clause['visibility'] = ACTIVELISTING;
-		return $query->where($clause);
-	}
+    /**
+     * @param $query
+     *
+     * @return mixed active listing
+     */
+    public function scopeRentActive($query) {
+        $clause['visibility'] = ACTIVELISTING;
+        return $query->where($clause);
+    }
+
+    /**
+     * @param $query
+     *
+     * @return mixed active listing
+     */
+    public function scopeActive($query) {
+        isAdmin() ?: $clause['user_id'] = myId();
+        $clause['visibility'] = ACTIVELISTING;
+        return $query->where($clause)->where('availability', '<=', now()->format('Y-m-d'));
+    }
 
     /**
      * @param $query
@@ -109,17 +119,6 @@ class Listing extends Model {
         return $query->where($clause);
     }
 
-    /**
-     * @param $query
-     *
-     * @return mixed active listing
-     */
-    public function scopeRentActive($query) {
-        $clause['visibility'] = ACTIVELISTING;
-        return $query->where($clause);
-    }
-
-
 	/**
 	 * @param $query
 	 *
@@ -127,23 +126,9 @@ class Listing extends Model {
 	 */
 	public function scopeInactive($query) {
 		isAdmin() ?: $clause['user_id'] = myId();
-		$clause['visibility'] = INACTIVELISTING;
-		return $query->where($clause);
+		$clause['visibility'] = ACTIVELISTING;
+		return $query->where($clause)->where('availability', '>', now()->format('Y-m-d'));
 	}
-
-    /**
-     * @param $query
-     *
-     * @return mixed
-     */
-	public function scopeRealty($query) {
-        $query = $query->where('realty_id', '!=', NULL);
-	    if(!isAdmin()) {
-            $query->where( 'user_id', myId() );
-        }
-
-	    return $query;
-    }
 
 	/**
 	 * @param $query

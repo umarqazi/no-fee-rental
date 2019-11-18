@@ -44,9 +44,6 @@
                         <a class="nav-link" data-toggle="pill" href="#listing-active">Active ( {{ $listing->active->total() }} )</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="pill" href="#listing-realty">Realty ( {{ $listing->realty->total() }} )</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" data-toggle="pill" href="#listing-inactive">Inactive ( {{ $listing->inactive->total() }} )</a>
                     </li>
                     <li class="nav-item">
@@ -81,9 +78,6 @@
                 <div class="tab-content">
                     <div class="tab-pane" id="listing-active">
                         @include('listing-features.active_listing')
-                    </div>
-                    <div class="tab-pane" id="listing-realty">
-                        @include('listing-features.realty_listing')
                     </div>
                     <div class="tab-pane fade" id="listing-inactive">
                         @include('listing-features.inactive_listing')

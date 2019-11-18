@@ -88,7 +88,7 @@ if (!defined('PENDINGLISTING')) {
  * Pending listing
  */
 if (!defined('ARCHIVED')) {
-    define('ARCHIVED', 3);
+    define('ARCHIVED', 0);
 }
 
 /**

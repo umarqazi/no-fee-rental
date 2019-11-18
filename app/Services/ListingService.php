@@ -237,13 +237,6 @@ class ListingService extends BuildingService {
     /**
      * @return mixed
      */
-    public function realty() {
-        return $this->listingRepo->realty();
-    }
-
-    /**
-     * @return mixed
-     */
     public function archived() {
         return $this->listingRepo->archived();
     }
@@ -524,9 +517,6 @@ class ListingService extends BuildingService {
             'inactive' => $this->inactive()
                                ->latest()
                                ->paginate( $paginate, [ '*' ], 'inactive' ),
-            'realty'   => $this->realty()
-                               ->latest()
-                               ->paginate( $paginate, [ '*' ], 'realty' ),
             'archived' => $this->archived()
                                ->latest()
                                ->paginate( $paginate, [ '*' ], 'archived' ),
@@ -553,10 +543,6 @@ class ListingService extends BuildingService {
                                             ->inactive()
                                             ->latest()
                                             ->paginate( $paginate, [ '*' ], 'inactive' ),
-            'realty'   => $this->listingRepo->search( $keywords )
-                                            ->realty()
-                                            ->latest()
-                                            ->paginate( $paginate, [ '*' ], 'realty' ),
             'archived' => $this->listingRepo->search( $keywords )
                                             ->archived()
                                             ->latest()
@@ -579,9 +565,6 @@ class ListingService extends BuildingService {
             'inactive' => $this->inactive()
                                ->orderBy( $col, $order )
                                ->paginate( $paginate, [ '*' ], 'inactive' ),
-            'realty'   => $this->realty()
-                               ->orderBy( $col, $order )
-                               ->paginate( $paginate, [ '*' ], 'realty' ),
             'pending'  => $this->pending()
                                ->orderBy( $col, $order )
                                ->paginate( $paginate, [ '*' ], 'pending' ),
