@@ -7,6 +7,7 @@
             <a href="{{ route('agent.addListing') }}" class="btn-default">New Listing</a>
 
         </div>
+        <div class="filter-mobile-data-wrapper">
         <div class="filter-mobile-data">
             <i class="fa fa-bars"></i> Filters
             <div class="filter-wrapper-mobile listing-container">
@@ -37,6 +38,7 @@
                 </div>
             </div>
         </div>
+    </div>
         <div class="block listing-container" id="app">
             <div class="heading-wrapper pl-0">
                 <ul class="nav nav-pills">
