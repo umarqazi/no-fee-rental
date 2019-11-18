@@ -345,11 +345,11 @@ class UserService {
      * @param $agent
      */
     private function agentMail($agent) {
-        DispatchNotificationService::AGENTINVITE(toObject([
-            'from' => myId(),
-            'to'   => $agent->id,
-            'data' => $agent
-        ]));
+//        DispatchNotificationService::AGENTINVITE(toObject([
+//            'from' => myId(),
+//            'to'   => $agent->id,
+//            'data' => $agent
+//        ]));
     }
 
     /**
@@ -387,7 +387,7 @@ class UserService {
                     return true ;
                 }
                 $this->agentRepo->update($InviteRes->id, ['token' => $agent->token]);
-                $this->agentMail($agent);
+                $this->agentMail($InviteRes);
                 return true;
             }
 
@@ -399,7 +399,7 @@ class UserService {
             return true ;
         }
         $this->agentRepo->invite($agent->toArray());
-        $this->agentMail($agent);
+        $this->agentMail($UserRes);
         return true;
     }
 

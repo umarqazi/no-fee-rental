@@ -129,10 +129,10 @@ Route::get('/composer-dump', function() {
     dd('composer dump-succeed');
 });
 
-//Member accept invitation
+// Member accept invitation
 Route::get('/accept-invitation/{token}', 'Agent\MemberController@acceptInvitation')->name('member.acceptInvitation');
 
 // Test Route
 Route::get('/test', function (\Illuminate\Http\Request $request) {
-    dd();
+    return view('mails.listing-feature-approved');
 })->name('web.test');
