@@ -1841,6 +1841,9 @@ main {
 
 .price-wrapp .additional-info ul li p {
     margin: 0;
+    display:inline-block;
+    margin-right: 5px;
+    vertical-align: middle;
 }
 
 .gm-style .gm-style-iw-c {
@@ -1866,8 +1869,9 @@ main {
     height: 200px;
     overflow-y: auto;
 }
+
 .map-wrapper .location-thumbnaail.location-image-btm {
-    margin-bottom: 15px;
+    margin-bottom: 5px;
 }
 
 

@@ -2240,8 +2240,8 @@ footer .copyright .social-icons li a:hover {
     align-items: center;
 }
 .map-wrapper .location-thumbnaail img{
-    width:130px !important;
-    height: 100px !important;
+    width:100px !important;
+    height: 65px !important;
     object-fit: cover;
     margin-right: 10px;
     border-radius: 5px;
