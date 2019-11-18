@@ -34,13 +34,6 @@ class ListingRepo extends BaseRepo {
 		return $this->model->inactive()->withall();
 	}
 
-    /**
-     * @return mixed
-     */
-	public function realty() {
-	    return $this->model->realty()->withall();
-    }
-
 	/**
 	 * @return mixed
 	 */

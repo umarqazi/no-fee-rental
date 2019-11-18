@@ -683,7 +683,7 @@ header .agent-avtar .avtar:hover div ul {
 }
 
 .main-wrapper .listing-wrapper .listing-row .info .actions-btns button {
-    margin-left: 10px;
+    margin-left: 5px;
 }
 
 .main-wrapper .listing-wrapper .listing-row:hover {
@@ -2252,6 +2252,34 @@ header .agent-avtar .avtar:hover div ul {
 }
 #building-popup .btn-default {
     line-height: 50px;
+}
+.badges {
+    position: absolute;
+    top: 20px;
+    right: 10px;
+}
+.badges span{
+    display: inline-block;
+    margin-right: 5px;
+}
+.info .badges .status {
+    position: relative !important;
+    top: 0 !important;
+    right: 0 !important;
+}
+.grid-badges{
+    position: absolute;
+    top: 15px;
+    right: 5px;
+}
+.grid-badges span{
+    display: inline-block;
+    margin-right: 5px;
+}
+.info .grid-badges .status {
+    position: relative !important;
+    top: 0 !important;
+    right: 0 !important;
 }
 @media (min-width: 576px) {
     #building-popup .modal-dialog {

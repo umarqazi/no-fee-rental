@@ -229,11 +229,6 @@
                     @endif
                 </div>
 
-{{--                <div class="col-md-3 col-sm-4">--}}
-{{--                    <h3>Listing Type</h3>--}}
-{{--                    {{ ucfirst($listing->building_type) }}--}}
-{{--                </div>--}}
-
                 <div class="col-md-3 col-sm-4">
                 <h3>Pet Policy</h3>
                     @php $pet = petPolicy($listing->features); @endphp
@@ -308,6 +303,7 @@
         </div>
     </div>
 
+    {{--NearBy Apartments--}}
     <div class="nearbyapartment featured-properties ">
         <div class="container-lg tab-content">
             <h3> Nearby Apartments</h3>
@@ -350,7 +346,7 @@
                         </div>
                         @endforeach
                     @else
-                        No nearby apartment found
+                        No Nearby Apartment Found
                     @endif
                 </div>
 
@@ -389,11 +385,11 @@
                                             <p>${{ ($apartment->rent) ?   number_format($apartment->rent,0) : 'None' }} / Month </p>
                                             <span>{{ str_formatting($apartment->bedrooms, 'Bed').' ,'.str_formatting($apartment->baths, 'Bath') }}</span>
                                         </div>
-                                </div>
+                                    </div>
                                 </div>
                             @endforeach
                         @else
-                            No nearby apartment found
+                            No Nearby Apartment Found
                         @endif
                     </div>
                 </div>
@@ -445,7 +441,7 @@
 {{--Make Appointment--}}
 @include('modals.appointment')
 <script>
-    mapWithNearbyLocations(@php echo $listing->map_location; @endphp, document.getElementById('map'), true ) ;
+    mapWithNearbyLocations('{!! $listing->map_location !!}', document.getElementById('map'), true ) ;
 </script>
 <script>
   $('.calendarCarasoule #calendar-slider').owlCarousel({
@@ -482,7 +478,7 @@
     $(".calendar-wrap").hide();
     $(".successfull-msg").show();
   });
- $(".apointment-tabs ul li").click(function(){l
+ $(".apointment-tabs ul li").click(function(){
     $(".apointment-tabs ul li").removeClass('active');
     $(this).addClass('active');
  });
