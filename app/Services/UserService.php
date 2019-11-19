@@ -345,11 +345,12 @@ class UserService {
      * @param $agent
      */
     private function agentMail($agent) {
-//        DispatchNotificationService::AGENTINVITE(toObject([
-//            'from' => myId(),
-//            'to'   => $agent->id,
-//            'data' => $agent
-//        ]));
+        DispatchNotificationService::AGENTINVITE(toObject([
+            'from' => myId(),
+            'to'   => $agent->email,
+            'data' => $agent,
+            'is_invite' => true
+        ]));
     }
 
     /**
