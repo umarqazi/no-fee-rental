@@ -2212,6 +2212,10 @@ footer .copyright .social-icons li a:hover {
     flex: 0 0 100%;
 }
 
+.map-wrapper.full-map .location-thumbnaail.location-image-btm img{
+    width: 140px !important;
+    height: 70px !important;
+}
 .neighborhood-search .search-result-wrapper .map-wrapper .swipe-btn {
     position: absolute;
     top: 50%;
