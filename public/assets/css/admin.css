@@ -325,7 +325,7 @@ h3 {
 }
 
 .block .heading-wrapper {
-    padding: 15px 29px 15px;
+    padding: 15px 15px 15px;
     border-bottom: #e4e4e4 solid 1px;
     display: flex;
     justify-content: space-between;
@@ -530,7 +530,7 @@ header .agent-avtar .avtar:hover div ul {
 
 .main-wrapper .listing-container .nav-pills li a {
     margin: 0px;
-    padding: 5px 30px;
+    padding: 5px 20px;
     position: relative;
 }
 
@@ -2226,7 +2226,7 @@ header .agent-avtar .avtar:hover div ul {
 }
 
 
-.filter-mobile-data{
+.filter-mobile-data-wrapper{
     display: none;
     position: relative;
 }
