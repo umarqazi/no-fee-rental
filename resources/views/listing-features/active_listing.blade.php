@@ -9,7 +9,7 @@
             <div class="info">
                 <p class="title">{{ str_limit(is_exclusive($al), STR_LIMIT_LIST_VIEW, ' ...') }}</p>
                 <p><i class="fa fa-tag"></i> ${{ ($al->rent) ?   number_format($al->rent,0) : 'None' }}</p>
-                <p>Freshness Score : 90%</p>
+                <p>Freshness Score : {{ $al->freshness_score }}%</p>
                 <ul>
                     <li><i class="fa fa-bed"></i> {{ str_formatting($al->bedrooms, 'Bed') }}</li>
                     <li><i class="fa fa-bath"></i> {{ str_formatting($al->baths, 'Bath') }}</li>
@@ -38,7 +38,7 @@
                     <a href="{{ route(whoAmI().'.repostListing', $al->id) }}">
                         <button type="button" class="border-btn">Repost</button>
                     </a>
-                    <a href="{{ route(whoAmI().'.listingStatus', $al->id) }}" title="Make this Property Archived">
+                    <a href="{{ route(whoAmI().'.listingStatus', $al->id) }}" title="Unpublish this Listing">
                         <button type="button" class="border-btn">Archive</button>
                     </a>
                     @if($al->is_featured != APPROVEFEATURED)
@@ -73,7 +73,7 @@
                             {{ str_limit(is_exclusive($al), STR_LIMIT_GRID_VIEW, ' ...') }}
                         </p>
                         <p><i class="fa fa-tag"></i> ${{ ($al->rent) ?   number_format($al->rent,0) : 'None' }}</p>
-                        <p>Freshness Score : 90%</p>
+                        <p>Freshness Score : {{ $al->freshness_score }}%</p>
                         <ul>
                             <li><i class="fa fa-bed"></i> {{ str_formatting($al->bedrooms, 'Bed') }}</li>
                             <li><i class="fa fa-bath"></i> {{ str_formatting($al->baths, 'Bath') }}</li>
@@ -93,7 +93,7 @@
                             <a href="{{ route(whoAmI().'.repostListing', $al->id) }}">
                                 <button type="button" class="border-btn">Repost</button>
                             </a>
-                            <a href="{{ route(whoAmI().'.listingStatus', $al->id) }}">
+                            <a href="{{ route(whoAmI().'.listingStatus', $al->id) }}" title="Unpublish this Listing">
                                 <button type="button" class="border-btn">Archive</button>
                             </a>
                             @if($al->is_featured != APPROVEFEATURED)

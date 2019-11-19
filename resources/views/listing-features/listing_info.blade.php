@@ -130,16 +130,16 @@
 <div class="col-md-6">
     <div class="form-group">
         <label>Availability</label>
-        {!! Form::select('availability', config('formfields.listing.availability'), null, ['class' => 'input-style']) !!}
+        {!! Form::select('availability_type', config('formfields.listing.availability'), null, ['class' => 'input-style']) !!}
         <span class="invalid-feedback" role="alert">
-			{!! $errors->first('available') !!}
+			{!! $errors->first('availability_type') !!}
 		</span>
     </div>
 </div>
-<div class="col-md-6 availability-date" style="display: none;">
+<div class="col-md-6 availability-date" style="display: {{ isset($listing) && $listing->availability_type === 3 ? 'block' : 'none' }};">
     <div class="form-group">
         <label>Select Availability Date</label>
-        {!! Form::text('availability_date', null,
+        {!! Form::text('availability', null,
             [
                 'autocomplete' => 'off',
                 'class' => 'input-style',
@@ -147,7 +147,7 @@
                 'data-language' => 'en'
             ]) !!}
         <span class="invalid-feedback" role="alert">
-			{!! $errors->first('availability_date') !!}
+			{!! $errors->first('availability') !!}
 		</span>
     </div>
 </div>
@@ -189,6 +189,9 @@
 
     </div>
 </div>
+    @if(isset($listing->freshness_score))
+        {!! Form::hidden('freshness_score', null) !!}
+    @endif
 <div class="col-md-12">
     <div class="form-group">
         <label>Description</label>

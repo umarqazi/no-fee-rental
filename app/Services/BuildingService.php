@@ -96,8 +96,6 @@ class BuildingService {
      * @return mixed
      */
     public function noFee( $id ) {
-        $this->__apartmentAction( $id, ['visibility' => ACTIVE] );
-
         return $this->buildingRepo->update( $id, [ 'type' => NOFEE ] );
     }
 

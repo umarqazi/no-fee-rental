@@ -57,7 +57,7 @@ $(() => {
         }
     });
 
-    $('select[name=availability]').on('change', function() {
+    $('select[name=availability_type]').on('change', function() {
         let $selector = $('.availability-date');
         if($(this).val() === '3') {
             $selector.show();return;

@@ -26,6 +26,11 @@ class ListingForm extends BaseForm {
     /**
      * @var integer
      */
+    public $availability_type;
+
+    /**
+     * @var integer
+     */
     public $building_id;
 
     /**
@@ -126,6 +131,11 @@ class ListingForm extends BaseForm {
     /**
      * @var string
      */
+    public $freshness_score;
+
+    /**
+     * @var string
+     */
     public $lease_term;
 
     /**
@@ -139,30 +149,32 @@ class ListingForm extends BaseForm {
      */
     function toArray() {
 		return [
-			'user_id'          => $this->user_id,
-            'building_id'      => $this->building_id,
-            'description'      => $this->description,
-			'name'             => $this->name,
-			'email'            => $this->email,
-            'availability'     => $this->availability,
-			'phone_number'     => $this->phone_number,
-			'street_address'   => $this->street_address,
-			'display_address'  => $this->display_address,
-			'neighborhood_id'  => $this->neighborhood_id,
-			'bedrooms'         => $this->bedrooms,
-			'baths'            => $this->baths,
-            'unique_slug'      => $this->unique_slug,
-			'unit'             => $this->unit,
-			'rent'             => $this->rent,
-			'thumbnail'        => $this->thumbnail,
-            'visibility'       => $this->visibility,
-			'square_feet'      => $this->square_feet,
-			'map_location'     => $this->map_location,
-            'building_type'    => $this->building_type,
-            'application_fee'  => $this->application_fee,
-            'deposit'          => $this->deposit,
-            'lease_term'       => $this->lease_term,
-            'free_months'      => $this->free_months
+			'user_id'            => $this->user_id,
+            'building_id'        => $this->building_id,
+            'description'        => $this->description,
+			'name'               => $this->name,
+			'email'              => $this->email,
+            'availability'       => $this->availability,
+			'phone_number'       => $this->phone_number,
+			'street_address'     => $this->street_address,
+			'display_address'    => $this->display_address,
+			'neighborhood_id'    => $this->neighborhood_id,
+			'bedrooms'           => $this->bedrooms,
+			'baths'              => $this->baths,
+            'unique_slug'        => $this->unique_slug,
+			'unit'               => $this->unit,
+            'freshness_score'    => $this->freshness_score,
+            'availability_type'  => $this->availability_type,
+			'rent'               => $this->rent,
+			'thumbnail'          => $this->thumbnail,
+            'visibility'         => $this->visibility,
+			'square_feet'        => $this->square_feet,
+			'map_location'       => $this->map_location,
+            'building_type'      => $this->building_type,
+            'application_fee'    => $this->application_fee,
+            'deposit'            => $this->deposit,
+            'lease_term'         => $this->lease_term,
+            'free_months'        => $this->free_months
         ];
 	}
 

@@ -259,3 +259,15 @@ if(!defined('EXPIRED')) {
 if(!defined('MAXPLANDAYS')) {
     define('MAXPLANDAYS', 30);
 }
+
+if(!defined('MINFRESHNESSSCORE')) {
+    define('MINFRESHNESSSCORE', 30);
+}
+
+if(!defined('MAXFRESHNESSSCORE')) {
+    define('MAXFRESHNESSSCORE', 100);
+}
+
+if(!defined('DROPFRESHNESS')) {
+    define('DROPFRESHNESS', 10);
+}

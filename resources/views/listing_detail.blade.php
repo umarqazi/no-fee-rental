@@ -309,8 +309,8 @@
             <h3> Nearby Apartments</h3>
             <div class="property-listing">
                 <div class="desktop-listiing">
-                    @if(isset($listing->listingBuilding->building->listings) && count($listing->listingBuilding->building->listings) > 1)
-                        @foreach($listing->listingBuilding->building->listings as $apartment)
+                    @if(isset($listing->building->listings) && count($listing->building->listings) > 1)
+                        @foreach($listing->building->listings as $apartment)
                             @if($listing->id === $apartment->id) @continue @endif
                             <div class="property-thumb">
                                 <div class="check-btn">
@@ -352,8 +352,8 @@
 
                 <div class="owl-slider">
                     <div class="owl-carousel owl-theme" id="NearbyApartments">
-                        @if( isset($listing->listingBuilding->building->listings) && count($listing->listingBuilding->building->listings) > 1)
-                            @foreach($listing->listingBuilding->building->listings as $apartment)
+                        @if( isset($listing->building->listings) && count($listing->building->listings) > 1)
+                            @foreach($listing->building->listings as $apartment)
                             @if($listing->id === $apartment->id) @continue @endif
                                 <div class="item">
                                     <div class="property-thumb">

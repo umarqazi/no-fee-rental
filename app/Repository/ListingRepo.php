@@ -57,7 +57,14 @@ class ListingRepo extends BaseRepo {
 		$query = $this->find(['id' => $id]);
 		$status = $query->select('visibility')->first();
 		$updateStatus = ($status->visibility) ? 0 : 1;
-		$query->update(['visibility' => $updateStatus]);
+
+		if($updateStatus === INACTIVELISTING) {
+            $update = ['visibility' => $updateStatus, 'is_featured' => FALSE];
+        } else {
+            $update = ['visibility' => $updateStatus];
+        }
+
+        $query->update($update);
 		return $updateStatus;
 	}
 
