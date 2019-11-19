@@ -48,9 +48,6 @@ const ajaxRequest = async function(url, type, data, loading = true, form = null,
             if(err.responseJSON.msg !== '' || err.responseJSON.msg !== null) {
                 toastr.error(err.responseJSON.msg);
             }
-        },
-        headers: {
-            'Access-Control-Allow-Origin': '*'
         }
     };
 	if(contentType === 'false') {
