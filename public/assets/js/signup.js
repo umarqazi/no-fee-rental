@@ -31,7 +31,10 @@ $(() => {
                 `https://data.ny.gov/resource/yg7h-zjbf.json?license_number=${license_number}`,
                 'GET',
                 {"$limit": 5000, "$$app_token": "r2d5ljgcgGPadDzIIgzTzu5Qf"},
-                false);
+                false,
+                null,
+                true,
+                true);
 
             if (res.length > 0) {
                 form.append(`<input type="hidden" name="company" value="${res[0].business_name}">

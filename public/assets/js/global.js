@@ -8,12 +8,13 @@
  * @param contentType
  * @returns {Promise<void>}
  */
-const ajaxRequest = async function(url, type, data, loading = true, form = null, contentType = 'true') {
+const ajaxRequest = async function(url, type, data, loading = true, form = null, contentType = 'true',crossDomain = false) {
 	setHeaders();
 	let settings = {
         url: url,
         type: type,
         data: data,
+        crossDomain: crossDomain,
         processData: true,
         beforeSend: () => {
             (loading) ? $('.loader').show() : '';
