@@ -9,7 +9,7 @@
             <div class="info">
                 <p class="title">{{ str_limit(is_exclusive($fl), STR_LIMIT_LIST_VIEW, ' ...') }}</p>
                 <p><i class="fa fa-tag"></i> ${{ ($fl->rent) ?   number_format($fl->rent,0) : 'None' }}</p>
-                <p>Freshness Score : 90%</p>
+                <p>Freshness Score : {{ $fl->freshness_score }}%</p>
                 <ul>
                     <li><i class="fa fa-bed"></i> {{ str_formatting($fl->bedrooms, 'Bed') }}</li>
                     <li><i class="fa fa-bath"></i> {{ str_formatting($fl->baths, 'Bath') }}</li>
@@ -44,7 +44,7 @@
                 <div class="info">
                     <p class="title">{{ str_limit(is_exclusive($fl), STR_LIMIT_GRID_VIEW, ' ...') }}</p>
                     <p><i class="fa fa-tag"></i> ${{ ($fl->rent) ?   number_format($fl->rent,0) : 'None' }}</p>
-                    <p>Freshness Score : 90%</p>
+                    <p>Freshness Score : {{ $fl->freshness_score }}%</p>
                     <ul>
                         <li><i class="fa fa-bed"></i> {{ str_formatting($fl->bedrooms, 'Bed') }}</li>
                         <li><i class="fa fa-bath"></i> {{ str_formatting($fl->baths, 'Bath') }}</li>

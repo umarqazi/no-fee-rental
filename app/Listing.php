@@ -25,8 +25,8 @@ class Listing extends Model {
         'name', 'email', 'phone_number', 'street_address', 'display_address',
         'thumbnail', 'baths', 'bedrooms', 'unit', 'rent', 'square_feet',
         'description', 'is_featured', 'map_location', 'building_type',
-		'visibility', 'realty_url', 'availability', 'application_fee',
-        'deposit', 'lease_term', 'free_months'
+		'visibility', 'realty_url', 'availability_type', 'availability',
+        'application_fee', 'deposit', 'lease_term', 'free_months', 'freshness_score'
 	];
 
     /**
@@ -185,7 +185,7 @@ class Listing extends Model {
 	public function scopeWithAll($query) {
 		return $query->with([
 		    'agent.company', 'images', 'building.amenities', 'favourites',
-            'openHouses', 'features', 'neighborhood'
+            'openHouses', 'features', 'neighborhood', 'building.listings'
         ]);
 	}
     /**

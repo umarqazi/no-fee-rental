@@ -16,7 +16,7 @@
                         <a class="nav-link" data-toggle="pill" href="#listing-inactive">Inactive ( {{ $listing->inactive->total() }} )</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="pill" href="#listing-pending">Pending Requests ( {{ $listing->pending->total() }} )</a>
+                        <a class="nav-link" data-toggle="pill" href="#listing-archived">Archived ( {{ $listing->archived->total() }} )</a>
                     </li>
                 </ul>
                 <div class="filter-wrapper">
@@ -51,8 +51,8 @@
                     <div class="tab-pane fade" id="listing-inactive">
                         @include('listing-features.inactive_listing')
                     </div>
-                    <div class="tab-pane fade" id="listing-pending">
-                        @include('listing-features.pending_listing')
+                    <div class="tab-pane fade" id="listing-archived">
+                        @include('listing-features.archive_listing')
                     </div>
                 </div>
             </div>
