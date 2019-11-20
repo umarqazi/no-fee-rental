@@ -28,7 +28,7 @@ $(() => {
 
         if (license_number !== '' && license_verify == 'true' && $selector.val().length >6) {
             let res = await ajaxRequest(
-                `http://data.ny.gov/resource/yg7h-zjbf.json?license_number=${license_number}`,
+                `https://data.ny.gov/resource/yg7h-zjbf.json?license_number=${license_number}`,
                 'GET',
                 {"$limit": 5000, "$$app_token": "r2d5ljgcgGPadDzIIgzTzu5Qf"},
                 false);
