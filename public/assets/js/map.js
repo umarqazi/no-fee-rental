@@ -178,7 +178,7 @@ const showListInfo = (resp) => {
         setTimeout(() => {
         $('body').find('.gm-style-iw-d > div').addClass('single');
         $('.single').css({height: '100px', overflow: 'hidden'});
-        },500);
+        },5);
     }
     return html;
 };
