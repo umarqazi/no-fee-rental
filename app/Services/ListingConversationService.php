@@ -94,8 +94,9 @@ class ListingConversationService {
      * @return mixed
      */
     public function accept($id) {
+        $listing_detail = listing_detail($id);
         calendarEvent([
-            'title' => 'Request Approved',
+            'title' => $listing_detail->display_address.'  (Approved)',
             'url'   => '.loadConversation',
             'color' => 'red'
         ], true, $id);
@@ -139,12 +140,13 @@ class ListingConversationService {
      * @return bool|mixed
      */
     private function __createAppointmentConversation($request) {
+        $listing_detail = listing_detail($request->listing_id);
         $appointment = $this->__isNewAppointment($request);
         if(!$appointment) {
             $appointment = $this->__validateAppointmentForm( $request );
             $appointment = $this->listingConversationRepo->create($appointment->toArray());
             calendarEvent([
-                'title'      => 'Appointment Request Sent (Pending)',
+                'title'      => $listing_detail->display_address.' (Pending)',
                 'linked_id'  => $appointment->id,
                 'from'       => $appointment->from,
                 'to'         => $appointment->to,
