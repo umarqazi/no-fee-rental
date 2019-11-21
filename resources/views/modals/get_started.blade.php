@@ -10,7 +10,7 @@
         z-index: 15;
     }
 </style>
-{!! Form::open(['url' => route('web.getStarted')]) !!}
+{!! Form::open(['url' => route('web.getStarted'),'id'=>'get_started']) !!}
 <div class="modal fade need-help-modal" id="need-help-step1">
     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
         <div class="modal-content">

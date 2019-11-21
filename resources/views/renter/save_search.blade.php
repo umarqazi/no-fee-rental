@@ -51,8 +51,8 @@
                             <div>
                                 <p>Min Price: ${{ number_format($criteria->priceRange['min_price']) }}</p>
                                 <p>Max Price: ${{ number_format($criteria->priceRange['max_price']) }}</p>
-                                <p>Min Square: ${{ number_format($criteria->squareRange['square_min']) }}</p>
-                                <p>Max Square: ${{ number_format($criteria->squareRange['square_max']) }}</p>
+                                <p>Min Square: {{$criteria->squareRange['square_min']}}</p>
+                                <p>Max Square: {{$criteria->squareRange['square_max']}}</p>
                             </div>
                             <div>
                                 <a href="{{ $search->url }}"><i class="fa fa-eye view-icon"></i></a>
