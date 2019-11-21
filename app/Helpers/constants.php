@@ -271,3 +271,11 @@ if(!defined('MAXFRESHNESSSCORE')) {
 if(!defined('DROPFRESHNESS')) {
     define('DROPFRESHNESS', 10);
 }
+
+if(!defined('LICENSEBASEURL')) {
+    define('LICENSEBASEURL', 'data.ny.gov');
+}
+
+if(!defined('SCHOOLZONEBASEURL')) {
+    define('SCHOOLZONEBASEURL', 'data.cityofnewyork.us');
+}
