@@ -591,4 +591,32 @@ $(() => {
             },
         }
     });
+
+    // Add Add Event Form validations
+    $('#add_event').validate({
+        rules: {
+            title: {
+                required: true
+            },
+            start: {
+                required: true,
+            },
+
+            end: {
+                required: true,
+            },
+        },
+
+        messages: {
+            title: {
+                required: "Event Title is required."
+            },
+            start: {
+                required: "Start Date is required.",
+            },
+            end: {
+                required: "End Date is required.",
+            },
+        }
+    });
 });

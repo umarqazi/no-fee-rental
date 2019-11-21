@@ -15,7 +15,7 @@
                 <h4 class="modal-title">Add Event</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
-            {!! Form::open(['url' => route('agent.addEvent')]) !!}
+            {!! Form::open(['url' => route('agent.addEvent'),'id'=>'add_event']) !!}
             <div class="modal-body">
                 <div class="form-group">
                     <label> Event Title</label>
