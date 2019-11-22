@@ -340,7 +340,8 @@ const mapWithNearbyLocations = (coords, mapSelector, nearByLocations = false, Zo
             let index = location.findIndex(findIndex);
 
             if(nearByLocations) {
-                findSubways(coords); findSchools(coords);
+                // findSubways(coords);
+                schoolZone(coords);
             }
 
             if (index !== -1) {
@@ -349,4 +350,27 @@ const mapWithNearbyLocations = (coords, mapSelector, nearByLocations = false, Zo
             }
         });
     }
+};
+
+const schoolZone = async (coords) => {
+    coords = JSON.parse(coords);
+    coords.range = 1200;
+    await ajaxRequest('/school-zone', 'post', coords, false).then(res => {
+        res.forEach(data => {
+            console.log(data);
+            // var flightPath = new google.maps.Polyline({
+            //     path: data.polygon,
+            //     geodesic: true,
+            //     strokeColor: '#FF0000',
+            //     strokeOpacity: 1.0,
+            //     strokeWeight: 2
+            // });
+            //
+            // flightPath.setMap(map);
+        });
+    }).catch(err => {
+        console.log(err);
+    });
+
+
 };

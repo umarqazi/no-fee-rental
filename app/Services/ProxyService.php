@@ -61,11 +61,28 @@ class ProxyService {
         $data = toObject([
             'lat' => str_limit($coords->latitude ?? null, 9, ''),
             'lng' => str_limit($coords->longitude ?? null, 9, ''),
-            'rng' => $this->range
+            'rng' => $coords->range ?? $this->range
         ]);
 
-        return $this->socrata->get($this->schoolZoneFilePath, [
+        $res = $this->socrata->get($this->schoolZoneFilePath, [
             "\$where" => "within_circle(the_geom, {$data->lat}, {$data->lng}, {$data->rng})"
         ]);
+
+        if(!empty($res)) {
+            $coordinates = [];
+            foreach ($res as $geom) {
+                $geom = $geom['the_geom']['coordinates'][0][0];
+                for($i = 0; $i < sizeof($geom); $i ++) {
+                    $coords = [
+                        'lat' => $geom[$i][0],
+                        'lng' => $geom[$i][1]
+                    ];
+
+                    array_push($coordinates, $coords);
+                }
+            }
+
+            dd(toObject(array_values($coordinates)));
+        }
     }
 }
