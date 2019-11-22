@@ -250,8 +250,10 @@ class BuildingService {
     private function __getApartmentsIds($id) {
         $ids     = [];
         $building = $this->buildingRepo->getApartments( $id )->first();
-        foreach ( $building->listings as $apartment ) {
-            $ids[]   = $apartment->id;
+        if(!empty($building)) {
+            foreach ($building->listings as $apartment) {
+                $ids[] = $apartment->id;
+            }
         }
 
         return $ids;

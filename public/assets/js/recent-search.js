@@ -107,5 +107,6 @@ $(() => {
     } else {
         if($('#empty-keywords').length > 0) return;
         $('.dropDown').append('<a href="javascript:void(0);" id="empty-keywords">You have no keywords yet to search</a>');
+        $('.dropDown > ul').removeClass('ul-border-top');
     }
 });
