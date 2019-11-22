@@ -1853,6 +1853,9 @@ main {
     padding: 0px !important;
     max-width: 280px !important;
 }
+.full-map .gm-style .gm-style-iw-c{
+    max-width:330px !important;
+}
 
 .gm-ui-hover-effect {
     top: 3px !important;
