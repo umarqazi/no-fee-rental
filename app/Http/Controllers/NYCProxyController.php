@@ -27,11 +27,11 @@ class NYCProxyController extends Controller {
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
-    public function licenseVerification(Request $request) {
+    public function licenseVerification(Request $request, $license_number) {
         $res = $this->proxyService
                     ->setBase(LICENSEBASEURL)
-                    ->license($request->license_number);
-        return sendResponse($request, $res);
+                    ->license($license_number);
+        return response()->json($res);
     }
 
     /**
