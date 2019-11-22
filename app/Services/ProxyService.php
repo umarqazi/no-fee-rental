@@ -63,6 +63,7 @@ class ProxyService {
      * @return mixed
      */
     public function schoolZone($coords) {
+        $collection = [];
         $data = toObject([
             'lat' => $coords->latitude,
             'lng' => $coords->longitude,
@@ -74,7 +75,6 @@ class ProxyService {
         ]);
 
         if(!empty($res)) {
-            $collection = [];
 
             foreach ($res as $geom) {
                 $coordinates = [];
