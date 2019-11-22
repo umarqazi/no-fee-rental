@@ -34,6 +34,11 @@ class ProxyService {
     /**
      * @var string
      */
+    private $schoolData = '/api/geospatial/9hw3-gi34';
+
+    /**
+     * @var string
+     */
     private $schoolZoneFilePath = '/resource/xehh-f7pi.json';
 
     /**
@@ -59,13 +64,39 @@ class ProxyService {
      */
     public function schoolZone($coords) {
         $data = toObject([
-            'lat' => str_limit($coords->latitude ?? null, 9, ''),
-            'lng' => str_limit($coords->longitude ?? null, 9, ''),
-            'rng' => $this->range
+            'lat' => $coords->latitude,
+            'lng' => $coords->longitude,
+            'rng' => $coords->range ?? $this->range
         ]);
 
-        return $this->socrata->get($this->schoolZoneFilePath, [
+        $res = $this->socrata->get($this->schoolZoneFilePath, [
             "\$where" => "within_circle(the_geom, {$data->lat}, {$data->lng}, {$data->rng})"
         ]);
+
+        if(!empty($res)) {
+            $coordinates = [];
+            foreach ($res as $geom) {
+                $geom = $geom['the_geom']['coordinates'][0][0];
+                for($i = 0; $i < sizeof($geom); $i ++) {
+                    $coords = [
+                        'longitude' => (float)$geom[$i][0],
+                        'latitude' => (float)$geom[$i][1]
+                    ];
+
+                    array_push($coordinates, $coords);
+                }
+            }
+        }
+
+        return \GuzzleHttp\json_encode(array_values($coordinates));
+    }
+
+    public function schoolData($coords) {
+        $params = [
+            'lat'  => $coords->latitude,
+            'lng'  => $coords->longitude,
+            'zoom' => 12
+        ];
+        dd($this->socrata->get($this->schoolData, $params));
     }
 }

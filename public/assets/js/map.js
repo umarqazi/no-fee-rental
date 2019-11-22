@@ -340,7 +340,8 @@ const mapWithNearbyLocations = (coords, mapSelector, nearByLocations = false, Zo
             let index = location.findIndex(findIndex);
 
             if(nearByLocations) {
-                findSubways(coords); findSchools(coords);
+                // findSubways(coords);
+                schoolZone(coords);
             }
 
             if (index !== -1) {
@@ -349,4 +350,27 @@ const mapWithNearbyLocations = (coords, mapSelector, nearByLocations = false, Zo
             }
         });
     }
+};
+
+const schoolZone = async (coords) => {
+    coords = JSON.parse(coords);
+    coords.range = 1200;
+
+    await ajaxRequest('/school-zone', 'post', coords, false).then(polygonCoords => {
+        let latLng = [];
+        polygonCoords = JSON.parse(polygonCoords);
+        polygonCoords.forEach(coords => {
+           latLng.push(setLatLng(coords));
+        });
+
+        let polygon = new google.maps.Polygon({
+            paths: latLng
+        });
+
+        polygon.setMap(map);
+    }).catch(err => {
+        console.log(err);
+    });
+
+
 };

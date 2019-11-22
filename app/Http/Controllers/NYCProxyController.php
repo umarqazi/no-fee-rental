@@ -42,6 +42,6 @@ class NYCProxyController extends Controller {
         $res = $this->proxyService
             ->setBase(SCHOOLZONEBASEURL)
             ->schoolZone($request);
-        return sendResponse($request, $res);
+        return response()->json($res);
     }
 }
