@@ -52,7 +52,7 @@ class BuildingController extends Controller {
      */
     public function detail($id, $status, $route) {
         $building = $this->buildingService->detail($id);
-        return view('owner.building_detail', compact('building', 'status', 'amenities', 'route'));
+        return view('owner.building_detail', compact('building', 'status', 'route'));
     }
 
     /**
@@ -94,5 +94,18 @@ class BuildingController extends Controller {
         $status = 'Update';
         $route = 'owner.updateBuilding';
         return $this->detail($id, $status, $route);
+    }
+
+    /**
+     * @param $id
+     *
+     * @return Factory|View
+     */
+    public function addApartment($id) {
+        $action = 'Create';
+        $listing = $this->buildingService->addApartment($id);
+        $listing->street_address = $listing->address;
+        $listing->display_address = $listing->address;
+        return view('listing-features.listing', compact('listing', 'action'));
     }
 }

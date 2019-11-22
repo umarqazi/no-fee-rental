@@ -61,11 +61,11 @@
                     </div>
                 </div>
             </div>
-            {!! Form::close() !!}
-            <!-- Modal footer -->
             <div class="modal-footer">
                 {!! Form::submit('Add Building', ['class' => 'btn btn-default']) !!}
             </div>
+        {!! Form::close() !!}
+        <!-- Modal footer -->
         </div>
     </div>
 </div>
