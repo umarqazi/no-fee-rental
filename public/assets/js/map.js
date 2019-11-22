@@ -230,7 +230,7 @@ const findIndex = (location) => {
 const nearByPlaces = async (position, keyword) => {
     let request = {
         location: setLatLng(position),
-        radius: 1000,
+        radius: 10000,
         keyword: keyword
     };
 
@@ -248,6 +248,7 @@ const nearByPlaces = async (position, keyword) => {
  */
 const findSubways = (coords) => {
     nearByPlaces(coords, 'station').then(res => {
+        console.log(res);
         if(res.length > 0) {
             res.forEach(value => {
                 let coords = {
@@ -331,7 +332,7 @@ const initMap = (selector, zoom = ZOOM) => {
  * @param nearByLocations
  * @param Zoom
  */
-const mapWithNearbyLocations = (coords, mapSelector, nearByLocations = false, Zoom = 16) => {
+const mapWithNearbyLocations = (coords, mapSelector, nearByLocations = false, Zoom = 15) => {
     if (coords !== null && coords !== '') {
         ZOOM = Zoom;
         setMap(coords, mapSelector);
@@ -340,7 +341,7 @@ const mapWithNearbyLocations = (coords, mapSelector, nearByLocations = false, Zo
             let index = location.findIndex(findIndex);
 
             if(nearByLocations) {
-                // findSubways(coords);
+                findSubways(coords);
                 schoolZone(coords);
             }
 
@@ -352,25 +353,31 @@ const mapWithNearbyLocations = (coords, mapSelector, nearByLocations = false, Zo
     }
 };
 
+/**
+ *
+ * @param coords
+ * @returns {Promise<void>}
+ */
 const schoolZone = async (coords) => {
     coords = JSON.parse(coords);
     coords.range = 1200;
 
     await ajaxRequest('/school-zone', 'post', coords, false).then(polygonCoords => {
-        let latLng = [];
         polygonCoords = JSON.parse(polygonCoords);
         polygonCoords.forEach(coords => {
-           latLng.push(setLatLng(coords));
+            let latLng = [];
+            coords.forEach(res => {
+                latLng.push(setLatLng(res));
+            });
+
+            let polygon = new google.maps.Polygon({
+                paths: latLng
+            });
+
+            polygon.setMap(map);
         });
 
-        let polygon = new google.maps.Polygon({
-            paths: latLng
-        });
-
-        polygon.setMap(map);
     }).catch(err => {
         console.log(err);
     });
-
-
 };
