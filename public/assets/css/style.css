@@ -144,8 +144,9 @@
     border-left: 4px solid transparent;
     border-right: 4px solid transparent;
     border-top: 4px solid #777;
-    -webkit-transform: origin(50% 20%);
-    transform: origin(50% 20%);
+    /*-webkit-transform: origin(50% 20%);*/
+    /*transform: origin(50% 20%);*/
+    transform-origin: 50% 20%;
     transition: all 0.125s ease-in-out;
     content: '';
     display: block;
@@ -1810,12 +1811,13 @@ main {
 .price-wrapp .additional-info ul li {
     margin-right: 8px;
     text-align: center;
-    border-right: #ddd solid 1px;
+    border-right: #ddd solid 2px;
     padding-right: 8px;
 }
 
 .price-wrapp.price-wrap-location  .additional-info ul li{
     color: #272a31;
+    font-weight: bold;
 }
 
 .price-wrapp .additional-info ul li:last-child {
@@ -1843,12 +1845,13 @@ main {
     margin: 0;
     display:inline-block;
     margin-right: 5px;
-    vertical-align: middle;
+    /*vertical-align: middle;*/
+    font-weight: bold;
 }
 
 .gm-style .gm-style-iw-c {
     padding: 0px !important;
-    max-width: 425px !important;
+    max-width: 280px !important;
 }
 
 .gm-ui-hover-effect {
