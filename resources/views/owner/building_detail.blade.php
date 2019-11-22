@@ -4,7 +4,7 @@
 <div class="wrapper building-details-wrapper">
     <div class="heading-wrapper">
         <h1>{{ $status }} Building</h1>
-{{--        <a href="{{ route('admin.addApartment', collect($building->listings)->first()->id) }}" class="btn-default" >Add Apartment</a>--}}
+        <a href="{{ route('owner.addApartment', $building->id) }}" class="btn-default" >Add Apartment</a>
     </div>
     <!--Grid view listing-->
     <div class="grid-view-wrapper" style="display: block;">
