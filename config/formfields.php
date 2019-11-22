@@ -3,7 +3,7 @@
 return [
     'listing' => [
         'availability' => [
-            1 => 'immediately',
+            1 => 'Immediately',
             3 => 'By Date Only',
             4 => 'Not Available',
         ]

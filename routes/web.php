@@ -48,8 +48,9 @@ Route::get('/confirm-email/{token}', 'UserController@confirmEmail')->name('user.
 // Email Validation
 Route::post('/verify-email', 'UserController@verifyEmail');
 
-// License Validations
+// License Routes
 Route::post('/verify-license', 'UserController@verifyLicense');
+Route::get('/license-verification/{license_number}', 'NYCProxyController@licenseVerification');
 
 // Login route for all user type
 Route::post('/login')->name('attempt.login')->middleware('authguard');

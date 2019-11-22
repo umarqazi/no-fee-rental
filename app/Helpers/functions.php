@@ -663,6 +663,15 @@ function is_exclusive( $listing ) {
 }
 
 /**
+ * @param $listing_id
+ *
+ * @return listing_detail
+ */
+function listing_detail( $id ) {
+    return ( new \App\Services\FeatureListingService() )->detail( $id );
+}
+
+/**
  * @param $string
  * @param $phrase
  *
