@@ -48,6 +48,10 @@ class HomeController extends Controller {
 		return view('index', compact('featured_listings'));
 	}
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
+     */
 	public function getStarted(Request $request) {
         $data = [
             'from'    => $request->email,
@@ -73,6 +77,7 @@ class HomeController extends Controller {
 
     /**
      * @param Request $request
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
     public function letUsHelp(Request $request) {
         $request->agentsWithPremiumPlan = true;
@@ -80,6 +85,8 @@ class HomeController extends Controller {
         foreach ($data->listings as $user) {
             dd(agents($user->user_id));
         }
+
+        return sendResponse($request, true, 'Request has been sent successfully');
     }
 
 	/**

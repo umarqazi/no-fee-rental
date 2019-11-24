@@ -56,7 +56,7 @@
                 </div>
                 <div class="message-input">
                     <div class="wrap">
-                        {!! Form::open(['id' => 'send-message', 'loading' => 'false', 'url' => route('renter.sendMessage', $collection->id), 'class' => 'ajax', 'reset' => 'true']) !!}
+                        {!! Form::open(['id' => 'send-message', 'url' => route('renter.sendMessage', $collection->id)]) !!}
                         <span id="error" style="color: red ; padding-left:7px;display: none">Message Field is required.</span>
                         {!! Form::text('message', null, ['placeholder' => 'Write your message...', 'autocomplete' => 'off']) !!}
                         {!! Form::hidden('to', myId() == $collection->to ? $collection->from : $collection->to) !!}
@@ -68,7 +68,6 @@
         </div>
     </div>
     {!! HTML::style('assets/css/chat.css') !!}
-    {!! HTML::script('assets/js/message.js') !!}
     <script>
         // Scroll to end of chat area
         window.onload = function () {

@@ -197,7 +197,7 @@ class ListingConversationService {
             'to'      => $request->to,
             'sender'  => mySelf()
         ];
-        dispatchMessageEvent($data);
+
         return $this->messageRepo->create($message->toArray());
     }
 

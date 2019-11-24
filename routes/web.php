@@ -80,7 +80,8 @@ Route::post('/send-request', 'ListingConversationController@create')->name('web.
 
 // Notification Routes
 Route::post('/delete-notification/{id}', 'NotificationController@delete');
-Route::post('/mark-all-as-read', 'NotificationController@markAsRead');
+Route::post('/read-notification/{id}', 'NotificationController@markAsRead');
+Route::post('/mark-all-as-read', 'NotificationController@markAllAsRead');
 Route::post('/push-notification', 'NotificationController@push');
 Route::post('/fetch-notifications', 'NotificationController@get');
 Route::get('/all-notifications', 'NotificationController@all');
@@ -138,5 +139,12 @@ Route::get('/accept-invitation/{token}', 'Agent\MemberController@acceptInvitatio
 
 // Test Route
 Route::get('/test', function (\Illuminate\Http\Request $request) {
-    return view('mails.listing-feature-approved');
+    socketEvent(toObject([
+        'to' => 4,
+        'from' => 5,
+        'id' => 15,
+        'message' => 'yes',
+        'url' => 'abc.com'
+    ]));
+    return redirect(route('web.index'));
 })->name('web.test');

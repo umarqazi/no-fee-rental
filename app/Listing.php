@@ -184,8 +184,8 @@ class Listing extends Model {
 	 */
 	public function scopeWithAll($query) {
 		return $query->with([
-		    'agent.company', 'images', 'building.amenities', 'favourites',
-            'openHouses', 'features', 'neighborhood', 'building.listings'
+		    'agent.company', 'agent.reviews', 'images', 'building.amenities', 'favourites',
+            'openHouses', 'features', 'neighborhood', 'building.listings', 'building.contact'
         ]);
 	}
     /**
