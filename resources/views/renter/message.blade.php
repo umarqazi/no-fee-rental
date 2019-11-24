@@ -44,6 +44,4 @@
             </div>
         </div>
     </div>
-    {{--Messaging Script--}}
-    {!! HTML::script('assets/js/message.js') !!}
 @endsection

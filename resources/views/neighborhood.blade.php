@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'No Fee Rental')
+@section('title', 'No Fee Rental | Neighborhood')
 @section('content')
  <style>
      #advance-search {

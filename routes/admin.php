@@ -76,6 +76,7 @@ Route::post('/edit-company/{id}', 'Admin\CompanyController@edit');
 Route::post('/update-company/{id}', 'Admin\CompanyController@update');
 Route::post('/delete-company/{id}', 'Admin\CompanyController@delete');
 Route::post('/company-status-update/{id}', 'Admin\CompanyController@status');
+Route::get('/view-associated-agents/{id}', 'Admin\HomeController@associatedAgents');
 
 // Neighborhood Routes
 Route::get('/neighborhoods', 'Admin\NeighborhoodController@index')->name('neighborhoods');
@@ -94,5 +95,3 @@ Route::post('/update-building/{id}', 'Admin\BuildingController@update')->name('a
 Route::get('/no-fee-building/{id}', 'Admin\BuildingController@noFee')->name('admin.noFeeBuilding');
 Route::get('/fee-building/{id}', 'Admin\BuildingController@fee')->name('admin.feeBuilding');
 Route::get('/add-apartment/{id}', 'Admin\BuildingController@addApartment')->name('admin.addApartment');
-
-Route::get('/view-associated-agents/{id}', 'Admin\HomeController@associatedAgents');
