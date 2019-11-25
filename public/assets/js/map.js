@@ -189,9 +189,33 @@ const showListInfo = (resp) => {
  * @returns {google.maps.places.Autocomplete}
  */
 const autoComplete = (searchSelector) => {
+    let isValid = 0;
+    let streetAddress = '';
+    let displayAddress = '';
+    let restrict = ['street_number', 'route', 'locality'];
     let autocomplete = new google.maps.places.Autocomplete(searchSelector);
+    google.maps.event.addListener(autocomplete, 'place_changed', function() {
+        let address = autocomplete.getPlace();
+        console.log(address);
+        address.address_components.forEach(_match => {
+            _match.types.forEach(matchCriteria => {
+                if(restrict.includes(matchCriteria)) {
+                    streetAddress += _match.short_name + ' ';
+                    isValid ++;
+                }
+            });
+        });
+
+        if(isValid !== restrict.length) {
+            // address error
+            alert('invalid');
+        } else {
+            $('#autofill').val(streetAddress.replace('New York', ''));
+            searchSelector.value = streetAddress;
+        }
+    });
     autocomplete.setComponentRestrictions({'country': ['us']});
-    return autocomplete;
+    return streetAddress;
 };
 
 /**
