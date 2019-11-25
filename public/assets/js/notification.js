@@ -10283,7 +10283,7 @@ $(function () {
 
 var io = __webpack_require__(/*! socket.io-client */ "./node_modules/socket.io-client/lib/index.js");
 
-var protocol = "http://no-fee-rental.teamtechverx.com:8000";
+var protocol = "http://localhost:8080";
 module.exports.socket = io(protocol);
 
 /***/ }),

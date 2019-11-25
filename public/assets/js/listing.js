@@ -65,28 +65,28 @@ $(() => {
             $selector.hide();
     });
 
-    $('.controls').on('keydown blur', function() {
-        setTimeout(async () => {
-            let val = $(this).val();
-            await ajaxRequest('/is-unique-address', 'post', {address: val}, false).then(res => {
-                if(res === 'true') {
-                    $('body').find('#amenities > .row').show();
-                }
-            });
-            val = val.replace(', NY', '');
-            val = val.replace(', MO', '');
-            val = val.replace(', CA', '');
-            val = val.replace(', FL', '');
-            val = val.replace(', PA', '');
-            val = val.replace(', GA', '');
-            val = val.replace(', TX', '');
-            val = val.replace(', DC', '');
-            val = val.replace(', USA', '');
-            val = val.replace(', IL', '');
-            val = val.replace(', New York', '');
-            $('#autofill').val(val);
-            $(this).val(val);
-        }, 5);
+    // $('.controls').on('keydown blur', function() {
+    //     setTimeout(async () => {
+    //         let val = $(this).val();
+    //         $('#autofill').val(val);
+    //         $(this).val(val);
+    //     }, 5);
+    // });
+
+    $('.controls').on('blur', async function() {
+        let $validator = $("#listing-form").validate();
+        await ajaxRequest('/is-owner-only', 'post', {address: $(this).val()}, false).then(async res => {
+            if(res === 'true') {
+                await ajaxRequest('/is-unique-address', 'post', {address: $(this).val()}, false).then(res => {
+                    if(res === 'true') {
+                        $('body').find('#amenities > .row').show();
+                    }
+                });
+            } else {
+                let errors = { street_address: "Current building is owner only." };
+                $validator.showErrors(errors);
+            }
+        });
     });
 
     $body.on('keyup', '#controls', function() {

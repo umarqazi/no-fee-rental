@@ -54,4 +54,12 @@ class ListingController extends Controller {
     public function isUnique(Request $request) {
         return $this->buildingService->isUniqueAddress($request->address);
     }
+
+    /**
+     * @param Request $request
+     * @return string
+     */
+    public function isOwnerOnly(Request $request) {
+        return $this->buildingService->ownerOnlyBuilding($request->address);
+    }
 }
