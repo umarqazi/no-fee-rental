@@ -57,3 +57,32 @@
 @else
     <div class="not-allowed-appointment"> You are not allowed to make appointment request</div>
 @endif
+
+<script>
+    $('.calendarCarasoule #calendar-slider').owlCarousel({
+        loop:false,
+        margin:10,
+        nav:true,
+        navText: ["<i class='fas fa-chevron-left'></i>","<i class='fas fa-chevron-right'></i>"],
+        responsive:{
+            0:{
+                items:3
+            },
+            600:{
+                items:6
+            },
+            768:{
+                items:7
+            },
+            992:{
+                items:4
+            },
+            1024:{
+                items:4
+            },
+            1366:{
+                items:5
+            }
+        }
+    });
+</script>

@@ -279,6 +279,38 @@ function dispatchMessageEvent( $data ) {
 
 /**
  * @param $data
+ * @return bool
+ */
+function socketEvent($data) {
+    $socket = new \App\Services\SocketService('https://nfr.localhost', config('socket.port'));
+    $socket->setQueryParams([
+        'token' => 'edihsudshuz',
+        'id' => '8780',
+        'cid' => '344',
+        'cmp' => 2339
+    ]);
+
+    $success = $socket->emit('notification-channel', [
+        'id' => $data->id,
+        'to' => $data->to,
+        'from' => $data->from,
+        'message' => $data->message,
+        'url' => $data->url,
+        'is_read' => false,
+        'profile_image' => asset(mySelf()->profile_image ?? DUI)
+    ]);
+    if(!$success)
+    {
+        dd($socket->getErrors());
+    }
+    else{
+        var_dump("Success");
+    }
+    dd($success);
+}
+
+/**
+ * @param $data
  * @param int $delay
  *
  * @return PendingDispatch

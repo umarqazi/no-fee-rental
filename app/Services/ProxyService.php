@@ -29,12 +29,12 @@ class ProxyService {
     /**
      * @var string
      */
-    private $licenseFilePath = '/resource/yg7h-zjbf.json';
+    private $schoolData = '/api/geospatial/9hw3-gi34';
 
     /**
      * @var string
      */
-    private $schoolData = '/api/geospatial/9hw3-gi34';
+    private $licenseFilePath = '/resource/yg7h-zjbf.json';
 
     /**
      * @var string
@@ -63,6 +63,7 @@ class ProxyService {
      * @return mixed
      */
     public function schoolZone($coords) {
+        $collection = [];
         $data = toObject([
             'lat' => $coords->latitude,
             'lng' => $coords->longitude,
@@ -74,8 +75,9 @@ class ProxyService {
         ]);
 
         if(!empty($res)) {
-            $coordinates = [];
+
             foreach ($res as $geom) {
+                $coordinates = [];
                 $geom = $geom['the_geom']['coordinates'][0][0];
                 for($i = 0; $i < sizeof($geom); $i ++) {
                     $coords = [
@@ -85,12 +87,17 @@ class ProxyService {
 
                     array_push($coordinates, $coords);
                 }
+
+                array_push($collection, $coordinates);
             }
         }
 
-        return \GuzzleHttp\json_encode(array_values($coordinates));
+        return \GuzzleHttp\json_encode(array_values($collection));
     }
 
+    /**
+     * @param $coords
+     */
     public function schoolData($coords) {
         $params = [
             'lat'  => $coords->latitude,

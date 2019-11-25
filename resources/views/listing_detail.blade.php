@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'No Fee Rental')
+@section('title', 'No Fee Rental | Listing Detail')
 @section('content')
 <style>
     .modal {
@@ -46,10 +46,9 @@
                     <div class="available-btn">
                         <div class="">
                             <span>NO FEE</span>
-                            @if(
-                            $listing->availability !== '0' &&
+                            @if( $listing->availability !== '0' &&
                             carbon($listing->availability)->format('Y-m-d') <= now()->format('Y-m-d'))
-                            <span>Available</span>
+                                <span>Available</span>
                             @else
                                 <span style="background-color: red;">Unavailable</span>
                             @endif
@@ -64,8 +63,8 @@
                             <label> {{ dateReadable($listing->updated_at) }} since last update </label>
                         </div>
                     </div>
-
                 </div>
+
                 <div class="item">
                     <div class="clearfix" style="max-width:100%;">
                         <ul id="image-gallery" class="gallery list-unstyled cS-hidden">
@@ -132,50 +131,18 @@
                             </div>
                         </div>
                     </div>
+
+                    {{--Open House--}}
                     @if($listing->openHouses->isNotEmpty())
                         <div class="open-house-section">
-                            @foreach($listing->openHouses as $openHouse)
-                                @if(carbon($openHouse->date)->format('m-d-Y') > now()->format('m-d-Y') && daysNumReadable(carbon($openHouse->date)) < 8)
-                                    <h3> Open House</h3>
-                                    <div class="open-house-inner">
-                                    <div class="open-timings">
-                                        <p>{{
-                                        formattedDate('D, M d' ,$openHouse->date). ' | '.
-                                        openHouseTimeSlot($openHouse->start_time)->format('h:i a'). ' - ' .
-                                        openHouseTimeSlot($openHouse->end_time)->format('h:i a')
-                                        }}</p>
-                                    </div>
-                                    <div class="apointment-interest-section">
-                                        @if($openHouse->only_appt)
-                                            <span> (By appointment only)</span>
-                                        @else
-                                            <button class="btn btn-default">Interested</button>
-                                        @endif
-{{--                                        <div class="request-send">--}}
-{{--                                        <i class="fas fa-check-circle"></i>Request Sent--}}
-{{--                                        </div>--}}
-                                    </div>
-                                </div>
-                                 @break
-                                @endif
-                            @endforeach
+                            @include('sections.listing_open_house')
                         </div>
                     @endif
-                    <div class="appointment-section">
-                        <a href="{{ route('web.agentProfile', $listing->agent->id) }}">
-                            <ul>
-                                <li>
-                                    <img src="{{ asset($listing->agent->profile_image ?? DUI) }}" alt="">
-                                </li>
-                                <li>
-                                    <h5> {{ $listing->agent->first_name.' '.$listing->agent->last_name }}</h5>
-                                    <p> {{ $listing->agent->company->company ?? 'None' }} </p>
-                                    <i class="far fa-comments"></i> 2 Renter Reviews
-                                </li>
-                            </ul>
-                        </a>
-                    </div>
 
+                    {{--Listing Representative--}}
+                    @include('sections.listing_representative')
+
+                    {{--Contact Representative--}}
                     <div class="apointment-tabs">
                         <ul class="nav nav-tabs">
                             <li class="active"><a data-toggle="tab" href="#home">Appointment</a></li>
@@ -183,27 +150,27 @@
                         </ul>
                         <div class="tab-content">
                             <div id="home" class="tab-pane fade active">
-                                @if(!authenticated())
-                                    <div class="login-signup-tab">
-                                        <div class="login-signup">
-                                            <h5> You have to need to login or sign up to send request</h5>
-                                            <a href="javascript:void(0);" data-toggle="modal" data-target="#login" class="btn-default"> login</a>
-                                            <a href="javascript:void(0);" data-toggle="modal" data-target="#signup" class="btn-default"> SignUp</a>
-                                        </div>
-                                        <div class="successfull-msg">
-                                            <i class="fas fa-check-circle"></i>
-                                            <h5> Your request has been sent successfully</h5>
-                                        </div>
+                            @if(!authenticated())
+                                <div class="login-signup-tab">
+                                    <div class="login-signup">
+                                        <h5> You have to need to login or sign up to send request</h5>
+                                        <a href="javascript:void(0);" data-toggle="modal" data-target="#login" class="btn-default"> login</a>
+                                        <a href="javascript:void(0);" data-toggle="modal" data-target="#signup" class="btn-default"> SignUp</a>
                                     </div>
-                                @else
-                                    {{--Calender--}}
-                                    @include('sections.make_appointment')
-                                @endif
+                                    <div class="successfull-msg">
+                                        <i class="fas fa-check-circle"></i>
+                                        <h5> Your request has been sent successfully</h5>
+                                    </div>
                                 </div>
-                                <div id="menu1" class="tab-pane fade">
-                                    {{--Check Availability--}}
-                                    @include('sections.check_availability')
-                                </div>
+                            @else
+                                {{--Make Appointment--}}
+                                @include('sections.make_appointment')
+                            @endif
+                            </div>
+                            <div id="menu1" class="tab-pane fade">
+                                {{--Check Availability--}}
+                                @include('sections.check_availability')
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -212,48 +179,21 @@
         <h3 class="mt-5 mb-3 description-title">Description</h3>
         <p>{!! $listing->description ?? 'No description' !!}</p>
     </div>
+
+    {{--Listing Amenities & Features--}}
     <div class="listing-aminities-sec">
         <div class="container-lg">
             <div class="row">
 
-                <div class="col-md-3 col-sm-4">
-                    <h3>Amenities</h3>
-                    @if(isset($listing->building->amenities) && sizeof($listing->building->amenities) > 0  )
-                    @foreach($listing->building->amenities as $amenity)
-                        <ul class="second-ul">
-                            <li>{{ $amenity->amenities }}</li>
-                        </ul>
-                    @endforeach
-                    @else
-                        None
-                    @endif
-                </div>
+                {{--Amenities--}}
+                @include('sections.listing_amenities')
 
-                <div class="col-md-3 col-sm-4">
-                <h3>Pet Policy</h3>
-                    @php $pet = petPolicy($listing->features); @endphp
-                    @if(count($pet) < 1)
-                        None
-                    @endif
-                    @foreach($pet as $feature)
-                        <ul class="second-ul">
-                            <li>{{ $feature }}</li>
-                        </ul>
-                    @endforeach
-                </div>
+                {{--Pet Policy--}}
+                @include('sections.listing_pets_policy')
 
-                <div class="col-md-3 col-sm-4">
-                    <h3>Unit Features</h3>
-                    @php $unit = unitFeature($listing->features); @endphp
-                    @if(count($unit) < 1)
-                        None
-                    @endif
-                    @foreach($unit as $feature)
-                        <ul class="second-ul">
-                            <li>{{ $feature }}</li>
-                        </ul>
-                    @endforeach
-                </div>
+                {{--Listing Feaures--}}
+                @include('sections.listing_features')
+
             </div>
         </div>
     </div>
@@ -265,25 +205,25 @@
                     <div class="row">
                         <div class="col-lg-6 col-sm-6">
                             <h3> Transportation</h3>
-                            <p> 51st St (0.25 mi) </p>
-                            <span class="span-box text-s"> S </span>
-                            <span class="span-box text-6"> 4 </span>
-                            <span class="span-box text-6"> 5 </span>
-                            <span class="span-box text-6"> 6 </span>
-                            <span class="span-box text-7"> 7 </span>
-                            <p> 42 Street - Grand Central (0.26 mi) </p>
+                            {{--<p> 51st St (0.25 mi) </p>--}}
+                            {{--<span class="span-box text-s"> S </span>--}}
+                            {{--<span class="span-box text-6"> 4 </span>--}}
+                            {{--<span class="span-box text-6"> 5 </span>--}}
+                            {{--<span class="span-box text-6"> 6 </span>--}}
+                            {{--<span class="span-box text-7"> 7 </span>--}}
+                            {{--<p> 42 Street - Grand Central (0.26 mi) </p>--}}
 
-                            <span class="span-box text-s"> S </span>
-                            <span class="span-box text-6"> 4 </span>
-                            <span class="span-box text-6"> 5 </span>
-                            <span class="span-box text-6"> 6 </span>
-                            <span class="span-box text-7"> 7 </span>
-                            <p>Lexington Av-53 St (0.34 mi </p>
+                            {{--<span class="span-box text-s"> S </span>--}}
+                            {{--<span class="span-box text-6"> 4 </span>--}}
+                            {{--<span class="span-box text-6"> 5 </span>--}}
+                            {{--<span class="span-box text-6"> 6 </span>--}}
+                            {{--<span class="span-box text-7"> 7 </span>--}}
+                            {{--<p>Lexington Av-53 St (0.34 mi </p>--}}
 
-                            <span class="span-box text-e"> E </span>
-                            <span class="span-box text-m"> M </span>
-                            <span class="span-box text-6"> 6 </span>
-                            <p> 51st St (0.25 mi) </p>
+                            {{--<span class="span-box text-e"> E </span>--}}
+                            {{--<span class="span-box text-m"> M </span>--}}
+                            {{--<span class="span-box text-6"> 6 </span>--}}
+                            {{--<p> 51st St (0.25 mi) </p>--}}
                         </div>
                         <div class="col-lg-6 col-sm-6">
                             <h3>Nearby Schools</h3>
@@ -307,172 +247,26 @@
     <div class="nearbyapartment featured-properties ">
         <div class="container-lg tab-content">
             <h3> Nearby Apartments</h3>
-            <div class="property-listing">
-                <div class="desktop-listiing">
-                    @if(isset($listing->building->listings) && count($listing->building->listings) > 1)
-                        @foreach($listing->building->listings as $apartment)
-                            @if($listing->id === $apartment->id) @continue @endif
-                            <div class="property-thumb">
-                                <div class="check-btn">
-                                    <a href="javascript:void(0);">
-                                        <button class="btn-default" data-toggle="modal" data-target="#check-availability">
-                                            Check Availability
-                                        </button>
-                                    </a>
-                                </div>
-                                @if(!authenticated())
-                                    <span class="display-heart-icon"></span>
-                                @endif
-                                @if(isRenter())
-                                    @if(isFavourite($apartment["favourites"],$apartment->id))
-                                        <span id = "{{$apartment->id}}" class="heart-icon favourite"></span>
-                                    @else
-                                        <span id = "{{$apartment->id}}" class="heart-icon "></span>
-                                    @endif
-                                @endif
-                                <img src="{{ asset($apartment->thumbnail ?? DLI) }}" alt="" class="main-img">
-                            <div class="info">
-                                <div class="info-link-text">
-                                    <p> ${{ ($apartment->rent) ?   number_format($apartment->rent,0) : 'None' }} </p>
-                                    <small>{{ str_formatting($apartment->bedrooms, 'Bed').' ,'.str_formatting($apartment->baths, 'Bath') }} </small>
-                                    <p> {{ is_exclusive($apartment) }}</p>
-                                </div>
-                                <a href="{{ route('listing.detail', $apartment->id) }}" class="btn viewfeature-btn"> View </a>
-                            </div>
-                            <div class="feaure-policy-text">
-                                <p>${{ ($apartment->rent) ?   number_format($apartment->rent,0) : 'None' }} / Month </p>
-                                <span>{{ str_formatting($apartment->bedrooms, 'Bed').' ,'.str_formatting($apartment->baths, 'Bath') }}</span>
-                            </div>
-                        </div>
-                        @endforeach
-                    @else
-                        No Nearby Apartment Found
-                    @endif
-                </div>
-
-                <div class="owl-slider">
-                    <div class="owl-carousel owl-theme" id="NearbyApartments">
-                        @if( isset($listing->building->listings) && count($listing->building->listings) > 1)
-                            @foreach($listing->building->listings as $apartment)
-                            @if($listing->id === $apartment->id) @continue @endif
-                                <div class="item">
-                                    <div class="property-thumb">
-                                    <div class="check-btn">
-                                        <a href="javascript:void(0);">
-                                            <button class="btn-default" data-toggle="modal" data-target="#check-availability">Check Availability</button>
-                                        </a>
-                                    </div>
-                                        @if(!authenticated())
-                                            <span class="display-heart-icon"></span>
-                                        @endif
-                                        @if(isRenter())
-                                            @if(isFavourite($apartment["favourites"],$apartment->id))
-                                                <span id = "{{$apartment->id}}" class="heart-icon favourite"></span>
-                                            @else
-                                                <span id = "{{$apartment->id}}" class="heart-icon "></span>
-                                            @endif
-                                        @endif
-                                    <img src="{{ asset($apartment->thumbnail ?? DLI) }}" alt="" class="main-img">
-                                        <div class="info">
-                                            <div class="info-link-text">
-                                                <p> ${{ ($apartment->rent) ?   number_format($apartment->rent,0) : 'None' }} </p>
-                                                <small>{{ str_formatting($apartment->bedrooms, 'Bed').' ,'.str_formatting($apartment->baths, 'Bath') }} </small>
-                                                <p> {{ is_exclusive($apartment) }}</p>
-                                            </div>
-                                            <a href="{{ route('listing.detail', $apartment->id) }}" class="btn viewfeature-btn"> View </a>
-                                        </div>
-                                        <div class="feaure-policy-text">
-                                            <p>${{ ($apartment->rent) ?   number_format($apartment->rent,0) : 'None' }} / Month </p>
-                                            <span>{{ str_formatting($apartment->bedrooms, 'Bed').' ,'.str_formatting($apartment->baths, 'Bath') }}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
-                        @else
-                            No Nearby Apartment Found
-                        @endif
-                    </div>
-                </div>
-            </div>
+            @include('sections.nearby_apartments')
         </div>
     </div>
 
-    <!-- The Modal -->
-        <div class="modal fade" id="flag-icon">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <!-- Modal Header -->
-                    <div class="modal-header">
-                        <h4 class="modal-title">Report this listing <br>
-                        <p> 223 Park Slope, 223 4th Avenue</p>
-                        </h4>
-                        <!--  <button type="button" class="close" data-dismiss="modal">&times;</button> -->
-
-                    </div>
-                    <!-- Modal body -->
-                    <div class="modal-body">
-                        <div class="profilecard-detaill">
-                            <h3> Report reason</h3>
-                            <div class="form-group">
-                                <select class="form-control" id="sel1">
-                                    <option>No longer available</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                </select>
-                            </div>
-                            <div class="form-group text-message">
-                                <textarea placeholder="Write Your Message"></textarea>
-                            </div>
-
-                        </div>
-                    </div>
-                    <!-- Modal footer -->
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-danger" data-dismiss="modal">Send</button>
-                        <button type="submit" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                    </div>
-                </div>
-            </div>
-        </div>
 </section>
+
+{{--Listing Report--}}
+@include('modals.listing_report')
+
 {{--Check Availability--}}
 @include('modals.check_availability')
+
 {{--Make Appointment--}}
 @include('modals.appointment')
+
 <script>
     mapWithNearbyLocations('{!! $listing->map_location !!}', document.getElementById('map'), true ) ;
 </script>
+
 <script>
-  $('.calendarCarasoule #calendar-slider').owlCarousel({
-    loop:false,
-    margin:10,
-    nav:true,
-    navText: ["<i class='fas fa-chevron-left'></i>","<i class='fas fa-chevron-right'></i>"],
-    responsive:{
-        0:{
-            items:3
-        },
-        600:{
-            items:6
-        },
-        768:{
-            items:7
-        },
-        992:{
-            items:4
-        },
-         1024:{
-            items:4
-        },
-        1366:{
-            items:5
-        }
-    }
-})
-
-
-
   $(document).ready(function(){
   $(".after-radio-textarea a").click(function(){
     $(".calendar-wrap").hide();
@@ -485,6 +279,3 @@
 });
   </script>
 @endsection
-
-
-

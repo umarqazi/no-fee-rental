@@ -44,8 +44,16 @@ class NotificationController extends Controller
      *
      * @return mixed
      */
-    public function markAsRead(Request $request) {
-        return $this->service->markAsRead($request);
+    public function markAllAsRead(Request $request) {
+        return $this->service->markAllAsRead($request);
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function markAsRead($id) {
+        return $this->service->markAsRead($id);
     }
 
     /**
@@ -54,20 +62,19 @@ class NotificationController extends Controller
      * @return bool
      */
     public function push(Request $request) {
-        $notification = [
-            'from'         => $request->sender['id'],
-            'to'           => myId(),
-            'sender'       => $request->sender,
-            'subject'      => 'New Message Arrive',
-            'view'         => 'message-receive',
-            'path'         => route('agent.messageIndex'),
-            'body'         => $request->message,
-            'notification' => "New message received from {$request->sender['first_name']} {$request->sender['last_name']}",
-            'toName'       => mySelf()->first_name,
-            'toEmail'      => mySelf()->email
-        ];
-        $this->service->setter($notification)->send();
-        return sendResponse($request, true, 'New message receive from '.$request->sender['first_name']. ' ' .$request->sender['last_name']);
+//        $notification = [
+//            'from'         => $request->sender['id'],
+//            'to'           => myId(),
+//            'subject'      => 'New Message Arrive',
+//            'view'         => 'message-receive',
+//            'path'         => 'anc',
+//            'body'         => $request->message,
+//            'notification' => "New message received from {$request->sender['first_name']} {$request->sender['last_name']}",
+//            'toName'       => mySelf()->first_name,
+//            'toEmail'      => mySelf()->email
+//        ];
+//        $this->service->setter($notification)->send();
+//        return sendResponse($request, true, 'New message receive from '.$request->sender['first_name']. ' ' .$request->sender['last_name']);
     }
 
     /**

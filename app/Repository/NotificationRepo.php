@@ -42,6 +42,14 @@ class NotificationRepo extends BaseRepo {
 
     /**
      * @param $id
+     * @return mixed
+     */
+    public function markAsRead($id) {
+        return $this->update($id, ['is_read' => true]);
+    }
+
+    /**
+     * @param $id
      *
      * @return bool|mixed
      */
