@@ -301,12 +301,11 @@ function socketEvent($data) {
     ]);
     if(!$success)
     {
-        dd($socket->getErrors());
+        $socket->getErrors();
     }
     else{
         var_dump("Success");
     }
-    dd($success);
 }
 
 /**
