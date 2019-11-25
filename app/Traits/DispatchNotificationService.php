@@ -82,7 +82,7 @@ trait DispatchNotificationService
         self::$data->subject = 'Email Confirmation';
         self::$data->message = 'You can confirm your email by clicking the button below.';
         self::$data->url = route('user.confirmEmail', self::$data->data->data->remember_token);
-        self::send();
+        self::__onlyEmail();
     }
 
     /**
@@ -307,5 +307,12 @@ trait DispatchNotificationService
                 'from' => $fromAgent,
             ])
         ]);
+    }
+
+    /**
+     * @return \Illuminate\Foundation\Bus\PendingDispatch
+     */
+    private static function __onlyEmail() {
+        return dispatchEmailQueue(self::$data);
     }
 }

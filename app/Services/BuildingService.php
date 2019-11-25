@@ -109,6 +109,14 @@ class BuildingService {
     }
 
     /**
+     * @param $address
+     * @return string
+     */
+    public function ownerOnlyBuilding($address) {
+        return $this->buildingRepo->ownerOnlyBuilding($address)->count() > 0 ? 'false' : 'true';
+    }
+
+    /**
      * @param $id
      * @param $request
      *
