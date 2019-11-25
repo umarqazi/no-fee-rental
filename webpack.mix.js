@@ -11,6 +11,6 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/notification.js', 'public/assets/js/notification.js')
-    .js('resources/js/listing-notification.js', 'public/assets/js/listing-notification.js')
-    .js('resources/js/message.js', 'public/assets/js/message.js');
+mix.js('resources/js/socket-client.js', 'public/assets/js/socket-client.js')
+    .js('resources/js/notification.js', 'public/assets/js/notification.js')
+    .js('resources/js/message.js', 'public/assets/js/tcp.js');
