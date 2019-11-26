@@ -191,27 +191,35 @@ const showListInfo = (resp) => {
 const autoComplete = (searchSelector) => {
     let isValid = 0;
     let streetAddress = '';
-    let restrict = ['street_number', 'route', 'administrative_area_level_1'];
+    let displayAddress = '';
+    let open = ['route'];
+    let exclusive = ['street_number', 'route'];
     let autocomplete = new google.maps.places.Autocomplete(searchSelector);
     google.maps.event.addListener(autocomplete, 'place_changed', function() {
         let address = autocomplete.getPlace();
         console.log(address);
         address.address_components.forEach(_match => {
             _match.types.forEach(matchCriteria => {
-                if(restrict.includes(matchCriteria)) {
-                    streetAddress += _match.long_name + ' ';
+
+                if(exclusive.includes(matchCriteria)) {
+                    streetAddress += _match.short_name + ' ';
                     isValid ++;
                 }
+
+                if(open.includes(matchCriteria)) {
+                    displayAddress += _match.long_name + ' ';
+                }
+
             });
         });
 
-        if(isValid !== restrict.length) {
+        if(isValid < 1) {
             // address error
             let $validator = $("#listing-form").validate();
-            let errors = { street_address: "Address is not valid" };
+            let errors = { street_address: "Not a valid street address" };
             $validator.showErrors(errors);
         } else {
-            $('#autofill').val(streetAddress.replace('New York', ''));
+            $('#autofill').val(displayAddress);
             searchSelector.value = streetAddress;
         }
     });
