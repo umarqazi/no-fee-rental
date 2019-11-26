@@ -68,7 +68,7 @@
     {!! HTML::script('assets/js/listing.js') !!}
 <script>
     $(document).ready(function() {
-        enableDatePicker('#availability_date');
+        enableDatePicker('#availability_date', false);
         enableDatePicker('.open-house-date', false);
         autoComplete(document.getElementById('controls'));
 

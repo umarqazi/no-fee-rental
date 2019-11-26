@@ -23,6 +23,7 @@
         [
             ($action == 'Update') ? 'readonly' : '',
             'id'    => 'autofill',
+            'readonly' => 'readonly',
             'class' => 'input-style',
         ]) !!}
         <span class="invalid-feedback" role="alert">
