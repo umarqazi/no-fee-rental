@@ -81,7 +81,7 @@ class UserController extends Controller {
      */
 	public function invitedAgentSignup(Request $request) {
 		$res = $this->service->invitedAgentSignup($request);
-		return sendResponse($request, $res, 'Account has been created', '/');
+		return sendResponse($request, $res, 'We send an email to your account. Kindly verify your email', '/');
 	}
 
     /**

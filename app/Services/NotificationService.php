@@ -62,15 +62,15 @@ class NotificationService extends NotificationSettingService {
      * @return bool
      */
     public function send() {
-        $this->data = $this->save();
+        $notification = $this->save();
         $settings = $this->receiverSettings( $this->data->to );
         if ( empty( $settings ) ) {
-            socketEvent($this->data);
+            socketEvent($notification);
             dispatchEmailQueue( $this->data );
         }
 
         if ( ! empty( $settings ) && $settings->allow_web_notification ) {
-            socketEvent($this->data);
+            socketEvent($notification);
         }
 
         if ( ! empty( $settings ) && $settings->allow_email ) {

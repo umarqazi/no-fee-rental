@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Listing Feature Approve</title>
+	<title>Listing Feature Request</title>
 	<style type="text/css">
 		body{
 			background-color: #edeff0;
@@ -138,10 +138,10 @@
 	</div>
 	<div class="Notification-wrapper">
 		<img src="{{ asset('assets/images/feature-listing.png') }}" alt="notification-bell-icon">
-		<h2> Notification Title</h2>
+		<h2> Listing Feature Request</h2>
 		<p> <b>Hi  </b> Converted 2 Bedroom and 1 Bath with double exposure in a condo located in Midtown East. Windowed Kitchen and Bath. Comfortable living and dining area. The building is located within 5 minutes walking distance to the United Nations. Modest post-war building </p>
 		<div class="action-button">
-			<button type="submit">Action Button</button>
+            <a href="{{ $data->url }}"><button type="submit">Feature Listings</button></a>
 		</div>
 		<div class="Notification-wrap-footer">
 			<p> <b>Lorem Ipsum </b>  is simply dummy text of the printing and typesetting industry. </p>

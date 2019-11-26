@@ -299,8 +299,8 @@ trait DispatchNotificationService
         self::$data = toObject([
             'to' => $data->to,
             'from' => $data->from,
-            'toEmail' => is_int($data->to) ? $toAgent->email : $data->to,
-            'fromEmail' => is_int($data->from) ? $fromAgent->email : $data->from,
+            'toEmail' => $toAgent->email,
+            'fromEmail' => $fromAgent->email,
             'data' => $data,
             'user' => toObject([
                 'to' => $toAgent,
