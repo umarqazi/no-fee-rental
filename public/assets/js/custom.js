@@ -610,9 +610,6 @@ $(() => {
             $('.app-message-error').text('') ;
         }
     });
-    $(".sort-bt > i,span").on('click', function () {
-        $(this).siblings(".custom-dropdown").slideToggle();
-    });
 
 });
 
