@@ -341,11 +341,24 @@ $(() => {
         }
     });
 
-    // $(function () {
-    //     $('#multiple').pignoseCalendar({
-    //         multiple: true
-    //     });
-    // });
+    function onSelectHandler(date, context) {
+        let from = null;
+        if (date[0] !== null) {
+            from = date[0].format('YYYY-MM-DD');
+        }
+
+        if($('body').find('.pignose-availability').length > 0) {
+            $('.pignose-availability').val(from);
+        } else {
+            $('body').find('.article').append(`<input name='availability' class="pignose-availability" type='hidden' value='${from}'>`);
+        }
+    }
+
+    $(function () {
+        $('#multiple').pignoseCalendar({
+            select: onSelectHandler
+        });
+    });
 
     $('#image-gallery').lightSlider({
         gallery: true,
@@ -596,9 +609,6 @@ $(() => {
         if(!$('.app-message-error').is(':empty')){
             $('.app-message-error').text('') ;
         }
-    });
-    $(".sort-bt > i,span").on('click', function () {
-        $(this).siblings(".custom-dropdown").slideToggle();
     });
 
 });
