@@ -191,8 +191,7 @@ const showListInfo = (resp) => {
 const autoComplete = (searchSelector) => {
     let isValid = 0;
     let streetAddress = '';
-    let displayAddress = '';
-    let restrict = ['street_number', 'route', 'locality'];
+    let restrict = ['street_number', 'route', 'administrative_area_level_1'];
     let autocomplete = new google.maps.places.Autocomplete(searchSelector);
     google.maps.event.addListener(autocomplete, 'place_changed', function() {
         let address = autocomplete.getPlace();
@@ -200,7 +199,7 @@ const autoComplete = (searchSelector) => {
         address.address_components.forEach(_match => {
             _match.types.forEach(matchCriteria => {
                 if(restrict.includes(matchCriteria)) {
-                    streetAddress += _match.short_name + ' ';
+                    streetAddress += _match.long_name + ' ';
                     isValid ++;
                 }
             });
@@ -208,7 +207,9 @@ const autoComplete = (searchSelector) => {
 
         if(isValid !== restrict.length) {
             // address error
-            alert('invalid');
+            let $validator = $("#listing-form").validate();
+            let errors = { street_address: "Address is not valid" };
+            $validator.showErrors(errors);
         } else {
             $('#autofill').val(streetAddress.replace('New York', ''));
             searchSelector.value = streetAddress;
