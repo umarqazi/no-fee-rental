@@ -2699,7 +2699,7 @@ footer .footer-wrapper>li:nth-child(1) {
 
 .info-collect-bg:before {
   content: "";
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.6);
   width: 100%;
   position: absolute;
   top: 0;
