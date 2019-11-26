@@ -388,6 +388,7 @@ class UserService {
                     return true ;
                 }
                 $this->agentRepo->update($InviteRes->id, ['token' => $agent->token]);
+                $InviteRes = $this->agentRepo->find(['email' => $request->email])->first();
                 $this->agentMail($InviteRes);
                 return true;
             }
@@ -399,8 +400,8 @@ class UserService {
             $this->agentRepo->invite($agent->toArray());
             return true ;
         }
-        $this->agentRepo->invite($agent->toArray());
-        $this->agentMail($UserRes);
+        $inviteRes = $this->agentRepo->invite($agent->toArray());
+        $this->agentMail($inviteRes);
         return true;
     }
 

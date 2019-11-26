@@ -107,8 +107,8 @@ trait DispatchNotificationService
         self::$data->view = 'reset-password';
         self::$data->subject = 'Password Reset';
         self::$data->message = 'You received this email as we receive a request for password reset. If you made this request you can reset your password by following the link given below.';
-        self::$data->url = route('recover.password', self::$data->data->response->token);
-        self::send();
+        self::$data->url = route('recover.password', self::$data->data->data->token);
+        self::__onlyEmail();
     }
 
     /**
@@ -122,7 +122,7 @@ trait DispatchNotificationService
         self::$data->message = 'You received an invitation from no fee rental.';
         self::$data->data->token = $data->data->token;
         self::$data->url = route('agent.signup_form', self::$data->data->token);
-        self::send();
+        self::__onlyEmail();
     }
 
     /**
