@@ -53,12 +53,13 @@ class SearchService extends SaveSearchService {
             'neighborhood'          => $request->neighborhoods ?? null,
             'beds'                  => $request->beds ?? null,
             'baths'                 => $request->baths ?? null,
+            'availability'          => $request->availability ?? null,
             'priceRange'            => is_array($request->priceRange)
                 ? $request->priceRange : ['min_price' => '0', 'max_price' => $request->priceRange],
             'squareRange'           => $request->squareRange ?? null,
             'agentsWithPremiumPlan' => $request->agentsWithPremiumPlan ?? null
         ];
-//dd($data);
+
         collect($data)->map(function($args, $method) {
             if(method_exists($this, $method) && !empty($args)) {
                 $this->args = toObject([$method => $args]);
@@ -94,7 +95,7 @@ class SearchService extends SaveSearchService {
      */
     private function beds() {
         if(in_array(5, $this->args->{__FUNCTION__})) {
-            $this->query->where('bedrooms', '>=', 5)->orWhereIn('bedrooms', [$this->args->{__FUNCTION__}]);
+            $this->query->whereIn('bedrooms', [$this->args->{__FUNCTION__}])->orWhere('bedrooms', '>=', 5);
         } else {
             $this->query->whereIn( 'bedrooms', is_array($this->args->{__FUNCTION__})
                 ? $this->args->{__FUNCTION__} : [ $this->args->{__FUNCTION__} ] );
@@ -152,6 +153,13 @@ class SearchService extends SaveSearchService {
                 $this->args->{__FUNCTION__}['square_min'],
                 $this->args->{__FUNCTION__}['square_max']
         ]);
+    }
+
+    /**
+     * availability filter
+     */
+    private function availability() {
+        $this->query->where('availability' , '>=', $this->args->{__FUNCTION__});
     }
 
     /**
