@@ -11,6 +11,7 @@ namespace App\Services;
 use App\Forms\AppointmentForm;
 use App\Forms\CheckAvailabilityForm;
 use App\Forms\MessageForm;
+use App\Repository\ListingRepo;
 use App\Traits\DispatchNotificationService;
 use Illuminate\Support\Facades\DB;
 use App\Repository\ListingConversationRepo;
@@ -30,6 +31,11 @@ class ListingConversationService {
     protected $messageRepo;
 
     /**
+     * @var ListingRepo
+     */
+    protected $listingRepo;
+
+    /**
      * @var ListingConversationRepo
      */
     protected $listingConversationRepo;
@@ -38,6 +44,7 @@ class ListingConversationService {
      * AppointmentService constructor.
      */
     public function __construct() {
+        $this->listingRepo = new ListingRepo();
         $this->messageRepo = new MessageRepo();
         $this->listingConversationRepo = new ListingConversationRepo();
     }
@@ -94,9 +101,14 @@ class ListingConversationService {
      * @return mixed
      */
     public function accept($id) {
-        $listing_detail = listing_detail($id);
+        $listing = $this->listingConversationRepo->findById($id)->with('listing')->first();
+        DispatchNotificationService::APPROVEMEETINGREQUEST(toObject([
+            'from' => $listing->from,
+            'to'   => $listing->to,
+            'data' => $listing
+        ]));
         calendarEvent([
-            'title' => $listing_detail->display_address.'  (Approved)',
+            'title' => $listing->listing->display_address.'  (Approved)',
             'url'   => '.loadConversation',
             'color' => 'red'
         ], true, $id);

@@ -140,7 +140,7 @@
     <div class="Notification-wrapper">
         <img src="{{ asset('assets/images/feature-listing.png') }}" alt="notification-bell-icon">
         <h2> Invitation to create account</h2>
-        <p> <b>Hi {{ ucfirst($data->user->to->first_name) }}! </b> Your have been invited to  create account  on no fee rental. </p>
+        <p> <b>Hi {{--{{ ucfirst($data->user->to->first_name) }}!--}} </b> Your have been invited to  create account  on no fee rental. </p>
         <div class="action-button">
             <a href="{{ $data->url }}">Click To Complete SignUp Process</a>
         </div>
