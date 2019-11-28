@@ -264,11 +264,11 @@
       });
 
     </script>
-<script src="<?php echo $_SERVER['REQUEST_URI']; ?>/assets/js/signup.js"></script>
-<script src="<?php echo $_SERVER['REQUEST_URI']; ?>/assets/js/login.js"></script>
-<script src="<?php echo $_SERVER['REQUEST_URI']; ?>/assets/js/recent-search.js"></script>
-<script src="<?php echo $_SERVER['REQUEST_URI']; ?>/assets/js/global.js"></script>
-<script src="<?php echo $_SERVER['REQUEST_URI']; ?>/assets/js/validate.js"></script>
+<script src="<?php echo $_SERVER['HTTP_HOST']; ?>/assets/js/signup.js"></script>
+<script src="<?php echo $_SERVER['HTTP_HOST']; ?>/assets/js/login.js"></script>
+<script src="<?php echo $_SERVER['HTTP_HOST']; ?>/assets/js/recent-search.js"></script>
+<script src="<?php echo $_SERVER['HTTP_HOST']; ?>/assets/js/global.js"></script>
+<script src="<?php echo $_SERVER['HTTP_HOST']; ?>/assets/js/validate.js"></script>
 
  </body>
 
