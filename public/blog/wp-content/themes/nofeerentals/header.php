@@ -8,7 +8,13 @@
    *
    * @package nofeerentals
    */
+    ob_start();
+    session_start();
 
+    function doLogin() {
+        $ch = curl_init('http://no-fee-rental.teamtechverx.com/api/login');
+
+    }
 ?>
     <!doctype html>
     <html <?php language_attributes(); ?>>
@@ -23,11 +29,19 @@
         <?php wp_head(); ?>
     </head>
 
-    <body <?php body_class(); ?>>
+    <body <?php body_class(); ?>
         <header>
 
             <div class="mobile-menu">
                 <i class="fa fa-times close-menu-btn"></i>
+                <div class="user-avtar">
+                    <a href="#"><img src="assets/images/agent-img.jpg" alt="" class="avtar" /> Jhone Doe <i class="fa fa-angle-down"></i></a>
+                    <div class="user-dropdown">
+                        <a href="#">Dashboard </a>
+                        <a href="#">Profile Setting </a>
+                        <a href="#">Log Out </a>
+                    </div>
+                </div>
                 <div class="mobile-nav">
                     <ul id="menu-header-menu" class="menu-links">
                         <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-29">
@@ -83,6 +97,19 @@
                               <button type="button" class="signup-btn signup-modal-btn" data-toggle="modal" data-target="#login">Login</button>
                               <button type="button" class="signup-btn login-btn signin-modal-btn" data-toggle="modal" data-target="#signup"> Signup</button>
                           </div>
+                            <div class="login-user">
+                                <a href="#"><img src="assets/images/agent-img.jpg" alt="" class="avtar" /> Jhone Doe <i class="fa fa-angle-down"></i></a>
+                                <div class="user-dropdown">
+                                    <a href="#">Dashboard </a>
+                                    <a href="#">Profile Setting </a>
+                                    <a href="#">Log Out </a>
+                                </div>
+                            </div>
+                            <div class="user-dropdown">
+                                <a href="{{ route(whoAmI().'.index') }}">Dashboard </a>
+                                <a href="{{ route(whoAmI().'.showProfile') }}">Profile Setting </a>
+                                <a href="{{ route(whoAmI().'.logout') }}">Log Out </a>
+                            </div>
                         </div>
 
                     </div>
