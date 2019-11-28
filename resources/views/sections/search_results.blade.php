@@ -6,7 +6,7 @@
                         <div class="mobile-view-dropdown">
                             <i class="fa fa-bars"></i> Filters
                         </div>
-                        <div class="mobile-map-icon"><i class="fa fa-map-marker-alt"></i></div>
+                        <div class="mobile-map-icon"><i class="fas fa-map-marked-alt"></i></div>
                         <div id="mobile-map-listing-view">
                             <div id="mobile-map"></div>
                         </div>
