@@ -1911,8 +1911,8 @@ footer .copyright .social-icons li a:hover {
 }
 
 .contact-banner {
-    background-image: url('..//images/contact-us-bgg.jpg');
-    max-height: 470px;main.css
+    background-image: url('..//images/contact-us-new.jpg');
+    height: 360px;
     background-repeat: no-repeat;
     object-fit: cover;
     width: 100%;
