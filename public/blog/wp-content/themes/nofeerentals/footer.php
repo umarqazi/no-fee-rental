@@ -52,7 +52,7 @@
                     <div class="newsletter">
                         <div class="title">subscribe news letter</div>
                         <p>Enter your email address &amp; get daily newsletter</p>
-                        <form method="POST" action="http://no-fee-rental.teamtechverx.com/newsletter-subscribe" accept-charset="UTF-8" id="newsletter-form" class="newsletter-form ajax" reset="true">
+                        <form method="POST" action="http://no-fee-rental.teamtechverx.com/api/newsletter-subscribe" accept-charset="UTF-8" id="newsletter-form" class="newsletter-form ajax" reset="true">
                             <input name="_token" type="hidden" value="0d93UMDvS4Sjfmoa9Lt7jJutbJVYodaQG0jcrRSF">
                             <input class="fld" placeholder="Email Address" name="email" type="text">
                             <label id="error" class="error email" for="email"></label>
@@ -94,7 +94,7 @@
                     <div class="login-heading">
                         Login
                     </div>
-                    <form method="POST" action="http://no-fee-rental.teamtechverx.com/login" accept-charset="UTF-8" id="login_form" class="ajax" novalidate="novalidate">
+                    <form method="POST" action="http://no-fee-rental.teamtechverx.com/api/login" accept-charset="UTF-8" id="login_form" class="ajax" novalidate="novalidate">
                         <input name="_token" type="hidden" value="wgtYrzIjKZeqRuv67Xf1mCwnwFUW8JlmJKzf0lre">
                         <div class="row">
                             <div class="col-md-6">
@@ -166,7 +166,7 @@
                     <div class="login-heading">
                         Signup
                     </div>
-                    <form method="POST" action="http://no-fee-rental.teamtechverx.com/user-signup" accept-charset="UTF-8" class="ajax" reset="true" id="signup_form" novalidate="novalidate">
+                    <form method="POST" action="http://no-fee-rental.teamtechverx.com/api/user-signup" accept-charset="UTF-8" class="ajax" reset="true" id="signup_form" novalidate="novalidate">
                         <input name="_token" type="hidden" value="wgtYrzIjKZeqRuv67Xf1mCwnwFUW8JlmJKzf0lre">
                         <div class="row">
                             <div class="col-sm-12 mb-2">
@@ -265,6 +265,12 @@
       });
 
     </script>
+<script src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/assets/js/vendor/toastr.js"></script>
+<?php
+if(session('message')) {
+    echo "<script>toastr.{session('alert_type')}(session('message'));</script>";
+}
+?>
 <script src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/assets/js/signup.js"></script>
 <script src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/assets/js/login.js"></script>
 <script src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/assets/js/recent-search.js"></script>
