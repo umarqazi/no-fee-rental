@@ -95,3 +95,9 @@ Route::post('/update-building/{id}', 'Admin\BuildingController@update')->name('a
 Route::get('/no-fee-building/{id}', 'Admin\BuildingController@noFee')->name('admin.noFeeBuilding');
 Route::get('/fee-building/{id}', 'Admin\BuildingController@fee')->name('admin.feeBuilding');
 Route::get('/add-apartment/{id}', 'Admin\BuildingController@addApartment')->name('admin.addApartment');
+
+// Listing Reports
+Route::get('/all-reports', 'Admin\ListingReports@get')->name('admin.listingReportIndex');
+Route::get('/view-report/{id}', 'Admin\ListingReports@detail')->name('admin.listingReportDetail');
+Route::post('/remove-report/{id}', 'Admin\ListingReports@delete')->name('admin.listingReportRemove');
+Route::post('/response-report/{id}', 'Admin\ListingReports@reply')->name('admin.listingReportReply');

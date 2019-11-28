@@ -18,6 +18,7 @@
         <meta name="viewport" content="width=device-width">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="profile" href="https://gmpg.org/xfn/11">
+        <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/assets/css/toastr.css">
 
         <?php wp_head(); ?>
     </head>
@@ -65,6 +66,19 @@
                       );
                     }
                   ?>
+                          <div class="recent-search-dropdown">
+                    <a href="#">Recent Searches<i class="fa fa-angle-down"></i></a>
+                    <div class="dropDown">
+                        <ul class="neighborhoods_amenities">
+                            <li></li>
+                        </ul>
+
+                        <ul class="ul-border-top">
+                            <li></li>
+                        </ul>
+                    </div>
+                </div>
+
                           <div class="actions-btns">
                               <button type="button" class="signup-btn signup-modal-btn" data-toggle="modal" data-target="#login">Login</button>
                               <button type="button" class="signup-btn login-btn signin-modal-btn" data-toggle="modal" data-target="#signup"> Signup</button>
@@ -111,9 +125,9 @@
 
                 <?php } ?>
 
-                    <script src="http://no-fee-rental.teamtechverx.com/assets/js/signup.js"></script>
-
-                    <script src="http://no-fee-rental.teamtechverx.com/assets/js/login.js"></script>
                     </div>
+                    <script src="http://no-fee-rental.teamtechverx.com/assets/js/vendor/jquery.validate.min.js"></script>
 
         </header>
+
+

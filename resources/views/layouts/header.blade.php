@@ -29,28 +29,23 @@
     <div class=" container-lg">
         <div class="header-container">
             <a href="{!! url('/') !!}"> <img src="{{ asset('assets/images/logo.png') }}" class="logo" /></a>
-            <ul class="menu-links">
-                <li>
-                    <a href="{{ route('web.ListsByRent') }}">Rent </a>
-                    <a href="{{ route('web.neighborhood') }}">Neighborhood </a>
-                </li>
-            </ul>
+
             <div class="header-right-wrapper">
+                <ul class="menu-links">
+                    <li>
+                        <a href="{{ route('web.ListsByRent') }}">Rent </a>
+                        <a href="{{ route('web.neighborhood') }}">Neighborhood </a>
+                    </li>
+                </ul>
                 <div class="recent-search-dropdown">
                     <a href="#">Recent Searches<i class="fa fa-angle-down"></i></a>
                     <div class="dropDown">
                         <ul class="neighborhoods_amenities">
-                            <li> {{--<a href="#">Cats Allowed </a>--}} </li>
-                       {{--     <li> <a href="#">Dogs Allowed </a>, </li>
-                            <li> <a href="#">By Owner </a>, </li>
-                            <li> <a href="#">Exclusive </a>, </li>
-                            <li> <a href="#">Sublet </a>, </li>
-                            <li> <a href="#">Common Outdoor Space </a> </li>
-                       --}} </ul>
+                            <li></li>
+                       </ul>
 
                         <ul class="ul-border-top">
-                            <li> {{--<a href="#">NYC-Manhattan $0 to $50000 - Beds:2 - Bath:1 </a>--}} </li>
-
+                            <li> </li>
                         </ul>
                     </div>
                 </div>

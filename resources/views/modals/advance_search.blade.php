@@ -115,11 +115,13 @@
                 </div>
 
                     {{--Apartment Features--}}
+                <div class="row">
                     <div class="col-md-12" style="margin-top: 20px;">
                         <div class="row">
                             {!! features() !!}
                         </div>
                     </div>
+                </div>
 
                     <div class="col-md-12 text-left mt-4 mb-4 bdr-top-btn">
                         <button type="submit" class="btn-default">Search</button>

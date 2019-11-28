@@ -1,4 +1,4 @@
-<section class="your-life-container">
+<section class="your-life-container ur-life-large-img">
     <div class="container-lg">
         <div class="row">
             <div class="p-0">
