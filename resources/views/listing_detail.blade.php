@@ -50,7 +50,7 @@
                             carbon($listing->availability)->format('Y-m-d') <= now()->format('Y-m-d'))
                                 <span>Available</span>
                             @else
-                                <span style="background-color: red;">Unavailable</span>
+                                <span style="background-color: red;">Not Available</span>
                             @endif
                             @if($listing->building_type === EXCLUSIVE)
                                 <span style="background-color: #223970;">Exclusive</span>
