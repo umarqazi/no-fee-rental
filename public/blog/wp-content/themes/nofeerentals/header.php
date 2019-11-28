@@ -125,7 +125,6 @@
                 <?php } ?>
 
                     </div>
-                    <script src="http://no-fee-rental.teamtechverx.com/assets/js/vendor/jquery.validate.min.js"></script>
 
         </header>
 
