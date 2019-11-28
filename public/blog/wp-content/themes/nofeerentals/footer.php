@@ -266,16 +266,16 @@
 
     </script>
 <script src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/assets/js/vendor/toastr.js"></script>
-<?php
-if(session('message')) {
-    echo "<script>toastr.{session('alert_type')}(session('message'));</script>";
-}
-?>
 <script src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/assets/js/signup.js"></script>
 <script src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/assets/js/login.js"></script>
 <script src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/assets/js/recent-search.js"></script>
 <script src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/assets/js/global.js"></script>
 <script src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/assets/js/validate.js"></script>
+<?php
+if(session('message')) {
+    echo "<script>toastr.{session('alert_type')}(session('message'));</script>";
+}
+?>
  </body>
 
 </html>
