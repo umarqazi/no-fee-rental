@@ -8,13 +8,6 @@
    *
    * @package nofeerentals
    */
-    ob_start();
-    session_start();
-
-    function doLogin() {
-        $ch = curl_init('http://no-fee-rental.teamtechverx.com/api/login');
-
-    }
 ?>
     <!doctype html>
     <html <?php language_attributes(); ?>>
