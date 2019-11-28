@@ -18,6 +18,7 @@
         <meta name="viewport" content="width=device-width">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="profile" href="https://gmpg.org/xfn/11">
+        <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/assets/css/toastr.css">
 
         <?php wp_head(); ?>
     </head>
@@ -77,7 +78,7 @@
                         </ul>
                     </div>
                 </div>
-                  
+
                           <div class="actions-btns">
                               <button type="button" class="signup-btn signup-modal-btn" data-toggle="modal" data-target="#login">Login</button>
                               <button type="button" class="signup-btn login-btn signin-modal-btn" data-toggle="modal" data-target="#signup"> Signup</button>
@@ -128,4 +129,5 @@
                     <script src="http://no-fee-rental.teamtechverx.com/assets/js/vendor/jquery.validate.min.js"></script>
 
         </header>
+
 

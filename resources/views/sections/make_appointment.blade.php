@@ -24,7 +24,7 @@
                 @endfor
             </div>
         </div>
-        <span class="app-date-error" style="padding-left: 10px; color : red"></span>
+        <span class="app-date-error" style="padding-left: 10px; color : red;font-size: 12px;margin-top: 7px;display: inline-block;"></span>
         <div class="appointment-radio-btn">
             <div class="selection">
                 <input id="Morning" name="appointment_time" value="10am" type="radio">
@@ -45,13 +45,13 @@
                 </label>
             </div>
         </div>
-        <span class="app-time-error" style="padding-left: 10px; color : red"></span>
+        <span class="app-time-error" style="padding-left: 10px; color : red;font-size: 12px;margin-top: 9px;display: inline-block;"></span>
         <div class="after-radio-textarea">
             {!! Form::textarea('message', null, ['class' => 'form-control', 'placeholder' => 'Message','id'=>'appointment-message','maxlength' => '500']) !!}
             <p id="counter"></p>
             <button class="appointment-submit-button" type="button"><img src="{{ asset('assets/images/send-msg.png') }}" alt="" /></button>
         </div>
-        <span class="app-message-error" style="padding-left: 10px; color : red"></span>
+        <span class="app-message-error" style="padding-left: 10px; color : red;font-size: 12px;position: relative; top: -15px;"></span>
         {!! Form::close() !!}
     </div>
 @else

@@ -18,3 +18,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::post('/newsletter-subscribe', 'NewsletterController@subscribe')->name('newsLetter-subscription');
+
+// WP Auth Routes
+Route::post('/login', 'WP\AuthController@login');

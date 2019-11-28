@@ -29,7 +29,6 @@ $(() => {
         var input_checked = $(this).find("input").attr('checked', true);
         if ($(input_checked).is(':checked')) {
             var get_parent = $(this).parent().parent().parent().parent().find(".btn-default").addClass("addbackground");
-            console.log(get_parent);
         } else {}
 
     });

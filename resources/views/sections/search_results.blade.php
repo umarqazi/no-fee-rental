@@ -108,7 +108,6 @@
                     </div>
                 </div>
             </div>
-            <h3>Manhattan, NY Rental</h3>
             <span>{{ count($data->listings) }} places available for rent </span>
             <div id="boxscroll22">
                 <div class="featured-properties" id="contentscroll22">
