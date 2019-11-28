@@ -27,17 +27,36 @@ class CalendarRepo extends BaseRepo {
         $collection = null;
         $events = $this->model->allEvents()->get();
         foreach ($events as $event) {
-            $tmp = \Calendar::event(
-                $event->title,
-                null,
-                carbon($event->start)->format('y-m-d h:i:s a'),
-                carbon($event->end)->format('y-m-d h:i:s a')
-            );
+            if(isAgent()) {
+                if(strpos($event->title, '(rejected)') == false) {
+                    $tmp = \Calendar::event(
+                        $event->title,
+                        null,
+                        carbon($event->start)->format('y-m-d h:i:s a'),
+                        carbon($event->end)->format('y-m-d h:i:s a')
+                    );
 
-            $collection = Calendar::addEvent($tmp, [
-                'color' => $event->color,
-                'url' => ($event->url !== 'javascript:void(0)') ? $event->url : $event->url
-            ]);
+                    $collection = Calendar::addEvent($tmp, [
+                        'color' => $event->color,
+                        'url' => ($event->url !== 'javascript:void(0)') ? $event->url : $event->url
+                    ]);
+                }
+            }
+            else   {
+                $tmp = \Calendar::event(
+                    $event->title,
+                    null,
+                    carbon($event->start)->format('y-m-d h:i:s a'),
+                    carbon($event->end)->format('y-m-d h:i:s a')
+                );
+
+                $collection = Calendar::addEvent($tmp, [
+                    'color' => $event->color,
+                    'url' => ($event->url !== 'javascript:void(0)') ? $event->url : $event->url
+                ]);
+
+            }
+
         }
 
         return $collection;

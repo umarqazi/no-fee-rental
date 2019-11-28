@@ -355,11 +355,12 @@ class UserService {
 
     /**
      * @param $agent
+     * @param $user
      */
-    private function memberMail($agent) {
+    private function memberMail($agent, $user) {
         DispatchNotificationService::ADDMEMBER(toObject([
             'from' => myId(),
-            'to'   => $agent->id,
+            'to'   => $user->id,
             'data' => $agent
         ]));
     }
@@ -383,7 +384,7 @@ class UserService {
         if ($agent->fails()) {
             if($InviteRes = $this->agentRepo->find(['email' => $request->email])->first()) {
                 if($UserRes = $this->userRepo->find(['email' => $request->email])->first()) {
-                    $this->memberMail($agent);
+                    $this->memberMail($agent, $UserRes);
                     $this->agentRepo->update($InviteRes->id, ['token' => $agent->token]);
                     return true ;
                 }
@@ -396,7 +397,7 @@ class UserService {
             return $agent->validate();
         }
         if($UserRes = $this->userRepo->find(['email' => $request->email])->first()) {
-            $this->memberMail($agent);
+            $this->memberMail($agent, $UserRes);
             $this->agentRepo->invite($agent->toArray());
             return true ;
         }
