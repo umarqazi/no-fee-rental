@@ -33,7 +33,7 @@ $(() => {
     */
 
     $(".mobile-map-icon").on('click', function () {
-        $(this).find("i").toggleClass('fa-map-marker-alt fa-times');
+        $(this).find("i").toggleClass('fa-map-marked-alt fa-times');
         $("#mobile-map-listing-view").slideToggle();
     });
 

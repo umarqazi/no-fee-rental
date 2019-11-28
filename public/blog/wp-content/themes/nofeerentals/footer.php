@@ -264,6 +264,11 @@
       });
 
     </script>
+<script src="<?php echo $_SERVER['REQUEST_URI']; ?>/assets/js/signup.js"></script>
+<script src="<?php echo $_SERVER['REQUEST_URI']; ?>/assets/js/login.js"></script>
+<script src="<?php echo $_SERVER['REQUEST_URI']; ?>/assets/js/recent-search.js"></script>
+<script src="<?php echo $_SERVER['REQUEST_URI']; ?>/assets/js/global.js"></script>
+<script src="<?php echo $_SERVER['REQUEST_URI']; ?>/assets/js/validate.js"></script>
  </body>
 
 </html>

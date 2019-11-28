@@ -36,6 +36,17 @@ $(() => {
         }
     });
 
+    $.validator.addMethod("dateFormat", function(value, ele) {console.log(value);
+        let rxDatePattern = /^(\d{1,2})(\/|-)(\d{1,2})(\/|-)(\d{4})$/;
+        let check = value.match(rxDatePattern);
+        if(check !== null) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    });
+
     $.validator.addMethod('time_validation', function(value, element, param) {
         let start_time = parseInt($('select[name="open_house[start_time][]"]').val());
         let end_time = parseInt($('select[name="open_house[end_time][]"]').val());
@@ -82,7 +93,8 @@ $(() => {
            },
            availability: {
                required: true,
-               validateSelect: true
+               validateSelect: true,
+               dateFormat : true
            },
            building_type: {
                required: true,
@@ -136,7 +148,8 @@ $(() => {
            },
            availability: {
                required: "Select Availability.",
-               validateSelect: "Select any one option."
+               validateSelect: "Select any one option.",
+               dateFormat: "Select Valid Date."
            },
 
            building_type: {

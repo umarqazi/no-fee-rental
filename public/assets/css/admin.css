@@ -1876,15 +1876,22 @@ header .agent-avtar .avtar:hover div ul {
 .credit-plans .inner-plans-wrapper{
     display: flex;
     justify-content: center;
-    align-items: center;
+    /*align-items: center;*/
 }
 .plans-wrapper .current-plans{
-    /*width: calc(27% - 20px);*/
+    width: calc(100% / 3 - 20px);
     box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.12);
     padding: 20px 30px;
     border-radius: 10px;
-    text-align: center;
+    flex: 1;
+    text-align:center;
     margin-right: 20px;
+    position: relative;
+}
+.plans-wrapper .current-plans p{
+    color: #000;
+    font-weight: 600;
+    margin-bottom: 15px;
 }
 .plans-wrapper .current-plans:last-child{
     margin-right: 0px;
@@ -1958,6 +1965,10 @@ header .agent-avtar .avtar:hover div ul {
     line-height: 45px;
     font-size: 18px;
     min-width:215px;
+    position:absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 20px;
 }
 .plans-wrapper .gold-plan .btn-default{
     background-color: #023672;
@@ -1973,6 +1984,7 @@ header .agent-avtar .avtar:hover div ul {
 .credit-plans p{
     font-size: 16px;
     line-height: 1.5;
+
 }
 /*Credit Plans page Css*/
 
