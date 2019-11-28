@@ -29,13 +29,14 @@
     <div class=" container-lg">
         <div class="header-container">
             <a href="{!! url('/') !!}"> <img src="{{ asset('assets/images/logo.png') }}" class="logo" /></a>
-            <ul class="menu-links">
-                <li>
-                    <a href="{{ route('web.ListsByRent') }}">Rent </a>
-                    <a href="{{ route('web.neighborhood') }}">Neighborhood </a>
-                </li>
-            </ul>
+
             <div class="header-right-wrapper">
+                <ul class="menu-links">
+                    <li>
+                        <a href="{{ route('web.ListsByRent') }}">Rent </a>
+                        <a href="{{ route('web.neighborhood') }}">Neighborhood </a>
+                    </li>
+                </ul>
                 <div class="recent-search-dropdown">
                     <a href="#">Recent Searches<i class="fa fa-angle-down"></i></a>
                     <div class="dropDown">

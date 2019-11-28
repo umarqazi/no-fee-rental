@@ -78,7 +78,7 @@
                         </ul>
                     </div>
                 </div>
-                  
+
                           <div class="actions-btns">
                               <button type="button" class="signup-btn signup-modal-btn" data-toggle="modal" data-target="#login">Login</button>
                               <button type="button" class="signup-btn login-btn signin-modal-btn" data-toggle="modal" data-target="#signup"> Signup</button>
@@ -126,6 +126,8 @@
                 <?php } ?>
 
                     </div>
+                    <script src="http://no-fee-rental.teamtechverx.com/assets/js/vendor/jquery.validate.min.js"></script>
 
         </header>
+
 

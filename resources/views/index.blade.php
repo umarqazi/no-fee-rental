@@ -14,7 +14,7 @@
         </div>
     </div>
 </section>
-<section class="about-us-container">
+<section class="about-us-container about-us-large-img">
     <div class="container-lg">
         <div class="row">
             <div class="col-lg-7 p-0">
