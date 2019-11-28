@@ -18,6 +18,7 @@
         <meta name="viewport" content="width=device-width">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="profile" href="https://gmpg.org/xfn/11">
+        <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/assets/css/toastr.css">
 
         <?php wp_head(); ?>
     </head>
