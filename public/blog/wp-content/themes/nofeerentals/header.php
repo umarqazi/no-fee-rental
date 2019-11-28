@@ -90,7 +90,7 @@
                                             alt=""
                                             class="avtar"
                                     />
-                                    {{ mySelf()['first_name']." ".mySelf()['last_name'] }} <i class="fa fa-angle-down"></i>
+                                    Yousuf Khalid <i class="fa fa-angle-down"></i>
                                 </a>
                                 <div class="user-dropdown">
                                     <a href="{{ route(whoAmI().'.index') }}">Dashboard </a>
