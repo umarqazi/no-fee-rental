@@ -1096,6 +1096,7 @@ h3 {
     align-items: center;
 }
 
+
 .about-us-container .about-mb-img {
     display: none;
 }
@@ -4322,7 +4323,6 @@ footer .copyright .social-icons li a:hover {
     .contact-info .btn-default {
         margin-bottom: 20px;
     }
-
     .neighborhood-search .search-result-wrapper .search-listing .featured-properties .property-listing .property-thumb {
         width: calc(100% / 2 - 30px);
     }
@@ -4419,6 +4419,23 @@ footer .copyright .social-icons li a:hover {
 
 
 /*Responsive style*/
+
+@media only screen and (min-width: 3600px) {
+    .about-us-large-img{
+        background: url(../images/about-bg-large.jpg) no-repeat center left -120px #ffffff !important;
+    }
+    .about-us-container{
+        background: none;
+    }
+    .ur-life-large-img{
+        background: url(../images/ur-life-large.jpg) no-repeat center right -120px !important;
+        min-height: 520px;
+    }
+    .your-life-container{
+        background: none;
+    }
+
+}
 
 @media only screen and (max-width: 1599px) {
     .neighborhood-search .search-result-wrapper .search-listing .featured-properties .property-listing .property-thumb {
