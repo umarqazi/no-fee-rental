@@ -108,6 +108,7 @@
                     </div>
                 </div>
             </div>
+            <h3></h3>
             <span>{{ count($data->listings) }} places available for rent </span>
             <div id="boxscroll22">
                 <div class="featured-properties" id="contentscroll22">

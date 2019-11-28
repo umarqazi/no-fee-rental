@@ -11,6 +11,7 @@ namespace App\Services;
 use App\Forms\AppointmentForm;
 use App\Forms\CheckAvailabilityForm;
 use App\Forms\MessageForm;
+use App\Repository\CalendarRepo;
 use App\Repository\ListingRepo;
 use App\Traits\DispatchNotificationService;
 use Illuminate\Support\Facades\DB;
@@ -41,12 +42,18 @@ class ListingConversationService {
     protected $listingConversationRepo;
 
     /**
+     * @var ListingConversationRepo
+     */
+    protected $calendarEventRepo;
+
+    /**
      * AppointmentService constructor.
      */
     public function __construct() {
         $this->listingRepo = new ListingRepo();
         $this->messageRepo = new MessageRepo();
         $this->listingConversationRepo = new ListingConversationRepo();
+        $this->calendarEventRepo = new CalendarRepo();
     }
 
     /**
@@ -102,6 +109,7 @@ class ListingConversationService {
      */
     public function accept($id) {
         $listing = $this->listingConversationRepo->findById($id)->with('listing')->first();
+        $calender = $this->calendarEventRepo->find(['linked_id' => $id])->first();
         DispatchNotificationService::APPROVEMEETINGREQUEST(toObject([
             'from' => $listing->from,
             'to'   => $listing->to,
@@ -110,8 +118,8 @@ class ListingConversationService {
         calendarEvent([
             'title' => $listing->listing->display_address.'  (Approved)',
             'url'   => '.loadConversation',
-            'color' => 'red'
-        ], true, $id);
+            'color' => 'green'
+        ], true, $calender->id);
         return $this->listingConversationRepo->update($id, ['meeting_request' => 1]);
     }
 
@@ -121,6 +129,13 @@ class ListingConversationService {
      * @return mixed
      */
     public function archive($id) {
+        $listing = $this->listingConversationRepo->findById($id)->with('listing')->first();
+        $calender = $this->calendarEventRepo->find(['linked_id' => $id])->first();
+        calendarEvent([
+            'title' => $listing->listing->display_address.'  (rejected)',
+            'url'   => '.loadConversation',
+            'color' => 'red',
+        ], true, $calender->id);
         return $this->listingConversationRepo->update($id, ['is_archived' => true]);
     }
 

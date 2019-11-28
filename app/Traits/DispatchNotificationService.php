@@ -134,7 +134,7 @@ trait DispatchNotificationService
         self::$data->view = 'listing-feature-approved';
         self::$data->subject = 'Featured Listing Request Approved';
         self::$data->message = 'Your Request to make this listing featured has been approved.';
-        self::$data->url = route('member.acceptInvitation', self::$data->data->agent->token);
+        self::$data->url = route('member.acceptInvitation', self::$data->data->data->token);
         self::send();
     }
 
@@ -294,7 +294,7 @@ trait DispatchNotificationService
      */
     private static function __setParams($data)
     {
-        $toAgent = agents($data->to);
+        $toAgent = is_int($data->to) ? agents($data->to ) : (object)['email' => $data->to];
         $fromAgent = agents($data->from);
         self::$data = toObject([
             'to' => $data->to,
