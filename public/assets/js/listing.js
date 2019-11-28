@@ -9,6 +9,8 @@ $(() => {
         localStorage.removeItem('grid-view');
     }
 
+    $body.on('blur', '.controls', function() { $('.pac-container').remove(); });
+
     $(".sort-bt > i,span").on('click', function () {
         $(this).siblings(".custom-dropdown").slideToggle();
     });

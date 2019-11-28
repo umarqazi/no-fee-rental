@@ -212,7 +212,7 @@
                 <div class="modal-body">
                     <div class="pt-4 -b-4">
                         <img src="assets/images/popcorn-icon.jpg" alt="" class="popcorn-icon" />
-                        <h3 class="mb-2 text-center">Thanks Danielle!</h3>
+                        <h3 class="mb-2 text-center">Thanks</h3>
                         <p class="text-center">We can help you even faster if you answer a few question about your search.</p>
                     </div>
                 </div>
@@ -290,153 +290,6 @@
                 <div class="modal-body">
                     <div class="pt-4 -b-4">
                         {!! Form::text('neighborhoods', null, ['class' => 'input-style', 'placeholder' => '+ Search for neighborhood']) !!}
-
-                        <!-- Nav pills -->
-{{--                        <ul class="nav nav-pills">--}}
-{{--                            <li class="nav-item">--}}
-{{--                                <a class="nav-link active" data-toggle="pill" href="#tab-1">All <span>308</span></a>--}}
-{{--                            </li>--}}
-{{--                            <li class="nav-item">--}}
-{{--                                <a class="nav-link" data-toggle="pill" href="#tab-2">Selected <span>4</span></a>--}}
-{{--                            </li>--}}
-{{--                            <span class="deselect">Deselect All</span>--}}
-{{--                        </ul>--}}
-
-                        <!-- Tab panes -->
-{{--                        <div class="tab-content">--}}
-{{--                            <div class="tab-pane active" id="tab-1">--}}
-{{--                                <ul class="cities-list">--}}
-{{--                                    <li>--}}
-{{--                                        <div class="custom-control custom-checkbox">--}}
-{{--                                            <input type="checkbox" class="custom-control-input" id="cities-1" name="cities">--}}
-{{--                                            <label class="custom-control-label" for="cities-1">2</label>--}}
-{{--                                        </div>--}}
-{{--                                    </li>--}}
-{{--                                    <li>--}}
-{{--                                        <div class="custom-control custom-checkbox">--}}
-{{--                                            <input type="checkbox" class="custom-control-input" id="cities-2" name="cities">--}}
-{{--                                            <label class="custom-control-label" for="cities-2">2</label>--}}
-{{--                                        </div>--}}
-{{--                                    </li>--}}
-{{--                                    <li>--}}
-{{--                                        <div class="custom-control custom-checkbox">--}}
-{{--                                            <input type="checkbox" class="custom-control-input" id="cities-3" name="cities">--}}
-{{--                                            <label class="custom-control-label" for="cities-3">2</label>--}}
-{{--                                        </div>--}}
-{{--                                    </li>--}}
-{{--                                    <li>--}}
-{{--                                        <div class="custom-control custom-checkbox">--}}
-{{--                                            <input type="checkbox" class="custom-control-input" id="cities-4" name="cities">--}}
-{{--                                            <label class="custom-control-label" for="cities-4">2</label>--}}
-{{--                                        </div>--}}
-{{--                                    </li>--}}
-{{--                                    <li>--}}
-{{--                                        <div class="custom-control custom-checkbox">--}}
-{{--                                            <input type="checkbox" class="custom-control-input" id="cities-5" name="cities">--}}
-{{--                                            <label class="custom-control-label" for="cities-5">2</label>--}}
-{{--                                        </div>--}}
-{{--                                    </li>--}}
-{{--                                    <li>--}}
-{{--                                        <div class="custom-control custom-checkbox">--}}
-{{--                                            <input type="checkbox" class="custom-control-input" id="cities-6" name="cities">--}}
-{{--                                            <label class="custom-control-label" for="cities-6">2</label>--}}
-{{--                                        </div>--}}
-{{--                                    </li>--}}
-{{--                                    <li>--}}
-{{--                                        <div class="custom-control custom-checkbox">--}}
-{{--                                            <input type="checkbox" class="custom-control-input" id="cities-7" name="cities">--}}
-{{--                                            <label class="custom-control-label" for="cities-7">2</label>--}}
-{{--                                        </div>--}}
-{{--                                    </li>--}}
-{{--                                    <li>--}}
-{{--                                        <div class="custom-control custom-checkbox">--}}
-{{--                                            <input type="checkbox" class="custom-control-input" id="cities-9" name="cities">--}}
-{{--                                            <label class="custom-control-label" for="cities-9">2</label>--}}
-{{--                                        </div>--}}
-{{--                                    </li>--}}
-{{--                                    <li>--}}
-{{--                                        <div class="custom-control custom-checkbox">--}}
-{{--                                            <input type="checkbox" class="custom-control-input" id="cities-10" name="cities">--}}
-{{--                                            <label class="custom-control-label" for="cities-10">2</label>--}}
-{{--                                        </div>--}}
-{{--                                    </li>--}}
-{{--                                    <li>--}}
-{{--                                        <div class="custom-control custom-checkbox">--}}
-{{--                                            <input type="checkbox" class="custom-control-input" id="cities-11" name="cities">--}}
-{{--                                            <label class="custom-control-label" for="cities-11">2</label>--}}
-{{--                                        </div>--}}
-{{--                                    </li>--}}
-{{--                                    <li>--}}
-{{--                                        <div class="custom-control custom-checkbox">--}}
-{{--                                            <input type="checkbox" class="custom-control-input" id="cities-12" name="cities">--}}
-{{--                                            <label class="custom-control-label" for="cities-12">2</label>--}}
-{{--                                        </div>--}}
-{{--                                    </li>--}}
-{{--                                    <li>--}}
-{{--                                        <div class="custom-control custom-checkbox">--}}
-{{--                                            <input type="checkbox" class="custom-control-input" id="cities-13" name="cities">--}}
-{{--                                            <label class="custom-control-label" for="cities-13">2</label>--}}
-{{--                                        </div>--}}
-{{--                                    </li>--}}
-{{--                                    <li>--}}
-{{--                                        <div class="custom-control custom-checkbox">--}}
-{{--                                            <input type="checkbox" class="custom-control-input" id="cities-14" name="cities">--}}
-{{--                                            <label class="custom-control-label" for="cities-14">2</label>--}}
-{{--                                        </div>--}}
-{{--                                    </li>--}}
-{{--                                    <li>--}}
-{{--                                        <div class="custom-control custom-checkbox">--}}
-{{--                                            <input type="checkbox" class="custom-control-input" id="cities-15" name="cities">--}}
-{{--                                            <label class="custom-control-label" for="cities-15">2</label>--}}
-{{--                                        </div>--}}
-{{--                                    </li>--}}
-{{--                                    <li>--}}
-{{--                                        <div class="custom-control custom-checkbox">--}}
-{{--                                            <input type="checkbox" class="custom-control-input" id="cities-16" name="cities">--}}
-{{--                                            <label class="custom-control-label" for="cities-16">2</label>--}}
-{{--                                        </div>--}}
-{{--                                    </li>--}}
-{{--                                    <li>--}}
-{{--                                        <div class="custom-control custom-checkbox">--}}
-{{--                                            <input type="checkbox" class="custom-control-input" id="cities-17" name="cities">--}}
-{{--                                            <label class="custom-control-label" for="cities-17">2</label>--}}
-{{--                                        </div>--}}
-{{--                                    </li>--}}
-{{--                                    <li>--}}
-{{--                                        <div class="custom-control custom-checkbox">--}}
-{{--                                            <input type="checkbox" class="custom-control-input" id="cities-18" name="cities">--}}
-{{--                                            <label class="custom-control-label" for="cities-18">2</label>--}}
-{{--                                        </div>--}}
-{{--                                    </li>--}}
-{{--                                    <li>--}}
-{{--                                        <div class="custom-control custom-checkbox">--}}
-{{--                                            <input type="checkbox" class="custom-control-input" id="cities-19" name="cities">--}}
-{{--                                            <label class="custom-control-label" for="cities-19">2</label>--}}
-{{--                                        </div>--}}
-{{--                                    </li>--}}
-{{--                                    <li>--}}
-{{--                                        <div class="custom-control custom-checkbox">--}}
-{{--                                            <input type="checkbox" class="custom-control-input" id="cities-20" name="cities">--}}
-{{--                                            <label class="custom-control-label" for="cities-20">2</label>--}}
-{{--                                        </div>--}}
-{{--                                    </li>--}}
-{{--                                    <li>--}}
-{{--                                        <div class="custom-control custom-checkbox">--}}
-{{--                                            <input type="checkbox" class="custom-control-input" id="cities-21" name="cities">--}}
-{{--                                            <label class="custom-control-label" for="cities-21">2</label>--}}
-{{--                                        </div>--}}
-{{--                                    </li>--}}
-{{--                                    <li>--}}
-{{--                                        <div class="custom-control custom-checkbox">--}}
-{{--                                            <input type="checkbox" class="custom-control-input" id="cities-22" name="cities">--}}
-{{--                                            <label class="custom-control-label" for="cities-22">2</label>--}}
-{{--                                        </div>--}}
-{{--                                    </li>--}}
-{{--                                </ul>--}}
-{{--                            </div>--}}
-{{--                            <div class="tab-pane fade" id="tab-2">...</div>--}}
-{{--                        </div>--}}
-
                     </div>
                     <div class="text-center"><button type="button" class="btn-default skip-btn" data-target="let-us-step10">Skip</button></div>
                 </div>
@@ -686,7 +539,3 @@
     </div>
 </div>
 {!! Form::close() !!}
-
-<script>
-    $('#let-us-step1').on('')
-</script>

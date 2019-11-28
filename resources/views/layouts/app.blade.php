@@ -22,6 +22,7 @@
     {!! HTML::style('assets/css/lightslider.css') !!}
     {!! HTML::style('assets/owlcarousel/assets/owl.carousel.min.css') !!}
     {!! HTML::style('assets/owlcarousel/assets/owl.theme.default.min.css') !!}
+    {!! HTML::style('assets/css/pignose.calendar.min.css') !!}
 
     <!-- JS -->
     {!! HTML::script('assets/js/vendor/jquery-3.2.1.min.js') !!}
@@ -39,6 +40,7 @@
     {!! HTML::script('assets/js/validate.js') !!}
     {!! HTML::script('assets/js/jquery.nicescroll.min.js') !!}
     {!! HTML::script('assets/js/vendor/owl.carousel.min.js') !!}
+    {!! HTML::script('assets/js/vendor/pignose.calendar.full.min.js') !!}
 
 </head>
     <body>
