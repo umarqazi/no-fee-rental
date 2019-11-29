@@ -85,13 +85,14 @@
                     <img src="<?php echo get_template_directory_uri(); ?>/assets/images/modal-logo.png" alt="" class="logo">
                     <h3>Login</h3>
                     <ul>
-                        <li>loremp ipsum lorem ipsum</li>
-                        <li>loremp ipsum lorem ipsum</li>
-                        <li>loremp ipsum lorem ipsum</li>
+                        <li>Save Your Searches</li>
+                        <li>Never Pay A Broker Fee</li>
+                        <li>Save Your Favorite Listings</li>
+                        <li>Get Email Notifications For New Listings In Neighborhoods That You Like</li>
                     </ul>
                 </div>
                 <div class="login-form-wrapper">
-                    <div class="login-heading">
+                    <div class="login-heading login-after-line">
                         Login
                     </div>
                     <form method="POST" action="http://no-fee-rental.teamtechverx.com/api/login" accept-charset="UTF-8" id="login_form" class="ajax" novalidate="novalidate">
@@ -147,24 +148,31 @@
                 <img src="<?php bloginfo('template_url')?>/assets/images/modal-close-icon.png" alt="" class="close-modal close-signup-modal" data-dismiss="modal">
                 <div class="logo-info-wrapper">
                     <img src="<?php echo get_template_directory_uri(); ?>/assets/images/modal-logo.png" alt="" class="logo">
-                    
+
                     <ul class="create-client-listing">
-                        <h3>Let's started</h3>
-                        <li>Explore Various Options</li>
-                        <li>Mark Listing as Favourite</li>
-                        <li>Save Your Researches</li>
-                        <li>Get Notified When we find a home for you</li>
+<!--                        <h3>Let's started</h3>-->
+                        <li>Save Your Searches</li>
+                        <li>Mark Your Favorite Listings</li>
+                        <li>Get Email Notification For New Listings In Neighborhoods That You Like</li>
+                        <li>Access To Showing On Demand</li>
+                        <li>Access To Our Neighborhood Specialists</li>
+                        <h1 style="color: white;font-size: 16px; line-height: normal;">And much more features!!</h1>
                     </ul>
                     <ul class="create-agent-listing">
                         <h3>join us</h3>
                         <li>Publish your listing</li>
-                        <li>Syndicate listing from Various marketplaces</li>
+                        <li>Syndicate Listing From Various Marketplaces</li>
+                        <li>Un Limited Renting Potential To Thousand Of Renters</li>
+                        <li>Access To Showing On Demand Clients</li>
+                        <li> Access To Our Direct Clientele Through Neighborhood Specialists Program</li>
+                        <h1 style="color:white; font-size: 16px; line-height: normal;">NOTE: We are NOO FEE website and any apartment will any apartment deemed
+                            as a fee untill will not be activated.</h1>
                     </ul>
                 </div>
 
                 <div class="login-form-wrapper">
                     <div class="login-heading">
-                        Signup
+                        CREATE ACCOUNT
                     </div>
                     <form method="POST" action="http://no-fee-rental.teamtechverx.com/api/user-signup" accept-charset="UTF-8" class="ajax" reset="true" id="signup_form" novalidate="novalidate">
                         <input name="_token" type="hidden" value="wgtYrzIjKZeqRuv67Xf1mCwnwFUW8JlmJKzf0lre">
@@ -207,7 +215,7 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <input class="input-style agnet-input" id="email" placeholder="Email" name="email" type="text">
-                                    
+
                                 </div>
                             </div>
 
@@ -233,13 +241,13 @@
                                 </div>
                             </div>
                         </div>
-                    
+
                     <div class="col-md-12 submit-clm">
                         <div class="text-center mt-3 mb-4">
                             <input class="btn-default" type="submit" value="Signup">
                         </div>
                     </div>
-                
+
                 <p class="footer-text">Already have an account? <span class="signin-wrapper" id="login-btn">Login</span></p>
             </div></form>
         </div>
