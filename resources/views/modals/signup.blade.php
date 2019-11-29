@@ -7,22 +7,29 @@
                 <img src="{{asset('assets/images/modal-logo.png')}}" alt="" class="logo" />
 
                 <ul class="create-client-listing">
-                    <h3>LET'S STARTED</h3>
-                    <li>Explore Various Options</li>
-                    <li>Mark Listing as Favourite</li>
-                    <li>Save Your Researches</li>
-                    <li>Get Notified When we find a home for you</li>
+                    {{--<h3>LET'S STARTED</h3>--}}
+                    <li>Save your searches</li>
+                    <li>Mark your favorite listings</li>
+                    <li>Get email notification for new listings in neighborhoods that you like</li>
+                    <li>Access to showing on demand</li>
+                    <li>Access to our neighborhood specialists</li>
+                    <h1 style="color: white;font-size: 20px;">And much more features!!</h1>
                 </ul>
+
                 <ul class="create-agent-listing">
                     <h3>JOIN US </h3>
-                    <li>Publish your listing</li>
+                    <li>Publish your listings</li>
                     <li>Syndicate listing from Various marketplaces</li>
+                    <li>Un limited renting potential to thousand of renters</li>
+                    <li>Access to showing on demand clients</li>
+                    <li>Access to our direct clientele through neighborhood specialists program</li>
+                    <h1 style="color:white">NOTE: We are NOO FEE website and any apartment will any apartment deemed as a fee untill will not be activated.</h1>
                 </ul>
             </div>
 
             <div class="login-form-wrapper">
                 <div class="login-heading">
-                    Signup
+                    Create Account
                 </div>
                 {!! Form::open(['url' => route('user.signup'), 'class' => 'ajax', 'reset' => 'true' , 'method' => 'post', 'id' => 'signup_form']) !!}
                 <div class="row">
