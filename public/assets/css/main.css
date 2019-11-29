@@ -917,7 +917,7 @@ h3 {
 }
 
 .login-modal .modal-dialog .logo-info-wrapper {
-    background: url(../images/modal-bg.jpg) no-repeat center center;
+    background: url(../images/login.jpg) no-repeat center center;
     background-size: cover;
     padding: 0px 20px;
     flex: 0 0 30%;
@@ -978,6 +978,9 @@ h3 {
     background: #223971;
     height: 2px;
     bottom: 0;
+    width: 210px;
+}
+.login-modal .modal-dialog .login-form-wrapper .login-heading.login-after-line:after{
     width: 140px;
 }
 
