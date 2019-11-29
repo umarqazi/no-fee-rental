@@ -8,7 +8,6 @@
    *
    * @package nofeerentals
    */
-
 ?>
     <!doctype html>
     <html <?php language_attributes(); ?>>
@@ -23,7 +22,7 @@
         <?php wp_head(); ?>
     </head>
 
-    <body <?php body_class(); ?>>
+    <body <?php body_class(); ?>
         <header>
 
             <div class="mobile-menu">
@@ -82,10 +81,23 @@
                           <div class="actions-btns">
                               <button type="button" class="signup-btn signup-modal-btn" data-toggle="modal" data-target="#login">Login</button>
                               <button type="button" class="signup-btn login-btn signin-modal-btn" data-toggle="modal" data-target="#signup"> Signup</button>
-                          </div>
-                        </div>
 
                     </div>
+                            <div class="login-user">
+                                <a href="#">
+                                    <img
+                                            src = "{!! asset( mySelf()->profile_image ?? DUI ) !!}"
+                                            alt=""
+                                            class="avtar"
+                                    />
+                                    Yousuf Khalid <i class="fa fa-angle-down"></i>
+                                </a>
+                                <div class="user-dropdown">
+                                    <a href="{{ route(whoAmI().'.index') }}">Dashboard </a>
+                                    <a href="{{ route(whoAmI().'.showProfile') }}">Profile Setting </a>
+                                    <a href="{{ route(whoAmI().'.logout') }}">Log Out </a>
+                                </div>
+                            </div>
                 </div>
             </div>
 
