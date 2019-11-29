@@ -7,9 +7,10 @@
                 <img src="{{asset('assets/images/modal-logo.png')}}" alt="" class="logo" />
                 <ul>
                     <h3> Login</h3>
-                    <li>loremp ipsum lorem ipsum</li>
-                    <li>loremp ipsum lorem ipsum</li>
-                    <li>loremp ipsum lorem ipsum</li>
+                    <li>Save your searches</li>
+                    <li>Never pay a broker fee</li>
+                    <li>Save your favorite listings</li>
+                    <li>Get email notifications for new listings in neighborhoods that you like</li>
                 </ul>
             </div>
             <div class="login-form-wrapper">
