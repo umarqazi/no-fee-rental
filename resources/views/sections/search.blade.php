@@ -9,9 +9,25 @@
         <h1>NYC’s Premier Source For NO FEE Rentals</h1>
         {!! Form::open(['url' => route('list.search'), 'method' => 'get', 'id' => 'search']) !!}
         <div class="search-property">
-            <i class="fas fa-search"></i>
-            <div>{!! Form::text('neighborhoods', null, ['id' => 'neigh', 'placeholder' => 'Enter Neighborhood', 'class' => 'search-fld']) !!}</div>
+
+            <div style="position:relative;">
+                <i class="fas fa-search"></i>
+                {!! Form::text('neighborhoods', null, ['id' => 'neigh', 'placeholder' => 'Enter Neighborhood', 'class' => 'search-fld']) !!}
+                <select class="custom-select-input">
+                    <option>Up To $5,000</option>
+                    <option>Up To $5,000</option>
+                    <option>Up To $5,000</option>
+                    <option>Up To $5,000</option>
+                </select>
+                <select class="custom-select-input size-input">
+                    <option>Size</option>
+                    <option>Size</option>
+                    <option>Size</option>
+                    <option>Size</option>
+                </select>
+            </div>
             {!! Form::button('Search', ['class' => 'search-btn', 'type' => 'submit']) !!}
+
         </div>
         {!! Form::close() !!}
         <a href="javascript:void(0);" class="advance-search" data-toggle="modal" data-target="#advance-search">+ Advanced Search</a>
