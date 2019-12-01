@@ -3,13 +3,16 @@
         <h2 class="text-center">Featured Properties</h2>
         <ul class="nav nav-pills">
             <li class="nav-item">
-                <a class="nav-link active" data-toggle="pill" href="#tab1">Recent</a>
+                <a class="nav-link active" data-toggle="pill" href="#tab1">Recommended</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-toggle="pill" href="#tab2">Cheapest</a>
+                <a class="nav-link" data-toggle="pill" href="#tab2">Trending</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-toggle="pill" href="#tab3">Popular</a>
+                <a class="nav-link" data-toggle="pill" href="#tab3">Price</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="pill" href="#tab4">Pet Friendly</a>
             </li>
 
         </ul>
@@ -101,10 +104,10 @@
             <div class="tab-pane" id="tab2">
                 <div class="property-listing">
                     <div class="desktop-listiing">
-                        @if(count($featured_listings['cheapest']) < 1)
+                        @if(count($featured_listings['popular']) < 1)
                             <span>No List Found</span>
                         @endif
-                        @foreach($featured_listings["cheapest"] as $key => $fl)
+                        @foreach($featured_listings["popular"] as $key => $fl)
                                 <div class="property-thumb">
                                     <div class="check-btn">
                                         <a href="javascript:void(0);">
@@ -140,10 +143,10 @@
 
                     <div class="owl-slider">
                         <div class="owl-carousel owl-theme" id="carousel-2">
-                            @if(count($featured_listings['cheapest']) < 1)
+                            @if(count($featured_listings['popular']) < 1)
                                 <span>No List Found</span>
                             @endif
-                            @foreach($featured_listings["cheapest"] as $key => $fl)
+                            @foreach($featured_listings["popular"] as $key => $fl)
                                 <div class="item">
                                     <div class="property-thumb">
                                         <div class="check-btn">
@@ -184,10 +187,10 @@
                 <div class="tab-pane" id="tab3">
                 <div class="property-listing">
                     <div class="desktop-listiing">
-                        @if(count($featured_listings['popular']) < 1)
+                        @if(count($featured_listings['cheapest']) < 1)
                             <span>No List Found</span>
                         @endif
-                        @foreach($featured_listings["popular"] as $key => $fl)
+                        @foreach($featured_listings["cheapest"] as $key => $fl)
                             <div class="property-thumb">
                                 <div class="check-btn">
                                     <a href="javascript:void(0);">
@@ -222,10 +225,10 @@
                     </div>
                     <div class="owl-slider">
                         <div class="owl-carousel owl-theme" id="carousel-3">
-                            @if(count($featured_listings['popular']) < 1)
+                            @if(count($featured_listings['cheapest']) < 1)
                                 <span>No List Found</span>
                             @endif
-                            @foreach($featured_listings["popular"] as $key => $fl)
+                            @foreach($featured_listings["cheapest"] as $key => $fl)
                                 <div class="item">
                                     <div class="property-thumb">
                                         <div class="check-btn">
