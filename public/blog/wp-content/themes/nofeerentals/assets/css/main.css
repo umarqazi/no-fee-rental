@@ -456,6 +456,15 @@ h3 {
     margin-left: 15px;
   line-height: 87px;
 }
+.header-wrapper .header-container .header-right-wrapper .recent-search-dropdown .dropDown ul li a{
+    width: 100%;
+    display: inline;
+    padding: 0px 0px;
+    color: #000;
+    font-size: 13px;
+    align-items: center;
+}
+
 .header-wrapper .header-container .header-right-wrapper .recent-search-dropdown .dropDown ul li a:hover {
     color: #f36f21;
 }
@@ -599,7 +608,7 @@ h3 {
   display: inline-block;
   vertical-align: middle;
   position: relative;
-  line-height: 88px;
+  line-height: 87px;
 }
 
 .header-wrapper .header-container .header-right-wrapper .login-user a {
@@ -826,7 +835,7 @@ h3 {
 }
 
 .login-modal .modal-dialog .logo-info-wrapper {
-  background: url(../images/modal-bg.jpg) no-repeat center center;
+  background: url(../images/login.jpg) no-repeat center center;
   background-size: cover;
   padding: 0px 20px;
   flex: 0 0 30%;
@@ -885,8 +894,12 @@ h3 {
   background: #223971;
   height: 2px;
   bottom: 0;
-  width: 140px;
+  width: 210px;
 }
+.login-modal .modal-dialog .login-form-wrapper .login-heading.login-after-line:after{
+    width: 140px;
+}
+
 
 .login-modal .modal-dialog .login-form-wrapper .forgot-password {
   color: #f36f21;

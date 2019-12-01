@@ -14,7 +14,7 @@
                 </ul>
             </div>
             <div class="login-form-wrapper">
-                <div class="login-heading">
+                <div class="login-heading login-after-line">
                     Login
                 </div>
                 {!! Form::open([
