@@ -31,7 +31,7 @@
            '2000'  => "Up To $2,000",
            '3000'  => "Up To $3,000",
            '4000'  => "Up To $4,000",
-           '5000'  => "Up To $5,000",],null, ['class' => 'custom-select-input size-input']) !!}
+           '5000'  => "Up To $5,000",],null, ['class' => 'custom-select-input']) !!}
                 {!! Form::select('square_max', [
            "" => "Size",
            '100'  => "100 square",
