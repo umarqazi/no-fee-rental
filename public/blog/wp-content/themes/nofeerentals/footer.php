@@ -41,7 +41,7 @@
                 <li class="wow fadeInLeft" data-wow-delay="0.5s">
                     <h4 class="collapseabe-link">Company <i class="fas fa-angle-down"></i></h4>
                     <div class="collapse-menu">
-                        <a href="http://no-fee-rental.teamtechverx.com/blog/?page_id=66" class="ft-links">About Us</a>
+                        <a href="http://no-fee-rental.teamtechverx.com/blog/?page_id=66" class="ft-links">Our Story</a>
                         <a href="http://no-fee-rental.teamtechverx.com/blog/?page_id=70" class="ft-links">Press</a>
                         <a href="http://no-fee-rental.teamtechverx.com/blog/?page_id=3" class="ft-links">Privacy Policy </a>
                         <a href="http://no-fee-rental.teamtechverx.com/blog/?page_id=27" class="ft-links">Terms</a>
@@ -156,16 +156,20 @@
                         <li>Get Email Notification For New Listings In Neighborhoods That You Like</li>
                         <li>Access To Showing On Demand</li>
                         <li>Access To Our Neighborhood Specialists</li>
-                        <h1 style="color: white;font-size: 16px; line-height: normal;">And much more features!!</h1>
+                        <h1 style="color: white;font-size: 16px; font-weight: 600; line-height: normal;">And much more
+                            features!!</h1>
                     </ul>
                     <ul class="create-agent-listing">
                         <h3>join us</h3>
                         <li>Publish your listing</li>
                         <li>Syndicate Listing From Various Marketplaces</li>
-                        <li>Un Limited Renting Potential To Thousand Of Renters</li>
+                        <li>Unlimited Renting Potential To Thousand Of Renters</li>
                         <li>Access To Showing On Demand Clients</li>
                         <li> Access To Our Direct Clientele Through Neighborhood Specialists Program</li>
-                        <h1 style="color:white; font-size: 16px; line-height: normal;">NOTE: We are NOO FEE website and any apartment will any apartment deemed
+                        <h1 style="color:white; font-size: 16px; line-height: normal;font-weight: 600;">Info: We are NOO
+                            FEE
+                            website
+                            and any apartment will any apartment deemed
                             as a fee untill will not be activated.</h1>
                     </ul>
                 </div>
