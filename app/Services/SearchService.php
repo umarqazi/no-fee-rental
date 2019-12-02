@@ -51,7 +51,7 @@ class SearchService extends SaveSearchService {
             'features'              => $request->features ?? null,
             'openHouse'             => $request->openHouse ?? null,
             'neighborhood'          => $request->neighborhoods ?? null,
-            'beds'                  => $request->beds ?? null,
+            'beds'                  => is_array($request->beds) ? $request->beds : [$request->beds] ?? null,
             'baths'                 => $request->baths ?? null,
             'availability'          => $request->availability ?? null,
             'priceRange'            => is_array($request->priceRange)

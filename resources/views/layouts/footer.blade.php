@@ -28,7 +28,7 @@
             <li class="wow fadeInLeft" data-wow-delay="0.5s">
                 <h4 class="collapseabe-link">Company <i class="fas fa-angle-down"></i></h4>
                 <div class="collapse-menu">
-                    <a href="http://no-fee-rental.teamtechverx.com/blog/?page_id=66" class="ft-links">About Us</a>
+                    <a href="http://no-fee-rental.teamtechverx.com/blog/?page_id=66" class="ft-links">Our Story</a>
                     <a href="http://no-fee-rental.teamtechverx.com/blog/?page_id=70" class="ft-links">Press</a>
                     <a href="http://no-fee-rental.teamtechverx.com/blog/?page_id=3" class="ft-links">Privacy Policy </a>
                     <a href="http://no-fee-rental.teamtechverx.com/blog/?page_id=27" class="ft-links">Terms</a>

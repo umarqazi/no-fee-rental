@@ -184,6 +184,89 @@
                         </div>
                     </div>
                 </div>
+            <div class="tab-pane" id="tab4">
+                <div class="property-listing">
+                    <div class="desktop-listiing">
+                        @if(count($featured_listings['pet_policy']) < 1)
+                            <span>No List Found</span>
+                        @endif
+                        @foreach($featured_listings["pet_policy"] as $key => $fl)
+                            <div class="property-thumb">
+                                <div class="check-btn">
+                                    <a href="javascript:void(0);">
+                                        <button class="btn-default" data-toggle="modal" id ="checkAvailability" data-target="#check-availability">Check Availability</button>
+                                    </a>
+                                </div>
+                                @if(!authenticated())
+                                    <span class="display-heart-icon"></span>
+                                @endif
+                                @if(isRenter())
+                                    @if(isFavourite($fl["favourites"],$fl->id))
+                                        <span id = "{{$fl->id}}" class="heart-icon favourite"></span>
+                                    @else
+                                        <span id = "{{$fl->id}}" class="heart-icon "></span>
+                                    @endif
+                                @endif
+                                <img src="{{ asset($fl->thumbnail ?? DLI) }}" alt="" class="main-img" />
+                                <div class="info">
+                                    <div class="info-link-text">
+                                        <p>{{ ($fl->rent) ?   '$' .number_format($fl->rent,0) : 'Null' }}</p>
+                                        <small> {{ str_formatting($fl->bedrooms, 'Bed') .' ,'. str_formatting($fl->baths, 'Bath') }} </small>
+                                        <p> {{ is_exclusive($fl) }}</p>
+                                    </div>
+                                    <a href="{{ route('listing.detail', $fl->id) }}" class="btn viewfeature-btn"> View </a>
+                                </div>
+                                <div class="feaure-policy-text">
+                                    <p>{{ ($fl->rent) ?   '$' .number_format($fl->rent,0) : 'Null' }} / Month </p>
+                                    <span>{{ str_formatting($fl->bedrooms, 'Bed') .' ,'. str_formatting($fl->baths, 'Bath') }} </span>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+
+                    <div class="owl-slider">
+                        <div class="owl-carousel owl-theme" id="carousel-2">
+                            @if(count($featured_listings['pet_policy']) < 1)
+                                <span>No List Found</span>
+                            @endif
+                            @foreach($featured_listings["pet_policy"] as $key => $fl)
+                                <div class="item">
+                                    <div class="property-thumb">
+                                        <div class="check-btn">
+                                            <a href="javascript:void(0);">
+                                                <button class="btn-default" data-toggle="modal" id ="checkAvailability" data-target="#check-availability">Check Availability</button>
+                                            </a>
+                                        </div>
+                                        @if(!authenticated())
+                                            <span class="display-heart-icon"></span>
+                                        @endif
+                                        @if(isRenter())
+                                            @if(isFavourite($fl["favourites"],$fl->id))
+                                                <span id = "{{$fl->id}}" class="heart-icon favourite"></span>
+                                            @else
+                                                <span id = "{{$fl->id}}" class="heart-icon "></span>
+                                            @endif
+                                        @endif
+                                        <img src="{{ asset($fl->thumbnail ?? DLI) }}" alt="" class="main-img" />
+                                        <div class="info">
+                                            <div class="info-link-text">
+                                                <p>{{ ($fl->rent) ?   '$' .number_format($fl->rent,0) : 'Null' }}</p>
+                                                <small> {{ str_formatting($fl->bedrooms, 'Bed') .' ,'. str_formatting($fl->baths, 'Bath') }} </small>
+                                                <p> {{ is_exclusive($fl) }}</p>
+                                            </div>
+                                            <a href="{{ route('listing.detail', $fl->id) }}" class="btn viewfeature-btn"> View </a>
+                                        </div>
+                                        <div class="feaure-policy-text">
+                                            <p>{{ ($fl->rent) ?   '$' .number_format($fl->rent,0) : 'Null' }} / Month </p>
+                                            <span>{{ str_formatting($fl->bedrooms, 'Bed') .' ,'. str_formatting($fl->baths, 'Bath') }} </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            </div>
                 <div class="tab-pane" id="tab3">
                 <div class="property-listing">
                     <div class="desktop-listiing">
