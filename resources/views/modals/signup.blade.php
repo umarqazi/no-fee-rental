@@ -13,17 +13,17 @@
                     <li>Get email notification for new listings in neighborhoods that you like</li>
                     <li>Access to showing on demand</li>
                     <li>Access to our neighborhood specialists</li>
-                    <h1 style="color: white;font-size: 16px; line-height: normal;">And much more features!!</h1>
+                    <h1 style="color: white;font-size: 16px; line-height: normal;font-weight: 600;">And much more features!!</h1>
                 </ul>
 
                 <ul class="create-agent-listing">
                     <h3>JOIN US </h3>
                     <li>Publish your listings</li>
                     <li>Syndicate listing from Various marketplaces</li>
-                    <li>Un limited renting potential to thousand of renters</li>
+                    <li>Unlimited renting potential to thousand of renters</li>
                     <li>Access to showing on demand clients</li>
                     <li>Access to our direct clientele through neighborhood specialists program</li>
-                    <h1 style="color:white; font-size: 16px; line-height: normal;">NOTE: We are NOO FEE website and any apartment will any apartment deemed
+                    <h1 style="color:white; font-size: 16px;font-weight: 600; line-height: normal;">Info: We are NOO FEE website and any apartment will any apartment deemed
                         as a fee untill will not be activated.</h1>
                 </ul>
             </div>
