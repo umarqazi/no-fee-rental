@@ -184,7 +184,7 @@
                         </div>
                     </div>
                 </div>
-            <div class="tab-pane" id="tab4">
+            <div class="tab-pane  no-mobile-tabs" id="tab4">
                 <div class="property-listing">
                     <div class="desktop-listiing">
                         @if(count($featured_listings['pet_policy']) < 1)
@@ -267,7 +267,7 @@
                     </div>
                 </div>
             </div>
-                <div class="tab-pane no-mobile-tabs" id="tab3">
+                <div class="tab-pane" id="tab3">
                 <div class="property-listing">
                     <div class="desktop-listiing">
                         @if(count($featured_listings['cheapest']) < 1)
