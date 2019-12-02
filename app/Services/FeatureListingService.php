@@ -213,6 +213,14 @@ class FeatureListingService {
     public function recent($paginate) {
         return $this->sortCollection($paginate, 'updated_at', RECENT);
     }
+
+    /**
+     * @return mixed
+     */
+    public function petFriendly() {
+        return $this->listingRepo->petFriendly();
+    }
+
     /**
      * @param $paginate
      *
@@ -220,21 +228,20 @@ class FeatureListingService {
      */
     public function featured_listing($paginate) {
         return [
-            'recent'   => $this->featured()
+            'recent'     => $this->featured()
                             ->where('visibility', ACTIVE)
                             ->latest('created_at')
                             ->paginate($paginate, ['*'], 'recent'),
-            'cheapest' => $this->featured()
+            'cheapest'   => $this->featured()
                             ->where('visibility', ACTIVE)
                             ->orderBy( 'rent' ,'ASC')
                             ->paginate($paginate, ['*'], 'cheapest'),
-            'popular' => $this->popular()
+            'popular'    => $this->popular()
                             ->where('visibility', ACTIVE)
                             ->paginate($paginate, ['*'], 'likes'),
-          /*  'pet_policy' => $this->policy($paginate)
-                ->where('visibility', ACTIVE)
-                ->paginate($paginate, ['*'], 'likes'),*/
-
+            'pet_policy' => $this->petFriendly()
+                            ->where('visibility', ACTIVE)
+                            ->paginate($paginate, ['*'], 'pets'),
         ];
     }
 }

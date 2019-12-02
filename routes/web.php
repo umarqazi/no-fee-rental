@@ -140,12 +140,6 @@ Route::get('/accept-invitation/{token}', 'Agent\MemberController@acceptInvitatio
 
 // Test Route
 Route::get('/test', function (\Illuminate\Http\Request $request) {
-    socketEvent(toObject([
-        'to' => 4,
-        'from' => 5,
-        'id' => 15,
-        'message' => 'yes',
-        'url' => 'abc.com'
-    ]));
-    return redirect(route('web.index'));
+    $service = new \App\Services\MapBoxService();
+    $service->call();
 })->name('web.test');

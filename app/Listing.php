@@ -244,6 +244,15 @@ class Listing extends Model {
     }
 
     /**
+     * @return mixed
+     */
+    public function scopePetFriendly($query) {
+        return $query->whereHas('features', function($subQuery) {
+            return $subQuery->whereIn('value', array_keys(config('features.pet_policy')));
+        });
+    }
+
+    /**
      * @param $query
      *
      * @return mixed
