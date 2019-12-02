@@ -1920,13 +1920,13 @@ footer .copyright .social-icons li a:hover {
 
 .contact-banner {
     background-image: url('..//images/contact-us-new.jpg');
-    max-height:470px;
-    height: 360px;
+    height: 300px;
     background-repeat: no-repeat;
     object-fit: cover;
     width: 100%;
-    max-width: 100%;
     background-size: cover;
+    background-position: center bottom;
+
 }
 
 .contact-info {
@@ -5960,4 +5960,7 @@ list .property-info .info p {
     border-bottom: 1px solid #eee;
     padding-bottom: 15px;
 }
+    .contact-banner{
+        height: 120px;
+    }
 }
