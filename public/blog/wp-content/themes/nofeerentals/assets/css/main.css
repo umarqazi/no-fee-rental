@@ -835,7 +835,7 @@ h3 {
 }
 
 .login-modal .modal-dialog .logo-info-wrapper {
-  background: url(../images/login.jpg) no-repeat center center;
+  background: url(/assets/images/login.jpg) no-repeat center center;
   background-size: cover;
   padding: 0px 20px;
   flex: 0 0 30%;
