@@ -2667,17 +2667,18 @@ footer .footer-wrapper>li:nth-child(1) {
 
 .privacy-policy-banner {
     width: 100%;
-    height: 380px;
+    height: 300px;
     object-fit: cover;
     position: relative;
+    background-repeat: no-repeat;
     background-position: center center;
-    background-size: 100%;
+    background-size: cover;
 }
 .privacy-policy-banner:before{
     content: "";
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 0.3);
     position: absolute;
     top: 0;
     left: 0;
@@ -3565,7 +3566,7 @@ footer {
     font-size: 20px;
   }
   .inner-pages .text-center.press-row span {
-    font-size: 12px;
+    font-size: 14px;
   }
   .press-description-row {
     font-size: 14px;
@@ -3807,6 +3808,12 @@ footer {
     text-align: center;
     margin-top: 20px;
   }
+    .privacy-policy-banner {
+        height: 120px;
+    }
+    .blog-banner-img-wrapper .blog-banner-text{
+        font-size: 20px;
+    }
 }
 
 @media (min-width: 576px) {
@@ -3846,6 +3853,7 @@ footer {
     padding: 10px;
     line-height: normal;
 }
+
 }
 
 @media (max-width: 1024px) {
