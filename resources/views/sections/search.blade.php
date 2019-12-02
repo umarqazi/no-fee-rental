@@ -25,14 +25,14 @@
                     <option>Size</option>
                     <option>Size</option>
                 </select>--}}
-                {!! Form::select('max_price', [
+                {!! Form::select('priceRange', [
            "" => "Up To Price",
            '1000'  => "Up To $1,000",
            '2000'  => "Up To $2,000",
            '3000'  => "Up To $3,000",
            '4000'  => "Up To $4,000",
            '5000'  => "Up To $5,000",],null, ['class' => 'custom-select-input']) !!}
-                {!! Form::select('square_max', [
+                {!! Form::select('squareRange', [
            "" => "Size",
            '100'  => "100 square",
            '200'  => "200 square",

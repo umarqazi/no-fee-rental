@@ -56,7 +56,8 @@ class SearchService extends SaveSearchService {
             'availability'          => $request->availability ?? null,
             'priceRange'            => is_array($request->priceRange)
                 ? $request->priceRange : ['min_price' => '0', 'max_price' => $request->priceRange],
-            'squareRange'           => $request->squareRange ?? null,
+            'squareRange'           => is_array($request->squareRange)
+                ? $request->squareRange : ['square_min' => '0', 'square_max' => $request->squareRange],
             'agentsWithPremiumPlan' => $request->agentsWithPremiumPlan ?? null
         ];
 
@@ -176,5 +177,12 @@ class SearchService extends SaveSearchService {
      */
     private function fetchQuery() {
         return $this->query->where('visibility', ACTIVE)->orderBy('is_featured', TRUE)->get();
+    }
+
+    /**
+     * @return mixed
+     */
+    private function petFriendly() {
+        return $this->query->whereHas('features');
     }
 }
