@@ -25,20 +25,8 @@
                     <option>Size</option>
                     <option>Size</option>
                 </select>--}}
-                {!! Form::select('max_price', [
-           "" => "Up To Price",
-           '1000'  => "Up To $1,000",
-           '2000'  => "Up To $2,000",
-           '3000'  => "Up To $3,000",
-           '4000'  => "Up To $4,000",
-           '5000'  => "Up To $5,000",],null, ['class' => 'custom-select-input']) !!}
-                {!! Form::select('square_max', [
-           "" => "Size",
-           '100'  => "100 square",
-           '200'  => "200 square",
-           '300'  => "300 square",
-           '400'  => "400 square",
-           '500'  => "500 square",],null, ['class' => 'custom-select-input size-input']) !!}
+                {!! Form::select('priceRange',  config('formfields.search.price') ,null, ['class' => 'custom-select-input']) !!}
+                {!! Form::select('beds', config('formfields.search.beds'),null, ['class' => 'custom-select-input size-input']) !!}
 
             </div>
             {!! Form::button('Search', ['class' => 'search-btn', 'type' => 'submit']) !!}

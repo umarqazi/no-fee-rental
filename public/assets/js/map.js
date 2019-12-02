@@ -9,6 +9,125 @@ let defaultCoords =  {latitude: 40.785091, longitude: -73.968285}; // New York C
 let infowindow = new google.maps.InfoWindow();
 
 /**
+ * ============================================================= |
+ *                      Map Box Controls
+ * ============================================================= |
+ *
+ */
+
+/**
+ *
+ * @type {number[][]}
+ */
+const defaultBounds = [
+    [-74.04728500751165, 40.68392799015035], // Southwest coordinates
+    [-73.91058699000139, 40.87764500765852]  // Northeast coordinates
+];
+
+const BBOX = [
+    -74.04728500751165, -73.91058699000139, 40.68392799015035, 40.87764500765852
+];
+
+/**
+ *
+ * @param coords
+ * @returns {LngLat}
+ */
+const latLngMapBox = (coords) => {
+    return new mapboxgl.LngLat(coords.longitude, coords.latitude);
+};
+
+/**
+ * Mapbox controls
+ */
+const mapBoxControls = () => {
+    map.addControl(new mapboxgl.NavigationControl(), 'bottom-right');
+};
+
+/**
+ *
+ * @returns {string}
+ */
+const setMapBoxToken = () => {
+    const accessToken = "pk.eyJ1IjoiZnJhbmsxMTIiLCJhIjoiY2szanJ4YWpvMDR2djNubXVpb3FnOHRuOCJ9.qeV9Ljfdoa-C5XjJI6qcsQ";
+    return mapboxgl.accessToken = accessToken;
+};
+
+const mapBoxMarker = (coords) => {
+    let marker = new mapboxgl.Marker()
+        .setLngLat(latLngMapBox(coords))
+        .addTo(map);
+
+    return marker;
+};
+
+/**
+ *
+ * @returns {Promise<unknown | never>}
+ */
+const initMapBox = () => {
+    map = new mapboxgl.Map({
+        container: "map",
+        style: "mapbox://styles/mapbox/light-v10",
+        center: latLngMapBox(defaultCoords), // New York Center Point
+        maxBounds: defaultBounds, // Map View Bound To New York City Only
+        scrollZoom: false,
+        accessToken: setMapBoxToken(),
+        logoPosition: "top-left",
+        attributionControl: true,
+        customAttribution: "New York City Map",
+        zoom: 12,
+    });
+
+    // let geocoder = new MapboxGeocoder({
+    //     accessToken: setMapBoxToken(),
+    //     maxBounds: defaultBounds,
+    //     mapboxgl: mapboxgl
+    // });
+    // geocoder.addTo('#controls');
+    // map.addControl(geocoder);
+    mapBoxControls();
+    mapBoxMarker(defaultCoords);
+};
+
+$(() => {
+    $('body').on('input', '#controls', function() {
+        console.log($(this).val(), defaultBounds[0]);
+        var mapboxClient = mapboxSdk({ accessToken: setMapBoxToken() });
+        mapboxClient.geocoding.forwardGeocode({
+            query: $(this).val(),
+            autocomplete: true,
+            bbox: BBOX,
+            limit: 1
+        })
+        .send()
+        .then(function (response) {
+            console.log(response);
+            if (response && response.body && response.body.features && response.body.features.length) {
+                var feature = response.body.features[0];
+
+                var map = new mapboxgl.Map({
+                    container: 'map',
+                    style: 'mapbox://styles/mapbox/streets-v11',
+                    center: feature.center,
+                    zoom: 10
+                });
+                new mapboxgl.Marker()
+                    .setLngLat(feature.center)
+                    .addTo(map);
+            }
+        });
+    });
+});
+
+/**
+ * ==================================================================== |
+ *                       Google Map Controls
+ * ==================================================================== |
+ *
+ */
+
+/**
  *
  * @param coords
  * @returns {google.maps.LatLng}
