@@ -300,7 +300,64 @@ h3 {
   outline: none !important;
   box-shadow: none;
 }
+/*loader*/
 
+.loader {
+    position: relative;
+    display: none;
+}
+
+.loader-wrap {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background: black;
+    opacity: .7;
+    z-index: 1100;
+    top:0;
+    right:0;
+    left:0;
+    bottom: 0;
+}
+
+.main-loader {
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid #223971;
+    border-bottom: 16px solid #223971;
+    width: 120px;
+    height: 120px;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1100;
+    margin-left: -50px;
+    margin-top: -50px;
+}
+
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+/*end loader */
 .header-bg {
   height: 100vh;
   background: url(../images/banner-bg.jpg) no-repeat top -100px center;
@@ -835,7 +892,7 @@ h3 {
 }
 
 .login-modal .modal-dialog .logo-info-wrapper {
-  background: url(../images/login.jpg) no-repeat center center;
+  background: url(/assets/images/login.jpg) no-repeat center center;
   background-size: cover;
   padding: 0px 20px;
   flex: 0 0 30%;
@@ -3808,11 +3865,11 @@ footer {
     text-align: center;
     margin-top: 20px;
   }
-    .privacy-policy-banner {
-        height: 120px;
-    }
     .blog-banner-img-wrapper .blog-banner-text{
         font-size: 20px;
+    }
+    .privacy-policy-banner {
+        height: 220px;
     }
 }
 
@@ -3853,7 +3910,9 @@ footer {
     padding: 10px;
     line-height: normal;
 }
-
+    .privacy-policy-banner {
+        height: 120px;
+    }
 }
 
 @media (max-width: 1024px) {

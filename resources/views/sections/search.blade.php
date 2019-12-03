@@ -32,7 +32,9 @@
             {!! Form::button('Search', ['class' => 'search-btn', 'type' => 'submit']) !!}
 
         </div>
+        <span id="search-error-message"></span>
         {!! Form::close() !!}
+
         <a href="javascript:void(0);" class="advance-search" data-toggle="modal" data-target="#advance-search">+ Advanced Search</a>
     </div>
 </div>
