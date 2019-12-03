@@ -5772,6 +5772,9 @@ footer .copyright .social-icons li a:hover {
     .neighborhood-search .sorting-listing .bettery-park {
         margin-top: 10px;
     }
+    .no-mobile-tabs{
+        display: none;
+    }
 }
 
 

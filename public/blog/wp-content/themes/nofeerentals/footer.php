@@ -75,6 +75,11 @@
 
 <?php wp_footer(); ?>
 
+<div class="loader">
+    <div class="loader-wrap"> </div>
+    <div class="main-loader"></div>
+</div>
+
 <!-- Login Modal -->
     <div class="modal fade login-modal" id="login">
         <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">

@@ -5,13 +5,13 @@
             <li class="nav-item">
                 <a class="nav-link active" data-toggle="pill" href="#tab1">Recommended</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item no-mobile-tabs">
                 <a class="nav-link" data-toggle="pill" href="#tab2">Trending</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" data-toggle="pill" href="#tab3">Price</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item no-mobile-tabs">
                 <a class="nav-link" data-toggle="pill" href="#tab4">Pet Friendly</a>
             </li>
 
@@ -101,7 +101,7 @@
                     </div>
                 </div>
             </div>
-            <div class="tab-pane" id="tab2">
+            <div class="tab-pane no-mobile-tabs" id="tab2">
                 <div class="property-listing">
                     <div class="desktop-listiing">
                         @if(count($featured_listings['popular']) < 1)
@@ -184,7 +184,7 @@
                         </div>
                     </div>
                 </div>
-            <div class="tab-pane" id="tab4">
+            <div class="tab-pane  no-mobile-tabs" id="tab4">
                 <div class="property-listing">
                     <div class="desktop-listiing">
                         @if(count($featured_listings['pet_policy']) < 1)
