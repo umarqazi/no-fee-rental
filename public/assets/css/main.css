@@ -2224,10 +2224,12 @@ footer .copyright .social-icons li a:hover {
 .neighborhood-search .search-result-wrapper .map-wrapper.full-map {
     flex: 0 0 100%;
 }
-
+.full-map .mapboxgl-popup.mapboxgl-popup-anchor-bottom{
+    max-width: 320px !important;
+}
 .map-wrapper.full-map .location-thumbnaail.location-image-btm img{
-    width: 140px !important;
-    height: 70px !important;
+    width: 150px !important;
+    height: 100px !important;
 }
 .neighborhood-search .search-result-wrapper .map-wrapper .swipe-btn {
     position: absolute;
@@ -2257,8 +2259,8 @@ footer .copyright .social-icons li a:hover {
     align-items: center;
 }
 .map-wrapper .location-thumbnaail img{
-    width:100px !important;
-    height: 65px !important;
+    width:120px !important;
+    height: 80px !important;
     object-fit: cover;
     margin-right: 10px;
     border-radius: 5px;
@@ -2461,7 +2463,13 @@ footer .copyright .social-icons li a:hover {
     background: #223971;
     border-radius: 50%;
 }
-
+.mapboxgl-popup.mapboxgl-popup-anchor-bottom{
+    max-width: 320px !important;
+}
+.mapboxgl-popup-close-button{
+    right: 10px !important;
+    font-size: 18px;
+}
 
 /*Rental Guides*/
 
