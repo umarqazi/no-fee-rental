@@ -3865,9 +3865,11 @@ footer {
     text-align: center;
     margin-top: 20px;
   }
-
     .blog-banner-img-wrapper .blog-banner-text{
         font-size: 20px;
+    }
+    .privacy-policy-banner {
+        height: 220px;
     }
 }
 
@@ -3908,7 +3910,6 @@ footer {
     padding: 10px;
     line-height: normal;
 }
-
     .privacy-policy-banner {
         height: 120px;
     }

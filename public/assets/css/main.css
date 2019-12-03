@@ -5964,6 +5964,11 @@ list .property-info .info p {
     padding-bottom: 15px;
 }
     .contact-banner{
+        height: 220px;
+    }
+}
+@media only screen and (max-width: 576px){
+    .contact-banner{
         height: 120px;
     }
 }
