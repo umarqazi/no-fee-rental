@@ -223,6 +223,18 @@ class ListingService extends BuildingService {
     }
 
     /**
+     * @param $request
+     *
+     * @return array
+     */
+    public function filter( $beds,$baths) {
+        $keywords = [];
+        $beds != null ? $keywords['bedrooms'] = $beds : null ;
+        $baths != null ? $keywords['baths'] = $baths : null ;
+        return $listings = $this->listingRepo->search($keywords)->get();
+    }
+
+    /**
      * @return mixed
      */
     public function active() {
