@@ -54,7 +54,15 @@ const setMapBoxToken = () => {
 };
 
 const mapBoxMarker = (coords) => {
+    let popup = new mapboxgl.Popup({
+        closeButton: true,
+        closeOnClick: true,
+    });
+
+    popup.setText('yousuf khalid');
+
     let marker = new mapboxgl.Marker()
+        .setPopup(popup)
         .setLngLat(latLngMapBox(coords))
         .addTo(map);
 
@@ -79,11 +87,16 @@ const initMapBox = () => {
         zoom: 12,
     });
 
-    // let geocoder = new MapboxGeocoder({
-    //     accessToken: setMapBoxToken(),
-    //     maxBounds: defaultBounds,
-    //     mapboxgl: mapboxgl
-    // });
+    let geocoder = new MapboxGeocoder({
+        container: 'controls',
+        accessToken: setMapBoxToken(),
+        maxBounds: defaultBounds,
+        mapboxgl: mapboxgl
+    });
+
+    document.getElementById('address').appendChild(geocoder.onAdd(map));
+    $('body').find('.mapboxgl-ctrl > svg').remove();
+    $('body').find('.mapboxgl-ctrl > input').attr('placeholder', 'Enter Street Address');
     // geocoder.addTo('#controls');
     // map.addControl(geocoder);
     mapBoxControls();
