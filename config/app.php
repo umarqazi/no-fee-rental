@@ -176,7 +176,7 @@ return [
 		 */
 		App\Providers\AppServiceProvider::class,
 		App\Providers\AuthServiceProvider::class,
-		 App\Providers\BroadcastServiceProvider::class,
+        App\Providers\BroadcastServiceProvider::class,
 		App\Providers\EventServiceProvider::class,
 		App\Providers\RouteServiceProvider::class,
 
@@ -234,6 +234,7 @@ return [
         'Calendar' => MaddHatter\LaravelFullcalendar\Facades\Calendar::class,
         'XmlParser' => Orchestra\Parser\Xml\Facade::class,
         'Stripe' => Cartalyst\Stripe\Laravel\Facades\Stripe::class,
-        'Soda'  => socrata\soda\Client::class
+        'Soda'  => socrata\soda\Client::class,
+        'MapBox' => \ZakClayton\Mapbox\MapboxApi::class,
 	],
 ];

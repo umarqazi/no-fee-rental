@@ -84,6 +84,13 @@ class ListingRepo extends BaseRepo {
 		return $this->model->featured()->withfavourite();
 	}
 
+    /**
+     * @return mixed
+     */
+    public function petFriendly() {
+        return $this->model->petFriendly();
+    }
+
 	/**
      * @return mixed
      */

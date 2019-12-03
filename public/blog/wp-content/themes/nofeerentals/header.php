@@ -38,10 +38,10 @@
         <div class="mobile-nav">
             <ul id="menu-header-menu" class="menu-links">
                 <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-29">
-                    <a href="http://no-fee-rental.teamtechverx.com/rent">Rent</a>
+                    <a href="http://no-fee-rental.teamtechverx.com/listing-by-rent">Rent</a>
                 </li>
                 <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-33">
-                    <a href="http://no-fee-rental.teamtechverx.com/neighborhood">Neighborhood</a>
+                    <a href="http://no-fee-rental.teamtechverx.com/listing-by-neighborhood">Neighborhood</a>
                 </li>
                 <li>
                     <a href="" data-toggle="modal" data-target="#login" class="signin-modal-btn close-menu">Login</a>

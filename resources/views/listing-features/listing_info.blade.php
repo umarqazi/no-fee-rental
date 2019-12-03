@@ -2,13 +2,14 @@
 {!! HTML::script('assets/js/datepicker.min.js') !!}
 {!! HTML::script('assets/js/datepicker.en.js') !!}
 <div class="col-md-6">
-    <div class="form-group">
+    <div class="form-group" id="address">
         <label>Street Address</label>
         {!! Form::text('street_address', null,
         [
             ($action == 'Update') ? 'readonly' : '',
             'id'           => ($action !== 'Update') ? 'controls' : '',
             'class'        => 'controls input-style',
+            'style'        => 'display:none',
             'autocomplete' => 'off'
         ]) !!}
         <span class="invalid-feedback" role="alert">

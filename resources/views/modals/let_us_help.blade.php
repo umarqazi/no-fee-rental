@@ -77,44 +77,67 @@
                 <!-- Modal body -->
                 <div class="modal-body">
                     <div class="pt-4 -b-4">
-                        <ul class="bedroom-listing">
-                            <li>
-                                <div class="custom-control custom-checkbox">
-                                    {!! Form::checkbox('beds[]', 'studio', null, ['class' => 'custom-control-input', 'id' => 'bedrooms-1']) !!}
-                                    <label class="custom-control-label" for="bedrooms-1">Studio</label>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="custom-control custom-checkbox">
-                                    {!! Form::checkbox('beds[]', '1', null, ['class' => 'custom-control-input', 'id' => 'bedrooms-2']) !!}
-                                    <label class="custom-control-label" for="bedrooms-2">1</label>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="custom-control custom-checkbox">
-                                    {!! Form::checkbox('beds[]', '2', null, ['class' => 'custom-control-input', 'id' => 'bedrooms-3']) !!}
-                                    <label class="custom-control-label" for="bedrooms-3">2</label>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="custom-control custom-checkbox">
-                                    {!! Form::checkbox('beds[]', '3', null, ['class' => 'custom-control-input', 'id' => 'bedrooms-4']) !!}
-                                    <label class="custom-control-label" for="bedrooms-4">3</label>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="custom-control custom-checkbox">
-                                    {!! Form::checkbox('beds[]', '4', null, ['class' => 'custom-control-input', 'id' => 'bedrooms-5']) !!}
-                                    <label class="custom-control-label" for="bedrooms-5">4</label>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="custom-control custom-checkbox">
-                                    {!! Form::checkbox('beds[]', '5', null, ['class' => 'custom-control-input', 'id' => 'bedrooms-6']) !!}
-                                    <label class="custom-control-label" for="bedrooms-6">5</label>
-                                </div>
-                            </li>
-                        </ul>
+{{--                        <ul class="bedroom-listing">--}}
+{{--                            <li>--}}
+{{--                                <div class="custom-control custom-checkbox">--}}
+{{--                                    {!! Form::checkbox('beds[]', 'studio', null, ['class' => 'custom-control-input', 'id' => 'bedrooms-1']) !!}--}}
+{{--                                    <label class="custom-control-label" for="bedrooms-1">Studio</label>--}}
+{{--                                </div>--}}
+{{--                            </li>--}}
+{{--                            <li>--}}
+{{--                                <div class="custom-control custom-checkbox">--}}
+{{--                                    {!! Form::checkbox('beds[]', '1', null, ['class' => 'custom-control-input', 'id' => 'bedrooms-2']) !!}--}}
+{{--                                    <label class="custom-control-label" for="bedrooms-2">1</label>--}}
+{{--                                </div>--}}
+{{--                            </li>--}}
+{{--                            <li>--}}
+{{--                                <div class="custom-control custom-checkbox">--}}
+{{--                                    {!! Form::checkbox('beds[]', '2', null, ['class' => 'custom-control-input', 'id' => 'bedrooms-3']) !!}--}}
+{{--                                    <label class="custom-control-label" for="bedrooms-3">2</label>--}}
+{{--                                </div>--}}
+{{--                            </li>--}}
+{{--                            <li>--}}
+{{--                                <div class="custom-control custom-checkbox">--}}
+{{--                                    {!! Form::checkbox('beds[]', '3', null, ['class' => 'custom-control-input', 'id' => 'bedrooms-4']) !!}--}}
+{{--                                    <label class="custom-control-label" for="bedrooms-4">3</label>--}}
+{{--                                </div>--}}
+{{--                            </li>--}}
+{{--                            <li>--}}
+{{--                                <div class="custom-control custom-checkbox">--}}
+{{--                                    {!! Form::checkbox('beds[]', '4', null, ['class' => 'custom-control-input', 'id' => 'bedrooms-5']) !!}--}}
+{{--                                    <label class="custom-control-label" for="bedrooms-5">4</label>--}}
+{{--                                </div>--}}
+{{--                            </li>--}}
+{{--                            <li>--}}
+{{--                                <div class="custom-control custom-checkbox">--}}
+{{--                                    {!! Form::checkbox('beds[]', '5', null, ['class' => 'custom-control-input', 'id' => 'bedrooms-6']) !!}--}}
+{{--                                    <label class="custom-control-label" for="bedrooms-6">5</label>--}}
+{{--                                </div>--}}
+{{--                            </li>--}}
+{{--                        </ul>--}}
+                        <div class="form-group" id="advance-search-chkbox">
+                            <label class="label">Beds <span>(Select all that applies)</span></label>
+                            <ul id="beds">
+                                <li> <input type="checkbox" value="studio" id="bed-Checkbox" name="Checkbox">
+                                    <label for="bed-Checkbox"><span class="label-name">Studio</span></label>
+                                </li>
+                                <li> <input type="checkbox" value="1" id="bed-Checkbox-1" name="beds[]">
+                                    <label for="bed-Checkbox-1"><span class="label-name">1</span></label>
+                                </li>
+                                <li> <input type="checkbox" value="2" id="bed-Checkbox-2" name="beds[]">
+                                    <label for="bed-Checkbox-2"><span class="label-name">2</span></label>
+                                </li>
+                                <li> <input type="checkbox" value="3" id="bed-Checkbox-3" name="beds[]">
+                                    <label for="bed-Checkbox-3"><span class="label-name">3</span></label>
+                                </li>
+                                <li> <input type="checkbox" value="4" id="bed-Checkbox-4" name="beds[]">
+                                    <label for="bed-Checkbox-4"><span class="label-name">4</span></label>
+                                </li>
+                                <li> <input type="checkbox" value="5" id="bed-Checkbox-5" name="beds[]">
+                                    <label for="bed-Checkbox-5"><span class="label-name">5+</span></label>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer text-center">

@@ -13,18 +13,21 @@
             <div style="position:relative;">
                 <i class="fas fa-search"></i>
                 {!! Form::text('neighborhoods', null, ['id' => 'neigh', 'placeholder' => 'Enter Neighborhood', 'class' => 'search-fld']) !!}
-                <select class="custom-select-input">
+                {{--<select class="custom-select-input">
                     <option>Up To $5,000</option>
                     <option>Up To $5,000</option>
                     <option>Up To $5,000</option>
                     <option>Up To $5,000</option>
-                </select>
-                <select class="custom-select-input size-input">
+                </select>--}}
+                {{--<select class="custom-select-input size-input">
                     <option>Size</option>
                     <option>Size</option>
                     <option>Size</option>
                     <option>Size</option>
-                </select>
+                </select>--}}
+                {!! Form::select('priceRange',  config('formfields.search.price') ,null, ['class' => 'custom-select-input']) !!}
+                {!! Form::select('beds', config('formfields.search.beds'),null, ['class' => 'custom-select-input size-input']) !!}
+
             </div>
             {!! Form::button('Search', ['class' => 'search-btn', 'type' => 'submit']) !!}
 
