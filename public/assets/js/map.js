@@ -112,6 +112,10 @@ const multiMarkers = (coords, container) => {
  <ul><li><p>${res.bedrooms}</p>Beds</li><li><p>${res.baths}</p>Baths</li></ul>
  </div></div></div> <p>${res.street_address} </p></a>`;
                  });
+                setTimeout(() => {
+                    $('body').find('.mapboxgl-popup-content').addClass('single');
+                    $('.single').css({'overflow-y': 'auto'});
+                },10);
             } else {
                 html += `<a href="${domain}/listing-detail/${resp.data[0].id}"><div class="location-thumbnaail location-image-btm"><img style="height: 170px; width: 300px;" src="${domain}/${resp.data[0].thumbnail}"><div class="price-wrapp price-wrap-location">
  <p class="price" style="color:#223971">` + '$' + resp.data[0].rent.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + `</p><div class="additional-info">
