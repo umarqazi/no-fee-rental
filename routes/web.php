@@ -98,6 +98,7 @@ Route::match(['get', 'post'], '/listing-by-neighborhood/{neighborhood}', 'Neighb
 Route::get('/listing-by-rent/{sort}', 'RentController@sort');
 Route::get('/listing-by-rent', 'RentController@index')->name('web.ListsByRent');
 Route::get('/listing-by-rent-search', 'RentController@advanceSearch')->name('web.advanceRentSearch');
+Route::get('/listing-by-rent-filter/{beds?}/{baths?}', 'RentController@filter')->name('web.advanceRentFilter');
 
 // Review Routes
 Route::get('/send-a-review/{token}', 'ReviewController@index')->name('web.makeReview');

@@ -235,9 +235,19 @@ $(() => {
 
         messages: {
             neighborhoods: {
-                required : 'neighborhood is required',
+                required : 'Neighborhood is required.',
             }
-        }
+        },
+        errorPlacement: function(error, element) {
+            if ( element.attr("name") === "neighborhoods" )
+            {
+                error.insertAfter('#search-error-message');
+            }
+            else
+            {
+                error.insertAfter(element);
+            }
+        },
     });
 
 

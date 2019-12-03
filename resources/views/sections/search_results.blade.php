@@ -26,14 +26,14 @@
                                     {{--Bedrooms--}}
                                     {!! Form::open([]) !!}
                                     <div class="dropdown-wrap">
-                                        <div class="radio-group-1 ">
+                                        <div class="radio-group-1 tabs" id="beds">
                                             <div class="item">
                                                 <label>Any
                                                     {!! Form::radio('beds', 'any') !!}
                                                     <span class="checkmark"></span>
                                                 </label>
                                             </div>
-                                            {!! Form::close() !!}
+                                            {{--{!! Form::close() !!}--}}
                                             <div class="item">
                                                 <label>Studio
                                                     {!! Form::radio('beds', 'studio') !!}
@@ -60,7 +60,7 @@
                                             </div>
                                         </div>
                                         {{--BathRooms--}}
-                                        <div class="radio-group-2 ">
+                                        <div class="radio-group-2 tabs" id="baths">
                                             <div class="item">
                                                 <label>Any
                                                     {!! Form::radio('baths', 'any') !!}
@@ -221,19 +221,57 @@
     $('input[name=map_location]').each(function(i, v) {
         coords.push($(v).val());
     });
-    inputsToDropdown('.radio-group-1', 'Beds', 'radio', '.radio-group-1', '');
-    inputsToDropdown('.radio-group-2', 'Baths', 'radio', '.radio-group-2', '');
+    if(sessionStorage.getItem("beds")){
+        inputsToDropdown('.radio-group-1', sessionStorage.getItem("beds"), 'radio', '.radio-group-1', '');
+    }
+    else  {
+        inputsToDropdown('.radio-group-1', 'Beds', 'radio', '.radio-group-1', '');
+    }
+    if(sessionStorage.getItem("baths")){
+        inputsToDropdown('.radio-group-2', sessionStorage.getItem("baths") , 'radio', '.radio-group-2', '');
+    }
+    else  {
+        inputsToDropdown('.radio-group-2', 'Baths', 'radio', '.radio-group-2', '');
+    }
+
     if(coords !== []) {
         multiMarkers(coords, 'desktop-map');
-        // markerClusters(coords, document.getElementById('mobile-map'));
-        // markerClusters(coords, document.getElementById('desktop-map'));
+        multiMarkers(coords, 'mobile-map');
     }
 
     $('body').on('change', '.sorting', function() {
-        let url = window.location.href;
+        let url = window.location.origin;
         url = url.replace('/recent', '');
         url = url.replace('/cheapest', '');
         url = url.replace('/oldest', '');
-        window.location.href = `${url}/${$(this).val()}`;
+        window.location.href = url+'/listing-by-rent/'+$(this).val();
+
     });
+
+    $('.tabs > div > ul').find('a').on('click', function() {
+        let url = window.location.origin;
+        let value = $(this.childNodes[0]).val();
+        let id = $(this).parent().parent().parent().parent().attr('id');
+        if(id == 'beds'){
+            if(sessionStorage.getItem("baths")){
+                window.location.href = url+'/listing-by-rent-filter/'+value+'/'+sessionStorage.getItem("baths") ;
+                sessionStorage.setItem("beds", value);
+            }
+            else {
+                window.location.href = url+'/listing-by-rent-filter/'+value;
+                sessionStorage.setItem("beds", value);
+            }
+        }
+        else{
+            if(sessionStorage.getItem("beds")){
+                window.location.href = url+'/listing-by-rent-filter/'+sessionStorage.getItem("beds")+'/'+value ;
+                sessionStorage.setItem("baths", value);
+            }
+            else {
+                window.location.href = url+'/listing-by-rent-filter/'+value;
+                sessionStorage.setItem("baths", value);
+            }
+        }
+    });
+
 </script>
