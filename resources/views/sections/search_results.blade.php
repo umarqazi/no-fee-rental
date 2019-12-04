@@ -215,7 +215,6 @@
 
 {!! HTML::script('assets/js/neighborhoods.js') !!}
 {!! HTML::script('assets/js/input-to-dropdown.js') !!}
-{!! HTML::script("https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js") !!}
 <script>
     let coords = [];
     $('input[name=map_location]').each(function(i, v) {
@@ -238,6 +237,14 @@
         multiMarkers(coords, 'desktop-map');
         multiMarkers(coords, 'mobile-map');
     }
+
+    $(".neighborhood-search .search-result-wrapper .map-wrapper .swipe-btn").on('click', function () {
+        $(this).find('i').toggleClass('fa-angle-left fa-angle-right');
+        multiMarkers(coords, 'desktop-map', 15);
+        multiMarkers(coords, 'mobile-map', 15);
+        $(".neighborhood-search .search-result-wrapper .search-listing").toggleClass('hide-list');
+        $(".neighborhood-search .search-result-wrapper .map-wrapper").toggleClass('full-map');
+    });
 
     $('body').on('change', '.sorting', function() {
         let url = window.location.origin;

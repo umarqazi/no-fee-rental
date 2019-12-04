@@ -3,7 +3,7 @@
 let MAP, MARKER;
 let defaultCoords =  {latitude: 40.785091, longitude: -73.968285}; // New York Center point
 const BBOX = [
-    -74.04728500751165, -73.91058699000139, 40.68392799015035, 40.87764500765852
+    -74.2590879797556, 40.477399, -73.7008392055224, 40.917576401307
 ];
 const defaultBounds = [
     [-74.04728500751165, 40.68392799015035], // Southwest coordinates
@@ -23,7 +23,7 @@ const defaultBounds = [
  * @returns {LngLat}
  */
 const setLatLng = (coords) => {
-    return new mapboxgl.LngLat(coords.longitude, coords.latitude);
+    return new mapboxgl.LngLat(coords.longitude ? coords.longitude : coords[0], coords.latitude ? coords.latitude : coords[1]);
 };
 
 /**
@@ -41,49 +41,94 @@ const setToken = () => {
     return mapboxgl.accessToken = "pk.eyJ1IjoiZnJhbmsxMTIiLCJhIjoiY2szanJ4YWpvMDR2djNubXVpb3FnOHRuOCJ9.qeV9Ljfdoa-C5XjJI6qcsQ";
 };
 
-const mapBoxMarker = (coords) => {
-    let popup = new mapboxgl.Popup({
-        closeButton: true,
-        closeOnClick: true,
-    });
-
-    popup.setText('yousuf khalid');
-
-    let marker = new mapboxgl.Marker()
-        .setPopup(popup)
-        .setLngLat(latLngMapBox(coords))
-        .addTo(map);
-
-    return marker;
-};
-
-const geocoder = (container) => {
-    let gcoder = new MapboxGeocoder({
+/**
+ *
+ * @param container
+ * @returns {MapboxGeocoder}
+ */
+const autoComplete = (container) => {
+    let $body = $('body');
+    let geoCode = new MapboxGeocoder({
         container: container,
+        countries: "us",
+        region: 'US-NY',
+        bbox: BBOX,
         accessToken: setToken(),
-        maxBounds: defaultBounds,
-        mapboxgl: mapboxgl
+        mapboxgl: mapboxgl,
     });
 
-    return gcoder;
+    document.getElementById('address').appendChild(geoCode.onAdd(MAP));
+    let $input = $body.find('.mapboxgl-ctrl > input');
+    $body.find('.mapboxgl-ctrl > svg').remove();
+    $input.attr('placeholder', 'Enter Street Address');
+    $input.attr('name', 'street_address');
+
+    return geoCode;
 };
 
+/**
+ *
+ * @param coords
+ * @returns {*}
+ */
+const setMarker = (coords) => {
+    MARKER = new mapboxgl.Marker()
+        .setLngLat(setLatLng(coords))
+        .addTo(MAP);
+
+    return MARKER;
+};
+
+/**
+ *
+ * @param container
+ * @param coords
+ * @param addMarker
+ * @param showPop
+ * @returns {Map<any, any> | P.Map | Map}
+ */
+const setMap = (container, coords, addMarker = true, showPop = true, html = null) => {
+    MAP = new mapboxgl.Map({
+        accessToken: setToken(),
+        container: container,
+        maxBounds: defaultBounds, // Map View Bound To New York City Only
+        style: 'mapbox://styles/mapbox/light-v10',
+        center: setLatLng(coords),
+        zoom: 10
+    });
+
+    MAP.flyTo({center: setLatLng(coords)});
+    (addMarker) ? setMarker(coords) : null;
+    (showPop) ? showPopUp(MARKER, html) : null;
+
+    return MAP;
+};
+
+/**
+ *
+ * @param m
+ * @param html
+ * @returns {*}
+ */
 const showPopUp = (m, html) => {
-    m.getPopup().setHTML(html);
-    return;
     let popup = new mapboxgl.Popup();
     popup.setHTML(html);
     return m.setPopup(popup);
 };
 
-const multiMarkers = (coords, container) => {
+/**
+ *
+ * @param coords
+ * @param container
+ * @param zoom
+ */
+const multiMarkers = (coords, container, zoom = 10) => {
     MAP = new mapboxgl.Map({
         accessToken: setToken(),
-        maxBounds: defaultBounds,
         container: container,
         style: 'mapbox://styles/mapbox/light-v10',
         center: setLatLng(defaultCoords),
-        zoom: 10
+        zoom: zoom
     });
 
     coords.forEach((coords, i) => {
@@ -94,7 +139,7 @@ const multiMarkers = (coords, container) => {
             style: "cursor:pointer",
         })
             .setLngLat(setLatLng(coords))
-            .setPopup( new mapboxgl.Popup().setHTML('I AM COOL') )
+            .setPopup( new mapboxgl.Popup().setHTML('') )
             .addTo(MAP);
 
         i.getElement().addEventListener('click', async function(event) {
@@ -148,45 +193,70 @@ const initMap = (container) => {
         zoom: 12,
     });
 
-
-
-    // document.getElementById('address').appendChild(geocoder.onAdd(map));
-    // $('body').find('.mapboxgl-ctrl > svg').remove();
-    // $('body').find('.mapboxgl-ctrl > input').attr('placeholder', 'Enter Street Address');
-    // geocoder.addTo('#controls');
-    // map.addControl(geocoder);
+    MAP.flyTo({center: setLatLng(defaultCoords)});
     mapControls(new mapboxgl.NavigationControl(), 'bottom-right');
-    mapBoxMarker(defaultCoords);
+    setMarker(defaultCoords);
 
     return MAP;
 };
 
 $(() => {
-    $('body').on('input', '#controls', function() {
-        console.log($(this).val(), defaultBounds[0]);
-        var mapboxClient = mapboxSdk({ accessToken: setMapBoxToken() });
+    $('body').on('keyup, blur', '.mapboxgl-ctrl-geocoder--input', function() {
+        // $('.loader').show();
+        let required = ['poi', 'address'];
+        setTimeout(() => {
+        var mapboxClient = mapboxSdk({ accessToken: setToken() });
         mapboxClient.geocoding.forwardGeocode({
-            query: $(this).val(),
-            autocomplete: true,
+            limit: 1,
             bbox: BBOX,
-            limit: 1
+            countries: ['us'],
+            query: $(this).val(),
         })
         .send()
         .then(function (response) {
-            console.log(response);
-            if (response && response.body && response.body.features && response.body.features.length) {
-                var feature = response.body.features[0];
+            $('.loader').hide();
+            response = JSON.parse(response.rawBody);
+            if(response && response.features[0].place_type) {
+                response.features[0].place_type.forEach(res => {
+                   if(required.includes(res)) {
+                       let streetAddress = null;
+                       let displayAddress = null;
+                       response = response.features[0];
+                       let neighborhood = response.context[0];
+                       let coords = response.geometry.coordinates;
+                       let addressArray = response.place_name.split(',');
 
-                var map = new mapboxgl.Map({
-                    container: 'map',
-                    style: 'mapbox://styles/mapbox/streets-v11',
-                    center: feature.center,
-                    zoom: 10
+                       if(res === 'poi') {
+                           streetAddress = addressArray[0];
+                           displayAddress = addressArray[1];
+                       } else {
+                           streetAddress = addressArray[0];
+                           displayAddress = streetAddress;
+                       }
+
+                       if(neighborhood.id.includes('neighborhood')) {
+                           $('input[name=neighborhood]').attr('readonly');
+                           $('input[name=neighborhood]').val(neighborhood.text);
+                       } else {
+                           $('input[name=neighborhood]').removeAttr('readonly');
+                       }
+
+                       $('input[name=display_address]').val(displayAddress);
+                       $('body').find('.mapboxgl-ctrl > input').val(streetAddress);
+                       $('input[name=map_location]').val(JSON.stringify({latitude: coords[1], longitude: coords[0]}));
+                       setMap('map', response.center, true, true, streetAddress);
+
+                   } else {
+                       let $validator = $("#listing-form").validate();
+                       let errors = { street_address: "Not a valid street address" };
+                       $validator.showErrors(errors);
+                   }
                 });
-                new mapboxgl.Marker()
-                    .setLngLat(feature.center)
-                    .addTo(map);
             }
+        }).catch(function (error) {
+            console.log('err => ',error);
+            $('.loader').hide();
         });
+        }, 100);
     });
 });
