@@ -1,4 +1,5 @@
 {
+    "/assets/js/mapbox.js": "/assets/js/mapbox.js",
     "/assets/js/notification.js": "/assets/js/notification.js",
     "/assets/js/socket-client.js": "/assets/js/socket-client.js",
     "/assets/js/tcp.js": "/assets/js/tcp.js"

@@ -216,7 +216,6 @@ var setMarker = function setMarker(coords) {
 
 
 function initMapBox(container) {
-  alert('has');
   MAP = new mapbox.Map({
     container: container,
     maxBounds: defaultBounds,

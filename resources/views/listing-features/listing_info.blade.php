@@ -4,14 +4,6 @@
 <div class="col-md-6">
     <div class="form-group" id="address">
         <label>Street Address</label>
-        {!! Form::text('street_address', null,
-        [
-            ($action == 'Update') ? 'readonly' : '',
-            'id'           => ($action !== 'Update') ? 'controls' : '',
-            'class'        => 'controls input-style',
-            'style'        => 'display:none',
-            'autocomplete' => 'off'
-        ]) !!}
         <span class="invalid-feedback" role="alert">
 			{!! $errors->first('street_address') !!}
 		</span>
@@ -35,7 +27,7 @@
 <div class="col-md-6">
     <div class="form-group">
         <label>Neighborhood</label>
-        {!! Form::select('neighborhood_id', neighborhoods(), null, ['class' => 'input-style']) !!}
+        {!! Form::text('neighborhood', null, ['class' => 'input-style', 'readonly']) !!}
         <span class="invalid-feedback" role="alert">
 			{!! $errors->first('neighborhood') !!}
 		</span>

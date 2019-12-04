@@ -86,15 +86,15 @@
     window.onload = function() {
         enableDatePicker('#availability_date', false);
         enableDatePicker('.open-house-date', false);
-
         @if($action === 'Copy' || $action === 'Update')
-            ZOOM = 15;
-            setMap($('input[name=map_location]').val(), document.getElementById('map'));
+            setMap('map', JSON.parse($('input[name=map_location]').val()));
+            setTimeout(() => {
+                $('body').find('.mapboxgl-ctrl-geocoder--input').val("{{ $listing->street_address }}");
+            }, 10);
         @else
-                setTimeout(() => {
-            initMapBox('map');
-        }, 2000);
+            initMap('map');
         @endif
+        autoComplete('controls');
     };
 </script>
 @endsection
