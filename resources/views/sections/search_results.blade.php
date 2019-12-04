@@ -215,28 +215,18 @@
 
 {!! HTML::script('assets/js/neighborhoods.js') !!}
 {!! HTML::script('assets/js/input-to-dropdown.js') !!}
+{!! HTML::script('assets/js/search-result.js') !!}
 <script>
     let coords = [];
     $('input[name=map_location]').each(function(i, v) {
         coords.push($(v).val());
-    });
-    if(sessionStorage.getItem("beds")){
-        inputsToDropdown('.radio-group-1', sessionStorage.getItem("beds"), 'radio', '.radio-group-1', '');
-    }
-    else  {
-        inputsToDropdown('.radio-group-1', 'Beds', 'radio', '.radio-group-1', '');
-    }
-    if(sessionStorage.getItem("baths")){
-        inputsToDropdown('.radio-group-2', sessionStorage.getItem("baths") , 'radio', '.radio-group-2', '');
-    }
-    else  {
-        inputsToDropdown('.radio-group-2', 'Baths', 'radio', '.radio-group-2', '');
-    }
-
+    })
+    @if(count($data->listings) > 0)
     if(coords !== []) {
         multiMarkers(coords, 'desktop-map');
         multiMarkers(coords, 'mobile-map');
     }
+    @endif
 
     $(".neighborhood-search .search-result-wrapper .map-wrapper .swipe-btn").on('click', function () {
         $(this).find('i').toggleClass('fa-angle-left fa-angle-right');
@@ -280,5 +270,9 @@
             }
         }
     });
+
+    @if(isset($data->index))
+    sessionStorage.clear();
+    @endif
 
 </script>

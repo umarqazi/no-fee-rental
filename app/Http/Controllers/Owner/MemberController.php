@@ -43,7 +43,7 @@ class MemberController extends Controller {
      */
     public function index() {
         $team = $this->mService->team();
-        return view('agent.members', compact('team'));
+        return view('owner.members', compact('team'));
     }
 
     /**
@@ -52,7 +52,7 @@ class MemberController extends Controller {
      */
     public function get() {
         $data = $this->mService->invites();
-        return dataTable(!empty($data) ? $data->invitedAgents : []);
+        return dataTable(!empty($data) ? $data->invitedOwners : []);
     }
 
     /**

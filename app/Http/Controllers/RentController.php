@@ -36,6 +36,7 @@ class RentController extends Controller {
      */
     public function index() {
         $data = toObject($this->rentService->get());
+        $data->index = true ;
         return view('rent', compact('data'))->with('route', 'web.advanceRentSearch');
     }
 
