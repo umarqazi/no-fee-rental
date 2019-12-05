@@ -45,33 +45,31 @@ class ReviewService {
 
     /**
      * @param $request
-     *
-     * @return PendingDispatch
+     * @return bool|mixed
      */
     public function sendRequest($request) {
+
        $renter = $this->userRepo->find(['email' => $request->email])->first();
+
+       if(!$renter) {
+           return false;
+       }
+
        $review = $this->reviewRepo->create([
-           'review_for'=>  myId() ,
-           'review_from'=>$renter->id,
+           'review_for'      =>  myId() ,
+           'review_from'     => $renter->id,
            'request_message' => $request->message,
-           'token' => str_random(50),
-           'is_token_used' => 0
+           'token'           => str_random(50),
+           'is_token_used'   => FALSE
         ]);
-        $data = [
-            'view'    => 'request-review',
-            'name'    => $renter->first_name,
-            'from'    => mySelf()->email,
-            'to'      => $request->email,
-            'subject' => 'Review Request By ' . mySelf()->email,
-            'url'    => route('web.makeReview',$review->token ),
-        ];
 
        DispatchNotificationService::REVIEWREQUEST(toObject([
-        'from' => myId(),
-        'to'   => $renter->id,
-        'data' => $data
-]));
-      /*  return dispatchEmailQueue($email);*/
+            'from' => myId(),
+            'to'   => $renter->id,
+            'data' => $review
+        ]));
+
+       return $review;
     }
 
     /**

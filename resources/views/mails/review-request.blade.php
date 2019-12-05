@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Confirm Email</title>
+    <title>Review Request</title>
     <style type="text/css">
         body{
             background-color: #edeff0;
@@ -140,7 +140,7 @@
     <div class="Notification-wrapper">
         <img src="{{ asset('assets/images/feature-listing.png') }}" alt="notification-bell-icon">
         <h2> Review Request</h2>
-        <p> <b>Hi {{ ucfirst($data->name) }}! </b> Review Request </p>
+        <p> <b>Hi {{ ucfirst($data->user->from->first_name) }}! </b> Review Request </p>
         <div class="action-button">
             <a href="{{ $data->url }}">Review</a>
         </div>

@@ -45,12 +45,4 @@ class ReviewController extends Controller {
         $res = $this->reviewService->sendRequest($request);
         return sendResponse($request, $res, 'Request has been sent.');
     }
-
-    public function show() {
-
-    }
-
-    public function hide() {
-
-    }
 }

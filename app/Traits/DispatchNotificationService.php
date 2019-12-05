@@ -196,11 +196,11 @@ trait DispatchNotificationService
     public static function REVIEWREQUEST($data)
     {
         self::__setParams($data);
-        self::$data->view = 'Review-request';
+        self::$data->view = 'review-request';
         self::$data->subject = 'Review Request';
         self::$data->message = 'New Review Request Received';
-        self::$data->url = false;
-        self::__onlyEmail();
+        self::$data->url = route('web.makeReview',self::$data->data->data->token );
+        self::send();
     }
 
     /**
@@ -320,6 +320,7 @@ trait DispatchNotificationService
                 'from' => $fromAgent,
             ])
         ]);
+
     }
 
     /**
