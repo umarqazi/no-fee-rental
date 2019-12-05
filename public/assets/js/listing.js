@@ -76,15 +76,17 @@ $(() => {
     // });
 
     $('body').on('blur', 'input[name=street_address]', async function() {
-        let $validator = $("#listing-form").validate();
+        let $validator = $(`#${$('body').find('form').attr('id')}`).validate();
         await ajaxRequest('/is-owner-only', 'post', {address: $(this).val()}, false).then(async res => {
-            if(res === 'true') {
+            if(res === 'false') {
+                $('.submit').removeAttr('disabled');
                 await ajaxRequest('/is-unique-address', 'post', {address: $(this).val()}, false).then(res => {
                     if(res === 'true') {
                         $('body').find('#amenities > .row').show();
                     }
                 });
             } else {
+                $('.submit').attr('disabled', 'disabled');
                 let errors = { street_address: "Current building is owner only." };
                 $validator.showErrors(errors);
             }

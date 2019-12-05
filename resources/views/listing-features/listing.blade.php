@@ -76,7 +76,8 @@
                         <div id="map"></div>
                     </div>
                     <div class="col-md-12 mt-4 text-center">
-                        <button type="button" class="btn-default submit">{{ $action }} Listing</button>
+                        {!! Form::submit($action.' Listing', ['class' => 'btn-default submit']) !!}
+                        {{--<button type="button" class="btn-default submit">{{ $action }} Listing</button>--}}
                     </div>
                 </div>
             </div>

@@ -120,7 +120,7 @@ class BuildingService {
      * @return string
      */
     public function ownerOnlyBuilding($address) {
-        return $this->buildingRepo->ownerOnlyBuilding($address)->count() > 0 ? 'false' : 'true';
+        return $this->buildingRepo->ownerOnlyBuilding($address)->count() > 0 ? 'true' : 'false';
     }
 
     /**
