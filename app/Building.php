@@ -18,7 +18,7 @@ class Building extends Model {
      */
     protected $fillable = [
         'is_verified', 'type', 'address', 'neighborhood_id', 'contact_representative',
-        'user_id', 'building_action', 'thumbnail'
+        'user_id', 'building_action', 'thumbnail', 'map_location'
     ];
 
     /**
@@ -26,6 +26,13 @@ class Building extends Model {
      */
     public function listings() {
         return $this->hasMany(Listing::class, 'building_id', 'id');
+    }
+
+    /**
+     * @return HasOne
+     */
+    public function neighborhood() {
+        return $this->hasOne(Neighborhoods::class, 'id', 'neighborhood_id');
     }
 
     /**
@@ -53,6 +60,6 @@ class Building extends Model {
      * @return mixed
      */
     public function scopeWithLists($query) {
-        return $query->with('listings');
+        return $query->with(['listings', 'neighborhood']);
     }
 }

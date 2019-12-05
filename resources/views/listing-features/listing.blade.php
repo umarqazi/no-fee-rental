@@ -61,11 +61,13 @@
                     {{--Features--}}
                     {!! features() !!}
 
-                    <div class="col-md-12" style="margin-top: 20px; margin-bottom: 20px;" id="amenities">
-                        <div class="row" style="display: none;">
-                            {!! amenities() !!}
+                    @if($action !== 'Building')
+                        <div class="col-md-12" style="margin-top: 20px; margin-bottom: 20px;" id="amenities">
+                            <div class="row" style="display: none;">
+                                {!! amenities() !!}
+                            </div>
                         </div>
-                    </div>
+                    @endif
 
                     {{--Basic User Info--}}
                     @include('listing-features.basic_info')
@@ -74,7 +76,8 @@
                         <div id="map"></div>
                     </div>
                     <div class="col-md-12 mt-4 text-center">
-                        <button type="button" class="btn-default submit">{{ $action }} Listing</button>
+                        {!! Form::submit($action.' Listing', ['class' => 'btn-default submit']) !!}
+                        {{--<button type="button" class="btn-default submit">{{ $action }} Listing</button>--}}
                     </div>
                 </div>
             </div>
@@ -86,10 +89,13 @@
     window.onload = function() {
         enableDatePicker('#availability_date', false);
         enableDatePicker('.open-house-date', false);
-        @if($action === 'Copy' || $action === 'Update')
+        @if($action === 'Copy' || $action === 'Update' || $action === 'Building')
             setMap('map', JSON.parse($('input[name=map_location]').val()));
             setTimeout(() => {
                 $('body').find('.mapboxgl-ctrl-geocoder--input').val("{{ $listing->street_address }}");
+                @if($action === 'Building')
+                $('body').find('.mapboxgl-ctrl-geocoder--input').attr('disabled', 'disabled');
+                @endif
             }, 10);
         @else
             initMap('map');
