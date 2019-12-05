@@ -75,7 +75,7 @@ $(() => {
     //     }, 5);
     // });
 
-    $('.controls').on('blur', async function() {
+    $('input[name=street_address]').on('blur', async function() {
         let $validator = $("#listing-form").validate();
         await ajaxRequest('/is-owner-only', 'post', {address: $(this).val()}, false).then(async res => {
             if(res === 'true') {

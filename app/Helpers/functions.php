@@ -537,7 +537,7 @@ function amenities() {
  */
 function features() {
     $html     = null;
-    $features = config( 'features' );
+    $features = config( 'features.apartment_features' );
     foreach ( $features as $type => $feature ) {
         $html .= "<div class='col-md-6'>
         <h3>" . ucwords( str_replace( '_', ' ', $type ) ) . "</h3><ul class='checkbox-listing'>";

@@ -36,6 +36,7 @@ return [
             '14000'  => "$14,000",
             '15000'  => "Up To $15,000",
         ],
+
         'beds' => [
             '' => 'Beds',
             '1'  => '1',
@@ -45,4 +46,10 @@ return [
             '5'  => '5+'
         ]
     ],
+
+    'building_action' => [
+        ''         => 'Select Building Action',
+        ALLOWAGENT => 'Allow Agent',
+        OWNERONLY  => 'Owner Only'
+    ]
 ];

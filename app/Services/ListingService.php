@@ -45,11 +45,6 @@ class ListingService extends BuildingService {
     protected $openHouseRepo;
 
     /**
-     * @var NeighborhoodRepo
-     */
-    protected $neighborhoodRepo;
-
-    /**
      * @var ListingImagesRepo
      */
     protected $listingImagesRepo;
@@ -62,7 +57,6 @@ class ListingService extends BuildingService {
         $this->userRepo          = new UserRepo();
         $this->featureRepo       = new FeatureRepo();
         $this->openHouseRepo     = new OpenHouseRepo();
-        $this->neighborhoodRepo  = new NeighborhoodRepo();
         $this->listingImagesRepo = new ListingImagesRepo();
         $this->searchService     = new SearchService();
     }

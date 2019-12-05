@@ -52,6 +52,7 @@ class BuildingController extends Controller {
      */
     public function detail($id, $status, $route) {
         $building = $this->buildingService->detail($id);
+        $building->neighborhood = $building->neighborhood->name;
         return view('owner.building_detail', compact('building', 'status', 'route'));
     }
 
@@ -62,7 +63,7 @@ class BuildingController extends Controller {
      * @return JsonResponse|RedirectResponse
      */
     public function update($id, Request $request) {
-        $this->buildingService->update($id, $request);
+        $this->buildingService->updateOwnerBuilding($id, $request);
         return success('Building has been updated.', route('owner.viewBuildings'));
     }
 
@@ -102,10 +103,31 @@ class BuildingController extends Controller {
      * @return Factory|View
      */
     public function addApartment($id) {
-        $action = 'Create';
+        $action = 'Building';
         $listing = $this->buildingService->addApartment($id);
         $listing->street_address = $listing->address;
         $listing->display_address = $listing->address;
+        $listing->neighborhood = $listing->neighborhood->name;
         return view('listing-features.listing', compact('listing', 'action'));
+    }
+
+    /**
+     * @param $id
+     * @param Request $request
+     * @return JsonResponse|RedirectResponse
+     */
+    public function fee($id, Request $request) {
+        $res = $this->buildingService->fee($id);
+        return sendResponse($request, $res, 'Building Set as Fee.');
+    }
+
+    /**
+     * @param $id
+     * @param Request $request
+     * @return JsonResponse|RedirectResponse
+     */
+    public function noFee($id, Request $request) {
+        $res = $this->buildingService->noFee($id);
+        return sendResponse($request, $res, 'Building Set as No Fee.');
     }
 }
