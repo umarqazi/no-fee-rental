@@ -44,6 +44,9 @@ class ListingService extends BuildingService {
      */
     protected $openHouseRepo;
 
+    /**
+     * @var NeighborhoodRepo
+     */
     protected $neighborhoodRepo;
 
     /**
@@ -341,10 +344,10 @@ class ListingService extends BuildingService {
      * @param $neighborhood
      * @return mixed
      */
-    private function __neighborhoodHandler($neighborhood) {
-        $neighborhood = $this->neighborhoodRepo->find(['name' => $neighborhood])->first();
+    private function __neighborhoodHandler($neighborhood_name) {
+        $neighborhood = $this->neighborhoodRepo->find(['name' => $neighborhood_name])->first();
         if(!$neighborhood) {
-            $neighborhood = $this->neighborhoodRepo->create(['name' => $neighborhood]);
+            $neighborhood = $this->neighborhoodRepo->create(['name' => $neighborhood_name]);
         }
 
         return $neighborhood->id;
