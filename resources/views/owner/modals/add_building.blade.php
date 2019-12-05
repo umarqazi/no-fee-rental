@@ -1,3 +1,13 @@
+<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.css' rel='stylesheet' />
+<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.2/mapbox-gl-geocoder.min.js'></script>
+<link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.2/mapbox-gl-geocoder.css' type='text/css' />
+{{--<!-- Promise polyfill script required to use Mapbox GL Geocoder in IE 11 -->--}}
+<script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
+<script src='https://unpkg.com/es6-promise@4.2.4/dist/es6-promise.auto.min.js'></script>
+<script src="https://unpkg.com/@mapbox/mapbox-sdk/umd/mapbox-sdk.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mapbox-gl/1.4.0/mapbox-gl-csp-worker.js.map"></script>
 <style>
     .modal-backdrop {
         z-index: 15;
@@ -17,15 +27,14 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-sm-6">
-                        <div class="form-group">
+                        <div class="form-group" id="address">
                             <label> Address:</label>
-                            {!! Form::text('address', null, ['class' => 'input-style', 'id' => 'controls']) !!}
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="sel1">Neighborhood:</label>
-                            {!! Form::select('neighborhood_id', neighborhoods(), null, ['class' => 'input-style']) !!}
+                            {!! Form::text('neighborhood', null, ['class' => 'input-style', 'readonly']) !!}
                         </div>
                     </div>
                     <div class="col-sm-6">
@@ -37,19 +46,13 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="radio">Building Action:</label>
-                            <div class="custom-control custom-radio custom-control-inline">
-                                {!! Form::radio('building_action', OWNERONLY, true, ['class' => 'custom-control-input', 'id' => 'radio1']) !!}
-                                <label class="custom-control-label" for="radio1">Owner Only</label>
-                            </div>
-                            <div class="custom-control custom-radio custom-control-inline">
-                                {!! Form::radio('building_action', ALLOWAGENT, false, ['class' => 'custom-control-input', 'id' => 'radio2']) !!}
-                                <label class="custom-control-label" for="radio2">Allow Agent</label>
-                            </div>
+                            {!! Form::select('building_action', config('formfields.building_action'), null, ['class' => 'input-style']) !!}
                         </div>
                     </div>
                     <div class="col-md-12">
                         <div class="form-group">
                             {!! Form::file('thumbnail', null, ['class' => 'input-style']) !!}
+                            {!! Form::hidden('map_location', null) !!}
                         </div>
                     </div>
                     <div class="col-sm-12">
@@ -69,8 +72,10 @@
         </div>
     </div>
 </div>
+<div id="map" style="display: none;"></div>
 <script>
-    autoComplete(document.getElementById('controls'));
+    initMap('map');
+    autoComplete('controls');
     $('#controls').on('input keydown', function(e) {
         if(e.keyCode === 13) {
             e.preventDefault();

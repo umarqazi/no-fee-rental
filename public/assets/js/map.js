@@ -285,11 +285,11 @@ $(() => {
 
                        $('input[name=display_address]').val(displayAddress);
                        $('body').find('.mapboxgl-ctrl > input').val(streetAddress);
-                       $('input[name=map_location]').val(JSON.stringify({latitude: coords[1], longitude: coords[0]}));
+                       $('body').find('input[name=map_location]').val(JSON.stringify({latitude: coords[1], longitude: coords[0]}));
                        setMap('map', response.center, true, true, streetAddress);
 
                    } else {
-                       let $validator = $("#listing-form").validate();
+                       let $validator = $(`#${$('body').find('form').attr('id')}`).validate();
                        let errors = { street_address: "Not a valid street address" };
                        $validator.showErrors(errors);
                    }

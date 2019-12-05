@@ -45,6 +45,11 @@ class AddBuildingForm extends BaseForm {
     public $building_action;
 
     /**
+     * @var string
+     */
+    public $map_location;
+
+    /**
      * @return array
      */
     public function toArray() {
@@ -52,6 +57,7 @@ class AddBuildingForm extends BaseForm {
             'user_id'                => $this->user_id,
             'thumbnail'              => $this->thumbnail,
             'address'                => $this->address,
+            'map_location'           => $this->map_location,
             'neighborhood_id'        => $this->neighborhood_id,
             'building_action'        => $this->building_action,
             'is_verified'            => isOwner() ? ACTIVE : DEACTIVE,
@@ -66,6 +72,7 @@ class AddBuildingForm extends BaseForm {
         return [
             'address'         => 'required',
             'thumbnail'       => 'required',
+            'map_location'    => 'required',
             'neighborhood_id' => 'required',
             'building_action' => 'required',
         ];
