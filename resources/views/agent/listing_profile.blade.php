@@ -15,7 +15,7 @@
                         <a href="javascript:void(0);">{{ neighborhoodExpertise($data->agent->neighborExpertise) }}</a>
                     </p>
                     <p class="expertise"><strong>Languages:</strong> <a
-                            href="javascript:void(0);">{{ $data->agent->languages  ?? 'Null' }}</a>
+                            href="javascript:void(0);">{{ $data->agent->languages  ?? 'None' }}</a>
                     </p>
                     <div class="contact-info contact-info-mobile">
                         <div>
@@ -24,11 +24,11 @@
                         </div>
                         <div>
                             <img src="{{ asset('assets/images/call-icon.png') }}" alt=""/>
-                            <a href="javascript:void(0);">{{ $data->agent->phone_number ?? 'Null' }}</a>
+                            <a href="javascript:void(0);">{{ $data->agent->phone_number ?? 'None' }}</a>
                         </div>
                         <div>
                             <img src="{{ asset('assets/images/location.png') }}" alt=""/> <a
-                                href="#">{{ $data->agent->address ?? 'Null' }}</a>
+                                href="#">{{ $data->agent->address ?? 'None' }}</a>
                         </div>
                     </div>
                 </div>

@@ -75,20 +75,10 @@ class ProxyService {
         ]);
 
         if(!empty($res)) {
-
             foreach ($res as $geom) {
-                $coordinates = [];
-                $geom = $geom['the_geom']['coordinates'][0][0];
-                for($i = 0; $i < sizeof($geom); $i ++) {
-                    $coords = [
-                        'longitude' => (float)$geom[$i][0],
-                        'latitude' => (float)$geom[$i][1]
-                    ];
-
-                    array_push($coordinates, $coords);
-                }
-
-                array_push($collection, $coordinates);
+//                $this->schoolData($)
+                dd($geom);
+                array_push($collection, $geom['the_geom']['coordinates'][0]);
             }
         }
 

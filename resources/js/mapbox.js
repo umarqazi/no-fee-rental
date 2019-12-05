@@ -67,7 +67,6 @@ const setMarker = (coords, popup = false, text = null) => {
  * @param container
  */
 function initMapBox(container) {
-    alert('has');
     MAP = new mapbox.Map({
         container: container,
         maxBounds: defaultBounds,

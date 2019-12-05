@@ -23,7 +23,7 @@
                     <li>Unlimited renting potential to thousand of renters</li>
                     <li>Access to showing on demand clients</li>
                     <li>Access to our direct clientele through neighborhood specialists program</li>
-                    <h1 style="color:white; font-size: 16px;font-weight: 600; line-height: normal;">Info: We are NOO FEE website and any apartment will any apartment deemed
+                    <h1 style="color:white; font-size: 16px;font-weight: 600; line-height: normal;">Info: We are NO FEE website and any apartment will any apartment deemed
                         as a fee untill will not be activated.</h1>
                 </ul>
             </div>

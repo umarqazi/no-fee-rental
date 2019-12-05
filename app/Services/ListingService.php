@@ -10,6 +10,7 @@ namespace App\Services;
 
 use App\Forms\ListingForm;
 use App\Repository\FeatureRepo;
+use App\Repository\NeighborhoodRepo;
 use App\Repository\OpenHouseRepo;
 use App\Repository\UserRepo;
 use App\Traits\DispatchNotificationService;
@@ -223,6 +224,18 @@ class ListingService extends BuildingService {
     }
 
     /**
+     * @param $request
+     *
+     * @return array
+     */
+    public function filter( $beds,$baths) {
+        $keywords = [];
+        $beds != null ? $keywords['bedrooms'] = $beds : null ;
+        $baths != null ? $keywords['baths'] = $baths : null ;
+        return $listings = $this->listingRepo->search($keywords)->get();
+    }
+
+    /**
      * @return mixed
      */
     public function active() {
@@ -322,6 +335,19 @@ class ListingService extends BuildingService {
     }
 
     /**
+     * @param $neighborhood
+     * @return mixed
+     */
+    private function __neighborhoodHandler($neighborhood_name) {
+        $neighborhood = $this->neighborhoodRepo->find(['name' => $neighborhood_name])->first();
+        if(!$neighborhood) {
+            $neighborhood = $this->neighborhoodRepo->create(['name' => $neighborhood_name]);
+        }
+
+        return $neighborhood->id;
+    }
+
+    /**
      * @param $request
      *
      * @return ListingForm
@@ -350,7 +376,7 @@ class ListingService extends BuildingService {
         $form->availability      = $request->availability;
         $form->visibility        = $request->visibility;
         $form->description       = $request->description;
-        $form->neighborhood_id   = $request->neighborhood_id;
+        $form->neighborhood_id   = $this->__neighborhoodHandler($request->neighborhood);
         $form->bedrooms          = $request->bedrooms;
         $form->baths             = $request->baths;
         $form->unit              = $request->unit;

@@ -443,7 +443,7 @@ function neighborhoodExpertise( $neighborhoods ) {
         $collect[] = $neighbours->name;
     }
 
-    return ( count( $collect ) > 0 ) ? implode( ', ', $collect ) : 'Null';
+    return ( count( $collect ) > 0 ) ? implode( ', ', $collect ) : 'None';
 }
 
 /**
@@ -537,7 +537,7 @@ function amenities() {
  */
 function features() {
     $html     = null;
-    $features = config( 'features' );
+    $features = config( 'features.apartment_features' );
     foreach ( $features as $type => $feature ) {
         $html .= "<div class='col-md-6'>
         <h3>" . ucwords( str_replace( '_', ' ', $type ) ) . "</h3><ul class='checkbox-listing'>";
@@ -554,33 +554,33 @@ function features() {
     }
 
     $html .= "<script>
-                let row = $('.row'); 
+                let row = $('.row');
                 $(() => {
                     if($('#listitemp3').is(':checked')) {
                         p3(true);
                     }
-                    
+
                     if($('#listitemp4').is(':checked')) {
                         p4(true);
                     }
                 });
-                
+
                 function p3(action) {
                     row.find('input[value=p1], input[value=p2], input[value=p4]').prop('checked', false);
                     row.find('input[value=p1], input[value=p2]').prop('disabled', action);
                 }
-                
+
                 function p4(action) {
                     row.find('input[value=p1], input[value=p2], input[value=p3]').prop('checked', false);
                     row.find('input[value=p1], input[value=p2]').prop('disabled', action);
                 }
-                
+
                 $('#listitemp4, #listitemp3').change(function() {
                     let val = $(this).val();
                     if (val === 'p3') {
                         p3($(this).is(':checked'));
                     }
-        
+
                     if (val === 'p4') {
                         p4($(this).is(':checked'));
                     }

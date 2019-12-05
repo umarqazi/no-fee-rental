@@ -1,6 +1,16 @@
 @extends('secured-layouts.app')
 @section('title', 'No Fee Rental')
 @section('content')
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.css' rel='stylesheet' />
+    <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.2/mapbox-gl-geocoder.min.js'></script>
+    <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.2/mapbox-gl-geocoder.css' type='text/css' />
+    {{--<!-- Promise polyfill script required to use Mapbox GL Geocoder in IE 11 -->--}}
+    <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
+    <script src='https://unpkg.com/es6-promise@4.2.4/dist/es6-promise.auto.min.js'></script>
+    <script src="https://unpkg.com/@mapbox/mapbox-sdk/umd/mapbox-sdk.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mapbox-gl/1.4.0/mapbox-gl-csp-worker.js.map"></script>
 <div class="wrapper building-details-wrapper">
     <div class="heading-wrapper">
         <h1>{{ $status }} Building</h1>
@@ -47,25 +57,63 @@
                 </div>
             @endforeach
         </div>
-        {!! Form::model($building, ['url' => route($route, $building->id)]) !!}
+        {!! Form::model($building, ['url' => route($route, $building->id), 'enctype' => 'multipart/form-data', 'id' => 'update_building']) !!}
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group" id="address">
+                    <label> Address</label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label> Neighbourhood</label>
+                    {!! Form::text('neighborhood', null, ['class' => 'input-style', 'readonly']) !!}
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group selectAgent">
+                    <label for="select-agent">Select Contact Representative:</label>
+                    {!! Form::select('contact_representative', agents(), null, ['class' => 'input-style']) !!}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="radio">Building Action:</label>
+                    {!! Form::select('building_action', config('formfields.building_action'), null, ['class' => 'input-style']) !!}
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    {!! Form::file('thumbnail', null, ['class' => 'input-style']) !!}
+                </div>
+                @if(isset($building->thumbnail))
+                    {!! Form::hidden('old_thumbnail', $building->thumbnail) !!}
+                    {!! Form::hidden('map_location', null) !!}
+                @endif
+            </div>
+        </div>
+
         <div class="amenities-section">
             <div class="row">
                {!! amenities() !!}
             </div>
         </div>
-            <div class="after-amenities-inputs">
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label> Neighbourhood</label>
-                            {!! Form::select('neighborhood_id', neighborhoods(), null, ['class' => 'input-style']) !!}
-                        </div>
-                    </div>
-                </div>
-                {!! Form::submit($status, ['class' => 'btn-default']) !!}
-            </div>
+        <div class="col-md-12 mt-4 text-center">
+            {!! Form::submit($status, ['class' => 'btn-default submit']) !!}
+        </div>
         {!! Form::close() !!}
     </div>
 </div>
     {!! HTML::script('assets/js/listing.js') !!}
+    <div id="map" style="display: none;"></div>
+    <script>
+        initMap('map');
+        autoComplete('controls');
+        setTimeout(() => {
+            $('body').find('.mapboxgl-ctrl-geocoder--input').val("{{ $building->address }}");
+        }, 10);
+    </script>
 @endsection

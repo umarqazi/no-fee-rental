@@ -1,3 +1,13 @@
+<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.css' rel='stylesheet' />
+<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.2/mapbox-gl-geocoder.min.js'></script>
+<link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.2/mapbox-gl-geocoder.css' type='text/css' />
+{{--<!-- Promise polyfill script required to use Mapbox GL Geocoder in IE 11 -->--}}
+<script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
+<script src='https://unpkg.com/es6-promise@4.2.4/dist/es6-promise.auto.min.js'></script>
+<script src="https://unpkg.com/@mapbox/mapbox-sdk/umd/mapbox-sdk.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mapbox-gl/1.4.0/mapbox-gl-csp-worker.js.map"></script>
 <div class="search-result-wrapper">
         <div class="search-listing">
             <div class="row">
@@ -16,14 +26,14 @@
                                     {{--Bedrooms--}}
                                     {!! Form::open([]) !!}
                                     <div class="dropdown-wrap">
-                                        <div class="radio-group-1 ">
+                                        <div class="radio-group-1 tabs" id="beds">
                                             <div class="item">
                                                 <label>Any
                                                     {!! Form::radio('beds', 'any') !!}
                                                     <span class="checkmark"></span>
                                                 </label>
                                             </div>
-                                            {!! Form::close() !!}
+                                            {{--{!! Form::close() !!}--}}
                                             <div class="item">
                                                 <label>Studio
                                                     {!! Form::radio('beds', 'studio') !!}
@@ -50,7 +60,7 @@
                                             </div>
                                         </div>
                                         {{--BathRooms--}}
-                                        <div class="radio-group-2 ">
+                                        <div class="radio-group-2 tabs" id="baths">
                                             <div class="item">
                                                 <label>Any
                                                     {!! Form::radio('baths', 'any') !!}
@@ -205,24 +215,64 @@
 
 {!! HTML::script('assets/js/neighborhoods.js') !!}
 {!! HTML::script('assets/js/input-to-dropdown.js') !!}
-{!! HTML::script("https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js") !!}
+{!! HTML::script('assets/js/search-result.js') !!}
 <script>
     let coords = [];
     $('input[name=map_location]').each(function(i, v) {
         coords.push($(v).val());
-    });
-    inputsToDropdown('.radio-group-1', 'Beds', 'radio', '.radio-group-1', '');
-    inputsToDropdown('.radio-group-2', 'Baths', 'radio', '.radio-group-2', '');
+    })
+    @if(count($data->listings) > 0)
     if(coords !== []) {
-        markerClusters(coords, document.getElementById('mobile-map'));
-        markerClusters(coords, document.getElementById('desktop-map'));
+        multiMarkers(coords, 'desktop-map');
+        multiMarkers(coords, 'mobile-map');
     }
+    @endif
+
+    $(".neighborhood-search .search-result-wrapper .map-wrapper .swipe-btn").on('click', function () {
+        $(this).find('i').toggleClass('fa-angle-left fa-angle-right');
+        multiMarkers(coords, 'desktop-map', 15);
+        multiMarkers(coords, 'mobile-map', 15);
+        $(".neighborhood-search .search-result-wrapper .search-listing").toggleClass('hide-list');
+        $(".neighborhood-search .search-result-wrapper .map-wrapper").toggleClass('full-map');
+    });
 
     $('body').on('change', '.sorting', function() {
-        let url = window.location.href;
+        let url = window.location.origin;
         url = url.replace('/recent', '');
         url = url.replace('/cheapest', '');
         url = url.replace('/oldest', '');
-        window.location.href = `${url}/${$(this).val()}`;
+        window.location.href = url+'/listing-by-rent/'+$(this).val();
+
     });
+
+    $('.tabs > div > ul').find('a').on('click', function() {
+        let url = window.location.origin;
+        let value = $(this.childNodes[0]).val();
+        let id = $(this).parent().parent().parent().parent().attr('id');
+        if(id == 'beds'){
+            if(sessionStorage.getItem("baths")){
+                window.location.href = url+'/listing-by-rent-filter/'+value+'/'+sessionStorage.getItem("baths") ;
+                sessionStorage.setItem("beds", value);
+            }
+            else {
+                window.location.href = url+'/listing-by-rent-filter/'+value;
+                sessionStorage.setItem("beds", value);
+            }
+        }
+        else{
+            if(sessionStorage.getItem("beds")){
+                window.location.href = url+'/listing-by-rent-filter/'+sessionStorage.getItem("beds")+'/'+value ;
+                sessionStorage.setItem("baths", value);
+            }
+            else {
+                window.location.href = url+'/listing-by-rent-filter/'+value;
+                sessionStorage.setItem("baths", value);
+            }
+        }
+    });
+
+    @if(isset($data->index))
+    sessionStorage.clear();
+    @endif
+
 </script>

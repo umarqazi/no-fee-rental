@@ -73,3 +73,7 @@ Route::post('/add-building', 'Owner\BuildingController@create')->name('owner.add
 Route::get('/all-buildings', 'Owner\BuildingController@index')->name('owner.viewBuildings');
 Route::get('/update-building/{id}', 'Owner\BuildingController@update')->name('owner.updateBuilding');
 Route::get('/add-apartment/{id}', 'Owner\BuildingController@addApartment')->name('owner.addApartment');
+
+// Reviews Routes
+Route::get('/all-reviews' , 'Owner\ReviewController@index')->name('owner.viewReviews');
+Route::post('/send-review-request' , 'Owner\ReviewController@request')->name('owner.requestReview');

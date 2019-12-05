@@ -19,11 +19,11 @@ $(() => {
         }
     });
 
-    $(".neighborhood-search .search-result-wrapper .map-wrapper .swipe-btn").on('click', function () {
-        $(this).find('i').toggleClass('fa-angle-left fa-angle-right');
-        $(".neighborhood-search .search-result-wrapper .search-listing").toggleClass('hide-list');
-        $(".neighborhood-search .search-result-wrapper .map-wrapper").toggleClass('full-map');
-    });
+    // $(".neighborhood-search .search-result-wrapper .map-wrapper .swipe-btn").on('click', function () {
+    //     $(this).find('i').toggleClass('fa-angle-left fa-angle-right');
+    //     $(".neighborhood-search .search-result-wrapper .search-listing").toggleClass('hide-list');
+    //     $(".neighborhood-search .search-result-wrapper .map-wrapper").toggleClass('full-map');
+    // });
 
     /*
         $(".mobile-view-dropdown").on('click', function () {
