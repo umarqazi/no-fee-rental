@@ -171,10 +171,10 @@
                         <li>Unlimited Renting Potential To Thousand Of Renters</li>
                         <li>Access To Showing On Demand Clients</li>
                         <li> Access To Our Direct Clientele Through Neighborhood Specialists Program</li>
-                        <h1 style="color:white; font-size: 16px; line-height: normal;font-weight: 600;">Info: We are NOO
+                        <h1 style="color:white; font-size: 16px; line-height: normal;font-weight: 600;">Info: We are NO
                             FEE
                             website
-                            and any apartment will any apartment deemed
+                            and any apartment deemed
                             as a fee untill will not be activated.</h1>
                     </ul>
                 </div>
