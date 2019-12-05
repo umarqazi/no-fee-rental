@@ -91,11 +91,13 @@ const setMap = (container, coords, addMarker = true, showPop = true, html = null
     MAP = new mapboxgl.Map({
         accessToken: setToken(),
         container: container,
-        maxBounds: defaultBounds, // Map View Bound To New York City Only
+        // maxBounds: defaultBounds, // Map View Bound To New York City Only
         style: 'mapbox://styles/mapbox/light-v10',
         center: setLatLng(coords),
-        zoom: 10
+        zoom: 13
     });
+
+    mapControls(new mapboxgl.NavigationControl(), 'bottom-right');
 
     MAP.flyTo({center: setLatLng(coords)});
     (addMarker) ? setMarker(coords) : null;
@@ -198,6 +200,46 @@ const initMap = (container) => {
     setMarker(defaultCoords);
 
     return MAP;
+};
+
+/**
+ *
+ * @param coords
+ * @returns {Promise<void>}
+ */
+const schoolZone = async (coords) => {
+    coords.range = 1200;
+    await ajaxRequest('/school-zone', 'post', coords, false).then(polygonCoords => {
+        polygonCoords = JSON.parse(polygonCoords);
+        polygonCoords.forEach((res, i) => {
+            drawPolygon(res, i);
+        });
+
+    }).catch(err => {
+        console.log(err);
+    });
+};
+
+const drawPolygon = ($coordinates, id) => {
+    MAP.addLayer({
+        'id': `maine-${id}`,
+        'type': 'fill',
+        'source': {
+            'type': 'geojson',
+            'data': {
+                'type': 'Feature',
+                'geometry': {
+                    'type': 'Polygon',
+                    'coordinates': $coordinates
+                }
+            }
+        },
+        'layout': {},
+        'paint': {
+            'fill-color': 'red',
+            'fill-opacity': 0.5
+        }
+    });
 };
 
 $(() => {
