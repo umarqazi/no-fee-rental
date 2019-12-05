@@ -92,6 +92,9 @@
             setMap('map', JSON.parse($('input[name=map_location]').val()));
             setTimeout(() => {
                 $('body').find('.mapboxgl-ctrl-geocoder--input').val("{{ $listing->street_address }}");
+                @if($action === 'Building')
+                $('body').find('.mapboxgl-ctrl-geocoder--input').attr('disabled', 'disabled');
+                @endif
             }, 10);
         @else
             initMap('map');
