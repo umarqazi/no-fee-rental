@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Services\FeatureListingService;
 use App\Services\SearchService;
+use App\Traits\DispatchNotificationService;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
@@ -71,7 +72,13 @@ class HomeController extends Controller {
                 'comment' => $request->description,
             ],
         ];
-        dispatchEmailQueue($data);
+        //dispatchEmailQueue($data);
+        DispatchNotificationService::GETSTARED(toObject([
+            'from' => $request->email,
+            'to'   => mailToAdmin(),
+            'data' => $data['data']
+        ]));
+
         return sendResponse($request, true, 'Request has been sent successfully');
     }
 
