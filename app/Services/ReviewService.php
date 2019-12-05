@@ -11,6 +11,7 @@ namespace App\Services;
 use App\Repository\ReviewRepo;
 use App\Repository\UserRepo;
 use App\Repository\UserReviewRepo;
+use App\Traits\DispatchNotificationService;
 use Illuminate\Foundation\Bus\PendingDispatch;
 
 /**
@@ -56,16 +57,21 @@ class ReviewService {
            'token' => str_random(50),
            'is_token_used' => 0
         ]);
-        $email = [
+        $data = [
             'view'    => 'request-review',
             'name'    => $renter->first_name,
             'from'    => mySelf()->email,
             'to'      => $request->email,
             'subject' => 'Review Request By ' . mySelf()->email,
-            'link'    => route('web.makeReview',$review->token ),
+            'url'    => route('web.makeReview',$review->token ),
         ];
 
-        return dispatchEmailQueue($email);
+       DispatchNotificationService::REVIEWREQUEST(toObject([
+        'from' => myId(),
+        'to'   => $renter->id,
+        'data' => $data
+]));
+      /*  return dispatchEmailQueue($email);*/
     }
 
     /**
