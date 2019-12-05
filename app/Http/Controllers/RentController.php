@@ -48,6 +48,7 @@ class RentController extends Controller {
     public function sort($order) {
         if(method_exists($this->rentService, $order)) {
             $data = toObject($this->rentService->{$order}()->fetch());
+            $data->index = true ;
             return view('rent', compact('data'))->with('sort', $order)->with('route', 'web.advanceRentSearch');
         }
 
@@ -61,6 +62,7 @@ class RentController extends Controller {
      */
     public function advanceSearch(Request $request) {
         $data = toObject($this->rentService->advanceSearch($request));
+        $data->index = true ;
         return view('rent', compact('data'))->with('route', 'web.advanceRentSearch');
     }
 

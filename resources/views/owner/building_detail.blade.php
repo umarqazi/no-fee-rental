@@ -48,20 +48,73 @@
             @endforeach
         </div>
         {!! Form::model($building, ['url' => route($route, $building->id)]) !!}
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label> Neighbourhood</label>
+                    {!! Form::select('neighborhood_id', neighborhoods(), null, ['class' => 'input-style']) !!}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label> Address</label>
+                    {!! Form::text('address', null, ['class' => 'input-style']) !!}
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label> Contact Representative</label>
+                    {!! Form::text('contact_representative', null, ['class' => 'input-style']) !!}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="radio">Building Action:</label>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        {!! Form::radio('building_action', OWNERONLY, true, ['class' => 'custom-control-input', 'id' => 'radio1']) !!}
+                        <label class="custom-control-label" for="radio1">Owner Only</label>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        {!! Form::radio('building_action', ALLOWAGENT, false, ['class' => 'custom-control-input', 'id' => 'radio2']) !!}
+                        <label class="custom-control-label" for="radio2">Allow Agent</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="img-holder">
+            <img id="view_profile" src="{{ asset( $user->profile_image ?? DUI ) }}" alt="" />
+            @if(!empty($user->profile_image))
+                <input type="hidden" name="old_profile" value="{{ $user->profile_image }}">
+            @endif
+            <label @if($errors->isEmpty()) @endif id="image-picker">
+                <i class="fa fa-edit edit-btn"></i>{!! Form::file('profile_image', ['class' => 'd-none']) !!}
+            </label>
+            <div class="col-12">
+                @if ($errors->has('profile_image'))
+                    <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('profile_image') }}</strong>
+                                </span>
+                @endif
+            </div>
+        </div>
         <div class="amenities-section">
             <div class="row">
                {!! amenities() !!}
             </div>
         </div>
             <div class="after-amenities-inputs">
-                <div class="row">
+                {{--<div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
                             <label> Neighbourhood</label>
                             {!! Form::select('neighborhood_id', neighborhoods(), null, ['class' => 'input-style']) !!}
                         </div>
                     </div>
-                </div>
+                </div>--}}
                 {!! Form::submit($status, ['class' => 'btn-default']) !!}
             </div>
         {!! Form::close() !!}

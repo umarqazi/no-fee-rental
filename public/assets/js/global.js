@@ -201,7 +201,7 @@ const fetchNeighbours = async (selector) => {
                 if (!ui.item) {
                     this.value = '';
                     if($('.neigh').length > 0) return;
-                    $neighbour.after('<label id="neighbors-error" class="error neigh" for="baths">Invalid Neighborhood.</label>');
+                    $('#search-error-message').after('<label id="neighbors-error" class="error neigh" for="baths">Invalid Neighborhood.</label>');
                 } else {
                     $('#neighbors-error').remove();
                 }
@@ -423,7 +423,7 @@ $(() => {
 
     //add US format phone masking on phone number filed
     $("input[name=phone_number]").focus(function(){
-        $("input[name=phone_number]").mask('+0000-000-0000');
+        $("input[name=phone_number]").mask('(000) 000-0000');
     });
 
 });
