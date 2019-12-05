@@ -39,7 +39,7 @@
                     ]) !!}
                 {!! Form::hidden('visibility') !!}
                 {!! Form::hidden('user_id') !!}
-                @if(isAdmin() /*&& $action == 'Create' ? true : isset($listing->id) && is_created_by_owner($listing->id)*/ )
+                @if(isAdmin())
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
@@ -77,7 +77,6 @@
                     </div>
                     <div class="col-md-12 mt-4 text-center">
                         {!! Form::submit($action.' Listing', ['class' => 'btn-default submit']) !!}
-                        {{--<button type="button" class="btn-default submit">{{ $action }} Listing</button>--}}
                     </div>
                 </div>
             </div>

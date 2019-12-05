@@ -67,14 +67,6 @@ $(() => {
             $selector.hide();
     });
 
-    // $('.controls').on('keydown blur', function() {
-    //     setTimeout(async () => {
-    //         let val = $(this).val();
-    //         $('#autofill').val(val);
-    //         $(this).val(val);
-    //     }, 5);
-    // });
-
     $('body').on('blur', 'input[name=street_address]', async function() {
         let $validator = $(`#${$('body').find('form').attr('id')}`).validate();
         await ajaxRequest('/is-owner-only', 'post', {address: $(this).val()}, false).then(async res => {
