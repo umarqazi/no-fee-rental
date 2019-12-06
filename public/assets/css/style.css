@@ -1412,6 +1412,7 @@
 .choose-cover .box {
     flex: 0 0 calc(100% - 150px);
     padding-left: 15px;
+    margin-top: -25px;
 }
 
 .box label {

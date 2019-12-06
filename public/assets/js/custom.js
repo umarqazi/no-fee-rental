@@ -1,11 +1,14 @@
 $(() => {
     new WOW().init();
 
-
     $("header .menu-icon").click(function () {
         $(".main-wrapper aside").slideDown();
     });
 
+    //randomly change banner images on load
+    let image = ["home-banner-new.jpeg" , "banner-bg.jpg" , "large-view-9.jpg"];
+    let x = Math.floor(image.length * Math.random());
+    $('body').find('.header-bg').css({"background": "url(../assets/images/" + image[x] + ")"});
 
     $("aside .close-menu").click(function () {
         $(".main-wrapper aside").slideUp();
