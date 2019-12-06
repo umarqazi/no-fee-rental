@@ -57,10 +57,10 @@ class Handler extends ExceptionHandler {
 	 *
 	 * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse|\Symfony\Component\HttpFoundation\Response|void
 	 */
-	protected function unauthenticated($request, Auth $exception) {
-
-		if ($request->ajax() || $request->expectsJson() || $exception->guards()[0]) {
-			return redirect(route('web.index'));
-		}
-	}
+//	protected function unauthenticated($request, Auth $exception) {
+//
+//		if ($request->ajax() || $request->expectsJson() || $exception->guards()[0]) {
+//			return redirect(route('web.index'));
+//		}
+//	}
 }
