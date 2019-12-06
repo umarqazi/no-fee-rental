@@ -120,7 +120,7 @@ class BuildingService {
      * @return string
      */
     public function ownerOnlyBuilding($address) {
-        return $this->buildingRepo->ownerOnlyBuilding($address)->count() > 0 ? 'false' : 'true';
+        return $this->buildingRepo->ownerOnlyBuilding($address)->count() > 0 ? 'true' : 'false';
     }
 
     /**
@@ -130,8 +130,15 @@ class BuildingService {
      * @return mixed
      */
     public function update( $id, $request ) {
+
+        if($request->hasFile('thumbnail')) {
+            $request->thumbnail = uploadImage($request->thumbnail, 'images/listing/thumbnails');
+        } else {
+            $request->thumbnail = $request->old_thumbnail;
+        }
+
         $neighborhood_id = $this->__neighborhoodHandler($request->neighborhood);
-        if($this->buildingRepo->update($id, ['neighborhood_id' => $neighborhood_id])) {
+        if($this->buildingRepo->update($id, ['neighborhood_id' => $neighborhood_id, 'thumbnail' => $request->thumbnail])) {
             $this->__apartmentNeighborhoods($id, $neighborhood_id);
             return $this->buildingRepo->updateAmenities( $this->__currentBuilding( $id ), $request->amenities );
         }

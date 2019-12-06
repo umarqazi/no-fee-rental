@@ -39,7 +39,7 @@
                     ]) !!}
                 {!! Form::hidden('visibility') !!}
                 {!! Form::hidden('user_id') !!}
-                @if(isAdmin() /*&& $action == 'Create' ? true : isset($listing->id) && is_created_by_owner($listing->id)*/ )
+                @if(isAdmin())
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
@@ -76,7 +76,7 @@
                         <div id="map"></div>
                     </div>
                     <div class="col-md-12 mt-4 text-center">
-                        <button type="button" class="btn-default submit">{{ $action }} Listing</button>
+                        {!! Form::submit($action.' Listing', ['class' => 'btn-default submit']) !!}
                     </div>
                 </div>
             </div>
@@ -92,6 +92,9 @@
             setMap('map', JSON.parse($('input[name=map_location]').val()));
             setTimeout(() => {
                 $('body').find('.mapboxgl-ctrl-geocoder--input').val("{{ $listing->street_address }}");
+                @if($action === 'Building')
+                $('body').find('.mapboxgl-ctrl-geocoder--input').attr('disabled', 'disabled');
+                @endif
             }, 10);
         @else
             initMap('map');

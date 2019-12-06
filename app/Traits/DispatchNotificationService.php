@@ -193,6 +193,19 @@ trait DispatchNotificationService
     /**
      * @param $data
      */
+    public static function REVIEWREQUEST($data)
+    {
+        self::__setParams($data);
+        self::$data->view = 'review-request';
+        self::$data->subject = 'Review Request';
+        self::$data->message = 'New Review Request Received';
+        self::$data->url = route('web.makeReview',self::$data->data->data->token );
+        self::send();
+    }
+
+    /**
+     * @param $data
+     */
     public static function APPROVEMEETINGREQUEST($data)
     {
         self::__setParams($data);
@@ -213,7 +226,7 @@ trait DispatchNotificationService
         self::$data->subject = 'Get Started Query Received';
         self::$data->message = 'You have a new get started request';
         self::$data->url = null;
-        self::send();
+        self::__onlyEmail();
     }
 
     /**
@@ -222,11 +235,11 @@ trait DispatchNotificationService
     public static function LETUSHELP($data)
     {
         self::__setParams($data);
-        self::$data->view = 'listing-feature-approved';
+        self::$data->view = 'let-us-help';
         self::$data->subject = 'Featured Listing Request Approved';
         self::$data->message = 'Your Request to make this listing featured has been approved.';
         self::$data->url = route('listing.detail', self::$data->data->data->id);
-        self::send();
+        self::__onlyEmail();
     }
 
     /**
@@ -295,7 +308,7 @@ trait DispatchNotificationService
     private static function __setParams($data)
     {
         $toAgent = is_int($data->to) ? agents($data->to ) : (object)['email' => $data->to];
-        $fromAgent = agents($data->from);
+        $fromAgent = is_int($data->from) ? agents($data->from ) : (object)['email' => $data->from];
         self::$data = toObject([
             'to' => $data->to,
             'from' => $data->from,
@@ -307,6 +320,7 @@ trait DispatchNotificationService
                 'from' => $fromAgent,
             ])
         ]);
+
     }
 
     /**

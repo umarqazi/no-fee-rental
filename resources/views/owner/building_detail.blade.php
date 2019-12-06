@@ -114,6 +114,7 @@
         autoComplete('controls');
         setTimeout(() => {
             $('body').find('.mapboxgl-ctrl-geocoder--input').val("{{ $building->address }}");
+            $('body').find('.mapboxgl-ctrl-geocoder--input').attr('disabled', 'disabled');
         }, 10);
     </script>
 @endsection
