@@ -170,6 +170,7 @@ class BuildingService {
         $building = $this->__isAlreadyExist( $listing->street_address );
         if ( ! $building ) {
             $building = $this->buildingRepo->create( [
+                'map_location'  => $listing->map_location,
                 'thumbnail'       => $listing->thumbnail,
                 'address'         => $listing->street_address,
                 'neighborhood_id' => $listing->neighborhood_id,
