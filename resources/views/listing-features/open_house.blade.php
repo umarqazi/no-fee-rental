@@ -5,12 +5,12 @@
             <div class="datepicker-withtime">
                 @foreach($listing->openHouses as $key => $value)
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <label>Date</label>
                             {!! Form::text('open_house[date][]', $value->date, ['class' => 'input-style open-house-date', 'autocomplete' => 'off', 'data-date-format' => 'yyyy-mm-dd']) !!}
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-md-8">
                             <div class="row">
                                 <div class="col-md-6">
                                     <label for="start">Start @:</label>
@@ -41,12 +41,12 @@
 @else
     <div class="datepicker-withtime">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <label>Date</label>
                 {!! Form::text('open_house[date][]', null, ['class' => 'input-style open-house-date', 'autocomplete' => 'off', 'data-date-format' => 'yyyy-mm-dd']) !!}
             </div>
 
-            <div class="col-md-6">
+            <div class="col-md-8">
                 <div class="row">
                     <div class="col-md-6">
                         <label for="start">Start @:</label>

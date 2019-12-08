@@ -866,7 +866,7 @@ header .agent-avtar .avtar:hover div ul {
 }
 
 .add-new-listing-wrapper .form-group {
-    margin-bottom: 30px;
+    margin-bottom: 15px;
 }
 
 .add-new-listing-wrapper .checkbox-listing {
@@ -2317,3 +2317,46 @@ header .agent-avtar .avtar:hover div ul {
     }
 }
 
+.neighborhood-flex {
+    display: flex;
+    justify-content: space-between;
+}
+.neighborhood-flex .form-group{
+    width: calc(100% / 4 - 5px);
+    margin-right: 5px;
+}
+.neighborhood-flex .form-group:first-child{
+    width: 85%;
+}
+.neighborhood-flex .form-group:last-child{
+    margin-right: 0;
+}
+.unit-flex{
+    display: flex;
+    justify-content: space-between;
+}
+.unit-flex .form-group{
+    width: calc(100% / 4 - 5px);
+    margin-right: 5px;
+}
+.unit-flex .form-group:last-child{
+    margin-right: 0;
+}
+.availability-flex {
+    display: flex;
+    justify-content: space-between;
+}
+.availability-flex .form-group{
+    width: calc(100% / 2 - 5px) ;
+    margin-right: 5px;
+}
+.availability-flex .form-group:last-child{
+    margin-right: 0px;
+}
+.add-more-btn .btn-default{
+    padding: 0px 15px;
+    font-size: 12px;
+    line-height: 24px;
+    text-transform: uppercase;
+
+}
