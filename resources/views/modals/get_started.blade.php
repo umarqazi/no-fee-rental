@@ -25,9 +25,10 @@
                 <div class="pt-4">
                     {!! Form::text('neighborhood', null, ['class' => 'input-style']) !!}
                 </div>
+                <p id="neighborhood-error"style="color:red; display: none">Neighborhood is required.</p>
             </div>
             <div class="modal-footer text-center">
-                <button type="button" class="btn-default" data-dismiss="modal" data-toggle="modal" data-target="#need-help-step2" id="need-help-btn2">Next</button>
+                <button type="button" class="btn-default" data-dismiss="modal" onclick="neighborhoodValiation(this)" data-toggle="modal" data-target="#need-help-step2" id="need-help-btn2">Next</button>
             </div>
         </div>
     </div>
@@ -47,7 +48,7 @@
                 <h4 class="text-center mb-0">How many bedrooms?</h4>
                 <div class="py-4">
                     <div class="form-group" id="advance-search-chkbox">
-                        <label class="label">Baths <span>(Select all that applies)</span></label>
+                        <label class="label">Bedrooms <span>(Select all that applies)</span></label>
                         <ul id="baths">
                             <li>
                                 {!! Form::checkbox('beds[]', 'studio', false, ['id' => 'checkbox-111']) !!}
@@ -74,12 +75,13 @@
                                 <label for="checkbox-116"><span class="label-name">5+</span></label>
                             </li>
                         </ul>
+                        <p id="bedroom-error"style="color:red; display: none">Bedroom is required.</p>
                     </div>
                 </div>
             </div>
             <div class="modal-footer text-center">
                 <button type="button" class="btn-default mr-2" data-dismiss="modal" data-toggle="modal" data-target="#need-help-step1">Previous</button>
-                <button type="button" class="btn-default" data-dismiss="modal" data-toggle="modal" data-target="#need-help-step3" id="need-help-step-3">Next</button>
+                <button type="button" class="btn-default" data-dismiss="modal" onclick="bedroomsValiation(this)" data-toggle="modal" data-target="#need-help-step3" id="need-help-step-3">Next</button>
             </div>
         </div>
 
@@ -102,10 +104,11 @@
                 <div class="pt-4">
                     {!! Form::text('priceRange', null, ['class' => 'input-style']) !!}
                 </div>
+                <p id="budget-error"style="color:red; display: none">Budget is required.</p>
             </div>
             <div class="modal-footer text-center">
                 <button type="button" class="btn-default mr-2" data-dismiss="modal" data-toggle="modal" data-target="#need-help-step2">Previous</button>
-                <button type="button" class="btn-default" data-dismiss="modal" data-toggle="modal" data-target="#need-help-step4">Next</button>
+                <button type="button" class="btn-default budget" data-dismiss="modal" onclick="budgetValiation(this)" data-toggle="modal" data-target="#need-help-step4">Next</button>
             </div>
         </div>
 
@@ -128,10 +131,11 @@
                 <div class="pt-4">
                     {!! Form::text('availability', null, ['class' => 'input-style']) !!}
                 </div>
+                <p id="availability-error"style="color:red; display: none">Move in Date is required.</p>
             </div>
             <div class="modal-footer text-center">
                 <button type="button" class="btn-default mr-2" data-dismiss="modal" data-toggle="modal" data-target="#need-help-step3">Previous</button>
-                <button type="button" class="btn-default" data-dismiss="modal" data-toggle="modal" data-target="#need-help-step5" id="need-help-step-5">Next</button>
+                <button type="button" class="btn-default" data-dismiss="modal" onclick="moveInValiation(this)" data-toggle="modal" data-target="#need-help-step5" id="need-help-step-5">Next</button>
             </div>
         </div>
 
@@ -156,32 +160,37 @@
                         <div class="form-group">
                             {!! Form::text('first_name', null, ['class' => 'input-style', 'placeholder' => 'First Name']) !!}
                         </div>
+                        <p id="first-name-error"style="color:red; display: none">First Name is required.</p>
                     </div>
                     <div class="col-lg-6">
                         <div class="form-group">
                             {!! Form::text('last_name', null, ['class' => 'input-style', 'placeholder' => 'Last Name']) !!}
                         </div>
+                        <p id="last-name-error"style="color:red; display: none">Last Name is required.</p>
                     </div>
                     <div class="col-lg-6">
                         <div class="form-group">
                             {!! Form::text('phone_number', null, ['class' => 'input-style', 'placeholder' => 'Phone Number']) !!}
                         </div>
+                        <p id="phone-number-error"style="color:red; display: none">Neighborhood is required.</p>
                     </div>
                     <div class="col-lg-6">
                         <div class="form-group">
                             {!! Form::email('email', null, ['class' => 'input-style', 'placeholder' => 'Email']) !!}
                         </div>
+                        <p id="email-error"style="color:red; display: none">Email is required.</p>
                     </div>
                     <div class="col-lg-12">
                         <div class="form-group">
                             {!! Form::textarea('description', null, ['style' => 'resize:none', 'class' => 'input-style text-area', 'placeholder' => 'Comment']) !!}
                         </div>
+                        <p id="comment-error"style="color:red; display: none">Comment is required.</p>
                     </div>
                 </div>
             </div>
             <div class="modal-footer text-center">
-                <button type="button" class="btn-default mr-2" data-dismiss="modal" data-toggle="modal" data-target="#need-help-step4">Previous</button>
-                {!! Form::submit('Send', ['class' => 'btn-default', 'style' => 'cursor:pointer;']) !!}
+                <button type="button" class="btn-default mr-2" data-dismiss="modal"  data-toggle="modal" data-target="#need-help-step4">Previous</button>
+                {!! Form::submit('Send', ['class' => 'btn-default let-us-help-submit', 'style' => 'cursor:pointer;','onclick' => "infoValiation(this)" ]) !!}
             </div>
         </div>
     </div>
@@ -190,4 +199,98 @@
 <script>
     fetchNeighbours($('input[name=neighborhood]'));
     enableDatePicker($('input[name=availability]'), false);
+
+    $('input[name="neighborhood"]').on('input', function () {
+        $('#need-help-btn2').prop('disabled', false);
+        $('#neighborhood-error').css({'display': 'none'});
+    });
+
+    function neighborhoodValiation($this) {
+        if ($('input[name="neighborhood"]').val() == '') {
+            $($this).prop('disabled', true);
+            $('#neighborhood-error').css({'display': 'block'});
+        }
+    }
+
+    $('input[name="beds[]"]').on('change', function () {
+        $('#need-help-step-3').prop('disabled', false);
+        $('#bedroom-error').css({'display': 'none'});
+    });
+
+    function bedroomsValiation($this) {
+        if (!$('input[name="beds[]"]').is(':checked')) {
+            $($this).prop('disabled', true);
+            $('#bedroom-error').css({'display': 'block'});
+        }
+    }
+
+    $('input[name="priceRange"]').on('change', function () {
+        $('.budget').prop('disabled', false);
+        $('#budget-error').css({'display': 'none'});
+    });
+
+    function budgetValiation($this) {
+        if ($('input[name="priceRange"]').val() == '') {
+            $($this).prop('disabled', true);
+            $('#budget-error').css({'display': 'block'});
+        }
+    }
+
+    $('input[name="availability"]').on('blur', function () {
+        $('#need-help-step-5').prop('disabled', false);
+        $('#availability-error').css({'display': 'none'});
+    });
+
+    function moveInValiation($this) {
+        if ($('input[name="availability"]').val() == '') {
+            $($this).prop('disabled', true);
+            $('#availability-error').css({'display': 'block'});
+        }
+    }
+
+    $('input[name="first_name"]').on('input', function () {
+        $('.let-us-help-submit').prop('disabled', false);
+        $('#first-name-error').css({'display': 'none'});
+    });
+
+    $('input[name="last_name"]').on('input', function () {
+        $('.let-us-help-submit').prop('disabled', false);
+        $('#last-name-error').css({'display': 'none'});
+    });
+    $('input[name="phone_number"]').on('input', function () {
+        $('.let-us-help-submit').prop('disabled', false);
+        $('#phone-number-error').css({'display': 'none'});
+    });
+    $('input[name="email"]').on('input', function () {
+        $('.let-us-help-submit').prop('disabled', false);
+        $('#email-error').css({'display': 'none'});
+    });
+    $('textarea[name="description"]').on('input', function () {
+        $('.let-us-help-submit').prop('disabled', false);
+        $('#comment-error').css({'display': 'none'});
+    });
+
+    function infoValiation($this) {
+        if ($('input[name="first_name"]').val() == '') {
+            $($this).prop('disabled', true);
+            $('#first-name-error').css({'display': 'block'});
+        }
+        if ($('input[name="last_name"]').val() == '') {
+            $($this).prop('disabled', true);
+            $('#last-name-error').css({'display': 'block'});
+        }
+        if ($('input[name="email"]').val() == '') {
+            $($this).prop('disabled', true);
+            $('#email-error').css({'display': 'block'});
+        }
+        if ($('input[name="phone_number"]').val() == '') {
+            $($this).prop('disabled', true);
+            $('#phone-number-error').css({'display': 'block'});
+        }
+        if ($('textarea[name="description"]').val() == '') {
+            $($this).prop('disabled', true);
+            $('#comment-error').css({'display': 'block'});
+        }
+    }
+
 </script>

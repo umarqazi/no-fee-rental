@@ -51,10 +51,11 @@
                     <div class="pt-4 -b-4">
                         {!! Form::text('priceRange', null, ['class' => 'input-style rent-input-icon']) !!}
                     </div>
+                    <p id="price-err"style="color:red; display: none">Rent is required.</p>
                 </div>
                 <div class="modal-footer text-center">
                     <button class="btn-default" type="button" data-target="let-us-step1">Previous</button>
-                    <button class="btn-default ml-3" type="button" data-target="let-us-step3">Next</button>
+                    <button class="btn-default ml-3" id="price-btn" type="button" data-target="let-us-step3" >Next</button>
                 </div>
 
             </div>
@@ -138,11 +139,12 @@
                                 </li>
                             </ul>
                         </div>
+                        <p id="bed-err"style="color:red; display: none">Bedroom is required.</p>
                     </div>
                 </div>
                 <div class="modal-footer text-center">
                     <button class="btn-default" type="button" data-target="let-us-step2">Previous</button>
-                    <button class="btn-default ml-3" type="button" data-target="let-us-step4">Next</button>
+                    <button class="btn-default ml-3" id="bed-btn" type="button" data-target="let-us-step4">Next</button>
                 </div>
 
             </div>
@@ -167,10 +169,11 @@
                     <div class="pt-4 -b-4">
                         {!! Form::text('username', null, ['class' => 'input-style', 'placeholder' => 'Full Name *']) !!}
                     </div>
+                    <p id="name-err"style="color:red; display: none">Name is required.</p>
                 </div>
                 <div class="modal-footer text-center">
                     <button class="btn-default" type="button" data-target="let-us-step3">Previous</button>
-                    <button class="btn-default ml-3" type="button" data-target="let-us-step5">Next</button>
+                    <button class="btn-default ml-3" id="name-btn" type="button" data-target="let-us-step5">Next</button>
                 </div>
 
             </div>
@@ -193,12 +196,13 @@
                 <!-- Modal body -->
                 <div class="modal-body">
                     <div class="pt-4 -b-4">
-                        {!! Form::email('email', null, ['class' => 'input-style', 'placeholder' => 'Email *']) !!}
+                        {!! Form::email('email', null, ['class' => 'input-style', 'placeholder' => 'Email *','id'=>'let-us-help-email']) !!}
                     </div>
+                    <p id="email-err"style="color:red; display: none">Email is required.</p>
                 </div>
                 <div class="modal-footer text-center">
                     <button class="btn-default" type="button" data-target="let-us-step4">Previous</button>
-                    <button class="btn-default ml-3" type="button" data-target="let-us-step6">Next</button>
+                    <button class="btn-default ml-3" id="email-btn" type="button" data-target="let-us-step6">Next</button>
                 </div>
 
             </div>
@@ -221,12 +225,13 @@
                 <!-- Modal body -->
                 <div class="modal-body">
                     <div class="pt-4 -b-4">
-                        {!! Form::text('phone_number', null, ['class' => 'input-style', 'placeholder' => 'Phone *']) !!}
+                        {!! Form::text('phone_number', null, ['class' => 'input-style', 'placeholder' => 'Phone *','id'=>'let-us-us-help-phone_number']) !!}
                     </div>
+                    <p id="phone-err"style="color:red; display: none">Phone Number is required.</p>
                 </div>
                 <div class="modal-footer text-center">
                     <button class="btn-default" type="button" data-target="let-us-step5">Previous</button>
-                    <button class="btn-default ml-3" type="button" data-target="let-us-step7">Next</button>
+                    <button class="btn-default ml-3" id="phone-btn" type="button" data-target="let-us-step7">Next</button>
                 </div>
             </div>
 
@@ -562,3 +567,90 @@
     </div>
 </div>
 {!! Form::close() !!}
+<script>
+    $('input[name=priceRange]:last').on('input', function () {
+        if ($('input[name=priceRange]:last').val() !== '') {
+            $('#price-err').css({'display': 'none'});
+            $('#price-btn').prop('disabled', false);
+        }
+    });
+    $('#price-btn').on('click', function () {
+        if ($('input[name=priceRange]:last').val() == '') {
+            setTimeout(() => {
+                $('#let-us-step2').show();
+                $('#let-us-step3').hide();
+            }, 5);
+            $('#price-err').css({'display': 'block'});
+            $('#price-btn').prop('disabled', true);
+        }
+    });
+
+    $('input[name="beds[]"]').on('change', function () {
+        if ($('input[name="beds[]"]').is(':checked')) {
+            $('#bed-err').css({'display': 'none'});
+            $('#bed-btn').prop('disabled', false);
+        }
+    });
+    $('#bed-btn').on('click', function () {
+        if (!$('input[name="beds[]"]').is(':checked')) {
+            setTimeout(() => {
+                $('#let-us-step3').show();
+                $('#let-us-step4').hide();
+            }, 5);
+            $('#bed-err').css({'display': 'block'});
+            $('#bed-btn').prop('disabled', true);
+        }
+    });
+
+    $('input[name=username]').on('input', function () {
+        if ($('input[name=username]').val() !== '') {
+            $('#name-err').css({'display': 'none'});
+            $('#name-btn').prop('disabled', false);
+        }
+    });
+    $('#name-btn').on('click', function () {
+        if ($('input[name=username]').val() == '') {
+            setTimeout(() => {
+                $('#let-us-step4').show();
+                $('#let-us-step5').hide();
+            }, 5);
+            $('#name-err').css({'display': 'block'});
+            $('#name-btn').prop('disabled', true);
+        }
+    });
+
+    $('#let-us-help-email').on('change', function () {
+        if ($('#let-us-help-email').val() !== '') {
+            $('#email-err').css({'display': 'none'});
+            $('#email-btn').prop('disabled', false);
+        }
+    });
+    $('#email-btn').on('click', function () {
+        if ($('#let-us-help-email').val() == '') {
+            setTimeout(() => {
+                $('#let-us-step5').show();
+                $('#let-us-step6').hide();
+            }, 5);
+            $('#email-err').css({'display': 'block'});
+            $('#email-btn').prop('disabled', true);
+        }
+    });
+    $('#let-us-us-help-phone_number').on('input', function () {
+        if ($('#let-us-us-help-phone_number').val() !== '') {
+            $('#phone-err').css({'display': 'none'});
+            $('#phone-btn').prop('disabled', false);
+        }
+    });
+    $('#phone-btn').on('click', function () {
+        if ($('#let-us-us-help-phone_number').val() == '') {
+            setTimeout(() => {
+                $('#let-us-step6').show();
+                $('#let-us-step7').hide();
+            }, 5);
+            $('#phone-err').css({'display': 'block'});
+            $('#phone-btn').prop('disabled', true);
+        }
+    });
+
+
+</script>
