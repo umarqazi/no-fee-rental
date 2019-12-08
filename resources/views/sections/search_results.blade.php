@@ -245,32 +245,6 @@
 
     });
 
-    $('.tabs > div > ul').find('a').on('click', function() {
-        let url = window.location.origin;
-        let value = $(this.childNodes[0]).val();
-        let id = $(this).parent().parent().parent().parent().attr('id');
-        if(id == 'beds'){
-            if(sessionStorage.getItem("baths")){
-                window.location.href = url+'/listing-by-rent-filter/'+value+'/'+sessionStorage.getItem("baths") ;
-                sessionStorage.setItem("beds", value);
-            }
-            else {
-                window.location.href = url+'/listing-by-rent-filter/'+value;
-                sessionStorage.setItem("beds", value);
-            }
-        }
-        else{
-            if(sessionStorage.getItem("beds")){
-                window.location.href = url+'/listing-by-rent-filter/'+sessionStorage.getItem("beds")+'/'+value ;
-                sessionStorage.setItem("baths", value);
-            }
-            else {
-                window.location.href = url+'/listing-by-rent-filter/'+value;
-                sessionStorage.setItem("baths", value);
-            }
-        }
-    });
-
     @if(isset($data->index))
     sessionStorage.clear();
     @endif

@@ -11,14 +11,7 @@ $(() => {
     else  {
         inputsToDropdown('.radio-group-2', 'Baths', 'radio', '.radio-group-2', '');
     }
-    $('body').on('change', '.sorting', function() {
-        let url = window.location.origin;
-        url = url.replace('/recent', '');
-        url = url.replace('/cheapest', '');
-        url = url.replace('/oldest', '');
-        window.location.href = url+'/listing-by-rent/'+$(this).val();
 
-    });
 
     $('.tabs > div > ul').find('a').on('click', function() {
         let url = window.location.origin;
@@ -30,7 +23,7 @@ $(() => {
                 sessionStorage.setItem("beds", value);
             }
             else {
-                window.location.href = url+'/listing-by-rent-filter/'+value;
+                window.location.href = url+'/listing-by-rent-filter/'+value+'/any';
                 sessionStorage.setItem("beds", value);
             }
         }
@@ -40,7 +33,7 @@ $(() => {
                 sessionStorage.setItem("baths", value);
             }
             else {
-                window.location.href = url+'/listing-by-rent-filter/'+value;
+                window.location.href = url+'/listing-by-rent-filter/any/'+value;
                 sessionStorage.setItem("baths", value);
             }
         }

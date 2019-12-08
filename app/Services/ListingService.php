@@ -230,9 +230,9 @@ class ListingService extends BuildingService {
      */
     public function filter( $beds,$baths) {
         $keywords = [];
-        $beds != null ? $keywords['bedrooms'] = $beds : null ;
-        $baths != null ? $keywords['baths'] = $baths : null ;
-        return $listings = $this->listingRepo->search($keywords)->get();
+        $beds != 'any' ? $keywords['bedrooms'] = $beds : null ;
+        $baths != 'any' ? $keywords['baths'] = $baths : null ;
+        return $listings = $this->listingRepo->search($keywords)->rentActive()->get();
     }
 
     /**
