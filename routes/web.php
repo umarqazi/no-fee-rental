@@ -48,6 +48,9 @@ Route::get('/confirm-email/{token}', 'UserController@confirmEmail')->name('user.
 // Email Validation
 Route::post('/verify-email', 'UserController@verifyEmail');
 
+// Renter  Validation
+Route::post('/verify-renter', 'UserController@renterCheck');
+
 // License Routes
 Route::post('/verify-license', 'UserController@verifyLicense');
 Route::get('/license-verification/{license_number}', 'NYCProxyController@licenseVerification');

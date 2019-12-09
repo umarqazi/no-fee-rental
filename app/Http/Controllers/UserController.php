@@ -145,6 +145,15 @@ class UserController extends Controller {
      *
      * @return bool
      */
+    public function renterCheck(Request $request) {
+        return $this->service->renterCheck($request);
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return bool
+     */
     public function verifyLicense(Request $request) {
         return $this->service->isUniqueLicense($request);
 	}

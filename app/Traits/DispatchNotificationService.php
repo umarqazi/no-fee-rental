@@ -198,7 +198,7 @@ trait DispatchNotificationService
         self::__setParams($data);
         self::$data->view = 'review-request';
         self::$data->subject = 'Review Request';
-        self::$data->message = 'New Review Request Received';
+        self::$data->message = $data->data->request_message;
         self::$data->url = route('web.makeReview',self::$data->data->data->token );
         self::send();
     }

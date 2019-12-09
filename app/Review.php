@@ -29,6 +29,6 @@ class Review extends Model {
      * @return mixed
      */
     public function scopeMyReviews($query) {
-        return $query->where('review_for', myId())->with('from');
+        return $query->where('review_for', myId())->where('review_message', '!=' , null)->with('from') ;
     }
 }
