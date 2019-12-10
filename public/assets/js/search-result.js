@@ -19,22 +19,28 @@ $(() => {
         let id = $(this).parent().parent().parent().parent().attr('id');
         if(id == 'beds'){
             if(sessionStorage.getItem("baths")){
-                window.location.href = url+'/listing-by-rent-filter/'+value+'/'+sessionStorage.getItem("baths") ;
                 sessionStorage.setItem("beds", value);
+                $('input[name=rent_beds]').val(value);
+                $('input[name=rent_baths]').val(sessionStorage.getItem("baths"));
+                $("#rent-search").submit();
             }
             else {
-                window.location.href = url+'/listing-by-rent-filter/'+value+'/any';
                 sessionStorage.setItem("beds", value);
+                $('input[name=rent_beds]').val(value);
+                $("#rent-search").submit();
             }
         }
         else{
             if(sessionStorage.getItem("beds")){
-                window.location.href = url+'/listing-by-rent-filter/'+sessionStorage.getItem("beds")+'/'+value ;
                 sessionStorage.setItem("baths", value);
+                $('input[name=rent_beds]').val(sessionStorage.getItem("beds"));
+                $('input[name=rent_baths]').val(value);
+                $("#rent-search").submit();
             }
             else {
-                window.location.href = url+'/listing-by-rent-filter/any/'+value;
                 sessionStorage.setItem("baths", value);
+                $('input[name=rent_baths]').val(value);
+                $("#rent-search").submit();
             }
         }
     });

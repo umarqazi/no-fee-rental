@@ -15,6 +15,15 @@ $(() => {
         bed.push($(this).text().replace(/\s/g, ''));
     });
 
+    $('#main-search-beds').on('change', function() {
+        bed.push($("#main-search-beds option:selected").text());
+    });
+
+    $('#main-search-priceRange').on('change', function() {
+        price_max = $("#main-search-priceRange option:selected").val();
+        price_min = 1 ;
+    });
+
     $('input[name=neighborhoods] , select[name=neighborhoods]').on('change', function() {
         let $nSelector = $("select[name=neighborhoods] option:selected");
         let $val = $('input[name=neighborhoods]').val();

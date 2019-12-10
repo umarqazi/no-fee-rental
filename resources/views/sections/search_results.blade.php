@@ -24,8 +24,10 @@
                             <div class="listing-wrapp">
                                 <div class=" ">
                                     {{--Bedrooms--}}
-                                    {!! Form::open([]) !!}
+                                    {!! Form::open(['url' => route('web.RentFilters'), 'method' => 'get', 'id' => 'rent-search']) !!}
                                     <div class="dropdown-wrap">
+                                        <input type="hidden"  name="rent_beds"/>
+                                        <input type="hidden"  name="rent_baths"/>
                                         <div class="radio-group-1 tabs" id="beds">
                                             <div class="item">
                                                 <label>Any
@@ -245,7 +247,7 @@
 
     });
 
-    @if(isset($data->index))
+    @if(!isset($data->index))
     sessionStorage.clear();
     @endif
 

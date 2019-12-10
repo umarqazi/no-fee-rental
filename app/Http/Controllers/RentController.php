@@ -36,7 +36,6 @@ class RentController extends Controller {
      */
     public function index() {
         $data = toObject($this->rentService->get());
-        $data->index = true ;
         return view('rent', compact('data'))->with('route', 'web.advanceRentSearch');
     }
 
@@ -48,7 +47,6 @@ class RentController extends Controller {
     public function sort($order) {
         if(method_exists($this->rentService, $order)) {
             $data = toObject($this->rentService->{$order}()->fetch());
-            $data->index = true ;
             return view('rent', compact('data'))->with('sort', $order)->with('route', 'web.advanceRentSearch');
         }
 
@@ -62,16 +60,16 @@ class RentController extends Controller {
      */
     public function advanceSearch(Request $request) {
         $data = toObject($this->rentService->advanceSearch($request));
-        $data->index = true ;
         return view('rent', compact('data'))->with('route', 'web.advanceRentSearch');
     }
 
     /**
      * $param keywords
      */
-    public function filter($beds = null, $baths = null){
-         $data =  $this->listingService->filter($beds,$baths);
+    public function filter(Request $request){
+         $data =  $this->listingService->filter($request);
          $data->listings = $data ;
+         $data->index = true ;
          return view('rent', compact('data'));
     }
 }
