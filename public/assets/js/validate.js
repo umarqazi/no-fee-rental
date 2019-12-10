@@ -500,7 +500,7 @@ $(() => {
         }
     });
 
-// Agent Inbox Rule
+    // Agent Inbox Rule
     $('#send-message').validate({
         rules: {
             message: {
@@ -518,6 +518,36 @@ $(() => {
             {
                 error.css('display' , 'none') ;
             }
+        },
+    });
+
+    // Review Request Rule
+    $('#review-request').validate({
+        rules: {
+            message: {
+                required: true,
+            },
+            email: {
+                required: true,
+                email: true,
+                remote: {
+                    headers: {
+                        'X-CSRF-TOKEN': TOKEN
+                    },
+                    url: "/verify-renter",
+                    type: "post",
+                }
+            },
+        },
+        messages: {
+            message: {
+                required: "Message is required.",
+            },
+            email: {
+                required: "Email is required.",
+                email: "Please enter valid email",
+                remote: "Renter does not exist.",
+            },
         },
     });
 

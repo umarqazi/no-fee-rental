@@ -6,7 +6,7 @@ $(() => {
     });
 
     //randomly change banner images on load
-    let image = ["home-banner-new.jpeg" , "banner-bg.jpg" , "large-view-9.jpg"];
+    let image = ["banner-image-1.jpeg" , "banner-image-2.jpeg" , "banner-image-3.jpeg" ,"banner-image-4.jpeg" ];
     let x = Math.floor(image.length * Math.random());
     $('body').find('.header-bg').css({"background": "url(../assets/images/" + image[x] + ")"});
 

@@ -15,11 +15,6 @@
                             Reviews
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="pill" href="#tab-2">
-                            Team Review
-                        </a>
-                    </li>
                 </ul>
             </div>
             <div class="block-body">
@@ -75,7 +70,7 @@
                     <h4 class="modal-title">Request a Review</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
-                {!! Form::open(['url' => route('owner.requestReview'),'class' => 'ajax','reset' => 'true']) !!}
+                {!! Form::open(['url' => route('owner.requestReview'),'class' => 'ajax','reset' => 'true','id' => 'review-request']) !!}
                 <!-- Modal body -->
                 <div class="modal-body">
                    <div class="row">

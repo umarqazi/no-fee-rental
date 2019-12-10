@@ -218,6 +218,21 @@ class UserService {
      *
      * @return bool
      */
+    public function renterCheck($request) {
+        $renter = $this->userRepo->find(['email' => $request->email])->first();
+        if(isset($renter)){
+            return $renter->user_type == 4 ? 'true' : 'false' ;
+        }
+        else {
+            return 'false' ;
+        }
+    }
+
+    /**
+     * @param $request
+     *
+     * @return bool
+     */
     public function isUniqueLicense($request) {
         if (!$this->userRepo->isUniqueLicense($request->license_number)) {
             return 'true';

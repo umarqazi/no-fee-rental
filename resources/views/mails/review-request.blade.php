@@ -140,7 +140,7 @@
     <div class="Notification-wrapper">
         <img src="{{ asset('assets/images/feature-listing.png') }}" alt="notification-bell-icon">
         <h2> Review Request</h2>
-        <p> <b>Hi {{ ucfirst($data->user->from->first_name) }}! </b> Review Request </p>
+        <p> <b>Hi {{ ucfirst($data->user->to->first_name) }}! </b> {{ $data->message }} </p>
         <div class="action-button">
             <a href="{{ $data->url }}">Review</a>
         </div>
