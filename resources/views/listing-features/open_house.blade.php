@@ -58,8 +58,11 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-12 mt-2 mb-2">
+            <div class="custom-control custom-checkbox by-add-only">
                 <div class="custom-control custom-checkbox by-add-only"><input class="custom-control-input" id="chk1" name="open_house[by_appointment][]" type="checkbox" value="1"><label class="custom-control-label" for="chk1"> By appt only</label>
+                </div>
+                <div class="remove-btn-wrapper">
+                    <span class="remove-open-house">Remove</span>
                 </div>
             </div>
         </div>
