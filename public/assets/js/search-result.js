@@ -1,11 +1,21 @@
 $(() => {
     if(sessionStorage.getItem("beds")){
+        $($('#advance-search-chkbox > #beds').find('li > input') ).each(function(index) {
+            if($(this).val() == sessionStorage.getItem("beds")){
+                $(this).attr('checked' , true);
+            }
+        });
         inputsToDropdown('.radio-group-1', sessionStorage.getItem("beds"), 'radio', '.radio-group-1', '');
     }
     else  {
         inputsToDropdown('.radio-group-1', 'Beds', 'radio', '.radio-group-1', '');
     }
     if(sessionStorage.getItem("baths")){
+        $($('#advance-search-chkbox > #baths').find('li > input') ).each(function(index) {
+            if($(this).val() == sessionStorage.getItem("baths")){
+                $(this).attr('checked' , true);
+            }
+        });
         inputsToDropdown('.radio-group-2', sessionStorage.getItem("baths") , 'radio', '.radio-group-2', '');
     }
     else  {
