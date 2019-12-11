@@ -1743,8 +1743,16 @@ main {
 
 .datepicker-withtime .by-add-only {
     flex: 0 0 100%;
+    padding-left: 0px;
 }
-
+.datepicker-withtime .by-add-only label{
+    padding-left: 20px;
+}
+.datepicker-withtime .by-add-only .remove-btnn{
+    display: inline-block;
+    width: 100%;
+    text-align: right;
+}
 .open-house-admin-section {
     background: #eee;
     padding: 15px;
@@ -2066,12 +2074,24 @@ main {
     }
     .choose-cover{
         display: block;
+        text-align: center;
     }
     .inputfile+label{
         max-width: 100%;
         font-size: 16px;
         display: block;
     }
+    .neighborhood-flex ,.unit-flex , .availability-flex{
+        display: block;
+    }
+    .neighborhood-flex .form-group ,.unit-flex .form-group , .availability-flex .form-group{
+        width: 100%;
+        margin-right: 0px;
+    }
+    .neighborhood-flex .form-group:first-child{
+        width: 100%;
+    }
+
 }
 
 
