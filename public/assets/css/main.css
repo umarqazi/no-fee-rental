@@ -4453,7 +4453,7 @@ footer .copyright .social-icons li a:hover {
 
 /*Responsive style*/
 
-@media only screen and (min-width: 3600px) {
+@media only screen and (min-width: 2560px) {
     .about-us-large-img{
         background: url(../images/about-bg-large.jpg) no-repeat center left -120px #ffffff !important;
     }
