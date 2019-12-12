@@ -118,10 +118,10 @@
             padding-bottom: 30px;
             margin-bottom: 30px;
         }
-        .social-icons a img {
-            width: 35px;
-            height: 35px;
-        }
+        /*.social-icons a img {*/
+        /*    width: 35px;*/
+        /*    height: 35px;*/
+        /*}*/
         @media only screen and (max-width: 991px){
             .main-wrapper {
                 padding: 20px 15px;
@@ -203,9 +203,9 @@
     </div>
     <div class="notification-main-footer">
         <div class="social-icons">
-            <a href="javascript:void(0)"><img src="{{ asset('assets/images/twitter-icon.png') }}"> </a>
-            <a href="javascript:void(0)"><img src="{{ asset('assets/images/fb-icon.png') }}"> </a>
-            <a href="javascript:void(0)"><img src="{{ asset('assets/images/google-icon.png') }}"> </a>
+            <a href="javascript:void(0)"><img src="{{ asset('assets/images/twitter-mail.png') }}"> </a>
+            <a href="javascript:void(0)"><img src="{{ asset('assets/images/fb-mail.png') }}"> </a>
+            <a href="javascript:void(0)"><img src="{{ asset('assets/images/mail-chimp.png') }}"> </a>
         </div>
         <p style="font-style: italic;">Copyright ©2020 <a href="#"> NOFEERENTALSNYC.COM</a>, All rights reserved.</p>
         <p class="footer-adres-text"> Our mailing address is: <br>
