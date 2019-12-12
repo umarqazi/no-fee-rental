@@ -724,6 +724,7 @@ header .agent-avtar .avtar:hover div ul {
 
 .building-details-wrapper .amenities-section {
     margin: 20px 0px;
+    text-transform: capitalize;
 }
 
 .building-details-wrapper .amenities-section .after-amenities-inputs {

@@ -16,6 +16,7 @@ $(() => {
     });
 
     $('#main-search-beds').on('change', function() {
+    if($("#main-search-beds option:selected").text() !== 'Beds') {
         bed.push($("#main-search-beds option:selected").text());
         $($('#beds').find('li > input') ).each(function(index) {
             if($(this).attr('checked')){
@@ -26,11 +27,22 @@ $(() => {
             }
 
         });
+    }
+
+    else  {
+         bed = [];
+    }
+
     });
 
     $('#main-search-priceRange').on('change', function() {
-        price_max = $("#main-search-priceRange option:selected").val();
-        $('#max_price').val(price_max);
+      if($("#main-search-priceRange option:selected").val() !== '') {
+          price_max = $("#main-search-priceRange option:selected").val();
+          $('#max_price').val(price_max);
+      }
+      else {
+          price_max = null ;
+      }
     });
 
     $('input[name=neighborhoods]').on('change', function() {

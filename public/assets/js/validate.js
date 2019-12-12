@@ -79,7 +79,7 @@ $(() => {
                required: true,
            },
            display_address: "required",
-           neighborhood_id: "required",
+           neighborhood: "required",
            bedrooms: "required",
            baths: "required",
            rent : {
@@ -119,7 +119,8 @@ $(() => {
            name : "required",
            phone_number: "required",
            email: "required",
-           user_id : "required"
+           user_id : "required",
+           unit : "required"
        },
 
        messages: {
@@ -129,7 +130,7 @@ $(() => {
            display_address: {
                required: "Display address is required."
            },
-           neighborhood_id: {
+           neighborhood: {
                required: "Neighborhood is required."
            },
            bedrooms: {
@@ -187,6 +188,9 @@ $(() => {
            user_id: {
                required: "Owner is required."
            },
+           unit: {
+               required: "Unit is required."
+           }
        },
        errorPlacement: function(error, element) {
            if ( element.attr("name") === "thumbnail" )
