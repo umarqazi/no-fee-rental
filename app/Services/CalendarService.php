@@ -62,7 +62,7 @@ class CalendarService {
      * @return mixed
      */
     public function updateEvent($id, $data) {
-        return $this->calendarRepo->updateByClause(['linked_id' => $id], $data);
+        return $this->calendarRepo->updateByClause(['id' => $id], $data);
     }
 
     /**
