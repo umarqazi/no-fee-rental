@@ -201,7 +201,7 @@ const fetchNeighbours = async (selector) => {
                 if (!ui.item) {
                     this.value = '';
                     if($('.neigh').length > 0) return;
-                    $('#search-error-message').after('<label id="neighbors-error" class="error neigh" for="baths">Invalid Neighborhood.</label>');
+                    $('#search-error-message').after('<label id="neighbors-error" class="error neigh" for="baths" style="margin-top: 5px;">Invalid Neighborhood.</label>');
                 } else {
                     $('#neighbors-error').remove();
                 }
