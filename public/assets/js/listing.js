@@ -84,7 +84,7 @@ $(() => {
         if($(this).val() === '3') {
             $selector.show();return;
         }
-            $selector.hide();
+        $selector.hide();
     });
 
     $('body').on('blur', 'input[name=street_address]', async function() {

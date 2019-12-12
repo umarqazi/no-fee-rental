@@ -5,12 +5,12 @@
             <div class="datepicker-withtime">
                 @foreach($listing->openHouses as $key => $value)
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <label>Date</label>
                             {!! Form::text('open_house[date][]', $value->date, ['class' => 'input-style open-house-date', 'autocomplete' => 'off', 'data-date-format' => 'yyyy-mm-dd']) !!}
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-md-8">
                             <div class="row">
                                 <div class="col-md-6">
                                     <label for="start">Start @:</label>
@@ -41,12 +41,12 @@
 @else
     <div class="datepicker-withtime">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <label>Date</label>
                 {!! Form::text('open_house[date][]', null, ['class' => 'input-style open-house-date', 'autocomplete' => 'off', 'data-date-format' => 'yyyy-mm-dd']) !!}
             </div>
 
-            <div class="col-md-6">
+            <div class="col-md-8">
                 <div class="row">
                     <div class="col-md-6">
                         <label for="start">Start @:</label>
@@ -58,9 +58,14 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-12 mt-2 mb-2">
+            <div class="col-md-12">
+            <div class="custom-control custom-checkbox by-add-only">
                 <div class="custom-control custom-checkbox by-add-only"><input class="custom-control-input" id="chk1" name="open_house[by_appointment][]" type="checkbox" value="1"><label class="custom-control-label" for="chk1"> By appt only</label>
                 </div>
+                <div class="remove-btn-wrapper remove-btnn ">
+                    <span class="remove-open-house">Remove</span>
+                </div>
+            </div>
             </div>
         </div>
         <div class="add-more-btn">

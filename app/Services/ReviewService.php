@@ -51,10 +51,6 @@ class ReviewService {
 
        $renter = $this->userRepo->find(['email' => $request->email])->first();
 
-       if(!$renter) {
-           return false;
-       }
-
        $review = $this->reviewRepo->create([
            'review_for'      =>  myId() ,
            'review_from'     => $renter->id,
@@ -76,7 +72,7 @@ class ReviewService {
      * @return mixed
      */
     public function get() {
-        return $this->reviewRepo->reviews()->get()->find(['review_message' !== null]);
+        return $this->reviewRepo->reviews()->get();
     }
 
     public function show() {

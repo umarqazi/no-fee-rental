@@ -48,6 +48,9 @@ Route::get('/confirm-email/{token}', 'UserController@confirmEmail')->name('user.
 // Email Validation
 Route::post('/verify-email', 'UserController@verifyEmail');
 
+// Renter  Validation
+Route::post('/verify-renter', 'UserController@renterCheck');
+
 // License Routes
 Route::post('/verify-license', 'UserController@verifyLicense');
 Route::get('/license-verification/{license_number}', 'NYCProxyController@licenseVerification');
@@ -98,7 +101,7 @@ Route::match(['get', 'post'], '/listing-by-neighborhood/{neighborhood}', 'Neighb
 Route::get('/listing-by-rent/{sort}', 'RentController@sort');
 Route::get('/listing-by-rent', 'RentController@index')->name('web.ListsByRent');
 Route::get('/listing-by-rent-search', 'RentController@advanceSearch')->name('web.advanceRentSearch');
-Route::get('/listing-by-rent-filter/{beds?}/{baths?}', 'RentController@filter')->name('web.advanceRentFilter');
+Route::get('/listing-by-rent-filter', 'RentController@filter')->name('web.RentFilters');
 
 // Review Routes
 Route::get('/send-a-review/{token}', 'ReviewController@index')->name('web.makeReview');

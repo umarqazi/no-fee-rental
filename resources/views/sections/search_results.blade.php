@@ -24,8 +24,10 @@
                             <div class="listing-wrapp">
                                 <div class=" ">
                                     {{--Bedrooms--}}
-                                    {!! Form::open([]) !!}
+                                    {!! Form::open(['url' => route('web.RentFilters'), 'method' => 'get', 'id' => 'rent-search']) !!}
                                     <div class="dropdown-wrap">
+                                        <input type="hidden"  name="rent_beds"/>
+                                        <input type="hidden"  name="rent_baths"/>
                                         <div class="radio-group-1 tabs" id="beds">
                                             <div class="item">
                                                 <label>Any
@@ -245,33 +247,7 @@
 
     });
 
-    $('.tabs > div > ul').find('a').on('click', function() {
-        let url = window.location.origin;
-        let value = $(this.childNodes[0]).val();
-        let id = $(this).parent().parent().parent().parent().attr('id');
-        if(id == 'beds'){
-            if(sessionStorage.getItem("baths")){
-                window.location.href = url+'/listing-by-rent-filter/'+value+'/'+sessionStorage.getItem("baths") ;
-                sessionStorage.setItem("beds", value);
-            }
-            else {
-                window.location.href = url+'/listing-by-rent-filter/'+value;
-                sessionStorage.setItem("beds", value);
-            }
-        }
-        else{
-            if(sessionStorage.getItem("beds")){
-                window.location.href = url+'/listing-by-rent-filter/'+sessionStorage.getItem("beds")+'/'+value ;
-                sessionStorage.setItem("baths", value);
-            }
-            else {
-                window.location.href = url+'/listing-by-rent-filter/'+value;
-                sessionStorage.setItem("baths", value);
-            }
-        }
-    });
-
-    @if(isset($data->index))
+    @if(!isset($data->index))
     sessionStorage.clear();
     @endif
 
