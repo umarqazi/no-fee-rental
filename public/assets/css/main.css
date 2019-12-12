@@ -6015,7 +6015,80 @@ list .property-info .info p {
 .financial-district-inner select::-ms-expand {
     display: none; /* remove default arrow on ie10 and ie11 */
 }
+/*404*/
+.four-o-four-wrapper{
+    background: url(../images/about-us-and-home-page-header.jpg) no-repeat ;
+    width: 100%;
+    height: 300px;
+    background-size: cover;
+    background-position: bottom center;
+    object-fit: cover;
+    margin-bottom: 30px;
+    position:relative;
+}
 
+.four-o-four-wrapper:before{
+    content: "";
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+.four-o-four-wrapper h4{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    color: #fff;
+    font-size: 20px;
+    transform: translate(-50%, -50%);
+    font-weight: 600;
+
+}
+.four-o-four-inner-content {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.four-o-four-inner-content img{
+    width: 313px;
+}
+.four-o-four-inner-content p{
+    color: #243b73;
+    margin: 30px 0px;
+}
+.four-o-four-inner-content a{
+    position: relative;
+}
+.four-o-four-inner-content .btn-default{
+    text-transform: initial;
+    border-radius: 0px;
+}
+.four-o-four-inner-content a:before{
+    content: "";
+    position: absolute;
+    border-bottom: 2px solid #f36f21;
+    width: 50px;
+    left: -65px;
+    top: 55%;
+    transform: translateY(-50%);
+    pointer-events: none;
+
+}
+.four-o-four-inner-content a:after{
+    content: "";
+    position: absolute;
+    border-bottom: 2px solid #f36f21;
+    width: 50px;
+    right: -65px;
+    top: 55%;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+/**/
 /*media query*/
 
 @media only screen and (max-width: 767px){
@@ -6071,12 +6144,21 @@ list .property-info .info p {
     .neighborhood-banner{
         height: 350px;
     }
+    .four-o-four-wrapper{
+        height: 350px;
+    }
+    .four-o-four-inner-content img{
+        width: 250px;
+    }
 }
 @media only screen and (max-width: 576px){
     .contact-banner{
         height: 120px;
     }
     .neighborhood-banner{
+        height:220px;
+    }
+    .four-o-four-wrapper{
         height:220px;
     }
     .financial-district-inner{
@@ -6089,5 +6171,7 @@ list .property-info .info p {
         width: 100%;
         margin-top: 10px;
     }
-
+    .four-o-four-inner-content img{
+        width: 150px;
+    }
 }
