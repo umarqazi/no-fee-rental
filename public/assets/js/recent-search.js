@@ -17,17 +17,40 @@ $(() => {
 
     $('#main-search-beds').on('change', function() {
         bed.push($("#main-search-beds option:selected").text());
+        $($('#beds').find('li > input') ).each(function(index) {
+            if($(this).attr('checked')){
+                $(this).attr('checked', false);
+            }
+            if($(this).val() == $("#main-search-beds option:selected").val()){
+                $(this).attr('checked' , true);
+            }
+
+        });
     });
 
     $('#main-search-priceRange').on('change', function() {
         price_max = $("#main-search-priceRange option:selected").val();
-        price_min = 1 ;
+        $('#max_price').val(price_max);
     });
 
-    $('input[name=neighborhoods] , select[name=neighborhoods]').on('change', function() {
-        let $nSelector = $("select[name=neighborhoods] option:selected");
+    $('input[name=neighborhoods]').on('change', function() {
+        let $select = $("select[name=neighborhoods] option");
         let $val = $('input[name=neighborhoods]').val();
-        neighborhood = $val.length > 0 ? $val : ($nSelector.text().length > 0 ? $nSelector.text() :null);
+        let $currentSelect ;
+        if ($val.length > 0){
+            $( $select ).each(function(index) {
+                if($(this).text() == $val){
+                    $currentSelect = $( this ).val() ;
+                }
+            });
+                $("select[name=neighborhoods]").val($currentSelect);
+        }
+        neighborhood = $val ;
+    });
+
+    $('select[name=neighborhoods]').on('change', function() {
+        let $nSelector = $("select[name=neighborhoods] option:selected");
+        neighborhood = $nSelector.text();
     });
 
     $body.on('min-price', function(e, res) {
@@ -101,17 +124,17 @@ $(() => {
             },[]);
 
             $('#empty-keywords').remove();
-            if(result.length > 2) {
-                $('.dropDown > ul.ul-border-top > li ').prepend(`
+           /* if(result.length > 2) {
+           */     $('.dropDown > ul.neighborhoods_amenities').prepend(`<li>
                 <a href="${v.url}">
-                       NYC ${(v.neighborhood !== "" ? ' - ' + v.neighborhood : '') + (v.beds.length > 0  ? ' ' + v.beds + ' beds' : '') + (v.baths.length > 0 ? ' ' + v.baths + ' baths' : '')+(v.price_min !== "" ? ' - ' + v.price_min + ' Min Price' : '')+(v.price_max !== "" ? ' - ' + v.price_max+ ' Max Price' : '')+(v.square_feet_min !== "" ? ' - ' + v.square_feet_min + ' Min Square Feet' : '')+(v.square_feet_max !== "" ? ' - ' + v.square_feet_max + ' Max Square Feet' : '')+(v.open_house !== "" ? ' - ' + v.open_house  + ' Open House' : '')}
-                </a> | `);
-            } else {
+                        ${(v.neighborhood !== null ? ' - ' + v.neighborhood : '') + (v.beds.length > 0  ? ' ' + v.beds + ' beds' : '') + (v.baths.length > 0 ? ' ' + v.baths + ' baths' : '')+(v.price_min !== null ? ' - $' + v.price_min + ' Min Price' : '')+(v.price_max !== null ? ' - $' + v.price_max+ ' Max Price' : '')+(v.square_feet_min !== null ? ' - ' + v.square_feet_min + ' Min Square Feet' : '')+(v.square_feet_max !== null ? ' - ' + v.square_feet_max + ' Max Square Feet' : '')+(v.open_house !== null ? ' - ' + v.open_house  + ' Open House' : '')}
+                </a> </li> `);
+            /*} else {
                 $('.dropDown > ul.neighborhoods_amenities > li ').prepend(`
                 <a href="${v.url}">
-                       NYC ${(v.neighborhood !== "" ? ' - ' + v.neighborhood : '') + (v.beds.length > 0  ? ' ' + v.beds + ' bed' : '') + (v.baths.length > 0  ? ' ' + v.baths + ' bath' : '')}
+                       NYC ${(v.neighborhood !== null ? ' - ' + v.neighborhood : '') + (v.beds.length > 0  ? ' ' + v.beds + ' bed' : '') + (v.baths.length > 0  ? ' ' + v.baths + ' bath' : '')}
                 </a> | `);
-            }
+            }*/
         });
     } else {
         if($('#empty-keywords').length > 0) return;

@@ -466,7 +466,7 @@ function apartmentFeatures($features) {
  */
 function petPolicy( $features ) {
     $collection    = [];
-    $configFeature = config( 'features.pet_policy' );
+    $configFeature = config( 'features.apartment_features.pet_policy' );
     foreach ( $features as $feature ) {
         if ( strpos( $feature->value ?? $feature, 'p' ) !== false ) {
             $collection[] = $configFeature[ $feature->value ?? $feature ];
@@ -483,7 +483,7 @@ function petPolicy( $features ) {
  */
 function unitFeature( $features ) {
     $collection    = [];
-    $configFeature = config( 'features.unit_features' );
+    $configFeature = config( 'features.apartment_features.unit_features' );
     foreach ( $features as $feature ) {
         if ( strpos( $feature->value ?? $feature, 'u' ) !== false ) {
             $collection[] = $configFeature[ $feature->value ?? $feature ];
