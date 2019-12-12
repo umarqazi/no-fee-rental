@@ -663,13 +663,20 @@ h3 {
 }
 
 .header-wrapper .header-container .header-right-wrapper .recent-search-dropdown .dropDown ul {
-    line-height: 17px;
+    line-height: 0px;
 }
 
 .header-wrapper .header-container .header-right-wrapper .recent-search-dropdown .dropDown ul li {
-    display: inline;
+    display: inline-block;
+    border-bottom: 1px solid #ddd;
+    padding: 5px 0px;
+    width: 100%;line-height: 15px;
 }
 
+.header-wrapper .header-container .header-right-wrapper .recent-search-dropdown .dropDown ul li:last-child {
+    border-bottom: none;
+
+}
 .header-wrapper .header-container .header-right-wrapper .recent-search-dropdown .dropDown ul li a {
     width: 100%;
     display: inline;

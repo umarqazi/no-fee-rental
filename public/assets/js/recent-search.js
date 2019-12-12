@@ -30,9 +30,7 @@ $(() => {
 
     $('#main-search-priceRange').on('change', function() {
         price_max = $("#main-search-priceRange option:selected").val();
-        price_min = 1 ;
         $('#max_price').val(price_max);
-        $('#min_price').val(price_min);
     });
 
     $('input[name=neighborhoods]').on('change', function() {
@@ -126,17 +124,17 @@ $(() => {
             },[]);
 
             $('#empty-keywords').remove();
-            if(result.length > 2) {
-                $('.dropDown > ul.ul-border-top > li ').prepend(`
+           /* if(result.length > 2) {
+           */     $('.dropDown > ul.neighborhoods_amenities').prepend(`<li>
                 <a href="${v.url}">
-                       NYC ${(v.neighborhood !== null ? ' - ' + v.neighborhood : '') + (v.beds.length > 0  ? ' ' + v.beds + ' beds' : '') + (v.baths.length > 0 ? ' ' + v.baths + ' baths' : '')+(v.price_min !== null ? ' - $' + v.price_min + ' Min Price' : '')+(v.price_max !== null ? ' - $' + v.price_max+ ' Max Price' : '')+(v.square_feet_min !== null ? ' - ' + v.square_feet_min + ' Min Square Feet' : '')+(v.square_feet_max !== null ? ' - ' + v.square_feet_max + ' Max Square Feet' : '')+(v.open_house !== null ? ' - ' + v.open_house  + ' Open House' : '')}
-                </a> | `);
-            } else {
+                        ${(v.neighborhood !== null ? ' - ' + v.neighborhood : '') + (v.beds.length > 0  ? ' ' + v.beds + ' beds' : '') + (v.baths.length > 0 ? ' ' + v.baths + ' baths' : '')+(v.price_min !== null ? ' - $' + v.price_min + ' Min Price' : '')+(v.price_max !== null ? ' - $' + v.price_max+ ' Max Price' : '')+(v.square_feet_min !== null ? ' - ' + v.square_feet_min + ' Min Square Feet' : '')+(v.square_feet_max !== null ? ' - ' + v.square_feet_max + ' Max Square Feet' : '')+(v.open_house !== null ? ' - ' + v.open_house  + ' Open House' : '')}
+                </a> </li> `);
+            /*} else {
                 $('.dropDown > ul.neighborhoods_amenities > li ').prepend(`
                 <a href="${v.url}">
                        NYC ${(v.neighborhood !== null ? ' - ' + v.neighborhood : '') + (v.beds.length > 0  ? ' ' + v.beds + ' bed' : '') + (v.baths.length > 0  ? ' ' + v.baths + ' bath' : '')}
                 </a> | `);
-            }
+            }*/
         });
     } else {
         if($('#empty-keywords').length > 0) return;
