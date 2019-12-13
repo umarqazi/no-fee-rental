@@ -2106,3 +2106,20 @@ main {
     display: inline-block;
     font-size: 25px;
 }
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+    .about-us-container{
+        height: 520px;
+    }
+    .your-life-container{
+        height: 626px;
+    }
+    .container-lg{
+        width: 1170px;
+    }
+    .header-bg .search-property .search-fld{
+        line-height: 0px;
+    }
+    .neighborhood-search .search-result-wrapper .search-listing{
+        width: 100%;
+    }
+}

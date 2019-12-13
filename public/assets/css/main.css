@@ -654,7 +654,7 @@ h3 {
     -webkit-transition: all ease 0.4s;
     transition: all ease 0.4s;
     visibility: hidden;
-    opacity: 0;
+    display: none;
     margin-top: 60px;
     line-height: normal;
     z-index: 3;
@@ -724,7 +724,7 @@ h3 {
 
 .header-wrapper .header-container .header-right-wrapper .recent-search-dropdown:hover .dropDown {
     visibility: visible;
-    opacity: 1;
+    display:block;
     margin-top: 0;
 }
 
@@ -785,7 +785,7 @@ h3 {
     display: inline-block;
     vertical-align: middle;
     position: relative;
-    line-height: 88px;
+    line-height: 87px;
 }
 
 .header-wrapper .header-container .header-right-wrapper .login-user a {
@@ -811,7 +811,7 @@ h3 {
     -webkit-transition: all ease 0.4s;
     transition: all ease 0.4s;
     visibility: hidden;
-    opacity: 0;
+    display: none;
     margin-top: 60px;
     line-height: normal;
     z-index: 3;
@@ -840,7 +840,7 @@ h3 {
 
 .header-wrapper .header-container .header-right-wrapper .login-user:hover .user-dropdown {
     visibility: visible;
-    opacity: 1;
+   display: block;
     margin-top: 0;
 }
 
