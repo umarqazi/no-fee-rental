@@ -13,7 +13,7 @@
                     <div class="financial-district-inner">
                         <h3>Financial District</h3>
                         <div class="form-group">
-                            {!! Form::select('neighborhoods', neighborhoods(), null, ['class' => 'form-control', 'id'=>'sel1']) !!}
+                            {!! Form::select('neighborhood', neighborhoods(), null, ['class' => 'form-control', 'id'=>'sel1']) !!}
                         </div>
                     </div>
                 </div>

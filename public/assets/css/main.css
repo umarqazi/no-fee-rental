@@ -364,6 +364,9 @@ h3 {
     border: 1px solid #223971;
     border-radius: 50%;
 }
+.agent-listing-profile .radio-button .checkmark {
+    top: 2px;
+}
 
 /* On mouse-over, add a grey background color */
 .radio-button:hover .checkmark {
@@ -3947,11 +3950,11 @@ footer .copyright .social-icons li a:hover {
     border: 1px solid #223971;
 }
 
-.agent-listing-profile #boxscroll22 {
-    height: auto;
-    overflow-y: hidden;
-    overflow-x: hidden;
-}
+/*.agent-listing-profile #boxscroll22 {*/
+/*    height: auto;*/
+/*    overflow-y: hidden;*/
+/*    overflow-x: hidden;*/
+/*}*/
 
 .clients-reviews-section .owl-slider {
     display: block;
