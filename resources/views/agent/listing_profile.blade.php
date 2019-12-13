@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('title', 'No Fee Rental | Profile')
 @section('content')
-    <section class=" press-section wow fadeIn featured-properties neighborhood-search agent-listing-profile"
+    <section class="wow fadeIn featured-properties neighborhood-search agent-listing-profile"
              data-wow-delay="0.2s">
         <div class="container-lg">
             <div class="agent-profile-view">
@@ -37,12 +37,8 @@
 
         <div class="profile-section-padding">
             <div class="container-lg ">
-                <div class="search-result-wrapper">
-                    <div class="search-listing">
                         {{--Listing Results--}}
                         @include('sections.search_results')
-                    </div>
-                </div>
             </div>
         </div>
         @if(sizeof($data->reviews) > 0)
@@ -105,11 +101,12 @@
 
 
     <script>
-        $(".neighborhood-search .search-result-wrapper .map-wrapper .swipe-btn").click(function () {
-            $(this).find('i').toggleClass('fa-angle-left fa-angle-right');
-            $(".neighborhood-search .search-result-wrapper .search-listing").toggleClass('hide-list');
-            $(".neighborhood-search .search-result-wrapper .map-wrapper").toggleClass('full-map');
-        });
+        // $(".neighborhood-search .search-result-wrapper .map-wrapper .swipe-btn").click(function () {
+        //     $(this).find('i').toggleClass('fa-angle-left fa-angle-right');
+        //     $(".neighborhood-search .search-result-wrapper .search-listing").toggleClass('hide-list');
+        //     $(".neighborhood-search .search-result-wrapper .map-wrapper").toggleClass('full-map');
+        //
+        // });
 
 
         // $(".mobile-view-dropdown").click(function(){

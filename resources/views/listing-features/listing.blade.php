@@ -62,7 +62,7 @@
                     {!! features() !!}
 
                     @if($action !== 'Building')
-                        <div class="col-md-12" style="margin-top: 20px; margin-bottom: 20px;" id="amenities">
+                        <div class="col-md-12" style="margin-top: 20px; margin-bottom: 20px; text-transform: capitalize;" id="amenities">
                             <div class="row" style="display: none;">
                                 {!! amenities() !!}
                             </div>

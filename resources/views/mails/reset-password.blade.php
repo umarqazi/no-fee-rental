@@ -167,7 +167,7 @@
         <div class="notification-inner-content">
             <h2> Notification Title</h2>
             <p> This email is in response for a request to reset your password.</p>
-            <p>Please click the link to reset your password: <a href="{{--{{ $data->url }}--}}">Reset Password</a></p>
+            <p>Please click the link to reset your password: <a href="{{ $data->url }}">Reset Password</a></p>
             <div class="action-button">
                 <p><b>Please make sure you have deleted any saved passwords for NOFEERENTALSNYC from your browser, which
                         can interfere with your login.</b></p>
