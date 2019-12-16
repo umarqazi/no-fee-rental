@@ -159,32 +159,32 @@
                     <div class="col-lg-6">
                         <div class="form-group">
                             {!! Form::text('first_name', null, ['class' => 'input-style', 'placeholder' => 'First Name']) !!}
+                            <p id="first-name-error"style="color:red; display: none">First Name is required.</p>
                         </div>
-                        <p id="first-name-error"style="color:red; display: none">First Name is required.</p>
                     </div>
                     <div class="col-lg-6">
                         <div class="form-group">
                             {!! Form::text('last_name', null, ['class' => 'input-style', 'placeholder' => 'Last Name']) !!}
-                        </div>
                         <p id="last-name-error"style="color:red; display: none">Last Name is required.</p>
+                        </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="form-group">
                             {!! Form::text('phone_number', null, ['class' => 'input-style', 'placeholder' => 'Phone Number']) !!}
-                        </div>
                         <p id="phone-number-error"style="color:red; display: none">Neighborhood is required.</p>
+                        </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="form-group">
                             {!! Form::email('email', null, ['class' => 'input-style', 'placeholder' => 'Email']) !!}
-                        </div>
                         <p id="email-error"style="color:red; display: none">Email is required.</p>
+                        </div>
                     </div>
                     <div class="col-lg-12">
                         <div class="form-group">
                             {!! Form::textarea('description', null, ['style' => 'resize:none', 'class' => 'input-style text-area', 'placeholder' => 'Comment']) !!}
-                        </div>
                         <p id="comment-error"style="color:red; display: none">Comment is required.</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -212,13 +212,13 @@
         }
     }
 
-    $('input[name="beds[]"]').on('change', function () {
+    $('#need-help-step2 > .modal-dialog > .modal-content > .modal-body > .py-4 > .form-group > ul > li > input[name="beds[]"]').on('change', function () {
         $('#need-help-step-3').prop('disabled', false);
         $('#bedroom-error').css({'display': 'none'});
     });
 
     function bedroomsValiation($this) {
-        if (!$('input[name="beds[]"]').is(':checked')) {
+        if (!$('#need-help-step2 > .modal-dialog > .modal-content > .modal-body > .py-4 > .form-group > ul > li > input[name="beds[]"]').is(':checked')) {
             $($this).prop('disabled', true);
             $('#bedroom-error').css({'display': 'block'});
         }

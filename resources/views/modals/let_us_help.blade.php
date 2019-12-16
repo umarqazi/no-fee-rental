@@ -585,14 +585,14 @@
         }
     });
 
-    $('input[name="beds[]"]').on('change', function () {
-        if ($('input[name="beds[]"]').is(':checked')) {
+    $('#let-us-step3 > .modal-body > .pt-4 > .form-group > ul#beds >li > input[name="beds[]"]').on('change', function () {
+        if ($('#let-us-step3 > .modal-body > .pt-4 > .form-group > ul#beds >li > input[name="beds[]"]').is(':checked')) {
             $('#bed-err').css({'display': 'none'});
             $('#bed-btn').prop('disabled', false);
         }
     });
     $('#bed-btn').on('click', function () {
-        if (!$('input[name="beds[]"]').is(':checked')) {
+        if (!$('#let-us-step3 > .modal-body > .pt-4 > .form-group > ul#beds >li > input[name="beds[]"]').is(':checked')) {
             setTimeout(() => {
                 $('#let-us-step3').show();
                 $('#let-us-step4').hide();
@@ -602,14 +602,14 @@
         }
     });
 
-    $('input[name=username]').on('input', function () {
-        if ($('input[name=username]').val() !== '') {
+    $('input[name=username]:last').on('input', function () {
+        if ($('input[name=username]:last').val() !== '') {
             $('#name-err').css({'display': 'none'});
             $('#name-btn').prop('disabled', false);
         }
     });
     $('#name-btn').on('click', function () {
-        if ($('input[name=username]').val() == '') {
+        if ($('input[name=username]:last').val() == '') {
             setTimeout(() => {
                 $('#let-us-step4').show();
                 $('#let-us-step5').hide();

@@ -419,7 +419,7 @@ header .agent-avtar .avtar div ul {
     -webkit-transition: all ease 0.4s;
     transition: all ease 0.4s;
     visibility: hidden;
-    opacity: 0;
+    display: none;
     min-width: 150px;
     margin-top: 10px;
 }
@@ -445,7 +445,7 @@ header .agent-avtar .avtar div ul li:last-child a {
 
 header .agent-avtar .avtar:hover div ul {
     visibility: visible;
-    opacity: 1;
+    display: block;
     margin-top: 0;
 }
 
@@ -724,6 +724,7 @@ header .agent-avtar .avtar:hover div ul {
 
 .building-details-wrapper .amenities-section {
     margin: 20px 0px;
+    text-transform: capitalize;
 }
 
 .building-details-wrapper .amenities-section .after-amenities-inputs {

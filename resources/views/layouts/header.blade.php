@@ -41,12 +41,8 @@
                     <a href="#">Recent Searches<i class="fa fa-angle-down"></i></a>
                     <div class="dropDown">
                         <ul class="neighborhoods_amenities">
-                            <li></li>
                        </ul>
 
-                        <ul class="ul-border-top">
-                            <li> </li>
-                        </ul>
                     </div>
                 </div>
                 <i class="fa fa-bars menu-btn"></i>

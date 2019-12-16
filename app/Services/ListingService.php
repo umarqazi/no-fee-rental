@@ -683,6 +683,7 @@ class ListingService extends BuildingService {
 
         return toObject( [
             'listings' => $listings,
+            'reviews'  => toObject($this->userRepo->profileDetail($agentId)->first()->reviews)
         ] );
     }
 }

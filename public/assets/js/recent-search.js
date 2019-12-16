@@ -16,6 +16,8 @@ $(() => {
     });
 
     $('#main-search-beds').on('change', function() {
+        bed = [];
+    if($("#main-search-beds option:selected").text() !== 'Beds') {
         bed.push($("#main-search-beds option:selected").text());
         $($('#beds').find('li > input') ).each(function(index) {
             if($(this).attr('checked')){
@@ -26,13 +28,22 @@ $(() => {
             }
 
         });
+    }
+
+    else  {
+         bed = [];
+    }
+
     });
 
     $('#main-search-priceRange').on('change', function() {
-        price_max = $("#main-search-priceRange option:selected").val();
-        price_min = 1 ;
-        $('#max_price').val(price_max);
-        $('#min_price').val(price_min);
+      if($("#main-search-priceRange option:selected").val() !== '') {
+          price_max = $("#main-search-priceRange option:selected").val();
+          $('#max_price').val(price_max);
+      }
+      else {
+          price_max = null ;
+      }
     });
 
     $('input[name=neighborhoods]').on('change', function() {
@@ -52,6 +63,7 @@ $(() => {
 
     $('select[name=neighborhoods]').on('change', function() {
         let $nSelector = $("select[name=neighborhoods] option:selected");
+        $('input[name=neighborhoods]').val($nSelector.text());
         neighborhood = $nSelector.text();
     });
 
@@ -111,6 +123,7 @@ $(() => {
     });
 
     if(queries && queries.length > 0) {
+        let selected = queries[queries.length - 1] ;
         queries.forEach(async (v, i) => {
             if(v.isNew === true) {
                 let currentQuery = queries[i];
@@ -126,21 +139,37 @@ $(() => {
             },[]);
 
             $('#empty-keywords').remove();
-            if(result.length > 2) {
-                $('.dropDown > ul.ul-border-top > li ').prepend(`
+           /* if(result.length > 2) {
+           */     $('.dropDown > ul.neighborhoods_amenities').prepend(`<li>
                 <a href="${v.url}">
-                       NYC ${(v.neighborhood !== null ? ' - ' + v.neighborhood : '') + (v.beds.length > 0  ? ' ' + v.beds + ' beds' : '') + (v.baths.length > 0 ? ' ' + v.baths + ' baths' : '')+(v.price_min !== null ? ' - $' + v.price_min + ' Min Price' : '')+(v.price_max !== null ? ' - $' + v.price_max+ ' Max Price' : '')+(v.square_feet_min !== null ? ' - ' + v.square_feet_min + ' Min Square Feet' : '')+(v.square_feet_max !== null ? ' - ' + v.square_feet_max + ' Max Square Feet' : '')+(v.open_house !== null ? ' - ' + v.open_house  + ' Open House' : '')}
-                </a> | `);
-            } else {
-                $('.dropDown > ul.neighborhoods_amenities > li ').prepend(`
-                <a href="${v.url}">
-                       NYC ${(v.neighborhood !== null ? ' - ' + v.neighborhood : '') + (v.beds.length > 0  ? ' ' + v.beds + ' bed' : '') + (v.baths.length > 0  ? ' ' + v.baths + ' bath' : '')}
-                </a> | `);
-            }
+                        ${
+                            (v.neighborhood !== null ? 'Listings in ' + v.neighborhood : 'Listings ') +
+                            (v.beds.length > 0  ?
+                                (v.beds.length > 1 ?
+                                    ' with ' + v.beds.sort() + ' bedrooms' : (v.beds[0] > 1 || v.beds[0] == '5+' ? ' with ' + v.beds + ' bedrooms' : ' with ' + v.beds + ' bedroom')): '') +
+                            (v.baths.length > 0  ?
+                                (v.baths.length > 1 ?
+                                    ' with at least ' + v.baths.sort() + ' bathrooms' : (v.baths[0] > 1 || v.baths[0] == '5+' ? ' with at least ' + v.baths + ' bathrooms' : ' with at least ' + v.baths + ' bathroom') ): '')+
+                            (v.price_min !== null ?
+                                (v.price_max !== null ?
+                                    ' between $' + formatNumber(v.price_min) + ' and $' + formatNumber(v.price_max) +' and' : 'above $' + formatNumber(v.price_min) ) :
+                                (v.price_max !== null ?
+                                    ' under $' + formatNumber(v.price_max) : '' ))+
+                            (v.square_feet_min !== null ?
+                                (v.square_feet_max !== null ?
+                                    ' between ' + formatNumber(v.square_feet_min) + ' ft² and ' + formatNumber(v.square_feet_max) + ' ft² ' : 'above ' + formatNumber(v.square_feet_min) + 'ft²' ) :
+                                (v.square_feet_max !== null ?
+                                    ' under ' + formatNumber(v.square_feet_max) + ' ft²' : '' ))+
+                            (v.open_house !== null ? ' with Open House ' + v.open_house : '')}
+                </a> </li>`);
         });
     } else {
         if($('#empty-keywords').length > 0) return;
         $('.dropDown').append('<a href="javascript:void(0);" id="empty-keywords">You have no keywords yet to search</a>');
         $('.dropDown > ul').removeClass('ul-border-top');
+    }
+
+    function formatNumber(num) {
+        return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
     }
 });

@@ -39,7 +39,7 @@
                     ]) !!}
                 {!! Form::hidden('visibility') !!}
                 {!! Form::hidden('user_id') !!}
-                @if(isAdmin())
+                @if(isAdmin() && $action == 'Update' && is_created_by_owner($listing->id))
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
@@ -62,7 +62,7 @@
                     {!! features() !!}
 
                     @if($action !== 'Building')
-                        <div class="col-md-12" style="margin-top: 20px; margin-bottom: 20px;" id="amenities">
+                        <div class="col-md-12" style="margin-top: 20px; margin-bottom: 20px; text-transform: capitalize;" id="amenities">
                             <div class="row" style="display: none;">
                                 {!! amenities() !!}
                             </div>
