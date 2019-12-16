@@ -98,9 +98,9 @@
                             Yousuf Khalid <i class="fa fa-angle-down"></i>
                         </a>
                         <div class="user-dropdown">
-                            <a href="{{ route(whoAmI().'.index') }}">Dashboard </a>
-                            <a href="{{ route(whoAmI().'.showProfile') }}">Profile Setting </a>
-                            <a href="{{ route(whoAmI().'.logout') }}">Log Out </a>
+                            <a href="{{ route(routeWP().'.index') }}">Dashboard </a>
+                            <a href="{{ route(routeWP().'.showProfile') }}">Profile Setting </a>
+                            <a href="{{ route(routeWP().'.logout') }}">Log Out </a>
                         </div>
                     </div>
                 </div>
