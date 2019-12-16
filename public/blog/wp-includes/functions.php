@@ -45,24 +45,12 @@ function mysql2date( $format, $date, $translate = true ) {
 	}
 }
 
-function ddwp($data) {
-    echo "<pre>";
-echo "dd helper \n";
-    print_r($data);
-    die();
-}
-
-function isAuthenticated() {
-session_start();
-    ddwp($_SESSION['auth'] = 'change');
-}
-
 /*Rest API for update the user course status*/
 add_action( 'rest_api_init', function ( $server ) {
-    $server->register_route( 'api/v1', '/rest-api-call', array(
+    $server->register_route( 'api', '/is-authenticated', array(
         'methods' => 'POST',
         'callback' => function (){
-            return $_SESSION['user_id'];
+            return $_SESSION['user_id'] ?? 'None';
         },
     ));
 });

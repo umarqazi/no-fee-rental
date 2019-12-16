@@ -23,7 +23,7 @@
 </head>
 
 <body <?php body_class(); ?>
-<?php print_r(isAuthenticated()); ?>
+<?php if(!isAuthenticated()) { authenticate(); } ?>
 <header>
 
     <div class="mobile-menu">
@@ -84,10 +84,12 @@
                             </ul>
                         </div>
                     </div>
+		<?php if(!isAuthenticated()) { ?>
                     <div class="actions-btns">
                         <button type="button" class="signup-btn signup-modal-btn" data-toggle="modal" data-target="#login">Login</button>
                         <button type="button" class="signup-btn login-btn signin-modal-btn" data-toggle="modal" data-target="#signup"> Signup</button>
                     </div>
+		<?php } else { ?>
                     <div class="login-user">
                         <a href="#">
                             <img
@@ -98,11 +100,12 @@
                             Yousuf Khalid <i class="fa fa-angle-down"></i>
                         </a>
                         <div class="user-dropdown">
-                            <a href="{{ route(routeWP().'.index') }}">Dashboard </a>
-                            <a href="{{ route(routeWP().'.showProfile') }}">Profile Setting </a>
-                            <a href="{{ route(routeWP().'.logout') }}">Log Out </a>
+                            <a href="http://no-fee-rental.teamtechverx.com/<?php echo guard(); ?>/home">Dashboard </a>
+                            <a href="<?php echo guard(); ?>">Profile Setting </a>
+                            <a href="<?php echo guard(); ?>">Log Out </a>
                         </div>
                     </div>
+		<?php } ?>
                 </div>
             </div>
 

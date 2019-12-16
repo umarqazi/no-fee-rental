@@ -22,6 +22,12 @@
  * @package WordPress
  */
 
+function dd($data) {
+ echo "<pre>";
+ print_r($data);
+ die();
+}
+
 function authenticate() {
 	$ch = curl_init();
 	$fields_string = null;
@@ -47,7 +53,6 @@ function authenticate() {
 	curl_close($ch);
 
 	if($result->status) {
-		session_start();
 		$_SESSION['api_token'] = $result->api_token;
 		$_SESSION['guard'] = $result->guard;
 		return true;
@@ -69,6 +74,7 @@ function guard() {
 }
 
 function routeWP($url) {
+dd($url);
   switch($url) {
 	case guard().'.index':
 	  dd('dashboard');
@@ -80,6 +86,6 @@ function routeWP($url) {
 		dd('logout');
 	break;
   }
-
+dd($url);die;
  return $url;
 }
