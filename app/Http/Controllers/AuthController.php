@@ -8,8 +8,11 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Validation\ValidationException;
 
-class AuthController extends Controller
-{
+/**
+ * Class AuthController
+ * @package App\Http\Controllers
+ */
+class AuthController extends Controller {
 
     /**
      * @var AuthService
