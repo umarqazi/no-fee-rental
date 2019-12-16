@@ -45,6 +45,16 @@ function mysql2date( $format, $date, $translate = true ) {
 	}
 }
 
+/*Rest API for update the user course status*/
+add_action( 'rest_api_init', function ( $server ) {
+    $server->register_route( 'api', '/is-authenticated', array(
+        'methods' => 'POST',
+        'callback' => function (){
+            return $_SESSION['user_id'] ?? 'None';
+        },
+    ));
+});
+
 /**
  * Retrieve the current time based on specified type.
  *
