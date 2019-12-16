@@ -36,6 +36,9 @@ class AuthController extends Controller {
         if($user && $this->attemptLogin($request)) {
             return response()->json([
                 'status' => true,
+                'user' => [
+                    'id' => $user->id
+                ],
                 'guard' => $this->__guardAssign($user),
                 'msg' => 'Authentication successful',
                 'api_token' => $user->api_token
