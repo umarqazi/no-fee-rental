@@ -28,39 +28,6 @@ function dd($data) {
  die();
 }
 
-function authenticate() {
-	$ch = curl_init();
-	$fields_string = null;
-	$url = 'http://no-fee-rental.teamtechverx.com/api/login';
-	$fields = [
-		'email' => 'codinghackers@admin.com',
-		'password' => '123456789'
-	];
-
-	foreach($fields as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
-	rtrim($fields_string, '&');
-
-	//set the url, number of POST vars, POST data
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-	curl_setopt($ch,CURLOPT_URL, $url);
-	curl_setopt($ch,CURLOPT_POST, count($fields));
-	curl_setopt($ch,CURLOPT_POSTFIELDS, $fields_string);
-
-	//execute post
-	$result = json_decode(curl_exec($ch));
-
-	//close connection
-	curl_close($ch);
-
-	if($result->status) {
-		$_SESSION['api_token'] = $result->api_token;
-		$_SESSION['guard'] = $result->guard;
-		return true;
-	}
-
-	return false;
-}
-
 function isAuthenticated() {
    if(isset($_SESSION['api_token']) || isset($_SESSION['guard'])) {
 	return true;
