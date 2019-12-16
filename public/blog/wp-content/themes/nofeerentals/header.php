@@ -23,6 +23,7 @@
 </head>
 
 <body <?php body_class(); ?>
+<?php print_r(isAuthenticated()); ?>
 <header>
 
     <div class="mobile-menu">
