@@ -21,6 +21,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	define( 'ABSPATH', dirname( __FILE__ ) . '/' );
 }
 
+require_once (ABSPATH.'wp-includes/helpers.php');
+
 error_reporting( E_CORE_ERROR | E_CORE_WARNING | E_COMPILE_ERROR | E_ERROR | E_WARNING | E_PARSE | E_USER_ERROR | E_USER_WARNING | E_RECOVERABLE_ERROR );
 
 /*
@@ -52,8 +54,6 @@ if ( file_exists( ABSPATH . 'wp-config.php' ) ) {
 	wp_fix_server_vars();
 
     require_once( ABSPATH . WPINC . '/functions.php' );
-
-    require_once( ABSPATH . WPINC . '/helpers.php' );
 
 	$path = wp_guess_url() . '/wp-admin/setup-config.php';
 

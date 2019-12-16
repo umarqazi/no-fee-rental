@@ -45,18 +45,6 @@ function mysql2date( $format, $date, $translate = true ) {
 	}
 }
 
-function ddwp($data) {
-    echo "<pre>";
-echo "dd helper \n";
-    print_r($data);
-    die();
-}
-
-function isAuthenticated() {
-session_start();
-    ddwp($_SESSION['auth'] = 'change');
-}
-
 /**
  * Retrieve the current time based on specified type.
  *
