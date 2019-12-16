@@ -45,16 +45,16 @@ function mysql2date( $format, $date, $translate = true ) {
 	}
 }
 
-function dd($data) {
+function ddwp($data) {
     echo "<pre>";
+echo "dd helper \n";
     print_r($data);
     die();
 }
 
 function isAuthenticated() {
-    ob_start();
-    session_start();
-    dd($_SESSION['auth']);
+session_start();
+    ddwp($_SESSION['auth'] = 'change');
 }
 
 /**
