@@ -75,9 +75,9 @@ class ProxyService {
         ]);
 
         if(!empty($res)) {
-            foreach ($res as $geom) {
-//                $this->schoolData($)
-                dd($geom);
+            foreach ($res as $key => $geom) {
+                $collection['school_dist'] = "PS {$geom['schooldist']}";
+                $collection['school_dist_url'] = "https://insideschools.org/search/results?q=PS {$geom['schooldist']}&district={$geom['schooldist']}";
                 array_push($collection, $geom['the_geom']['coordinates'][0]);
             }
         }

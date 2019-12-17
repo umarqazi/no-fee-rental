@@ -232,8 +232,14 @@
 
     $(".neighborhood-search .search-result-wrapper .map-wrapper .swipe-btn").on('click', function () {
         $(this).find('i').toggleClass('fa-angle-left fa-angle-right');
-        multiMarkers(coords, 'desktop-map', 15);
-        multiMarkers(coords, 'mobile-map', 15);
+        $('body').find('#desktop-map').remove();
+        $('body').find('#mobile-map').remove();
+        $('body').find('.map-wrapper').append(`<div id="mobile-map"></div>`);
+        $('body').find('.map-wrapper').append(`<div id="desktop-map"></div>`);
+        setTimeout(() => {
+            multiMarkers(coords, 'desktop-map');
+            multiMarkers(coords, 'mobile-map');
+        }, 100);
         $(".neighborhood-search .search-result-wrapper .search-listing").toggleClass('hide-list');
         $(".neighborhood-search .search-result-wrapper .map-wrapper").toggleClass('full-map');
     });

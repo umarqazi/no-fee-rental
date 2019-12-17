@@ -28,22 +28,12 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             {!! Form::email('email', null, ['class' => 'input-style', 'placeholder' => 'Email']) !!}
-                            @if ($errors->has('email'))
-                                <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                            @endif
                         </div>
                     </div>
 
                     <div class="col-md-6">
                         <div class="form-group">
                             {!! Form::password('password', ['class' => 'input-style', 'placeholder' => 'Password']) !!}
-                            @if ($errors->has('password'))
-                                <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                            @endif
                         </div>
                     </div>
                 </div>
