@@ -100,7 +100,7 @@
                     <div class="login-heading login-after-line">
                         Login
                     </div>
-                    <form method="POST" action="http://no-fee-rental.teamtechverx.com/api/login" accept-charset="UTF-8" id="login_form" class="ajax" novalidate="novalidate">
+                    <form method="POST" action="javascript:void(0);" accept-charset="UTF-8" id="login_form">
                         <input name="_token" type="hidden" value="wgtYrzIjKZeqRuv67Xf1mCwnwFUW8JlmJKzf0lre">
                         <div class="row">
                             <div class="col-md-6">
@@ -130,9 +130,8 @@
 
                             <div class="col-md-12">
                                 <div class="text-center mt-5 mb-4">
-                                    <button type="submit" class="btn-default">
+                                    <input type="submit" class="btn-default" name="login">
                                         Login
-                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -282,17 +281,22 @@
       });
 
     </script>
+<?php
+    if(isset($_POST['login'])) {
+        $credentials = [
+            'email'    => $_POST['email'],
+            'password' => $_POST['password']
+        ];
+
+        authenticate($credentials);
+    }
+?>
 <script src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/assets/js/vendor/toastr.js"></script>
 <script src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/assets/js/signup.js"></script>
 <script src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/assets/js/login.js"></script>
 <script src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/assets/js/recent-search.js"></script>
 <script src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/assets/js/global.js"></script>
 <script src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/assets/js/validate.js"></script>
-<?php
-if(session('message')) {
-    echo "<script>toastr.{session('alert_type')}(session('message'));</script>";
-}
-?>
  </body>
 
 </html>

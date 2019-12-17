@@ -89,7 +89,10 @@ class ListingConversation extends Model {
      * @return mixed
      */
     public function scopeArchiveConversations($query) {
-        return $this->where('is_archived', TRUE)->with(['listing', 'sender']);
+        return $this->where([
+                'is_archived', TRUE,
+                isRenter() ? 'from' : 'to' => myId()
+            ])->with(['listing', 'sender']);
     }
 
     /**

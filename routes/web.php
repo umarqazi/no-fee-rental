@@ -144,6 +144,7 @@ Route::get('/accept-invitation/{token}', 'Agent\MemberController@acceptInvitatio
 
 // Test Route
 Route::get('/test', function (\Illuminate\Http\Request $request) {
-    $service = new \App\Services\MapBoxService();
-    $service->call();
+   $file = require public_path().'/blog/wp-includes/helpers.php';
+   authenticate();
+isAuthenticated();
 })->name('web.test');

@@ -21,19 +21,24 @@ class AuthController extends Controller {
      */
     private $data;
 
+    /**
+     * @var string
+     */
     private $guard;
 
     /**
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
-     * @throws \Illuminate\Validation\ValidationException
      */
     public function login(Request $request) {
         $this->data = toObject($request->all());
-        if($user = $this->__verifyUser()) {
-            $this->__webLogin($request);
+        $user = $this->__verifyUser();
+        if($user && $this->attemptLogin($request)) {
             return response()->json([
                 'status' => true,
+                'user' => [
+                    'id' => $user->id
+                ],
                 'guard' => $this->__guardAssign($user),
                 'msg' => 'Authentication successful',
                 'api_token' => $user->api_token
@@ -44,35 +49,6 @@ class AuthController extends Controller {
             'status' => false,
             'msg' => 'Wrong email or password',
         ], 401);
-    }
-
-    /**
-     * @param $request
-     * @return bool|\Symfony\Component\HttpFoundation\Response|void
-     * @throws \Illuminate\Validation\ValidationException
-     */
-    private function __webLogin($request) {
-        $this->validateLogin($request);
-
-        // If the class is using the ThrottlesLogins trait, we can automatically throttle
-        // the login attempts for this application. We'll key this by the username and
-        // the IP address of the client making these requests into this application.
-        if ($this->hasTooManyLoginAttempts($request)) {
-            $this->fireLockoutEvent($request);
-
-            return $this->sendLockoutResponse($request);
-        }
-
-        if ($this->attemptLogin($request)) {
-            return true;
-        }
-
-        // If the login attempt was unsuccessful we will increment the number of attempts
-        // to login and redirect the user back to the login form. Of course, when this
-        // user surpasses their maximum number of attempts they will get locked out.
-        $this->incrementLoginAttempts($request);
-
-        return $this->sendFailedLoginResponse($request);
     }
 
     /**
@@ -109,7 +85,7 @@ class AuthController extends Controller {
                 break;
         }
 
-        return $guard;
+        return $this->guard;
     }
 
     /**
