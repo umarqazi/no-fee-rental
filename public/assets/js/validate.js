@@ -229,6 +229,47 @@ $(() => {
         }
     });
 
+    // Add building Form Validations
+    $('#add_building').validate({
+        rules: {
+            neighborhood: {
+                required: true,
+            },
+            street_address: {
+                required: true,
+            },
+            contact_representative: {
+                required: true,
+            },
+            building_action: {
+                required: true,
+            },
+            thumbnail: {
+                required: true,
+                validateExtension: 'thumbnail'
+            },
+        },
+
+        messages: {
+            neighborhood: {
+                required: "Neighborhood is required.",
+            },
+            street_address: {
+                required: "Street Address is required.",
+            },
+            contact_representative: {
+                required: "Contact Representative is required.",
+            },
+            building_action: {
+                required: "Building Action is required.",
+            },
+            thumbnail: {
+                required: "Thumbnail is required.",
+                validateExtension: "Choose valid thumbnail file.",
+            },
+        }
+    });
+
     // Neighborhood Search Form Validations
     $('#search').validate({
         rules: {
