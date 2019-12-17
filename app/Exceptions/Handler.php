@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Exception;
+use Http\Client\Exception\HttpException;
 use Illuminate\Auth\AuthenticationException as Auth;
 use Illuminate\Database\Eloquent\ModelNotFoundException as ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
@@ -34,6 +35,7 @@ class Handler extends ExceptionHandler {
 	 * @return void
 	 */
 	public function report(Exception $exception) {
+
 		if ($exception instanceof ModelNotFoundException) {
 			dd('Requested Record Not Exist');
 		}
@@ -48,6 +50,11 @@ class Handler extends ExceptionHandler {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function render($request, Exception $exception) {
+
+	    if($exception->getStatusCode() === 404) {
+	        return abort(419);
+	    }
+
 		return parent::render($request, $exception);
 	}
 
