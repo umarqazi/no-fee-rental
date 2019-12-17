@@ -7,19 +7,38 @@ $(() => {
     let bath = [], bed = [], square_feet_min = null, square_feet_max = null, neighborhood = null, price_min = null, price_max = null, open_house = null;
 
 
-    $('#baths').find('li').one('click', function() {
-        bath.push($(this).text().replace(/\s/g, ''));
+    $('#advance-search-baths').find('li').on('change', function() {
+        let found = false ;
+        for(let i = 0 ; i < bath.length ; i++){
+           if(bath[i] == $(this).text().replace(/\s/g, '')){
+                   bath.splice(i,1);
+                   found = true ;
+           }
+        }
+        if(found !== true){
+            bath.push($(this).text().replace(/\s/g, ''));
+        }
     });
 
-    $('#beds').find('li').one('click', function() {
-        bed.push($(this).text().replace(/\s/g, ''));
+    $('#advance-search-beds').find('li').on('change', function() {
+        let found = false ;;
+        for(let i = 0 ; i < bed.length ; i++){
+            if(bed[i] == $(this).text().replace(/\s/g, '')){
+                bed.splice(i,1);
+                found = true ;
+            }
+        }
+        if(found !== true){
+            bed.push($(this).text().replace(/\s/g, ''));
+        }
+
     });
 
     $('#main-search-beds').on('change', function() {
         bed = [];
     if($("#main-search-beds option:selected").text() !== 'Beds') {
         bed.push($("#main-search-beds option:selected").text());
-        $($('#beds').find('li > input') ).each(function(index) {
+        $($('#advance-search-beds').find('li > input') ).each(function(index) {
             if($(this).attr('checked')){
                 $(this).attr('checked', false);
             }
@@ -124,6 +143,54 @@ $(() => {
 
     if(queries && queries.length > 0) {
         let selected = queries[queries.length - 1] ;
+        if (selected.beds.length > 0 ){
+            $($('#advance-search-beds').find('li > input') ).each(function(index) {
+                for (let i = 0 ; i < selected.beds.length ; i++) {
+                    if($(this).val() == selected.beds[i]){
+                        $(this).trigger( "click");
+                        $(this).attr('checked' , true);
+                        break ;
+                    }
+                }
+
+            });
+        }
+        if (selected.baths.length > 0 ){
+            $($('#advance-search-baths').find('li > input') ).each(function(index) {
+                for (let i = 0 ; i < selected.baths.length ; i++) {
+                    if($(this).val() == selected.baths[i]){
+                        $(this).trigger( "click" );
+                        $(this).attr('checked' , true)
+                        break ;
+                    }
+                }
+
+            });
+        }
+        if (selected.price_min !== null){
+            setTimeout(() => {
+                price_min = selected.price_min ;
+                $('#min_price').val(selected.price_min);
+            }, 100);
+        }
+        if (selected.price_max !== null){
+            setTimeout(() => {
+                price_max = selected.price_max ;
+                $('#max_price').val(selected.price_max);
+            }, 100);
+        }
+        if (selected.neighborhood !== null){
+            let current ;
+            $('input[name=neighborhoods]').val(selected.neighborhood);
+            $('select[name=neighborhoods] option').each(function(index) {
+                if($(this).text() == selected.neighborhood){
+                     current = $( this ).val() ;
+                }
+            });
+            $('select[name=neighborhoods]').val(current);
+            neighborhood = selected.neighborhood ;
+        }
+
         queries.forEach(async (v, i) => {
             if(v.isNew === true) {
                 let currentQuery = queries[i];

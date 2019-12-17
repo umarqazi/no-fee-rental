@@ -10,7 +10,7 @@
             <h1>Credits Plan</h1>
         </div>
         <div class="credit-plans">
-            <h3>NOFE Rental Plans</h3>
+            <h3>NOFEE Rental Plans</h3>
             <p>We stand behind our name in giving our advertises quality leads without watering down our product & service you confidence!
                 Our goal is to provide top-quality leads at a fraction of a cost to the agent.</p><br>
             <p>For a limited time we are offering the 1st month of advertising at no cost. In addition once your on our plan if for any reason you are not
