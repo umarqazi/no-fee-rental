@@ -91,7 +91,7 @@ const setMap = (container, coords, addMarker = true, showPop = true, html = null
     MAP = new mapboxgl.Map({
         accessToken: setToken(),
         container: container,
-        // maxBounds: defaultBounds, // Map View Bound To New York City Only
+        maxBounds: defaultBounds, // Map View Bound To New York City Only
         style: 'mapbox://styles/mapbox/light-v10',
         center: setLatLng(coords),
         zoom: 13
@@ -128,6 +128,7 @@ const multiMarkers = (coords, container, zoom = 10) => {
     MAP = new mapboxgl.Map({
         accessToken: setToken(),
         container: container,
+        maxBounds: defaultBounds,
         style: 'mapbox://styles/mapbox/light-v10',
         center: setLatLng(defaultCoords),
         zoom: zoom
@@ -211,6 +212,7 @@ const schoolZone = async (coords) => {
     coords.range = 1200;
     await ajaxRequest('/school-zone', 'post', coords, false).then(polygonCoords => {
         polygonCoords = JSON.parse(polygonCoords);
+        $('body').find('#insideschool').append(`<li><a target="_blank" href="${polygonCoords[1]}">${polygonCoords[0]}</a></li>`)
         polygonCoords.forEach((res, i) => {
             drawPolygon(res, i);
         });
