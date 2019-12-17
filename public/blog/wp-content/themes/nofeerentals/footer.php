@@ -100,7 +100,7 @@
                     <div class="login-heading login-after-line">
                         Login
                     </div>
-                    <form method="POST" action="javascript:void(0);" accept-charset="UTF-8" id="login_form">
+                    <form method="POST" action="#" accept-charset="UTF-8" id="login_form">
                         <input name="_token" type="hidden" value="wgtYrzIjKZeqRuv67Xf1mCwnwFUW8JlmJKzf0lre">
                         <div class="row">
                             <div class="col-md-6">
