@@ -535,7 +535,7 @@ h3 {
     padding-left: 50px;
     color: #131415;
     font-size: 18px;
-    width: 370px;
+    width: 290px;
 }
 
 .header-bg .search-property .custom-select-input {
@@ -554,7 +554,7 @@ h3 {
     background: url(../images/select-menu-arrow.png) no-repeat right 15px center;
 }
 .header-bg .search-property .custom-select-input:last-child{
-    border-right: none;
+    border-right: #e0e8e7 solid 1px;
     min-width: 100px;
 }
 
@@ -580,7 +580,26 @@ h3 {
 .header-bg .search-property .search-btn:hover {
     background: #223971;
 }
+.dropdown-beds{
+    min-width: 218px;
+    padding: 0px 15px;
+    background: url(../images/select-menu-arrow.png) no-repeat right 15px center;
+}
+.beds-dropdown{
+    position: relative;
 
+}
+
+.beds-dropdown #advance-search-beds{
+    position: absolute;
+    top: 0px;
+    background-color: #fff;
+    left: 0px;
+    width: 340px;
+    padding: 15px;
+    line-height: normal;
+    display: none;
+}
 .header-wrapper {
     position: absolute;
     top: 0;
@@ -1951,9 +1970,11 @@ footer .copyright .social-icons li a:hover {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    min-height: 131px;
+    min-height: 258px;
 }
-
+.contact-info .info h6{
+    margin-bottom: 10px;
+}
 .contact-info .info img {
     max-width: 60px;
     margin-right: 10px;
@@ -1971,6 +1992,8 @@ footer .copyright .social-icons li a:hover {
     max-width: 300px;
     margin: 0 auto;
     color: #7A7A7A;
+    display: inline-block;
+    margin-bottom: 10px;
 }
 
 .contact-info .info p {
