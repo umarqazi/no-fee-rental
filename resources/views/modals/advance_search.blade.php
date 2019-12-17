@@ -24,7 +24,7 @@
                     <div class="col-md-6 search-form-grou-mrg-btm">
                         <div class="form-group" id="advance-search-chkbox">
                             <label class="label">Beds <span>(Select all that applies)</span></label>
-                            <ul id="beds">
+                            <ul id="advance-search-beds">
                                 <li> <input type="checkbox" value="studio" id="Checkbox" name="Checkbox">
                                     <label for="Checkbox"><span class="label-name">Studio</span></label>
                                 </li>
@@ -47,7 +47,7 @@
                         </div>
                         <div class="form-group" id="advance-search-chkbox">
                             <label class="label">Baths <span>(Select all that applies)</span></label>
-                            <ul id="baths">
+                            <ul id="advance-search-baths">
                                 <li> <input type="checkbox" value="any" id="Checkbox-6" name="baths[]">
                                     <label for="Checkbox-6"><span class="label-name">Any</span></label>
                                 </li>
