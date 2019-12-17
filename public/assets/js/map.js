@@ -212,7 +212,7 @@ const schoolZone = async (coords) => {
     coords.range = 1200;
     await ajaxRequest('/school-zone', 'post', coords, false).then(polygonCoords => {
         polygonCoords = JSON.parse(polygonCoords);
-        $('body').find('#insideschool').append(`<li><a target="_blank" href="${polygonCoords[1]}">${polygonCoords[0]}</a></li>`)
+        $('body').find('#insideschool').append(`<li><a target="_blank" href="${polygonCoords[1]}">${polygonCoords[0]}</a></li>`);
         polygonCoords.forEach((res, i) => {
             drawPolygon(res, i);
         });
