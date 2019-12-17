@@ -174,7 +174,7 @@
                             FEE
                             website
                             and any apartment deemed
-                            as a fee untill will not be activated.</h1>
+                            as a fee unit will not be activated.</h1>
                     </ul>
                 </div>
 
