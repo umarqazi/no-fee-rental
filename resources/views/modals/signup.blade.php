@@ -24,7 +24,7 @@
                     <li>Access to showing on demand clients</li>
                     <li>Access to our direct clientele through neighborhood specialists program</li>
                     <h1 style="color:white; font-size: 16px;font-weight: 600; line-height: normal;">Info: We are NO FEE website and any apartment deemed
-                        as a fee untill will not be activated.</h1>
+                        as a fee unit will not be activated.</h1>
                 </ul>
             </div>
 
