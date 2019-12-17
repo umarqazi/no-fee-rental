@@ -36,8 +36,8 @@ $(() => {
         }
     });
 
-    $.validator.addMethod("dateFormat", function(value, ele) {console.log(value);
-        let rxDatePattern = /^(\d{1,2})(\/|-)(\d{1,2})(\/|-)(\d{4})$/;
+    $.validator.addMethod("dateFormat", function(value, ele) {
+        let rxDatePattern = /([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/;
         let check = value.match(rxDatePattern);
         if(check !== null) {
             return true;
@@ -52,6 +52,13 @@ $(() => {
         let end_time = parseInt($('select[name="open_house[end_time][]"]').val());
         return (!(start_time >= end_time)) ;
     });
+
+    $.validator.addMethod('date_validation', function(value, element, param) {
+        let availability = $('input[name="availability"]').val();
+        let open_house = $('input[name="open_house[date][]"]').val();console.log(open_house=='');
+        return (open_house == '' || availability == '') ?  true : (open_house >= availability);
+    });
+
 
     (function($) {
         $.fn.inputFilter = function(inputFilter) {
@@ -94,7 +101,8 @@ $(() => {
            availability: {
                required: true,
                validateSelect: true,
-               dateFormat : true
+               dateFormat : true,
+               date_validation : true
            },
            building_type: {
                required: true,
@@ -104,7 +112,9 @@ $(() => {
                validateSelect: true,
                time_validation : $('select[name="open_house[end_time][]"]')
            },
-
+           "open_house[date][]": {
+               date_validation : true,
+               },
            "open_house[end_time][]": {
                validateSelect: true,
                time_validation : $('select[name="open_house[start_time][]"]')
@@ -150,7 +160,8 @@ $(() => {
            availability: {
                required: "Select Availability.",
                validateSelect: "Select any one option.",
-               dateFormat: "Select Valid Date."
+               dateFormat: "Select Valid Date.",
+               date_validation: "Greater Availability Date."
            },
 
            building_type: {
@@ -167,7 +178,9 @@ $(() => {
                validateSelect: "Select any one option.",
                time_validation :  "End Time should be greater than start time."
            },
-
+           'open_house[date][]': {
+               date_validation: "Smaller Open House Date."
+           },
            thumbnail: {
                required: "Thumbnail is required.",
                validateExtension: "Choose valid thumbnail file.",
@@ -226,6 +239,47 @@ $(() => {
                required: "Password is required.",
                greaterThan: "Password should be greater than 8 characters."
             }
+        }
+    });
+
+    // Add building Form Validations
+    $('#add_building').validate({
+        rules: {
+            neighborhood: {
+                required: true,
+            },
+            street_address: {
+                required: true,
+            },
+            contact_representative: {
+                required: true,
+            },
+            building_action: {
+                required: true,
+            },
+            thumbnail: {
+                required: true,
+                validateExtension: 'thumbnail'
+            },
+        },
+
+        messages: {
+            neighborhood: {
+                required: "Neighborhood is required.",
+            },
+            street_address: {
+                required: "Street Address is required.",
+            },
+            contact_representative: {
+                required: "Contact Representative is required.",
+            },
+            building_action: {
+                required: "Building Action is required.",
+            },
+            thumbnail: {
+                required: "Thumbnail is required.",
+                validateExtension: "Choose valid thumbnail file.",
+            },
         }
     });
 

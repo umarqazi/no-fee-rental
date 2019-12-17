@@ -29,20 +29,25 @@ const pushNotification = (data) => {
  */
 window.onload = async function () {
     hideAlert();
-    let res = await ajaxRequest('/fetch-notifications', 'post', null, false);
-    res.data.forEach(collection => {
-        if(collection.is_read === 0) {
-            showAlert();
-        }
+    await ajaxRequest('/fetch-notifications', 'post', null, false)
+        .then(res => {
+        res.data.forEach(collection => {
+            if(collection.is_read === 0) {
+                showAlert();
+            }
 
-        let obj = {
-            'id': collection.id,
-            'is_read': collection.is_read,
-            'profile_image': `${window.location.origin}/${collection.from.profile_image}`,
-            'url': collection.url,
-            'message': collection.message
-        };
-        pushNotification(obj);
+            let obj = {
+                'id': collection.id,
+                'is_read': collection.is_read,
+                'profile_image': `${window.location.origin}/${collection.from.profile_image}`,
+                'url': collection.url,
+                'message': collection.message
+            };
+            pushNotification(obj);
+        });
+    })
+        .catch(err => {
+            console.log(err);
     });
 };
 

@@ -227,10 +227,7 @@
                         </div>
                         <div class="col-lg-6 col-sm-6">
                             <h3>Nearby Schools</h3>
-                            <ul class="second-ul">
-                                <li> St Mary Church Christian Academy</li>
-                                <li> Ciszek Hally</li>
-                                <li>Sis. Fox House</li>
+                            <ul class="second-ul" id="insideschool">
 
                             </ul>
                         </div>

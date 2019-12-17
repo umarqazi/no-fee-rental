@@ -206,8 +206,7 @@ $(() => {
             },[]);
 
             $('#empty-keywords').remove();
-           /* if(result.length > 2) {
-           */     $('.dropDown > ul.neighborhoods_amenities').prepend(`<li>
+                $('.dropDown > ul.neighborhoods_amenities').prepend(`<li>
                 <a href="${v.url}">
                         ${
                             (v.neighborhood !== null ? 'Listings in ' + v.neighborhood : 'Listings ') +

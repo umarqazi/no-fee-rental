@@ -75,7 +75,8 @@ class ListingConversation extends Model {
      *
      * @return mixed
      */
-    public function scopeInactiveConversations($query) {
+    public function scopeInactiveConversations($query)
+    {
         return $query->where([
             'meeting_request'          => DEACTIVE,
             'is_archived'              => FALSE,

@@ -154,7 +154,8 @@
                         'autocomplete' => 'off',
                         'class' => 'input-style',
                         'id' => 'availability_date',
-                        'data-language' => 'en'
+                        'data-language' => 'en',
+                        'data-date-format' => 'yyyy-mm-dd'
                     ]) !!}
                 <span class="invalid-feedback" role="alert">
 			{!! $errors->first('availability') !!}

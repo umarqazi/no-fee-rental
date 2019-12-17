@@ -50,7 +50,6 @@ function mysql2date( $format, $date, $translate = true ) {
  * @return bool
  */
 function authenticate($credentials) {
-    print_r($credentials);die;
     $ch = curl_init();
     $fields_string = null;
     $url = 'http://no-fee-rental.teamtechverx.com/api/login';

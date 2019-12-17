@@ -29,7 +29,7 @@
                                 <li>30 Reposts</li>
                             </ul>
                         </div>
-                        <a href="javascript:void(0);" class="btn btn-default credit-plan" data-toggle="modal" data-target="#myModal-currentPlan" id="30"> Current plan </a>
+                        <a href="javascript:void(0);" class="btn btn-default credit-plan" data-toggle="modal" data-target="#myModal-currentPlan" id="40"> Current Plan </a>
                     </div>
                     <div class="current-plans gold-plan">
                         <h3> Gold Plan</h3>
@@ -44,7 +44,7 @@
                                 <li>Featured listing in our weekly news letter</li>
                             </ul>
                         </div>
-                        <a href="javascript:void(0);" class="btn btn-default credit-plan" data-toggle="modal" data-target="#myModal-currentPlan" id="60"> Get Started </a>
+                        <a href="javascript:void(0);" class="btn btn-default credit-plan" data-toggle="modal" data-target="#myModal-currentPlan" id="7  0"> Get Started </a>
 {{--                        <a href="#" class="btn btn-default"> Get started </a>--}}
                     </div>
                     <div class="current-plans platinum-plan">

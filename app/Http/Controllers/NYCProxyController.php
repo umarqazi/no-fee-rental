@@ -41,7 +41,7 @@ class NYCProxyController extends Controller {
     public function schoolZonePolygons(Request $request) {
         $res = $this->proxyService
             ->setBase(SCHOOLZONEBASEURL)
-            ->schoolData($request);
+            ->schoolZone($request);
         return response()->json($res);
     }
 }
