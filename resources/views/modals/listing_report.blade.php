@@ -16,10 +16,11 @@
                     <h3> Report reason</h3>
                     <div class="form-group">
                         <select class="form-control" id="sel1">
-                            <option>No longer available</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
+                            <option selected="true" disabled="disabled">Please Select</option>
+                            <option>This listing is no longer available.</option>
+                            <option>This is a fraudulent listing.</option>
+                            <option>This listing has incorrect information/photos.</option>
+                            <option>This is discriminatory or offensive listing.</option>
                         </select>
                     </div>
                     <div class="form-group text-message">
