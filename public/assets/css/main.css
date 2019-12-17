@@ -467,7 +467,7 @@ h3 {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-position: top 0px center !important;
+    background-position: top -100px center !important;
     background-repeat: no-repeat !important;
 }
 
