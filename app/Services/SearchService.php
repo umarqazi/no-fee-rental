@@ -53,7 +53,7 @@ class SearchService extends SaveSearchService {
             'openHouse'             => $request->openHouse ?? null,
             'neighborhood'          => $request->neighborhoods ?? null,
             'beds'                  => is_array($request->beds) ? $request->beds : ($request->beds ? [$request->beds] : null),
-            'baths'                 => $request->baths ?? null,
+            'baths'                 => is_array($request->beds) ? $request->baths : null,
             'availability'          => $request->availability ?? null,
             'priceRange'            => is_array($request->priceRange)
                 ? $request->priceRange : ['min_price' => '0', 'max_price' => $request->priceRange ?? 10000],
@@ -103,7 +103,8 @@ class SearchService extends SaveSearchService {
      */
     private function beds() {
         if(in_array(5, $this->args->{__FUNCTION__})) {
-            $this->query->whereIn('bedrooms', [$this->args->{__FUNCTION__}])->orWhere('bedrooms', '>=', 5);
+            $this->query->whereIn('bedrooms', is_array($this->args->{__FUNCTION__})
+                ? $this->args->{__FUNCTION__} : [ $this->args->{__FUNCTION__} ])->orWhere('bedrooms', '>=', 5);
         } else {
             $this->query->whereIn( 'bedrooms', is_array($this->args->{__FUNCTION__})
                 ? $this->args->{__FUNCTION__} : [ $this->args->{__FUNCTION__} ] );
@@ -117,9 +118,11 @@ class SearchService extends SaveSearchService {
         if (in_array('any', $this->args->{__FUNCTION__})) {
             $this->query = $this->query->where('baths', '>', 0);
         } elseif (in_array(5, $this->args->{__FUNCTION__})) {
-            $this->query = $this->query->where( 'baths', '>=', 5 )->orWhereIn( 'baths', [ $this->args->{__FUNCTION__} ] );
+            $this->query = $this->query->where( 'baths', '>=', 5 )->orWhereIn( 'baths', is_array($this->args->{__FUNCTION__})
+                ? $this->args->{__FUNCTION__} : [ $this->args->{__FUNCTION__} ] );
         } else {
-            $this->query = $this->query->whereIn( 'baths', [ $this->args->{__FUNCTION__} ] );
+            $this->query = $this->query->whereIn( 'baths', is_array($this->args->{__FUNCTION__})
+                ? $this->args->{__FUNCTION__} : [ $this->args->{__FUNCTION__} ] );
         }
     }
 
