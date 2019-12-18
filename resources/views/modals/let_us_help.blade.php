@@ -272,19 +272,19 @@
                         <ul class="bedroom-listing">
                             <li>
                                 <div class="custom-control custom-radio custom-control-inline">
-                                    {!! Form::radio('location-preference', 1, false, ['class' => 'custom-control-input', 'id' => 'location-1']) !!}
-                                    <label class="custom-control-label" for="location-1">Finding a Home ( Client )</label>
+                                    {!! Form::radio('location-preference', 1, false, ['class' => 'custom-control-input', 'id' => 'location-1','onclick'=>'openSpecificModal(this)']) !!}
+                                    <label class="custom-control-label" for="location-1">Yes, I'm intrested in certain neighborhoods...</label>
                                 </div>
                             </li>
                             <li>
                                 <div class="custom-control custom-radio custom-control-inline">
-                                    {!! Form::radio('location-preference', 2, false, ['class' => 'custom-control-input', 'id' => 'location-2']) !!}
+                                    {!! Form::radio('location-preference', 2, false, ['class' => 'custom-control-input', 'id' => 'location-2','onclick'=>'openSpecificModal(this)']) !!}
                                     <label class="custom-control-label" for="location-2">I have something very specific i’m looking for...</label>
                                 </div>
                             </li>
                             <li>
                                 <div class="custom-control custom-radio custom-control-inline">
-                                    {!! Form::radio('location-preference', 3, false, ['class' => 'custom-control-input', 'id' => 'location-3']) !!}
+                                    {!! Form::radio('location-preference', 3, false, ['class' => 'custom-control-input', 'id' => 'location-3','onclick'=>'openSpecificModal(this)']) !!}
                                     <label class="custom-control-label" for="location-3">No, I’m open to anything</label>
                                 </div>
                             </li>
@@ -293,7 +293,7 @@
                     <div class="text-center"><button type="button" class="btn-default skip-btn" data-target="let-us-step9">Skip</button></div>
                 </div>
                 <div class="modal-footer text-center">
-                    <button class="btn-default ml-3" type="button" data-target="let-us-step9">Next</button>
+                    <button class="btn-default ml-3" type="button" id="location-preference-button" >Next</button>
                 </div>
 
             </div>
@@ -311,6 +311,36 @@
                         <li></li>
                     </ul>
                     <h3 class="modal-title">Search for neighborhood</h3>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="pt-4 -b-4">
+                        {!! Form::text('neighborhoods', null, ['class' => 'input-style', 'placeholder' => '+ Search for neighborhood']) !!}
+                    </div>
+                    <div class="text-center"><button type="button" class="btn-default skip-btn" data-target="let-us-step10">Skip</button></div>
+                </div>
+                <div class="modal-footer text-center">
+                    <button class="btn-default ml-3" type="button" data-target="let-us-step8">Previous</button>
+                    <button class="btn-default ml-3" type="button" data-target="let-us-step10">Next</button>
+                </div>
+
+            </div>
+
+            <div class="let-us-hlep-form" id="let-us-step14">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <ul class="steps-progress">
+                        <li class="active"></li>
+                        <li class="active"></li>
+                        <li class="active"></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                    </ul>
+                    <h3 class="modal-title">Search neighborhood</h3>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
 
@@ -438,7 +468,7 @@
                     <div class="text-center"><button type="button" class="btn-default skip-btn" data-target="let-us-step12">Skip</button></div>
                 </div>
                 <div class="modal-footer text-center">
-                    <button class="btn-default ml-3" type="button" data-target="let-us-step10">Previous</button>
+                    <button class="btn-default ml-3" type="button" data-target="let-us-step8">Previous</button>
                     <button class="btn-default ml-3" type="button" data-target="let-us-step12">Next</button>
                 </div>
 
@@ -651,6 +681,16 @@
             $('#phone-btn').prop('disabled', true);
         }
     });
-
+  function openSpecificModal($this){
+      if($($this).attr('id') == 'location-1'){
+          $('#location-preference-button').attr('data-target','let-us-step14');
+      }
+      if($($this).attr('id') == 'location-2'){
+          $('#location-preference-button').attr('data-target','let-us-step9');
+      }
+      if($($this).attr('id') == 'location-3'){
+          $('#location-preference-button').attr('data-target','let-us-step11');
+      }
+    }
 
 </script>

@@ -509,7 +509,7 @@ function openHouseTimeSlot( $index ) {
  */
 function amenities() {
     $i = 0;
-    $html    = '<div class="col-md-4"><h3>Amenities</h3>';
+    $html    = '<div class="col-md-4"><h3>Building Features</h3>';
     $service = new \App\Services\AmenityService();
     $amenities = $service->get();
     $total = $amenities->count();

@@ -179,7 +179,7 @@ $(() => {
                time_validation :  "End Time should be greater than start time."
            },
            'open_house[date][]': {
-               date_validation: "Smaller Open House Date."
+               date_validation: "Open House Date should be greater than or equal to Availability date."
            },
            thumbnail: {
                required: "Thumbnail is required.",
