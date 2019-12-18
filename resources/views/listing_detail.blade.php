@@ -45,17 +45,17 @@
 
                     <div class="available-btn">
                         <div class="">
-                            <span>NO FEE</span>
+                            <span class="listing-detail-badges">NO FEE</span>
                             @if( $listing->availability !== '0' &&
                             carbon($listing->availability)->format('Y-m-d') <= now()->format('Y-m-d'))
-                                <span>Available</span>
+                                <span class="listing-detail-badges">Available</span>
                             @else
-                                <span style="background-color: red;">Not Available</span>
+                                <span class="listing-detail-badges">Not Available</span>
                             @endif
                             @if($listing->building_type === EXCLUSIVE)
-                                <span style="background-color: #223970;">Exclusive</span>
+                                <span class="listing-detail-badges">Exclusive</span>
                             @else
-                                <span style="background-color: red;">Open</span>
+                                <span class="listing-detail-badges">Open</span>
                             @endif
                         </div>
                         <div class="estimation-time">

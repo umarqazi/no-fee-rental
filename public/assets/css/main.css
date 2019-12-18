@@ -538,6 +538,10 @@ h3 {
     width: 370px;
 }
 
+.listing-detail-badges {
+    background-color: #cecccc !important;
+}
+
 .header-bg .search-property .custom-select-input {
     background: #fff;
     border: none;
