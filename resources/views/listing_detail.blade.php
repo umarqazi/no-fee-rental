@@ -203,30 +203,11 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="row">
-                        <div class="col-lg-6 col-sm-6">
+                        <div class="col-lg-6 col-sm-6" id="subways">
                             <h3> Transportation</h3>
-                            {{--<p> 51st St (0.25 mi) </p>--}}
-                            {{--<span class="span-box text-s"> S </span>--}}
-                            {{--<span class="span-box text-6"> 4 </span>--}}
-                            {{--<span class="span-box text-6"> 5 </span>--}}
-                            {{--<span class="span-box text-6"> 6 </span>--}}
-                            {{--<span class="span-box text-7"> 7 </span>--}}
-                            {{--<p> 42 Street - Grand Central (0.26 mi) </p>--}}
-
-                            {{--<span class="span-box text-s"> S </span>--}}
-                            {{--<span class="span-box text-6"> 4 </span>--}}
-                            {{--<span class="span-box text-6"> 5 </span>--}}
-                            {{--<span class="span-box text-6"> 6 </span>--}}
-                            {{--<span class="span-box text-7"> 7 </span>--}}
-                            {{--<p>Lexington Av-53 St (0.34 mi </p>--}}
-
-                            {{--<span class="span-box text-e"> E </span>--}}
-                            {{--<span class="span-box text-m"> M </span>--}}
-                            {{--<span class="span-box text-6"> 6 </span>--}}
-                            {{--<p> 51st St (0.25 mi) </p>--}}
                         </div>
                         <div class="col-lg-6 col-sm-6">
-                            <h3>Nearby Schools</h3>
+                            <h3>School Zone</h3>
                             <ul class="second-ul" id="insideschool">
 
                             </ul>

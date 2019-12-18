@@ -42,6 +42,11 @@ class ProxyService {
     private $schoolZoneFilePath = '/resource/xehh-f7pi.json';
 
     /**
+     * @var string
+     */
+    private $subwayStationFilePath = '/resource/kk4q-3rt2.json';
+
+    /**
      * @param $base_url
      * @return $this
      */
@@ -60,9 +65,9 @@ class ProxyService {
 
     /**
      * @param $coords
-     * @return mixed
+     * @return string
      */
-    public function schoolZone($coords) {
+    public function fetchData($coords) {
         $collection = [];
         $data = toObject([
             'lat' => $coords->latitude,
@@ -70,19 +75,60 @@ class ProxyService {
             'rng' => $coords->range ?? $this->range
         ]);
 
+        $collection['schoolData'] = $this->__schoolZone($data);
+        $collection['transportationData'] = $this->__subwayStation($data);
+
+        return \GuzzleHttp\json_encode($collection);
+    }
+
+    /**
+     * @param $data
+     * @return array|bool
+     */
+    private function __subwayStation($data) {
+        $collection = [];
+        $res = $this->socrata->get($this->subwayStationFilePath, [
+            "\$where" => "within_circle(the_geom, {$data->lat}, {$data->lng}, 500)"
+        ]);
+
+        if(!empty($res)) {
+            foreach ($res as $key => $value) {
+                $coords = $value['the_geom']['coordinates'];
+                $bind = [
+                    'name'       => $value['name'],
+                    'line_badge' => explode('-', $value['line']),
+                    'coords'     => [
+                        'latitude'  => $coords[1],
+                        'longitude' => $coords[0]
+                    ]
+                ];
+
+                array_push($collection, $bind);
+            }
+        }
+
+        return $collection;
+    }
+
+    /**
+     * @param $data
+     * @return mixed
+     */
+    private function __schoolZone($data) {
+        $collection = [];
         $res = $this->socrata->get($this->schoolZoneFilePath, [
             "\$where" => "within_circle(the_geom, {$data->lat}, {$data->lng}, {$data->rng})"
         ]);
 
         if(!empty($res)) {
-            foreach ($res as $key => $geom) {
-                $collection['school_dist'] = "PS {$geom['schooldist']}";
-                $collection['school_dist_url'] = "https://insideschools.org/search/results?q=PS {$geom['schooldist']}&district={$geom['schooldist']}";
-                array_push($collection, $geom['the_geom']['coordinates'][0]);
+            foreach ($res as $index => $value) {
+                $collection[] = $value['the_geom']['coordinates'][0];
+                $collection['school_dist'] = "Zone {$value['schooldist']}";
+                $collection['school_dist_url'] = "https://insideschools.org/search/results?district={$value['schooldist']}";
             }
         }
 
-        return \GuzzleHttp\json_encode(array_values($collection));
+        return array_values($collection);
     }
 
     /**

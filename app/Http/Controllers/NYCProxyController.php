@@ -38,10 +38,10 @@ class NYCProxyController extends Controller {
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
-    public function schoolZonePolygons(Request $request) {
+    public function nycData(Request $request) {
         $res = $this->proxyService
             ->setBase(SCHOOLZONEBASEURL)
-            ->schoolZone($request);
+            ->fetchData($request);
         return response()->json($res);
     }
 }
