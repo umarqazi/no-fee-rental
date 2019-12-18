@@ -612,6 +612,27 @@ $(() => {
             $('.app-message-error').text('') ;
         }
     });
+    $(".dropdown-beds #advance-search-beds").hide();
+    $("#main-search-priceRange").click(function(){
+        $(".dropdown-beds #advance-search-beds").show();
+        $(".dropdown-beds #advance-search-beds").hide();
+    });
+
+    $(".dropdown-beds").click ( function () {
+        $(".dropdown-beds #advance-search-beds").toggle();
+    });
+
+
+    $("#advance-search-beds ul > li > input").on("click",function(e){
+        var get_text =  $(this).parent().find('span').text();
+        var dropdown_show = get_text.replace('+', '');
+        if($(this).is(":checked")){
+            $('#show-beds').append('<span id="chk_'+dropdown_show+'_chk">'+  ' ' + ',' + get_text +  ' '+ '</span>');
+        }if($(this).is(":not(:checked)")) {
+            $('#chk_'+dropdown_show+'_chk').remove();
+        };
+
+    });
 
 });
 

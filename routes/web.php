@@ -120,8 +120,8 @@ Route::post('/let-us-help', 'HomeController@letUsHelp')->name('web.letUsHelp');
 // Get Started
 Route::post('/get-started', 'HomeController@getStarted')->name('web.getStarted');
 
-// School Zone Api Route
-Route::post('/school-zone', 'NYCProxyController@schoolZonePolygons');
+// NYC Api Route
+Route::post('/nyc-data', 'NYCProxyController@nycData');
 
 // Application Controlling Routes
 Route::get('/all-clear', function() {

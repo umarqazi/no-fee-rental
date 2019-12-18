@@ -210,22 +210,60 @@ const initMap = (container) => {
  */
 const schoolZone = async (coords) => {
     coords.range = 1200;
-    await ajaxRequest('/school-zone', 'post', coords, false).then(polygonCoords => {
-        polygonCoords = JSON.parse(polygonCoords);
-        if(polygonCoords[1] !== undefined) {
-            $('body').find('#insideschool').append(`<li><a target="_blank" href="${polygonCoords[1]}">${polygonCoords[0]}</a></li>`);
-        } else {
-            $('body').find('#insideschool').append(`<li>No School Found</li>`);
-        }
-        polygonCoords.forEach((res, i) => {
-            drawPolygon(res, i);
-        });
-
+    await ajaxRequest('/nyc-data', 'post', coords, false).then(response => {
+        response = JSON.parse(response);
+        schoolData(response.schoolData);
+        transportation(response.transportationData);
     }).catch(err => {
         console.log(err);
     });
 };
 
+/**
+ *
+ * @param data
+ * @returns {Promise<void>}
+ */
+const transportation = async (data) => {
+    if(data !== '' && data !== undefined) {
+        data.forEach((res, i) => {
+            let html = '<div class="transportation">';
+            // setMarker(res.coords);
+            res.line_badge.forEach(badge => {
+                badge = badge.replace('Express', '');
+                html += `<span class="span-box text-${badge.toLowerCase()}"> ${badge} </span> `;
+            });
+
+            html += `<span>  ${res.name}</span></div>`;
+            $('body').find('#subways').append(html);
+
+        });
+    } else {
+        $('body').find('#subways').append(`<span>No Transportation Found</span>`);
+    }
+};
+
+/**
+ *
+ * @param data
+ * @returns {Promise<void>}
+ */
+const schoolData = async (data) => {
+    if(data !== '' && data !== undefined) {
+        $('body').find('#insideschool').append(`<a href="${data[2]}" target="_blank">${data[1]}</a>`);
+        data.forEach((res, i) => {
+            drawPolygon(res, i);
+        });
+    } else {
+        $('body').find('#insideschool').append(`<span>No School Zone Found</span>`);
+    }
+};
+
+/**
+ *
+ * @param $coordinates
+ * @param id
+ */
 const drawPolygon = ($coordinates, id) => {
     MAP.addLayer({
         'id': `maine-${id}`,
@@ -248,9 +286,11 @@ const drawPolygon = ($coordinates, id) => {
     });
 };
 
+/**
+ * jquery api call
+ */
 $(() => {
     $('body').on('keyup, blur', '.mapboxgl-ctrl-geocoder--input', function() {
-        // $('.loader').show();
         let required = ['poi', 'address'];
         setTimeout(() => {
         var mapboxClient = mapboxSdk({ accessToken: setToken() });
