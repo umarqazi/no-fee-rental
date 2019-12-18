@@ -230,6 +230,7 @@ const transportation = async (data) => {
             let html = '<div class="transportation">';
             // setMarker(res.coords);
             res.line_badge.forEach(badge => {
+                badge = badge.replace('Express', '');
                 html += `<span class="span-box text-${badge.toLowerCase()}"> ${badge} </span> `;
             });
 
