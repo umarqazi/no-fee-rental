@@ -12,8 +12,18 @@
                 <div class="container-lg">
                     <div class="financial-district-inner">
                         <h3>Financial District</h3>
-                        <div class="form-group">
-                            {!! Form::select('neighborhood', neighborhoods(), null, ['class' => 'form-control', 'id'=>'sel1']) !!}
+                        <div class="form-group neighborhood-selection">
+{{--                            {!! Form::select('neighborhood', neighborhoods(), null, ['class' => 'form-control', 'id'=>'sel1']) !!}--}}
+                            <select class="form-control">
+                                <optgroup label="Swedish Cars">
+                                    <option value="volvo">Volvo</option>
+                                    <option value="saab">Saab</option>
+                                </optgroup>
+                                <optgroup label="German Cars">
+                                    <option value="mercedes">Mercedes</option>
+                                    <option value="audi">Audi</option>
+                                </optgroup>
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -47,3 +57,7 @@
         </div>
     </section>
 @endsection
+
+
+
+
