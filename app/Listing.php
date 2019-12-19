@@ -126,7 +126,7 @@ class Listing extends Model {
 	 */
 	public function scopeInactive($query) {
 		isAdmin() ?: $clause['user_id'] = myId();
-		$clause['visibility'] = ACTIVELISTING;
+		$clause['visibility'] =  INACTIVELISTING;
 		return $query->where($clause)->where('availability', '>', now()->format('Y-m-d'));
 	}
 

@@ -30,7 +30,7 @@ return [
         'u25' => 'Walk-In Closet',
         'u26' => 'Walls OK',
     ],
-
+  
     'pet_policy' => [
         'title' => 'Pet Policy',
         'p1' => 'Cats Allowed',
