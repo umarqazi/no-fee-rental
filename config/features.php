@@ -38,6 +38,12 @@ return [
         'p4' => 'Pets Not Allowed',
     ],
 
+    'pets_filter' => [
+        'p1' => 'Cats Allowed',
+        'p2' => 'Dogs Allowed',
+        'p3' => 'Pets Allowed',
+    ],
+
     'building_features' => [
         '0' => 'Bicycle Room',
         '1' => 'Brownstone',
