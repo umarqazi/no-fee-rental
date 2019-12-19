@@ -30,15 +30,15 @@
             <label>Neighborhood</label>
             {!! Form::text('neighborhood', null, ['class' => 'input-style', 'readonly']) !!}
             <span class="invalid-feedback" role="alert">
-			{!! $errors->first('neighborhood') !!}
-		</span>
+			    {!! $errors->first('neighborhood') !!}
+		    </span>
         </div>
         <div class="form-group">
             <label>Rent</label>
-            {!! Form::text('rent', null, ['class' => 'input-style']) !!}
+            {!! Form::text('rent', null, ['class' => 'input-style', 'autocomplete' => 'off']) !!}
             <span class="invalid-feedback" role="alert">
-			{!! $errors->first('rent') !!}
-		</span>
+			    {!! $errors->first('rent') !!}
+		    </span>
         </div>
     </div>
 </div>
@@ -47,31 +47,31 @@
     <div class="unit-flex">
         <div class="form-group">
             <label>Unit</label>
-            {!! Form::text('unit', null, ['class' => 'input-style']) !!}
+            {!! Form::text('unit', null, ['class' => 'input-style', 'autocomplete' => 'off']) !!}
             <span class="invalid-feedback" role="alert">
-			{!! $errors->first('unit') !!}
-		</span>
+			    {!! $errors->first('unit') !!}
+		    </span>
         </div>
         <div class="form-group">
             <label>Bedrooms</label>
-            {!! Form::text('bedrooms', null, ['class' => 'input-style']) !!}
+            {!! Form::text('bedrooms', null, ['class' => 'input-style', 'autocomplete' => 'off']) !!}
             <span class="invalid-feedback" role="alert">
-			{!! $errors->first('bedrooms') !!}
-		</span>
+			    {!! $errors->first('bedrooms') !!}
+		    </span>
         </div>
         <div class="form-group">
             <label>Bathrooms</label>
-            {!! Form::text('baths', null, ['class' => 'input-style']) !!}
+            {!! Form::text('baths', null, ['class' => 'input-style', 'autocomplete' => 'off']) !!}
             <span class="invalid-feedback" role="alert">
-			{!! $errors->first('baths') !!}
-		</span>
+			    {!! $errors->first('baths') !!}
+		    </span>
         </div>
         <div class="form-group">
             <label>Square Feet</label>
-            {!! Form::text('square_feet', null, ['class' => 'input-style']) !!}
+            {!! Form::text('square_feet', null, ['class' => 'input-style', 'autocomplete' => 'off']) !!}
             <span class="invalid-feedback" role="alert">
-            {!! $errors->first('square_feet') !!}
-        </span>
+                {!! $errors->first('square_feet') !!}
+            </span>
         </div>
     </div>
 </div>
@@ -79,62 +79,34 @@
     <div class="unit-flex">
         <div class="form-group">
             <label>Free Months</label>
-            {!! Form::text('free_months', null, ['class' => 'input-style']) !!}
+            {!! Form::text('free_months', null, ['class' => 'input-style', 'autocomplete' => 'off']) !!}
             <span class="invalid-feedback" role="alert">
-            {!! $errors->first('free_months') !!}
-        </span>
+                {!! $errors->first('free_months') !!}
+            </span>
         </div>
         <div class="form-group">
             <label>Application Fee</label>
-            {!! Form::text('application_fee', null, ['class' => 'input-style']) !!}
+            {!! Form::text('application_fee', null, ['class' => 'input-style', 'autocomplete' => 'off']) !!}
             <span class="invalid-feedback" role="alert">
-			{!! $errors->first('application_fee') !!}
-		</span>
+			    {!! $errors->first('application_fee') !!}
+		    </span>
         </div>
         <div class="form-group">
             <label>Deposit</label>
-            {!! Form::text('deposit', null, ['class' => 'input-style']) !!}
+            {!! Form::text('deposit', null, ['class' => 'input-style', 'autocomplete' => 'off']) !!}
             <span class="invalid-feedback" role="alert">
             {!! $errors->first('deposit') !!}
         </span>
         </div>
         <div class="form-group">
             <label>Lease Term</label>
-            {!! Form::select('lease_term', [
-               "" => "Select Lease Term",
-               '1 Month'  => "1 Month",
-               '2 Months'  => "2 Months",
-               '3 Months'  => "3 Months",
-               '4 Months'  => "4 Months",
-               '5 Months'  => "5 Months",
-               '6 Months'  => "6 Months",
-               '7 Months'  => "7 Months",
-               '8 Months'  => "8 Months",
-               '9 Months'  => "9 Months",
-               '10 Months' => "10 Months",
-               '11 Months' => "11 Months",
-               '12 Months' => "12 Months",
-               '13 Months' => "13 Months",
-               '14 Months' => "14 Months",
-               '15 Months' => "15 Months",
-               '16 Months' => "16 Months",
-               '17 Months' => "17 Months",
-               '18 Months' => "18 Months",
-               '19 Months' => "19 Months",
-               '20 Months' => "20 Months",
-               '21 Months' => "21 Months",
-               '22 Months' => "22 Months",
-               '23 Months' => "23 Months",
-               '24 Months' => "24 Months",],null, ['class' => 'input-style']) !!}
+            {!! Form::select('lease_term', config('formfields.listing.free_months'), null, ['class' => 'input-style']) !!}
             <span class="invalid-feedback" role="alert">
-			{!! $errors->first('lease_term') !!}
-		</span>
+			    {!! $errors->first('lease_term') !!}
+		    </span>
         </div>
     </div>
 </div>
-
-
-
 
 <div class="col-md-6">
     <div class="availability-flex">
@@ -145,33 +117,26 @@
                 {!! $errors->first('availability_type') !!}
             </span>
         </div>
-        <div class="form-group availability-date" style="display: {{ isset($listing) && $listing->availability_type
-        === 3 ?
-        'block' : 'none' }};">
-                <label>Select Availability Date</label>
-                {!! Form::text('availability', null,
-                    [
-                        'autocomplete' => 'off',
-                        'class' => 'input-style',
-                        'id' => 'availability_date',
-                        'data-language' => 'en',
-                        'data-date-format' => 'yyyy-mm-dd'
-                    ]) !!}
-                <span class="invalid-feedback" role="alert">
-			{!! $errors->first('availability') !!}
-		</span>
+        <div class="form-group availability-date" style="display: {{ isset($listing) && $listing->availability_type === 3 ? 'block' : 'none' }};">
+            <label>Select Availability Date</label>
+            {!! Form::text('availability', null,
+                [
+                    'data-date-format' => 'yyyy-mm-dd',
+                    'autocomplete' => 'off',
+                    'class' => 'input-style',
+                    'id' => 'availability_date',
+                    'data-language' => 'en'
+                ]) !!}
+            <span class="invalid-feedback" role="alert">
+			    {!! $errors->first('availability') !!}
+		    </span>
         </div>
         <div class="form-group">
             <label>Listing Type</label>
-            {!! Form::select('building_type',
-            [
-                ''          => 'Select Type',
-                'open'      => 'Open',
-                'exclusive' => 'Exclusive'
-            ], null, ['class' => 'input-style']) !!}
+            {!! Form::select('building_type', config('formfields.listing.listing_type'), null, ['class' => 'input-style']) !!}
             <span class="invalid-feedback" role="alert">
-            {!! $errors->first('building_type') !!}
-		</span>
+                {!! $errors->first('building_type') !!}
+		    </span>
         </div>
     </div>
 </div>
@@ -181,7 +146,7 @@
 <div class="row">
     <div class="col-md-6">
         <div class="choose-cover">
-            <img class="img-thumbnail" src="{{isset($listing->thumbnail) ? asset($listing->thumbnail ?? DLI ) : ''}}" id="img" style="{{($action == 'Update' || $action == 'Copy') ? '' : ''}}">
+            <img class="img-thumbnail" src="{{isset($listing->thumbnail) ? asset($listing->thumbnail ?? DLI ) : asset(DLI) }}" id="img" style="{{($action == 'Update' || $action == 'Copy') ? '' : ''}}">
             <div class="box">
                 {!! Form::file('thumbnail',['class' => 'inputfile inputfile-3', 'id' => 'file-3']) !!}
                 <label for="file-3" id="error-message">
@@ -191,18 +156,9 @@
                     <span>Choose a Cover&hellip;</span>
                 </label>
             </div>
-            @if(isset($listing->thumbnail))
-                {!! Form::hidden('old_thumbnail', $listing->thumbnail) !!}
-            @endif
-            @if(isset($listing->building_id))
-                {!! Form::hidden('building_id', $listing->building_id) !!}
-            @endif
-
         </div>
     </div>
-    @if(isset($listing->freshness_score))
-        {!! Form::hidden('freshness_score', null) !!}
-    @endif
+
     <div class="col-md-12">
         <div class="form-group">
             <label>Description</label>

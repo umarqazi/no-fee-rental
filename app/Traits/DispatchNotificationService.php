@@ -236,9 +236,9 @@ trait DispatchNotificationService
     {
         self::__setParams($data);
         self::$data->view = 'let-us-help';
-        self::$data->subject = 'Featured Listing Request Approved';
-        self::$data->message = 'Your Request to make this listing featured has been approved.';
-        self::$data->url = route('listing.detail', self::$data->data->data->id);
+        self::$data->subject = 'let us help Request Approved';
+        self::$data->message = 'You have a new let us help request.';
+        self::$data->url = null;
         self::__onlyEmail();
     }
 

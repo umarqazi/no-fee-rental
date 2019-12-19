@@ -211,7 +211,7 @@ $(() => {
                                     ' with at least ' + v.baths.sort() + ' bathrooms' : (v.baths[0] > 1 || v.baths[0] == '5+' ? ' with at least ' + v.baths + ' bathrooms' : ' with at least ' + v.baths + ' bathroom') ): '')+
                             (v.price_min !== null ?
                                 (v.price_max !== null ?
-                                    ' between $' + formatNumber(v.price_min) + ' and $' + formatNumber(v.price_max) +' and' : 'above $' + formatNumber(v.price_min) ) :
+                                    ' between $' + formatNumber(v.price_min) + ' and $' + formatNumber(v.price_max) : 'above $' + formatNumber(v.price_min) ) :
                                 (v.price_max !== null ?
                                     ' under $' + formatNumber(v.price_max) : '' ))+
                             (v.square_feet_min !== null ?

@@ -288,9 +288,9 @@
                                     <label class="custom-control-label" for="location-3">No, I’m open to anything</label>
                                 </div>
                             </li>
+                            <p id="location-preference-err"style="color:red; display: none">Location Preference is required.</p>
                         </ul>
                     </div>
-                    <div class="text-center"><button type="button" class="btn-default skip-btn" data-target="let-us-step9">Skip</button></div>
                 </div>
                 <div class="modal-footer text-center">
                     <button class="btn-default ml-3" type="button" id="location-preference-button" >Next</button>
@@ -681,7 +681,7 @@
             $('#phone-btn').prop('disabled', true);
         }
     });
-  function openSpecificModal($this){
+    function openSpecificModal($this){
       if($($this).attr('id') == 'location-1'){
           $('#location-preference-button').attr('data-target','let-us-step14');
       }
@@ -693,4 +693,56 @@
       }
     }
 
+    $('input[name="location-preference"]').on('change', function () {
+        if ($('input[name="location-preference"]').is(':checked')) {
+            $('#location-preference-err').css({'display': 'none'});
+            $('#location-preference-button').prop('disabled', false);
+        }
+    });
+
+    $('body').on('click', '#location-preference-button', function (e) {
+
+        if (!$('input[name="location-preference"]').is(':checked')) {
+            setTimeout(() => {
+                $('#let-us-step8').show();
+                //$('#let-us-step4').hide();
+            }, 5);
+            $('#location-preference-err').css({'display': 'block'});
+            $('#location-preference-button').prop('disabled', true);
+        }
+
+    if ($(this).attr('data-target') == 'let-us-step14') {
+               setTimeout(() => {
+            $('#let-us-step14').show();
+            $('#let-us-step8').hide();
+        }, 5);
+               setTimeout(() => {
+            $('#let-us-step9').hide();
+            $('#let-us-step11').hide()
+        }, 10);
+        }
+
+    if ($(this).attr('data-target') == 'let-us-step9') {
+        setTimeout(() => {
+            $('#let-us-step9').show();
+            $('#let-us-step8').hide();
+        }, 5);
+        setTimeout(() => {
+            $('#let-us-step11').hide();
+            $('#let-us-step14').hide();
+        }, 10);
+        }
+
+    if ($(this).attr('data-target') == 'let-us-step11') {
+        setTimeout(() => {
+            $('#let-us-step11').show();
+            $('#let-us-step8').hide();
+        }, 5);
+        setTimeout(() => {
+            $('#let-us-step9').hide();
+            $('#let-us-step14').hide();
+        }, 10);
+        }
+
+    });
 </script>
