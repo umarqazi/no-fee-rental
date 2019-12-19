@@ -2,7 +2,7 @@
 
 return [
     'apartment_features' => [
-        'title' => 'Apartment Features',
+        'title' => 'Unit Features',
         'u1'  => 'Balcony',
         'u2'  => 'Dining Room',
         'u3'  => 'Dishwasher',
@@ -19,7 +19,6 @@ return [
         'u14' => 'Loft',
         'u15' => 'Marble Bath',
         'u16' => 'Multi Level',
-        'u17' => 'NO FEE',
         'u18' => 'Outdoor Space',
         'u19' => 'Patio',
         'u20' => 'Private Deck',
