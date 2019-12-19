@@ -106,19 +106,16 @@
                         </div>
                     </div>
 
+                    {{--Pets--}}
+                    {!! features_pet() !!}
+
+                    {{--Apartment Features--}}
+                    {!! features() !!}
+
                     {{-- Building Features--}}
                     <div class="col-md-12">
                         <div class="row">
                             {!! amenities() !!}
-                        </div>
-                    </div>
-                </div>
-
-                    {{--Apartment Features--}}
-                <div class="row">
-                    <div class="col-md-12" style="margin-top: 20px;">
-                        <div class="row">
-                            {!! features() !!}
                         </div>
                     </div>
                 </div>

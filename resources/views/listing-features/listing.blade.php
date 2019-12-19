@@ -37,8 +37,6 @@
                         'method'  => 'post',
                         'enctype' => 'multipart/form-data'
                     ]) !!}
-                {!! Form::hidden('visibility') !!}
-                {!! Form::hidden('user_id') !!}
                 @if(isAdmin() && ($action == 'Update'  ? is_created_by_owner($listing->id) : true))
                     <div class="row">
                         <div class="col-md-6">
@@ -58,10 +56,16 @@
                     {{--Listing Info--}}
                     @include('listing-features.listing_info')
 
+                    {{--Hidden Fields--}}
+                    @include('listing-features.hidden_fields')
+
+                    {{--Pets Feature--}}
+                    {!! features_pet() !!}
+
                     {{--Features--}}
                     {!! features() !!}
 
-                    @if($action !== 'Building')
+                    @if($action !== 'Building' || $action !== 'Update' || $action !== 'Copy')
                         <div class="col-md-12" style="margin-top: 20px; margin-bottom: 20px; text-transform: capitalize;" id="amenities">
                             <div class="row" style="display: none;">
                                 {!! amenities() !!}
@@ -72,6 +76,7 @@
                     {{--Basic User Info--}}
                     @include('listing-features.basic_info')
 
+                    {{--Map View--}}
                     <div class="col-md-12 mt-4">
                         <div id="map"></div>
                     </div>
@@ -97,7 +102,7 @@
         @else
             initMap('map');
         @endif
-        autoComplete('controls');
+            autoComplete('controls');
     };
 </script>
 @endsection

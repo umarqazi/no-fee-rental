@@ -10,7 +10,6 @@ namespace App\Services;
 
 use App\Forms\ListingForm;
 use App\Repository\FeatureRepo;
-use App\Repository\NeighborhoodRepo;
 use App\Repository\OpenHouseRepo;
 use App\Repository\UserRepo;
 use App\Traits\DispatchNotificationService;
@@ -37,7 +36,7 @@ class ListingService extends BuildingService {
     /**
      * @var SearchService
      */
-    private $searchService;
+    protected $searchService;
 
     /**
      * @var OpenHouseRepo
@@ -68,19 +67,27 @@ class ListingService extends BuildingService {
      */
     public function create( $request ) {
         DB::beginTransaction();
+
         $request->freshness_score = MAXFRESHNESSSCORE;
         $listing              = $this->__validateForm( $request );
         $listing->thumbnail   = $this->__uploadImage( $listing );
         $building             = $this->addBuilding( $listing, $request );
         $listing->building_id = $building->id;
-        $listing->visibility  = ( ! $building->is_verified && isAgent() )
-            ? PENDINGLISTING : $building->is_verified;
+
+        if(!$building->is_verified && isAgent()) {
+            $listing->visibility = PENDINGLISTING;
+        } else {
+            $listing->visibility = ACTIVELISTING;
+        }
+
         $listing              = $this->__addList( $listing );
         $this->__addOpenHouse( $listing->id, $listing, $request->open_house );
         $this->__addFeatures( $listing->id, $request->features );
         $this->__manageSaveSearch( $listing, $request->features );
-        DB::commit();
         $this->__freshnessScore($listing);
+
+        DB::commit();
+
         $listing->visibility !== PENDINGLISTING ?:
             DispatchNotificationService::LISTINGAPPROVALREQUEST(toObject([
                 'to'   => mailToAdmin(),
