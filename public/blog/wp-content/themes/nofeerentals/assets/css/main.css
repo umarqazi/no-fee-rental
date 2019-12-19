@@ -156,7 +156,8 @@ body {
 
 .container-lg {
   position: relative;
-  max-width: 1170px;
+  max-width: 100%;
+    width: 100%;
   padding: 0px 15px;
   margin: 0 auto;
 }
@@ -2981,7 +2982,7 @@ footer {
 @media (min-width: 1600px) {
   .container-lg,
   .kc-container {
-    max-width: 1600px;
+    max-width:100%;
   }
 }
 
@@ -3004,7 +3005,7 @@ footer {
 @media only screen and (min-width: 1367px) and (max-width: 1599px) {
   .container-lg,
   .kc-container {
-    max-width: 1400px;
+    max-width:100%;
   }
 }
 
