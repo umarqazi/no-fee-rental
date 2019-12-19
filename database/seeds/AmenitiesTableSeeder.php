@@ -28,21 +28,7 @@ class AmenitiesTableSeeder extends Seeder {
     public function run() {
         $batch = [];
         DB::table('amenities')->delete();
-        $amenities = [
-            0  => 'Balcony',
-            1  => 'Dishwasher',
-            2  => 'Concierge',
-            3  => 'Elevator',
-            4  => 'Furnished',
-            5  => 'Gym',
-            6  => 'In-Unit Laundry',
-            7  => 'On-Site Parking',
-            8  => 'Terrace',
-            9  => 'Door Man',
-            10 => 'Fitness Centre',
-            11 => 'Storage Facility',
-            12 => 'Elevator',
-        ];
+        $amenities = config('features.building_features');
         foreach ($amenities as $amenity) {
             $collect = [
                 'amenities'       => $amenity,

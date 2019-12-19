@@ -541,7 +541,7 @@ function features_pet() {
     $pets = config('features.pet_policy');
     foreach ($pets as $type => $pet) {
         if($type === 'title') {
-            $html .= "<div class='col-md-12'>";
+            $html .= "<div class='col-md-12' style='margin-top: 10px;'>";
             $html .= "<h3>" . $pet . "</h3><div class='row'><div class='col-md-4'>";
         } else {
             $html .= "<ul class='checkbox-listing'><li><div class='custom-control custom-checkbox'>";
