@@ -62,6 +62,7 @@ const autoComplete = (container) => {
     $body.find('.mapboxgl-ctrl > svg').remove();
     $input.attr('placeholder', 'Enter Street Address');
     $input.attr('name', 'street_address');
+    $input.attr('autocomplete', 'off');
 
     return geoCode;
 };
