@@ -70,6 +70,15 @@ $(() => {
         }
     });
 
+    $body.on('click', '.border-btn', async function(e) {
+        e.preventDefault();
+        if(await confirm('')) {
+            let currentTab = $(this).parents('div.active').attr('id');
+            localStorage.setItem('tab', currentTab);
+            window.location.href = $(this).parent().attr('href');
+        }
+    });
+
     $body.on('click', '.page-link', function(e) {
         e.preventDefault();
         let currentTab = $(this).parents('div.active').attr('id');
