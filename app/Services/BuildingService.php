@@ -112,7 +112,7 @@ class BuildingService {
      * @return string
      */
     public function isUniqueAddress($address) {
-        return $this->buildingRepo->find(['address' => $address])->count() > 0 ? 'false' : 'true';
+        return $this->buildingRepo->find(['address' => $address])->count() > 0 ? 'true' : 'false';
     }
 
     /**

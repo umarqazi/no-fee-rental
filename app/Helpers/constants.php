@@ -144,7 +144,7 @@ if(!defined('STR_LIMIT_GRID_VIEW')) {
  * Default Listing Image
  */
 if(!defined('DLI')) {
-    define('DLI', 'assets/images/default-images/listing-thumb.jpg');
+    define('DLI', 'assets/images/default-images/listing.jpeg');
 }
 
 /**

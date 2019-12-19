@@ -2094,7 +2094,7 @@ footer .copyright .social-icons li a:hover {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    min-height: 258px;
+    min-height: 310px;
 }
 .contact-info .info h6{
     margin-bottom: 10px;
