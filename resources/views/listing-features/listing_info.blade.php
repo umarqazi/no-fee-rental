@@ -121,6 +121,7 @@
             <label>Select Availability Date</label>
             {!! Form::text('availability', null,
                 [
+                    'data-date-format' => 'yyyy-mm-dd',
                     'autocomplete' => 'off',
                     'class' => 'input-style',
                     'id' => 'availability_date',
