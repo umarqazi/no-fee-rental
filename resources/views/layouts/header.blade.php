@@ -26,7 +26,7 @@
 </div>
 
 <div class="header-wrapper">
-    <div class=" container-lg">
+    <div class="container-fluid">
         <div class="header-container">
             <a href="{!! url('/') !!}"> <img src="{{ asset('assets/images/logo.png') }}" class="logo" /></a>
 
