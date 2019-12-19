@@ -310,14 +310,15 @@
                         <li></li>
                         <li></li>
                     </ul>
-                    <h3 class="modal-title">Search for neighborhood</h3>
+                    <h3 class="modal-title">Do you have any location / neighborhood preferences?</h3>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
 
                 <!-- Modal body -->
                 <div class="modal-body">
                     <div class="pt-4 -b-4">
-                        {!! Form::text('neighborhoods', null, ['class' => 'input-style', 'placeholder' => '+ Search for neighborhood']) !!}
+                        {{--{!! Form::text('neighborhood', null, ['class' => 'input-style', 'placeholder' => '+ Search for neighborhood']) !!}--}}
+                        {!! Form::textarea('location_or_neighborhood', null, ['class' => 'input-style text-area', 'style' => 'resize:none;','placeholder' => 'What are you looking for?']) !!}
                     </div>
                     <div class="text-center"><button type="button" class="btn-default skip-btn" data-target="let-us-step10">Skip</button></div>
                 </div>
@@ -340,15 +341,38 @@
                         <li></li>
                         <li></li>
                     </ul>
-                    <h3 class="modal-title">Search neighborhood</h3>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
 
                 <!-- Modal body -->
                 <div class="modal-body">
                     <div class="pt-4 -b-4">
-                        {!! Form::text('neighborhoods', null, ['class' => 'input-style', 'placeholder' => '+ Search for neighborhood']) !!}
+                        {!! Form::text('neighborhood', null, ['class' => 'input-style', 'placeholder' => '+ Search for neighborhood']) !!}
                     </div>
+
+                    <ul class="nav nav-pills">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="pill" href="#tab-1">All <span>308</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="pill" href="#tab-2">Selected <span>4</span></a>
+                        </li>
+                        <span class="deselect">Deselect All</span>
+                    </ul>
+
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tab-1">
+                            <ul class="neighborhood-list">
+                                <li>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="cities-1" name="cities">
+                                        <label class="custom-control-label" for="cities-1">2</label>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                </div>
+
                     <div class="text-center"><button type="button" class="btn-default skip-btn" data-target="let-us-step10">Skip</button></div>
                 </div>
                 <div class="modal-footer text-center">
@@ -413,7 +437,7 @@
                     <div class="text-center"><button type="button" class="btn-default skip-btn" data-target="let-us-step11">Skip</button></div>
                 </div>
                 <div class="modal-footer text-center">
-                    <button class="btn-default ml-3" type="button" data-target="let-us-step9">Previous</button>
+                    <button class="btn-default ml-3" type="button" data-target="let-us-step8">Previous</button>
                     <button class="btn-default ml-3" type="button" data-target="let-us-step11">Next</button>
                 </div>
 
@@ -468,7 +492,7 @@
                     <div class="text-center"><button type="button" class="btn-default skip-btn" data-target="let-us-step12">Skip</button></div>
                 </div>
                 <div class="modal-footer text-center">
-                    <button class="btn-default ml-3" type="button" data-target="let-us-step8">Previous</button>
+                    <button class="btn-default ml-3" type="button" data-target="let-us-step10">Previous</button>
                     <button class="btn-default ml-3" type="button" data-target="let-us-step12">Next</button>
                 </div>
 
@@ -535,7 +559,7 @@
                         <li class="active"></li>
                         <li class="active"></li>
                     </ul>
-                    <h3 class="modal-title">When does your lease end?</h3>
+                    <h3 class="modal-title">What is your credit score?</h3>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
 
@@ -689,7 +713,7 @@
           $('#location-preference-button').attr('data-target','let-us-step9');
       }
       if($($this).attr('id') == 'location-3'){
-          $('#location-preference-button').attr('data-target','let-us-step11');
+          $('#location-preference-button').attr('data-target','let-us-step10');
       }
     }
 
@@ -705,7 +729,6 @@
         if (!$('input[name="location-preference"]').is(':checked')) {
             setTimeout(() => {
                 $('#let-us-step8').show();
-                //$('#let-us-step4').hide();
             }, 5);
             $('#location-preference-err').css({'display': 'block'});
             $('#location-preference-button').prop('disabled', true);
@@ -718,7 +741,7 @@
         }, 5);
                setTimeout(() => {
             $('#let-us-step9').hide();
-            $('#let-us-step11').hide()
+            $('#let-us-step10').hide()
         }, 10);
         }
 
@@ -728,14 +751,14 @@
             $('#let-us-step8').hide();
         }, 5);
         setTimeout(() => {
-            $('#let-us-step11').hide();
+            $('#let-us-step10').hide();
             $('#let-us-step14').hide();
         }, 10);
         }
 
-    if ($(this).attr('data-target') == 'let-us-step11') {
+    if ($(this).attr('data-target') == 'let-us-step10') {
         setTimeout(() => {
-            $('#let-us-step11').show();
+            $('#let-us-step10').show();
             $('#let-us-step8').hide();
         }, 5);
         setTimeout(() => {
