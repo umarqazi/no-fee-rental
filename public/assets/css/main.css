@@ -340,18 +340,18 @@ h3 {
     border-right: 0 !important;
 }
 .dropdown-listing-price-wrapper ul li:nth-child(2){
-    border-left: 1px solid #f36f21;
-    border-right: 1px solid #f36f21 !important;
-    border-left: 1px solid red;
-    border-right: 1px solid red !important;
     display: inline-block;
     height: 36px;
     vertical-align: middle;
     line-height: 36px;
     text-align: center;
 }
+.dropdown-listing-price-wrapper ul{
+    padding: 10px;
+}
+
 .dropdown-listing-price-wrapper ul li input{
-    border: 0;
+    width: 172px;
     font-size: 14px;
 }
 
