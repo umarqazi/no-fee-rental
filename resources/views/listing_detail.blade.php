@@ -188,11 +188,11 @@
                 {{--Amenities--}}
                 @include('sections.listing_amenities')
 
-                {{--Pet Policy--}}
-                @include('sections.listing_pets_policy')
-
                 {{--Listing Feaures--}}
                 @include('sections.listing_features')
+
+                {{--Pet Policy--}}
+                @include('sections.listing_pets_policy')
 
             </div>
         </div>

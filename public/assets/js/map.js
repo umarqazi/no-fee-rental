@@ -225,7 +225,7 @@ const schoolZone = async (coords) => {
  * @returns {Promise<void>}
  */
 const transportation = async (data) => {
-    if(data !== '' && data !== undefined) {
+    if(data.length > 0) {
         data.forEach((res, i) => {
             let html = '<div class="transportation">';
             // setMarker(res.coords);
@@ -249,7 +249,7 @@ const transportation = async (data) => {
  * @returns {Promise<void>}
  */
 const schoolData = async (data) => {
-    if(data !== '' && data !== undefined) {
+    if(data.length > 0) {
         $('body').find('#insideschool').append(`<a href="${data[2]}" target="_blank">${data[1]}</a>`);
         data.forEach((res, i) => {
             drawPolygon(res, i);
