@@ -487,7 +487,6 @@ $(() => {
             if ($(e.target).is("#signup-btn") == false && $(e.target).parents('#signup').length == 0 && $(e.target).parents('#login').length == 0) {
                 $("body").removeClass("signup-modal-scroll");
             }
-
         });
 
         $('.close-signup-modal').click(function () {
@@ -612,27 +611,62 @@ $(() => {
             $('.app-message-error').text('') ;
         }
     });
-    $(".dropdown-beds #advance-search-beds").hide();
-    $("#main-search-priceRange").click(function(){
-        $(".dropdown-beds #advance-search-beds").show();
-        $(".dropdown-beds #advance-search-beds").hide();
+    // $(".dropdown-beds #advance-search-beds").hide();
+    // $("#main-search-priceRange").click(function(){
+    //     $(".dropdown-beds #advance-search-beds").show();
+    //     $(".dropdown-beds #advance-search-beds").hide();
+    // });
+    $(".dropdown-beds").click(function(){
+        $(".dropdown-beds #advance-search-beds").addClass('active');
     });
-
+    $(document).mouseup(function(e){
+        $('div#advance-search-beds').removeClass("active");
+    });
     $(".dropdown-beds").click ( function () {
         $(".dropdown-beds #advance-search-beds").toggle();
     });
-
 
     $("#advance-search-beds ul > li > input").on("click",function(e){
         var get_text =  $(this).parent().find('span').text();
         var dropdown_show = get_text.replace('+', '');
         if($(this).is(":checked")){
-            $('#show-beds').append('<span id="chk_'+dropdown_show+'_chk">'+  ' ' + ',' + get_text +  ' '+ '</span>');
+            $("#show-beds").find('.placeholder-text').hide();
+            $('#show-beds').append('<span id="chk_'+dropdown_show+'_chk">'+  ' ' + '' + get_text +  ' ,'+ '</span>');
         }if($(this).is(":not(:checked)")) {
             $('#chk_'+dropdown_show+'_chk').remove();
-        };
+        }
+        var get_inputs = $(".dropdown-beds #advance-search-beds ul input");
+        if($(get_inputs).is(":checked")) {
+            $("#show-beds").find('.placeholder-text').hide();
+        }else{
+            $("#show-beds").find('.placeholder-text').show();
+        }
 
     });
+//rent dropdwon buttons
+    $('.dropdown-wrap .btn-primary').click(function () {
+        $('.dropdown-wrap .btn-primary').removeClass('rent-active-dropdown');
+        $(this).toggleClass('rent-active-dropdown');
+    });
+    $('#beds-for-dropdown').click(function () {
+    $('.dropdown-for-beds').slideToggle();
+    });
+    $('#bath-for-dropdown').click(function () {
+        $('.dropdown-for-baths').slideToggle();
+    });
+    $('#neigh-for-dropdown').click(function () {
+        $('.dropdown-for-neigh').slideToggle();
+    });
+    $('#price-for-dropdown').click(function () {
+        $('.dropdown-for-price').slideToggle();
+    });
+    $('.dropdown-wrap .btn-primary').click(function () {
+        $(".dropdown-listiing-rent-page").hide();
+        $(this).next().addClass('active').show();
+    });
+    // $(document).mouseup(function(e){
+    //     $('div.dropdown-listiing-rent-page').removeClass("active");
+    // });
 
 });
 
