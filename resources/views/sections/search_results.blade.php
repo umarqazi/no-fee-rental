@@ -22,6 +22,72 @@
                 {{--Bedrooms--}}
                 {!! Form::open(['url' => route('web.RentFilters'), 'method' => 'get', 'id' => 'rent-search']) !!}
                 <div class="dropdown-wrap">
+                    <div class="neighborhoods-dropdown-listings">
+                        <button type="button" class="btn btn-primary" id="neigh-for-dropdown">Neighborhood</button>
+                        <div class="dropdown-for-neigh dropdown-listiing-rent-page" id="advance-search-chkbox">
+                            <div class="neighborhood-border-no">
+                                <h3>Manhattan</h3>
+                                <div class="border-bottom-h3"></div>
+                                <ul>
+                                    <li>
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="catss-1-neigh"
+                                                   name="pets">
+                                            <label class="custom-control-label" for="catss-1-neigh">Neighborhood</label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="catss-2-neigh"
+                                                   name="pets">
+                                            <label class="custom-control-label" for="catss-2-neigh">Neighborhood</label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        {{--                                    <div class="custom-control custom-checkbox">--}}
+                                        {{--                                        <input type="checkbox" class="custom-control-input" id="catss-3-neigh"--}}
+                                        {{--                                               name="pets">--}}
+                                        {{--                                        <label class="custom-control-label" for="catss-3-neigh">Neighborhood</label>--}}
+                                        {{--                                    </div>--}}
+                                        <ul class="inside-listing">
+                                            <li>
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input" id="catss-4-neigh"
+                                                           name="pets">
+                                                    <label class="custom-control-label"
+                                                           for="catss-4-neigh">Neighborhood</label>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input" id="catss-5-neigh"
+                                                           name="pets">
+                                                    <label class="custom-control-label"
+                                                           for="catss-5-neigh">Neighborhood</label>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input" id="catss-6-neigh"
+                                                           name="pets">
+                                                    <label class="custom-control-label"
+                                                           for="catss-6-neigh">Neighborhood</label>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="catss-7-neigh"
+                                                   name="pets">
+                                            <label class="custom-control-label"
+                                                   for="catss-7-neigh">Neighborhood</label>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                     <div class="">
                         <button type="button" class="btn btn-primary" id="beds-for-dropdown">Beds</button>
                         <div class="dropdown-for-beds dropdown-listiing-rent-page" id="advance-search-chkbox">
@@ -72,71 +138,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="neighborhoods-dropdown-listings">
-                        <button type="button" class="btn btn-primary" id="neigh-for-dropdown">Neighborhood</button>
-                        <div class="dropdown-for-neigh dropdown-listiing-rent-page" id="advance-search-chkbox">
-                            <div class="neighborhood-border-no">
-                            <h3>Manhattan</h3>
-                            <ul>
-                                <li>
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="catss-1-neigh"
-                                               name="pets">
-                                        <label class="custom-control-label" for="catss-1-neigh">Neighborhood</label>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="catss-2-neigh"
-                                               name="pets">
-                                        <label class="custom-control-label" for="catss-2-neigh">Neighborhood</label>
-                                    </div>
-                                </li>
-                                <li>
-{{--                                    <div class="custom-control custom-checkbox">--}}
-{{--                                        <input type="checkbox" class="custom-control-input" id="catss-3-neigh"--}}
-{{--                                               name="pets">--}}
-{{--                                        <label class="custom-control-label" for="catss-3-neigh">Neighborhood</label>--}}
-{{--                                    </div>--}}
-                                    <ul class="inside-listing">
-                                        <li>
-                                            <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" id="catss-4-neigh"
-                                                       name="pets">
-                                                <label class="custom-control-label"
-                                                       for="catss-4-neigh">Neighborhood</label>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" id="catss-5-neigh"
-                                                       name="pets">
-                                                <label class="custom-control-label"
-                                                       for="catss-5-neigh">Neighborhood</label>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" id="catss-6-neigh"
-                                                       name="pets">
-                                                <label class="custom-control-label"
-                                                       for="catss-6-neigh">Neighborhood</label>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="catss-7-neigh"
-                                               name="pets">
-                                        <label class="custom-control-label"
-                                               for="catss-7-neigh">Neighborhood</label>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                        </div>
-                    </div>
+
                     <div class="dropdown-listing-price-wrapper">
                         <button type="button" class="btn btn-primary" id="price-for-dropdown">Price</button>
                         <div class="dropdown-for-price dropdown-listiing-rent-page" id="advance-search-chkbox">

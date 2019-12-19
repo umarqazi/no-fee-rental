@@ -155,7 +155,7 @@ body {
     position: relative;
     max-width: 100%;
     width: 100%;
-    padding: 0px 15px;
+    padding: 0px 30px;
 }
 button {
     cursor: pointer;
@@ -340,18 +340,18 @@ h3 {
     border-right: 0 !important;
 }
 .dropdown-listing-price-wrapper ul li:nth-child(2){
-    border-left: 1px solid #f36f21;
-    border-right: 1px solid #f36f21 !important;
-    border-left: 1px solid red;
-    border-right: 1px solid red !important;
     display: inline-block;
     height: 36px;
     vertical-align: middle;
     line-height: 36px;
     text-align: center;
 }
+.dropdown-listing-price-wrapper ul{
+    padding: 10px;
+}
+
 .dropdown-listing-price-wrapper ul li input{
-    border: 0;
+    width: 172px;
     font-size: 14px;
 }
 
@@ -374,6 +374,11 @@ h3 {
     margin-bottom: 10px;
     font-size: 20px;
     padding: 15px 15px 0px 15px;
+}
+.border-bottom-h3{
+    border-top: 1px solid #e77817;
+    margin-top: 10px;
+    margin: 10px;
 }
 .neighborhoods-dropdown-listings #advance-search-chkbox ul{
     display: block ;
@@ -711,7 +716,7 @@ h3 {
 
 .beds-dropdown #advance-search-beds{
     position: absolute;
-    top: 0px;
+    top: 5px;
     background-color: #fff;
     left: 0px;
     width: 340px;
@@ -4411,6 +4416,7 @@ footer .copyright .social-icons li a:hover {
     .property-listing.neighbourhood-listing{
         justify-content: center;
     }
+
 }
 @media (min-width: 576px) {
     .login .modal-dialog-centered {
@@ -4649,7 +4655,7 @@ footer .copyright .social-icons li a:hover {
 @media only screen and (min-width: 1921px) {
 
     .neighborhood-search .search-result-wrapper .search-listing .featured-properties .property-listing .property-thumb{
-        width: calc(100% / 3 - 30px);
+        width: calc(100% / 4 - 30px);
         height: 250px;
     }
     .featured-properties .property-listing .property-thumb{
@@ -4664,6 +4670,9 @@ footer .copyright .social-icons li a:hover {
     .your-life-container{
         min-height: 766px;
     }
+    .neighborhood-search .search-result-wrapper .map-wrapper {
+        flex: 0 0 20%;
+    }
 }
 
 @media all and (min-width: 2200px) {
@@ -4674,7 +4683,7 @@ footer .copyright .social-icons li a:hover {
         min-height: 876px;
     }
     .featured-properties .property-listing .property-thumb {
-        width: calc(100% / 4 - 30px) !important;
+        width: calc(100% / 5 - 30px) ;
     }
 }
 @media all and (min-width: 2560px) {
@@ -4687,6 +4696,11 @@ footer .copyright .social-icons li a:hover {
 
     .featured-properties .property-listing .property-thumb {
         width: calc(100% / 6 - 30px);
+    }
+    .neighborhood-search .search-result-wrapper .search-listing .featured-properties .property-listing .property-thumb {
+        width: calc(100% / 5 - 30px);
+        height: 250px;
+        max-width: 445px;
     }
 
 }
@@ -4942,6 +4956,10 @@ footer .copyright .social-icons li a:hover {
     }
     .header-bg{
         background-position: top 0px center !important;
+    }
+    .beds-dropdown #advance-search-beds{
+        width: 100%;
+        top: 10px;
     }
     .featured-properties .property-listing .property-thumb {
         width: calc(100% / 2 - 30px);
@@ -6232,6 +6250,20 @@ list .property-info .info p {
 .financial-district-inner .form-control{
     background-clip: none;
 }
+.financial-district-inner select option{
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: initial;
+}
+.financial-district-inner select option, .financial-district-inner select optgroup {
+    background-color:#fff;
+    color: #333;
+}
+.financial-district-inner select optgroup{
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: initial;
+}
 .financial-district-description{
     margin-bottom: 30px;
 }
@@ -6412,7 +6444,7 @@ list .property-info .info p {
         width: 150px;
     }
 }
-
 .transportation {
     padding: 10px;
 }
+
