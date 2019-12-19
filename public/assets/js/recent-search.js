@@ -198,16 +198,9 @@ $(() => {
                 currentQuery.url = window.location.href;
                 localStorage.setItem('search-queries', JSON.stringify(queries));
             }
-
-            let result = Object.entries(v).reduce((a,[key,val]) => {
-                if(val && val.length)
-                    a.push({name : key, value : val});
-                return a;
-            },[]);
-
             $('#empty-keywords').remove();
                 $('.dropDown > ul.neighborhoods_amenities').prepend(`<li>
-                <a href="${v.url}">
+                <a href="${v.url}" class="recent" data-id = "${i}" >
                         ${
                             (v.neighborhood !== null ? 'Listings in ' + v.neighborhood : 'Listings ') +
                             (v.beds.length > 0  ?
@@ -238,4 +231,17 @@ $(() => {
     function formatNumber(num) {
         return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
     }
+
+    $body.on('click', '.recent', async function(e) {
+        let temp = JSON.parse(localStorage.getItem('search-queries'));
+        temp.push(temp[$(this).attr('data-id')]);
+         for(let i = 0 ; i < temp.length ; i++){
+             if(i >= $(this).attr('data-id')) {
+                 temp[i] = temp[i + 1] ;
+             }
+         }
+         temp.pop();
+        localStorage.setItem('search-queries', JSON.stringify(temp)) ;
+    });
+
 });

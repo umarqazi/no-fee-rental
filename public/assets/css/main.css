@@ -653,6 +653,10 @@ h3 {
     width: 290px;
 }
 
+.listing-detail-badges {
+    background-color: #cecccc !important;
+}
+
 .header-bg .search-property .custom-select-input {
     background: #fff;
     border: none;
@@ -6407,4 +6411,8 @@ list .property-info .info p {
     .four-o-four-inner-content img{
         width: 150px;
     }
+}
+
+.transportation {
+    padding: 10px;
 }
