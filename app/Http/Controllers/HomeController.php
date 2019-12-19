@@ -89,9 +89,24 @@ class HomeController extends Controller {
     public function letUsHelp(Request $request) {
         $request->agentsWithPremiumPlan = true;
         $data = toObject(['listings' => $this->searchService->search($request)]);
+        $agents = [];
         foreach ($data->listings as $user) {
-            dd(agents($user->user_id));
+              $agents =   agents($user->user_id);
         }
+        $data = [
+            'data'    => [
+                'first_name'   => $request->first_name,
+                'email'        => $request->email,
+                'phone_number' => $request->phone_number,
+            ],
+        ];
+        //dispatchEmailQueue($data);
+        DispatchNotificationService::LETUSHELP(toObject([
+            'from' => $request->email,
+            'to'   => $agents ,
+            'data' => $data['data']
+        ]));
+
 
         return sendResponse($request, true, 'Request has been sent successfully');
     }
