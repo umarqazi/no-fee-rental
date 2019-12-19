@@ -249,7 +249,7 @@ class Listing extends Model {
     public function scopePetFriendly($query) {
         return $query->whereHas('features', function($subQuery) {
             return $subQuery->whereIn('value', array_keys(config('features.pets_filter')));
-        });
+        })->where('is_featured', TRUE);
     }
 
     /**

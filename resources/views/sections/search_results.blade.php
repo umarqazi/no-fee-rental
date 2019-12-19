@@ -158,9 +158,10 @@
                     {!! Form::select('sorting',
                         [
                             ''         => 'Select',
-                            'recent'   => 'Recent',
-                            'cheapest' => 'Cheapest',
-                            'oldest'   => 'Oldest'
+                            'recent'   => 'Recommended',
+                            'cheapest' => 'Price',
+                            'oldest'   => 'Trending',
+                            'pets'     => 'Pet Friendly',
                         ],
                         $sort ?? null,
                         ['class' => "custom-select-list sorting"]) !!}
