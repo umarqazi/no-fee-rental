@@ -612,7 +612,7 @@ $(() => {
         }
     });
     $(document).on("click", function (e) {
-        if ($(e.target).is("#show-beds") == false && $(e.target).parents('.dropdown-beds').length == 0 && $(e.target).parents('.beds-dropdown').length == 0) {
+        if ($(e.target).is(".dropdown-beds") == false && $(e.target).parents('.dropdown-beds').length == 0 && $(e.target).parents('.beds-dropdown').length == 0) {
             $(".bed-advance-search").hide();
         }
     });
