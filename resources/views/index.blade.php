@@ -7,7 +7,7 @@
 </header>
 <style>
     .header-wrapper{
-        background-color: rgba(31, 46, 81, 0.14);
+        background-color: rgba(255, 255, 255, 0.45);
     }
 </style>
 <section class="need-help-container wow fadeIn " data-wow-delay="0.2s">

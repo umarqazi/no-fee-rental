@@ -3699,6 +3699,9 @@ footer {
 }
 }
 @media only screen and (max-width: 767px) {
+    .container-fluid, .container-lg{
+        padding: 0px 15px;
+    }
   .header-wrapper .header-container .logo {
     max-width: 200px;
   }
