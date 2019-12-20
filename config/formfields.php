@@ -37,6 +37,14 @@ return [
             '24 Months' => "24 Months"
         ],
 
+        'listing_report_reasons' => [
+            "" => "Please Select",
+            'This listing is no longer available.'           => "This listing is no longer available.",
+            'This is a fraudulent listing.'                  => "This is a fraudulent listing.",
+            'This listing has incorrect information/photos.' => "This listing has incorrect information/photos.",
+            'This is a discriminatory or offensive listing.'   => "This is a discriminatory or offensive listing.",
+        ],
+
         'listing_type' => [
             ''          => 'Select Type',
             'open'      => 'Open',

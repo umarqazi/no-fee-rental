@@ -9,6 +9,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\UserService;
+use App\Traits\DispatchNotificationService;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -198,5 +199,25 @@ class UserController extends Controller {
         $renters = $this->service->getRenters();
         return $renters;
         return sendResponse(null , $renters, null);
+    }
+
+    /**
+     *
+     * @param $request
+     */
+    public function reportListing(Request $request) {
+        $data = [
+            'from'    => $request->email,
+            'message' => 'New Listing Report Received',
+            'view'    => 'listing-report',
+             ];
+
+        DispatchNotificationService::GETSTARED(toObject([
+            'from' => $request->email,
+            'to'   => mailToAdmin(),
+            'data' => $data
+        ]));
+
+         return  success('We have received your report regarding this listing.');
     }
 }
