@@ -143,6 +143,12 @@ table {
     -webkit-transition: all ease 0.4s;
     transition: all ease 0.4s;
 }
+html , body{
+    height: 100%;
+}
+.inner-pages{
+    min-height: calc(100% - 348px);
+}
 
 body {
     margin: 0px;
@@ -331,6 +337,8 @@ h3 {
 }
 .dropdown-for-beds, .dropdown-for-baths, .dropdown-for-price, .dropdown-for-neigh{
     display: none;
+    max-height:300px;
+    overflow-y: auto;
 }
 .dropdown-listing-price-wrapper ul{
     text-align: center;
@@ -387,6 +395,7 @@ h3 {
 .neighborhoods-dropdown-listings #advance-search-chkbox ul li{
     border-right: 0px;
     border-bottom: 1px solid #ddd;
+    padding: 5px 10px;
 }
 .neighborhoods-dropdown-listings #advance-search-chkbox ul li:last-child{
     border-bottom: 0;
@@ -397,29 +406,11 @@ h3 {
 .dropdown-beds #advance-search-beds{
     display: none;
 }
-
-.neighborhoods-dropdown-listings ul li .custom-checkbox{
-    margin-left: 15px;
-    margin-right: 15px;
+.neighborhoods-dropdown-listings #advance-search-chkbox ul.inside-listing{
+    margin: 0px 10px;
 }
-.neighborhoods-dropdown-listings #advance-search-chkbox input[type=checkbox]+label{
+.neighborhoods-dropdown-listings #advance-search-chkbox ul.inside-listing li{
     padding: 5px 0px;
-    text-align: left;
-}
-.neighborhoods-dropdown-listings #advance-search-chkbox input[type=checkbox]:checked+label{
-    background-color: #fff;
-    color: #000;
-    font-weight: 500;
-}
-.neighborhoods-dropdown-listings .custom-control-label::after{
-    top: 7px;
-}
-
-.neighborhoods-dropdown-listings .custom-control-label::before{
-    top: 7px;
-}
-.neighborhoods-dropdown-listings .inside-listing li{
-    padding-left: 15px;
 }
 .dropdown-listiing-rent-page.active{
     display: none;
@@ -1637,7 +1628,7 @@ footer .copyright .social-icons li a:hover {
     z-index: 25 !important;
 }
 #advance-search .modal-body h3{
-    margin-bottom: 20px;
+    margin: 10px 0px;
 }
 #advance-search .bdr-top-btn {
     border-top: 1px solid #cecaca;
@@ -2066,7 +2057,31 @@ footer .copyright .social-icons li a:hover {
 
 
 /*contact us*/
-
+.blog-banner-img-wrapper{
+    position: relative;
+}
+.blog-banner-img-wrapper .blog-banner-text {
+    position: absolute;
+    top: 50%;
+    z-index: 1;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 30px;
+    font-weight: 600;
+    color: #fff;
+    padding: 20px;
+}
+.contact-banner:before {
+    content: "";
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
 .inner-pages.contact-us {
     padding: 0px 0px 120px;
     margin-top: 90px;
@@ -2091,10 +2106,7 @@ footer .copyright .social-icons li a:hover {
     margin-bottom: 40px;
     border: 1px solid #D7D7D7;
     padding: 30px 15px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    min-height: 310px;
+    min-height: 290px;
 }
 .contact-info .info h6{
     margin-bottom: 10px;
@@ -2102,6 +2114,8 @@ footer .copyright .social-icons li a:hover {
 .contact-info .info img {
     max-width: 60px;
     margin-right: 10px;
+    max-height:60px;
+    margin-top: 15px;
 }
 
 .contact-info .info .title {
@@ -2109,7 +2123,10 @@ footer .copyright .social-icons li a:hover {
     font-size: 22px;
     color: #000;
 }
-
+.contact-info .info-inner {
+    display: flex;
+    margin-bottom: 15px;
+}
 .contact-info .info .title a {
     font-size: 14px;
     font-weight: 500;
@@ -2128,7 +2145,13 @@ footer .copyright .social-icons li a:hover {
     margin-top: 5px;
     font-weight: 500;
 }
-
+.contact-info .description-text{
+    margin-top: 20px;
+}
+.contact-info .description-text p{
+    max-width: 100%;
+    /*margin-top: 15px;*/
+}
 .contact-form .textArea {
     height: 180px;
     padding-top: 10px;
@@ -3901,6 +3924,10 @@ footer .copyright .social-icons li a:hover {
     background-color: #F8F8F8;
     padding: 10px 15px;
 }
+ .sort-by-wrapper{
+     max-width: 230px;
+     width: 230px;
+ }
  .sort-by-wrapper .sort-by{
      display: flex;
      align-items: center;
@@ -4654,6 +4681,9 @@ footer .copyright .social-icons li a:hover {
     .listing-right-padd {
         padding-right: 15px;
     }
+    .search-bdr-top{
+        padding: 10px 0px 10px 15px;
+    }
 }
 
 
@@ -4816,7 +4846,7 @@ footer .copyright .social-icons li a:hover {
     }
     #desktop-map {
         width: 100%;
-        height: 510px;
+        height: 100%;
     }
     .lSSlideOuter .lSSlideWrapper #image-gallery>li img {
         max-height: 600px;
@@ -5286,8 +5316,8 @@ footer .copyright .social-icons li a:hover {
 
     .mobile-map-icon {
         position: absolute;
-        top: 7px;
-        right: 15px;
+        top: 3px;
+        right: 30px;
         background: #223971;
         color: #fff;
         padding: 8px 0px;
@@ -5314,6 +5344,7 @@ footer .copyright .social-icons li a:hover {
         top: 40px;
         left: 0;
         display: none;
+        padding: 0px 30px;
     }
 
     .neighborhood-search .search-result-wrapper .search-listing {
@@ -5360,6 +5391,10 @@ footer .copyright .social-icons li a:hover {
         background-color: rgb(248, 248, 248);
         margin-top: 9px;
         padding-bottom: 5px;
+        width: 100%;
+    }
+    .sort-by-wrapper .sort-by{
+        padding-right: 15px;
     }
 }
 
@@ -5382,9 +5417,15 @@ footer .copyright .social-icons li a:hover {
     #signup .modal-dialog-scrollable .modal-content {
         max-height: initial !important;
     }
+    .mobile-map-icon{
+        right: 45px;
+    }
 }
 
 @media only screen and (max-width: 767px) {
+    .container-fluid, .container-lg{
+        padding: 0px 15px;
+    }
     .header-wrapper .header-container .logo {
         max-width: 200px;
     }
@@ -5788,7 +5829,8 @@ footer .copyright .social-icons li a:hover {
     }
 
     #mobile-map-listing-view {
-        height: 375px;
+        height: 100%;
+        padding: 0px 15px;
     }
 
     .listing-Details .appointment-iconDetails ul li span {
@@ -5845,10 +5887,12 @@ footer .copyright .social-icons li a:hover {
         max-width: 22px;
         max-height: 22px;
     }
-
     #boxscroll22 {
         height: auto;
         padding-right: 0px;
+    }
+    .financial-district-inner select option{
+        font-size: 14px;
     }
 
 }
@@ -6038,22 +6082,9 @@ footer .copyright .social-icons li a:hover {
         font-size: 13px;
     }
 
-    .dropdown-wrap {
-        display: flex;
-    }
-
-    .listing-wrapp {
-        display: flex;
-    }
-
     .search-bdr-top .btn-group__multiple>.btn {
         width: 50px;
     }
-
-    .sort-by-wrapper .sort-by span {
-        display: none;
-    }
-
     .search-bdr-top .price-dropdown .btn-default {
         width: 50px;
     }
@@ -6425,6 +6456,16 @@ list .property-info .info p {
     .four-o-four-inner-content img{
         width: 250px;
     }
+    .dropdown-wrap {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .dropdown-wrap button{
+        margin-bottom: 10px;
+    }
+    .listing-wrapp {
+        display: block;
+    }
 }
 @media only screen and (max-width: 576px){
     .contact-banner{
@@ -6448,6 +6489,10 @@ list .property-info .info p {
     }
     .four-o-four-inner-content img{
         width: 150px;
+    }
+    .dropdown-listing-price-wrapper ul li input {
+        width: 100%;
+        font-size: 14px;
     }
 }
 .transportation {

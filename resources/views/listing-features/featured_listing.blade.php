@@ -17,13 +17,14 @@
                 {!! $fl->realty_id ? "<p><i class='fa fa-map-marker-alt'></i> RealtyMX ID: {$fl->realty_id}</p>" : '' !!}
                 <p>Requested By: {{ $fl->agent->first_name.' '.$fl->agent->last_name }}</p>
                 <p>Posted On: {{ $fl->created_at->format("m/d/y H:m A") }}</p>
-                <a href="{{ route('admin.removeFeatured', $fl->id) }}" title="Remove this property from featured">
                     <span class="status" style="background: red;">Remove Feature</span>
-                </a>
                 <div class="actions-btns">
                     <a href="{{ route('admin.editListing', $fl->id) }}"><span><img src="{{asset('assets/images/edit-icon.png')}}" alt=""></span></a>
                     <span><img src="{{asset('assets/images/copy-icon.png')}}" alt=""></span>
                     <a href="{{ route('admin.repostListing', $fl->id) }}"><button type="button" class="border-btn">Repost</button></a>
+                    <a href="{{ route('admin.removeFeatured', $fl->id) }}" title="Remove this property from featured">
+                        <button type="button" class="border-btn">Remove Feature</button>
+                    </a>
                 </div>
             </div>
         </div>
@@ -52,9 +53,11 @@
                     {!! $fl->realty_id ? "<p><i class='fa fa-map-marker-alt'></i> RealtyMX ID: {$fl->realty_id}</p>" : '' !!}
                     <p>Requested By: {{ $fl->agent->first_name.' '.$fl->agent->last_name }}</p>
                     <p>Posted On: {{ $fl->created_at->format("m/d/y H:m A") }}</p>
-                    <a href="{{ route('admin.removeFeatured', $fl->id) }}" title="Remove this property from featured"><span class="status" style="background: red;">Remove Feature</span></a>
                     <div class="actions-btns">
                         <a href="{{ route('admin.repostListing', $fl->id) }}"><button type="button" class="border-btn">Repost</button></a>
+                        <a href="{{ route('admin.removeFeatured', $fl->id) }}" title="Remove this property from featured">
+                            <button type="button" class="border-btn">Remove Feature</button>
+                        </a>
                     </div>
                     <div class="list-actions-icons">
                         <a href="{{ route('admin.editListing', $fl->id) }}"><button><i class="fa fa-edit"></i></button></a>

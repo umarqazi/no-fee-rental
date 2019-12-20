@@ -102,7 +102,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label class="label">Open House</label>
-                            {!! Form::text('openHouse', null, ['autocomplete' => 'off', 'id' => 'open_house', 'placeholder', 'Open House', 'class' => 'input-style']) !!}
+                            {!! Form::text('openHouse', null, ['autocomplete' => 'off', 'id' => 'open_house', 'placeholder', 'Open House', 'class' => 'input-style','data-date-format' => 'yyyy-mm-dd']) !!}
                         </div>
                     </div>
 

@@ -165,7 +165,7 @@
             <a href="javascript:void(0)"><img src="{{ asset('assets/images/logo.png') }}" alt="logo"></a>
         </div>
         <div class="notification-inner-content">
-            <h2> Notification Title</h2>
+            <h2>RESET YOUR PASSWORD</h2>
             <p> This email is in response for a request to reset your password.</p>
             <p>Please click the link to reset your password: <a href="{{ $data->url }}">Reset Password</a></p>
             <div class="action-button">
