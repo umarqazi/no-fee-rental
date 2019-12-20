@@ -24,7 +24,7 @@
                     <div class="col-md-6 search-form-grou-mrg-btm">
                         <div class="form-group" id="advance-search-chkbox">
                             <label class="label">Beds <span>(Select all that applies)</span></label>
-                            <ul id="beds">
+                            <ul id="advance-search-beds">
                                 <li> <input type="checkbox" value="studio" id="Checkbox" name="Checkbox">
                                     <label for="Checkbox"><span class="label-name">Studio</span></label>
                                 </li>
@@ -47,7 +47,7 @@
                         </div>
                         <div class="form-group" id="advance-search-chkbox">
                             <label class="label">Baths <span>(Select all that applies)</span></label>
-                            <ul id="baths">
+                            <ul id="advance-search-baths">
                                 <li> <input type="checkbox" value="any" id="Checkbox-6" name="baths[]">
                                     <label for="Checkbox-6"><span class="label-name">Any</span></label>
                                 </li>
@@ -102,24 +102,24 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label class="label">Open House</label>
-                            {!! Form::text('openHouse', null, ['autocomplete' => 'off', 'id' => 'open_house', 'placeholder', 'Open House', 'class' => 'input-style']) !!}
+                            {!! Form::text('openHouse', null, ['autocomplete' => 'off', 'id' => 'open_house', 'placeholder', 'Open House', 'class' => 'input-style','data-date-format' => 'yyyy-mm-dd']) !!}
                         </div>
                     </div>
 
                     {{-- Building Features--}}
-                    <div class="col-md-12">
+                    <div class="col-md-12" style="margin-top: 10px;">
                         <div class="row">
                             {!! amenities() !!}
                         </div>
                     </div>
-                </div>
 
                     {{--Apartment Features--}}
-                    <div class="col-md-12" style="margin-top: 20px;">
-                        <div class="row">
-                            {!! features() !!}
-                        </div>
-                    </div>
+                    {!! features() !!}
+
+                    {{--Pets--}}
+                    {!! features_pet() !!}
+
+                </div>
 
                     <div class="col-md-12 text-left mt-4 mb-4 bdr-top-btn">
                         <button type="submit" class="btn-default">Search</button>

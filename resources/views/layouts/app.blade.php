@@ -6,6 +6,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800|Raleway:300,400,500,600,700,800,900" rel="stylesheet">
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.css' rel='stylesheet' />
     <script>
         Window.Laravel = {
             user: "{{ authenticated() ? myId() : null }}"
@@ -22,6 +23,7 @@
     {!! HTML::style('assets/css/lightslider.css') !!}
     {!! HTML::style('assets/owlcarousel/assets/owl.carousel.min.css') !!}
     {!! HTML::style('assets/owlcarousel/assets/owl.theme.default.min.css') !!}
+    {!! HTML::style('assets/css/pignose.calendar.min.css') !!}
 
     <!-- JS -->
     {!! HTML::script('assets/js/vendor/jquery-3.2.1.min.js') !!}
@@ -37,7 +39,13 @@
     {!! HTML::script('assets/js/global.js') !!}
     {!! HTML::script('assets/js/map.js') !!}
     {!! HTML::script('assets/js/validate.js') !!}
+    {!! HTML::script('assets/js/jquery.nicescroll.min.js') !!}
     {!! HTML::script('assets/js/vendor/owl.carousel.min.js') !!}
+    {!! HTML::script('assets/js/vendor/pignose.calendar.full.min.js') !!}
+
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
 
 </head>
     <body>

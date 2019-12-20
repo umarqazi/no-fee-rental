@@ -110,4 +110,12 @@ class BuildingRepo extends BaseRepo {
             return $query->whereIn('amenity_id', $amenities);
         });
     }
+
+    /**
+     * @param $address
+     * @return mixed
+     */
+    public function ownerOnlyBuilding($address) {
+        return $this->model->where('address', $address)->where('building_action', OWNERONLY);
+    }
 }

@@ -144,7 +144,7 @@ if(!defined('STR_LIMIT_GRID_VIEW')) {
  * Default Listing Image
  */
 if(!defined('DLI')) {
-    define('DLI', 'assets/images/default-images/listing-thumb.jpg');
+    define('DLI', 'assets/images/default-images/listing.jpeg');
 }
 
 /**
@@ -258,4 +258,24 @@ if(!defined('EXPIRED')) {
 
 if(!defined('MAXPLANDAYS')) {
     define('MAXPLANDAYS', 30);
+}
+
+if(!defined('MINFRESHNESSSCORE')) {
+    define('MINFRESHNESSSCORE', 30);
+}
+
+if(!defined('MAXFRESHNESSSCORE')) {
+    define('MAXFRESHNESSSCORE', 100);
+}
+
+if(!defined('DROPFRESHNESS')) {
+    define('DROPFRESHNESS', 10);
+}
+
+if(!defined('LICENSEBASEURL')) {
+    define('LICENSEBASEURL', 'data.ny.gov');
+}
+
+if(!defined('SCHOOLZONEBASEURL')) {
+    define('SCHOOLZONEBASEURL', 'data.cityofnewyork.us');
 }

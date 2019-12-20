@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Exception;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Illuminate\Auth\AuthenticationException as Auth;
 use Illuminate\Database\Eloquent\ModelNotFoundException as ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
@@ -27,13 +28,13 @@ class Handler extends ExceptionHandler {
 		'password_confirmation',
 	];
 
-	/**
-	 * Report or log an exception.
-	 *
-	 * @param  \Exception  $exception
-	 * @return void
-	 */
+    /**
+     * @param Exception $exception
+     * @return mixed|void
+     * @throws Exception
+     */
 	public function report(Exception $exception) {
+
 		if ($exception instanceof ModelNotFoundException) {
 			dd('Requested Record Not Exist');
 		}
@@ -48,7 +49,16 @@ class Handler extends ExceptionHandler {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function render($request, Exception $exception) {
-		return parent::render($request, $exception);
+        if ($this->isHttpException($exception)) {
+            if ($exception instanceof NotFoundHttpException) {
+                $errors = collect();
+                return response()->view('404', compact('errors'), 404);
+            }
+
+            return $this->renderHttpException($exception);
+        }
+
+        return parent::render($request, $exception);
 	}
 
 	/**
@@ -57,32 +67,10 @@ class Handler extends ExceptionHandler {
 	 *
 	 * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse|\Symfony\Component\HttpFoundation\Response|void
 	 */
-	protected function unauthenticated($request, Auth $exception) {
-		if ($request->ajax() || $request->expectsJson()) {
-			return response()->json(['message' => 'Request Not Allowed.'], 401);
-		}
-
-		switch ($exception->guards()[0]) {
-		case 'admin':
-			return redirect('/')->with(['message' => 'Your login session has been expired', 'alert_type' => 'error']);
-			break;
-
-		case 'agent':
-			return redirect('/')->with(['message' => 'Your login session has been expired', 'alert_type' => 'error']);
-			break;
-
-		case 'renter':
-			// code...
-			break;
-
-		case 'owner':
-			// code...
-			break;
-
-		default:
-			return redirect('/')->with(['message' => 'Your login session has been expired']);
-			break;
-		}
-		return abort(401);
-	}
+//	protected function unauthenticated($request, Auth $exception) {
+//
+//		if ($request->ajax() || $request->expectsJson() || $exception->guards()[0]) {
+//			return redirect(route('web.index'));
+//		}
+//	}
 }

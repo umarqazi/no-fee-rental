@@ -89,7 +89,6 @@ class ListingController extends Controller {
      * @return Factory|RedirectResponse|View
      */
     public function create(Request $request) {
-        $request->visibility = PENDINGLISTING;
         $id = $this->listingService->create($request);
         return redirect(route('agent.createListingImages', $id));
     }
@@ -168,6 +167,7 @@ class ListingController extends Controller {
         $listing = $this->listingService->edit($id)->first();
         $listing->features = findFeatures($listing->features);
         $listing->user_id = $listing->agent->id;
+        $listing->neighborhood = $listing->neighborhood->name;
         return view('listing-features.listing', compact('listing', 'action'));
     }
 
@@ -229,6 +229,7 @@ class ListingController extends Controller {
         $listing = $this->listingService->edit($id)->first();
         $listing->features = findFeatures($listing->features);
         $listing->user_id = $listing->agent->id;
+        $listing->neighborhood = $listing->neighborhood->name ?? null;
         return view('listing-features.listing', compact('listing', 'action'));
     }
 

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meeting Request</title>
+    <title>Listing Feature Approve</title>
     <style type="text/css">
         body{
             background-color: #edeff0;
@@ -134,14 +134,14 @@
 <body>
 <div class="main-wrapper">
     <div class="logo-img">
-        <a href="javascript:void(0)"><img src="../assets/images/logo.png" alt="logo"> </a>
+        <a href="javascript:void(0)"><img src="{{ asset('assets/images/logo.png') }}" alt="logo"></a>
     </div>
     <div class="Notification-wrapper">
-        <img src="../assets/images/notification-review.png" alt="notification-bell-icon">
-        <h2> Request for Review</h2>
-        <p> <b>Hi {{$data}}! </b> Converted 2 Bedroom and 1 Bath with double exposure in a condo located in Midtown East. Windowed Kitchen and Bath. Comfortable living and dining area. The building is located within 5 minutes walking distance to the United Nations. Modest post-war building </p>
+        <img src="{{ asset('assets/images/feature-listing.png') }}" alt="notification-bell-icon">
+        <h2> Meeting Request</h2>
+        <p> <b>Hi  </b> Converted 2 Bedroom and 1 Bath with double exposure in a condo located in Midtown East. Windowed Kitchen and Bath. Comfortable living and dining area. The building is located within 5 minutes walking distance to the United Nations. Modest post-war building </p>
         <div class="action-button">
-            <a href="{{$data}}"><button type="submit">Leave a Review</button></a>
+            <a href="{{ $data->url }}"><button type="submit">View Request</button></a>
         </div>
         <div class="Notification-wrap-footer">
             <p> <b>Lorem Ipsum </b>  is simply dummy text of the printing and typesetting industry. </p>
@@ -151,10 +151,9 @@
         <p> Problems or questions? Call us at (123) 254 658 <br> or email  info@nofeerental.com   </p>
         <p> @NOFEE Rental NYC all rights reserved </p>
 
-        <a href="javascript:void(0)"><img src="../assets/images/fb-icon.png"> </a>
-        <a href="javascript:void(0)"><img src="../assets/images/twitter-icon.png"> </a>
-        <a href="javascript:void(0)"><img src="../assets/images/google-icon.png"> </a>
+        <a href="javascript:void(0)"><img src="{{ asset('assets/images/fb-icon.png') }}"> </a>
+        <a href="javascript:void(0)"><img src="{{ asset('assets/images/twitter-icon.png') }}"> </a>
+        <a href="javascript:void(0)"><img src="{{ asset('assets/images/google-icon.png') }}"> </a>
     </div>
-</div>
 </body>
 </html>

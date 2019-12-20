@@ -52,6 +52,7 @@ class BuildingController extends Controller {
      */
     public function detail($id, $status, $route) {
         $building = $this->buildingService->detail($id);
+        $building->neighborhood = $building->neighborhood->name;
         return view('admin.building_detail', compact('building', 'status', 'route'));
     }
 
@@ -127,10 +128,11 @@ class BuildingController extends Controller {
      * @return Factory|View
      */
     public function addApartment($id) {
-        $action = 'Create';
+        $action = 'Building';
         $listing = $this->buildingService->addApartment($id);
         $listing->street_address = $listing->address;
         $listing->display_address = $listing->address;
+        $listing->neighborhood = $listing->neighborhood->name;
         return view('listing-features.listing', compact('listing', 'action'));
     }
 }

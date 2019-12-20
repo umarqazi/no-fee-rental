@@ -1,11 +1,14 @@
 $(() => {
     new WOW().init();
 
-
     $("header .menu-icon").click(function () {
         $(".main-wrapper aside").slideDown();
     });
 
+    //randomly change banner images on load
+    let image = ["1.jpg" , "2.jpg","3.jpg" ];
+    let x = Math.floor(image.length * Math.random());
+    $('body').find('.header-bg').css({"background": "url(../assets/images/" + image[x] + ")"});
 
     $("aside .close-menu").click(function () {
         $(".main-wrapper aside").slideUp();
@@ -29,7 +32,6 @@ $(() => {
         var input_checked = $(this).find("input").attr('checked', true);
         if ($(input_checked).is(':checked')) {
             var get_parent = $(this).parent().parent().parent().parent().find(".btn-default").addClass("addbackground");
-            console.log(get_parent);
         } else {}
 
     });
@@ -341,11 +343,24 @@ $(() => {
         }
     });
 
-    // $(function () {
-    //     $('#multiple').pignoseCalendar({
-    //         multiple: true
-    //     });
-    // });
+    function onSelectHandler(date, context) {
+        let from = null;
+        if (date[0] !== null) {
+            from = date[0].format('YYYY-MM-DD');
+        }
+
+        if($('body').find('.pignose-availability').length > 0) {
+            $('.pignose-availability').val(from);
+        } else {
+            $('body').find('.article').append(`<input name='availability' class="pignose-availability" type='hidden' value='${from}'>`);
+        }
+    }
+
+    $(function () {
+        $('#multiple').pignoseCalendar({
+            select: onSelectHandler
+        });
+    });
 
     $('#image-gallery').lightSlider({
         gallery: true,
@@ -472,7 +487,6 @@ $(() => {
             if ($(e.target).is("#signup-btn") == false && $(e.target).parents('#signup').length == 0 && $(e.target).parents('#login').length == 0) {
                 $("body").removeClass("signup-modal-scroll");
             }
-
         });
 
         $('.close-signup-modal').click(function () {
@@ -597,6 +611,58 @@ $(() => {
             $('.app-message-error').text('') ;
         }
     });
+    $(document).on("click", function (e) {
+        if ($(e.target).is("#show-beds") == false && $(e.target).parents('.dropdown-beds').length == 0 && $(e.target).parents('.beds-dropdown').length == 0) {
+            $(".bed-advance-search").hide();
+        }
+    });
+
+    $(".dropdown-beds").click ( function () {
+        $(".dropdown-beds #advance-search-beds").toggle();
+    });
+
+    $("#advance-search-beds ul > li > input").on("click",function(e){
+        var get_text =  $(this).parent().find('span').text();
+        var dropdown_show = get_text.replace('+', '');
+        if($(this).is(":checked")){
+            $("#show-beds").find('.placeholder-text').hide();
+            $('#show-beds').append('<span id="chk_'+dropdown_show+'_chk">'+  ' ' + '' + get_text +  ' ,'+ '</span>');
+        }if($(this).is(":not(:checked)")) {
+            $('#chk_'+dropdown_show+'_chk').remove();
+        }
+        var get_inputs = $(".dropdown-beds #advance-search-beds ul input");
+        if($(get_inputs).is(":checked")) {
+            $("#show-beds").find('.placeholder-text').hide();
+        }else{
+            $("#show-beds").find('.placeholder-text').show();
+        }
+
+    });
+//rent dropdwon buttons
+    $('.dropdown-wrap .btn-primary').click(function () {
+        $('.dropdown-wrap .btn-primary').removeClass('rent-active-dropdown');
+        $(this).toggleClass('rent-active-dropdown');
+    });
+    $('#beds-for-dropdown').click(function () {
+    $('.dropdown-for-beds').slideToggle();
+    });
+    $('#bath-for-dropdown').click(function () {
+        $('.dropdown-for-baths').slideToggle();
+    });
+    $('#neigh-for-dropdown').click(function () {
+        $('.dropdown-for-neigh').slideToggle();
+    });
+    $('#price-for-dropdown').click(function () {
+        $('.dropdown-for-price').slideToggle();
+    });
+    $('.dropdown-wrap .btn-primary').click(function () {
+        $(".dropdown-listiing-rent-page").hide();
+        $(this).next().addClass('active').show();
+    });
+    // $(document).mouseup(function(e){
+    //     $('div.dropdown-listiing-rent-page').removeClass("active");
+    // });
+
 });
 
 

@@ -48,8 +48,12 @@ Route::get('/confirm-email/{token}', 'UserController@confirmEmail')->name('user.
 // Email Validation
 Route::post('/verify-email', 'UserController@verifyEmail');
 
-// License Validations
+// Renter  Validation
+Route::post('/verify-renter', 'UserController@renterCheck');
+
+// License Routes
 Route::post('/verify-license', 'UserController@verifyLicense');
+Route::get('/license-verification/{license_number}', 'NYCProxyController@licenseVerification');
 
 // Login route for all user type
 Route::post('/login')->name('attempt.login')->middleware('authguard');
@@ -73,13 +77,15 @@ Route::get('/realty-mx/{client}/{listing}', 'RealtyMXController@detail')->name('
 Route::post('/listing-detail', 'ListingController@detail');
 Route::get('/listing-detail/{id}', 'HomeController@detail')->name('listing.detail');
 Route::post('/is-unique-address', 'ListingController@isUnique');
+Route::post('/is-owner-only', 'ListingController@isOwnerOnly');
 
 // Listing Conversation Routes
 Route::post('/send-request', 'ListingConversationController@create')->name('web.listConversation');
 
 // Notification Routes
 Route::post('/delete-notification/{id}', 'NotificationController@delete');
-Route::post('/mark-all-as-read', 'NotificationController@markAsRead');
+Route::post('/read-notification/{id}', 'NotificationController@markAsRead');
+Route::post('/mark-all-as-read', 'NotificationController@markAllAsRead');
 Route::post('/push-notification', 'NotificationController@push');
 Route::post('/fetch-notifications', 'NotificationController@get');
 Route::get('/all-notifications', 'NotificationController@all');
@@ -95,6 +101,7 @@ Route::match(['get', 'post'], '/listing-by-neighborhood/{neighborhood}', 'Neighb
 Route::get('/listing-by-rent/{sort}', 'RentController@sort');
 Route::get('/listing-by-rent', 'RentController@index')->name('web.ListsByRent');
 Route::get('/listing-by-rent-search', 'RentController@advanceSearch')->name('web.advanceRentSearch');
+Route::get('/listing-by-rent-filter', 'RentController@filter')->name('web.RentFilters');
 
 // Review Routes
 Route::get('/send-a-review/{token}', 'ReviewController@index')->name('web.makeReview');
@@ -113,6 +120,9 @@ Route::post('/let-us-help', 'HomeController@letUsHelp')->name('web.letUsHelp');
 // Get Started
 Route::post('/get-started', 'HomeController@getStarted')->name('web.getStarted');
 
+// NYC Api Route
+Route::post('/nyc-data', 'NYCProxyController@nycData');
+
 // Application Controlling Routes
 Route::get('/all-clear', function() {
     artisan(['config:cache', 'view:clear', 'route:clear']);
@@ -129,10 +139,12 @@ Route::get('/composer-dump', function() {
     dd('composer dump-succeed');
 });
 
-//Member accept invitation
+// Member accept invitation
 Route::get('/accept-invitation/{token}', 'Agent\MemberController@acceptInvitation')->name('member.acceptInvitation');
 
 // Test Route
 Route::get('/test', function (\Illuminate\Http\Request $request) {
-    dd();
+   $file = require public_path().'/blog/wp-includes/helpers.php';
+   authenticate();
+isAuthenticated();
 })->name('web.test');

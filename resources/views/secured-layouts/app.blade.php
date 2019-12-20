@@ -25,11 +25,12 @@
 
     {{-- JS --}}
     {!! HTML::script('assets/js/vendor/jquery-3.2.1.min.js') !!}
-    {!! HTML::script('assets/js/notification.js') !!}
+{{--	{!! HTML::script('assets/js/socket-client.js') !!}--}}
+	{!! HTML::script('assets/js/notification.js') !!}
+	{!! HTML::script('assets/js/tcp.js') !!}
     {!! HTML::script('https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js') !!}
 
-@if(isRenter())
-        {!! HTML::script('assets/js/listing-notification.js') !!}
+	@if(isRenter())
         {!! HTML::style('assets/css/main.css') !!}
         {!! HTML::style('assets/css/admin.css') !!}
         {!! HTML::style('assets/css/responsive.css') !!}
@@ -43,7 +44,8 @@
     {!! HTML::script('assets/js/vendor/toastr.js') !!}
     {!! HTML::script('assets/js/validate.js') !!}
     {!! HTML::script('assets/js/global.js') !!}
-    {!! HTML::script('assets/js/map.js') !!}
+	{!! HTML::script('assets/js/map.js') !!}
+	<scrip src="{{ asset('assets/js/mapbox.js') }}" async></scrip>
 	{!! HTML::script('assets/js/vendor/datatable.min.js') !!}
 
 	<title>@yield('title')</title>

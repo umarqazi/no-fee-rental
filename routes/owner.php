@@ -71,4 +71,9 @@ Route::get('/fee-building/{id}', 'Owner\BuildingController@fee')->name('owner.fe
 Route::post('/is-unique-address', 'Owner\BuildingController@isUnique');
 Route::post('/add-building', 'Owner\BuildingController@create')->name('owner.addBuilding');
 Route::get('/all-buildings', 'Owner\BuildingController@index')->name('owner.viewBuildings');
-Route::get('/update-building/{id}', 'Owner\BuildingController@update')->name('owner.updateBuilding');
+Route::post('/update-building/{id}', 'Owner\BuildingController@update')->name('owner.updateBuilding');
+Route::get('/add-apartment/{id}', 'Owner\BuildingController@addApartment')->name('owner.addApartment');
+
+// Reviews Routes
+Route::get('/all-reviews' , 'Owner\ReviewController@index')->name('owner.viewReviews');
+Route::post('/send-review-request' , 'Owner\ReviewController@request')->name('owner.requestReview');

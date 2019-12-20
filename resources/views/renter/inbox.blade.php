@@ -15,7 +15,7 @@
                     </div>
                     <ul>
                         <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60"><defs></defs><title>Asset 4</title><g id="Layer_2" data-name="Layer 2"><g id="Capa_1" data-name="Capa 1"><path class="cls-1" d="M51.21,8.79a30,30,0,0,0-42.42,0,30,30,0,0,0,0,42.42,30,30,0,0,0,42.42,0,30,30,0,0,0,0-42.42ZM31.89,43.05h-.13V47a1.76,1.76,0,0,1-3.52,0v-3.9H24.35a1.76,1.76,0,1,1,0-3.51h7.54a3.89,3.89,0,1,0,0-7.78H28.13a7.41,7.41,0,1,1,0-14.81h.12v-3.9a1.76,1.76,0,0,1,3.52,0V17h3.89a1.76,1.76,0,1,1,0,3.51H28.13a3.89,3.89,0,1,0,0,7.78h3.76a7.41,7.41,0,0,1,0,14.81Z"></path></g></g></svg>
-                            <span> ${{ ($collection->listing->rent) ?   number_format($collection->listing->rent,0) : 'None' }}</span>
+                            <span> {{ ($collection->listing->rent) ?   number_format($collection->listing->rent,0) : 'None' }}</span>
                         </li>
                         <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 55"><defs></defs><title>Asset 3</title><g id="Layer_2" data-name="Layer 2"><g id="Capa_1" data-name="Capa 1"><path class="cls-1" d="M3.25,32.55l.5,0,52.69,0,.31,0h.14a1.25,1.25,0,0,0,1.25-1.25,1.19,1.19,0,0,0-.2-.68L55,21.06V6.25A6.25,6.25,0,0,0,48.75,0H11.25A6.25,6.25,0,0,0,5,6.25V21.06L2,30.94a1.25,1.25,0,0,0,1.29,1.61ZM8.75,20H10.9l1.16-4.66A3.75,3.75,0,0,1,15.7,12.5h8.05a3.75,3.75,0,0,1,3.75,3.75V20h5V16.25a3.75,3.75,0,0,1,3.75-3.75h8a3.75,3.75,0,0,1,3.64,2.84L49.1,20h2.15a1.25,1.25,0,0,1,0,2.5H49.06a3.61,3.61,0,0,1-.56,1.06,3.73,3.73,0,0,1-3,1.44h-9.3a3.75,3.75,0,0,1-3.52-2.5H27.27A3.75,3.75,0,0,1,23.75,25h-9.3a3.73,3.73,0,0,1-2.95-1.44,3.49,3.49,0,0,1-.56-1.06H8.75a1.25,1.25,0,0,1,0-2.5Z"></path><path class="cls-1" d="M56.25,35H3.75A3.75,3.75,0,0,0,0,38.75v15A1.25,1.25,0,0,0,1.25,55h5A1.25,1.25,0,0,0,7.5,53.75V50h45v3.75A1.25,1.25,0,0,0,53.75,55h5A1.25,1.25,0,0,0,60,53.75v-15A3.75,3.75,0,0,0,56.25,35Z"></path></g></g></svg> <span> {{ str_formatting($collection->listing->bedrooms, 'Bed') }}</span>
                         </li>
@@ -56,7 +56,7 @@
                 </div>
                 <div class="message-input">
                     <div class="wrap">
-                        {!! Form::open(['id' => 'send-message', 'loading' => 'false', 'url' => route('renter.sendMessage', $collection->id), 'class' => 'ajax', 'reset' => 'true']) !!}
+                        {!! Form::open(['id' => 'send-message', 'url' => route('renter.sendMessage', $collection->id)]) !!}
                         <span id="error" style="color: red ; padding-left:7px;display: none">Message Field is required.</span>
                         {!! Form::text('message', null, ['placeholder' => 'Write your message...', 'autocomplete' => 'off']) !!}
                         {!! Form::hidden('to', myId() == $collection->to ? $collection->from : $collection->to) !!}
@@ -68,7 +68,6 @@
         </div>
     </div>
     {!! HTML::style('assets/css/chat.css') !!}
-    {!! HTML::script('assets/js/message.js') !!}
     <script>
         // Scroll to end of chat area
         window.onload = function () {

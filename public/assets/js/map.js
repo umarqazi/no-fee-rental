@@ -1,339 +1,351 @@
 "use strict";
 
-let ZOOM = 10;
-const NAVIGATOR = navigator.geolocation;
-const RADIUS = 1500;
-const GEOCODER = new google.maps.Geocoder();
-let map, marker;
+let MAP, MARKER;
 let defaultCoords =  {latitude: 40.785091, longitude: -73.968285}; // New York Center point
-let infowindow = new google.maps.InfoWindow();
+const BBOX = [
+    -74.2590879797556, 40.477399, -73.7008392055224, 40.917576401307
+];
+const defaultBounds = [
+    [-74.04728500751165, 40.68392799015035], // Southwest coordinates
+    [-73.91058699000139, 40.87764500765852]  // Northeast coordinates
+];
+
+/**
+ | ============================================================= |
+ |                      Map Box Controls
+ | ============================================================= |
+ */
+
 
 /**
  *
  * @param coords
- * @returns {google.maps.LatLng}
+ * @returns {LngLat}
  */
 const setLatLng = (coords) => {
-    if(coords === null) return;
-    return new google.maps.LatLng(coords.latitude, coords.longitude);
+    return new mapboxgl.LngLat(coords.longitude ? coords.longitude : coords[0], coords.latitude ? coords.latitude : coords[1]);
 };
 
 /**
- *
- * @param coords
- * @param displaySelector
- * @param radius
- * @param types
- * @param styles
- * @returns {Map<any, any>}
+ * Mapbox controls
  */
-const setMap = (coords = defaultCoords, displaySelector, radius = 0, types = [], styles = null) => {
-    coords = (typeof coords === 'object') ? coords : JSON.parse(coords);
-    map = new google.maps.Map(displaySelector, {
-        center: setLatLng(coords === null ? defaultCoords : coords),
-        zoom: ZOOM,
-        radius: radius !== 0 ? radius : RADIUS,
-        types: types,
-        styles: [
-            {
-                featureType: "poi",
-                elementType: "labels",
-                stylers: [
-                    { visibility: "off" }
-                ]
-            }
-        ]
-    });
-
-    addMarker(coords);
-    return map;
+const mapControls = (control, position) => {
+    MAP.addControl(control, position);
 };
 
 /**
  *
- * @returns {Promise<unknown>}
- */
-const myLocation = () => {
-    if (NAVIGATOR) {
-        return new Promise((res) => {
-            NAVIGATOR.getCurrentPosition(async (position) => {
-                res(position.coords);
-            });
-        });
-    }
-};
-
-/**
- *
- * @param coords
- * @returns {Promise<unknown>}
- */
-const latLngToAddr = (coords) => {
-    return new Promise((res) => {
-        GEOCODER.geocode({location: setLatLng(coords)}, async (address) => {
-            res(address);
-        });
-    });
-};
-
-/**
- *
- * @param address
- * @returns {Promise<unknown>}
- */
-const addrToLatLng = (address) => {
-    return new Promise((res) => {
-        GEOCODER.geocode({address: address}, (coords) => {
-            res(coords);
-        });
-    });
-};
-
-/**
- *
- * @param coords
- * @param title
- * @param icon
- * @returns {google.maps.Marker}
- */
-const addMarker = (coords, title = null, icon = null) => {
-    marker = new google.maps.Marker({
-        map: map,
-        title: title,
-        position: setLatLng(coords),
-        icon: {
-            url: icon !== null ? icon : `${document.location.origin}/assets/images/map-icon.png`, // url
-            scaledSize: new google.maps.Size(30, 30), // scaled size
-        },
-    });
-
-    return marker;
-};
-
-/**
- *
- * @param coords
- * @returns {[]}
- */
-const setMultiMarkers = (coords) => {
-    let markers = [];
-    coords.forEach((cord) => {
-        setMap();
-        latLngToAddr(cord).then(address => {
-            markers.push(addMarker(cord, address[0].formatted_address));
-        });
-    });
-
-    return markers;
-};
-
-/**
- *
- * @param coords
- * @param selector
- */
-const markerClusters = (coords, selector) => {
-    let markers = null; ZOOM = 10;
-    setMap(null, selector);
-    markers = coords.map(function(coords) {
-        coords = JSON.parse(coords);
-        let mark = addMarker(coords);
-        mark.addListener("click", async function(e) {
-            let coords = JSON.stringify({latitude: e.latLng.lat(), longitude: e.latLng.lng()});
-            let res = await ajaxRequest(`/listing-detail`, 'post', {map_location: coords});
-            showInfoWindow(showListInfo(res), mark);
-                google.maps.event.addListener(map, 'click', function(e) {closeInfoWindow();});
-        });
-
-        return mark;
-    });
-
-    // let cluster = new MarkerClusterer(map, markers, {
-    //     imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
-    // });
-};
-
-/**
- *
- * @param res
  * @returns {string}
  */
-const showListInfo = (resp) => {
-    let html = '';
-    let domain = window.location.origin;
-    resp.data.forEach((res, b) => {
-        html += `<a href="${domain}/listing-detail/${res.id}"><div class="location-thumbnaail location-image-btm"><img style="height: 170px; width: 300px;" src="${domain}/${res.thumbnail}"><div class="price-wrapp price-wrap-location">
-<p class="price" style="color:#223971"> $${res.rent} </p><div class="additional-info">
-<ul><li><p>${res.bedrooms}</p>Beds</li><li><p>${res.baths}</p>Baths</li></ul>
-<p>${res.street_address} #2</p></div></div></div></a>`;
+const setToken = () => {
+    return mapboxgl.accessToken = "pk.eyJ1IjoiZnJhbmsxMTIiLCJhIjoiY2szanJ4YWpvMDR2djNubXVpb3FnOHRuOCJ9.qeV9Ljfdoa-C5XjJI6qcsQ";
+};
+
+/**
+ *
+ * @param container
+ * @returns {MapboxGeocoder}
+ */
+const autoComplete = (container) => {
+    let $body = $('body');
+    let geoCode = new MapboxGeocoder({
+        container: container,
+        countries: "us",
+        region: 'US-NY',
+        bbox: BBOX,
+        accessToken: setToken(),
+        mapboxgl: mapboxgl,
     });
-    return html;
-};
 
-/**
- *
- * @param searchSelector
- * @returns {google.maps.places.Autocomplete}
- */
-const autoComplete = (searchSelector) => {
-    let autocomplete = new google.maps.places.Autocomplete(searchSelector);
-    autocomplete.setComponentRestrictions({'country': ['us']});
-    return autocomplete;
-};
+    document.getElementById('address').appendChild(geoCode.onAdd(MAP));
+    let $input = $body.find('.mapboxgl-ctrl > input');
+    $body.find('.mapboxgl-ctrl > svg').remove();
+    $input.attr('placeholder', 'Enter Street Address');
+    $input.attr('name', 'street_address');
+    $input.attr('autocomplete', 'off');
 
-/**
- *
- * @param content
- * @param marker
- */
-const showInfoWindow = (content, marker) => {
-    infowindow.setContent(content);
-    infowindow.open(map, marker);
-};
-
-/**
- *
- * @returns {Promise<void>}
- */
-const closeInfoWindow = async () => {
-    infowindow.close();
-};
-
-/**
- *
- * @param location
- * @returns {boolean}
- */
-const findIndex = (location) => {
-    return location.formatted_address === $('.title-subtext').text();
-};
-
-/**
- *
- * @param position
- * @param keyword
- * @returns {Promise<unknown>}
- */
-const nearByPlaces = async (position, keyword) => {
-    let request = {
-        location: setLatLng(position),
-        radius: 1000,
-        keyword: keyword
-    };
-
-    let service = new google.maps.places.PlacesService(map);
-    return new Promise(res => {
-        service.nearbySearch(request, results => {
-            res(results);
-        });
-    })
+    return geoCode;
 };
 
 /**
  *
  * @param coords
+ * @returns {*}
  */
-const findSubways = (coords) => {
-    nearByPlaces(coords, 'station').then(res => {
-        if(res.length > 0) {
-            res.forEach(value => {
-                let coords = {
-                    latitude: value.geometry.location.lat(),
-                    longitude: value.geometry.location.lng()
-                };
-                let icon = value.icon;
-                let title = value.name;
-                setSubways(title);
-                addMarker(coords, title, icon);
-            });
-        } else {
-            if($('#no-subway').length > 0) return;
-            $('.location-map-sec').find('.row:last > div:first').append('<p id="no-subway">No Subways Found</p>');
-        }
+const setMarker = (coords) => {
+    MARKER = new mapboxgl.Marker()
+        .setLngLat(setLatLng(coords))
+        .addTo(MAP);
+
+    return MARKER;
+};
+
+/**
+ *
+ * @param container
+ * @param coords
+ * @param addMarker
+ * @param showPop
+ * @returns {Map<any, any> | P.Map | Map}
+ */
+const setMap = (container, coords, addMarker = true, showPop = true, html = null) => {
+    MAP = new mapboxgl.Map({
+        accessToken: setToken(),
+        container: container,
+        maxBounds: defaultBounds, // Map View Bound To New York City Only
+        style: 'mapbox://styles/mapbox/light-v10',
+        center: setLatLng(coords),
+        zoom: 13
     });
+
+    mapControls(new mapboxgl.NavigationControl(), 'bottom-right');
+
+    MAP.flyTo({center: setLatLng(coords)});
+    (addMarker) ? setMarker(coords) : null;
+    (showPop) ? showPopUp(MARKER, html) : null;
+
+    return MAP;
+};
+
+/**
+ *
+ * @param m
+ * @param html
+ * @returns {*}
+ */
+const showPopUp = (m, html) => {
+    let popup = new mapboxgl.Popup();
+    popup.setHTML(html);
+    return m.setPopup(popup);
 };
 
 /**
  *
  * @param coords
- */
-const findSchools = (coords) => {
-    nearByPlaces(coords, 'school').then(res => {
-        if(res.length > 0) {
-            res.forEach(value => {
-                let coords = {
-                    latitude: value.geometry.location.lat(),
-                    longitude: value.geometry.location.lng()
-                };
-                let icon = value.icon;
-                let title = value.name;
-                setSchools(title);
-                addMarker(coords, title, icon);
-            });
-        } else {
-            if($('#no-school').length > 0) return;
-            $('.mob-top-mrg').append('<p id="no-school">No Schools Found</p>');
-        }
-    });
-};
-
-/**
- *
- * @param title
- */
-const setSubways = (title) => {
-    $('#no-subway').remove();
-    $('.location-map-sec').find('.row:last > div:first > ul').append(`<li>${title}</li>`);
-};
-
-/**
- *
- * @param title
- */
-const setSchools = (title) => {
-    $('#no-school').remove();
-    $('.mob-top-mrg').find('ul').append(`<li>${title}</li>`);
-};
-
-/**
- *
- * @param selector
+ * @param container
  * @param zoom
  */
-const initMap = (selector, zoom = ZOOM) => {
-    ZOOM = zoom;
-    myLocation().then(coords => {
-        setMap(coords, selector);
-        latLngToAddr(coords).then(address => {
-            marker = addMarker(coords, address[0].formatted_address);
-            showInfoWindow(address[0].formatted_address, marker);
+const multiMarkers = (coords, container, zoom = 10) => {
+    MAP = new mapboxgl.Map({
+        accessToken: setToken(),
+        container: container,
+        maxBounds: defaultBounds,
+        style: 'mapbox://styles/mapbox/light-v10',
+        center: setLatLng(defaultCoords),
+        zoom: zoom
+    });
+
+    coords.forEach((coords, i) => {
+        coords = JSON.parse(coords);
+        MAP.flyTo({center: setLatLng(coords)});
+
+        i = new mapboxgl.Marker({
+            style: "cursor:pointer",
+        })
+            .setLngLat(setLatLng(coords))
+            .setPopup( new mapboxgl.Popup().setHTML('') )
+            .addTo(MAP);
+
+        i.getElement().addEventListener('click', async function(event) {
+            MARKER = i;
+            let html = '';
+            let current = MARKER.getLngLat();
+            let domain = window.location.origin;
+            let map_location = JSON.stringify({'latitude': current.lat, 'longitude': current.lng});
+            let resp = await ajaxRequest(`/listing-detail`, 'post', {map_location: map_location});
+
+            if(resp.data.length > 1) {
+                resp.data.forEach((res, b) => {
+                    html += `<a href="${domain}/listing-detail/${res.id}"><div class="location-thumbnaail location-image-btm"><img style="height: 170px; width: 300px;" src="${domain}/${res.thumbnail}"><div class="price-wrapp price-wrap-location">
+<p class="price" style="color:#223971">`+ '$'+res.rent.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') +`</p><div class="additional-info">
+ <ul><li><p>${res.bedrooms}</p>Beds</li><li><p>${res.baths}</p>Baths</li></ul>
+ </div></div></div> <p>${res.street_address} </p></a>`;
+                 });
+                setTimeout(() => {
+                    $('body').find('.mapboxgl-popup-content').addClass('single');
+                    $('.single').css({'overflow-y': 'auto'});
+                },10);
+            } else {
+                html += `<a href="${domain}/listing-detail/${resp.data[0].id}"><div class="location-thumbnaail location-image-btm"><img style="height: 170px; width: 300px;" src="${domain}/${resp.data[0].thumbnail}"><div class="price-wrapp price-wrap-location">
+ <p class="price" style="color:#223971">` + '$' + resp.data[0].rent.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + `</p><div class="additional-info">
+<ul><li><p>${resp.data[0].bedrooms}</p>Beds</li><li><p>${resp.data[0].baths}</p>Baths</li></ul>
+</div></div></div> <p>${resp.data[0].street_address} </p></a>`;
+             }
+
+            i.getPopup().setHTML(html);
         });
     });
+
+    mapControls(new mapboxgl.NavigationControl(), 'bottom-right');
+};
+
+/**
+ *
+ * @param container
+ */
+const initMap = (container) => {
+    MAP = new mapboxgl.Map({
+        container: container,
+        style: "mapbox://styles/mapbox/light-v10",
+        center: setLatLng(defaultCoords), // New York Center Point
+        maxBounds: defaultBounds, // Map View Bound To New York City Only
+        scrollZoom: false,
+        accessToken: setToken(),
+        logoPosition: "top-left",
+        attributionControl: true,
+        customAttribution: "New York City Map",
+        zoom: 12,
+    });
+
+    MAP.flyTo({center: setLatLng(defaultCoords)});
+    mapControls(new mapboxgl.NavigationControl(), 'bottom-right');
+    setMarker(defaultCoords);
+
+    return MAP;
 };
 
 /**
  *
  * @param coords
- * @param mapSelector
- * @param nearByLocations
- * @param Zoom
+ * @returns {Promise<void>}
  */
-const mapWithNearbyLocations = (coords, mapSelector, nearByLocations = false, Zoom = 16) => {
-    if (coords !== null && coords !== '') {
-        ZOOM = Zoom;
-        setMap(coords, mapSelector);
-        latLngToAddr(coords).then(location => {
+const schoolZone = async (coords) => {
+    coords.range = 1200;
+    await ajaxRequest('/nyc-data', 'post', coords, false).then(response => {
+        response = JSON.parse(response);
+        schoolData(response.schoolData);
+        transportation(response.transportationData);
+    }).catch(err => {
+        console.log(err);
+    });
+};
 
-            let index = location.findIndex(findIndex);
+/**
+ *
+ * @param data
+ * @returns {Promise<void>}
+ */
+const transportation = async (data) => {
+    if(data.length > 0) {
+        data.forEach((res, i) => {
+            let html = '<div class="transportation">';
+            // setMarker(res.coords);
+            res.line_badge.forEach(badge => {
+                badge = badge.replace('Express', '');
+                html += `<span class="span-box text-${badge.toLowerCase()}"> ${badge} </span> `;
+            });
 
-            if(nearByLocations) {
-                findSubways(coords); findSchools(coords);
-            }
+            html += `<span>  ${res.name}</span></div>`;
+            $('body').find('#subways').append(html);
 
-            if (index !== -1) {
-                marker = addMarker(coords, location[0].formatted_address);
-                showInfoWindow(location[0].formatted_address, marker);
-            }
         });
+    } else {
+        $('body').find('#subways').append(`<span>No Transportation Found</span>`);
     }
 };
+
+/**
+ *
+ * @param data
+ * @returns {Promise<void>}
+ */
+const schoolData = async (data) => {
+    if(data.length > 0) {
+        $('body').find('#insideschool').append(`<a href="${data[2]}" target="_blank">${data[1]}</a>`);
+        data.forEach((res, i) => {
+            drawPolygon(res, i);
+        });
+    } else {
+        $('body').find('#insideschool').append(`<span>No School Zone Found</span>`);
+    }
+};
+
+/**
+ *
+ * @param $coordinates
+ * @param id
+ */
+const drawPolygon = ($coordinates, id) => {
+    MAP.addLayer({
+        'id': `maine-${id}`,
+        'type': 'fill',
+        'source': {
+            'type': 'geojson',
+            'data': {
+                'type': 'Feature',
+                'geometry': {
+                    'type': 'Polygon',
+                    'coordinates': $coordinates
+                }
+            }
+        },
+        'layout': {},
+        'paint': {
+            'fill-color': 'red',
+            'fill-opacity': 0.5
+        }
+    });
+};
+
+/**
+ * jquery api call
+ */
+$(() => {
+    $('body').on('keyup, blur', '.mapboxgl-ctrl-geocoder--input', function() {
+        let required = ['poi', 'address'];
+        setTimeout(() => {
+        var mapboxClient = mapboxSdk({ accessToken: setToken() });
+        mapboxClient.geocoding.forwardGeocode({
+            limit: 1,
+            bbox: BBOX,
+            countries: ['us'],
+            query: $(this).val(),
+        })
+        .send()
+        .then(function (response) {
+            $('.loader').hide();
+            response = JSON.parse(response.rawBody);
+            if(response && response.features[0].place_type) {
+                response.features[0].place_type.forEach(res => {
+                   if(required.includes(res)) {
+                       let streetAddress = null;
+                       let displayAddress = null;
+                       response = response.features[0];
+                       let neighborhood = response.context[0];
+                       let coords = response.geometry.coordinates;
+                       let addressArray = response.place_name.split(',');
+
+                       if(res === 'poi') {
+                           streetAddress = addressArray[0];
+                           displayAddress = addressArray[1];
+                       } else {
+                           streetAddress = addressArray[0];
+                           displayAddress = streetAddress;
+                       }
+
+                       if(neighborhood.id.includes('neighborhood')) {
+                           $('input[name=neighborhood]').attr('readonly');
+                           $('input[name=neighborhood]').val(neighborhood.text);
+                       } else {
+                           $('input[name=neighborhood]').removeAttr('readonly');
+                       }
+
+                       $('input[name=display_address]').val(displayAddress);
+                       $('body').find('.mapboxgl-ctrl > input').val(streetAddress);
+                       $('body').find('input[name=map_location]').val(JSON.stringify({latitude: coords[1], longitude: coords[0]}));
+                       setMap('map', response.center, true, true, streetAddress);
+
+                   } else {
+                       let $validator = $(`#${$('body').find('form').attr('id')}`).validate();
+                       let errors = { street_address: "Not a valid street address" };
+                       $validator.showErrors(errors);
+                   }
+                });
+            }
+        }).catch(function (error) {
+            console.log('err => ',error);
+            $('.loader').hide();
+        });
+        }, 100);
+    });
+});

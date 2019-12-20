@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Services\FeatureListingService;
 use App\Services\SearchService;
+use App\Traits\DispatchNotificationService;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
@@ -48,6 +49,10 @@ class HomeController extends Controller {
 		return view('index', compact('featured_listings'));
 	}
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
+     */
 	public function getStarted(Request $request) {
         $data = [
             'from'    => $request->email,
@@ -67,19 +72,43 @@ class HomeController extends Controller {
                 'comment' => $request->description,
             ],
         ];
-        dispatchEmailQueue($data);
+        //dispatchEmailQueue($data);
+        DispatchNotificationService::GETSTARED(toObject([
+            'from' => $request->email,
+            'to'   => mailToAdmin(),
+            'data' => $data['data']
+        ]));
+
         return sendResponse($request, true, 'Request has been sent successfully');
     }
 
     /**
      * @param Request $request
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
     public function letUsHelp(Request $request) {
         $request->agentsWithPremiumPlan = true;
         $data = toObject(['listings' => $this->searchService->search($request)]);
+        $agents = [];
         foreach ($data->listings as $user) {
-            dd(agents($user->user_id));
+              $agents =   agents($user->user_id);
         }
+        $data = [
+            'data'    => [
+                'first_name'   => $request->first_name,
+                'email'        => $request->email,
+                'phone_number' => $request->phone_number,
+            ],
+        ];
+        //dispatchEmailQueue($data);
+        DispatchNotificationService::LETUSHELP(toObject([
+            'from' => $request->email,
+            'to'   => $agents ,
+            'data' => $data['data']
+        ]));
+
+
+        return sendResponse($request, true, 'Request has been sent successfully');
     }
 
 	/**

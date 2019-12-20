@@ -9,17 +9,22 @@
             <div class="info">
                 <p class="title">{{ str_limit(is_exclusive($al), STR_LIMIT_LIST_VIEW, ' ...') }}</p>
                 <p><i class="fa fa-tag"></i> ${{ ($al->rent) ?   number_format($al->rent,0) : 'None' }}</p>
-                <p>Freshness Score : 90%</p>
+                <p>Freshness Score : {{ $al->freshness_score }}%</p>
                 <ul>
                     <li><i class="fa fa-bed"></i> {{ str_formatting($al->bedrooms, 'Bed') }}</li>
                     <li><i class="fa fa-bath"></i> {{ str_formatting($al->baths, 'Bath') }}</li>
                 </ul>
                 {!! $al->realty_id ? "<p><i class='fa fa-map-marker-alt'></i> RealtyMX ID: {$al->realty_id}</p>" : '' !!}
                 <p>Posted On: {{ $al->created_at->format("m/d/y H:m A") }}</p>
-                <a href="{{ route(whoAmI().'.listingStatus', $al->id) }}" title="Unpublish this property"><span class="status">Active</span></a>
-                @if($al->is_featured != REJECTFEATURED)
-                    <span class="status" style="margin-right: 60px;background: blueviolet;">{{($al->is_featured == REQUESTFEATURED) ? 'Requested for feature' : 'Featured' }}</span>
-                @endif
+                <div class="badges">
+                    @if($al->is_featured != REJECTFEATURED)
+                        <span class="status" style="background: blueviolet;">{{($al->is_featured == REQUESTFEATURED) ? 'Requested for feature' : 'Featured' }}</span>
+                    @endif
+                    @if(!empty($al->realty_id))
+                        <span class="status" style="background: #213971;">Realty Feed</span>
+                    @endif
+                        <span class="status">Available</span>
+                </div>
                 <div class="actions-btns">
                     <a href="{{ route(whoAmI().'.editListing', $al->id) }}">
                         <span><img src="{{asset('assets/images/edit-icon.png')}}" alt=""></span>
@@ -32,6 +37,9 @@
                     </a>
                     <a href="{{ route(whoAmI().'.repostListing', $al->id) }}">
                         <button type="button" class="border-btn">Repost</button>
+                    </a>
+                    <a href="{{ route(whoAmI().'.listingStatus', $al->id) }}" title="Unpublish this Listing">
+                        <button type="button" class="border-btn">Archive</button>
                     </a>
                     @if($al->is_featured != APPROVEFEATURED)
                         <a href="{{ route(whoAmI().(isAdmin() ? '.approveFeature' : '.requestFeatured'), $al->id) }}">
@@ -65,22 +73,28 @@
                             {{ str_limit(is_exclusive($al), STR_LIMIT_GRID_VIEW, ' ...') }}
                         </p>
                         <p><i class="fa fa-tag"></i> ${{ ($al->rent) ?   number_format($al->rent,0) : 'None' }}</p>
-                        <p>Freshness Score : 90%</p>
+                        <p>Freshness Score : {{ $al->freshness_score }}%</p>
                         <ul>
                             <li><i class="fa fa-bed"></i> {{ str_formatting($al->bedrooms, 'Bed') }}</li>
                             <li><i class="fa fa-bath"></i> {{ str_formatting($al->baths, 'Bath') }}</li>
                         </ul>
                         {!! $al->realty_id ? "<p><i class='fa fa-map-marker-alt'></i> RealtyMX ID: {$al->realty_id}</p>" : '' !!}
                         <p>Posted On: {{ $al->created_at->format("m/d/y H:m A") }}</p>
-                        <a href="{{ route(whoAmI().'.listingStatus', $al->id) }}" title="Unpublish this property">
-                            <span class="status">Active</span>
-                        </a>
-                        @if($al->is_featured != REJECTFEATURED)
-                            <span class="status" style="margin-right: 60px;background: blueviolet;">{{($al->is_featured == REQUESTFEATURED) ? 'Requested for feature' : 'Featured' }}</span>
-                        @endif
+                        <div class="grid-badges">
+                            @if($al->is_featured != REJECTFEATURED)
+                                <span class="status" style="background: blueviolet;">{{($al->is_featured == REQUESTFEATURED) ? 'Requested for feature' : 'Featured' }}</span>
+                            @endif
+                            @if(!empty($al->realty_id))
+                                <span class="status" style="background: #213971;">Realty Feed</span>
+                            @endif
+                                <span class="status">Available</span>
+                        </div>
                         <div class="actions-btns">
                             <a href="{{ route(whoAmI().'.repostListing', $al->id) }}">
                                 <button type="button" class="border-btn">Repost</button>
+                            </a>
+                            <a href="{{ route(whoAmI().'.listingStatus', $al->id) }}" title="Unpublish this Listing">
+                                <button type="button" class="border-btn">Archive</button>
                             </a>
                             @if($al->is_featured != APPROVEFEATURED)
                                 <a href="{{ route(whoAmI().(isAdmin() ? '.approveFeature' : '.requestFeatured'), $al->id) }}">

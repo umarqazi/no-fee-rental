@@ -7,6 +7,7 @@
             <a href="{{ route('agent.addListing') }}" class="btn-default">New Listing</a>
 
         </div>
+        <div class="filter-mobile-data-wrapper">
         <div class="filter-mobile-data">
             <i class="fa fa-bars"></i> Filters
             <div class="filter-wrapper-mobile listing-container">
@@ -37,6 +38,7 @@
                 </div>
             </div>
         </div>
+    </div>
         <div class="block listing-container" id="app">
             <div class="heading-wrapper pl-0">
                 <ul class="nav nav-pills">
@@ -44,13 +46,13 @@
                         <a class="nav-link" data-toggle="pill" href="#listing-active">Active ( {{ $listing->active->total() }} )</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="pill" href="#listing-realty">Realty ( {{ $listing->realty->total() }} )</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" data-toggle="pill" href="#listing-inactive">Inactive ( {{ $listing->inactive->total() }} )</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="pill" href="#listing-pending">Pending Requests ( {{ $listing->pending->total() }} )</a>
+                        <a class="nav-link" data-toggle="pill" href="#listing-archived">Archived ( {{ $listing->archived->total() }} )</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="pill" href="#listing-pending">Pending Request ( {{ $listing->pending->total() }} )</a>
                     </li>
                 </ul>
                 <div class="filter-wrapper">
@@ -82,11 +84,11 @@
                     <div class="tab-pane" id="listing-active">
                         @include('listing-features.active_listing')
                     </div>
-                    <div class="tab-pane" id="listing-realty">
-                        @include('listing-features.realty_listing')
-                    </div>
                     <div class="tab-pane fade" id="listing-inactive">
                         @include('listing-features.inactive_listing')
+                    </div>
+                    <div class="tab-pane fade" id="listing-archived">
+                        @include('listing-features.archive_listing')
                     </div>
                     <div class="tab-pane fade" id="listing-pending">
                         @include('listing-features.pending_listing')

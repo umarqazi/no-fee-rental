@@ -51,10 +51,11 @@
                     <div class="pt-4 -b-4">
                         {!! Form::text('priceRange', null, ['class' => 'input-style rent-input-icon']) !!}
                     </div>
+                    <p id="price-err"style="color:red; display: none">Rent is required.</p>
                 </div>
                 <div class="modal-footer text-center">
                     <button class="btn-default" type="button" data-target="let-us-step1">Previous</button>
-                    <button class="btn-default ml-3" type="button" data-target="let-us-step3">Next</button>
+                    <button class="btn-default ml-3" id="price-btn" type="button" data-target="let-us-step3" >Next</button>
                 </div>
 
             </div>
@@ -77,49 +78,73 @@
                 <!-- Modal body -->
                 <div class="modal-body">
                     <div class="pt-4 -b-4">
-                        <ul class="bedroom-listing">
-                            <li>
-                                <div class="custom-control custom-checkbox">
-                                    {!! Form::checkbox('beds[]', 'studio', null, ['class' => 'custom-control-input', 'id' => 'bedrooms-1']) !!}
-                                    <label class="custom-control-label" for="bedrooms-1">Studio</label>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="custom-control custom-checkbox">
-                                    {!! Form::checkbox('beds[]', '1', null, ['class' => 'custom-control-input', 'id' => 'bedrooms-2']) !!}
-                                    <label class="custom-control-label" for="bedrooms-2">1</label>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="custom-control custom-checkbox">
-                                    {!! Form::checkbox('beds[]', '2', null, ['class' => 'custom-control-input', 'id' => 'bedrooms-3']) !!}
-                                    <label class="custom-control-label" for="bedrooms-3">2</label>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="custom-control custom-checkbox">
-                                    {!! Form::checkbox('beds[]', '3', null, ['class' => 'custom-control-input', 'id' => 'bedrooms-4']) !!}
-                                    <label class="custom-control-label" for="bedrooms-4">3</label>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="custom-control custom-checkbox">
-                                    {!! Form::checkbox('beds[]', '4', null, ['class' => 'custom-control-input', 'id' => 'bedrooms-5']) !!}
-                                    <label class="custom-control-label" for="bedrooms-5">4</label>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="custom-control custom-checkbox">
-                                    {!! Form::checkbox('beds[]', '5', null, ['class' => 'custom-control-input', 'id' => 'bedrooms-6']) !!}
-                                    <label class="custom-control-label" for="bedrooms-6">5</label>
-                                </div>
-                            </li>
-                        </ul>
+{{--                        <ul class="bedroom-listing">--}}
+{{--                            <li>--}}
+{{--                                <div class="custom-control custom-checkbox">--}}
+{{--                                    {!! Form::checkbox('beds[]', 'studio', null, ['class' => 'custom-control-input', 'id' => 'bedrooms-1']) !!}--}}
+{{--                                    <label class="custom-control-label" for="bedrooms-1">Studio</label>--}}
+{{--                                </div>--}}
+{{--                            </li>--}}
+{{--                            <li>--}}
+{{--                                <div class="custom-control custom-checkbox">--}}
+{{--                                    {!! Form::checkbox('beds[]', '1', null, ['class' => 'custom-control-input', 'id' => 'bedrooms-2']) !!}--}}
+{{--                                    <label class="custom-control-label" for="bedrooms-2">1</label>--}}
+{{--                                </div>--}}
+{{--                            </li>--}}
+{{--                            <li>--}}
+{{--                                <div class="custom-control custom-checkbox">--}}
+{{--                                    {!! Form::checkbox('beds[]', '2', null, ['class' => 'custom-control-input', 'id' => 'bedrooms-3']) !!}--}}
+{{--                                    <label class="custom-control-label" for="bedrooms-3">2</label>--}}
+{{--                                </div>--}}
+{{--                            </li>--}}
+{{--                            <li>--}}
+{{--                                <div class="custom-control custom-checkbox">--}}
+{{--                                    {!! Form::checkbox('beds[]', '3', null, ['class' => 'custom-control-input', 'id' => 'bedrooms-4']) !!}--}}
+{{--                                    <label class="custom-control-label" for="bedrooms-4">3</label>--}}
+{{--                                </div>--}}
+{{--                            </li>--}}
+{{--                            <li>--}}
+{{--                                <div class="custom-control custom-checkbox">--}}
+{{--                                    {!! Form::checkbox('beds[]', '4', null, ['class' => 'custom-control-input', 'id' => 'bedrooms-5']) !!}--}}
+{{--                                    <label class="custom-control-label" for="bedrooms-5">4</label>--}}
+{{--                                </div>--}}
+{{--                            </li>--}}
+{{--                            <li>--}}
+{{--                                <div class="custom-control custom-checkbox">--}}
+{{--                                    {!! Form::checkbox('beds[]', '5', null, ['class' => 'custom-control-input', 'id' => 'bedrooms-6']) !!}--}}
+{{--                                    <label class="custom-control-label" for="bedrooms-6">5</label>--}}
+{{--                                </div>--}}
+{{--                            </li>--}}
+{{--                        </ul>--}}
+                        <div class="form-group" id="advance-search-chkbox">
+                            <label class="label">Beds <span>(Select all that applies)</span></label>
+                            <ul id="beds">
+                                <li> <input type="checkbox" value="studio" id="bed-Checkbox" name="Checkbox">
+                                    <label for="bed-Checkbox"><span class="label-name">Studio</span></label>
+                                </li>
+                                <li> <input type="checkbox" value="1" id="bed-Checkbox-1" name="beds[]">
+                                    <label for="bed-Checkbox-1"><span class="label-name">1</span></label>
+                                </li>
+                                <li> <input type="checkbox" value="2" id="bed-Checkbox-2" name="beds[]">
+                                    <label for="bed-Checkbox-2"><span class="label-name">2</span></label>
+                                </li>
+                                <li> <input type="checkbox" value="3" id="bed-Checkbox-3" name="beds[]">
+                                    <label for="bed-Checkbox-3"><span class="label-name">3</span></label>
+                                </li>
+                                <li> <input type="checkbox" value="4" id="bed-Checkbox-4" name="beds[]">
+                                    <label for="bed-Checkbox-4"><span class="label-name">4</span></label>
+                                </li>
+                                <li> <input type="checkbox" value="5" id="bed-Checkbox-5" name="beds[]">
+                                    <label for="bed-Checkbox-5"><span class="label-name">5+</span></label>
+                                </li>
+                            </ul>
+                        </div>
+                        <p id="bed-err"style="color:red; display: none">Bedroom is required.</p>
                     </div>
                 </div>
                 <div class="modal-footer text-center">
                     <button class="btn-default" type="button" data-target="let-us-step2">Previous</button>
-                    <button class="btn-default ml-3" type="button" data-target="let-us-step4">Next</button>
+                    <button class="btn-default ml-3" id="bed-btn" type="button" data-target="let-us-step4">Next</button>
                 </div>
 
             </div>
@@ -144,10 +169,11 @@
                     <div class="pt-4 -b-4">
                         {!! Form::text('username', null, ['class' => 'input-style', 'placeholder' => 'Full Name *']) !!}
                     </div>
+                    <p id="name-err"style="color:red; display: none">Name is required.</p>
                 </div>
                 <div class="modal-footer text-center">
                     <button class="btn-default" type="button" data-target="let-us-step3">Previous</button>
-                    <button class="btn-default ml-3" type="button" data-target="let-us-step5">Next</button>
+                    <button class="btn-default ml-3" id="name-btn" type="button" data-target="let-us-step5">Next</button>
                 </div>
 
             </div>
@@ -170,12 +196,13 @@
                 <!-- Modal body -->
                 <div class="modal-body">
                     <div class="pt-4 -b-4">
-                        {!! Form::email('email', null, ['class' => 'input-style', 'placeholder' => 'Email *']) !!}
+                        {!! Form::email('email', null, ['class' => 'input-style', 'placeholder' => 'Email *','id'=>'let-us-help-email']) !!}
                     </div>
+                    <p id="email-err"style="color:red; display: none">Email is required.</p>
                 </div>
                 <div class="modal-footer text-center">
                     <button class="btn-default" type="button" data-target="let-us-step4">Previous</button>
-                    <button class="btn-default ml-3" type="button" data-target="let-us-step6">Next</button>
+                    <button class="btn-default ml-3" id="email-btn" type="button" data-target="let-us-step6">Next</button>
                 </div>
 
             </div>
@@ -198,12 +225,13 @@
                 <!-- Modal body -->
                 <div class="modal-body">
                     <div class="pt-4 -b-4">
-                        {!! Form::text('phone_number', null, ['class' => 'input-style', 'placeholder' => 'Phone *']) !!}
+                        {!! Form::text('phone_number', null, ['class' => 'input-style', 'placeholder' => 'Phone *','id'=>'let-us-us-help-phone_number']) !!}
                     </div>
+                    <p id="phone-err"style="color:red; display: none">Phone Number is required.</p>
                 </div>
                 <div class="modal-footer text-center">
                     <button class="btn-default" type="button" data-target="let-us-step5">Previous</button>
-                    <button class="btn-default ml-3" type="button" data-target="let-us-step7">Next</button>
+                    <button class="btn-default ml-3" id="phone-btn" type="button" data-target="let-us-step7">Next</button>
                 </div>
             </div>
 
@@ -212,7 +240,7 @@
                 <div class="modal-body">
                     <div class="pt-4 -b-4">
                         <img src="assets/images/popcorn-icon.jpg" alt="" class="popcorn-icon" />
-                        <h3 class="mb-2 text-center">Thanks Danielle!</h3>
+                        <h3 class="mb-2 text-center">Thanks {{authenticated() ? mySelf()->first_name : ''}}</h3>
                         <p class="text-center">We can help you even faster if you answer a few question about your search.</p>
                     </div>
                 </div>
@@ -244,28 +272,28 @@
                         <ul class="bedroom-listing">
                             <li>
                                 <div class="custom-control custom-radio custom-control-inline">
-                                    {!! Form::radio('location-preference', 1, false, ['class' => 'custom-control-input', 'id' => 'location-1']) !!}
-                                    <label class="custom-control-label" for="location-1">Finding a Home ( Client )</label>
+                                    {!! Form::radio('location-preference', 1, false, ['class' => 'custom-control-input', 'id' => 'location-1','onclick'=>'openSpecificModal(this)']) !!}
+                                    <label class="custom-control-label" for="location-1">Yes, I'm intrested in certain neighborhoods...</label>
                                 </div>
                             </li>
                             <li>
                                 <div class="custom-control custom-radio custom-control-inline">
-                                    {!! Form::radio('location-preference', 2, false, ['class' => 'custom-control-input', 'id' => 'location-2']) !!}
+                                    {!! Form::radio('location-preference', 2, false, ['class' => 'custom-control-input', 'id' => 'location-2','onclick'=>'openSpecificModal(this)']) !!}
                                     <label class="custom-control-label" for="location-2">I have something very specific i’m looking for...</label>
                                 </div>
                             </li>
                             <li>
                                 <div class="custom-control custom-radio custom-control-inline">
-                                    {!! Form::radio('location-preference', 3, false, ['class' => 'custom-control-input', 'id' => 'location-3']) !!}
+                                    {!! Form::radio('location-preference', 3, false, ['class' => 'custom-control-input', 'id' => 'location-3','onclick'=>'openSpecificModal(this)']) !!}
                                     <label class="custom-control-label" for="location-3">No, I’m open to anything</label>
                                 </div>
                             </li>
+                            <p id="location-preference-err"style="color:red; display: none">Location Preference is required.</p>
                         </ul>
                     </div>
-                    <div class="text-center"><button type="button" class="btn-default skip-btn" data-target="let-us-step9">Skip</button></div>
                 </div>
                 <div class="modal-footer text-center">
-                    <button class="btn-default ml-3" type="button" data-target="let-us-step9">Next</button>
+                    <button class="btn-default ml-3" type="button" id="location-preference-button" >Next</button>
                 </div>
 
             </div>
@@ -282,162 +310,69 @@
                         <li></li>
                         <li></li>
                     </ul>
-                    <h3 class="modal-title">Search for neighborhood</h3>
+                    <h3 class="modal-title">Do you have any location / neighborhood preferences?</h3>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
 
                 <!-- Modal body -->
                 <div class="modal-body">
                     <div class="pt-4 -b-4">
-                        {!! Form::text('neighborhoods', null, ['class' => 'input-style', 'placeholder' => '+ Search for neighborhood']) !!}
-
-                        <!-- Nav pills -->
-{{--                        <ul class="nav nav-pills">--}}
-{{--                            <li class="nav-item">--}}
-{{--                                <a class="nav-link active" data-toggle="pill" href="#tab-1">All <span>308</span></a>--}}
-{{--                            </li>--}}
-{{--                            <li class="nav-item">--}}
-{{--                                <a class="nav-link" data-toggle="pill" href="#tab-2">Selected <span>4</span></a>--}}
-{{--                            </li>--}}
-{{--                            <span class="deselect">Deselect All</span>--}}
-{{--                        </ul>--}}
-
-                        <!-- Tab panes -->
-{{--                        <div class="tab-content">--}}
-{{--                            <div class="tab-pane active" id="tab-1">--}}
-{{--                                <ul class="cities-list">--}}
-{{--                                    <li>--}}
-{{--                                        <div class="custom-control custom-checkbox">--}}
-{{--                                            <input type="checkbox" class="custom-control-input" id="cities-1" name="cities">--}}
-{{--                                            <label class="custom-control-label" for="cities-1">2</label>--}}
-{{--                                        </div>--}}
-{{--                                    </li>--}}
-{{--                                    <li>--}}
-{{--                                        <div class="custom-control custom-checkbox">--}}
-{{--                                            <input type="checkbox" class="custom-control-input" id="cities-2" name="cities">--}}
-{{--                                            <label class="custom-control-label" for="cities-2">2</label>--}}
-{{--                                        </div>--}}
-{{--                                    </li>--}}
-{{--                                    <li>--}}
-{{--                                        <div class="custom-control custom-checkbox">--}}
-{{--                                            <input type="checkbox" class="custom-control-input" id="cities-3" name="cities">--}}
-{{--                                            <label class="custom-control-label" for="cities-3">2</label>--}}
-{{--                                        </div>--}}
-{{--                                    </li>--}}
-{{--                                    <li>--}}
-{{--                                        <div class="custom-control custom-checkbox">--}}
-{{--                                            <input type="checkbox" class="custom-control-input" id="cities-4" name="cities">--}}
-{{--                                            <label class="custom-control-label" for="cities-4">2</label>--}}
-{{--                                        </div>--}}
-{{--                                    </li>--}}
-{{--                                    <li>--}}
-{{--                                        <div class="custom-control custom-checkbox">--}}
-{{--                                            <input type="checkbox" class="custom-control-input" id="cities-5" name="cities">--}}
-{{--                                            <label class="custom-control-label" for="cities-5">2</label>--}}
-{{--                                        </div>--}}
-{{--                                    </li>--}}
-{{--                                    <li>--}}
-{{--                                        <div class="custom-control custom-checkbox">--}}
-{{--                                            <input type="checkbox" class="custom-control-input" id="cities-6" name="cities">--}}
-{{--                                            <label class="custom-control-label" for="cities-6">2</label>--}}
-{{--                                        </div>--}}
-{{--                                    </li>--}}
-{{--                                    <li>--}}
-{{--                                        <div class="custom-control custom-checkbox">--}}
-{{--                                            <input type="checkbox" class="custom-control-input" id="cities-7" name="cities">--}}
-{{--                                            <label class="custom-control-label" for="cities-7">2</label>--}}
-{{--                                        </div>--}}
-{{--                                    </li>--}}
-{{--                                    <li>--}}
-{{--                                        <div class="custom-control custom-checkbox">--}}
-{{--                                            <input type="checkbox" class="custom-control-input" id="cities-9" name="cities">--}}
-{{--                                            <label class="custom-control-label" for="cities-9">2</label>--}}
-{{--                                        </div>--}}
-{{--                                    </li>--}}
-{{--                                    <li>--}}
-{{--                                        <div class="custom-control custom-checkbox">--}}
-{{--                                            <input type="checkbox" class="custom-control-input" id="cities-10" name="cities">--}}
-{{--                                            <label class="custom-control-label" for="cities-10">2</label>--}}
-{{--                                        </div>--}}
-{{--                                    </li>--}}
-{{--                                    <li>--}}
-{{--                                        <div class="custom-control custom-checkbox">--}}
-{{--                                            <input type="checkbox" class="custom-control-input" id="cities-11" name="cities">--}}
-{{--                                            <label class="custom-control-label" for="cities-11">2</label>--}}
-{{--                                        </div>--}}
-{{--                                    </li>--}}
-{{--                                    <li>--}}
-{{--                                        <div class="custom-control custom-checkbox">--}}
-{{--                                            <input type="checkbox" class="custom-control-input" id="cities-12" name="cities">--}}
-{{--                                            <label class="custom-control-label" for="cities-12">2</label>--}}
-{{--                                        </div>--}}
-{{--                                    </li>--}}
-{{--                                    <li>--}}
-{{--                                        <div class="custom-control custom-checkbox">--}}
-{{--                                            <input type="checkbox" class="custom-control-input" id="cities-13" name="cities">--}}
-{{--                                            <label class="custom-control-label" for="cities-13">2</label>--}}
-{{--                                        </div>--}}
-{{--                                    </li>--}}
-{{--                                    <li>--}}
-{{--                                        <div class="custom-control custom-checkbox">--}}
-{{--                                            <input type="checkbox" class="custom-control-input" id="cities-14" name="cities">--}}
-{{--                                            <label class="custom-control-label" for="cities-14">2</label>--}}
-{{--                                        </div>--}}
-{{--                                    </li>--}}
-{{--                                    <li>--}}
-{{--                                        <div class="custom-control custom-checkbox">--}}
-{{--                                            <input type="checkbox" class="custom-control-input" id="cities-15" name="cities">--}}
-{{--                                            <label class="custom-control-label" for="cities-15">2</label>--}}
-{{--                                        </div>--}}
-{{--                                    </li>--}}
-{{--                                    <li>--}}
-{{--                                        <div class="custom-control custom-checkbox">--}}
-{{--                                            <input type="checkbox" class="custom-control-input" id="cities-16" name="cities">--}}
-{{--                                            <label class="custom-control-label" for="cities-16">2</label>--}}
-{{--                                        </div>--}}
-{{--                                    </li>--}}
-{{--                                    <li>--}}
-{{--                                        <div class="custom-control custom-checkbox">--}}
-{{--                                            <input type="checkbox" class="custom-control-input" id="cities-17" name="cities">--}}
-{{--                                            <label class="custom-control-label" for="cities-17">2</label>--}}
-{{--                                        </div>--}}
-{{--                                    </li>--}}
-{{--                                    <li>--}}
-{{--                                        <div class="custom-control custom-checkbox">--}}
-{{--                                            <input type="checkbox" class="custom-control-input" id="cities-18" name="cities">--}}
-{{--                                            <label class="custom-control-label" for="cities-18">2</label>--}}
-{{--                                        </div>--}}
-{{--                                    </li>--}}
-{{--                                    <li>--}}
-{{--                                        <div class="custom-control custom-checkbox">--}}
-{{--                                            <input type="checkbox" class="custom-control-input" id="cities-19" name="cities">--}}
-{{--                                            <label class="custom-control-label" for="cities-19">2</label>--}}
-{{--                                        </div>--}}
-{{--                                    </li>--}}
-{{--                                    <li>--}}
-{{--                                        <div class="custom-control custom-checkbox">--}}
-{{--                                            <input type="checkbox" class="custom-control-input" id="cities-20" name="cities">--}}
-{{--                                            <label class="custom-control-label" for="cities-20">2</label>--}}
-{{--                                        </div>--}}
-{{--                                    </li>--}}
-{{--                                    <li>--}}
-{{--                                        <div class="custom-control custom-checkbox">--}}
-{{--                                            <input type="checkbox" class="custom-control-input" id="cities-21" name="cities">--}}
-{{--                                            <label class="custom-control-label" for="cities-21">2</label>--}}
-{{--                                        </div>--}}
-{{--                                    </li>--}}
-{{--                                    <li>--}}
-{{--                                        <div class="custom-control custom-checkbox">--}}
-{{--                                            <input type="checkbox" class="custom-control-input" id="cities-22" name="cities">--}}
-{{--                                            <label class="custom-control-label" for="cities-22">2</label>--}}
-{{--                                        </div>--}}
-{{--                                    </li>--}}
-{{--                                </ul>--}}
-{{--                            </div>--}}
-{{--                            <div class="tab-pane fade" id="tab-2">...</div>--}}
-{{--                        </div>--}}
-
+                        {{--{!! Form::text('neighborhood', null, ['class' => 'input-style', 'placeholder' => '+ Search for neighborhood']) !!}--}}
+                        {!! Form::textarea('location_or_neighborhood', null, ['class' => 'input-style text-area', 'style' => 'resize:none;','placeholder' => 'What are you looking for?']) !!}
                     </div>
+                    <div class="text-center"><button type="button" class="btn-default skip-btn" data-target="let-us-step10">Skip</button></div>
+                </div>
+                <div class="modal-footer text-center">
+                    <button class="btn-default ml-3" type="button" data-target="let-us-step8">Previous</button>
+                    <button class="btn-default ml-3" type="button" data-target="let-us-step10">Next</button>
+                </div>
+
+            </div>
+
+            <div class="let-us-hlep-form" id="let-us-step14">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <ul class="steps-progress">
+                        <li class="active"></li>
+                        <li class="active"></li>
+                        <li class="active"></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                    </ul>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="pt-4 -b-4">
+                        {!! Form::text('neighborhood', null, ['class' => 'input-style', 'placeholder' => '+ Search for neighborhood']) !!}
+                    </div>
+
+                    <ul class="nav nav-pills">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="pill" href="#tab-1">All <span>308</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="pill" href="#tab-2">Selected <span>4</span></a>
+                        </li>
+                        <span class="deselect">Deselect All</span>
+                    </ul>
+
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tab-1">
+                            <ul class="neighborhood-list">
+                                <li>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="cities-1" name="cities">
+                                        <label class="custom-control-label" for="cities-1">2</label>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                </div>
+
                     <div class="text-center"><button type="button" class="btn-default skip-btn" data-target="let-us-step10">Skip</button></div>
                 </div>
                 <div class="modal-footer text-center">
@@ -502,7 +437,7 @@
                     <div class="text-center"><button type="button" class="btn-default skip-btn" data-target="let-us-step11">Skip</button></div>
                 </div>
                 <div class="modal-footer text-center">
-                    <button class="btn-default ml-3" type="button" data-target="let-us-step9">Previous</button>
+                    <button class="btn-default ml-3" type="button" data-target="let-us-step8">Previous</button>
                     <button class="btn-default ml-3" type="button" data-target="let-us-step11">Next</button>
                 </div>
 
@@ -624,7 +559,7 @@
                         <li class="active"></li>
                         <li class="active"></li>
                     </ul>
-                    <h3 class="modal-title">When does your lease end?</h3>
+                    <h3 class="modal-title">What is your credit score?</h3>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
 
@@ -686,7 +621,152 @@
     </div>
 </div>
 {!! Form::close() !!}
-
 <script>
-    $('#let-us-step1').on('')
+    enableDatePicker($('input[name=lease-pay]'), false);
+    $('input[name=priceRange]:last').on('input', function () {
+        if ($('input[name=priceRange]:last').val() !== '') {
+            $('#price-err').css({'display': 'none'});
+            $('#price-btn').prop('disabled', false);
+        }
+    });
+    $('#price-btn').on('click', function () {
+        if ($('input[name=priceRange]:last').val() == '') {
+            setTimeout(() => {
+                $('#let-us-step2').show();
+                $('#let-us-step3').hide();
+            }, 5);
+            $('#price-err').css({'display': 'block'});
+            $('#price-btn').prop('disabled', true);
+        }
+    });
+
+    $('#let-us-step3 > .modal-body > .pt-4 > .form-group > ul#beds >li > input[name="beds[]"]').on('change', function () {
+        if ($('#let-us-step3 > .modal-body > .pt-4 > .form-group > ul#beds >li > input[name="beds[]"]').is(':checked')) {
+            $('#bed-err').css({'display': 'none'});
+            $('#bed-btn').prop('disabled', false);
+        }
+    });
+    $('#bed-btn').on('click', function () {
+        if (!$('#let-us-step3 > .modal-body > .pt-4 > .form-group > ul#beds >li > input[name="beds[]"]').is(':checked')) {
+            setTimeout(() => {
+                $('#let-us-step3').show();
+                $('#let-us-step4').hide();
+            }, 5);
+            $('#bed-err').css({'display': 'block'});
+            $('#bed-btn').prop('disabled', true);
+        }
+    });
+
+    $('input[name=username]').on('input', function () {
+        if ($('input[name=username]').val() !== '') {
+            $('#name-err').css({'display': 'none'});
+            $('#name-btn').prop('disabled', false);
+        }
+    });
+    $('#name-btn').on('click', function () {
+        if ($('input[name=username]').val() == '') {
+            setTimeout(() => {
+                $('#let-us-step4').show();
+                $('#let-us-step5').hide();
+            }, 5);
+            $('#name-err').css({'display': 'block'});
+            $('#name-btn').prop('disabled', true);
+        }
+    });
+
+    $('#let-us-help-email').on('change', function () {
+        if ($('#let-us-help-email').val() !== '') {
+            $('#email-err').css({'display': 'none'});
+            $('#email-btn').prop('disabled', false);
+        }
+    });
+    $('#email-btn').on('click', function () {
+        if ($('#let-us-help-email').val() == '') {
+            setTimeout(() => {
+                $('#let-us-step5').show();
+                $('#let-us-step6').hide();
+            }, 5);
+            $('#email-err').css({'display': 'block'});
+            $('#email-btn').prop('disabled', true);
+        }
+    });
+    $('#let-us-us-help-phone_number').on('input', function () {
+        if ($('#let-us-us-help-phone_number').val() !== '') {
+            $('#phone-err').css({'display': 'none'});
+            $('#phone-btn').prop('disabled', false);
+        }
+    });
+    $('#phone-btn').on('click', function () {
+        if ($('#let-us-us-help-phone_number').val() == '') {
+            setTimeout(() => {
+                $('#let-us-step6').show();
+                $('#let-us-step7').hide();
+            }, 5);
+            $('#phone-err').css({'display': 'block'});
+            $('#phone-btn').prop('disabled', true);
+        }
+    });
+    function openSpecificModal($this){
+      if($($this).attr('id') == 'location-1'){
+          $('#location-preference-button').attr('data-target','let-us-step14');
+      }
+      if($($this).attr('id') == 'location-2'){
+          $('#location-preference-button').attr('data-target','let-us-step9');
+      }
+      if($($this).attr('id') == 'location-3'){
+          $('#location-preference-button').attr('data-target','let-us-step10');
+      }
+    }
+
+    $('input[name="location-preference"]').on('change', function () {
+        if ($('input[name="location-preference"]').is(':checked')) {
+            $('#location-preference-err').css({'display': 'none'});
+            $('#location-preference-button').prop('disabled', false);
+        }
+    });
+
+    $('body').on('click', '#location-preference-button', function (e) {
+
+        if (!$('input[name="location-preference"]').is(':checked')) {
+            setTimeout(() => {
+                $('#let-us-step8').show();
+            }, 5);
+            $('#location-preference-err').css({'display': 'block'});
+            $('#location-preference-button').prop('disabled', true);
+        }
+
+    if ($(this).attr('data-target') == 'let-us-step14') {
+               setTimeout(() => {
+            $('#let-us-step14').show();
+            $('#let-us-step8').hide();
+        }, 5);
+               setTimeout(() => {
+            $('#let-us-step9').hide();
+            $('#let-us-step10').hide()
+        }, 10);
+        }
+
+    if ($(this).attr('data-target') == 'let-us-step9') {
+        setTimeout(() => {
+            $('#let-us-step9').show();
+            $('#let-us-step8').hide();
+        }, 5);
+        setTimeout(() => {
+            $('#let-us-step10').hide();
+            $('#let-us-step14').hide();
+        }, 10);
+        }
+
+    if ($(this).attr('data-target') == 'let-us-step10') {
+        setTimeout(() => {
+            $('#let-us-step10').show();
+            $('#let-us-step8').hide();
+        }, 5);
+        setTimeout(() => {
+            $('#let-us-step9').hide();
+            $('#let-us-step14').hide();
+        }, 10);
+        }
+
+    });
 </script>

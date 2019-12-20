@@ -41,7 +41,7 @@
                 <li class="wow fadeInLeft" data-wow-delay="0.5s">
                     <h4 class="collapseabe-link">Company <i class="fas fa-angle-down"></i></h4>
                     <div class="collapse-menu">
-                        <a href="http://no-fee-rental.teamtechverx.com/blog/?page_id=66" class="ft-links">About Us</a>
+                        <a href="http://no-fee-rental.teamtechverx.com/blog/?page_id=66" class="ft-links">Our Story</a>
                         <a href="http://no-fee-rental.teamtechverx.com/blog/?page_id=70" class="ft-links">Press</a>
                         <a href="http://no-fee-rental.teamtechverx.com/blog/?page_id=3" class="ft-links">Privacy Policy </a>
                         <a href="http://no-fee-rental.teamtechverx.com/blog/?page_id=27" class="ft-links">Terms</a>
@@ -52,7 +52,7 @@
                     <div class="newsletter">
                         <div class="title">subscribe news letter</div>
                         <p>Enter your email address &amp; get daily newsletter</p>
-                        <form method="POST" action="http://no-fee-rental.teamtechverx.com/newsletter-subscribe" accept-charset="UTF-8" id="newsletter-form" class="newsletter-form ajax" reset="true">
+                        <form method="POST" action="http://no-fee-rental.teamtechverx.com/api/newsletter-subscribe" accept-charset="UTF-8" id="newsletter-form" class="newsletter-form ajax" reset="true">
                             <input name="_token" type="hidden" value="0d93UMDvS4Sjfmoa9Lt7jJutbJVYodaQG0jcrRSF">
                             <input class="fld" placeholder="Email Address" name="email" type="text">
                             <label id="error" class="error email" for="email"></label>
@@ -75,6 +75,11 @@
 
 <?php wp_footer(); ?>
 
+<div class="loader">
+    <div class="loader-wrap"> </div>
+    <div class="main-loader"></div>
+</div>
+
 <!-- Login Modal -->
     <div class="modal fade login-modal" id="login">
         <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
@@ -85,16 +90,17 @@
                     <img src="<?php echo get_template_directory_uri(); ?>/assets/images/modal-logo.png" alt="" class="logo">
                     <h3>Login</h3>
                     <ul>
-                        <li>loremp ipsum lorem ipsum</li>
-                        <li>loremp ipsum lorem ipsum</li>
-                        <li>loremp ipsum lorem ipsum</li>
+                        <li>Save Your Searches</li>
+                        <li>Never Pay A Broker Fee</li>
+                        <li>Save Your Favorite Listings</li>
+                        <li>Get Email Notifications For New Listings In Neighborhoods That You Like</li>
                     </ul>
                 </div>
                 <div class="login-form-wrapper">
-                    <div class="login-heading">
+                    <div class="login-heading login-after-line">
                         Login
                     </div>
-                    <form method="POST" action="http://no-fee-rental.teamtechverx.com/login" accept-charset="UTF-8" id="login_form" class="ajax" novalidate="novalidate">
+                    <form method="POST" action="#" accept-charset="UTF-8" id="login_form">
                         <input name="_token" type="hidden" value="wgtYrzIjKZeqRuv67Xf1mCwnwFUW8JlmJKzf0lre">
                         <div class="row">
                             <div class="col-md-6">
@@ -124,9 +130,8 @@
 
                             <div class="col-md-12">
                                 <div class="text-center mt-5 mb-4">
-                                    <button type="submit" class="btn-default">
+                                    <input type="submit" class="btn-default" name="login">
                                         Login
-                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -147,26 +152,37 @@
                 <img src="<?php bloginfo('template_url')?>/assets/images/modal-close-icon.png" alt="" class="close-modal close-signup-modal" data-dismiss="modal">
                 <div class="logo-info-wrapper">
                     <img src="<?php echo get_template_directory_uri(); ?>/assets/images/modal-logo.png" alt="" class="logo">
-                    
+
                     <ul class="create-client-listing">
-                        <h3>Let's started</h3>
-                        <li>Explore Various Options</li>
-                        <li>Mark Listing as Favourite</li>
-                        <li>Save Your Researches</li>
-                        <li>Get Notified When we find a home for you</li>
+<!--                        <h3>Let's started</h3>-->
+                        <li>Save Your Searches</li>
+                        <li>Mark Your Favorite Listings</li>
+                        <li>Get Email Notification For New Listings In Neighborhoods That You Like</li>
+                        <li>Access To Showing On Demand</li>
+                        <li>Access To Our Neighborhood Specialists</li>
+                        <h1 style="color: white;font-size: 16px; font-weight: 600; line-height: normal;">And much more
+                            features!!</h1>
                     </ul>
                     <ul class="create-agent-listing">
                         <h3>join us</h3>
                         <li>Publish your listing</li>
-                        <li>Syndicate listing from Various marketplaces</li>
+                        <li>Syndicate Listing From Various Marketplaces</li>
+                        <li>Unlimited Renting Potential To Thousand Of Renters</li>
+                        <li>Access To Showing On Demand Clients</li>
+                        <li> Access To Our Direct Clientele Through Neighborhood Specialists Program</li>
+                        <h1 style="color:white; font-size: 16px; line-height: normal;font-weight: 600;">Info: We are NO
+                            FEE
+                            website
+                            and any apartment deemed
+                            as a fee unit will not be activated.</h1>
                     </ul>
                 </div>
 
                 <div class="login-form-wrapper">
                     <div class="login-heading">
-                        Signup
+                        CREATE ACCOUNT
                     </div>
-                    <form method="POST" action="http://no-fee-rental.teamtechverx.com/user-signup" accept-charset="UTF-8" class="ajax" reset="true" id="signup_form" novalidate="novalidate">
+                    <form method="POST" action="http://no-fee-rental.teamtechverx.com/api/user-signup" accept-charset="UTF-8" class="ajax" reset="true" id="signup_form" novalidate="novalidate">
                         <input name="_token" type="hidden" value="wgtYrzIjKZeqRuv67Xf1mCwnwFUW8JlmJKzf0lre">
                         <div class="row">
                             <div class="col-sm-12 mb-2">
@@ -207,7 +223,7 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <input class="input-style agnet-input" id="email" placeholder="Email" name="email" type="text">
-                                    
+
                                 </div>
                             </div>
 
@@ -233,13 +249,13 @@
                                 </div>
                             </div>
                         </div>
-                    
+
                     <div class="col-md-12 submit-clm">
                         <div class="text-center mt-3 mb-4">
                             <input class="btn-default" type="submit" value="Signup">
                         </div>
                     </div>
-                
+
                 <p class="footer-text">Already have an account? <span class="signin-wrapper" id="login-btn">Login</span></p>
             </div></form>
         </div>
@@ -247,6 +263,7 @@
 </div>
 
 
+<script src="http://no-fee-rental.teamtechverx.com/assets/js/vendor/jquery.validate.min.js"></script>
 
 <?php wp_footer(); ?>
 
@@ -264,7 +281,22 @@
       });
 
     </script>
+<?php
+    if(isset($_POST['login'])) {
+        $credentials = [
+            'email'    => $_POST['email'],
+            'password' => $_POST['password']
+        ];
 
+        authenticate($credentials);
+    }
+?>
+<script src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/assets/js/vendor/toastr.js"></script>
+<script src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/assets/js/signup.js"></script>
+<script src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/assets/js/login.js"></script>
+<script src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/assets/js/recent-search.js"></script>
+<script src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/assets/js/global.js"></script>
+<script src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/assets/js/validate.js"></script>
  </body>
 
 </html>

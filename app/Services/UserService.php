@@ -218,6 +218,21 @@ class UserService {
      *
      * @return bool
      */
+    public function renterCheck($request) {
+        $renter = $this->userRepo->find(['email' => $request->email])->first();
+        if(isset($renter)){
+            return $renter->user_type == 4 ? 'true' : 'false' ;
+        }
+        else {
+            return 'false' ;
+        }
+    }
+
+    /**
+     * @param $request
+     *
+     * @return bool
+     */
     public function isUniqueLicense($request) {
         if (!$this->userRepo->isUniqueLicense($request->license_number)) {
             return 'true';
@@ -347,18 +362,20 @@ class UserService {
     private function agentMail($agent) {
         DispatchNotificationService::AGENTINVITE(toObject([
             'from' => myId(),
-            'to'   => $agent->id,
-            'data' => $agent
+            'to'   => $agent->email,
+            'data' => $agent,
+            'is_invite' => true
         ]));
     }
 
     /**
      * @param $agent
+     * @param $user
      */
-    private function memberMail($agent) {
+    private function memberMail($agent, $user) {
         DispatchNotificationService::ADDMEMBER(toObject([
             'from' => myId(),
-            'to'   => $agent->id,
+            'to'   => $user->id,
             'data' => $agent
         ]));
     }
@@ -382,24 +399,25 @@ class UserService {
         if ($agent->fails()) {
             if($InviteRes = $this->agentRepo->find(['email' => $request->email])->first()) {
                 if($UserRes = $this->userRepo->find(['email' => $request->email])->first()) {
-                    $this->memberMail($agent);
+                    $this->memberMail($agent, $UserRes);
                     $this->agentRepo->update($InviteRes->id, ['token' => $agent->token]);
                     return true ;
                 }
                 $this->agentRepo->update($InviteRes->id, ['token' => $agent->token]);
-                $this->agentMail($agent);
+                $InviteRes = $this->agentRepo->find(['email' => $request->email])->first();
+                $this->agentMail($InviteRes);
                 return true;
             }
 
             return $agent->validate();
         }
         if($UserRes = $this->userRepo->find(['email' => $request->email])->first()) {
-            $this->memberMail($agent);
+            $this->memberMail($agent, $UserRes);
             $this->agentRepo->invite($agent->toArray());
             return true ;
         }
-        $this->agentRepo->invite($agent->toArray());
-        $this->agentMail($agent);
+        $inviteRes = $this->agentRepo->invite($agent->toArray());
+        $this->agentMail($inviteRes);
         return true;
     }
 

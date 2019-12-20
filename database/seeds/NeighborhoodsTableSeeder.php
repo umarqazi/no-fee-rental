@@ -15,6 +15,7 @@ class NeighborhoodsTableSeeder extends Seeder
         $neighbours = collect(config('neighborhoods'))->map(function($neighbour) {
             $collection = [
                 'name' => $neighbour,
+                'boro_id' => random_int(1, 5),
                 'created_at' => now(),
                 'updated_at' => now()
             ];

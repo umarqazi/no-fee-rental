@@ -144,8 +144,9 @@
     border-left: 4px solid transparent;
     border-right: 4px solid transparent;
     border-top: 4px solid #777;
-    -webkit-transform: origin(50% 20%);
-    transform: origin(50% 20%);
+    /*-webkit-transform: origin(50% 20%);*/
+    /*transform: origin(50% 20%);*/
+    transform-origin: 50% 20%;
     transition: all 0.125s ease-in-out;
     content: '';
     display: block;
@@ -481,7 +482,7 @@
 .Availability-date-sec strong {
     color: #000;
     font-size: 12px;
-    font-weight: 700;
+    font-weight: 700 !important;
 }
 
 .appointment-section {
@@ -1411,6 +1412,7 @@
 .choose-cover .box {
     flex: 0 0 calc(100% - 150px);
     padding-left: 15px;
+    margin-top: -25px;
 }
 
 .box label {
@@ -1741,8 +1743,16 @@ main {
 
 .datepicker-withtime .by-add-only {
     flex: 0 0 100%;
+    padding-left: 0px;
 }
-
+.datepicker-withtime .by-add-only label{
+    padding-left: 20px;
+}
+.datepicker-withtime .by-add-only .remove-btnn{
+    display: inline-block;
+    width: 100%;
+    text-align: right;
+}
 .open-house-admin-section {
     background: #eee;
     padding: 15px;
@@ -1810,12 +1820,13 @@ main {
 .price-wrapp .additional-info ul li {
     margin-right: 8px;
     text-align: center;
-    border-right: #ddd solid 1px;
+    border-right: #ddd solid 2px;
     padding-right: 8px;
 }
 
 .price-wrapp.price-wrap-location  .additional-info ul li{
     color: #272a31;
+    font-weight: bold;
 }
 
 .price-wrapp .additional-info ul li:last-child {
@@ -1841,11 +1852,18 @@ main {
 
 .price-wrapp .additional-info ul li p {
     margin: 0;
+    display:inline-block;
+    margin-right: 5px;
+    /*vertical-align: middle;*/
+    font-weight: bold;
 }
 
 .gm-style .gm-style-iw-c {
     padding: 0px !important;
-    max-width: 425px !important;
+    max-width: 280px !important;
+}
+.full-map .gm-style .gm-style-iw-c{
+    max-width:330px !important;
 }
 
 .gm-ui-hover-effect {
@@ -1866,8 +1884,9 @@ main {
     height: 200px;
     overflow-y: auto;
 }
+
 .map-wrapper .location-thumbnaail.location-image-btm {
-    margin-bottom: 15px;
+    margin-bottom: 5px;
 }
 
 
@@ -2055,12 +2074,24 @@ main {
     }
     .choose-cover{
         display: block;
+        text-align: center;
     }
     .inputfile+label{
         max-width: 100%;
         font-size: 16px;
         display: block;
     }
+    .neighborhood-flex ,.unit-flex , .availability-flex{
+        display: block;
+    }
+    .neighborhood-flex .form-group ,.unit-flex .form-group , .availability-flex .form-group{
+        width: 100%;
+        margin-right: 0px;
+    }
+    .neighborhood-flex .form-group:first-child{
+        width: 100%;
+    }
+
 }
 
 
@@ -2074,4 +2105,21 @@ main {
 .listing-info .empty-heart {
     display: inline-block;
     font-size: 25px;
+}
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+    .about-us-container{
+        height: 520px;
+    }
+    .your-life-container{
+        height: 626px;
+    }
+    .container-lg{
+        width: 1170px;
+    }
+    .header-bg .search-property .search-fld{
+        line-height: 0px;
+    }
+    .neighborhood-search .search-result-wrapper .search-listing{
+        width: 100%;
+    }
 }

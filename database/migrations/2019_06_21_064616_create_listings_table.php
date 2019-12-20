@@ -41,9 +41,11 @@ class CreateListingsTable extends Migration {
             $table->enum('building_type', ['open', 'exclusive'])->default('open')->nullable();
             $table->string('application_fee')->nullable();
             $table->string('deposit')->nullable();
+            $table->integer('freshness_score')->nullable();
 			$table->integer('is_featured')->default(0)->comment = "0-Non-Featured, 1-Featured, 2-Request-Featured";
             $table->integer('visibility')->default(2)->comment = "0-Inactive, 1-Active, 2-Pending, 3-Archived";
-            $table->string('availability')->nullable()->comment = "0-Not Available, 1-Available, 2-Immediately, 3-Date";
+            $table->integer('availability_type')->nullable()->comment = "0-Not Available, 2-Immediately, 3-Date";
+            $table->string('availability')->nullable();
 			$table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

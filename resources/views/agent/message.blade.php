@@ -48,5 +48,5 @@
     @include('agent.modals.message')
 
     {{--Messaging Script--}}
-    {!! HTML::script('assets/js/message.js') !!}
+{{--    {!! HTML::script('assets/js/message.js') !!}--}}
 @endsection

@@ -36,11 +36,29 @@ $(() => {
         }
     });
 
+    $.validator.addMethod("dateFormat", function(value, ele) {
+        let rxDatePattern = /([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/;
+        let check = value.match(rxDatePattern);
+        if(check !== null) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    });
+
     $.validator.addMethod('time_validation', function(value, element, param) {
         let start_time = parseInt($('select[name="open_house[start_time][]"]').val());
         let end_time = parseInt($('select[name="open_house[end_time][]"]').val());
         return (!(start_time >= end_time)) ;
     });
+
+    $.validator.addMethod('date_validation', function(value, element, param) {
+        let availability = $('input[name="availability"]').val();
+        let open_house = $('input[name="open_house[date][]"]').val();console.log(open_house=='');
+        return (open_house == '' || availability == '') ?  true : (open_house >= availability);
+    });
+
 
     (function($) {
         $.fn.inputFilter = function(inputFilter) {
@@ -68,7 +86,7 @@ $(() => {
                required: true,
            },
            display_address: "required",
-           neighborhood_id: "required",
+           neighborhood: "required",
            bedrooms: "required",
            baths: "required",
            rent : {
@@ -82,7 +100,9 @@ $(() => {
            },
            availability: {
                required: true,
-               validateSelect: true
+               validateSelect: true,
+               dateFormat : true,
+               date_validation : true
            },
            building_type: {
                required: true,
@@ -92,7 +112,9 @@ $(() => {
                validateSelect: true,
                time_validation : $('select[name="open_house[end_time][]"]')
            },
-
+           "open_house[date][]": {
+               date_validation : true,
+               },
            "open_house[end_time][]": {
                validateSelect: true,
                time_validation : $('select[name="open_house[start_time][]"]')
@@ -107,7 +129,8 @@ $(() => {
            name : "required",
            phone_number: "required",
            email: "required",
-           user_id : "required"
+           user_id : "required",
+           unit : "required"
        },
 
        messages: {
@@ -117,7 +140,7 @@ $(() => {
            display_address: {
                required: "Display address is required."
            },
-           neighborhood_id: {
+           neighborhood: {
                required: "Neighborhood is required."
            },
            bedrooms: {
@@ -136,7 +159,9 @@ $(() => {
            },
            availability: {
                required: "Select Availability.",
-               validateSelect: "Select any one option."
+               validateSelect: "Select any one option.",
+               dateFormat: "Select Valid Date.",
+               date_validation: "Greater Availability Date."
            },
 
            building_type: {
@@ -153,7 +178,9 @@ $(() => {
                validateSelect: "Select any one option.",
                time_validation :  "End Time should be greater than start time."
            },
-
+           'open_house[date][]': {
+               date_validation: "Open House Date should be greater than or equal to Availability date."
+           },
            thumbnail: {
                required: "Thumbnail is required.",
                validateExtension: "Choose valid thumbnail file.",
@@ -174,6 +201,9 @@ $(() => {
            user_id: {
                required: "Owner is required."
            },
+           unit: {
+               required: "Unit is required."
+           }
        },
        errorPlacement: function(error, element) {
            if ( element.attr("name") === "thumbnail" )
@@ -212,6 +242,47 @@ $(() => {
         }
     });
 
+    // Add building Form Validations
+    $('#add_building').validate({
+        rules: {
+            neighborhood: {
+                required: true,
+            },
+            street_address: {
+                required: true,
+            },
+            contact_representative: {
+                required: true,
+            },
+            building_action: {
+                required: true,
+            },
+            thumbnail: {
+                required: true,
+                validateExtension: 'thumbnail'
+            },
+        },
+
+        messages: {
+            neighborhood: {
+                required: "Neighborhood is required.",
+            },
+            street_address: {
+                required: "Street Address is required.",
+            },
+            contact_representative: {
+                required: "Contact Representative is required.",
+            },
+            building_action: {
+                required: "Building Action is required.",
+            },
+            thumbnail: {
+                required: "Thumbnail is required.",
+                validateExtension: "Choose valid thumbnail file.",
+            },
+        }
+    });
+
     // Neighborhood Search Form Validations
     $('#search').validate({
         rules: {
@@ -222,9 +293,19 @@ $(() => {
 
         messages: {
             neighborhoods: {
-                required : 'neighborhood is required',
+                required : 'Neighborhood is required.',
             }
-        }
+        },
+        errorPlacement: function(error, element) {
+            if ( element.attr("name") === "neighborhoods" )
+            {
+                error.insertAfter('#search-error-message');
+            }
+            else
+            {
+                error.insertAfter(element);
+            }
+        },
     });
 
 
@@ -477,7 +558,7 @@ $(() => {
         }
     });
 
-// Agent Inbox Rule
+    // Agent Inbox Rule
     $('#send-message').validate({
         rules: {
             message: {
@@ -495,6 +576,36 @@ $(() => {
             {
                 error.css('display' , 'none') ;
             }
+        },
+    });
+
+    // Review Request Rule
+    $('#review-request').validate({
+        rules: {
+            message: {
+                required: true,
+            },
+            email: {
+                required: true,
+                email: true,
+                remote: {
+                    headers: {
+                        'X-CSRF-TOKEN': TOKEN
+                    },
+                    url: "/verify-renter",
+                    type: "post",
+                }
+            },
+        },
+        messages: {
+            message: {
+                required: "Message is required.",
+            },
+            email: {
+                required: "Email is required.",
+                email: "Please enter valid email",
+                remote: "Renter does not exist.",
+            },
         },
     });
 
@@ -569,6 +680,54 @@ $(() => {
                 required: "Expiry year is required"
             }
         }
-    })
+    });
 
+    // Add Neighborhoods Form validations
+    $('#add_neighborhood').validate({
+        rules: {
+            neighborhood_name: {
+                required: true
+            },
+            neighborhood_content: {
+                required: true,
+            },
+        },
+
+        messages: {
+            neighborhood_name: {
+                required: "Name is required."
+            },
+            neighborhood_content: {
+                required: "Content is required.",
+            },
+        }
+    });
+
+    // Add Add Event Form validations
+    $('#add_event').validate({
+        rules: {
+            title: {
+                required: true
+            },
+            start: {
+                required: true,
+            },
+
+            end: {
+                required: true,
+            },
+        },
+
+        messages: {
+            title: {
+                required: "Event Title is required."
+            },
+            start: {
+                required: "Start Date is required.",
+            },
+            end: {
+                required: "End Date is required.",
+            },
+        }
+    });
 });

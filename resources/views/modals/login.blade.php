@@ -7,13 +7,14 @@
                 <img src="{{asset('assets/images/modal-logo.png')}}" alt="" class="logo" />
                 <ul>
                     <h3> Login</h3>
-                    <li>loremp ipsum lorem ipsum</li>
-                    <li>loremp ipsum lorem ipsum</li>
-                    <li>loremp ipsum lorem ipsum</li>
+                    <li>Save your searches</li>
+                    <li>Never pay a broker fee</li>
+                    <li>Save your favorite listings</li>
+                    <li>Get email notifications for new listings in neighborhoods that you like</li>
                 </ul>
             </div>
             <div class="login-form-wrapper">
-                <div class="login-heading">
+                <div class="login-heading login-after-line">
                     Login
                 </div>
                 {!! Form::open([
@@ -27,22 +28,12 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             {!! Form::email('email', null, ['class' => 'input-style', 'placeholder' => 'Email']) !!}
-                            @if ($errors->has('email'))
-                                <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                            @endif
                         </div>
                     </div>
 
                     <div class="col-md-6">
                         <div class="form-group">
                             {!! Form::password('password', ['class' => 'input-style', 'placeholder' => 'Password']) !!}
-                            @if ($errors->has('password'))
-                                <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                            @endif
                         </div>
                     </div>
                 </div>

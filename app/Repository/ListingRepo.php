@@ -34,13 +34,6 @@ class ListingRepo extends BaseRepo {
 		return $this->model->inactive()->withall();
 	}
 
-    /**
-     * @return mixed
-     */
-	public function realty() {
-	    return $this->model->realty()->withall();
-    }
-
 	/**
 	 * @return mixed
 	 */
@@ -64,7 +57,14 @@ class ListingRepo extends BaseRepo {
 		$query = $this->find(['id' => $id]);
 		$status = $query->select('visibility')->first();
 		$updateStatus = ($status->visibility) ? 0 : 1;
-		$query->update(['visibility' => $updateStatus]);
+
+		if($updateStatus === INACTIVELISTING) {
+            $update = ['visibility' => $updateStatus, 'is_featured' => FALSE];
+        } else {
+            $update = ['visibility' => $updateStatus];
+        }
+
+        $query->update($update);
 		return $updateStatus;
 	}
 
@@ -83,6 +83,13 @@ class ListingRepo extends BaseRepo {
 	public function featured() {
 		return $this->model->featured()->withfavourite();
 	}
+
+    /**
+     * @return mixed
+     */
+    public function petFriendly() {
+        return $this->model->petFriendly();
+    }
 
 	/**
      * @return mixed

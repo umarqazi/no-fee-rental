@@ -1,5 +1,4 @@
 
-
 <!--List view listing-->
 <div class="listing-wrapper">
     @foreach($listing->archived as $al)
@@ -10,14 +9,25 @@
             <div class="info">
                 <p class="title">{{ str_limit(is_exclusive($al), STR_LIMIT_LIST_VIEW, ' ...') }}</p>
                 <p><i class="fa fa-tag"></i> ${{ ($al->rent) ?   number_format($al->rent,0) : 'None' }}</p>
-                <p>Freshness Score : 90%</p>
+                <p>Freshness Score : {{ $al->freshness_score }}%</p>
                 <ul>
                     <li><i class="fa fa-bed"></i> {{ str_formatting($al->bedrooms, 'Bed') }}</li>
                     <li><i class="fa fa-bath"></i> {{ str_formatting($al->baths, 'Bath') }}</li>
                 </ul>
                 {!! $al->realty_id ? "<p><i class='fa fa-map-marker-alt'></i> RealtyMX ID: {$al->realty_id}</p>" : '' !!}
                 <p>Posted On: {{ $al->created_at->format("m/d/y H:m A") }}</p>
-                <a href="{{ route(whoAmI().'.listingStatus', $al->id) }}" title="Publish this property"><span class="status">Archived</span></a>
+                <div class="badges">
+                    @if(!empty($al->realty_id))
+                        <span class="status" style="background: #213971;">Realty Feed</span>
+                    @endif
+                </div>
+                <div class="actions-btns">
+                    @if(!empty($al->realty_id) && agentHasPlan() || empty($al->realty_id))
+                        <a href="{{ route(whoAmI().'.listingStatus', $al->id) }}" title="Publish this Listing">
+                            <button type="button" class="border-btn">UnArchive</button>
+                        </a>
+                    @endif
+                </div>
             </div>
         </div>
     @endforeach
@@ -26,7 +36,6 @@
     @endif
     {!! $listing->archived->render() !!}
 </div>
-
 
 <!--Grid view listing-->
 <div class="grid-view-wrapper">
@@ -40,16 +49,25 @@
                             {{ str_limit(is_exclusive($al), STR_LIMIT_GRID_VIEW, ' ...') }}
                         </p>
                         <p><i class="fa fa-tag"></i> ${{ ($al->rent) ?   number_format($al->rent,0) : 'None' }}</p>
-                        <p>Freshness Score : 90%</p>
+                        <p>Freshness Score : {{ $al->freshness_score }}%</p>
                         <ul>
                             <li><i class="fa fa-bed"></i> {{ str_formatting($al->bedrooms, 'Bed') }}</li>
                             <li><i class="fa fa-bath"></i> {{ str_formatting($al->baths, 'Bath') }}</li>
                         </ul>
                         {!! $al->realty_id ? "<p><i class='fa fa-map-marker-alt'></i> RealtyMX ID: {$al->realty_id}</p>" : '' !!}
                         <p>Posted On: {{ $al->created_at->format("m/d/y H:m A") }}</p>
-                        <a href="{{ route(whoAmI().'.listingStatus', $al->id) }}" title="Publish this property">
-                            <span class="status">Archived</span>
-                        </a>
+                        <div class="grid-badges">
+                            @if(!empty($al->realty_id))
+                                <span class="status" style="background: #213971;">Realty Feed</span>
+                            @endif
+                        </div>
+                        <div class="actions-btns">
+                            @if(!empty($al->realty_id) && agentHasPlan() || empty($al->realty_id))
+                                <a href="{{ route(whoAmI().'.listingStatus', $al->id) }}" title="Publish this Listing">
+                                    <button type="button" class="border-btn">UnArchive</button>
+                                </a>
+                            @endif
+                        </div>
                     </div>
                 </div>
             </div>

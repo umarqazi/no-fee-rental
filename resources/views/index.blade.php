@@ -1,12 +1,17 @@
 @extends('layouts.app')
-@section('title', 'No Fee Rental | Dashboard')
+@section('title', 'No Fee Rental | Home')
 @section('content')
 <header>
     {{--Normal Search--}}
     @include('sections.search')
 </header>
+<style>
+    .header-wrapper{
+        background-color: rgba(255, 255, 255, 0.45);
+    }
+</style>
 <section class="need-help-container wow fadeIn " data-wow-delay="0.2s">
-    <div class="container-lg">
+    <div class="container">
         <div class="wrapper">
             <h2>nEED hELP?</h2>
             <p>It’s easy: Just tell us what you’re looking for and we’ll do the rest. <br> How? We’ll put you in touch with one of our neighborhood experts based on your needs.</p>
@@ -14,7 +19,7 @@
         </div>
     </div>
 </section>
-<section class="about-us-container">
+<section class="about-us-container about-us-large-img">
     <div class="container-lg">
         <div class="row">
             <div class="col-lg-7 p-0">

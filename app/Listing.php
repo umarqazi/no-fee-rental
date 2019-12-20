@@ -25,8 +25,8 @@ class Listing extends Model {
         'name', 'email', 'phone_number', 'street_address', 'display_address',
         'thumbnail', 'baths', 'bedrooms', 'unit', 'rent', 'square_feet',
         'description', 'is_featured', 'map_location', 'building_type',
-		'visibility', 'realty_url', 'availability', 'application_fee',
-        'deposit', 'lease_term', 'free_months'
+		'visibility', 'realty_url', 'availability_type', 'availability',
+        'application_fee', 'deposit', 'lease_term', 'free_months', 'freshness_score'
 	];
 
     /**
@@ -87,16 +87,26 @@ class Listing extends Model {
         return $query->with('building.amenities');
     }
 
-	/**
-	 * @param $query
-	 *
-	 * @return mixed active listing
-	 */
-	public function scopeActive($query) {
-		isAdmin() ?: $clause['user_id'] = myId();
-		$clause['visibility'] = ACTIVELISTING;
-		return $query->where($clause);
-	}
+    /**
+     * @param $query
+     *
+     * @return mixed active listing
+     */
+    public function scopeRentActive($query) {
+        $clause['visibility'] = ACTIVELISTING;
+        return $query->where($clause);
+    }
+
+    /**
+     * @param $query
+     *
+     * @return mixed active listing
+     */
+    public function scopeActive($query) {
+        isAdmin() ?: $clause['user_id'] = myId();
+        $clause['visibility'] = ACTIVELISTING;
+        return $query->where($clause)->where('availability', '<=', now()->format('Y-m-d'));
+    }
 
     /**
      * @param $query
@@ -109,17 +119,6 @@ class Listing extends Model {
         return $query->where($clause);
     }
 
-    /**
-     * @param $query
-     *
-     * @return mixed active listing
-     */
-    public function scopeRentActive($query) {
-        $clause['visibility'] = ACTIVELISTING;
-        return $query->where($clause);
-    }
-
-
 	/**
 	 * @param $query
 	 *
@@ -127,23 +126,9 @@ class Listing extends Model {
 	 */
 	public function scopeInactive($query) {
 		isAdmin() ?: $clause['user_id'] = myId();
-		$clause['visibility'] = INACTIVELISTING;
-		return $query->where($clause);
+		$clause['visibility'] =  INACTIVELISTING;
+		return $query->where($clause)->where('availability', '>', now()->format('Y-m-d'));
 	}
-
-    /**
-     * @param $query
-     *
-     * @return mixed
-     */
-	public function scopeRealty($query) {
-        $query = $query->where('realty_id', '!=', NULL);
-	    if(!isAdmin()) {
-            $query->where( 'user_id', myId() );
-        }
-
-	    return $query;
-    }
 
 	/**
 	 * @param $query
@@ -199,8 +184,8 @@ class Listing extends Model {
 	 */
 	public function scopeWithAll($query) {
 		return $query->with([
-		    'agent.company', 'images', 'building.amenities', 'favourites',
-            'openHouses', 'features', 'neighborhood'
+		    'agent.company', 'agent.reviews', 'images', 'building.amenities', 'favourites',
+            'openHouses', 'features', 'neighborhood', 'building.listings', 'building.contact'
         ]);
 	}
     /**
@@ -256,6 +241,15 @@ class Listing extends Model {
      */
     public function scopeCheapest($query) {
 	    return $query->orderBy('rent', CHEAPEST);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function scopePetFriendly($query) {
+        return $query->whereHas('features', function($subQuery) {
+            return $subQuery->whereIn('value', array_keys(config('features.pets_filter')));
+        });
     }
 
     /**

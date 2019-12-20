@@ -325,7 +325,7 @@ h3 {
 }
 
 .block .heading-wrapper {
-    padding: 15px 29px 15px;
+    padding: 15px 15px 15px;
     border-bottom: #e4e4e4 solid 1px;
     display: flex;
     justify-content: space-between;
@@ -419,7 +419,7 @@ header .agent-avtar .avtar div ul {
     -webkit-transition: all ease 0.4s;
     transition: all ease 0.4s;
     visibility: hidden;
-    opacity: 0;
+    display: none;
     min-width: 150px;
     margin-top: 10px;
 }
@@ -445,7 +445,7 @@ header .agent-avtar .avtar div ul li:last-child a {
 
 header .agent-avtar .avtar:hover div ul {
     visibility: visible;
-    opacity: 1;
+    display: block;
     margin-top: 0;
 }
 
@@ -530,7 +530,7 @@ header .agent-avtar .avtar:hover div ul {
 
 .main-wrapper .listing-container .nav-pills li a {
     margin: 0px;
-    padding: 5px 30px;
+    padding: 5px 12px;
     position: relative;
 }
 
@@ -683,7 +683,7 @@ header .agent-avtar .avtar:hover div ul {
 }
 
 .main-wrapper .listing-wrapper .listing-row .info .actions-btns button {
-    margin-left: 10px;
+    margin-left: 5px;
 }
 
 .main-wrapper .listing-wrapper .listing-row:hover {
@@ -724,6 +724,7 @@ header .agent-avtar .avtar:hover div ul {
 
 .building-details-wrapper .amenities-section {
     margin: 20px 0px;
+    text-transform: capitalize;
 }
 
 .building-details-wrapper .amenities-section .after-amenities-inputs {
@@ -866,7 +867,7 @@ header .agent-avtar .avtar:hover div ul {
 }
 
 .add-new-listing-wrapper .form-group {
-    margin-bottom: 30px;
+    margin-bottom: 15px;
 }
 
 .add-new-listing-wrapper .checkbox-listing {
@@ -1876,15 +1877,22 @@ header .agent-avtar .avtar:hover div ul {
 .credit-plans .inner-plans-wrapper{
     display: flex;
     justify-content: center;
-    align-items: center;
+    /*align-items: center;*/
 }
 .plans-wrapper .current-plans{
-    /*width: calc(27% - 20px);*/
+    width: calc(100% / 3 - 20px);
     box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.12);
     padding: 20px 30px;
     border-radius: 10px;
-    text-align: center;
+    flex: 1;
+    text-align:center;
     margin-right: 20px;
+    position: relative;
+}
+.plans-wrapper .current-plans p{
+    color: #000;
+    font-weight: 600;
+    margin-bottom: 15px;
 }
 .plans-wrapper .current-plans:last-child{
     margin-right: 0px;
@@ -1958,6 +1966,10 @@ header .agent-avtar .avtar:hover div ul {
     line-height: 45px;
     font-size: 18px;
     min-width:215px;
+    position:absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 20px;
 }
 .plans-wrapper .gold-plan .btn-default{
     background-color: #023672;
@@ -1973,6 +1985,7 @@ header .agent-avtar .avtar:hover div ul {
 .credit-plans p{
     font-size: 16px;
     line-height: 1.5;
+
 }
 /*Credit Plans page Css*/
 
@@ -2059,6 +2072,24 @@ header .agent-avtar .avtar:hover div ul {
 }
 .basic-plan-wrapper .plans-table .mobile-table-td{
     display: none;
+}
+
+.mapboxgl-ctrl-geocoder{
+    width: 100% !important;
+    max-width: 100% !important;
+}
+.mapboxgl-ctrl-geocoder--input {
+    height: 45px !important;
+    padding: 6px 15px !important;
+    border: #d7d7d7 solid 1px !important;
+    border-radius: 5px;
+}
+.mapboxgl-ctrl-geocoder--input:focus{
+    border-color: #e77817 !important;
+}
+
+.mapboxgl-ctrl-geocoder, .mapboxgl-ctrl-geocoder .suggestions {
+     box-shadow: none !important;
 }
 
 @media only screen and (min-width: 1280px) and (max-width: 1349px) {
@@ -2226,7 +2257,7 @@ header .agent-avtar .avtar:hover div ul {
 }
 
 
-.filter-mobile-data{
+.filter-mobile-data-wrapper{
     display: none;
     position: relative;
 }
@@ -2253,9 +2284,80 @@ header .agent-avtar .avtar:hover div ul {
 #building-popup .btn-default {
     line-height: 50px;
 }
+.badges {
+    position: absolute;
+    top: 20px;
+    right: 10px;
+}
+.badges span{
+    display: inline-block;
+    margin-right: 5px;
+}
+.info .badges .status {
+    position: relative !important;
+    top: 0 !important;
+    right: 0 !important;
+}
+.grid-badges{
+    position: absolute;
+    top: 15px;
+    right: 5px;
+}
+.grid-badges span{
+    display: inline-block;
+    margin-right: 5px;
+}
+.info .grid-badges .status {
+    position: relative !important;
+    top: 0 !important;
+    right: 0 !important;
+}
 @media (min-width: 576px) {
     #building-popup .modal-dialog {
         max-width: 1000px;
     }
 }
 
+.neighborhood-flex {
+    display: flex;
+    justify-content: space-between;
+}
+.neighborhood-flex .form-group{
+    width: calc(100% / 4 - 5px);
+    margin-right: 5px;
+}
+.neighborhood-flex .form-group:first-child{
+    width: 85%;
+}
+.neighborhood-flex .form-group:last-child{
+    margin-right: 0;
+}
+.unit-flex{
+    display: flex;
+    justify-content: space-between;
+}
+.unit-flex .form-group{
+    width: calc(100% / 4 - 5px);
+    margin-right: 5px;
+}
+.unit-flex .form-group:last-child{
+    margin-right: 0;
+}
+.availability-flex {
+    display: flex;
+    justify-content: space-between;
+}
+.availability-flex .form-group{
+    width: calc(100% / 2 - 5px) ;
+    margin-right: 5px;
+}
+.availability-flex .form-group:last-child{
+    margin-right: 0px;
+}
+.add-more-btn .btn-default{
+    padding: 0px 15px;
+    font-size: 12px;
+    line-height: 24px;
+    text-transform: uppercase;
+
+}

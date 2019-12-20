@@ -36,7 +36,7 @@ class ListingService extends BuildingService {
     /**
      * @var SearchService
      */
-    private $searchService;
+    protected $searchService;
 
     /**
      * @var OpenHouseRepo
@@ -67,17 +67,27 @@ class ListingService extends BuildingService {
      */
     public function create( $request ) {
         DB::beginTransaction();
+
+        $request->freshness_score = MAXFRESHNESSSCORE;
         $listing              = $this->__validateForm( $request );
         $listing->thumbnail   = $this->__uploadImage( $listing );
         $building             = $this->addBuilding( $listing, $request );
         $listing->building_id = $building->id;
-        $listing->visibility  = ( ! $building->is_verified && isAgent() )
-            ? PENDINGLISTING : $building->is_verified;
+
+        if(!$building->is_verified && isAgent()) {
+            $listing->visibility = PENDINGLISTING;
+        } else {
+            $listing->visibility = ACTIVELISTING;
+        }
+
         $listing              = $this->__addList( $listing );
         $this->__addOpenHouse( $listing->id, $listing, $request->open_house );
         $this->__addFeatures( $listing->id, $request->features );
         $this->__manageSaveSearch( $listing, $request->features );
+        $this->__freshnessScore($listing);
+
         DB::commit();
+
         $listing->visibility !== PENDINGLISTING ?:
             DispatchNotificationService::LISTINGAPPROVALREQUEST(toObject([
                 'to'   => mailToAdmin(),
@@ -170,7 +180,7 @@ class ListingService extends BuildingService {
      * @return mixed
      */
     public function repost( $id ) {
-        return $this->listingRepo->update( $id, [ 'updated_at' => now() ] );
+        return $this->listingRepo->update( $id, [ 'updated_at' => now(), 'freshness_score' => MAXFRESHNESSSCORE ] );
     }
 
     /**
@@ -221,6 +231,18 @@ class ListingService extends BuildingService {
     }
 
     /**
+     * @param $request
+     *
+     * @return array
+     */
+    public function filter($request) {
+        $keywords = [];
+        $request->rent_beds != null && $request->rent_beds !=  'any' && $request->rent_beds !=  'studio' ? $keywords['bedrooms'] = $request->rent_beds : null ;
+        $request->rent_baths != null && $request->rent_baths != 'any' ? $keywords['baths'] = $request->rent_baths : null ;
+        return $listings = $this->listingRepo->search($keywords)->rentActive()->get();
+    }
+
+    /**
      * @return mixed
      */
     public function active() {
@@ -232,13 +254,6 @@ class ListingService extends BuildingService {
      */
     public function inactive() {
         return $this->listingRepo->inactive();
-    }
-
-    /**
-     * @return mixed
-     */
-    public function realty() {
-        return $this->listingRepo->realty();
     }
 
     /**
@@ -327,37 +342,61 @@ class ListingService extends BuildingService {
     }
 
     /**
+     * @param $neighborhood
+     * @return mixed
+     */
+    private function __neighborhoodHandler($neighborhood_name) {
+        $neighborhood = $this->neighborhoodRepo->find(['name' => $neighborhood_name])->first();
+        if(!$neighborhood) {
+            $neighborhood = $this->neighborhoodRepo->create(['name' => $neighborhood_name]);
+        }
+
+        return $neighborhood->id;
+    }
+
+    /**
      * @param $request
      *
      * @return ListingForm
      */
     protected function __validateForm( $request ) {
-        $form                  = new ListingForm();
-        $form->user_id         = $request->user_id ?? myId();
-        $form->unique_slug     = str_random( 20 );
-        $form->name            = $request->name;
-        $form->building_id     = $request->building_id;
-        $form->email           = $request->email;
-        $form->phone_number    = $request->phone_number;
-        $form->street_address  = $request->street_address;
-        $form->display_address = $request->display_address;
-        $form->availability    = $request->availability_date ?? $request->availability === '1' ? now() : false;
-        $form->visibility      = $request->visibility;
-        $form->description     = $request->description;
-        $form->neighborhood_id = $request->neighborhood_id;
-        $form->bedrooms        = $request->bedrooms;
-        $form->baths           = $request->baths;
-        $form->unit            = $request->unit;
-        $form->rent            = $request->rent;
-        $form->square_feet     = $request->square_feet;
-        $form->map_location    = $request->map_location;
-        $form->building_type   = $request->building_type;
-        $form->thumbnail       = $request->thumbnail ?? '';
-        $form->old_thumbnail   = $request->old_thumbnail ?? null;
-        $form->application_fee = $request->application_fee;
-        $form->deposit         = $request->deposit;
-        $form->lease_term      = $request->lease_term;
-        $form->free_months     = $request->free_months;
+
+        if($request->availability_type == 1) {
+            $request->availability = now()->format('Y-m-d');
+        } elseif ($request->availability_type == 3) {
+            $request->availability = carbon($request->availability)->format('Y-m-d');
+        } else {
+            $request->availability = false;
+        }
+
+        $form                    = new ListingForm();
+        $form->user_id           = $request->user_id ?? myId();
+        $form->unique_slug       = str_random( 20 );
+        $form->name              = $request->name;
+        $form->building_id       = $request->building_id;
+        $form->email             = $request->email;
+        $form->phone_number      = $request->phone_number;
+        $form->street_address    = $request->street_address;
+        $form->display_address   = $request->display_address;
+        $form->freshness_score   = $request->freshness_score;
+        $form->availability_type = $request->availability_type;
+        $form->availability      = $request->availability;
+        $form->visibility        = $request->visibility;
+        $form->description       = $request->description;
+        $form->neighborhood_id   = $this->__neighborhoodHandler($request->neighborhood);
+        $form->bedrooms          = $request->bedrooms;
+        $form->baths             = $request->baths;
+        $form->unit              = $request->unit;
+        $form->rent              = $request->rent;
+        $form->square_feet       = $request->square_feet;
+        $form->map_location      = $request->map_location;
+        $form->building_type     = $request->building_type;
+        $form->thumbnail         = $request->thumbnail ?? '';
+        $form->old_thumbnail     = $request->old_thumbnail ?? null;
+        $form->application_fee   = $request->application_fee;
+        $form->deposit           = $request->deposit;
+        $form->lease_term        = $request->lease_term;
+        $form->free_months       = $request->free_months;
         $form->validate();
 
         return $form;
@@ -524,9 +563,6 @@ class ListingService extends BuildingService {
             'inactive' => $this->inactive()
                                ->latest()
                                ->paginate( $paginate, [ '*' ], 'inactive' ),
-            'realty'   => $this->realty()
-                               ->latest()
-                               ->paginate( $paginate, [ '*' ], 'realty' ),
             'archived' => $this->archived()
                                ->latest()
                                ->paginate( $paginate, [ '*' ], 'archived' ),
@@ -553,10 +589,6 @@ class ListingService extends BuildingService {
                                             ->inactive()
                                             ->latest()
                                             ->paginate( $paginate, [ '*' ], 'inactive' ),
-            'realty'   => $this->listingRepo->search( $keywords )
-                                            ->realty()
-                                            ->latest()
-                                            ->paginate( $paginate, [ '*' ], 'realty' ),
             'archived' => $this->listingRepo->search( $keywords )
                                             ->archived()
                                             ->latest()
@@ -579,9 +611,6 @@ class ListingService extends BuildingService {
             'inactive' => $this->inactive()
                                ->orderBy( $col, $order )
                                ->paginate( $paginate, [ '*' ], 'inactive' ),
-            'realty'   => $this->realty()
-                               ->orderBy( $col, $order )
-                               ->paginate( $paginate, [ '*' ], 'realty' ),
             'pending'  => $this->pending()
                                ->orderBy( $col, $order )
                                ->paginate( $paginate, [ '*' ], 'pending' ),
@@ -622,6 +651,29 @@ class ListingService extends BuildingService {
     }
 
     /**
+     * @param $listing
+     * @return bool
+     */
+    private function __freshnessScore($listing) {
+        $listings = $this->listingRepo->find([
+            'neighborhood_id' => $listing->neighborhood_id,
+            'bedrooms' => $listing->bedrooms,
+            'baths' => $listing->baths,
+            'street_address' => $listing->street_address
+        ]);
+
+        $listings = $listings->where('id', '!=', $listing->id)->get();
+        foreach ($listings as $listing) {
+            if($listing->freshness_score >= MINFRESHNESSSCORE) {
+                $score = $listing->freshness_score - DROPFRESHNESS;
+                $this->listingRepo->update($listing->id, ['freshness_score' => $score]);
+            }
+        }
+
+        return true;
+    }
+
+    /**
      * @param $request
      * @param $agentId
      *
@@ -638,6 +690,7 @@ class ListingService extends BuildingService {
 
         return toObject( [
             'listings' => $listings,
+            'reviews'  => toObject($this->userRepo->profileDetail($agentId)->first()->reviews)
         ] );
     }
 }

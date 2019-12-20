@@ -279,6 +279,30 @@ function dispatchMessageEvent( $data ) {
 
 /**
  * @param $data
+ * @return bool
+ */
+function socketEvent($data) {
+    $socket = new \App\Services\SocketService(request()->root(), config('socket.port'));
+    $socket->setQueryParams([
+        'token' => 'edihsudshuz',
+        'id' => '8780',
+        'cid' => '344',
+        'cmp' => 2339
+    ]);
+
+    $socket->emit('notification-channel', [
+        'id' => $data->id,
+        'to' => $data->to,
+        'from' => $data->from,
+        'message' => $data->message,
+        'url' => $data->url,
+        'is_read' => false,
+        'profile_image' => asset(mySelf()->profile_image ?? DUI)
+    ]);
+}
+
+/**
+ * @param $data
  * @param int $delay
  *
  * @return PendingDispatch
@@ -419,7 +443,7 @@ function neighborhoodExpertise( $neighborhoods ) {
         $collect[] = $neighbours->name;
     }
 
-    return ( count( $collect ) > 0 ) ? implode( ', ', $collect ) : 'Null';
+    return ( count( $collect ) > 0 ) ? implode( ', ', $collect ) : 'None';
 }
 
 /**
@@ -459,7 +483,7 @@ function petPolicy( $features ) {
  */
 function unitFeature( $features ) {
     $collection    = [];
-    $configFeature = config( 'features.unit_features' );
+    $configFeature = config( 'features.apartment_features' );
     foreach ( $features as $feature ) {
         if ( strpos( $feature->value ?? $feature, 'u' ) !== false ) {
             $collection[] = $configFeature[ $feature->value ?? $feature ];
@@ -485,7 +509,7 @@ function openHouseTimeSlot( $index ) {
  */
 function amenities() {
     $i = 0;
-    $html    = '<div class="col-md-4"><h3>Amenities</h3>';
+    $html    = '<div class="col-md-4"><h3>Building Features</h3>';
     $service = new \App\Services\AmenityService();
     $amenities = $service->get();
     $total = $amenities->count();
@@ -501,6 +525,7 @@ function amenities() {
         if ( ( $key + 1 ) % $perColumn === 0 ) {
             $html .= '</div><div class="col-sm-4"><h3>&nbsp;</h3>';
         } elseif ( $i === $total ) {
+            $i = 0;
             $html .= '</div>';
         }
     }
@@ -511,56 +536,95 @@ function amenities() {
 /**
  * @return string|null
  */
-function features() {
-    $html     = null;
-    $features = config( 'features' );
-    foreach ( $features as $type => $feature ) {
-        $html .= "<div class='col-md-6'>
-        <h3>" . ucwords( str_replace( '_', ' ', $type ) ) . "</h3><ul class='checkbox-listing'>";
-        foreach ( $feature as $index => $value ) {
-            $html .= "<li><div class='custom-control custom-checkbox'>" .
-                     Form::checkbox( "features[]", $index, null,
-                         [
-                             'class' => 'custom-control-input',
-                             'id'    => "listitem{$index}"
-                         ] ) . "<label class='custom-control-label' for='listitem{$index}'>" .
-                     $value . "</label></div></li>";
+function features_pet() {
+    $html = null;
+    $pets = config('features.pet_policy');
+    foreach ($pets as $type => $pet) {
+        if($type === 'title') {
+            $html .= "<div class='col-md-12' style='margin-top: 10px;'>";
+            $html .= "<h3>" . $pet . "</h3><div class='row'><div class='col-md-4'>";
+        } else {
+            $html .= "<ul class='checkbox-listing'><li><div class='custom-control custom-checkbox'>";
+            $html .= Form::checkbox( "features[]", $type, null,
+                [
+                    'class' => 'custom-control-input',
+                    'id'    => "listitem{$type}"
+                ]);
+            $html .= "<label class='custom-control-label' for='listitem{$type}'>{$pet}</label></div></li></ul>";
         }
-        $html .= "</ul></div>";
     }
 
+    $html .= "</div></div></div>";
+
     $html .= "<script>
-                let row = $('.row'); 
-                $(() => {
-                    if($('#listitemp3').is(':checked')) {
-                        p3(true);
-                    }
-                    
-                    if($('#listitemp4').is(':checked')) {
-                        p4(true);
-                    }
-                });
-                
-                function p3(action) {
-                    row.find('input[value=p1], input[value=p2], input[value=p4]').prop('checked', false);
-                    row.find('input[value=p1], input[value=p2]').prop('disabled', action);
-                }
-                
-                function p4(action) {
-                    row.find('input[value=p1], input[value=p2], input[value=p3]').prop('checked', false);
-                    row.find('input[value=p1], input[value=p2]').prop('disabled', action);
-                }
-                
-                $('#listitemp4, #listitemp3').change(function() {
-                    let val = $(this).val();
-                    if (val === 'p3') {
-                        p3($(this).is(':checked'));
-                    }
+        let row = $('.row');
+        $(() => {
+        if($('#listitemp3').is(':checked')) {
+        p3(true);
+        }
         
-                    if (val === 'p4') {
-                        p4($(this).is(':checked'));
-                    }
-                });</script>";
+        if($('#listitemp4').is(':checked')) {
+        p4(true);
+        }
+        });
+        
+        function p3(action) {
+        row.find('input[value=p1], input[value=p2], input[value=p4]').prop('checked', false);
+        row.find('input[value=p1], input[value=p2]').prop('disabled', action);
+        }
+        
+        function p4(action) {
+        row.find('input[value=p1], input[value=p2], input[value=p3]').prop('checked', false);
+        row.find('input[value=p1], input[value=p2]').prop('disabled', action);
+        }
+        
+        $('#listitemp4, #listitemp3').change(function() {
+        let val = $(this).val();
+        if (val === 'p3') {
+        p3($(this).is(':checked'));
+        }
+        
+        if (val === 'p4') {
+        p4($(this).is(':checked'));
+        }
+        });</script>";
+
+    return $html;
+}
+
+/**
+ * @return string|null
+ */
+function features() {
+    $i = 0;
+    $open = false;
+    $html     = null;
+    $features = collect(config( 'features.apartment_features' ));
+    $total = ($features->count() - 1);
+    $per_column = ceil($total / 3);
+    foreach ( $features as $type => $feature ) {
+        if($type === 'title') {
+            $open = true;
+            $html .= "<div class='col-md-12' style='margin-top: 10px;'>";
+            $html .= "<h3>" . $feature . "</h3><div class='row'><div class='col-md-4'>";
+        } else {
+            $i ++;
+            $html .= "<ul class='checkbox-listing'><li><div class='custom-control custom-checkbox'>";
+            $html .= Form::checkbox( "features[]", $type, null,
+                        [
+                            'class' => 'custom-control-input',
+                            'id'    => "listitem{$type}"
+                        ]);
+            $html .= "<label class='custom-control-label' for='listitem{$type}'>{$feature}</label></div></li></ul>";
+            if($i == $per_column) {
+                $i = 0; $open = true;
+                $html .= "</div><div class='col-md-4'>";
+            }
+        }
+    }
+
+    if($open === true) { $open = false;$html .= "</div>"; }
+    $html .= "</div></div>";
 
     return $html;
 }
@@ -660,6 +724,15 @@ function is_exclusive( $listing ) {
     }
 
     return 'N/A';
+}
+
+/**
+ * @param $listing_id
+ *
+ * @return listing_detail
+ */
+function listing_detail( $id ) {
+    return ( new \App\Services\FeatureListingService() )->detail( $id );
 }
 
 /**

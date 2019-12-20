@@ -1,5 +1,5 @@
 {
-    "/assets/js/listing-notification.js": "/assets/js/listing-notification.js",
-    "/assets/js/message.js": "/assets/js/message.js",
-    "/assets/js/notification.js": "/assets/js/notification.js"
+    "/assets/js/notification.js": "/assets/js/notification.js",
+    "/assets/js/socket-client.js": "/assets/js/socket-client.js",
+    "/assets/js/tcp.js": "/assets/js/tcp.js"
 }

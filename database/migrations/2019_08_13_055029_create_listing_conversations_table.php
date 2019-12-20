@@ -23,6 +23,7 @@ class CreateListingConversationsTable extends Migration {
             $table->string('username')->nullable();
             $table->string('email')->nullable();
             $table->string('phone_number')->nullable();
+            $table->string('reply_rate')->nullable();
             $table->date('appointment_date')->nullable();
             $table->string('appointment_time')->nullable();
             $table->boolean('is_archived')->default(false);

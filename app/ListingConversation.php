@@ -75,7 +75,8 @@ class ListingConversation extends Model {
      *
      * @return mixed
      */
-    public function scopeInactiveConversations($query) {
+    public function scopeInactiveConversations($query)
+    {
         return $query->where([
             'meeting_request'          => DEACTIVE,
             'is_archived'              => FALSE,
@@ -89,7 +90,10 @@ class ListingConversation extends Model {
      * @return mixed
      */
     public function scopeArchiveConversations($query) {
-        return $this->where('is_archived', TRUE)->with(['listing', 'sender']);
+        return $this->where([
+                'is_archived'              => TRUE,
+                isRenter() ? 'from' : 'to' => myId()
+            ])->with(['listing', 'sender']);
     }
 
     /**

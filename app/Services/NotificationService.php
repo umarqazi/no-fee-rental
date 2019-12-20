@@ -62,15 +62,15 @@ class NotificationService extends NotificationSettingService {
      * @return bool
      */
     public function send() {
-        $this->save();
+        $notification = $this->save();
         $settings = $this->receiverSettings( $this->data->to );
         if ( empty( $settings ) ) {
-            event( new \App\Events\TriggerNotification( $this->data ) );
+            socketEvent($notification);
             dispatchEmailQueue( $this->data );
         }
 
         if ( ! empty( $settings ) && $settings->allow_web_notification ) {
-            event( new \App\Events\TriggerNotification( $this->data ) );
+            socketEvent($notification);
         }
 
         if ( ! empty( $settings ) && $settings->allow_email ) {
@@ -99,8 +99,16 @@ class NotificationService extends NotificationSettingService {
      *
      * @return mixed
      */
-    public function markAsRead( $request ) {
+    public function markAllAsRead( $request ) {
         return $this->notificationRepo->markAllAsRead( $request->ids );
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function markAsRead($id) {
+        return $this->notificationRepo->markAsRead( $id );
     }
 
     /**

@@ -8,9 +8,9 @@
  * @param contentType
  * @returns {Promise<void>}
  */
-const ajaxRequest = async function(url, type, data, loading = true, form = null, contentType = 'true') {
-	setHeaders();
-	let settings = {
+const ajaxRequest = async function (url, type, data, loading = true, form = null, contentType = 'true') {
+    setHeaders();
+    let settings = {
         url: url,
         type: type,
         data: data,
@@ -22,8 +22,8 @@ const ajaxRequest = async function(url, type, data, loading = true, form = null,
         success: (res) => {
             (loading) ? $('.loader').hide() : '';
 
-            if(!res.status) {
-                if(res.msg !== undefined) {
+            if (!res.status) {
+                if (res.msg !== undefined) {
                     if (res.msg !== '' && res.msg !== null) {
                         toastr.error(res.msg);
                     }
@@ -31,8 +31,8 @@ const ajaxRequest = async function(url, type, data, loading = true, form = null,
                 return false;
             }
 
-            if(res.status) {
-                if(res.msg !== '' && res.msg !== null) {
+            if (res.status) {
+                if (res.msg !== '' && res.msg !== null) {
                     toastr.success(res.msg);
                 }
                 return res;
@@ -41,21 +41,26 @@ const ajaxRequest = async function(url, type, data, loading = true, form = null,
 
         error: (err) => {
             (loading) ? $('.loader').hide() : '';
-            if(err.status === 422) {
+            if (err.status === 422) {
                 populateErrors(form, err.responseJSON.errors);
                 return;
             }
-            if(err.responseJSON.msg !== '' || err.responseJSON.msg !== null) {
+            if (
+                err.responseJSON.msg !== '' &&
+                err.responseJSON.msg !== null &&
+                err.responseJSON.message !== null &&
+                err.responseJSON.message !== ''
+            ) {
                 toastr.error(err.responseJSON.msg);
             }
         }
     };
-	if(contentType === 'false') {
-	    settings.processData = false;
-	    settings.contentType = false;
+    if (contentType === 'false') {
+        settings.processData = false;
+        settings.contentType = false;
     }
 
-	return await $.ajax(settings);
+    return await $.ajax(settings);
 };
 
 /**
@@ -64,12 +69,13 @@ const ajaxRequest = async function(url, type, data, loading = true, form = null,
  * @param data
  */
 const populateFields = function (form, data) {
-    $.each(data, function(key, value) {
-        let ctrl = $('[name='+key+']', form);
-        switch(ctrl.prop("type")) {
-            case "radio": case "checkbox":
-                ctrl.each(function() {
-                    if($(this).attr('value') === value) $(this).attr("checked",value);
+    $.each(data, function (key, value) {
+        let ctrl = $('[name=' + key + ']', form);
+        switch (ctrl.prop("type")) {
+            case "radio":
+            case "checkbox":
+                ctrl.each(function () {
+                    if ($(this).attr('value') === value) $(this).attr("checked", value);
                 });
                 break;
             default:
@@ -82,11 +88,11 @@ const populateFields = function (form, data) {
  * Set Default Request Headers
  */
 const setHeaders = function () {
-	$.ajaxSetup({
-		headers: {
-			'X-CSRF-TOKEN': $('meta[name=csrf-token]').attr('content')
-		}
-	});
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name=csrf-token]').attr('content')
+        }
+    });
 };
 
 /**
@@ -95,9 +101,9 @@ const setHeaders = function () {
  * @param errors
  */
 const populateErrors = function (form, errors) {
-	$.each(errors, function (key, msg) {
-		$(form).find(`input[name=${key}]`).after(`<label class="error">${msg}</label>`);
-	});
+    $.each(errors, function (key, msg) {
+        $(form).find(`input[name=${key}]`).after(`<label class="error">${msg}</label>`);
+    });
 };
 
 /**
@@ -115,7 +121,7 @@ const confirm = function (msg) {
             'Yes, I am sure!'
         ],
         dangerMode: true,
-    }).then(function(isConfirm) {
+    }).then(function (isConfirm) {
         return !!(isConfirm);
     });
 };
@@ -128,7 +134,7 @@ const confirm = function (msg) {
  * @returns {Promise<void>}
  */
 async function deleteRecord(route, table, form) {
-    if(await confirm('You want to delete?')) {
+    if (await confirm('You want to delete?')) {
         await ajaxRequest(route, 'post', null);
         table.row($(form).parents('tr')).remove().draw();
     }
@@ -142,11 +148,11 @@ async function deleteRecord(route, table, form) {
  * @returns {Promise<void>}
  */
 async function toggleStatus(route, table, form) {
-    if(await confirm('Sure to perform this action?')) {
+    if (await confirm('Sure to perform this action?')) {
         let res = await ajaxRequest(route, 'post', null);
-        if(form.hasClass('fa-eye')) {
+        if (form.hasClass('fa-eye')) {
             form.addClass('fa-eye-slash').removeClass('fa-eye');
-        } else if(form.hasClass('fa-eye-slash')) {
+        } else if (form.hasClass('fa-eye-slash')) {
             form.addClass('fa-eye').removeClass('fa-eye-slash');
         }
         return res;
@@ -173,7 +179,7 @@ async function updateRecord(form_id, route) {
  */
 async function livePreview(file, target) {
     let reader = new FileReader();
-    reader.onload = function(e) {
+    reader.onload = function (e) {
         $(target).attr('src', e.target.result);
     };
     reader.readAsDataURL(file);
@@ -200,13 +206,15 @@ const fetchNeighbours = async (selector) => {
             change: function (event, ui) {
                 if (!ui.item) {
                     this.value = '';
-                    if($('.neigh').length > 0) return;
-                    $neighbour.after('<label id="neighbors-error" class="error neigh" for="baths">Invalid Neighborhood.</label>');
+                    if ($('.neigh').length > 0) return;
+                    $('#search-error-message').after('<label id="neighbors-error" class="error neigh" for="baths" style="margin-top: 5px;">Invalid Neighborhood.</label>');
                 } else {
                     $('#neighbors-error').remove();
                 }
             }
         });
+    }).catch(err => {
+        console.log(err);
     });
 };
 
@@ -288,7 +296,7 @@ const enableDatePicker = (selector, allowTime = true) => {
  *
  * @returns {{serverSide: boolean, processing: boolean}}
  */
-const dataTableSettings = function() {
+const dataTableSettings = function () {
     return {
         serverSide: true,
         processing: true,
@@ -325,7 +333,7 @@ const dataTables = function (selector, url, column = null, columnDef = null, tar
 const pushColumns = function (column) {
     let columns = [];
     column.forEach(col => {
-        columns.push({ data: col });
+        columns.push({data: col});
     });
     return columns;
 };
@@ -338,7 +346,7 @@ const pushColumns = function (column) {
 const setBySelector = function (selector) {
     let columns = [];
     $(selector).find('th').each((i, a) => {
-        if($(a).text() !== 'action') {
+        if ($(a).text() !== 'action') {
             columns.push($(a).text().replace(/\s+/g, '_').toLowerCase());
         }
     });
@@ -355,45 +363,45 @@ const scrollDown = (selector) => {
 
 $(() => {
 
-	$('body').on('submit', '.ajax', async function(e) {
-		e.preventDefault();
-		let form    = $(this);
-		let id      = $(this).attr('id');
-		let url     = $(this).attr('action');
-		let type    = $(this).attr('method');
-		let data    = $(this).serialize();
-		let reset   = $(this).attr('reset');
+    $('body').on('submit', '.ajax', async function (e) {
+        e.preventDefault();
+        let form = $(this);
+        let id = $(this).attr('id');
+        let url = $(this).attr('action');
+        let type = $(this).attr('method');
+        let data = $(this).serialize();
+        let reset = $(this).attr('reset');
         let loading = $(this).attr('loading');
         let content = $(this).attr('content');
 
-		if(!form.valid()) {
-			return;
-		}
+        if (!form.valid()) {
+            return;
+        }
 
-		let res = await ajaxRequest(url, type, data, (loading !== 'false'), form, content);
+        let res = await ajaxRequest(url, type, data, (loading !== 'false'), form, content);
 
-		if(reset === 'true'){
+        if (reset === 'true') {
             $(form).trigger("reset");
         }
 
-		if(res.status){
-			form.trigger(`form-success-${id}`, res.data);
-		}
-	});
+        if (res.status) {
+            form.trigger(`form-success-${id}`, res.data);
+        }
+    });
 
-	$('BODY').on('click', 'button[data-target="#check-availability"]', function () {
-	    let $listing = $(this).parents('.property-thumb');
-	    let img = $listing.find('img').attr('src');
-	    let info = $listing.find('.info > div');
-	    let rent = info.find('p:first').text();
-	    let data = info.find('small').text();
+    $('BODY').on('click', 'button[data-target="#check-availability"]', function () {
+        let $listing = $(this).parents('.property-thumb');
+        let img = $listing.find('img').attr('src');
+        let info = $listing.find('.info > div');
+        let rent = info.find('p:first').text();
+        let data = info.find('small').text();
         let address = info.find('p:last').text();
-	    data = data.split(',');
-	    let bed = parseInt(data[0]);
-	    let bath = parseInt(data[1]);
-	    let modal = $('body').find('#check-availability');
-	    modal.find('.row > div > img').attr('src', img);
-	    modal.find('#address').text(address);
+        data = data.split(',');
+        let bed = parseInt(data[0]);
+        let bath = parseInt(data[1]);
+        let modal = $('body').find('#check-availability');
+        modal.find('.row > div > img').attr('src', img);
+        modal.find('#address').text(address);
         modal.find('.bedroms-baths-text > span:first').text(bed);
         modal.find('.bedroms-baths-text > span:last').text(bath);
         modal.find('.row > div:eq(1) > small').text(rent);
@@ -408,10 +416,10 @@ $(() => {
         let id = $(this).attr('id');
         $(this).toggleClass('favourite');
         if ($(this).hasClass('favourite')) {
-            return await ajaxRequest(`/favourite/${id}`, 'GET', true, false );
+            return await ajaxRequest(`/favourite/${id}`, 'GET', true, false);
         }
 
-        return await ajaxRequest(`/remove/favourite/${id}`, 'GET', true,  false);
+        return await ajaxRequest(`/remove/favourite/${id}`, 'GET', true, false);
     });
 
     /**
@@ -422,8 +430,8 @@ $(() => {
     });
 
     //add US format phone masking on phone number filed
-    $("input[name=phone_number]").focus(function(){
-        $("input[name=phone_number]").mask('+0000-000-0000');
+    $("input[name=phone_number]").focus(function () {
+        $("input[name=phone_number]").mask('(000) 000-0000');
     });
 
 });
