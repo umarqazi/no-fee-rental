@@ -389,7 +389,7 @@ class ListingService extends BuildingService {
     private function __neighborhoodHandler($neighborhood_name) {
         $neighborhood = $this->neighborhoodRepo->find(['name' => $neighborhood_name])->first();
         if(!$neighborhood) {
-            $neighborhood = $this->neighborhoodRepo->create(['name' => $neighborhood_name]);
+            $neighborhood = $this->neighborhoodRepo->create(['name' => $neighborhood_name, 'boro_id' => 1]);
         }
 
         return $neighborhood->id;
