@@ -273,7 +273,7 @@
                             <li>
                                 <div class="custom-control custom-radio custom-control-inline">
                                     {!! Form::radio('location-preference', 1, false, ['class' => 'custom-control-input', 'id' => 'location-1','onclick'=>'openSpecificModal(this)']) !!}
-                                    <label class="custom-control-label" for="location-1">Yes, I'm intrested in certain neighborhoods...</label>
+                                    <label class="custom-control-label" for="location-1">Yes, I'm interested in certain neighborhoods...</label>
                                 </div>
                             </li>
                             <li>
