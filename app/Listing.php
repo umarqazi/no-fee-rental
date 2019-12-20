@@ -79,6 +79,13 @@ class Listing extends Model {
     }
 
     /**
+     * @return HasMany
+     */
+    public function reported() {
+        return $this->hasMany(ListingReport::class, 'listing_id', 'id');
+    }
+
+    /**
      * @param $query
      *
      * @return mixed
@@ -106,6 +113,40 @@ class Listing extends Model {
         isAdmin() ?: $clause['user_id'] = myId();
         $clause['visibility'] = ACTIVELISTING;
         return $query->where($clause)->where('availability', '<=', now()->format('Y-m-d'));
+    }
+
+    /**
+     * @param $query
+     * @return mixed
+     */
+    public function scopeAI($query) {
+        return $query->where(['visibility' => ACTIVELISTING, 'realty_id' => NULL]);
+    }
+
+    /**
+     * @param $query
+     * @return mixed
+     */
+    public function scopeRealty($query) {
+        return $query->where('realty_id', '!=', NULL);
+    }
+
+    /**
+     * @param $query
+     * @return mixed
+     */
+    public function scopeReportedLists($query) {
+        return $query->whereHas('reported');
+    }
+
+    /**
+     * @param $query
+     * @return mixed
+     */
+    public function scopeOwnerOnly($query) {
+        return $query->whereHas('building', function($subQuery) {
+            return $subQuery->where('building_action', OWNERONLY);
+        });
     }
 
     /**
@@ -185,7 +226,8 @@ class Listing extends Model {
 	public function scopeWithAll($query) {
 		return $query->with([
 		    'agent.company', 'agent.reviews', 'images', 'building.amenities', 'favourites',
-            'openHouses', 'features', 'neighborhood', 'building.listings', 'building.contact'
+            'openHouses', 'features', 'neighborhood', 'building.listings', 'building.contact',
+            'reported'
         ]);
 	}
     /**

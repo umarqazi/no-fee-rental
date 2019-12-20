@@ -185,72 +185,14 @@
                 <div class="property-listing neighbourhood-listing">
                     @foreach($data->listings as $listing)
                         <input type='hidden' name='map_location' value={{ $listing->map_location }}>
-                        <div class='property-thumb'>
-                            <div class='check-btn'>
-                                <button class='btn-default' list_id="{{ $listing->id }}" to="{{ $listing->agent->id }}" data-target='#check-availability'>
-                                    Check Availability
-                                </button>
-                            </div>
-                            @if(!authenticated())
-                                <span class="display-heart-icon"></span>
-                            @endif
-                            @if(isRenter())
-                                @if(isFavourite($listing["favourites"],$listing->id))
-                                    <span id = "{{$listing->id}}" class="heart-icon favourite"></span>
-                                @else
-                                    <span id = "{{$listing->id}}" class="heart-icon "></span>
-                                @endif
-                            @endif
-                            <img src='{{ asset($listing->thumbnail ?? DLI) }}' alt="" class='main-img'>
-                            <div class='info'>
-                                <div href='javascript:void(0);' class='info-link-text'>
-                                    <p> ${{ ($listing->rent) ?   number_format($listing->rent,0) : 'None' }} </p>
-                                    <small>{{ str_formatting($listing->bedrooms, ' Bed').', '.str_formatting($listing->baths, ' Bath') }}</small>
-                                    <p> {{ is_exclusive($listing).', '. $listing->neighborhood->name }} </p>
-                                </div>
-                                <a href="{{ route('listing.detail', $listing->id) }}" class='btn viewfeature-btn'> View </a>
-                            </div>
-                            <div class='feaure-policy-text'>
-                                <p>${{ ($listing->rent) ?   number_format($listing->rent,0) : 'None' }} / Month </p>
-                                <span>{{ str_formatting($listing->bedrooms, ' Bed').', '.str_formatting($listing->baths, ' Bath') }}</span>
-                            </div>
-                        </div>
+                        {!! property_thumbs($listing) !!}
                     @endforeach
                 </div>
                 <div class="property-listing mobile-listing">
                     <div class="owl-carousel owl-theme">
                         @foreach($data->listings as $listing)
                             <div class="items">
-                                <div class='property-thumb'>
-                                    <div class='check-btn'>
-                                        <button class='btn-default'  list_id="{{ $listing->id }}" to="{{ $listing->agent->id }}" data-target='#check-availability'>
-                                            Check Availability
-                                        </button>
-                                    </div>
-                                    @if(!authenticated())
-                                        <span class="display-heart-icon"></span>
-                                    @endif
-                                    @if(isRenter())
-                                        @if(isFavourite($listing["favourites"],$listing->id))
-                                            <span id = "{{$listing->id}}" class="heart-icon favourite"></span>
-                                        @else
-                                            <span id = "{{$listing->id}}" class="heart-icon "></span>
-                                        @endif
-                                    @endif
-                                    <img src='{{ asset($listing->thumbnail ?? DLI) }}' alt="" class='main-img'>
-                                    <div class='info'>
-                                        <div href='javascript:void(0);' class='info-link-text'>
-                                            <p> $ {{ ($listing->rent) ?   number_format($listing->rent,0) : 'None' }} </p>
-                                            <small>{{ str_formatting($listing->bedrooms, ' Bed').', '.str_formatting($listing->baths, ' Bath') }}</small>
-                                            <p> {{ is_exclusive($listing).', '.  $listing->neighborhood->name }} </p>
-                                        </div>
-                                        <a href="{{ route('listing.detail', $listing->id) }}" class='btn viewfeature-btn'> View </a>
-                                    </div>
-                                    <div class='feaure-policy-text'>
-                                        <p>${{ ($listing->rent) ?   number_format($listing->rent,0) : 'None' }} / Month </p>
-                                        <span>{{ str_formatting($listing->bedrooms, ' Bed').', '.str_formatting($listing->baths, ' Bath') }}</span>
-                                    </div>
-                                </div>
+                                {!! property_thumbs($listing) !!}
                             </div>
                         @endforeach
                     </div>
@@ -270,6 +212,7 @@
 
 {{--Advance Search Modal--}}
 @include('modals.advance_search')
+
 {{--Check Availability--}}
 @include('modals.check_availability')
 

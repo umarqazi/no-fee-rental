@@ -103,7 +103,6 @@ const setMap = (container, coords, addMarker = true, showPop = true, html = null
     MAP.flyTo({center: setLatLng(coords)});
     (addMarker) ? setMarker(coords) : null;
     (showPop) ? showPopUp(MARKER, html) : null;
-
     return MAP;
 };
 
