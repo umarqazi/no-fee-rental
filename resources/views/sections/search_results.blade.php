@@ -30,58 +30,55 @@
                                 <div class="border-bottom-h3"></div>
                                 <ul>
                                     <li>
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="catss-1-neigh"
-                                                   name="pets">
-                                            <label class="custom-control-label" for="catss-1-neigh">Neighborhood</label>
+                                        <div class="custom-control custom-radio custom-control-inline">
+                                            <input type="radio" class="custom-control-input" id="beds-1-radio"
+                                                   name="location">
+                                            <label class="custom-control-label" for="beds-1-radio">Find
+                                                Neighborhood</label>
                                         </div>
                                     </li>
                                     <li>
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="catss-2-neigh"
-                                                   name="pets">
-                                            <label class="custom-control-label" for="catss-2-neigh">Neighborhood</label>
+                                        <div class="custom-control custom-radio custom-control-inline">
+                                            <input type="radio" class="custom-control-input" id="beds-2-radio"
+                                                   name="location">
+                                            <label class="custom-control-label" for="beds-2-radio">Find
+                                                Neighborhood</label>
                                         </div>
                                     </li>
                                     <li>
-                                        {{--                                    <div class="custom-control custom-checkbox">--}}
-                                        {{--                                        <input type="checkbox" class="custom-control-input" id="catss-3-neigh"--}}
-                                        {{--                                               name="pets">--}}
-                                        {{--                                        <label class="custom-control-label" for="catss-3-neigh">Neighborhood</label>--}}
-                                        {{--                                    </div>--}}
                                         <ul class="inside-listing">
                                             <li>
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="catss-4-neigh"
-                                                           name="pets">
-                                                    <label class="custom-control-label"
-                                                           for="catss-4-neigh">Neighborhood</label>
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    <input type="radio" class="custom-control-input" id="beds-3-radio"
+                                                           name="location">
+                                                    <label class="custom-control-label" for="beds-3-radio">Find
+                                                        Neighborhood</label>
                                                 </div>
                                             </li>
                                             <li>
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="catss-5-neigh"
-                                                           name="pets">
-                                                    <label class="custom-control-label"
-                                                           for="catss-5-neigh">Neighborhood</label>
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    <input type="radio" class="custom-control-input" id="beds-4-radio"
+                                                           name="location">
+                                                    <label class="custom-control-label" for="beds-4-radio">Find
+                                                        Neighborhood</label>
                                                 </div>
                                             </li>
                                             <li>
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="catss-6-neigh"
-                                                           name="pets">
-                                                    <label class="custom-control-label"
-                                                           for="catss-6-neigh">Neighborhood</label>
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    <input type="radio" class="custom-control-input" id="beds-5-radio"
+                                                           name="location">
+                                                    <label class="custom-control-label" for="beds-5-radio">Find
+                                                        Neighborhood</label>
                                                 </div>
                                             </li>
                                         </ul>
                                     </li>
                                     <li>
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="catss-7-neigh"
-                                                   name="pets">
-                                            <label class="custom-control-label"
-                                                   for="catss-7-neigh">Neighborhood</label>
+                                        <div class="custom-control custom-radio custom-control-inline">
+                                            <input type="radio" class="custom-control-input" id="beds-6-radio"
+                                                   name="location">
+                                            <label class="custom-control-label" for="beds-6-radio">Find
+                                                Neighborhood</label>
                                         </div>
                                     </li>
                                 </ul>
@@ -174,11 +171,6 @@
 </div>
 <div class="search-result-wrapper">
     <div class="search-listing">
-        <div class="row">
-            <div class="col-lg-12 listing-right-padd">
-
-            </div>
-        </div>
         <h3></h3>
         {{--            <span>{{ count($data->listings) }} places available for rent </span>--}}
         <div id="boxscroll22">

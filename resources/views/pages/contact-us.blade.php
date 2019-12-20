@@ -2,44 +2,58 @@
 @section('title', 'Contact Us')
 @section('content')
     <section class="inner-pages contact-us wow fadeIn" data-wow-delay="0.2s">
-        <div class="contact-banner"> </div>
+        <div class="blog-banner-img-wrapper">
+            <h4 class="blog-banner-text">Contact Us</h4>
+            <div class="contact-banner"> </div>
+        </div>
         <div class="container-lg">
             <h2 class="text-center"></h2>
             <div class="contact-info">
                 <div class="row">
                     <div class="col-lg-4 ">
                         <div class="info">
-                            <img src="assets/images/location.png" alt="" />
-                            <div class="title"><h6> Sales/Advertising </h6>
-                                <p> Info@nofeerentalsnyc.com </p>
-                            <p>NOFEERENTALSNYC.COM 447 BROADWAY 2nd FL #453 New York, NY 10013
-                            </p>
-                                <p>Are you looking for a plan for your brokerage? Are you looking to advertise on our site
+                            <div class="info-inner">
+                                <img src="assets/images/location.png" alt="" />
+                                <div class="title"><h6> Sales/Advertising </h6>
+                                    <p> Info@nofeerentalsnyc.com </p>
+                                    <p>NOFEERENTALSNYC.COM 447 BROADWAY 2nd FL #453 New York, NY 10013
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="description-text">
+                            <p>Are you looking for a plan for your brokerage? Are you looking to advertise on our site
                                 and want to purchase a plan? Question about different plans? Let our sales team help you!</p>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="info">
-                            <img src="assets/images/close-envelope-new.png" alt="" />
-                            <div class="title"><h6> Support/Billing </h6>
-                                <a href="mailto:marketing@nofeerentals.com">Support@nofeerentalsnyc.com</a>
+                            <div class="info-inner">
+                                <img src="assets/images/close-envelope-new.png" alt="" />
+                                <div class="title"><h6> Support/Billing </h6>
+                                    <a href="mailto:marketing@nofeerentals.com">Support@nofeerentalsnyc.com</a>
+                                </div>
+                            </div>
+                            <div class="description-text">
                                 <p>Providing Easy-to-Access Customer Support is our top priority! Having problems with your listings? Technical porblems with your account?
                                     Questions about a charge or invoice? Don't worry - our dedicated support and billing team will help you out.</p>
-
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="info">
-                            <img src="assets/images/call-icon.png" alt="" />
-                            <div class="title"><h6> Careers </h6>
-                                <a href="#">Careers@nofeerentalsnyc .com</a>
+                            <div class="info-inner">
+                                <img src="assets/images/call-icon.png" alt="" />
+                                <div class="title"><h6> Careers </h6>
+                                    <a href="#">Careers@nofeerentalsnyc .com</a>
+                                </div>
+                            </div>
+
+                            <div class="description-text">
                                 <p>We're Hiring...</p>
                                 <p>Technical support specialist, IOS Developer, Senior Desing and UX Lead, Database Engineer,
-                                 Web Analytics Specialist, Sr. Account Manager and Brand Editorial Intern (Part-time). If you're interested in any of these
-                                positions please reach out to us.</p>
-                            </div>
+                                    Web Analytics Specialist, Sr. Account Manager and Brand Editorial Intern (Part-time). If you're interested in any of these
+                                    positions please reach out to us.</p></div>
                         </div>
                     </div>
                 </div>

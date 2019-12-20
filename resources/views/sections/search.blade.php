@@ -13,7 +13,7 @@
             <div class="dropdown-beds" >
                 <label id="show-beds"><span class="placeholder-text">Beds</span></label>
                 <div id="advance-search-chkbox" class="beds-dropdown">
-                    <div id="advance-search-beds">
+                    <div id="advance-search-beds" class="bed-advance-search">
                         <ul>
                             <li> <input type="checkbox" value="studio" id="Checkbox-ad-search" name="Checkbox">
                                 <label for="Checkbox-ad-search"><span class="label-name">Studio</span></label>
