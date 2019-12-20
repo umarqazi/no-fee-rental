@@ -15,11 +15,14 @@
                     <li><i class="fa fa-bath"></i> {{ str_formatting($pl->baths, 'Bath') }}</li>
                 </ul>
                 {!! isAdmin() ? "<p>Request By: {$pl->agent->first_name} {$pl->agent->last_name}</p>" : '' !!}
-
                 <p>Posted On: {{ $pl->created_at->format("m/d/y H:m A") }}</p>
-                <div class="badges">
+                @if(isAdmin())
+                    <a href="{{ route('admin.approveRequest', $pl->id) }}" title='Click To Approve'>
+                        <span class="status" style="background: #ffce39;">Pending</span>
+                    </a>
+                @else
                     <span class="status" style="background: #ffce39;">Pending</span>
-                </div>
+                @endif
                 <div class="actions-btns">
                     <a href="{{ route(whoAmI().'.editListing', $pl->id) }}">
                         <span><img src="{{asset('assets/images/edit-icon.png')}}" alt=""></span>
@@ -27,11 +30,9 @@
                     <a href="{{ route(whoAmI().'.copyListing', $pl->id) }}">
                         <span><img src="{{asset('assets/images/copy-icon.png')}}" alt=""></span>
                     </a>
-                    @if(isAdmin())
-                        <a href="{{ route('admin.approveRequest', $pl->id) }}" title='Click To Approve'>
-                            <button type="button" class="border-btn">Pending</button>
-                        </a>
-                    @endif
+                    <a href="{{ route('listing.detail', $pl->id) }}">
+                        <i class="fa fa-eye" style="font-size: 24px;position: relative;top: 5px;"></i>
+                    </a>
                 </div>
             </div>
         </div>
@@ -58,18 +59,19 @@
                             <li><i class="fa fa-bath"></i> {{ str_formatting($pl->baths, 'Bath') }}</li>
                         </ul>
                         <p>Posted On: {{ $pl->created_at->format("m/d/y H:m A") }}</p>
-                        <span class="status" style="background: #ffce39;">Pending</span>
+                        @if(isAdmin())
+                            <a href="{{ route('admin.approveRequest', $pl->id) }}" title='Click To Approve'>
+                                <span class="status" style="background: #ffce39;">Pending</span>
+                            </a>
+                        @else
+                            <span class="status" style="background: #ffce39;">Pending</span>
+                        @endif
                         <div class="actions-btns">
-                            @if(isAdmin())
-                                <a href="{{ route('admin.approveRequest', $pl->id) }}" title='Click To Approve'>
-                                    <button type="button" class="border-btn">Pending</button>
-                                </a>
-                            @endif
-
                         </div>
                         <div class="list-actions-icons">
                             <a href="{{ route(whoAmI().'.editListing', $pl->id) }}"><button><i class="fa fa-edit"></i></button></a>
                             <a href="{{ route(whoAmI().'.copyListing', $pl->id) }}"><button><i class="fa fa-copy"></i></button></a>
+                            <a href="{{ route('listing.detail', $pl->id) }}"><button><i class="fa fa-eye"></i></button></a>
                         </div>
                     </div>
                 </div>
@@ -79,5 +81,5 @@
             <p class="null">No Record Found</p>
         @endif
     </div>
-    {!! $listing->pending->render() !!}
+        {!! $listing->pending->render() !!}
 </div>
