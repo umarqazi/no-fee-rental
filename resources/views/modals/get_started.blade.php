@@ -224,7 +224,7 @@
         }
     }
 
-    $('input[name="priceRange"]').on('change', function () {
+    $('input[name="priceRange"]').on('input', function () {
         $('.budget').prop('disabled', false);
         $('#budget-error').css({'display': 'none'});
     });
