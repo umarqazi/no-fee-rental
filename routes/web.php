@@ -148,3 +148,6 @@ Route::get('/test', function (\Illuminate\Http\Request $request) {
    authenticate();
 isAuthenticated();
 })->name('web.test');
+
+// Listing Report
+Route::get('/listing-report', 'UserController@reportListing')->name('user.reportListing');

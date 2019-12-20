@@ -429,6 +429,13 @@ $(() => {
         $('#login').modal('show');
     });
 
+    /**
+     * Open Log in Modal when a guest click on Listing Report Icon
+     */
+    $("body").on('click', '#listing-report-flag', async function () {
+        $('#login').modal('show');
+    });
+
     //add US format phone masking on phone number filed
     $("input[name=phone_number]").focus(function () {
         $("input[name=phone_number]").mask('(000) 000-0000');

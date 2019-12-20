@@ -232,6 +232,19 @@ trait DispatchNotificationService
     /**
      * @param $data
      */
+    public static function LISTINGREPORT($data)
+    {
+        self::__setParams($data);
+        self::$data->view = 'listing-report';
+        self::$data->subject = 'Listing report Query Received';
+        self::$data->message = 'You have a new Listing report.';
+        self::$data->url = null;
+        self::__onlyEmail();
+    }
+
+    /**
+     * @param $data
+     */
     public static function LETUSHELP($data)
     {
         self::__setParams($data);
