@@ -46,13 +46,13 @@
                 <!-- Tab panes -->
                 <div class="tab-content">
                     <div class="tab-pane" id="listing-active">
-                        @include('listing-features.active_listing')
+                        @include('listing-tabs.active')
                     </div>
                     <div class="tab-pane fade" id="listing-inactive">
-                        @include('listing-features.inactive_listing')
+                        @include('listing-tabs.inactive')
                     </div>
                     <div class="tab-pane fade" id="listing-archived">
-                        @include('listing-features.archive_listing')
+                        @include('listing-tabs.archive')
                     </div>
                 </div>
             </div>

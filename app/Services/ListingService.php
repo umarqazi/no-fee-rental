@@ -184,6 +184,14 @@ class ListingService extends BuildingService {
     }
 
     /**
+     * @param $paginate
+     * @return object
+     */
+    public function getAdminLists($paginate) {
+        return toObject($this->__adminCollection($paginate));
+    }
+
+    /**
      * @param $id
      *
      * @return int
@@ -237,8 +245,13 @@ class ListingService extends BuildingService {
      */
     public function filter($request) {
         $keywords = [];
-        $request->rent_beds != null && $request->rent_beds !=  'any' && $request->rent_beds !=  'studio' ? $keywords['bedrooms'] = $request->rent_beds : null ;
-        $request->rent_baths != null && $request->rent_baths != 'any' ? $keywords['baths'] = $request->rent_baths : null ;
+        $request->rent_beds != null &&
+        $request->rent_beds !=  'any' &&
+        $request->rent_beds !=  'studio'
+            ? $keywords['bedrooms'] = $request->rent_beds : null ;
+        $request->rent_baths != null &&
+        $request->rent_baths != 'any'
+            ? $keywords['baths'] = $request->rent_baths : null ;
         return $listings = $this->listingRepo->search($keywords)->rentActive()->get();
     }
 
@@ -254,6 +267,34 @@ class ListingService extends BuildingService {
      */
     public function inactive() {
         return $this->listingRepo->inactive();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function active_inactive() {
+        return $this->listingRepo->activeInactive();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function realty() {
+        return $this->listingRepo->realty();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function ownerOnly() {
+        return $this->listingRepo->ownerOnly();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function reported() {
+        return $this->listingRepo->reported();
     }
 
     /**
@@ -566,6 +607,33 @@ class ListingService extends BuildingService {
             'archived' => $this->archived()
                                ->latest()
                                ->paginate( $paginate, [ '*' ], 'archived' ),
+        ];
+    }
+
+    /**
+     * @param $paginate
+     * @return array
+     */
+    protected function __adminCollection($paginate) {
+        return [
+            'active'     => $this->active_inactive()
+                                  ->latest()
+                                  ->paginate($paginate, ['*'], 'active'),
+            'realty'     => $this->realty()
+                                  ->latest()
+                                  ->paginate($paginate, ['*'], 'realty'),
+            'archived'   => $this->archived()
+                                  ->latest()
+                                  ->paginate($paginate, ['*'], 'archive'),
+            'owner_only' => $this->ownerOnly()
+                                 ->latest()
+                                 ->paginate($paginate, ['*'], 'owner_only'),
+            'pending'    => $this->pending()
+                                  ->latest()
+                                  ->paginate($paginate, ['*'], 'pending'),
+            'reported'   => $this->reported()
+                                  ->latest()
+                                  ->paginate($paginate, ['*'], 'reported'),
         ];
     }
 

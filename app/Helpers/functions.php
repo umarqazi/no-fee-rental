@@ -630,6 +630,42 @@ function features() {
 }
 
 /**
+ * @param $listing
+ * @return string|nul
+ *
+ */
+function property_thumbs($listing) {
+    $html = null;
+    $html .= "<div class='property-thumb'><div class='check-btn'>";
+    $html .= "<a href='javascript:void(0);'>";
+    $html .= "<button class='btn-default' list_id='{$listing->id}' to='{$listing->agent->id}' data-target=\"#check-availability\">Check Availability</button>";
+    $html .= "</a></div>";
+
+    if(!authenticated()) {
+        $html .= "<span class='display-heart-icon'></span>";
+    }
+
+    if(isRenter()) {
+        if(isFavourite($listing["favourites"],$listing->id)) {
+            $html .= "<span id ='{$listing->id}' class='heart-icon favourite'></span>";
+        } else {
+            $html .= "<span id ='{$listing->id}' class='heart-icon'></span>";
+        }
+    }
+
+    $html .= "<img src='".asset($listing->thumbnail ?? DLI)."' alt='' class='main-img'>";
+    $html .= "<div class='info'><div class='info-link-text'>";
+    $html .= "<p>$ ".number_format($listing->rent)." / month&nbsp;&nbsp;</p>";
+    $html .= "<small> (". $listing->bedrooms .' bd'.", ".$listing->baths.' ba'.")</small>";
+    $html .= "<p>".is_exclusive($listing).", {$listing->neighborhood->name}</p></div>";
+    $html .= "<a href='".route('listing.detail', $listing->id)."' class='btn viewfeature-btn'> View </a></div>";
+    $html .= "<div class='feaure-policy-text'>";
+    $html .= "<p>$ ".number_format($listing->rent)." / month </p>";
+    $html .= "<span> ". str_formatting($listing->bedrooms, 'bed').", ".str_formatting($listing->baths, 'bath')." </span></div></div>";
+    return $html;
+}
+
+/**
  * @param null $id
  *
  * @return mixed
