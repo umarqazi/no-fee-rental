@@ -2743,6 +2743,17 @@ footer .footer-wrapper>li:nth-child(1) {
     bottom: 0;
     right: 0;
 }
+.banner-text-blog{
+    position: absolute;
+    top: 50%;
+    z-index: 1;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 30px;
+    font-weight: 600;
+    color: #fff;
+    padding: 20px;
+}
 
 .privacy-heading {
   display: inline-block;

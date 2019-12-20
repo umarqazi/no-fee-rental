@@ -2,7 +2,10 @@
 @section('title', 'Contact Us')
 @section('content')
     <section class="inner-pages contact-us wow fadeIn" data-wow-delay="0.2s">
-        <div class="contact-banner"> </div>
+        <div class="blog-banner-img-wrapper">
+            <h4 class="blog-banner-text">Contact Us</h4>
+            <div class="contact-banner"> </div>
+        </div>
         <div class="container-lg">
             <h2 class="text-center"></h2>
             <div class="contact-info">

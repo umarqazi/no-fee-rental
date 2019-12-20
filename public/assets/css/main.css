@@ -2057,7 +2057,31 @@ footer .copyright .social-icons li a:hover {
 
 
 /*contact us*/
-
+.blog-banner-img-wrapper{
+    position: relative;
+}
+.blog-banner-img-wrapper .blog-banner-text {
+    position: absolute;
+    top: 50%;
+    z-index: 1;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 30px;
+    font-weight: 600;
+    color: #fff;
+    padding: 20px;
+}
+.contact-banner:before {
+    content: "";
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
 .inner-pages.contact-us {
     padding: 0px 0px 120px;
     margin-top: 90px;
