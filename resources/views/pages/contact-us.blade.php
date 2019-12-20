@@ -16,7 +16,7 @@
                                 <img src="assets/images/location.png" alt="" />
                                 <div class="title"><h6> Sales/Advertising </h6>
                                     <p> Info@nofeerentalsnyc.com </p>
-                                    <p>632 Broadway, 6th Floor New York, NY 10012 P 212.753.7702
+                                    <p>NOFEERENTALSNYC.COM 447 BROADWAY 2nd FL #453 New York, NY 10013
                                     </p>
                                 </div>
                             </div>

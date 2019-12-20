@@ -240,7 +240,7 @@
                 <div class="modal-body">
                     <div class="pt-4 -b-4">
                         <img src="assets/images/popcorn-icon.jpg" alt="" class="popcorn-icon" />
-                        <h3 class="mb-2 text-center">Thanks</h3>
+                        <h3 class="mb-2 text-center">Thanks {{authenticated() ? mySelf()->first_name : ''}}</h3>
                         <p class="text-center">We can help you even faster if you answer a few question about your search.</p>
                     </div>
                 </div>
@@ -622,6 +622,7 @@
 </div>
 {!! Form::close() !!}
 <script>
+    enableDatePicker($('input[name=lease-pay]'), false);
     $('input[name=priceRange]:last').on('input', function () {
         if ($('input[name=priceRange]:last').val() !== '') {
             $('#price-err').css({'display': 'none'});
@@ -656,14 +657,14 @@
         }
     });
 
-    $('input[name=username]:last').on('input', function () {
-        if ($('input[name=username]:last').val() !== '') {
+    $('input[name=username]').on('input', function () {
+        if ($('input[name=username]').val() !== '') {
             $('#name-err').css({'display': 'none'});
             $('#name-btn').prop('disabled', false);
         }
     });
     $('#name-btn').on('click', function () {
-        if ($('input[name=username]:last').val() == '') {
+        if ($('input[name=username]').val() == '') {
             setTimeout(() => {
                 $('#let-us-step4').show();
                 $('#let-us-step5').hide();

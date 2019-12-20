@@ -171,12 +171,20 @@ $(() => {
             setTimeout(() => {
                 price_min = selected.price_min ;
                 $('#min_price').val(selected.price_min);
+                let percentage = (selected.price_min / 10000) * 100 ;
+                $('#slider-range > span:first').css("left",percentage+'%');
+                $('#slider-range > div').css("left",percentage+'%');
+                $('#slider-range > div').css("width",100-percentage+'%');
             }, 100);
         }
         if (selected.price_max !== null){
             setTimeout(() => {
                 price_max = selected.price_max ;
                 $('#max_price').val(selected.price_max);
+                let percentage = (selected.price_max / 10000) * 100 ;
+                let width =  parseFloat($('#slider-range > div').css('width')) ;
+                $('#slider-range > span:last').css("left",percentage+'%');
+                $('#slider-range > div').css("width",(width -(100-percentage)+'%'));
             }, 100);
         }
         if (selected.neighborhood !== null){
@@ -219,7 +227,7 @@ $(() => {
                                     ' between ' + formatNumber(v.square_feet_min) + ' ft² and ' + formatNumber(v.square_feet_max) + ' ft² ' : 'above ' + formatNumber(v.square_feet_min) + 'ft²' ) :
                                 (v.square_feet_max !== null ?
                                     ' under ' + formatNumber(v.square_feet_max) + ' ft²' : '' ))+
-                            (v.open_house !== null ? ' with Open House ' + v.open_house : '')}
+                            (v.open_house !== null && v.open_house !== ''  ? ' with Open House ' + v.open_house : '')}
                 </a> </li>`);
         });
     } else {

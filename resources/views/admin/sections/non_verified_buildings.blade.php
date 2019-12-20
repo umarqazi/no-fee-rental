@@ -10,9 +10,15 @@
                 <p class="title">{{ $building->address }}</p>
                 <p class="title">Total Agents: {{ count($building->listings) }}</p>
                 <p>Posted On: {{ $building->created_at->format("m/d/y H:m A") }}</p>
-                <a href="{{ route(whoAmI().'.buildingDetails', $building->id) }}" title="Verify this building">
                     <span class="status" style="background-color:red;">Verify</span>
-                </a>
+             <div class="actions-btns">
+                 <a href="{{ route(whoAmI().'.editBuilding', $building->id) }}">
+                     <span><img src="{{asset('assets/images/edit-icon.png')}}" alt=""></span>
+                 </a>
+                 <a href="{{ route(whoAmI().'.buildingDetails', $building->id) }}" title="Verify this building">
+                     <button type="button" class="border-btn">Verify</button>
+                 </a>
+             </div>
             </div>
         </div>
     @endforeach
@@ -34,12 +40,13 @@
                             {{ $building->address }}
                         </p>
                         <p>Posted On: {{ $building->created_at->format("m/d/y H:m A") }}</p>
-                        <a href="{{ route(whoAmI().'.buildingDetails', $building->id) }}" title="Approve this building">
-                            <span class="status" style="background-color:red;">Verify</span>
-                        </a>
+                         <span class="status" style="background-color:red;">Verify</span>
                         <div class="actions-btns">
                             <a href="{{ route(whoAmI().'.editBuilding', $building->id) }}">
                                 <span><img src="{{asset('assets/images/edit-icon.png')}}" alt=""></span>
+                            </a>
+                            <a href="{{ route(whoAmI().'.buildingDetails', $building->id) }}" title="Verify this building">
+                                <button type="button" class="border-btn">Verify</button>
                             </a>
                         </div>
                     </div>
