@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'No Fee Rental | Dashboard')
+@section('title', 'No Fee Rental | Home')
 @section('content')
 <header>
     {{--Normal Search--}}
