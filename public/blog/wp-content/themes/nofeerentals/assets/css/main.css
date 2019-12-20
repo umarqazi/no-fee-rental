@@ -156,7 +156,8 @@ body {
 
 .container-lg {
   position: relative;
-  max-width: 1170px;
+  max-width: 100%;
+    width: 100%;
   padding: 0px 15px;
   margin: 0 auto;
 }
@@ -2742,6 +2743,17 @@ footer .footer-wrapper>li:nth-child(1) {
     bottom: 0;
     right: 0;
 }
+.banner-text-blog{
+    position: absolute;
+    top: 50%;
+    z-index: 1;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 30px;
+    font-weight: 600;
+    color: #fff;
+    padding: 20px;
+}
 
 .privacy-heading {
   display: inline-block;
@@ -2981,7 +2993,7 @@ footer {
 @media (min-width: 1600px) {
   .container-lg,
   .kc-container {
-    max-width: 1600px;
+    max-width:100%;
   }
 }
 
@@ -3004,7 +3016,7 @@ footer {
 @media only screen and (min-width: 1367px) and (max-width: 1599px) {
   .container-lg,
   .kc-container {
-    max-width: 1400px;
+    max-width:100%;
   }
 }
 
@@ -3698,6 +3710,9 @@ footer {
 }
 }
 @media only screen and (max-width: 767px) {
+    .container-fluid, .container-lg{
+        padding: 0px 15px;
+    }
   .header-wrapper .header-container .logo {
     max-width: 200px;
   }

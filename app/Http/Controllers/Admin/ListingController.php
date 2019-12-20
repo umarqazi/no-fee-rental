@@ -59,7 +59,7 @@ class ListingController extends Controller {
 	 * @return Factory|View
 	 */
 	public function index() {
-		$listing = $this->listingService->get($this->paginate);
+		$listing = $this->listingService->getAdminLists($this->paginate);
 		return view('admin.listing_view', compact('listing'));
 	}
 

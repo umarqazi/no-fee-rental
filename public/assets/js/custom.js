@@ -611,17 +611,12 @@ $(() => {
             $('.app-message-error').text('') ;
         }
     });
-    // $(".dropdown-beds #advance-search-beds").hide();
-    // $("#main-search-priceRange").click(function(){
-    //     $(".dropdown-beds #advance-search-beds").show();
-    //     $(".dropdown-beds #advance-search-beds").hide();
-    // });
-    $(".dropdown-beds").click(function(){
-        $(".dropdown-beds #advance-search-beds").addClass('active');
+    $(document).on("click", function (e) {
+        if ($(e.target).is(".dropdown-beds") == false && $(e.target).parents('.dropdown-beds').length == 0 && $(e.target).parents('.beds-dropdown').length == 0) {
+            $(".bed-advance-search").hide();
+        }
     });
-    $(document).mouseup(function(e){
-        $('div#advance-search-beds').removeClass("active");
-    });
+
     $(".dropdown-beds").click ( function () {
         $(".dropdown-beds #advance-search-beds").toggle();
     });

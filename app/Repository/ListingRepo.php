@@ -13,39 +13,67 @@ class ListingRepo extends BaseRepo {
 		parent::__construct(new Listing);
 	}
 
+    /**
+     * @return mixed
+     */
+	public function activeInactive() {
+	    return $this->model->ai()->with('images');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function realty() {
+	    return $this->model->realty()->with('images');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function ownerOnly() {
+        return $this->model->ownerOnly()->with('images');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function reported() {
+        return $this->model->reportedLists()->with('images');
+    }
+
 	/**
 	 * @return mixed
 	 */
 	public function active() {
-		return $this->model->active()->withall();
+		return $this->model->active()->with('images');
 	}
 
 	/**
      * @return mixed
      */
     public function rentActive() {
-        return $this->model->rentActive()->withall();
+        return $this->model->rentActive()->with('images');
     }
 
 	/**
 	 * @return mixed
 	 */
 	public function inactive() {
-		return $this->model->inactive()->withall();
+		return $this->model->inactive()->with('images');
 	}
 
 	/**
 	 * @return mixed
 	 */
 	public function pending() {
-		return $this->model->pending()->withall();
+		return $this->model->pending()->with('images');
 	}
 
     /**
      * @return mixed
      */
     public function archived() {
-        return $this->model->archived()->withall();
+        return $this->model->archived()->with('images');
     }
 
 	/**

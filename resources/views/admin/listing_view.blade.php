@@ -48,13 +48,19 @@
                         <a class="nav-link" data-toggle="pill" href="#listing-active">Active ( {{ $listing->active->total() }} )</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="pill" href="#listing-inactive">Inactive ( {{ $listing->inactive->total() }} )</a>
+                        <a class="nav-link" data-toggle="pill" href="#listing-realty">Realty ( {{ $listing->realty->total() }} )</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="pill" href="#owner-only">Owner Only ( {{ $listing->owner_only->total() }} )</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="pill" href="#listing-archived">Archived ( {{ $listing->archived->total() }} )</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="pill" href="#listing-pending">Pending Requests ( {{ $listing->pending->total() }} )</a>
+                        <a class="nav-link" data-toggle="pill" href="#listing-pending">Requests ( {{ $listing->pending->total() }} )</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="pill" href="#listing-reported">Reported ( {{ $listing->reported->total() }} )</a>
                     </li>
                 </ul>
                 <div class="filter-wrapper">
@@ -84,16 +90,22 @@
                 <!-- Tab panes -->
                 <div class="tab-content">
                     <div class="tab-pane" id="listing-active">
-                        @include('listing-features.active_listing')
+                        @include('listing-tabs.active_inactive')
                     </div>
-                    <div class="tab-pane fade" id="listing-inactive">
-                        @include('listing-features.inactive_listing')
+                    <div class="tab-pane fade" id="listing-realty">
+                        @include('listing-tabs.realty')
+                    </div>
+                    <div class="tab-pane fade" id="owner-only">
+                        @include('listing-tabs.owner_only')
                     </div>
                     <div class="tab-pane fade" id="listing-archived">
-                        @include('listing-features.archive_listing')
+                        @include('listing-tabs.archive')
                     </div>
                     <div class="tab-pane fade" id="listing-pending">
-                        @include('listing-features.pending_listing')
+                        @include('listing-tabs.pending')
+                    </div>
+                    <div class="tab-pane fade" id="listing-reported">
+                        @include('listing-tabs.reported')
                     </div>
                 </div>
             </div>

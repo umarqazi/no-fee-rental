@@ -30,58 +30,55 @@
                                 <div class="border-bottom-h3"></div>
                                 <ul>
                                     <li>
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="catss-1-neigh"
-                                                   name="pets">
-                                            <label class="custom-control-label" for="catss-1-neigh">Neighborhood</label>
+                                        <div class="custom-control custom-radio custom-control-inline">
+                                            <input type="radio" class="custom-control-input" id="beds-1-radio"
+                                                   name="location">
+                                            <label class="custom-control-label" for="beds-1-radio">Find
+                                                Neighborhood</label>
                                         </div>
                                     </li>
                                     <li>
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="catss-2-neigh"
-                                                   name="pets">
-                                            <label class="custom-control-label" for="catss-2-neigh">Neighborhood</label>
+                                        <div class="custom-control custom-radio custom-control-inline">
+                                            <input type="radio" class="custom-control-input" id="beds-2-radio"
+                                                   name="location">
+                                            <label class="custom-control-label" for="beds-2-radio">Find
+                                                Neighborhood</label>
                                         </div>
                                     </li>
                                     <li>
-                                        {{--                                    <div class="custom-control custom-checkbox">--}}
-                                        {{--                                        <input type="checkbox" class="custom-control-input" id="catss-3-neigh"--}}
-                                        {{--                                               name="pets">--}}
-                                        {{--                                        <label class="custom-control-label" for="catss-3-neigh">Neighborhood</label>--}}
-                                        {{--                                    </div>--}}
                                         <ul class="inside-listing">
                                             <li>
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="catss-4-neigh"
-                                                           name="pets">
-                                                    <label class="custom-control-label"
-                                                           for="catss-4-neigh">Neighborhood</label>
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    <input type="radio" class="custom-control-input" id="beds-3-radio"
+                                                           name="location">
+                                                    <label class="custom-control-label" for="beds-3-radio">Find
+                                                        Neighborhood</label>
                                                 </div>
                                             </li>
                                             <li>
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="catss-5-neigh"
-                                                           name="pets">
-                                                    <label class="custom-control-label"
-                                                           for="catss-5-neigh">Neighborhood</label>
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    <input type="radio" class="custom-control-input" id="beds-4-radio"
+                                                           name="location">
+                                                    <label class="custom-control-label" for="beds-4-radio">Find
+                                                        Neighborhood</label>
                                                 </div>
                                             </li>
                                             <li>
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="catss-6-neigh"
-                                                           name="pets">
-                                                    <label class="custom-control-label"
-                                                           for="catss-6-neigh">Neighborhood</label>
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    <input type="radio" class="custom-control-input" id="beds-5-radio"
+                                                           name="location">
+                                                    <label class="custom-control-label" for="beds-5-radio">Find
+                                                        Neighborhood</label>
                                                 </div>
                                             </li>
                                         </ul>
                                     </li>
                                     <li>
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="catss-7-neigh"
-                                                   name="pets">
-                                            <label class="custom-control-label"
-                                                   for="catss-7-neigh">Neighborhood</label>
+                                        <div class="custom-control custom-radio custom-control-inline">
+                                            <input type="radio" class="custom-control-input" id="beds-6-radio"
+                                                   name="location">
+                                            <label class="custom-control-label" for="beds-6-radio">Find
+                                                Neighborhood</label>
                                         </div>
                                     </li>
                                 </ul>
@@ -160,9 +157,10 @@
                     {!! Form::select('sorting',
                         [
                             ''         => 'Select',
-                            'recent'   => 'Recent',
-                            'cheapest' => 'Cheapest',
-                            'oldest'   => 'Oldest'
+                            'recent'   => 'Recommended',
+                            'cheapest' => 'Price',
+                            'oldest'   => 'Trending',
+                            'pets'     => 'Pet Friendly',
                         ],
                         $sort ?? null,
                         ['class' => "custom-select-list sorting"]) !!}
@@ -174,11 +172,6 @@
 </div>
 <div class="search-result-wrapper">
     <div class="search-listing">
-        <div class="row">
-            <div class="col-lg-12 listing-right-padd">
-
-            </div>
-        </div>
         <h3></h3>
         {{--            <span>{{ count($data->listings) }} places available for rent </span>--}}
         <div id="boxscroll22">
@@ -186,72 +179,14 @@
                 <div class="property-listing neighbourhood-listing">
                     @foreach($data->listings as $listing)
                         <input type='hidden' name='map_location' value={{ $listing->map_location }}>
-                        <div class='property-thumb'>
-                            <div class='check-btn'>
-                                <button class='btn-default' list_id="{{ $listing->id }}" to="{{ $listing->agent->id }}" data-target='#check-availability'>
-                                    Check Availability
-                                </button>
-                            </div>
-                            @if(!authenticated())
-                                <span class="display-heart-icon"></span>
-                            @endif
-                            @if(isRenter())
-                                @if(isFavourite($listing["favourites"],$listing->id))
-                                    <span id = "{{$listing->id}}" class="heart-icon favourite"></span>
-                                @else
-                                    <span id = "{{$listing->id}}" class="heart-icon "></span>
-                                @endif
-                            @endif
-                            <img src='{{ asset($listing->thumbnail ?? DLI) }}' alt="" class='main-img'>
-                            <div class='info'>
-                                <div href='javascript:void(0);' class='info-link-text'>
-                                    <p> ${{ ($listing->rent) ?   number_format($listing->rent,0) : 'None' }} </p>
-                                    <small>{{ str_formatting($listing->bedrooms, ' Bed').', '.str_formatting($listing->baths, ' Bath') }}</small>
-                                    <p> {{ is_exclusive($listing).', '. $listing->neighborhood->name }} </p>
-                                </div>
-                                <a href="{{ route('listing.detail', $listing->id) }}" class='btn viewfeature-btn'> View </a>
-                            </div>
-                            <div class='feaure-policy-text'>
-                                <p>${{ ($listing->rent) ?   number_format($listing->rent,0) : 'None' }} / Month </p>
-                                <span>{{ str_formatting($listing->bedrooms, ' Bed').', '.str_formatting($listing->baths, ' Bath') }}</span>
-                            </div>
-                        </div>
+                        {!! property_thumbs($listing) !!}
                     @endforeach
                 </div>
                 <div class="property-listing mobile-listing">
                     <div class="owl-carousel owl-theme">
                         @foreach($data->listings as $listing)
                             <div class="items">
-                                <div class='property-thumb'>
-                                    <div class='check-btn'>
-                                        <button class='btn-default'  list_id="{{ $listing->id }}" to="{{ $listing->agent->id }}" data-target='#check-availability'>
-                                            Check Availability
-                                        </button>
-                                    </div>
-                                    @if(!authenticated())
-                                        <span class="display-heart-icon"></span>
-                                    @endif
-                                    @if(isRenter())
-                                        @if(isFavourite($listing["favourites"],$listing->id))
-                                            <span id = "{{$listing->id}}" class="heart-icon favourite"></span>
-                                        @else
-                                            <span id = "{{$listing->id}}" class="heart-icon "></span>
-                                        @endif
-                                    @endif
-                                    <img src='{{ asset($listing->thumbnail ?? DLI) }}' alt="" class='main-img'>
-                                    <div class='info'>
-                                        <div href='javascript:void(0);' class='info-link-text'>
-                                            <p> $ {{ ($listing->rent) ?   number_format($listing->rent,0) : 'None' }} </p>
-                                            <small>{{ str_formatting($listing->bedrooms, ' Bed').', '.str_formatting($listing->baths, ' Bath') }}</small>
-                                            <p> {{ is_exclusive($listing).', '.  $listing->neighborhood->name }} </p>
-                                        </div>
-                                        <a href="{{ route('listing.detail', $listing->id) }}" class='btn viewfeature-btn'> View </a>
-                                    </div>
-                                    <div class='feaure-policy-text'>
-                                        <p>${{ ($listing->rent) ?   number_format($listing->rent,0) : 'None' }} / Month </p>
-                                        <span>{{ str_formatting($listing->bedrooms, ' Bed').', '.str_formatting($listing->baths, ' Bath') }}</span>
-                                    </div>
-                                </div>
+                                {!! property_thumbs($listing) !!}
                             </div>
                         @endforeach
                     </div>
@@ -271,6 +206,7 @@
 
 {{--Advance Search Modal--}}
 @include('modals.advance_search')
+
 {{--Check Availability--}}
 @include('modals.check_availability')
 

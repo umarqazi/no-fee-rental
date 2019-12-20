@@ -44,8 +44,7 @@
     {!! HTML::script('assets/js/vendor/pignose.calendar.full.min.js') !!}
 
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    {!! HTML::script('assets/js/vendor/icontains.js') !!}
-    {!! HTML::script('assets/js/vendor/comboTreePlugin.js') !!}
+
 
 
 </head>
