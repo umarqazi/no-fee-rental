@@ -41,7 +41,7 @@ class ListingController extends Controller {
      * @return JsonResponse|RedirectResponse
      */
     public function detail(Request $request) {
-        $list = \App\Listing::where('map_location', 'like', $request->map_location)
+        $list = \App\Listing::where('map_location', 'like', $request->map_location)->where('visibility', ACTIVELISTING)
                             ->select('rent', 'id', 'street_address', 'bedrooms', 'baths', 'thumbnail')->get();
         return sendResponse($request, $list, null, null, null);
     }

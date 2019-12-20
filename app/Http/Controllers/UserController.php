@@ -202,22 +202,17 @@ class UserController extends Controller {
     }
 
     /**
-     *
-     * @param $request
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse|RedirectResponse
      */
     public function reportListing(Request $request) {
-        $data = [
-            'from'    => $request->email,
-            'message' => 'New Listing Report Received',
-            'view'    => 'listing-report',
-             ];
 
-        DispatchNotificationService::GETSTARED(toObject([
+        DispatchNotificationService::LISTINGREPORT(toObject([
             'from' => $request->email,
             'to'   => mailToAdmin(),
-            'data' => $data
+            'data' => $request->all()
         ]));
 
-         return  success('We have received your report regarding this listing.');
+         return sendResponse($request, true, 'We have received your report regarding this listing.');
     }
 }

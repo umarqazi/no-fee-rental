@@ -30,9 +30,6 @@
                     <a href="{{ route(whoAmI().'.copyListing', $pl->id) }}">
                         <span><img src="{{asset('assets/images/copy-icon.png')}}" alt=""></span>
                     </a>
-                    <a href="{{ route('listing.detail', $pl->id) }}">
-                        <i class="fa fa-eye" style="font-size: 24px;position: relative;top: 5px;"></i>
-                    </a>
                 </div>
             </div>
         </div>
@@ -71,7 +68,6 @@
                         <div class="list-actions-icons">
                             <a href="{{ route(whoAmI().'.editListing', $pl->id) }}"><button><i class="fa fa-edit"></i></button></a>
                             <a href="{{ route(whoAmI().'.copyListing', $pl->id) }}"><button><i class="fa fa-copy"></i></button></a>
-                            <a href="{{ route('listing.detail', $pl->id) }}"><button><i class="fa fa-eye"></i></button></a>
                         </div>
                     </div>
                 </div>
