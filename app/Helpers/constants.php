@@ -279,3 +279,11 @@ if(!defined('LICENSEBASEURL')) {
 if(!defined('SCHOOLZONEBASEURL')) {
     define('SCHOOLZONEBASEURL', 'data.cityofnewyork.us');
 }
+
+if(!defined('MINPRICE')) {
+    define('MINPRICE', 0);
+}
+
+if(!defined('MAXPRICE')) {
+    define('MAXPRICE', 10000);
+}

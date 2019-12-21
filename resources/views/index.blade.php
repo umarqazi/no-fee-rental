@@ -50,6 +50,9 @@
 
 {{--Neighborhoods--}}
 @include('sections.neighborhood')
+<script>
+
+</script>
 @endsection
 
 

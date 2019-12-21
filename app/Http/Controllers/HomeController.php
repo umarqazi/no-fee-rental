@@ -17,25 +17,19 @@ use Illuminate\View\View;
 class HomeController extends Controller {
 
     /**
-     * @var SearchService
+     * @var int
      */
-    private $searchService;
+    private $paginate = 20;
 
 	/**
 	 * @var FeatureListingService
 	 */
 	private $featureListingService;
 
-	/**
-	 * @var int
-	 */
-	private $paginate = 20;
-
     /**
      * HomeController constructor.
      */
 	public function __construct() {
-	    $this->searchService = new SearchService();
         $this->featureListingService = new FeatureListingService();
 	}
 
@@ -87,9 +81,9 @@ class HomeController extends Controller {
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
     public function letUsHelp(Request $request) {
+        $agents = [];
         $request->agentsWithPremiumPlan = true;
         $data = toObject(['listings' => $this->searchService->search($request)]);
-        $agents = [];
         foreach ($data->listings as $user) {
               $agents =   agents($user->user_id);
         }

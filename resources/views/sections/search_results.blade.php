@@ -1,13 +1,4 @@
-<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.js'></script>
-<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.css' rel='stylesheet' />
-<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.2/mapbox-gl-geocoder.min.js'></script>
-<link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.2/mapbox-gl-geocoder.css' type='text/css' />
-{{--<!-- Promise polyfill script required to use Mapbox GL Geocoder in IE 11 -->--}}
-<script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
-<script src='https://unpkg.com/es6-promise@4.2.4/dist/es6-promise.auto.min.js'></script>
-<script src="https://unpkg.com/@mapbox/mapbox-sdk/umd/mapbox-sdk.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mapbox-gl/1.4.0/mapbox-gl-csp-worker.js.map"></script>
+
 <div class="search-bdr-top">
     <div class="mobile-view-dropdown">
         <i class="fa fa-bars"></i> Filters
@@ -210,29 +201,33 @@
 {{--Check Availability--}}
 @include('modals.check_availability')
 
-{!! HTML::script('assets/js/neighborhoods.js') !!}
 {!! HTML::script('assets/js/input-to-dropdown.js') !!}
 {!! HTML::script('assets/js/search-result.js') !!}
+{!! HTML::style('https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.css') !!}
+{!! HTML::script('https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.js') !!}
 <script>
+
     let coords = [];
     $('input[name=map_location]').each(function(i, v) {
         coords.push($(v).val());
-    })
+    });
+
     @if(count($data->listings) > 0)
-    if(coords !== []) {
-        multiMarkers(coords, 'desktop-map');
-        multiMarkers(coords, 'mobile-map');
-    }
+        if(coords !== []) {
+            multiMarkers(coords, 'desktop-map');
+            multiMarkers(coords, 'mobile-map');
+        }
     @endif
 
     $(".neighborhood-search .search-result-wrapper .map-wrapper .swipe-btn").on('click', function () {
+        let $body = $('body');
         $(this).find('i').toggleClass('fa-angle-left fa-angle-right');
-        $('body').find('#desktop-map').remove();
-        $('body').find('#mobile-map').remove();
-        $('body').find('.map-wrapper').append(`<div id="mobile-map"></div>`);
-        $('body').find('.map-wrapper').append(`<div id="desktop-map"></div>`);
+        $body.find('#desktop-map').remove();
+        $body.find('#mobile-map').remove();
+        $body.find('.map-wrapper').append(`<div id="mobile-map"></div>`);
+        $body.find('.map-wrapper').append(`<div id="desktop-map"></div>`);
         setTimeout(() => {
-            multiMarkers(coords, 'desktop-map');
+            multiMarkers(coords, 'desktop-map', 5);
             multiMarkers(coords, 'mobile-map');
         }, 100);
         $(".neighborhood-search .search-result-wrapper .search-listing").toggleClass('hide-list');
@@ -247,9 +242,5 @@
         window.location.href = url+'/listing-by-rent/'+$(this).val();
 
     });
-
-    @if(!isset($data->index))
-    sessionStorage.clear();
-    @endif
 
 </script>

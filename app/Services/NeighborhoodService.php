@@ -28,16 +28,10 @@ class NeighborhoodService {
     protected $neighborhoodRepo;
 
     /**
-     * @var SearchService
-     */
-    private $searchService;
-
-    /**
      * NeighborhoodService constructor.
      */
     public function __construct() {
         $this->__sortConstruct(new Neighborhoods());
-        $this->searchService = new SearchService();
         $this->neighborhoodRepo = new NeighborhoodRepo();
     }
 

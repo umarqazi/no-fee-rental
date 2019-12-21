@@ -31,7 +31,7 @@ class FeatureListingService {
 	 * @return array
 	 */
 	public function get($paginate) {
-		return $this->collection($paginate);
+		return $this->__collection($paginate);
 	}
 
     /**
@@ -39,7 +39,7 @@ class FeatureListingService {
      *
      * @return array
      */
-	private function collection($paginate) {
+	private function __collection($paginate) {
 		return [
 			'featured'         => $this->featured()
                                        ->paginate($paginate, ['*'], 'featured'),
@@ -54,7 +54,7 @@ class FeatureListingService {
      *
      * @return array
      */
-    private function searchCollection($keywords, $paginate) {
+    private function __searchCollection($keywords, $paginate) {
         return [
             'featured'         => $this->listingRepo->search($keywords)
                                              ->featured()
@@ -72,7 +72,7 @@ class FeatureListingService {
      *
      * @return array
      */
-    private function sortCollection($paginate, $col, $order) {
+    private function __sortCollection($paginate, $col, $order) {
         return [
             'featured'         => $this->featured()
                                        ->orderBy($col, $order)
@@ -88,7 +88,7 @@ class FeatureListingService {
      *
      * @return mixed
      */
-    private function policy($paginate) {
+    private function __policy($paginate) {
         return $this->featured()
                     ->policy()
                     ->paginate($paginate, ['*'], 'featured');
@@ -99,9 +99,9 @@ class FeatureListingService {
      *
      * @return array
      */
-    public function petPolicy($paginate) {
+    public function __petPolicy($paginate) {
         return [
-            'featured'         => $this->policy($paginate),
+            'featured'         => $this->__policy($paginate),
             'request_featured' => $this->requestfeatured()
                                        ->policy()
                                        ->paginate($paginate, ['*'], 'request-featured'),
@@ -193,7 +193,7 @@ class FeatureListingService {
         $keywords = [];
         !empty($request->baths) ? $keywords['baths'] = $request->baths : null;
         !empty($request->beds)  ? $keywords['bedrooms'] = $request->beds : null;
-        return $this->searchCollection($keywords, $paginate);
+        return $this->__searchCollection($keywords, $paginate);
     }
 
     /**
@@ -202,7 +202,7 @@ class FeatureListingService {
      * @return array
      */
     public function cheaper($paginate) {
-        return $this->sortCollection($paginate, 'rent', CHEAPEST);
+        return $this->__sortCollection($paginate, 'rent', CHEAPEST);
     }
 
     /**
@@ -211,7 +211,7 @@ class FeatureListingService {
      * @return array
      */
     public function recent($paginate) {
-        return $this->sortCollection($paginate, 'updated_at', RECENT);
+        return $this->__sortCollection($paginate, 'updated_at', RECENT);
     }
 
     /**

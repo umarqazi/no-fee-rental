@@ -44,6 +44,11 @@ class ProxyService {
     /**
      * @var string
      */
+    private $boroughDataFilePath = '/resource/7t3b-ywvw.json';
+
+    /**
+     * @var string
+     */
     private $subwayStationFilePath = '/resource/kk4q-3rt2.json';
 
     /**
@@ -79,6 +84,27 @@ class ProxyService {
         $collection['transportationData'] = $this->__subwayStation($data);
 
         return \GuzzleHttp\json_encode($collection);
+    }
+
+    /**
+     * @return string
+     */
+    public function boroughsCoordinates() {
+        $boroughs = [];
+        $res = $this->socrata->get($this->boroughDataFilePath);
+
+        if(!empty($res)) {
+            foreach ($res as $type => $value) {
+                $bind = [
+                    'boro_name' => $value['boro_name'],
+                    'polygon'   => $value['the_geom']['coordinates']
+                ];
+
+                array_push($boroughs, $bind);
+            }
+        }
+
+        return \GuzzleHttp\json_encode($boroughs);
     }
 
     /**

@@ -14,7 +14,8 @@
 Route::get('/', 'HomeController@index')->name('web.index');
 
 // Search Listing Route
-Route::get('/search', 'SearchController@advanceSearch')->name('list.search');
+Route::get('/search', 'SearchController@indexSearch')->name('web.indexSearch');
+Route::get('/advance-search', 'SearchController@advanceSearch')->name('web.advanceSearch');
 
 // Contact Us Routes
 Route::get('/contact-us', 'ContactUsController@showForm')->name('contact-us');
@@ -121,6 +122,7 @@ Route::post('/let-us-help', 'HomeController@letUsHelp')->name('web.letUsHelp');
 Route::post('/get-started', 'HomeController@getStarted')->name('web.getStarted');
 
 // NYC Api Route
+Route::post('/boroughs', 'NYCProxyController@boroughs');
 Route::post('/nyc-data', 'NYCProxyController@nycData');
 
 // Application Controlling Routes

@@ -96,26 +96,6 @@ $(() => {
         $selector.hide();
     });
 
-    $('body').on('blur', 'input[name=street_address]', async function() {
-        setTimeout(async () => {
-            let $validator = $(`#${$('body').find('form').attr('id')}`).validate();
-            await ajaxRequest('/is-owner-only', 'post', {address: $(this).val()}, false).then(async res => {
-                if(res === 'false') {
-                    $('.submit').removeAttr('disabled');
-                    await ajaxRequest('/is-unique-address', 'post', {address: $(this).val()}, false).then(res => {
-                        if(res === 'false') {
-                            $('body').find('#amenities > .row').show();
-                        }
-                    });
-                } else {
-                    $('.submit').attr('disabled', 'disabled');
-                    let errors = { street_address: "Current building is owner only." };
-                    $validator.showErrors(errors);
-                }
-            });
-        }, 1000);
-    });
-
     $body.on('keyup', '#controls', function() {
         autoComplete( document.getElementById('controls'));
     });

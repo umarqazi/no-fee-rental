@@ -1,14 +1,12 @@
 <div class="header-bg">
     <div class="banner-wrapper wow fadeInUp " data-wow-delay="0.2s">
         <h1>NYC’s Premier Source For NO FEE Rentals</h1>
-        {!! Form::open(['url' => route('list.search'), 'method' => 'get', 'id' => 'search']) !!}
+        {!! Form::open(['url' => route('web.indexSearch'), 'method' => 'get', 'id' => 'search']) !!}
         <div class="search-property">
             <div style="position:relative;">
                 <i class="fas fa-search"></i>
                 {!! Form::text('neighborhoods', null, ['id' => 'neigh', 'placeholder' => 'Enter Neighborhood', 'class' => 'search-fld']) !!}
-                {!! Form::select('priceRange',  config('formfields.search.price') ,null, ['class' => 'custom-select-input','id' => 'main-search-priceRange']) !!}
-                {{--                {!! Form::select('beds', config('formfields.search.beds'),null, ['class' => 'custom-select-input size-input','id' => 'main-search-beds']) !!}--}}
-
+                {!! Form::select('min_price',  config('formfields.search.price') ,null, ['class' => 'custom-select-input','id' => 'main-search-priceRange']) !!}
             </div>
             <div class="dropdown-beds" >
                 <label id="show-beds"><span class="placeholder-text">Beds</span></label>

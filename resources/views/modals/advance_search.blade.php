@@ -19,7 +19,7 @@
             </div>
             {{--Modal body--}}
             <div class="modal-body">
-                {!! Form::open(['url' => route($route ?? 'list.search', $param ?? null), 'method' => 'get']) !!}
+                {!! Form::open(['url' => route($route ?? 'web.advanceSearch', $param ?? null), 'method' => 'get']) !!}
                 <div class="row">
                     <div class="col-md-6 search-form-grou-mrg-btm">
                         <div class="form-group" id="advance-search-chkbox">
