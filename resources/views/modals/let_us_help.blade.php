@@ -49,7 +49,7 @@
                 <!-- Modal body -->
                 <div class="modal-body">
                     <div class="pt-4 -b-4">
-                        {!! Form::text('priceRange', null, ['class' => 'input-style rent-input-icon']) !!}
+                        {!! Form::text('priceRange', null, ['class' => 'input-style']) !!}
                     </div>
                     <p id="price-err"style="color:red; display: none">Rent is required.</p>
                 </div>
@@ -622,7 +622,8 @@
 </div>
 {!! Form::close() !!}
 <script>
-    enableDatePicker($('input[name=lease-pay]'), false);
+    enableDatePicker($('#lease-3'), false);
+    $('#datepickers-container').css('z-index','10000');
     $('input[name=priceRange]:last').on('input', function () {
         if ($('input[name=priceRange]:last').val() !== '') {
             $('#price-err').css({'display': 'none'});

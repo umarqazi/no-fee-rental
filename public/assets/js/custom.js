@@ -622,11 +622,23 @@ $(() => {
     });
 
     $("#advance-search-beds ul > li > input").on("click",function(e){
+        let count = 0 ;
+        $('#advance-search-beds ul > li > input').each(function(index) {console.log(this);
+            if($(this).is(":checked")){
+                ++count ;
+            }
+        });
         var get_text =  $(this).parent().find('span').text();
         var dropdown_show = get_text.replace('+', '');
         if($(this).is(":checked")){
             $("#show-beds").find('.placeholder-text').hide();
-            $('#show-beds').append('<span id="chk_'+dropdown_show+'_chk">'+  ' ' + '' + get_text +  ' ,'+ '</span>');
+            if(count == 1) {
+                $('#show-beds').append('<span id="chk_'+dropdown_show+'_chk">'+  ' ' + '' + get_text +  ' '+ '</span>');
+            }
+            if(count > 1){
+                $('#show-beds').append('<span id="chk_'+dropdown_show+'_chk">'+  ' ' + ', ' + get_text +  ''+ '</span>');
+            }
+            //$('#show-beds').append('<span id="chk_'+dropdown_show+'_chk">'+  ' ' + '' + get_text +  ' ,'+ '</span>');
         }if($(this).is(":not(:checked)")) {
             $('#chk_'+dropdown_show+'_chk').remove();
         }
