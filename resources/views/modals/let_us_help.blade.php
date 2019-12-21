@@ -1,4 +1,4 @@
-{!! Form::open(['url' => route('web.letUsHelp'), 'method' => 'post']) !!}
+{!! Form::open(['url' => route('web.letUsHelp'), 'method' => 'post','id'=>'let-us-help-modal']) !!}
 <div class="modal fade need-help-modal let-us-help-modal" id="let-us-help">
     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
         <div class="modal-content">
@@ -624,6 +624,11 @@
 <script>
     enableDatePicker($('#lease-3'), false);
     $('#datepickers-container').css('z-index','10000');
+    $('#let-us-help-modal').bind('keydown', function(e) {
+        if (e.keyCode == 13) {
+            e.preventDefault();
+        }
+    });
     $('input[name=priceRange]:last').on('input', function () {
         if ($('input[name=priceRange]:last').val() !== '') {
             $('#price-err').css({'display': 'none'});

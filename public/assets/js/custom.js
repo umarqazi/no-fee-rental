@@ -623,7 +623,7 @@ $(() => {
 
     $("#advance-search-beds ul > li > input").on("click",function(e){
         let count = 0 ;
-        $('#advance-search-beds ul > li > input').each(function(index) {console.log(this);
+        $('#advance-search-beds ul > li > input').each(function(index) {
             if($(this).is(":checked")){
                 ++count ;
             }
