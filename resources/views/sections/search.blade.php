@@ -6,10 +6,21 @@
             <div style="position:relative;">
                 <i class="fas fa-search"></i>
                 {!! Form::text('neighborhoods', null, ['id' => 'neigh', 'placeholder' => 'Enter Neighborhood', 'class' => 'search-fld']) !!}
-                {!! Form::select('priceRange',  config('formfields.search.price') ,null, ['class' => 'custom-select-input','id' => 'main-search-priceRange']) !!}
+{{--                {!! Form::select('priceRange',  config('formfields.search.price') ,null, ['class' => 'custom-select-input','id' => 'main-search-priceRange']) !!}--}}
                 {{--                {!! Form::select('beds', config('formfields.search.beds'),null, ['class' => 'custom-select-input size-input','id' => 'main-search-beds']) !!}--}}
 
             </div>
+            <div class="price-range-dropdown">
+               Price
+                <div class="price-range-ul">
+                    <ul>
+                        <li><input type="text" class="form-control" placeholder="min"></li>
+                        <li>To</li>
+                        <li><input type="text" class="form-control" placeholder="max"> </li>
+                    </ul>
+                </div>
+            </div>
+
             <div class="dropdown-beds" >
                 <label id="show-beds"><span class="placeholder-text">Beds</span></label>
                 <div id="advance-search-chkbox" class="beds-dropdown">
