@@ -200,6 +200,12 @@
     fetchNeighbours($('input[name=neighborhood]'));
     enableDatePicker($('input[name=availability]'), false);
 
+    $('#get_started').bind('keydown', function(e) {
+        if (e.keyCode == 13) {
+            e.preventDefault();
+        }
+    });
+
     $('input[name="neighborhood"]').on('input', function () {
         $('#need-help-btn2').prop('disabled', false);
         $('#neighborhood-error').css({'display': 'none'});

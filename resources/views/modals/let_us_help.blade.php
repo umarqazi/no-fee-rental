@@ -1,4 +1,4 @@
-{!! Form::open(['url' => route('web.letUsHelp'), 'method' => 'post']) !!}
+{!! Form::open(['url' => route('web.letUsHelp'), 'method' => 'post','id'=>'let-us-help-modal']) !!}
 <div class="modal fade need-help-modal let-us-help-modal" id="let-us-help">
     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
         <div class="modal-content">
@@ -49,7 +49,7 @@
                 <!-- Modal body -->
                 <div class="modal-body">
                     <div class="pt-4 -b-4">
-                        {!! Form::text('priceRange', null, ['class' => 'input-style rent-input-icon']) !!}
+                        {!! Form::text('priceRange', null, ['class' => 'input-style']) !!}
                     </div>
                     <p id="price-err"style="color:red; display: none">Rent is required.</p>
                 </div>
@@ -240,7 +240,7 @@
                 <div class="modal-body">
                     <div class="pt-4 -b-4">
                         <img src="assets/images/popcorn-icon.jpg" alt="" class="popcorn-icon" />
-                        <h3 class="mb-2 text-center">Thanks {{authenticated() ? mySelf()->first_name : ''}}</h3>
+                        <h3 class="mb-2 text-center" id="thanks-name"></h3>
                         <p class="text-center">We can help you even faster if you answer a few question about your search.</p>
                     </div>
                 </div>
@@ -273,7 +273,7 @@
                             <li>
                                 <div class="custom-control custom-radio custom-control-inline">
                                     {!! Form::radio('location-preference', 1, false, ['class' => 'custom-control-input', 'id' => 'location-1','onclick'=>'openSpecificModal(this)']) !!}
-                                    <label class="custom-control-label" for="location-1">Yes, I'm intrested in certain neighborhoods...</label>
+                                    <label class="custom-control-label" for="location-1">Yes, I'm interested in certain neighborhoods...</label>
                                 </div>
                             </li>
                             <li>
@@ -622,7 +622,13 @@
 </div>
 {!! Form::close() !!}
 <script>
-    enableDatePicker($('input[name=lease-pay]'), false);
+    enableDatePicker($('#lease-3'), false);
+    $('#datepickers-container').css('z-index','10000');
+    $('#let-us-help-modal').bind('keydown', function(e) {
+        if (e.keyCode == 13) {
+            e.preventDefault();
+        }
+    });
     $('input[name=priceRange]:last').on('input', function () {
         if ($('input[name=priceRange]:last').val() !== '') {
             $('#price-err').css({'display': 'none'});
@@ -659,6 +665,7 @@
 
     $('input[name=username]').on('input', function () {
         if ($('input[name=username]').val() !== '') {
+            $('#thanks-name').text('Thanks '+$('input[name=username]').val());
             $('#name-err').css({'display': 'none'});
             $('#name-btn').prop('disabled', false);
         }
