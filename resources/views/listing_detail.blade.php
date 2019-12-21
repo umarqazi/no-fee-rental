@@ -35,10 +35,10 @@
                                     <span id = "{{$listing->id}}" class="heart-icon"></span>
                                 @endif
                             @endif
-                            @if(isRenter() || isAdmin() || isAgent() || isOwner())
-                            <a href="javascript:void(0);" class="" data-toggle="modal" id="{{isRenter() || isAdmin() || isAgent() || isOwner() ? '':'listing-report-flag'}}"
+                            @if(isRenter())
+                            <a href="javascript:void(0);" class="" data-toggle="modal" id="{{ isRenter() ? '' : 'listing-report-flag' }}"
                                data-target='#flag-icon' ><img src="/assets/images/flag-icon.png" alt="" class="flag-icon" /></a>
-                            @else
+                            @elseif(!isAdmin() && !isAgent() && !isOwner())
                                 <a href="javascript:void(0);" class="" data-toggle="modal" id="listing-report-flag">
                                     <img src="/assets/images/flag-icon.png" alt="" class="flag-icon" /></a>
                             @endif

@@ -38,11 +38,11 @@ return [
         ],
 
         'listing_report_reasons' => [
-            "" => "Please Select",
-            'This listing is no longer available.'           => "This listing is no longer available.",
-            'This is a fraudulent listing.'                  => "This is a fraudulent listing.",
-            'This listing has incorrect information/photos.' => "This listing has incorrect information/photos.",
-            'This is a discriminatory or offensive listing.'   => "This is a discriminatory or offensive listing.",
+            "" => "Select Reason",
+            1 => "This listing is no longer available.",
+            2 => "This is a fraudulent listing.",
+            3 => "This listing has incorrect information/photos.",
+            4 => "This is a discriminatory or offensive listing.",
         ],
 
         'listing_type' => [
