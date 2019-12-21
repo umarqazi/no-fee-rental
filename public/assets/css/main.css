@@ -695,6 +695,35 @@ h3 {
 .header-bg .search-property .search-btn:hover {
     background: #223971;
 }
+
+/**/
+.price-range-dropdown{
+    padding: 0px 15px;
+    width: 100%;
+    position:relative;
+    background: url(../images/select-menu-arrow.png) no-repeat right 15px center;
+    cursor: context-menu;
+}
+.price-range-ul{
+    position: absolute;
+    top: 61px;
+    background-color: #fff;
+    padding: 10px 5px;
+    text-align: center;
+    display: none;
+    left: 0;
+    right: 0;
+}
+.price-range-ul ul{
+    border: 1px solid #f36f21;
+    padding: 10px 10px;
+
+}
+.price-range-ul ul li:nth-child(2){
+    height: 30px;
+    line-height: 30px;
+}
+/**/
 .dropdown-beds{
     min-width: 218px;
     padding: 0px 15px;

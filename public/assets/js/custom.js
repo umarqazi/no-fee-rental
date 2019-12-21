@@ -611,9 +611,13 @@ $(() => {
             $('.app-message-error').text('') ;
         }
     });
+
     $(document).on("click", function (e) {
         if ($(e.target).is(".dropdown-beds") == false && $(e.target).parents('.dropdown-beds').length == 0 && $(e.target).parents('.beds-dropdown').length == 0) {
             $(".bed-advance-search").hide();
+        }
+        if (!$(e.target).is(".price-range-dropdown") && $(e.target).parents('.price-range-dropdown').length == 0) {
+            $(".price-range-ul").hide();
         }
     });
 
@@ -659,9 +663,12 @@ $(() => {
         $(".dropdown-listiing-rent-page").hide();
         $(this).next().addClass('active').show();
     });
-    // $(document).mouseup(function(e){
-    //     $('div.dropdown-listiing-rent-page').removeClass("active");
-    // });
+   $(".price-range-dropdown").click(function (e) {
+       if($(e.target).parents('.price-range-dropdown').length !== 0){
+           return;
+       }
+       $(".price-range-ul").toggle();
+   });
 
 });
 
