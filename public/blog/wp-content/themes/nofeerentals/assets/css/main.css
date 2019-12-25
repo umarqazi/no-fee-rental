@@ -2987,7 +2987,17 @@ footer {
   color: #fff;
   padding: 20px;
 }
-
+.blog-banner-text{
+    position: absolute;
+    top: 50%;
+    z-index: 1;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 30px;
+    font-weight: 600;
+    color: #fff;
+    padding: 20px;
+}
 /*Responsive style*/
 
 @media (min-width: 1600px) {

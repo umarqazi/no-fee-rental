@@ -15,9 +15,10 @@ class SearchRepo extends BaseRepo {
 
     /**
      * SearchRepo constructor.
+     * @param $model
      */
-    public function __construct() {
-        parent::__construct(new Listing());
+    public function __construct($model) {
+        parent::__construct($model ?? new Listing());
     }
 
     /**

@@ -20,15 +20,13 @@ class UserController extends Controller {
     /**
      * @var UserService
      */
-	private $service;
+	private $userService;
 
     /**
      * UserController constructor.
-     *
-     * @param UserService $service
      */
-	public function __construct(UserService $service) {
-		$this->service = $service;
+	public function __construct() {
+		$this->userService = new UserService();
 	}
 
 	/**
@@ -37,9 +35,9 @@ class UserController extends Controller {
 	 * @return RedirectResponse
 	 */
 	public function editProfile(Request $request) {
-		$update_data = $this->service->updateProfile($request);
+		$update_data = $this->userService->updateProfile($request);
 		if ($request->hasFile('profile_image')) {
-			$update_data = $this->service->updateProfileImage($request->file('profile_image'), myId(), $request->old_profile ?? null);
+			$update_data = $this->userService->updateProfileImage($request->file('profile_image'), myId(), $request->old_profile ?? null);
 		}
 
 		return $update_data
@@ -63,12 +61,12 @@ class UserController extends Controller {
 	 * @return RedirectResponse
 	 */
 	public function updatePassword(Request $request, $token) {
-		if ($user = $this->service->validateEncodedToken($token)) {
-		if($user->email_verified_at == null){
-            $this->confirmEmail($token) ;
-        }
+		if ($user = $this->userService->validateEncodedToken($token)) {
+            if ($user->email_verified_at == null){
+                $this->confirmEmail($token) ;
+            }
 			$request->id = $user->id;
-			$this->service->changePassword($request);
+			$this->userService->changePassword($request);
             return redirect('/')->with(['message' => 'Password has been updated', 'alert_type' => 'success']);
 		}
 		return error('Invalid token request cannot be processed.');
@@ -81,7 +79,7 @@ class UserController extends Controller {
      * @return RedirectResponse
      */
 	public function invitedAgentSignup(Request $request) {
-		$res = $this->service->invitedAgentSignup($request);
+		$res = $this->userService->invitedAgentSignup($request);
 		return sendResponse($request, $res, 'We send an email to your account. Kindly verify your email', '/');
 	}
 
@@ -91,7 +89,7 @@ class UserController extends Controller {
      * @return Factory|RedirectResponse|View
      */
 	public function invitedAgentSignupForm($token) {
-		$authenticate_token = $this->service->getAgentToken($token)->first();
+		$authenticate_token = $this->userService->getAgentToken($token)->first();
 		if (!empty($authenticate_token) && $authenticate_token->token == $token) {
 			return view('invited_agent_signup', compact('authenticate_token'));
 		}
@@ -105,7 +103,7 @@ class UserController extends Controller {
 	 * @return RedirectResponse
 	 */
 	public function signup(Request $request){
-		$response = $this->service->signup($request);
+		$response = $this->userService->signup($request);
 		return sendResponse($request, $response, 'We send an email to your account. Kindly verify your email');
 	}
 
@@ -115,7 +113,7 @@ class UserController extends Controller {
      * @return RedirectResponse
      */
     public function renterSignup(Request $request){
-        $response = $this->service->renterSignup($request);
+        $response = $this->userService->renterSignup($request);
         return sendResponse($request, $response, 'We send an email to your account. Kindly verify your email');
     }
 
@@ -125,7 +123,7 @@ class UserController extends Controller {
 	 * @return RedirectResponse
 	 */
 	public function confirmEmail($token) {
-		if ($this->service->verifyEmail($token)) {
+		if ($this->userService->verifyEmail($token)) {
 			return success('Email has been verified.', '/');
 		}
 
@@ -138,7 +136,7 @@ class UserController extends Controller {
      * @return bool
      */
 	public function verifyEmail(Request $request) {
-	    return $this->service->isUniqueEmail($request);
+	    return $this->userService->isUniqueEmail($request);
     }
 
     /**
@@ -147,7 +145,7 @@ class UserController extends Controller {
      * @return bool
      */
     public function renterCheck(Request $request) {
-        return $this->service->renterCheck($request);
+        return $this->userService->renterCheck($request);
     }
 
     /**
@@ -156,33 +154,62 @@ class UserController extends Controller {
      * @return bool
      */
     public function verifyLicense(Request $request) {
-        return $this->service->isUniqueLicense($request);
+        return $this->userService->isUniqueLicense($request);
 	}
 
     /**
-     * @param listing_id
-     *
-     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
+     * @param $agentId
+     * @return Factory|View
+     */
+	public function agentProfileWithListing($agentId) {
+        $data = $this->userService->getAgentWithListings($agentId);
+        return $this->__view($data, $agentId);
+    }
+
+    /**
+     * @param $id
+     * @param Request $request
+     * @return Factory|View
+     */
+    public function agentProfileAdvanceSearch($id, Request $request) {
+	    $data = $this->userService->advanceSearch($id, $request);
+	    return $this->__view($data, $id);
+    }
+
+    /**
+     * @param $id
+     * @param Request $request
+     * @return Factory|View
+     */
+    public function agentProfileSearchFilter($id, Request $request) {
+        $data = $this->userService->advanceSearch($id, $request);
+        return $this->__view($data, $id);
+    }
+
+    /**
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse|RedirectResponse|string
      */
     public function favourite(Request $request,$id) {
         if(myid()){
-		 $favourite = $this->service->favourite($id);
+		 $favourite = $this->userService->favourite($id);
 		 if($favourite){
 			return sendResponse($request, $favourite, null);
 		 }
-        }
-        else {
+        } else {
             return 'false';
         }
     }
+
     /**
-     * @param listing_id
-     *
-     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse|RedirectResponse|string
      */
     public function removeFavourite(Request $request,$id) {
         if(myid()){
-            $favourite = $this->service->removeFavourite($id);
+            $favourite = $this->userService->removeFavourite($id);
             if($favourite){
                 return sendResponse($request, $favourite, null);
             }
@@ -191,28 +218,28 @@ class UserController extends Controller {
             return 'false';
         }
     }
+
     /**
      *
      * return Renters
      */
     public function getRenters() {
-        $renters = $this->service->getRenters();
+        $renters = $this->userService->getRenters();
         return $renters;
-        return sendResponse(null , $renters, null);
     }
 
     /**
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse|RedirectResponse
+     * @param $data
+     * @param $agentId
+     * @return Factory|View
      */
-    public function reportListing(Request $request) {
-
-        DispatchNotificationService::LISTINGREPORT(toObject([
-            'from' => $request->email,
-            'to'   => mailToAdmin(),
-            'data' => $request->all()
-        ]));
-
-         return sendResponse($request, true, 'We have received your report regarding this listing.');
+    private function __view($data, $agentId) {
+        return view('listing_profile', compact('data'))
+            ->with([
+                'neigh_filter'  => true,
+                'param'         => $agentId,
+                'filter_route'  => 'web.agentProfileSearchFilter',
+                'search_route'  => 'web.agentProfileAdvanceSearch'
+            ]);
     }
 }

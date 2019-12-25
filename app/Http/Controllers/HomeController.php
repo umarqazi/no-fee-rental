@@ -21,6 +21,11 @@ class HomeController extends Controller {
      */
     private $paginate = 20;
 
+    /**
+     * @var SearchService
+     */
+    private $searchService;
+
 	/**
 	 * @var FeatureListingService
 	 */
@@ -30,6 +35,7 @@ class HomeController extends Controller {
      * HomeController constructor.
      */
 	public function __construct() {
+	    $this->searchService = new SearchService();
         $this->featureListingService = new FeatureListingService();
 	}
 
@@ -48,29 +54,11 @@ class HomeController extends Controller {
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
 	public function getStarted(Request $request) {
-        $data = [
-            'from'    => $request->email,
-            'to'      => config('mail.from.address'),
-            'message' => 'New Get Started Request Received',
-            'view'    => 'realty-import',
-            'subject' => 'Get Started Request',
-            'data'    => [
-                'first_name'   => $request->first_name,
-                'last_name'    => $request->last_name,
-                'email'        => $request->email,
-                'rent'         => $request->priceRange,
-                'neighborhood' => $request->neighborhood,
-                'availability' => $request->availability,
-                'phone_number' => $request->phone_number,
-                'bedrooms'     => implode( ',', $request->beds ),
-                'comment' => $request->description,
-            ],
-        ];
-        //dispatchEmailQueue($data);
+	    
         DispatchNotificationService::GETSTARED(toObject([
             'from' => $request->email,
             'to'   => mailToAdmin(),
-            'data' => $data['data']
+            'data' => $request->all()
         ]));
 
         return sendResponse($request, true, 'Request has been sent successfully');
@@ -84,35 +72,18 @@ class HomeController extends Controller {
         $agents = [];
         $request->agentsWithPremiumPlan = true;
         $data = toObject(['listings' => $this->searchService->search($request)]);
+
         foreach ($data->listings as $user) {
               $agents =   agents($user->user_id);
         }
-        $data = [
-            'data'    => [
-                'first_name'   => $request->first_name,
-                'email'        => $request->email,
-                'phone_number' => $request->phone_number,
-            ],
-        ];
-        //dispatchEmailQueue($data);
+
         DispatchNotificationService::LETUSHELP(toObject([
             'from' => $request->email,
-            'to'   => $agents ,
-            'data' => $data['data']
+            'to'   => mailToAdmin() ,
+            'data' => $request->all()
         ]));
 
 
         return sendResponse($request, true, 'Request has been sent successfully');
     }
-
-	/**
-	 * @param $id
-	 *
-	 * @return Factory|View
-	 */
-	public function detail($id) {
-		$listing = $this->featureListingService->detail($id);
-		if(empty($listing)) abort(404);
-		return view('listing_detail', compact('listing'));
-	}
 }

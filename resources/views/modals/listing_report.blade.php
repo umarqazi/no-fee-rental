@@ -14,7 +14,7 @@
             <div class="modal-body">
                 <div class="profilecard-detaill">
                     <h3>Report Reason</h3>
-                    {!! Form::model(mySelf(), ['url' => route('user.reportListing'), 'reset' => 'true' , 'method' => 'get',]) !!}
+                    {!! Form::model(mySelf(), ['url' => route('web.reportListing'), 'reset' => 'true' , 'method' => 'post', 'id' => 'report_listing']) !!}
                     <div class="form-group">
                         {!! Form::text('username', authenticated() ? (mySelf()->first_name.' '.mySelf()->last_name) : null, ['class' => 'input-style', 'placeholder' => 'User Name']) !!}
                     </div>
@@ -25,9 +25,10 @@
                         {!! Form::text('phone_number', null, ['class' => 'input-style', 'placeholder' => 'Phone Number']) !!}
                     </div>
                     <div class="form-group">
-                        {!! Form::select('report_reason', config('formfields.listing.listing_report_reasons'), null, ['class' => 'input-style','id'=>'sel1']) !!}
+                        {!! Form::select('reason', config('formfields.listing.listing_report_reasons'), null, ['class' => 'input-style','id'=>'sel1']) !!}
                     </div>
                     <div class="form-group text-message">
+                        {!! Form::hidden('listing_id', $listing->id) !!}
                         {!! Form::textarea('message', null, ['class' => 'input-style', 'style' => 'resize:none;', 'placeholder' => 'Write Your Message']) !!}
                     </div>
                 </div>

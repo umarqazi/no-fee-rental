@@ -184,6 +184,14 @@ class ListingService extends BuildingService {
     }
 
     /**
+     * @param $clause
+     * @return mixed
+     */
+    public function find($clause) {
+        return $this->listingRepo->find($clause);
+    }
+
+    /**
      * @param $paginate
      * @return object
      */
@@ -236,23 +244,6 @@ class ListingService extends BuildingService {
         ! empty( $request->beds ) ? $keywords['bedrooms'] = $request->beds : null;
 
         return toObject( $this->__searchCollection( $keywords, $paginate ) );
-    }
-
-    /**
-     * @param $request
-     *
-     * @return array
-     */
-    public function filter($request) {
-        $keywords = [];
-        $request->rent_beds != null &&
-        $request->rent_beds !=  'any' &&
-        $request->rent_beds !=  'studio'
-            ? $keywords['bedrooms'] = $request->rent_beds : null ;
-        $request->rent_baths != null &&
-        $request->rent_baths != 'any'
-            ? $keywords['baths'] = $request->rent_baths : null ;
-        return $listings = $this->listingRepo->search($keywords)->rentActive()->get();
     }
 
     /**

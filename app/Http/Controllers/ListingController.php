@@ -12,11 +12,6 @@ use Illuminate\Http\Request;
 class ListingController extends Controller {
 
     /**
-     * @var FavouriteService
-     */
-    private $favouriteService;
-
-    /**
      * @var ListingService
      */
     private $listingService;
@@ -30,9 +25,8 @@ class ListingController extends Controller {
      * ListingController constructor.
      */
     public function __construct() {
-        $this->buildingService = new BuildingService();
-        $this->favouriteService = new FavouriteService();
         $this->listingService = new ListingService();
+        $this->buildingService = new BuildingService();
     }
 
     /**
@@ -41,8 +35,21 @@ class ListingController extends Controller {
      * @return JsonResponse|RedirectResponse
      */
     public function detail(Request $request) {
-        $list = \App\Listing::where('map_location', 'like', $request->map_location)->where('visibility', ACTIVELISTING)->get();
+        $list = $this->listingService->find([
+            'visibility' => ACTIVELISTING,
+            'map_location' => $request->map_location])->get();
         return sendResponse($request, $list, null, null, null);
+    }
+
+    /**
+     * @param $id
+     *
+     * @return Factory|View
+     */
+    public function viewDetail($id) {
+        $listing = $this->listingService->find(['id' => $id])->first();
+        if(empty($listing)) abort(404);
+        return view('listing_detail', compact('listing'));
     }
 
     /**

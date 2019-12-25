@@ -101,7 +101,7 @@ class Listing extends Model {
      */
     public function scopeRentActive($query) {
         $clause['visibility'] = ACTIVELISTING;
-        return $query->where($clause);
+        return $query->where($clause)->orderBy('is_featured', APPROVEFEATURED);
     }
 
     /**
@@ -226,10 +226,27 @@ class Listing extends Model {
 	public function scopeWithAll($query) {
 		return $query->with([
 		    'agent.company', 'agent.reviews', 'images', 'building.amenities', 'favourites',
-            'openHouses', 'features', 'neighborhood', 'building.listings', 'building.contact',
+            'openHouses', 'features', 'neighborhood', 'building.nearbyListings', 'building.contact',
             'reported'
         ]);
 	}
+
+    /**
+     * @param $query
+     * @return mixed
+     */
+	public function scopeWithNeighborhood($query) {
+	    return $query->with('neighborhood');
+    }
+
+    /**
+     * @param $query
+     * @return mixed
+     */
+    public function scopeWithAgent($query) {
+        return $query->with('agent.reviews');
+    }
+
     /**
      * @param $query
      *

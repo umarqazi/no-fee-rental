@@ -78,13 +78,6 @@ class UserRepo extends BaseRepo {
     }
 
     /**
-     * @return mixed
-     */
-    public function appendQuery() {
-        return $this->model->query();
-    }
-
-    /**
      * @param $id
      *
      * @return mixed

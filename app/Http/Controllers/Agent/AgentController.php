@@ -18,19 +18,10 @@ class AgentController extends Controller {
 	private $userService;
 
     /**
-     * @var ListingService
-     */
-	private $listingService;
-
-    /**
      * AgentController constructor.
-     *
-     * @param UserService $userService
-     * @param ListingService $listingService
      */
-	public function __construct(UserService $userService, ListingService $listingService) {
-		$this->userService = $userService;
-		$this->listingService = $listingService;
+	public function __construct() {
+		$this->userService = new UserService();
 	}
 
 	/**
@@ -72,47 +63,4 @@ class AgentController extends Controller {
 		$update = $this->userService->changePassword($request);
 		return sendResponse($request, $update, 'Password has been updated.');
 	}
-
-    /**
-     * @param $agentId
-     * @param Request $request
-     *
-     * @return Factory|View
-     */
-	public function profileListing($agentId, Request $request) {
-	    $data = null;
-	    $showMap = false;
-//        if(!empty($request->all())) {
-//            $data = $this->sortListing($agentId, $request->all());
-//        } else {
-            $data = toObject($this->userService->getAgentWithListings($agentId));
-//        }
-	    return view('agent.listing_profile', compact('data', 'showMap'))->with('route', 'web.agentProfileSearch')->with('param', $agentId);
-    }
-
-    /**
-     * @param $agentId
-     * @param $sortBy
-     *
-     * @return object
-     */
-    public function sortListing($agentId, $sortBy) {
-        collect($sortBy)->map(function($method) use ($agentId) {
-            if(method_exists($this->userService, $method)) {
-                $this->userService->{$method}( $agentId );
-            }
-        });
-        return toObject($this->userService->fetchQuery());
-    }
-
-    /**
-     * @param Request $request
-     *
-     * @return Factory|View
-     */
-    public function search(Request $request, $agentId) {
-        $data = toObject($this->listingService->profileAdvanceSearch($request,$agentId));
-        $data->agent = $this->userService->edit($agentId);
-        return view('agent.listing_profile', compact('data'))->with('route', 'web.agentProfileSearch')->with('param', $agentId);
-    }
 }

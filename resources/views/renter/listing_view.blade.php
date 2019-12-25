@@ -44,14 +44,15 @@
                                             </ul>
                                             {!! $al->realty_id ? "<p><i class='fa fa-map-marker-alt'></i> RealtyMX ID: {$al->realty_id}</p>" : '' !!}
                                             <p>Posted On: {{ $al->created_at->format("m/d/y H:m A") }}</p>
-                                            <a href="{{ route('web.removeFavouriteListing', $al->id) }}" title="Remove From Favourite">
                                                 <span class="status" style="background: red;">Remove</span>
-                                            </a>
                                              <div class="actions-btns">
                                                 <a href="{{ route('listing.detail', $al->id) }}">
                                                     <i class="fa fa-eye" style="font-size: 24px;position: relative;top: 5px;"></i>
                                                 </a>
-                                            </div>
+                                                 <a href="{{ route('web.removeFavouriteListing', $al->id) }}" title="Remove From Favourite">
+                                                     <button type="button" class="border-btn">Remove</button>
+                                                 </a>
+                                             </div>
                                         </div>
                                     </div>
                                 @endforeach
@@ -81,13 +82,14 @@
                                                     </ul>
                                                     {!! $al->realty_id ? "<p><i class='fa fa-map-marker-alt'></i> RealtyMX ID: {$al->realty_id}</p>" : '' !!}
                                                     <p>Posted On: {{ $al->created_at->format("m/d/y H:m A") }}</p>
-                                                    <a href="{{ route('web.removeFavouriteListing', $al->id)}}" title="Remove From Favourite">
                                                         <span class="status" style="background: red;">Remove</span>
-                                                    </a>
                                                     <div class="actions-btns">
-                                                       </div>
                                                     <div class="list-actions-icons">
                                                         <a href="{{ route('listing.detail', $al->id) }}"><button><i class="fa fa-eye"></i></button></a>
+                                                    </div>
+                                                    <a href="{{ route('web.removeFavouriteListing', $al->id) }}" title="Remove From Favourite">
+                                                        <button type="button" class="border-btn">Remove</button>
+                                                    </a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -120,9 +122,12 @@
                                         </ul>
                                         {!! $il->realty_id ? "<p><i class='fa fa-map-marker-alt'></i> RealtyMX ID: {$il->realty_id}</p>" : '' !!}
                                         <p>Posted On: {{ $il->created_at->format("m/d/y H:m A") }}</p>
-                                        <a href="{{ route('web.removeFavouriteListing', $il->id)}}" title="Remove From Favourite">
                                             <span class="status" style="background: red;">Remove</span>
+                                    <div class="actions-btns">
+                                        <a href="{{ route('web.removeFavouriteListing', $il->id) }}" title="Remove From Favourite">
+                                            <button type="button" class="border-btn">Remove</button>
                                         </a>
+                                    </div>
                                     </div>
                                 </div>
                             @endforeach
@@ -148,10 +153,13 @@
                                                 </ul>
                                                 {!! $il->realty_id ? "<p><i class='fa fa-map-marker-alt'></i> RealtyMX ID: {$il->realty_id}</p>" : '' !!}
                                                 <p>Posted On: {{ $il->created_at->format("m/d/y H:m A") }}</p>
-                                                <a href="{{ route('web.removeFavouriteListing', $il->id)}}" title="Remove From Favourite">
                                                     <span class="status" style="background: red;">Remove</span>
+                                            <div class="actions-btns">
+                                                <a href="{{ route('web.removeFavouriteListing', $il->id) }}" title="Remove From Favourite">
+                                                    <button type="button" class="border-btn">Remove</button>
                                                 </a>
-                                           </div>
+                                            </div>
+                                            </div>
                                         </div>
                                     </div>
                                 @endforeach
@@ -167,4 +175,5 @@
             </div>
         </div>
     </div>
+    {!! HTML::script('assets/js/listing.js') !!}
 @endsection

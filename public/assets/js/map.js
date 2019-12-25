@@ -89,16 +89,18 @@ const setMarker = (coords) => {
  * @param coords
  * @param addMarker
  * @param showPop
+ * @param html
+ * @param Zoom
  * @returns {Map<any, any> | P.Map | Map}
  */
-const setMap = (container, coords, addMarker = true, showPop = true, html = null) => {
+const setMap = (container, coords, addMarker = true, showPop = true, html = null, Zoom = 10) => {
     MAP = new mapboxgl.Map({
         accessToken: setToken(),
         container: container,
-        maxBounds: defaultBounds, // Map View Bound To New York City Only
+        // maxBounds: defaultBounds, // Map View Bound To New York City Only
         style: 'mapbox://styles/mapbox/light-v10',
         center: setLatLng(coords),
-        zoom: 13
+        zoom: Zoom
     });
 
     mapControls(new mapboxgl.NavigationControl(), 'bottom-right');
@@ -286,11 +288,7 @@ const drawPolygon = ($coordinates, id) => {
                 'type': 'Feature',
                 'geometry': {
                     'type': 'Polygon',
-                    'coordinates': [
-                        [
-                            [-73.89680883223774,40.79580844515979],[-73.89693872998792,40.79563587285357],[-73.89723603843939,40.79572003753707],[-73.89796839783742,40.795644839161994],[-73.89857332665558,40.7960691402596],[-73.89895261832527,40.796227852579634],[-73.89919434249981,40.79650245601821],[-73.89852052071471,40.796936194189776],[-73.89788253240185,40.79711653214705],[-73.89713149795642,40.79679807772831],[-73.89678526341234,40.796329166487105],[-73.89680883223774,40.79580844515979]
-                        ]
-                    ]
+                    'coordinates': $coordinates,
                 }
             }
         },

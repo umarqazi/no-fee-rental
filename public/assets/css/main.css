@@ -695,10 +695,40 @@ h3 {
 .header-bg .search-property .search-btn:hover {
     background: #223971;
 }
+
+/**/
+.price-range-dropdown{
+    padding: 0px 15px;
+    width: 100%;
+    position:relative;
+    background: url(../images/select-menu-arrow.png) no-repeat right 15px center;
+    cursor: pointer;
+}
+.price-range-ul{
+    position: absolute;
+    top: 61px;
+    background-color: #fff;
+    padding: 10px 5px;
+    text-align: center;
+    display: none;
+    left: 0;
+    right: 0;
+}
+.price-range-ul ul{
+    border: 1px solid #f36f21;
+    padding: 10px 10px;
+
+}
+.price-range-ul ul li:nth-child(2){
+    height: 30px;
+    line-height: 30px;
+}
+/**/
 .dropdown-beds{
     min-width: 218px;
     padding: 0px 15px;
     background: url(../images/select-menu-arrow.png) no-repeat right 15px center;
+    cursor: pointer;
 }
 .beds-dropdown{
     position: relative;
@@ -1197,6 +1227,15 @@ h3 {
 }
 
 .login-form-wrapper .fa.fa-eye {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    color: #223971;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.login-form-wrapper .fa.fa-eye-slash {
     position: absolute;
     right: 15px;
     top: 15px;
@@ -3571,14 +3610,6 @@ footer .copyright .social-icons li a:hover {
     border-right: 0px;
 }
 
-.let-us-help-modal .let-us-hlep-form {
-    display: none;
-}
-
-.let-us-help-modal .let-us-hlep-form:first-child {
-    display: block;
-}
-
 .let-us-help-modal .rent-input-icon {
     background: url(../images/dollar-icon.png) no-repeat left 12px top 11px;
     padding-left: 32px;
@@ -3921,7 +3952,7 @@ footer .copyright .social-icons li a:hover {
 
  .search-bdr-top {
     width: 100%;
-    background-color: #F8F8F8;
+    background-color: #dee2e6;
     padding: 10px 15px;
 }
  .sort-by-wrapper{

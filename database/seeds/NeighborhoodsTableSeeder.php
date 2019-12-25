@@ -11,18 +11,33 @@ class NeighborhoodsTableSeeder extends Seeder
      * @return void
      */
     public function run() {
+        DB::table('boroughs')->delete();
         DB::table('neighborhoods')->delete();
-        $neighbours = collect(config('neighborhoods'))->map(function($neighbour) {
-            $collection = [
-                'name' => $neighbour,
-                'boro_id' => random_int(1, 5),
+        $collection = config('neighborhoods');
+        $boro = collect($collection['boro'])->map(function($value, $keys) {
+            $boroughs = [
+                'boro' => $value,
                 'created_at' => now(),
                 'updated_at' => now()
             ];
 
-            return $collection;
+            return $boroughs;
         });
 
-        DB::table('neighborhoods')->insert($neighbours->toArray());
+        DB::table('boroughs')->insert($boro->toArray());
+
+        $neighbours = collect($collection['neighborhoods'])->map(function($neighbours, $key) {
+            $collection = null;
+            foreach ($neighbours as $neighbour) {
+                $collection[] = [
+                    'name'       => $neighbour,
+                    'boro_id'    => $key,
+                    'created_at' => now(),
+                    'updated_at' => now()
+                ];
+            }
+
+            DB::table('neighborhoods')->insert($collection);
+        });
     }
 }

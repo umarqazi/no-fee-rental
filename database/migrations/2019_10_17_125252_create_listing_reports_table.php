@@ -18,6 +18,9 @@ class CreateListingReportsTable extends Migration {
         Schema::create('listing_reports', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('listing_id');
+            $table->string('username');
+            $table->string('email');
+            $table->string('phone_number');
             $table->string('reason');
             $table->text('message');
             $table->timestamps();

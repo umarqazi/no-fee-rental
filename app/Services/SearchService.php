@@ -18,8 +18,9 @@ class SearchService {
 
     /**
      * SearchService constructor.
+     * @param null $model
      */
-    public function __construct() {
-        $this->__searchConstruct();
+    public function __construct($model = null) {
+        $this->__searchConstruct($model ?? null);
     }
 }

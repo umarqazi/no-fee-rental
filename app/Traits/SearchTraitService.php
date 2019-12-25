@@ -18,14 +18,14 @@ use App\Repository\NeighborhoodRepo;
 trait SearchTraitService {
 
     /**
+     * @var mixed
+     */
+    public $query;
+
+    /**
      * @var string|array|mixed
      */
     private $args;
-
-    /**
-     * @var mixed
-     */
-    private $query;
 
     /**
      * @var SearchRepo
@@ -38,10 +38,11 @@ trait SearchTraitService {
     private $neighborhoodRepo;
 
     /**
-     * SearchService constructor.\
+     * SearchTraitService constructor.
+     * @param null $model
      */
-    public function __construct() {
-        $this->searchRepo = new SearchRepo();
+    public function __construct($model = null) {
+        $this->searchRepo = new SearchRepo($model);
         $this->neighborhoodRepo = new NeighborhoodRepo();
         $this->query = $this->searchRepo->appendQuery();
     }
@@ -53,7 +54,7 @@ trait SearchTraitService {
      */
     public function search($request) {
 
-        collect($this->__setParams($request))->map(function($args, $method) {
+        collect($this->__setSearchParams($request))->map(function($args, $method) {
             if(method_exists($this, $method) && !empty($args)) {
                 $this->args = toObject([$method => $args]);
                 $this->{$method}();
@@ -67,24 +68,35 @@ trait SearchTraitService {
      * @param $request
      * @return array
      */
-    private function __setParams($request) {
+    private function __setSearchParams($request) {
         $data = [
             'beds'                  => $request->beds ?? null,
             'baths'                 => $request->baths ?? null,
             'features'              => $request->features ?? null,
             'openHouse'             => $request->openHouse ?? null,
             'amenities'             => $request->amenities ?? null,
+            'agentProfile'          => $request->agentProfile ?? null,
+            'availability'          => $request->availability ?? null,
+            'neighborhood'          => $request->neighborhood ?? null,
+            'agentsWithPremiumPlan' => $request->agentsWithPremiumPlan ?? null,
             'price'                 => [
                 'min_price'  => $request->min_price ? (int)$request->min_price : MINPRICE,
                 'max_price'  => $request->max_price ? (int)$request->max_price : MAXPRICE
             ],
-            'square'                => $request->squareRange ?? null,
-            'availability'          => $request->availability ?? null,
-            'neighborhood'          => $request->neighborhoods ?? null,
-            'agentsWithPremiumPlan' => $request->agentsWithPremiumPlan ?? null
+            'square'                => [
+                'square_min'  => $request->square_min ? (int)$request->square_min : MINSQUARE,
+                'square_max'  => $request->square_max ? (int)$request->square_max : MAXSQUARE
+            ],
         ];
 
         return $data;
+    }
+
+    /**
+     * filter for user
+     */
+    private function agentProfile() {
+        $this->query->where('user_id', (int)$this->args->{__FUNCTION__})->withAgent();
     }
 
     /**
@@ -98,9 +110,7 @@ trait SearchTraitService {
             $neighborhood = $repo->id;
         }
 
-        $this->query->whereHas('neighborhood', function($query) use ($neighborhood) {
-            return $query->where('neighborhood_id', $neighborhood);
-        });
+        $this->query->where('neighborhood_id', $neighborhood);
     }
 
     /**
@@ -119,7 +129,7 @@ trait SearchTraitService {
     private function beds() {
         if(in_array(5, $this->args->{__FUNCTION__})) {
             $this->query->whereIn('bedrooms', is_array($this->args->{__FUNCTION__})
-                ? $this->args->{__FUNCTION__} : [ $this->args->{__FUNCTION__} ])->orWhere('bedrooms', '>=', 5);
+                ? $this->args->{__FUNCTION__} : [ $this->args->{__FUNCTION__} ])->where('bedrooms', '>=', 5);
         } else {
             $this->query->whereIn( 'bedrooms', is_array($this->args->{__FUNCTION__})
                 ? $this->args->{__FUNCTION__} : [ $this->args->{__FUNCTION__} ] );
@@ -166,7 +176,7 @@ trait SearchTraitService {
      */
     private function features() {
         $features = $this->args->{__FUNCTION__};
-        $this->query->orWhereHas('features', function($query) use ($features) {
+        $this->query->whereHas('features', function($query) use ($features) {
             return $query->whereIn('value', $features);
         });
     }
@@ -176,8 +186,8 @@ trait SearchTraitService {
      */
     private function square() {
         $this->query->whereBetween('square_feet', [
-            (int)$this->args->{__FUNCTION__}['square_min'],
-            (int)$this->args->{__FUNCTION__}['square_max']
+            $this->args->{__FUNCTION__}['square_min'],
+            $this->args->{__FUNCTION__}['square_max']
         ]);
     }
 
@@ -208,6 +218,8 @@ trait SearchTraitService {
      * @return mixed|String
      */
     private function fetchQuery() {
-        return $this->query->where('visibility', ACTIVE)->orderBy('is_featured', APPROVEFEATURED)->get();
+        return $this->query->where('visibility', ACTIVE)
+                        ->orderBy('is_featured', APPROVEFEATURED)
+                        ->get();
     }
 }

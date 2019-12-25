@@ -92,7 +92,7 @@
 
                     <div class="col-md-12 submit-clm">
                         <div class="text-center mt-3 mb-4">
-                            {!! Form::submit('Signup', ['class' => 'btn-default']) !!}
+                            {!! Form::submit('Signup', ['class' => 'btn-default', 'style' => 'cursor:pointer;']) !!}
                         </div>
                     </div>
                     {!! Form::close() !!}

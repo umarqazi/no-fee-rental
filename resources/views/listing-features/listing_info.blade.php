@@ -24,7 +24,7 @@
 		</span>
     </div>
 </div>
-<div class="col-md-6">
+<div class="col-md-12 col-lg-6">
     <div class="neighborhood-flex">
         <div class="form-group">
             <label>Neighborhood</label>
@@ -43,7 +43,7 @@
     </div>
 </div>
 
-<div class="col-md-6">
+<div class="col-md-12 col-lg-6">
     <div class="unit-flex">
         <div class="form-group">
             <label>Unit</label>
@@ -75,7 +75,7 @@
         </div>
     </div>
 </div>
-<div class="col-md-6">
+<div class="col-md-12 col-lg-12 col-xl-6">
     <div class="unit-flex">
         <div class="form-group">
             <label>Free Months</label>
@@ -108,7 +108,7 @@
     </div>
 </div>
 
-<div class="col-md-6">
+<div class="col-md-12 col-lg-12 col-xl-6">
     <div class="availability-flex">
         <div class="form-group">
             <label>Availability</label>

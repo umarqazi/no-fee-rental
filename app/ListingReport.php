@@ -9,5 +9,9 @@ use Illuminate\Database\Eloquent\Model;
  * @package App
  */
 class ListingReport extends Model {
-    //
+
+    /**
+     * @var array
+     */
+    protected $fillable = ['username', 'email', 'phone_number', 'listing_id', 'reason', 'message'];
 }

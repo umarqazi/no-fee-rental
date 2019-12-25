@@ -31,7 +31,11 @@ class SearchController extends Controller {
      */
     public function indexSearch(Request $request) {
         $data = $this->__trigger($request);
-        return view('listing_search_results', compact('data'));
+        return $this->__view($data);
+    }
+
+    public function filter(Request $request) {
+        return $this->__view($this->__trigger($request));
     }
 
     /**
@@ -41,7 +45,7 @@ class SearchController extends Controller {
      */
     public function advanceSearch(Request $request) {
         $data = $this->__trigger($request);
-        return view('listing_search_results', compact('data'));
+        return $this->__view($data);
     }
 
     /**
@@ -50,5 +54,17 @@ class SearchController extends Controller {
      */
     private function __trigger($request) {
         return toObject(['listings' => $this->searchService->search($request)]);
+    }
+
+    /**
+     * @param $data
+     * @return Factory|View
+     */
+    private function __view($data) {
+        return view('listing_search_results', compact('data'))
+            ->with([
+                'neigh_filter' => true,
+                'filter_route' => 'web.advanceSearchFilter'
+            ]);
     }
 }

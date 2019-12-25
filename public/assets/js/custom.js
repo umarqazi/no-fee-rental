@@ -335,14 +335,6 @@ $(() => {
         $(".mobile-menu").slideUp();
     });
 
-    $(".let-us-hlep-form .btn-default").click(function () {
-        var get_btn_id = $(this).data("target");
-        if (get_btn_id != '') {
-            $(".let-us-hlep-form").hide();
-            $("#" + get_btn_id).fadeIn();
-        }
-    });
-
     function onSelectHandler(date, context) {
         let from = null;
         if (date[0] !== null) {
@@ -360,6 +352,9 @@ $(() => {
         $('#multiple').pignoseCalendar({
             select: onSelectHandler
         });
+
+        let from = $('body').find('.pignose-calendar-unit-active').attr('data-date');
+        $('body').find('.article').append(`<input name='availability' class="pignose-availability" type='hidden' value='${from}'>`);
     });
 
     $('#image-gallery').lightSlider({
@@ -611,9 +606,13 @@ $(() => {
             $('.app-message-error').text('') ;
         }
     });
+
     $(document).on("click", function (e) {
         if ($(e.target).is(".dropdown-beds") == false && $(e.target).parents('.dropdown-beds').length == 0 && $(e.target).parents('.beds-dropdown').length == 0) {
             $(".bed-advance-search").hide();
+        }
+        if (!$(e.target).is(".price-range-dropdown") && $(e.target).parents('.price-range-dropdown').length == 0) {
+            $(".price-range-ul").hide();
         }
     });
 
@@ -622,11 +621,23 @@ $(() => {
     });
 
     $("#advance-search-beds ul > li > input").on("click",function(e){
+        let count = 0 ;
+        $('#advance-search-beds ul > li > input').each(function(index) {
+            if($(this).is(":checked")){
+                ++count ;
+            }
+        });
         var get_text =  $(this).parent().find('span').text();
         var dropdown_show = get_text.replace('+', '');
         if($(this).is(":checked")){
             $("#show-beds").find('.placeholder-text').hide();
-            $('#show-beds').append('<span id="chk_'+dropdown_show+'_chk">'+  ' ' + '' + get_text +  ' ,'+ '</span>');
+            if(count == 1) {
+                $('#show-beds').append('<span id="chk_'+dropdown_show+'_chk">'+  ' ' + '' + get_text +  ' '+ '</span>');
+            }
+            if(count > 1){
+                $('#show-beds').append('<span id="chk_'+dropdown_show+'_chk">'+  ' ' + ', ' + get_text +  ''+ '</span>');
+            }
+            //$('#show-beds').append('<span id="chk_'+dropdown_show+'_chk">'+  ' ' + '' + get_text +  ' ,'+ '</span>');
         }if($(this).is(":not(:checked)")) {
             $('#chk_'+dropdown_show+'_chk').remove();
         }
@@ -659,9 +670,12 @@ $(() => {
         $(".dropdown-listiing-rent-page").hide();
         $(this).next().addClass('active').show();
     });
-    // $(document).mouseup(function(e){
-    //     $('div.dropdown-listiing-rent-page').removeClass("active");
-    // });
+   $(".price-range-dropdown").click(function (e) {
+       if($(e.target).parents('.price-range-dropdown').length !== 0){
+           return;
+       }
+       $(".price-range-ul").toggle();
+   });
 
 });
 

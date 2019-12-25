@@ -77,8 +77,41 @@ class NeighborhoodController extends Controller {
      * @return mixed
      * @throws \Exception
      */
-    public function get() {
-        return dataTable($this->neighborhoodService->get());
+    public function manhattan() {
+        return dataTable($this->neighborhoodService->manhattan());
     }
+
+    /**
+     * @return mixed
+     * @throws \Exception
+     */
+    public function bronx() {
+        return dataTable($this->neighborhoodService->bronx());
+    }
+
+    /**
+     * @return mixed
+     * @throws \Exception
+     */
+    public function brooklyn() {
+        return dataTable($this->neighborhoodService->brooklyn());
+    }
+
+    /**
+     * @return mixed
+     * @throws \Exception
+     */
+    public function queens() {
+        return dataTable($this->neighborhoodService->queens());
+    }
+
+    /**
+     * @return mixed
+     * @throws \Exception
+     */
+    public function statenIsland() {
+        return dataTable($this->neighborhoodService->statenIsland());
+    }
+
 
 }

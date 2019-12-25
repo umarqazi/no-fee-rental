@@ -37,14 +37,14 @@
 
         <div class="profile-section-padding">
             <div class="container-lg ">
-                        {{--Listing Results--}}
-                        @include('sections.search_results')
+                {{--Listing Results--}}
+                @include('sections.search_results')
             </div>
         </div>
-        @if(sizeof($data->reviews) > 0)
         <div class="clients-reviews-section">
-            <div class="container-lg">
+            <div class="">
                 <h3> What our clients say about him</h3>
+                @if(sizeof($data->reviews) > 0)
                 <div class="owl-slider">
                     <div id="ClientCarousel" class="owl-carousel">
                         @foreach($data->reviews as $key => $review)
@@ -62,62 +62,13 @@
                         @endforeach
                     </div>
                 </div>
-
+                @else
+                    <div>No Reviews Found</div>
+                @endif
             </div>
         </div>
-         @else
-
-        @endif
-{{--        <div class="profile-contact-section profile-section-padding">--}}
-{{--            <div class="container-lg">--}}
-{{--                <h3>Leave a review </h3>--}}
-{{--                <div class="row">--}}
-{{--                    <div class="col-sm-6">--}}
-{{--                        <div class="form-group">--}}
-{{--                            <label for="first-name">Your Name</label>--}}
-{{--                            <input type="text" name="firstName" class="form-control" placeholder="Write your name">--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                    <div class="col-sm-6">--}}
-{{--                        <div class="form-group">--}}
-{{--                            <label for="first-name">Your email</label>--}}
-{{--                            <input type="email" name="emailName" class="form-control" placeholder="Write your email">--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                    <div class="col-sm-12">--}}
-{{--                        <div class="form-group">--}}
-{{--                            <label>Write a review </label>--}}
-{{--                            <textarea class="form-control" placeholder="Write your review here"></textarea>--}}
-{{--                            <button class="btn-default"> Post a review</button>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-
     </section>
-    {{--Search Modal--}}
-    {{--@include('modals.advance_search')--}}
-
-
     <script>
-        // $(".neighborhood-search .search-result-wrapper .map-wrapper .swipe-btn").click(function () {
-        //     $(this).find('i').toggleClass('fa-angle-left fa-angle-right');
-        //     $(".neighborhood-search .search-result-wrapper .search-listing").toggleClass('hide-list');
-        //     $(".neighborhood-search .search-result-wrapper .map-wrapper").toggleClass('full-map');
-        //
-        // });
-
-
-        // $(".mobile-view-dropdown").click(function(){
-        //     $(this).find("i").toggleClass('fa-bars fa-times');
-        //     $("#mobile-tabs-collapse").slideToggle();
-        // });
-        // $(".dropdown-wrap .btn-default").click(function(){
-        //     $(".dropdown-wrap .btn-default").removeClass("active");
-        //     $(this).addClass("active");
-        // });
-
         $('.owl-slider #carouselNeighbour , .owl-slider #ClientCarousel').owlCarousel({
             autoplay: true,
             responsiveClass: true,
@@ -172,5 +123,4 @@
             }
         });
     </script>
-@endsection {!! HTML::script('assets/js/input-to-dropdown.js') !!}
-<!--  -->
+@endsection

@@ -29,6 +29,14 @@ class Building extends Model {
     }
 
     /**
+     * @return HasMany
+     */
+    public function nearbyListings() {
+        return $this->hasMany(Listing::class, 'building_id', 'id')
+                    ->where('visibility', ACTIVELISTING);
+    }
+
+    /**
      * @return HasOne
      */
     public function neighborhood() {

@@ -730,4 +730,128 @@ $(() => {
             },
         }
     });
+
+    // Get Started Form Validation
+    $('#get_started').validate({
+        rules: {
+            'beds[]': {
+                required: true
+            },
+            price: {
+                required: true
+            },
+            move_in_date: {
+                required: true
+            },
+            neighborhood: {
+                required: true
+            },
+            first_name: {
+                required: true
+            },
+            last_name: {
+                required: true
+            },
+            email: {
+                required: true,
+                email: true
+            },
+            phone_number: {
+                required: true
+            },
+            description: {
+                required: true
+            }
+        },
+        messages: {
+            move_in_date: "Move in date is required",
+            price: "Budget is required",
+            'beds[]': "Bedroom is required",
+            neighborhood: "Neighborhood is required",
+            first_name: "First name is required",
+            last_name: "Last name is required",
+            phone_number: "Phone number is required",
+            email: {
+                required: "Email is required",
+                email: "Invalid email address"
+            },
+            description: "Description is required"
+        }
+    });
+
+    // Listing Report Form
+    $('#report_listing').validate({
+        rules: {
+            username: "required",
+            email: {
+                required: true,
+                email: true
+            },
+            phone_number: "required",
+            reason: "required",
+            message: "required"
+        },
+
+        messages: {
+            username: "User name is required",
+            email: "Email is required",
+            phone_number: "Phone number is required",
+            reason: "Reason is required",
+            message: "Message is required"
+        }
+    });
+
+    // Let Us Help Form Validations
+    $('#let_us_help').validate({
+        rules:{
+            min_price: {
+                required: true
+            },
+            location_preference: {
+                required: true
+            },
+            username: {
+                required: true
+            },
+            email: {
+                required: true,
+                email: true
+            },
+            phone_number: {
+                required: true
+            }
+        },
+
+        messages: {
+            min_price: 'Price is required'
+        }
+    })
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

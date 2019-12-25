@@ -16,6 +16,7 @@ Route::get('/', 'HomeController@index')->name('web.index');
 // Search Listing Route
 Route::get('/search', 'SearchController@indexSearch')->name('web.indexSearch');
 Route::get('/advance-search', 'SearchController@advanceSearch')->name('web.advanceSearch');
+Route::get('/advance-search-filter', 'SearchController@filter')->name('web.advanceSearchFilter');
 
 // Contact Us Routes
 Route::get('/contact-us', 'ContactUsController@showForm')->name('contact-us');
@@ -29,8 +30,9 @@ Route::get('/press', 'ContactUsController@showPress')->name('press');
 Route::post('newsletter', 'NewsletterController@store');
 
 // Agent Profile Routes
-Route::get('/agent-profile/{agentId}', 'Agent\AgentController@profileListing')->name('web.agentProfile');
-Route::get('/agent-profile-search/{agentId}', 'Agent\AgentController@search')->name('web.agentProfileSearch');
+Route::get('/agent-profile/{agentId}', 'UserController@agentProfileWithListing')->name('web.agentProfile');
+Route::get('/agent-profile-search-filters/{agentId}', 'UserController@agentProfileSearchFilter')->name('web.agentProfileSearchFilter');
+Route::get('/agent-profile-advance-search/{agentId}', 'UserController@agentProfileAdvanceSearch')->name('web.agentProfileAdvanceSearch');
 
 // Add User By Admin Change Password Routes
 Route::get('/change-password/{token}', 'UserController@changePassword')->name('user.change_password');
@@ -76,9 +78,9 @@ Route::get('/realty-mx/{client}/{listing}', 'RealtyMXController@detail')->name('
 
 // Listing Routes
 Route::post('/listing-detail', 'ListingController@detail');
-Route::get('/listing-detail/{id}', 'HomeController@detail')->name('listing.detail');
 Route::post('/is-unique-address', 'ListingController@isUnique');
 Route::post('/is-owner-only', 'ListingController@isOwnerOnly');
+Route::get('/listing-detail/{id}', 'ListingController@viewDetail')->name('listing.detail');
 
 // Listing Conversation Routes
 Route::post('/send-request', 'ListingConversationController@create')->name('web.listConversation');
@@ -91,18 +93,18 @@ Route::post('/push-notification', 'NotificationController@push');
 Route::post('/fetch-notifications', 'NotificationController@get');
 Route::get('/all-notifications', 'NotificationController@all');
 
-// Neighborhood Routes
-Route::post('/all-neighborhoods', 'NeighborhoodController@all')->name('web.allNeigetghbours');
-Route::get('/listing-by-neighborhood/{neighborhood}/{sort}', 'NeighborhoodController@sort');
-Route::get('/listing-by-neighborhood/search', 'NeighborhoodController@advanceSearch')->name('web.advanceNeighborhoodSearch');
-Route::get('/listing-by-neighborhood', 'NeighborhoodController@index')->name('web.neighborhood');
-Route::match(['get', 'post'], '/listing-by-neighborhood/{neighborhood}', 'NeighborhoodController@find')->name('web.ListsByNeighborhood');
-
 // Rent Routes
 Route::get('/listing-by-rent/{sort}', 'RentController@sort');
 Route::get('/listing-by-rent', 'RentController@index')->name('web.ListsByRent');
+Route::get('/listing-by-rent-filter', 'RentController@filter')->name('web.rentFilter');
 Route::get('/listing-by-rent-search', 'RentController@advanceSearch')->name('web.advanceRentSearch');
-Route::get('/listing-by-rent-filter', 'RentController@filter')->name('web.RentFilters');
+
+// Neighborhood Routes
+Route::post('/all-neighborhoods', 'NeighborhoodController@all');
+Route::get('/listing-by-neighborhood', 'NeighborhoodController@index')->name('web.neighborhood');
+Route::get('/listing-by-neighborhood/filter', 'NeighborhoodController@filter')->name('web.neighborhoodFilter');
+Route::get('/listing-by-neighborhood/advance-search', 'NeighborhoodController@advanceSearch')->name('web.advanceNeighborhoodSearch');
+Route::match(['get', 'post'], '/listing-by-neighborhood/{neighborhood}', 'NeighborhoodController@find')->name('web.ListsByNeighborhood');
 
 // Review Routes
 Route::get('/send-a-review/{token}', 'ReviewController@index')->name('web.makeReview');
@@ -111,6 +113,9 @@ Route::post('/create-review', 'ReviewController@create')->name('web.createReview
 // Favourite Routes
 Route::get('/favourite/{listing_id}', 'UserController@favourite')->name('web.favouriteListing');
 Route::get('/remove/favourite/{listing_id}', 'UserController@removeFavourite')->name('web.removeFavouriteListing');
+
+// Listing Report
+Route::post('/listing-report', 'ReportListingController@report')->name('web.reportListing');
 
 //get Renters
 Route::get('/get-renters', 'UserController@getRenters')->name('web.getRenters');
@@ -146,10 +151,5 @@ Route::get('/accept-invitation/{token}', 'Agent\MemberController@acceptInvitatio
 
 // Test Route
 Route::get('/test', function (\Illuminate\Http\Request $request) {
-   $file = require public_path().'/blog/wp-includes/helpers.php';
-   authenticate();
-isAuthenticated();
+    return view('agent.subscription_plan');
 })->name('web.test');
-
-// Listing Report
-Route::get('/listing-report', 'UserController@reportListing')->name('user.reportListing');

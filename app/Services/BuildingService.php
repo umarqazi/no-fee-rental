@@ -93,7 +93,6 @@ class BuildingService {
      */
     public function fee( $id ) {
         $this->__apartmentAction( $id, ['visibility' => ARCHIVED, 'is_featured' => DEACTIVE] );
-
         return $this->buildingRepo->update( $id, [ 'type' => FEE ] );
     }
 
