@@ -105,7 +105,7 @@ const setMap = (container, coords, addMarker = true, showPop = true, html = null
 
     mapControls(new mapboxgl.NavigationControl(), 'bottom-right');
 
-    // MAP.flyTo({center: setLatLng(coords)});
+    MAP.flyTo({center: setLatLng(coords)});
     (addMarker) ? setMarker(coords) : null;
     (showPop) ? showPopUp(MARKER, html) : null;
     return MAP;
@@ -141,7 +141,7 @@ const multiMarkers = (coords, container, zoom = 10) => {
 
     coords.forEach((coords, i) => {
         coords = JSON.parse(coords);
-        MAP.flyTo({center: setLatLng(coords)});
+        // MAP.flyTo({center: setLatLng(coords)});
 
         i = new mapboxgl.Marker({
             style: "cursor:pointer",
