@@ -279,3 +279,39 @@ if(!defined('LICENSEBASEURL')) {
 if(!defined('SCHOOLZONEBASEURL')) {
     define('SCHOOLZONEBASEURL', 'data.cityofnewyork.us');
 }
+
+if(!defined('MINPRICE')) {
+    define('MINPRICE', 0);
+}
+
+if(!defined('MAXPRICE')) {
+    define('MAXPRICE', 10000);
+}
+
+if(!defined('MINSQUARE')) {
+    define('MINSQUARE', 0);
+}
+
+if(!defined('MAXSQUARE')) {
+    define('MAXSQUARE', 10000);
+}
+
+if(!defined('MANHATTAN')) {
+    define('MANHATTAN', 1);
+}
+
+if(!defined('BROOKLYN')) {
+    define('BROOKLYN', 2);
+}
+
+if(!defined('QUEENS')) {
+    define('QUEENS', 3);
+}
+
+if(!defined('BRONX')) {
+    define('BRONX', 4);
+}
+
+if(!defined('STATENISLAND')) {
+    define('STATENISLAND', 5);
+}

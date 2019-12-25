@@ -14,6 +14,7 @@ use App\Forms\User\AgentInvitationForm;
 use App\Forms\User\ChangePasswordForm;
 use App\Forms\User\EditProfileForm;
 use App\Forms\User\UserForm;
+use App\Listing;
 use App\Repository\CompanyRepo;
 use App\Repository\ExclusiveSettingRepo;
 use App\Repository\MemberRepo;
@@ -21,6 +22,7 @@ use App\Repository\AgentRepo;
 use App\Repository\NeighborhoodRepo;
 use App\Repository\UserRepo;
 use App\Traits\DispatchNotificationService;
+use App\Traits\SearchTraitService;
 use App\User;
 use Illuminate\Support\Facades\DB;
 use Zend\Diactoros\Request;
@@ -60,11 +62,6 @@ class UserService {
     private $exclusiveSettingRepo;
 
     /**
-     * @var mixed
-     */
-    private $query;
-
-    /**
      * UserService constructor.
      */
     public function __construct() {
@@ -74,7 +71,6 @@ class UserService {
         $this->memberRepo = new MemberRepo();
         $this->neighborhoodRepo = new NeighborhoodRepo();
         $this->exclusiveSettingRepo = new ExclusiveSettingRepo();
-        $this->query = $this->userRepo->appendQuery();
     }
 
     /**
@@ -632,36 +628,28 @@ class UserService {
      */
     public function getAgentWithListings($id) {
         $data = $this->userRepo->profileDetail($id)->first();
-        return [
+        return toObject([
             'agent'    => $data,
             'listings' => $data->listings,
             'reviews'  => $data->reviews
-        ];
+        ]);
     }
 
     /**
      * @param $id
+     * @param $request
+     * @return object
      */
-    public function cheaper($id) {
-        $this->query = $this->userRepo->cheaper($id);
-    }
-
-    /**
-     * @param $id
-     */
-    public function recent($id) {
-        $this->query = $this->userRepo->recent($id);
-    }
-
-    /**
-     * @return array
-     */
-    public function fetchQuery() {
-        $data = $this->query->first();
-        return [
-            'agent'    => $data,
-            'listings' => $data->listings
-        ];
+    public function advanceSearch($id, $request) {
+        $service = new SearchService();
+        $request->agentProfile = $id;
+        $data = collect($service->search($request));
+        $info = $data->first();
+        return toObject([
+            'agent'    => $info->agent,
+            'listings' => $data,
+            'reviews'  => $info->agent->reviews
+        ]);
     }
 
     /**
@@ -704,7 +692,6 @@ class UserService {
      * @return bool
      */
     public function favourite($listing_id) {
-
         $this->userRepo->attach($this->userRepo->edit(myid())->first(), $listing_id);
         return true ;
 
@@ -739,10 +726,10 @@ class UserService {
      * @return array
      */
     public function getRenters() {
-        $data = $this->userRepo->find(['user_type' => 4])->get();
         $renters_email = [];
+        $data = $this->userRepo->find(['user_type' => RENTER])->get();
         foreach ($data as $key=> $renter){
-            array_push($renters_email,$renter->email);
+            array_push($renters_email, $renter->email);
         }
         return $renters_email;
     }

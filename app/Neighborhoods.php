@@ -15,7 +15,7 @@ class Neighborhoods extends Model {
     /**
      * @var array
      */
-    protected $fillable = ['name','content'];
+    protected $fillable = ['name','content', 'banner', 'boro_id'];
 
     /**
      * @return HasMany
@@ -60,7 +60,7 @@ class Neighborhoods extends Model {
      */
     public function scopeWithListings($query) {
         return $query->with(['listings' => function($subQuery) {
-            return $subQuery->orderBy('is_featured', APPROVEFEATURED);
+            return $subQuery->where('visibility', ACTIVELISTING)->orderBy('is_featured', APPROVEFEATURED);
         }]);
     }
 }

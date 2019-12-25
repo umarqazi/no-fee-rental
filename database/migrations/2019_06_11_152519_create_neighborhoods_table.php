@@ -16,9 +16,13 @@ class CreateNeighborhoodsTable extends Migration {
     public function up() {
         Schema::create('neighborhoods', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('boro_id');
             $table->string('name');
+            $table->string('banner')->nullable();
             $table->text('content')->nullable();
             $table->timestamps();
+
+            $table->foreign('boro_id')->references('id')->on('boroughs')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

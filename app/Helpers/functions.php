@@ -536,6 +536,181 @@ function amenities() {
 /**
  * @return string|null
  */
+function bedsDropDown() {
+    $html = null;
+    $html = '<ul>
+                <li> <input type="checkbox" value="studio" id="Checkbox-ad-search" name="beds[]">
+                    <label for="Checkbox-ad-search"><span class="label-name">Studio</span></label>
+                </li>
+                <li> <input type="checkbox" value="1" id="Checkbox-1-ad-search" name="beds[]">
+                    <label for="Checkbox-1-ad-search"><span class="label-name">1</span></label>
+                </li>
+                <li> <input type="checkbox" value="2" id="Checkbox-2-ad-search" name="beds[]">
+                    <label for="Checkbox-2-ad-search"><span class="label-name">2</span></label>
+                </li>
+                <li> <input type="checkbox" value="3" id="Checkbox-3-ad-search" name="beds[]">
+                    <label for="Checkbox-3-ad-search"><span class="label-name">3</span></label>
+                </li>
+                <li> <input type="checkbox" value="4" id="Checkbox-4-ad-search" name="beds[]">
+                    <label for="Checkbox-4-ad-search"><span class="label-name">4</span></label>
+                </li>
+                <li> <input type="checkbox" value="5" id="Checkbox-5-ad-search" name="beds[]">
+                    <label for="Checkbox-5-ad-search"><span class="label-name">5+</span></label>
+                </li>
+            </ul>';
+
+    return $html;
+}
+
+/**
+ * @param $selected
+ * @return string|null
+ */
+function simple_neighborhood_select($selected = null) {
+    $html = null;
+    $boroughs = (new \App\Services\BoroughService())->get();
+    foreach ($boroughs as $borough) {
+        $html .= "<optgroup label='{$borough->boro}'>";
+        foreach ($borough->neighborhoods as $neighborhood) {
+            $html .= "<option value='{$neighborhood->name}'";
+            $html .= $neighborhood->name == $selected ? 'selected>' : '>';
+            $html .= "{$neighborhood->name}</option>";
+        }
+
+        $html .= "</optgroup>";
+    }
+
+    return $html;
+}
+
+/**
+ * @param int $amount
+ * @param null $pre_select
+ * @return string|null
+ */
+function multi_select_beds($amount = 5, $pre_select = null) {
+    $html = null;
+    $id = str_random(5);
+    $html .= "<ul id=\"advance-search-beds\">";
+    $html .= "<li";
+    $html .= is_array($pre_select) && in_array('studio', $pre_select) ? " class='white-border-chkbox'>" : '>';
+    $html .= Form::checkbox('beds[]', 'studio', is_array($pre_select) && in_array('studio', $pre_select) ? "checked='checked'" : '', ['id' => $id]);
+    $html .= "<label for=\"{$id}\"><span class=\"label-name\">Studio</span></label></li>";
+    for ($i = 1; $i <= $amount; $i ++) {
+        $id = str_random(5);
+        $html .= "<li";
+        $html .= is_array($pre_select) && in_array($i, $pre_select) ? " class='white-border-chkbox'>" : '>';
+        $html .= Form::checkbox('beds[]', $i, is_array($pre_select) && in_array($i, $pre_select) ? "checked='checked'" : '', ['id' => $id]);
+        $html .= "<label for=\"{$id}\"><span class=\"label-name\">{$i}</span></label></li>";
+    }
+
+    return $html;
+}
+
+/**
+ * @param int $amount
+ * @param null $pre_select
+ * @return string|null
+ */
+function multi_select_baths($amount = 5, $pre_select = null) {
+    $html = null;
+    $id = str_random(5);
+    $html .= "<ul id=\"advance-search-baths\">";
+    $html .= "<li";
+    $html .= is_array($pre_select) && in_array('any', $pre_select) ? " class='white-border-chkbox'>" : '>';
+    $html .= Form::checkbox('baths[]', 'any', is_array($pre_select) && in_array('any', $pre_select) ? "checked='checked'" : '', ['id' => $id]);
+    $html .= "<label for=\"{$id}\"><span class=\"label-name\">Any</span></label></li>";
+    for ($i = 1; $i <= $amount; $i ++) {
+        $id = str_random(5);
+        $html .= "<li";
+        $html .= is_array($pre_select) && in_array($i, $pre_select) ? " class='white-border-chkbox'>" : '>';
+        $html .= Form::checkbox('baths[]', $i, is_array($pre_select) && in_array($i, $pre_select) ? "checked='checked'" : '', ['id' => $id]);
+        $html .= "<label for=\"{$id}\"><span class=\"label-name\">{$i}</span></label></li>";
+    }
+
+    return $html;
+}
+
+/**
+ * @return string|null
+ */
+function filter_neighborhood_select() {
+    $html = null;
+    $html .= "<div class=\"neighborhood-border-no\">";
+    $boroughs = (new \App\Services\BoroughService())->get();
+    foreach ($boroughs as $borough) {
+        $html .= "<h3>{$borough->boro}</h3><div class=\"border - bottom - h3\"></div><ul>";
+        foreach ($borough->neighborhoods as $key => $neighborhood) {
+            $html .= "<li><div class=\"custom-control custom-radio custom-control-inline\">";
+            $html .= Form::radio('neighborhood', $neighborhood->name, false, ['class' => 'custom-control-input', 'id' => 'neighborhood-'.$key]);
+            $html .= "<label class=\"custom-control-label\" for=\"neighborhood-{$key}\">{$neighborhood->name}</label></div></li>";
+        }
+
+        $html .= "</ul>";
+    }
+
+    $html .= "</div>";
+
+    return $html;
+}
+
+function neighborhood_let_us_help() {
+    $tabs = null;
+    $content = null;
+    $tabs .= "<ul class=\"nav nav-pills\">";
+    $content .= "<div class=\"tab-content\">";
+    $boroughs = (new \App\Services\BoroughService())->get();
+    foreach ($boroughs as $key => $borough) {
+        $total = count($borough->neighborhoods);
+        $hasOpen = false;
+        $i = 1;
+        $perColum = ceil($total / 3);
+        $tabs .= "<li class=\"nav-item\">";
+        $tabs .= "<a class='nav-link";
+        $tabs .= $key == 0 ? " active'" : "'";
+        $tabs .= " data-toggle=\"pill\" href=\"#tab-{$key}\">{$borough->boro}</a></li>";
+        foreach ($borough->neighborhoods as $key2 => $neighborhood) {
+            $i ++;
+            $id = str_random(5);
+            if($key2 == 0) {
+                $content .= "<div class='tab-pane ";
+                $content .= $key == 0 ? "active'" : "'";
+                $content .= " id=\"tab-{$key}\">";
+                $content .= "<div class='row'>";
+            }
+
+            if(!$hasOpen) {
+                $hasOpen = true;
+                $content .= "<div class='col-md-4'><ul class=\"neighborhood-list\">";
+            }
+
+            $content .= "<li><div class=\"custom-control custom-checkbox\">";
+            $content .= Form::radio('neighborhood', $neighborhood->name, false, ['class' => 'custom-control-input', 'id' => $id]);
+            $content .= "<label class=\"custom-control-label\" for=\"{$id}\">{$neighborhood->name}</label></div></li>";
+
+            if($i == $perColum) {
+                $i = 1;
+                $hasOpen = false;
+                $content .= "</ul></div>";
+            }
+        }
+
+        if($hasOpen) {
+            $content .= "</ul></div>";
+        }
+
+        $content .= "</div></div>";
+    }
+
+    $tabs .= "</ul>";
+    $content .= "</div>";
+
+    return $tabs.$content;
+}
+
+/**
+ * @return string|null
+ */
 function features_pet() {
     $html = null;
     $pets = config('features.pet_policy');
@@ -559,34 +734,34 @@ function features_pet() {
     $html .= "<script>
         let row = $('.row');
         $(() => {
-        if($('#listitemp3').is(':checked')) {
-        p3(true);
-        }
+            if($('#listitemp3').is(':checked')) {
+                p3(true);
+            }
         
-        if($('#listitemp4').is(':checked')) {
-        p4(true);
-        }
+            if($('#listitemp4').is(':checked')) {
+                p4(true);
+            }
         });
         
         function p3(action) {
-        row.find('input[value=p1], input[value=p2], input[value=p4]').prop('checked', false);
-        row.find('input[value=p1], input[value=p2]').prop('disabled', action);
+            row.find('input[value=p1], input[value=p2], input[value=p4]').prop('checked', false);
+            row.find('input[value=p1], input[value=p2]').prop('disabled', action);
         }
         
         function p4(action) {
-        row.find('input[value=p1], input[value=p2], input[value=p3]').prop('checked', false);
-        row.find('input[value=p1], input[value=p2]').prop('disabled', action);
+            row.find('input[value=p1], input[value=p2], input[value=p3]').prop('checked', false);
+            row.find('input[value=p1], input[value=p2]').prop('disabled', action);
         }
         
         $('#listitemp4, #listitemp3').change(function() {
-        let val = $(this).val();
-        if (val === 'p3') {
-        p3($(this).is(':checked'));
-        }
+            let val = $(this).val();
+            if (val === 'p3') {
+                p3($(this).is(':checked'));
+            }
         
-        if (val === 'p4') {
-        p4($(this).is(':checked'));
-        }
+            if (val === 'p4') {
+                p4($(this).is(':checked'));
+            }
         });</script>";
 
     return $html;

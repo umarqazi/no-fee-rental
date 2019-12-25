@@ -80,8 +80,12 @@ Route::get('/view-associated-agents/{id}', 'Admin\HomeController@associatedAgent
 
 // Neighborhood Routes
 Route::get('/neighborhoods', 'Admin\NeighborhoodController@index')->name('neighborhoods');
-Route::get('/get-neighborhoods', 'Admin\NeighborhoodController@get')->name('neighborhoods.get');
-Route::post('/neighborhood/create', 'Admin\NeighborhoodController@create')->name('neighborhood.create');
+Route::get('/manhattan-neighborhoods', 'Admin\NeighborhoodController@manhattan');
+Route::get('/bronx-neighborhoods', 'Admin\NeighborhoodController@bronx');
+Route::get('/brooklyn-neighborhoods', 'Admin\NeighborhoodController@brooklyn');
+Route::get('/queens-neighborhoods', 'Admin\NeighborhoodController@queens');
+Route::get('/staten_island-neighborhoods', 'Admin\NeighborhoodController@statenIsland');
+Route::post('/create-neighborhood', 'Admin\NeighborhoodController@create')->name('admin.createNeighborhood');
 Route::post('/neighborhood/edit/{id}', 'Admin\NeighborhoodController@edit')->name('neighborhood.edit');
 Route::post('/neighborhood/update/{id}', 'Admin\NeighborhoodController@update')->name('neighborhood.update');
 Route::post('/neighborhood/delete/{id}', 'Admin\NeighborhoodController@delete')->name('neighborhood.delete');

@@ -33,6 +33,7 @@
 
                     <div class="col-md-6">
                         <div class="form-group">
+                            <i class="fa fa-eye"></i>
                             {!! Form::password('password', ['class' => 'input-style', 'placeholder' => 'Password']) !!}
                         </div>
                     </div>

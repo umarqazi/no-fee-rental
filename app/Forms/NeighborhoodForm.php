@@ -8,6 +8,10 @@
 
 namespace App\Forms;
 
+/**
+ * Class NeighborhoodForm
+ * @package App\Forms
+ */
 class NeighborhoodForm extends BaseForm {
 
     /**
@@ -21,12 +25,24 @@ class NeighborhoodForm extends BaseForm {
     public $content;
 
     /**
+     * @var int
+     */
+    public $boro_id;
+
+    /**
+     * @var string
+     */
+    public $banner;
+
+    /**
      * @return array
      */
     public function toArray() {
         return [
             'name' => $this->name,
-            'content' => $this->content
+            'content' => $this->content,
+            'banner' => $this->banner,
+            'boro_id' => $this->boro_id
         ];
     }
 
@@ -35,7 +51,8 @@ class NeighborhoodForm extends BaseForm {
      */
     public function rules() {
         return [
-            'name' => 'required'
+            'name' => 'required',
+            'boro_id' => 'required'
         ];
     }
 }

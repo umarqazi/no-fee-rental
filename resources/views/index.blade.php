@@ -6,9 +6,7 @@
         @include('sections.search')
     </header>
     <style>
-        .header-wrapper{
-            background-color: rgba(255, 255, 255, 0.45);
-        }
+        .header-wrapper { background-color: rgba(255, 255, 255, 0.45); }
     </style>
     <section class="need-help-container wow fadeIn " data-wow-delay="0.2s">
         <div class="container">
@@ -23,7 +21,7 @@
         <div class="container-lg">
             <div class="row">
                 <div class="col-lg-7 p-0">
-                    <img src="{{asset('assets/images/about-bg-small.jpg')}}" alt="" class="about-mb-img" />
+                    <img src="{{ asset('assets/images/about-bg-small.jpg') }}" alt="" class="about-mb-img" />
                 </div>
                 <div class="col-lg-5 wow fadeInRight " data-wow-delay="0.2s">
                     <h3>The NO-FEE Rentals NYC Philosophy</h3>

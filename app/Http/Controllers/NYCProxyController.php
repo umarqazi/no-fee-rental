@@ -35,6 +35,14 @@ class NYCProxyController extends Controller {
     }
 
     /**
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function boroughs() {
+        $res = $this->proxyService->setBase(SCHOOLZONEBASEURL)->boroughsCoordinates();
+        return response()->json($res);
+    }
+
+    /**
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */

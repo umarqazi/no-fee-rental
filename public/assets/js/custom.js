@@ -335,14 +335,6 @@ $(() => {
         $(".mobile-menu").slideUp();
     });
 
-    $(".let-us-hlep-form .btn-default").click(function () {
-        var get_btn_id = $(this).data("target");
-        if (get_btn_id != '') {
-            $(".let-us-hlep-form").hide();
-            $("#" + get_btn_id).fadeIn();
-        }
-    });
-
     function onSelectHandler(date, context) {
         let from = null;
         if (date[0] !== null) {
@@ -360,6 +352,9 @@ $(() => {
         $('#multiple').pignoseCalendar({
             select: onSelectHandler
         });
+
+        let from = $('body').find('.pignose-calendar-unit-active').attr('data-date');
+        $('body').find('.article').append(`<input name='availability' class="pignose-availability" type='hidden' value='${from}'>`);
     });
 
     $('#image-gallery').lightSlider({

@@ -52,6 +52,15 @@ return [
         ]
     ],
 
+    'boro' => [
+        '' => 'Select Boro',
+        MANHATTAN    => 'Manhattan',
+        BROOKLYN     => 'Brooklyn',
+        QUEENS       => 'Queens',
+        BRONX        => 'Bronx',
+        STATENISLAND => 'Staten Island'
+    ],
+
     'user' => [
         'roles' => [
             '' => 'Select Type',

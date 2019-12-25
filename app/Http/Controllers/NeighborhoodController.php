@@ -18,17 +18,21 @@ use Illuminate\View\View;
 class NeighborhoodController extends Controller {
 
     /**
+     * @var SearchService
+     */
+    private $searchService;
+
+    /**
      * @var NeighborhoodService
      */
     private $neighborhoodService;
 
     /**
      * NeighborhoodController constructor.
-     *
-     * @param NeighborhoodService $neighborhoodService
      */
-    public function __construct(NeighborhoodService $neighborhoodService) {
-        $this->neighborhoodService = $neighborhoodService;
+    public function __construct() {
+        $this->searchService = new SearchService();
+        $this->neighborhoodService = new NeighborhoodService();
     }
 
     /**
@@ -55,27 +59,17 @@ class NeighborhoodController extends Controller {
      * @return Factory|View
      */
     public function find($neighborhood) {
-        $data = toObject($this->neighborhoodService->find($neighborhood));
-        return view('neighborhood', compact('data'))->with('route', 'web.advanceNeighborhoodSearch');
+        $data = $this->neighborhoodService->find($neighborhood);
+        return $this->__view($data);
     }
 
     /**
-     * @param $neighborhood
-     * @param $order
-     *
-     * @return object
+     * @param Request $request
+     * @return Factory|View
      */
-    public function sort($neighborhood, $order) {
-        if(method_exists($this->neighborhoodService, $order)) {
-            $data = toObject($this->neighborhoodService
-                                  ->sortBase(['name' => $neighborhood ], 'listings', $order)
-                                  ->fetch());
-            return view('neighborhood', compact('data'))
-                    ->with('sort', $order)
-                    ->with('route', 'web.advanceNeighborhoodSearch');
-        }
-
-        return redirect()->back();
+    public function filter(Request $request) {
+        $data = $this->neighborhoodService->searchFilters($request);
+        return $this->__view($data);
     }
 
     /**
@@ -84,7 +78,20 @@ class NeighborhoodController extends Controller {
      * @return Factory|View
      */
     public function advanceSearch(Request $request) {
-        $data = toObject($this->neighborhoodService->advanceSearch($request));
-        return view('neighborhood', compact('data'))->with('route', 'web.advanceNeighborhoodSearch');
+        $data = $this->neighborhoodService->searchFilters($request);
+        return $this->__view($data);
+    }
+
+    /**
+     * @param $data
+     * @return Factory|View
+     */
+    private function __view($data) {
+        return view('neighborhood', compact('data'))
+            ->with([
+                'neigh_filter'  => false,
+                'filter_route'  => 'web.neighborhoodFilter',
+                'search_route'  => 'web.advanceNeighborhoodSearch'
+            ]);
     }
 }

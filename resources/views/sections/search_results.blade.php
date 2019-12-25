@@ -1,13 +1,4 @@
-<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.js'></script>
-<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.css' rel='stylesheet' />
-<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.2/mapbox-gl-geocoder.min.js'></script>
-<link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.2/mapbox-gl-geocoder.css' type='text/css' />
-{{--<!-- Promise polyfill script required to use Mapbox GL Geocoder in IE 11 -->--}}
-<script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
-<script src='https://unpkg.com/es6-promise@4.2.4/dist/es6-promise.auto.min.js'></script>
-<script src="https://unpkg.com/@mapbox/mapbox-sdk/umd/mapbox-sdk.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mapbox-gl/1.4.0/mapbox-gl-csp-worker.js.map"></script>
+
 <div class="search-bdr-top">
     <div class="mobile-view-dropdown">
         <i class="fa fa-bars"></i> Filters
@@ -20,119 +11,26 @@
         <div class="listing-wrapp">
             <div class=" ">
                 {{--Bedrooms--}}
-                {!! Form::open(['url' => route('web.RentFilters'), 'method' => 'get', 'id' => 'rent-search']) !!}
+                {!! Form::model(app('request')->all(), ['url' => route($filter_route, $param ?? null), 'method' => 'get', 'id' => 'search']) !!}
                 <div class="dropdown-wrap">
-                    <div class="neighborhoods-dropdown-listings">
-                        <button type="button" class="btn btn-primary" id="neigh-for-dropdown">Neighborhood</button>
-                        <div class="dropdown-for-neigh dropdown-listiing-rent-page" id="advance-search-chkbox">
-                            <div class="neighborhood-border-no">
-                                <h3>Manhattan</h3>
-                                <div class="border-bottom-h3"></div>
-                                <ul>
-                                    <li>
-                                        <div class="custom-control custom-radio custom-control-inline">
-                                            <input type="radio" class="custom-control-input" id="beds-1-radio"
-                                                   name="location">
-                                            <label class="custom-control-label" for="beds-1-radio">Find
-                                                Neighborhood</label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="custom-control custom-radio custom-control-inline">
-                                            <input type="radio" class="custom-control-input" id="beds-2-radio"
-                                                   name="location">
-                                            <label class="custom-control-label" for="beds-2-radio">Find
-                                                Neighborhood</label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <ul class="inside-listing">
-                                            <li>
-                                                <div class="custom-control custom-radio custom-control-inline">
-                                                    <input type="radio" class="custom-control-input" id="beds-3-radio"
-                                                           name="location">
-                                                    <label class="custom-control-label" for="beds-3-radio">Find
-                                                        Neighborhood</label>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="custom-control custom-radio custom-control-inline">
-                                                    <input type="radio" class="custom-control-input" id="beds-4-radio"
-                                                           name="location">
-                                                    <label class="custom-control-label" for="beds-4-radio">Find
-                                                        Neighborhood</label>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="custom-control custom-radio custom-control-inline">
-                                                    <input type="radio" class="custom-control-input" id="beds-5-radio"
-                                                           name="location">
-                                                    <label class="custom-control-label" for="beds-5-radio">Find
-                                                        Neighborhood</label>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <div class="custom-control custom-radio custom-control-inline">
-                                            <input type="radio" class="custom-control-input" id="beds-6-radio"
-                                                   name="location">
-                                            <label class="custom-control-label" for="beds-6-radio">Find
-                                                Neighborhood</label>
-                                        </div>
-                                    </li>
-                                </ul>
+                    @if($neigh_filter)
+                        <div class="neighborhoods-dropdown-listings">
+                            <button type="button" class="btn btn-primary" id="neigh-for-dropdown">{{ app('request')->get('neighborhood') ?? 'Neighborhood' }}</button>
+                            <div class="dropdown-for-neigh dropdown-listiing-rent-page" id="advance-search-chkbox">
+                                {!! filter_neighborhood_select() !!}
                             </div>
                         </div>
-                    </div>
+                    @endif
                     <div class="">
                         <button type="button" class="btn btn-primary" id="beds-for-dropdown">Beds</button>
                         <div class="dropdown-for-beds dropdown-listiing-rent-page" id="advance-search-chkbox">
-                            <ul id="advance-search-beds">
-                                <li> <input type="checkbox" value="studio" id="Checkbox-beds-rent" name="Checkbox">
-                                    <label for="Checkbox-beds-rent"><span class="label-name">Studio</span></label>
-                                </li>
-                                <li> <input type="checkbox" value="1" id="Checkbox-1-beds-rent" name="beds[]">
-                                    <label for="Checkbox-1-beds-rent"><span class="label-name">1</span></label>
-                                </li>
-                                <li> <input type="checkbox" value="2" id="Checkbox-2-beds-rent" name="beds[]">
-                                    <label for="Checkbox-2-beds-rent"><span class="label-name">2</span></label>
-                                </li>
-                                <li> <input type="checkbox" value="3" id="Checkbox-3-beds-rent" name="beds[]">
-                                    <label for="Checkbox-3-beds-rent"><span class="label-name">3</span></label>
-                                </li>
-                                <li> <input type="checkbox" value="4" id="Checkbox-4-beds-rent" name="beds[]">
-                                    <label for="Checkbox-4-beds-rent"><span class="label-name">4</span></label>
-                                </li>
-                                <li> <input type="checkbox" value="5" id="Checkbox-5-beds-rent" name="beds[]">
-                                    <label for="Checkbox-5-beds-rent"><span class="label-name">5+</span></label>
-                                </li>
-                            </ul>
+                            {!! multi_select_beds(5, app('request')->get('beds') ?? null) !!}
                         </div>
                     </div>
                     <div class="">
                         <button type="button" class="btn btn-primary" id="bath-for-dropdown">Baths</button>
                         <div class="dropdown-for-baths dropdown-listiing-rent-page" id="advance-search-chkbox">
-                            <ul id="advance-search-beds">
-                                <li> <input type="checkbox" value="studio" id="Checkbox-bathss-rent" name="Checkbox">
-                                    <label for="Checkbox-bathss-rent"><span class="label-name">Any</span></label>
-                                </li>
-                                <li> <input type="checkbox" value="1" id="Checkbox-1-bathss-rent" name="beds[]">
-                                    <label for="Checkbox-1-bathss-rent"><span class="label-name">1</span></label>
-                                </li>
-                                <li> <input type="checkbox" value="2" id="Checkbox-2-bathss-rent" name="beds[]">
-                                    <label for="Checkbox-2-bathss-rent"><span class="label-name">2</span></label>
-                                </li>
-                                <li> <input type="checkbox" value="3" id="Checkbox-3-bathss-rent" name="beds[]">
-                                    <label for="Checkbox-3-bathss-rent"><span class="label-name">3</span></label>
-                                </li>
-                                <li> <input type="checkbox" value="4" id="Checkbox-4-bathss-rent" name="beds[]">
-                                    <label for="Checkbox-4-bathss-rent"><span class="label-name">4</span></label>
-                                </li>
-                                <li> <input type="checkbox" value="5" id="Checkbox-5-bathss-rent" name="beds[]">
-                                    <label for="Checkbox-5-bathss-rent"><span class="label-name">5+</span></label>
-                                </li>
-                            </ul>
+                            {!! multi_select_baths(5, app('request')->get('baths') ?? null) !!}
                         </div>
                     </div>
 
@@ -140,40 +38,25 @@
                         <button type="button" class="btn btn-primary" id="price-for-dropdown">Price</button>
                         <div class="dropdown-for-price dropdown-listiing-rent-page" id="advance-search-chkbox">
                             <ul>
-                                <li><input type="text" class="form-control" placeholder="min"/></li>
+                                <li>
+                                    {!! Form::text('min_price', null, ['class' => 'form-control', 'placeholder' => '$ min']) !!}
                                 <li>To</li>
-                                <li><input type="text" class="form-control" placeholder="max" /> </li>
+                                <li>
+                                    {!! Form::text('max_price', null, ['class' => 'form-control', 'placeholder' => '$ max']) !!}
                             </ul>
                         </div>
                     </div>
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#advance-search">More</button>
+                    {!! Form::button('Search', ['class' => 'btn btn-primary text-right', 'type' => 'submit', 'style' => 'background:#213971;color:#ffff;']) !!}
                 </div>
                 {!! Form::close() !!}
             </div>
-
-            <div class="sort-by-wrapper">
-                <div class="sort-by">
-                    <span>Sort By: </span>
-                    {!! Form::select('sorting',
-                        [
-                            ''         => 'Select',
-                            'recent'   => 'Recommended',
-                            'cheapest' => 'Price',
-                            'oldest'   => 'Trending',
-                            'pets'     => 'Pet Friendly',
-                        ],
-                        $sort ?? null,
-                        ['class' => "custom-select-list sorting"]) !!}
-                </div>
-            </div>
-
         </div>
     </div>
 </div>
 <div class="search-result-wrapper">
     <div class="search-listing">
         <h3></h3>
-        {{--            <span>{{ count($data->listings) }} places available for rent </span>--}}
         <div id="boxscroll22">
             <div class="featured-properties" id="contentscroll22">
                 <div class="property-listing neighbourhood-listing">
@@ -210,30 +93,34 @@
 {{--Check Availability--}}
 @include('modals.check_availability')
 
-{!! HTML::script('assets/js/neighborhoods.js') !!}
 {!! HTML::script('assets/js/input-to-dropdown.js') !!}
 {!! HTML::script('assets/js/search-result.js') !!}
+{!! HTML::style('https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.css') !!}
+{!! HTML::script('https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.js') !!}
 <script>
+
     let coords = [];
     $('input[name=map_location]').each(function(i, v) {
         coords.push($(v).val());
-    })
+    });
+
     @if(count($data->listings) > 0)
-    if(coords !== []) {
-        multiMarkers(coords, 'desktop-map');
-        multiMarkers(coords, 'mobile-map');
-    }
+        if(coords !== []) {
+            multiMarkers(coords, 'desktop-map', 10);
+            multiMarkers(coords, 'mobile-map', 10);
+        }
     @endif
 
     $(".neighborhood-search .search-result-wrapper .map-wrapper .swipe-btn").on('click', function () {
+        let $body = $('body');
         $(this).find('i').toggleClass('fa-angle-left fa-angle-right');
-        $('body').find('#desktop-map').remove();
-        $('body').find('#mobile-map').remove();
-        $('body').find('.map-wrapper').append(`<div id="mobile-map"></div>`);
-        $('body').find('.map-wrapper').append(`<div id="desktop-map"></div>`);
+        $body.find('#desktop-map').remove();
+        $body.find('#mobile-map').remove();
+        $body.find('.map-wrapper').append(`<div id="mobile-map"></div>`);
+        $body.find('.map-wrapper').append(`<div id="desktop-map"></div>`);
         setTimeout(() => {
-            multiMarkers(coords, 'desktop-map');
-            multiMarkers(coords, 'mobile-map');
+            multiMarkers(coords, 'desktop-map', 10);
+            multiMarkers(coords, 'mobile-map', 10);
         }, 100);
         $(".neighborhood-search .search-result-wrapper .search-listing").toggleClass('hide-list');
         $(".neighborhood-search .search-result-wrapper .map-wrapper").toggleClass('full-map');
@@ -247,9 +134,5 @@
         window.location.href = url+'/listing-by-rent/'+$(this).val();
 
     });
-
-    @if(!isset($data->index))
-    sessionStorage.clear();
-    @endif
 
 </script>

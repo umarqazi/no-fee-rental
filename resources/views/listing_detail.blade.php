@@ -35,13 +35,9 @@
                                     <span id = "{{$listing->id}}" class="heart-icon"></span>
                                 @endif
                             @endif
-                            @if(isRenter())
-                            <a href="javascript:void(0);" class="" data-toggle="modal" id="{{ isRenter() ? '' : 'listing-report-flag' }}"
-                               data-target='#flag-icon' ><img src="/assets/images/flag-icon.png" alt="" class="flag-icon" /></a>
-                            @elseif(!isAdmin() && !isAgent() && !isOwner())
-                                <a href="javascript:void(0);" class="" data-toggle="modal" id="listing-report-flag">
-                                    <img src="/assets/images/flag-icon.png" alt="" class="flag-icon" /></a>
-                            @endif
+                            <a href="javascript:void(0);" class="" data-toggle="modal"
+                               data-target='#flag-icon' ><img src="/assets/images/flag-icon.png" alt="" class="flag-icon" />
+                            </a>
                         </div>
                     </div>
                     <p class="title-subtext">
@@ -244,18 +240,10 @@
 
 {{--Make Appointment--}}
 @include('modals.appointment')
-<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.js'></script>
-<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.css' rel='stylesheet' />
-<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.2/mapbox-gl-geocoder.min.js'></script>
-<link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.2/mapbox-gl-geocoder.css' type='text/css' />
-{{--<!-- Promise polyfill script required to use Mapbox GL Geocoder in IE 11 -->--}}
-<script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
-<script src='https://unpkg.com/es6-promise@4.2.4/dist/es6-promise.auto.min.js'></script>
-<script src="https://unpkg.com/@mapbox/mapbox-sdk/umd/mapbox-sdk.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mapbox-gl/1.4.0/mapbox-gl-csp-worker.js.map"></script>
+{!! HTML::style('https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.css') !!}
+{!! HTML::script('https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.js') !!}
 <script>
-    setMap('map', JSON.parse('{!! $listing->map_location !!}'), true, true, '{!! $listing->street_address !!}');
+    setMap('map', JSON.parse('{!! $listing->map_location !!}'), true, true, '{!! $listing->street_address !!}', 13);
     schoolZone(JSON.parse('{!! $listing->map_location !!}'));
 </script>
 

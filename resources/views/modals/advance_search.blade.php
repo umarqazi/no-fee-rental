@@ -19,54 +19,16 @@
             </div>
             {{--Modal body--}}
             <div class="modal-body">
-                {!! Form::open(['url' => route($route ?? 'list.search', $param ?? null), 'method' => 'get']) !!}
+                {!! Form::model(app('request')->all(), ['url' => route($search_route ?? 'web.advanceSearch', $param ?? null), 'method' => 'get', 'id' => 'modal-search-from']) !!}
                 <div class="row">
                     <div class="col-md-6 search-form-grou-mrg-btm">
                         <div class="form-group" id="advance-search-chkbox">
                             <label class="label">Beds <span>(Select all that applies)</span></label>
-                            <ul id="advance-search-beds">
-                                <li> <input type="checkbox" value="studio" id="Checkbox" name="Checkbox">
-                                    <label for="Checkbox"><span class="label-name">Studio</span></label>
-                                </li>
-                                <li> <input type="checkbox" value="1" id="Checkbox-1" name="beds[]">
-                                    <label for="Checkbox-1"><span class="label-name">1</span></label>
-                                </li>
-                                <li> <input type="checkbox" value="2" id="Checkbox-2" name="beds[]">
-                                    <label for="Checkbox-2"><span class="label-name">2</span></label>
-                                </li>
-                                <li> <input type="checkbox" value="3" id="Checkbox-3" name="beds[]">
-                                    <label for="Checkbox-3"><span class="label-name">3</span></label>
-                                </li>
-                                <li> <input type="checkbox" value="4" id="Checkbox-4" name="beds[]">
-                                    <label for="Checkbox-4"><span class="label-name">4</span></label>
-                                </li>
-                                <li> <input type="checkbox" value="5" id="Checkbox-5" name="beds[]">
-                                    <label for="Checkbox-5"><span class="label-name">5+</span></label>
-                                </li>
-                            </ul>
+                            {!! multi_select_beds(5, app('request')->get('beds') ?? null) !!}
                         </div>
                         <div class="form-group" id="advance-search-chkbox">
                             <label class="label">Baths <span>(Select all that applies)</span></label>
-                            <ul id="advance-search-baths">
-                                <li> <input type="checkbox" value="any" id="Checkbox-6" name="baths[]">
-                                    <label for="Checkbox-6"><span class="label-name">Any</span></label>
-                                </li>
-                                <li> <input type="checkbox" value="1" id="Checkbox-7" name="baths[]">
-                                    <label for="Checkbox-7"><span class="label-name">1</span></label>
-                                </li>
-                                <li> <input type="checkbox" value="2" id="Checkbox-9" name="baths[]">
-                                    <label for="Checkbox-9"><span class="label-name">2</span></label>
-                                </li>
-                                <li> <input type="checkbox" value="3" id="Checkbox-10" name="baths[]">
-                                    <label for="Checkbox-10"><span class="label-name">3</span></label>
-                                </li>
-                                <li> <input type="checkbox" value="4" id="Checkbox-11" name="baths[]">
-                                    <label for="Checkbox-11"><span class="label-name">4</span></label>
-                                </li>
-                                <li> <input type="checkbox" value="5" id="Checkbox-12" name="baths[]">
-                                    <label for="Checkbox-12"><span class="label-name">5+</span></label>
-                                </li>
-                            </ul>
+                            {!! multi_select_baths(5, app('request')->get('baths') ?? null) !!}
                         </div>
                     </div>
                     {{--Baths--}}
@@ -75,8 +37,8 @@
                             <label class="label">Price Range</label>
                             <div class="slider-wrapper">
                                 <div class="search-input-wrap">
-                                {!! Form::number('priceRange[min_price]', null, ['min' => 0, 'max' => 9900, 'id' => 'min_price', 'class' => 'price-range-field input-style', 'oninput' => 'validity.valid||(value=0);']) !!} -
-                                {!! Form::number('priceRange[max_price]', null, ['min' => 0, 'max' => 10000, 'id' => 'max_price', 'class' => 'price-range-field input-style', 'oninput' => 'validity.valid||(value=10000);']) !!}
+                                {!! Form::number('min_price', null, ['min' => 0, 'max' => 9900, 'id' => 'min_price', 'class' => 'price-range-field input-style', 'oninput' => 'validity.valid||(value=0);']) !!} -
+                                {!! Form::number('max_price', null, ['min' => 0, 'max' => 10000, 'id' => 'max_price', 'class' => 'price-range-field input-style', 'oninput' => 'validity.valid||(value=10000);']) !!}
                             </div>
                                 <div id="slider-range" class="price-filter-range" name="rangeInput"></div>
                             </div>
@@ -85,8 +47,8 @@
                             <label class="label">Square feet</label>
                             <div class="slider-wrapper">
                                 <div class="search-input-wrap">
-                                {!! Form::number('squareRange[square_min]', null, ['min' => 0, 'max' => 9900, 'id' => 'min_price_2', 'class' => 'price-range-field input-style', 'oninput' => 'validity.valid||(value=0);']) !!} -
-                                {!! Form::number('squareRange[square_max]', null, ['min' => 0, 'max' => 10000, 'id' => 'max_price_2', 'class' => 'price-range-field input-style', 'oninput' => 'validity.valid||(value=10000);']) !!}
+                                {!! Form::number('square_min', null, ['min' => 0, 'max' => 9900, 'id' => 'min_price_2', 'class' => 'price-range-field input-style', 'oninput' => 'validity.valid||(value=0);']) !!} -
+                                {!! Form::number('square_max', null, ['min' => 0, 'max' => 10000, 'id' => 'max_price_2', 'class' => 'price-range-field input-style', 'oninput' => 'validity.valid||(value=10000);']) !!}
                                 </div>
                                 <div id="slider-range-2" class="price-filter-range" name="rangeInput"></div>
                             </div>
@@ -96,7 +58,9 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label class="label">Neighbourhoods</label>
-                            {!! Form::select('neighborhoods', neighborhoods(), null, ['class' => 'input-style']) !!}
+                            <select class="input-style" name="neighborhood">
+                                {!! simple_neighborhood_select(app('request')->get('neighborhood') ?? null) !!}
+                            </select>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -122,7 +86,7 @@
                 </div>
 
                     <div class="col-md-12 text-left mt-4 mb-4 bdr-top-btn">
-                        <button type="submit" class="btn-default">Search</button>
+                        <button type="submit" class="btn-default search">Search</button>
                     </div>
                 </div>
                 {!! Form::close() !!}

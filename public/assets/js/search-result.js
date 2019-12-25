@@ -1,4 +1,5 @@
 $(() => {
+
     if(sessionStorage.getItem("beds")){
         $($('#advance-search-chkbox > #beds').find('li > input') ).each(function(index) {
             if($(this).val() == sessionStorage.getItem("beds")){

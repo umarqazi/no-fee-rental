@@ -9,18 +9,13 @@
 namespace App\Services;
 
 use App\Forms\NeighborhoodForm;
-use App\Neighborhoods;
 use App\Repository\NeighborhoodRepo;
 
 /**
  * Class NeighborhoodService
  * @package App\Services
  */
-class NeighborhoodService {
-
-    use SortListingService {
-        SortListingService::__construct as private __sortConstruct;
-    }
+class NeighborhoodService extends SearchService {
 
     /**
      * @var object
@@ -28,16 +23,10 @@ class NeighborhoodService {
     protected $neighborhoodRepo;
 
     /**
-     * @var SearchService
-     */
-    private $searchService;
-
-    /**
      * NeighborhoodService constructor.
      */
     public function __construct() {
-        $this->__sortConstruct(new Neighborhoods());
-        $this->searchService = new SearchService();
+        parent::__construct();
         $this->neighborhoodRepo = new NeighborhoodRepo();
     }
 
@@ -48,8 +37,10 @@ class NeighborhoodService {
      */
     private function validateForm($request) {
         $form = new NeighborhoodForm();
-        $form->name = $request->neighborhood_name;
-        $form->content = $request->neighborhood_content;
+        $form->boro_id = $request->boro_id;
+        $form->name = $request->neighborhood;
+        $form->content = $request->content;
+        $form->banner = $request->banner;
         $form->validate();
         return $form;
     }
@@ -60,6 +51,11 @@ class NeighborhoodService {
      * @return mixed
      */
     public function create($request) {
+
+        if($request->hasFile('banner')) {
+            $request->banner = uploadImage($request->file('banner'), 'images/neighborhood/banners');
+        }
+
         $form = $this->validateForm($request);
         return $this->neighborhoodRepo->create($form->toArray());
     }
@@ -80,6 +76,14 @@ class NeighborhoodService {
      */
     public function findById($id) {
         return $this->neighborhoodRepo->findById($id)->first();
+    }
+
+    /**
+     * @param $name
+     * @return mixed
+     */
+    public function findByName($name) {
+        return $this->neighborhoodRepo->find(['name' => $name])->first();
     }
 
     /**
@@ -112,6 +116,41 @@ class NeighborhoodService {
     /**
      * @return mixed
      */
+    public function manhattan() {
+        return $this->neighborhoodRepo->find(['boro_id' => MANHATTAN])->get();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function brooklyn() {
+        return $this->neighborhoodRepo->find(['boro_id' => BROOKLYN])->get();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function bronx() {
+        return $this->neighborhoodRepo->find(['boro_id' => BRONX])->get();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function queens() {
+        return $this->neighborhoodRepo->find(['boro_id' => QUEENS])->get();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function statenIsland() {
+        return $this->neighborhoodRepo->find(['boro_id' => STATENISLAND])->get();
+    }
+
+    /**
+     * @return mixed
+     */
     public function first() {
         return $this->neighborhoodRepo->first();
     }
@@ -121,16 +160,10 @@ class NeighborhoodService {
      *
      * @return array
      */
-    private function collection($data) {
-        $listings = [];
-        foreach($data->listings as $key => $listing){
-            if($listing->visibility == 1 ){
-                array_push($listings,$listing);
-            }
-        }
+    private function __collection($data) {
         return [
             'neighborhood'  => $data,
-            'listings'      => $listings
+            'listings'      => $data->listings
         ];
     }
 
@@ -141,27 +174,19 @@ class NeighborhoodService {
      */
     public function find($neighborhood) {
         $data = $this->neighborhoodRepo->getNeighborhoodWithListing($neighborhood)->first();
-        return $this->collection($data);
-    }
-
-    /**
-     * @return array
-     */
-    public function fetch() {
-        $data = $this->fetchQuery()->first();
-        return $this->collection($data);
+        return toObject($this->__collection($data));
     }
 
     /**
      * @param $request
-     *
      * @return object
      */
-    public function advanceSearch($request) {
-        $data = $this->searchService->search($request);
+    public function searchFilters($request) {
+        $data = collect($this->search($request));
+        $info = $data->first();
         return toObject([
             'listings'     => $data,
-            'neighborhood' => $data[0]->neighborhood ?? null,
+            'neighborhood' => $info->neighborhood ?? ($request->neighborhood ? $this->findByName($request->neighborhood) : $this->first()),
         ]);
     }
 }
