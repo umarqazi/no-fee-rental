@@ -105,7 +105,7 @@ const setMap = (container, coords, addMarker = true, showPop = true, html = null
 
     mapControls(new mapboxgl.NavigationControl(), 'bottom-right');
 
-    MAP.flyTo({center: setLatLng(coords)});
+    // MAP.flyTo({center: setLatLng(coords)});
     (addMarker) ? setMarker(coords) : null;
     (showPop) ? showPopUp(MARKER, html) : null;
     return MAP;
