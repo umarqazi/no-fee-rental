@@ -650,8 +650,9 @@ h3 {
     border: none;
     padding-left: 50px;
     color: #131415;
-    font-size: 18px;
+    font-size: 16px;
     width: 290px;
+    cursor: pointer;
 }
 
 .listing-detail-badges {
@@ -715,6 +716,13 @@ h3 {
     display:none;
 }
 /**/
+.neighborhood-search-dropdown{
+    position: absolute;
+    top:60px;
+    background-color: #fff;
+    width: 100%;
+    display: none;
+}
 .price-range-dropdown{
     padding: 0px 15px;
     width: 100%;
@@ -746,6 +754,9 @@ h3 {
     min-width: 218px;
     padding: 0px 15px;
     background: url(../images/select-menu-arrow.png) no-repeat right 15px center;
+    cursor: pointer;
+}
+.dropdown-beds #show-beds{
     cursor: pointer;
 }
 .beds-dropdown{
