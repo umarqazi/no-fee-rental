@@ -37,7 +37,7 @@
     {!! HTML::script('assets/js/neighborhoods.js') !!}
     <script>
         var $disabledResults = $("#neighborhood");
-        $disabledResults.select2();
+        // $disabledResults.select2();
     </script>
 @endsection
 
