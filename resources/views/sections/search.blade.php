@@ -21,7 +21,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="dropdown-beds" >
+            <div class="dropdown-beds main-search-beds" >
                 <label id="show-beds"><span class="placeholder-text">Beds</span></label>
                 <div id="advance-search-chkbox" class="beds-dropdown">
                     <div id="advance-search-beds" class="bed-advance-search">
