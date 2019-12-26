@@ -128,11 +128,9 @@ trait SearchTraitService {
      */
     private function beds() {
         if(in_array(5, $this->args->{__FUNCTION__})) {
-            $this->query->whereIn('bedrooms', is_array($this->args->{__FUNCTION__})
-                ? $this->args->{__FUNCTION__} : [ $this->args->{__FUNCTION__} ])->where('bedrooms', '>=', 5);
+            $this->query->whereIn('bedrooms', $this->args->{__FUNCTION__})->orWhere('bedrooms', '>=', 5);
         } else {
-            $this->query->whereIn( 'bedrooms', is_array($this->args->{__FUNCTION__})
-                ? $this->args->{__FUNCTION__} : [ $this->args->{__FUNCTION__} ] );
+            $this->query->whereIn( 'bedrooms', $this->args->{__FUNCTION__} );
         }
     }
 
@@ -143,11 +141,9 @@ trait SearchTraitService {
         if (in_array('any', $this->args->{__FUNCTION__})) {
             $this->query = $this->query->where('baths', '>', 0);
         } elseif (in_array(5, $this->args->{__FUNCTION__})) {
-            $this->query = $this->query->where( 'baths', '>=', 5 )->orWhereIn( 'baths', is_array($this->args->{__FUNCTION__})
-                ? $this->args->{__FUNCTION__} : [ $this->args->{__FUNCTION__} ] );
+            $this->query = $this->query->whereIn( 'baths', $this->args->{__FUNCTION__} )->orWhere( 'baths', '>=', 5 );
         } else {
-            $this->query = $this->query->whereIn( 'baths', is_array($this->args->{__FUNCTION__})
-                ? $this->args->{__FUNCTION__} : [ $this->args->{__FUNCTION__} ] );
+            $this->query = $this->query->whereIn( 'baths', $this->args->{__FUNCTION__} );
         }
     }
 
