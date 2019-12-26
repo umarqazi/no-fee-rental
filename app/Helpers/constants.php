@@ -315,3 +315,7 @@ if(!defined('BRONX')) {
 if(!defined('STATENISLAND')) {
     define('STATENISLAND', 5);
 }
+
+if(!defined('OTHER')) {
+    define('OTHER', 6);
+}

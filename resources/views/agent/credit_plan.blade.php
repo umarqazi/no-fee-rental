@@ -44,7 +44,7 @@
                                 <li>Featured listing in our weekly news letter</li>
                             </ul>
                         </div>
-                        <a href="javascript:void(0);" class="btn btn-default credit-plan" data-toggle="modal" data-target="#myModal-currentPlan" id="7  0"> Get Started </a>
+                        <a href="javascript:void(0);" class="btn btn-default credit-plan" data-toggle="modal" data-target="#myModal-currentPlan" id="70"> Get Started </a>
 {{--                        <a href="#" class="btn btn-default"> Get started </a>--}}
                     </div>
                     <div class="current-plans platinum-plan">

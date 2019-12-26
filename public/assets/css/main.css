@@ -6278,8 +6278,8 @@ list .property-info .info p {
     background: url(../images/neighborhood-banner.jpg) no-repeat ;
     width: 100%;
     height: 480px;
-    background-size: cover;
-    background-position: center center;
+    background-size: cover !important;
+    background-position: center center !important;
     object-fit: cover;
     margin-bottom: 30px;
     position:relative;

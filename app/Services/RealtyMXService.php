@@ -246,7 +246,7 @@ class RealtyMXService extends ListingService {
     private function __createNeighborhood( $neighbour ) {
         $uniqueNeighborhood = $this->__isNewNeighborhood( $neighbour );
         if ( ! $uniqueNeighborhood ) {
-            $neighbour = $this->neighbourRepo->create( [ 'name' => $neighbour ] );
+            $neighbour = $this->neighbourRepo->create( [ 'name' => $neighbour, 'boro_id' => OTHER ] );
 
             return $neighbour->id;
         }
