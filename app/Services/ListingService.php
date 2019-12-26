@@ -71,16 +71,10 @@ class ListingService extends BuildingService {
         $request->freshness_score = MAXFRESHNESSSCORE;
         $listing              = $this->__validateForm( $request );
         $listing->thumbnail   = $this->__uploadImage( $listing );
-        $building             = $this->addBuilding( $listing, $request );
+        $building             = $this->manageBuilding( $request );
         $listing->building_id = $building->id;
-
-        if(!$building->is_verified && isAgent()) {
-            $listing->visibility = PENDINGLISTING;
-        } else {
-            $listing->visibility = ACTIVELISTING;
-        }
-
-        $listing              = $this->__addList( $listing );
+        $listing->visibility  = $this->__visibility($building);
+        $listing              = $this->__addList($listing);
         $this->__addOpenHouse( $listing->id, $listing, $request->open_house );
         $this->__addFeatures( $listing->id, $request->features );
         $this->__manageSaveSearch( $listing, $request->features );
@@ -98,18 +92,12 @@ class ListingService extends BuildingService {
     }
 
     /**
-     * @param $listing
-     * @param $request
-     *
-     * @return bool
+     * @param $building
+     * @return int
      */
-    public function addBuilding( $listing, $request ) {
-        $building = parent::manageBuilding( $listing );
-        if ( $request->has( 'amenities' ) ) {
-            $this->attachAmenities( $building, $request->amenities );
-        }
-
-        return $building;
+    private function __visibility($building) {
+        return !$building->is_verified && isAgent()
+            ? PENDINGLISTING : ACTIVELISTING;
     }
 
     /**
@@ -219,17 +207,6 @@ class ListingService extends BuildingService {
      */
     public function edit( $id ) {
         return $this->listingRepo->edit( $id )->withall();
-    }
-
-    /**
-     * @param $id
-     *
-     * @return mixed
-     */
-    public function created_by( $id ) {
-        $listing_creator = $this->listingRepo->edit( $id )->withall()->first();
-
-        return $listing_creator->agent->user_type;
     }
 
     /**
@@ -374,13 +351,13 @@ class ListingService extends BuildingService {
     }
 
     /**
-     * @param $neighborhood
+     * @param $neighborhood_name
      * @return mixed
      */
     private function __neighborhoodHandler($neighborhood_name) {
         $neighborhood = $this->neighborhoodRepo->find(['name' => $neighborhood_name])->first();
         if(!$neighborhood) {
-            $neighborhood = $this->neighborhoodRepo->create(['name' => $neighborhood_name, 'boro_id' => 1]);
+            $neighborhood = $this->neighborhoodRepo->create(['name' => $neighborhood_name, 'boro_id' => OTHER]);
         }
 
         return $neighborhood->id;
@@ -402,7 +379,7 @@ class ListingService extends BuildingService {
         }
 
         $form                    = new ListingForm();
-        $form->user_id           = $request->user_id ?? myId();
+        $form->user_id           = $request->owner_id ?? myId();
         $form->unique_slug       = str_random( 20 );
         $form->name              = $request->name;
         $form->building_id       = $request->building_id;
@@ -454,7 +431,7 @@ class ListingService extends BuildingService {
      *
      * @return mixed
      */
-    protected function __addList( $form ) {
+    private function __addList( $form ) {
         return $this->listingRepo->create( $form->toArray() );
     }
 
@@ -466,7 +443,7 @@ class ListingService extends BuildingService {
      *
      * @return mixed
      */
-    protected function __addOpenHouse( $id, $listing, $data, $is_update = false ) {
+    private function __addOpenHouse( $id, $listing, $data, $is_update = false ) {
         $batch = [];
         if ( isset( $data['date'][0] ) ) {
             if ( $is_update ) {

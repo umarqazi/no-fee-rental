@@ -106,6 +106,20 @@ function whoAmI() {
 }
 
 /**
+ * @param $id
+ * @return bool|mixed
+ */
+function isOwnerListing($id = null) {
+    $user = false;
+    if($id != null) {
+        $user = (new \App\Services\UserService())->findById($id);
+        return $user->user_type === OWNER;
+    }
+
+    return $user;
+}
+
+/**
  * @return mixed
  */
 function authenticated() {
@@ -138,20 +152,6 @@ function isRenter() {
  */
 function isOwner() {
     return auth()->guard( 'owner' )->check();
-}
-
-/**
- * @param $listing_id
- *
- * @return bool
- */
-function is_created_by_owner( $listing_id ) {
-    $listing_creator = ( new \App\Services\ListingService() )->created_by( $listing_id );
-    if ( $listing_creator == 3 ) {
-        return true;
-    } else {
-        return false;
-    }
 }
 
 /**
@@ -590,14 +590,14 @@ function simple_neighborhood_select($selected = null) {
  */
 function multi_select_beds($amount = 5, $pre_select = null) {
     $html = null;
-    $id = str_random(5);
+    $id = str_random(10);
     $html .= "<ul id=\"advance-search-beds\">";
     $html .= "<li";
     $html .= is_array($pre_select) && in_array('studio', $pre_select) ? " class='white-border-chkbox'>" : '>';
     $html .= Form::checkbox('beds[]', 'studio', is_array($pre_select) && in_array('studio', $pre_select) ? "checked='checked'" : '', ['id' => $id]);
     $html .= "<label for=\"{$id}\"><span class=\"label-name\">Studio</span></label></li>";
     for ($i = 1; $i <= $amount; $i ++) {
-        $id = str_random(5);
+        $id = str_random(10);
         $html .= "<li";
         $html .= is_array($pre_select) && in_array($i, $pre_select) ? " class='white-border-chkbox'>" : '>';
         $html .= Form::checkbox('beds[]', $i, is_array($pre_select) && in_array($i, $pre_select) ? "checked='checked'" : '', ['id' => $id]);
@@ -614,14 +614,14 @@ function multi_select_beds($amount = 5, $pre_select = null) {
  */
 function multi_select_baths($amount = 5, $pre_select = null) {
     $html = null;
-    $id = str_random(5);
+    $id = str_random(10);
     $html .= "<ul id=\"advance-search-baths\">";
     $html .= "<li";
     $html .= is_array($pre_select) && in_array('any', $pre_select) ? " class='white-border-chkbox'>" : '>';
     $html .= Form::checkbox('baths[]', 'any', is_array($pre_select) && in_array('any', $pre_select) ? "checked='checked'" : '', ['id' => $id]);
     $html .= "<label for=\"{$id}\"><span class=\"label-name\">Any</span></label></li>";
     for ($i = 1; $i <= $amount; $i ++) {
-        $id = str_random(5);
+        $id = str_random(10);
         $html .= "<li";
         $html .= is_array($pre_select) && in_array($i, $pre_select) ? " class='white-border-chkbox'>" : '>';
         $html .= Form::checkbox('baths[]', $i, is_array($pre_select) && in_array($i, $pre_select) ? "checked='checked'" : '', ['id' => $id]);
@@ -641,9 +641,10 @@ function filter_neighborhood_select() {
     foreach ($boroughs as $borough) {
         $html .= "<h3>{$borough->boro}</h3><div class=\"border - bottom - h3\"></div><ul>";
         foreach ($borough->neighborhoods as $key => $neighborhood) {
+            $id = str_random(10);
             $html .= "<li><div class=\"custom-control custom-radio custom-control-inline\">";
-            $html .= Form::radio('neighborhood', $neighborhood->name, false, ['class' => 'custom-control-input', 'id' => 'neighborhood-'.$key]);
-            $html .= "<label class=\"custom-control-label\" for=\"neighborhood-{$key}\">{$neighborhood->name}</label></div></li>";
+            $html .= Form::radio('neighborhood', $neighborhood->name, false, ['class' => 'custom-control-input', 'id' => $id]);
+            $html .= "<label class=\"custom-control-label\" for=\"{$id}\">{$neighborhood->name}</label></div></li>";
         }
 
         $html .= "</ul>";
@@ -671,7 +672,7 @@ function neighborhood_let_us_help() {
         $tabs .= " data-toggle=\"pill\" href=\"#tab-{$key}\">{$borough->boro}</a></li>";
         foreach ($borough->neighborhoods as $key2 => $neighborhood) {
             $i ++;
-            $id = str_random(5);
+            $id = str_random(10);
             if($key2 == 0) {
                 $content .= "<div class='tab-pane ";
                 $content .= $key == 0 ? "active'" : "'";
@@ -684,7 +685,7 @@ function neighborhood_let_us_help() {
                 $content .= "<div class='col-md-4'><ul class=\"neighborhood-list\">";
             }
 
-            $content .= "<li><div class=\"custom-control custom-checkbox\">";
+            $content .= "<li><div class=\"custom-control custom-radio custom-control-inline\">";
             $content .= Form::radio('neighborhood', $neighborhood->name, false, ['class' => 'custom-control-input', 'id' => $id]);
             $content .= "<label class=\"custom-control-label\" for=\"{$id}\">{$neighborhood->name}</label></div></li>";
 

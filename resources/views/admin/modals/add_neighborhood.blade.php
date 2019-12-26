@@ -7,7 +7,7 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <!-- Modal body -->
-			{!! Form::open(['method' => 'post', 'url' => route('admin.createNeighborhood'), 'enctype' => 'multipart/form-data']); !!}
+			{!! Form::open(['method' => 'post', 'url' => route('admin.createNeighborhood'), 'enctype' => 'multipart/form-data', 'id' => 'neighborhood-from']); !!}
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-12">
@@ -38,7 +38,7 @@
             </div>
             <!-- Modal footer -->
             <div class="modal-footer justify-content-center">
-                {!! Form::submit('Add Neighborhood', ['class' => 'btn-default']) !!}
+                {!! Form::submit('Create', ['class' => 'btn-default']) !!}
             </div>
 			<?php echo Form::close(); ?>
         </div>

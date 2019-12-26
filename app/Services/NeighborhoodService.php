@@ -66,7 +66,7 @@ class NeighborhoodService extends SearchService {
      * @return mixed
      */
     public function edit($id) {
-        return $this->neighborhoodRepo->edit($id)->first();
+        return $this->neighborhoodRepo->getNeighborhoodWithBoro($id)->first();
     }
 
     /**
@@ -102,6 +102,11 @@ class NeighborhoodService extends SearchService {
      * @return mixed
      */
     public function update($id, $request) {
+
+        if($request->hasFile('banner')) {
+            $request->banner = uploadImage($request->file('banner'), 'images/neighborhood/banners');
+        }
+
         $form = $this->validateForm($request);
         return $this->neighborhoodRepo->update($id, $form->toArray());
     }

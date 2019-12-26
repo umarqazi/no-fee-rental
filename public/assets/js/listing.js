@@ -100,10 +100,6 @@ $(() => {
         autoComplete( document.getElementById('controls'));
     });
 
-    $body.on('click', '.submit', function () {
-        $(this).parents('form').submit();
-    });
-
     $body.on('blur', '#controls', function() {
         setTimeout(() => {
             addrToLatLng($('body').find('#controls').val()).then(coords => {

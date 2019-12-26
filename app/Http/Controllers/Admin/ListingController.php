@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Repository\ListingRepo;
 use App\Services\ListingService;
 use App\Services\NeighborhoodService;
 use App\Services\UserService;

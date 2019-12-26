@@ -37,7 +37,7 @@ Route::post('/send-invitation', 'Admin\UserController@invite')->name('admin.send
 // Listing Routes
 Route::prefix('listing')->group(function() {
     Route::get('/add-images/{id}', 'Admin\ListingController@createImages')->name('admin.createListingImages');
-    Route::post('/add', 'Admin\ListingController@create')->name('admin.createListing');
+    Route::post('/add-listing', 'Admin\ListingController@create')->name('admin.createListing');
     Route::match(['get', 'post'], '/search', 'Admin\ListingController@searchWithFilters')->name('admin.listingSearch');
     Route::get('/property', 'Admin\AdminController@viewPropertyListing')->name('property-listing');
     Route::get('/view', 'Admin\ListingController@index')->name('admin.viewListing');

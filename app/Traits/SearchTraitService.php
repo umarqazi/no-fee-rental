@@ -70,6 +70,7 @@ trait SearchTraitService {
      */
     private function __setSearchParams($request) {
         $data = [
+            'neighborhood'          => $request->neighborhood ?? null,
             'beds'                  => $request->beds ?? null,
             'baths'                 => $request->baths ?? null,
             'features'              => $request->features ?? null,
@@ -77,7 +78,6 @@ trait SearchTraitService {
             'amenities'             => $request->amenities ?? null,
             'agentProfile'          => $request->agentProfile ?? null,
             'availability'          => $request->availability ?? null,
-            'neighborhood'          => $request->neighborhood ?? null,
             'agentsWithPremiumPlan' => $request->agentsWithPremiumPlan ?? null,
             'price'                 => [
                 'min_price'  => $request->min_price ? (int)$request->min_price : MINPRICE,
@@ -128,11 +128,12 @@ trait SearchTraitService {
      */
     private function beds() {
         if(in_array(5, $this->args->{__FUNCTION__})) {
-            $this->query->whereIn('bedrooms', is_array($this->args->{__FUNCTION__})
-                ? $this->args->{__FUNCTION__} : [ $this->args->{__FUNCTION__} ])->where('bedrooms', '>=', 5);
+            $args = $this->args->{__FUNCTION__};
+            $this->query->where(function ($query) use ($args) {
+                return $query->whereIn('bedrooms', $args)->orWhere('bedrooms', '>=', 5);
+            });
         } else {
-            $this->query->whereIn( 'bedrooms', is_array($this->args->{__FUNCTION__})
-                ? $this->args->{__FUNCTION__} : [ $this->args->{__FUNCTION__} ] );
+            $this->query->whereIn( 'bedrooms', $this->args->{__FUNCTION__} );
         }
     }
 
@@ -143,11 +144,12 @@ trait SearchTraitService {
         if (in_array('any', $this->args->{__FUNCTION__})) {
             $this->query = $this->query->where('baths', '>', 0);
         } elseif (in_array(5, $this->args->{__FUNCTION__})) {
-            $this->query = $this->query->where( 'baths', '>=', 5 )->orWhereIn( 'baths', is_array($this->args->{__FUNCTION__})
-                ? $this->args->{__FUNCTION__} : [ $this->args->{__FUNCTION__} ] );
+            $args = $this->args->{__FUNCTION__};
+            $this->query->where(function ($query) use ($args) {
+                return $query->whereIn('baths', $args)->orWhere('baths', '>=', 5);
+            });
         } else {
-            $this->query = $this->query->whereIn( 'baths', is_array($this->args->{__FUNCTION__})
-                ? $this->args->{__FUNCTION__} : [ $this->args->{__FUNCTION__} ] );
+            $this->query = $this->query->whereIn( 'baths', $this->args->{__FUNCTION__} );
         }
     }
 
