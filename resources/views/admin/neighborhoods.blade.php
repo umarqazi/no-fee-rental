@@ -4,7 +4,9 @@
     <div class="wrapper">
         <div class="heading-wrapper">
             <h1>Neighborhoods</h1>
-            <a href="#" data-toggle="modal"  id="new-neighborhood"class="btn-default">New Neighborhood</a>
+            <a href="javascript:void(0);" id="add_neighborhood" data-toggle="modal" data-target="#add-neighborhood" class="btn-default">
+                <i class="fa fa-plus"></i>
+                Add Neighborhood</a>
         </div>
         <div class="block listing-container manage-accounts">
             <div class="heading-wrapper pl-0">
@@ -35,7 +37,6 @@
                             <tr>
                                 <th>Id</th>
                                 <th>Name</th>
-                                <th>Banner</th>
                                 <th>Content</th>
                                 <th>Action</th>
                             </tr>
@@ -114,65 +115,33 @@
     {!! HTML::script('assets/js/neighborhoods.js') !!}
     <script>
         let column = [{
+
             render: (data, type, row) => {
-                return `<img height="100" width="100" src="${row.banner === null ? '{{asset(DLI)}}' : window.location.origin+'/'+row.banner}">`;
+                let $content = 'Null';
+
+                if(row.content !== null) {
+                    $content = row.content.substr(0, 10) + (row.content.length > 10 ? ' ...' : '');
+                }
+
+                return $content;
             }, targets: 2,
 
-            render: (data, type, row) => {
-                return row.content !== null ? row.content : "None";
-            }, targets: 3,
-
+        }, {
             render: (data, type, row) => {
                 return `
-                <i class="fa fa-eye action-btn" id="viewNeighborhoodContent" ref_id="${row.id}" route="/admin/neighborhood/edit/${row.id}"></i>
-                <i class="fa fa-edit px-2 action-btn" id="updateNeighborhood" ref_id="${row.id}" route="/admin/neighborhood/edit/${row.id}"></i>
-                <i class="fa fa-trash action-btn" id="deleteNeighborhood" ref_id="${row.id}" route="/admin/neighborhood/delete/${row.id}"></i>`;
-            }, targets: 4,
+                    <i class="fa fa-eye action-btn" id="viewNeighborhoodContent" ref_id="${row.id}" route="/admin/neighborhood/edit/${row.id}"></i>
+                    <i class="fa fa-edit px-2 action-btn" id="updateNeighborhood" ref_id="${row.id}" route="/admin/neighborhood/edit/${row.id}"></i>
+                    <i class="fa fa-trash action-btn" id="deleteNeighborhood" ref_id="${row.id}" route="/admin/neighborhood/delete/${row.id}"></i>`;
+            }, targets: 3
         }];
 
         dataTables('#manhattan', '/admin/manhattan-neighborhoods', null, column);
 
-        column = [{
-            render: (data, type, row) => {
-                return `
-                <i class="fa fa-eye action-btn" id="viewNeighborhoodContent" ref_id="${row.id}" route="/admin/neighborhood/edit/${row.id}"></i>
-                <i class="fa fa-edit px-2 action-btn" id="updateNeighborhood" ref_id="${row.id}" route="/admin/neighborhood/edit/${row.id}"></i>
-                <i class="fa fa-trash action-btn" id="deleteNeighborhood" ref_id="${row.id}" route="/admin/neighborhood/delete/${row.id}"></i>`;
-            }, targets: 3
-        }];
-
         dataTables('#bronx', '/admin/bronx-neighborhoods', null, column);
-
-        column = [{
-            render: (data, type, row) => {
-                return `
-                <i class="fa fa-eye action-btn" id="viewNeighborhoodContent" ref_id="${row.id}" route="/admin/neighborhood/edit/${row.id}"></i>
-                <i class="fa fa-edit px-2 action-btn" id="updateNeighborhood" ref_id="${row.id}" route="/admin/neighborhood/edit/${row.id}"></i>
-                <i class="fa fa-trash action-btn" id="deleteNeighborhood" ref_id="${row.id}" route="/admin/neighborhood/delete/${row.id}"></i>`;
-            }, targets: 3
-        }];
 
         dataTables('#brooklyn', '/admin/brooklyn-neighborhoods', null, column);
 
-        column = [{
-            render: (data, type, row) => {
-                return `
-                <i class="fa fa-eye action-btn" id="viewNeighborhoodContent" ref_id="${row.id}" route="/admin/neighborhood/edit/${row.id}"></i>
-                <i class="fa fa-edit px-2 action-btn" id="updateNeighborhood" ref_id="${row.id}" route="/admin/neighborhood/edit/${row.id}"></i>
-                <i class="fa fa-trash action-btn" id="deleteNeighborhood" ref_id="${row.id}" route="/admin/neighborhood/delete/${row.id}"></i>`;
-            }, targets: 3
-        }];
-
         dataTables('#queens', '/admin/queens-neighborhoods', null, column);
-
-        column = [{
-            render: (data, type, row) => {
-                return `
-                <i class="fa fa-eye action-btn" id="viewNeighborhoodContent" ref_id="${row.id}" route="/admin/neighborhood/edit/${row.id}"></i>
-                <i class="fa fa-edit px-2 action-btn" id="updateNeighborhood" ref_id="${row.id}" route="/admin/neighborhood/edit/${row.id}"></i>
-                <i class="fa fa-trash action-btn" id="deleteNeighborhood" ref_id="${row.id}" route="/admin/neighborhood/delete/${row.id}"></i>`;
-            }, targets: 3
-        }];
 
         dataTables('#staten_island', '/admin/staten_island-neighborhoods', null, column);
     </script>

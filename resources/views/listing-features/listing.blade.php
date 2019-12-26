@@ -1,16 +1,12 @@
 @extends('secured-layouts.app')
 @section('title', 'Nofee Rental')
 @section('content')
-    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.js'></script>
-    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.css' rel='stylesheet' />
-    <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.2/mapbox-gl-geocoder.min.js'></script>
-    <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.2/mapbox-gl-geocoder.css' type='text/css' />
-    {{--<!-- Promise polyfill script required to use Mapbox GL Geocoder in IE 11 -->--}}
-    <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
-    <script src='https://unpkg.com/es6-promise@4.2.4/dist/es6-promise.auto.min.js'></script>
-    <script src="https://unpkg.com/@mapbox/mapbox-sdk/umd/mapbox-sdk.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mapbox-gl/1.4.0/mapbox-gl-csp-worker.js.map"></script>
+    {!! HTML::style('https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.css') !!}
+    {!! HTML::style('https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.2/mapbox-gl-geocoder.css') !!}
+    {!! HTML::script('https://unpkg.com/@mapbox/mapbox-sdk/umd/mapbox-sdk.min.js') !!}
+    {!! HTML::script('https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.js') !!}
+    {!! HTML::script('https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.2/mapbox-gl-geocoder.min.js') !!}
+
     <style>
         .marker {
             background-image: url('mapbox-icon.png');
@@ -22,6 +18,7 @@
         }
         .checkbox-listing { margin-bottom: 0px !important; }
     </style>
+
     <div class="wrapper">
         <div class="heading-wrapper">
             <h1>{{$action}} Listing</h1>
@@ -33,24 +30,20 @@
                         'id'  => 'listing-form',
                         'url' => ($action == 'Update')
                                 ? route(whoAmI().'.updateListing', $listing->id)
-                                : route(whoAmI().'.createListing'),
+                                : route('admin.createListing'),
                         'method'  => 'post',
                         'enctype' => 'multipart/form-data'
                     ]) !!}
-                @if(isAdmin() && ($action == 'Update'  ? is_created_by_owner($listing->id) : true))
-                    <div class="row">
+                <div class="row">
+                    @if(isAdmin())
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>List Belongs To:</label>
-                                {!! Form::select('user_id', owners(), null,
-                                [
-                                    'class'        => 'input-style',
-                                    'autocomplete' => 'off'
-                                ]) !!}
+                                {!! Form::select('owner_id', owners(), null, ['class' => 'input-style']) !!}
                             </div>
                         </div>
-                    </div>
-                @endif
+                    @endif
+                </div>
                 <div class="row">
 
                     {{--Listing Info--}}
