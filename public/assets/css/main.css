@@ -163,6 +163,9 @@ body {
     width: 100%;
     padding: 0px 30px;
 }
+.container.container-need{
+    max-width: 1170px;
+}
 button {
     cursor: pointer;
     -webkit-transition: all ease 0.4s;
@@ -331,7 +334,7 @@ h3 {
     width: 100%;
     background-color:#fff;
     padding: 10px;
-    top: 47px;
+    top: 48px;
     left: 0px;
     z-index: 6;
 }
@@ -359,10 +362,12 @@ h3 {
 }
 
 .dropdown-listing-price-wrapper ul li input{
-    width: 172px;
+    width: 100%;
     font-size: 14px;
 }
-
+.dropdown-listing-price-wrapper ul li:nth-child(2){
+    width: 85px !important;
+}
 .dropdown-listing-price-wrapper ul li .form-control:focus{
     box-shadow: none !important;
     border-color:#ced4da !important;
@@ -695,7 +700,20 @@ h3 {
 .header-bg .search-property .search-btn:hover {
     background: #223971;
 }
-
+.header-bg .search-property .select2-container--default .select2-selection--single{
+    background-color:transparent;
+    border: none;
+    border-radius: 0px;
+}
+.header-bg .search-property  .select2-container .select2-selection--single .select2-selection__rendered{
+    padding-left: 45px;
+}
+.header-bg .search-property .select2-container--default .select2-selection--single:focus{
+    outline: none;
+}
+.header-bg .search-property .select2-container--default .select2-selection--single .select2-selection__arrow{
+    display:none;
+}
 /**/
 .price-range-dropdown{
     padding: 0px 15px;
@@ -2435,7 +2453,7 @@ footer .copyright .social-icons li a:hover {
 }
 
 .neighborhood-search .search-result-wrapper .map-wrapper {
-    flex: 0 0 25%;
+    flex: 0 0 30%;
     padding: 0px 0px;
     position: relative;
     height: 535px;
@@ -4455,9 +4473,20 @@ footer .copyright .social-icons li a:hover {
 .make-review-wrapper {
     padding: 88px 0px;
 }
+@media all and (min-width:4000px){
+    .featured-properties .property-listing .property-thumb{
+        max-width: 100% !important;
+        width: calc(100% / 7 - 30px) !important;
+        height: auto;
+    }
+}
+
 @media all and (min-width:3000px){
     .about-us-container {
         min-height: 1150px !important;
+    }
+    .container.container-need{
+        max-width: 2500px !important;
     }
     .ur-life-large-img {
         min-height: 1260px !important;
@@ -4720,7 +4749,9 @@ footer .copyright .social-icons li a:hover {
 
 /*Responsive style*/
 @media only screen and (min-width: 1921px) {
-
+    .container.container-need{
+        max-width: 1600px;
+    }
     .neighborhood-search .search-result-wrapper .search-listing .featured-properties .property-listing .property-thumb{
         width: calc(100% / 4 - 30px);
         height: 250px;
@@ -4738,7 +4769,7 @@ footer .copyright .social-icons li a:hover {
         min-height: 766px;
     }
     .neighborhood-search .search-result-wrapper .map-wrapper {
-        flex: 0 0 20%;
+        flex: 0 0 30%;
     }
 }
 
@@ -6304,6 +6335,34 @@ list .property-info .info p {
 .financial-district-inner .form-group{
     margin-bottom: 0px;
     width: 300px;
+    height: calc(45px + 2px);
+    background-color: #e77817;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 5px;
+}
+.financial-district-inner .form-group:active,
+.financial-district-inner .form-group:focus
+{
+    outline: none;
+    box-shadow: none;
+}
+.financial-district-inner .select2-container--default .select2-selection--single{
+     background-color: transparent;
+     border:0;
+     border-radius: 0;
+}
+.financial-district-inner .select2-container--default .select2-selection--single .select2-selection__rendered {
+    color: #fff;
+    line-height: 47px;
+}
+.financial-district-inner .select2-container--default .select2-selection--single .select2-selection__arrow b{
+    display: none;
+}
+.financial-district-inner .select2-container{
+    height: 100%;
 }
 .financial-district-inner select.form-control:not([size]):not([multiple]) {
     height: calc(45px + 2px);
@@ -6314,6 +6373,12 @@ list .property-info .info p {
     font-size: 16px;
     font-weight: 600;
     padding-left: 15px;
+}
+.financial-district-inner .select2-container{
+    background: url(../images/select-menu-arrow-white.png) no-repeat right 10px center;
+}
+.financial-district-inner .select2-container .select2-selection--single{
+    height: 47px;
 }
 .financial-district-inner .form-control{
     background-clip: none;

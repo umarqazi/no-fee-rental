@@ -130,8 +130,7 @@
 
                             <div class="col-md-12">
                                 <div class="text-center mt-5 mb-4">
-                                    <input type="submit" class="btn-default" name="login">
-                                        Login
+                                    <input type="submit" class="btn-default" name="login" value="Login">
                                 </div>
                             </div>
                         </div>
