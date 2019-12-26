@@ -22,11 +22,11 @@
                 {!! Form::model(app('request')->all(), ['url' => route($search_route ?? 'web.advanceSearch', $param ?? null), 'method' => 'get', 'id' => 'modal-search-from']) !!}
                 <div class="row">
                     <div class="col-md-6 search-form-grou-mrg-btm">
-                        <div class="form-group" id="advance-search-chkbox">
+                        <div class="form-group" id="advance-search-chkbox" class="advance-search-modal-beds">
                             <label class="label">Beds <span>(Select all that applies)</span></label>
                             {!! multi_select_beds(5, app('request')->get('beds') ?? null) !!}
                         </div>
-                        <div class="form-group" id="advance-search-chkbox">
+                        <div class="form-group" id="advance-search-chkbox" class="advance-search-modal-baths">
                             <label class="label">Baths <span>(Select all that applies)</span></label>
                             {!! multi_select_baths(5, app('request')->get('baths') ?? null) !!}
                         </div>
