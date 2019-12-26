@@ -30,12 +30,12 @@
                         'id'  => 'listing-form',
                         'url' => ($action == 'Update')
                                 ? route(whoAmI().'.updateListing', $listing->id)
-                                : route('admin.createListing'),
+                                : route(whoAmI().'.createListing'),
                         'method'  => 'post',
                         'enctype' => 'multipart/form-data'
                     ]) !!}
                 <div class="row">
-                    @if(isAdmin())
+                    @if(isAdmin() && isOwnerListing($listing->agent->id ?? null))
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>List Belongs To:</label>

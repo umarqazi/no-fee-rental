@@ -733,4 +733,12 @@ class UserService {
         }
         return $renters_email;
     }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function findById($id) {
+        return $this->userRepo->findById($id)->first();
+    }
 }

@@ -106,6 +106,20 @@ function whoAmI() {
 }
 
 /**
+ * @param $id
+ * @return bool|mixed
+ */
+function isOwnerListing($id = null) {
+    $user = false;
+    if($id != null) {
+        $user = (new \App\Services\UserService())->findById($id);
+        return $user->user_type === OWNER;
+    }
+
+    return $user;
+}
+
+/**
  * @return mixed
  */
 function authenticated() {
@@ -671,7 +685,7 @@ function neighborhood_let_us_help() {
                 $content .= "<div class='col-md-4'><ul class=\"neighborhood-list\">";
             }
 
-            $content .= "<li><div class=\"custom-control custom-checkbox\">";
+            $content .= "<li><div class=\"custom-control custom-radio custom-control-inline\">";
             $content .= Form::radio('neighborhood', $neighborhood->name, false, ['class' => 'custom-control-input', 'id' => $id]);
             $content .= "<label class=\"custom-control-label\" for=\"{$id}\">{$neighborhood->name}</label></div></li>";
 

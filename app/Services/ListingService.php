@@ -379,7 +379,7 @@ class ListingService extends BuildingService {
         }
 
         $form                    = new ListingForm();
-        $form->user_id           = $request->user_id ?? myId();
+        $form->user_id           = $request->owner_id ?? myId();
         $form->unique_slug       = str_random( 20 );
         $form->name              = $request->name;
         $form->building_id       = $request->building_id;

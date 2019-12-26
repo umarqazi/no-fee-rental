@@ -1,8 +1,7 @@
 @extends('layouts.app')
 @section('title', 'No Fee Rental | Neighborhood')
 @section('content')
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>
+    {!! HTML::style('https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css') !!}
     <style>
         #advance-search {
             z-index: 100 !important;
@@ -35,9 +34,10 @@
         </div>
     </section>
     {!! HTML::script('assets/js/neighborhoods.js') !!}
+    {!! HTML::script('https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js') !!}
     <script>
-        var $disabledResults = $("#neighborhood");
-        // $disabledResults.select2();
+        let $disabledResults = $('#neighborhood');
+        $disabledResults.select2();
     </script>
 @endsection
 
