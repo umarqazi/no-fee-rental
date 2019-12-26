@@ -6335,6 +6335,34 @@ list .property-info .info p {
 .financial-district-inner .form-group{
     margin-bottom: 0px;
     width: 300px;
+    height: calc(45px + 2px);
+    background-color: #e77817;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 5px;
+}
+.financial-district-inner .form-group:active,
+.financial-district-inner .form-group:focus
+{
+    outline: none;
+    box-shadow: none;
+}
+.financial-district-inner .select2-container--default .select2-selection--single{
+     background-color: transparent;
+     border:0;
+     border-radius: 0;
+}
+.financial-district-inner .select2-container--default .select2-selection--single .select2-selection__rendered {
+    color: #fff;
+    line-height: 47px;
+}
+.financial-district-inner .select2-container--default .select2-selection--single .select2-selection__arrow b{
+    display: none;
+}
+.financial-district-inner .select2-container{
+    height: 100%;
 }
 .financial-district-inner select.form-control:not([size]):not([multiple]) {
     height: calc(45px + 2px);
@@ -6345,6 +6373,12 @@ list .property-info .info p {
     font-size: 16px;
     font-weight: 600;
     padding-left: 15px;
+}
+.financial-district-inner .select2-container{
+    background: url(../images/select-menu-arrow-white.png) no-repeat right 10px center;
+}
+.financial-district-inner .select2-container .select2-selection--single{
+    height: 47px;
 }
 .financial-district-inner .form-control{
     background-clip: none;
