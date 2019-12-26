@@ -161,22 +161,18 @@ class BuildingService {
     }
 
     /**
-     * @param $listing
-     *
+     * @param $request
      * @return bool|mixed
      */
-    public function manageBuilding( $listing ) {
-        $building = $this->__isAlreadyExist( $listing->street_address );
+    public function manageBuilding( $request ) {
+        $building = $this->__isAlreadyExist( $request->street_address );
         if ( ! $building ) {
-            $building = $this->buildingRepo->create( [
-                'map_location'  => $listing->map_location,
-                'thumbnail'       => $listing->thumbnail,
-                'address'         => $listing->street_address,
-                'neighborhood_id' => $listing->neighborhood_id,
-                'is_verified'     => isAgent() ? false : true
-            ] );
+            $building = $this->__validateForm($request);
+            $building = $this->buildingRepo->create($building->toArray());
 
-            return $building;
+            if ( $request->has( 'amenities' ) ) {
+                $this->attachAmenities( $building, $request->amenities );
+            }
         }
 
         return $building;
@@ -236,17 +232,35 @@ class BuildingService {
      */
     private function __validateForm( $request ) {
         $form                         = new AddBuildingForm();
-        $form->user_id                = myId();
+        $form->user_id                = $this->__buildingBelongsTo($request);
         $form->address                = $request->street_address;
         $form->map_location           = $request->map_location;
         $form->thumbnail              = $request->hasFile('thumbnail')
             ? uploadImage($request->thumbnail, 'images/listing/thumbnails')
-            : $request->old_thumbnail ?? Null;
+            : $request->old_thumbnail ?? $request->thumbnail ?? Null;
         $form->neighborhood_id        = $this->__neighborhoodHandler($request->neighborhood);
-        $form->building_action        = $request->building_action;
+        $form->building_action        = $request->building_action ?? ALLOWAGENT;
         $form->contact_representative = $request->contact_representative;
+        $form->is_verified            = isAgent() ? false : true;
         $form->validate();
         return $form;
+    }
+
+    /**
+     * @param $request
+     * @return int|null
+     */
+    private function __buildingBelongsTo($request) {
+        $id = null;
+        if(isAdmin()) {
+            $id = $request->owner_id;
+        } elseif (isOwner()) {
+            $id = myId();
+        } else {
+            $id = null;
+        }
+
+        return $id;
     }
 
     /**

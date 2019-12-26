@@ -30,6 +30,14 @@ class NeighborhoodRepo extends BaseRepo {
     }
 
     /**
+     * @param $id
+     * @return mixed
+     */
+    public function getNeighborhoodWithBoro($id) {
+        return $this->edit($id)->withBoro();
+    }
+
+    /**
      * @param $user
      * @param $data
      * @return mixed
