@@ -350,6 +350,7 @@ $(() => {
 
     $(function () {
         $('#multiple').pignoseCalendar({
+            minDate: new Date(),
             select: onSelectHandler
         });
 
