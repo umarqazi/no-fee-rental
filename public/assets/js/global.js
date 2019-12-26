@@ -270,6 +270,7 @@ const enableDatePicker = (selector, allowTime = true) => {
         timepicker: allowTime,
         language: 'en',
         startDate: start,
+        minDate: new Date(),
         minHours: startHours,
         maxHours: 18,
         onSelect: function (fd, d, picker) {

@@ -50,6 +50,11 @@ class AddBuildingForm extends BaseForm {
     public $map_location;
 
     /**
+     * @var bool
+     */
+    public $is_verified;
+
+    /**
      * @return array
      */
     public function toArray() {
@@ -60,7 +65,7 @@ class AddBuildingForm extends BaseForm {
             'map_location'           => $this->map_location,
             'neighborhood_id'        => $this->neighborhood_id,
             'building_action'        => $this->building_action,
-            'is_verified'            => isOwner() ? ACTIVE : DEACTIVE,
+            'is_verified'            => $this->is_verified,
             'contact_representative' => $this->contact_representative,
         ];
     }

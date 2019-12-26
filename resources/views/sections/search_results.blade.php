@@ -20,6 +20,8 @@
                                 {!! filter_neighborhood_select() !!}
                             </div>
                         </div>
+                    @else
+                        <input type="hidden" name="neighborhood" value="{{ request()->segment(2) }}">
                     @endif
                     <div class="">
                         <button type="button" class="btn btn-primary" id="beds-for-dropdown">Beds</button>
@@ -106,8 +108,8 @@
 
     @if(count($data->listings) > 0)
         if(coords !== []) {
-            multiMarkers(coords, 'desktop-map', 10);
-            multiMarkers(coords, 'mobile-map', 10);
+            multiMarkers(coords, 'desktop-map', 8);
+            multiMarkers(coords, 'mobile-map', 8);
         }
     @endif
 

@@ -24,6 +24,7 @@
     {!! HTML::style('assets/owlcarousel/assets/owl.carousel.min.css') !!}
     {!! HTML::style('assets/owlcarousel/assets/owl.theme.default.min.css') !!}
     {!! HTML::style('assets/css/pignose.calendar.min.css') !!}
+    {!! HTML::style('assets/css/pignose.calendar.min.css') !!}
 
     <!-- JS -->
     {!! HTML::script('assets/js/vendor/jquery-3.2.1.min.js') !!}

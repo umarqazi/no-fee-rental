@@ -18,6 +18,13 @@ class Neighborhoods extends Model {
     protected $fillable = ['name','content', 'banner', 'boro_id'];
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function boro() {
+        return $this->hasOne(Borough::class, 'id', 'boro_id');
+    }
+
+    /**
      * @return HasMany
      */
     public function listings() {
@@ -40,6 +47,14 @@ class Neighborhoods extends Model {
         return $query->with(['listings' => function($subQuery) {
             return $subQuery->orderBy('rent', CHEAPER);
         }]);
+    }
+
+    /**
+     * @param $query
+     * @return mixed
+     */
+    public function scopeWithBoro($query) {
+        return $query->with('boro');
     }
 
     /**

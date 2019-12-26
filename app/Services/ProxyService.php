@@ -24,7 +24,12 @@ class ProxyService {
     /**
      * @var int
      */
-    private $range = 1200;
+    private $schoolDistRange = 1800;
+
+    /**
+     * @var int
+     */
+    private $transportationRange = 1000;
 
     /**
      * @var string
@@ -114,7 +119,7 @@ class ProxyService {
     private function __subwayStation($data) {
         $collection = [];
         $res = $this->socrata->get($this->subwayStationFilePath, [
-            "\$where" => "within_circle(the_geom, {$data->lat}, {$data->lng}, 500)"
+            "\$where" => "within_circle(the_geom, {$data->lat}, {$data->lng}, {$this->transportationRange})"
         ]);
 
         if(!empty($res)) {
@@ -143,7 +148,7 @@ class ProxyService {
     private function __schoolZone($data) {
         $collection = [];
         $res = $this->socrata->get($this->schoolZoneFilePath, [
-            "\$where" => "within_circle(the_geom, {$data->lat}, {$data->lng}, {$data->rng})"
+            "\$where" => "within_circle(the_geom, {$data->lat}, {$data->lng}, {$this->schoolDistRange})"
         ]);
 
         if(!empty($res)) {

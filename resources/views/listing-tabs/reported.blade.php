@@ -20,7 +20,9 @@
                         <span class="status" style="background: blueviolet;">{{($al->is_featured == REQUESTFEATURED) ? 'Requested for feature' : 'Featured' }}</span>
                     @endif
 
-                    <span class="status" style="background: #213971;">Realty Feed</span>
+                    @if(!empty($al->realty_id))
+                        <span class="status" style="background: #213971;">Realty Feed</span>
+                    @endif
 
                     @if($al->visibility == 1)
                         <span class="status">Active</span>
