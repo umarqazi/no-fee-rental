@@ -1,7 +1,7 @@
 
 let $body = $('body');
 
-$body.on('input select', '#neighborhood', function () {
+$body.on('change', '#neighborhood', function () {
     window.location.href = `${window.location.origin}/listing-by-neighborhood/${$(this).val()}`;
 });
 
