@@ -20,6 +20,8 @@
                                 {!! filter_neighborhood_select() !!}
                             </div>
                         </div>
+                    @else
+                        <input type="hidden" name="neighborhood" value="{{ request()->segment(2) }}">
                     @endif
                     <div class="">
                         <button type="button" class="btn btn-primary" id="beds-for-dropdown">Beds</button>
