@@ -70,6 +70,7 @@ trait SearchTraitService {
      */
     private function __setSearchParams($request) {
         $data = [
+            'neighborhood'          => $request->neighborhood ?? null,
             'beds'                  => $request->beds ?? null,
             'baths'                 => $request->baths ?? null,
             'features'              => $request->features ?? null,
@@ -77,7 +78,6 @@ trait SearchTraitService {
             'amenities'             => $request->amenities ?? null,
             'agentProfile'          => $request->agentProfile ?? null,
             'availability'          => $request->availability ?? null,
-            'neighborhood'          => $request->neighborhood ?? null,
             'agentsWithPremiumPlan' => $request->agentsWithPremiumPlan ?? null,
             'price'                 => [
                 'min_price'  => $request->min_price ? (int)$request->min_price : MINPRICE,

@@ -1,13 +1,15 @@
 @extends('layouts.app')
 @section('title', 'No Fee Rental | Neighborhood')
 @section('content')
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>
     <style>
         #advance-search {
             z-index: 100 !important;
         }
     </style>
     <section class="neighborhood-search neighbourhood-pd wow fadeIn neighborhood-banner-page" data-wow-delay="0.2s">
-        <div class="neighborhood-banner" style="background: url('{{ asset($data->neighborhood->banner ?? DLI) }}')">
+        <div class="neighborhood-banner" style="background: url('{{ asset($data->neighborhood->banner ?? DLI) }}') no-repeat;">
             <div class="financial-district-section">
                 <div class="container-lg">
                     <div class="financial-district-inner">
@@ -33,6 +35,10 @@
         </div>
     </section>
     {!! HTML::script('assets/js/neighborhoods.js') !!}
+    <script>
+        var $disabledResults = $("#neighborhood");
+        $disabledResults.select2();
+    </script>
 @endsection
 
 

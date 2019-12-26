@@ -6,7 +6,8 @@ return [
         2 => 'Brooklyn',
         3 => 'Queens',
         4 => 'Bronx',
-        5 => 'Staten Island'
+        5 => 'Staten Island',
+        6 => 'Other'
     ],
 
     'neighborhoods' => [

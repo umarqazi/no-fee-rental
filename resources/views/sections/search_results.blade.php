@@ -106,8 +106,8 @@
 
     @if(count($data->listings) > 0)
         if(coords !== []) {
-            multiMarkers(coords, 'desktop-map', 9);
-            multiMarkers(coords, 'mobile-map', 9);
+            multiMarkers(coords, 'desktop-map', 8);
+            multiMarkers(coords, 'mobile-map', 8);
         }
     @endif
 
@@ -119,8 +119,8 @@
         $body.find('.map-wrapper').append(`<div id="mobile-map"></div>`);
         $body.find('.map-wrapper').append(`<div id="desktop-map"></div>`);
         setTimeout(() => {
-            multiMarkers(coords, 'desktop-map', 9);
-            multiMarkers(coords, 'mobile-map', 9);
+            multiMarkers(coords, 'desktop-map', 10);
+            multiMarkers(coords, 'mobile-map', 10);
         }, 100);
         $(".neighborhood-search .search-result-wrapper .search-listing").toggleClass('hide-list');
         $(".neighborhood-search .search-result-wrapper .map-wrapper").toggleClass('full-map');
