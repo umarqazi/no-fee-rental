@@ -23,15 +23,15 @@
                     @else
                         <input type="hidden" name="neighborhood" value="{{ request()->segment(2) }}">
                     @endif
-                    <div class="">
+                    <div class="main-search-beds">
                         <button type="button" class="btn btn-primary" id="beds-for-dropdown">Beds</button>
-                        <div class="dropdown-for-beds dropdown-listiing-rent-page" id="advance-search-chkbox">
+                        <div class="dropdown-for-beds dropdown-listiing-rent-page search-beds" id="advance-search-chkbox">
                             {!! multi_select_beds(5, app('request')->get('beds') ?? null) !!}
                         </div>
                     </div>
-                    <div class="">
+                    <div class="main-bath-search">
                         <button type="button" class="btn btn-primary" id="bath-for-dropdown">Baths</button>
-                        <div class="dropdown-for-baths dropdown-listiing-rent-page" id="advance-search-chkbox">
+                        <div class="dropdown-for-baths dropdown-listiing-rent-page search-bath" id="advance-search-chkbox">
                             {!! multi_select_baths(5, app('request')->get('baths') ?? null) !!}
                         </div>
                     </div>

@@ -3,7 +3,7 @@
         <h1>NYC’s Premier Source For NO FEE Rentals</h1>
         {!! Form::model(app('request')->all(), ['url' => route('web.indexSearch'), 'method' => 'get', 'id' => 'index-search-from']) !!}
         <div class="search-property">
-            <div style="position:relative;">
+            <div style="position:relative;" class="search-neighborhood">
                 <i class="fas fa-search"></i>
                 {!! Form::text('neighborhood', null, ['id' => 'neigh', 'placeholder' => 'Enter Neighborhood', 'class' => 'search-fld']) !!}
             </div>
@@ -24,7 +24,7 @@
             <div class="dropdown-beds main-search-beds" >
                 <label id="show-beds"><span class="placeholder-text">Beds</span></label>
                 <div id="advance-search-chkbox" class="beds-dropdown">
-                    <div id="advance-search-beds" class="bed-advance-search">
+                    <div id="advance-search-beds" class="bed-advance-search search-beds">
                         {!! bedsDropDown() !!}
                     </div>
                 </div>
