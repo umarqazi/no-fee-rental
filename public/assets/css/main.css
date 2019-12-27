@@ -608,7 +608,7 @@ h3 {
     font-size: 16px;
     font-weight: 600;
     margin-top: 10px;
-    display: block;
+    display: inline-block;
 }
 
 .header-bg .banner-wrapper p {
@@ -650,9 +650,15 @@ h3 {
     border: none;
     padding-left: 50px;
     color: #131415;
-    font-size: 18px;
+    font-size: 16px;
     width: 290px;
+    cursor: pointer;
+    background: url(../images/select-menu-arrow.png) no-repeat right 15px center;
 }
+.neighborhood-search-advance .custom-control-label{
+    font-size: 12px;
+}
+
 
 .listing-detail-badges {
     background-color: #cecccc !important;
@@ -715,12 +721,21 @@ h3 {
     display:none;
 }
 /**/
+.neighborhood-search-dropdown{
+    position: absolute;
+    top:60px;
+    background-color: #fff;
+    width: 100%;
+    display: none;
+}
 .price-range-dropdown{
     padding: 0px 15px;
     width: 100%;
     position:relative;
     background: url(../images/select-menu-arrow.png) no-repeat right 15px center;
     cursor: pointer;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
 }
 .price-range-ul{
     position: absolute;
@@ -746,6 +761,9 @@ h3 {
     min-width: 218px;
     padding: 0px 15px;
     background: url(../images/select-menu-arrow.png) no-repeat right 15px center;
+    cursor: pointer;
+}
+.dropdown-beds #show-beds{
     cursor: pointer;
 }
 .beds-dropdown{
@@ -3657,6 +3675,8 @@ footer .copyright .social-icons li a:hover {
 .let-us-help-modal .nav-pills {
     margin: 20px 0px 10px;
     border-bottom: #959595 solid 1px;
+    display: flex;
+    justify-content: space-between;
 }
 
 .let-us-help-modal .nav-pills li a {
@@ -6594,4 +6614,3 @@ list .property-info .info p {
 .transportation {
     padding: 10px;
 }
-
