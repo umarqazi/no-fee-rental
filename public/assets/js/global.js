@@ -191,6 +191,7 @@ async function livePreview(file, target) {
  * @returns {Promise<void>}
  */
 const fetchNeighbours = async (selector) => {
+    console.log(selector);
     await ajaxRequest('/all-neighborhoods', 'post', null, false).then(neighbours => {
         let data = [];
         neighbours.data.forEach(v => {
@@ -229,22 +230,13 @@ const fetchRenters = async (selector) => {
         renters.forEach(v => {
             data.push(v);
         });
+
         let $renter = selector;
         $renter.autocomplete({
             source: data,
             select: function (event, ui) {
                 $(this).val(ui.item ? ui.item : " ");
             },
-
-            /*change: function (event, ui) {
-                if (!ui.item) {
-                    this.value = '';
-                    if($('.renter_email').length > 0) return;
-                    $renter.after('<label id="renter-error" class="error" >Renter does not exist.</label>');
-                } else {
-                    $('#renter-error').remove();
-                }
-            }*/
         });
     });
 };

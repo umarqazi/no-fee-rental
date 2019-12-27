@@ -24,7 +24,10 @@
             <div class="modal-body">
                 <h4 class="text-center mb-0">Where would you love to live?</h4>
                 <div class="pt-4">
-                    {!! Form::text('neighborhood', null, ['class' => 'input-style', 'placeholder' => 'Neighborhood']) !!}
+                    <select class="input-style neighborhood-select-search" name="neighborhood">
+                        {!! simple_neighborhood_select(app('request')->get('neighborhood') ?? null) !!}
+                    </select>
+{{--                    {!! Form::text('neighborhood', null, ['class' => 'input-style', 'placeholder' => 'Neighborhood']) !!}--}}
                 </div>
             </div>
             <div class="modal-footer text-center">
@@ -187,6 +190,5 @@
 {!! Form::close() !!}
 {!! HTML::script('assets/js/get_started.js') !!}
 <script>
-    fetchNeighbours($('input[name=neighborhood]'));
     enableDatePicker($('input[name=move_in_date]'), false);
 </script>

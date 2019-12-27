@@ -555,7 +555,7 @@ function bedsDropDown() {
                     <label for="Checkbox-4-ad-search"><span class="label-name">4</span></label>
                 </li>
                 <li> <input type="checkbox" value="5" id="Checkbox-5-ad-search" name="beds[]">
-                    <label for="Checkbox-5-ad-search"><span class="label-name">5+</span></label>
+                    <label for="Checkbox-5-ad-search"><span class="label-name">5 +</span></label>
                 </li>
             </ul>';
 
@@ -601,7 +601,9 @@ function multi_select_beds($amount = 5, $pre_select = null) {
         $html .= "<li";
         $html .= is_array($pre_select) && in_array($i, $pre_select) ? " class='white-border-chkbox'>" : '>';
         $html .= Form::checkbox('beds[]', $i, is_array($pre_select) && in_array($i, $pre_select) ? "checked='checked'" : '', ['id' => $id]);
-        $html .= "<label for=\"{$id}\"><span class=\"label-name\">{$i}</span></label></li>";
+        $html .= "<label for=\"{$id}\"><span class=\"label-name\">";
+        $html .= $i == 5 ? $i.' +' : $i;
+        $html .= "</span></label></li>";
     }
 
     return $html;
@@ -625,7 +627,9 @@ function multi_select_baths($amount = 5, $pre_select = null) {
         $html .= "<li";
         $html .= is_array($pre_select) && in_array($i, $pre_select) ? " class='white-border-chkbox'>" : '>';
         $html .= Form::checkbox('baths[]', $i, is_array($pre_select) && in_array($i, $pre_select) ? "checked='checked'" : '', ['id' => $id]);
-        $html .= "<label for=\"{$id}\"><span class=\"label-name\">{$i}</span></label></li>";
+        $html .= "<label for=\"{$id}\"><span class=\"label-name\">";
+        $html .= $i == 5 ? $i.' +' : $i;
+        $html .= "</span></label></li>";
     }
 
     return $html;
@@ -662,21 +666,22 @@ function neighborhood_let_us_help() {
     $content .= "<div class=\"tab-content\">";
     $boroughs = (new \App\Services\BoroughService())->get();
     foreach ($boroughs as $key => $borough) {
-        $total = count($borough->neighborhoods);
-        $hasOpen = false;
         $i = 1;
+        $hasOpen = false;
+        $tab_id = str_random(16);
+        $total = count($borough->neighborhoods);
         $perColum = ceil($total / 3);
         $tabs .= "<li class=\"nav-item\">";
         $tabs .= "<a class='nav-link";
         $tabs .= $key == 0 ? " active'" : "'";
-        $tabs .= " data-toggle=\"pill\" href=\"#tab-{$key}\">{$borough->boro}</a></li>";
+        $tabs .= " data-toggle=\"pill\" href=\"#tab-{$tab_id}\">{$borough->boro}</a></li>";
         foreach ($borough->neighborhoods as $key2 => $neighborhood) {
             $i ++;
             $id = str_random(10);
             if($key2 == 0) {
                 $content .= "<div class='tab-pane ";
                 $content .= $key == 0 ? "active'" : "'";
-                $content .= " id=\"tab-{$key}\">";
+                $content .= " id=\"tab-{$tab_id}\">";
                 $content .= "<div class='row'>";
             }
 
@@ -833,7 +838,10 @@ function property_thumbs($listing) {
     $html .= "<div class='info'><div class='info-link-text'>";
     $html .= "<p>$ ".number_format($listing->rent)." / month&nbsp;&nbsp;</p>";
     $html .= "<small> (". $listing->bedrooms .' bd'.", ".$listing->baths.' ba'.")</small>";
-    $html .= "<p>".is_exclusive($listing).", {$listing->neighborhood->name}</p></div>";
+    $html .= "<p>";
+    $html .= is_exclusive($listing).", ";
+    $html .= $listing->neighborhood ? $listing->neighborhood->name : null;
+    $html .= "</p></div>";
     $html .= "<a href='".route('listing.detail', $listing->id)."' class='btn viewfeature-btn'> View </a></div>";
     $html .= "<div class='feaure-policy-text'>";
     $html .= "<p>$ ".number_format($listing->rent)." / month </p>";

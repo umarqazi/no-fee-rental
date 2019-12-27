@@ -401,12 +401,12 @@
                                     <label class="custom-control-label" for="moving-4">need more space</label>
                                 </div>
                             </li>
-                            <li>
-                                <div class="custom-control custom-radio custom-control-inline">
-                                    {!! Form::radio('move_reason', 5, false, ['class' => 'custom-control-input', 'id' => 'moving-5']) !!}
-                                    <label class="custom-control-label" for="moving-5">Other...</label>
-                                </div>
-                            </li>
+                            {{--<li>--}}
+                                {{--<div class="custom-control custom-radio custom-control-inline">--}}
+                                    {{--{!! Form::radio('move_reason', 5, false, ['class' => 'custom-control-input', 'id' => 'moving-5']) !!}--}}
+                                    {{--<label class="custom-control-label" for="moving-5">Other...</label>--}}
+                                {{--</div>--}}
+                            {{--</li>--}}
                         </ul>
                     </div>
                     <div class="text-center"><button type="button" class="btn-default skip-btn" data-target="let-us-step11">Skip</button></div>

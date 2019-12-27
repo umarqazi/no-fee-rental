@@ -645,10 +645,11 @@ class UserService {
         $request->agentProfile = $id;
         $data = collect($service->search($request));
         $info = $data->first();
+        $agent = $info->agent ?? $this->userRepo->findAgent($id);
         return toObject([
-            'agent'    => $info->agent,
+            'agent'    => $agent,
             'listings' => $data,
-            'reviews'  => $info->agent->reviews
+            'reviews'  => $agent->agent->reviews ?? $agent->reviews
         ]);
     }
 
