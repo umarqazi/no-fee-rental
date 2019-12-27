@@ -4,6 +4,7 @@
     @endif
 
     {!! HTML::script('assets/js/recent-search.js') !!}
+    {!! HTML::script('https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js') !!}
     {!! HTML::script('https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js') !!}
     <script src="{{asset('assets/js/vendor/jquery-ui.min.js')}}"></script>
     <script src="{{asset('assets/js/vendor/jquery.ui.touch-punch.min.js')}}"></script>
@@ -15,6 +16,8 @@
     <script src="{{asset('assets/js/vendor/lightslider.js')}}"></script>
     <script>
         $(() => {
+            let $disabledResults = $('.neighborhood-select-search');
+            $disabledResults.select2();
             $('button[data-target="#check-availability"]').on('click', function() {
                 @if(!authenticated())
                     $('#login').modal('show');

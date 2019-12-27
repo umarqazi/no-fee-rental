@@ -69,6 +69,14 @@ class UserRepo extends BaseRepo {
     }
 
     /**
+     * @param $id
+     * @return mixed
+     */
+    public function findAgent($id) {
+        return $this->findById($id)->withreviews()->first();
+    }
+
+    /**
      * @param $email
      *
      * @return mixed

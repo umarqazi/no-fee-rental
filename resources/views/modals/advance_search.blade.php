@@ -58,7 +58,7 @@
                     <div class="col-md-6">
                         <div class="form-group search-neighborhood">
                             <label class="label">Neighbourhoods</label>
-                            <select class="input-style" name="neighborhood">
+                            <select class="input-style neighborhood-select-search" name="neighborhood">
                                 {!! simple_neighborhood_select(app('request')->get('neighborhood') ?? null) !!}
                             </select>
                         </div>
@@ -94,6 +94,5 @@
         </div>
     </div>
 <script>
-    fetchNeighbours($('input[name=neighborhoods]'));
     enableDatePicker('#open_house', false);
 </script>

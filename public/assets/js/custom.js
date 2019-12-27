@@ -349,8 +349,9 @@ $(() => {
     }
 
     $(function () {
+        let date = new Date();
         $('#multiple').pignoseCalendar({
-            minDate: new Date(),
+            minDate: date.setDate(date.getDate() - 1),
             select: onSelectHandler
         });
 

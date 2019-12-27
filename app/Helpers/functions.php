@@ -555,7 +555,7 @@ function bedsDropDown() {
                     <label for="Checkbox-4-ad-search"><span class="label-name">4</span></label>
                 </li>
                 <li> <input type="checkbox" value="5" id="Checkbox-5-ad-search" name="beds[]">
-                    <label for="Checkbox-5-ad-search"><span class="label-name">5+</span></label>
+                    <label for="Checkbox-5-ad-search"><span class="label-name">5 +</span></label>
                 </li>
             </ul>';
 
@@ -601,8 +601,9 @@ function multi_select_beds($amount = 5, $pre_select = null) {
         $html .= "<li";
         $html .= is_array($pre_select) && in_array($i, $pre_select) ? " class='white-border-chkbox'>" : '>';
         $html .= Form::checkbox('beds[]', $i, is_array($pre_select) && in_array($i, $pre_select) ? "checked='checked'" : '', ['id' => $id]);
-        $i !== 5 ? $html .= "<label for=\"{$id}\"><span class=\"label-name\">{$i}</span></label></li>" :
-            $html .= "<label for=\"{$id}\"><span class=\"label-name\">{$i}+</span></label></li>" ;
+        $html .= "<label for=\"{$id}\"><span class=\"label-name\">";
+        $html .= $i == 5 ? $i.' +' : $i;
+        $html .= "</span></label></li>";
     }
 
     return $html;
@@ -626,7 +627,9 @@ function multi_select_baths($amount = 5, $pre_select = null) {
         $html .= "<li";
         $html .= is_array($pre_select) && in_array($i, $pre_select) ? " class='white-border-chkbox'>" : '>';
         $html .= Form::checkbox('baths[]', $i, is_array($pre_select) && in_array($i, $pre_select) ? "checked='checked'" : '', ['id' => $id]);
-        $html .= "<label for=\"{$id}\"><span class=\"label-name\">{$i}</span></label></li>";
+        $html .= "<label for=\"{$id}\"><span class=\"label-name\">";
+        $html .= $i == 5 ? $i.' +' : $i;
+        $html .= "</span></label></li>";
     }
 
     return $html;

@@ -6,7 +6,7 @@ $(() => {
     let queries = JSON.parse(localStorage.getItem('search-queries'));
     let bath = [], bed = [], square_feet_min = null, square_feet_max = null, neighborhood = null, price_min = null, price_max = null, open_house = null;
 
-    // Price Range slider variables
+// Price Range slider variables
     let price_min_left = 0.0 , price_max_left = 100.0 , width = 100.0 ;
 
     $('.search-bath').find('li > input').on('click', function(e){
@@ -14,13 +14,13 @@ $(() => {
             let index = $(this).val() !== 'any' ? $(this).val() : 0;
             if($.inArray($(this).val(), bath) == -1) {
                 $(this).parents('.main-bath-search').length !== 0 ?
-                $($('.search-bath:last')).find('li > input')[index].click() : $($('.search-bath:first')).find('li > input')[index].click() ;
+                    $($('.search-bath:last')).find('li > input')[index].click() : $($('.search-bath:first')).find('li > input')[index].click() ;
                 bath.push($(this).val());
             }
             else {
                 bath.splice($.inArray($(this).val(), bed),1);
                 $(this).parents('.main-bath-search').length !== 0 ?
-                $($('.search-bath:last')).find('li > input')[index].click() : $($('.search-bath:first')).find('li > input')[index].click() ;
+                    $($('.search-bath:last')).find('li > input')[index].click() : $($('.search-bath:first')).find('li > input')[index].click() ;
             }
         }
     });
@@ -30,13 +30,13 @@ $(() => {
             let index = $(this).val() !== 'studio' ? $(this).val() : 0;
             if($.inArray($(this).val(), bed) == -1) {
                 $(this).parents('.main-search-beds').length !== 0 ?
-                $($('.search-beds:last')).find('li > input')[index].click() : $($('.search-beds:first')).find('li > input')[index].click() ;
+                    $($('.search-beds:last')).find('li > input')[index].click() : $($('.search-beds:first')).find('li > input')[index].click() ;
                 bed.push($(this).val());
             }
             else {
                 bed.splice($.inArray($(this).val(), bed),1);
                 $(this).parents('.main-search-beds').length !== 0 ?
-                $($('.search-beds:last')).find('li > input')[index].click() : $($('.search-beds:first')).find('li > input')[index].click() ;
+                    $($('.search-beds:last')).find('li > input')[index].click() : $($('.search-beds:first')).find('li > input')[index].click() ;
             }
         }
         console.log(bed);
@@ -51,32 +51,32 @@ $(() => {
     });
 
     $('input[name=min_price]').on('change', function() {
-       width = parseFloat($('#slider-range > div').css('width'));
-       $(this).val() > price_min ? (
-             width = width - ($(this).val()/10000 * 100 - price_min/10000 * 100),
-             price_min = $(this).val(),
-             price_min_left = $(this).val()/10000 * 100) :
-             ( width = width + (price_min/10000 * 100 - $(this).val()/10000 * 100),
-             price_min = $(this).val(),
-             price_min_left = $(this).val()/10000 * 100 ) ;
-       $('#min_price').val(price_min);
-       $('#slider-range > span:first').css("left",price_min_left+'%');
-       $('#slider-range > div').css("left",price_min_left+'%');
-       $('#slider-range > div').css("width",width+'%');
+        width = parseFloat($('#slider-range > div').css('width'));
+        $(this).val() > price_min ? (
+            width = width - ($(this).val()/10000 * 100 - price_min/10000 * 100),
+        price_min = $(this).val(),
+            price_min_left = $(this).val()/10000 * 100) :
+        ( width = width + (price_min/10000 * 100 - $(this).val()/10000 * 100),
+        price_min = $(this).val(),
+            price_min_left = $(this).val()/10000 * 100 ) ;
+        $('#min_price').val(price_min);
+        $('#slider-range > span:first').css("left",price_min_left+'%');
+        $('#slider-range > div').css("left",price_min_left+'%');
+        $('#slider-range > div').css("width",width+'%');
     });
 
     $('input[name=max_price]').on('change', function() {
         width = parseFloat($('#slider-range > div').css('width'));
-           $(this).val()/10000 * 100 < price_max_left ? (
-            width = width - (price_max_left - $(this).val()/10000 * 100) ,
-            price_max = $(this).val(),
-            price_max_left = $(this).val()/10000 * 100) :
+        $(this).val()/10000 * 100 < price_max_left ? (
+                width = width - (price_max_left - $(this).val()/10000 * 100) ,
+                    price_max = $(this).val(),
+                    price_max_left = $(this).val()/10000 * 100) :
             ( width = width + (($(this).val()/10000 * 100) - price_max_left) ,
-            price_max = $(this).val(),
-            price_max_left = $(this).val()/10000 * 100 ) ;
-       $('#max_price').val(price_max);
-       $('#slider-range > span:last').css("left",price_max_left+'%');
-       $('#slider-range > div').css("width",width+'%');
+                price_max = $(this).val(),
+                price_max_left = $(this).val()/10000 * 100 ) ;
+        $('#max_price').val(price_max);
+        $('#slider-range > span:last').css("left",price_max_left+'%');
+        $('#slider-range > div').css("width",width+'%');
     });
 
     $body.on('min-price', function(e, res) {
@@ -111,7 +111,7 @@ $(() => {
             price_max: price_max,
             square_feet_min: square_feet_min,
             square_feet_max: square_feet_max,
-            open_house  : open_house
+            open_house : open_house
         };
 
         let query = [];
@@ -139,59 +139,59 @@ $(() => {
     if(queries && queries.length > 0) {
         /*let selected = queries[queries.length - 1] ;
         if (selected.beds.length > 0 ){
-            $($('#advance-search-beds').find('li > input') ).each(function(index) {
-                for (let i = 0 ; i < selected.beds.length ; i++) {
-                    if($(this).val() == selected.beds[i]){
-                        $(this).trigger( "click");
-                        $(this).attr('checked' , true);
-                        break ;
-                    }
-                }
+        $($('#advance-search-beds').find('li > input') ).each(function(index) {
+        for (let i = 0 ; i < selected.beds.length ; i++) {
+        if($(this).val() == selected.beds[i]){
+        $(this).trigger( "click");
+        $(this).attr('checked' , true);
+        break ;
+        }
+        }
 
-            });
+        });
         }
         if (selected.baths.length > 0 ){
-            $($('#advance-search-baths').find('li > input') ).each(function(index) {
-                for (let i = 0 ; i < selected.baths.length ; i++) {
-                    if($(this).val() == selected.baths[i]){
-                        $(this).trigger( "click" );
-                        $(this).attr('checked' , true)
-                        break ;
-                    }
-                }
+        $($('#advance-search-baths').find('li > input') ).each(function(index) {
+        for (let i = 0 ; i < selected.baths.length ; i++) {
+        if($(this).val() == selected.baths[i]){
+        $(this).trigger( "click" );
+        $(this).attr('checked' , true)
+        break ;
+        }
+        }
 
-            });
+        });
         }
         if (selected.price_min !== null){
-            setTimeout(() => {
-                price_min = selected.price_min ;
-                $('#min_price').val(selected.price_min);
-                let percentage = (selected.price_min / 10000) * 100 ;
-                $('#slider-range > span:first').css("left",percentage+'%');
-                $('#slider-range > div').css("left",percentage+'%');
-                $('#slider-range > div').css("width",100-percentage+'%');
-            }, 100);
+        setTimeout(() => {
+        price_min = selected.price_min ;
+        $('#min_price').val(selected.price_min);
+        let percentage = (selected.price_min / 10000) * 100 ;
+        $('#slider-range > span:first').css("left",percentage+'%');
+        $('#slider-range > div').css("left",percentage+'%');
+        $('#slider-range > div').css("width",100-percentage+'%');
+        }, 100);
         }
         if (selected.price_max !== null){
-            setTimeout(() => {
-                price_max = selected.price_max ;
-                $('#max_price').val(selected.price_max);
-                let percentage = (selected.price_max / 10000) * 100 ;
-                let width =  parseFloat($('#slider-range > div').css('width')) ;
-                $('#slider-range > span:last').css("left",percentage+'%');
-                $('#slider-range > div').css("width",(width -(100-percentage)+'%'));
-            }, 100);
+        setTimeout(() => {
+        price_max = selected.price_max ;
+        $('#max_price').val(selected.price_max);
+        let percentage = (selected.price_max / 10000) * 100 ;
+        let width = parseFloat($('#slider-range > div').css('width')) ;
+        $('#slider-range > span:last').css("left",percentage+'%');
+        $('#slider-range > div').css("width",(width -(100-percentage)+'%'));
+        }, 100);
         }
         if (selected.neighborhood !== null){
-            let current ;
-            $('input[name=neighborhoods]').val(selected.neighborhood);
-            $('select[name=neighborhoods] option').each(function(index) {
-                if($(this).text() == selected.neighborhood){
-                    current = $( this ).val() ;
-                }
-            });
-            $('select[name=neighborhoods]').val(current);
-            neighborhood = selected.neighborhood ;
+        let current ;
+        $('input[name=neighborhoods]').val(selected.neighborhood);
+        $('select[name=neighborhoods] option').each(function(index) {
+        if($(this).text() == selected.neighborhood){
+        current = $( this ).val() ;
+        }
+        });
+        $('select[name=neighborhoods]').val(current);
+        neighborhood = selected.neighborhood ;
         }*/
 
         queries.forEach(async (v, i) => {
@@ -203,13 +203,13 @@ $(() => {
             }
             $('#empty-keywords').remove();
             $('.dropDown > ul.neighborhoods_amenities').prepend(`<li>
-                <a href="${v.url}" class="recent" data-id = "${i}" >
-                        ${
+<a href="${v.url}" class="recent" data-id = "${i}" >
+${
             (v.neighborhood !== null ? 'Listings in ' + v.neighborhood : 'Listings ') +
-            (v.beds.length > 0  ?
+            (v.beds.length > 0 ?
                 (v.beds.length > 1 ?
                     ' with ' + v.beds.sort() + ' bedrooms' : (v.beds[0] > 1 || v.beds[0] == '5+' ? ' with ' + v.beds + ' bedrooms' : ' with ' + v.beds + ' bedroom')): '') +
-            (v.baths.length > 0  ?
+            (v.baths.length > 0 ?
                 (v.baths.length > 1 ?
                     ' with at least ' + v.baths.sort() + ' bathrooms' : (v.baths[0] > 1 || v.baths[0] == '5+' ? ' with at least ' + v.baths + ' bathrooms' : ' with at least ' + v.baths + ' bathroom') ): '')+
             (v.price_min !== null ?
@@ -222,8 +222,8 @@ $(() => {
                     ' between ' + formatNumber(v.square_feet_min) + ' ft² and ' + formatNumber(v.square_feet_max) + ' ft² ' : 'above ' + formatNumber(v.square_feet_min) + 'ft²' ) :
                 (v.square_feet_max !== null ?
                     ' under ' + formatNumber(v.square_feet_max) + ' ft²' : '' ))+
-            (v.open_house !== null && v.open_house !== ''  ? ' with Open House ' + v.open_house : '')}
-                </a> </li>`);
+            (v.open_house !== null && v.open_house !== '' ? ' with Open House ' + v.open_house : '')}
+</a> </li>`);
         });
     } else {
         if($('#empty-keywords').length > 0) return;
