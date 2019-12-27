@@ -666,21 +666,22 @@ function neighborhood_let_us_help() {
     $content .= "<div class=\"tab-content\">";
     $boroughs = (new \App\Services\BoroughService())->get();
     foreach ($boroughs as $key => $borough) {
-        $total = count($borough->neighborhoods);
-        $hasOpen = false;
         $i = 1;
+        $hasOpen = false;
+        $tab_id = str_random(16);
+        $total = count($borough->neighborhoods);
         $perColum = ceil($total / 3);
         $tabs .= "<li class=\"nav-item\">";
         $tabs .= "<a class='nav-link";
         $tabs .= $key == 0 ? " active'" : "'";
-        $tabs .= " data-toggle=\"pill\" href=\"#tab-{$key}\">{$borough->boro}</a></li>";
+        $tabs .= " data-toggle=\"pill\" href=\"#tab-{$tab_id}\">{$borough->boro}</a></li>";
         foreach ($borough->neighborhoods as $key2 => $neighborhood) {
             $i ++;
             $id = str_random(10);
             if($key2 == 0) {
                 $content .= "<div class='tab-pane ";
                 $content .= $key == 0 ? "active'" : "'";
-                $content .= " id=\"tab-{$key}\">";
+                $content .= " id=\"tab-{$tab_id}\">";
                 $content .= "<div class='row'>";
             }
 
