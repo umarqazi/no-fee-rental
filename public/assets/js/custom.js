@@ -474,6 +474,9 @@ $(() => {
         $("#need-help-btn2").click(function () {
             $("body").addClass("signup-modal-scroll-getStart");
         });
+        $(".btn-default.get_started_next_btn , .btn-default.next-modal").click(function () {
+            $("body").addClass("signup-modal-scroll-getStart");
+        });
 
         $(".need-help-modal .close").click(function () {
             $("body").removeClass("signup-modal-scroll-getStart");
@@ -615,6 +618,9 @@ $(() => {
         if (!$(e.target).is(".price-range-dropdown") && $(e.target).parents('.price-range-dropdown').length == 0) {
             $(".price-range-ul").hide();
         }
+        if (!$(e.target).is(".search-fld") && $(e.target).parents('.neighborhood-search-advance').length == 0) {
+            $(".neighborhood-search-dropdown").hide();
+        }
     });
 
     $(".dropdown-beds").click ( function () {
@@ -678,11 +684,9 @@ $(() => {
        $(".price-range-ul").toggle();
    });
    $(".header-bg .search-property .search-fld").click(function (e) {
-       // if($(e.target).parents('.neighborhood-search-advance').length !== 0){
-       //     return;
-       // }
+
         $(".neighborhood-search-dropdown").toggle();
-   })
+   });
 
 });
 
