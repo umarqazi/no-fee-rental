@@ -677,6 +677,12 @@ $(() => {
        }
        $(".price-range-ul").toggle();
    });
+   $(".header-bg .search-property .search-fld").click(function (e) {
+       // if($(e.target).parents('.neighborhood-search-advance').length !== 0){
+       //     return;
+       // }
+        $(".neighborhood-search-dropdown").toggle();
+   })
 
 });
 
