@@ -342,6 +342,18 @@ h3 {
     padding: 30px;
 }
 
+.block .heading-wrapper.listings-wrapperr{
+    display: block;
+    padding: 15px 0px 15px;
+}
+.block .heading-wrapper.listings-wrapperr .nav.nav-pills{
+    border-bottom: #e4e4e4 solid 1px;
+    padding-bottom: 17px;
+}
+.block .heading-wrapper.listings-wrapperr .filter-wrapper {
+    margin-top: 20px;
+    padding-left: 7px;
+}
 header {
     background: #223971;
     display: flex;
@@ -553,7 +565,9 @@ header .agent-avtar .avtar:hover div ul {
 .main-wrapper .listing-container .filter-wrapper {
     display: flex;
     align-items: center;
+
 }
+
 
 .main-wrapper .listing-container .filter-wrapper .listing-views {
     margin-right: 10px;
@@ -581,7 +595,7 @@ header .agent-avtar .avtar:hover div ul {
 .main-wrapper .listing-container .filter-wrapper .filter-input {
     border: #b7b7b7 solid 1px;
     height: 30px;
-    width: 150px;
+    width: 100px;
     padding: 0px 10px;
     border-radius: 40px;
     margin-right: 10px;
@@ -1671,7 +1685,11 @@ header .agent-avtar .avtar:hover div ul {
     font-weight: 600;
     font-size: 16px;
 }
-
+#neighborhood_detail .form-group img {
+    width: 100%;
+    max-height:250px;
+    object-fit: cover;
+}
 .error {
     color: red;
 }
@@ -2242,10 +2260,13 @@ header .agent-avtar .avtar:hover div ul {
     #add-neighborhood .modal-dialog {
         max-width: 600px;
     }
-
-    #view-content .modal-dialog {
-        max-width: 600px;
+    #view-content .modal-dialog{
+        max-width: 400px;
     }
+
+    /*#view-content .modal-dialog {*/
+    /*    max-width: 600px;*/
+    /*}*/
     #myModal-currentPlan .modal-dialog{
         max-width:420px;
     }
