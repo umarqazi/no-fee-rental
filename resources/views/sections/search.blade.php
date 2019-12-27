@@ -5,7 +5,7 @@
             {!! Form::model(app('request')->all(), ['url' => route('web.indexSearch'), 'method' => 'get', 'id' => 'index-search-from']) !!}
             <div class="search-property">
                 <div style="position:relative;">
-                    <i class="fas fa-search"></i> {{-- {!! Form::text('neighborhood', null, ['id' => 'neigh', 'placeholder' => 'Enter Neighborhood', 'class' => 'search-fld']) !!}--}}
+                    <i class="fas fa-search"></i>
                     <label class="search-fld">Neighborhood </label>
                 </div>
                 <div class="price-range-dropdown">
@@ -46,5 +46,10 @@
         <a href="javascript:void(0);" class="advance-search" data-toggle="modal" data-target="#advance-search">+ Advanced Search</a>
     </div>
 </div>
+<script>
+    $('.neighborhood-list > li > div').on('click', function() {
+        $('.search-fld').text($(this).text());
+    });
+</script>
 {{--Advance Search--}}
 @include('modals.advance_search')

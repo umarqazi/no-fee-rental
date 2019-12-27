@@ -191,6 +191,7 @@ async function livePreview(file, target) {
  * @returns {Promise<void>}
  */
 const fetchNeighbours = async (selector) => {
+    console.log(selector);
     await ajaxRequest('/all-neighborhoods', 'post', null, false).then(neighbours => {
         let data = [];
         neighbours.data.forEach(v => {
