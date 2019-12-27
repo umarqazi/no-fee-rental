@@ -837,7 +837,9 @@ function property_thumbs($listing) {
     $html .= "<div class='info'><div class='info-link-text'>";
     $html .= "<p>$ ".number_format($listing->rent)." / month&nbsp;&nbsp;</p>";
     $html .= "<small> (". $listing->bedrooms .' bd'.", ".$listing->baths.' ba'.")</small>";
-    $html .= "<p>".is_exclusive($listing).", {$listing->neighborhood->name}</p></div>";
+    $html .= "<p>";
+    $html .= is_exclusive($listing).", ".$listing->neighborhood->name ?? null;
+    $html .= "</p></div>";
     $html .= "<a href='".route('listing.detail', $listing->id)."' class='btn viewfeature-btn'> View </a></div>";
     $html .= "<div class='feaure-policy-text'>";
     $html .= "<p>$ ".number_format($listing->rent)." / month </p>";
