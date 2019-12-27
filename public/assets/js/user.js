@@ -102,9 +102,8 @@ $(() => {
         },
         {
         render: (data, type, row) => {
-            return `<i class="fa ${row.status ? 'fa-eye' : 'fa-eye-slash'} action-btn" id="updateUserStatus" ref_id="${row.id}" route="/admin/status-update/${row.id}"></i>
-                     <i class="fa fa-edit px-2 action-btn" id="updateUser" ref_id="${row.id}" route="/admin/edit-user/${row.id}"></i>
-                     <i class="fa fa-trash action-btn" id="deleteUser" ref_id="${row.id}" route="/admin/delete-user/${row.id}"></i>`;
+            return `<i class="fa fa-edit px-2 action-btn" id="updateUser" ref_id="${row.id}" route="/admin/edit-user/${row.id}"></i>
+                    <i class="fa fa-trash action-btn" id="deleteUser" ref_id="${row.id}" route="/admin/delete-user/${row.id}"></i>`;
         },
         targets: 3
     }];
@@ -114,17 +113,15 @@ $(() => {
     columnDefs = [{
         render: (data, type, row) => {
             return row.first_name+' '+row.last_name;
-        },
-        targets: 0
-    },
-        {
-            render: (data, type, row) => {
-                return `<i class="fa ${row.status ? 'fa-eye' : 'fa-eye-slash'} action-btn" id="updateUserStatus" ref_id="${row.id}" route="/admin/status-update/${row.id}"></i>
-                     <i class="fa fa-edit px-2 action-btn" id="updateUser" ref_id="${row.id}" route="/admin/edit-user/${row.id}"></i>
-                     <i class="fa fa-trash action-btn" id="deleteUser" ref_id="${row.id}" route="/admin/delete-user/${row.id}"></i>`;
-            },
-            targets: 3
-        }];
+        }, targets: 0
+
+    }, {
+        render: (data, type, row) => {
+            return `<i class="fa fa-edit px-2 action-btn" id="updateUser" ref_id="${row.id}" route="/admin/edit-user/${row.id}"></i>
+                    <i class="fa fa-trash action-btn" id="deleteUser" ref_id="${row.id}" route="/admin/delete-user/${row.id}"></i>`;
+        }, targets: 3
+    }];
+
     dataTables('#renters_table', '/admin/get-renters', columns, columnDefs);
 
     // +++++ Companies Table +++++ //
@@ -139,6 +136,7 @@ $(() => {
             },
             targets: 2
     }];
+
     dataTables('#companies_table', '/admin/get-companies-with-agents', ['id', 'company', 'status'], columnDefs);
 });
 

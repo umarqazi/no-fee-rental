@@ -51,11 +51,11 @@
                         <div class="item">
                             <!-- <img src="/assest/images/check.png" alt="item-img"> -->
                             <div class="item-first-img">
-                                <img src="{{asset('assets/images/check.png')}}"/>
+                                <img src="{{ asset('assets/images/check-icon.png') }}"/>
                             </div>
                             <p>{{$review->review_message}}</p>
                             <div class="item-profile-img">
-                                <img src="{{asset($review->from->profile_image)}}"/>
+                                <img src="{{ asset($review->from->profile_image ?? DUI) }}"/>
                             </div>
                             <strong>{{$review->from->first_name}} {{$review->from->last_name}}</strong>
                         </div>

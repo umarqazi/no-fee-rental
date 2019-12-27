@@ -7,6 +7,7 @@ $(() => {
     let bath = [], bed = [], square_feet_min = null, square_feet_max = null, neighborhood = null, price_min = null, price_max = null, open_house = null;
 
 
+
     $('#advance-search-modals-baths').find('li > input').on('change', function() {
         let found = false ;
         for(let i = 0 ; i < bath.length ; i++){

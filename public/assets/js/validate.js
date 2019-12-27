@@ -21,14 +21,12 @@ $(() => {
 
         if($(ele).val()) {
             val = $(ele).val() ;
-        }
-
-        else {
+        } else {
              val = $('input[name="old_thumbnail"]').val() ;
         }
 
             switch(val.substring(val.lastIndexOf('.') + 1).toLowerCase()){
-            case 'jpeg': case 'jpg': case 'png' : case 'gif':
+            case 'jpeg': case 'jpg': case 'png':
                 return true;
             default:
                 $(this).val('');
