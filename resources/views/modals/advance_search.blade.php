@@ -22,11 +22,11 @@
                 {!! Form::model(app('request')->all(), ['url' => route($search_route ?? 'web.advanceSearch', $param ?? null), 'method' => 'get', 'id' => 'modal-search-from']) !!}
                 <div class="row">
                     <div class="col-md-6 search-form-grou-mrg-btm">
-                        <div class="form-group" id="advance-search-chkbox" class="advance-search-modal-beds">
+                        <div class="form-group advance-search-modal-beds search-beds" id="advance-search-chkbox">
                             <label class="label">Beds <span>(Select all that applies)</span></label>
                             {!! multi_select_beds(5, app('request')->get('beds') ?? null) !!}
                         </div>
-                        <div class="form-group" id="advance-search-chkbox" class="advance-search-modal-baths">
+                        <div class="form-group advance-search-modal-baths search-bath" id="advance-search-chkbox">
                             <label class="label">Baths <span>(Select all that applies)</span></label>
                             {!! multi_select_baths(5, app('request')->get('baths') ?? null) !!}
                         </div>
@@ -56,7 +56,7 @@
                     </div>
                     {{--Keywords--}}
                     <div class="col-md-6">
-                        <div class="form-group">
+                        <div class="form-group search-neighborhood">
                             <label class="label">Neighbourhoods</label>
                             <select class="input-style" name="neighborhood">
                                 {!! simple_neighborhood_select(app('request')->get('neighborhood') ?? null) !!}

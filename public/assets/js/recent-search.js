@@ -6,77 +6,77 @@ $(() => {
     let queries = JSON.parse(localStorage.getItem('search-queries'));
     let bath = [], bed = [], square_feet_min = null, square_feet_max = null, neighborhood = null, price_min = null, price_max = null, open_house = null;
 
+    // Price Range slider variables
+    let price_min_left = 0.0 , price_max_left = 100.0 , width = 100.0 ;
 
-    $('#advance-search-modals-baths').find('li > input').on('change', function() {
-        let found = false ;
-        for(let i = 0 ; i < bath.length ; i++){
-            if(bath[i] == $(this).val()){
-                bath.splice(i,1);
-                found = true ;
+    $('.search-bath').find('li > input').on('click', function(e){
+        if(e.originalEvent.isTrusted == true){
+            let index = $(this).val() !== 'any' ? $(this).val() : 0;
+            if($.inArray($(this).val(), bath) == -1) {
+                $(this).parents('.main-bath-search').length !== 0 ?
+                $($('.search-bath:last')).find('li > input')[index].click() : $($('.search-bath:first')).find('li > input')[index].click() ;
+                bath.push($(this).val());
             }
-        }
-        if(found !== true){
-            bath.push($(this).val());
+            else {
+                bath.splice($.inArray($(this).val(), bed),1);
+                $(this).parents('.main-bath-search').length !== 0 ?
+                $($('.search-bath:last')).find('li > input')[index].click() : $($('.search-bath:first')).find('li > input')[index].click() ;
+            }
         }
     });
 
     $('.search-beds').find('li > input').on('click', function(e){
-        if(e.originalEvent.isTrusted == true) {
-            let val = $(this).val();
-            if ($(this).parents('ul').attr('class') == 'search-beds main-beds') {
-                $($('.search-beds:last')).find('li > input').each(function (index) {
-                    if ($(this).val() == val) {
-                        $(this).click();
-                    }
-                });
-            } else {
-                $($('.search-beds:first')).find('li > input').each(function (index) {
-                    if ($(this).val() == val) {
-                        $(this).click();
-                    }
-                });
+        if(e.originalEvent.isTrusted == true){
+            let index = $(this).val() !== 'studio' ? $(this).val() : 0;
+            if($.inArray($(this).val(), bed) == -1) {
+                $(this).parents('.main-search-beds').length !== 0 ?
+                $($('.search-beds:last')).find('li > input')[index].click() : $($('.search-beds:first')).find('li > input')[index].click() ;
+                bed.push($(this).val());
             }
-            bed.push(val);
+            else {
+                bed.splice($.inArray($(this).val(), bed),1);
+                $(this).parents('.main-search-beds').length !== 0 ?
+                $($('.search-beds:last')).find('li > input')[index].click() : $($('.search-beds:first')).find('li > input')[index].click() ;
+            }
         }
+        console.log(bed);
     });
 
-    $('input[name=neighborhood]').on('change', function() {
-        let select = $("select[name=neighborhood] option");
-        let val = $('input[name=neighborhood]').val();console.log(val);
-        let currentSelect ;
-        if (val.length > 0){
-            $( select ).each(function(index) {
-                if($(this).text() == val){
-                    currentSelect = $( this ).val() ;
-                }
-            });
-            $("select[name=neighborhood]").val(currentSelect);
-        }
-        neighborhood = val ;
-    });
-
-    $('select[name=neighborhood]').on('change', function() {
-        let nSelector = $("select[name=neighborhood] option:selected");
-        $('input[name=neighborhood]').val(nSelector.text());
-        neighborhood = nSelector.text();
+    $('.search-neighborhood').find('input,select').on('change', function(e){
+        $(this).attr('id') ?
+            ($('.search-neighborhood').find('select').val($(this).val()),
+                neighborhood = $(this).val()) :
+            ($('.search-neighborhood').find('input').val($(this).val()) ,
+                neighborhood = $(this).val()) ;
     });
 
     $('input[name=min_price]').on('change', function() {
-       price_min = $(this).val();
+       width = parseFloat($('#slider-range > div').css('width'));
+       $(this).val() > price_min ? (
+             width = width - ($(this).val()/10000 * 100 - price_min/10000 * 100),
+             price_min = $(this).val(),
+             price_min_left = $(this).val()/10000 * 100) :
+             ( width = width + (price_min/10000 * 100 - $(this).val()/10000 * 100),
+             price_min = $(this).val(),
+             price_min_left = $(this).val()/10000 * 100 ) ;
        $('#min_price').val(price_min);
-       let percentage = (price_min / 10000) * 100 ;
-       $('#slider-range > span:first').css("left",percentage+'%');
-       $('#slider-range > div').css("left",percentage+'%');
-       $('#slider-range > div').css("width",100-percentage+'%');
+       $('#slider-range > span:first').css("left",price_min_left+'%');
+       $('#slider-range > div').css("left",price_min_left+'%');
+       $('#slider-range > div').css("width",width+'%');
     });
 
     $('input[name=max_price]').on('change', function() {
-       price_max = $(this).val();
+        width = parseFloat($('#slider-range > div').css('width'));
+           $(this).val()/10000 * 100 < price_max_left ? (
+            width = width - (price_max_left - $(this).val()/10000 * 100) ,
+            price_max = $(this).val(),
+            price_max_left = $(this).val()/10000 * 100) :
+            ( width = width + (($(this).val()/10000 * 100) - price_max_left) ,
+            price_max = $(this).val(),
+            price_max_left = $(this).val()/10000 * 100 ) ;
        $('#max_price').val(price_max);
-       let percentage = (price_max / 10000) * 100 ;
-       let width =  parseFloat($('#slider-range > div').css('width')) ;
-       $('#slider-range > span:last').css("left",percentage+'%');
-       $('#slider-range > div').css("width",(width -(100-percentage)+'%'));
+       $('#slider-range > span:last').css("left",price_max_left+'%');
+       $('#slider-range > div').css("width",width+'%');
     });
 
     $body.on('min-price', function(e, res) {
@@ -101,7 +101,7 @@ $(() => {
         open_house = $(this).val();
     });
 
-    $body.on('submit', '#search , #advance-search', async function() {
+    $body.on('submit', '#search , #advance-search , #index-search-from', async function() {
         let searchQuery = {
             isNew: true,
             baths: bath,

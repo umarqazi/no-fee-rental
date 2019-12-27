@@ -601,7 +601,8 @@ function multi_select_beds($amount = 5, $pre_select = null) {
         $html .= "<li";
         $html .= is_array($pre_select) && in_array($i, $pre_select) ? " class='white-border-chkbox'>" : '>';
         $html .= Form::checkbox('beds[]', $i, is_array($pre_select) && in_array($i, $pre_select) ? "checked='checked'" : '', ['id' => $id]);
-        $html .= "<label for=\"{$id}\"><span class=\"label-name\">{$i}</span></label></li>";
+        $i !== 5 ? $html .= "<label for=\"{$id}\"><span class=\"label-name\">{$i}</span></label></li>" :
+            $html .= "<label for=\"{$id}\"><span class=\"label-name\">{$i}+</span></label></li>" ;
     }
 
     return $html;
