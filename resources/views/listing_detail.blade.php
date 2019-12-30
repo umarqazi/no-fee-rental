@@ -43,7 +43,7 @@
                         </div>
                     </div>
                     <p class="title-subtext">
-                        {{ $listing->display_address.', '.$listing->neighborhood->name }}
+                        {{ $listing->display_address.', '.$listing->neighborhood ? $listing->neighborhood->name : Null }}
                     </p>
 
                     <div class="available-btn">

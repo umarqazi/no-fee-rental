@@ -6,14 +6,14 @@
     {!! HTML::script('assets/js/recent-search.js') !!}
     {!! HTML::script('https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js') !!}
     {!! HTML::script('https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js') !!}
-    <script src="{{asset('assets/js/vendor/jquery-ui.min.js')}}"></script>
-    <script src="{{asset('assets/js/vendor/jquery.ui.touch-punch.min.js')}}"></script>
-    <script src="{{asset('assets/js/vendor/popper.min.js')}}"></script>
-    <script src="{{asset('assets/js/vendor/bootstrap.min.js')}}"></script>
-    <script src="{{asset('assets/js/vendor/wow.min.js')}}"></script>
-    <script src="{{asset('assets/js/vendor/jquery.validate.min.js')}}"></script>
-    <script src="{{asset('assets/js/custom.js')}}"></script>
-    <script src="{{asset('assets/js/vendor/lightslider.js')}}"></script>
+    {!! HTML::script("assets/js/vendor/jquery-ui.min.js") !!}
+    {!! HTML::script("assets/js/vendor/jquery.ui.touch-punch.min.js") !!}
+    {!! HTML::script("assets/js/vendor/popper.min.js") !!}
+    {!! HTML::script("assets/js/vendor/bootstrap.min.js") !!}
+    {!! HTML::script("assets/js/vendor/wow.min.js") !!}
+    {!! HTML::script("assets/js/vendor/jquery.validate.min.js") !!}
+    {!! HTML::script("assets/js/custom.js") !!}
+    {!! HTML::script("assets/js/vendor/lightslider.js") !!}
     <script>
         $(() => {
             let $disabledResults = $('.neighborhood-select-search');
@@ -25,5 +25,10 @@
                     $('#check-availability').modal('show');
                 @endif
             });
+            @if(!empty($errors->all()))
+                populateErrors($(this), "{{ $errors->all() }}");
+            @endif
+
+            $('.property-thumb > img').resizeToParent();
         });
     </script>

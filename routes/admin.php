@@ -79,12 +79,13 @@ Route::post('/company-status-update/{id}', 'Admin\CompanyController@status');
 Route::get('/view-associated-agents/{id}', 'Admin\HomeController@associatedAgents');
 
 // Neighborhood Routes
-Route::get('/neighborhoods', 'Admin\NeighborhoodController@index')->name('neighborhoods');
+Route::get('/neighborhoods', 'Admin\NeighborhoodController@index')->name('admin.neighborhood');
 Route::get('/manhattan-neighborhoods', 'Admin\NeighborhoodController@manhattan');
 Route::get('/bronx-neighborhoods', 'Admin\NeighborhoodController@bronx');
 Route::get('/brooklyn-neighborhoods', 'Admin\NeighborhoodController@brooklyn');
 Route::get('/queens-neighborhoods', 'Admin\NeighborhoodController@queens');
 Route::get('/staten_island-neighborhoods', 'Admin\NeighborhoodController@statenIsland');
+Route::get('/other-neighborhoods', 'Admin\NeighborhoodController@other');
 Route::post('/create-neighborhood', 'Admin\NeighborhoodController@create')->name('admin.createNeighborhood');
 Route::post('/neighborhood/edit/{id}', 'Admin\NeighborhoodController@edit')->name('neighborhood.edit');
 Route::post('/neighborhood/update/{id}', 'Admin\NeighborhoodController@update')->name('neighborhood.update');

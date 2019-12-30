@@ -16,19 +16,16 @@
                 </ul>
                 {!! isAdmin() ? "<p>Request By: {$pl->agent->first_name} {$pl->agent->last_name}</p>" : '' !!}
                 <p>Posted On: {{ $pl->created_at->format("m/d/y H:m A") }}</p>
-                @if(isAdmin())
-                    <a href="{{ route('admin.approveRequest', $pl->id) }}" title='Click To Approve'>
-                        <span class="status" style="background: #ffce39;">Pending</span>
-                    </a>
-                @else
-                    <span class="status" style="background: #ffce39;">Pending</span>
-                @endif
+                <span class="status" style="background: #ffce39;">Pending Request</span>
                 <div class="actions-btns">
                     <a href="{{ route(whoAmI().'.editListing', $pl->id) }}">
                         <span><img src="{{asset('assets/images/edit-icon.png')}}" alt=""></span>
                     </a>
                     <a href="{{ route(whoAmI().'.copyListing', $pl->id) }}">
                         <span><img src="{{asset('assets/images/copy-icon.png')}}" alt=""></span>
+                    </a>
+                    <a href="{{ route(whoAmI().'.approveRequest', $pl->id) }}" title="Publish this Listing">
+                        <button type="button" class="border-btn">Approve</button>
                     </a>
                 </div>
             </div>
@@ -56,14 +53,11 @@
                             <li><i class="fa fa-bath"></i> {{ str_formatting($pl->baths, 'Bath') }}</li>
                         </ul>
                         <p>Posted On: {{ $pl->created_at->format("m/d/y H:m A") }}</p>
-                        @if(isAdmin())
-                            <a href="{{ route('admin.approveRequest', $pl->id) }}" title='Click To Approve'>
-                                <span class="status" style="background: #ffce39;">Pending</span>
-                            </a>
-                        @else
-                            <span class="status" style="background: #ffce39;">Pending</span>
-                        @endif
+                        <span class="status" style="background: #ffce39;">Pending Request</span>
                         <div class="actions-btns">
+                            <a href="{{ route(whoAmI().'.approveRequest', $pl->id) }}" title="Publish this Listing">
+                                <button type="button" class="border-btn">Approve</button>
+                            </a>
                         </div>
                         <div class="list-actions-icons">
                             <a href="{{ route(whoAmI().'.editListing', $pl->id) }}"><button><i class="fa fa-edit"></i></button></a>

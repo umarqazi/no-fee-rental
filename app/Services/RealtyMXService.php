@@ -6,13 +6,12 @@
  * @project no-fee-rental
  */
 
-
 namespace App\Services;
 
 use App\Repository\CompanyRepo;
 use App\Repository\NeighborhoodRepo;
-use App\Traits\DispatchNotificationService;
 use Illuminate\Support\Facades\Validator;
+use App\Traits\DispatchNotificationService;
 
 /**
  * Class RealtyMXService

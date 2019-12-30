@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Services\NeighborhoodService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Services\NeighborhoodService;
 
-
+/**
+ * Class NeighborhoodController
+ * @package App\Http\Controllers\Admin
+ *
+ */
 class NeighborhoodController extends Controller {
 
     /**
@@ -16,11 +20,9 @@ class NeighborhoodController extends Controller {
 
     /**
      * NeighborhoodController constructor.
-     *
-     * @param NeighborhoodService $neighborhoodService
      */
-    public function __construct(NeighborhoodService $neighborhoodService) {
-        $this->neighborhoodService = $neighborhoodService;
+    public function __construct() {
+        $this->neighborhoodService = new NeighborhoodService();
     }
 
     /**
@@ -113,5 +115,11 @@ class NeighborhoodController extends Controller {
         return dataTable($this->neighborhoodService->statenIsland());
     }
 
-
+    /**
+     * @return mixed
+     * @throws \Exception
+     */
+    public function other() {
+        return dataTable($this->neighborhoodService->other());
+    }
 }
