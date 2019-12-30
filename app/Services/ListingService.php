@@ -82,12 +82,12 @@ class ListingService extends BuildingService {
 
         DB::commit();
 
-        $listing->visibility !== PENDINGLISTING ?:
-            DispatchNotificationService::LISTINGAPPROVALREQUEST(toObject([
-                'to'   => mailToAdmin(),
-                'data' => $listing,
-                'from' => $listing->user_id,
-            ]));
+//        $listing->visibility !== PENDINGLISTING ?:
+//            DispatchNotificationService::LISTINGAPPROVALREQUEST(toObject([
+//                'to'   => mailToAdmin(),
+//                'data' => $listing,
+//                'from' => $listing->user_id,
+//            ]));
         return $listing->id;
     }
 
@@ -379,8 +379,8 @@ class ListingService extends BuildingService {
         }
 
         $form                    = new ListingForm();
-        $form->user_id           = $request->owner_id ?? myId();
-        $form->unique_slug       = str_random( 20 );
+        $form->user_id           = $request->owner_id ?? $request->user_id ?? myId();
+        $form->unique_slug       = $request->unique_slug ?? str_random( 20 );
         $form->name              = $request->name;
         $form->building_id       = $request->building_id;
         $form->email             = $request->email;
@@ -392,7 +392,8 @@ class ListingService extends BuildingService {
         $form->availability      = $request->availability;
         $form->visibility        = $request->visibility;
         $form->description       = $request->description;
-        $form->neighborhood_id   = $this->__neighborhoodHandler($request->neighborhood);
+        $form->neighborhood_id   = $request->neighborhood_id ??
+                                   $this->__neighborhoodHandler($request->neighborhood);
         $form->bedrooms          = $request->bedrooms;
         $form->baths             = $request->baths;
         $form->unit              = $request->unit;
@@ -613,22 +614,30 @@ class ListingService extends BuildingService {
      */
     protected function __searchCollection( $keywords, $paginate ) {
         return [
-            'pending'  => $this->listingRepo->search( $keywords )
-                                            ->pending()
-                                            ->latest()
-                                            ->paginate( $paginate, [ '*' ], 'pending' ),
-            'active'   => $this->listingRepo->search( $keywords )
+            'active'     => $this->listingRepo->search( $keywords )
                                             ->active()
-                                            ->latest( 'updated_at' )
-                                            ->paginate( $paginate, [ '*' ], 'active' ),
-            'inactive' => $this->listingRepo->search( $keywords )
-                                            ->inactive()
                                             ->latest()
-                                            ->paginate( $paginate, [ '*' ], 'inactive' ),
-            'archived' => $this->listingRepo->search( $keywords )
+                                            ->paginate($paginate, ['*'], 'active'),
+            'realty'     => $this->listingRepo->search( $keywords )
+                                            ->realty()
+                                            ->latest()
+                                            ->paginate($paginate, ['*'], 'realty'),
+            'archived'   => $this->listingRepo->search( $keywords )
                                             ->archived()
                                             ->latest()
-                                            ->paginate( $paginate, [ '*' ], 'archived' ),
+                                            ->paginate($paginate, ['*'], 'archive'),
+            'owner_only' => $this->listingRepo->search( $keywords )
+                                            ->ownerOnly()
+                                            ->latest()
+                                            ->paginate($paginate, ['*'], 'owner_only'),
+            'pending'    => $this->listingRepo->search( $keywords )
+                                            ->pending()
+                                            ->latest()
+                                            ->paginate($paginate, ['*'], 'pending'),
+            'reported'   => $this->listingRepo->search( $keywords )
+                                            ->reportedLists()
+                                            ->latest()
+                                            ->paginate($paginate, ['*'], 'reported'),
         ];
     }
 
@@ -641,18 +650,27 @@ class ListingService extends BuildingService {
      */
     protected function __sortCollection( $paginate, $col, $order ) {
         return toObject( [
-            'active'   => $this->active()
+            'active'     => $this->active()
                                ->orderBy( $col, $order )
                                ->paginate( $paginate, [ '*' ], 'active' ),
-            'inactive' => $this->inactive()
+            'inactive'   => $this->inactive()
                                ->orderBy( $col, $order )
                                ->paginate( $paginate, [ '*' ], 'inactive' ),
-            'pending'  => $this->pending()
+            'pending'    => $this->pending()
                                ->orderBy( $col, $order )
                                ->paginate( $paginate, [ '*' ], 'pending' ),
-            'archived' => $this->archived()
+            'archived'   => $this->archived()
                                ->orderBy( $col, $order )
-                               ->paginate( $paginate, [ '*' ], 'archived' )
+                               ->paginate( $paginate, [ '*' ], 'archived' ),
+            'owner_only' => $this->ownerOnly()
+                                 ->orderBy( $col, $order )
+                                 ->paginate($paginate, ['*'], 'owner_only'),
+            'reported'   => $this->reported()
+                                 ->orderBy( $col, $order )
+                                 ->paginate($paginate, ['*'], 'reported'),
+            'realty'     => $this->realty()
+                               ->orderBy( $col, $order )
+                               ->paginate( $paginate, [ '*' ], 'realty' )
         ] );
     }
 

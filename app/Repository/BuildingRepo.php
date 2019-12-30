@@ -54,7 +54,7 @@ class BuildingRepo extends BaseRepo {
      * @return mixed
      */
     public function fee($paginate) {
-        return $this->find(['type' => FEE])
+        return $this->find(['type' => FEE, 'user_id' => NULL])
                     ->withLists()
                     ->paginate($paginate, ['*'], 'fee');
     }

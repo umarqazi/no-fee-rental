@@ -23,6 +23,7 @@
                                     <ul>
                                         <li><a href="{{ route('admin.sorting', 'cheaper') }}">Cheapest</a></li>
                                         <li><a href="{{ route('admin.sorting', 'recent') }}" >Recent</a></li>
+                                        <li><a href="{{ route('admin.sorting', 'oldest') }}" >Oldest</a></li>
                                     </ul>
                                 </div>
                                 <span>Sort By</span>
@@ -74,6 +75,7 @@
                             <ul>
                                 <li><a href="{{ route('admin.sorting', 'cheaper') }}">Cheapest</a></li>
                                 <li><a href="{{ route('admin.sorting', 'recent') }}" >Recent</a></li>
+                                <li><a href="{{ route('admin.sorting', 'oldest') }}" >Oldest</a></li>
                             </ul>
                         </div>
                         <span>Sort By</span>
