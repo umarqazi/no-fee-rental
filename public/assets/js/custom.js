@@ -475,14 +475,16 @@ $(() => {
         $("#need-help-btn2").click(function () {
             $("body").addClass("signup-modal-scroll-getStart");
         });
-        $(".btn-default.get_started_next_btn , .btn-default.next-modal").click(function () {
+        $(".btn-default.get_started_next_btn , .btn-default.next-modal , .datepicker--cell-day").click(function () {
             $("body").addClass("signup-modal-scroll-getStart");
         });
 
         $(".need-help-modal .close").click(function () {
             $("body").removeClass("signup-modal-scroll-getStart");
         });
-
+        $(".datepicker--cell-day").click(function () {
+            $("body").addClass("modal-open");
+        });
         $(document).on("click", function (e) {
             if ($(e.target).is("#signup-btn") == false && $(e.target).parents('#signup').length == 0 && $(e.target).parents('#login').length == 0) {
                 $("body").removeClass("signup-modal-scroll");
