@@ -53,12 +53,13 @@ return [
     ],
 
     'boro' => [
-        '' => 'Select Boro',
+        NULL         => 'Select Borough',
         MANHATTAN    => 'Manhattan',
         BROOKLYN     => 'Brooklyn',
         QUEENS       => 'Queens',
         BRONX        => 'Bronx',
-        STATENISLAND => 'Staten Island'
+        STATENISLAND => 'Staten Island',
+        OTHER        => 'Other'
     ],
 
     'user' => [

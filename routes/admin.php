@@ -85,6 +85,7 @@ Route::get('/bronx-neighborhoods', 'Admin\NeighborhoodController@bronx');
 Route::get('/brooklyn-neighborhoods', 'Admin\NeighborhoodController@brooklyn');
 Route::get('/queens-neighborhoods', 'Admin\NeighborhoodController@queens');
 Route::get('/staten_island-neighborhoods', 'Admin\NeighborhoodController@statenIsland');
+Route::get('/other-neighborhoods', 'Admin\NeighborhoodController@other');
 Route::post('/create-neighborhood', 'Admin\NeighborhoodController@create')->name('admin.createNeighborhood');
 Route::post('/neighborhood/edit/{id}', 'Admin\NeighborhoodController@edit')->name('neighborhood.edit');
 Route::post('/neighborhood/update/{id}', 'Admin\NeighborhoodController@update')->name('neighborhood.update');

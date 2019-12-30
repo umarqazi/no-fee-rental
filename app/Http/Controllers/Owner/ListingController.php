@@ -29,11 +29,6 @@ class ListingController extends Controller {
     private $neighborhoodService;
 
     /**
-     * @var
-     */
-    private $userService;
-
-    /**
      * @var int
      */
     private $paginate = 5;
@@ -41,16 +36,13 @@ class ListingController extends Controller {
     /**
      * ListingController constructor.
      *
-     * @param UserService $userService
      * @param ListingService $listingService
      * @param NeighborhoodService $neighborhoodService
      */
     public function __construct(
-        UserService $userService,
         ListingService $listingService,
         NeighborhoodService $neighborhoodService
     ) {
-        $this->userService = $userService;
         $this->listingService = $listingService;
         $this->neighborhoodService = $neighborhoodService;
     }
@@ -168,7 +160,7 @@ class ListingController extends Controller {
         $listing = $this->listingService->edit($id)->first();
         $listing->features = findFeatures($listing->features);
         $listing->user_id = $listing->agent->id;
-        $listing->neighborhood = $listing->neighborhood->name;
+        $listing->neighborhood = $listing->neighborhood ? $listing->neighborhood->name : Null;
         return view('listing-features.listing', compact('listing', 'action'));
     }
 
@@ -230,6 +222,7 @@ class ListingController extends Controller {
         $listing = $this->listingService->edit($id)->first();
         $listing->features = findFeatures($listing->features);
         $listing->user_id = $listing->agent->id;
+        $listing->neighborhood = $listing->neighborhood ? $listing->neighborhood->name : Null;
         return view('listing-features.listing', compact('listing', 'action'));
     }
 
