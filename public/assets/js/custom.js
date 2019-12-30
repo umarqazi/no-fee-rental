@@ -513,10 +513,10 @@ $(() => {
     });
 
 //    filter data for agent dashboard
-    $('.filter-mobile-data i').click( function () {
+    $('.filter-mobile-data .filters-icon').click( function () {
         $(this).toggleClass('fa-bars fa-times');
         $('.filter-wrapper-mobile .filter-wrapper').slideToggle();
-    })
+    });
 
 //appointment message counter
     $("#appointment-message").on('input', function(){

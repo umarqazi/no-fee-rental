@@ -25,6 +25,7 @@
     }
     .main-wrapper .listing-container .filter-wrapper .filter-input {
         width: 80px;
+        margin-bottom: 5px;
     }
     .main-wrapper .grid-view-wrapper > .row .col-lg-3 {
         -webkit-box-flex: 0;
@@ -53,6 +54,9 @@
     }
     .main-wrapper .listing-container .filter-wrapper{
         display: none;
+    }
+    .block .heading-wrapper.listings-wrapperr .nav.nav-pills{
+        border-bottom: none;
     }
 
 }
@@ -125,9 +129,9 @@
         display: block;
     }
 
-    .filter-wrapper-mobile .filter-wrapper #search{
-        margin-top: 10px;
-    }
+    /*.filter-wrapper-mobile .filter-wrapper #search{*/
+    /*    margin-top: 10px;*/
+    /*}*/
 
 }
 
@@ -185,9 +189,9 @@
         justify-content: space-between;
         align-items: center;
     }
-    .main-wrapper .wrapper > .heading-wrapper a {
-        margin-top: 15px;
-    }
+    /*.main-wrapper .wrapper > .heading-wrapper a {*/
+    /*    margin-top: 15px;*/
+    /*}*/
 
     .credit-plans-container .actions-btns {
         display: block;
@@ -209,7 +213,7 @@
         display: block;
     }
     .listing-container .heading-wrapper .nav.nav-pills {
-        justify-content: space-between;
+        justify-content: flex-start;
     }
     .message-row .date-text,
     .message-row .actions-btns {
@@ -232,6 +236,6 @@
 
 @media only screen and (max-width:576px){
     .main-wrapper .wrapper > .heading-wrapper a.btn-default{
-        padding:0px 20px;
+        padding:0px 17px;
     }
 }
