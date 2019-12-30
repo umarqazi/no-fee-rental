@@ -42,8 +42,8 @@
 
 
         <div class="block listing-container" id="app">
-            <div class="heading-wrapper pl-0">
-                <ul class="nav nav-pills">
+            <div class="heading-wrapper pl-0 listings-wrapperr">
+                <ul class="nav nav-pills ">
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="pill" href="#listing-active">Active ( {{ $listing->active->total() }} )</a>
                     </li>

@@ -746,11 +746,12 @@ h3 {
     display: none;
     left: 0;
     right: 0;
+    z-index: 1;
 }
 .price-range-ul ul{
     border: 1px solid #f36f21;
     padding: 10px 10px;
-
+    border-radius: 5px;
 }
 .price-range-ul ul li:nth-child(2){
     height: 30px;
@@ -762,22 +763,23 @@ h3 {
     padding: 0px 15px;
     background: url(../images/select-menu-arrow.png) no-repeat right 15px center;
     cursor: pointer;
+    position: relative;
 }
 .dropdown-beds #show-beds{
     cursor: pointer;
 }
-.beds-dropdown{
-    position: relative;
+/*.beds-dropdown{*/
+/*    position: relative;*/
 
-}
+/*}*/
 
 .beds-dropdown #advance-search-beds{
     position: absolute;
-    top: 5px;
+    top: 60px;
     background-color: #fff;
     left: 0px;
-    width: 340px;
-    padding: 15px;
+    width: 355px;
+    padding: 10px 5px;
     line-height: normal;
     display: none;
 }
@@ -4196,6 +4198,9 @@ footer .copyright .social-icons li a:hover {
 .profile-section-padding {
     padding-top: 50px;
 }
+.clients-reviews-section{
+    margin-top: 20px;
+}
 
 /*.agent-listing-profile .search-result-wrapper .search-listing .featured-properties .property-listing .property-thumb {*/
 /*width: calc(100% / 4 - 30px);*/
@@ -5107,7 +5112,10 @@ footer .copyright .social-icons li a:hover {
     }
     .beds-dropdown #advance-search-beds{
         width: 100%;
-        top: 10px;
+        top: 55px;
+    }
+    .price-range-ul{
+        top: 45px;
     }
     .featured-properties .property-listing .property-thumb {
         width: calc(100% / 2 - 30px);

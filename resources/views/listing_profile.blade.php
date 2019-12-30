@@ -63,7 +63,7 @@
                     </div>
                 </div>
                 @else
-                    <div>No Reviews Found</div>
+                    <div style="text-align: center">No Reviews Found</div>
                 @endif
             </div>
         </div>

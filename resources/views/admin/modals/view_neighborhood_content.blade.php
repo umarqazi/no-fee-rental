@@ -9,10 +9,8 @@
             <!-- Modal body -->
             <div class="modal-body">
                 <div class="row" id="neighborhood_detail">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <img src="" alt="" id="banner">
-                        </div>
+                    <div class="form-group">
+                        <img src="" alt="" id="banner">
                     </div>
                     <div class="col-md-12">
                         <div class="form-group">
@@ -35,8 +33,8 @@
                 </div>
             </div>
             <!-- Modal footer -->
-            <div class="modal-footer justify-content-center">
-            </div>
+{{--            <div class="modal-footer justify-content-center">--}}
+{{--            </div>--}}
         </div>
     </div>
 </div>
