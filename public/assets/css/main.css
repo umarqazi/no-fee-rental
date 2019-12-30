@@ -747,15 +747,26 @@ h3 {
     left: 0;
     right: 0;
     z-index: 1;
+    width: 300px;
 }
 .price-range-ul ul{
     border: 1px solid #f36f21;
-    padding: 10px 10px;
+    padding: 0px 5px;
     border-radius: 5px;
+}
+.price-range-ul li {
+    display: inline-block;
+}
+.price-range-ul li:first-child{
+    width: 40%;
 }
 .price-range-ul ul li:nth-child(2){
     height: 30px;
     line-height: 30px;
+    width: 15%;
+}
+.price-range-ul li:last-child{
+    width: 40%;
 }
 /**/
 .dropdown-beds{
@@ -5116,6 +5127,12 @@ footer .copyright .social-icons li a:hover {
     }
     .price-range-ul{
         top: 45px;
+        width: 100%;
+    }
+    .price-range-dropdown{
+        border-left: none;
+        border-right: none;
+        border-bottom: 1px solid #ddd;
     }
     .featured-properties .property-listing .property-thumb {
         width: calc(100% / 2 - 30px);

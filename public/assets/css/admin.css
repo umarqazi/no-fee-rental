@@ -572,7 +572,10 @@ header .agent-avtar .avtar:hover div ul {
 .main-wrapper .listing-container .filter-wrapper .listing-views {
     margin-right: 10px;
 }
-
+.listing-views-mobilee{
+    display: flex;
+    flex: 0 0 30%;
+}
 .main-wrapper .listing-container .filter-wrapper .listing-views i {
     color: #838f9a;
     cursor: pointer;
@@ -2145,6 +2148,7 @@ header .agent-avtar .avtar:hover div ul {
         flex: 0 0 100% !important;
         max-width: 100% !important;
     }
+
 }
 @media only screen and (max-width:767px) {
     .dataTables_filter {
@@ -2219,6 +2223,7 @@ header .agent-avtar .avtar:hover div ul {
         overflow-x: auto;
     }
 
+
 }
 @media only screen and (max-width: 576px){
 
@@ -2254,6 +2259,26 @@ header .agent-avtar .avtar:hover div ul {
     .main-wrapper .grid-view-wrapper .listing-thumb .actions-btns .border-btn{
         margin-top: 10px;
     }
+    .filter-wrapper-mobile .filter-wrapper .listing-views{
+        display: block !important;
+    }
+    .main-wrapper .grid-view-wrapper .listing-thumb .list-actions-icons button{
+        width: 30px;
+        height: 30px;
+    }
+    .main-wrapper .grid-view-wrapper .listing-thumb .info .status{
+        padding: 5px 7px;
+    }
+    .main-wrapper .grid-view-wrapper .listing-thumb .list-actions-icons{
+        left: 5px;
+    }
+    .main-wrapper .grid-view-wrapper .listing-thumb .list-actions-icons button{
+        margin-right: 5px;
+    }
+    .grid-badges span{
+        margin-right: 0px !important;
+    }
+
 }
 
 @media (min-width: 576px) {
@@ -2307,8 +2332,8 @@ header .agent-avtar .avtar:hover div ul {
 }
 .badges {
     position: absolute;
-    top: 20px;
-    right: 10px;
+    top: 15px;
+    right: 0px;
 }
 .badges span{
     display: inline-block;
