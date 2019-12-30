@@ -666,21 +666,22 @@ function neighborhood_let_us_help() {
     $content .= "<div class=\"tab-content\">";
     $boroughs = (new \App\Services\BoroughService())->get();
     foreach ($boroughs as $key => $borough) {
-        $total = count($borough->neighborhoods);
-        $hasOpen = false;
         $i = 1;
+        $hasOpen = false;
+        $tab_id = str_random(16);
+        $total = count($borough->neighborhoods);
         $perColum = ceil($total / 3);
         $tabs .= "<li class=\"nav-item\">";
         $tabs .= "<a class='nav-link";
         $tabs .= $key == 0 ? " active'" : "'";
-        $tabs .= " data-toggle=\"pill\" href=\"#tab-{$key}\">{$borough->boro}</a></li>";
+        $tabs .= " data-toggle=\"pill\" href=\"#tab-{$tab_id}\">{$borough->boro}</a></li>";
         foreach ($borough->neighborhoods as $key2 => $neighborhood) {
             $i ++;
             $id = str_random(10);
             if($key2 == 0) {
                 $content .= "<div class='tab-pane ";
                 $content .= $key == 0 ? "active'" : "'";
-                $content .= " id=\"tab-{$key}\">";
+                $content .= " id=\"tab-{$tab_id}\">";
                 $content .= "<div class='row'>";
             }
 
@@ -837,7 +838,10 @@ function property_thumbs($listing) {
     $html .= "<div class='info'><div class='info-link-text'>";
     $html .= "<p>$ ".number_format($listing->rent)." / month&nbsp;&nbsp;</p>";
     $html .= "<small> (". $listing->bedrooms .' bd'.", ".$listing->baths.' ba'.")</small>";
-    $html .= "<p>".is_exclusive($listing).", {$listing->neighborhood->name}</p></div>";
+    $html .= "<p>";
+    $html .= is_exclusive($listing).", ";
+    $html .= $listing->neighborhood ? $listing->neighborhood->name : null;
+    $html .= "</p></div>";
     $html .= "<a href='".route('listing.detail', $listing->id)."' class='btn viewfeature-btn'> View </a></div>";
     $html .= "<div class='feaure-policy-text'>";
     $html .= "<p>$ ".number_format($listing->rent)." / month </p>";
