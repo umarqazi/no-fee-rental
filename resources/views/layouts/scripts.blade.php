@@ -26,6 +26,6 @@
                 @endif
             });
 
-            $('img').resizeToParent();
+            $('.property-thumb > img').resizeToParent();
         });
     </script>
