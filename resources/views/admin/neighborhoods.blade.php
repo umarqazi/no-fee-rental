@@ -26,6 +26,9 @@
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="pill" href="#tab-5">Staten Island</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="pill" href="#tab-6">Other</a>
+                    </li>
                 </ul>
             </div>
             <div class="tab-content">
@@ -105,6 +108,21 @@
                         </table>
                     </div>
                 </div>
+                <div class="tab-pane" id="tab-6">
+                    <div class="table-responsive neighbourhood-table">
+                        <table class="datatable dataTable table table-hover display" style="width: 100%;" id="other">
+                            <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Name</th>
+                                <th>Content</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -144,6 +162,8 @@
         dataTables('#queens', '/admin/queens-neighborhoods', null, column);
 
         dataTables('#staten_island', '/admin/staten_island-neighborhoods', null, column);
+
+        dataTables('#other', '/admin/other-neighborhoods', null, column);
     </script>
 @endsection
 
