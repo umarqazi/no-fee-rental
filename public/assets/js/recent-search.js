@@ -39,15 +39,19 @@ $(() => {
                     $($('.search-beds:last')).find('li > input')[index].click() : $($('.search-beds:first')).find('li > input')[index].click() ;
             }
         }
-        console.log(bed);
     });
 
-    $('.search-neighborhood').find('input,select').on('change', function(e){
-        $(this).attr('id') ?
-            ($('.search-neighborhood').find('select').val($(this).val()),
-                neighborhood = $(this).val()) :
-            ($('.search-neighborhood').find('input').val($(this).val()) ,
-                neighborhood = $(this).val()) ;
+    $('.search-neighborhood,.search-result-section-neighborhood').find('.neighborhood-list > li > div > label,select,ul > li > div > input').on('click change', function(e){
+        $(this).attr('class') == 'custom-control-label' ?
+            ( $($('.search-neighborhood')).find('select').val($(this).text()),
+                neighborhood = $(this).text()) :
+                ( $('.search-fld').text($(this).val()),
+                neighborhood = $(this).val() ,
+                $('.neighborhood-field').text($(this).val())
+            ) ;
+        $(this).parents('.search-result-section-neighborhood').length > 0 ?
+            ( $($('.search-neighborhood')).find('select').val($(this).val()),console.log(this),
+                neighborhood = $(this).val()) : null ;
     });
 
     $('input[name=min_price]').on('change', function() {

@@ -4,7 +4,7 @@
         <div class="advce-search-form-wrapper" style="position: relative">
             {!! Form::model(app('request')->all(), ['url' => route('web.indexSearch'), 'method' => 'get', 'id' => 'index-search-from']) !!}
             <div class="search-property">
-                <div style="position:relative;">
+                <div style="position:relative;" class="search-neighborhood">
                     <i class="fas fa-search"></i>
                     <label class="search-fld">Neighborhood </label>
                 </div>
@@ -22,10 +22,10 @@
                         </ul>
                     </div>
                 </div>
-                <div class="dropdown-beds">
+                <div class="dropdown-beds main-search-beds">
                     <label id="show-beds"><span class="placeholder-text">Beds</span></label>
                     <div id="advance-search-chkbox" class="beds-dropdown">
-                        <div id="advance-search-beds" class="bed-advance-search">
+                        <div id="advance-search-beds" class="bed-advance-search search-beds">
                             {!! bedsDropDown() !!}
                         </div>
                     </div>
@@ -35,7 +35,7 @@
             </div>
             <div class="neighborhood-search-advance">
             <div class="neighborhood-search-dropdown let-us-help-modal">
-                <div class="modal-body">
+                <div class="modal-body search-neighborhood">
                     {!! neighborhood_let_us_help() !!}
                 </div>
             </div>
