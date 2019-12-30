@@ -186,6 +186,7 @@ class ListingForm extends BaseForm {
 			'name'            => 'required|string',
 			'email'           => 'required|email',
 			'phone_number'    => 'required|string',
+            'neighborhood_id' => 'required',
 			'street_address'  => 'required|string',
 			'display_address' => 'required|string',
 			'availability'    => 'required',

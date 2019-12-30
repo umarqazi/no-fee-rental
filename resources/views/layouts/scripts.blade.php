@@ -25,5 +25,7 @@
                     $('#check-availability').modal('show');
                 @endif
             });
+
+            $('img').resizeToParent();
         });
     </script>
