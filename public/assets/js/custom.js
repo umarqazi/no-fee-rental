@@ -638,7 +638,7 @@ $(() => {
             }
         });
         var get_text =  $(this).parent().find('span').text();
-        var dropdown_show = get_text.replace('+', '');
+        var dropdown_show = get_text.replace(' +','');
         if($(this).is(":checked")){
             $("#show-beds").find('.placeholder-text').hide();
             if(count == 1) {
