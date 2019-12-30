@@ -15,8 +15,8 @@
                 <div class="dropdown-wrap">
                     @if($neigh_filter)
                         <div class="neighborhoods-dropdown-listings">
-                            <button type="button" class="btn btn-primary" id="neigh-for-dropdown">{{ app('request')->get('neighborhood') ?? 'Neighborhood' }}</button>
-                            <div class="dropdown-for-neigh dropdown-listiing-rent-page" id="advance-search-chkbox">
+                            <button type="button" class="btn btn-primary neighborhood-field" id="neigh-for-dropdown">{{ app('request')->get('neighborhood') ?? 'Neighborhood' }}</button>
+                            <div class="dropdown-for-neigh dropdown-listiing-rent-page search-result-section-neighborhood" id="advance-search-chkbox">
                                 {!! filter_neighborhood_select() !!}
                             </div>
                         </div>
@@ -135,6 +135,10 @@
         url = url.replace('/oldest', '');
         window.location.href = url+'/listing-by-rent/'+$(this).val();
 
+    });
+
+    $('.search-result-section-neighborhood').find('ul > li > div > input').on('click', function() {
+        $('.neighborhood-field').text($(this).val());
     });
 
 </script>
