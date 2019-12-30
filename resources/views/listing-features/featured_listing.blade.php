@@ -19,8 +19,16 @@
                 <p>Posted On: {{ $fl->created_at->format("m/d/y H:m A") }}</p>
                     <span class="status" style="background: red;">Remove Feature</span>
                 <div class="actions-btns">
-                    <a href="{{ route('admin.editListing', $fl->id) }}"><span><img src="{{asset('assets/images/edit-icon.png')}}" alt=""></span></a>
-                    <span><img src="{{asset('assets/images/copy-icon.png')}}" alt=""></span>
+                    <a href="{{ route('admin.editListing', $fl->id) }}">
+                        <span>
+                            <img src="{{asset('assets/images/edit-icon.png')}}" alt="">
+                        </span>
+                    </a>
+                    <a href="{{ route(whoAmI().'.copyListing', $fl->id) }}">
+                        <span>
+                            <img src="{{asset('assets/images/copy-icon.png')}}" alt="">
+                        </span>
+                    </a>
                     <a href="{{ route('admin.repostListing', $fl->id) }}"><button type="button" class="border-btn">Repost</button></a>
                     <a href="{{ route('admin.removeFeatured', $fl->id) }}" title="Remove this property from featured">
                         <button type="button" class="border-btn">Remove Feature</button>

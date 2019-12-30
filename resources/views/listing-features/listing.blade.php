@@ -35,13 +35,15 @@
                         'enctype' => 'multipart/form-data'
                     ]) !!}
                 <div class="row">
-                    @if(isAdmin() && isOwnerListing($listing->agent->id ?? null))
+                    @if(isAdmin())
+                        @if($action == 'Create' || isOwnerListing($listing->agent->id ?? null))
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>List Belongs To:</label>
                                 {!! Form::select('owner_id', owners(), null, ['class' => 'input-style']) !!}
                             </div>
                         </div>
+                        @endif
                     @endif
                 </div>
                 <div class="row">

@@ -25,7 +25,8 @@
                             <div class="custom-dropdown">
                                 <ul>
                                     <li><a href="{{ route('admin.featureSorting', 'cheaper') }}">Cheapest</a></li>
-                                    <li><a href="{{ route('admin.featureSorting', 'recent') }}" >Recent</a></li>
+									<li><a href="{{ route('admin.featureSorting', 'recent') }}" >Recent</a></li>
+									<li><a href="{{ route('admin.featureSorting', 'oldest') }}" >Oldest</a></li>
                                 </ul>
                             </div>
                             <span>Sort By</span>
@@ -53,5 +54,4 @@
 		</div>
 
 {!! HTML::script('assets/js/listing.js') !!}
-
 @endsection

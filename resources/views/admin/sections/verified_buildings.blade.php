@@ -10,24 +10,14 @@
                 <p class="title">{{ $building->address }}</p>
                 <p class="title">Total Apartments: {{ count($building->listings) }}</p>
                 <p>Posted On: {{ $building->created_at->format("m/d/y H:m A") }}</p>
-                @if($building->type === FEE)
-                        <span class="status" style="background-color:red;">Fee</span>
-                @else
-                        <span class="status" style="background-color:#223970;">No Fee</span>
-                @endif
+                <span class="status" style="background-color:#223970;">No Fee Building</span>
                 <div class="actions-btns">
                     <a href="{{ route(whoAmI().'.editBuilding', $building->id) }}">
                         <span><img src="{{asset('assets/images/edit-icon.png')}}" alt=""></span>
                     </a>
-                    @if($building->type === FEE)
-                        <a href="{{ route(whoAmI().'.noFeeBuilding', $building->id) }}" title="Make this building no fee">
-                            <button type="button" class="border-btn">Fee</button>
-                        </a>
-                    @else
-                        <a href="{{ route(whoAmI().'.feeBuilding', $building->id) }}" title="Make this building fee">
-                            <button type="button" class="border-btn">No Fee</button>
-                        </a>
-                    @endif
+                    <a href="{{ route(whoAmI().'.feeBuilding', $building->id) }}" title="Make this building fee">
+                        <button type="button" class="border-btn">Fee</button>
+                    </a>
                 </div>
             </div>
         </div>
@@ -50,24 +40,14 @@
                             {{ $building->address }}
                         </p>
                         <p>Posted On: {{ $building->created_at->format("m/d/y H:m A") }}</p>
-                        @if($building->type === FEE)
-                                <span class="status" style="background-color:red;">Fee</span>
-                        @else
-                                <span class="status" style="background-color:#223970;">No Fee</span>
-                        @endif
+                        <span class="status" style="background-color:#223970;">No Fee Building</span>
                         <div class="actions-btns">
                             <a href="{{ route(whoAmI().'.editBuilding', $building->id) }}">
                                 <span><img src="{{asset('assets/images/edit-icon.png')}}" alt=""></span>
                             </a>
-                            @if($building->type === FEE)
-                                <a href="{{ route(whoAmI().'.noFeeBuilding', $building->id) }}" title="Make this building no fee">
-                                    <button type="button" class="border-btn">Fee</button>
-                                </a>
-                            @else
-                                <a href="{{ route(whoAmI().'.feeBuilding', $building->id) }}" title="Make this building fee">
-                                    <button type="button" class="border-btn">No Fee</button>
-                                </a>
-                            @endif
+                            <a href="{{ route(whoAmI().'.feeBuilding', $building->id) }}" title="Make this building fee">
+                                <button type="button" class="border-btn">Fee</button>
+                            </a>
                         </div>
                     </div>
                 </div>
