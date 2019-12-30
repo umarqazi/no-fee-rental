@@ -13,14 +13,16 @@ $(() => {
         if(e.originalEvent.isTrusted == true){
             let index = $(this).val() !== 'any' ? $(this).val() : 0;
             if($.inArray($(this).val(), bath) == -1) {
+               if(!$(this).prop('checked') == '') {
                 $(this).parents('.main-bath-search').length !== 0 ?
-                    $($('.search-bath:last')).find('li > input')[index].click() : $($('.search-bath:first')).find('li > input')[index].click() ;
+                $('.search-bath:last').find('li > input')[index].click() : $('.search-bath:first').find('li > input')[index].click();
                 bath.push($(this).val());
+                }
             }
             else {
                 bath.splice($.inArray($(this).val(), bed),1);
                 $(this).parents('.main-bath-search').length !== 0 ?
-                    $($('.search-bath:last')).find('li > input')[index].click() : $($('.search-bath:first')).find('li > input')[index].click() ;
+                $('.search-bath:last').find('li > input')[index].click() : $('.search-bath:first').find('li > input')[index].click() ;
             }
         }
     });
@@ -29,50 +31,71 @@ $(() => {
         if(e.originalEvent.isTrusted == true){
             let index = $(this).val() !== 'studio' ? $(this).val() : 0;
             if($.inArray($(this).val(), bed) == -1) {
+                if(!$(this).prop('checked') == ''){
                 $(this).parents('.main-search-beds').length !== 0 ?
-                    $($('.search-beds:last')).find('li > input')[index].click() : $($('.search-beds:first')).find('li > input')[index].click() ;
+                $('.search-beds:last').find('li > input')[index].click() : $('.search-beds:first').find('li > input')[index].click() ;
                 bed.push($(this).val());
+                }
             }
             else {
                 bed.splice($.inArray($(this).val(), bed),1);
                 $(this).parents('.main-search-beds').length !== 0 ?
-                    $($('.search-beds:last')).find('li > input')[index].click() : $($('.search-beds:first')).find('li > input')[index].click() ;
+                $('.search-beds:last').find('li > input')[index].click() : $('.search-beds:first').find('li > input')[index].click() ;
             }
         }
     });
 
     $('.search-neighborhood,.search-result-section-neighborhood').find('.neighborhood-list > li > div > label,select,ul > li > div > input').on('click change', function(e){
         $(this).attr('class') == 'custom-control-label' ?
-            ( $($('.search-neighborhood')).find('select').val($(this).text()),
+            (   $('.search-neighborhood').find('select').val($(this).text()),
+                $('body').find('.select2-selection__rendered:first').text($(this).text()),
                 neighborhood = $(this).text()) :
-                ( $('.search-fld').text($(this).val()),
-                neighborhood = $(this).val() ,
-                $('.neighborhood-field').text($(this).val())
-            ) ;
+                (   neighborhood = $(this).val() ,
+                    $('.search-neighborhood').find('.neighborhood-list > li > div > input').each(function() {
+                    $(this).val() == neighborhood ? $(this).attr('checked', true): null ;
+                }),
+                $('.search-fld').text($(this).val()),
+                $('.neighborhood-field').text(neighborhood),
+                $('.search-result-section-neighborhood').find('ul > li > div > input').each(function() {
+                    $(this).val() == neighborhood ? $(this).attr('checked', true): null ;
+                })
+            );
         $(this).parents('.search-result-section-neighborhood').length > 0 ?
-            ( $($('.search-neighborhood')).find('select').val($(this).val()),console.log(this),
-                neighborhood = $(this).val()) : null ;
+            (    $('.search-neighborhood').find('select').val($(this).val()),
+                 neighborhood = $(this).val(),
+                $('body').find('.select2-selection__rendered:first').text($(this).val())) : null ;
     });
 
     $('input[name=min_price]').on('change', function() {
+        if($(this).val() > 0 && $(this).val() < 10000  ) {
+
         width = parseFloat($('#slider-range > div').css('width'));
-        $(this).val() > price_min ? (
-            width = width - ($(this).val()/10000 * 100 - price_min/10000 * 100),
-        price_min = $(this).val(),
+        $(this).val() > price_min ?
+          ( width = width - ($(this).val()/10000 * 100 - price_min/10000 * 100),
+            price_min = $(this).val(),
             price_min_left = $(this).val()/10000 * 100) :
-        ( width = width + (price_min/10000 * 100 - $(this).val()/10000 * 100),
-        price_min = $(this).val(),
+          ( width = width + (price_min/10000 * 100 - $(this).val()/10000 * 100),
+            price_min = $(this).val(),
             price_min_left = $(this).val()/10000 * 100 ) ;
         $('#min_price').val(price_min);
         $('#slider-range > span:first').css("left",price_min_left+'%');
         $('#slider-range > div').css("left",price_min_left+'%');
         $('#slider-range > div').css("width",width+'%');
+
+        }
+
+        else {
+            price_min = $(this.val());
+        }
+
     });
 
     $('input[name=max_price]').on('change', function() {
+        if($(this).val() > 0 && $(this).val()<10000) {
+
         width = parseFloat($('#slider-range > div').css('width'));
-        $(this).val()/10000 * 100 < price_max_left ? (
-                width = width - (price_max_left - $(this).val()/10000 * 100) ,
+        $(this).val()/10000 * 100 < price_max_left ?
+            ( width = width - (price_max_left - $(this).val()/10000 * 100) ,
                     price_max = $(this).val(),
                     price_max_left = $(this).val()/10000 * 100) :
             ( width = width + (($(this).val()/10000 * 100) - price_max_left) ,
@@ -81,6 +104,12 @@ $(() => {
         $('#max_price').val(price_max);
         $('#slider-range > span:last').css("left",price_max_left+'%');
         $('#slider-range > div').css("width",width+'%');
+
+        }
+
+        else {
+            price_max = $(this).val();
+        }
     });
 
     $body.on('min-price', function(e, res) {
