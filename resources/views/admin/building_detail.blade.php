@@ -73,7 +73,10 @@
         <div class="col-md-12">
             <div class="form-group">
                 <label>Building Thumbnail</label>
-                {!! Form::file('thumbnail', null, ['class' => 'input-style']) !!}
+                <div>
+                    <img class="img-thumbnail" src="{{isset($building->thumbnail) ? asset($building->thumbnail ?? DLI ) : asset(DLI) }}" id="img" style="width: 180px;height: 145px;margin-bottom: 15px;">
+                </div>
+                {!! Form::file('thumbnail', ['id' => 'file-3']) !!}
             </div>
             @if(isset($building->thumbnail))
                 {!! Form::hidden('old_thumbnail', $building->thumbnail) !!}

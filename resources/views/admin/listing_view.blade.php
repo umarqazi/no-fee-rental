@@ -16,16 +16,17 @@
                             <div class="listing-views-mobilee">
                             <span><i class="fa fa-th-list list-view-btn active"></i></span>
                             <span><i class="fa fa-th grid-view-btn"></i></span>
-                                <div class="sort-bt">
-                                    <i class="fa fa-sort-amount-down"></i>
-                                    <div class="custom-dropdown">
-                                        <ul>
-                                            <li><a href="{{ route('admin.sorting', 'cheaper') }}">Cheapest</a></li>
-                                            <li><a href="{{ route('admin.sorting', 'recent') }}" >Recent</a></li>
-                                        </ul>
-                                    </div>
-                                    <span>Sort By</span>
+                            </div>
+                            <div class="sort-bt">
+                                <i class="fa fa-sort-amount-down"></i>
+                                <div class="custom-dropdown">
+                                    <ul>
+                                        <li><a href="{{ route('admin.sorting', 'cheaper') }}">Cheapest</a></li>
+                                        <li><a href="{{ route('admin.sorting', 'recent') }}" >Recent</a></li>
+                                        <li><a href="{{ route('admin.sorting', 'oldest') }}" >Oldest</a></li>
+                                    </ul>
                                 </div>
+                            <span>Sort By</span>
                         </div>
                             <form action="{{ route('admin.listingSearch') }}" id="search" method="post">
                                 @csrf
@@ -34,8 +35,6 @@
                                 <button type="submit" class="btn-default">Filter</button>
                             </form>
                         </div>
-
-
                     </div>
                 </div>
             </div>
@@ -75,6 +74,7 @@
                             <ul>
                                 <li><a href="{{ route('admin.sorting', 'cheaper') }}">Cheapest</a></li>
                                 <li><a href="{{ route('admin.sorting', 'recent') }}" >Recent</a></li>
+                                <li><a href="{{ route('admin.sorting', 'oldest') }}" >Oldest</a></li>
                             </ul>
                         </div>
                         <span>Sort By</span>

@@ -20,12 +20,12 @@
                         <span><img src="{{asset('assets/images/edit-icon.png')}}" alt=""></span>
                     </a>
                     @if($building->type === FEE)
-                        <a href="{{ route(whoAmI().'.noFeeBuilding', $building->id) }}" title="Make this building no fee">
-                            <button type="button" class="border-btn">Fee</button>
+                        <a href="{{ route(whoAmI().'.noFeeBuilding', $building->id) }}" title="Make this building No Fee">
+                            <button type="button" class="border-btn">No Fee</button>
                         </a>
                     @else
-                        <a href="{{ route(whoAmI().'.feeBuilding', $building->id) }}" title="Make this building fee">
-                            <button type="button" class="border-btn">No Fee</button>
+                        <a href="{{ route(whoAmI().'.feeBuilding', $building->id) }}" title="Make this building Fee">
+                            <button type="button" class="border-btn">Fee</button>
                         </a>
                     @endif
                 </div>
@@ -60,12 +60,12 @@
                                 <span><img src="{{asset('assets/images/edit-icon.png')}}" alt=""></span>
                             </a>
                             @if($building->type === FEE)
-                                <a href="{{ route(whoAmI().'.noFeeBuilding', $building->id) }}" title="Make this building no fee">
-                                    <button type="button" class="border-btn">Fee</button>
+                                <a href="{{ route(whoAmI().'.noFeeBuilding', $building->id) }}" title="Make this building No Fee">
+                                    <button type="button" class="border-btn">No Fee</button>
                                 </a>
                             @else
-                                <a href="{{ route(whoAmI().'.feeBuilding', $building->id) }}" title="Make this building fee">
-                                    <button type="button" class="border-btn">No Fee</button>
+                                <a href="{{ route(whoAmI().'.feeBuilding', $building->id) }}" title="Make this building Fee">
+                                    <button type="button" class="border-btn">Fee</button>
                                 </a>
                             @endif
                         </div>

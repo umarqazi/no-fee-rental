@@ -12,15 +12,12 @@
 										<p><i class="fa fa-tag"></i> ${{ ($rf->rent) ?   number_format($rf->rent,0) : 'None' }}</p>
 										<p>Freshness Score : {{ $rf->freshness_score }}%</p>
 										<ul>
-											<li><i class="fa fa-bed"></i> {{ $rf->bedrooms }} Bed</li>
-											<li><i class="fa fa-bath"></i> {{ $rf->baths }} Bath</li>
+											<li><i class="fa fa-bed"></i> {{ str_formatting($rf->bedrooms, 'Bed') }}</li>
+											<li><i class="fa fa-bath"></i> {{ str_formatting($rf->baths, 'Bath') }}</li>
 										</ul>
-										<p><i class="fa fa-map-marker-alt"></i> RealtyMX ID: mrgnyc_366577 · Auto Feed Mode</p>
 										<p>Requested By: {{ $rf->agent->first_name }}</p>
-										<p>Posted: {{ date("m/d/y H:m A", strtotime($rf->created_at)) }}</p>
+										<p>Posted On: {{ date("m/d/y H:m A", strtotime($rf->created_at)) }}</p>
 										<div class="actions-btns">
-											<a href="{{ route('admin.editListing', $rf->id) }}"><span><img src="{{asset('admin/images/edit-icon.png')}}" alt=""></span></a>
-											<span><img src="{{asset('admin/images/copy-icon.png')}}" alt=""></span>
 											<a href="{{ route('admin.repostListing', $rf->id) }}"><button type="button" class="border-btn">Repost</button></a>
                                             <a href="{{ route('admin.approveFeature', $rf->id )}}" title="Make this property featured">
                                                 <button type="button" class="border-btn">Approve</button>
@@ -49,23 +46,21 @@
 												<p><i class="fa fa-tag"></i> ${{ ($rf->rent) ?   number_format($rf->rent,0) : 'None' }}</p>
 												<p>Freshness Score : {{ $rf->freshness_score }}%</p>
 												<ul>
-													<li><i class="fa fa-bed"></i> {{ $rf->bedrooms }} Bed</li>
-													<li><i class="fa fa-bath"></i> {{ $rf->baths }} Bath</li>
+													<li><i class="fa fa-bed"></i> {{ str_formatting($rf->bedrooms, 'Bed') }}</li>
+													<li><i class="fa fa-bath"></i> {{ str_formatting($rf->baths, 'Bath') }}</li>
 												</ul>
-												<p><i class="fa fa-map-marker-alt"></i> RealtyMX ID: mrgnyc_366577 · Auto Feed Mode</p>
-												<p>Posted: {{ date("m/d/y H:m A", strtotime($rf->created_at)) }}</p>
+												<p>Posted On: {{ date("m/d/y H:m A", strtotime($rf->created_at)) }}</p>
 												<div class="actions-btns">
-													<a href="{{ route('admin.repostListing', $rf->id) }}"><button type="button" class="border-btn">Repost</button></a>
+													<a href="{{ route('admin.repostListing', $rf->id) }}">
+														<button type="button" class="border-btn">Repost</button>
+													</a>
                                                     <a href="{{ route('admin.approveFeature', $rf->id )}}" title="Make this property featured">
                                                         <button type="button" class="border-btn">Approve</button>
                                                     </a>
                                                     <a href="{{ route('admin.removeFeatured', $rf->id )}}" title="Reject feature request">
-                                                        <button type="button" class="border-btn">Cancel</button></a>
+                                                        <button type="button" class="border-btn">Cancel</button>
+													</a>
                                                 </div>
-												<div class="list-actions-icons">
-													<a href="{{ route('admin.editListing', $rf->id) }}"><button><i class="fa fa-edit"></i></button></a>
-													<button><i class="fa fa-copy"></i></button>
-												</div>
 											</div>
 										</div>
 									</div>

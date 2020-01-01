@@ -9,20 +9,20 @@ $(() => {
         $('.list-view-btn').removeClass('active');
         setTimeout(() => {
             $('.grid-view-btn').trigger('click');
-        }, 10);
+        }, 5);
         localStorage.removeItem('grid-view');
     } else {
         $('.grid-view-btn').removeClass('active');
         setTimeout(() => {
             $('.list-view-btn').trigger('click');
-        }, 10);
+        }, 5);
         localStorage.removeItem('list-view');
     }
 
     if(localStorage.getItem(`tab-view-${url}`)) {
         setTimeout(() => {
             $(`.nav-pills > li > a:eq(${localStorage.getItem(`tab-view-${url}`)})`).trigger('click');
-        }, 50);
+        }, 5);
     }
 
     $(".grid-view-btn").on('click', function(){

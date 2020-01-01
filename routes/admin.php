@@ -79,7 +79,7 @@ Route::post('/company-status-update/{id}', 'Admin\CompanyController@status');
 Route::get('/view-associated-agents/{id}', 'Admin\HomeController@associatedAgents');
 
 // Neighborhood Routes
-Route::get('/neighborhoods', 'Admin\NeighborhoodController@index')->name('neighborhoods');
+Route::get('/neighborhoods', 'Admin\NeighborhoodController@index')->name('admin.neighborhood');
 Route::get('/manhattan-neighborhoods', 'Admin\NeighborhoodController@manhattan');
 Route::get('/bronx-neighborhoods', 'Admin\NeighborhoodController@bronx');
 Route::get('/brooklyn-neighborhoods', 'Admin\NeighborhoodController@brooklyn');
