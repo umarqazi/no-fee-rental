@@ -15,7 +15,7 @@
                     <li><i class="fa fa-bath"></i> {{ str_formatting($pl->baths, 'Bath') }}</li>
                 </ul>
                 <p>Posted On: {{ $pl->created_at->format("m/d/y H:m A") }}</p>
-                @if($pl->availability <= now()->format('Y-m-d'))
+                @if(is_available($pl->availability))
                     <span class="status">Available</span>
                 @else
                     <span class="status" style="background: red;">Not Available</span>
@@ -36,7 +36,7 @@
                     <a href="{{ route(whoAmI().'.repostListing', $pl->id) }}">
                         <button type="button" class="border-btn">Repost</button>
                     </a>
-                    <a href="{{ route(whoAmI().'.listingStatus', $pl->id) }}" title="Unpublish this Listing">
+                    <a href="{{ route(whoAmI().'.archive', $pl->id) }}" title="Archive this Listing">
                         <button type="button" class="border-btn">Archive</button>
                     </a>
                     @if($pl->is_featured != APPROVEFEATURED)
@@ -70,7 +70,7 @@
                             <li><i class="fa fa-bath"></i> {{ str_formatting($pl->baths, 'Bath') }}</li>
                         </ul>
                         <p>Posted On: {{ $pl->created_at->format("m/d/y H:m A") }}</p>
-                        @if($pl->availability <= now()->format('Y-m-d'))
+                        @if(is_available($pl->availability))
                             <span class="status">Available</span>
                         @else
                             <span class="status" style="background: red;">Not Available</span>
@@ -82,7 +82,7 @@
                             <a href="{{ route(whoAmI().'.repostListing', $pl->id) }}">
                                 <button type="button" class="border-btn">Repost</button>
                             </a>
-                            <a href="{{ route(whoAmI().'.listingStatus', $pl->id) }}" title="Unpublish this Listing">
+                            <a href="{{ route(whoAmI().'.archive', $pl->id) }}" title="Archive this Listing">
                                 <button type="button" class="border-btn">Archive</button>
                             </a>
                             @if($pl->is_featured != APPROVEFEATURED)

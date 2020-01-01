@@ -38,13 +38,13 @@ class CreateListingsTable extends Migration {
 			$table->string('map_location')->nullable();
             $table->string('lease_term')->nullable();
             $table->string('free_months')->nullable();
-            $table->enum('building_type', ['open', 'exclusive'])->default('open')->nullable();
+            $table->enum('listing_type', ['open', 'exclusive'])->default('open')->nullable();
             $table->string('application_fee')->nullable();
             $table->string('deposit')->nullable();
             $table->integer('freshness_score')->nullable();
 			$table->integer('is_featured')->default(0)->comment = "0-Non-Featured, 1-Featured, 2-Request-Featured";
             $table->integer('visibility')->default(2)->comment = "0-Inactive, 1-Active, 2-Pending, 3-Archived";
-            $table->integer('availability_type')->nullable()->comment = "0-Not Available, 2-Immediately, 3-Date";
+            $table->integer('availability_type')->nullable()->comment = "0-Not Available, 1-Immediately, 2-Date";
             $table->string('availability')->nullable();
 			$table->timestamps();
 

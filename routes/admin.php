@@ -36,30 +36,42 @@ Route::post('/send-invitation', 'Admin\UserController@invite')->name('admin.send
 
 // Listing Routes
 Route::prefix('listing')->group(function() {
-    Route::get('/add-images/{id}', 'Admin\ListingController@createImages')->name('admin.createListingImages');
-    Route::post('/add-listing', 'Admin\ListingController@create')->name('admin.createListing');
+
+    Route::post('/create-listing', 'Admin\ListingController@create')->name('admin.createListing');
+
     Route::match(['get', 'post'], '/search', 'Admin\ListingController@searchWithFilters')->name('admin.listingSearch');
+
     Route::get('/property', 'Admin\AdminController@viewPropertyListing')->name('property-listing');
-    Route::get('/view', 'Admin\ListingController@index')->name('admin.viewListing');
-    Route::get('/add', 'Admin\ListingController@showForm')->name('admin.addListing');
-    Route::get('/approve-request/{id}', 'Admin\ListingController@approve')->name('admin.approveRequest');
+
+    Route::get('/view-listing', 'Admin\ListingController@index')->name('admin.viewListing');
+    Route::get('/create-listing', 'Admin\ListingController@showForm')->name('admin.addListing');
+
     Route::get('/status/{id}', 'Admin\ListingController@status')->name('admin.listingStatus');
+
+    Route::get('/add-images/{id}', 'Admin\ListingController@createImages')->name('admin.createListingImages');
     Route::post('/upload-images/{id}', 'Admin\ListingController@uploadImages')->name('admin.listingImages');
     Route::get('/remove-image/{id}', 'Admin\ListingController@removeImage');
+
     Route::get('/repost/{id}', 'Admin\ListingController@repost')->name('admin.repostListing');
     Route::get('/edit/{id}', 'Admin\ListingController@edit')->name('admin.editListing');
     Route::get('/copy/{id}', 'Admin\ListingController@copy')->name('admin.copyListing');
     Route::post('/update/{id}', 'Admin\ListingController@update')->name('admin.updateListing');
+
     Route::get('/finish-create', 'Admin\ListingController@finishCreate')->name('admin.finishCreateListing');
     Route::get('/finish-update', 'Admin\ListingController@finishUpdate')->name('admin.finishUpdateListing');
+
     Route::get('/{sortBy}', 'Admin\ListingController@sortBy')->name('admin.sorting');
+
+    Route::get('/approve-listing/{id}', 'Admin\ListingController@approve')->name('admin.approveRequest');
+    Route::get('/archive-listing/{id}', 'Admin\ListingController@archive')->name('admin.archive');
+    Route::get('/unArchive-listing/{id}', 'Admin\ListingController@unArchive')->name('admin.unArchive');
 });
 
 // Featured Listing Routes
 Route::get('/feature-listing/{sortBy}', 'Admin\FeaturedListingController@sortBy')->name('admin.featureSorting');
 Route::match(['get', 'post'], '/search-feature-listing', 'Admin\FeaturedListingController@searchWithFilters')->name('admin.featureListingSearch');
 Route::get('/feature-listing', 'Admin\FeaturedListingController@index')->name('admin.featureListing');
-Route::get('/approve-feature-request/{id}', 'Admin\FeaturedListingController@approve')->name('admin.approveFeature');
+Route::get('/make-feature/{id}', 'Admin\FeaturedListingController@approve')->name('admin.approveFeature');
 Route::get('/remove-featured-listing/{id}', 'Admin\FeaturedListingController@remove')->name('admin.removeFeatured');
 
 // Jquery Email Validation Response

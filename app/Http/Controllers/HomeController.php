@@ -6,9 +6,7 @@ use App\Services\FeatureListingService;
 use App\Services\SearchService;
 use App\Traits\DispatchNotificationService;
 use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
-use Illuminate\View\View;
 
 /**
  * Class HomeController

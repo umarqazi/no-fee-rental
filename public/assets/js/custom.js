@@ -21,6 +21,10 @@ $(() => {
         $(".listing-wrapper").show();
     });
 
+    $(".mobile-map-icon").click(function(){
+       $(".map-wrapper").slideToggle();
+    });
+
     $(".grid-view-btn").click(function () {
         $(".list-view-btn").removeClass('active');
         $(this).addClass('active');

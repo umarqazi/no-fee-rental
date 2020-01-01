@@ -101,7 +101,7 @@ class ListingForm extends BaseForm {
     /**
      * @var string
      */
-	public $building_type;
+	public $listing_type;
 
     /**
      * @var boolean
@@ -170,7 +170,7 @@ class ListingForm extends BaseForm {
             'visibility'         => $this->visibility,
 			'square_feet'        => $this->square_feet,
 			'map_location'       => $this->map_location,
-            'building_type'      => $this->building_type,
+            'listing_type'       => $this->listing_type,
             'application_fee'    => $this->application_fee,
             'deposit'            => $this->deposit,
             'lease_term'         => $this->lease_term,
@@ -197,7 +197,7 @@ class ListingForm extends BaseForm {
 			'description'     => 'required',
 			'rent'            => 'required|integer',
 			'square_feet'     => 'required|integer',
-            'building_type'   => 'required|string'
+            'listing_type'    => 'required|string'
 		];
 	}
 }
