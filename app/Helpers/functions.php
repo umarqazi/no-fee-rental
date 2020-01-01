@@ -650,8 +650,8 @@ function filter_neighborhood_select() {
         $html .= "<h3>{$borough->boro}</h3><div class=\"border - bottom - h3\"></div><ul>";
         foreach ($borough->neighborhoods as $key => $neighborhood) {
             $id = str_random(10);
-            $html .= "<li><div class=\"custom-control custom-radio custom-control-inline\">";
-            $html .= Form::radio('neighborhood', $neighborhood->name, false, ['class' => 'custom-control-input', 'id' => $id]);
+            $html .= "<li><div class=\"custom-control custom-checkbox custom-control-inline\">";
+            $html .= Form::checkbox('neighborhood[]', $neighborhood->name, false, ['class' => 'custom-control-input', 'id' => $id]);
             $html .= "<label class=\"custom-control-label\" for=\"{$id}\">{$neighborhood->name}</label></div></li>";
         }
 
@@ -712,6 +712,12 @@ function neighborhood_let_us_help() {
         }
 
         if($hasContent) {
+            $content .= "</div></div>";
+        } else {
+            $content .= "<div class='tab-pane'";
+            $content .= " id=\"tab-{$tab_id}\">";
+            $content .= "<div class='row' style='display: block;'>";
+            $content .= "<h5 style='padding: 10px;color:black;' class='text-center'>No Neighborhood Exist in {$borough->boro}</h5>";
             $content .= "</div></div>";
         }
     }

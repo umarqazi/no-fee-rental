@@ -54,7 +54,7 @@ $('.next-modal').on('click', function () {
     $('#let-us-step2').modal('show');
 });
 
-$('#spend').on('input', function () {
+$('#spend').on('keyup', function () {
     let price = $(this).val();
     $('#invest').text('$'+price);
 });
