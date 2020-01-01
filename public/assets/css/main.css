@@ -654,6 +654,11 @@ h3 {
     width: 290px;
     cursor: pointer;
     background: url(../images/select-menu-arrow.png) no-repeat right 15px center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    padding-right: 25px;
+    height: 55px;
 }
 .neighborhood-search-advance .custom-control-label{
     font-size: 12px;
