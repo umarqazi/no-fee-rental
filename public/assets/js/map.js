@@ -356,7 +356,7 @@ $(() => {
                        $('input[name=display_address]').val(displayAddress);
                        $('body').find('.mapboxgl-ctrl > input').val(streetAddress);
                        $('body').find('input[name=map_location]').val(JSON.stringify({latitude: coords[1], longitude: coords[0]}));
-                       setMap('map', response.center, true, true, streetAddress);
+                       setMap('map', response.center, true, true, streetAddress, 15);
 
                    } else {
                        let $validator = $(`#${$('body').find('form').attr('id')}`).validate();

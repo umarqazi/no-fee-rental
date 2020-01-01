@@ -148,15 +148,14 @@ class ListingController extends Controller {
 		: response()->json(['message' => 'Something went wrong'], 500);
 	}
 
-	/**
-	 * @param $id
-	 *
-	 * @return RedirectResponse
-	 */
-	public function repost($id) {
-		return $this->listingService->repost($id)
-		? success('Property has been reposted')
-		: error('Something went wrong');
+    /**
+     * @param $id
+     * @param Request $request
+     * @return RedirectResponse
+     */
+	public function repost($id, Request $request) {
+		$res = $this->listingService->repost($id);
+		return sendResponse($request, $res, 'Listing has been Re-Posted');
 	}
 
 	/**
@@ -168,7 +167,7 @@ class ListingController extends Controller {
 		$action = 'Update';
 		$listing = $this->listingService->edit($id)->first();
 		$listing->features = findFeatures($listing->features);
-		$listing->user_id = $listing->agent->id;
+        $listing->owner_id = $listing->agent->id;
 		$listing->neighborhood = $listing->neighborhood ? $listing->neighborhood->name : Null;
 		return view('listing-features.listing', compact('listing', 'action'));
 	}
@@ -195,6 +194,26 @@ class ListingController extends Controller {
 		? success(($status) ? 'Property has been published.' : 'Property has been unpublished')
 		: error('Something went wrong');
 	}
+
+    /**
+     * @param $id
+     * @param Request $request
+     * @return JsonResponse|RedirectResponse
+     */
+	public function archive($id, Request $request) {
+	    $res = $this->listingService->setArchive($id);
+	    return sendResponse($request, $res, 'Listing has been archived');
+    }
+
+    /**
+     * @param $id
+     * @param Request $request
+     * @return JsonResponse|RedirectResponse
+     */
+    public function unArchive($id, Request $request) {
+        $res = $this->listingService->setunArchive($id);
+        return sendResponse($request, $res, 'Listing has been archived', null, 'Fee Building listing not unarchived');
+    }
 
     /**
      * @param Request $request
@@ -230,7 +249,7 @@ class ListingController extends Controller {
         $action = 'Copy';
         $listing = $this->listingService->edit($id)->first();
         $listing->features = findFeatures($listing->features);
-        $listing->user_id = $listing->agent->id;
+        $listing->owner_id = $listing->agent->id;
         $listing->neighborhood = $listing->neighborhood ? $listing->neighborhood->name : Null;
         return view('listing-features.listing', compact('listing', 'action'));
     }

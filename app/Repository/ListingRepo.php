@@ -4,6 +4,10 @@ namespace App\Repository;
 
 use App\Listing;
 
+/**
+ * Class ListingRepo
+ * @package App\Repository
+ */
 class ListingRepo extends BaseRepo {
 
 	/**
@@ -77,26 +81,6 @@ class ListingRepo extends BaseRepo {
     }
 
 	/**
-	 * @param $id
-	 *
-	 * @return int
-	 */
-	public function status($id) {
-		$query = $this->find(['id' => $id]);
-		$status = $query->select('visibility')->first();
-		$updateStatus = ($status->visibility) ? 0 : 1;
-
-		if($updateStatus === INACTIVELISTING) {
-            $update = ['visibility' => $updateStatus, 'is_featured' => FALSE];
-        } else {
-            $update = ['visibility' => $updateStatus];
-        }
-
-        $query->update($update);
-		return $updateStatus;
-	}
-
-	/**
 	 * @param $keywords
 	 *
 	 * @return mixed
@@ -109,21 +93,14 @@ class ListingRepo extends BaseRepo {
 	 * @return mixed
 	 */
 	public function featured() {
-		return $this->model->featured()->withfavourite();
+		return $this->model->featured();
 	}
 
     /**
      * @return mixed
      */
-    public function petFriendly() {
-        return $this->model->petFriendly();
-    }
-
-	/**
-     * @return mixed
-     */
-    public function popular() {
-        return $this->model->featured()->popular();
+	public function price() {
+	    return $this->model->price()->orderBy('rent', CHEAPEST);
     }
 
 	/**
