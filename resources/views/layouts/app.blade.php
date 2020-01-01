@@ -43,7 +43,7 @@
     {!! HTML::script('assets/js/vendor/owl.carousel.min.js') !!}
     {!! HTML::script('assets/js/vendor/pignose.calendar.full.min.js') !!}
     {!! HTML::script('https://code.jquery.com/ui/1.12.1/jquery-ui.js') !!}
-
+    <script src="{{ asset('assets/js/resize-image.js') }}"></script>
 
 
 </head>

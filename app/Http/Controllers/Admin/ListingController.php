@@ -78,10 +78,9 @@ class ListingController extends Controller {
 	 *
 	 * @return RedirectResponse
 	 */
-	public function approve($id) {
-		return ($this->listingService->approve($id))
-		? success('Listing has been approved successfully')
-		: error('Something went wrong');
+	public function approve($id, Request $request) {
+		$res = $this->listingService->approve($id);
+		return sendResponse($request, $res, 'Listing has been approved successfully');
 	}
 
     /**
@@ -170,7 +169,7 @@ class ListingController extends Controller {
 		$listing = $this->listingService->edit($id)->first();
 		$listing->features = findFeatures($listing->features);
 		$listing->user_id = $listing->agent->id;
-		$listing->neighborhood = $listing->neighborhood->name;
+		$listing->neighborhood = $listing->neighborhood ? $listing->neighborhood->name : Null;
 		return view('listing-features.listing', compact('listing', 'action'));
 	}
 
@@ -191,7 +190,7 @@ class ListingController extends Controller {
      * @return RedirectResponse
      */
 	public function status($id, Request $request) {
-		$status = $this->listingService->visibility($id, $request);
+		$status = $this->listingService->visibility($id);
 		return (isset($status))
 		? success(($status) ? 'Property has been published.' : 'Property has been unpublished')
 		: error('Something went wrong');
@@ -232,7 +231,7 @@ class ListingController extends Controller {
         $listing = $this->listingService->edit($id)->first();
         $listing->features = findFeatures($listing->features);
         $listing->user_id = $listing->agent->id;
-        $listing->neighborhood = $listing->neighborhood->name;
+        $listing->neighborhood = $listing->neighborhood ? $listing->neighborhood->name : Null;
         return view('listing-features.listing', compact('listing', 'action'));
     }
 }
