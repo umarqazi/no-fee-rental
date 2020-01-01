@@ -666,7 +666,6 @@ function filter_neighborhood_select() {
 function neighborhood_let_us_help() {
     $tabs = null;
     $content = null;
-    $hasContent = false;
     $tabs .= "<ul class=\"nav nav-pills\">";
     $content .= "<div class=\"tab-content\">";
     $boroughs = (new \App\Services\BoroughService())->get();
@@ -718,9 +717,7 @@ function neighborhood_let_us_help() {
     }
 
     $tabs .= "</ul>";
-    if($hasContent) {
-        $content .= "</div>";
-    }
+    $content .= "</div>";
 
     return $tabs.$content;
 }
