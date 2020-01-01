@@ -515,7 +515,7 @@
                         </ul>
                     </div>
                     <div class="text-center">
-                        <button type="button" class="btn-default skip-btn let_us_help_next_btn" data-target="let-us-step13">Skip</button>
+                        <button type="button" class="btn-default skip-btn let_us_help_next_btn" current="let-us-step12" next="let-us-step13">Skip</button>
                     </div>
                 </div>
                 <div class="modal-footer text-center">

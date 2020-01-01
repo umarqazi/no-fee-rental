@@ -103,14 +103,14 @@ trait SearchTraitService {
      * filter for neighborhoods
      */
     private function neighborhood() {
-        $neighborhood_string = $this->args->{__FUNCTION__};
-        $neighborhood = (int)$neighborhood_string;
-        if($neighborhood === 0) {
-            $repo = $this->neighborhoodRepo->find(['name' => $neighborhood_string])->first();
-            $neighborhood = $repo->id;
-        }
+        $neighborhood = $this->args->{__FUNCTION__};
+        $this->query->whereHas('neighborhood', function ($subQuery) use ($neighborhood) {
+            if(is_array($neighborhood)) {
+                return $subQuery->whereIn('name', $neighborhood);
+            }
 
-        $this->query->where('neighborhood_id', $neighborhood);
+            return $subQuery->where('name', $neighborhood);
+        });
     }
 
     /**

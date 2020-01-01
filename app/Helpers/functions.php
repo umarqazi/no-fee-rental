@@ -666,12 +666,14 @@ function filter_neighborhood_select() {
 function neighborhood_let_us_help() {
     $tabs = null;
     $content = null;
+    $hasContent = false;
     $tabs .= "<ul class=\"nav nav-pills\">";
     $content .= "<div class=\"tab-content\">";
     $boroughs = (new \App\Services\BoroughService())->get();
     foreach ($boroughs as $key => $borough) {
         $i = 1;
         $hasOpen = false;
+        $hasContent = false;
         $tab_id = str_random(16);
         $total = count($borough->neighborhoods);
         $perColum = ceil($total / 3);
@@ -681,6 +683,7 @@ function neighborhood_let_us_help() {
         $tabs .= " data-toggle=\"pill\" href=\"#tab-{$tab_id}\">{$borough->boro}</a></li>";
         foreach ($borough->neighborhoods as $key2 => $neighborhood) {
             $i ++;
+            $hasContent = true;
             $id = str_random(10);
             if($key2 == 0) {
                 $content .= "<div class='tab-pane ";
@@ -694,8 +697,8 @@ function neighborhood_let_us_help() {
                 $content .= "<div class='col-md-4'><ul class=\"neighborhood-list\">";
             }
 
-            $content .= "<li><div class=\"custom-control custom-radio custom-control-inline\">";
-            $content .= Form::radio('neighborhood', $neighborhood->name, false, ['class' => 'custom-control-input', 'id' => $id]);
+            $content .= "<li><div class=\"custom-control custom-checkbox custom-control-inline\">";
+            $content .= Form::checkbox('neighborhood[]', $neighborhood->name, false, ['class' => 'custom-control-input', 'id' => $id]);
             $content .= "<label class=\"custom-control-label\" for=\"{$id}\">{$neighborhood->name}</label></div></li>";
 
             if($i == $perColum) {
@@ -709,11 +712,15 @@ function neighborhood_let_us_help() {
             $content .= "</ul></div>";
         }
 
-        $content .= "</div></div>";
+        if($hasContent) {
+            $content .= "</div></div>";
+        }
     }
 
     $tabs .= "</ul>";
-    $content .= "</div>";
+    if($hasContent) {
+        $content .= "</div>";
+    }
 
     return $tabs.$content;
 }
