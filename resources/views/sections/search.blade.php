@@ -4,7 +4,7 @@
         <div class="advce-search-form-wrapper" style="position: relative">
             {!! Form::model(app('request')->all(), ['url' => route('web.indexSearch'), 'method' => 'get', 'id' => 'index-search-from']) !!}
             <div class="search-property">
-                <div style="position:relative;" class="search-neighborhood">
+                <div style="position:relative;height: 55px; line-height: 55px;" class="search-neighborhood">
                     <i class="fas fa-search"></i>
                     <label class="search-fld">Neighborhood </label>
                 </div>
@@ -13,11 +13,13 @@
                     <div class="price-range-ul">
                         <ul>
                             <li>
-                                {!! Form::text('min_price', null, ['class' => 'form-control', 'placeholder' => 'min']) !!}
+                                {!! Form::text('min_price', null, ['class' => 'form-control', 'placeholder' =>
+                                '$ min']) !!}
                             </li>
                             <li>To</li>
                             <li>
-                                {!! Form::text('max_price', null, ['class' => 'form-control', 'placeholder' => 'max']) !!}
+                                {!! Form::text('max_price', null, ['class' => 'form-control', 'placeholder' =>
+                                '$ max']) !!}
                             </li>
                         </ul>
                     </div>
