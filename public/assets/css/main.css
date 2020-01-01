@@ -384,7 +384,7 @@ h3 {
     border: 1px solid #f36f21;
     /*padding: 10px;*/
     border-radius: 5px;
-    max-height: 220px;
+    max-height: 235px;
     overflow: auto;
 }
 .neighborhoods-dropdown-listings .neighborhood-border-no h3{
@@ -1967,7 +1967,19 @@ footer .copyright .social-icons li a:hover {
     text-align: center;
     font-size: 14px;
 }
-
+#neighborhood-searchchecbox input[type=checkbox]+label {
+    display: inline-block;
+    padding: 3px 0px;
+    width: 100%;
+    color: #223871;
+    cursor: pointer;
+    text-align: center;
+    font-size: 14px;
+}
+#neighborhood-searchchecbox ul li{
+    border-bottom: 1px solid #ddd;
+    padding: 5px 10px;
+}
 
 #advance-search-chkbox input[type=checkbox]:checked+label {
     background: #f36f21;

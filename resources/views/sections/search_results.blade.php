@@ -20,7 +20,7 @@
                                 ? sprintf("Neighborhood (%s)", count(app('request')->get('neighborhood')))
                                 : app('request')->get('neighborhood') ?? 'Neighborhood' }}
                             </button>
-                            <div class="dropdown-for-neigh dropdown-listiing-rent-page search-result-section-neighborhood" id="advance-search-chkbox">
+                            <div class="dropdown-for-neigh dropdown-listiing-rent-page search-result-section-neighborhood" id="neighborhood-searchchecbox">
                                 {!! filter_neighborhood_select() !!}
                             </div>
                         </div>
