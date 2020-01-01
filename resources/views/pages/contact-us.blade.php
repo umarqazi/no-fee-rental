@@ -117,12 +117,17 @@
                         {!! Form::close() !!}
                     </div>
                      <div class="col-lg-6 contact-map">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3403.3395820921846!2d74.27331331448124!3d31.459843557277523!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2s!4v1569249518976!5m2!1sen!2s" width="100%" height="100%" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+                        <div id="map"></div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+    {!! HTML::style('https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.css') !!}
+    {!! HTML::script('https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.js') !!}
+    <script>
+        setMap('map', { latitude: 41.552830, longitude: -73.968850 }, true, true, '<p>447 BROADWAY 2nd FL #453 New York, NY 10013</p>', 15);
+    </script>
 @endsection
 
 

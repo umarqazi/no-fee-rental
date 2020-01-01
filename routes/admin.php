@@ -103,7 +103,7 @@ Route::post('/neighborhood/edit/{id}', 'Admin\NeighborhoodController@edit')->nam
 Route::post('/neighborhood/update/{id}', 'Admin\NeighborhoodController@update')->name('neighborhood.update');
 Route::post('/neighborhood/delete/{id}', 'Admin\NeighborhoodController@delete')->name('neighborhood.delete');
 
-// Manage Building Routes
+// Building Routes
 Route::get('/all-buildings', 'Admin\BuildingController@index')->name('admin.manageBuildingIndex');
 Route::post('/verify-building/{id}', 'Admin\BuildingController@verify')->name('admin.verifyBuilding');
 Route::get('/verifying-building/{id}', 'Admin\BuildingController@verifying')->name('admin.buildingDetails');

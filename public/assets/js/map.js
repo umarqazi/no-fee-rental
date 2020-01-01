@@ -184,7 +184,8 @@ const multiMarkers = (coords, container, zoom = 10) => {
 
 const draw = () => {
     drawPolygon(broklyn, 'aass');
-}
+};
+
 /**
  *
  * @param container
