@@ -379,6 +379,10 @@
     overflow-x: hidden;
     overflow-y: auto;
 }
+.datepicker-overflow-hidden{
+    overflow: hidden;
+    padding-right: 17px;
+}
 
 
 /**/

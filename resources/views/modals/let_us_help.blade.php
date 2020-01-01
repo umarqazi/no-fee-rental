@@ -46,7 +46,7 @@
                         <li></li>
                         <li></li>
                     </ul>
-                    <h3 class="modal-title">I can spend over <span id="invest">____</span> on rent every month</h3>
+                    <h3 class="modal-title">I can't spend over <span id="invest">____</span> on rent every month</h3>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
 

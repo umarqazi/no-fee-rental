@@ -3000,6 +3000,12 @@ footer {
     color: #fff;
     padding: 20px;
 }
+.login-modal .modal-dialog .login-form-wrapper .mobile-display{
+    display: none;
+}
+.login-modal .modal-dialog .login-form-wrapper .mobile-none{
+    display: block;
+}
 /*Responsive style*/
 
 @media (min-width: 1600px) {
@@ -3939,6 +3945,12 @@ footer {
 }
     .privacy-policy-banner {
         height: 120px;
+    }
+    .login-modal .modal-dialog .login-form-wrapper .mobile-display{
+        display: block;
+    }
+    .login-modal .modal-dialog .login-form-wrapper .mobile-none{
+        display: none;
     }
 }
 

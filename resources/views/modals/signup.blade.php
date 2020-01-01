@@ -71,13 +71,18 @@
                             {!! Form::text('email', null, ['class'=>'input-style agnet-input', 'id' => 'email', 'placeholder'=>'Email']) !!}
                         </div>
                     </div>
+                    <div class="col-sm-12 mobile-display">
+                        <p class="finding-home-text">If you would like to syndicate listing into no fee rentals nyc,
+                            please use the same email address that you use for your RealtyMX.</p>
+                    </div>
                      <div class="col-sm-6" id="phone_number">
                         <div class="form-group">
                             {!! Form::text('phone_number', null, ['class'=>'input-style agnet-input', 'placeholder'=>'Phone Number']) !!}
                         </div>
                     </div>
-                    <div class="col-sm-12">
-                        <p class="finding-home-text">If you would like to syndicate listing into no fee rentals nyc, please use tha same email address that you use for your RealtyMX.</p>
+                    <div class="col-sm-12 mobile-none">
+                        <p class="finding-home-text">If you would like to syndicate listing into no fee rentals nyc,
+                            please use the same email address that you use for your RealtyMX.</p>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
