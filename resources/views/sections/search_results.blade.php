@@ -15,7 +15,11 @@
                 <div class="dropdown-wrap">
                     @if($neigh_filter)
                         <div class="neighborhoods-dropdown-listings">
-                            <button type="button" class="btn btn-primary neighborhood-field" id="neigh-for-dropdown">{{ app('request')->get('neighborhood') ?? 'Neighborhood' }}</button>
+                            <button type="button" class="btn btn-primary neighborhood-field" id="neigh-for-dropdown">
+                                {{ is_array(app('request')->get('neighborhood'))
+                                ? sprintf("Neighborhood (%s)", count(app('request')->get('neighborhood')))
+                                : app('request')->get('neighborhood') ?? 'Neighborhood' }}
+                            </button>
                             <div class="dropdown-for-neigh dropdown-listiing-rent-page search-result-section-neighborhood" id="advance-search-chkbox">
                                 {!! filter_neighborhood_select() !!}
                             </div>
