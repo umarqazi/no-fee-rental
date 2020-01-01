@@ -329,6 +329,12 @@ h3 {
     color: #333;
     border: 1px solid #ddd;
 }
+
+.dropdown-for-beds, .dropdown-for-baths, .dropdown-for-price, .dropdown-for-neigh{
+    display: none;
+    max-height:300px;
+    overflow-y: auto;
+}
 .dropdown-listiing-rent-page{
     position: absolute;
     width: 100%;
@@ -337,11 +343,7 @@ h3 {
     top: 48px;
     left: 0px;
     z-index: 6;
-}
-.dropdown-for-beds, .dropdown-for-baths, .dropdown-for-price, .dropdown-for-neigh{
-    display: none;
-    max-height:300px;
-    overflow-y: auto;
+    max-height: inherit;
 }
 .dropdown-listing-price-wrapper ul{
     text-align: center;
@@ -382,6 +384,8 @@ h3 {
     border: 1px solid #f36f21;
     /*padding: 10px;*/
     border-radius: 5px;
+    max-height: 220px;
+    overflow: auto;
 }
 .neighborhoods-dropdown-listings .neighborhood-border-no h3{
     margin-bottom: 10px;
@@ -5471,6 +5475,16 @@ footer .copyright .social-icons li a:hover {
 
     .neighborhood-search .search-result-wrapper .map-wrapper {
         display: none;
+        position: absolute;
+        left: 15px;
+        width: calc(100% - 30px);
+        height: calc(100% - 36px);
+        top: 36px;
+        z-index: 3;
+    }
+
+    .neighborhood-search .search-result-wrapper .map-wrapper .swipe-btn{
+        display: none;
     }
 
     #mobile-map-listing-view {
@@ -5523,12 +5537,15 @@ footer .copyright .social-icons li a:hover {
     }
 
     #mobile-tabs-collapse {
-        position: relative;
         z-index: 23;
         background-color: rgb(248, 248, 248);
-        margin-top: 9px;
-        padding-bottom: 5px;
         width: 100%;
+        position: absolute;
+        width: calc(100% - 30px);
+        top: 36px;
+        left: 15px;
+        right: 0px;
+        margin: 0;
     }
     .sort-by-wrapper .sort-by{
         padding-right: 15px;

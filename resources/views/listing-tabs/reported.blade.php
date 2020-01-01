@@ -24,10 +24,10 @@
                         <span class="status" style="background: #213971;">Realty Feed</span>
                     @endif
 
-                    @if($al->visibility == 1)
-                        <span class="status">Active</span>
-                    @elseif($al->visibility == 0)
-                        <span class="status" style="background: red;">Inactive</span>
+                    @if(is_available($al->availability))
+                        <span class="status">Available</span>
+                    @else
+                        <span class="status" style="background: red;">Not Available</span>
                     @endif
 
                 </div>
@@ -41,7 +41,7 @@
                     <a href="{{ route('listing.detail', $al->id) }}">
                         <i class="fa fa-eye" style="font-size: 24px;position: relative;top: 5px;"></i>
                     </a>
-                    <a href="{{ route(whoAmI().'.listingStatus', $al->id) }}" title="Unpublish this Listing">
+                    <a href="{{ route(whoAmI().'.archive', $al->id) }}" title="Archive this Listing">
                         <button type="button" class="border-btn">Archive</button>
                     </a>
                 </div>
@@ -80,15 +80,15 @@
 
                             <span class="status" style="background: #213971;">Realty Feed</span>
 
-                            @if($al->visibility === TRUE)
-                                <span class="status">Active</span>
-                            @elseif($al->visibility === FALSE)
-                                <span class="status" style="background: red;">Inactive</span>
+                            @if(is_available($al->availability))
+                                <span class="status">Available</span>
+                            @else
+                                <span class="status" style="background: red;">Not Available</span>
                             @endif
 
                         </div>
                         <div class="actions-btns">
-                            <a href="{{ route(whoAmI().'.listingStatus', $al->id) }}" title="Unpublish this Listing">
+                            <a href="{{ route(whoAmI().'.archive', $al->id) }}" title="Archive this Listing">
                                 <button type="button" class="border-btn">Archive</button>
                             </a>
                         </div>

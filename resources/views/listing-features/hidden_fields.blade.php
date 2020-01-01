@@ -2,7 +2,9 @@
 
 {!! Form::hidden('user_id') !!}
 {!! Form::hidden('visibility') !!}
-{!! Form::hidden('unique_slug') !!}
+@if($action !== 'Copy')
+    {!! Form::hidden('unique_slug') !!}
+@endif
 {!! Form::hidden('building_id') !!}
 {!! Form::hidden('neighborhood_id') !!}
 

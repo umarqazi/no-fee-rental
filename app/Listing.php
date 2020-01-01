@@ -24,7 +24,7 @@ class Listing extends Model {
 		'user_id', 'realty_id', 'unique_slug', 'neighborhood_id', 'building_id',
         'name', 'email', 'phone_number', 'street_address', 'display_address',
         'thumbnail', 'baths', 'bedrooms', 'unit', 'rent', 'square_feet',
-        'description', 'is_featured', 'map_location', 'building_type',
+        'description', 'is_featured', 'map_location', 'listing_type',
 		'visibility', 'realty_url', 'availability_type', 'availability',
         'application_fee', 'deposit', 'lease_term', 'free_months', 'freshness_score'
 	];
@@ -188,7 +188,33 @@ class Listing extends Model {
      * @return mixed
      */
     public function scopeFeatured($query) {
-        return $query->whereis_featured(APPROVEFEATURED);
+        return $query->whereis_featured(APPROVEFEATURED)->where('visibility', ACTIVE)->latest('created_at');
+    }
+
+    /**
+     * @param $query
+     * @return mixed
+     */
+    public function scopePrice($query) {
+        return $query->whereis_featured(APPROVEFEATURED)->where('visibility', ACTIVE);
+    }
+
+    /**
+     * @param $query
+     * @return mixed
+     */
+    public function scopeRecommended($query) {
+        return $query->featured()->whereHas('agent.company', function ($subQuery) {
+            return $subQuery->where('company', 'MANHATTAN REALTY GROUP');
+        });
+    }
+
+    /**
+     * @param $query
+     * @return mixed
+     */
+    public function scopeTrending($query) {
+        return $query->featured()->whereHas('favourites');
     }
 
     /**

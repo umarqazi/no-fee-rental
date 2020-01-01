@@ -83,44 +83,12 @@ class FeatureListingService {
         ];
     }
 
-    /**
-     * @param $paginate
-     *
-     * @return mixed
-     */
-    private function __policy($paginate) {
-        return $this->featured()
-                    ->policy()
-                    ->paginate($paginate, ['*'], 'featured');
-    }
-
-    /**
-     * @param $paginate
-     *
-     * @return array
-     */
-    public function __petPolicy($paginate) {
-        return [
-            'featured'         => $this->__policy($paginate),
-            'request_featured' => $this->requestfeatured()
-                                       ->policy()
-                                       ->paginate($paginate, ['*'], 'request-featured'),
-        ];
-    }
-
 	/**
 	 * @return mixed
 	 */
 	public function featured() {
 		return $this->listingRepo->featured();
 	}
-
-	/**
-     * @return mixed
-     */
-    public function popular() {
-        return $this->listingRepo->featured()->hasfavourite();
-    }
 
 	/**
 	 * @return mixed
@@ -215,33 +183,16 @@ class FeatureListingService {
     }
 
     /**
-     * @return mixed
-     */
-    public function petFriendly() {
-        return $this->listingRepo->petFriendly();
-    }
-
-    /**
      * @param $paginate
      *
      * @return array
      */
     public function featured_listing($paginate) {
-        return [
-            'recent'     => $this->featured()
-                            ->where('visibility', ACTIVE)
-                            ->latest('created_at')
-                            ->paginate($paginate, ['*'], 'recent'),
-            'cheapest'   => $this->featured()
-                            ->where('visibility', ACTIVE)
-                            ->orderBy( 'rent' ,'ASC')
-                            ->paginate($paginate, ['*'], 'cheapest'),
-            'popular'    => $this->popular()
-                            ->where('visibility', ACTIVE)
-                            ->paginate($paginate, ['*'], 'likes'),
-            'pet_policy' => $this->petFriendly()
-                            ->where('visibility', ACTIVE)
-                            ->paginate($paginate, ['*'], 'pets'),
-        ];
+        return toObject([
+            'recommended' => $this->featured()->recommended()->paginate($paginate),
+            'trending'    => $this->featured()->trending()->paginate($paginate),
+            'price'       => $this->listingRepo->price()->paginate($paginate),
+            'pet_policy'  => $this->featured()->petFriendly()->paginate($paginate),
+        ]);
     }
 }

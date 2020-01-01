@@ -92,15 +92,6 @@ class ListingService extends BuildingService {
     }
 
     /**
-     * @param $building
-     * @return int
-     */
-    private function __visibility($building) {
-        return !$building->is_verified && isAgent()
-            ? PENDINGLISTING : ACTIVELISTING;
-    }
-
-    /**
      * @param $id
      * @param $request
      *
@@ -189,15 +180,46 @@ class ListingService extends BuildingService {
 
     /**
      * @param $id
-     *
-     * @return int
+     * @return mixed
      */
-    public function visibility( $id ) {
+    public function setArchive($id) {
+        return $this->listingRepo->update($id, ['visibility' => ARCHIVED]);
+    }
+
+    /**
+     * @param $id
+     * @return bool|mixed
+     */
+    public function setUnArchive($id) {
         if ( $this->listingRepo->isFee( $id ) ) {
             return false;
         }
 
-        return $this->listingRepo->status( $id );
+        return $this->listingRepo->update($id, ['visibility' => ACTIVELISTING]);
+    }
+
+    /**
+     * @param $id
+     * @return bool
+     */
+    public function approve( $id ) {
+        if ( $this->listingRepo->update( $id, [ 'visibility' => 1 ] ) ) {
+            $list = $this->listingRepo->find( [ 'id' => $id ] )->with( 'agent' )->first();
+            DispatchNotificationService::LISTINGAPPROVED(toObject([
+                'data' => $list,
+                'from' => myId(),
+                'to'   => $list->agent->id,
+            ]));
+
+            calendarEvent( [
+                'color' => UPDATEOPENHOUSECOLOR,
+                'url'   => route( 'listing.detail', $id ),
+            ], true, $list->id );
+
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -226,14 +248,14 @@ class ListingService extends BuildingService {
     /**
      * @return mixed
      */
-    public function active() {
+    public function getActive() {
         return $this->listingRepo->active();
     }
 
     /**
      * @return mixed
      */
-    public function inactive() {
+    public function getInActive() {
         return $this->listingRepo->inactive();
     }
 
@@ -247,64 +269,36 @@ class ListingService extends BuildingService {
     /**
      * @return mixed
      */
-    public function realty() {
+    public function getRealty() {
         return $this->listingRepo->realty();
     }
 
     /**
      * @return mixed
      */
-    public function ownerOnly() {
+    public function getOwnerOnly() {
         return $this->listingRepo->ownerOnly();
     }
 
     /**
      * @return mixed
      */
-    public function reported() {
+    public function getReported() {
         return $this->listingRepo->reported();
     }
 
     /**
      * @return mixed
      */
-    public function archived() {
+    public function getArchive() {
         return $this->listingRepo->archived();
     }
 
     /**
      * @return mixed
      */
-    public function pending() {
+    public function getPending() {
         return $this->listingRepo->pending();
-    }
-
-    /**
-     * @param $id
-     *
-     * @return mixed
-     */
-    public function approve( $id ) {
-        DB::beginTransaction();
-        if ( $this->listingRepo->update( $id, [ 'visibility' => 1 ] ) ) {
-            $list = $this->listingRepo->find( [ 'id' => $id ] )->with( 'agent' )->first();
-            DispatchNotificationService::LISTINGAPPROVED(toObject([
-                'data' => $list,
-                'from' => myId(),
-                'to'   => $list->agent->id,
-            ]));
-
-            calendarEvent( [
-                'color' => UPDATEOPENHOUSECOLOR,
-                'url'   => route( 'listing.detail', $id ),
-            ], true, $list->id );
-
-            DB::commit();
-
-            return true;
-        }
-
-        return false;
     }
 
     /**
@@ -351,16 +345,12 @@ class ListingService extends BuildingService {
     }
 
     /**
-     * @param $neighborhood_name
-     * @return mixed
+     * @param $paginate
+     *
+     * @return array
      */
-    private function __neighborhoodHandler($neighborhood_name) {
-        $neighborhood = $this->neighborhoodRepo->find(['name' => $neighborhood_name])->first();
-        if(!$neighborhood) {
-            $neighborhood = $this->neighborhoodRepo->create(['name' => $neighborhood_name, 'boro_id' => OTHER]);
-        }
-
-        return $neighborhood->id;
+    public function oldest( $paginate ) {
+        return $this->__sortCollection( $paginate, 'updated_at', OLDEST );
     }
 
     /**
@@ -368,14 +358,14 @@ class ListingService extends BuildingService {
      *
      * @return ListingForm
      */
-    protected function __validateForm( $request ) {
+    private function __validateForm( $request ) {
 
         if($request->availability_type == 1) {
             $request->availability = now()->format('Y-m-d');
-        } elseif ($request->availability_type == 3) {
+        } elseif ($request->availability_type == 2) {
             $request->availability = carbon($request->availability)->format('Y-m-d');
         } else {
-            $request->availability = false;
+            $request->availability = FALSE;
         }
 
         $form                    = new ListingForm();
@@ -400,7 +390,7 @@ class ListingService extends BuildingService {
         $form->rent              = $request->rent;
         $form->square_feet       = $request->square_feet;
         $form->map_location      = $request->map_location;
-        $form->building_type     = $request->building_type;
+        $form->listing_type      = $request->listing_type;
         $form->thumbnail         = $request->thumbnail ?? '';
         $form->old_thumbnail     = $request->old_thumbnail ?? null;
         $form->application_fee   = $request->application_fee;
@@ -417,7 +407,7 @@ class ListingService extends BuildingService {
      *
      * @return bool|string
      */
-    protected function __uploadImage( $listing ) {
+    private function __uploadImage( $listing ) {
         if ( ! empty( $listing->thumbnail ) && strpos( $listing->thumbnail, 'http' ) === false ) {
             $listing->thumbnail = uploadImage( $listing->thumbnail, 'images/listing/thumbnails' );
         } elseif ( ! empty( $listing->old_thumbnail ) ) {
@@ -496,7 +486,7 @@ class ListingService extends BuildingService {
      *
      * @return mixed
      */
-    protected function __addFeatures( $id, $features ) {
+    private function __addFeatures( $id, $features ) {
         $batch = [];
         if ( ! empty( $features ) && count( $features ) > 0 ) {
             foreach ( $features as $feature ) {
@@ -518,7 +508,7 @@ class ListingService extends BuildingService {
      *
      * @return bool
      */
-    protected function __updateList( $id, $listing ) {
+    private function __updateList( $id, $listing ) {
         if ( ! empty( $listing->thumbnail ) ) {
             $listing->thumbnail = uploadImage(
                 $listing->thumbnail,
@@ -539,7 +529,7 @@ class ListingService extends BuildingService {
      *
      * @return mixed
      */
-    protected function __updateOpenHouses( $id, $listing, $data ) {
+    private function __updateOpenHouses( $id, $listing, $data ) {
         $this->openHouseRepo->deleteMultiple( [ 'listing_id' => $id ] );
 
         return $this->__addOpenHouse( $id, $listing, $data, true );
@@ -551,7 +541,7 @@ class ListingService extends BuildingService {
      *
      * @return mixed
      */
-    protected function __updateFeatures( $id, $data ) {
+    private function __updateFeatures( $id, $data ) {
         $this->featureRepo->deleteMultiple( [ 'listing_id' => $id ] );
 
         return $this->__addFeatures( $id, $data );
@@ -562,18 +552,18 @@ class ListingService extends BuildingService {
      *
      * @return array
      */
-    protected function __collection( $paginate ) {
+    private function __collection( $paginate ) {
         return [
-            'active'   => $this->active()
+            'active'   => $this->getActive()
                                ->latest( 'updated_at' )
                                ->paginate( $paginate, [ '*' ], 'active' ),
-            'pending'  => $this->pending()
+            'pending'  => $this->getPending()
                                ->latest()
                                ->paginate( $paginate, [ '*' ], 'pending' ),
-            'inactive' => $this->inactive()
+            'inactive' => $this->getInActive()
                                ->latest()
                                ->paginate( $paginate, [ '*' ], 'inactive' ),
-            'archived' => $this->archived()
+            'archived' => $this->getArchive()
                                ->latest()
                                ->paginate( $paginate, [ '*' ], 'archived' ),
         ];
@@ -583,24 +573,24 @@ class ListingService extends BuildingService {
      * @param $paginate
      * @return array
      */
-    protected function __adminCollection($paginate) {
+    private function __adminCollection($paginate) {
         return [
             'active'     => $this->active_inactive()
                                   ->latest()
                                   ->paginate($paginate, ['*'], 'active'),
-            'realty'     => $this->realty()
+            'realty'     => $this->getRealty()
                                   ->latest()
                                   ->paginate($paginate, ['*'], 'realty'),
-            'archived'   => $this->archived()
+            'archived'   => $this->getArchive()
                                   ->latest()
                                   ->paginate($paginate, ['*'], 'archive'),
-            'owner_only' => $this->ownerOnly()
+            'owner_only' => $this->getOwnerOnly()
                                  ->latest()
                                  ->paginate($paginate, ['*'], 'owner_only'),
-            'pending'    => $this->pending()
+            'pending'    => $this->getPending()
                                   ->latest()
                                   ->paginate($paginate, ['*'], 'pending'),
-            'reported'   => $this->reported()
+            'reported'   => $this->getReported()
                                   ->latest()
                                   ->paginate($paginate, ['*'], 'reported'),
         ];
@@ -612,7 +602,7 @@ class ListingService extends BuildingService {
      *
      * @return array
      */
-    protected function __searchCollection( $keywords, $paginate ) {
+    private function __searchCollection( $keywords, $paginate ) {
         return [
             'active'     => $this->listingRepo->search( $keywords )
                                             ->active()
@@ -648,27 +638,27 @@ class ListingService extends BuildingService {
      *
      * @return array
      */
-    protected function __sortCollection( $paginate, $col, $order ) {
+    private function __sortCollection( $paginate, $col, $order ) {
         return toObject( [
-            'active'     => $this->active()
+            'active'     => $this->getActive()
                                ->orderBy( $col, $order )
                                ->paginate( $paginate, [ '*' ], 'active' ),
-            'inactive'   => $this->inactive()
+            'inactive'   => $this->getInActive()
                                ->orderBy( $col, $order )
                                ->paginate( $paginate, [ '*' ], 'inactive' ),
-            'pending'    => $this->pending()
+            'pending'    => $this->getPending()
                                ->orderBy( $col, $order )
                                ->paginate( $paginate, [ '*' ], 'pending' ),
-            'archived'   => $this->archived()
+            'archived'   => $this->getArchive()
                                ->orderBy( $col, $order )
                                ->paginate( $paginate, [ '*' ], 'archived' ),
-            'owner_only' => $this->ownerOnly()
+            'owner_only' => $this->getOwnerOnly()
                                  ->orderBy( $col, $order )
                                  ->paginate($paginate, ['*'], 'owner_only'),
-            'reported'   => $this->reported()
+            'reported'   => $this->getReported()
                                  ->orderBy( $col, $order )
                                  ->paginate($paginate, ['*'], 'reported'),
-            'realty'     => $this->realty()
+            'realty'     => $this->getRealty()
                                ->orderBy( $col, $order )
                                ->paginate( $paginate, [ '*' ], 'realty' )
         ] );
@@ -728,23 +718,24 @@ class ListingService extends BuildingService {
     }
 
     /**
-     * @param $request
-     * @param $agentId
-     *
-     * @return object
+     * @param $building
+     * @return int
      */
-    public function profileAdvanceSearch( $request, $agentId ) {
-        $data     = $this->searchService->search( $request );
-        $listings = [];
-        foreach ( $data as $key => $listing ) {
-            if ( $listing->user_id == $agentId ) {
-                array_push( $listings, $listing );
-            }
+    private function __visibility($building) {
+        return !$building->is_verified && isAgent()
+            ? PENDINGLISTING : ACTIVELISTING;
+    }
+
+    /**
+     * @param $neighborhood_name
+     * @return mixed
+     */
+    private function __neighborhoodHandler($neighborhood_name) {
+        $neighborhood = $this->neighborhoodRepo->find(['name' => $neighborhood_name])->first();
+        if(!$neighborhood) {
+            $neighborhood = $this->neighborhoodRepo->create(['name' => $neighborhood_name, 'boro_id' => OTHER]);
         }
 
-        return toObject( [
-            'listings' => $listings,
-            'reviews'  => toObject($this->userRepo->profileDetail($agentId)->first()->reviews)
-        ] );
+        return $neighborhood->id;
     }
 }

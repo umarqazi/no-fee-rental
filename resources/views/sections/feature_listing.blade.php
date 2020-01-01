@@ -21,20 +21,17 @@
             <div class="tab-pane active" id="tab1">
                 <div class="property-listing">
                     <div class="desktop-listiing">
-                        @if(count($featured_listings['recent']) < 1)
-                            <span>No List Found</span>
-                        @endif
-                        @foreach($featured_listings["recent"] as $key => $fl)
-                            {!! property_thumbs($fl) !!}
+                        @foreach($featured_listings->recommended as $key => $rl)
+                            {!! property_thumbs($rl) !!}
                         @endforeach
+                        @if($featured_listings->recommended->total() < 1)
+                            No Recommended List Found
+                        @endif
                     </div>
 
                     <div class="owl-slider">
                         <div class="owl-carousel owl-theme" id="carousel-1">
-                            @if(count($featured_listings['recent']) < 1)
-                                <span>No List Found</span>
-                            @endif
-                            @foreach($featured_listings["recent"] as $key => $fl)
+                            @foreach($featured_listings->recommended as $key => $fl)
                                 <div class="item">
                                     {!! property_thumbs($fl) !!}
                                 </div>
@@ -46,20 +43,20 @@
             <div class="tab-pane no-mobile-tabs" id="tab2">
                 <div class="property-listing">
                     <div class="desktop-listiing">
-                        @if(count($featured_listings['popular']) < 1)
+                        @if(count($featured_listings->trending) < 1)
                             <span>No List Found</span>
                         @endif
-                        @foreach($featured_listings["popular"] as $key => $fl)
+                        @foreach($featured_listings->trending as $key => $fl)
                             {!! property_thumbs($fl) !!}
                         @endforeach
                     </div>
 
                     <div class="owl-slider">
                         <div class="owl-carousel owl-theme" id="carousel-2">
-                            @if(count($featured_listings['popular']) < 1)
+                            @if(count($featured_listings->trending) < 1)
                                 <span>No List Found</span>
                             @endif
-                            @foreach($featured_listings["popular"] as $key => $fl)
+                            @foreach($featured_listings->trending as $key => $fl)
                                 <div class="item">
                                     {!! property_thumbs($fl) !!}
                                 </div>
@@ -71,20 +68,20 @@
             <div class="tab-pane no-mobile-tabs" id="tab3">
                 <div class="property-listing">
                     <div class="desktop-listiing">
-                        @if(count($featured_listings['cheapest']) < 1)
+                        @if(count($featured_listings->price) < 1)
                             <span>No List Found</span>
                         @endif
-                        @foreach($featured_listings["cheapest"] as $key => $fl)
+                        @foreach($featured_listings->price as $key => $fl)
                             {!! property_thumbs($fl) !!}
                         @endforeach
                     </div>
 
                     <div class="owl-slider">
                         <div class="owl-carousel owl-theme" id="carousel-1">
-                            @if(count($featured_listings['cheapest']) < 1)
+                            @if(count($featured_listings->price) < 1)
                                 <span>No List Found</span>
                             @endif
-                            @foreach($featured_listings["cheapest"] as $key => $fl)
+                            @foreach($featured_listings->price as $key => $fl)
                                 <div class="item">
                                     {!! property_thumbs($fl) !!}
                                 </div>
@@ -96,44 +93,20 @@
             <div class="tab-pane no-mobile-tabs" id="tab4">
                 <div class="property-listing">
                     <div class="desktop-listiing">
-                        @if(count($featured_listings['pet_policy']) < 1)
+                        @if(count($featured_listings->pet_policy) < 1)
                             <span>No List Found</span>
                         @endif
-                        @foreach($featured_listings["pet_policy"] as $key => $fl)
+                        @foreach($featured_listings->pet_policy as $key => $fl)
                             {!! property_thumbs($fl) !!}
                         @endforeach
                     </div>
 
                     <div class="owl-slider">
                         <div class="owl-carousel owl-theme" id="carousel-2">
-                            @if(count($featured_listings['pet_policy']) < 1)
+                            @if(count($featured_listings->pet_policy) < 1)
                                 <span>No List Found</span>
                             @endif
-                            @foreach($featured_listings["pet_policy"] as $key => $fl)
-                                <div class="item">
-                                    {!! property_thumbs($fl) !!}
-                                </div>
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="tab-pane" id="tab3">
-                <div class="property-listing">
-                    <div class="desktop-listiing">
-                        @if(count($featured_listings['cheapest']) < 1)
-                            <span>No List Found</span>
-                        @endif
-                        @foreach($featured_listings["cheapest"] as $key => $fl)
-                            {!! property_thumbs($fl) !!}
-                        @endforeach
-                    </div>
-                    <div class="owl-slider">
-                        <div class="owl-carousel owl-theme" id="carousel-3">
-                            @if(count($featured_listings['cheapest']) < 1)
-                                <span>No List Found</span>
-                            @endif
-                            @foreach($featured_listings["cheapest"] as $key => $fl)
+                            @foreach($featured_listings->pet_policy as $key => $fl)
                                 <div class="item">
                                     {!! property_thumbs($fl) !!}
                                 </div>

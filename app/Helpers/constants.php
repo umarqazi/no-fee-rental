@@ -120,6 +120,13 @@ if(!defined('OLDEST')) {
 }
 
 /**
+ * Open Listing
+ */
+if(!defined('OPEN')) {
+    define('OPEN', 'open');
+}
+
+/**
  * Exclusive Listing
  */
 if(!defined('EXCLUSIVE')) {
@@ -152,13 +159,6 @@ if(!defined('DLI')) {
  */
 if(!defined('DUI')) {
     define('DUI', 'assets/images/default-images/user.jpeg');
-}
-
-/**
- * Default Image Placeholder
- */
-if(!defined('DIP')) {
-    define('DIP', 'assets/images/default-images/user.jpeg');
 }
 
 /**
@@ -218,104 +218,155 @@ if(!defined('ALLOWAGENT')) {
 }
 
 /**
- * Stripe Gateway
+ * Payment Type Stripe
  */
 if(!defined('STRIPE')) {
     define('STRIPE', 1);
 }
 
 /**
- * Stripe Gateway
+ * Basic Subscription Plan
  */
 if(!defined('BASIC')) {
     define('BASIC', 1);
 }
 
 /**
- * Stripe Gateway
+ * Gold Subscription Plan
  */
 if(!defined('GOLD')) {
     define('GOLD', 2);
 }
 
 /**
- * Stripe Gateway
+ * Premium Subscription Plan
  */
 if(!defined('PREMIUM')) {
     define('PREMIUM', 3);
 }
 
 /**
- * Stripe Gateway
+ * Not Expired Plan
  */
 if(!defined('NOTEXPIRED')) {
     define('NOTEXPIRED', false);
 }
 
+/**
+ * Expired Plan
+ */
 if(!defined('EXPIRED')) {
     define('EXPIRED', true);
 }
 
+/**
+ * Max Plan Days
+ */
 if(!defined('MAXPLANDAYS')) {
     define('MAXPLANDAYS', 30);
 }
 
+/**
+ * Freshness Score Min
+ */
 if(!defined('MINFRESHNESSSCORE')) {
     define('MINFRESHNESSSCORE', 30);
 }
 
+/**
+ * Freshness Score Max
+ */
 if(!defined('MAXFRESHNESSSCORE')) {
     define('MAXFRESHNESSSCORE', 100);
 }
 
+/**
+ * Per List Drop Freshness Score
+ */
 if(!defined('DROPFRESHNESS')) {
     define('DROPFRESHNESS', 10);
 }
 
+/**
+ * NYC License Data Set URL
+ */
 if(!defined('LICENSEBASEURL')) {
     define('LICENSEBASEURL', 'data.ny.gov');
 }
 
+/**
+ * NYC School Zone Data Set URL
+ */
 if(!defined('SCHOOLZONEBASEURL')) {
     define('SCHOOLZONEBASEURL', 'data.cityofnewyork.us');
 }
 
+/**
+ * Min Listing Rent
+ */
 if(!defined('MINPRICE')) {
     define('MINPRICE', 0);
 }
 
+/**
+ * Max Listing Rent
+ */
 if(!defined('MAXPRICE')) {
     define('MAXPRICE', 10000);
 }
 
+/**
+ * Listing Square Min
+ */
 if(!defined('MINSQUARE')) {
     define('MINSQUARE', 0);
 }
 
+/**
+ * Listing Square Max
+ */
 if(!defined('MAXSQUARE')) {
     define('MAXSQUARE', 10000);
 }
 
+/**
+ * Borough Manhattan
+ */
 if(!defined('MANHATTAN')) {
     define('MANHATTAN', 1);
 }
 
+/**
+ * Borough Brooklyn
+ */
 if(!defined('BROOKLYN')) {
     define('BROOKLYN', 2);
 }
 
+/**
+ * Borough Queens
+ */
 if(!defined('QUEENS')) {
     define('QUEENS', 3);
 }
 
+/**
+ * Borough Bronx
+ */
 if(!defined('BRONX')) {
     define('BRONX', 4);
 }
 
+/**
+ * Borough Staten Island
+ */
 if(!defined('STATENISLAND')) {
     define('STATENISLAND', 5);
 }
 
+/**
+ * Borough Other
+ */
 if(!defined('OTHER')) {
     define('OTHER', 6);
 }

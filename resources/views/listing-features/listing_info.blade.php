@@ -133,9 +133,9 @@
         </div>
         <div class="form-group">
             <label>Listing Type</label>
-            {!! Form::select('building_type', config('formfields.listing.listing_type'), null, ['class' => 'input-style']) !!}
+            {!! Form::select('listing_type', config('formfields.listing.listing_type'), null, ['class' => 'input-style']) !!}
             <span class="invalid-feedback" role="alert">
-                {!! $errors->first('building_type') !!}
+                {!! $errors->first('listing_type') !!}
 		    </span>
         </div>
     </div>

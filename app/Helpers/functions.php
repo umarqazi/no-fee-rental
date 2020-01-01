@@ -446,6 +446,10 @@ function neighborhoodExpertise( $neighborhoods ) {
     return ( count( $collect ) > 0 ) ? implode( ', ', $collect ) : 'None';
 }
 
+function languages($languages) {
+    dd($languages);
+}
+
 /**
  * @param $features
  *
@@ -936,7 +940,7 @@ function deleteCalendarEvent( $id ) {
  */
 function is_exclusive( $listing ) {
     if ( $listing !== null ) {
-        if ( $listing->building_type === EXCLUSIVE ) {
+        if ( $listing->listing_type === EXCLUSIVE ) {
             return sprintf( "%s - (%s)", $listing->street_address, $listing->unit ?? '#' );
         }
 
@@ -944,6 +948,14 @@ function is_exclusive( $listing ) {
     }
 
     return 'N/A';
+}
+
+/**
+ * @param $date
+ * @return bool
+ */
+function is_available($date) {
+    return $date >= now()->format('Y-m-d');
 }
 
 /**
