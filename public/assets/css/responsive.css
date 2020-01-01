@@ -238,4 +238,10 @@
     .main-wrapper .wrapper > .heading-wrapper a.btn-default{
         padding:0px 17px;
     }
+    .main-wrapper .wrapper > .heading-wrapper{
+        display: block;
+    }
+    .main-wrapper .wrapper > .heading-wrapper a.btn-default{
+        margin-top: 15px;
+    }
 }
