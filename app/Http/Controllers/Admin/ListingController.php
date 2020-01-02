@@ -29,11 +29,6 @@ class ListingController extends Controller {
      */
 	private $neighborhoodService;
 
-    /**
-     * @var
-     */
-	private $userService;
-
 	/**
 	 * @var int
 	 */
@@ -42,16 +37,13 @@ class ListingController extends Controller {
     /**
      * ListingController constructor.
      *
-     * @param UserService $userService
      * @param ListingService $listingService
      * @param NeighborhoodService $neighborhoodService
      */
 	public function __construct(
-        UserService $userService,
 	    ListingService $listingService,
         NeighborhoodService $neighborhoodService
     ) {
-	    $this->userService = $userService;
         $this->listingService = $listingService;
         $this->neighborhoodService = $neighborhoodService;
 	}

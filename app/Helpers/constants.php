@@ -370,3 +370,10 @@ if(!defined('STATENISLAND')) {
 if(!defined('OTHER')) {
     define('OTHER', 6);
 }
+
+/**
+ * Web Owner Listing
+ */
+if(!defined('MRG')) {
+    define('MRG', 'MANHATTAN REALTY GROUP');
+}

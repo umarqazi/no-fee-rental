@@ -65,17 +65,6 @@ class ListingController extends Controller {
     }
 
     /**
-     * @param $id
-     *
-     * @return RedirectResponse
-     */
-    public function approve($id) {
-        return ($this->listingService->approve($id))
-            ? success('Listing has been approved successfully')
-            : error('Something went wrong');
-    }
-
-    /**
      * @param Request $request
      *
      * @return Factory|RedirectResponse|View
@@ -175,19 +164,6 @@ class ListingController extends Controller {
     }
 
     /**
-     * @param $id
-     * @param Request $request
-     *
-     * @return RedirectResponse
-     */
-    public function status($id, Request $request) {
-        $status = $this->listingService->visibility($id, $request);
-        return (isset($status))
-            ? success(($status) ? 'Property has been published.' : 'Property has been unpublished')
-            : error('Something went wrong');
-    }
-
-    /**
      * @param Request $request
      * @param $id
      *
@@ -235,5 +211,25 @@ class ListingController extends Controller {
         return $this->listingService->requestForFeatured($id)
             ? success('Feature Request has been sent.')
             : error('Something went wrong');
+    }
+
+    /**
+     * @param $id
+     * @param Request $request
+     * @return JsonResponse|RedirectResponse
+     */
+    public function archive($id, Request $request) {
+        $res = $this->listingService->setArchive($id);
+        return sendResponse($request, $res, 'Listing has been archived');
+    }
+
+    /**
+     * @param $id
+     * @param Request $request
+     * @return JsonResponse|RedirectResponse
+     */
+    public function unArchive($id, Request $request) {
+        $res = $this->listingService->setunArchive($id);
+        return sendResponse($request, $res, 'Listing has been archived', null, 'Fee Building listing not unarchived');
     }
 }

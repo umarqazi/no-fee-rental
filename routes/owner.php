@@ -34,7 +34,7 @@ Route::post('/upload-listing-images/{id}', 'Owner\ListingController@uploadImages
 Route::get('/remove-listing-image/{id}', 'Owner\ListingController@removeImage');
 Route::get('/listing-repost/{id}', 'Owner\ListingController@repost')->name('owner.repostListing');
 Route::match(['get', 'post'], '/search-listing', 'Owner\ListingController@searchWithFilters')->name('owner.listingSearch');
-Route::get('/listing-status/{id}', 'Owner\ListingController@status')->name('owner.listingStatus');
+Route::get('/listing-status/{id}', 'Owner\ListingController@archive')->name('owner.listingStatus');
 Route::get('/edit-list/{id}', 'Owner\ListingController@edit')->name('owner.editListing');
 Route::post('/update-listing/{id}', 'Owner\ListingController@update')->name('owner.updateListing');
 Route::get('/finish-listing', 'Owner\ListingController@finishCreate')->name('owner.finishCreateListing');

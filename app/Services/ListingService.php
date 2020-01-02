@@ -602,7 +602,7 @@ class ListingService extends BuildingService {
      *
      * @return array
      */
-    private function __searchCollection( $keywords, $paginate ) {
+    private function __adminSearchCollection( $keywords, $paginate ) {
         return [
             'active'     => $this->listingRepo->search( $keywords )
                                             ->active()
@@ -638,7 +638,7 @@ class ListingService extends BuildingService {
      *
      * @return array
      */
-    private function __sortCollection( $paginate, $col, $order ) {
+    private function __adminSortCollection( $paginate, $col, $order ) {
         return toObject( [
             'active'     => $this->getActive()
                                ->orderBy( $col, $order )
