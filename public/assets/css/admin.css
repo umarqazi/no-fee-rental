@@ -2113,9 +2113,10 @@ header .agent-avtar .avtar:hover div ul {
      box-shadow: none !important;
 }
 
-@media only screen and (min-width: 1280px) and (max-width: 1349px) {
+@media only screen and (min-width: 992px) and (max-width: 1999px) {
     .main-wrapper .grid-view-wrapper .listing-thumb .actions-btns{
         display: block;
+        text-align: center;
     }
     .main-wrapper .grid-view-wrapper .listing-thumb .actions-btns .border-btn {
         margin-top: 15px;
@@ -2255,6 +2256,7 @@ header .agent-avtar .avtar:hover div ul {
     }
     .main-wrapper .grid-view-wrapper .listing-thumb .actions-btns{
         display: block;
+        text-align: center;
     }
     .main-wrapper .grid-view-wrapper .listing-thumb .actions-btns .border-btn{
         margin-top: 10px;

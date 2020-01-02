@@ -46,7 +46,7 @@
             </li>
         </ul>
         <div class="copyright wow fadeIn " data-wow-delay="0.3s">
-            <p><img src="{{ asset('assets/images/home-icon.png') }}" /> Fair Housing & Equal Oppurtunity</p>
+            <p><img src="{{ asset('assets/images/home-icon.png') }}" /> Fair Housing & Equal Opportunity</p>
             <ul class="social-icons">
                 <li>
                     <a href="#"><img src="{{ asset('assets/images/fb-icon.png') }}" alt="" /></a>

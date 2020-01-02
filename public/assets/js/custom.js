@@ -22,7 +22,7 @@ $(() => {
     });
 
     $(".mobile-map-icon").click(function(){
-       $(".map-wrapper").slideToggle();
+        $(".map-wrapper").slideToggle();
     });
 
     $(".grid-view-btn").click(function () {
@@ -372,13 +372,13 @@ $(() => {
         auto: false,
         loop: false,
         responsive: [{
-                breakpoint: 1279,
-                settings: {
-                    item: 1,
-                    thumbItem: 4,
-                    slideMove: 1,
-                }
-            },
+            breakpoint: 1279,
+            settings: {
+                item: 1,
+                thumbItem: 4,
+                slideMove: 1,
+            }
+        },
             {
                 breakpoint: 1024,
                 settings: {
@@ -479,15 +479,18 @@ $(() => {
         $("#need-help-btn2").click(function () {
             $("body").addClass("signup-modal-scroll-getStart");
         });
-        $(".btn-default.get_started_next_btn , .btn-default.next-modal , .datepicker--cell-day").click(function () {
+        $(".btn-default.get_started_next_btn , .btn-default.next-modal").click(function () {
             $("body").addClass("signup-modal-scroll-getStart");
+        });
+        $(".datepicker.-bottom-left-.-from-bottom-").click(function () {
+            $("body").addClass("datepicker-overflow-hidden");
         });
 
         $(".need-help-modal .close").click(function () {
-            $("body").removeClass("signup-modal-scroll-getStart");
+            $("body").removeClass("datepicker-overflow-hidden");
         });
-        $(".datepicker--cell-day").click(function () {
-            $("body").addClass("modal-open");
+        $(".need-help-modal .close").click(function () {
+            $("body").removeClass("signup-modal-scroll-getStart");
         });
         $(document).on("click", function (e) {
             if ($(e.target).is("#signup-btn") == false && $(e.target).parents('#signup').length == 0 && $(e.target).parents('#login').length == 0) {
@@ -504,6 +507,11 @@ $(() => {
             if ($(e.target).parents(".need-help-modal").length == 0) {
                 $("body").removeClass("signup-modal-scroll-getStart");
             }
+
+
+            // if ($(e.target).parents("#datepickers-container .datepicker").length == 0) {
+            //     $("body").removeClass("datepicker-overflow-hidden");
+            // }
         });
 
         //
@@ -628,6 +636,22 @@ $(() => {
         if (!$(e.target).is(".search-fld") && $(e.target).parents('.neighborhood-search-advance').length == 0) {
             $(".neighborhood-search-dropdown").hide();
         }
+        if (!$(e.target).is(".search-fld") && $(e.target).parents('.neighborhood-search-advance').length == 0) {
+            $(".neighborhood-search-dropdown").hide();
+        }
+
+        if (!$(e.target).is(".dropdown-wrap .btn-primary") && $(e.target).parents('.dropdown-for-neigh').length == 0) {
+            $(".dropdown-for-neigh").slideUp();
+        }
+        if (!$(e.target).is(".dropdown-wrap .btn-primary") && $(e.target).parents('.dropdown-for-beds , #advance-search-beds').length == 0) {
+            $(".dropdown-for-beds").slideUp();
+        }
+        if (!$(e.target).is(".dropdown-wrap .btn-primary") && $(e.target).parents('.dropdown-for-baths , #advance-search-baths').length == 0) {
+            $(".dropdown-for-baths").slideUp();
+
+        }if (!$(e.target).is(".dropdown-wrap .btn-primary") && $(e.target).parents('.dropdown-for-price').length == 0) {
+            $(".dropdown-for-price").slideUp();
+        }
     });
 
     $(".dropdown-beds").click ( function () {
@@ -669,7 +693,7 @@ $(() => {
         $(this).toggleClass('rent-active-dropdown');
     });
     $('#beds-for-dropdown').click(function () {
-    $('.dropdown-for-beds').slideToggle();
+        $('.dropdown-for-beds').slideToggle();
     });
     $('#bath-for-dropdown').click(function () {
         $('.dropdown-for-baths').slideToggle();
@@ -684,16 +708,16 @@ $(() => {
         $(".dropdown-listiing-rent-page").hide();
         $(this).next().addClass('active').show();
     });
-   $(".price-range-dropdown").click(function (e) {
-       if($(e.target).parents('.price-range-dropdown').length !== 0){
-           return;
-       }
-       $(".price-range-ul").toggle();
-   });
-   $(".header-bg .search-property .search-fld").click(function (e) {
+    $(".price-range-dropdown").click(function (e) {
+        if($(e.target).parents('.price-range-dropdown').length !== 0){
+            return;
+        }
+        $(".price-range-ul").toggle();
+    });
 
+    $(".header-bg .search-property .search-fld").click(function (e) {
         $(".neighborhood-search-dropdown").toggle();
-   });
+    });
 
 });
 

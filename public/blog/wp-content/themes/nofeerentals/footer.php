@@ -62,7 +62,8 @@
                 </li>
             </ul>
             <div class="copyright wow fadeIn " data-wow-delay="0.3s">
-                <p><img src="<?php echo get_template_directory_uri(); ?>/assets/images/home-icon.png" /> Fair Housing & Equal Oppurtunity</p>
+                <p><img src="<?php echo get_template_directory_uri(); ?>/assets/images/home-icon.png" /> Fair Housing
+                    & Equal Opportunity</p>
                 <ul class="social-icons">
                     <li><a href="#"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/fb-icon.png" alt="" /></a></li>
                     <li><a href="#"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/twitter-icon.png" alt="" /></a></li>
@@ -225,14 +226,19 @@
 
                                 </div>
                             </div>
+                            <div class="col-sm-12 mobile-display">
+                                <p class="finding-home-text">If you would like to syndicate listing into no fee rentals nyc,
+                                    please use the same email address that you use for your RealtyMX.</p>
+                            </div>
 
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <input class="input-style agnet-input" placeholder="Phone Number" name="phone_number" type="text">
                                 </div>
                             </div>
-                            <div class="col-sm-12">
-                                    <p class="finding-home-text">If you would like to syndicate listing into no fee rentals nyc, please use tha same email address that you use for your RealtyMX..</p>
+                            <div class="col-sm-12 mobile-none">
+                                    <p class="finding-home-text">If you would like to syndicate listing into no fee
+                                        rentals nyc, please use the same email address that you use for your RealtyMX..</p>
                             </div>
 
                             <div class="col-sm-6">
