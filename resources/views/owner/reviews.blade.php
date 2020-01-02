@@ -24,7 +24,6 @@
                         <div class="profile-contact-section profile-section-padding">
                             <div class="container-lg">
                                 <div class="your-reviews-section">
-{{--                                    <h3>Your Reviews</h3>--}}
                                     <div class="row">
                                         @if($reviews->isNotEmpty())
                                             @foreach($reviews as $review)
@@ -54,9 +53,6 @@
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="tab-2">
-                        No Record Found
-                    </div>
                 </div>
             </div>
         </div>
@@ -77,7 +73,7 @@
                        <div class="col-sm-12">
                            <div class="form-group">
                                <label>Email</label>
-                               {!! Form::text('email', null, ['class' => 'input-style','id' => 'renter_email', 'placeholder' => 'Request Email', 'type' => 'email']) !!}
+                               {!! Form::select('email', renters(), null, ['class' => 'input-style','id' => 'renter_email']) !!}
                            </div>
                            <div class="form-group">
                                <label>Message</label>
@@ -94,8 +90,11 @@
             </div>
         </div>
     </div>
+    {!! HTML::style('https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css') !!}
+    {!! HTML::script('https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js') !!}
     <script>
-        fetchRenters($('input[name=email]'));
+        let $disabledResults = $('select[name=email]');
+        $disabledResults.select2();
     </script>
 @endsection
 

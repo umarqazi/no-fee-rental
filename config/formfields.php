@@ -104,6 +104,12 @@ return [
         ]
     ],
 
+    'sorting' => [
+        'cheaper' => 'Cheapest',
+        'recent'  => 'Recent',
+        'older'   => 'Oldest',
+    ],
+
     'building_action' => [
         ''         => 'Select Building Action',
         ALLOWAGENT => 'Allow Agent',

@@ -11,9 +11,9 @@
                 <p class="title">Total Apartments: {{ count($building->listings) }}</p>
                 <p>Posted On: {{ $building->created_at->format("m/d/y H:m A") }}</p>
                 @if($building->type === FEE)
-                    <span class="status" style="background-color:red;">Fee</span>
+                    <span class="status" style="background-color:red;">Fee Building</span>
                 @else
-                    <span class="status" style="background-color:#223970;">No Fee</span>
+                    <span class="status" style="background-color:#223970;">No Fee Building</span>
                 @endif
                 <div class="actions-btns">
                     <a href="{{ route(whoAmI().'.editBuilding', $building->id) }}">
@@ -51,9 +51,9 @@
                         </p>
                         <p>Posted On: {{ $building->created_at->format("m/d/y H:m A") }}</p>
                         @if($building->type === FEE)
-                            <span class="status" style="background-color:red;">Fee</span>
+                            <span class="status" style="background-color:red;">Fee Building</span>
                         @else
-                            <span class="status" style="background-color:#223970;">No Fee</span>
+                            <span class="status" style="background-color:#223970;">No Fee Building</span>
                         @endif
                         <div class="list-actions-icons">
                             <a href="{{ route(whoAmI().'.editBuilding', $building->id) }}"><button><i class="fa fa-edit"></i></button></a>

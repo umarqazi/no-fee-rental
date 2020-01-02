@@ -179,6 +179,22 @@ class ListingService extends BuildingService {
     }
 
     /**
+     * @param $paginate
+     * @return object
+     */
+    public function getOwnerLists($paginate) {
+        return toObject($this->__ownerCollection($paginate));
+    }
+
+    /**
+     * @param $paginate
+     * @return object
+     */
+    public function getAgentLists($paginate) {
+        return toObject($this->__agentCollection($paginate));
+    }
+
+    /**
      * @param $id
      * @return mixed
      */
@@ -239,10 +255,19 @@ class ListingService extends BuildingService {
      */
     public function search( $request, $paginate ) {
         $keywords = [];
+        $results = null;
         ! empty( $request->baths ) ? $keywords['baths'] = $request->baths : null;
         ! empty( $request->beds ) ? $keywords['bedrooms'] = $request->beds : null;
 
-        return toObject( $this->__searchCollection( $keywords, $paginate ) );
+        if(isAdmin()) {
+            $results = $this->__adminSearchCollection( $keywords, $paginate );
+        } elseif (isOwner()) {
+            $results = $this->__ownerSearchCollection( $keywords, $paginate );
+        } else {
+            $results = $this->__agentSearchCollection( $keywords, $paginate );
+        }
+
+        return toObject( $results );
     }
 
     /**
@@ -262,7 +287,7 @@ class ListingService extends BuildingService {
     /**
      * @return mixed
      */
-    public function active_inactive() {
+    public function getActiveInactive() {
         return $this->listingRepo->activeInactive();
     }
 
@@ -302,15 +327,6 @@ class ListingService extends BuildingService {
     }
 
     /**
-     * @param $paginate
-     *
-     * @return array
-     */
-    public function get( $paginate ) {
-        return toObject( $this->__collection( $paginate ) );
-    }
-
-    /**
      * @param $id
      *
      * @return mixed
@@ -332,7 +348,15 @@ class ListingService extends BuildingService {
      * @return array
      */
     public function cheaper( $paginate ) {
-        return $this->__sortCollection( $paginate, 'rent', CHEAPEST );
+        $results = null;
+        if(isAdmin()) {
+            $results = $this->__adminSortCollection($paginate, 'rent', CHEAPEST);
+        } elseif (isOwner()) {
+            $results = $this->__ownerSortCollection($paginate, 'rent', CHEAPEST);
+        } else {
+            $results = $this->__agentSortCollection($paginate, 'rent', CHEAPEST);
+        }
+        return toObject($results);
     }
 
     /**
@@ -341,7 +365,15 @@ class ListingService extends BuildingService {
      * @return array
      */
     public function recent( $paginate ) {
-        return $this->__sortCollection( $paginate, 'updated_at', RECENT );
+        $results = null;
+        if(isAdmin()) {
+            $results = $this->__adminSortCollection($paginate, 'rent', RECENT);
+        } elseif (isOwner()) {
+            $results = $this->__ownerSortCollection($paginate, 'rent', RECENT);
+        } else {
+            $results = $this->__agentSortCollection($paginate, 'rent', RECENT);
+        }
+        return toObject($results);
     }
 
     /**
@@ -350,7 +382,15 @@ class ListingService extends BuildingService {
      * @return array
      */
     public function oldest( $paginate ) {
-        return $this->__sortCollection( $paginate, 'updated_at', OLDEST );
+        $results = null;
+        if(isAdmin()) {
+            $results = $this->__adminSortCollection($paginate, 'rent', OLDEST);
+        } elseif (isOwner()) {
+            $results = $this->__ownerSortCollection($paginate, 'rent', OLDEST);
+        } else {
+            $results = $this->__agentSortCollection($paginate, 'rent', OLDEST);
+        }
+        return toObject($results);
     }
 
     /**
@@ -549,33 +589,11 @@ class ListingService extends BuildingService {
 
     /**
      * @param $paginate
-     *
-     * @return array
-     */
-    private function __collection( $paginate ) {
-        return [
-            'active'   => $this->getActive()
-                               ->latest( 'updated_at' )
-                               ->paginate( $paginate, [ '*' ], 'active' ),
-            'pending'  => $this->getPending()
-                               ->latest()
-                               ->paginate( $paginate, [ '*' ], 'pending' ),
-            'inactive' => $this->getInActive()
-                               ->latest()
-                               ->paginate( $paginate, [ '*' ], 'inactive' ),
-            'archived' => $this->getArchive()
-                               ->latest()
-                               ->paginate( $paginate, [ '*' ], 'archived' ),
-        ];
-    }
-
-    /**
-     * @param $paginate
      * @return array
      */
     private function __adminCollection($paginate) {
         return [
-            'active'     => $this->active_inactive()
+            'active'     => $this->getActiveInactive()
                                   ->latest()
                                   ->paginate($paginate, ['*'], 'active'),
             'realty'     => $this->getRealty()
@@ -597,6 +615,45 @@ class ListingService extends BuildingService {
     }
 
     /**
+     * @param $paginate
+     * @return array
+     */
+    private function __ownerCollection($paginate) {
+        return [
+            'active'     => $this->getActive()
+                ->latest()
+                ->paginate($paginate, ['*'], 'active'),
+            'inactive'   => $this->getInActive()
+                ->latest()
+                ->paginate($paginate, ['*'], 'in-active'),
+            'archived'   => $this->getArchive()
+                ->latest()
+                ->paginate($paginate, ['*'], 'archive'),
+        ];
+    }
+
+    /**
+     * @param $paginate
+     * @return array
+     */
+    private function __agentCollection($paginate) {
+        return [
+            'active'     => $this->getActive()
+                ->latest()
+                ->paginate($paginate, ['*'], 'active'),
+            'inactive'   => $this->getInActive()
+                ->latest()
+                ->paginate($paginate, ['*'], 'in-active'),
+            'archived'   => $this->getArchive()
+                ->latest()
+                ->paginate($paginate, ['*'], 'archive'),
+            'pending'    => $this->getPending()
+                ->latest()
+                ->paginate($paginate, ['*'], 'pending'),
+        ];
+    }
+
+    /**
      * @param $keywords
      * @param $paginate
      *
@@ -605,7 +662,7 @@ class ListingService extends BuildingService {
     private function __adminSearchCollection( $keywords, $paginate ) {
         return [
             'active'     => $this->listingRepo->search( $keywords )
-                                            ->active()
+                                            ->ai()
                                             ->latest()
                                             ->paginate($paginate, ['*'], 'active'),
             'realty'     => $this->listingRepo->search( $keywords )
@@ -632,6 +689,29 @@ class ListingService extends BuildingService {
     }
 
     /**
+     * @param $keywords
+     * @param $paginate
+     *
+     * @return array
+     */
+    private function __ownerSearchCollection( $keywords, $paginate ) {
+        return [
+            'active' => $this->listingRepo->search( $keywords )
+                            ->active()
+                            ->latest()
+                            ->paginate($paginate, ['*'], 'active'),
+            'inactive' => $this->listingRepo->search( $keywords )
+                            ->inactive()
+                            ->latest()
+                            ->paginate($paginate, ['*'], 'in-active'),
+            'archived'   => $this->listingRepo->search( $keywords )
+                            ->archived()
+                            ->latest()
+                            ->paginate($paginate, ['*'], 'archive'),
+        ];
+    }
+
+    /**
      * @param $paginate
      * @param $col
      * @param $order
@@ -640,12 +720,9 @@ class ListingService extends BuildingService {
      */
     private function __adminSortCollection( $paginate, $col, $order ) {
         return toObject( [
-            'active'     => $this->getActive()
+            'active'     => $this->getActiveInactive()
                                ->orderBy( $col, $order )
                                ->paginate( $paginate, [ '*' ], 'active' ),
-            'inactive'   => $this->getInActive()
-                               ->orderBy( $col, $order )
-                               ->paginate( $paginate, [ '*' ], 'inactive' ),
             'pending'    => $this->getPending()
                                ->orderBy( $col, $order )
                                ->paginate( $paginate, [ '*' ], 'pending' ),
@@ -661,6 +738,27 @@ class ListingService extends BuildingService {
             'realty'     => $this->getRealty()
                                ->orderBy( $col, $order )
                                ->paginate( $paginate, [ '*' ], 'realty' )
+        ] );
+    }
+
+    /**
+     * @param $paginate
+     * @param $col
+     * @param $order
+     *
+     * @return array
+     */
+    private function __ownerSortCollection( $paginate, $col, $order ) {
+        return toObject( [
+            'active'     => $this->getActive()
+                                ->orderBy( $col, $order )
+                                ->paginate( $paginate, [ '*' ], 'active' ),
+            'inactive'   => $this->getInActive()
+                                ->orderBy( $col, $order )
+                                ->paginate( $paginate, [ '*' ], 'in-active' ),
+            'archived'   => $this->getArchive()
+                                ->orderBy( $col, $order )
+                                ->paginate( $paginate, [ '*' ], 'archived' ),
         ] );
     }
 

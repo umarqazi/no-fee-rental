@@ -19,39 +19,27 @@ use Illuminate\View\View;
 class ListingController extends Controller {
 
     /**
-     * @var ListingService
-     */
-    private $listingService;
-
-    /**
-     * @var NeighborhoodService
-     */
-    private $neighborhoodService;
-
-    /**
      * @var int
      */
     private $paginate = 5;
 
     /**
-     * ListingController constructor.
-     *
-     * @param ListingService $listingService
-     * @param NeighborhoodService $neighborhoodService
+     * @var ListingService
      */
-    public function __construct(
-        ListingService $listingService,
-        NeighborhoodService $neighborhoodService
-    ) {
-        $this->listingService = $listingService;
-        $this->neighborhoodService = $neighborhoodService;
+    private $listingService;
+
+    /**
+     * ListingController constructor.
+     */
+    public function __construct() {
+        $this->listingService = new ListingService();
     }
 
     /**
      * @return Factory|View
      */
     public function index() {
-        $listing = $this->listingService->get($this->paginate);
+        $listing = $this->listingService->getOwnerLists($this->paginate);
         return view('owner.index', compact('listing'));
     }
 
