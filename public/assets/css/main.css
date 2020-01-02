@@ -766,6 +766,11 @@ h3 {
 .price-range-ul li {
     display: inline-block;
 }
+.price-range-dropdown .price-range-ul ul li .form-control:focus{
+    outline: 0;
+    box-shadow: none !important;
+    border-color:  #ced4da;
+}
 .price-range-ul li:first-child{
     width: 40%;
 }
@@ -1736,6 +1741,7 @@ footer .copyright .social-icons li a:hover {
 #advance-search .bdr-top-btn {
     border-top: 1px solid #cecaca;
     padding-top: 20px;
+    padding-left: 0px;
 }
 
 #advance-search .modal-title {
@@ -2793,14 +2799,14 @@ footer .copyright .social-icons li a:hover {
     max-width: 320px !important;
 }
 .mapboxgl-popup-close-button{
-    right: 5px !important;
+    right: -10px !important;
     font-size: 18px;
     background-color: #333 !important;
     padding: 5px;
     border-radius: 20px !important;
     color: #fff;
     line-height: 10px;
-    top: 5px !important;
+    top: -10px !important;
 }
 .mapboxgl-popup-content.single{
     height: 250px;
@@ -3996,6 +4002,9 @@ footer .copyright .social-icons li a:hover {
 .datepicker {
     z-index: 999999;
 }
+.datepickers-container{
+    z-index: 1100;
+}
 
 .timeDatepicker {
     margin-top: 5px;
@@ -4026,7 +4035,7 @@ footer .copyright .social-icons li a:hover {
     flex-wrap: wrap;
     display: flex;
     margin: 0px -30px;
-    justify-content: start;
+    justify-content: center;
 }
 
 .property-listing .owl-dots {
@@ -4090,7 +4099,7 @@ footer .copyright .social-icons li a:hover {
 /**/
 .property-listing.neighbourhood-listing {
     display: flex;
-    justify-content: left;
+    justify-content: center;
     flex-wrap: wrap;
 }
 
@@ -4588,7 +4597,7 @@ footer .copyright .social-icons li a:hover {
         max-width: 465px;
     }
     .desktop-listiing {
-        justify-content: flex-start;
+        justify-content: center;
     }
     .neighborhood-search .search-result-wrapper .map-wrapper{
         flex: 0 0 30%;
@@ -5155,6 +5164,7 @@ footer .copyright .social-icons li a:hover {
     .price-range-ul{
         top: 45px;
         width: 100%;
+
     }
     .price-range-dropdown{
         border-left: none;
