@@ -504,14 +504,22 @@ $(() => {
 
 
         $(document).on("click", function (e) {
-            if ($(e.target).parents(".need-help-modal").length == 0) {
+            if ($(e.target).parents(".need-help-modal, #datepickers-container .datepicker").length == 0) {
                 $("body").removeClass("signup-modal-scroll-getStart");
             }
+            if ($(e.target).parents(".datepickers-container").length == 0) {
+                var get_click = $(e.target).text();
+                console.log("trueee", get_click);
+                $("body").removeClass("datepicker-overflow-hidden");
+            }
 
+            if($(e.target).hasClass(".datepicker--cell")){
+                console.log("good");
+            }
+            $(".datepicker--cell").click(function(){
+               console.log("celll")
+            });
 
-            // if ($(e.target).parents("#datepickers-container .datepicker").length == 0) {
-            //     $("body").removeClass("datepicker-overflow-hidden");
-            // }
         });
 
         //

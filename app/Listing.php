@@ -120,7 +120,12 @@ class Listing extends Model {
      * @return mixed
      */
     public function scopeAI($query) {
-        return $query->where(['visibility' => ACTIVELISTING, 'realty_id' => NULL]);
+        return $query->where([
+            'visibility' => ACTIVELISTING,
+            'realty_id' => NULL
+        ])->whereHas('building', function($subQuery) {
+            return $subQuery->where('building_action', '!=', OWNERONLY);
+        });
     }
 
     /**

@@ -53,7 +53,7 @@
                 <!-- Modal body -->
                 <div class="modal-body">
                     <div class="pt-4 -b-4">
-                        {!! Form::text('min_price', null, ['class' => 'input-style', 'placeholder' => 'Spend Amount', 'id' => 'spend']) !!}
+                        {!! Form::text('min_price', null, ['class' => 'input-style', 'placeholder' => '$ Amount', 'id' => 'spend']) !!}
                     </div>
                 </div>
                 <div class="modal-footer text-center">
@@ -311,7 +311,6 @@
                 <!-- Modal body -->
                 <div class="modal-body">
                     {!! neighborhood_let_us_help() !!}
-                    <div class="text-center"><button type="button" class="btn-default skip-btn" data-target="let-us-step11">Skip</button></div>
                 </div>
                 <div class="modal-footer text-center">
                     <button class="btn-default ml-3 let_us_help_prev_btn" type="button" current="location-1-modal" prev="let-us-step8">Previous</button>
@@ -345,7 +344,6 @@
                     <div class="pt-4 -b-4">
                         {!! Form::textarea('location_or_neighborhood', null, ['class' => 'input-style text-area', 'style' => 'resize:none;','placeholder' => 'What are you looking for?']) !!}
                     </div>
-                    <div class="text-center"><button type="button" class="btn-default skip-btn" data-target="let-us-step11">Skip</button></div>
                 </div>
                 <div class="modal-footer text-center">
                     <button class="btn-default ml-3 let_us_help_prev_btn" type="button" current="location-2-modal" prev="let-us-step8">Previous</button>
@@ -401,15 +399,8 @@
                                     <label class="custom-control-label" for="moving-4">need more space</label>
                                 </div>
                             </li>
-                            {{--<li>--}}
-                                {{--<div class="custom-control custom-radio custom-control-inline">--}}
-                                    {{--{!! Form::radio('move_reason', 5, false, ['class' => 'custom-control-input', 'id' => 'moving-5']) !!}--}}
-                                    {{--<label class="custom-control-label" for="moving-5">Other...</label>--}}
-                                {{--</div>--}}
-                            {{--</li>--}}
                         </ul>
                     </div>
-                    <div class="text-center"><button type="button" class="btn-default skip-btn" data-target="let-us-step11">Skip</button></div>
                 </div>
                 <div class="modal-footer text-center">
                     <button class="btn-default ml-3 let_us_help_prev_btn" type="button" current="location-3-modal" prev="let-us-step8">Previous</button>
@@ -468,7 +459,9 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="text-center"><button type="button" class="btn-default skip-btn" data-target="let-us-step12">Skip</button></div>
+                    <div class="text-center">
+                        <button type="button" class="btn-default skip-btn let_us_help_next_btn" current="let-us-step11" next="let-us-step12">Skip</button>
+                    </div>
                 </div>
                 <div class="modal-footer text-center">
                     <button class="btn-default ml-3 let_us_help_prev_btn" id="set-prev" type="button" current="let-us-step11" prev="">Previous</button>
@@ -521,7 +514,9 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="text-center"><button type="button" class="btn-default skip-btn" data-target="let-us-step13">Skip</button></div>
+                    <div class="text-center">
+                        <button type="button" class="btn-default skip-btn let_us_help_next_btn" current="let-us-step12" next="let-us-step13">Skip</button>
+                    </div>
                 </div>
                 <div class="modal-footer text-center">
                     <button class="btn-default ml-3 let_us_help_prev_btn" type="button" current="let-us-step12" prev="let-us-step11">Previous</button>

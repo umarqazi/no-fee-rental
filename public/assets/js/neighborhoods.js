@@ -7,7 +7,7 @@ $body.on('change', '#neighborhood', function () {
 
 $('#add_neighborhood').on('click', function () {
     $body.find('input[type=submit]').val('Create');
-})
+});
 
 $body.on('click', '#viewNeighborhoodContent', async function() {
     let $id = $(this).attr('ref_id');
