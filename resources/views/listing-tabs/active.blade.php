@@ -38,7 +38,7 @@
                     <a href="{{ route(whoAmI().'.repostListing', $al->id) }}">
                         <button type="button" class="border-btn">Repost</button>
                     </a>
-                    <a href="{{ route(whoAmI().'.listingStatus', $al->id) }}" title="Unpublish this Listing">
+                    <a href="{{ route(whoAmI().'.archive', $al->id) }}" title="Archive this Listing">
                         <button type="button" class="border-btn">Archive</button>
                     </a>
                     @if($al->is_featured != APPROVEFEATURED)
@@ -93,7 +93,7 @@
                             <a href="{{ route(whoAmI().'.repostListing', $al->id) }}">
                                 <button type="button" class="border-btn">Repost</button>
                             </a>
-                            <a href="{{ route(whoAmI().'.listingStatus', $al->id) }}" title="Unpublish this Listing">
+                            <a href="{{ route(whoAmI().'.archive', $al->id) }}" title="Archive this Listing">
                                 <button type="button" class="border-btn">Archive</button>
                             </a>
                             @if($al->is_featured != APPROVEFEATURED)

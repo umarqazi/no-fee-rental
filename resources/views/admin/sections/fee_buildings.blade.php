@@ -41,10 +41,10 @@
                         </p>
                         <p>Posted On: {{ $building->created_at->format("m/d/y H:m A") }}</p>
                         <span class="status" style="background-color:red;">Fee Building</span>
+                        <div class="list-actions-icons">
+                            <a href="{{ route(whoAmI().'.editBuilding', $building->id) }}"><button><i class="fa fa-edit"></i></button></a>
+                        </div>
                         <div class="actions-btns">
-                            <a href="{{ route(whoAmI().'.editBuilding', $building->id) }}">
-                                <span><img src="{{asset('assets/images/edit-icon.png')}}" alt=""></span>
-                            </a>
                             <a href="{{ route(whoAmI().'.noFeeBuilding', $building->id) }}" title="Make this building No Fee">
                                 <button type="button" class="border-btn">No Fee</button>
                             </a>

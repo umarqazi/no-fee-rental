@@ -172,8 +172,8 @@ class Listing extends Model {
 	 */
 	public function scopeInactive($query) {
 		isAdmin() ?: $clause['user_id'] = myId();
-		$clause['visibility'] =  INACTIVELISTING;
-		return $query->where($clause)->where('availability', '>', now()->format('Y-m-d'));
+		$clause['visibility'] =  ACTIVELISTING;
+		return $query->where($clause)->where('availability', '>=', now()->format('Y-m-d'));
 	}
 
 	/**
@@ -193,7 +193,7 @@ class Listing extends Model {
      * @return mixed
      */
     public function scopeFeatured($query) {
-        return $query->whereis_featured(APPROVEFEATURED)->where('visibility', ACTIVE)->latest('created_at');
+        return $query->whereis_featured(APPROVEFEATURED)->where('visibility', ACTIVELISTING)->latest('created_at');
     }
 
     /**
@@ -201,7 +201,7 @@ class Listing extends Model {
      * @return mixed
      */
     public function scopePrice($query) {
-        return $query->whereis_featured(APPROVEFEATURED)->where('visibility', ACTIVE);
+        return $query->whereis_featured(APPROVEFEATURED)->where('visibility', ACTIVELISTING);
     }
 
     /**

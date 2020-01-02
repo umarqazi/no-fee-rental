@@ -21,63 +21,63 @@ class ListingRepo extends BaseRepo {
      * @return mixed
      */
 	public function activeInactive() {
-	    return $this->model->ai()->with('images');
+	    return $this->model->ai();
     }
 
     /**
      * @return mixed
      */
     public function realty() {
-	    return $this->model->realty()->with('images');
+	    return $this->model->realty();
     }
 
     /**
      * @return mixed
      */
     public function ownerOnly() {
-        return $this->model->ownerOnly()->with('images');
+        return $this->model->ownerOnly();
     }
 
     /**
      * @return mixed
      */
     public function reported() {
-        return $this->model->reportedLists()->with('images');
+        return $this->model->reportedLists();
     }
 
 	/**
 	 * @return mixed
 	 */
 	public function active() {
-		return $this->model->active()->with('images');
+		return $this->model->active();
 	}
 
 	/**
      * @return mixed
      */
     public function rentActive() {
-        return $this->model->rentActive()->with('images');
+        return $this->model->rentActive();
     }
 
 	/**
 	 * @return mixed
 	 */
 	public function inactive() {
-		return $this->model->inactive()->with('images');
+		return $this->model->inactive();
 	}
 
 	/**
 	 * @return mixed
 	 */
 	public function pending() {
-		return $this->model->pending()->with('images');
+		return $this->model->pending();
 	}
 
     /**
      * @return mixed
      */
     public function archived() {
-        return $this->model->archived()->with('images');
+        return $this->model->archived();
     }
 
 	/**

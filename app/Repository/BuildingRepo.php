@@ -35,52 +35,41 @@ class BuildingRepo extends BaseRepo {
     }
 
     /**
-     * @param $paginate
      *
      * @return mixed
      */
-    public function noFee($paginate) {
+    public function noFee() {
         return $this->find([
-            'is_verified'     => ACTIVE,
             'type'            => NOFEE,
+            'is_verified'     => ACTIVE,
             'building_action' => ALLOWAGENT
-        ])->withLists()
-          ->paginate($paginate, ['*'], 'no-fee');
+        ])->withLists();
     }
 
     /**
-     * @param $paginate
      *
      * @return mixed
      */
-    public function fee($paginate) {
+    public function fee() {
         return $this->find([
-            'type'        => FEE,
-            'is_verified' => ACTIVE,
-        ])->withLists()
-          ->paginate($paginate, ['*'], 'fee');
+            'type'            => FEE,
+            'is_verified'     => ACTIVE,
+            'building_action' => ALLOWAGENT,
+        ])->withLists();
     }
 
     /**
-     * @param $paginate
-     *
      * @return mixed
      */
-    public function pending($paginate) {
-        return $this->find(['is_verified' => DEACTIVE])
-                    ->withLists()
-                    ->paginate($paginate, ['*'], 'pending');
+    public function pending() {
+        return $this->find(['is_verified' => DEACTIVE])->withLists();
     }
 
     /**
-     * @param $paginate
-     *
      * @return mixed
      */
-    public function ownerOnly($paginate) {
-        return $this->find(['building_action' => OWNERONLY])
-                    ->withLists()
-                    ->paginate($paginate, ['*'], 'owner-only');
+    public function ownerOnly() {
+        return $this->find(['building_action' => OWNERONLY])->withLists();
     }
 
     /**

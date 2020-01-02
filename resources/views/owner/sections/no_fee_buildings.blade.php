@@ -16,7 +16,7 @@
                         <span><img src="{{asset('assets/images/edit-icon.png')}}" alt=""></span>
                     </a>
                     <a href="{{ route(whoAmI().'.feeBuilding', $building->id) }}" title="Make this building fee">
-                        <button type="button" class="border-btn">Fee</button>
+                        <button class="border-btn">Fee</button>
                     </a>
                 </div>
             </div>
@@ -46,7 +46,7 @@
                         </div>
                         <div class="actions-btns">
                             <a href="{{ route(whoAmI().'.feeBuilding', $building->id) }}" title="Make this building fee">
-                                <button type="button" class="border-btn">Fee</button>
+                                <button class="border-btn">Fee</button>
                             </a>
                         </div>
                     </div>

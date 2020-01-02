@@ -10,8 +10,18 @@
             <div class="heading-wrapper pl-0">
                 <ul class="nav nav-pills">
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="pill" href="#buildings-active">
-                            No Fee ( {{ $buildings->total() }} )
+                        <a class="nav-link" data-toggle="pill" href="#no-fee-buildings">
+                            No Fee ( {{ $buildings->no_fee->total() }} )
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-link" data-toggle="pill" href="#fee-buildings">
+                            Fee ( {{ $buildings->fee->total() }} )
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-link" data-toggle="pill" href="#owner-only-buildings">
+                            Owner Only ( {{ $buildings->owner_only->total() }} )
                         </a>
                     </li>
                 </ul>
@@ -25,8 +35,14 @@
             <div class="block-body">
                 <!-- Tab panes -->
                 <div class="tab-content">
-                    <div class="tab-pane" id="buildings-active">
-                        @include('owner.sections.verified_buildings')
+                    <div class="tab-pane" id="no-fee-buildings">
+                        @include('owner.sections.no_fee_buildings')
+                    </div>
+                    <div class="tab-pane" id="fee-buildings">
+                        @include('owner.sections.fee_buildings')
+                    </div>
+                    <div class="tab-pane" id="owner-only-buildings">
+                        @include('owner.sections.owner_only_building')
                     </div>
                 </div>
             </div>

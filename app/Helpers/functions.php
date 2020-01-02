@@ -446,10 +446,6 @@ function neighborhoodExpertise( $neighborhoods ) {
     return ( count( $collect ) > 0 ) ? implode( ', ', $collect ) : 'None';
 }
 
-function languages($languages) {
-    dd($languages);
-}
-
 /**
  * @param $features
  *
@@ -729,6 +725,31 @@ function neighborhood_let_us_help() {
 }
 
 /**
+ * @param $params
+ * @return string|null
+ */
+function panel_listing_filters($params) {
+    $html = null;
+    $sorting = config('formfields.sorting');
+    $html .= '<div class="sort-bt"><i class="fa fa-sort-amount-down"></i>';
+    $html .= '<div class="custom-dropdown"><ul><li>';
+    foreach ($sorting as $key => $sort) {
+        $html .= '<li><a href="';
+        $html .= route(whoAmI().'.sorting', $key);
+        $html .= sprintf('">%s</a></li>', $sort);
+    }
+
+    $html .= '</ul></div><span>Sort By</span></div>';
+    $html .= Form::open(['url' => route(whoAmI().'.listingSearch'), 'id' => 'search', 'method' => 'post']);
+    $html .= Form::number('beds', $params['beds'] ?? null, ['class' => 'filter-input', 'placeholder' => 'All Beds', 'autocomplete' => 'off']);
+    $html .= Form::number('baths', $params['baths'] ?? null, ['class' => 'filter-input', 'placeholder' => 'All Baths', 'autocomplete' => 'off']);
+    $html .= Form::button('Filter', ['class' => 'btn-default', 'type' => 'submit']);
+    $html .= Form::close();
+
+    return $html;
+}
+
+/**
  * @return string|null
  */
 function features_pet() {
@@ -893,6 +914,19 @@ function owners() {
     }
 
     return $owners;
+}
+
+/**
+ * @return array
+ */
+function renters() {
+    $data       = ( new \App\Services\UserService() )->renters();
+    $renters[''] = "Select Request Email";
+    foreach ( $data as $renter ) {
+        $renters[ $renter->email ] = sprintf( "%s", $renter->email );
+    }
+
+    return $renters;
 }
 
 /**
