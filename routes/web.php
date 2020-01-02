@@ -29,10 +29,10 @@ Route::post('/newsletter-subscribe', 'NewsletterController@subscribe')->name('ne
 Route::get('/press', 'ContactUsController@showPress')->name('press');
 Route::post('newsletter', 'NewsletterController@store');
 
-// Agent Profile Routes
-Route::get('/agent-profile/{agentId}', 'UserController@agentProfileWithListing')->name('web.agentProfile');
-Route::get('/agent-profile-search-filters/{agentId}', 'UserController@agentProfileSearchFilter')->name('web.agentProfileSearchFilter');
-Route::get('/agent-profile-advance-search/{agentId}', 'UserController@agentProfileAdvanceSearch')->name('web.agentProfileAdvanceSearch');
+// Profile Routes
+Route::get('/profile/{agentId}', 'UserController@agentProfileWithListing')->name('web.agentProfile');
+Route::get('/profile-search-filters/{agentId}', 'UserController@agentProfileSearchFilter')->name('web.agentProfileSearchFilter');
+Route::get('/profile-advance-search/{agentId}', 'UserController@agentProfileAdvanceSearch')->name('web.agentProfileAdvanceSearch');
 
 // Add User By Admin Change Password Routes
 Route::get('/change-password/{token}', 'UserController@changePassword')->name('user.change_password');

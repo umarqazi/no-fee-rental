@@ -11226,7 +11226,6 @@ var pushNotification = function pushNotification(data) {
 
 
 window.onload = function _callee() {
-  var res;
   return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function _callee$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
@@ -11248,12 +11247,11 @@ window.onload = function _callee() {
               };
               pushNotification(obj);
             });
-          })["catch"](function (err) {}));
+          })["catch"](function (err) {
+            console.log(err);
+          }));
 
         case 3:
-          res = _context.sent;
-
-        case 4:
         case "end":
           return _context.stop();
       }
