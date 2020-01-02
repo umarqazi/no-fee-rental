@@ -46,14 +46,19 @@
                         <li></li>
                         <li></li>
                     </ul>
-                    <h3 class="modal-title">I can't spend over <span id="invest">____</span> on rent every month</h3>
+                    <h3 class="modal-title">How much can you spend on rent every month?</h3>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
 
                 <!-- Modal body -->
                 <div class="modal-body">
-                    <div class="pt-4 -b-4">
-                        {!! Form::text('min_price', null, ['class' => 'input-style', 'placeholder' => '$ Amount', 'id' => 'spend']) !!}
+                    <div class="pt-4 -b-4 text-center">
+                        <h4>I can't spend over <span id="invest">
+                                {!! Form::text('min_price', null, ['class' => 'input-style', 'placeholder' =>
+                                '$ Amount', 'id' => 'spend', 'style' => 'margin:5px 0px; width:25%;']) !!}</span> on
+                            rent every
+                            month</h4>
+
                     </div>
                 </div>
                 <div class="modal-footer text-center">

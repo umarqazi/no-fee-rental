@@ -53,7 +53,8 @@
                         </div>
                     </div>
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#advance-search">More</button>
-                    {!! Form::button('Search', ['class' => 'btn btn-primary text-right', 'type' => 'submit', 'style' => 'background:#213971;color:#ffff;']) !!}
+                    {!! Form::button('Search', ['class' => 'btn btn-primary text-right', 'type' => 'submit', 'style'
+                    => 'background:#f36f21;color:#ffff; border-color:#f36f21;']) !!}
                 </div>
                 {!! Form::close() !!}
             </div>
