@@ -26,9 +26,6 @@
     {!! HTML::script("assets/js/vendor/wow.min.js") !!}
     {!! HTML::script("assets/js/custom.js") !!}
     {!! HTML::script("assets/js/vendor/lightslider.js") !!}
-    @if(session('message'))
-        {!! toast(session('message'), session('alert_type')) !!}
-    @endif
 
     <script>
         $(() => {
