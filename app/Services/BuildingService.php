@@ -60,7 +60,7 @@ class BuildingService {
      * @return array
      */
     public function index( $paginate ) {
-        return toObject( $this->__collection( $paginate ) );
+        return toObject( $this->__adminCollection( $paginate ) );
     }
 
     /**
@@ -69,7 +69,7 @@ class BuildingService {
      * @return mixed
      */
     public function ownerIndex($paginate) {
-        return $this->buildingRepo->find(['user_id' => myId()])->paginate($paginate);
+        return toObject($this->__ownerCollection($paginate));
     }
 
     /**
@@ -344,12 +344,25 @@ class BuildingService {
      *
      * @return array
      */
-    private function __collection( $paginate ) {
+    private function __adminCollection( $paginate ) {
         return [
-            'no_fee'       => $this->buildingRepo->noFee( $paginate ),
-            'fee'          => $this->buildingRepo->fee($paginate),
-            'owner_only'   => $this->buildingRepo->ownerOnly($paginate),
-            'non_verified' => $this->buildingRepo->pending( $paginate )
+            'fee'          => $this->buildingRepo->fee()->paginate($paginate, ['*'], 'fee'),
+            'no_fee'       => $this->buildingRepo->noFee()->paginate($paginate, ['*'], 'no-fee'),
+            'owner_only'   => $this->buildingRepo->ownerOnly()->paginate($paginate, ['*'], 'owner-only'),
+            'non_verified' => $this->buildingRepo->pending()->paginate($paginate, ['*'], 'non-verified')
+        ];
+    }
+
+    /**
+     * @param $paginate
+     *
+     * @return array
+     */
+    private function __ownerCollection( $paginate ) {
+        return [
+            'fee'        => $this->buildingRepo->fee()->where('user_id', myId())->paginate($paginate, ['*'], 'fee'),
+            'no_fee'     => $this->buildingRepo->noFee()->where('user_id', myId())->paginate($paginate, ['*'], 'no-fee'),
+            'owner_only' => $this->buildingRepo->ownerOnly()->where('user_id', myId())->paginate($paginate, ['*'], 'owner-only'),
         ];
     }
 }

@@ -34,7 +34,8 @@ Route::post('/upload-listing-images/{id}', 'Agent\ListingController@uploadImages
 Route::get('/remove-listing-image/{id}', 'Agent\ListingController@removeImage');
 Route::get('/listing-repost/{id}', 'Agent\ListingController@repost')->name('agent.repostListing');
 Route::match(['get', 'post'], '/search-listing', 'Agent\ListingController@searchWithFilters')->name('agent.listingSearch');
-Route::get('/listing-status/{id}', 'Agent\ListingController@status')->name('agent.listingStatus');
+Route::get('/archive-listing/{id}', 'Agent\ListingController@archive')->name('agent.archive');
+Route::get('/unarchive-listing/{id}', 'Agent\ListingController@unArchive')->name('agent.unArchive');
 Route::get('/edit-list/{id}', 'Agent\ListingController@edit')->name('agent.editListing');
 Route::post('/update-listing/{id}', 'Agent\ListingController@update')->name('agent.updateListing');
 Route::get('/finish-listing', 'Agent\ListingController@finishCreate')->name('agent.finishCreateListing');

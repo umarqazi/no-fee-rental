@@ -48,7 +48,7 @@
                     <div class="tab-pane" id="buildings-owner-only">
                         @include('admin.sections.owner_only_building')
                     </div>
-                    <div class="tab-pane fade" id="buildings-pending">
+                    <div class="tab-pane" id="buildings-pending">
                         @include('admin.sections.non_verified_buildings')
                     </div>
                 </div>

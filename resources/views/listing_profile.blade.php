@@ -12,11 +12,11 @@
                     <h2>{{ $data->agent->first_name.' '.$data->agent->last_name }}</h2>
                     <p>{{ $data->agent->description ?? 'No bio found' }}</p>
                     @if($data->agent->user_type != OWNER)
+                        <p class="expertise"><strong>Languages:</strong>
+                            <a href="javascript:void(0);">{{ $data->agent->languages }}</a>
+                        </p>
                         <p class="expertise"><strong>Neighborhood Expertise:</strong>
                             <a href="javascript:void(0);">{{ neighborhoodExpertise($data->agent->neighborExpertise) }}</a>
-                        </p>
-                        <p class="expertise"><strong>Languages:</strong>
-                            <a href="javascript:void(0);">{{ languages($data->agent->languages) }}</a>
                         </p>
                     @endif
                     <div class="contact-info contact-info-mobile">

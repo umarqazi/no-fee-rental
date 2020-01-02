@@ -94,6 +94,14 @@ class User extends Authenticate implements CanResetPassword {
         return $this->belongsToMany(Listing::class, 'favourites', 'user_id', 'listing_id');
     }
 
+    /**
+     * @param $value
+     * @return string
+     */
+    public function getLanguagesAttribute($value){
+        return str_replace(',', ', ', $value);
+    }
+
 	/**
 	 * @param $query
 	 *

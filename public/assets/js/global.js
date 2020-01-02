@@ -222,28 +222,6 @@ const fetchNeighbours = async (selector) => {
 /**
  *
  * @param selector
- * @returns {Promise<void>}
- */
-const fetchRenters = async (selector) => {
-    await ajaxRequest('/get-renters', 'get', null, false).then(renters => {
-        let data = [];
-        renters.forEach(v => {
-            data.push(v);
-        });
-
-        let $renter = selector;
-        $renter.autocomplete({
-            source: data,
-            select: function (event, ui) {
-                $(this).val(ui.item ? ui.item : " ");
-            },
-        });
-    });
-};
-
-/**
- *
- * @param selector
  * @param allowTime
  */
 const enableDatePicker = (selector, allowTime = true) => {
