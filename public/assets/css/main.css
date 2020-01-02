@@ -1741,6 +1741,7 @@ footer .copyright .social-icons li a:hover {
 #advance-search .bdr-top-btn {
     border-top: 1px solid #cecaca;
     padding-top: 20px;
+    padding-left: 0px;
 }
 
 #advance-search .modal-title {
@@ -4000,6 +4001,9 @@ footer .copyright .social-icons li a:hover {
 
 .datepicker {
     z-index: 999999;
+}
+.datepickers-container{
+    z-index: 1100;
 }
 
 .timeDatepicker {

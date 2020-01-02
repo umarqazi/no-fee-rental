@@ -52,10 +52,13 @@
 
                 <!-- Modal body -->
                 <div class="modal-body">
-                    <div class="pt-4 -b-4 text-center">
-                        <h4>I can't spend over <span id="invest">
+                    <div class="pt-4 -b-4 text-center" style="max-width: 300px; margin: 0 auto;">
+                        <h4 style="font-size: 24px;text-align: left;">I can't spend over </h4> <span id="invest">
                                 {!! Form::text('min_price', null, ['class' => 'input-style', 'placeholder' =>
-                                '$ Amount', 'id' => 'spend', 'style' => 'margin:5px 0px; width:25%;']) !!}</span> on
+                                '$', 'id' => 'spend', 'style' => 'margin:10px 0px; width:100%; text-align:center;
+                                font-size:25px;'])
+                                !!}</span>
+                            <br/>  <h4 style="font-size: 28px;text-align: left;">on
                             rent every
                             month</h4>
 

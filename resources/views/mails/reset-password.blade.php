@@ -6,7 +6,7 @@
     <title>Listing Feature Approve</title>
     <style type="text/css">
         body{
-            background-color: #edeff0;
+            background: #edeff0;
             margin: 0;
             padding: 0;
             font-family: sans-serif;
@@ -169,12 +169,10 @@
             <p> This email is in response for a request to reset your password.</p>
             <p>Please click the link to reset your password: <a href="{{ $data->url }}">Reset Password</a></p>
             <div class="action-button">
-                <p><b>Please make sure you have deleted any saved passwords for NOFEERENTALSNYC from your browser, which
-                        can interfere with your login.</b></p>
+                <p><b>Please make sure you have deleted any saved passwords for NOFEERENTALSNYC from your browser, which can interfere with your login.</b></p>
             </div>
             <div class="settings-text">
-                <p>For Chrome: Go to Tools > Settings > Advanced > Manage Passwords > then click the 3 dots by the
-                    Nofeerentalsnyc entries and choose “Remove” <br> <br>
+                <p>For Chrome: Go to Tools > Settings > Advanced > Manage Passwords > then click the 3 dots by the Nofeerentalsnyc entries and choose “Remove” <br> <br>
 
                     For Internet Explorer: Go to Tools > Internet Options > Content Tab > Autocomplete Settings > Manage Passwords > then click the down arrow by the Nofeerentalsnyc entries and click “Remove”
                     <br> <br>
@@ -182,18 +180,12 @@
                 <br>
             </div>
             <p>
-                If you have any questions or concerns, please contact us at <a href="#" style="color: cadetblue;">
-                    info@nofeerentalsnyc
-                    .com</a>
+                If you have any questions or concerns, please contact us at <a href="#" style="color: cadetblue;">info@nofeerentalsnyc.com</a>
                 <br> <br>
             </p>
             <div class="secure-nofee-rental">
-                <p> <span style="background-color: #eee;">Didn’t request to reset your security information? Someone may
-                        be
-                        attempting to
-                    claim your ID as their own nofeerentalsnyc ID.</span>  <span style="background-color: #eee;">
-                        Please go to <a href="#"> secure.nofeerentalsnyc
-                        .com </a> to reset your password immediately. </span></p>
+                <p> <span style="background-color: #eee;">Didn’t request to reset your security information? Someone
+                        may be attempting to claim your ID as their own nofeerentalsnyc ID.</span>  <span style="background-color: #eee;">Please go to <a href="#"> secure.nofeerentalsnyc.com </a> to reset your password immediately. </span></p>
                 <br>
             </div>
 {{--            <div class="Notification-wrap-footer">--}}
@@ -207,12 +199,8 @@
             <a href="javascript:void(0)"><img src="{{ asset('assets/images/fb-mail.png') }}"> </a>
             <a href="javascript:void(0)"><img src="{{ asset('assets/images/mail-chimp.png') }}"> </a>
         </div>
-        <p style="font-style: italic;">Copyright ©2020 <a href="#"> NOFEERENTALSNYC.COM</a>, All rights reserved.</p>
-        <p class="footer-adres-text"> Our mailing address is: <br>
-            1178 Broadway <br>
-            3rd Floor#1073 <br>
-            New York, NY 10001
-        </p>
+        <p style="font-style: italic;">Copyright ©2020 <a href="#">NOFEERENTALSNYC.COM</a>, All rights reserved.</p>
+        <p class="footer-adres-text"> Our mailing address is: <br> 1178 Broadway <br> 3rd Floor#1073 <br> New York, NY 10001</p>
 {{--        <p> @NOFEE Rental NYC all rights reserved </p>--}}
     </div>
 </div>

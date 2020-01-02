@@ -1690,7 +1690,7 @@ header .agent-avtar .avtar:hover div ul {
 }
 #neighborhood_detail .form-group img {
     width: 100%;
-    max-height:250px;
+    max-height:180px;
     object-fit: cover;
 }
 .error {
@@ -2112,7 +2112,11 @@ header .agent-avtar .avtar:hover div ul {
 .mapboxgl-ctrl-geocoder, .mapboxgl-ctrl-geocoder .suggestions {
      box-shadow: none !important;
 }
-
+#building-popup .modal-title{
+    font-size: 24px;
+    font-weight: 600;
+    color: #000;
+}
 @media only screen and (min-width: 992px) and (max-width: 1999px) {
     .main-wrapper .grid-view-wrapper .listing-thumb .actions-btns{
         display: block;
@@ -2288,7 +2292,7 @@ header .agent-avtar .avtar:hover div ul {
         max-width: 600px;
     }
     #view-content .modal-dialog{
-        max-width: 400px;
+        max-width: 480px;
     }
 
     /*#view-content .modal-dialog {*/
