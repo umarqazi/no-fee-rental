@@ -10,10 +10,10 @@
             <div class="heading-wrapper pl-0">
                 <ul class="nav nav-pills">
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="pill" href="#listing-active">Active ( {{ $listing->active->total() }} )</a>
+                        <a class="nav-link" data-toggle="pill" href="#listing-active">Available ( {{ $listing->active->total() }} )</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="pill" href="#listing-inactive">Inactive ( {{ $listing->inactive->total() }} )</a>
+                        <a class="nav-link" data-toggle="pill" href="#listing-inactive">Not Available ( {{ $listing->inactive->total() }} )</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="pill" href="#listing-archived">Archived ( {{ $listing->archived->total() }} )</a>

@@ -210,7 +210,7 @@ class Listing extends Model {
      */
     public function scopeRecommended($query) {
         return $query->featured()->whereHas('agent.company', function ($subQuery) {
-            return $subQuery->where('company', 'MANHATTAN REALTY GROUP');
+            return $subQuery->where('company', MRG);
         });
     }
 
