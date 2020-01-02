@@ -27,6 +27,9 @@
 
 </head>
     <body>
+    @if(session('message'))
+        {!! toast(session('message'), session('alert_type')) !!}
+    @endif
     <div class="loader">
         <div class="loader-wrap"> </div>
         <div class="main-loader"></div>
