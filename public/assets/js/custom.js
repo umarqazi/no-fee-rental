@@ -100,8 +100,8 @@ $(() => {
             range: true,
             orientation: "horizontal",
             min: 0,
-            max: 10000,
-            values: [0, 10000],
+            max: 1000000,
+            values: [0, 1000000],
             step: 1,
             slide: function (event, ui) {
                 if (ui.values[0] == ui.values[1]) {
@@ -174,8 +174,8 @@ $(() => {
             range: true,
             orientation: "horizontal",
             min: 0,
-            max: 10000,
-            values: [0, 10000],
+            max: 1000000,
+            values: [0, 1000000],
             step: 1,
 
             slide: function (event, ui) {
@@ -486,7 +486,8 @@ $(() => {
             $("body").addClass("datepicker-overflow-hidden");
         });
 
-        $(".need-help-modal .close").click(function () {
+        $(".need-help-modal .close, #let-us-step12 .close , #advance-search .close , #myModal-currentPlan .close ," +
+            " #add-event .close , #add-event .modal-footer .btn-default  ").click(function () {
             $("body").removeClass("datepicker-overflow-hidden");
         });
         $(".need-help-modal .close").click(function () {
@@ -508,7 +509,7 @@ $(() => {
             if ($(e.target).parents(".need-help-modal, #datepickers-container .datepicker").length == 0) {
                 $("body").removeClass("signup-modal-scroll-getStart");
             }
-            if ($(e.target).is('#need-help-step4, #let-us-step12')) {
+            if ($(e.target).is('#need-help-step4, #let-us-step12, #advance-search, #myModal-currentPlan, #add-event')) {
                 $("body").removeClass("datepicker-overflow-hidden");
             }
         });

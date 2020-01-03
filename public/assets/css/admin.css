@@ -208,6 +208,7 @@ img {
     padding: 0px 40px;
     line-height: 40px;
     font-size: 18px;
+    margin-top: 10px;
 }
 
 .border-btn {
@@ -258,8 +259,11 @@ label {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: wrap;
 }
-
+.profile-container .additional-info textarea{
+    padding: 10px;
+}
 
 .text-area {
     border: #d7d7d7 solid 1px;
@@ -726,6 +730,7 @@ header .agent-avtar .avtar:hover div ul {
     align-items: center;
     margin: 15px 0px 25px;
     border-bottom: 1px solid #eee;
+    flex-wrap: wrap;
 
 }
 
@@ -2231,7 +2236,6 @@ header .agent-avtar .avtar:hover div ul {
 
 }
 @media only screen and (max-width: 576px){
-
     .review-inner-box-content .agent-name{
         display: flex;
         align-items: center;
@@ -2283,6 +2287,10 @@ header .agent-avtar .avtar:hover div ul {
     }
     .grid-badges span{
         margin-right: 0px !important;
+    }
+    .building-details-wrapper .building-detail-header{
+        display: block;
+        flex-wrap: wrap;
     }
 
 }
@@ -2370,7 +2378,15 @@ header .agent-avtar .avtar:hover div ul {
     }
 }
 
-.neighborhood-flex {
+@media (max-width: 370px){
+    .fc-toolbar .fc-right {
+        float: left !important;
+        margin-top: 10px;
+        width: 100%;
+    }
+}
+
+    .neighborhood-flex {
     display: flex;
     justify-content: space-between;
 }
@@ -2430,4 +2446,10 @@ header .agent-avtar .avtar:hover div ul {
 
 .select2-container--default .select2-results__option--highlighted[aria-selected] {
     background-color: #f36f21 !important;
+}
+
+#add-event .modal-title{
+    font-size: 20px;
+    font-weight: 600;
+    color: #000;
 }
