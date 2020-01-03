@@ -312,7 +312,7 @@ if(!defined('MINPRICE')) {
  * Max Listing Rent
  */
 if(!defined('MAXPRICE')) {
-    define('MAXPRICE', 10000);
+    define('MAXPRICE', 1000000);
 }
 
 /**
@@ -326,7 +326,7 @@ if(!defined('MINSQUARE')) {
  * Listing Square Max
  */
 if(!defined('MAXSQUARE')) {
-    define('MAXSQUARE', 10000);
+    define('MAXSQUARE', 1000000);
 }
 
 /**
