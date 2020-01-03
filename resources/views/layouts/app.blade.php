@@ -11,6 +11,7 @@
     {!! HTML::style('assets/css/jquery-ui.css') !!}
     {!! HTML::style('assets/css/toastr.css') !!}
     {!! HTML::style('assets/css/animate.min.css') !!}
+    {!! HTMl::style('assets/css/fSelect.css') !!}
     {!! HTML::style('assets/css/main.css') !!}
     {!! HTML::style('assets/css/style.css') !!}
     {!! HTML::style('assets/css/lightslider.css') !!}

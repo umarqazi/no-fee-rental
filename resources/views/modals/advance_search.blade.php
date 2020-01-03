@@ -58,8 +58,8 @@
                     <div class="col-md-6">
                         <div class="form-group search-neighborhood">
                             <label class="label">Neighbourhoods</label>
-                            <select class="input-style neighborhood-select-search" name="neighborhood">
-                                <option value="">Select Neighborhood</option>
+                            <select class="input-style neighborhood-select-search" name="neighborhood[]" multiple="multiple">
+                                {{--<option value="">Select Neighborhood</option>--}}
                                 {!! simple_neighborhood_select(app('request')->get('neighborhood') ?? null) !!}
                             </select>
                         </div>
