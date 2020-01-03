@@ -6,7 +6,7 @@
             <div class="search-property">
                 <div style="position:relative;height: 55px; line-height: 55px;" class="search-neighborhood">
                     <i class="fas fa-search"></i>
-                    <label class="search-fld">Neighborhood </label>
+                    <label class="search-fld">Neighborhoods </label>
                 </div>
                 <div class="price-range-dropdown">
                     Price
