@@ -91,7 +91,7 @@
         @if($action === 'Copy' || $action === 'Update' || $action === 'Building')
             setMap('map', JSON.parse($('input[name=map_location]').val()));
             setTimeout(() => {
-                $('body').find('.mapboxgl-ctrl-geocoder--input').val("{{ $listing->street_address }}");
+                $('body').find('.mapboxgl-ctrl-geocoder--input').val("{!! $listing->street_address !!}");
                 $('body').find('.mapboxgl-ctrl-geocoder--input').attr('readonly', 'readonly');
             }, 10);
         @else

@@ -100,8 +100,8 @@ $(() => {
             range: true,
             orientation: "horizontal",
             min: 0,
-            max: 10000,
-            values: [0, 10000],
+            max: 1000000,
+            values: [0, 1000000],
             step: 1,
             slide: function (event, ui) {
                 if (ui.values[0] == ui.values[1]) {
@@ -174,8 +174,8 @@ $(() => {
             range: true,
             orientation: "horizontal",
             min: 0,
-            max: 10000,
-            values: [0, 10000],
+            max: 1000000,
+            values: [0, 1000000],
             step: 1,
 
             slide: function (event, ui) {
