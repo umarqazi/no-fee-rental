@@ -4570,10 +4570,41 @@ footer .copyright .social-icons li a:hover {
     text-transform: initial;
 
 }
-
 /*make-review*/
 .make-review-wrapper {
     padding: 88px 0px;
+}
+.fs-wrap{
+    width: 100% !important;
+    line-height:32px !important;
+    height: 45px;
+    position: relative;
+}
+.fs-label-wrap{
+    border-color: #223971 !important;
+    border-radius: 5px;
+}
+.fs-dropdown{
+    width: 100%;
+}
+.fs-label:active, .fs-label:focus{
+    outline: none;
+    box-shadow: none;
+}
+.fs-label-wrap:active, .fs-label-wrap:focus{
+    outline: none;
+    box-shadow: none;
+}
+.fs-wrap.multiple .fs-option .fs-checkbox i{
+    border: #223971 solid 1px;
+    border-radius: .25rem;
+    width: 1rem;
+    height: 1rem;
+}
+.fs-wrap.multiple .fs-option.selected .fs-checkbox i{
+    background-color: #f36f21;
+    border-color: #f36f21;
+
 }
 @media all and (min-width:4000px){
     .featured-properties .property-listing .property-thumb{
@@ -6490,7 +6521,10 @@ list .property-info .info p {
 }
 .financial-district-inner .select2-container--default .select2-selection--single .select2-selection__rendered {
     color: #fff;
-    line-height: 47px;
+    line-height: 47px !important;
+    /*padding-left: 15px;*/
+    font-size: 16px;
+    font-weight: 700;
 }
 .financial-district-inner .select2-container--default .select2-selection--single .select2-selection__arrow b{
     display: none;
@@ -6512,7 +6546,7 @@ list .property-info .info p {
     background: url(../images/select-menu-arrow-white.png) no-repeat right 10px center;
 }
 .financial-district-inner .select2-container .select2-selection--single{
-    height: 47px;
+    height: 47px !important;
 }
 .financial-district-inner .form-control{
     background-clip: none;
