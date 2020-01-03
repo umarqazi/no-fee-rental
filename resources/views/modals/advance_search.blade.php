@@ -54,14 +54,10 @@
                             </div>
                         </div>
                     </div>
-                    {{--Keywords--}}
                     <div class="col-md-6">
                         <div class="form-group search-neighborhood">
                             <label class="label">Neighbourhoods</label>
-                            <select class="input-style neighborhood-select-search" name="neighborhood[]" multiple="multiple">
-                                {{--<option value="">Select Neighborhood</option>--}}
-                                {!! simple_neighborhood_select(app('request')->get('neighborhood') ?? null) !!}
-                            </select>
+                            {!! multi_or_single_neighborhood_selector(isset($neigh_filter) ? $neigh_filter : null, app('request')->get('neighborhood')) !!}
                         </div>
                     </div>
                     <div class="col-md-6">

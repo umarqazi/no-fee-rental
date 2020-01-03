@@ -584,6 +584,65 @@ function simple_neighborhood_select($selected = null) {
 }
 
 /**
+ * @param $bool
+ * @param $param
+ * @return string|null
+ */
+function multi_or_single_neighborhood_selector($bool, $param) {
+    $html = null;
+    $script = null;
+    if(isset($bool)) {
+
+        if($bool === true){
+            $html .= '<select class="input-style neighborhood-select-search" name="neighborhood[]" multiple="multiple">';
+            $script .= fSelect();
+        } else {
+            $html .= '<select class="input-style neighborhood-select-search" name="neighborhood"><option value="">Select Neighborhood</option>';
+            $script .= select2();
+        }
+
+    } else {
+        $html .= '<select class="input-style neighborhood-select-search" name="neighborhood[]" multiple="multiple">';
+        $script .= fSelect();
+    }
+        $html .= simple_neighborhood_select($param ?? null);
+        $html .= '</select>';
+
+        return $html.$script;
+}
+
+/**
+ * @return string|null
+ */
+function fSelect() {
+    $html = null;
+    $html .= "<script>
+        let selector = $('.neighborhood-select-search');
+        selector.fSelect({
+            placeholder: 'Select Neighborhoods',
+            overflowText: 'Neighborhoods ({n})',
+            searchText: 'Search',
+            numDisplayed: 1,
+        });
+    </script>";
+    
+    return $html;
+}
+
+/**
+ * @return string|null
+ */
+function select2() {
+    $html = null;
+    $html .= "<script>
+        let selector = $('.neighborhood-select-search');
+        selector.select2();
+    </script>";
+
+    return $html;
+}   
+
+/**
  * @param int $amount
  * @param null $pre_select
  * @return string|null
