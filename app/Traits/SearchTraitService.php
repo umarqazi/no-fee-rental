@@ -168,7 +168,7 @@ trait SearchTraitService {
      */
     private function amenities() {
         $amenities = $this->args->{__FUNCTION__};
-        $this->query->whereHas('building.amenities', function ($query) use ($amenities) {
+        $this->query->orWhereHas('building.amenities', function ($query) use ($amenities) {
             return $query->whereIn('amenity_id', $amenities);
         });
     }
@@ -178,7 +178,7 @@ trait SearchTraitService {
      */
     private function features() {
         $features = $this->args->{__FUNCTION__};
-        $this->query->whereHas('features', function($query) use ($features) {
+        $this->query->orWhereHas('features', function($query) use ($features) {
             return $query->whereIn('value', $features);
         });
     }
@@ -197,7 +197,7 @@ trait SearchTraitService {
      * availability filter
      */
     private function availability() {
-        $this->query->where('availability' , '>=', $this->args->{__FUNCTION__});
+        $this->query->orWhere('availability' , '>=', $this->args->{__FUNCTION__});
     }
 
     /**
@@ -213,7 +213,7 @@ trait SearchTraitService {
      * @return mixed
      */
     private function petFriendly() {
-        return $this->query->whereHas('features');
+        return $this->query->orWhereHas('features');
     }
 
     /**
