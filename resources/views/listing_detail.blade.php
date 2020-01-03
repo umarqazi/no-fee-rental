@@ -55,7 +55,7 @@
                             @else
                                 <span class="listing-detail-badges">Not Available</span>
                             @endif
-                            @if($listing->building_type === EXCLUSIVE)
+                            @if($listing->listing_type === EXCLUSIVE)
                                 <span class="listing-detail-badges">Exclusive</span>
                             @else
                                 <span class="listing-detail-badges">Open</span>

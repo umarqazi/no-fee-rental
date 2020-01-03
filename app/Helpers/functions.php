@@ -584,26 +584,27 @@ function simple_neighborhood_select($selected = null) {
 }
 
 /**
- * @param $bool
- * @param $param
- * @return string|null
+ * @param null $bool
+ * @param null $param
+ * @return string
  */
-function multi_or_single_neighborhood_selector($bool, $param) {
+function multi_or_single_neighborhood_selector($bool = null, $param = null) {
     $html = null;
     $script = null;
+    $rand_class = str_random(20);
     if(isset($bool)) {
 
         if($bool === true){
-            $html .= '<select class="input-style neighborhood-select-search" name="neighborhood[]" multiple="multiple">';
-            $script .= fSelect();
+            $html .= '<select class="input-style neighborhood-select-search '.$rand_class.'" name="neighborhood[]" multiple="multiple">';
+            $script .= fSelect($rand_class);
         } else {
-            $html .= '<select class="input-style neighborhood-select-search" name="neighborhood"><option value="">Select Neighborhood</option>';
-            $script .= select2();
+            $html .= '<select class="input-style neighborhood-select-search '.$rand_class.'" name="neighborhood"><option value="">Select Neighborhood</option>';
+            $script .= select2($rand_class);
         }
 
     } else {
-        $html .= '<select class="input-style neighborhood-select-search" name="neighborhood[]" multiple="multiple">';
-        $script .= fSelect();
+        $html .= '<select class="input-style neighborhood-select-search '.$rand_class.'" name="neighborhood[]" multiple="multiple">';
+        $script .= fSelect($rand_class);
     }
         $html .= simple_neighborhood_select($param ?? null);
         $html .= '</select>';
@@ -612,13 +613,13 @@ function multi_or_single_neighborhood_selector($bool, $param) {
 }
 
 /**
+ * @param $class
  * @return string|null
  */
-function fSelect() {
+function fSelect($class) {
     $html = null;
     $html .= "<script>
-        let selector = $('.neighborhood-select-search');
-        selector.fSelect({
+        $('.{$class}').fSelect({
             placeholder: 'Select Neighborhoods',
             overflowText: 'Neighborhoods ({n})',
             searchText: 'Search',
@@ -630,13 +631,13 @@ function fSelect() {
 }
 
 /**
+ * @param $class
  * @return string|null
  */
-function select2() {
+function select2($class) {
     $html = null;
     $html .= "<script>
-        let selector = $('.neighborhood-select-search');
-        selector.select2();
+        $('.{$class}').select2();
     </script>";
 
     return $html;
