@@ -14,7 +14,7 @@
                         <h3>{{ $data->neighborhood->name ?? 'Unknown' }}</h3>
                         <div class="form-group neighborhood-selection">
                             <select class="form-control" id="neighborhood">
-                                <option value="">Neighborhood</option>
+                                <option value="">Neighborhoods</option>
                                 {!! simple_neighborhood_select() !!}
                             </select>
                         </div>

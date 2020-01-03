@@ -37,8 +37,8 @@
                             <label class="label">Price Range</label>
                             <div class="slider-wrapper">
                                 <div class="search-input-wrap">
-                                {!! Form::number('min_price', null, ['min' => 0, 'max' => 9900, 'id' => 'min_price', 'class' => 'price-range-field input-style', 'oninput' => 'validity.valid||(value=0);']) !!} -
-                                {!! Form::number('max_price', null, ['min' => 0, 'max' => 10000, 'id' => 'max_price', 'class' => 'price-range-field input-style', 'oninput' => 'validity.valid||(value=10000);']) !!}
+                                {!! Form::number('min_price', null, ['min' => 0, 'max' => 990000, 'id' => 'min_price', 'class' => 'price-range-field input-style']) !!} -
+                                {!! Form::number('max_price', null, ['min' => 0, 'max' => 1000000, 'id' => 'max_price', 'class' => 'price-range-field input-style']) !!}
                             </div>
                                 <div id="slider-range" class="price-filter-range" name="rangeInput"></div>
                             </div>
@@ -47,21 +47,17 @@
                             <label class="label">Square feet</label>
                             <div class="slider-wrapper">
                                 <div class="search-input-wrap">
-                                {!! Form::number('square_min', null, ['min' => 0, 'max' => 9900, 'id' => 'min_price_2', 'class' => 'price-range-field input-style', 'oninput' => 'validity.valid||(value=0);']) !!} -
-                                {!! Form::number('square_max', null, ['min' => 0, 'max' => 10000, 'id' => 'max_price_2', 'class' => 'price-range-field input-style', 'oninput' => 'validity.valid||(value=10000);']) !!}
+                                {!! Form::number('square_min', null, ['min' => 0, 'max' => 990000, 'id' => 'min_price_2', 'class' => 'price-range-field input-style']) !!} -
+                                {!! Form::number('square_max', null, ['min' => 0, 'max' => 1000000, 'id' => 'max_price_2', 'class' => 'price-range-field input-style']) !!}
                                 </div>
                                 <div id="slider-range-2" class="price-filter-range" name="rangeInput"></div>
                             </div>
                         </div>
                     </div>
-                    {{--Keywords--}}
                     <div class="col-md-6">
                         <div class="form-group search-neighborhood">
                             <label class="label">Neighbourhoods</label>
-                            <select class="input-style neighborhood-select-search" name="neighborhood[]" multiple="multiple">
-                                {{--<option value="">Select Neighborhood</option>--}}
-                                {!! simple_neighborhood_select(app('request')->get('neighborhood') ?? null) !!}
-                            </select>
+                            {!! multi_or_single_neighborhood_selector(isset($neigh_filter) ? $neigh_filter : null, app('request')->get('neighborhood')) !!}
                         </div>
                     </div>
                     <div class="col-md-6">
