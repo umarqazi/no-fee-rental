@@ -18,7 +18,7 @@
                             <button type="button" class="btn btn-primary neighborhood-field" id="neigh-for-dropdown">
                                 {{ is_array(app('request')->get('neighborhood'))
                                 ? sprintf("Neighborhood (%s)", count(app('request')->get('neighborhood')))
-                                : app('request')->get('neighborhood') ?? 'Neighborhood' }}
+                                : app('request')->get('neighborhood') ?? 'Neighborhoods' }}
                             </button>
                             <div class="dropdown-for-neigh dropdown-listiing-rent-page search-result-section-neighborhood" id="neighborhood-searchchecbox">
                                 {!! filter_neighborhood_select() !!}

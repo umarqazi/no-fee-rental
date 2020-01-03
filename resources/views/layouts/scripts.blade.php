@@ -31,14 +31,6 @@
     <script>
         $(() => {
 
-            let $selector = $('.neighborhood-select-search');
-            $selector.fSelect({
-                placeholder: "Select Neighborhoods",
-                overflowText: 'Neighborhoods ({n})',
-                searchText: 'Search',
-                numDisplayed: 1,
-            });
-
             $('button[data-target="#check-availability"]').on('click', function() {
                 @if(!authenticated())
                     $('#login').modal('show');

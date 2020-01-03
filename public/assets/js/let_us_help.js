@@ -42,19 +42,11 @@ $('input[name=location_preference]').on('click', function () {
 });
 
 $('#location-preference-button').on('click', function () {
+    $body.find('#set-prev').attr('prev', `${$location}-modal`);
     $(`#let-us-step8`).modal('hide');
     $(`#${$location}-modal`).modal('show');
-});
-
-$('input[name=location-preference]').on('click', function () {
-    console.log($(this));
 });
 
 $('.next-modal').on('click', function () {
     $('#let-us-step2').modal('show');
 });
-
-// $('#spend').on('keyup', function () {
-//     let price = $(this).val();
-//     $('#invest').text('$'+price);
-// });
