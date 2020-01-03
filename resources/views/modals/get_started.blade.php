@@ -24,10 +24,7 @@
             <div class="modal-body">
                 <h4 class="text-center mb-0">Where would you love to live?</h4>
                 <div class="pt-4">
-                    <select class="input-style neighborhood-select-search" name="neighborhood">
-                        {!! simple_neighborhood_select(app('request')->get('neighborhood') ?? null) !!}
-                    </select>
-{{--                    {!! Form::text('neighborhood', null, ['class' => 'input-style', 'placeholder' => 'Neighborhood']) !!}--}}
+                    {!! multi_or_single_neighborhood_selector(isset($neigh_filter) ? $neigh_filter : null, null) !!}
                 </div>
             </div>
             <div class="modal-footer text-center">
