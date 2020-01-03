@@ -822,7 +822,17 @@ header .agent-avtar .avtar:hover div ul {
     padding: 5px 12px;
     border-radius: 20px;
 }
-
+.main-wrapper .grid-view-wrapper .listing-thumb .info .building-detail-feature-icons{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+.main-wrapper .grid-view-wrapper .listing-thumb .info .building-detail-feature-icons .not-avail{
+    font-size: 11px;
+    color: #fff;
+    padding: 5px 12px;
+    border-radius: 20px;
+}
 .main-wrapper .grid-view-wrapper .listing-thumb .info .status-approve {
     position: absolute;
     right: 70px;

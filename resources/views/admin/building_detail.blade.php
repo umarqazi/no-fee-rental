@@ -39,14 +39,17 @@
                                 <li><i class="fa fa-bath"></i> {{ str_formatting($apartment->baths, 'Bath') }}</li>
                             </ul>
                             <p>Posted On: {{ $apartment->created_at->format('m/d/y h:i a') }}</p>
+                            <div class="building-detail-feature-icons">
+                                @if($apartment->is_featured === APPROVEFEATURED)
+                                    <span class="not-avail" style="background: blueviolet;right: 75px;">Featured</span>
+                                @endif
                             @if(is_available($apartment->availability))
                                 <span class="status">Available</span>
                             @else
-                                <span class="status" style="background: red;">Not Available</span>
+                                <span class="not-avail" style="background: red;">Not Available</span>
                             @endif
-                            @if($apartment->is_featured === APPROVEFEATURED)
-                                <span class="status" style="background: blueviolet;right: 75px;">Featured</span>
-                            @endif
+
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -4580,9 +4580,11 @@ footer .copyright .social-icons li a:hover {
     height: 45px;
     position: relative;
 }
+
 .fs-label-wrap{
     border-color: #223971 !important;
     border-radius: 5px;
+    cursor: pointer;
 }
 .fs-dropdown{
     width: 100%;
@@ -6522,7 +6524,7 @@ list .property-info .info p {
 .financial-district-inner .select2-container--default .select2-selection--single .select2-selection__rendered {
     color: #fff;
     line-height: 47px !important;
-    /*padding-left: 15px;*/
+    padding-left: 15px;
     font-size: 16px;
     font-weight: 700;
 }
@@ -6531,6 +6533,7 @@ list .property-info .info p {
 }
 .financial-district-inner .select2-container{
     height: 100%;
+    background: url(../images/select-menu-arrow-white.png) no-repeat right 10px center;
 }
 .financial-district-inner select.form-control:not([size]):not([multiple]) {
     height: calc(45px + 2px);
@@ -6539,12 +6542,10 @@ list .property-info .info p {
     color:#fff;
     text-transform: uppercase;
     font-size: 16px;
-    font-weight: 600;
+    font-weight: 700;
     padding-left: 15px;
 }
-.financial-district-inner .select2-container{
-    background: url(../images/select-menu-arrow-white.png) no-repeat right 10px center;
-}
+
 .financial-district-inner .select2-container .select2-selection--single{
     height: 47px !important;
 }
