@@ -378,13 +378,10 @@
 .signup-modal-scroll-getStart .modal {
     overflow-x: hidden;
     overflow-y: auto;
-}
-.datepicker-overflow-hidden{
-    overflow: hidden;
-    padding-right: 17px;
-}
-
-
+}.datepicker-overflow-hidden{
+     overflow: hidden;
+     padding-right: 17px;
+ }
 /**/
 
 .unavailable-btn span {
@@ -633,40 +630,48 @@
     text-align: center;
     font-size: 12px;
     font-weight: 600;
-    color: #fff;
+    color: #000;
     display: inline-block;
     line-height: 22px;
 }
 
 .location-map-sec .text-a {
+    color: #fff;
     background-color: #185286;
 }
 
 .location-map-sec .text-e {
+    color: #fff;
     background-color: #0039a6;
 }
 
 .location-map-sec .text-s {
+    color: #fff;
     background-color: #6d6e71;
 }
 
 .location-map-sec .text-7 {
+    color: #fff;
     background-color: #9d3d97;
 }
 
 .location-map-sec .text-m {
     background-color: #f58220;
+    color: #fff;
 }
 
 .location-map-sec .text-6 {
+    color: #fff;
     background-color: #00a65c;
 }
 
 .location-map-sec .text-c {
     background-color: #185286;
+    color: #fff;
 }
 
 .location-map-sec .text-f {
+    color: #fff;
     background-color: #f98312;
 }
 
@@ -676,14 +681,17 @@
 }
 
 .location-map-sec .text-g {
+    color: #fff;
     background-color: #8bbd12;
 }
 
 .location-map-sec .text-2 {
+    color: #fff;
     background-color: #f80014;
 }
 
 .location-map-sec .text-4 {
+    color: #fff;
     background-color: #1c872b;
 }
 

@@ -4570,11 +4570,11 @@ footer .copyright .social-icons li a:hover {
     text-transform: initial;
 
 }
-
 /*make-review*/
 .make-review-wrapper {
     padding: 88px 0px;
 }
+
 @media all and (min-width:4000px){
     .featured-properties .property-listing .property-thumb{
         max-width: 100% !important;
@@ -6490,7 +6490,10 @@ list .property-info .info p {
 }
 .financial-district-inner .select2-container--default .select2-selection--single .select2-selection__rendered {
     color: #fff;
-    line-height: 47px;
+    line-height: 47px !important;
+    /*padding-left: 15px;*/
+    font-size: 16px;
+    font-weight: 700;
 }
 .financial-district-inner .select2-container--default .select2-selection--single .select2-selection__arrow b{
     display: none;
@@ -6512,7 +6515,7 @@ list .property-info .info p {
     background: url(../images/select-menu-arrow-white.png) no-repeat right 10px center;
 }
 .financial-district-inner .select2-container .select2-selection--single{
-    height: 47px;
+    height: 47px !important;
 }
 .financial-district-inner .form-control{
     background-clip: none;
