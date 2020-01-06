@@ -220,7 +220,7 @@ class BuildingService {
         $form->user_id                = $this->__buildingBelongsTo($request);
         $form->address                = $request->street_address;
         $form->map_location           = $request->map_location;
-        $form->neighborhood_id        = collect($this->__neighborhoodHandler($request->neighborhood))->get('id');
+        $form->neighborhood_id        = collect($this->__neighborhoodHandler($request->neighborhood))->get('neighborhood_id');
         $form->building_action        = $request->building_action ?? ALLOWAGENT;
         $form->contact_representative = $request->contact_representative;
         $form->is_verified            = isAgent() ? false : true;
