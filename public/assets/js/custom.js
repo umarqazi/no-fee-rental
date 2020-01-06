@@ -1,4 +1,5 @@
 $(() => {
+
     new WOW().init();
 
     $("header .menu-icon").click(function () {
@@ -493,18 +494,11 @@ $(() => {
         $(".need-help-modal .close").click(function () {
             $("body").removeClass("signup-modal-scroll-getStart");
         });
+
         $(document).on("click", function (e) {
             if ($(e.target).is("#signup-btn") == false && $(e.target).parents('#signup').length == 0 && $(e.target).parents('#login').length == 0) {
                 $("body").removeClass("signup-modal-scroll");
             }
-        });
-
-        $('.close-signup-modal').click(function () {
-            $('body').removeClass('signup-modal-scroll');
-        });
-
-
-        $(document).on("click", function (e) {
             // console.log('------------------',$(e.target).is('#need-help-step4'));
             if ($(e.target).parents(".need-help-modal, #datepickers-container .datepicker").length == 0) {
                 $("body").removeClass("signup-modal-scroll-getStart");
@@ -512,8 +506,37 @@ $(() => {
             if ($(e.target).is('#need-help-step4, #let-us-step12, #advance-search, #myModal-currentPlan, #add-event')) {
                 $("body").removeClass("datepicker-overflow-hidden");
             }
+            if ($(e.target).is(".dropdown-beds") == false && $(e.target).parents('.dropdown-beds').length == 0 && $(e.target).parents('.beds-dropdown').length == 0) {
+                $(".bed-advance-search").hide();
+            }
+            if (!$(e.target).is(".price-range-dropdown") && $(e.target).parents('.price-range-dropdown').length == 0) {
+                $(".price-range-ul").hide();
+            }
+            if (!$(e.target).is(".search-fld") && $(e.target).parents('.neighborhood-search-advance').length == 0) {
+                $(".neighborhood-search-dropdown").hide();
+            }
+            if (!$(e.target).is(".search-fld") && $(e.target).parents('.neighborhood-search-advance').length == 0) {
+                $(".neighborhood-search-dropdown").hide();
+            }
+
+            if (!$(e.target).is(".dropdown-wrap .btn-primary") && $(e.target).parents('.dropdown-for-neigh').length == 0) {
+                $(".dropdown-for-neigh").slideUp();
+            }
+            if (!$(e.target).is(".dropdown-wrap .btn-primary") && $(e.target).parents('.dropdown-for-beds , #advance-search-beds').length == 0) {
+                $(".dropdown-for-beds").slideUp();
+            }
+            if (!$(e.target).is(".dropdown-wrap .btn-primary") && $(e.target).parents('.dropdown-for-baths , #advance-search-baths').length == 0) {
+                $(".dropdown-for-baths").slideUp();
+
+            }if (!$(e.target).is(".dropdown-wrap .btn-primary") && $(e.target).parents('.dropdown-for-price').length == 0) {
+                $(".dropdown-for-price").slideUp();
+            }
+
         });
 
+        $('.close-signup-modal').click(function () {
+            $('body').removeClass('signup-modal-scroll');
+        });
         //
         $("#advance-search-chkbox input[type='checkbox']").change(function () {
             if ($(this).is(":checked")) {
@@ -623,34 +646,6 @@ $(() => {
 
         if(!$('.app-message-error').is(':empty')){
             $('.app-message-error').text('') ;
-        }
-    });
-
-    $(document).on("click", function (e) {
-        if ($(e.target).is(".dropdown-beds") == false && $(e.target).parents('.dropdown-beds').length == 0 && $(e.target).parents('.beds-dropdown').length == 0) {
-            $(".bed-advance-search").hide();
-        }
-        if (!$(e.target).is(".price-range-dropdown") && $(e.target).parents('.price-range-dropdown').length == 0) {
-            $(".price-range-ul").hide();
-        }
-        if (!$(e.target).is(".search-fld") && $(e.target).parents('.neighborhood-search-advance').length == 0) {
-            $(".neighborhood-search-dropdown").hide();
-        }
-        if (!$(e.target).is(".search-fld") && $(e.target).parents('.neighborhood-search-advance').length == 0) {
-            $(".neighborhood-search-dropdown").hide();
-        }
-
-        if (!$(e.target).is(".dropdown-wrap .btn-primary") && $(e.target).parents('.dropdown-for-neigh').length == 0) {
-            $(".dropdown-for-neigh").slideUp();
-        }
-        if (!$(e.target).is(".dropdown-wrap .btn-primary") && $(e.target).parents('.dropdown-for-beds , #advance-search-beds').length == 0) {
-            $(".dropdown-for-beds").slideUp();
-        }
-        if (!$(e.target).is(".dropdown-wrap .btn-primary") && $(e.target).parents('.dropdown-for-baths , #advance-search-baths').length == 0) {
-            $(".dropdown-for-baths").slideUp();
-
-        }if (!$(e.target).is(".dropdown-wrap .btn-primary") && $(e.target).parents('.dropdown-for-price').length == 0) {
-            $(".dropdown-for-price").slideUp();
         }
     });
 

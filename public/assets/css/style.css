@@ -1435,7 +1435,7 @@
 
 
 /* notification */
-@charset "UTF-8";
+/*@charset "UTF-8";*/
 
 .notification-container {
     cursor: default;
@@ -2127,7 +2127,7 @@ main {
         height: 626px;
     }
     .container-lg{
-        width: 1170px;
+        width: 100%;
     }
     .header-bg .search-property .search-fld{
         line-height: 0px;
