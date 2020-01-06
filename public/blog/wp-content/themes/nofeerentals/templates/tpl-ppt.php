@@ -32,17 +32,11 @@ $add_js_code_here = get_field('add_js_code_here');
 ?>
 <section class="inner-pages press-section wow fadeIn inner-page-terms" data-wow-delay="0.2s">
     <div class="blog-banner-img-wrapper">
-<<<<<<< Updated upstream
         <div class="blog-banner-text">
             <h4> <?php  echo $banner_title;?></h4>
             <span><?php echo $last_update; ?> </span>
         </div>
         <div class="privacy-policy-banner" style="background-image: url('<?php echo $privacy_banner; ?>')"> </div>
-
-=======
-      <h4 class="blog-banner-text"> <?php  echo $banner_title;?></h4>
-      <div class="privacy-policy-banner" style="background-image: url('<?php echo $privacy_banner; ?>')"> </div>
->>>>>>> Stashed changes
     </div>
 
     <?php echo $content_before_middle_section; ?>
