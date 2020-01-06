@@ -2984,6 +2984,7 @@ footer {
   z-index: 1;
   left: 50%;
   transform: translate(-50%, -50%);
+    text-align: center;
 }
 .blog-banner-img-wrapper .blog-banner-text h4{
     font-size: 30px;
@@ -2993,6 +2994,8 @@ footer {
 }
 .blog-banner-img-wrapper .blog-banner-text span{
     font-size: 12px;
+    color: #fff;
+    
 }
 .login-modal .modal-dialog .login-form-wrapper .mobile-display{
     display: none;
