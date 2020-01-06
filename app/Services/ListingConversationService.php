@@ -22,7 +22,7 @@ use App\Repository\MessageRepo;
  * Class ListingConversationService
  * @package App\Services
  */
-class ListingConversationService {
+class ListingConversationService extends MemberService {
 
     use DispatchNotificationService;
 
@@ -50,6 +50,7 @@ class ListingConversationService {
      * AppointmentService constructor.
      */
     public function __construct() {
+        parent::__construct();
         $this->listingRepo = new ListingRepo();
         $this->messageRepo = new MessageRepo();
         $this->listingConversationRepo = new ListingConversationRepo();
@@ -109,17 +110,17 @@ class ListingConversationService {
      */
     public function accept($id) {
         $listing = $this->listingConversationRepo->findById($id)->with('listing')->first();
-        $calender = $this->calendarEventRepo->find(['linked_id' => $id])->first();
-        DispatchNotificationService::APPROVEMEETINGREQUEST(toObject([
-            'from' => $listing->from,
-            'to'   => $listing->to,
-            'data' => $listing
-        ]));
-        calendarEvent([
-            'title' => $listing->listing->display_address.'  (Approved)',
-            'url'   => '.loadConversation',
-            'color' => 'green'
-        ], true, $calender->id);
+//        $calender = $this->calendarEventRepo->find(['linked_id' => $id])->first();
+//        DispatchNotificationService::APPROVEMEETINGREQUEST(toObject([
+//            'from' => $listing->from,
+//            'to'   => $listing->to,
+//            'data' => $listing
+//        ]));
+//        calendarEvent([
+//            'title' => $listing->listing->display_address.'  (Approved)',
+//            'url'   => '.loadConversation',
+//            'color' => 'green'
+//        ], true, $calender->id);
         return $this->listingConversationRepo->update($id, ['meeting_request' => 1]);
     }
 
@@ -154,11 +155,24 @@ class ListingConversationService {
      * @return array
      */
     public function fetchConversations($paginate) {
+        $ids = $this->__fetchMemberIds();
         return [
-            'active'   => $this->listingConversationRepo->getActiveConversations($paginate),
-            'archived' => $this->listingConversationRepo->getArchivedConversations($paginate),
-            'inactive' => $this->listingConversationRepo->getInactiveConversations($paginate)
+            'active'   => $this->listingConversationRepo->getActiveConversations($ids, $paginate),
+            'archived' => $this->listingConversationRepo->getArchivedConversations($ids, $paginate),
+            'inactive' => $this->listingConversationRepo->getInactiveConversations($ids, $paginate)
         ];
+    }
+
+    /**
+     * @return array
+     */
+    private function __fetchMemberIds() {
+        $ids = [];
+        foreach ($this->members() as $member) {
+            $ids[] = $member->id;
+        }
+
+        return $ids;
     }
 
     /**
@@ -172,24 +186,24 @@ class ListingConversationService {
         if(!$appointment) {
             $appointment = $this->__validateAppointmentForm( $request );
             $appointment = $this->listingConversationRepo->create($appointment->toArray());
-            calendarEvent([
-                'title'      => $listing_detail->display_address.' (Pending)',
-                'linked_id'  => $appointment->id,
-                'from'       => $appointment->from,
-                'to'         => $appointment->to,
-                'start'      => $appointment->appointment_date->format('Y-m-d').' '.$appointment->appointment_time,
-                'end'        => $appointment->appointment_date->format('Y-m-d').' '.$appointment->appointment_time,
-                'color'      => 'light green',
-                'url'        => 'javascript:void(0)'
-            ]);
-
-            DispatchNotificationService::MEETINGREQUEST(toObject([
-                'from' => $appointment->from,
-                'to'   => $appointment->to,
-                'data' => $appointment
-            ]));
-
-            $this->__sendCCEmails($appointment);
+//            calendarEvent([
+//                'title'      => $listing_detail->display_address.' (Pending)',
+//                'linked_id'  => $appointment->id,
+//                'from'       => $appointment->from,
+//                'to'         => $appointment->to,
+//                'start'      => $appointment->appointment_date->format('Y-m-d').' '.$appointment->appointment_time,
+//                'end'        => $appointment->appointment_date->format('Y-m-d').' '.$appointment->appointment_time,
+//                'color'      => 'light green',
+//                'url'        => 'javascript:void(0)'
+//            ]);
+//
+//            DispatchNotificationService::MEETINGREQUEST(toObject([
+//                'from' => $appointment->from,
+//                'to'   => $appointment->to,
+//                'data' => $appointment
+//            ]));
+//
+//            $this->__sendCCEmails($appointment);
             return $appointment;
         }
 

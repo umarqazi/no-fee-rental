@@ -19,31 +19,20 @@ use Illuminate\View\View;
 class ListingController extends Controller {
 
     /**
-     * @var ListingService
-     */
-    private $listingService;
-
-    /**
-     * @var NeighborhoodService
-     */
-    private $neighborhoodService;
-
-    /**
      * @var int
      */
     private $paginate = 5;
 
     /**
-     * ListingController constructor.
-     * @param ListingService $listingService
-     * @param NeighborhoodService $neighborhoodService
+     * @var ListingService
      */
-    public function __construct(
-        ListingService $listingService,
-        NeighborhoodService $neighborhoodService
-    ) {
-        $this->listingService = $listingService;
-        $this->neighborhoodService = $neighborhoodService;
+    private $listingService;
+
+    /**
+     * ListingController constructor.
+     */
+    public function __construct() {
+        $this->listingService = new ListingService();
     }
 
     /**
@@ -61,17 +50,6 @@ class ListingController extends Controller {
         $listing = null;
         $action = 'Create';
         return view('listing-features.listing', compact('listing', 'action'));
-    }
-
-    /**
-     * @param $id
-     *
-     * @return RedirectResponse
-     */
-    public function approve($id) {
-        return ($this->listingService->approve($id))
-            ? success('Listing has been approved successfully')
-            : error('Something went wrong');
     }
 
     /**
@@ -144,7 +122,7 @@ class ListingController extends Controller {
      */
     public function repost($id) {
         return $this->listingService->repost($id)
-            ? success('Property has been reposted')
+            ? success('Listing has been reposted')
             : error('Something went wrong');
     }
 
@@ -169,20 +147,7 @@ class ListingController extends Controller {
      */
     public function searchWithFilters(Request $request) {
         $listing = $this->listingService->search($request, $this->paginate);
-        return view('admin.listing_view', compact('listing'));
-    }
-
-    /**
-     * @param $id
-     * @param Request $request
-     *
-     * @return RedirectResponse
-     */
-    public function status($id, Request $request) {
-        $status = $this->listingService->visibility($id);
-        return (isset($status))
-            ? success(($status) ? 'Property has been published.' : 'Property has been unpublished')
-            : error('Something went wrong');
+        return view('agent.index', compact('listing'));
     }
 
     /**
@@ -208,6 +173,26 @@ class ListingController extends Controller {
             return $this->index();
         }
         return view('agent.index', compact('listing'));
+    }
+
+    /**
+     * @param Request $request
+     * @param $id
+     * @return JsonResponse|RedirectResponse
+     */
+    public function archive(Request $request, $id) {
+        $res = $this->listingService->setArchive($id);
+        return sendResponse($request, $res, 'Listing has been Archived');
+    }
+
+    /**
+     * @param Request $request
+     * @param $id
+     * @return JsonResponse|RedirectResponse
+     */
+    public function unArchive(Request $request, $id) {
+        $res = $this->listingService->setUnArchive($id);
+        return sendResponse($request, $res, 'Listing has been Un-Archived');
     }
 
     /**

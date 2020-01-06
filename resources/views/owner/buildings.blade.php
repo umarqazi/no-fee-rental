@@ -36,13 +36,13 @@
                 <!-- Tab panes -->
                 <div class="tab-content">
                     <div class="tab-pane" id="no-fee-buildings">
-                        @include('owner.sections.no_fee_buildings')
+                        @include('owner.building-tabs.no_fee_buildings')
                     </div>
                     <div class="tab-pane" id="fee-buildings">
-                        @include('owner.sections.fee_buildings')
+                        @include('owner.building-tabs.fee_buildings')
                     </div>
                     <div class="tab-pane" id="owner-only-buildings">
-                        @include('owner.sections.owner_only_building')
+                        @include('owner.building-tabs.owner_only_building')
                     </div>
                 </div>
             </div>

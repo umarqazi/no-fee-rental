@@ -27,8 +27,8 @@ class CreateEventsTable extends Migration {
             $table->string('url')->nullable();
             $table->timestamps();
 
-            $table->foreign('to')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('from')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('to')->references('id')->on('users');
+            $table->foreign('from')->references('id')->on('users');
         });
     }
 

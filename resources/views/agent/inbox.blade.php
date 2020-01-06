@@ -40,7 +40,7 @@
                 <div class="messages">
                     <ul>
                         @foreach($collection->messages as $message)
-                            @if($message->align === myId())
+                            @if($message->align == myId())
                                 <li class="replies">
                                     <img style="width: 25px;height: 25px;" src="{{ asset(mySelf()->profile_image ?? DUI) }}" alt="" />
                                     <p>{{ $message->message }}</p>
@@ -59,7 +59,7 @@
                         {!! Form::open(['id' => 'send-message', 'loading' => 'false', 'url' => route('agent.sendMessage', $collection->id), 'class' => 'ajax', 'reset' => 'true']) !!}
                         <span id="error" style="color: red ; padding-left:7px;display: none">Message Field is required.</span>
                         {!! Form::text('message', null, ['placeholder' => 'Write your message...', 'autocomplete' => 'off']) !!}
-                        {!! Form::hidden('to', myId() == $collection->to ? $collection->from : $collection->to) !!}
+                        {!! Form::hidden('to', $collection->id, ['id' => 'chat-room']) !!}
                         <button class="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
                         {!! Form::close() !!}
                     </div>

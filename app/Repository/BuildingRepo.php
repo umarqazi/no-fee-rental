@@ -107,6 +107,6 @@ class BuildingRepo extends BaseRepo {
      * @return mixed
      */
     public function ownerOnlyBuilding($address) {
-        return $this->model->where('address', $address)->where('building_action', OWNERONLY);
+        return $this->model->where(['address' => $address, 'building_action' => OWNERONLY]);
     }
 }

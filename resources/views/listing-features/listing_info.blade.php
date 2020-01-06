@@ -117,7 +117,7 @@
                 {!! $errors->first('availability_type') !!}
             </span>
         </div>
-        <div class="form-group availability-date" style="display: {{ isset($listing) && $listing->availability_type === 3 ? 'block' : 'none' }};">
+        <div class="form-group availability-date" style="display: {{ isset($listing) && $listing->availability_type === 2 ? 'block' : 'none' }};">
             <label>Select Availability Date</label>
             {!! Form::text('availability', null,
                 [

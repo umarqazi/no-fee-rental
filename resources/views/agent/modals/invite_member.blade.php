@@ -9,13 +9,11 @@
 <div class="modal fade" id="invite-member">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-
             <!-- Modal Header -->
             <div class="modal-header">
                 <h4 class="modal-title">Add Member</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
-
             <!-- Modal body -->
             <div class="modal-body">
                 <div class="invites">
@@ -27,11 +25,10 @@
                     <span class="invalid-feedback" role="alert" style="display: block;">
                         {{ $errors->first('email') }}
                     </span>
-                    {!! Form::submit('Send', ['class' => 'btn-default large-btn mt-4']) !!}
+                    {!! Form::submit('Send Invitation', ['class' => 'btn-default large-btn mt-4']) !!}
                     {!! Form::close() !!}
                 </div>
             </div>
-
         </div>
     </div>
 </div>

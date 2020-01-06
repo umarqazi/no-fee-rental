@@ -4,8 +4,7 @@
     <div class="wrapper">
         <div class="heading-wrapper">
             <h1>Listings</h1>
-            <a href="{{ route('agent.addListing') }}" class="btn-default">New Listing</a>
-
+            <a href="{{ route('agent.addListing') }}" class="btn-default"><i class="fa fa-plus"></i> Add Listing</a>
         </div>
         <div class="filter-mobile-data-wrapper">
         <div class="filter-mobile-data">
@@ -22,6 +21,7 @@
                                     <ul>
                                         <li><a href="{{ route('agent.sorting', 'cheaper') }}">Cheapest</a></li>
                                         <li><a href="{{ route('agent.sorting', 'recent') }}" >Recent</a></li>
+                                        <li><a href="{{ route('agent.sorting', 'older') }}" >Oldest</a></li>
                                     </ul>
                                 </div>
                                 <span>Sort By</span>
@@ -43,16 +43,19 @@
             <div class="heading-wrapper pl-0">
                 <ul class="nav nav-pills">
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="pill" href="#listing-active">Active ( {{ $listing->active->total() }} )</a>
+                        <a class="nav-link" data-toggle="pill" href="#active">Active ( {{ $listing->active->total() }} )</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="pill" href="#listing-inactive">Inactive ( {{ $listing->inactive->total() }} )</a>
+                        <a class="nav-link" data-toggle="pill" href="#inactive">Inactive ( {{ $listing->inactive->total() }} )</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="pill" href="#listing-archived">Archived ( {{ $listing->archived->total() }} )</a>
+                        <a class="nav-link" data-toggle="pill" href="#realty">Realty ( {{ $listing->realty->total() }} )</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="pill" href="#listing-pending">Pending Request ( {{ $listing->pending->total() }} )</a>
+                        <a class="nav-link" data-toggle="pill" href="#archived">Archived ( {{ $listing->archived->total() }} )</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="pill" href="#pending">Pending ( {{ $listing->pending->total() }} )</a>
                     </li>
                 </ul>
                 <div class="filter-wrapper">
@@ -60,38 +63,26 @@
                         <span><i class="fa fa-th-list list-view-btn active"></i></span>
                         <span><i class="fa fa-th grid-view-btn"></i></span>
                     </div>
-                    <div class="sort-bt">
-                        <i class="fa fa-sort-amount-down"></i>
-                        <div class="custom-dropdown">
-                            <ul>
-                                <li><a href="{{ route('agent.sorting', 'cheaper') }}">Cheapest</a></li>
-                                <li><a href="{{ route('agent.sorting', 'recent') }}" >Recent</a></li>
-                            </ul>
-                        </div>
-                        <span>Sort By</span>
-                    </div>
-                    <form action="{{ route('agent.listingSearch') }}" id="search" method="post">
-                        @csrf
-                        <input value="{{ !empty(Request::get('beds')) ? Request::get('beds') : '' }}" type="number" name="beds" class="filter-input" placeholder="All Beds" />
-                        <input value="{{ !empty(Request::get('baths')) ? Request::get('baths') : '' }}" type="number" name="baths" class="filter-input" placeholder="All Baths" />
-                        <button type="submit" class="btn-default">Filter</button>
-                    </form>
+                    {!! panel_listing_filters(Request::all()) !!}
                 </div>
             </div>
             <div class="block-body">
                 <!-- Tab panes -->
                 <div class="tab-content">
-                    <div class="tab-pane" id="listing-active">
-                        @include('listing-tabs.active')
+                    <div class="tab-pane" id="active">
+                        @include('agent.listing-tabs.active')
                     </div>
-                    <div class="tab-pane fade" id="listing-inactive">
-                        @include('listing-tabs.inactive')
+                    <div class="tab-pane fade" id="inactive">
+                        @include('agent.listing-tabs.inactive')
                     </div>
-                    <div class="tab-pane fade" id="listing-archived">
-                        @include('listing-tabs.archive')
+                    <div class="tab-pane fade" id="realty">
+                        @include('agent.listing-tabs.realty')
                     </div>
-                    <div class="tab-pane fade" id="listing-pending">
-                        @include('listing-tabs.pending')
+                    <div class="tab-pane fade" id="archived">
+                        @include('agent.listing-tabs.archive')
+                    </div>
+                    <div class="tab-pane fade" id="pending">
+                        @include('agent.listing-tabs.pending')
                     </div>
                 </div>
             </div>

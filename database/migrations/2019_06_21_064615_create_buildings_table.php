@@ -20,6 +20,7 @@ class CreateBuildingsTable extends Migration {
             $table->unsignedInteger('user_id')->nullable();
             $table->unsignedInteger('contact_representative')->nullable();
             $table->unsignedInteger('neighborhood_id')->nullable();
+            $table->string('map_location');
             $table->string('address');
             $table->string('thumbnail');
             $table->enum('building_action', ['OO', 'AA'])->default('AA')->comment = 'Owner Only(OO), Allow Agent(AA)';
@@ -27,8 +28,9 @@ class CreateBuildingsTable extends Migration {
             $table->boolean('is_verified')->default(false);
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('neighborhood_id')->references('id')->on('neighborhoods')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('contact_representative')->references('id')->on('users');
+            $table->foreign('neighborhood_id')->references('id')->on('neighborhoods');
         });
     }
 

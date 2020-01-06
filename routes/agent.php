@@ -42,6 +42,7 @@ Route::get('/finish-listing', 'Agent\ListingController@finishCreate')->name('age
 Route::get('/update-listing', 'Agent\ListingController@finishUpdate')->name('agent.finishUpdateListing');
 Route::get('/listing/{sortBy}', 'Agent\ListingController@sortBy')->name('agent.sorting');
 Route::get('/copy-list/{id}', 'Agent\ListingController@copy')->name('agent.copyListing');
+Route::get('/copying-list/{id}', 'Agent\ListingController@copy')->name('agent.approveRequest');
 
 // Featured Listing
 Route::get('/request-featured/{id}', 'Agent\ListingController@requestFeatured')->name('agent.requestFeatured');
@@ -71,6 +72,7 @@ Route::get('/reviews' , 'Agent\AgentController@reviews')->name('agent.reviews');
 
 // Credit Plan Routes
 Route::get('/credit-plan', 'Agent\CreditPlanController@index')->name('agent.creditPlan');
+Route::get('/show-plan', 'Agent\CreditPlanController@subscription')->name('agent.plan');
 Route::post('/purchase-plan', 'Agent\CreditPlanController@create')->name('agent.purchasePlan');
 
 Route::get('/basic-plan', function() {

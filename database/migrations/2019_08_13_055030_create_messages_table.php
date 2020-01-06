@@ -18,11 +18,11 @@ class CreateMessagesTable extends Migration {
         Schema::create('messages', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('conversation_id')->nullable();
-            $table->integer('align');
+            $table->string('align');
             $table->text('message');
             $table->timestamps();
 
-            $table->foreign('conversation_id')->references('id')->on('listing_conversations')->onDelete('cascade');
+            $table->foreign('conversation_id')->references('id')->on('listing_conversations');
         });
     }
 

@@ -63,7 +63,7 @@ class BuildingController extends Controller {
      * @return JsonResponse|RedirectResponse
      */
     public function update($id, Request $request) {
-        $this->buildingService->updateOwnerBuilding($id, $request);
+        $this->buildingService->update($id, $request);
         return success('Building has been updated.', route('owner.viewBuildings'));
     }
 

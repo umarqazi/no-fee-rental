@@ -5,8 +5,8 @@ return [
 
         'availability' => [
             1 => 'Immediately',
-            3 => 'By Date Only',
-            4 => 'Not Available',
+            2 => 'By Date Only',
+            0 => 'Not Available',
         ],
 
         'free_months' => [

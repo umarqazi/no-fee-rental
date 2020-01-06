@@ -8,7 +8,9 @@
 
 namespace App\Services;
 
+use App\Forms\ContactUsForm;
 use App\Repository\ContactUsRepo;
+use Illuminate\Support\Facades\DB;
 use App\Traits\DispatchNotificationService;
 
 /**
@@ -30,13 +32,26 @@ class ContactUsService {
 		$this->repo = new ContactUsRepo();
 	}
 
-	/**
-	 * @param $data
-	 *
-	 * @return mixed
-	 */
-	public function saveRecord($data) {
-		return $this->repo->create($data);
+    /**
+     * @param $request
+     * @return mixed
+     */
+	public function create($request) {
+	    $contact = $this->__validateForm($request);
+        DB::beginTransaction();
+	    if($contact = $this->repo->create($contact->toArray())) {
+            DispatchNotificationService::CONTACTUS(toObject([
+                'to'   => mailToAdmin(),
+                'from' => $contact->email,
+                'data' => $contact
+            ]));
+
+            DB::commit();
+            return true;
+        }
+
+	    DB::rollBack();
+		return false;
 	}
 
 	/**
@@ -45,4 +60,18 @@ class ContactUsService {
 	public function showMessages() {
 		return $this->repo->all();
 	}
+
+    /**
+     * @param $request
+     * @return ContactUsForm
+     */
+	private function __validateForm($request) {
+	    $form = new ContactUsForm();
+	    $form->username     = $request->username;
+	    $form->email        = $request->email;
+	    $form->phone_number = $request->phone_number;
+	    $form->message      = $request->message;
+	    $form->validate();
+	    return $form;
+    }
 }

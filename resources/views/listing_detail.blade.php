@@ -49,8 +49,7 @@
                     <div class="available-btn">
                         <div class="">
                             <span class="listing-detail-badges">NO FEE</span>
-                            @if( $listing->availability !== '0' &&
-                            carbon($listing->availability)->format('Y-m-d') <= now()->format('Y-m-d'))
+                            @if( is_available($listing->availability))
                                 <span class="listing-detail-badges">Available</span>
                             @else
                                 <span class="listing-detail-badges">Not Available</span>

@@ -21,11 +21,9 @@ class ListingConversationController extends Controller {
 
     /**
      * ListingConversationController constructor.
-     *
-     * @param ListingConversationService $service
      */
-    public function __construct(ListingConversationService $service) {
-        $this->conversationService = $service;
+    public function __construct() {
+        $this->conversationService = new ListingConversationService();
     }
 
     /**

@@ -19,8 +19,8 @@ Route::get('/advance-search', 'SearchController@advanceSearch')->name('web.advan
 Route::get('/advance-search-filter', 'SearchController@filter')->name('web.advanceSearchFilter');
 
 // Contact Us Routes
-Route::get('/contact-us', 'ContactUsController@showForm')->name('contact-us');
-Route::post('/contact-us', 'ContactUsController@contactUs')->name('contact-us');
+Route::get('/contact-us', 'ContactUsController@index')->name('web.contact-us');
+Route::post('/contact-us', 'ContactUsController@sendRequest')->name('web.sendRequest');
 
 // subscription through mail chimp
 Route::post('/newsletter-subscribe', 'NewsletterController@subscribe')->name('newsLetter-subscription');
@@ -95,6 +95,7 @@ Route::get('/all-notifications', 'NotificationController@all');
 
 // Rent Routes
 Route::get('/listing-by-rent/{sort}', 'RentController@sort');
+Route::get('/find-apartments/{price}', 'RentController@findApartment');
 Route::get('/listing-by-rent', 'RentController@index')->name('web.ListsByRent');
 Route::get('/listing-by-rent-filter', 'RentController@filter')->name('web.rentFilter');
 Route::get('/listing-by-rent-search', 'RentController@advanceSearch')->name('web.advanceRentSearch');

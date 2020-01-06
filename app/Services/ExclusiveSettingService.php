@@ -9,10 +9,13 @@
 
 namespace App\Services;
 
-
 use App\Repository\ExclusiveSettingRepo;
 
-class NotificationSettingService {
+/**
+ * Class ExclusiveSettingService
+ * @package App\Services
+ */
+class ExclusiveSettingService {
 
     /**
      * @var ExclusiveSettingRepo

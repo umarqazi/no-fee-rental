@@ -43,8 +43,8 @@ Route::prefix('listing')->group(function() {
 
     Route::get('/property', 'Admin\AdminController@viewPropertyListing')->name('property-listing');
 
-    Route::get('/view-listing', 'Admin\ListingController@index')->name('admin.viewListing');
-    Route::get('/create-listing', 'Admin\ListingController@showForm')->name('admin.addListing');
+    Route::get('/view', 'Admin\ListingController@index')->name('admin.viewListing');
+    Route::get('/add', 'Admin\ListingController@showForm')->name('admin.addListing');
 
     Route::get('/status/{id}', 'Admin\ListingController@status')->name('admin.listingStatus');
 

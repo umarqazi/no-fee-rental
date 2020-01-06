@@ -47,7 +47,7 @@ class ListingController extends Controller {
      * @return Factory|View
      */
     public function viewDetail($id) {
-        $listing = $this->listingService->find(['id' => $id])->first();
+        $listing = $this->listingService->detail($id);
         if(empty($listing)) abort(404);
         return view('listing_detail', compact('listing'));
     }
@@ -66,6 +66,6 @@ class ListingController extends Controller {
      * @return string
      */
     public function isOwnerOnly(Request $request) {
-        return $this->buildingService->ownerOnlyBuilding($request->address);
+        return $this->buildingService->isOwnerOnly($request);
     }
 }
