@@ -108,9 +108,10 @@
 
         this.opts = $.extend(true, {}, defaults, options, this.$el.data());
 
-        if ($body == undefined) {
-            $body = $('body');
-        }
+        // if ($body == undefined) {
+        //     $body = $('body');
+        // }
+        $body = $(el).parent();
 
         if (!this.opts.startDate) {
             this.opts.startDate = new Date();
@@ -148,7 +149,9 @@
         viewIndexes: ['days', 'months', 'years'],
 
         init: function () {
-            if (!containerBuilt && !this.opts.inline && this.elIsInput) {
+            // !containerBuilt
+
+            if (!this.opts.inline && this.elIsInput) {
                 this._buildDatepickersContainer();
             }
             this._buildBaseHtml();
@@ -264,8 +267,8 @@
 
         _buildDatepickersContainer: function () {
             containerBuilt = true;
-            $body.append('<div class="datepickers-container" id="datepickers-container"></div>');
-            $datepickersContainer = $('#datepickers-container');
+            $body.append('<div class="datepickers-container" id="'+this.el.id+'-datepicker-container"></div>');
+            $datepickersContainer = $('#'+this.el.id+'-datepicker-container');
         },
 
         _buildBaseHtml: function () {
@@ -713,9 +716,8 @@
             return type ? types[type] : types.day
         },
 
-        _getDimensions: function ($el) {
-            var offset = $el.offset();
-
+        _getDimensions: function ($el, relative) {
+            var offset = (relative)?  $el.position() : $el.offset();
             return {
                 width: $el.outerWidth(),
                 height: $el.outerHeight(),
@@ -748,15 +750,15 @@
 
         setPosition: function (position) {
             position = position || this.opts.position;
-
-            var dims = this._getDimensions(this.$el),
+            // this._getDimensions(this.$el)
+            var dims = this._getDimensions(this.$el, true),//{width: 0, height: 0, left: 0, top: 0},
                 selfDims = this._getDimensions(this.$datepicker),
                 pos = position.split(' '),
                 top, left,
                 offset = this.opts.offset,
                 main = pos[0],
                 secondary = pos[1];
-
+            console.log(main, dims,selfDims,this.opts.offset)
             switch (main) {
                 case 'top':
                     top = dims.top - selfDims.height - offset;
@@ -771,7 +773,7 @@
                     left = dims.left - selfDims.width - offset;
                     break;
             }
-
+            console.log(secondary)
             switch(secondary) {
                 case 'top':
                     top = dims.top;
@@ -792,7 +794,7 @@
                         left = dims.left + dims.width/2 - selfDims.width/2;
                     }
             }
-
+    console.log(left,top)
             this.$datepicker
                 .css({
                     left: left,
@@ -2184,7 +2186,7 @@
         _onChangeRange: function (e) {
             var $target = $(e.target),
                 name = $target.attr('name');
-            
+
             this.d.timepickerIsActive = true;
 
             this[name] = $target.val();
