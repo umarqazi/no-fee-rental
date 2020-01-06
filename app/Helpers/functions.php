@@ -265,21 +265,11 @@ function dispatchMail( $to, $data ) {
  * @return bool
  */
 function dispatchNotification( $data ) {
-    return ( new NotificationService( $data ) )->send();
+    return ( new NotificationService() )->setter($data)->send();
 }
 
 /**
  * @param $data
- *
- * @return array|null
- */
-function dispatchMessageEvent( $data ) {
-    return event( new \App\Events\TriggerMessage( $data ) );
-}
-
-/**
- * @param $data
- * @return bool
  */
 function socketEvent($data) {
     $socket = new \App\Services\SocketService(request()->root(), config('socket.port'));
@@ -1002,7 +992,7 @@ function agents($id = null) {
         return $service->edit($id);
     }
 
-    $agents = ['Select Representative'];
+    $agents = ['' => 'Select Representative'];
     $records = $service->agents();
     foreach ($records as $agent) {
         $agents[$agent->id] = $agent->first_name.' '.$agent->last_name;
@@ -1059,7 +1049,11 @@ function is_exclusive( $listing ) {
  * @return bool
  */
 function is_available($date) {
-    return $date >= now()->format('Y-m-d');
+    if($date == null) {
+        return false;
+    }
+
+    return $date <= now()->format('Y-m-d');
 }
 
 /**

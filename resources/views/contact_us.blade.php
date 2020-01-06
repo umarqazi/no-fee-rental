@@ -53,7 +53,8 @@
                                 <p>We're Hiring...</p>
                                 <p>Technical support specialist, IOS Developer, Senior Desing and UX Lead, Database Engineer,
                                     Web Analytics Specialist, Sr. Account Manager and Brand Editorial Intern (Part-time). If you're interested in any of these
-                                    positions please reach out to us.</p></div>
+                                    positions please reach out to us.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -62,57 +63,52 @@
                     <div class="col-lg-6">
                         <h2 class="text-left">Contact Us</h2>
                         <p> Reach out to us for any enquery</p>
-                        {!! Form::open(['url'=>route('contact-us'), 'class'=>'contact-form ajax', 'method'=>'post','reset'=> 'true' ,'id'=>'contact_us_form', 'enctype'=>'multipart/form-data']) !!}
+                        {!! Form::open([
+                            'url' => route('web.sendRequest'),
+                            'class' => 'contact-form ajax',
+                            'method' => 'post',
+                            'reset' => 'true',
+                            'id' => 'contact_us_form']) !!}
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label> Your Name</label>
-                                    {!! Form::text('name', null, ['class'=>'input-style', 'placeholder'=>'Name']) !!}
-                                    @if ($errors->has('name'))
-                                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('name') }}</strong>
+                                    {!! Form::text('username', null, ['class'=>'input-style', 'placeholder'=>'Name']) !!}
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{!! $errors->first('username') !!}</strong>
                                     </span>
-                                    @endif
                                 </div>
                             </div>
-
                             <div class="col-sm-12">
                                 <div class="form-group">
                                      <label> Your Email </label>
                                     {!! Form::text('email', null, ['class'=>'input-style', 'placeholder'=>'Email']) !!}
-                                    @if ($errors->has('email'))
-                                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('email') }}</strong>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{!! $errors->first('email') !!}</strong>
                                     </span>
-                                    @endif
                                 </div>
                             </div>
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label> Your Phone Number </label>
                                     {!! Form::text('phone_number', null, ['class'=>'input-style', 'placeholder'=>'Phone Number']) !!}
-                                    @if ($errors->has('phone_number'))
-                                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('phone_number') }}</strong>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{!! $errors->first('phone_number') !!}</strong>
                                     </span>
-                                    @endif
                                 </div>
                             </div>
-
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label>Write a Message </label>
-                                    {!! Form::textarea('comment', null, ['class'=>'input-style textArea', 'placeholder'=>'Message']) !!}
-                                    @if ($errors->has('comment'))
-                                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('comment') }}</strong>
+                                    {!! Form::textarea('message', null, ['class'=>'input-style textArea', 'placeholder'=>'Message']) !!}
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{!! $errors->first('message') !!}</strong>
                                     </span>
-                                    @endif
                                 </div>
                             </div>
                         </div>
                         <div class=" text-left contact-page">
-                        <button class="btn-default">Submit</button>
+                            {!! Form::button('Submit', ['class' => 'btn-default', 'type' => 'submit']) !!}
                         </div>
                         {!! Form::close() !!}
                     </div>

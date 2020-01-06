@@ -86,6 +86,10 @@ class PaymentService {
         return $this->__createCard()->__createTransaction( $this->customer );
     }
 
+    public function currentPlan() {
+
+    }
+
     /**
      * @param $customer
      *

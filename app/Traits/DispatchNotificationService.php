@@ -300,10 +300,10 @@ trait DispatchNotificationService
     public static function CONTACTUS($data)
     {
         self::__setParams($data);
-        self::$data->view = 'listing-feature-approved';
-        self::$data->subject = 'Featured Listing Request Approved';
-        self::$data->message = 'Your Request to make this listing featured has been approved.';
-        self::$data->url = route('listing.detail', self::$data->data->data->id);
+        self::$data->view = 'contact-us';
+        self::$data->subject = 'Contact Us';
+        self::$data->message = 'New User contact you';
+        self::$data->url = 'http://www.gmail.com';
         self::send();
     }
 

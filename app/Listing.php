@@ -112,7 +112,38 @@ class Listing extends Model {
     public function scopeActive($query) {
         isAdmin() ?: $clause['user_id'] = myId();
         $clause['visibility'] = ACTIVELISTING;
-        return $query->where($clause)->where('availability', '<=', now()->format('Y-m-d'));
+        $clause['realty_id'] = NULL;
+        return $query->where($clause)
+            ->where('availability', '<=', now()->format('Y-m-d'))
+            ->whereHas('building', function($subQuery) {
+                return $subQuery->where('building_action', '!=', OWNERONLY);
+            });
+    }
+
+    /**
+     * @param $query
+     *
+     * @return mixed
+     */
+    public function scopeInactive($query) {
+        isAdmin() ?: $clause['user_id'] = myId();
+        $clause['visibility'] =  ACTIVELISTING;
+        $clause['realty_id']  = NULL;
+        return $query->where($clause)
+            ->where(function ($subQuery) {
+                return $subQuery->where('availability', '>', now()->format('Y-m-d'))->orWhere('availability', NULL);
+            });
+    }
+
+    /**
+     * @param $query
+     *
+     * @return mixed active listing
+     */
+    public function scopeArchived($query) {
+        isAdmin() ?: $clause['user_id'] = myId();
+        $clause['visibility'] = ARCHIVED;
+        return $query->where($clause);
     }
 
     /**
@@ -133,7 +164,10 @@ class Listing extends Model {
      * @return mixed
      */
     public function scopeRealty($query) {
-        return $query->where('realty_id', '!=', NULL);
+        return $query->where([
+            ['realty_id', '!=', NULL],
+            ['visibility', '=', ACTIVELISTING],
+        ]);
     }
 
     /**
@@ -151,30 +185,13 @@ class Listing extends Model {
     public function scopeOwnerOnly($query) {
         return $query->whereHas('building', function($subQuery) {
             return $subQuery->where('building_action', OWNERONLY);
-        });
+        })->where([
+            ['visibility', '!=', ARCHIVED],
+            isAdmin()
+                ? ['user_id', '>', 0]
+                : ['user_id', '=', myId()]
+        ]);
     }
-
-    /**
-     * @param $query
-     *
-     * @return mixed active listing
-     */
-    public function scopeArchived($query) {
-        isAdmin() ?: $clause['user_id'] = myId();
-        $clause['visibility'] = ARCHIVED;
-        return $query->where($clause);
-    }
-
-	/**
-	 * @param $query
-	 *
-	 * @return mixed
-	 */
-	public function scopeInactive($query) {
-		isAdmin() ?: $clause['user_id'] = myId();
-		$clause['visibility'] =  ACTIVELISTING;
-		return $query->where($clause)->where('availability', '>', now()->format('Y-m-d'));
-	}
 
 	/**
 	 * @param $query

@@ -21,6 +21,8 @@ class CreateExclusiveSettingsTable extends Migration {
             $table->boolean('allow_email')->default(1);
             $table->boolean('allow_web_notification')->default(1);
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

@@ -86,8 +86,7 @@
     {!! HTML::script('assets/js/listing.js') !!}
 <script>
     window.onload = function() {
-        enableDatePicker('#availability_date', false);
-        enableDatePicker('.open-house-date', false);
+        enableDatePicker('#availability_date, .open-house-date', false);
         @if($action === 'Copy' || $action === 'Update' || $action === 'Building')
             setMap('map', JSON.parse($('input[name=map_location]').val()));
             setTimeout(() => {

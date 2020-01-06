@@ -17,15 +17,13 @@ class CreateNotificationsTable extends Migration {
     public function up() {
         Schema::create('notifications', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('from');
             $table->unsignedInteger('to');
             $table->text('message');
             $table->text('url');
             $table->boolean('is_read')->default(0)->comment = "0-Unread, 1-Read";
             $table->timestamps();
 
-            $table->foreign('to')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('from')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('to')->references('id')->on('users');
         });
     }
 

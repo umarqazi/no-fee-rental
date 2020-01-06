@@ -16,7 +16,6 @@
                     <a class="nav-link" data-toggle="pill" href="#agent-invites">Invites</a>
                 </li>
             </ul>
-
         </div>
         <div class="block-body">
             <!-- Tab panes -->
@@ -33,11 +32,11 @@
                             </div>
 
                             <div class="img-wrapp">
-                                <img src="{{ asset($member->friends->profile_image ?? DUI)}}" alt="" class="main-img" />
+                                <img src="{{ asset($member->profile_image ?? DUI)}}" alt="" class="main-img" />
                             </div>
 
-                            <div class="name">{{ $member->friends->first_name.' '.$member->friends->last_name }}</div>
-                            <a href="#" class="team-mail">{{ $member->friends->email }}</a>
+                            <div class="name">{{ $member->first_name.' '.$member->last_name }}</div>
+                            <a href="#" class="team-mail">{{ $member->email }}</a>
                             <div class="actions-btns">
                                 <a href="#" class="btn-default"><i class="fa fa-user"></i> Profile</a>
                                 <a href="#" class="btn-default"><i class="fa fa-envelope"></i> Contact</a>

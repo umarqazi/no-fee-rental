@@ -26,11 +26,28 @@ class MemberRepo extends BaseRepo {
     }
 
     /**
-     * @param null $id
-     *
      * @return mixed
      */
-    public function friends($id = null) {
-        return $this->model->myfriends($id);
+    public function myFriends() {
+        return $this->model->teamAgent();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function friend() {
+        return $this->model->teamMembers();
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function unFriend($id) {
+        return $this->model->where(function ($subQuery) use ($id) {
+            return $subQuery->where('agent_id', myId())->where('member_id', $id);
+        })->orWhere(function ($subQuery) use ($id) {
+            return $subQuery->where('agent_id', $id)->where('member_id', myId());
+        })->delete();
     }
 }

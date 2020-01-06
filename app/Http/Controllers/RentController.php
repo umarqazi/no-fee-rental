@@ -57,6 +57,10 @@ class RentController extends Controller {
         return $this->__view($data);
     }
 
+    public function findApartment($price) {
+        $this->__collection($this->searchService->search($price));
+    }
+
     /**
      * @param $data
      * @return array

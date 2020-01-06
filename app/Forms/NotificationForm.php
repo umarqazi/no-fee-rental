@@ -17,11 +17,6 @@ class NotificationForm extends BaseForm {
     /**
      * @var integer
      */
-    public $from;
-
-    /**
-     * @var integer
-     */
     public $to;
 
     /**
@@ -39,7 +34,6 @@ class NotificationForm extends BaseForm {
      */
     public function toArray() {
         return [
-            'from'    => $this->from,
             'to'      => $this->to,
             'url'     => $this->url,
             'message' => $this->message,
@@ -51,8 +45,7 @@ class NotificationForm extends BaseForm {
      */
     public function rules() {
         return [
-            'from' => 'required',
-            'to'   => 'required',
+            'to' => 'required',
         ];
     }
 }

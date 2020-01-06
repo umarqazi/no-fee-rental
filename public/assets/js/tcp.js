@@ -11226,29 +11226,39 @@ var emit = function emit() {
       }
     }
   });
-}; // Socket Listener
+}; // Event Listener
 
 
-socket.on("listen-chat-event.".concat(currentUser), function _callee(res) {
-  var $ul;
-  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function _callee$(_context2) {
-    while (1) {
-      switch (_context2.prev = _context2.next) {
-        case 0:
-          // let url = window.location.href;
-          // url = url.split('/');
-          // if(url[4] !== 'load-chat') {
-          //     await ajaxRequest('/push-notification', 'post', res, false);
-          // } else {
-          $ul = $('.messages > ul');
-          $ul.append("\n            <li class=\"sent\">\n            <img style=\"width: 25px;height: 25px;\" alt=\"\" src=\"".concat(res.profile_image, "\">\n                 <p>").concat(res.message, "</p>\n            </li>"));
-          scrollDown($ul); // }
+$(function () {
+  socket.on("listen-chat-event.".concat($('input[name=to]').val()), function _callee(res) {
+    var $ul;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function _callee$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            if (!(Window.Laravel.user === res.from)) {
+              _context2.next = 2;
+              break;
+            }
 
-        case 3:
-        case "end":
-          return _context2.stop();
+            return _context2.abrupt("return");
+
+          case 2:
+            // let url = window.location.href;
+            // url = url.split('/');
+            // if(url[4] !== 'load-chat') {
+            //     await ajaxRequest('/push-notification', 'post', res, false);
+            // } else {
+            $ul = $('.messages > ul');
+            $ul.append("\n            <li class=\"sent\">\n            <img style=\"width: 25px;height: 25px;\" alt=\"\" src=\"".concat(res.profile_image, "\">\n                 <p>").concat(res.message, "</p>\n            </li>"));
+            scrollDown($ul); // }
+
+          case 5:
+          case "end":
+            return _context2.stop();
+        }
       }
-    }
+    });
   });
 });
 $(function () {

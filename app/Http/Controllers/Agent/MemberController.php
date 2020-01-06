@@ -7,33 +7,35 @@ use App\Services\UserService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class MemberController extends Controller
-{
-    /**
-     * @var MemberService
-     */
-    private $uService;
+/**
+ * Class MemberController
+ * @package App\Http\Controllers\Agent
+ */
+class MemberController extends Controller {
 
     /**
      * @var MemberService
      */
-    private $mService;
+    private $userService;
+
+    /**
+     * @var MemberService
+     */
+    private $memberService;
 
     /**
      * MemberController constructor.
-     *
-     * @param MemberService $service
      */
-    public function __construct(MemberService $mService, UserService $uService) {
-        $this->mService = $mService;
-        $this->uService = $uService;
+    public function __construct() {
+        $this->memberService = new MemberService();
+        $this->userService = new UserService();
     }
 
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index() {
-        $team = $this->mService->team();
+        $team = $this->memberService->members();
         return view('agent.members', compact('team'));
     }
 
@@ -42,7 +44,7 @@ class MemberController extends Controller
      * @throws \Exception
      */
     public function get() {
-        $data = $this->mService->invites();
+        $data = $this->memberService->invites();
         return dataTable(!empty($data) ? $data->invitedAgents : []);
     }
 
@@ -59,7 +61,7 @@ class MemberController extends Controller
             return sendResponse($request, $invite, 'Invitation cannot be sent to yourself.');
         }
         else {
-            $invite = $this->uService->sendInvite($request);
+            $invite = $this->userService->sendInvite($request);
             return sendResponse($request, $invite, 'Invitation has been sent.');
         }
     }
@@ -71,8 +73,8 @@ class MemberController extends Controller
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
     public function acceptInvitation($token) {
-        $authenticate_token = $this->uService->getAgentToken($token)->first();
-       $res  = $this->uService->addMember($authenticate_token);
+        $authenticate_token = $this->userService->getAgentToken($token)->first();
+       $res  = $this->userService->addMember($authenticate_token);
        if($res){
            return redirect(route('web.index'))
                ->with(['message' => 'You have been added to Team', 'alert_type' => 'success']);
@@ -83,7 +85,7 @@ class MemberController extends Controller
      * un friend Agent
      */
     public function unFriend($id) {
-        $this->uService->unFriend($id);
+        $this->memberService->unFriend($id);
 
         return redirect(route('agent.team'))
             ->with(['message' => 'Member Removed Successfully', 'alert_type' => 'success']);

@@ -19,7 +19,7 @@ class ListingConversationController extends Controller {
     /**
      * @var int
      */
-    private $paginate = 20;
+    private $paginate = 10;
 
     /**
      * @var ListingConversationService
@@ -38,7 +38,7 @@ class ListingConversationController extends Controller {
      */
     public function index() {
         $conversations = toObject($this->conversationService->fetchConversations($this->paginate));
-        return view('agent.message', compact('conversations'));
+        return view('agent.conversation', compact('conversations'));
     }
 
     /**

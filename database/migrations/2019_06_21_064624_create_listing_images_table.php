@@ -21,7 +21,7 @@ class CreateListingImagesTable extends Migration {
 			$table->string('listing_image');
 			$table->timestamps();
 
-			$table->foreign('listing_id')->references('id')->on('listings')->onEdit('cascade')->onDelete('cascade');
+			$table->foreign('listing_id')->references('id')->on('listings');
 		});
 	}
 

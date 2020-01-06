@@ -23,9 +23,6 @@ class CreateListingsTable extends Migration {
             $table->unsignedInteger('neighborhood_id')->nullable();
             $table->string('realty_id')->nullable();
             $table->string('realty_url')->nullable();
-			$table->string('name')->nullable();
-            $table->string('email')->nullable();
-			$table->string('phone_number')->nullable();
 			$table->string('street_address')->nullable();
 			$table->string('display_address')->nullable();
 			$table->string('thumbnail')->nullable();
@@ -48,9 +45,9 @@ class CreateListingsTable extends Migration {
             $table->string('availability')->nullable();
 			$table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('building_id')->references('id')->on('buildings')->onDelete('cascade');
-			$table->foreign('neighborhood_id')->references('id')->on('neighborhoods')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('building_id')->references('id')->on('buildings');
+			$table->foreign('neighborhood_id')->references('id')->on('neighborhoods');
 		});
 	}
 
