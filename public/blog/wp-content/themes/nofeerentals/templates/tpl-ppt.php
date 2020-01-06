@@ -22,6 +22,7 @@
 <?php
 $privacy_banner = get_field('privacy_banner');
 $banner_title = get_field('banner_title');
+$last_update = get_field('last_update')
 $content_before_middle_section = get_field('content_before_middle_section');
 $background_image = get_field('background_image');
 $title = get_field('title');
@@ -30,7 +31,10 @@ $content_after_middle_section = get_field('content_after_middle_section');
 ?>
 <section class="inner-pages press-section wow fadeIn inner-page-terms" data-wow-delay="0.2s">
     <div class="blog-banner-img-wrapper">
-        <h4 class="blog-banner-text"> <?php  echo $banner_title;?></h4>
+        <div class="blog-banner-text">
+            <h4> <?php  echo $banner_title;?></h4>
+            <span><?php echo $last_update; ?> </span>
+        </div>
         <div class="privacy-policy-banner" style="background-image: url('<?php echo $privacy_banner; ?>')"> </div>
 
     </div>

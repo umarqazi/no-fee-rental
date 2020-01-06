@@ -2984,21 +2984,15 @@ footer {
   z-index: 1;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 30px;
-  font-weight: 600;
-  color: #fff;
-  padding: 20px;
 }
-.blog-banner-text{
-    position: absolute;
-    top: 50%;
-    z-index: 1;
-    left: 50%;
-    transform: translate(-50%, -50%);
+.blog-banner-img-wrapper .blog-banner-text h4{
     font-size: 30px;
     font-weight: 600;
     color: #fff;
-    padding: 20px;
+    padding: 20px 20px 0px 20px;
+}
+.blog-banner-img-wrapper .blog-banner-text span{
+    font-size: 12px;
 }
 .login-modal .modal-dialog .login-form-wrapper .mobile-display{
     display: none;
@@ -3898,7 +3892,7 @@ footer {
     text-align: center;
     margin-top: 20px;
   }
-    .blog-banner-img-wrapper .blog-banner-text{
+    .blog-banner-img-wrapper .blog-banner-text h4{
         font-size: 20px;
     }
     .privacy-policy-banner {
@@ -3938,7 +3932,7 @@ footer {
     text-align: center;
     margin-top: 20px;
 }
-.blog-banner-img-wrapper .blog-banner-text{
+.blog-banner-img-wrapper .blog-banner-text h4{
     font-size: 16px;
     padding: 10px;
     line-height: normal;
