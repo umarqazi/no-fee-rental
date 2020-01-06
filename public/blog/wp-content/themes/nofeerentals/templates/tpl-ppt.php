@@ -22,7 +22,7 @@
 <?php
 $privacy_banner = get_field('privacy_banner');
 $banner_title = get_field('banner_title');
-$last_update = get_field('last_update')
+$last_update = get_field('last_update');
 $content_before_middle_section = get_field('content_before_middle_section');
 $background_image = get_field('background_image');
 $title = get_field('title');
