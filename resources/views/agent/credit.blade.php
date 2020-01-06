@@ -18,7 +18,7 @@
             <p>Welcome to the nofeerentalsnyc.com family!!</p>
             <div class="plans-wrapper">
                 <div class="inner-plans-wrapper">
-                    <div class="current-plans {{ BASICPLAN == $currentPlan->plan ? '' : 'platinum-plan' }}">
+                    <div class="current-plans {{ isset($currentPlan) && $currentPlan->plan == BASICPLAN ? '' : 'platinum-plan' }}">
                         <h3> Basic Plan</h3>
                         <h2>$40</h2> <small>/Month</small>
                         <div class="text-with-tick-image">
@@ -29,12 +29,11 @@
                                 <li>30 Reposts</li>
                             </ul>
                         </div>
-                        <a href="{{ BASICPLAN == $currentPlan->plan ? route('agent.plan') : 'javascript:void(0);' }}"
-                           class="btn btn-default credit-plan" data-toggle="modal" data-target="#myModal-currentPlan" id="40">
-                            {{ BASICPLAN == $currentPlan->plan ? 'Current Plan' : 'Get Started' }}
+                        <a href="javascript:void(0);" class="btn btn-default credit-plan">
+                            {{ isset($currentPlan) && $currentPlan->plan == BASICPLAN ? 'Current Plan' : 'Get Started' }}
                         </a>
                     </div>
-                    <div class="current-plans {{ GOLDPLAN == $currentPlan->plan ? '' : 'gold-plan' }}">
+                    <div class="current-plans {{ isset($currentPlan) && $currentPlan->plan == GOLDPLAN ? '' : 'platinum-plan' }}">
                         <h3> Gold Plan</h3>
                         <h2>$70</h2> <small>/Month</small>
                         <div class="text-with-tick-image">
@@ -42,34 +41,32 @@
                                 <p style="text-align: center">Get ahead with more client views.</p>
                                 <li>40 listing slots</li>
                                 <li>10 featured listings</li>
-                                <li>Premier reach to more potential clients.</li>
                                 <li>60 Reposts</li>
+                                <li>Premier reach to more potential clients.</li>
                                 <li>Featured listing in our weekly news letter</li>
                             </ul>
                         </div>
-                        <a href="{{ GOLDPLAN == $currentPlan->plan ? route('agent.plan') : 'javascript:void(0);' }}"
-                           class="btn btn-default credit-plan" data-toggle="modal" data-target="#myModal-currentPlan" id="40">
-                            {{ GOLDPLAN == $currentPlan->plan ? 'Current Plan' : 'Get Started' }}
+                        <a href="javascript:void(0);" class="btn btn-default credit-plan">
+                            {{ isset($currentPlan) && $currentPlan->plan == GOLDPLAN ? 'Current Plan' : 'Get Started' }}
                         </a>
                     </div>
-                    <div class="current-plans {{ PLATINUMPLAN == $currentPlan->plan ? '' : 'platinum-plan' }}">
+                    <div class="current-plans {{ isset($currentPlan) && $currentPlan->plan == PLATINUMPLAN ? '' : 'platinum-plan' }}">
                         <h3> Platinum Plan</h3>
                         <h2>$100</h2> <small>/Month</small>
                         <div class="text-with-tick-image">
                             <ul>
                                 <p style="text-align: center">Ultimate Visibility</p>
+                                <li>70 listings slots</li>
                                 <li>25 featured listings</li>
                                 <li>100 Reposts</li>
-                                <li>70 listings slots</li>
                                 <li>Close more deals than ever before.</li>
                                 <li>Varified client leads based on your expertise</li>
                                 <li>Direct leads from our client questioner form</li>
                                 <li>Featured listing in our weekly news letter</li>
                             </ul>
                         </div>
-                        <a href="{{ PLATINUMPLAN == $currentPlan->plan ? route('agent.plan') : 'javascript:void(0);' }}"
-                           class="btn btn-default credit-plan" data-toggle="modal" data-target="#myModal-currentPlan" id="40">
-                            {{ PLATINUMPLAN == $currentPlan->plan ? 'Current Plan' : 'Get Started' }}
+                        <a href="javascript:void(0);" class="btn btn-default credit-plan">
+                            {{ isset($currentPlan) && $currentPlan->plan == PLATINUMPLAN ? 'Current Plan' : 'Get Started' }}
                         </a>
                     </div>
                 </div>
@@ -79,31 +76,5 @@
 
     {{--Checkout Modal--}}
     @include('agent.modals.payment_checkout')
-
-    <script>
-        enableDatePicker('#exp_year', false);
-        enableDatePicker('#exp_month', false);
-        let plan;
-        let creditPlan;
-        $('.credit-plan').on('click', function() {
-            plan = $(this).attr('id');
-
-            if(plan === '30') {
-                creditPlan = 1;
-            } else if (plan === '60') {
-                creditPlan = 2;
-            } else {
-                creditPlan = 3;
-            }
-
-            let plan_name = $(this).closest('.current-plans').find('h3').text();
-            $('.modal-header > h4').text(`Purchase ${plan_name}`);
-            $('.modal-footer > input').attr('value', `Checkout ($${plan})`);
-        });
-
-        $('form').on('submit', function() {
-            $('.amount').attr('value', plan);
-            $('.credit_plan').attr('value', creditPlan);
-        });
-    </script>
+    {!! HTML::script('assets/js/credit_plan.js') !!}
 @endsection
