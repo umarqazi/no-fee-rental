@@ -15,13 +15,17 @@ const emit = async () => {
     await ajaxRequest($('#send-message').attr('action'), $('#send-message').attr('method'), data, false);
 };
 
-// Socket Listener
-socket.on(`listen-chat-event.${currentUser}`, async function (res) {
-    // let url = window.location.href;
-    // url = url.split('/');
-    // if(url[4] !== 'load-chat') {
-    //     await ajaxRequest('/push-notification', 'post', res, false);
-    // } else {
+// Event Listener
+$(() => {
+    socket.on(`listen-chat-event.${$('input[name=to]').val()}`, async function (res) {
+        if(Window.Laravel.user === res.from) {
+            return;
+        }
+        // let url = window.location.href;
+        // url = url.split('/');
+        // if(url[4] !== 'load-chat') {
+        //     await ajaxRequest('/push-notification', 'post', res, false);
+        // } else {
         let $ul = $('.messages > ul');
         $ul.append(`
             <li class="sent">
@@ -29,9 +33,9 @@ socket.on(`listen-chat-event.${currentUser}`, async function (res) {
                  <p>${res.message}</p>
             </li>`);
         scrollDown($ul);
-    // }
+        // }
+    });
 });
-
 
 $(() => {
     let $body = $('body');

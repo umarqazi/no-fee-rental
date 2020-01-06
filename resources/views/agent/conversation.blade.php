@@ -30,15 +30,15 @@
                 <div class="tab-content">
                     {{--Inbox--}}
                     <div class="tab-pane active" id="tab-1">
-                        @include('agent.message-tabs.inbox')
+                        @include('agent.conversation-tabs.inbox')
                     </div>
                     {{--Archive--}}
                     <div class="tab-pane fade" id="tab-2">
-                        @include('agent.message-tabs.archived')
+                        @include('agent.conversation-tabs.archived')
                     </div>
                     {{--Request Meeting--}}
                     <div class="tab-pane fade" id="tab-3">
-                        @include('agent.message-tabs.meeting_request')
+                        @include('agent.conversation-tabs.meeting_request')
                     </div>
                 </div>
             </div>

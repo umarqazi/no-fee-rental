@@ -18,17 +18,46 @@ class ListingRepo extends BaseRepo {
 	}
 
     /**
+     * @param $id
      * @return mixed
      */
-	public function activeInactive() {
-	    return $this->model->ai();
+	public function detail($id) {
+        return $this->find(['id' => $id])->where('visibility', '!=', ARCHIVED);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function active() {
+        return $this->model->active();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function inactive() {
+        return $this->model->inactive();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function pending() {
+        return $this->model->pending();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function archived() {
+        return $this->model->archived();
     }
 
     /**
      * @return mixed
      */
     public function realty() {
-	    return $this->model->realty();
+        return $this->model->realty();
     }
 
     /**
@@ -45,12 +74,12 @@ class ListingRepo extends BaseRepo {
         return $this->model->reportedLists();
     }
 
-	/**
-	 * @return mixed
-	 */
-	public function active() {
-		return $this->model->active();
-	}
+    /**
+     * @return mixed
+     */
+	public function activeInactive() {
+	    return $this->model->ai();
+    }
 
 	/**
      * @return mixed
@@ -62,36 +91,6 @@ class ListingRepo extends BaseRepo {
 	/**
 	 * @return mixed
 	 */
-	public function inactive() {
-		return $this->model->inactive();
-	}
-
-	/**
-	 * @return mixed
-	 */
-	public function pending() {
-		return $this->model->pending();
-	}
-
-    /**
-     * @return mixed
-     */
-    public function archived() {
-        return $this->model->archived();
-    }
-
-	/**
-	 * @param $keywords
-	 *
-	 * @return mixed
-	 */
-	public function search($keywords) {
-		return $this->model->search($keywords);
-	}
-
-	/**
-	 * @return mixed
-	 */
 	public function featured() {
 		return $this->model->featured();
 	}
@@ -99,23 +98,32 @@ class ListingRepo extends BaseRepo {
     /**
      * @return mixed
      */
+    public function activeFeatured() {
+        return $this->model->activefeatured();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function requestFeatured() {
+        return $this->model->requestFeatured();
+    }
+
+    /**
+     * @param $keywords
+     *
+     * @return mixed
+     */
+    public function search($keywords) {
+        return $this->model->search($keywords);
+    }
+
+    /**
+     * @return mixed
+     */
 	public function price() {
 	    return $this->model->price()->orderBy('rent', CHEAPEST);
     }
-
-	/**
-	 * @return mixed
-	 */
-	public function activeFeatured() {
-		return $this->model->activefeatured();
-	}
-
-	/**
-	 * @return mixed
-	 */
-	public function requestfeatured() {
-		return $this->model->requestFeatured();
-	}
 
     /**
      * @param $id

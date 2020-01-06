@@ -15,7 +15,7 @@ use App\Repository\NotificationRepo;
  * Class NotificationService
  * @package App\Services
  */
-class NotificationService extends NotificationSettingService {
+class NotificationService extends ExclusiveSettingService {
 
     /**
      * @var mixed
@@ -29,13 +29,17 @@ class NotificationService extends NotificationSettingService {
 
     /**
      * NotificationService constructor.
-     *
-     * @param $data
      */
-    public function __construct( $data = null ) {
-        $this->setter( $data );
+    public function __construct() {
         parent::__construct();
         $this->notificationRepo = new NotificationRepo();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function get() {
+        return $this->notificationRepo->get();
     }
 
     /**
@@ -50,20 +54,12 @@ class NotificationService extends NotificationSettingService {
     }
 
     /**
-     * @param $id
-     *
-     * @return mixed
-     */
-    private function receiverSettings( $id ) {
-        return $this->getSettings( $id );
-    }
-
-    /**
      * @return bool
      */
     public function send() {
-        $notification = $this->save();
-        $settings = $this->receiverSettings( $this->data->to );
+        $notification = $this->__create();
+        $settings = $this->__receiverExclusiveSettings($this->data->to);
+
         if ( empty( $settings ) ) {
             socketEvent($notification);
             dispatchEmailQueue( $this->data );
@@ -78,20 +74,6 @@ class NotificationService extends NotificationSettingService {
         }
 
         return true;
-    }
-
-    /**
-     * @return mixed
-     */
-    private function save() {
-        $form          = new NotificationForm();
-        $form->from    = $this->data->from;
-        $form->to      = $this->data->to;
-        $form->url     = $this->data->url;
-        $form->message = $this->data->message;
-        $form->validate();
-
-        return $this->notificationRepo->create( $form->toArray() );
     }
 
     /**
@@ -123,7 +105,30 @@ class NotificationService extends NotificationSettingService {
     /**
      * @return mixed
      */
-    public function get() {
-        return $this->notificationRepo->get();
+    private function __create() {
+        $notification = $this->__validateForm($this->data);
+        return $this->notificationRepo->create( $notification->toArray() );
+    }
+
+    /**
+     * @param $request
+     * @return NotificationForm
+     */
+    private function __validateForm($request) {
+        $form          = new NotificationForm();
+        $form->to      = $this->data->to;
+        $form->url     = $this->data->url;
+        $form->message = $this->data->message;
+        $form->validate();
+        return $form;
+    }
+
+    /**
+     * @param $id
+     *
+     * @return mixed
+     */
+    private function __receiverExclusiveSettings( $id ) {
+        return $this->getSettings( $id );
     }
 }

@@ -41,21 +41,6 @@ class ListingForm extends BaseForm {
     /**
      * @var string
      */
-	public $name;
-
-    /**
-     * @var string
-     */
-	public $email;
-
-    /**
-     * @var string
-     */
-	public $phone_number;
-
-    /**
-     * @var string
-     */
 	public $description;
 
     /**
@@ -152,10 +137,7 @@ class ListingForm extends BaseForm {
 			'user_id'            => $this->user_id,
             'building_id'        => $this->building_id,
             'description'        => $this->description,
-			'name'               => $this->name,
-			'email'              => $this->email,
             'availability'       => $this->availability,
-			'phone_number'       => $this->phone_number,
 			'street_address'     => $this->street_address,
 			'display_address'    => $this->display_address,
 			'neighborhood_id'    => $this->neighborhood_id,
@@ -183,21 +165,18 @@ class ListingForm extends BaseForm {
      */
 	function rules() {
 		return [
-			'name'            => 'required|string',
-			'email'           => 'required|email',
-			'phone_number'    => 'required|string',
-            'neighborhood_id' => 'required',
-			'street_address'  => 'required|string',
-			'display_address' => 'required|string',
-			'availability'    => 'required',
-			'map_location'    => 'required|string',
-			'bedrooms'        => 'required|integer',
-			'baths'           => 'required|integer',
-            'thumbnail'       => 'sometimes|mimes:jpg,png,jpeg',
-			'description'     => 'required',
-			'rent'            => 'required|integer',
-			'square_feet'     => 'required|integer',
-            'listing_type'    => 'required|string'
+            'neighborhood_id'   => 'required',
+			'street_address'    => 'required|string',
+			'display_address'   => 'required|string',
+			'availability_type' => 'required',
+			'map_location'      => 'required|string',
+			'bedrooms'          => 'required|integer',
+			'baths'             => 'required|integer',
+            'thumbnail'         => 'sometimes|mimes:jpg,png,jpeg',
+			'description'       => 'required',
+			'rent'              => 'required|integer',
+			'square_feet'       => 'required|integer',
+            'listing_type'      => 'required|string'
 		];
 	}
 }

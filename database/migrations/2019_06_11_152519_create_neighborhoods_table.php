@@ -22,7 +22,7 @@ class CreateNeighborhoodsTable extends Migration {
             $table->text('content')->nullable();
             $table->timestamps();
 
-            $table->foreign('boro_id')->references('id')->on('boroughs')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('boro_id')->references('id')->on('boroughs');
         });
     }
 

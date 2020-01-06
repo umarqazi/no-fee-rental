@@ -31,9 +31,9 @@ class CreateListingConversationsTable extends Migration {
             $table->boolean('meeting_request')->default(0)->comment = "0-Not Accept Yet, 1-Accepted";
             $table->timestamps();
 
-            $table->foreign('to')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('from')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('listing_id')->references('id')->on('listings')->onDelete('cascade');
+            $table->foreign('to')->references('id')->on('users');
+            $table->foreign('from')->references('id')->on('users');
+            $table->foreign('listing_id')->references('id')->on('listings');
 
         });
     }

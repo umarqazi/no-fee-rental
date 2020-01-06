@@ -13,12 +13,12 @@
             <h3>NOFEE Rental Plans</h3>
             <p>We stand behind our name in giving our advertises quality leads without watering down our product & service you confidence!
                 Our goal is to provide top-quality leads at a fraction of a cost to the agent.</p><br>
-            <p>For a limited time we are offering the 1st month of advertising at no cost. In addition once your on our plan if for any reason you are not
-                completely satisfied we will refund your monthly subscription with no question asked.</p><br>
+            <p>For a limited time we are offering the 1st month of advertising at no cost. In addition once your on our plan if
+                for any reason you are not completely satisfied we will refund your monthly subscription with no question asked.</p><br>
             <p>Welcome to the nofeerentalsnyc.com family!!</p>
             <div class="plans-wrapper">
                 <div class="inner-plans-wrapper">
-                    <div class="current-plans">
+                    <div class="current-plans {{ BASICPLAN == $currentPlan->plan ? '' : 'platinum-plan' }}">
                         <h3> Basic Plan</h3>
                         <h2>$40</h2> <small>/Month</small>
                         <div class="text-with-tick-image">
@@ -29,9 +29,12 @@
                                 <li>30 Reposts</li>
                             </ul>
                         </div>
-                        <a href="javascript:void(0);" class="btn btn-default credit-plan" data-toggle="modal" data-target="#myModal-currentPlan" id="40"> Current Plan </a>
+                        <a href="{{ BASICPLAN == $currentPlan->plan ? route('agent.plan') : 'javascript:void(0);' }}"
+                           class="btn btn-default credit-plan" data-toggle="modal" data-target="#myModal-currentPlan" id="40">
+                            {{ BASICPLAN == $currentPlan->plan ? 'Current Plan' : 'Get Started' }}
+                        </a>
                     </div>
-                    <div class="current-plans gold-plan">
+                    <div class="current-plans {{ GOLDPLAN == $currentPlan->plan ? '' : 'gold-plan' }}">
                         <h3> Gold Plan</h3>
                         <h2>$70</h2> <small>/Month</small>
                         <div class="text-with-tick-image">
@@ -44,10 +47,12 @@
                                 <li>Featured listing in our weekly news letter</li>
                             </ul>
                         </div>
-                        <a href="javascript:void(0);" class="btn btn-default credit-plan" data-toggle="modal" data-target="#myModal-currentPlan" id="70"> Get Started </a>
-{{--                        <a href="#" class="btn btn-default"> Get started </a>--}}
+                        <a href="{{ GOLDPLAN == $currentPlan->plan ? route('agent.plan') : 'javascript:void(0);' }}"
+                           class="btn btn-default credit-plan" data-toggle="modal" data-target="#myModal-currentPlan" id="40">
+                            {{ GOLDPLAN == $currentPlan->plan ? 'Current Plan' : 'Get Started' }}
+                        </a>
                     </div>
-                    <div class="current-plans platinum-plan">
+                    <div class="current-plans {{ PLATINUMPLAN == $currentPlan->plan ? '' : 'platinum-plan' }}">
                         <h3> Platinum Plan</h3>
                         <h2>$100</h2> <small>/Month</small>
                         <div class="text-with-tick-image">
@@ -62,7 +67,10 @@
                                 <li>Featured listing in our weekly news letter</li>
                             </ul>
                         </div>
-                        <a href="javascript:void(0);" class="btn btn-default credit-plan" data-toggle="modal" data-target="#myModal-currentPlan" id="100"> Get Started </a>
+                        <a href="{{ PLATINUMPLAN == $currentPlan->plan ? route('agent.plan') : 'javascript:void(0);' }}"
+                           class="btn btn-default credit-plan" data-toggle="modal" data-target="#myModal-currentPlan" id="40">
+                            {{ PLATINUMPLAN == $currentPlan->plan ? 'Current Plan' : 'Get Started' }}
+                        </a>
                     </div>
                 </div>
             </div>

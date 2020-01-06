@@ -90,7 +90,7 @@ $(() => {
 
     $('select[name=availability_type]').on('change', function() {
         let $selector = $('.availability-date');
-        if($(this).val() === '3') {
+        if($(this).val() === '2') {
             $selector.show();return;
         }
         $selector.hide();

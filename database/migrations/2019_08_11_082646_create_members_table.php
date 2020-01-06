@@ -22,8 +22,8 @@ class CreateMembersTable extends Migration {
             $table->unsignedInteger('member_id');
             $table->timestamps();
 
-            $table->foreign('agent_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('member_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('agent_id')->references('id')->on('users');
+            $table->foreign('member_id')->references('id')->on('users');
 
         });
     }

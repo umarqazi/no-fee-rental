@@ -22,30 +22,30 @@ class ListingConversationRepo extends BaseRepo {
     }
 
     /**
+     * @param $ids
      * @param $paginate
-     *
      * @return mixed
      */
-    public function getActiveConversations($paginate) {
-        return $this->model->activeconversations()->paginate($paginate, ['*'], 'inbox');
+    public function getActiveConversations($ids, $paginate) {
+        return $this->model->activeconversations($ids)->paginate($paginate, ['*'], 'inbox');
     }
 
     /**
+     * @param $ids
      * @param $paginate
-     *
      * @return mixed
      */
-    public function getInactiveConversations($paginate) {
-        return $this->model->inactiveconversations()->paginate($paginate, ['*'], 'request');
+    public function getInactiveConversations($ids, $paginate) {
+        return $this->model->inactiveconversations($ids)->paginate($paginate, ['*'], 'request');
     }
 
     /**
+     * @param $ids
      * @param $paginate
-     *
      * @return mixed
      */
-    public function getArchivedConversations($paginate) {
-        return $this->model->archiveconversations()->paginate($paginate, ['*'], 'archived');
+    public function getArchivedConversations($ids, $paginate) {
+        return $this->model->archiveconversations($ids)->paginate($paginate, ['*'], 'archived');
     }
 
     /**

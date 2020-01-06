@@ -35,9 +35,17 @@ class CreditPlanService {
      * @return bool
      */
     public function agentHasPlan() {
-        return $this->creditPlanRepo
-            ->find(['user_id' => myId(), 'is_expired' => NOTEXPIRED])
-            ->count() > 0 ? true : false;
+        return $this->currentPlan()->count() > 0 ? true : false;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function currentPlan() {
+        return $this->creditPlanRepo->find([
+            'user_id' => myId(),
+            'is_expired' => NOTEXPIRED
+        ]);
     }
 
     /**

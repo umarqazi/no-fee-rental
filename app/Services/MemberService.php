@@ -11,34 +11,54 @@ namespace App\Services;
 
 use App\Repository\MemberRepo;
 
-class MemberService extends UserService {
+/**
+ * Class MemberService
+ * @package App\Services
+ */
+class MemberService {
 
     /**
      * @var MemberRepo
      */
-    private $repo;
+    protected $memberRepo;
 
     /**
      * MemberService constructor.
      */
     public function __construct() {
-        parent::__construct();
-        $this->repo = new MemberRepo;
+        $this->memberRepo = new MemberRepo;
     }
 
     /**
-     * @param null $id
-     *
+     * @param $id
+     */
+    public function unFriend($id) {
+        $this->memberRepo->unFriend($id);
+    }
+
+    /**
      * @return mixed
      */
-    public function team($id = null) {
-        return $this->repo->friends($id)->get();
+    public function members() {
+        $collection = [];
+        $a = $this->memberRepo->myFriends()->get();
+        $b = $this->memberRepo->friend()->get();
+
+        foreach ($a as $friend) {
+            $collection[] = $friend->membersColA;
+        }
+
+        foreach ($b as $friend) {
+            $collection[] = $friend->membersColB;
+        }
+
+        return $collection;
     }
 
     /**
      * @return mixed
      */
     public function invites() {
-        return $this->repo->getInvitedAgents()->first();
+        return $this->memberRepo->getInvitedAgents()->first();
     }
 }

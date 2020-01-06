@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Agent;
 
+use App\Services\CreditPlanService;
 use App\Services\PaymentService;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\JsonResponse;
@@ -21,18 +22,30 @@ class CreditPlanController extends Controller {
      */
     private $paymentService;
 
+    private $creditPlanService;
+
     /**
      * StripeController constructor.
      */
     public function __construct() {
         $this->paymentService = new PaymentService();
+        $this->creditPlanService = new CreditPlanService();
     }
 
     /**
      * @return Factory|View
      */
     public function index() {
-        return view('agent.credit_plan');
+        $currentPlan = $this->creditPlanService->currentPlan()->first();
+        return view('agent.credit', compact('currentPlan'));
+    }
+
+    /**
+     * @param $id
+     * @return Factory|View
+     */
+    public function subscription($id) {
+        return view('agent.subscription_plan');
     }
 
     /**

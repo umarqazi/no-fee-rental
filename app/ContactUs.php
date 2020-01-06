@@ -15,9 +15,7 @@ class ContactUs extends Model {
      *
      * @var array
      */
-    protected $fillable = [
-        'name','email', 'phone_number', 'comment'
-    ];
+    protected $fillable = ['username','email', 'phone_number', 'message'];
 
     /**
      * @var string

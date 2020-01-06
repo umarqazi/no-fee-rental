@@ -25,7 +25,7 @@ class CreateListingReportsTable extends Migration {
             $table->text('message');
             $table->timestamps();
 
-            $table->foreign('listing_id')->references('id')->on('listings')->onDelete('cascade');
+            $table->foreign('listing_id')->references('id')->on('listings');
         });
     }
 

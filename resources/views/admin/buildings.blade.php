@@ -40,16 +40,16 @@
                 <!-- Tab panes -->
                 <div class="tab-content">
                     <div class="tab-pane" id="buildings-no-fee">
-                        @include('admin.sections.verified_buildings')
+                        @include('admin.building-tabs.verified_buildings')
                     </div>
                     <div class="tab-pane" id="buildings-fee">
-                        @include('admin.sections.fee_buildings')
+                        @include('admin.building-tabs.fee_buildings')
                     </div>
                     <div class="tab-pane" id="buildings-owner-only">
-                        @include('admin.sections.owner_only_building')
+                        @include('admin.building-tabs.owner_only_building')
                     </div>
                     <div class="tab-pane" id="buildings-pending">
-                        @include('admin.sections.non_verified_buildings')
+                        @include('admin.building-tabs.non_verified_buildings')
                     </div>
                 </div>
             </div>

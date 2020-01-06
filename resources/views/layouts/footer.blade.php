@@ -19,7 +19,7 @@
             <li class="wow fadeInLeft" data-wow-delay="0.4s">
                 <h4 class="collapseabe-link"> Support <i class="fas fa-angle-down"></i></h4>
                 <div class="collapse-menu">
-                    <a href="{!! route('contact-us') !!}" class="ft-links">Contact Us</a>
+                    <a href="{!! route('web.contact-us') !!}" class="ft-links">Contact Us</a>
                     <a href="http://no-fee-rental.teamtechverx.com/blog/?page_id=185" class="ft-links">Site Map</a>
                     <a href="http://no-fee-rental.teamtechverx.com/blog/?page_id=187" class="ft-links">Feedback</a>
                     <a href="http://no-fee-rental.teamtechverx.com/blog/?page_id=195" class="ft-links">Advertise with Us</a>

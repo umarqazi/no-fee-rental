@@ -14,12 +14,5 @@ class Notification extends Model {
     /**
      * @var array
      */
-    protected $fillable = ['from', 'to', 'message', 'is_read', 'url'];
-
-    /**
-     * @return BelongsTo
-     */
-    public function from() {
-        return $this->belongsTo(User::class, 'from', 'id');
-    }
+    protected $fillable = ['to', 'message', 'is_read', 'url'];
 }

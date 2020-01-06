@@ -227,22 +227,22 @@ if(!defined('STRIPE')) {
 /**
  * Basic Subscription Plan
  */
-if(!defined('BASIC')) {
-    define('BASIC', 1);
+if(!defined('BASICPLAN')) {
+    define('BASICPLAN', 1);
 }
 
 /**
  * Gold Subscription Plan
  */
-if(!defined('GOLD')) {
-    define('GOLD', 2);
+if(!defined('GOLDPLAN')) {
+    define('GOLDPLAN', 2);
 }
 
 /**
  * Premium Subscription Plan
  */
-if(!defined('PREMIUM')) {
-    define('PREMIUM', 3);
+if(!defined('PLATINUMPLAN')) {
+    define('PLATINUMPLAN', 3);
 }
 
 /**

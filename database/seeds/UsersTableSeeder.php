@@ -15,7 +15,6 @@ class UsersTableSeeder extends Seeder {
 		    // Admins
 			[
 				'first_name' => 'Yousuf',
-				'api_token'  => str_random(60),
 				'last_name' => 'Khalid',
 				'email' => 'codinghackers@admin.com',
 				'user_type' => ADMIN,
@@ -29,7 +28,6 @@ class UsersTableSeeder extends Seeder {
 			],
             [
                 'first_name' => 'Eli',
-                'api_token'  => str_random(60),
                 'last_name' => 'Halali',
                 'email' => 'nofeerentalsync@admin.com',
                 'user_type' => ADMIN,
@@ -43,7 +41,6 @@ class UsersTableSeeder extends Seeder {
             ],
 			[
 				'first_name' => 'Muhammad',
-				'api_token'  => str_random(60),
 				'last_name' => 'Adeel',
 				'email' => 'adeel@admin.com',
 				'user_type' => ADMIN,
@@ -58,7 +55,6 @@ class UsersTableSeeder extends Seeder {
             // Agents
             [
                 'first_name' => 'Yousuf',
-                'api_token'  => str_random(60),
                 'last_name' => 'Khalid',
                 'email' => 'codinghackers@agent.com',
                 'user_type' => AGENT,
@@ -72,7 +68,6 @@ class UsersTableSeeder extends Seeder {
             ],
             [
                 'first_name' => 'Eli',
-                'api_token'  => str_random(60),
                 'last_name' => 'Halali',
                 'email' => 'nofeerentalsync@agent.com',
                 'user_type' => AGENT,
@@ -86,7 +81,6 @@ class UsersTableSeeder extends Seeder {
             ],
             [
                 'first_name' => 'Muhammad',
-                'api_token'  => str_random(60),
                 'last_name' => 'Adeel',
                 'email' => 'adeel@agent.com',
                 'user_type' => AGENT,
@@ -100,7 +94,6 @@ class UsersTableSeeder extends Seeder {
             ],
             [
                 'first_name' => 'Helvin',
-                'api_token'  => str_random(60),
                 'last_name' => 'Rymer',
                 'email' => 'helvin@kwnyc.com',
                 'user_type' => AGENT,
@@ -114,7 +107,6 @@ class UsersTableSeeder extends Seeder {
             ],
             [
                 'first_name' => 'Chen',
-                'api_token'  => str_random(60),
                 'last_name' => 'Mishael',
                 'email' => 'cmteam@kwnyc.com',
                 'user_type' => AGENT,
@@ -128,7 +120,6 @@ class UsersTableSeeder extends Seeder {
             ],
             [
                 'first_name' => 'Jaime',
-                'api_token'  => str_random(60),
                 'last_name' => 'Farmer',
                 'email' => 'jaime@kwnyc.com',
                 'user_type' => AGENT,
@@ -143,7 +134,6 @@ class UsersTableSeeder extends Seeder {
             // Owners
             [
                 'first_name' => 'Yousuf',
-                'api_token'  => str_random(60),
                 'last_name' => 'Khalid',
                 'email' => 'codinghackers@owner.com',
                 'user_type' => OWNER,
@@ -157,7 +147,6 @@ class UsersTableSeeder extends Seeder {
             ],
             [
                 'first_name' => 'Muhammad',
-                'api_token'  => str_random(60),
                 'last_name' => 'Adeel',
                 'email' => 'adeel@owner.com',
                 'user_type' => OWNER,
@@ -172,7 +161,6 @@ class UsersTableSeeder extends Seeder {
             // Renters
             [
                 'first_name' => 'Yousuf',
-                'api_token'  => str_random(60),
                 'last_name' => 'Khalid',
                 'email' => 'codinghackers@renter.com',
                 'user_type' => RENTER,
@@ -186,7 +174,6 @@ class UsersTableSeeder extends Seeder {
             ],
             [
                 'first_name' => 'Muhammad',
-                'api_token'  => str_random(60),
                 'last_name' => 'Adeel',
                 'email' => 'adeel@renter.com',
                 'user_type' => RENTER,

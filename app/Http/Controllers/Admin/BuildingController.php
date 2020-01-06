@@ -39,7 +39,7 @@ class BuildingController extends Controller {
      * @return Factory|View
      */
     public function index() {
-        $buildings = $this->buildingService->index($this->paginate);
+        $buildings = $this->buildingService->adminIndex($this->paginate);
         return view('admin.buildings', compact('buildings'));
     }
 

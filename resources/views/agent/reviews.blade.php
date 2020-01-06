@@ -24,7 +24,6 @@
                         <div class="profile-contact-section profile-section-padding">
                             <div class="container-lg">
                                 <div class="your-reviews-section">
-{{--                                    <h3>Your Reviews</h3>--}}
                                     <div class="row">
                                         @if($reviews->isNotEmpty())
                                             @foreach($reviews as $review)
@@ -70,21 +69,21 @@
                     <h4 class="modal-title">Request a Review</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
-                {!! Form::open(['url' => route('agent.requestReview'),'class' => 'ajax','reset' => 'true','id' => 'review-request']) !!}
-                <!-- Modal body -->
+            {!! Form::open(['url' => route('agent.requestReview'),'class' => 'ajax','reset' => 'true','id' => 'review-request']) !!}
+            <!-- Modal body -->
                 <div class="modal-body">
-                   <div class="row">
-                       <div class="col-sm-12">
-                           <div class="form-group">
-                               <label>Email</label>
-                               {!! Form::text('email', null, ['class' => 'input-style','id' => 'renter_email', 'placeholder' => 'Request Email', 'type' => 'email']) !!}
-                           </div>
-                           <div class="form-group">
-                               <label>Message</label>
-                               {!! Form::textarea('message', null, ['class' => 'input-style', 'placeholder' => 'Message']) !!}
-                           </div>
-                       </div>
-                   </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label>Email</label>
+                                {!! Form::select('email', renters(), null, ['class' => 'input-style','id' => 'renter_email']) !!}
+                            </div>
+                            <div class="form-group">
+                                <label>Message</label>
+                                {!! Form::textarea('message', null, ['class' => 'input-style', 'placeholder' => 'Message']) !!}
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <!-- Modal footer -->
                 <div class="modal-footer">
@@ -94,8 +93,11 @@
             </div>
         </div>
     </div>
+    {!! HTML::style('https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css') !!}
+    {!! HTML::script('https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js') !!}
     <script>
-        fetchRenters($('input[name=email]'));
+        let $disabledResults = $('select[name=email]');
+        $disabledResults.select2();
     </script>
 @endsection
 

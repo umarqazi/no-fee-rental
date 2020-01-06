@@ -59,41 +59,46 @@ class ListingConversation extends Model {
 
     /**
      * @param $query
-     *
+     * @param $ids
      * @return mixed
      */
-    public function scopeActiveConversations($query) {
+    public function scopeActiveConversations($query, $ids) {
         return $query->where([
             'meeting_request'          => ACTIVE,
             'is_archived'              => FALSE,
-            isRenter() ? 'from' : 'to' => myId()
-        ])->with(['listing', 'sender']);
+        ])->where(function ($subQuery) use ($ids) {
+            return $subQuery->whereIn(isRenter() ? 'from' : 'to', $ids)
+                ->orWhere(isRenter() ? 'from' : 'to', myId());
+        })->with(['listing', 'sender']);
     }
 
     /**
      * @param $query
-     *
+     * @param $ids
      * @return mixed
      */
-    public function scopeInactiveConversations($query)
-    {
+    public function scopeInactiveConversations($query, $ids) {
         return $query->where([
             'meeting_request'          => DEACTIVE,
             'is_archived'              => FALSE,
-            isRenter() ? 'from' : 'to' => myId()
-        ])->with(['listing', 'sender']);
+        ])->where(function ($subQuery) use ($ids) {
+            return $subQuery->whereIn(isRenter() ? 'from' : 'to', $ids)
+                ->orWhere(isRenter() ? 'from' : 'to', myId());
+        })->with(['listing', 'sender']);
     }
 
     /**
      * @param $query
-     *
+     * @param $ids
      * @return mixed
      */
-    public function scopeArchiveConversations($query) {
+    public function scopeArchiveConversations($query, $ids) {
         return $this->where([
-                'is_archived'              => TRUE,
-                isRenter() ? 'from' : 'to' => myId()
-            ])->with(['listing', 'sender']);
+                'is_archived' => TRUE
+        ])->where(function ($subQuery) use ($ids) {
+            return $subQuery->whereIn(isRenter() ? 'from' : 'to', $ids)
+                ->orWhere(isRenter() ? 'from' : 'to', myId());
+        })->with(['listing', 'sender']);
     }
 
     /**

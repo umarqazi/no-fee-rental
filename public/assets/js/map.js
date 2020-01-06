@@ -332,7 +332,7 @@ $(() => {
                        }
 
                        let $validator = $(`#${$('body').find('form').attr('id')}`).validate();
-                       ajaxRequest('/is-owner-only', 'post', {address: streetAddress}, false).then(async res => {
+                       ajaxRequest('/is-owner-only', 'post', {address: streetAddress, user_id: Window.Laravel.user}, false).then(async res => {
                            if (res === 'false') {
                                $('.submit').removeAttr('disabled');
                                await ajaxRequest('/is-unique-address', 'post', {address: streetAddress}, false).then(res => {

@@ -4,19 +4,22 @@
     <div class="wrapper">
         <div class="heading-wrapper">
             <h1>Listings</h1>
-            <a href="{{ route('owner.addListing') }}" class="btn-default">New Listing</a>
+            <a href="{{ route('owner.addListing') }}" class="btn-default"><i class="fa fa-plus"></i> Add Listing</a>
         </div>
         <div class="block listing-container" id="app">
             <div class="heading-wrapper pl-0">
                 <ul class="nav nav-pills">
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="pill" href="#listing-active">Available ( {{ $listing->active->total() }} )</a>
+                        <a class="nav-link" data-toggle="pill" href="#active">Available ( {{ $listing->active->total() }} )</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="pill" href="#listing-inactive">Not Available ( {{ $listing->inactive->total() }} )</a>
+                        <a class="nav-link" data-toggle="pill" href="#inactive">Not Available ( {{ $listing->inactive->total() }} )</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="pill" href="#listing-archived">Archived ( {{ $listing->archived->total() }} )</a>
+                        <a class="nav-link" data-toggle="pill" href="#owner-only">Owner Only ( {{ $listing->owner_only->total() }} )</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="pill" href="#archived">Archived ( {{ $listing->archived->total() }} )</a>
                     </li>
                 </ul>
                 <div class="filter-wrapper">
@@ -30,14 +33,17 @@
             <div class="block-body">
                 <!-- Tab panes -->
                 <div class="tab-content">
-                    <div class="tab-pane" id="listing-active">
-                        @include('listing-tabs.active')
+                    <div class="tab-pane" id="active">
+                        @include('owner.listing-tabs.active')
                     </div>
-                    <div class="tab-pane fade" id="listing-inactive">
-                        @include('listing-tabs.inactive')
+                    <div class="tab-pane fade" id="inactive">
+                        @include('owner.listing-tabs.inactive')
                     </div>
-                    <div class="tab-pane fade" id="listing-archived">
-                        @include('listing-tabs.archive')
+                    <div class="tab-pane fade" id="owner-only">
+                        @include('owner.listing-tabs.owner_only')
+                    </div>
+                    <div class="tab-pane fade" id="archived">
+                        @include('owner.listing-tabs.archive')
                     </div>
                 </div>
             </div>

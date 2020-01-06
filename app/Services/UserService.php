@@ -656,15 +656,6 @@ class UserService {
     /**
      * @param $id
      *
-     * @return bool|mixed
-     */
-    public function unFriend($id) {
-        return $this->memberRepo->delete($id);
-    }
-
-    /**
-     * @param $id
-     *
      * @return mixed
      */
     public function getExclusiveSettings($id) {

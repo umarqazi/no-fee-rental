@@ -20,8 +20,8 @@ class BuildingAmenities extends Migration {
             $table->unsignedInteger('building_id');
             $table->unsignedInteger('amenity_id');
 
-            $table->foreign('amenity_id')->references('id')->on('amenities')->onDelete('cascade');
-            $table->foreign('building_id')->references('id')->on('buildings')->onDelete('cascade');
+            $table->foreign('amenity_id')->references('id')->on('amenities');
+            $table->foreign('building_id')->references('id')->on('buildings');
         });
     }
 

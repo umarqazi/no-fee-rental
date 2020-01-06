@@ -20,8 +20,15 @@ class Member extends Model {
     /**
      * @return HasOne
      */
-    public function friends() {
+    public function membersColA() {
         return $this->hasOne(User::class, 'id', 'member_id');
+    }
+
+    /**
+     * @return HasOne
+     */
+    public function membersColB() {
+        return $this->hasOne(User::class, 'id', 'agent_id');
     }
 
     /**
@@ -46,7 +53,17 @@ class Member extends Model {
      *
      * @return mixed
      */
-    public function scopeMyFriends($query, $id) {
-        return $query->where('agent_id', $id ?? myId())->with('friends');
+    public function scopeTeamAgent($query) {
+        return $query->where('agent_id', myId())->with('membersColA');
+    }
+
+    /**
+     * @param $query
+     * @param $id
+     *
+     * @return mixed
+     */
+    public function scopeTeamMembers($query) {
+        return $query->where('member_id', myId())->with('membersColB');
     }
 }

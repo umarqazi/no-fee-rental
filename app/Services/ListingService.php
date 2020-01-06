@@ -166,8 +166,8 @@ class ListingService extends BuildingService {
      * @param $clause
      * @return mixed
      */
-    public function find($clause) {
-        return $this->listingRepo->find($clause);
+    public function detail($id) {
+        return $this->listingRepo->detail($id)->first();
     }
 
     /**
@@ -405,16 +405,13 @@ class ListingService extends BuildingService {
         } elseif ($request->availability_type == 2) {
             $request->availability = carbon($request->availability)->format('Y-m-d');
         } else {
-            $request->availability = FALSE;
+            $request->availability = NULL;
         }
 
         $form                    = new ListingForm();
         $form->user_id           = $request->owner_id ?? $request->user_id ?? myId();
         $form->unique_slug       = $request->unique_slug ?? str_random( 20 );
-        $form->name              = $request->name;
         $form->building_id       = $request->building_id;
-        $form->email             = $request->email;
-        $form->phone_number      = $request->phone_number;
         $form->street_address    = $request->street_address;
         $form->display_address   = $request->display_address;
         $form->freshness_score   = $request->freshness_score;
@@ -629,6 +626,9 @@ class ListingService extends BuildingService {
             'archived'   => $this->getArchive()
                 ->latest()
                 ->paginate($paginate, ['*'], 'archive'),
+            'owner_only' => $this->getOwnerOnly()
+                ->latest()
+                ->paginate($paginate, ['*'], 'owner-only'),
         ];
     }
 
@@ -638,16 +638,19 @@ class ListingService extends BuildingService {
      */
     private function __agentCollection($paginate) {
         return [
-            'active'     => $this->getActive()
+            'active'   => $this->getActive()
                 ->latest()
                 ->paginate($paginate, ['*'], 'active'),
-            'inactive'   => $this->getInActive()
+            'inactive' => $this->getInActive()
                 ->latest()
                 ->paginate($paginate, ['*'], 'in-active'),
-            'archived'   => $this->getArchive()
+            'realty'   => $this->getRealty()
+                ->latest()
+                ->paginate($paginate, ['*'], 'realty'),
+            'archived' => $this->getArchive()
                 ->latest()
                 ->paginate($paginate, ['*'], 'archive'),
-            'pending'    => $this->getPending()
+            'pending'  => $this->getPending()
                 ->latest()
                 ->paginate($paginate, ['*'], 'pending'),
         ];
@@ -708,6 +711,41 @@ class ListingService extends BuildingService {
                             ->archived()
                             ->latest()
                             ->paginate($paginate, ['*'], 'archive'),
+            'owner_only' => $this->listingRepo->search( $keywords )
+                            ->ownerOnly()
+                            ->latest()
+                            ->paginate($paginate, ['*'], 'owner-only'),
+        ];
+    }
+
+    /**
+     * @param $keywords
+     * @param $paginate
+     *
+     * @return array
+     */
+    private function __agentSearchCollection( $keywords, $paginate ) {
+        return [
+            'active' => $this->listingRepo->search( $keywords )
+                ->active()
+                ->latest()
+                ->paginate($paginate, ['*'], 'active'),
+            'realty' => $this->listingRepo->search( $keywords )
+                ->realty()
+                ->latest()
+                ->paginate($paginate, ['*'], 'realty'),
+            'inactive' => $this->listingRepo->search( $keywords )
+                ->inactive()
+                ->latest()
+                ->paginate($paginate, ['*'], 'in-active'),
+            'archived'   => $this->listingRepo->search( $keywords )
+                ->archived()
+                ->latest()
+                ->paginate($paginate, ['*'], 'archived'),
+            'pending'   => $this->listingRepo->search( $keywords )
+                ->pending()
+                ->latest()
+                ->paginate($paginate, ['*'], 'pending'),
         ];
     }
 
@@ -759,6 +797,36 @@ class ListingService extends BuildingService {
             'archived'   => $this->getArchive()
                                 ->orderBy( $col, $order )
                                 ->paginate( $paginate, [ '*' ], 'archived' ),
+            'owner_only' => $this->getOwnerOnly()
+                                ->orderBy( $col, $order )
+                                ->paginate( $paginate, [ '*' ], 'archived' ),
+        ] );
+    }
+
+    /**
+     * @param $paginate
+     * @param $col
+     * @param $order
+     *
+     * @return array
+     */
+    private function __agentSortCollection( $paginate, $col, $order ) {
+        return toObject( [
+            'active'   => $this->getActive()
+                        ->orderBy( $col, $order )
+                        ->paginate( $paginate, [ '*' ], 'active' ),
+            'pending'  => $this->getPending()
+                ->orderBy( $col, $order )
+                ->paginate( $paginate, [ '*' ], 'pending' ),
+            'archived' => $this->getArchive()
+                ->orderBy( $col, $order )
+                ->paginate( $paginate, [ '*' ], 'archived' ),
+            'inactive' => $this->getInActive()
+                ->orderBy( $col, $order )
+                ->paginate($paginate, ['*'], 'in-active'),
+            'realty'   => $this->getRealty()
+                ->orderBy( $col, $order )
+                ->paginate( $paginate, [ '*' ], 'realty' )
         ] );
     }
 

@@ -25,8 +25,8 @@ class CreateReviewsTable extends Migration {
             $table->integer('is_token_used');
             $table->timestamps();
 
-            $table->foreign('review_for')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('review_from')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('review_for')->references('id')->on('users');
+            $table->foreign('review_from')->references('id')->on('users');
         });
     }
 
