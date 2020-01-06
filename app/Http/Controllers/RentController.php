@@ -62,7 +62,11 @@ class RentController extends Controller {
      * @return Factory|View
      */
     public function findApartment($price) {
-        $data = $this->__collection($this->searchService->search(toObject(['min_price' => $price])));
+        $setParams = [
+            'min_price' => (int)$price,
+            'max_price' => MAXPRICE
+        ];
+        $data = $this->__collection($this->searchService->search(toObject($setParams)));
         return $this->__view($data);
     }
 
