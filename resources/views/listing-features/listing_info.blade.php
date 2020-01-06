@@ -9,6 +9,7 @@
 		</span>
     </div>
 </div>
+{{--@dd($errors->all())--}}
 <div class="col-md-6">
     <div class="form-group">
         <label>Display Address</label>
