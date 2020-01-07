@@ -3,14 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Confirm Email</title>
+    <title>@yield('title')</title>
     <style type="text/css">
         body{
-            background-color: #edeff0;
+            background: #edeff0;
             margin: 0;
             padding: 0;
             font-family: sans-serif;
             overflow-x: hidden;
+        }
+        a{
+            color: cornflowerblue;
+            font-size: 14px;
         }
         .main-wrapper{
             width: 100%;
@@ -20,6 +24,8 @@
         }
         .logo-img{
             margin-bottom: 30px;
+            border-bottom: 2px dotted #ddd;
+            padding-bottom: 30px;
         }
         .logo-img img{
             width: 210px;
@@ -29,14 +35,13 @@
         .Notification-wrapper{
             background-color: #fff;
             display: inline-block;
-            max-width: 745px;
+            max-width: 730px;
             padding: 45px 45px 10px 45px;
-            border-radius: 10px;
-
+            border-bottom: 2px solid #ddd;
         }
 
         .Notification-wrapper h2{
-            color: #233772;
+            color: #333;
             font-size: 30px;
             font-weight: 700;
         }
@@ -44,32 +49,39 @@
             color: #000;
         }
         .Notification-wrapper p{
-            color: #5f6368;
-            font-size: 16px;
+            color: #333;
+            font-size: 14px;
             font-weight: 500;
             letter-spacing: 0.5px;
-            line-height: 25px;
+            line-height: 20px;
 
         }
-        .action-button a{
+        .notification-inner-content{
+            text-align: left;
+        }
+        .action-button{
+            margin-top: 30px;
+        }
+        .action-button button{
             padding: 10px 35px;
             background-color: #e77817;
             color: #fff;
             border: #e77817 solid 1px;
             border-radius: 5px;
-            text-decoration: none;
             font-size: 16px;
             font-weight: normal;
             cursor: pointer;
             margin: 60px 0px;
         }
-        .action-button a:hover{
+        .action-button button:hover{
             background-color: #223971;
             border: #223971 solid 1px;
             transition: 0.3s ease-in-out;
         }
         .notification-main-footer{
             padding: 40px 0 0;
+            max-width:820px;
+            margin: 0 auto;
         }
         .Notification-wrap-footer p{
             padding-top: 20px;
@@ -80,20 +92,31 @@
         }
 
         .notification-main-footer p{
-            color: #aaaaaa;
-            font-size: 16px;
+            color: #333;
+            font-size: 14px;
             font-weight: 500;
             margin-top: 0;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
             line-height: 22px;
         }
         .notification-main-footer a{
             text-decoration: none;
-            margin-right: 5px;
+            margin-right: 20px;
             display: inline-block;
+        }
+        .notification-main-footer .footer-adres-text{
+            font-weight: 600;
         }
         .notification-main-footer a:last-child{
             margin-right: 0;
+        }
+        .settings-text p{
+            font-size: 12px;
+        }
+        .social-icons{
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 30px;
+            margin-bottom: 30px;
         }
         @media only screen and (max-width: 991px){
             .main-wrapper {
@@ -105,10 +128,7 @@
             .Notification-wrapper{
                 padding: 20px 15px 10px 15px;
             }
-            .Notification-wrapper img{
-                width: 50px;
-                height: 50px;
-            }
+
             .Notification-wrapper h2{
                 font-size: 24px;
                 margin: 10px 0px;
@@ -134,28 +154,8 @@
 </head>
 <body>
 <div class="main-wrapper">
-    <div class="logo-img">
-        <a href="javascript:void(0)"><img src="{{ asset('assets/images/logo.png') }}" alt="logo"></a>
-    </div>
-    <div class="Notification-wrapper">
-        <img src="{{ asset('assets/images/feature-listing.png') }}" alt="notification-bell-icon">
-        <h2> Account Created</h2>
-        <p> <b>Hi {{ ucfirst($data->user->to->first_name) }}! </b> Your account was successfully creaded on no fee rental. </p>
-        <div class="action-button">
-            <a href="{{ $data->url }}">Click To Set Password.</a>
-        </div>
-        <div class="Notification-wrap-footer">
-            <p> <b>Lorem Ipsum </b>  is simply dummy text of the printing and typesetting industry. </p>
-        </div>
-    </div>
-    <div class="notification-main-footer">
-        <p> Problems or questions? Call us at (123) 254 658 <br> or email  {{ config('mail.from.address') }}   </p>
-        <p> @NOFEE Rental NYC all rights reserved </p>
-
-        <a href="javascript:void(0)"><img src="{{ asset('assets/images/fb-icon.png') }}"> </a>
-        <a href="javascript:void(0)"><img src="{{ asset('assets/images/twitter-icon.png') }}"> </a>
-        <a href="javascript:void(0)"><img src="{{ asset('assets/images/google-icon.png') }}"> </a>
-    </div>
+    @yield('content')
+    @include('mails.layouts.footer')
 </div>
 </body>
 </html>

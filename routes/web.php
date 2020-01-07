@@ -152,5 +152,13 @@ Route::get('/accept-invitation/{token}', 'Agent\MemberController@acceptInvitatio
 
 // Test Route
 Route::get('/test', function (\Illuminate\Http\Request $request) {
+    $data = toObject([
+        'agent' => toObject([
+            'email' => 'abc.com',
+            'password' => str_random(10)
+        ]),
 
+        'title' => 'Account Created'
+    ]);
+return view('mails.realty_agent_invite', compact('data'));
 })->name('web.test');

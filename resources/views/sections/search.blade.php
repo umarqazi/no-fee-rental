@@ -49,9 +49,9 @@
     </div>
 </div>
 <script>
-    $('.neighborhood-list > li > div').on('click', function() {
-        $('.search-fld').text($(this).text());
-    });
+    // $('.neighborhood-list > li > div').on('click', function() {
+        // $('.search-fld').text($(this).text());
+    // });
 </script>
 {{--Advance Search--}}
 @include('modals.advance_search')

@@ -742,7 +742,7 @@ function neighborhood_let_us_help() {
                 $content .= "<div class='col-md-4'><ul class=\"neighborhood-list\">";
             }
 
-            $content .= "<li><div class=\"custom-control custom-checkbox custom-control-inline\">";
+            $content .= "<li><div class=\"custom-control custom-checkbox custom-control-inline index-neighborhood\">";
             $content .= Form::checkbox('neighborhood[]', $neighborhood->name, false, ['class' => 'custom-control-input', 'id' => $id]);
             $content .= "<label class=\"custom-control-label\" for=\"{$id}\">{$neighborhood->name}</label></div></li>";
 
