@@ -3,18 +3,18 @@
 Plugin Name: KingComposer
 Plugin URI: https://kingcomposer.com/
 Description: KingComposer is the most professional WordPress page builder plugin, it's lightweight and high efficiency to help you build any layout design quickly.
-Version: 2.8.2
+Version: 2.9
 Author: King-Theme
 Author URI: http://king-theme.com/
 Text Domain: kingcomposer
 */
 
-
-if( defined('KC_VERSION') || isset( $GLOBALS['kc'] ) ) {
+ 
+if( defined('KC_VERSION') || isset( $GLOBALS['kc'] ) ) { 
 	die('ERROR: the plugin has been loaded before.');
 }
 /**
-*	unorthodox
+*	unorthodox 
 */
 if(!defined('ABSPATH')) {
 	header('HTTP/1.0 403 Forbidden');

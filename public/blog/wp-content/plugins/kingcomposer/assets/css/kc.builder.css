@@ -6029,7 +6029,8 @@ html body.WP5.kc-vs-gutenberg div#kc-switcher-buttons {
 }
 html body.WP5.kc-vs-gutenberg div#editor #kc-container {
     margin: 0px;
-    padding: 20px;
+    padding: 0px;
+    background: #edeff0;
     font-size: 14px;
 }
 html body.WP5.kc-vs-gutenberg #editor .edit-post-header div#kc-switcher-buttons {
@@ -6042,7 +6043,9 @@ html body.WP5.kc-vs-gutenberg #editor .edit-post-header div#kc-switcher-buttons 
 html body.WP5.kc-vs-gutenberg #editor .edit-post-header div#kc-controls {
     box-shadow: none;
     height: 100%;
-    padding-top: 0px;
+    padding-top: 0;
+    display: inline-block;
+    margin: 0px;
 }
 html body.WP5.kc-vs-gutenberg #editor .edit-post-header .editor-post-switch-to-draft,
 html body.WP5.kc-vs-gutenberg #editor .edit-post-header .editor-post-save-draft {
@@ -6081,13 +6084,12 @@ html body.WP5.kc-vs-gutenberg.kc-editor-active #editor ul>li.kc-column-settings.
 }
 html body.WP5.kc-vs-gutenberg.kc-editor-active #editor .kc-column .kc-column-control>li>i{
 	top: -2px;
-	position: relative;
+	position: relative; 
 }
 html body.WP5.kc-vs-gutenberg.kc-editor-active #editor .kc-column .kc-column-control{
     height: 30px;
     line-height: 30px;
 }
-html body.WP5.kc-vs-gutenberg.kc-editor-active #editor .edit-post-header__settings>*,
 html body.WP5.kc-vs-gutenberg.kc-editor-active #editor #kc-controls .quick-save {
 	display: none;
 }
