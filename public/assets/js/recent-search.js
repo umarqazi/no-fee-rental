@@ -1,8 +1,111 @@
-// "use strict";
-//
-// $(() => {
-//
-//     let $body = $('body');
+"use strict";
+
+$(document).ready(function () {
+    let $body = $('body');
+
+    // Neighborhood Select Management
+    let $neighborhoods = [];
+    $('.index-neighborhood input[type="checkbox"]').click(function(){
+        let get_text = null;
+        if($(this).prop("checked") == true){
+            get_text = $(this).next().text();
+            if(!$neighborhoods.includes(get_text)) {
+                $neighborhoods.push(get_text);
+            }
+        }
+
+        if($(this).prop("checked") == false){
+            $neighborhoods.pop();
+        }
+
+        index_neighborhood(get_text);
+    });
+
+    $('.advance-search').on('click', function () {
+        $body.find('.fs-label').text('Select Neighborhoods');
+        $body.find('.g0').removeClass('selected');
+        $body.find('.g0').each((a, v) => {
+            if($neighborhoods.includes($(v).find('div').text())) {
+                if(!$(v).hasClass('selected')) {
+                    $(v).trigger('click');
+                }
+            }
+        });
+    });
+
+    $body.find('.g0').on('click', function () {
+        let text = $(this).find('div').text();
+
+        if(!$neighborhoods.includes(text)) {
+            $neighborhoods.push(text);
+            $('.index-neighborhood input[type="checkbox"]').each((a, v) => {
+                if($neighborhoods.includes($(v).val())) {
+                    $(v).prop('checked', true);
+                    return;
+                }
+            });
+        }
+
+        // Unselect Neighborhoods from index
+        if($(this).hasClass('selected') && $neighborhoods.includes(text)) {
+            $neighborhoods.splice($neighborhoods.indexOf(text), 1);
+            $('.index-neighborhood input[type="checkbox"]').each((a, v) => {
+                if($(v).prop('checked') && $(v).val() == text) {
+                    $(v).prop('checked', false);
+                    if($neighborhoods.length == 1) {
+                        index_neighborhood($neighborhoods[0]);
+                        return;
+                    } else {
+                        index_neighborhood(text);
+                        return;
+                    }
+                }
+            });
+        }
+
+        // Select Neighborhoods from index
+        else if($(this).hasClass('selected') && !$neighborhoods.includes(text)) {
+            $neighborhoods.push(text);
+        }
+
+        console.log($neighborhoods);
+    });
+
+    function index_neighborhood(get_text) {
+        if($neighborhoods.length > 1) {
+            $('.search-fld').text(`Neighborhoods (${$neighborhoods.length})`);
+        } else if($neighborhoods.length < 1) {
+            $('.search-fld').text('Neighborhoods');
+        } else {
+            $('.search-fld').text(get_text !== null ? get_text : $neighborhoods[0]);
+        }
+    }
+
+
+    // let $indexNeighborhoods = $body.find('#index-search-from');
+    // $indexNeighborhoods.find('.index-neighborhood:first').on('click', function () {
+    //     console.log($(this));
+    //     let target = $body.find('.search-fld');
+    //     let selected = $(this).find('div > label').text();
+    //     $neighborhoods.push(selected);
+    //     if($neighborhoods.length > 1) {
+    //         $(target).text(`Neighborhoods (${$neighborhoods.length})`);
+    //     } else {
+    //         $(target).text(selected);
+    //     }
+    //
+    //     // advance_search_neighborhood($(this), selected);
+    // });
+});
+
+// function advance_search_neighborhood(selector, selected) {
+//     let $index = $(selector).index();
+//     $body.find(`.fs-options > .g0`).each((a, b) => {
+//         if($(b).find('div').text() === selected) {
+//             $(b).addClass('selected');
+//         }
+//     })
+// }
 //     let queries = JSON.parse(localStorage.getItem('search-queries'));
 //     let bath = [], bed = [], square_feet_min = null, square_feet_max = null, neighborhood = null, price_min = null, price_max = null, open_house = null;
 //
@@ -22,6 +125,7 @@
 //             else {
 //                 bath.splice($.inArray($(this).val(), bed),1);
 //                 $(this).parents('.main-bath-search').length !== 0 ?
+//
 //                 $('.search-bath:last').find('li > input')[index].click() : $('.search-bath:first').find('li > input')[index].click() ;
 //             }
 //         }

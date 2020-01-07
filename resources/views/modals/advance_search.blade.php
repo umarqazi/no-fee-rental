@@ -7,7 +7,7 @@
     }
 </style>
 <link rel="stylesheet" type="text/css" href="{{asset('assets/css/datepicker.min.css')}}"/>
-<script src="{{asset('assets/js/datepicker.min.js')}}"></script>
+<script src="{{asset('assets/js/datepicker.js')}}"></script>
 <script src="{{asset('assets/js/datepicker.en.js')}}"></script>
 <div class="modal fade" id="advance-search">
     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg">

@@ -483,7 +483,7 @@ $(() => {
         $(".btn-default.get_started_next_btn , .btn-default.next-modal").click(function () {
             $("body").addClass("signup-modal-scroll-getStart");
         });
-        $(".datepicker.-bottom-left-.-from-bottom-").click(function () {
+        $(".modal .datepicker.-bottom-left-.-from-bottom-").click(function () {
             $("body").addClass("datepicker-overflow-hidden");
         });
 
@@ -499,7 +499,6 @@ $(() => {
             if ($(e.target).is("#signup-btn") == false && $(e.target).parents('#signup').length == 0 && $(e.target).parents('#login').length == 0) {
                 $("body").removeClass("signup-modal-scroll");
             }
-            // console.log('------------------',$(e.target).is('#need-help-step4'));
             if ($(e.target).parents(".need-help-modal, #datepickers-container .datepicker").length == 0) {
                 $("body").removeClass("signup-modal-scroll-getStart");
             }

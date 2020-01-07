@@ -125,7 +125,8 @@
             <div class="modal-body">
                 <h4 class="text-center mb-0">When would you like move in?</h4>
                 <div class="pt-4">
-                    {!! Form::text('move_in_date', null, ['class' => 'input-style', 'placeholder' => 'Move in date', 'data-date-format' => 'yyyy-mm-dd']) !!}
+                    {!! Form::text('move_in_date', null, ['class' => 'input-style','id' => 'get-started-calendar',
+                    'placeholder' => 'Move in date', 'data-date-format' => 'yyyy-mm-dd']) !!}
                 </div>
             </div>
             <div class="modal-footer text-center">
