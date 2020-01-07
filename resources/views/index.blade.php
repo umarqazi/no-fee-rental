@@ -33,7 +33,6 @@
             </div>
         </div>
     </section>
-
     {{--Get Started--}}
     @include('modals.get_started')
 
