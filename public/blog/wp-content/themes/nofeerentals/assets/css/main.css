@@ -1534,6 +1534,11 @@ footer .copyright .social-icons li a:hover {
     height: 8px;
     background: #223971;
     border-radius: 50%;
+    opacity: 0;
+}
+.bullet-list li img{
+    width: 20px;
+    height: 20px;
 }
 
 .about-us h3 {
