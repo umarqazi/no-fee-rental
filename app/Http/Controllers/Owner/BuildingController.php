@@ -108,6 +108,7 @@ class BuildingController extends Controller {
         $listing->street_address = $listing->address;
         $listing->display_address = $listing->address;
         $listing->neighborhood = $listing->neighborhood->name;
+        $listing->building_id = $id;
         return view('listing-features.listing', compact('listing', 'action'));
     }
 
