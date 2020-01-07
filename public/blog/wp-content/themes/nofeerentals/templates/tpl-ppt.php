@@ -39,7 +39,17 @@ $add_js_code_here = get_field('add_js_code_here');
         <div class="privacy-policy-banner" style="background-image: url('<?php echo $privacy_banner; ?>')"> </div>
     </div>
 
-    <?php echo $content_before_middle_section; ?>
+    <?php
+        if(have_posts()){
+            while (have_posts()) {
+                the_post();
+
+                the_content();
+            }
+        }
+    ?>
+
+    <!-- <?php echo $content_before_middle_section; ?>
     
     <div class="sec-padiing-terms <?php if($_GET['page_id']==27) echo 'entire-agreement-bg';elseif($_GET['page_id']==3) echo 'info-collect-bg'; else echo 'info-collect-bg' ?>" style="background-image: url(<?php echo $background_image; ?>);">
         <div class="container-lg">
@@ -50,7 +60,7 @@ $add_js_code_here = get_field('add_js_code_here');
         </div>
     </div>
 
-    <?php echo $content_after_middle_section; ?>
+    <?php echo $content_after_middle_section; ?> -->
 </section>
 
 <?php if($add_js_code_here){ ?>
