@@ -20,6 +20,7 @@
         "orchestra/parser": "^3.7",
         "predis/predis": "^1.1",
         "socrata/soda-php": "dev-develop",
+        "spatie/laravel-image-optimizer": "^1.5",
         "spatie/laravel-newsletter": "^4.0",
         "yajra/laravel-datatables-oracle": "^8.0"
     },

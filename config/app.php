@@ -170,6 +170,7 @@ return [
 		Yajra\DataTables\DataTablesServiceProvider::class,
         MaddHatter\LaravelFullcalendar\ServiceProvider::class,
         Cartalyst\Stripe\Laravel\StripeServiceProvider::class,
+        \Spatie\LaravelImageOptimizer\Facades\ImageOptimizer::class,
 
 		/*
 	     * Application Service Providers...
@@ -236,5 +237,6 @@ return [
         'Stripe' => Cartalyst\Stripe\Laravel\Facades\Stripe::class,
         'Soda'  => socrata\soda\Client::class,
         'MapBox' => \ZakClayton\Mapbox\MapboxApi::class,
+        'Optimizer' => \Spatie\LaravelImageOptimizer\Facades\ImageOptimizer::class
 	],
 ];
