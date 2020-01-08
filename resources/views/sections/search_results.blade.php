@@ -15,7 +15,7 @@
                 <div class="dropdown-wrap">
                     @if($neigh_filter)
                         <div class="neighborhoods-dropdown-listings">
-                            <button type="button" class="btn btn-primary neighborhood-field" id="neigh-for-dropdown">
+                            <button type="button" class="btn btn-primary neighborhood-field PN" id="neigh-for-dropdown">
                                 {{ is_array(app('request')->get('neighborhood'))
                                 ? sprintf("Neighborhood (%s)", count(app('request')->get('neighborhood')))
                                 : app('request')->get('neighborhood') ?? 'Neighborhoods' }}
@@ -29,13 +29,13 @@
                     @endif
                     <div class="main-search-beds">
                         <button type="button" class="btn btn-primary" id="beds-for-dropdown">Beds</button>
-                        <div class="dropdown-for-beds dropdown-listiing-rent-page search-beds" id="advance-search-chkbox">
+                        <div class="dropdown-for-beds dropdown-listiing-rent-page search-beds PBD" id="advance-search-chkbox">
                             {!! multi_select_beds(5, app('request')->get('beds') ?? null) !!}
                         </div>
                     </div>
                     <div class="main-bath-search">
                         <button type="button" class="btn btn-primary" id="bath-for-dropdown">Baths</button>
-                        <div class="dropdown-for-baths dropdown-listiing-rent-page search-bath" id="advance-search-chkbox">
+                        <div class="dropdown-for-baths dropdown-listiing-rent-page search-bath PBA" id="advance-search-chkbox">
                             {!! multi_select_baths(5, app('request')->get('baths') ?? null) !!}
                         </div>
                     </div>
@@ -45,10 +45,10 @@
                         <div class="dropdown-for-price dropdown-listiing-rent-page" id="advance-search-chkbox">
                             <ul>
                                 <li>
-                                    {!! Form::text('min_price', null, ['class' => 'form-control', 'placeholder' => '$ min']) !!}
+                                    {!! Form::text('min_price', null, ['class' => 'form-control PPm', 'placeholder' => '$ min']) !!}
                                 <li>To</li>
                                 <li>
-                                    {!! Form::text('max_price', null, ['class' => 'form-control', 'placeholder' => '$ max']) !!}
+                                    {!! Form::text('max_price', null, ['class' => 'form-control PPM', 'placeholder' => '$ max']) !!}
                             </ul>
                         </div>
                     </div>

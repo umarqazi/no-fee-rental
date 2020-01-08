@@ -150,8 +150,7 @@ Route::get('/composer-dump', function() {
 // Member accept invitation
 Route::get('/accept-invitation/{token}', 'Agent\MemberController@acceptInvitation')->name('member.acceptInvitation');
 
-use Spatie\LaravelImageOptimizer\Facades\ImageOptimizer;
+
 // Test Route
 Route::get('/test', function (\Illuminate\Http\Request $request) {
-    dd((new ImageOptimizer())->optimize(asset('')));
 })->name('web.test');

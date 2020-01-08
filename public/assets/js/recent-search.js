@@ -7,18 +7,24 @@ $(document).ready(function () {
     let $neighborhoods = [];
     $('.index-neighborhood input[type="checkbox"]').click(function(){
         let get_text = null;
+        get_text = $(this).next().text();
         if($(this).prop("checked") == true){
-            get_text = $(this).next().text();
             if(!$neighborhoods.includes(get_text)) {
                 $neighborhoods.push(get_text);
             }
         }
 
+
         if($(this).prop("checked") == false){
-            $neighborhoods.pop();
+            $neighborhoods.splice($neighborhoods.indexOf(get_text), 1);
+            if($neighborhoods.length < 2) {
+                index_neighborhood($neighborhoods[0]);
+                return;
+            }
         }
 
         index_neighborhood(get_text);
+
     });
 
     $('.advance-search').on('click', function () {
@@ -69,7 +75,58 @@ $(document).ready(function () {
         }
 
         console.log($neighborhoods);
+
+
     });
+
+    // Price Management
+    // MIN
+    let $slider = $('#slider-range');
+    $('#index-min').on('input', function () {
+        let val = $(this).val();
+        let result = val / 10000;
+        $('#min_price').val(val);
+        $slider.find('span:first').css({'left': `${result}%`});
+        $slider.find('div').css({'left': `${result}%`, 'width': `${100 - result}%`});
+    });
+
+    // MAX
+    $('#index-max').on('input', function () {
+        let val = $(this).val();
+        let result = val / 10000;
+        let min_val = $('input[name=min_price]').val();
+        let rb = min_val / 1000;
+        $slider.find('span:last').css({'left': `${result}%`});
+        $slider.find('div').css({'left': `${rb}%`,'width': `${result - rb}%`});
+        $('#max_price').val($(this).val());
+    });
+
+    // MIN Advance
+    $('#min_price').on('input', function () {
+        $('#index-min').val($(this).val());
+    });
+
+    // MAX Advance
+    $('#max_price').on('input', function () {
+        $('#index-max').val($(this).val());
+    });
+
+    // Beds Management
+    $('.search-beds:first > ul > li').on('click', function () {
+        let $index = $(this).index();
+        if($(this).find('input').prop('checked') == true) {
+            $('.search-beds:last').find(`ul > li > input:eq(${$index})`).trigger('click');
+        }
+    });
+
+    $('.search-beds:last > li').on('click', function () {
+        let $index = $(this).index();
+        if($(this).find('input').prop('checked') == true) {
+            $('body').find(`.search-beds:first > ul > li > input:eq(${$index})`).prop('checked', true);
+        }
+    });
+
+
 
     function index_neighborhood(get_text) {
         if($neighborhoods.length > 1) {
