@@ -150,15 +150,8 @@ Route::get('/composer-dump', function() {
 // Member accept invitation
 Route::get('/accept-invitation/{token}', 'Agent\MemberController@acceptInvitation')->name('member.acceptInvitation');
 
+use Spatie\LaravelImageOptimizer\Facades\ImageOptimizer;
 // Test Route
 Route::get('/test', function (\Illuminate\Http\Request $request) {
-    $data = toObject([
-        'agent' => toObject([
-            'email' => 'abc.com',
-            'password' => str_random(10)
-        ]),
-
-        'title' => 'Account Created'
-    ]);
-return view('mails.realty_agent_invite', compact('data'));
+    dd((new ImageOptimizer())->optimize(asset('')));
 })->name('web.test');
