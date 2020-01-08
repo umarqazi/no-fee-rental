@@ -1567,6 +1567,11 @@ footer .copyright .social-icons li a:hover {
     padding-left: 15px;
     font-size: 16px;
 }
+.bullet-list li img{
+    width: 20px;
+    height: 20px;
+}
+
 .about-us h3 {
     color: #000;
     margin-bottom: 15px;
@@ -1584,7 +1589,6 @@ footer .copyright .social-icons li a:hover {
 .about-us .our-passion a:hover {
     color: #223971;
 }
-
 
 /*Advertise with us*/
 
@@ -2960,20 +2964,13 @@ li.definitions-listings h4{
 .after-terms-section .after-terms-right-sec ul li:before {
     display: none;
 }
-
 .p-after-terms-section p {
     line-height: 45px;
 }
-
 .entire-agreement-bg {
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    width: 100%;
-    background-position: bottom center;
     position: relative;
     padding-top: 100px;
     padding-bottom: 100px;
-    background-size: cover;
 }
 
 .entire-agreement-bg:before {
