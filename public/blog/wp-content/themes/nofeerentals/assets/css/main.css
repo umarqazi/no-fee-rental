@@ -2987,6 +2987,7 @@ li.definitions-listings h4{
 
 .entire-agreement-text {
     position: relative;
+    padding: 0 15px;
 }
 
 .entire-agreement-bg h3 {
@@ -3985,7 +3986,7 @@ li.definitions-listings h4{
     }
     .blog-banner-img-wrapper .blog-banner-text h4{
         font-size: 16px;
-        padding: 10px;
+        padding: 0px;
         line-height: normal;
     }
     .privacy-policy-banner {
@@ -3997,6 +3998,7 @@ li.definitions-listings h4{
     .login-modal .modal-dialog .login-form-wrapper .mobile-none{
         display: none;
     }
+
 }
 
 @media (max-width: 1024px) {
