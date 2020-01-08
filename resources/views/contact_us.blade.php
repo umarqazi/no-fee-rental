@@ -1,9 +1,9 @@
 @extends('layouts.app')
 @section('title', 'Contact Us')
 @section('content')
-    <section class="inner-pages contact-us wow fadeIn" data-wow-delay="0.2s">
-        <div class="blog-banner-img-wrapper">
-            <h4 class="blog-banner-text">Contact Us</h4>
+    <section class="neighborhood-search neighbourhood-pd contact-us wow fadeIn" data-wow-delay="0.2s">
+                <div class="blog-banner-img-wrapper">
+                    <h4 class="blog-banner-text">Contact Us</h4>
             <div class="contact-banner"> </div>
         </div>
         <div class="container-lg">
@@ -16,8 +16,6 @@
                                 <img src="assets/images/location.png" alt="" />
                                 <div class="title"><h6> Sales/Advertising </h6>
                                     <p> Info@nofeerentalsnyc.com </p>
-                                    <p>NOFEERENTALSNYC.COM 447 BROADWAY 2nd FL #453 New York, NY 10013
-                                    </p>
                                 </div>
                             </div>
                             <div class="description-text">
@@ -114,6 +112,10 @@
                     </div>
                      <div class="col-lg-6 contact-map">
                         <div id="map"></div>
+                             <div class="adress-text">
+                                 <p class="description-text">NOFEERENTALSNYC.COM 447 BROADWAY 2nd FL #453 New York, NY 10013
+                                 </p>
+                             </div>
                     </div>
                 </div>
             </div>
