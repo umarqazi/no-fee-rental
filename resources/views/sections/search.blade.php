@@ -13,13 +13,11 @@
                     <div class="price-range-ul">
                         <ul>
                             <li>
-                                {!! Form::text('min_price', null, ['class' => 'form-control', 'placeholder' =>
-                                '$ min']) !!}
+                                {!! Form::text('min_price', null, ['class' => 'form-control PPm', 'placeholder' => '$ min', 'id' => 'index-min']) !!}
                             </li>
                             <li>To</li>
                             <li>
-                                {!! Form::text('max_price', null, ['class' => 'form-control', 'placeholder' =>
-                                '$ max']) !!}
+                                {!! Form::text('max_price', null, ['class' => 'form-control PPM', 'placeholder' => '$ max', 'id' => 'index-max']) !!}
                             </li>
                         </ul>
                     </div>
@@ -27,7 +25,7 @@
                 <div class="dropdown-beds main-search-beds">
                     <label id="show-beds"><span class="placeholder-text">Beds</span></label>
                     <div id="advance-search-chkbox" class="beds-dropdown">
-                        <div id="advance-search-beds" class="bed-advance-search search-beds">
+                        <div id="advance-search-beds" class="bed-advance-search search-beds PBD">
                             {!! bedsDropDown() !!}
                         </div>
                     </div>
@@ -48,10 +46,5 @@
         <a href="javascript:void(0);" class="advance-search" data-toggle="modal" data-target="#advance-search">+ Advanced Search</a>
     </div>
 </div>
-<script>
-    // $('.neighborhood-list > li > div').on('click', function() {
-        // $('.search-fld').text($(this).text());
-    // });
-</script>
 {{--Advance Search--}}
 @include('modals.advance_search')

@@ -15,13 +15,13 @@
                 <div class="dropdown-wrap">
                     @if($neigh_filter)
                         <div class="neighborhoods-dropdown-listings">
-                            <button type="button" class="btn btn-primary neighborhood-field" id="neigh-for-dropdown">
+                            <button type="button" class="btn btn-primary neighborhood-field PN" id="neigh-for-dropdown">
                                 {{ is_array(app('request')->get('neighborhood'))
-                                ? sprintf("Neighborhood (%s)", count(app('request')->get('neighborhood')))
+                                ? sprintf("Neighborhoods (%s)", count(app('request')->get('neighborhood')))
                                 : app('request')->get('neighborhood') ?? 'Neighborhoods' }}
                             </button>
                             <div class="dropdown-for-neigh dropdown-listiing-rent-page search-result-section-neighborhood" id="neighborhood-searchchecbox">
-                                {!! filter_neighborhood_select() !!}
+                                {!! filter_neighborhood_select(app('request')->get('neighborhood')) !!}
                             </div>
                         </div>
                     @else
@@ -29,13 +29,13 @@
                     @endif
                     <div class="main-search-beds">
                         <button type="button" class="btn btn-primary" id="beds-for-dropdown">Beds</button>
-                        <div class="dropdown-for-beds dropdown-listiing-rent-page search-beds" id="advance-search-chkbox">
+                        <div class="dropdown-for-beds dropdown-listiing-rent-page search-beds PBD" id="advance-search-chkbox">
                             {!! multi_select_beds(5, app('request')->get('beds') ?? null) !!}
                         </div>
                     </div>
                     <div class="main-bath-search">
                         <button type="button" class="btn btn-primary" id="bath-for-dropdown">Baths</button>
-                        <div class="dropdown-for-baths dropdown-listiing-rent-page search-bath" id="advance-search-chkbox">
+                        <div class="dropdown-for-baths dropdown-listiing-rent-page search-bath PBA" id="advance-search-chkbox">
                             {!! multi_select_baths(5, app('request')->get('baths') ?? null) !!}
                         </div>
                     </div>
@@ -45,14 +45,14 @@
                         <div class="dropdown-for-price dropdown-listiing-rent-page" id="advance-search-chkbox">
                             <ul>
                                 <li>
-                                    {!! Form::text('min_price', null, ['class' => 'form-control', 'placeholder' => '$ min']) !!}
+                                    {!! Form::text('min_price', null, ['class' => 'form-control PPm', 'placeholder' => '$ min']) !!}
                                 <li>To</li>
                                 <li>
-                                    {!! Form::text('max_price', null, ['class' => 'form-control', 'placeholder' => '$ max']) !!}
+                                    {!! Form::text('max_price', null, ['class' => 'form-control PPM', 'placeholder' => '$ max']) !!}
                             </ul>
                         </div>
                     </div>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#advance-search">More</button>
+                    <button type="button" class="btn btn-primary advance-search" data-toggle="modal" data-target="#advance-search">More</button>
                     {!! Form::button('Search', ['class' => 'btn btn-primary text-right', 'type' => 'submit', 'style'
                     => 'background:#f36f21;color:#ffff; border-color:#f36f21; padding-left:35px; padding-right:35px;'])
                      !!}

@@ -171,6 +171,17 @@ class ListingService extends BuildingService {
     }
 
     /**
+     * @param $request
+     * @return mixed
+     */
+    public function get($request) {
+        return $this->listingRepo->find([
+            'visibility' => ACTIVELISTING,
+            'map_location' => $request->map_location
+        ])->get();
+    }
+
+    /**
      * @param $paginate
      * @return object
      */
