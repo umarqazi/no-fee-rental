@@ -55,7 +55,7 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="form-group search-neighborhood ASN">
+                        <div class="form-group search-neighborhood">
                             <label class="label">Neighbourhoods</label>
                             {!! multi_or_single_neighborhood_selector(isset($neigh_filter) ? $neigh_filter : null, app('request')->get('neighborhood')) !!}
                         </div>

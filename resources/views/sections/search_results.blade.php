@@ -17,11 +17,11 @@
                         <div class="neighborhoods-dropdown-listings">
                             <button type="button" class="btn btn-primary neighborhood-field PN" id="neigh-for-dropdown">
                                 {{ is_array(app('request')->get('neighborhood'))
-                                ? sprintf("Neighborhood (%s)", count(app('request')->get('neighborhood')))
+                                ? sprintf("Neighborhoods (%s)", count(app('request')->get('neighborhood')))
                                 : app('request')->get('neighborhood') ?? 'Neighborhoods' }}
                             </button>
                             <div class="dropdown-for-neigh dropdown-listiing-rent-page search-result-section-neighborhood" id="neighborhood-searchchecbox">
-                                {!! filter_neighborhood_select() !!}
+                                {!! filter_neighborhood_select(app('request')->get('neighborhood')) !!}
                             </div>
                         </div>
                     @else
@@ -52,7 +52,7 @@
                             </ul>
                         </div>
                     </div>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#advance-search">More</button>
+                    <button type="button" class="btn btn-primary advance-search" data-toggle="modal" data-target="#advance-search">More</button>
                     {!! Form::button('Search', ['class' => 'btn btn-primary text-right', 'type' => 'submit', 'style'
                     => 'background:#f36f21;color:#ffff; border-color:#f36f21; padding-left:35px; padding-right:35px;'])
                      !!}

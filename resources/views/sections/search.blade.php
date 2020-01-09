@@ -35,7 +35,7 @@
             </div>
             <div class="neighborhood-search-advance">
             <div class="neighborhood-search-dropdown let-us-help-modal">
-                <div class="modal-body search-neighborhood PN">
+                <div class="modal-body search-neighborhood">
                     {!! neighborhood_let_us_help() !!}
                 </div>
             </div>
