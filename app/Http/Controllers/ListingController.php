@@ -35,9 +35,7 @@ class ListingController extends Controller {
      * @return JsonResponse|RedirectResponse
      */
     public function detail(Request $request) {
-        $list = $this->listingService->find([
-            'visibility' => ACTIVELISTING,
-            'map_location' => $request->map_location])->get();
+        $list = $this->listingService->get($request);
         return sendResponse($request, $list, null, null, null);
     }
 

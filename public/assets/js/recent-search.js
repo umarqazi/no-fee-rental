@@ -3,83 +3,137 @@
 $(document).ready(function () {
     let $body = $('body');
 
-    // Neighborhood Select Management
     let $neighborhoods = [];
-    $('.index-neighborhood input[type="checkbox"]').click(function(){
-        let get_text = null;
-        if($(this).prop("checked") == true){
-            get_text = $(this).next().text();
-            if(!$neighborhoods.includes(get_text)) {
-                $neighborhoods.push(get_text);
+    let collect = new URL(decodeURIComponent(window.location.href));
+    collect = collect.searchParams.getAll('neighborhood[]');
+    if(collect.length > 0) {
+        collect.forEach((i, b) => {
+            $neighborhoods.push(i);
+        });
+    }
+    // Neighborhood Select Management
+    $('.neighborhood-list > li > div > input').click(function(){
+        let name = $(this).val();
+        if($(this).prop("checked") === true){
+            if(!$neighborhoods.includes(name)) {
+                $neighborhoods.push(name);
             }
         }
 
-        if($(this).prop("checked") == false){
-            $neighborhoods.pop();
+        if($(this).prop("checked") === false){
+            $neighborhoods.splice($neighborhoods.indexOf(name), 1);
+            if($neighborhoods.length < 2) {
+                index_neighborhood($neighborhoods[0]);
+                return;
+            }
         }
 
-        index_neighborhood(get_text);
+        index_neighborhood(name);
+
     });
 
+    // On Advance Search Button Click Neighborhoods (Selected)
     $('.advance-search').on('click', function () {
         $body.find('.fs-label').text('Select Neighborhoods');
-        $body.find('.g0').removeClass('selected');
-        $body.find('.g0').each((a, v) => {
-            if($neighborhoods.includes($(v).find('div').text())) {
-                if(!$(v).hasClass('selected')) {
-                    $(v).trigger('click');
+        $body.find('.fs-option').removeClass('selected');
+        if($neighborhoods.length > 0) {
+            $body.find('.fs-option').each((a, v) => {
+                let text = $(v).find('div').text();
+                if ($neighborhoods.includes(text)) {
+                    let id = text.replace(/\s/g, '');
+                    $('.ASN:first').find(`option[id=${id}]`).attr('selected', 'selected');
+                    $body.find('.fs-label').text($body.find('.search-fld, .PN').text());
+                    $(v).addClass('selected');
                 }
+            });
+        }
+    });
+
+    $body.find('#advance-search').on('hidden.bs.modal', function () {
+        if($neighborhoods.length > 0) {
+            $('.neighborhood-list > li > div').each((i, b) => {
+                let name = $(b).find('label').text();
+                if($neighborhoods.includes(name) && $(b).find('input').prop('checked') === false) {
+                    $(b).find('input').prop('checked', true);
+                }
+            });
+        }
+    });
+
+    $body.find('.fs-option').on('click', function () {
+        let name = $(this).find('div').text();
+        if(!$neighborhoods.includes(name)) {
+            $neighborhoods.push(name);
+        } else {
+            $neighborhoods.splice($neighborhoods.indexOf(name), 1);
+            if($neighborhoods.length < 2) {
+                index_neighborhood($neighborhoods[0]);
+                return;
             }
-        });
+        }
+
+        index_neighborhood(name);
     });
 
-    $body.find('.g0').on('click', function () {
-        let text = $(this).find('div').text();
-
-        if(!$neighborhoods.includes(text)) {
-            $neighborhoods.push(text);
-            $('.index-neighborhood input[type="checkbox"]').each((a, v) => {
-                if($neighborhoods.includes($(v).val())) {
-                    $(v).prop('checked', true);
-                    return;
-                }
-            });
-        }
-
-        // Unselect Neighborhoods from index
-        if($(this).hasClass('selected') && $neighborhoods.includes(text)) {
-            $neighborhoods.splice($neighborhoods.indexOf(text), 1);
-            $('.index-neighborhood input[type="checkbox"]').each((a, v) => {
-                if($(v).prop('checked') && $(v).val() == text) {
-                    $(v).prop('checked', false);
-                    if($neighborhoods.length == 1) {
-                        index_neighborhood($neighborhoods[0]);
-                        return;
-                    } else {
-                        index_neighborhood(text);
-                        return;
-                    }
-                }
-            });
-        }
-
-        // Select Neighborhoods from index
-        else if($(this).hasClass('selected') && !$neighborhoods.includes(text)) {
-            $neighborhoods.push(text);
-        }
-
-        console.log($neighborhoods);
-    });
-
+    /**
+     * Neighborhoods Text Emitter
+     **/
     function index_neighborhood(get_text) {
         if($neighborhoods.length > 1) {
-            $('.search-fld').text(`Neighborhoods (${$neighborhoods.length})`);
+            $('.search-fld, .PN').text(`Neighborhoods (${$neighborhoods.length})`);
         } else if($neighborhoods.length < 1) {
-            $('.search-fld').text('Neighborhoods');
+            $('.search-fld, .PN').text('Neighborhoods');
         } else {
-            $('.search-fld').text(get_text !== null ? get_text : $neighborhoods[0]);
+            $('.search-fld, .PN').text(get_text !== null ? get_text : $neighborhoods[0]);
         }
     }
+
+    // Price Management
+    // MIN
+    let $slider = $('#slider-range');
+    $('#index-min').on('input', function () {
+        let val = $(this).val();
+        let result = val / 10000;
+        $('#min_price').val(val);
+        $slider.find('span:first').css({'left': `${result}%`});
+        $slider.find('div').css({'left': `${result}%`, 'width': `${100 - result}%`});
+    });
+
+    // MAX
+    $('#index-max').on('input', function () {
+        let val = $(this).val();
+        let result = val / 10000;
+        let min_val = $('input[name=min_price]').val();
+        let rb = min_val / 1000;
+        $slider.find('span:last').css({'left': `${result}%`});
+        $slider.find('div').css({'left': `${rb}%`,'width': `${result - rb}%`});
+        $('#max_price').val($(this).val());
+    });
+
+    // MIN Advance
+    $('#min_price').on('input', function () {
+        $('#index-min').val($(this).val());
+    });
+
+    // MAX Advance
+    $('#max_price').on('input', function () {
+        $('#index-max').val($(this).val());
+    });
+
+    // Beds Management
+    // $('.search-beds:first > ul > li').on('click', function () {
+    //     let $index = $(this).index();
+    //     if($(this).find('input').prop('checked') == true) {
+    //         $('.search-beds:last').find(`ul > li > input:eq(${$index})`).trigger('click');
+    //     }
+    // });
+    //
+    // $('.search-beds:last > li').on('click', function () {
+    //     let $index = $(this).index();
+    //     if($(this).find('input').prop('checked') == true) {
+    //         $('body').find(`.search-beds:first > ul > li > input:eq(${$index})`).prop('checked', true);
+    //     }
+    // });
 
 
     // let $indexNeighborhoods = $body.find('#index-search-from');
