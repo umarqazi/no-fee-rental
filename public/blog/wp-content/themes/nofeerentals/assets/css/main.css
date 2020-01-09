@@ -282,7 +282,7 @@ h3 {
     font-size: 25px;
     color: #223971;
     font-family: 'Raleway', sans-serif;
-    margin-bottom: 45px;
+    margin-bottom: 20px;
 }
 h4{
   font-weight: bold;
@@ -1531,7 +1531,7 @@ footer .copyright .social-icons li a:hover {
     margin-bottom: 15px;
 }
 
-.inner-pages ul li {
+.inner-pages ul li, .bullet-list li {
   line-height: normal;
   margin-bottom: 10px;
   position: relative;
@@ -1539,7 +1539,7 @@ footer .copyright .social-icons li a:hover {
   font-size: 16px;
 }
 
-.inner-pages ul li:before {
+.inner-pages ul li:before, .bullet-list li:before {
   position: absolute;
   left: 0;
   top: 4px;
@@ -1657,7 +1657,7 @@ footer .copyright .social-icons li a:hover {
 }
 
 .plan-listing .clm ul li {
-    background: url(../images/check-icon.png) no-repeat left top 10px;
+    background: url(../images/check-icon.png) no-repeat left top 6px;
     font-weight: 600;
     color: #000;
     display: block;
@@ -2202,7 +2202,7 @@ footer .copyright .social-icons li a:hover {
 .calculator-container .calculator-wrapper .form-clm .form-group .input-style {
     font-size: 16px;
     height: 40px;
-    margin-top: 15px;
+    margin-top: 30px;
 }
 
 .calculator-container .calculator-wrapper .form-clm .form-group-right-sec {
@@ -2267,7 +2267,7 @@ footer .copyright .social-icons li a:hover {
     height: 40px;
     line-height: 40px;
     font-size: 16px;
-    margin-top: 6px;
+    margin-top: 14px;
     padding: 0px 30px;
 }
 
@@ -2735,6 +2735,12 @@ footer .footer-wrapper h4 {
     margin-bottom: 30px;
     margin-top: 15px;
 }
+footer .collapse-menu ul li {
+    width: 100%;
+}
+footer .collapse-menu li a{
+    display: inline-block !important;
+}
 
 footer .footer-wrapper .newsletter .title {
     color: #fff;
@@ -2761,7 +2767,7 @@ footer .footer-wrapper>li:nth-child(1) {
 
 /*Privacy Policy */
 
-.privacy-policy-banner {
+.privacy-policy-banner, .blog-banner-img-wrapper .banner-bg {
     width: 100%;
     height: 300px;
     object-fit: cover;
@@ -2770,7 +2776,7 @@ footer .footer-wrapper>li:nth-child(1) {
     background-position: center center;
     background-size: cover;
 }
-.privacy-policy-banner:before{
+.privacy-policy-banner:before, .blog-banner-img-wrapper .banner-bg:before{
     content: "";
     width: 100%;
     height: 100%;

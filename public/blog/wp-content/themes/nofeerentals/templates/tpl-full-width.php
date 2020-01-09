@@ -1,39 +1,47 @@
 <?php
-/**
- * Template Name: Full Width Template
- *
- * This is the template that displays all pages by default.
- * Please note that this is the WordPress construct of pages and that
- * other "pages" on your WordPress site will use a different template.
- *
- * @package WordPress
- * @subpackage Twenty_Sixteen
- * @since Twenty Sixteen 1.0
- */
+  /**
+   * Template Name: Full Width Template
+   *
+   */
 
-get_header(); ?>
+  get_header();
 
-<div id="primary" class="content-area">
-	<main id="main" class="site-main clearfix" role="main">
-		<?php
-		// Start the loop.
-		while ( have_posts() ) :
-			the_post();
+  if (have_posts()) {
+    while (have_posts()) {
+      the_post();
 
-			// Include the page content template.
-			get_template_part( 'template-parts/content', 'page' );
+      $title = get_field('title');
+      $sub_title = get_field('sub_title');
+      $banner_img = get_the_post_thumbnail_url();
 
-			// If comments are open or we have at least one comment, load up the comment template.
-			if ( comments_open() || get_comments_number() ) {
-				comments_template();
-			}
+      ?>
 
-			// End of the loop.
-		endwhile;
-		?>
+      <div class="blog-banner-img-wrapper">
+        <div class="blog-banner-text">
+          <?php if($title){ ?>
+            <h4><?php echo $title; ?></h4>
+          <?php } if($sub_title){ ?>
+            <h5><?php echo $sub_title; ?></h5>
+          <?php } ?>
+        </div>
+        <?php if($banner_img){ ?>
+          <div class="banner-bg" style="background-image: url(<?php echo $banner_img; ?>)"></div>
+        <?php } ?>
+      </div>
 
-	</main><!-- .site-main -->
+      <?php
 
-</div><!-- .content-area -->
+      the_content();
+    }
+  }
 
-<?php get_footer(); ?>
+  $add_js_code_here = get_field('add_js_code_here');
+?>
+
+<?php if($add_js_code_here){ ?>
+
+  <script type="text/javascript">
+    <?php echo $add_js_code_here; ?>
+  </script>
+
+<?php } get_footer(); ?>
