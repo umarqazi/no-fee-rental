@@ -530,7 +530,9 @@ $(() => {
             }if (!$(e.target).is(".dropdown-wrap .btn-primary") && $(e.target).parents('.dropdown-for-price').length == 0) {
                 $(".dropdown-for-price").slideUp();
             }
-
+            if (!$(e.target).is(".dropdown-wrap .btn-primary") && $(e.target).parents('.dropdown-listiing-rent-page').length == 0) {
+                $(".dropdown-wrap .btn-primary").removeClass('rent-active-dropdown');
+            }
         });
 
         $('.close-signup-modal').click(function () {
