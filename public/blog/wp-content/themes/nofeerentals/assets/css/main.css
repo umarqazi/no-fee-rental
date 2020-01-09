@@ -2045,10 +2045,6 @@ footer .copyright .social-icons li a:hover {
 
 /*Rent calculator*/
 
-.calculator-container {
-    background: #fff;
-}
-
 .calculator-container .calculator-wrapper {
     display: flex;
 }
@@ -2144,7 +2140,6 @@ footer .copyright .social-icons li a:hover {
 }
 
 .calculator-container {
-    background: #fff;
     padding: 45px 0px;
 }
 
@@ -3031,6 +3026,7 @@ li.definitions-listings h4{
     padding-bottom: 0px;
 }
 .blog-banner-img-wrapper {
+    /*margin-bottom: 1.5rem;*/
     position: relative;
 }
 .blog-banner-img-wrapper .blog-banner-text{
@@ -3671,7 +3667,7 @@ li.definitions-listings h4{
     }
     .calculator-container .calculator-wrapper .form-clm {
         border-right: 0px;
-        border-bottom: #e1e1e1 solid 2px;
+        /*border-bottom: #e1e1e1 solid 2px;*/
     }
     .rental-guides-container .rental-guides-row .main-img {
         -webkit-clip-path: polygon(0 0, 100% 0, 100% 80%, 0% 100%);
@@ -3953,7 +3949,7 @@ li.definitions-listings h4{
     .blog-banner-img-wrapper .blog-banner-text h4{
         font-size: 20px;
     }
-    .privacy-policy-banner {
+    .privacy-policy-banner, .blog-banner-img-wrapper .banner-bg {
         height: 220px;
     }
 }
@@ -3979,6 +3975,9 @@ li.definitions-listings h4{
         padding: 0px 0px;
         width: 100%;
     }
+    .use-of-data-wrap{
+        display: block !important;
+    }
     .col-md-12.submit-clm {
         padding: 0px;
     }
@@ -3995,7 +3994,7 @@ li.definitions-listings h4{
         padding: 0px;
         line-height: normal;
     }
-    .privacy-policy-banner {
+    .privacy-policy-banner, .blog-banner-img-wrapper .banner-bg {
         height: 120px;
     }
     .login-modal .modal-dialog .login-form-wrapper .mobile-display{
