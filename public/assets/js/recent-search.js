@@ -4,8 +4,8 @@ let $old_queries = [];
 let decodedURL = new URL(decodeURIComponent(window.location.href));
 let $beds = decodedURL.searchParams.getAll('beds[]') || [];
 let $baths = decodedURL.searchParams.getAll('baths[]') || [];
-let $min_price = decodedURL.searchParams.getAll('min_price') || 0;
-let $max_price = decodedURL.searchParams.getAll('max_price') || 1000000;
+let $min_price = decodedURL.searchParams.getAll('min_price');
+let $max_price = decodedURL.searchParams.getAll('max_price');
 let $neighborhoods = decodedURL.searchParams.getAll('neighborhood[]') || [];
 
 window.onload = function() {
@@ -25,14 +25,29 @@ window.onload = function() {
     });
 };
 
+/**
+ *
+ * @param v
+ */
 function oldObject(v) {
     let obj = {};
     obj.url = v.url;
-    obj.title = `Listings between $${formatNumber(v.min_price)} and $${formatNumber(v.max_price)}`;
+    obj.title = 'Listings';
     obj.string = obj.title;
+
+    if(v.min_price !== null) {
+        obj.title += ` between $${formatNumber(v.min_price)}`;
+        obj.string += ` between $${formatNumber(v.min_price)}`;
+    }
+
+    if(v.max_price !== null) {
+        obj.title += ` and $${formatNumber(v.max_price)}`;
+        obj.string += ` and $${formatNumber(v.max_price)}`;
+    }
+
     if(v.neighborhoods !== null) {
         obj.title += ` in ${v.neighborhoods.length > 1 ? v.neighborhoods.join(', ') + ' Neighborhoods' : v.neighborhoods + ' Neighborhood'}`;
-        obj.string += ` in ${v.neighborhoods.length > 1 ? v.neighborhoods.length + ' Neighborhoods' : v.neighborhoods.length + ' Neighborhood'}`;
+        obj.string += ` in ${v.neighborhoods.length > 1 ? v.neighborhoods.length + ' Neighborhoods' : v.neighborhoods + ' Neighborhood'}`;
     }
 
     if(v.beds !== null) {
@@ -45,17 +60,31 @@ function oldObject(v) {
         obj.string += bath; obj.title += bath;
     }
 
-    pushRecentSearch(obj);
+    pushRecentSearch(obj, true);
 }
 
+/**
+ * build new search obj
+ */
 function buildNewObject() {
     let obj = {};
     obj.url = window.location.href;
-    obj.title = `Listings between $${formatNumber($min_price)} and $${formatNumber($max_price)}`;
+    obj.title = 'Listings';
     obj.string = obj.title;
+
+    if($min_price !== null) {
+        obj.title += ` between $${formatNumber($min_price)}`;
+        obj.string += ` between $${formatNumber($min_price)}`;
+    }
+
+    if($max_price !== null) {
+        obj.title += ` and $${formatNumber($max_price)}`;
+        obj.string += ` and $${formatNumber($max_price)}`;
+    }
+
     if($neighborhoods.length > 0) {
         obj.title += ` in ${$neighborhoods.length > 1 ? $neighborhoods.join(', ') + ' Neighborhoods' : $neighborhoods + ' Neighborhood'}`;
-        obj.string += ` in ${$neighborhoods.length > 1 ? $neighborhoods.length + ' Neighborhoods' : $neighborhoods.length + ' Neighborhood'}`;
+        obj.string += ` in ${$neighborhoods.length > 1 ? $neighborhoods.length + ' Neighborhoods' : $neighborhoods + ' Neighborhood'}`;
     }
 
     if($beds.length > 0) {
@@ -68,9 +97,13 @@ function buildNewObject() {
         obj.string += bath; obj.title += bath;
     }
 
-    pushRecentSearch(obj);
+    pushRecentSearch(obj, false);
 }
 
+/**
+ * storage manager
+ * @param index
+ */
 function manageStorage(index) {
 
     $query = {
@@ -89,20 +122,26 @@ function manageStorage(index) {
         $old_queries.shift();
     }
 
-    $old_queries.push($query);
+    $old_queries.splice(0, 0, $query);
     localStorage.setItem('search-query', JSON.stringify($old_queries));
 }
 
 /**
  *
- * @param $data
+ * @param data
+ * @param $prepend
  */
-function pushRecentSearch(data = null) {
+function pushRecentSearch(data = null, $prepend) {
     let $target = $('body').find('.neighborhoods_amenities');
     if(data === null) {
         $target.append('<li><a href="javascript:void(0);" id="empty-keywords">You have no keywords yet to search</a></li>');
     } else {
-        $target.append(`<li><a href="${data.url}" title="${data.title}" class="recent" data-id="1">${data.string}</a></li>`);
+        let html = `<li><a href="${data.url}" title="${data.title}" class="recent" data-id="1">${data.string}</a></li>`;
+        if($prepend) {
+            $target.prepend(html);
+        } else {
+            $target.append(html);
+        }
     }
 }
 
