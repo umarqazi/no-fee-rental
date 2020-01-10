@@ -49,7 +49,7 @@ class User extends Authenticate implements CanResetPassword {
 	 * @return HasMany
 	 */
 	public function listings() {
-		return $this->hasMany(Listing::class, 'user_id', 'id');
+		return $this->hasMany(Listing::class, 'user_id', 'id')->where('visibility', ACTIVELISTING);
 	}
 
     /**
@@ -166,7 +166,7 @@ class User extends Authenticate implements CanResetPassword {
      * @return mixed
      */
 	public function scopeWithListings($query) {
-	    return $query->with('listings')->where('visibility', ACTIVELISTING);
+	    return $query->with('listings');
     }
 
     /**
