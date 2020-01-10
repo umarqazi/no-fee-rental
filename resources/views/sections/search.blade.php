@@ -13,11 +13,11 @@
                     <div class="price-range-ul">
                         <ul>
                             <li>
-                                {!! Form::text('min_price', null, ['class' => 'form-control PPm', 'placeholder' => '$ min', 'id' => 'index-min']) !!}
+                                {!! Form::text('min_price', MINPRICE, ['class' => 'form-control PPm', 'placeholder' => '$ min', 'id' => 'index-min']) !!}
                             </li>
                             <li>To</li>
                             <li>
-                                {!! Form::text('max_price', null, ['class' => 'form-control PPM', 'placeholder' => '$ max', 'id' => 'index-max']) !!}
+                                {!! Form::text('max_price', MAXPRICE, ['class' => 'form-control PPM', 'placeholder' => '$ max', 'id' => 'index-max']) !!}
                             </li>
                         </ul>
                     </div>
