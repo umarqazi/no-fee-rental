@@ -6,6 +6,17 @@
       0 => 'BeyondCode\\DumpServer\\DumpServerServiceProvider',
     ),
   ),
+  'cartalyst/stripe-laravel' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Cartalyst\\Stripe\\Laravel\\StripeServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Stripe' => 'Cartalyst\\Stripe\\Laravel\\Facades\\Stripe',
+    ),
+  ),
   'fideloper/proxy' => 
   array (
     'providers' => 
