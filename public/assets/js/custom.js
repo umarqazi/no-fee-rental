@@ -108,8 +108,9 @@ $(() => {
                 if (ui.values[0] == ui.values[1]) {
                     return false;
                 }
-                $("#min_price").val(ui.values[0]);
-                $("#max_price").val(ui.values[1]);
+
+                $("#min_price, .PPm").val(ui.values[0]);
+                $("#max_price, .PPM").val(ui.values[1]);
                 $('body').trigger('min-price', ui.values[0]);
                 $('body').trigger('max-price', ui.values[1]);
             }
@@ -530,7 +531,9 @@ $(() => {
             }if (!$(e.target).is(".dropdown-wrap .btn-primary") && $(e.target).parents('.dropdown-for-price').length == 0) {
                 $(".dropdown-for-price").slideUp();
             }
-
+            if (!$(e.target).is(".dropdown-wrap .btn-primary") && $(e.target).parents('.dropdown-listiing-rent-page').length == 0) {
+                $(".dropdown-wrap .btn-primary").removeClass('rent-active-dropdown');
+            }
         });
 
         $('.close-signup-modal').click(function () {

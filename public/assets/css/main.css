@@ -1652,7 +1652,12 @@ footer .footer-wrapper .newsletter .title {
     font-weight: 500;
     text-transform: uppercase;
 }
-
+footer .collapse-menu ul li {
+    width: 100%;
+}
+footer .collapse-menu li a{
+    display: inline-block !important;
+}
 footer .footer-wrapper .newsletter p {
     font-size: 13px;
     color: #fff;
@@ -2227,9 +2232,9 @@ footer .copyright .social-icons li a:hover {
     bottom: 0;
     right: 0;
 }
-.inner-pages.contact-us {
-    padding: 0px 0px 120px;
-    margin-top: 90px;
+
+.neighborhood-search.neighbourhood-pd.contact-us{
+    padding-top: 0px !important;
 }
 
 .contact-banner {
@@ -2239,8 +2244,7 @@ footer .copyright .social-icons li a:hover {
     object-fit: cover;
     width: 100%;
     background-size: cover;
-    background-position: center bottom;
-
+    background-position: center bottom -60px;
 }
 
 .contact-info {
@@ -2317,6 +2321,12 @@ footer .copyright .social-icons li a:hover {
 .contact-info .set-pass {
     text-align: center;
 }
+.contact-info .adress-text .description-text{
+    padding: 10px;
+    background-color: #eee;
+    font-size: 14px;
+
+}
 
 .contact-info label {
     font-size: 16px;
@@ -2325,6 +2335,71 @@ footer .copyright .social-icons li a:hover {
 }
 
 .rowmt-5 h2 {
+    margin-bottom: 20px;
+    color: #000;
+}
+
+/*site map*/
+.site-map-banner{
+    background-image: url('http://localhost:8000/assets/images/site-map.jpg');
+    height: 300px;
+    background-repeat: no-repeat;
+    object-fit: cover;
+    width: 100%;
+    background-size: cover;
+    background-position: center center;
+    position: relative;
+}
+.site-map-banner:before {
+    content: "";
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+.site-map-banner h4{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    color: #fff;
+    font-size: 20px;
+    transform: translate(-50%, -50%);
+    font-weight: 600;
+}
+.site-map-wrapper .let-us-help-modal .nav-pills li a,
+.site-map-wrapper .let-us-help-modal .nav-pills li a.active{
+    color: #000;
+}
+.site-map-wrapper .let-us-help-modal .nav-pills{
+    justify-content: flex-start;
+}
+.site-map-wrapper .let-us-help-modal .nav-pills li{
+    margin-left: 60px;
+}
+.site-map-wrapper .let-us-help-modal .nav-pills li:first-child{
+    margin-left: 0px;
+}
+.site-map-wrapper .tab-content{
+    padding: 0 15px;
+}
+.site-map-wrapper .neighborhood-list li{
+    padding: 15px 0px 10px 0px;
+}
+.site-map-wrapper .neighborhood-list li a{
+
+    border-bottom: 1px solid #223971;
+}
+.site-map-wrapper .links-section-content{
+    padding: 0 15px;
+}
+.site-map-wrapper .links-section{
+    margin-top: 50px;
+}
+.site-map-wrapper .links-section h3{
     margin-bottom: 20px;
     color: #000;
 }
@@ -6028,6 +6103,9 @@ list .property-info .info p {
         left: 30px;
         width: calc(100% - 60px);
     }
+    .site-map-wrapper .let-us-help-modal .nav-pills li{
+        margin-left: 0px;;
+    }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
@@ -6603,6 +6681,10 @@ list .property-info .info p {
         left: 15px;
         width: calc(100% - 30px);
     }
+    .site-map-banner{
+        height: 220px;
+    }
+
 }
 
 @media only screen and (min-width: 577px) and (max-width: 767px) {
@@ -6839,6 +6921,16 @@ list .property-info .info p {
     .dropdown-listing-price-wrapper ul li input {
         width: 100%;
         font-size: 14px;
+    }
+    .site-map-banner{
+        height: 120px;
+    }
+    .blog-banner-img-wrapper .blog-banner-text, .site-map-banner h4{
+        padding: 0;
+    }
+    .site-map-wrapper .let-us-help-modal .nav-pills li{
+        margin-left: 0px;
+        width: calc(100% / 2 - 15px);
     }
 }
 

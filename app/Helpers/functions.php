@@ -562,8 +562,9 @@ function simple_neighborhood_select($selected = null) {
     foreach ($boroughs as $borough) {
         $html .= "<optgroup label='{$borough->boro}'>";
         foreach ($borough->neighborhoods as $neighborhood) {
-            $html .= "<option value='{$neighborhood->name}'";
-            $html .= $neighborhood->name == $selected ? 'selected>' : '>';
+            $html .= "<option value='{$neighborhood->name}' id='";
+            $html .= str_replace(' ', '', $neighborhood->name)."'";
+            $html .= $selected !== null ? (in_array($neighborhood->name, is_array($selected) ? $selected : (array)$selected) ? 'selected="selected">' : '>') : '>';
             $html .= "{$neighborhood->name}</option>";
         }
 
@@ -585,15 +586,15 @@ function multi_or_single_neighborhood_selector($bool = null, $param = null) {
     if(isset($bool)) {
 
         if($bool === true){
-            $html .= '<select class="input-style neighborhood-select-search '.$rand_class.'" name="neighborhood[]" multiple="multiple">';
+            $html .= '<select class="input-style neighborhood-select-search ASN '.$rand_class.'" name="neighborhood[]" multiple="multiple">';
             $script .= fSelect($rand_class);
         } else {
-            $html .= '<select class="input-style neighborhood-select-search '.$rand_class.'" name="neighborhood"><option value="">Select Neighborhood</option>';
+            $html .= '<select class="input-style neighborhood-select-search ASN '.$rand_class.'" name="neighborhood"><option value="">Select Neighborhood</option>';
             $script .= select2($rand_class);
         }
 
     } else {
-        $html .= '<select class="input-style neighborhood-select-search '.$rand_class.'" name="neighborhood[]" multiple="multiple">';
+        $html .= '<select class="input-style neighborhood-select-search ASN '.$rand_class.'" name="neighborhood[]" multiple="multiple">';
         $script .= fSelect($rand_class);
     }
         $html .= simple_neighborhood_select($param ?? null);
@@ -686,18 +687,21 @@ function multi_select_baths($amount = 5, $pre_select = null) {
 }
 
 /**
+ * @param null $array
  * @return string|null
  */
-function filter_neighborhood_select() {
+function filter_neighborhood_select($array = null) {
     $html = null;
     $html .= "<div class=\"neighborhood-border-no\">";
     $boroughs = (new \App\Services\BoroughService())->get();
     foreach ($boroughs as $borough) {
-        $html .= "<h3>{$borough->boro}</h3><div class=\"border - bottom - h3\"></div><ul>";
+        $html .= "<h3>{$borough->boro}</h3><div class=\"border - bottom - h3\"></div><ul class='neighborhood-list'>";
         foreach ($borough->neighborhoods as $key => $neighborhood) {
             $id = str_random(10);
             $html .= "<li><div class=\"custom-control custom-checkbox custom-control-inline\">";
-            $html .= Form::checkbox('neighborhood[]', $neighborhood->name, false, ['class' => 'custom-control-input', 'id' => $id]);
+            $html .= Form::checkbox('neighborhood[]', $neighborhood->name,
+                $array !== null ? (in_array($neighborhood->name, $array) ? true : false) : false,
+                ['class' => 'custom-control-input', 'id' => $id]);
             $html .= "<label class=\"custom-control-label\" for=\"{$id}\">{$neighborhood->name}</label></div></li>";
         }
 
