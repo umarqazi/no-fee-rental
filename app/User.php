@@ -166,7 +166,7 @@ class User extends Authenticate implements CanResetPassword {
      * @return mixed
      */
 	public function scopeWithListings($query) {
-	    return $query->with('listings');
+	    return $query->with('listings')->where('visibility', ACTIVELISTING);
     }
 
     /**
