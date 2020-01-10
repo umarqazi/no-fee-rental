@@ -108,8 +108,9 @@ $(() => {
                 if (ui.values[0] == ui.values[1]) {
                     return false;
                 }
-                $("#min_price").val(ui.values[0]);
-                $("#max_price").val(ui.values[1]);
+
+                $("#min_price, .PPm").val(ui.values[0]);
+                $("#max_price, .PPM").val(ui.values[1]);
                 $('body').trigger('min-price', ui.values[0]);
                 $('body').trigger('max-price', ui.values[1]);
             }

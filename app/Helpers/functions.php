@@ -564,7 +564,7 @@ function simple_neighborhood_select($selected = null) {
         foreach ($borough->neighborhoods as $neighborhood) {
             $html .= "<option value='{$neighborhood->name}' id='";
             $html .= str_replace(' ', '', $neighborhood->name)."'";
-            $html .= $selected !== null ? (in_array($neighborhood->name, $selected) ? 'selected="selected">' : '>') : '>';
+            $html .= $selected !== null ? (in_array($neighborhood->name, is_array($selected) ? $selected : (array)$selected) ? 'selected="selected">' : '>') : '>';
             $html .= "{$neighborhood->name}</option>";
         }
 

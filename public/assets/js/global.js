@@ -65,6 +65,15 @@ const ajaxRequest = async function (url, type, data, loading = true, form = null
 
 /**
  *
+ * @param num
+ * @returns {string}
+ */
+const formatNumber = (num) => {
+    return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+};
+
+/**
+ *
  * @param form
  * @param data
  */
