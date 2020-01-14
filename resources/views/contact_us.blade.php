@@ -15,7 +15,7 @@
                             <div class="info-inner">
                                 <img src="assets/images/location.png" alt="" />
                                 <div class="title"><h6> Sales/Advertising </h6>
-                                    <p> Info@nofeerentalsnyc.com </p>
+                                    <p> info@nofeerentalsnyc.com </p>
                                 </div>
                             </div>
                             <div class="description-text">
@@ -29,7 +29,7 @@
                             <div class="info-inner">
                                 <img src="assets/images/close-envelope-new.png" alt="" />
                                 <div class="title"><h6> Support/Billing </h6>
-                                    <a href="mailto:marketing@nofeerentals.com">Support@nofeerentalsnyc.com</a>
+                                    <a href="mailto:marketing@nofeerentals.com">support@nofeerentalsnyc.com</a>
                                 </div>
                             </div>
                             <div class="description-text">
@@ -43,7 +43,7 @@
                             <div class="info-inner">
                                 <img src="assets/images/call-icon.png" alt="" />
                                 <div class="title"><h6> Careers </h6>
-                                    <a href="#">Careers@nofeerentalsnyc .com</a>
+                                    <a href="#">careers@nofeerentalsnyc .com</a>
                                 </div>
                             </div>
 
@@ -113,8 +113,9 @@
                      <div class="col-lg-6 contact-map">
                         <div id="map"></div>
                              <div class="adress-text">
-                                 <p class="description-text"><a href="https://www.nofeerentalsnyc.com/">NOFEERENTALSNYC.COM</a> 447 BROADWAY 2nd FL
-                                     #453 New
+                                 <p class="description-text"><a href="https://www.nofeerentalsnyc
+                                 .com/">NOFEERENTALSNYC.COM</a> <br/> 447 BROADWAY <br/>2nd FL
+                                     #453 <br/>New
                                                                 York, NY 10013
                                  </p>
                              </div>
