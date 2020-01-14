@@ -6841,7 +6841,7 @@ list .property-info .info p {
 
 /*site map*/
 .site-map-banner{
-    background-image: url('http://localhost:8000/assets/images/site-map.jpg');
+    background-image: url('../images/site-map.jpg');
     height: 300px;
     background-repeat: no-repeat;
     object-fit: cover;
