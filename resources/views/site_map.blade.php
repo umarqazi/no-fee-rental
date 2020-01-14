@@ -49,11 +49,6 @@
                                 <li><a href="http://no-fee-rental.teamtechverx.com/blog/?page_id=195">Advertise with us</a> </li>
                             </ul>
                         </div>
-                        <div class="col-md-3 col-sm-4">
-                            <ul class="neighborhood-list">
-                                <li><a href="{{ route('web.siteMap') }}">Site Map</a> </li>
-                            </ul>
-                        </div>
                     </div>
                 </div>
             </div>
