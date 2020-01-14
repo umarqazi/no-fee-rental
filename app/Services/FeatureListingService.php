@@ -90,6 +90,13 @@ class FeatureListingService {
 		return $this->listingRepo->featured();
 	}
 
+    /**
+     * @return ListingRepo
+     */
+    public function recommended() {
+        return $this->listingRepo->recommended();
+    }
+
 	/**
 	 * @return mixed
 	 */
@@ -189,7 +196,7 @@ class FeatureListingService {
      */
     public function featured_listing($paginate) {
         return toObject([
-            'recommended' => $this->featured()->recommended()->paginate($paginate),
+            'recommended' => $this->recommended()->paginate($paginate),
             'trending'    => $this->featured()->trending()->paginate($paginate),
             'price'       => $this->listingRepo->price()->paginate($paginate),
             'pet_policy'  => $this->featured()->petFriendly()->paginate($paginate),
