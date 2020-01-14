@@ -1574,7 +1574,7 @@ footer .copyright .social-icons li a:hover {
 }
 
 .about-us h3 {
-    color: #000;
+    color: #223971;
     margin-bottom: 15px;
 }
 
@@ -2514,6 +2514,9 @@ footer .copyright .social-icons li a:hover {
     color: #f36f21;
     text-transform: uppercase;
     text-decoration: underline;
+    margin-top: 10px;
+    display: inline-block;
+    
 }
 
 .blog-page .rental-guides-row p a:hover {
