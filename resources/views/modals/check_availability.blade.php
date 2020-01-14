@@ -45,7 +45,7 @@
                 {!! Form::close() !!}
                 </div>
                 @else
-                    You not allowed to send request
+                    You are not allowed to send request.
                 @endif
             </div>
         </div>
