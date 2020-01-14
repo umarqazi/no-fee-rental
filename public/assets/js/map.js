@@ -157,6 +157,7 @@ const multiMarkers = (coords, container, zoom = 10) => {
             let resp = await ajaxRequest(`/listing-detail`, 'post', {map_location: map_location});
 
             if(resp.data.length > 1) {
+                html += '<div class="mapbox-content-wrapper">';
                 resp.data.forEach((res, b) => {
                     html += `<a href="${domain}/listing-detail/${res.id}"><div class="location-thumbnaail location-image-btm"><img style="height: 170px; width: 300px;" src="${domain}/${res.thumbnail}"><div class="price-wrapp price-wrap-location">
 <p class="price" style="color:#223971">`+ '$'+res.rent.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') +`</p><div class="additional-info">
@@ -165,8 +166,9 @@ const multiMarkers = (coords, container, zoom = 10) => {
                  });
                 setTimeout(() => {
                     $('body').find('.mapboxgl-popup-content').addClass('single');
-                    $('.single').css({'overflow-y': 'auto'});
+                    //$('.single').css({'overflow-y': 'auto'});
                 },10);
+                html += '</div>';
             } else {
                 html += `<a href="${domain}/listing-detail/${resp.data[0].id}"><div class="location-thumbnaail location-image-btm"><img style="height: 170px; width: 300px;" src="${domain}/${resp.data[0].thumbnail}"><div class="price-wrapp price-wrap-location">
  <p class="price" style="color:#223971">` + '$' + resp.data[0].rent.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + `</p><div class="additional-info">
