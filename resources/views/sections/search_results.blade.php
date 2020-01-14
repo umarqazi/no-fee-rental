@@ -59,7 +59,18 @@
                 </div>
                 {!! Form::close() !!}
             </div>
+            <div class="sortBy-listing">
+                <div class="form-group sortBy-wraper">
+                    <label for="sortBy">Sort By:</label>
+                    <select class="form-control" id="sortBy">
+                        <option>Recent</option>
+                        <option>Cheapest</option>
+
+                    </select>
+                </div>
+            </div>
         </div>
+
     </div>
 </div>
 <div class="search-result-wrapper">

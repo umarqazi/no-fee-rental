@@ -113,7 +113,9 @@
                      <div class="col-lg-6 contact-map">
                         <div id="map"></div>
                              <div class="adress-text">
-                                 <p class="description-text">NOFEERENTALSNYC.COM 447 BROADWAY 2nd FL #453 New York, NY 10013
+                                 <p class="description-text"><a href="https://www.nofeerentalsnyc.com/">NOFEERENTALSNYC.COM</a> 447 BROADWAY 2nd FL
+                                     #453 New
+                                                                York, NY 10013
                                  </p>
                              </div>
                     </div>
