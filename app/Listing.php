@@ -226,7 +226,7 @@ class Listing extends Model {
      * @return mixed
      */
     public function scopeRecommended($query) {
-        return $query->featured()->whereHas('agent.company', function ($subQuery) {
+        return $query->whereHas('agent.company', function ($subQuery) {
             return $subQuery->where('company', MRG);
         });
     }
