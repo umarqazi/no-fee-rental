@@ -786,6 +786,75 @@ function neighborhood_let_us_help() {
 }
 
 /**
+ * @return string
+ */
+function neighborhood_site_map() {
+    $tabs = null;
+    $content = null;
+    $tabs .= "<ul class=\"nav nav-pills\">";
+    $content .= "<div class=\"tab-content\">";
+    $boroughs = (new \App\Services\BoroughService())->get();
+    foreach ($boroughs as $key => $borough) {
+        $i = 1;
+        $hasOpen = false;
+        $hasContent = false;
+        $tab_id = str_random(16);
+        $total = count($borough->neighborhoods);
+        $perColum = ceil($total / 3);
+        $tabs .= "<li class=\"nav-item\">";
+        $tabs .= "<a class='nav-link";
+        $tabs .= $key == 0 ? " active'" : "'";
+        $tabs .= " data-toggle=\"pill\" href=\"#tab-{$tab_id}\">{$borough->boro}</a></li>";
+        foreach ($borough->neighborhoods as $key2 => $neighborhood) {
+            $i ++;
+            $hasContent = true;
+            $id = str_random(10);
+            if($key2 == 0) {
+                $content .= "<div class='tab-pane ";
+                $content .= $key == 0 ? "active'" : "'";
+                $content .= " id=\"tab-{$tab_id}\">";
+                $content .= "<div class='row'>";
+            }
+
+            if(!$hasOpen) {
+                $hasOpen = true;
+                $content .= "<div class='col-md-4'><ul class=\"neighborhood-list\">";
+            }
+
+            $content .= "<li>";
+            $content .= "<a href='".route('web.ListsByNeighborhood', $neighborhood->name)."'>";
+            $content .= "<label class=\"\" for=\"{$id}\">{$neighborhood->name}</label></a></li>";
+
+            if($i == $perColum) {
+                $i = 1;
+                $hasOpen = false;
+                $content .= "</ul></div>";
+            }
+        }
+
+        if($hasOpen) {
+            $content .= "</ul></div>";
+        }
+
+        if($hasContent) {
+            $content .= "</div></div>";
+        } else {
+            $content .= "<div class='tab-pane'";
+            $content .= " id=\"tab-{$tab_id}\">";
+            $content .= "<div class='row' style='display: block;'>";
+            $content .= "<h5 style='padding: 10px;color:black;' class='text-center'>No Neighborhood Exist in {$borough->boro}</h5>";
+            $content .= "</div></div>";
+        }
+    }
+
+    $tabs .= "</ul>";
+    $content .= "</div>";
+
+    return $tabs.$content;
+
+}
+
+/**
  * @param $params
  * @return string|null
  */

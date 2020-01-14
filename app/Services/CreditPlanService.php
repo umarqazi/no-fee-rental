@@ -155,10 +155,10 @@ class CreditPlanService extends PaymentService {
     private function __validateTransactionForm($request) {
         $form              = new TransactionForm();
         $form->user_id     = myId();
-        $form->amt_paid    = $this->request->amount;
+//        $form->amt_paid    = $this->request->amount;
         $form->txn_status  = $request->status;
         $form->receipt_url = $request->receipt_url;
-        $form->plan        = $this->request->credit_plan;
+//        $form->plan        = $this->request->credit_plan;
         $form->txn_id      = $request->balance_transaction;
         $form->validate();
 
