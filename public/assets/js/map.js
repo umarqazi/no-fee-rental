@@ -166,7 +166,7 @@ const multiMarkers = (coords, container, zoom = 10) => {
                  });
                 setTimeout(() => {
                     $('body').find('.mapboxgl-popup-content').addClass('single');
-                    $('.single').css({'overflow-y': 'auto'});
+                    //$('.single').css({'overflow-y': 'auto'});
                 },10);
                 html += '</div>';
             } else {

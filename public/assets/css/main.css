@@ -2951,10 +2951,13 @@ footer .copyright .social-icons li a:hover {
     line-height: 10px;
     top: -10px !important;
 }
-
+.mapbox-content-wrapper{
+    overflow-y: auto;
+    height: 100%;
+}
 .mapboxgl-popup-content.single {
     height: 250px;
-    width: 290px;
+    width: 300px;
 }
 
 .full-map .mapboxgl-popup-content.single {
