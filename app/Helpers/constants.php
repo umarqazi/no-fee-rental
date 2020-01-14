@@ -228,21 +228,21 @@ if(!defined('STRIPE')) {
  * Basic Subscription Plan
  */
 if(!defined('BASICPLAN')) {
-    define('BASICPLAN', 1);
+    define('BASICPLAN', 0);
 }
 
 /**
  * Gold Subscription Plan
  */
 if(!defined('GOLDPLAN')) {
-    define('GOLDPLAN', 2);
+    define('GOLDPLAN', 1);
 }
 
 /**
  * Premium Subscription Plan
  */
 if(!defined('PLATINUMPLAN')) {
-    define('PLATINUMPLAN', 3);
+    define('PLATINUMPLAN', 2);
 }
 
 /**
