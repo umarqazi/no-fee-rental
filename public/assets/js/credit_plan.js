@@ -6,24 +6,16 @@ enableDatePicker('#exp_month', false);
 let plan;
 let creditPlan;
 $('.credit-plan').on('click', function() {
+    let modal = $('#myModal-currentPlan');
     let DOM = $(this).parents('div.platinum-plan');
-
-    plan = $(this).attr('id');
-
-    if(plan === '30') {
-        creditPlan = 1;
-    } else if (plan === '60') {
-        creditPlan = 2;
-    } else {
-        creditPlan = 3;
-    }
-
-    let plan_name = $(this).closest('.current-plans').find('h3').text();
-    $('.modal-header > h4').text(`Purchase ${plan_name}`);
-    $('.modal-footer > input').attr('value', `Checkout ($${plan})`);
+    creditPlan = DOM.index();
+    let title = DOM.find('h3:first').text();
+    let price = DOM.find('h2:first').text();
+    modal.find('.credit-title').text(`Purchase ${title}`);
+    modal.find('.checkout-popup-btn').val(`Checkout (${price})`);
+    modal.modal('show');
 });
 
 $('form').on('submit', function() {
-    $('.amount').attr('value', plan);
     $('.credit_plan').attr('value', creditPlan);
 });

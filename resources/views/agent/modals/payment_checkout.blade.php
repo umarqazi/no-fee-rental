@@ -8,7 +8,7 @@
         <div class="modal-content">
             <!-- Modal Header -->
             <div class="modal-header">
-                <h4 class="modal-title text-center">Purchase Basic Plan</h4>
+                <h4 class="modal-title text-center credit-title"></h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
         {!! Form::open(['url' => route('agent.purchasePlan'), 'method' => 'post', 'class' => 'ajax', 'reset' => 'true', 'id' => 'stripe-checkout']) !!}
