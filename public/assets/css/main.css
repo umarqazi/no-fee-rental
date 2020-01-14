@@ -2379,8 +2379,7 @@ footer .copyright .social-icons li a:hover {
 .contact-info .info img {
     max-width: 60px;
     margin-right: 10px;
-    max-height: 60px;
-    margin-top: 15px;
+    max-height: 40px;
 }
 
 .contact-info .info .title {
@@ -2420,6 +2419,11 @@ footer .copyright .social-icons li a:hover {
 .contact-info .description-text p {
     max-width: 100%;
     /*margin-top: 15px;*/
+}
+.contact-map .description-text {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #e4e4e4;
 }
 
 .contact-form .textArea {
@@ -2574,7 +2578,9 @@ footer .copyright .social-icons li a:hover {
 .neighborhood-search.neighbourhood-pd {
     padding: 20px 0px 20px !important;
 }
-
+.neighborhood-search.neighbourhood-pd.contact-us {
+    padding: 0px 0px 20px !important;
+}
 .neighborhood-search .sorting-listing {
     margin-bottom: 20px;
 }
@@ -4272,6 +4278,24 @@ footer .copyright .social-icons li a:hover {
 
 .login-form-wrapper .row.form-group .forgot-pass {
     text-align: right;
+}
+.sortBy-listing .form-group.sortBy-wraper{
+    display: flex;
+    align-items: center;
+    margin-bottom: 0px;
+}
+.sortBy-listing .form-group.sortBy-wraper #sortBy{
+    width: 130px;
+    background-color: transparent;
+    border: 1px solid #495057;
+    cursor: pointer;
+}
+.sortBy-listing .form-group.sortBy-wraper #sortBy:focus{
+    outline: none;
+    box-shadow: none;
+}
+.sortBy-listing .form-group.sortBy-wraper label{
+    min-width: 70px;
 }
 
 
@@ -6109,6 +6133,9 @@ list .property-info .info p {
         left: 30px;
         width: calc(100% - 60px);
     }
+    .listing-wrapp{
+        padding: 0px 15px 10px;
+    }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
@@ -6126,6 +6153,16 @@ list .property-info .info p {
     }
     .mobile-map-icon {
         right: 45px;
+    }
+    .site-map-banner{
+        height: 220px;
+    }
+    .sortBy-listing{
+        margin-top: 10px;
+    }
+    .listing-wrapp{
+        display: flex;
+        flex-wrap: wrap;
     }
 }
 
@@ -6600,6 +6637,16 @@ list .property-info .info p {
     }
     .property-listing .owl-slider .property-thumb {
         width: 92% !important;
+    }
+    .site-map-banner{
+        height: 120px;
+    }
+    .blog-banner-img-wrapper .blog-banner-text, .site-map-banner h4{
+        padding: 0;
+    }
+    .site-map-wrapper .let-us-help-modal .nav-pills li{
+        margin-left: 0px;
+        width: calc(100% / 2 - 15px);
     }
 }
 
