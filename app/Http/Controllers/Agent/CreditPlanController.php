@@ -18,17 +18,14 @@ use Illuminate\View\View;
 class CreditPlanController extends Controller {
 
     /**
-     * @var PaymentService
+     * @var CreditPlanService
      */
-    private $paymentService;
-
     private $creditPlanService;
 
     /**
      * StripeController constructor.
      */
     public function __construct() {
-        $this->paymentService = new PaymentService();
         $this->creditPlanService = new CreditPlanService();
     }
 
@@ -54,7 +51,14 @@ class CreditPlanController extends Controller {
      * @return JsonResponse|RedirectResponse
      */
     public function create(Request $request) {
-        $res = $this->paymentService->makePayment($request);
+        $request->card_number = '4242424242424242';
+        $request->cvc = '123';
+        $request->exp_month = '08';
+        $request->exp_year = '2025';
+        $request->credit_plan = 'gold';
+        $request->amount = '100';
+        $request->card_holder_name = 'Yousuf';
+        $res = $this->creditPlanService->makePayment($request);
         return sendResponse($request, $res, 'Payment has been sent');
     }
 }

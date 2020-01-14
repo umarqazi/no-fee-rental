@@ -205,7 +205,7 @@ trait SearchTraitService {
      */
     private function agentsWithPremiumPlan() {
         $this->query->whereHas('agent.plan', function($subQuery) {
-            return $subQuery->where(['plan' => PREMIUM, 'is_expired' => NOTEXPIRED]);
+            return $subQuery->where(['plan' => PLATINUMPLAN, 'is_expired' => NOTEXPIRED]);
         });
     }
 
