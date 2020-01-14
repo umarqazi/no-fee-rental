@@ -127,6 +127,9 @@ Route::post('/let-us-help', 'HomeController@letUsHelp')->name('web.letUsHelp');
 // Get Started
 Route::post('/get-started', 'HomeController@getStarted')->name('web.getStarted');
 
+// Site Map Routes
+Route::get('/site-map', 'SiteMapController@index')->name('web.siteMap');
+
 // NYC Api Route
 Route::post('/boroughs', 'NYCProxyController@boroughs');
 Route::post('/nyc-data', 'NYCProxyController@nycData');

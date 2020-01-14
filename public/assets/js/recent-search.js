@@ -52,7 +52,7 @@ function oldObject(v) {
     }
 
     if(v.beds !== null) {
-        let bed = ` with at least ${$beds.length > 1 ? $beds.join(', ') + ' bedrooms' : $beds + ' bedroom'}`;
+        let bed = ` with at least ${v.beds.length > 1 ? v.beds.join(', ') + ' bedrooms' : v.beds + ' bedroom'}`;
         obj.title += bed; obj.string += bed;
     }
 

@@ -18,150 +18,40 @@
         </div>
         <div class="container-lg">
             <div class="let-us-help-modal">
-                <ul class="nav nav-pills">
-                    <li class="nav-item"><a class="nav-link active" data-toggle="pill"
-                                            href="#tab-Manhattan">Manhattan</a></li>
-                    <li class="nav-item"><a class="nav-link" data-toggle="pill" href="#tab-broklyn">Brooklyn</a></li>
-                    <li class="nav-item"><a class="nav-link" data-toggle="pill" href="#tab-queens">Queens</a></li>
-                    <li class="nav-item"><a class="nav-link" data-toggle="pill" href="#tab-bronx">Bronx</a></li>
-                    <li class="nav-item"><a class="nav-link" data-toggle="pill" href="#tab-Staten-Island">Staten
-                            Island</a></li>
-                    <li class="nav-item"><a class="nav-link" data-toggle="pill" href="#tab-other">Other</a></li>
-                </ul>
+                {!! neighborhood_site_map() !!}
             </div>
 
-            <div class="tab-content">
-                <div class="tab-pane active show" id="tab-Manhattan">
-                    <div class="row">
-                        <div class="col-md-3 col-sm-4">
-                            <ul class="neighborhood-list">
-                                <li><a href="javascript:void(0)">Battery Park City</a> </li>
-                                <li><a href="javascript:void(0)">Battery Park City</a> </li>
-                                <li><a href="javascript:void(0)">Battery Park City</a> </li>
-                                <li><a href="javascript:void(0)">Battery Park City</a> </li>
-                            </ul>
-                        </div>
-                        <div class="col-md-3 col-sm-4">
-                            <ul class="neighborhood-list">
-                                <li><a href="javascript:void(0)">Battery Park City</a> </li>
-                                <li><a href="javascript:void(0)">Battery Park City</a> </li>
-                                <li><a href="javascript:void(0)">Battery Park City</a> </li>
-                                <li><a href="javascript:void(0)">Battery Park City</a> </li>
-                            </ul>
-                        </div>
-                        <div class="col-md-3 col-sm-4">
-                            <ul class="neighborhood-list">
-                                <li><a href="javascript:void(0)">Battery Park City</a> </li>
-                                <li><a href="javascript:void(0)">Battery Park City</a> </li>
-                                <li><a href="javascript:void(0)">Battery Park City</a> </li>
-                                <li><a href="javascript:void(0)">Battery Park City</a> </li>
-                            </ul>
-                        </div>
-                        <div class="col-md-3 col-sm-4">
-                            <ul class="neighborhood-list">
-                                <li><a href="javascript:void(0)">Battery Park City</a> </li>
-                                <li><a href="javascript:void(0)">Battery Park City</a> </li>
-                                <li><a href="javascript:void(0)">Battery Park City</a> </li>
-                                <li><a href="javascript:void(0)">Battery Park City</a> </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="tab-pane" id="tab-broklyn">
-                    <div class="row">
-                        <div class="col-md-3 col-sm-4">
-                            <ul class="neighborhood-list">
-                                <li><a href="javascript:void(0)">Battery Park City</a> </li>
-                                <li><a href="javascript:void(0)">Battery Park City</a> </li>
-                                <li><a href="javascript:void(0)">Battery Park City</a> </li>
-                                <li><a href="javascript:void(0)">Battery Park City</a> </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="tab-pane" id="tab-queens">
-                    <div class="row">
-                        <div class="col-md-3 col-sm-4">
-                            <ul class="neighborhood-list">
-                                <li><a href="javascript:void(0)">Battery Park City</a> </li>
-                                <li><a href="javascript:void(0)">Battery Park City</a> </li>
-                                <li><a href="javascript:void(0)">Battery Park City</a> </li>
-                                <li><a href="javascript:void(0)">Battery Park City</a> </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="tab-pane" id="tab-bronx">
-                    <div class="row">
-                        <div class="col-md-3 col-sm-4">
-                            <ul class="neighborhood-list">
-                                <li><a href="javascript:void(0)">Battery Park City</a> </li>
-                                <li><a href="javascript:void(0)">Battery Park City</a> </li>
-                                <li><a href="javascript:void(0)">Battery Park City</a> </li>
-                                <li><a href="javascript:void(0)">Battery Park City</a> </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="tab-pane" id="tab-Staten-Island">
-                    <div class="row">
-                        <div class="col-md-3 col-sm-4">
-                            <ul class="neighborhood-list">
-                                <li><a href="javascript:void(0)">Battery Park City</a> </li>
-                                <li><a href="javascript:void(0)">Battery Park City</a> </li>
-                                <li><a href="javascript:void(0)">Battery Park City</a> </li>
-                                <li><a href="javascript:void(0)">Battery Park City</a> </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="tab-pane" id="tab-other">
-                    <div class="row">
-                        <div class="col-md-3 col-sm-4">
-                            <ul class="neighborhood-list">
-                                <li><a href="javascript:void(0)">Battery Park City</a> </li>
-                                <li><a href="javascript:void(0)">Battery Park City</a> </li>
-                                <li><a href="javascript:void(0)">Battery Park City</a> </li>
-                                <li><a href="javascript:void(0)">Battery Park City</a> </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div class="links-section">
                 <h3>Links</h3>
                 <div class="links-section-content">
                     <div class="row">
                         <div class="col-md-3 col-sm-4">
                             <ul class="neighborhood-list">
-                                <li><a href="javascript:void(0)">Battery park City</a> </li>
-                                <li><a href="javascript:void(0)">Battery park City</a> </li>
-                                <li><a href="javascript:void(0)">Battery park City</a> </li>
-                                <li><a href="javascript:void(0)">Battery park City</a> </li>
+                                <li><a href="{{ route('web.ListsByRent') }}">Rent</a> </li>
+                                <li><a href="{{ route('web.neighborhood') }}">Neighborhood</a> </li>
+                                <li><a href="http://no-fee-rental.teamtechverx.com/blog/?page_id=49">Renter Guide</a> </li>
+                                <li><a href="http://no-fee-rental.teamtechverx.com/blog/?page_id=233">Rent Calculator</a> </li>
                             </ul>
                         </div>
                         <div class="col-md-3 col-sm-4">
                             <ul class="neighborhood-list">
-                                <li><a href="javascript:void(0)">Battery park City</a> </li>
-                                <li><a href="javascript:void(0)">Battery park City</a> </li>
-                                <li><a href="javascript:void(0)">Battery park City</a> </li>
-                                <li><a href="javascript:void(0)">Battery park City</a> </li>
+                                <li><a href="http://no-fee-rental.teamtechverx.com/blog/?post_type=help_and_answers">Help and Answers</a> </li>
+                                <li><a href="http://no-fee-rental.teamtechverx.com/blog/">Blog</a> </li>
+                                <li><a href="http://no-fee-rental.teamtechverx.com/blog/?page_id=187">Feedback</a> </li>
+                                <li><a href="http://no-fee-rental.teamtechverx.com/blog/?page_id=66">Our Story</a> </li>
                             </ul>
                         </div>
                         <div class="col-md-3 col-sm-4">
                             <ul class="neighborhood-list">
-                                <li><a href="javascript:void(0)">Battery park City</a> </li>
-                                <li><a href="javascript:void(0)">Battery park City</a> </li>
-                                <li><a href="javascript:void(0)">Battery park City</a> </li>
-                                <li><a href="javascript:void(0)">Battery park City</a> </li>
+                                <li><a href="http://no-fee-rental.teamtechverx.com/blog/?page_id=70">Press</a> </li>
+                                <li><a href="http://no-fee-rental.teamtechverx.com/blog/?page_id=3">Privacy Policy</a> </li>
+                                <li><a href="http://no-fee-rental.teamtechverx.com/blog/?page_id=27">Terms</a> </li>
+                                <li><a href="http://no-fee-rental.teamtechverx.com/blog/?page_id=195">Advertise with us</a> </li>
                             </ul>
                         </div>
                         <div class="col-md-3 col-sm-4">
                             <ul class="neighborhood-list">
-                                <li><a href="javascript:void(0)">Battery park City</a> </li>
-                                <li><a href="javascript:void(0)">Battery park City</a> </li>
-                                <li><a href="javascript:void(0)">Battery park City</a> </li>
-                                <li><a href="javascript:void(0)">Battery park City</a> </li>
+                                <li><a href="{{ route('web.siteMap') }}">Site Map</a> </li>
                             </ul>
                         </div>
                     </div>
