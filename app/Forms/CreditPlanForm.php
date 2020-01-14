@@ -23,7 +23,7 @@ class CreditPlanForm extends BaseForm {
     /**
      * @var int
      */
-    public $plan;
+    public $remaining_slots;
 
     /**
      * @var int
@@ -36,11 +36,6 @@ class CreditPlanForm extends BaseForm {
     public $remaining_featured;
 
     /**
-     * @var string
-     */
-    public $txn_id;
-
-    /**
      * @var boolean
      */
     public $is_expired;
@@ -51,11 +46,10 @@ class CreditPlanForm extends BaseForm {
     public function toArray() {
         return [
             'user_id'            => $this->user_id,
-            'plan'               => $this->plan,
             'is_expired'         => $this->is_expired,
+            'remaining_slots'    => $this->remaining_slots,
             'remaining_repost'   => $this->remaining_repost,
             'remaining_featured' => $this->remaining_featured,
-            'txn_id'             => $this->txn_id,
         ];
     }
 
@@ -65,11 +59,10 @@ class CreditPlanForm extends BaseForm {
     public function rules() {
         return [
             'user_id'            => 'required',
-            'plan'               => 'required',
             'is_expired'         => 'required',
+            'remaining_slots'    => 'required',
             'remaining_repost'   => 'required',
             'remaining_featured' => 'required',
-            'txn_id'             => 'required',
         ];
     }
 }

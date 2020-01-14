@@ -1,4 +1,5 @@
 "use strict";
+
 let $query = [];
 let $old_queries = [];
 let decodedURL = new URL(decodeURIComponent(window.location.href));
@@ -12,7 +13,7 @@ window.onload = function() {
     $old_queries = JSON.parse(localStorage.getItem('search-query'));
 
     if($old_queries === null) {
-        pushRecentSearch(); return;
+        pushRecentSearch(null, false); return;
     }
 
     $old_queries.forEach((v, i) => {
@@ -60,7 +61,7 @@ function oldObject(v) {
         obj.string += bath; obj.title += bath;
     }
 
-    pushRecentSearch(obj, true);
+    pushRecentSearch(obj, false);
 }
 
 /**
@@ -97,7 +98,7 @@ function buildNewObject() {
         obj.string += bath; obj.title += bath;
     }
 
-    pushRecentSearch(obj, false);
+    pushRecentSearch(obj, true);
 }
 
 /**
@@ -252,45 +253,49 @@ $(document).ready(function () {
 
     // Beds Management (INDEX)
     $('.PBD > ul > li > input').click(function () {
+        let $selector = $('body').find(`.ASBD > ul > li:eq(${$(this).parent('li').index()}) > input`);
         if($(this).prop('checked')) {
-            $('body').find(`.ASBD > ul > li:eq(${$(this).parent('li').index()}) > input`).trigger('click');
+            $selector.trigger('click');
         }
 
         if(!$(this).prop('checked')) {
-            $('body').find(`.ASBD > ul > li:eq(${$(this).parent('li').index()}) > input`).trigger('click');
+            $selector.trigger('click');
         }
     });
 
     // Beds Management (Advance)
     $('.ASBD > ul > li > input').click(function () {
+        let $selector = $('body').find(`.PBD > ul > li:eq(${$(this).parent('li').index()}) > input`);
         if($(this).prop('checked')) {
-            $('body').find(`.PBD > ul > li:eq(${$(this).parent('li').index()}) > input`).trigger('click');
+            $selector.trigger('click');
         }
 
         if(!$(this).prop('checked')) {
-            $('body').find(`.PBD > ul > li:eq(${$(this).parent('li').index()}) > input`).trigger('click');
+            $selector.trigger('click');
         }
     });
 
     // Baths Management (INDEX)
     $('.PBA > ul > li > input').click(function () {
+        let $selector = $('body').find(`.ASBA > ul > li:eq(${$(this).parent('li').index()}) > input`);
         if($(this).prop('checked')) {
-            $('body').find(`.ASBA > ul > li:eq(${$(this).parent('li').index()}) > input`).trigger('click');
+            $selector.trigger('click');
         }
 
         if(!$(this).prop('checked')) {
-            $('body').find(`.ASBA > ul > li:eq(${$(this).parent('li').index()}) > input`).trigger('click');
+            $selector.trigger('click');
         }
     });
 
     // Beds Management (Advance)
     $('.ASBA > ul > li > input').click(function () {
+        let $selector = $('body').find(`.PBA > ul > li:eq(${$(this).parent('li').index()}) > input`);
         if($(this).prop('checked')) {
-            $('body').find(`.PBA > ul > li:eq(${$(this).parent('li').index()}) > input`).trigger('click');
+            $selector.trigger('click');
         }
 
         if(!$(this).prop('checked')) {
-            $('body').find(`.PBA > ul > li:eq(${$(this).parent('li').index()}) > input`).trigger('click');
+            $selector.trigger('click');
         }
     });
 

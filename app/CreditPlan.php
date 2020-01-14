@@ -14,12 +14,12 @@ class CreditPlan extends Model {
     /**
      * @var array
      */
-    protected $fillable = ['user_id', 'txn_id', 'remaining_repost', 'remaining_featured', 'plan', 'is_expired'];
+    protected $fillable = ['user_id', 'remaining_slots', 'remaining_repost', 'remaining_featured', 'is_expired'];
 
     /**
      * @return HasOne
      */
-    public function user() {
+    public function agent() {
         return $this->hasOne(User::class, 'id', 'user_id');
     }
 }

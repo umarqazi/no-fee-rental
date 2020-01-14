@@ -8,12 +8,9 @@
 
 namespace App\Services;
 
-use App\Forms\CreditPlanForm;
 use App\Forms\PaymentForm;
-use App\Repository\CreditPlanRepo;
-use App\Repository\ManageCustomerRepo;
-use App\Traits\DispatchNotificationService;
 use Cartalyst\Stripe\Stripe;
+use App\Repository\ManageCustomerRepo;
 
 /**
  * Class PaymentService
@@ -21,17 +18,10 @@ use Cartalyst\Stripe\Stripe;
  */
 class PaymentService {
 
-    use DispatchNotificationService;
-
     /**
      * @var integer
      */
     private $gateway;
-
-    /**
-     * @var object
-     */
-    private $stripe;
 
     /**
      * @var object
@@ -44,19 +34,14 @@ class PaymentService {
     private $customer;
 
     /**
-     * @var ManageCustomerRepo
-     */
-    protected $customerRepo;
-
-    /**
-     * @var CreditPlanRepo
-     */
-    protected $creditPlanRepo;
-
-    /**
      * @var object
      */
     private $paymentMethod;
+
+    /**
+     * @var ManageCustomerRepo
+     */
+    protected $customerRepo;
 
     /**
      * PaymentService constructor.
@@ -66,28 +51,21 @@ class PaymentService {
     public function __construct( $gateway = STRIPE ) {
         $this->gateway = $gateway;
         $this->__setGateway();
-        $this->creditPlanRepo = new CreditPlanRepo();
         $this->customerRepo   = new ManageCustomerRepo();
     }
 
     /**
-     * @param $data
+     * @param $request
      *
      * @return mixed
      */
-    public function makePayment( $data ) {
-        $this->request = toObject($data);
-        $this->stripe = toObject( $this->__validateForm( $this->request ) );
-        $customer   = $this->__isNewCustomer();
-        if ( $customer ) {
-            return $this->__createTransaction( $customer );
+    public function makePayment( $request ) {
+        $this->request = $this->__validateForm( $request );
+        if ($customer   = $this->__isNewCustomer()) {
+            return $this->__makeTransaction( $customer );
         }
 
-        return $this->__createCard()->__createTransaction( $this->customer );
-    }
-
-    public function currentPlan() {
-
+        return $this->__createCard()->__makeTransaction( $this->customer );
     }
 
     /**
@@ -95,39 +73,14 @@ class PaymentService {
      *
      * @return mixed
      */
-    private function __createTransaction( $customer ) {
+    private function __makeTransaction( $customer ) {
         $charge = $this->paymentMethod->charges()->create( [
             'currency' => 'usd',
             'customer' => $customer,
-            'amount'   => $this->stripe->amount,
+            'amount'   => $this->request->amount,
         ] );
 
-        $this->__createPlan(toObject($charge));
         return $charge;
-    }
-
-    /**
-     * @param $data
-     *
-     * @return mixed
-     */
-    private function __createPlan($data) {
-        $data = [
-            'plan'               => $this->request->credit_plan,
-            'remaining_repost'   => $this->request->remaining_repost ?? 60,
-            'txn_id'             => $data->balance_transaction ?? null,
-            'remaining_featured' => $this->request->remaining_featured ?? 60,
-        ];
-
-        $credit = $this->__validateCreditPlanForm(toObject($data));
-        $plan = $this->creditPlanRepo->create($credit->toArray());
-        DispatchNotificationService::PLANPURCHASED(toObject([
-            'to' => myId(),
-            'from' => mailToAdmin(),
-            'data' => $plan
-        ]));
-
-        return $plan;
     }
 
     /**
@@ -167,11 +120,11 @@ class PaymentService {
     private function __createToken() {
         $token = $this->paymentMethod->tokens()->create( [
             'card' => [
-                'name'      => $this->stripe->card_holder_name,
-                'number'    => $this->stripe->card_number,
-                'exp_month' => $this->stripe->exp_month,
-                'cvc'       => $this->stripe->cvc,
-                'exp_year'  => $this->stripe->exp_year,
+                'name'      => $this->request->card_holder_name,
+                'number'    => $this->request->card_number,
+                'exp_month' => $this->request->exp_month,
+                'cvc'       => $this->request->cvc,
+                'exp_year'  => $this->request->exp_year,
             ]
         ] );
 
@@ -228,23 +181,6 @@ class PaymentService {
         $form->exp_year         = $request->exp_year;
         $form->validate();
 
-        return $form;
-    }
-
-    /**
-     * @param $request
-     *
-     * @return CreditPlanForm
-     */
-    private function __validateCreditPlanForm($request) {
-        $form                     = new CreditPlanForm();
-        $form->user_id            = myId();
-        $form->txn_id             = $request->txn_id;
-        $form->plan               = $request->plan;
-        $form->is_expired         = NOTEXPIRED;
-        $form->remaining_repost   = $request->remaining_repost;
-        $form->remaining_featured = $request->remaining_featured;
-        $form->validate();
         return $form;
     }
 }

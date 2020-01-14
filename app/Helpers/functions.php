@@ -239,7 +239,14 @@ function formattedDate( $format, $date ) {
  * @return bool
  */
 function agentHasPlan() {
-    return (new \App\Services\CreditPlanService())->agentHasPlan();
+    return (new \App\Services\CreditPlanService())->isExpired();
+}
+
+/**
+ * @return mixed
+ */
+function agentCurrentPlan() {
+    return (new \App\Services\CreditPlanService())->currentPlan()->first();
 }
 
 /**
