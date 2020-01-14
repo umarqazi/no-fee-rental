@@ -36,7 +36,7 @@
         <div class="collapse-menu">
           <ul>
             <li><a href="http://no-fee-rental.teamtechverx.com/contact-us" class="ft-links">Contact Us</a></li>
-            <li><a href="<?php bloginfo('url'); ?>/?page_id=185" class="ft-links">Site Map</a></li>
+            <li><a href="http://no-fee-rental.teamtechverx.com/site-map" class="ft-links">Site Map</a></li>
             <li><a href="<?php bloginfo('url'); ?>/?page_id=187" class="ft-links">Feedback</a></li>
             <li><a href="<?php bloginfo('url'); ?>/?page_id=195" class="ft-links">Advertise with Us</a></li>
           </ul>
