@@ -7,8 +7,9 @@ $(() => {
         $(".main-wrapper aside").slideDown();
     });
 
-    $(".mapboxgl-popup-anchor-top").append("<button class='mapboxgl-popup-close-button' type='button' aria-label='Close popup'>×</button>");
-
+    //$(".mapboxgl-popup-anchor-top").append("<button class='mapboxgl-popup-close-button' type='button'
+    // aria-label='Close popup'>×</button>");
+    $( "<button class='mapboxgl-popup-close-button' type='button' aria-label='Close popup'>×</button>" ).insertAfter( ".mapboxgl-popup-anchor-top" );
     //randomly change banner images on load
     let image = ["1.jpg", "2.jpg", "3.jpg"];
     let x = Math.floor(image.length * Math.random());

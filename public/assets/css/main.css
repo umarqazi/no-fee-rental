@@ -2423,7 +2423,7 @@ footer .copyright .social-icons li a:hover {
 .contact-map .description-text {
     margin-top: 20px;
     padding: 10px;
-    background-color: #e4e4e4;
+    font-weight: 700;
 }
 
 .contact-form .textArea {
@@ -6901,6 +6901,7 @@ list .property-info .info p {
 }
 .site-map-wrapper .links-section{
     margin-top: 50px;
+    margin-bottom: 40px;
 }
 .site-map-wrapper .links-section h3{
     margin-bottom: 20px;
