@@ -373,12 +373,11 @@ $(() => {
         let $listing = $(this).parents('.property-thumb');
         let img = $listing.find('img').attr('src');
         let info = $listing.find('.info > div');
+        let data = $listing.find('.feaure-policy-text > span').text();
         let rent = info.find('p:first').text();
-        let data = info.find('small').text();
         let address = info.find('p:last').text();
         data = data.split(',');
-        let bed = parseInt(data[0]);
-        let bath = parseInt(data[1]);
+        let bed = parseInt(data[0]); let bath = parseInt(data[1]);
         let modal = $('body').find('#check-availability');
         modal.find('.row > div > img').attr('src', img);
         modal.find('#address').text(address);

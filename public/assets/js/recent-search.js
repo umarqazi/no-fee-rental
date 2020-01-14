@@ -119,7 +119,7 @@ function manageStorage(index) {
 
     $old_queries.splice(index, 1);
 
-    if($old_queries.length >= 5) {
+    if($old_queries.length > 4) {
         $old_queries.shift();
     }
 

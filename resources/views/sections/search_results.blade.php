@@ -72,6 +72,9 @@
                         <input type='hidden' name='map_location' value={{ $listing->map_location }}>
                         {!! property_thumbs($listing) !!}
                     @endforeach
+                    @if(count($data->listings) < 1)
+                        No results found
+                    @endif
                 </div>
                 <div class="property-listing mobile-listing">
                     <div class="owl-carousel owl-theme">
@@ -80,6 +83,9 @@
                                 {!! property_thumbs($listing) !!}
                             </div>
                         @endforeach
+                        @if(count($data->listings) < 1)
+                            No results found
+                        @endif
                     </div>
                 </div>
             </div>

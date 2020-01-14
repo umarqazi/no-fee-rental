@@ -82,7 +82,11 @@
         </div>
     </div>
 </div>
-{{--Login Modal--}} @include('modals.login') {{--SignUp Modal--}} @include('modals.signup') {!! HTML::script('assets/js/login.js') !!}
+{{--Login Modal--}}
+@include('modals.login')
+{{--SignUp Modal--}}
+@include('modals.signup')
+{!! HTML::script('assets/js/login.js') !!}
 <script type="text/javascript">
     function togglefooterlink() {
         if (window.matchMedia('(max-width: 1279px)').matches) {
