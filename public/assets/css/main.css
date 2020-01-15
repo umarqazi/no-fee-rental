@@ -5294,6 +5294,9 @@ list .property-info .info p {
     .neighborhood-search .search-result-wrapper .search-listing .featured-properties .property-listing .property-thumb {
         width: calc(100% / 3 - 30px);
     }
+    .contact-banner {
+        background-position: center bottom -150px;
+    }
 }
 
 @media (min-width: 992px) {

@@ -14,7 +14,7 @@
       the_post();
       ?>
 
-      <section class="inner-pages rental-guides-container blog-page mt-5 single-post">
+      <section class="inner-pages rental-guides-container blog-page single-post">
         <div class="container-lg">
           <div class="text-center">
             <h3><?php the_title(); ?> <br> <span><?php echo get_the_date('j M Y'); ?></span></h3>

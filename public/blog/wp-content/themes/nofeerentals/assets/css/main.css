@@ -1585,6 +1585,7 @@ footer .copyright .social-icons li a:hover {
 .about-us .our-passion a {
     color: #f36f21;
     text-decoration: underline;
+    text-transform: uppercase;
 }
 
 .about-us .our-passion a:hover {
@@ -2516,7 +2517,7 @@ footer .copyright .social-icons li a:hover {
     text-decoration: underline;
     margin-top: 10px;
     display: inline-block;
-    
+
 }
 
 .blog-page .rental-guides-row p a:hover {
