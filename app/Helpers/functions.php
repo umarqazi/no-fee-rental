@@ -236,24 +236,25 @@ function formattedDate( $format, $date ) {
 }
 
 /**
- * @return bool
+ * @return bool|mixed
  */
-function agentHasPlan() {
-    return (new \App\Services\CreditPlanService())->isExpired();
-}
-
-/**
- * @return mixed
- */
-function agentCurrentPlan() {
-    return (new \App\Services\CreditPlanService())->currentPlan()->first();
+function dispatchPlanExpiryCheckListener() {
+    return (new \App\Services\CreditPlanService())->listenForExpiry();
 }
 
 /**
  * @return bool|mixed
  */
-function dispatchPlanExpiryCheckListener() {
-    return (new \App\Services\CreditPlanService())->listenForExpiry();
+function addNewList() {
+    return (new \App\Services\CreditPlanService())->addSlots();
+}
+
+function repost() {
+
+}
+
+function featured() {
+
 }
 
 /**
