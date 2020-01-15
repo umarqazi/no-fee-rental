@@ -1224,7 +1224,7 @@ h3 {
 }
 
 .login-modal .modal-dialog {
-    max-width: 1244px;
+    max-width: 1000px;
 }
 
 .login-modal .modal-dialog .modal-content {
@@ -2950,6 +2950,7 @@ footer .copyright .social-icons li a:hover {
     color: #fff;
     line-height: 10px;
     top: -10px !important;
+    z-index: 10;
 }
 .mapbox-content-wrapper{
     overflow-y: auto;
@@ -2957,7 +2958,15 @@ footer .copyright .social-icons li a:hover {
 }
 .mapboxgl-popup-content.single {
     height: 250px;
-    width: 300px;
+    width: 310px;
+}
+
+#desktop-map .mapboxgl-popup-content{
+    width: 280px;
+}
+.full-map .mapboxgl-popup-content{
+    padding: 10px 0px 15px 15px!important;
+    width: 300px !important;
 }
 
 .full-map .mapboxgl-popup-content.single {
