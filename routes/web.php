@@ -156,5 +156,5 @@ Route::get('/accept-invitation/{token}', 'Agent\MemberController@acceptInvitatio
 
 // Test Route
 Route::get('/test', function (\Illuminate\Http\Request $request) {
-    return (new \App\Http\Controllers\Agent\CreditPlanController())->create($request);
+    return view('agent.subscription_plan');
 })->name('web.test');

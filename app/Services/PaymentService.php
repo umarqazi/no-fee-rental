@@ -48,7 +48,7 @@ class PaymentService {
      *
      * @param $gateway
      */
-    public function __construct( $gateway = STRIPE ) {
+    protected function __construct( $gateway = STRIPE ) {
         $this->gateway = $gateway;
         $this->__setGateway();
         $this->customerRepo   = new ManageCustomerRepo();
@@ -59,7 +59,7 @@ class PaymentService {
      *
      * @return mixed
      */
-    public function makePayment( $request ) {
+    protected function __makePayment( $request ) {
         $this->request = $this->__validateForm( $request );
         if ($customer   = $this->__isNewCustomer()) {
             return $this->__makeTransaction( $customer );

@@ -31,12 +31,15 @@ class AgentHasPlan {
      * @return mixed
      */
     public function handle($request, Closure $next) {
+        if($this->service->agentHasPlan()) {
+            if(!$this->service->isExpired() && $this->service->isExpired() !== null) {
+                return $next($request);
+            }
 
-        dd($this->__agentHasPlan());
-        return $next($request);
-    }
+            $this->service->listenForExpiry();
+            return error('Your plan has been expired');
+        }
 
-    private function __agentHasPlan() {
-        return $this->service->listenForExpiry();
+        return error('You have no subscription plan for listings');
     }
 }

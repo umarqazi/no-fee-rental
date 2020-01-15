@@ -13,7 +13,7 @@ class ManageTransaction extends Model {
     /**
      * @var array
      */
-    protected $fillable = ['txn_id', 'txn_status', 'receipt_url', 'plan', 'user_id', 'amt_paid'];
+    protected $fillable = ['txn_id', 'txn_status', 'receipt_url', 'user_id', 'amt_paid'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne

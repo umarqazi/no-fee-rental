@@ -19,3 +19,7 @@ $('.credit-plan').on('click', function() {
 $('form').on('submit', function() {
     $('.credit_plan').attr('value', creditPlan);
 });
+
+$('body').on('form-success-stripe-checkout', function (event, data) {
+    window.location.reload();
+});

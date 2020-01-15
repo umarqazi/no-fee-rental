@@ -14,12 +14,26 @@ class CreditPlan extends Model {
     /**
      * @var array
      */
-    protected $fillable = ['user_id', 'remaining_slots', 'remaining_repost', 'remaining_featured', 'is_expired'];
+    protected $fillable = ['user_id', 'remaining_slots', 'remaining_repost', 'remaining_featured', 'plan', 'is_expired'];
 
     /**
      * @return HasOne
      */
     public function agent() {
         return $this->hasOne(User::class, 'id', 'user_id');
+    }
+
+    /**
+     * @param $value
+     * @return int
+     */
+    public function getPlanAttribute($value) {
+        if($value == 'basic') {
+            return BASICPLAN;
+        } elseif ($value == 'gold') {
+            return GOLDPLAN;
+        } elseif ($value == 'platinum') {
+            return PLATINUMPLAN;
+        }
     }
 }

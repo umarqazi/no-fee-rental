@@ -30,11 +30,6 @@ class TransactionForm extends BaseForm {
     public $receipt_url;
 
     /**
-     * @var string
-     */
-    public $plan;
-
-    /**
      * @var integer
      */
     public $amt_paid;
@@ -49,7 +44,6 @@ class TransactionForm extends BaseForm {
      */
     public function toArray() {
         return [
-            'plan'        => $this->plan,
             'txn_id'      => $this->txn_id,
             'user_id'     => $this->user_id,
             'amt_paid'    => $this->amt_paid,
@@ -63,7 +57,6 @@ class TransactionForm extends BaseForm {
      */
     public function rules() {
         return [
-            'plan'        => 'required',
             'txn_id'      => 'required',
             'user_id'     => 'required',
             'amt_paid'    => 'required',

@@ -19,7 +19,6 @@ class CreateManageTransactionsTable extends Migration
             $table->string('txn_id');
             $table->string('receipt_url');
             $table->string('amt_paid');
-            $table->enum('plan', ['basic', 'gold', 'premium']);
             $table->string('txn_status');
             $table->timestamps();
 
