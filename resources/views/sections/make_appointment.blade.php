@@ -9,7 +9,7 @@
         {!! Form::hidden('listing_id', $listing->id) !!}
         <div class="calendarCarasoule">
             <div class="owl-carousel owl-theme" id="calendar-slider">
-                @for($i = 0; $i < 14; $i ++)
+                @for($i = 0; $i <= 30; $i ++)
                     @php $date = now()->addDay($i); @endphp
                     <div class="item">
                         <div class="appointment-radio-btn">
