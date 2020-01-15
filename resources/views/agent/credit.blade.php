@@ -29,9 +29,15 @@
                                 <li>30 Reposts</li>
                             </ul>
                         </div>
-                        <a href="javascript:void(0);" class="btn btn-default credit-plan">
-                            {{ isset($currentPlan) && $currentPlan->plan == BASICPLAN ? 'Current Plan' : 'Get Started' }}
-                        </a>
+                        @if(isset($currentPlan) && $currentPlan->plan == BASICPLAN)
+                            <a href="{{ route('agent.plan') }}" class="btn btn-default">
+                                Current Plan
+                            </a>
+                        @else
+                            <a href="javascript:void(0);" class="btn btn-default credit-plan">
+                                Get Started
+                            </a>
+                        @endif
                     </div>
                     <div class="current-plans {{ isset($currentPlan) && $currentPlan->plan == GOLDPLAN ? '' : 'platinum-plan' }}">
                         <h3> Gold Plan</h3>
@@ -46,9 +52,15 @@
                                 <li>Featured listing in our weekly news letter</li>
                             </ul>
                         </div>
-                        <a href="javascript:void(0);" class="btn btn-default credit-plan">
-                            {{ isset($currentPlan) && $currentPlan->plan == GOLDPLAN ? 'Current Plan' : 'Get Started' }}
-                        </a>
+                        @if(isset($currentPlan) && $currentPlan->plan == GOLDPLAN)
+                            <a href="{{ route('agent.plan') }}" class="btn btn-default">
+                                Current Plan
+                            </a>
+                        @else
+                            <a href="javascript:void(0);" class="btn btn-default credit-plan">
+                                Get Started
+                            </a>
+                        @endif
                     </div>
                     <div class="current-plans {{ isset($currentPlan) && $currentPlan->plan == PLATINUMPLAN ? '' : 'platinum-plan' }}">
                         <h3> Platinum Plan</h3>
@@ -65,9 +77,15 @@
                                 <li>Featured listing in our weekly news letter</li>
                             </ul>
                         </div>
-                        <a href="javascript:void(0);" class="btn btn-default credit-plan">
-                            {{ isset($currentPlan) && $currentPlan->plan == PLATINUMPLAN ? 'Current Plan' : 'Get Started' }}
-                        </a>
+                        @if(isset($currentPlan) && $currentPlan->plan == PLATINUMPLAN)
+                            <a href="{{ route('agent.plan') }}" class="btn btn-default">
+                                Current Plan
+                            </a>
+                        @else
+                            <a href="javascript:void(0);" class="btn btn-default credit-plan">
+                                Get Started
+                            </a>
+                        @endif
                     </div>
                 </div>
             </div>

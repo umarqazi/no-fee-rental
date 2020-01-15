@@ -80,7 +80,25 @@ class ListingService extends BuildingService {
         $this->__manageSaveSearch( $listing, $request->features );
         $this->__freshnessScore($listing);
 
-        DB::commit();
+
+        if($this->__addListingEvents($listing)) {
+            DB::commit();
+            return $listing->id;
+        }
+
+        DB::rollBack();
+        return false;
+
+    }
+
+    /**
+     * @param $listing
+     * @return bool
+     */
+    private function __addListingEvents($listing) {
+//        if(isAgent()) {
+//            return addNewList();
+//        }
 
 //        $listing->visibility !== PENDINGLISTING ?:
 //            DispatchNotificationService::LISTINGAPPROVALREQUEST(toObject([
@@ -88,7 +106,8 @@ class ListingService extends BuildingService {
 //                'data' => $listing,
 //                'from' => $listing->user_id,
 //            ]));
-        return $listing->id;
+
+        return true;
     }
 
     /**

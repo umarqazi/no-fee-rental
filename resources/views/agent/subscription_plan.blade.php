@@ -5,8 +5,7 @@
     <div class="wrapper">
         <div class="heading-wrapper">
             <h1>Credits Plan</h1>
-            <a href="http://localhost:8000/agent/add-listing" class="btn-default" data-toggle="modal"
-               data-target="#request-review">Back</a>
+            <a href="{{ url()->previous() }}" class="btn-default">Back</a>
         </div>
         <div class="credit-plans basic-plan-wrapper">
             <h3>Current Plan - Pro/Silver</h3>
@@ -47,42 +46,23 @@
                                 <thead>
                                 <tr>
                                     <th>Date</th>
-                                    <th>Amt Due</th>
                                     <th>Amt Paid</th>
                                     <th>Status</th>
                                     <th>Receipt</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>2019-05-05 </td>
-                                    <td>$69.00 </td>
-                                    <td>$69.00 </td>
-                                    <td>Paid  </td>
-                                    <td><a href="javascript:void(0)" class="desktop-table-td"> View Receipt </a>
-                                        <a href="javascript:void(0)" class="mobile-table-td"> <i class="far fa-eye"></i> </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2019-05-05 </td>
-                                    <td>$69.00 </td>
-                                    <td>$69.00 </td>
-                                    <td>Paid  </td>
-                                    <td><a href="javascript:void(0)" class="desktop-table-td"> View Receipt </a>
-                                        <a href="javascript:void(0)" class="mobile-table-td"> <i class="far fa-eye"></i> </a>
-                                    </td>
-
-                                </tr>
-                                <tr>
-                                    <td>2019-05-05 </td>
-                                    <td>$69.00 </td>
-                                    <td>$69.00 </td>
-                                    <td>Paid  </td>
-                                    <td><a href="javascript:void(0)" class="desktop-table-td"> View Receipt </a>
-                                        <a href="javascript:void(0)" class="mobile-table-td"> <i class="far fa-eye"></i> </a>
-                                    </td>
-
-                                </tr>
+                                @foreach($transactions as $transaction)
+                                    <tr>
+                                        <td>{{ $transaction->created_at->format('d-m-Y') }}</td>
+                                        <td>${{ $transaction->amt_paid }}</td>
+                                        <td>{{ $transaction->txn_status }}</td>
+                                        <td>
+                                            <a href="{{ $transaction->receipt_url }}" class="desktop-table-td"> View Receipt </a>
+                                            <a href="{{ $transaction->receipt_url }}" class="mobile-table-td"> <i class="far fa-eye"></i> </a>
+                                        </td>
+                                    </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>

@@ -402,6 +402,7 @@ header .agent-avtar .notifications .noti-alert {
     height: 12px;
     border: #fff solid 2px;
     border-radius: 50px;
+    z-index: 1000;
 }
 
 header .agent-avtar .avtar {
