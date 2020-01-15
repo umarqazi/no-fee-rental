@@ -101,7 +101,7 @@ $(() => {
                validateSelect: true,
                dateFormat : true,
            },
-           building_type: {
+           listing_type: {
                required: true,
                validateSelect: true
            },
@@ -156,7 +156,7 @@ $(() => {
                dateFormat: "Select Valid Date.",
            },
 
-           building_type: {
+           listing_type: {
                required: "Select Listing Type.",
                validateSelect: "Select any one option."
            },
