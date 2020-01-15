@@ -54,8 +54,8 @@ class HomeController extends Controller {
 	public function getStarted(Request $request) {
 	    
         DispatchNotificationService::GETSTARED(toObject([
-            'from' => $request->email,
-            'to'   => mailToAdmin(),
+            'from' => 'yousuf.khalid@gmail.com',
+            'to'   => 'shaban@gems.techverx.com',
             'data' => $request->all()
         ]));
 

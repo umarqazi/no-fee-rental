@@ -120,6 +120,16 @@ class BaseRepo implements IRepo {
     }
 
     /**
+     * @param $column
+     * @param $ids
+     * @param $data
+     * @return mixed
+     */
+    public function updateMultiRowsByClause($column, $ids, $data) {
+        return $this->model->whereIn($column, $ids)->update($data);
+    }
+
+    /**
      * @return mixed
      */
     public function first() {

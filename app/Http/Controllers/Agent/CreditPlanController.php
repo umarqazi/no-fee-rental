@@ -33,16 +33,17 @@ class CreditPlanController extends Controller {
      * @return Factory|View
      */
     public function index() {
-        $currentPlan = $this->creditPlanService->currentPlan()->first();
+        $currentPlan = $this->creditPlanService->myPlan();
         return view('agent.credit', compact('currentPlan'));
     }
 
     /**
-     * @param $id
      * @return Factory|View
      */
-    public function subscription($id) {
-        return view('agent.subscription_plan');
+    public function subscription() {
+        $currentPlan = $this->creditPlanService->myPlan();
+        $transactions = $this->creditPlanService->myTransactions();
+        return view('agent.subscription_plan', compact('transactions', 'currentPlan'));
     }
 
     /**
@@ -51,14 +52,7 @@ class CreditPlanController extends Controller {
      * @return JsonResponse|RedirectResponse
      */
     public function create(Request $request) {
-        $request->card_number = '4242424242424242';
-        $request->cvc = '123';
-        $request->exp_month = '08';
-        $request->exp_year = '2025';
-        $request->credit_plan = 'gold';
-        $request->amount = '100';
-        $request->card_holder_name = 'Yousuf';
-        $res = $this->creditPlanService->makePayment($request);
+        $res = $this->creditPlanService->purchasePlan($request);
         return sendResponse($request, $res, 'Payment has been sent');
     }
 }

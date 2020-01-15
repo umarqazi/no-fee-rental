@@ -21,6 +21,11 @@ class CreditPlanForm extends BaseForm {
     public $user_id;
 
     /**
+     * @var string
+     */
+    public $plan;
+
+    /**
      * @var int
      */
     public $remaining_slots;
@@ -45,6 +50,7 @@ class CreditPlanForm extends BaseForm {
      */
     public function toArray() {
         return [
+            'plan'               => $this->plan,
             'user_id'            => $this->user_id,
             'is_expired'         => $this->is_expired,
             'remaining_slots'    => $this->remaining_slots,
@@ -58,6 +64,7 @@ class CreditPlanForm extends BaseForm {
      */
     public function rules() {
         return [
+            'plan'               => 'required',
             'user_id'            => 'required',
             'is_expired'         => 'required',
             'remaining_slots'    => 'required',
