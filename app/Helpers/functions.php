@@ -632,7 +632,7 @@ function fSelect($class) {
             numDisplayed: 1,
         });
     </script>";
-    
+
     return $html;
 }
 
@@ -647,7 +647,7 @@ function select2($class) {
     </script>";
 
     return $html;
-}   
+}
 
 /**
  * @param int $amount
@@ -990,7 +990,7 @@ function features() {
  */
 function property_thumbs($listing) {
     $html = null;
-    $html .= "<div class='property-thumb'><div class='check-btn'>";
+    $html .= "<div class='property-thumb'><div class='grid-badges'><span class='status'>Featured</span></div><div class='check-btn'>";
     $html .= "<a href='javascript:void(0);'>";
     $html .= "<button class='btn-default' list_id='{$listing->id}' to='{$listing->agent->id}' data-target=\"#check-availability\">Check Availability</button>";
     $html .= "</a></div>";

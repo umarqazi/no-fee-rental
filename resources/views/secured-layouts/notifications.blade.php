@@ -107,7 +107,6 @@
                                 </div>
                             </div>
                             <div class="right-side-icons">
-                                <i class="far fa-star"></i>
                                 <img src="/assets/images/error-cross.png" class="cross-icon-noti"/>
                             </div>
 
@@ -131,7 +130,6 @@
                                 </div>
                             </div>
                             <div class="right-side-icons">
-                                <i class="far fa-star"></i>
                                 <img src="/assets/images/error-cross.png" class="cross-icon-noti"/>
                             </div>
                         </div>
@@ -154,7 +152,6 @@
                                 </div>
                             </div>
                             <div class="right-side-icons">
-                                <i class="far fa-star"></i>
                                 <img src="/assets/images/error-cross.png" class="cross-icon-noti"/>
                             </div>
                         </div>
@@ -177,7 +174,6 @@
                                 </div>
                             </div>
                             <div class="right-side-icons">
-                                <i class="far fa-star"></i>
                                 <img src="/assets/images/error-cross.png" class="cross-icon-noti"/>
                             </div>
                         </div>
@@ -200,7 +196,6 @@
                                 </div>
                             </div>
                             <div class="right-side-icons">
-                                <i class="far fa-star"></i>
                                 <img src="/assets/images/error-cross.png" class="cross-icon-noti"/>
                             </div>
                         </div>
@@ -223,7 +218,6 @@
                                 </div>
                             </div>
                             <div class="right-side-icons">
-                                <i class="far fa-star"></i>
                                 <img src="/assets/images/error-cross.png" class="cross-icon-noti"/>
                             </div>
                         </div>
@@ -246,7 +240,6 @@
                                 </div>
                             </div>
                             <div class="right-side-icons">
-                                <i class="far fa-star"></i>
                                 <img src="/assets/images/error-cross.png" class="cross-icon-noti"/>
                             </div>
                         </div>
@@ -269,7 +262,6 @@
                                 </div>
                             </div>
                             <div class="right-side-icons">
-                                <i class="far fa-star"></i>
                                 <img src="/assets/images/error-cross.png" class="cross-icon-noti"/>
                             </div>
                         </div>
@@ -292,7 +284,6 @@
                                 </div>
                             </div>
                             <div class="right-side-icons">
-                                <i class="far fa-star"></i>
                                 <img src="/assets/images/error-cross.png" class="cross-icon-noti"/>
                             </div>
                         </div>
