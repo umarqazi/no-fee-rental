@@ -47,7 +47,7 @@
         <div class="collapse-menu">
           <ul>
             <li><a href="<?php bloginfo('url'); ?>/?page_id=66" class="ft-links">Our Story</a></li>
-            <li><a href="<?php bloginfo('url'); ?>/?page_id=70" class="ft-links">Press</a></li>
+            <li><a href="<?php bloginfo('url'); ?>/?post_type=press_cptui" class="ft-links"">Press</a></li>
             <li><a href="<?php bloginfo('url'); ?>/?page_id=3" class="ft-links">Privacy Policy </a></li>
             <li><a href="<?php bloginfo('url'); ?>/?page_id=27" class="ft-links">Terms</a></li>
           </ul>
