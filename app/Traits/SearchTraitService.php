@@ -221,7 +221,7 @@ trait SearchTraitService {
      */
     private function fetchQuery() {
         return $this->query->where('visibility', ACTIVE)
-            ->selectRaw('ususer_iders u.company_id=')->orderBy('is_featured', APPROVEFEATURED)
+            ->orderBy('is_featured', APPROVEFEATURED)
             ->get();
     }
 }
