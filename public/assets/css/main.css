@@ -797,7 +797,10 @@ h3 {
     width: 100%;
     display: none;
 }
-
+.neighborhood-search-dropdown .modal-body.search-neighborhood .custom-control{
+    display: inline-block;
+    vertical-align: middle;
+}
 .price-range-dropdown {
     padding: 0px 15px;
     width: 100%;
@@ -1485,9 +1488,24 @@ h3 {
     min-width: 100%;
     max-width: 100%;
 }
-
-
-/*.featured-properties .property-listing .property-thumb*/
+.property-thumb .grid-badges .status {
+    position: absolute;
+    left: -200px;
+    top: 10px;
+    font-size: 11px;
+    background: #223971;
+    color: #fff;
+    padding: 5px 12px;
+    border-radius: 20px;
+    opacity: 0;
+}
+.featured-properties .property-listing .property-thumb:hover .status{
+    left: 10px;
+    transform: translateX(0px);
+    transition: 0.3s ease-in-out;
+    opacity: 1;
+}
+    /*.featured-properties .property-listing .property-thumb*/
 
 .heart-icon {
     background: url(../images/heart-icon.png) no-repeat 0px 0px;
@@ -1633,7 +1651,6 @@ h3 {
     transition: 0.3s ease-in-out;
     opacity: 1;
 }
-
 .your-life-container {
     background: url(../images/your-life-bg.jpg) no-repeat center right;
     background-size: auto 100%;
@@ -2360,11 +2377,9 @@ footer .copyright .social-icons li a:hover {
     background-size: cover;
     background-position: center bottom;
 }
-
-.contact-info {
-    margin-bottom: 30px;
+.contact-info{
+    margin-top: 40px;
 }
-
 .contact-info .info {
     margin-bottom: 40px;
     border: 1px solid #D7D7D7;
@@ -2377,7 +2392,7 @@ footer .copyright .social-icons li a:hover {
 }
 
 .contact-info .info img {
-    max-width: 60px;
+    max-width: 50px;
     margin-right: 10px;
     max-height: 40px;
 }
@@ -2422,7 +2437,6 @@ footer .copyright .social-icons li a:hover {
 }
 .contact-map .description-text {
     margin-top: 20px;
-    padding: 10px;
     font-weight: 700;
 }
 
@@ -5778,6 +5792,7 @@ list .property-info .info p {
     .header-bg .search-property .search-fld {
         flex: 0 0 32%;
         padding: 0px 15px;
+        background-image: none;
     }
     .header-bg {
         background-position: top 0px center !important;
@@ -5785,6 +5800,7 @@ list .property-info .info p {
     .beds-dropdown #advance-search-beds {
         width: 100%;
         top: 55px;
+        z-index: 1;
     }
     .price-range-ul {
         top: 45px;
@@ -5794,6 +5810,10 @@ list .property-info .info p {
         border-left: none;
         border-right: none;
         border-bottom: 1px solid #ddd;
+        top: 55px;
+    }
+    .dropdown-beds{
+        top: 55px;
     }
     .featured-properties .property-listing .property-thumb {
         width: calc(100% / 2 - 30px);
@@ -5909,6 +5929,13 @@ list .property-info .info p {
     .header-bg .search-property {
         display: block;
         line-height: 50px;
+        position: relative;
+        min-height:225px;
+    }
+    .header-bg .search-property .search-neighborhood{
+        position: absolute !important;
+        background: url(../images/select-menu-arrow.png) no-repeat right 15px center;
+        width: 100%;
     }
     .header-bg .search-property .search-fld {
         width: 100%;
@@ -5993,6 +6020,8 @@ list .property-info .info p {
     .header-bg .search-property .search-btn {
         height: 45px;
         font-size: 14px;
+        position: relative;
+        top: 55px;
     }
     .neighborhood-search .filters-wrapper {
         display: block;
@@ -6876,6 +6905,9 @@ list .property-info .info p {
     bottom: 0;
     right: 0;
 }
+.site-map-wrapper .let-us-help-modal .nav-pills{
+    margin-top: 40px;
+}
 .site-map-banner h4{
     position: absolute;
     top: 50%;
@@ -6916,7 +6948,7 @@ list .property-info .info p {
 }
 .site-map-wrapper .links-section{
     margin-top: 50px;
-    margin-bottom: 40px;
+    /*margin-bottom: 40px;*/
 }
 .site-map-wrapper .links-section h3{
     margin-bottom: 20px;

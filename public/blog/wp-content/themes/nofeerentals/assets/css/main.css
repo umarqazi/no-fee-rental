@@ -1579,30 +1579,29 @@ footer .copyright .social-icons li a:hover {
     height: 20px;
 }
 
-.about-us h3 {
+.page-wraper-margin-bottom h3 {
     color: #223971;
     margin-bottom: 15px;
 }
 
-.about-us .our-passion {
+.our-passion {
     margin-bottom: 40px;
 }
-.about-us .our-passion:last-child{
+.our-passion:last-child{
     margin-bottom: 0px;
 }
 
-.about-us .our-passion a {
+.our-passion a {
     color: #f36f21;
     text-decoration: underline;
     text-transform: uppercase;
 }
 
-.about-us .our-passion a:hover {
+.our-passion a:hover {
     color: #223971;
 }
 
 /*Advertise with us*/
-
 .plan-listing {
     display: flex;
     max-width: 1060px;
@@ -3067,8 +3066,47 @@ li.definitions-listings h4{
 .login-modal .modal-dialog .login-form-wrapper .mobile-none{
     display: block;
 }
-/*Responsive style*/
+.page-wraper-margin-bottom{
+    margin-bottom: 70px;
+}
+.sec-content-padd{
+    padding: 40px 0;
+}
+/*pagination*/
+.navigation{
+    padding: 40px 0;
+    text-align: center;
+}
+.navigation li a,
+.navigation li a:hover,
+.navigation li.active a,
+.navigation li.disabled {
+    color: #fff;
+    text-decoration:none;
+}
 
+.navigation li {
+    display: inline;
+}
+
+.navigation li a,
+.navigation li a:hover,
+.navigation li.active a,
+.navigation li.disabled {
+    background-color: #f36f21;
+    border-radius: 3px;
+    cursor: pointer;
+    padding: 12px;
+    padding: 0.75rem;
+    display: inline-block;
+}
+
+.navigation li a:hover,
+.navigation li.active a {
+    background-color: #223971;
+}
+
+/*Responsive style*/
 @media (min-width: 1600px) {
     .container-lg,
     .kc-container {

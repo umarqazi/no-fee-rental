@@ -143,13 +143,13 @@
 
             <!-- Modal Header -->
             <div class="modal-header">
-                <h3 class="modal-title">Timeline</h3>
+                <h3 class="modal-title">Enter your personal information</h3>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
 
             <!-- Modal body -->
             <div class="modal-body">
-                <h4 class="text-center mb-0">When would you like move in?</h4>
+{{--                <h4 class="text-center mb-0">When would you like move in?</h4>--}}
                 <div class="pt-4 row">
                     <div class="col-lg-6">
                         <div class="form-group">
