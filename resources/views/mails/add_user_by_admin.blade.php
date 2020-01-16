@@ -6,7 +6,7 @@
             <a href="javascript:void(0)"><img src="{{ asset('assets/images/logo.png') }}" alt="logo"></a>
         </div>
         <div class="notification-inner-content">
-            <h2>{{ $data->title }}</h2>
+            <h2>ACCOUNT CREATED</h2>
             <div class="action-button">
                 <p><b>You have been added as an {{ $data->type }}, Please follow the instructions to proceed.</b></p>
             </div>

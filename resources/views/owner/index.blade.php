@@ -10,10 +10,7 @@
             <div class="heading-wrapper pl-0">
                 <ul class="nav nav-pills">
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="pill" href="#active">Available ( {{ $listing->active->total() }} )</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="pill" href="#inactive">Not Available ( {{ $listing->inactive->total() }} )</a>
+                        <a class="nav-link" data-toggle="pill" href="#active">Active ( {{ $listing->active->total() }} )</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="pill" href="#owner-only">Owner Only ( {{ $listing->owner_only->total() }} )</a>
@@ -35,9 +32,6 @@
                 <div class="tab-content">
                     <div class="tab-pane" id="active">
                         @include('owner.listing-tabs.active')
-                    </div>
-                    <div class="tab-pane fade" id="inactive">
-                        @include('owner.listing-tabs.inactive')
                     </div>
                     <div class="tab-pane fade" id="owner-only">
                         @include('owner.listing-tabs.owner_only')

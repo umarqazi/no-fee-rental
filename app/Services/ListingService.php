@@ -303,20 +303,6 @@ class ListingService extends BuildingService {
     /**
      * @return mixed
      */
-    public function getActive() {
-        return $this->listingRepo->active();
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getInActive() {
-        return $this->listingRepo->inactive();
-    }
-
-    /**
-     * @return mixed
-     */
     public function getActiveInactive() {
         return $this->listingRepo->activeInactive();
     }
@@ -503,17 +489,15 @@ class ListingService extends BuildingService {
      */
     private function __addOpenHouse( $id, $listing, $data, $is_update = false ) {
         $batch = [];
-        if ( isset( $data['date'][0] ) ) {
-            if ( $is_update ) {
-                deleteCalendarEvent( $id );
-            }
-            for ( $i = 0; $i < sizeof( $data['date'] ); $i ++ ) {
+        if ( isset( $data ) ) {
+            if ( $is_update ) deleteCalendarEvent( $id );
+            for ( $i = 0; $i < sizeof($data); $i ++ ) {
                 $batch[] = [
                     'listing_id' => $id,
-                    'date'       => $data['date'][ $i ],
-                    'start_time' => $data['start_time'][ $i ],
-                    'end_time'   => $data['end_time'][ $i ],
-                    'only_appt'  => isset( $data['by_appointment'][ $i ] ) && $data['by_appointment'][ $i ] !== 'on' ? false : true,
+                    'date'       => $data[ $i ]['date'],
+                    'start_time' => $data[ $i ]['start_time'],
+                    'end_time'   => $data[ $i ]['end_time'],
+                    'only_appt'  => isset( $data[ $i ]['by_appointment'] ) && $data[ $i ]['by_appointment'] == 'on' ? true : false,
                     'created_at' => now(),
                     'updated_at' => now()
                 ];
@@ -647,12 +631,9 @@ class ListingService extends BuildingService {
      */
     private function __ownerCollection($paginate) {
         return [
-            'active'     => $this->getActive()
+            'active'     => $this->getActiveInactive()
                 ->latest()
                 ->paginate($paginate, ['*'], 'active'),
-            'inactive'   => $this->getInActive()
-                ->latest()
-                ->paginate($paginate, ['*'], 'in-active'),
             'archived'   => $this->getArchive()
                 ->latest()
                 ->paginate($paginate, ['*'], 'archive'),
@@ -668,12 +649,9 @@ class ListingService extends BuildingService {
      */
     private function __agentCollection($paginate) {
         return [
-            'active'   => $this->getActive()
+            'active'   => $this->getActiveInactive()
                 ->latest()
                 ->paginate($paginate, ['*'], 'active'),
-            'inactive' => $this->getInActive()
-                ->latest()
-                ->paginate($paginate, ['*'], 'in-active'),
             'realty'   => $this->getRealty()
                 ->latest()
                 ->paginate($paginate, ['*'], 'realty'),
@@ -695,7 +673,7 @@ class ListingService extends BuildingService {
     private function __adminSearchCollection( $keywords, $paginate ) {
         return [
             'active'     => $this->listingRepo->search( $keywords )
-                                            ->ai()
+                                            ->active()
                                             ->latest()
                                             ->paginate($paginate, ['*'], 'active'),
             'realty'     => $this->listingRepo->search( $keywords )
@@ -733,10 +711,6 @@ class ListingService extends BuildingService {
                             ->active()
                             ->latest()
                             ->paginate($paginate, ['*'], 'active'),
-            'inactive' => $this->listingRepo->search( $keywords )
-                            ->inactive()
-                            ->latest()
-                            ->paginate($paginate, ['*'], 'in-active'),
             'archived'   => $this->listingRepo->search( $keywords )
                             ->archived()
                             ->latest()
@@ -764,10 +738,6 @@ class ListingService extends BuildingService {
                 ->realty()
                 ->latest()
                 ->paginate($paginate, ['*'], 'realty'),
-            'inactive' => $this->listingRepo->search( $keywords )
-                ->inactive()
-                ->latest()
-                ->paginate($paginate, ['*'], 'in-active'),
             'archived'   => $this->listingRepo->search( $keywords )
                 ->archived()
                 ->latest()
@@ -818,12 +788,9 @@ class ListingService extends BuildingService {
      */
     private function __ownerSortCollection( $paginate, $col, $order ) {
         return toObject( [
-            'active'     => $this->getActive()
+            'active'     => $this->getActiveInactive()
                                 ->orderBy( $col, $order )
                                 ->paginate( $paginate, [ '*' ], 'active' ),
-            'inactive'   => $this->getInActive()
-                                ->orderBy( $col, $order )
-                                ->paginate( $paginate, [ '*' ], 'in-active' ),
             'archived'   => $this->getArchive()
                                 ->orderBy( $col, $order )
                                 ->paginate( $paginate, [ '*' ], 'archived' ),
@@ -842,7 +809,7 @@ class ListingService extends BuildingService {
      */
     private function __agentSortCollection( $paginate, $col, $order ) {
         return toObject( [
-            'active'   => $this->getActive()
+            'active'   => $this->getActiveInactive()
                         ->orderBy( $col, $order )
                         ->paginate( $paginate, [ '*' ], 'active' ),
             'pending'  => $this->getPending()
@@ -851,9 +818,6 @@ class ListingService extends BuildingService {
             'archived' => $this->getArchive()
                 ->orderBy( $col, $order )
                 ->paginate( $paginate, [ '*' ], 'archived' ),
-            'inactive' => $this->getInActive()
-                ->orderBy( $col, $order )
-                ->paginate($paginate, ['*'], 'in-active'),
             'realty'   => $this->getRealty()
                 ->orderBy( $col, $order )
                 ->paginate( $paginate, [ '*' ], 'realty' )

@@ -46,10 +46,7 @@
                         <a class="nav-link" data-toggle="pill" href="#active">Active ( {{ $listing->active->total() }} )</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="pill" href="#inactive">Inactive ( {{ $listing->inactive->total() }} )</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="pill" href="#realty">Realty ( {{ $listing->realty->total() }} )</a>
+                        <a class="nav-link" data-toggle="pill" href="#realty">Syndicated ( {{ $listing->realty->total() }} )</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="pill" href="#archived">Archived ( {{ $listing->archived->total() }} )</a>
@@ -71,9 +68,6 @@
                 <div class="tab-content">
                     <div class="tab-pane" id="active">
                         @include('agent.listing-tabs.active')
-                    </div>
-                    <div class="tab-pane fade" id="inactive">
-                        @include('agent.listing-tabs.inactive')
                     </div>
                     <div class="tab-pane fade" id="realty">
                         @include('agent.listing-tabs.realty')
