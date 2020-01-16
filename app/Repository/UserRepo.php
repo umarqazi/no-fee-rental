@@ -41,6 +41,13 @@ class UserRepo extends BaseRepo {
 		return $this->model->admins();
 	}
 
+    /**
+     * @return mixed
+     */
+	public function mrgAgents() {
+        return $this->model->mrgAgents();
+    }
+
 	/**
 	 * @param $email
 	 *

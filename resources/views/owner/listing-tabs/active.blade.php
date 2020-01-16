@@ -19,7 +19,11 @@
                     @if($al->is_featured != REJECTFEATURED)
                         <span class="status" style="background: blueviolet;">{{($al->is_featured == REQUESTFEATURED) ? 'Requested for feature' : 'Featured' }}</span>
                     @endif
-                    <span class="status">Available</span>
+                    @if(is_available($al->availability))
+                        <span class="status">Available</span>
+                    @else
+                        <span class="status" style="background: red">Not Available</span>
+                    @endif
                 </div>
                 <div class="actions-btns">
                     <a href="{{ route(whoAmI().'.editListing', $al->id) }}">
@@ -74,7 +78,11 @@
                             @if($al->is_featured != REJECTFEATURED)
                                 <span class="status" style="background: blueviolet;">{{($al->is_featured == REQUESTFEATURED) ? 'Requested for feature' : 'Featured' }}</span>
                             @endif
-                            <span class="status">Available</span>
+                            @if(is_available($al->availability))
+                                <span class="status">Available</span>
+                            @else
+                                <span class="status" style="background: red">Not Available</span>
+                            @endif
                         </div>
                         <div class="actions-btns">
                             <a href="{{ route(whoAmI().'.repostListing', $al->id) }}">

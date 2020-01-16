@@ -114,24 +114,8 @@ class Listing extends Model {
         $clause['visibility'] = ACTIVELISTING;
         $clause['realty_id'] = NULL;
         return $query->where($clause)
-            ->where('availability', '<=', now()->format('Y-m-d'))
             ->whereHas('building', function($subQuery) {
                 return $subQuery->where('building_action', '!=', OWNERONLY);
-            });
-    }
-
-    /**
-     * @param $query
-     *
-     * @return mixed
-     */
-    public function scopeInactive($query) {
-        isAdmin() ?: $clause['user_id'] = myId();
-        $clause['visibility'] =  ACTIVELISTING;
-        $clause['realty_id']  = NULL;
-        return $query->where($clause)
-            ->where(function ($subQuery) {
-                return $subQuery->where('availability', '>', now()->format('Y-m-d'))->orWhere('availability', NULL);
             });
     }
 
@@ -144,19 +128,6 @@ class Listing extends Model {
         isAdmin() ?: $clause['user_id'] = myId();
         $clause['visibility'] = ARCHIVED;
         return $query->where($clause);
-    }
-
-    /**
-     * @param $query
-     * @return mixed
-     */
-    public function scopeAI($query) {
-        return $query->where([
-            'visibility' => ACTIVELISTING,
-            'realty_id' => NULL
-        ])->whereHas('building', function($subQuery) {
-            return $subQuery->where('building_action', '!=', OWNERONLY);
-        });
     }
 
     /**
@@ -228,7 +199,7 @@ class Listing extends Model {
     public function scopeRecommended($query) {
         return $query->whereHas('agent.company', function ($subQuery) {
             return $subQuery->where('company', MRG);
-        });
+        })->latest();
     }
 
     /**
