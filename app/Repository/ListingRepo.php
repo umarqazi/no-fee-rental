@@ -28,20 +28,6 @@ class ListingRepo extends BaseRepo {
     /**
      * @return mixed
      */
-    public function active() {
-        return $this->model->active();
-    }
-
-    /**
-     * @return mixed
-     */
-    public function inactive() {
-        return $this->model->inactive();
-    }
-
-    /**
-     * @return mixed
-     */
     public function pending() {
         return $this->model->pending();
     }
@@ -78,7 +64,7 @@ class ListingRepo extends BaseRepo {
      * @return mixed
      */
 	public function activeInactive() {
-	    return $this->model->ai();
+	    return $this->model->active();
     }
 
 	/**

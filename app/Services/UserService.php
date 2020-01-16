@@ -733,4 +733,11 @@ class UserService {
     public function findById($id) {
         return $this->userRepo->findById($id)->first();
     }
+
+    /**
+     * @return mixed
+     */
+    public function agentsWithMRGCompany() {
+        return $this->userRepo->mrgAgents()->count() > 0 ? true : false;
+    }
 }

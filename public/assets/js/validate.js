@@ -100,9 +100,8 @@ $(() => {
                required: true,
                validateSelect: true,
                dateFormat : true,
-               date_validation : true
            },
-           building_type: {
+           listing_type: {
                required: true,
                validateSelect: true
            },
@@ -110,9 +109,6 @@ $(() => {
                validateSelect: true,
                time_validation : $('select[name="open_house[end_time][]"]')
            },
-           "open_house[date][]": {
-               date_validation : true,
-               },
            "open_house[end_time][]": {
                validateSelect: true,
                time_validation : $('select[name="open_house[start_time][]"]')
@@ -158,10 +154,9 @@ $(() => {
                required: "Select Availability.",
                validateSelect: "Select any one option.",
                dateFormat: "Select Valid Date.",
-               date_validation: "Greater Availability Date."
            },
 
-           building_type: {
+           listing_type: {
                required: "Select Listing Type.",
                validateSelect: "Select any one option."
            },
@@ -174,9 +169,6 @@ $(() => {
            'open_house[end_time][]': {
                validateSelect: "Select any one option.",
                time_validation :  "End Time should be greater than start time."
-           },
-           'open_house[date][]': {
-               date_validation: "Open House Date should be greater than or equal to Availability date."
            },
            thumbnail: {
                required: "Thumbnail is required.",

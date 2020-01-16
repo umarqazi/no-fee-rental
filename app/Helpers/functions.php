@@ -155,6 +155,13 @@ function isOwner() {
 }
 
 /**
+ * @return mixed
+ */
+function isMRGAgent() {
+    return (new \App\Services\UserService())->agentsWithMRGCompany();
+}
+
+/**
  * @param $favourites
  * @param $listing_id
  *

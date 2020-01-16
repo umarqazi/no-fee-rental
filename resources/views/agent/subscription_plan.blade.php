@@ -5,8 +5,7 @@
     <div class="wrapper">
         <div class="heading-wrapper">
             <h1>Credits Plan</h1>
-            <a href="http://localhost:8000/agent/add-listing" class="btn-default" data-toggle="modal"
-               data-target="#request-review">Back</a>
+            <a href="{{ url()->previous() }}" class="btn-default">Back</a>
         </div>
         <div class="credit-plans basic-plan-wrapper">
             <h3>Current Plan - Pro/Silver</h3>

@@ -48,7 +48,7 @@
                         <a class="nav-link" data-toggle="pill" href="#listing-active">Active ( {{ $listing->active->total() }} )</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="pill" href="#listing-realty">Realty ( {{ $listing->realty->total() }} )</a>
+                        <a class="nav-link" data-toggle="pill" href="#listing-realty">Syndicated ( {{ $listing->realty->total() }} )</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="pill" href="#owner-only">Owner Only ( {{ $listing->owner_only->total() }} )</a>

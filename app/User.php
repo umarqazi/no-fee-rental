@@ -131,6 +131,16 @@ class User extends Authenticate implements CanResetPassword {
 
     /**
      * @param $query
+     * @return mixed
+     */
+	public function scopeMRGAgents($query) {
+	    return $query->where('id', myId())->whereHas('company', function ($suqQuery) {
+	        return $suqQuery->where('company', MRG);
+        });
+    }
+
+    /**
+     * @param $query
      *
      * @return mixed
      */

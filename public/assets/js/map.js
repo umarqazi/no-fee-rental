@@ -312,6 +312,7 @@ $(() => {
         })
         .send()
         .then(function (response) {
+            console.log(response);
             $('.loader').hide();
             response = JSON.parse(response.rawBody);
             if(response && response.features[0].place_type) {
