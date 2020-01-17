@@ -81,7 +81,7 @@ class CreditPlanService extends PaymentService {
     public function isExpired() {
         if($plan = $this->__currentBalance()) {
             return $plan->updated_at->addDays(MAXPLANDAYS)->format('d-m-Y') > now()->format('d-m-Y')
-                ? $this->__sendMail() : false;
+                ? true : false;
         }
 
         return null;
@@ -92,6 +92,7 @@ class CreditPlanService extends PaymentService {
      */
     public function listenForExpiry() {
         if($this->isExpired() !== null || !$this->isExpired()) {
+            $this->__sendMail();
             return $this->__performExpiryAction();
         }
 

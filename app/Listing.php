@@ -197,9 +197,10 @@ class Listing extends Model {
      * @return mixed
      */
     public function scopeRecommended($query) {
-        return $query->whereHas('agent.company', function ($subQuery) {
-            return $subQuery->where('company', MRG);
-        })->latest();
+        return $query->where('visibility', ACTIVELISTING)
+            ->whereHas('agent.company', function ($subQuery) {
+                return $subQuery->where('company', MRG);
+            })->latest();
     }
 
     /**

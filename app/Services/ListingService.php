@@ -489,7 +489,7 @@ class ListingService extends BuildingService {
      */
     private function __addOpenHouse( $id, $listing, $data, $is_update = false ) {
         $batch = [];
-        if ( isset( $data ) ) {
+        if ( isset( $data[0]['date'] ) ) {
             if ( $is_update ) deleteCalendarEvent( $id );
             for ( $i = 0; $i < sizeof($data); $i ++ ) {
                 $batch[] = [
@@ -502,7 +502,7 @@ class ListingService extends BuildingService {
                     'updated_at' => now()
                 ];
 
-                $this->__addCalendarEvents( $listing, $is_update, $id, $data, $i );
+//                $this->__addCalendarEvents( $listing, $is_update, $id, $data, $i );
             }
         }
         $this->openHouseRepo->insert( $batch );
@@ -526,8 +526,8 @@ class ListingService extends BuildingService {
             'linked_id' => $listing->id,
             'url'       => ! isAgent() && $listing->visibility !== PENDINGLISTING
                 ? 'listing.detail' : 'javascript:void(0)',
-            'start'     => $data['date'][ $i ] . ' ' . openHouseTimeSlot( $data['start_time'][ $i ] )->format( 'H:i:s' ),
-            'end'       => $data['date'][ $i ] . ' ' . openHouseTimeSlot( $data['end_time'][ $i ] )->format( 'H:i:s' ),
+            'start'     => $data[ $i ]['date'] . ' ' . openHouseTimeSlot( $data[ $i ]['start_time'] )->format( 'H:i:s' ),
+            'end'       => $data[ $i ]['date'] . ' ' . openHouseTimeSlot( $data[ $i ]['end_time'] )->format( 'H:i:s' ),
         ] );
     }
 
