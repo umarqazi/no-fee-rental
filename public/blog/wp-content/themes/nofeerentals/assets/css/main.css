@@ -3067,14 +3067,13 @@ li.definitions-listings h4{
     display: block;
 }
 .page-wraper-margin-bottom{
-    margin-bottom: 70px;
+    margin-bottom: 110px;
 }
 .sec-content-padd{
     padding: 40px 0;
 }
 /*pagination*/
 .navigation{
-    padding: 40px 0;
     text-align: center;
 }
 .navigation li a,
