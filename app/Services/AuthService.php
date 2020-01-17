@@ -57,7 +57,7 @@ class AuthService {
         }
 
         if ($this->attemptLogin($request)) {
-            dispatchPlanExpiryCheckListener();
+//            dispatchPlanExpiryCheckListener();
             return sendResponse($request, ['url' => route("{$this->guard}.index")], null);
         }
 

@@ -34,6 +34,11 @@ class ListingForm extends BaseForm {
     public $building_id;
 
     /**
+     * @var integer
+     */
+    public $is_convertible;
+
+    /**
      * @var string
      */
 	public $old_thumbnail;
@@ -42,6 +47,11 @@ class ListingForm extends BaseForm {
      * @var string
      */
 	public $description;
+
+    /**
+     * @var string
+     */
+	public $renter_rebate;
 
     /**
      * @var string
@@ -153,6 +163,8 @@ class ListingForm extends BaseForm {
 			'square_feet'        => $this->square_feet,
 			'map_location'       => $this->map_location,
             'listing_type'       => $this->listing_type,
+            'is_convertible'     => $this->is_convertible,
+            'renter_rebate'      => $this->renter_rebate,
             'application_fee'    => $this->application_fee,
             'deposit'            => $this->deposit,
             'lease_term'         => $this->lease_term,
@@ -170,7 +182,7 @@ class ListingForm extends BaseForm {
 			'display_address'   => 'required|string',
 			'availability_type' => 'required',
 			'map_location'      => 'required|string',
-			'bedrooms'          => 'required|integer',
+			'bedrooms'          => 'required',
 			'baths'             => 'required|integer',
             'thumbnail'         => 'sometimes|mimes:jpg,png,jpeg',
 			'description'       => 'required',
