@@ -7,8 +7,6 @@ $(() => {
         $(".main-wrapper aside").slideDown();
     });
 
-    //$(".mapboxgl-popup-anchor-top").append("<button class='mapboxgl-popup-close-button' type='button'
-    // aria-label='Close popup'>×</button>");
     $( "<button class='mapboxgl-popup-close-button' type='button' aria-label='Close popup'>×</button>" ).insertAfter( ".mapboxgl-popup-anchor-top" );
     //randomly change banner images on load
     let image = ["1.jpg", "2.jpg", "3.jpg"];
@@ -17,6 +15,15 @@ $(() => {
 
     $("aside .close-menu").click(function() {
         $(".main-wrapper aside").slideUp();
+    });
+
+    $(".after-radio-textarea a").click(function(){
+        $(".calendar-wrap").hide();
+        $(".successfull-msg").show();
+    });
+    $(".apointment-tabs ul li").click(function(){
+        $(".apointment-tabs ul li").removeClass('active');
+        $(this).addClass('active');
     });
 
     $(".list-view-btn").click(function() {
@@ -52,10 +59,6 @@ $(() => {
         uiLibrary: 'bootstrap4'
     });
 
-    /*$(".property-thumb .heart-icon").click(function () {
-        $(this).toggleClass('favourite');
-    });*/
-    // disable enable exclusive settings checkboxes
     $(function() {
         $('#exclusive-3').change(function() {
             var val = $(this).val();
