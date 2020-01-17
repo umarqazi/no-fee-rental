@@ -1488,23 +1488,7 @@ h3 {
     min-width: 100%;
     max-width: 100%;
 }
-.property-thumb .grid-badges .status {
-    position: absolute;
-    left: -200px;
-    top: 10px;
-    font-size: 11px;
-    background: #223971;
-    color: #fff;
-    padding: 5px 12px;
-    border-radius: 20px;
-    opacity: 0;
-}
-.featured-properties .property-listing .property-thumb:hover .status{
-    left: 10px;
-    transform: translateX(0px);
-    transition: 0.3s ease-in-out;
-    opacity: 1;
-}
+
     /*.featured-properties .property-listing .property-thumb*/
 
 .heart-icon {

@@ -100,6 +100,11 @@ $(() => {
         autoComplete( document.getElementById('controls'));
     });
 
+    $body.on('keydown', function (event) {
+        if(event.keyCode === 13)
+            event.preventDefault();
+    });
+
     $body.on('blur', '#controls', function() {
         setTimeout(() => {
             addrToLatLng($('body').find('#controls').val()).then(coords => {
