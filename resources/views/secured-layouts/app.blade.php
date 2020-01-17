@@ -38,6 +38,7 @@
 	{!! HTML::script('assets/js/vendor/jquery.validate.min.js') !!}
     {!! HTML::script('assets/js/vendor/jquery-ui.min.js') !!}
 	{!! HTML::script('assets/js/vendor/lightslider.js') !!}
+	{!! HTML::script('assets/js/vendor/jquery.maskMoney.js') !!}
 	{!! HTML::script('assets/js/vendor/pignose.calendar.full.min.js') !!}
     {!! HTML::script('assets/js/vendor/dropzone.js') !!}
     {!! HTML::script('assets/js/vendor/sweetalert.min.js') !!}

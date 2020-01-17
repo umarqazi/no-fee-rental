@@ -24,8 +24,8 @@ class Listing extends Model {
 		'user_id', 'realty_id', 'unique_slug', 'neighborhood_id', 'building_id',
         'name', 'email', 'phone_number', 'street_address', 'display_address',
         'thumbnail', 'baths', 'bedrooms', 'unit', 'rent', 'square_feet',
-        'description', 'is_featured', 'map_location', 'listing_type',
-		'visibility', 'realty_url', 'availability_type', 'availability',
+        'description', 'is_featured', 'map_location', 'listing_type', 'is_convertible',
+		'visibility', 'realty_url', 'availability_type', 'availability', 'renter_rebate',
         'application_fee', 'deposit', 'lease_term', 'free_months', 'freshness_score'
 	];
 
