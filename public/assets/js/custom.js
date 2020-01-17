@@ -723,5 +723,6 @@ $(() => {
     });
     $('.notification-main-wrapper i').click(function () {
         $(this).toggleClass('far fa-star fas fa-star');
-    })
+    });
+    $('[data-toggle="tooltip"]').tooltip();
 });

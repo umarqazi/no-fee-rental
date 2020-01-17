@@ -60,7 +60,7 @@
                 <div class="rowmt-5 row">
                     <div class="col-lg-6">
                         <h2 class="text-left">Contact Us</h2>
-                        <p> Reach out to us for any enquery</p>
+                        <p> Reach out to us for any enquiry</p>
                         {!! Form::open([
                             'url' => route('web.sendRequest'),
                             'class' => 'contact-form ajax',
