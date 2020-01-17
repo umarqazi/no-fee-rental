@@ -13,12 +13,9 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     @csrf
-
                                     <input type="hidden" name="token" value="{{ $token }}">
-
                                     <div class="form-group">
                                         <input id="email" type="email" placeholder="E-Mail Address" class="input-style" name="email" value="{{ $email ?? old('email') }}" required autofocus>
-
                                         @if ($errors->has('email'))
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $errors->first('email') }}</strong>
@@ -56,4 +53,9 @@
         </div>
         </div>
     </section>
+    <script>
+        $('body').on('form-success-reset-password', function (event, data) {
+            window.location.href = "{{ route('web.index') }}"
+        });
+    </script>
 @endsection

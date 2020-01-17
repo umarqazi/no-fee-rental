@@ -86,6 +86,13 @@
                                     </a>
                                 </li>
                             @endforeach
+                            @if(count($listing->images) < 1)
+                                <li data-thumb="{{ asset($listing->thumbnail ?? DLI) }}" class="large-view">
+                                    <a target="_blank" href="{{ asset($listing->thumbnail ??  DLI) }}">
+                                        <img src="{{ asset($listing->thumbnail ?? DLI) }}" alt=""/>
+                                    </a>
+                                </li>
+                            @endif
                         </ul>
                     </div>
                 </div>
@@ -120,6 +127,10 @@
                                 <div class="lease-term-section">
                                     <span>Lease term: </span>
                                      <strong> {{ $listing->lease_term ?? 'None' }}</strong>
+                                </div>
+                                <div class="lease-term-section">
+                                    <span>Free Month: </span>
+                                    <strong> {{ str_formatting($listing->free_months, 'Month') ?? 'None' }}</strong>
                                 </div>
                                 <div class="lease-term-section">
                                    <span>Days on market:</span>
@@ -258,17 +269,4 @@
     setMap('map', JSON.parse('{!! $listing->map_location !!}'), true, true, '{!! $listing->street_address !!}', 13);
     schoolZone(JSON.parse('{!! $listing->map_location !!}'));
 </script>
-
-<script>
-  $(document).ready(function(){
-  $(".after-radio-textarea a").click(function(){
-    $(".calendar-wrap").hide();
-    $(".successfull-msg").show();
-  });
- $(".apointment-tabs ul li").click(function(){
-    $(".apointment-tabs ul li").removeClass('active');
-    $(this).addClass('active');
- });
-});
-  </script>
 @endsection
