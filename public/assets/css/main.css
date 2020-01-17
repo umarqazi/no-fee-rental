@@ -3063,7 +3063,11 @@ footer .copyright .social-icons li a:hover {
     justify-content: space-between;
     /*flex: auto;*/
 }
-
+.listing-detail-container .listing-info .product-title .right-share-icons-side .img-with-tooltip{
+    width: 23px;
+    height: 24px;
+    margin-right:10px;
+}
 .listing-detail-container .listing-info .product-title .share-icon-div {
     cursor: pointer;
     display: inline-block;
