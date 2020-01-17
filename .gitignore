@@ -24,3 +24,4 @@ yarn-error.log
 /.phpintel
 /.idea
 /public/uploads/
+/credentials
