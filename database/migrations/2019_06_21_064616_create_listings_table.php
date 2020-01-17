@@ -27,7 +27,7 @@ class CreateListingsTable extends Migration {
 			$table->string('display_address')->nullable();
 			$table->string('thumbnail')->nullable();
 			$table->integer('baths')->nullable();
-			$table->integer('bedrooms')->nullable();
+			$table->float('bedrooms')->nullable();
 			$table->string('unit')->nullable();
 			$table->integer('rent')->nullable();
 			$table->integer('square_feet')->nullable();
@@ -35,10 +35,12 @@ class CreateListingsTable extends Migration {
 			$table->string('map_location')->nullable();
             $table->string('lease_term')->nullable();
             $table->string('free_months')->nullable();
-            $table->enum('listing_type', ['open', 'exclusive'])->default('open')->nullable();
             $table->string('application_fee')->nullable();
             $table->string('deposit')->nullable();
+            $table->string('renter_rebate')->nullable();
             $table->integer('freshness_score')->nullable();
+            $table->enum('listing_type', ['open', 'exclusive'])->default('open')->nullable();
+            $table->integer('is_convertible')->default(0)->comment = "0-Not Convertible, 1-Convertible";
 			$table->integer('is_featured')->default(0)->comment = "0-Non-Featured, 1-Featured, 2-Request-Featured";
             $table->integer('visibility')->default(2)->comment = "0-Inactive, 1-Active, 2-Pending, 3-Archived";
             $table->integer('availability_type')->nullable()->comment = "0-Not Available, 1-Immediately, 2-Date";

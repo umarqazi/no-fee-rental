@@ -416,8 +416,8 @@ $(() => {
     });
 
     //add US format phone masking on phone number filed
-    $("input[name=phone_number]").focus(function () {
-        $("input[name=phone_number]").mask('(000) 000-0000');
-    });
+    // $("input[name=phone_number]").focus(function () {
+        $("input[name=rent]").maskMoney();
+    // });
 
 });

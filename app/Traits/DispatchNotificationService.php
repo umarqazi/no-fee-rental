@@ -21,6 +21,7 @@ trait DispatchNotificationService
     private static $data;
 
     /**
+     * // not required
      * @param $data
      */
     public static function LISTINGAPPROVALREQUEST($data)
