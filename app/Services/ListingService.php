@@ -435,18 +435,19 @@ class ListingService extends BuildingService {
         $form->availability      = $request->availability;
         $form->visibility        = $request->visibility;
         $form->description       = $request->description;
-        $form->neighborhood_id   = $request->neighborhood_id ??
-                                   $this->__neighborhoodHandler($request->neighborhood);
+        $form->neighborhood_id   = $request->neighborhood_id ?? $this->__neighborhoodHandler($request->neighborhood);
         $form->bedrooms          = $request->bedrooms;
         $form->baths             = $request->baths;
         $form->unit              = $request->unit;
         $form->rent              = $request->rent;
+        $form->is_convertible    = $this->__isConvertible($request->is_convertible);
         $form->square_feet       = $request->square_feet;
         $form->map_location      = $request->map_location;
-        $form->listing_type      = $request->listing_type;
+        $form->listing_type      = $this->__listingType($request->listing_type);
         $form->thumbnail         = $request->thumbnail ?? '';
         $form->old_thumbnail     = $request->old_thumbnail ?? null;
         $form->application_fee   = $request->application_fee;
+        $form->renter_rebate     = $request->renter_rebate;
         $form->deposit           = $request->deposit;
         $form->lease_term        = $request->lease_term;
         $form->free_months       = $request->free_months;
@@ -468,6 +469,31 @@ class ListingService extends BuildingService {
         }
 
         return $listing->thumbnail;
+    }
+
+    /**
+     * @param $request
+     * @return bool
+     */
+    private function __isConvertible($request) {
+        return isset($request) && $request === 'on';
+    }
+
+    /**
+     * @param $request
+     * @return string
+     */
+    private function __listingType($request) {
+        if(isOwner()) return EXCLUSIVE;
+        return $request;
+    }
+
+    /**
+     * @param $request
+     * @return bool
+     */
+    private function __byAppointment($request) {
+        return isset( $request ) && $request === 'on';
     }
 
     /**
@@ -497,7 +523,7 @@ class ListingService extends BuildingService {
                     'date'       => $data[ $i ]['date'],
                     'start_time' => $data[ $i ]['start_time'],
                     'end_time'   => $data[ $i ]['end_time'],
-                    'only_appt'  => isset( $data[ $i ]['by_appointment'] ) && $data[ $i ]['by_appointment'] == 'on' ? true : false,
+                    'only_appt'  => $this->__byAppointment($data[ $i ]['by_appointment']),
                     'created_at' => now(),
                     'updated_at' => now()
                 ];

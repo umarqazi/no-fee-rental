@@ -47,7 +47,8 @@ class RecoverPasswordController extends Controller
      */
     public function sendRequest(Request $request) {
         $res = $this->service->sendEmail($request);
-        return sendResponse($request, $res, 'We Send an Email to your account', '/','invalid Email');
+        return sendResponse($request, $res,
+            'We Send an Email to your account', null, 'invalid Email');
     }
 
     /**
@@ -56,6 +57,8 @@ class RecoverPasswordController extends Controller
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
     public function recover(Request $request) {
-        return sendResponse($request, $this->service->recover($request), 'Your password has been reset.', '/', 'Invalid Email');
+        $res = $this->service->recover($request);
+        return sendResponse($request, $res,
+            'Your password has been reset.', null, 'Invalid Email');
     }
 }

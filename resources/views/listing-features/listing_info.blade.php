@@ -24,13 +24,20 @@
 		</span>
     </div>
 </div>
-<div class="col-md-12 col-lg-6">
+<div class="col-md-10 col-lg-6">
     <div class="neighborhood-flex">
         <div class="form-group">
             <label>Neighborhood</label>
             {!! Form::text('neighborhood', null, ['class' => 'input-style', 'readonly']) !!}
             <span class="invalid-feedback" role="alert">
 			    {!! $errors->first('neighborhood') !!}
+		    </span>
+        </div>
+        <div class="form-group">
+            <label>Renter Rebate</label>
+            {!! Form::text('renter_rebate', null, ['class' => 'input-style', 'autocomplete' => 'off']) !!}
+            <span class="invalid-feedback" role="alert">
+			    {!! $errors->first('rent') !!}
 		    </span>
         </div>
         <div class="form-group">
@@ -54,14 +61,14 @@
         </div>
         <div class="form-group">
             <label>Bedrooms</label>
-            {!! Form::text('bedrooms', null, ['class' => 'input-style', 'autocomplete' => 'off']) !!}
+            {!! Form::select('bedrooms', config('formfields.listing.beds'), null, ['class' => 'input-style']) !!}
             <span class="invalid-feedback" role="alert">
 			    {!! $errors->first('bedrooms') !!}
 		    </span>
         </div>
         <div class="form-group">
             <label>Bathrooms</label>
-            {!! Form::text('baths', null, ['class' => 'input-style', 'autocomplete' => 'off']) !!}
+            {!! Form::select('baths', config('formfields.listing.baths'), null, ['class' => 'input-style']) !!}
             <span class="invalid-feedback" role="alert">
 			    {!! $errors->first('baths') !!}
 		    </span>
@@ -131,16 +138,23 @@
 			    {!! $errors->first('availability') !!}
 		    </span>
         </div>
-        <div class="form-group">
-            <label>Listing Type</label>
-            {!! Form::select('listing_type', config('formfields.listing.listing_type'), null, ['class' => 'input-style']) !!}
-            <span class="invalid-feedback" role="alert">
-                {!! $errors->first('listing_type') !!}
-		    </span>
-        </div>
+        @if(!isOwner())
+            <div class="form-group">
+                <label>Listing Type</label>
+                {!! Form::select('listing_type', config('formfields.listing.listing_type'), null, ['class' => 'input-style']) !!}
+                <span class="invalid-feedback" role="alert">
+                    {!! $errors->first('listing_type') !!}
+                </span>
+            </div>
+        @endif
     </div>
 </div>
-
+<div class="col-md-12">
+    <div class="custom-control custom-checkbox by-add-only">
+        {!! Form::checkbox('is_convertible', null, false, ['class' => "custom-control-input", 'id' => 'convertible']) !!}
+        <label class="custom-control-label" for="convertible"> Convertible</label>
+    </div>
+</div>
 {{--Open House--}}
 @include('listing-features.open_house')
 <div class="row">

@@ -544,7 +544,7 @@ function amenities() {
 function bedsDropDown() {
     $html = null;
     $html = '<ul>
-                <li> <input type="checkbox" value="studio" id="Checkbox-ad-search" name="beds[]">
+                <li> <input type="checkbox" value="0.5" id="Checkbox-ad-search" name="beds[]">
                     <label for="Checkbox-ad-search"><span class="label-name">Studio</span></label>
                 </li>
                 <li> <input type="checkbox" value="1" id="Checkbox-1-ad-search" name="beds[]">
@@ -660,7 +660,7 @@ function multi_select_beds($amount = 5, $pre_select = null) {
     $html .= "<ul id=\"advance-search-beds\">";
     $html .= "<li";
     $html .= is_array($pre_select) && in_array('studio', $pre_select) ? " class='white-border-chkbox'>" : '>';
-    $html .= Form::checkbox('beds[]', 'studio', is_array($pre_select) && in_array('studio', $pre_select) ? "checked='checked'" : '', ['id' => $id]);
+    $html .= Form::checkbox('beds[]', '0.5', is_array($pre_select) && in_array('0.5', $pre_select) ? "checked='checked'" : '', ['id' => $id]);
     $html .= "<label for=\"{$id}\"><span class=\"label-name\">Studio</span></label></li>";
     for ($i = 1; $i <= $amount; $i ++) {
         $id = str_random(10);
@@ -990,7 +990,7 @@ function features() {
  */
 function property_thumbs($listing) {
     $html = null;
-    $html .= "<div class='property-thumb'><div class='grid-badges'><span class='status'>Featured</span></div><div class='check-btn'>";
+    $html .= "<div class='property-thumb'><div class='check-btn'>";
     $html .= "<a href='javascript:void(0);'>";
     $html .= "<button class='btn-default' list_id='{$listing->id}' to='{$listing->agent->id}' data-target=\"#check-availability\">Check Availability</button>";
     $html .= "</a></div>";
@@ -1010,7 +1010,9 @@ function property_thumbs($listing) {
     $html .= "<img src='".asset($listing->thumbnail ?? DLI)."' alt='' class='main-img'>";
     $html .= "<div class='info'><div class='info-link-text'>";
     $html .= "<p>$ ".number_format($listing->rent)." / month&nbsp;&nbsp;</p>";
-    $html .= "<small> (". $listing->bedrooms .' bd'.", ".$listing->baths.' ba'.")</small>";
+    $html .= "<small> (";
+    $html .= $listing->bedrooms < 1 ? 'Studio' : $listing->bedrooms .' bd';
+    $html .= ", ".$listing->baths.' ba'.")</small>";
     $html .= "<p>";
     $html .= is_exclusive($listing).", ";
     $html .= $listing->neighborhood ? $listing->neighborhood->name : null;
@@ -1018,7 +1020,9 @@ function property_thumbs($listing) {
     $html .= "<a href='".route('listing.detail', $listing->id)."' class='btn viewfeature-btn'> View </a></div>";
     $html .= "<div class='feaure-policy-text'>";
     $html .= "<p>$ ".number_format($listing->rent)." / month </p>";
-    $html .= "<span> ". str_formatting($listing->bedrooms, 'bed').", ".str_formatting($listing->baths, 'bath')." </span></div></div>";
+    $html .= "<span> ";
+    $html .= $listing->bedrooms < 1 ? 'Studio' : str_formatting($listing->bedrooms, 'bed');
+    $html .= ", ".str_formatting($listing->baths, 'bath')." </span></div></div>";
     return $html;
 }
 
