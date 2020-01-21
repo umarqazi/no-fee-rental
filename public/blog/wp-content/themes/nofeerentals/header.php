@@ -75,13 +75,7 @@
                     <div class="recent-search-dropdown">
                         <a href="#">Recent Searches<i class="fa fa-angle-down"></i></a>
                         <div class="dropDown">
-                            <ul class="neighborhoods_amenities">
-                                <li></li>
-                            </ul>
-
-                            <ul class="ul-border-top">
-                                <li></li>
-                            </ul>
+                            <ul class="neighborhoods_amenities"></ul>
                         </div>
                     </div>
 		<?php if(!isAuthenticated()) { ?>
@@ -148,7 +142,8 @@
         </div>
     </div>
     <script src="http://no-fee-rental.teamtechverx.com/assets/js/vendor/jquery.validate.min.js"></script>
-
+    <script src="http://no-fee-rental.teamtechverx.com/assets/js/vendor/jquery.maskMoney.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
 </header>
 
 
