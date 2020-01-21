@@ -253,15 +253,29 @@ function dispatchPlanExpiryCheckListener() {
  * @return bool|mixed
  */
 function addNewList() {
-    return (new \App\Services\CreditPlanService())->addSlots();
+    return (new \App\Services\CreditPlanService())->addSlot();
 }
 
-function repost() {
-
+/**
+ * @param $plan
+ * @return string
+ */
+function currentPlan($plan) {
+    if($plan === BASICPLAN) {
+        return 'Basic Plan';
+    } else if ($plan === GOLDPLAN) {
+        return 'Gold Plan';
+    } else {
+        return 'Platinum Plan';
+    }
 }
 
-function featured() {
-
+/**
+ * @param $currentPlan
+ * @return mixed
+ */
+function billingCycle($currentPlan) {
+    return $currentPlan->updated_at->addDays(MAXPLANDAYS)->format('D m, Y h:m s');
 }
 
 /**
@@ -1094,20 +1108,15 @@ function agents($id = null) {
 }
 
 /**
+ * @param $model
  * @param $data
  * @param bool $update
  * @param null $id
- *
  * @return mixed
  */
-function calendarEvent( $data, $update = false, $id = null ) {
-    if ( $update ) {
-        $calendar = ( new \App\Services\CalendarService() )->updateEvent( $id, $data );
-    } else {
-        $calendar = ( new \App\Services\CalendarService() )->addEvent( toObject( $data ) );
-    }
-
-    return $calendar;
+function calendarEvent( $model, $data, $update = false, $id = null ) {
+    $calendar = ( new \App\Services\CalendarService() );
+    return !$update ? $calendar->addEvent($model, $data) : $calendar->updateEvent($model, $id, $data);
 }
 
 /**

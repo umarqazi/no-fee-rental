@@ -130,7 +130,7 @@
     wp_enqueue_style('maincss', get_template_directory_uri().'/assets/css/main.css');
     // wp_enqueue_style('maincss', get_template_directory_uri().'/assets/css/new-main.css');
 
-    // scripts
+    // scripts//
     wp_enqueue_script('jqueryjs', get_template_directory_uri().'/assets/js/jquery.min.js', '', '', true);
     wp_enqueue_script('jqueryuijs', get_template_directory_uri().'/assets/js/jquery-ui.min.js', '', '', true);
     wp_enqueue_script('bootstrapjs', get_template_directory_uri().'/assets/js/bootstrap.min.js', '', '', true);

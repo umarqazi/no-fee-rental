@@ -26,7 +26,7 @@ class CalendarEvent extends Model implements Event {
     /**
      * @var array
      */
-    protected $fillable = ['start', 'end', 'title', 'color', 'url', 'from', 'to', 'linked_id'];
+    protected $fillable = ['start', 'end', 'title', 'model', 'url', 'from', 'to', 'ref_event_id'];
 
     /**
      * @param $query

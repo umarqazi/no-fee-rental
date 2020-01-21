@@ -190,20 +190,6 @@ if(!defined('FEE')) {
 }
 
 /**
- * Default Open House Color
- */
-if(!defined('ADDOPENHOUSECOLOR')) {
-    define('ADDOPENHOUSECOLOR', 'dark yellow');
-}
-
-/**
- * Update Open House Color
- */
-if(!defined('UPDATEOPENHOUSECOLOR')) {
-    define('UPDATEOPENHOUSECOLOR', 'red');
-}
-
-/**
  * Owner Only
  */
 if(!defined('OWNERONLY')) {
@@ -246,6 +232,27 @@ if(!defined('PLATINUMPLAN')) {
 }
 
 /**
+ * Stripe Basic Plan
+ */
+if(!defined('BASICPLANID')) {
+    define('BASICPLANID', 'basic_00000');
+}
+
+/**
+ * Stripe Gold Plan
+ */
+if(!defined('GOLDPLANID')) {
+    define('GOLDPLANID', 'gold_00000');
+}
+
+/**
+ * Stripe Platinum Plan
+ */
+if(!defined('PLATINUMPLANID')) {
+    define('PLATINUMPLANID', 'platinum_00000');
+}
+
+/**
  * Not Expired Plan
  */
 if(!defined('NOTEXPIRED')) {
@@ -264,6 +271,13 @@ if(!defined('EXPIRED')) {
  */
 if(!defined('MAXPLANDAYS')) {
     define('MAXPLANDAYS', 30);
+}
+
+/**
+ * Trial Days
+ */
+if(!defined('TRIALDAYS')) {
+    define('TRIALDAYS', 30);
 }
 
 /**
@@ -376,4 +390,32 @@ if(!defined('OTHER')) {
  */
 if(!defined('MRG')) {
     define('MRG', 'MANHATTAN REALTY GROUP');
+}
+
+/**
+ * Yellow Coming Event
+ */
+if(!defined('COMINGEVENT')) {
+    define('COMINGEVENT', '#FFFF00');
+}
+
+/**
+ * Green Today Event
+ */
+if(!defined('CURRENTEVENT')) {
+    define('CURRENTEVENT', '#00FF00');
+}
+
+/**
+ * Gray Passed Event
+ */
+if(!defined('PASTEVENT')) {
+    define('PASTEVENT', '#D3D3D3');
+}
+
+/**
+ * Red Rejected Event
+ */
+if(!defined('REJECTEDEVENT')) {
+    define('REJECTEDEVENT', '#FF0000');
 }

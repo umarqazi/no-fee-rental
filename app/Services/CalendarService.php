@@ -9,6 +9,7 @@
 namespace App\Services;
 
 use App\Forms\AddEventForm;
+use App\Forms\EventForm;
 use App\Repository\CalendarRepo;
 
 /**
@@ -76,19 +77,18 @@ class CalendarService {
 
     /**
      * @param $request
-     *
-     * @return AddEventForm
+     * @return EventForm
      */
     private function __validateForm($request) {
-        $form             = new AddEventForm();
-        $form->to         = $request->to ?? null;
-        $form->from       = $request->from ?? myId();
-        $form->linked_id  = $request->linked_id;
-        $form->title      = $request->title;
-        $form->color      = $request->color;
-        $form->start      = carbon($request->start)->format('Y-m-d h:i:s');
-        $form->end        = carbon($request->end)->format('Y-m-d h:i:s');
-        $form->url        = $request->url;
+        $form                = new EventForm();
+        $form->to            = $request->to ?? null;
+        $form->from          = $request->from ?? myId();
+        $form->title         = $request->title;
+        $form->model         = $request->model;
+        $form->start         = carbon($request->start)->format('Y-m-d h:i:s');
+        $form->end           = carbon($request->end)->format('Y-m-d h:i:s');
+        $form->url           = $request->url;
+        $form->ref_event_id  = $request->linked_id;
         $form->validate();
         return $form;
     }

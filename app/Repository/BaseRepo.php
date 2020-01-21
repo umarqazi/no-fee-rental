@@ -43,6 +43,15 @@ class BaseRepo implements IRepo {
 		return $this->model->insert($data);
 	}
 
+    /**
+     * @param $data
+     *
+     * @return mixed
+     */
+    public function insertGetIds($data) {
+        return $this->model->insertGetId($data);
+    }
+
 	/**
 	 * @param $id
 	 *

@@ -34,7 +34,7 @@ class CreditPlanController extends Controller {
      */
     public function index() {
         $currentPlan = $this->creditPlanService->myPlan();
-        return view('agent.credit', compact('currentPlan'));
+        return view('agent.credit', compact('currentPlan'))->with(['plan_detail' => false]);
     }
 
     /**
@@ -42,8 +42,19 @@ class CreditPlanController extends Controller {
      */
     public function subscription() {
         $currentPlan = $this->creditPlanService->myPlan();
-        $transactions = $this->creditPlanService->myTransactions();
-        return view('agent.subscription_plan', compact('transactions', 'currentPlan'));
+        return view('agent.subscription_plan', compact( 'currentPlan'))->with([
+            'plan_detail' => true,
+            'route' => whoAmI().'.changeCard'
+        ]);
+    }
+
+    /**
+     * @param Request $request
+     * @return JsonResponse|RedirectResponse
+     */
+    public function changeCard(Request $request) {
+        $res = $this->creditPlanService->changeCard($request);
+        return sendResponse($request, $res, 'Card has been changed');
     }
 
     /**

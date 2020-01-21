@@ -21,5 +21,7 @@ $('form').on('submit', function() {
 });
 
 $('body').on('form-success-stripe-checkout', function (event, data) {
-    window.location.reload();
+    setTimeout(() => {
+        window.location.reload();
+    });
 });

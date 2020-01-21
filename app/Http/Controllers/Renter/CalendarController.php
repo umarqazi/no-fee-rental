@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Renter;
 
+use App\CalendarEvent;
 use App\Services\CalendarService;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\JsonResponse;
@@ -19,11 +20,9 @@ class CalendarController extends Controller {
 
     /**
      * CalendarController constructor.
-     *
-     * @param CalendarService $calendarService
      */
-    public function __construct(CalendarService $calendarService) {
-        $this->calendarService = $calendarService;
+    public function __construct() {
+        $this->calendarService = new CalendarService();
     }
 
     /**
@@ -40,6 +39,7 @@ class CalendarController extends Controller {
      * @return JsonResponse|RedirectResponse
      */
     public function create(Request $request) {
+        $request->model = CalendarEvent::class;
         $res = $this->calendarService->addEvent($request);
         return sendResponse($request, $res, 'Event has been added.');
     }
