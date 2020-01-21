@@ -14,13 +14,24 @@ class CreditPlan extends Model {
     /**
      * @var array
      */
-    protected $fillable = ['user_id', 'remaining_slots', 'remaining_repost', 'remaining_featured', 'plan', 'is_expired'];
+    protected $fillable = ['user_id', 'txn_id', 'remaining_slots', 'remaining_repost', 'remaining_featured', 'plan', 'is_expired'];
 
     /**
      * @return HasOne
      */
     public function agent() {
         return $this->hasOne(User::class, 'id', 'user_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function transactions() {
+        return $this->hasMany(ManageTransaction::class, 'user_id', 'user_id');
+    }
+
+    public function getPlan($value) {
+        dd('yes', $value);
     }
 
     /**

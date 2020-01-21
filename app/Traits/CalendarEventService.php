@@ -8,7 +8,10 @@
 
 namespace App\Traits;
 
-
+/**
+ * Trait CalendarEventService
+ * @package App\Traits
+ */
 trait CalendarEventService
 {
 

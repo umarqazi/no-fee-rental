@@ -143,7 +143,6 @@
     </div>
     <script src="http://no-fee-rental.teamtechverx.com/assets/js/vendor/jquery.validate.min.js"></script>
     <script src="http://no-fee-rental.teamtechverx.com/assets/js/vendor/jquery.maskMoney.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
 </header>
 
 

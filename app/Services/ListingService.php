@@ -9,6 +9,7 @@
 namespace App\Services;
 
 use App\Forms\ListingForm;
+use App\OpenHouse;
 use App\Repository\FeatureRepo;
 use App\Repository\OpenHouseRepo;
 use App\Repository\UserRepo;
@@ -96,9 +97,9 @@ class ListingService extends BuildingService {
      * @return bool
      */
     private function __addListingEvents($listing) {
-//        if(isAgent()) {
-//            return addNewList();
-//        }
+        if(isAgent()) {
+            return addNewList();
+        }
 
 //        $listing->visibility !== PENDINGLISTING ?:
 //            DispatchNotificationService::LISTINGAPPROVALREQUEST(toObject([
@@ -489,11 +490,11 @@ class ListingService extends BuildingService {
     }
 
     /**
-     * @param $request
+     * @param null $request
      * @return bool
      */
-    private function __byAppointment($request) {
-        return isset( $request ) && $request === 'on';
+    private function __byAppointment($request = null) {
+        return isset( $request['by_appointment'] ) && $request['by_appointment'] === 'on';
     }
 
     /**
@@ -515,25 +516,29 @@ class ListingService extends BuildingService {
      */
     private function __addOpenHouse( $id, $listing, $data, $is_update = false ) {
         $batch = [];
-        if ( isset( $data[0]['date'] ) ) {
-            if ( $is_update ) deleteCalendarEvent( $id );
-            for ( $i = 0; $i < sizeof($data); $i ++ ) {
+
+        if($data[0]['date'] !== null) {
+
+            foreach ($data as $key => $openHouse) {
                 $batch[] = [
                     'listing_id' => $id,
-                    'date'       => $data[ $i ]['date'],
-                    'start_time' => $data[ $i ]['start_time'],
-                    'end_time'   => $data[ $i ]['end_time'],
-                    'only_appt'  => $this->__byAppointment($data[ $i ]['by_appointment']),
+                    'date' => $openHouse['date'],
+                    'start_time' => $openHouse['start_time'],
+                    'end_time' => $openHouse['end_time'],
+                    'only_appt' => $this->__byAppointment($openHouse),
                     'created_at' => now(),
                     'updated_at' => now()
                 ];
-
-//                $this->__addCalendarEvents( $listing, $is_update, $id, $data, $i );
             }
-        }
-        $this->openHouseRepo->insert( $batch );
 
-        return $id;
+            if ($this->openHouseRepo->insert($batch)) {
+//            $this->__addOpenHouseCalendarEvent($id, $listing, $data, $is_update);
+                return $id;
+            }
+
+        }
+
+        return false;
     }
 
     /**
@@ -543,18 +548,20 @@ class ListingService extends BuildingService {
      * @param $data
      * @param $i
      */
-    private function __addCalendarEvents( $listing, $is_update, $id, $data, $i ) {
-        calendarEvent( [
-            'color'     => $is_update && $listing->visibility !== PENDINGLISTING
-                ? UPDATEOPENHOUSECOLOR : ADDOPENHOUSECOLOR,
-            'title'     => is_exclusive( $listing ),
-            'from'      => $listing->user_id,
-            'linked_id' => $listing->id,
-            'url'       => ! isAgent() && $listing->visibility !== PENDINGLISTING
-                ? 'listing.detail' : 'javascript:void(0)',
-            'start'     => $data[ $i ]['date'] . ' ' . openHouseTimeSlot( $data[ $i ]['start_time'] )->format( 'H:i:s' ),
-            'end'       => $data[ $i ]['date'] . ' ' . openHouseTimeSlot( $data[ $i ]['end_time'] )->format( 'H:i:s' ),
-        ] );
+    private function __addOpenHouseCalendarEvent( $id, $listing, $data, $update) {
+        $events = [];
+        dd($data);
+        foreach ($data as $key => $event) {
+            dd($event);
+            $events[] = [
+                'title'        => is_exclusive($listing),
+                'start'        => $event['start'],
+                'end'          => $event['end'],
+                'ref_event_id' => $id,
+            ];
+        }
+
+        dd($events);
     }
 
     /**

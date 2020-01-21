@@ -1,6 +1,10 @@
 @extends('secured-layouts.app')
-@section('title', 'Basic Plan')
+@section('title', currentPlan($currentPlan->plan))
 @section('content')
+    {!! HTML::style('assets/css/credit.css') !!}
+    <link rel="stylesheet" type="text/css" href="http://no-fee-rental.teamtechverx.com/assets/css/datepicker.min.css">
+    <script src="http://no-fee-rental.teamtechverx.com/assets/js/datepicker.min.js"></script>
+    <script src="http://no-fee-rental.teamtechverx.com/assets/js/datepicker.en.js"></script>
     {{--basic plan page--}}
     <div class="wrapper">
         <div class="heading-wrapper">
@@ -8,12 +12,11 @@
             <a href="{{ url()->previous() }}" class="btn-default">Back</a>
         </div>
         <div class="credit-plans basic-plan-wrapper">
-            <h3>Current Plan - Pro/Silver</h3>
+            <h3>Current Plan - {{ currentPlan($currentPlan->plan) }}</h3>
             <div class="pg-header">
-                <p>  Your billing cycle ends on Jun 5, 2019 1:06 am, and is currently set to renew.The current payment method is: American Express ending with 8000
+                <p>  Your billing cycle ends on <b>{{ billingCycle($currentPlan) }}</b>, and is currently set to renew. The current payment method is: American Express ending with 8000
                 </p>
-                <a href="javascript:void(0)" class="change-card"> Change Card </a>
-
+                <a href="javascript:void(0)" class="change-card credit-plan"> Change Card </a>
             </div>
             <div class="switching-plans">
                 <h3>Switching Plans</h3>
@@ -52,7 +55,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($transactions as $transaction)
+                                @foreach($currentPlan->transactions as $transaction)
                                     <tr>
                                         <td>{{ $transaction->created_at->format('d-m-Y') }}</td>
                                         <td>${{ $transaction->amt_paid }}</td>
@@ -71,4 +74,6 @@
             </div>
         </div>
     </div>
+    @include('agent.modals.payment_checkout')
+    {!! HTML::script('assets/js/credit_plan.js') !!}
 @endsection
