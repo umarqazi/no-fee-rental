@@ -38,6 +38,11 @@ class PaymentForm extends BaseForm {
     /**
      * @var string
      */
+    public $plan;
+
+    /**
+     * @var string
+     */
     public $card_holder_name;
 
     /**
@@ -46,7 +51,7 @@ class PaymentForm extends BaseForm {
     public $card_number;
 
     /**
-     * @return array|void
+     * @return array
      */
     public function toArray() {
         return [
@@ -54,19 +59,19 @@ class PaymentForm extends BaseForm {
             'name'      => $this->card_holder_name,
             'cvc'       => $this->cvc,
             'amount'    => $this->amount,
+            'plan'      => $this->plan,
             'exp_month' => $this->exp_month,
             'exp_year'  => $this->exp_year
         ];
     }
 
     /**
-     * @return mixed|void
+     * @return array|mixed
      */
     public function rules() {
         return [
             'card'      => 'required|max:16',
             'cvc'       => 'required|max:3',
-            'amount'    => 'required',
             'name'      => 'required',
             'exp_month' => 'required|max:2',
             'exp_year'  => 'required|max:4'

@@ -39,6 +39,12 @@ class CalendarRepo extends BaseRepo {
                     $collection = Calendar::addEvent($tmp, [
                         'color' => $event->color,
                         'url' => ($event->url !== 'javascript:void(0)') ? $event->url : $event->url
+                    ])->setCallbacks([
+                        'eventClick' => 'function(e) {
+                            ajaxRequest("/test", "get", null).then(res => { 
+                                console.log(res);
+                            });
+                        }'
                     ]);
                 }
             }

@@ -19,11 +19,11 @@ class CreateEventsTable extends Migration {
             $table->increments('id');
             $table->unsignedInteger('from');
             $table->unsignedInteger('to')->nullable();
-            $table->unsignedInteger('linked_id')->nullable();
+            $table->unsignedInteger('ref_event_id')->nullable();
+            $table->string('model')->nullable();
             $table->string('title');
             $table->dateTime('start');
             $table->dateTime('end');
-            $table->string('color')->nullable();
             $table->string('url')->nullable();
             $table->timestamps();
 

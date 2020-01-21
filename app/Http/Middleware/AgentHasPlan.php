@@ -17,6 +17,11 @@ class AgentHasPlan {
     private $service;
 
     /**
+     * @var string
+     */
+    private $headers;
+
+    /**
      * AgentHasPlan constructor.
      */
     public function __construct() {
@@ -32,14 +37,16 @@ class AgentHasPlan {
      */
     public function handle($request, Closure $next) {
 
-        if(isMRGAgent()) {
-            return $next($request);
+        $this->headers = $next($request);
+        if(isMRGAgent() || mySelf()->created_at->addDays(TRIALDAYS)->format('Y-m-d') >= now()->format('Y-m-d')) {
+            return $this->headers;
+        } else {
+            $this->service->planExpiredSlotsAction();
         }
 
         if($this->service->agentHasPlan()) {
             if(!$this->service->isExpired() && $this->service->isExpired() !== null) {
-                $this->__performAction($request);
-                return $next($request);
+                return $this->__performAction($request);
             }
 
             $this->service->listenForExpiry();
@@ -49,15 +56,19 @@ class AgentHasPlan {
         return error('You have no subscription plan for listings');
     }
 
+    /**
+     * @param $request
+     * @return bool
+     */
     private function __performAction($request) {
         switch ($request->route()->getName()) {
             case 'agent.addListing':
             case 'agent.createListingImages':
             case 'agent.copyListing':
-
+                return $this->__slotsAction();
                 break;
             case 'agent.repostListing':
-
+                return $this->__repostAction();
                 break;
             case 'agent.unArchive':
 
@@ -66,5 +77,23 @@ class AgentHasPlan {
                 return true;
                 break;
         }
+    }
+
+    /**
+     * @return bool|\Illuminate\Http\RedirectResponse
+     */
+    private function __slotsAction() {
+        return $this->service->isSlotsExist()
+            ? $this->headers
+            : error('You have no remaining slots to add');
+    }
+
+    /**
+     * @return bool|\Illuminate\Http\RedirectResponse
+     */
+    private function __repostAction() {
+        return $this->service->isRepostsExist()
+            ? $this->headers
+            : error('You have no remaining re-posts');
     }
 }
