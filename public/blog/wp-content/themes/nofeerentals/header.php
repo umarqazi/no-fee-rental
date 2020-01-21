@@ -75,13 +75,7 @@
                     <div class="recent-search-dropdown">
                         <a href="#">Recent Searches<i class="fa fa-angle-down"></i></a>
                         <div class="dropDown">
-                            <ul class="neighborhoods_amenities">
-                                <li></li>
-                            </ul>
-
-                            <ul class="ul-border-top">
-                                <li></li>
-                            </ul>
+                            <ul class="neighborhoods_amenities"></ul>
                         </div>
                     </div>
 		<?php if(!isAuthenticated()) { ?>
