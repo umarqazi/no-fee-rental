@@ -21,3 +21,7 @@ Route::post('/newsletter-subscribe', 'NewsletterController@subscribe')->name('ne
 
 // WP Auth Routes
 Route::post('/login', 'WP\AuthController@login');
+
+Route::get('/payment-created', function () {
+    return 'hit';
+});

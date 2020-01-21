@@ -8,7 +8,7 @@
 
 namespace App\Forms;
 
-class AddEventForm extends BaseForm {
+class EventForm extends BaseForm {
 
     /**
      * @var string
@@ -48,21 +48,26 @@ class AddEventForm extends BaseForm {
     /**
      * @var string
      */
-    public $linked_id;
+    public $model;
+
+    /**
+     * @var string
+     */
+    public $ref_event_id;
 
     /**
      * @return array
      */
     public function toArray() {
         return [
-            'title'      => $this->title,
-            'start'      => $this->start,
-            'end'        => $this->end,
-            'color'      => $this->color,
-            'url'        => $this->url,
-            'from'       => $this->from,
-            'to'         => $this->to,
-            'linked_id'  => $this->linked_id
+            'title'         => $this->title,
+            'start'         => $this->start,
+            'end'           => $this->end,
+            'color'         => $this->color,
+            'url'           => $this->url,
+            'from'          => $this->from,
+            'to'            => $this->to,
+            'ref_event_id'  => $this->ref_event_id
         ];
     }
 
@@ -71,6 +76,7 @@ class AddEventForm extends BaseForm {
      */
     public function rules() {
         return [
+            'model' => 'required',
             'title' => 'required',
             'start' => 'required',
             'end'   => 'required',
