@@ -13,5 +13,5 @@ class ManageCustomer extends Model {
     /**
      * @var array
      */
-    protected $fillable = ['customer_id', 'email'];
+    protected $fillable = ['customer_id', 'subscription_id', 'user_id', 'card_id'];
 }

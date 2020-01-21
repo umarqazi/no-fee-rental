@@ -11,9 +11,19 @@
                 <h4 class="modal-title text-center credit-title"></h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
-        {!! Form::open(['url' => route('agent.purchasePlan'), 'method' => 'post', 'class' => 'ajax', 'reset' => 'true', 'id' => 'stripe-checkout']) !!}
-        {!! Form::hidden('amount', null, ['class' => 'amount']) !!}
-        {!! Form::hidden('credit_plan', null, ['class' => 'credit_plan']) !!}
+            {!! Form::open(
+            [
+                'url' => route($route ?? 'agent.purchasePlan'),
+                'method' => 'post',
+                'class' => 'ajax',
+                'reset' => 'true',
+                'id' => 'stripe-checkout'
+            ]) !!}
+
+            @if(!$plan_detail)
+                {!! Form::hidden('amount', null, ['class' => 'amount']) !!}
+                {!! Form::hidden('credit_plan', null, ['class' => 'credit_plan']) !!}
+            @endif
         <!-- Modal body -->
             <div class="modal-body">
                 <div class="form-group">

@@ -33,6 +33,16 @@ class CreditPlanService extends PaymentService {
     protected $creditPlanRepo;
 
     /**
+     * @var string
+     */
+    private $currentPlan;
+
+    /**
+     * @var string
+     */
+    private $request;
+
+    /**
      * @var ManageTransactionRepo
      */
     protected $manageTransactionRepo;
@@ -49,19 +59,39 @@ class CreditPlanService extends PaymentService {
 
     /**
      * @param $request
+     * @return mixed
+     */
+    public function changeCard($request) {
+        return $this->__changeCard($request);
+    }
+
+    /**
+     * @param $request
      * @return bool
      */
     public function purchasePlan($request) {
         DB::beginTransaction();
-        $selectedPlan = $this->__selectPlan($request->credit_plan);
-        $request->amount = $selectedPlan->amount;
-        if($payment = toObject($this->__makePayment($request))) {
-            if($this->__makeTransaction($selectedPlan, $payment, $request)) {
-                if($this->__makeCreditPlan($selectedPlan)) {
+        $this->request = $request;
+        $this->currentPlan = $this->__selectPlan($this->request->credit_plan);
+
+        if($this->agentHasPlan()) {
+
+            if($this->__makeCreditPlan($this->currentPlan, true)) {
+                if($this->__upgradePlan($request)) {
                     DB::commit();
                     return true;
                 }
             }
+
+        } else {
+
+            if($this->__makeCreditPlan($this->currentPlan)) {
+                if($payment = toObject($this->__makePayment($this->request))) {
+                    DB::commit();
+                    return true;
+                }
+            }
+
         }
 
         DB::rollBack();
@@ -80,11 +110,35 @@ class CreditPlanService extends PaymentService {
      */
     public function isExpired() {
         if($plan = $this->__currentBalance()) {
-            return $plan->updated_at->addDays(MAXPLANDAYS)->format('d-m-Y') > now()->format('d-m-Y')
-                ? true : false;
+            return $plan->updated_at->addDays(MAXPLANDAYS)->format('Y-m-d') > now()->format('Y-m-d')
+                ? false : true;
         }
 
         return null;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSlotsExist() {
+        $plan = $this->__currentBalance();
+        return $plan ? $plan->remaining_slots > 0 : false;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isFeaturedExist() {
+        $plan = $this->__currentBalance();
+        return $plan ? $plan->remaining_featured > 0 : false;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isRepostsExist() {
+        $plan = $this->__currentBalance();
+        return $plan ? $plan->remaining_reposts > 0 : false;
     }
 
     /**
@@ -102,7 +156,7 @@ class CreditPlanService extends PaymentService {
     /**
      * @return bool|mixed
      */
-    public function addSlots() {
+    public function addSlot() {
         $plan = $this->__currentBalance();
         $availableSlots = $plan->remaining_slots;
         if($availableSlots >= 1) {
@@ -117,27 +171,12 @@ class CreditPlanService extends PaymentService {
     /**
      * @return bool|mixed
      */
-    public function removeSlots() {
-        $plan = $this->__currentBalance();
-        $availableSlots = $plan->remaining_slots;
-        if($availableSlots > 1) {
-            return $this->creditPlanRepo->updateByClause(['user_id' => myId()], [
-                'remaining_slots' => $availableSlots -= 1
-            ]);
-        }
-
-        return false;
-    }
-
-    /**
-     * @return bool|mixed
-     */
     public function reposts() {
         $plan = $this->__currentBalance();
         $availableRepost = $plan->remaining_repost;
         if($availableRepost > 1) {
             return $this->creditPlanRepo->updateByClause(['user_id' => myId()], [
-                'remaining_slots' => $availableRepost -= 1
+                'remaining_slots' => $availableRepost - 1
             ]);
         }
 
@@ -152,7 +191,7 @@ class CreditPlanService extends PaymentService {
         $availableFeatured = $plan->remaining_featured;
         if($availableFeatured > 1) {
             return $this->creditPlanRepo->updateByClause(['user_id' => myId()], [
-                'remaining_slots' => $availableFeatured -= 1
+                'remaining_slots' => $availableFeatured - 1
             ]);
         }
 
@@ -171,6 +210,17 @@ class CreditPlanService extends PaymentService {
      */
     public function myTransactions() {
         return $this->manageTransactionRepo->find(['user_id' => myId()])->get();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function planExpiredSlotsAction() {
+        $listings = $this->listingRepo->activeInactive();
+        return $listings->update([
+            'is_featured' => FALSE,
+            'visibility'  => ARCHIVED
+        ]);
     }
 
     /**
@@ -203,9 +253,10 @@ class CreditPlanService extends PaymentService {
 
     /**
      * @param $selectedPlan
+     * @param bool $update
      * @return mixed
      */
-    private function __makeCreditPlan($selectedPlan) {
+    private function __makeCreditPlan($selectedPlan, $update = false) {
         $credits = $this->__validateCreditPlanForm(toObject([
             'credit_plan'        => $selectedPlan->cdt_plan,
             'remaining_slots'    => $selectedPlan->slots,
@@ -213,19 +264,16 @@ class CreditPlanService extends PaymentService {
             'remaining_featured' => $selectedPlan->features
         ]));
 
-        return $this->creditPlanRepo->create($credits->toArray());
+        return !$update
+            ? $this->creditPlanRepo->create($credits->toArray())
+            : $this->creditPlanRepo->updateByClause(['user_id' => myId()], $credits->toArray());
     }
 
     /**
      * @return bool|mixed
      */
     private function __performExpiryAction() {
-        $listings = $this->listingRepo->updateMultiRowsByClause('user_id', [myId()], [
-            'is_featured' => FALSE,
-            'visibility'  => ARCHIVED
-        ]);
-
-        if($listings) {
+        if($this->planExpiredSlotsAction()) {
             return $this->creditPlanRepo->updateByClause(
                 ['user_id' => myId()],
                 ['is_expired' => EXPIRED]
@@ -274,7 +322,6 @@ class CreditPlanService extends PaymentService {
      */
     private function __basicPlan() {
         return [
-            'amount'    => 40,
             'slots'     => 20,
             're_posts'  => 30,
             'features'  => 05,
@@ -287,7 +334,6 @@ class CreditPlanService extends PaymentService {
      */
     private function __goldPlan() {
         return [
-            'amount'    => 70,
             'slots'     => 40,
             're_posts'  => 60,
             'features'  => 10,
@@ -303,7 +349,6 @@ class CreditPlanService extends PaymentService {
             'slots'     => 70,
             'features'  => 25,
             're_posts'  => 100,
-            'amount'    => 100,
             'cdt_plan'  => 'platinum'
         ];
     }

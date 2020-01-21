@@ -38,11 +38,6 @@ class EventForm extends BaseForm {
     /**
      * @var string
      */
-    public $color;
-
-    /**
-     * @var string
-     */
     public $url;
 
     /**
@@ -63,9 +58,9 @@ class EventForm extends BaseForm {
             'title'         => $this->title,
             'start'         => $this->start,
             'end'           => $this->end,
-            'color'         => $this->color,
             'url'           => $this->url,
             'from'          => $this->from,
+            'model'         => $this->model,
             'to'            => $this->to,
             'ref_event_id'  => $this->ref_event_id
         ];

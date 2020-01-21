@@ -17,9 +17,13 @@ class CreateManageCustomersTable extends Migration {
     public function up() {
         Schema::create('manage_customers', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('user_id');
+            $table->string('card_id');
             $table->string('customer_id');
-            $table->string('email');
+            $table->string('subscription_id');
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

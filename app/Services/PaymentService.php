@@ -19,6 +19,16 @@ use App\Repository\ManageCustomerRepo;
 class PaymentService {
 
     /**
+     * @var string
+     */
+    private $card;
+
+    /**
+     * @var string
+     */
+    private $plan;
+
+    /**
      * @var integer
      */
     private $gateway;
@@ -32,6 +42,11 @@ class PaymentService {
      * @var string
      */
     private $customer;
+
+    /**
+     * @var string
+     */
+    private $subscription;
 
     /**
      * @var object
@@ -49,69 +64,148 @@ class PaymentService {
      * @param $gateway
      */
     protected function __construct( $gateway = STRIPE ) {
-        $this->gateway = $gateway;
-        $this->__setGateway();
+        $this->gateway = $gateway; $this->__setGateway();
         $this->customerRepo   = new ManageCustomerRepo();
     }
 
     /**
      * @param $request
-     *
-     * @return mixed
+     * @return PaymentService|mixed
      */
     protected function __makePayment( $request ) {
+
         $this->request = $this->__validateForm( $request );
-        if ($customer   = $this->__isNewCustomer()) {
-            return $this->__makeTransaction( $customer );
+
+        if ($request->is_upgrading) {
+            return $this->__upgradePlan();
         }
 
-        return $this->__createCard()->__makeTransaction( $this->customer );
-    }
+        if ($this->customer = $this->__isNewCustomer()) {
+            return $this->__makeTransaction( $request );
+        }
 
-    /**
-     * @param $customer
-     *
-     * @return mixed
-     */
-    private function __makeTransaction( $customer ) {
-        $charge = $this->paymentMethod->charges()->create( [
-            'currency' => 'usd',
-            'customer' => $customer,
-            'amount'   => $this->request->amount,
-        ] );
-
-        return $charge;
+        $this->__createCard()->__makeTransaction( $request );
+        return $this->__saveDetails();
     }
 
     /**
      * @return string
+     */
+    private function __createSubscription() {
+        $subscription = $this->paymentMethod->subscriptions()->create($this->customer, [
+            'plan' => $this->plan,
+        ]);
+
+        $this->subscription = $subscription['id'];
+        return $subscription;
+    }
+
+    /**
+     * @param $request
+     * @return mixed
+     */
+    protected function __upgradePlan($request) {
+        $this->plan = $this->__selectedPlan($request->credit_plan);
+        $customer = $this->customerRepo->find(['user_id' => myId()])->first();
+        $subscription = $this->paymentMethod->subscriptions()
+            ->update($customer->customer_id, $customer->subscription_id, [
+                'plan' => $this->plan
+            ]);
+
+        return $subscription;
+    }
+
+    /**
+     * @return mixed
+     */
+    private function __cancelPlan() {
+        return $this->paymentMethod->subscriptions()->cancel($this->customer, $this->subscription, true);
+    }
+
+    /**
+     * @param $request
+     * @return string
+     */
+    private function __makeTransaction( $request ) {
+        $this->plan = $this->__selectedPlan($request->credit_plan);
+        return $this->__createSubscription();
+    }
+
+    /**
+     * @param $plan
+     * @return bool|object
+     */
+    private function __selectedPlan($plan) {
+        switch ($plan) {
+            case BASICPLAN:
+                return BASICPLANID;
+                break;
+            case GOLDPLAN:
+                return GOLDPLANID;
+                break;
+            case PLATINUMPLAN:
+                return PLATINUMPLANID;
+                break;
+        }
+
+        return false;
+    }
+
+    /**
+     * @return mixed
      */
     private function __createCustomer() {
         $customer = $this->paymentMethod->customers()->create( [
             'email' => mySelf()->email
         ] );
 
-        $this->customer = $customer['id'];
-
-        if ($customer) {
-            $this->customerRepo->create([
-                'email'       => mySelf()->email,
-                'customer_id' => $this->customer
-            ]);
-        }
-
-        return $this->customer;
+        return $this->customer = $customer['id'];
     }
 
     /**
      * @return mixed
      */
     private function __createCard() {
-        $this->paymentMethod
-            ->cards()
-            ->create( $this->__createCustomer(), $this->__createToken() );
+        $card = $this->paymentMethod
+                     ->cards()
+                     ->create( $this->__createCustomer(), $this->__createToken() );
 
+        $this->card = $card['id'];
         return $this;
+    }
+
+    /**
+     * @param $request
+     * @return mixed
+     */
+    protected function __changeCard($request) {
+        $this->request = $this->__validateForm($request);
+        $credentials = $this->customerRepo->find(['user_id' => myId()])->first();
+        $this->paymentMethod->cards()->delete($credentials->customer_id, $credentials->card_id);
+        return $this->__createCard()->__updateCardDetails();
+    }
+
+    /**
+     * @return mixed
+     */
+    private function __updateCardDetails() {
+        return $this->customerRepo->updateByClause(['user_id' => myId()], [
+            'user_id'         => myId(),
+            'card_id'         => $this->card,
+            'customer_id'     => $this->customer
+        ]);
+    }
+
+    /**
+     * @return $this
+     */
+    private function __saveDetails() {
+        return $this->customerRepo->create([
+            'user_id'         => myId(),
+            'card_id'         => $this->card,
+            'customer_id'     => $this->customer,
+            'subscription_id' => $this->subscription
+        ]);
     }
 
     /**
@@ -150,7 +244,7 @@ class PaymentService {
      * @return bool|mixed
      */
     private function __isNewCustomer() {
-        $customer = $this->customerRepo->find( [ 'email' => mySelf()->email ] )->first();
+        $customer = $this->customerRepo->find( [ 'user_id' => myId() ] )->first();
 
         return $customer ? $this->__findCustomer( $customer->customer_id ) : false;
     }
@@ -179,6 +273,7 @@ class PaymentService {
         $form->cvc              = $request->cvc;
         $form->exp_month        = $request->exp_month;
         $form->exp_year         = $request->exp_year;
+        $form->plan             = $this->__selectedPlan($request->credit_plan);
         $form->validate();
 
         return $form;
