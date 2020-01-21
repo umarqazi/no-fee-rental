@@ -258,10 +258,10 @@ class ListingService extends BuildingService {
                 'to'   => $list->agent->id,
             ]));
 
-            calendarEvent( [
-                'color' => UPDATEOPENHOUSECOLOR,
-                'url'   => route( 'listing.detail', $id ),
-            ], true, $list->id );
+//            calendarEvent( [
+//                'color' => UPDATEOPENHOUSECOLOR,
+//                'url'   => route( 'listing.detail', $id ),
+//            ], true, $list->id );
 
             return true;
         }
