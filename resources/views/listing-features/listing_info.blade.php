@@ -24,7 +24,7 @@
 		</span>
     </div>
 </div>
-<div class="col-md-10 col-lg-6">
+<div class="col-md-12 col-lg-12 col-xl-6">
     <div class="neighborhood-flex">
         <div class="form-group">
             <label>Neighborhood</label>
@@ -50,7 +50,7 @@
     </div>
 </div>
 
-<div class="col-md-12 col-lg-6">
+<div class="col-md-12 col-lg-12 col-xl-6">
     <div class="unit-flex">
         <div class="form-group">
             <label>Unit</label>
@@ -73,6 +73,16 @@
 			    {!! $errors->first('baths') !!}
 		    </span>
         </div>
+        <div class="form-group by-add-only-chkbox">
+            <div class="custom-control custom-checkbox by-add-only">
+                {!! Form::checkbox('is_convertible', null, false, ['class' => "custom-control-input", 'id' => 'convertible']) !!}
+                <label class="custom-control-label" for="convertible"> Convertible</label>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-md-12 col-lg-12 col-xl-6">
+    <div class="unit-flex">
         <div class="form-group">
             <label>Square Feet</label>
             {!! Form::text('square_feet', null, ['class' => 'input-style', 'autocomplete' => 'off']) !!}
@@ -80,10 +90,6 @@
                 {!! $errors->first('square_feet') !!}
             </span>
         </div>
-    </div>
-</div>
-<div class="col-md-12 col-lg-12 col-xl-6">
-    <div class="unit-flex">
         <div class="form-group">
             <label>Free Months</label>
             {!! Form::text('free_months', null, ['class' => 'input-style', 'autocomplete' => 'off']) !!}
@@ -98,6 +104,11 @@
 			    {!! $errors->first('application_fee') !!}
 		    </span>
         </div>
+    </div>
+</div>
+
+<div class="col-md-12 col-lg-12 col-xl-6">
+    <div class="availability-flex">
         <div class="form-group">
             <label>Deposit</label>
             {!! Form::text('deposit', null, ['class' => 'input-style', 'autocomplete' => 'off']) !!}
@@ -112,10 +123,18 @@
 			    {!! $errors->first('lease_term') !!}
 		    </span>
         </div>
+        @if(!isOwner())
+            <div class="form-group">
+                <label>Listing Type</label>
+                {!! Form::select('listing_type', config('formfields.listing.listing_type'), null, ['class' => 'input-style']) !!}
+                <span class="invalid-feedback" role="alert">
+                    {!! $errors->first('listing_type') !!}
+                </span>
+            </div>
+        @endif
     </div>
 </div>
-
-<div class="col-md-12 col-lg-12 col-xl-6">
+<div class="col-md-12 col-lg-6 col-xl-6">
     <div class="availability-flex">
         <div class="form-group">
             <label>Availability</label>
@@ -138,21 +157,6 @@
 			    {!! $errors->first('availability') !!}
 		    </span>
         </div>
-        @if(!isOwner())
-            <div class="form-group">
-                <label>Listing Type</label>
-                {!! Form::select('listing_type', config('formfields.listing.listing_type'), null, ['class' => 'input-style']) !!}
-                <span class="invalid-feedback" role="alert">
-                    {!! $errors->first('listing_type') !!}
-                </span>
-            </div>
-        @endif
-    </div>
-</div>
-<div class="col-md-12">
-    <div class="custom-control custom-checkbox by-add-only">
-        {!! Form::checkbox('is_convertible', null, false, ['class' => "custom-control-input", 'id' => 'convertible']) !!}
-        <label class="custom-control-label" for="convertible"> Convertible</label>
     </div>
 </div>
 {{--Open House--}}
