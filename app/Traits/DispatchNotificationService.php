@@ -318,9 +318,14 @@ trait DispatchNotificationService
 
     /**
      * @param $data
+     * @param bool $hasNotification
      */
-    private static function __setParams($data)
+    private static function __setParams($data, $hasNotification = false)
     {
+        $param = [];
+        if($hasNotification) {
+
+        }
         $toAgent = is_int($data->to) ? agents($data->to ) : (object)['email' => $data->to];
         $fromAgent = is_int($data->from) ? agents($data->from ) : (object)['email' => $data->from];
         self::$data = toObject([

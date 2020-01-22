@@ -43,6 +43,14 @@ function mailToAdmin() {
     return $admin->id ?? null;
 }
 
+function nycSupportEmail() {
+
+}
+
+function nycInfoEmail() {
+
+}
+
 /**
  * @param $path
  * @param $data
@@ -230,6 +238,15 @@ function daysNumReadable( $date ) {
  */
 function carbon( $string ) {
     return new Carbon( $string );
+}
+
+/**
+ * @param $date
+ * @return string
+ */
+function genericFormat($date) {
+    $date = \DateTime::createFromFormat('m-d-Y', $date);
+    return $date->format('Y-m-d');
 }
 
 /**

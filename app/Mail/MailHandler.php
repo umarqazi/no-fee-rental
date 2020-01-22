@@ -20,7 +20,7 @@ class MailHandler extends Mailable {
 	 * @param $data
 	 */
 	public function __construct($data) {
-		$this->data = $data;
+		$this->data = is_object($data) ? $data : toObject($data);
 	}
 
 	/**

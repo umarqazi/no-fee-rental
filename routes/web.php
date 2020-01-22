@@ -156,5 +156,11 @@ Route::get('/accept-invitation/{token}', 'Agent\MemberController@acceptInvitatio
 
 // Test Route
 Route::get('/test', function (\Illuminate\Http\Request $request) {
-    return json('yes', true, true);
+    dd(config('mail.from.address'));
+    dispatchMail('codinghackers@gmail.com', [
+        'fromEmail' => config('mail.from.address'),
+        'view' => 'sign_up',
+        'subject' => 'Test'
+    ]);
+    dd('send');
 })->name('web.test');

@@ -14,7 +14,7 @@ class AgentInvite extends Model {
     /**
      * @var array
      */
-	protected $fillable = ['invited_by', 'email', 'token','accept'];
+	protected $fillable = ['invited_by', 'email', 'token', 'accept'];
 
     /**
      * @return HasOne

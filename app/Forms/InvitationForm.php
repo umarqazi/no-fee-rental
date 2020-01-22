@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Forms\User;
+namespace App\Forms;
 
-use App\Forms\BaseForm;
-
-class AgentInvitationForm extends BaseForm {
+/**
+ * Class InvitationForm
+ * @package App\Forms\User
+ */
+class InvitationForm extends BaseForm {
 
 	/**
 	 * @var string

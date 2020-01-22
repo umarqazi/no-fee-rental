@@ -31,13 +31,10 @@ class RecoverPasswordService {
 
     /**
      * RecoverPasswordService constructor.
-     *
-     * @param PasswordResetRepo $repo
-     * @param UserRepo $userRepo
      */
-    public function __construct(PasswordResetRepo $repo, UserRepo $userRepo) {
-        $this->repo = $repo;
-        $this->userRepo = $userRepo;
+    public function __construct() {
+        $this->userRepo = new UserRepo();
+        $this->repo = new PasswordResetRepo();
     }
 
     /**
@@ -84,19 +81,6 @@ class RecoverPasswordService {
         $form->token = $this->generateToken(60);
         $form->validate();
         return $this->repo->create($form->toArray());
-    }
-
-    /**
-     * @param $data
-     *
-     * @return array
-     */
-    private function mailData($data) {
-        return [
-            'subject' => 'Reset Password Email',
-            'view'    => 'reset-password',
-            'route'   => route('recover.password', $data->token)
-        ];
     }
 
     /**
@@ -149,7 +133,6 @@ class RecoverPasswordService {
 
     /**
      * @param $token
-     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View|void
      */
     public function resetForm($token) {
