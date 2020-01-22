@@ -531,7 +531,7 @@ h4{
     margin-left: 15px;
     line-height: 87px;
 }
-.header-wrapper .header-container .header-right-wrapper .recent-search-dropdown .dropDown ul li a{
+.header-wrapper .header-container .header-right-wrapper .recent-search-dropdown .dropDown ul li a {
     width: 100%;
     display: inline;
     padding: 0px 0px;
@@ -539,7 +539,6 @@ h4{
     font-size: 13px;
     align-items: center;
 }
-
 .header-wrapper .header-container .header-right-wrapper .recent-search-dropdown .dropDown ul li a:hover {
     color: #f36f21;
 }
@@ -556,11 +555,6 @@ h4{
     color: #000;
     font-size: 13px;
     align-items: center;
-}
-.recent-search-dropdown .dropDown .ul-border-top {
-    border-top: 1px solid #ddd;
-    margin-top: 5px;
-    margin-bottom: 5px;
 }
 .header-wrapper .header-container .header-right-wrapper .recent-search-dropdown>a i {
     padding-left: 10px;
@@ -625,7 +619,19 @@ h4{
     display: block;
     margin-top: 0;
 }
-
+.header-wrapper .header-container .header-right-wrapper .recent-search-dropdown .dropDown ul {
+    line-height: 0px;
+}
+.header-wrapper .header-container .header-right-wrapper .recent-search-dropdown .dropDown ul li {
+    display: inline-block;
+    border-bottom: 1px solid #ddd;
+    padding: 5px 0px;
+    width: 100%;
+    line-height: 15px;
+}
+.header-wrapper .header-container .header-right-wrapper .recent-search-dropdown .dropDown ul li:last-child {
+    border-bottom: none;
+}
 .header-wrapper .header-container .header-right-wrapper .actions-btns {
     display: inline-block;
     vertical-align: middle;

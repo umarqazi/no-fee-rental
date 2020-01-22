@@ -902,6 +902,9 @@ header .agent-avtar .avtar:hover div ul {
 .add-new-listing-wrapper .form-group {
     margin-bottom: 15px;
 }
+.mapboxgl-ctrl-geocoder--input::placeholder{
+    font-size: 14px;
+}
 
 .add-new-listing-wrapper .checkbox-listing {
     margin-bottom: 30px;
@@ -2143,6 +2146,11 @@ header .agent-avtar .avtar:hover div ul {
     }
 }
 /*basic plan page css*/
+@media only screen and (min-width:1200px) and (max-width: 1365px){
+    .neighborhood-flex .form-group:first-child{
+        width: 60% !important;
+    }
+}
 @media only screen and (max-width:1200px){
     .basic-plan-wrapper .pg-header{
         display: block;
@@ -2303,6 +2311,9 @@ header .agent-avtar .avtar:hover div ul {
         display: block;
         flex-wrap: wrap;
     }
+    .unit-flex .by-add-only-chkbox{
+        margin-bottom: 15px !important;
+    }
 
 }
 
@@ -2406,7 +2417,10 @@ header .agent-avtar .avtar:hover div ul {
     margin-right: 5px;
 }
 .neighborhood-flex .form-group:first-child{
-    width: 85%;
+    width: 65%;
+}
+.unit-flex .by-add-only-chkbox{
+    margin-bottom: -15px;
 }
 .neighborhood-flex .form-group:last-child{
     margin-right: 0;
@@ -2414,9 +2428,10 @@ header .agent-avtar .avtar:hover div ul {
 .unit-flex{
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 .unit-flex .form-group{
-    width: calc(100% / 4 - 5px);
+    width: calc(100% / 3 - 5px);
     margin-right: 5px;
 }
 .unit-flex .form-group:last-child{
@@ -2427,7 +2442,7 @@ header .agent-avtar .avtar:hover div ul {
     justify-content: space-between;
 }
 .availability-flex .form-group{
-    width: calc(100% / 2 - 5px) ;
+    width: calc(100% / 1 - 5px) ;
     margin-right: 5px;
 }
 .availability-flex .form-group:last-child{

@@ -302,6 +302,7 @@
     authenticate($credentials);
   }
 ?>
+
 <script src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/assets/js/vendor/toastr.js"></script>
 <script src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/assets/js/signup.js"></script>
 <script src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/assets/js/login.js"></script>
