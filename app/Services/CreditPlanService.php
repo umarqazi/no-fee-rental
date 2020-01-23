@@ -77,18 +77,18 @@ class CreditPlanService extends PaymentService {
         if($this->agentHasPlan()) {
 
             if($this->__makeCreditPlan($this->currentPlan, true)) {
-                if($this->__upgradePlan($request)) {
+                if($this->__upgradePlan($this->request)) {
                     DB::commit();
-                    return true;
+                    return 'Plan has been updated';
                 }
             }
 
         } else {
 
             if($this->__makeCreditPlan($this->currentPlan)) {
-                if($payment = toObject($this->__makePayment($this->request))) {
+                if($this->__makePayment($this->request)) {
                     DB::commit();
-                    return true;
+                    return 'Plan purchased Successfully';
                 }
             }
 

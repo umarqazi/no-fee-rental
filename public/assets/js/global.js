@@ -249,6 +249,7 @@ const enableDatePicker = (selector, allowTime = true) => {
         timepicker: allowTime,
         language: 'en',
         startDate: start,
+        dateFormat: "mm-d-yyyy",
         minDate: new Date(),
         minHours: startHours,
         maxHours: 18,
@@ -343,7 +344,8 @@ const scrollDown = (selector) => {
 
 $(() => {
 
-    $('body').on('submit', '.ajax', async function (e) {
+    let $body = $('body');
+    $body.on('submit', '.ajax', async function (e) {
         e.preventDefault();
         let form = $(this);
         let id = $(this).attr('id');
@@ -369,7 +371,7 @@ $(() => {
         }
     });
 
-    $('body').on('click', 'button[data-target="#check-availability"]', function () {
+    $body.on('click', 'button[data-target="#check-availability"]', function () {
         let $listing = $(this).parents('.property-thumb');
         let img = $listing.find('img').attr('src');
         let info = $listing.find('.info > div');
@@ -391,7 +393,7 @@ $(() => {
     /**
      * Do Listing Favourite/Remove Favourite
      */
-    $("body").on('click', '.heart-icon', async function () {
+    $body.on('click', '.heart-icon', async function () {
         let id = $(this).attr('id');
         $(this).toggleClass('favourite');
         if ($(this).hasClass('favourite')) {
@@ -404,20 +406,17 @@ $(() => {
     /**
      * Open Log in Modal when a guest click on favourite Icon
      */
-    $("body").on('click', '.display-heart-icon', async function () {
+    $body.on('click', '.display-heart-icon', async function () {
         $('#login').modal('show');
     });
 
     /**
      * Open Log in Modal when a guest click on Listing Report Icon
      */
-    $("body").on('click', '#listing-report-flag', async function () {
+    $body.on('click', '#listing-report-flag', async function () {
         $('#login').modal('show');
     });
 
-    //add US format phone masking on phone number filed
-    // $("input[name=phone_number]").focus(function () {
-    //     $("input[name=rent]").maskMoney();
-    // });
+    $body.find('.money-mask').maskMoney({prefix:'$ ', allowNegative: true, thousands:',', decimal:',', affixesStay: true});
 
 });

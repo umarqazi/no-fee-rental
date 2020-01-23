@@ -76,10 +76,6 @@ class PaymentService {
 
         $this->request = $this->__validateForm( $request );
 
-        if ($request->is_upgrading) {
-            return $this->__upgradePlan();
-        }
-
         if ($this->customer = $this->__isNewCustomer()) {
             return $this->__makeTransaction( $request );
         }
@@ -92,8 +88,10 @@ class PaymentService {
      * @return string
      */
     private function __createSubscription() {
+//        dd(now()->addDays(TRIALDAYS)->format('dMY'));
         $subscription = $this->paymentMethod->subscriptions()->create($this->customer, [
             'plan' => $this->plan,
+//            'trial_end' => now()->addDays(TRIALDAYS)->format('dMY')
         ]);
 
         $this->subscription = $subscription['id'];

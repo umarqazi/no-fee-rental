@@ -79,11 +79,12 @@ trait DispatchNotificationService
     public static function USERSIGNUP($data)
     {
         self::__setParams($data);
-        self::$data->view = 'confirm-email';
+        self::$data->via = 'info';
+        self::$data->view = 'email_confirmation';
         self::$data->subject = 'Email Confirmation';
-        self::$data->message = 'You can confirm your email by clicking the button below.';
+        self::$data->message = 'Email confirmation request';
         self::$data->url = route('user.confirmEmail', self::$data->data->data->remember_token);
-        self::__onlyEmail();
+        self::send();
     }
 
     /**
@@ -92,9 +93,10 @@ trait DispatchNotificationService
     public static function ADDUSERBYADMIN($data)
     {
         self::__setParams($data);
-        self::$data->view = 'add-user-by-admin';
+        self::$data->via  = 'info';
+        self::$data->view = 'add_user_by_admin';
         self::$data->subject = 'Account Created';
-        self::$data->message = 'Your account was created on no fee rental follow link below to set password.';
+        self::$data->message = 'New account created';
         self::$data->url = route('user.change_password', self::$data->data->data->remember_token);
         self::send();
     }
@@ -105,11 +107,12 @@ trait DispatchNotificationService
     public static function RESETPASSWORD($data)
     {
         self::__setParams($data);
-        self::$data->view = 'reset-password';
+        self::$data->view = 'reset_password';
+        self::$data->via = 'info';
         self::$data->subject = 'Password Reset';
-        self::$data->message = 'You received this email as we receive a request for password reset. If you made this request you can reset your password by following the link given below.';
+        self::$data->message = 'Password reset request';
         self::$data->url = route('recover.password', self::$data->data->data->token);
-        self::__onlyEmail();
+        self::send();
     }
 
     /**
@@ -118,9 +121,10 @@ trait DispatchNotificationService
     public static function AGENTINVITE($data)
     {
         self::__setParams($data);
-        self::$data->view = 'agent-invite';
+        self::$data->via = 'info';
+        self::$data->view = 'invite_by_agent';
         self::$data->subject = 'No Fee Rental Invitation';
-        self::$data->message = 'You received an invitation from no fee rental.';
+        self::$data->message = 'Agent invitation sent';
         self::$data->data->token = $data->data->token;
         self::$data->url = route('agent.signup_form', self::$data->data->token);
         self::__onlyEmail();
@@ -132,9 +136,10 @@ trait DispatchNotificationService
     public static function ADDMEMBER($data)
     {
         self::__setParams($data);
-        self::$data->view = 'listing-feature-approved';
-        self::$data->subject = 'Featured Listing Request Approved';
-        self::$data->message = 'Your Request to make this listing featured has been approved.';
+        self::$data->view = 'add_member';
+        self::$data->via = 'info';
+        self::$data->subject = 'Add Member';
+        self::$data->message = 'A new member has been added';
         self::$data->url = route('member.acceptInvitation', self::$data->data->data->token);
         self::send();
     }
@@ -318,9 +323,14 @@ trait DispatchNotificationService
 
     /**
      * @param $data
+     * @param bool $hasNotification
      */
-    private static function __setParams($data)
+    private static function __setParams($data, $hasNotification = false)
     {
+        $param = [];
+        if($hasNotification) {
+
+        }
         $toAgent = is_int($data->to) ? agents($data->to ) : (object)['email' => $data->to];
         $fromAgent = is_int($data->from) ? agents($data->from ) : (object)['email' => $data->from];
         self::$data = toObject([

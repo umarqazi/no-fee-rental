@@ -44,6 +44,33 @@ function mailToAdmin() {
 }
 
 /**
+ * @param $data
+ * @return mixed
+ */
+function sendViaSupport($data) {
+    $credentials = [
+        'email' => config('mail.support.username'),
+        'password' => config('mail.support.password'),
+    ];
+    new \App\Services\MailService($credentials);
+    return dispatchMail($data->to, $data);
+}
+
+/**
+ * @param $data
+ * @return mixed
+ */
+function sendViaInfo($data) {
+    $credentials = [
+        'email' => config('mail.info.username'),
+        'password' => config('mail.info.password'),
+    ];
+
+    new \App\Services\MailService($credentials);
+    return dispatchMail($data->to, $data);
+}
+
+/**
  * @param $path
  * @param $data
  * @param $name
@@ -234,6 +261,15 @@ function carbon( $string ) {
 
 /**
  * @param $date
+ * @return string
+ */
+function genericFormat($date) {
+    $date = \DateTime::createFromFormat('m-d-Y', $date);
+    return $date->format('Y-m-d');
+}
+
+/**
+ * @param $date
  * @param $format
  *
  * @return false|string
@@ -333,7 +369,6 @@ function dispatchListingNotification( $data, $delay = 5 ) {
 /**
  * @param $data
  * @param int $delay
- *
  * @return PendingDispatch
  */
 function dispatchEmailQueue( $data, $delay = 10 ) {

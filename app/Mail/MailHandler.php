@@ -6,6 +6,10 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
+/**
+ * Class MailHandler
+ * @package App\Mail
+ */
 class MailHandler extends Mailable {
 	use Queueable, SerializesModels;
 
@@ -20,7 +24,7 @@ class MailHandler extends Mailable {
 	 * @param $data
 	 */
 	public function __construct($data) {
-		$this->data = $data;
+		$this->data = is_object($data) ? $data : toObject($data);
 	}
 
 	/**
@@ -30,8 +34,7 @@ class MailHandler extends Mailable {
 	 */
 	public function build() {
 		$data = $this->data;
-		return $this->from($this->data->fromEmail)
-                    ->subject($this->data->subject)
-                    ->view("mails.{$this->data->view}", compact('data'));
+		return $this->subject($this->data->subject)
+            ->view("mails.{$this->data->view}", compact('data'));
 	}
 }

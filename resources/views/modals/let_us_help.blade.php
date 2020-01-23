@@ -54,8 +54,8 @@
                 <div class="modal-body">
                     <div class="pt-4 -b-4 text-center" style="max-width: 100%;">
                          <span id="invest">
-                                {!! Form::text('min_price', null, ['class' => 'input-style', 'placeholder' =>
-                                '$', 'id' => 'spend', 'style' => 'margin:10px 0px; width:100%; text-align:center;
+                                {!! Form::text('min_price', null, ['class' => 'input-style money-mask1', 'placeholder' =>
+                                '$', 'style' => 'margin:10px 0px; width:100%; text-align:center;
                                 font-size:25px;'])
                                 !!}</span>
                             <br/>  <h4 style="font-size: 16px;text-align: left;">on

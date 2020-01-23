@@ -5199,7 +5199,134 @@ list .property-info .info p {
     padding: 10px;
 }
 
+.advertise-banner{
+    background: url("../images/advertise_with_us.jpg") no-repeat center center;
+    min-height: 300px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 87px;
+}
 
+.advertise-banner h1{
+    font-size: 30px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-weight: 600;
+    color: #fff;
+    padding: 20px 20px 0px 20px;
+    font-family: 'Raleway', sans-serif;
+    margin-bottom: 10px;
+    z-index: 2;
+}
+
+.advertise-banner:before{
+    content: "";
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+.swal-footer {
+    text-align: center !important;
+}
+
+.advertise-intro{
+    background: #f4f5f8;
+    padding: 40px 0px;
+}
+.bullet-list li{
+    line-height: normal;
+    margin-bottom: 10px;
+    position: relative;
+    padding-left: 25px;
+    font-size: 16px;
+}
+.bullet-list li:last-child{
+    margin-bottom: 0px;
+}
+.bullet-list li img{
+    width: 20px;
+    height: 20px;
+}
+
+.bullet-list li:before {
+    position: absolute;
+    left: 0;
+    top: 4px;
+    content: "";
+    width: 15px;
+    height: 15px;
+    background-image: url('../images/check.png');
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+.bullet-list li:last-child{
+    text-align: center;
+    margin-top: 0;
+}
+.bullet-list li:last-child:before{
+    display: none;
+}
+strong {
+    font-weight: 600;
+}
+.advertise-pg{
+    padding-top: 40px;
+    margin-bottom: 110px;
+}
+#myModal-currentPlan .modal-title {
+    text-align: center;
+    font-size: 20px;
+    color: #000;
+    font-weight: normal;
+}
+#myModal-currentPlan .modal-body .form-group label {
+    color: #808080;
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+#myModal-currentPlan .input-style {
+    border: #d7d7d7 solid 1px;
+    width: 100%;
+    padding-left: 10px;
+    height: 45px;
+    border-radius: 5px;
+    outline: none;
+    background: #fff;
+}
+#myModal-currentPlan .modal-body .form-group .fa-calendar-alt {
+    position: absolute;
+    top: 40px;
+    right: 15px;
+    color: #e77817;
+}
+#myModal-currentPlan .credit-input{
+    max-width: 100%;
+}
+#myModal-currentPlan .modal-body .form-group{
+    position: relative;
+}
+#myModal-currentPlan .modal-footer {
+    display: block;
+    text-align: center;
+    border: none;
+}
+#myModal-currentPlan .modal-footer .checkout-popup-btn {
+    padding: 2px 60px;
+    border-radius: 45px;
+    font-size: 16px;
+    line-height: 38px;
+}
 /*Responsive style*/
 
 @media all and (min-width:4000px) {
@@ -6680,9 +6807,16 @@ list .property-info .info p {
         margin-left: 0px;
         width: calc(100% / 2 - 15px);
     }
+
 }
 
 @media only screen and (max-width: 576px) {
+    .advertise-banner{
+        min-height: 120px;
+    }
+    .advertise-banner h1{
+        font-size: 16px;
+    }
     .appointment-radio-btn .selection label {
         width: 100%;
     }

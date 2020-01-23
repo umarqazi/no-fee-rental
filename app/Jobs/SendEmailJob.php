@@ -42,6 +42,13 @@ class SendEmailJob implements ShouldQueue
      * @return void
      */
     public function handle() {
-        dispatchMail($this->data->toEmail, $this->data);
+        switch ($this->data->via) {
+            case 'info':
+                sendViaInfo($this->data);
+                break;
+            case 'support':
+                sendViaSupport($this->data);
+                break;
+        }
     }
 }

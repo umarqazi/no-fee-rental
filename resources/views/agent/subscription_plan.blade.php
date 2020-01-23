@@ -1,7 +1,6 @@
 @extends('secured-layouts.app')
 @section('title', currentPlan($currentPlan->plan))
 @section('content')
-    {!! HTML::style('assets/css/credit.css') !!}
     <link rel="stylesheet" type="text/css" href="http://no-fee-rental.teamtechverx.com/assets/css/datepicker.min.css">
     <script src="http://no-fee-rental.teamtechverx.com/assets/js/datepicker.min.js"></script>
     <script src="http://no-fee-rental.teamtechverx.com/assets/js/datepicker.en.js"></script>
@@ -74,6 +73,6 @@
             </div>
         </div>
     </div>
-    @include('agent.modals.payment_checkout')
+    @include('modals.payment_checkout')
     {!! HTML::script('assets/js/credit_plan.js') !!}
 @endsection

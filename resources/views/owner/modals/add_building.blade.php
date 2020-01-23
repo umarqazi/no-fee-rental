@@ -33,15 +33,28 @@
                         </div>
                     </div>
                     <div class="col-sm-6">
-                        <div class="form-group selectAgent">
-                            <label for="select-agent">Select Contact Representative:</label>
-                            {!! Form::select('contact_representative', agents(), null, ['class' => 'input-style']) !!}
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
                         <div class="form-group">
                             <label for="radio">Building Action:</label>
                             {!! Form::select('building_action', config('formfields.building_action'), null, ['class' => 'input-style']) !!}
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="open-house-admin-section">
+                            <label>Contact Representative</label>
+                            <div class="row">
+                                <div class="col-md-4 selectAgent">
+                                    <label for="select-agent">Email</label>
+                                    {!! Form::email('contact_representative', null, ['class' => 'input-style']) !!}
+                                </div>
+                                <div class="col-md-4 selectAgent">
+                                    <label for="select-agent">Username:</label>
+                                    {!! Form::text('username', null, ['class' => 'input-style']) !!}
+                                </div>
+                                <div class="col-md-4 selectAgent">
+                                    <label for="select-agent">Phone Number:</label>
+                                    {!! Form::text('phone_number', null, ['class' => 'input-style']) !!}
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-12">
