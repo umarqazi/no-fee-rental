@@ -130,9 +130,15 @@ Route::post('/get-started', 'HomeController@getStarted')->name('web.getStarted')
 // Site Map Routes
 Route::get('/site-map', 'SiteMapController@index')->name('web.siteMap');
 
+// Advertise With Us Routes
+Route::get('/advertise-with-us', 'AdvertiseController@index')->name('web.advertise');
+
 // NYC Api Route
 Route::post('/boroughs', 'NYCProxyController@boroughs');
 Route::post('/nyc-data', 'NYCProxyController@nycData');
+
+// Member accept invitation
+Route::get('/accept-invitation/{token}', 'Agent\MemberController@acceptInvitation')->name('member.acceptInvitation');
 
 // Application Controlling Routes
 Route::get('/all-clear', function() {
@@ -150,17 +156,8 @@ Route::get('/composer-dump', function() {
     dd('composer dump-succeed');
 });
 
-// Member accept invitation
-Route::get('/accept-invitation/{token}', 'Agent\MemberController@acceptInvitation')->name('member.acceptInvitation');
-
-
+use App\Traits\DispatchNotificationService;
 // Test Route
 Route::get('/test', function (\Illuminate\Http\Request $request) {
-    dd(config('mail.from.address'));
-    dispatchMail('codinghackers@gmail.com', [
-        'fromEmail' => config('mail.from.address'),
-        'view' => 'sign_up',
-        'subject' => 'Test'
-    ]);
-    dd('send');
+    return view('advertise_with_us');
 })->name('web.test');

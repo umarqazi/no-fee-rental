@@ -25,7 +25,7 @@
                         <li><a href="{!! route('web.contact-us') !!}" class="ft-links">Contact Us</a></li>
                         <li><a href="{{ route('web.siteMap') }}" class="ft-links">Site Map</a></li>
                         <li><a href="http://no-fee-rental.teamtechverx.com/blog/?page_id=187" class="ft-links">Feedback</a></li>
-                        <li><a href="http://no-fee-rental.teamtechverx.com/blog/?page_id=195" class="ft-links">Advertise with Us</a></li>
+                        <li><a href="{{ route('web.advertise') }}" class="ft-links">Advertise with Us</a></li>
                     </ul>
                 </div>
             </li>

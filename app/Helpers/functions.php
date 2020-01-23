@@ -43,12 +43,31 @@ function mailToAdmin() {
     return $admin->id ?? null;
 }
 
-function nycSupportEmail() {
-
+/**
+ * @param $data
+ * @return mixed
+ */
+function sendViaSupport($data) {
+    $credentials = [
+        'email' => config('mail.support.username'),
+        'password' => config('mail.support.password'),
+    ];
+    new \App\Services\MailService($credentials);
+    return dispatchMail($data->to, $data);
 }
 
-function nycInfoEmail() {
+/**
+ * @param $data
+ * @return mixed
+ */
+function sendViaInfo($data) {
+    $credentials = [
+        'email' => config('mail.info.username'),
+        'password' => config('mail.info.password'),
+    ];
 
+    new \App\Services\MailService($credentials);
+    return dispatchMail($data->to, $data);
 }
 
 /**
@@ -350,7 +369,6 @@ function dispatchListingNotification( $data, $delay = 5 ) {
 /**
  * @param $data
  * @param int $delay
- *
  * @return PendingDispatch
  */
 function dispatchEmailQueue( $data, $delay = 10 ) {

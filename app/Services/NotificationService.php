@@ -57,23 +57,26 @@ class NotificationService extends ExclusiveSettingService {
      * @return bool
      */
     public function send() {
-        $notification = $this->__create();
+//        $notification = $this->__create();
         $settings = $this->__receiverExclusiveSettings($this->data->to);
 
         if ( empty( $settings ) ) {
-            socketEvent($notification);
+//            socketEvent($notification);
             dispatchEmailQueue( $this->data );
+            return true;
         }
 
         if ( ! empty( $settings ) && $settings->allow_web_notification ) {
-            socketEvent($notification);
+//            socketEvent($notification);
+            return true;
         }
 
         if ( ! empty( $settings ) && $settings->allow_email ) {
             dispatchEmailQueue( $this->data );
+            return true;
         }
 
-        return true;
+        return false;
     }
 
     /**

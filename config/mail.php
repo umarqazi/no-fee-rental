@@ -56,8 +56,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-        'name' => env('MAIL_FROM_NAME', 'Example'),
+        'address' => env('MAIL_FROM_ADDRESS', 'noreply@nofeerentalsnyc.com'),
+        'name' => env('MAIL_FROM_NAME', 'No Fee Rentals'),
     ],
 
     /*
@@ -83,6 +83,16 @@ return [
     | connection. You may also set the "password" value below this one.
     |
     */
+
+    'info' => [
+        'username' => env('INFO_MAIL_USERNAME'),
+        'password' => env('INFO_MAIL_PASSWORD'),
+    ],
+
+    'support' => [
+        'username' => env('SUPPORT_MAIL_USERNAME'),
+        'password' => env('SUPPORT_MAIL_PASSWORD'),
+    ],
 
     'username' => env('MAIL_USERNAME'),
 

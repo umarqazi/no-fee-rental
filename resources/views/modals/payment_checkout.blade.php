@@ -3,6 +3,10 @@
         color: red !important;
     }
 </style>
+<link rel="stylesheet" type="text/css" href="http://no-fee-rental.teamtechverx.com/assets/css/datepicker.min.css">
+<script src="http://no-fee-rental.teamtechverx.com/assets/js/datepicker.min.js"></script>
+<script src="http://no-fee-rental.teamtechverx.com/assets/js/datepicker.en.js"></script>
+{!! HTML::style('assets/css/credit.css') !!}
 <div class="modal fade" id="myModal-currentPlan">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -20,11 +24,8 @@
                 'id' => 'stripe-checkout'
             ]) !!}
 
-            @if(!$plan_detail)
-                {!! Form::hidden('amount', null, ['class' => 'amount']) !!}
                 {!! Form::hidden('credit_plan', null, ['class' => 'credit_plan']) !!}
-            @endif
-        <!-- Modal body -->
+            <!-- Modal body -->
             <div class="modal-body">
                 <div class="form-group">
                     <label>Cardholder Name</label>
