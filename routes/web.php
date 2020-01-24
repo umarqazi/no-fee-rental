@@ -159,5 +159,5 @@ Route::get('/composer-dump', function() {
 use App\Traits\DispatchNotificationService;
 // Test Route
 Route::get('/test', function (\Illuminate\Http\Request $request) {
-    return view('advertise_with_us');
+    dd((new \App\Member())->members());
 })->name('web.test');
