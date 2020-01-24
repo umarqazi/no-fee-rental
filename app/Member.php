@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class Member
@@ -36,6 +37,15 @@ class Member extends Model {
      */
     public function invitedAgents() {
         return $this->hasMany(AgentInvite::class, 'invited_by', 'agent_id');
+    }
+
+    public function members() {
+        $id = myId();
+        $results = DB::raw("SELECT * FROM users u1 INNER JOIN (SELECT DISTINCT u.id FROM `users` u 
+                      INNER JOIN members m ON (u.id = m.agent_id OR u.id = m.member_id) WHERE m.agent_id = {$id} OR m.member_id = {$id}) 
+                      as team ON team.id = u1.id WHERE u1.id != {$id}")->get();
+
+        return $results;
     }
 
     /**
