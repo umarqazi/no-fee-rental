@@ -255,8 +255,11 @@ p {
     line-height: 1.5;
     margin-bottom: 10px;
 }
-p:last-child {
+.our-passion p:last-child {
     margin-bottom: 0px;
+}
+.our-passion .bullet-list li:last-child {
+    margin-bottom: 10px;
 }
 .use-of-data-center-content{
   width: 100%;
@@ -1598,13 +1601,13 @@ footer .copyright .social-icons li a:hover {
 }
 
 .our-passion a {
-    color: #f36f21;
+    color: #223971;
     text-decoration: underline;
     text-transform: uppercase;
 }
 
 .our-passion a:hover {
-    color: #223971;
+    color: #f36f21;
 }
 
 /*Advertise with us*/
