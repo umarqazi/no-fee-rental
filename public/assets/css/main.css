@@ -2796,9 +2796,6 @@ footer .copyright .social-icons li a:hover {
 
 .neighborhood-search .search-result-wrapper .search-listing .featured-properties .property-listing {
     margin: 1px -15px 0px;
-    /*height: calc(100vh - 200px);*/
-    overflow-y: auto;
-    overflow-x: hidden;
 }
 
 .neighborhood-search .search-result-wrapper .search-listing .featured-properties .property-listing .property-thumb {
@@ -2954,23 +2951,19 @@ footer .copyright .social-icons li a:hover {
     overflow-y: auto;
     height: 100%;
 }
-.mapboxgl-popup-content.single {
+#desktop-map .mapboxgl-popup-content.single {
     height: 250px;
-    width: 310px;
+    padding: 10px 0px 10px 10px;
+    width:300px;
 }
 
 #desktop-map .mapboxgl-popup-content{
     width: 280px;
 }
 .full-map .mapboxgl-popup-content{
-    padding: 10px 0px 15px 15px!important;
-    width: 300px !important;
+    padding: 10px 0px 10px 10px!important;
+    width: 320px !important;
 }
-
-.full-map .mapboxgl-popup-content.single {
-    width: 320px;
-}
-
 .full-map .mapboxgl-canvas {
     width: 100% !important;
 }
