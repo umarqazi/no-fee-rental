@@ -1,4 +1,3 @@
-I can't spend over
 {!! Form::open(['url' => route('web.letUsHelp'), 'method' => 'post','id'=>'let_us_help']) !!}
 <div class="modal fade need-help-modal let-us-help-modal" id="let-us-step1">
     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
