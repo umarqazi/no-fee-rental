@@ -62,11 +62,7 @@
             <div class="sortBy-listing">
                 <div class="form-group sortBy-wraper">
                     <label for="sortBy">Sort By:</label>
-                    <select class="form-control" id="sortBy">
-                        <option>Recent</option>
-                        <option>Cheapest</option>
-
-                    </select>
+                    {!! Form::select('sortBy', ['' => 'Sort By', 'rent' => 'Cheapest'], request()->get('sortBy') ?? null, ['class' => 'form-control']) !!}
                 </div>
             </div>
         </div>
@@ -147,13 +143,8 @@
         $(".neighborhood-search .search-result-wrapper .map-wrapper").toggleClass('full-map');
     });
 
-    $('body').on('change', '.sorting', function() {
-        let url = window.location.origin;
-        url = url.replace('/recent', '');
-        url = url.replace('/cheapest', '');
-        url = url.replace('/oldest', '');
-        window.location.href = url+'/listing-by-rent/'+$(this).val();
-
+    $('body').on('change', 'select[name=sortBy]', function() {
+        document.location.search = insertParam('sortBy', $(this).val());
     });
 
     $('.search-result-section-neighborhood').find('ul > li > div > input').on('click', function() {
