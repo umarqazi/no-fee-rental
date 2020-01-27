@@ -70,8 +70,8 @@ class ListingRepo extends BaseRepo {
 	/**
      * @return mixed
      */
-    public function rentActive() {
-        return $this->model->rentActive();
+    public function rent() {
+        return $this->model->rent();
     }
 
 	/**

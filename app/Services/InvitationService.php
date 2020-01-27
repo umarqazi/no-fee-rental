@@ -58,7 +58,7 @@ class InvitationService {
     public function addRepresentative($request) {
         if($request->representative_exists == 'true') {
 //            $this->__sendRepresentativeEmail($request);
-            $user = $this->userRepo->find(['email' => $request->contact_representative])->first();
+            $user = $this->userRepo->find(['email' => $request->email])->first();
             return $user->id;
         }
 

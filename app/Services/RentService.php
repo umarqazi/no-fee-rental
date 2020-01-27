@@ -28,9 +28,17 @@ class RentService {
     }
 
     /**
+     * @param $request
      * @return mixed
      */
-    public function get() {
-        return $this->listingRepo->rentActive()->get();
+    public function get($request) {
+        $listings = null;
+        if($request->has('sortBy')) {
+            $listings = $this->listingRepo->rent()->orderBy('rent', 'asc');
+        } else {
+            $listings = $this->listingRepo->rent();
+        }
+
+        return $listings->orderBy('is_featured', APPROVEFEATURED)->get();
     }
 }

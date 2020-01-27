@@ -420,6 +420,16 @@ if(!defined('REJECTEDEVENT')) {
     define('REJECTEDEVENT', '#FF0000');
 }
 
+/**
+ * GUEST appointment
+ */
 if(!defined('GUEST')) {
     define('GUEST', 'guest');
+}
+
+/**
+ * sort by price
+ */
+if(!defined('PRICE')) {
+    define('PRICE', 'price');
 }
