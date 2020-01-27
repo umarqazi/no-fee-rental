@@ -46,9 +46,11 @@
                 <div class="newsletter">
                     <div class="title">subscribe news letter</div>
                     <p>Enter your email address & get daily newsletter</p>
-                    {!! Form::open(['url' => route('newsLetter-subscription'), 'id' => 'newsletter-form', 'class' => 'newsletter-form ajax', 'reset' => 'true', 'method' => 'post']) !!} {!! Form::text('email', null, ['class' => 'fld', 'placeholder' => 'Email Address']) !!}
+                    {!! Form::open(['url' => route('newsLetter-subscription'), 'id' => 'newsletter-form', 'class' => 'newsletter-form ajax', 'reset' => 'true', 'method' => 'post']) !!}
+                    {!! Form::text('email', null, ['class' => 'fld', 'placeholder' => 'Email Address', 'autocomplete' => 'off']) !!}
                     <label id="error" class="error email" for="email"></label>
-                    {!! Form::submit('Subscribe', ['class' => 'btn-default']) !!} {!! Form::close() !!}
+                    {!! Form::submit('Subscribe', ['class' => 'btn-default']) !!}
+                    {!! Form::close() !!}
                 </div>
             </li>
         </ul>

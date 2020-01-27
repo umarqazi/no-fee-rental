@@ -41,7 +41,7 @@ class NeighborhoodController extends Controller {
      * @return JsonResponse|RedirectResponse
      */
     public function all(Request $request) {
-        $neighbors = $this->neighborhoodService->get();
+        $neighbors = $this->neighborhoodService->getAll();
         return sendResponse($request, $neighbors, null);
     }
 

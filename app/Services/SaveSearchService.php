@@ -151,12 +151,11 @@ class SaveSearchService {
     protected function __validateKeywords( $criteria ) {
         return ( in_array( $criteria['beds'], $this->keywords['beds'] ) &&
                  in_array( $criteria['baths'], $this->keywords['baths'] ) &&
-                 ! empty( $this->keywords['neighborhood'] )
-            ? $criteria['neighborhood'] == $this->keywords['neighborhood'] : true &&
-              $criteria['squareRange'] >= $this->keywords['squareRange']['square_min'] &&
-              $criteria['squareRange'] <= $this->keywords['squareRange']['square_max'] &&
-              $criteria['priceRange'] >= $this->keywords['priceRange']['min_price'] &&
-              $criteria['priceRange'] <= $this->keywords['priceRange']['max_price'] );
+                 empty( $this->keywords['neighborhood'] ) ?: in_array($criteria['neighborhood'], $this->keywords['neighborhood']) &&
+              $criteria['square'] >= $this->keywords['square']['square_min'] &&
+              $criteria['square'] <= $this->keywords['square']['square_max'] &&
+              $criteria['price'] >= $this->keywords['price']['min_price'] &&
+              $criteria['price'] <= $this->keywords['price']['max_price'] );
     }
 
     /**
