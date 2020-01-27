@@ -1,3 +1,4 @@
+I can't spend over
 {!! Form::open(['url' => route('web.letUsHelp'), 'method' => 'post','id'=>'let_us_help']) !!}
 <div class="modal fade need-help-modal let-us-help-modal" id="let-us-step1">
     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
@@ -19,7 +20,7 @@
 
                 <!-- Modal body -->
                 <div class="modal-body">
-                    <div class="pt-4">
+                    <div class="pt-3 mb-3">
                         <div id="multiple" class="article">
                             <div class="multi-select-calendar"></div>
                         </div>
@@ -52,14 +53,14 @@
 
                 <!-- Modal body -->
                 <div class="modal-body">
-                    <div class="pt-4 -b-4 text-center" style="max-width: 100%;">
+                    <div class="pt-3 mb-3 text-center" style="max-width: 100%;">
                          <span id="invest">
                                 {!! Form::text('min_price', null, ['class' => 'input-style money-mask1', 'placeholder' =>
                                 '$', 'style' => 'margin:10px 0px; width:100%; text-align:center;
                                 font-size:25px;'])
                                 !!}</span>
-                            <br/>  <h4 style="font-size: 16px;text-align: left;">on
-                            rent every
+                            <br/>  <h4 style="color: #223971;font-size: 24px; font-weight: 700; text-align:left">on rent
+                            every
                             month</h4>
 
                     </div>
@@ -93,7 +94,7 @@
 
                 <!-- Modal body -->
                 <div class="modal-body">
-                    <div class="pt-4 -b-4">
+                    <div class="pt-3 mb-3">
                         <div class="form-group" id="advance-search-chkbox">
                             <label class="label">Beds <span>(Select all that applies)</span></label>
                             <ul id="beds">
@@ -148,7 +149,7 @@
 
                 <!-- Modal body -->
                 <div class="modal-body">
-                    <div class="pt-4 -b-4">
+                    <div class="pt-3 mb-3">
                         {!! Form::text('username', null, ['class' => 'input-style', 'placeholder' => 'Full Name *']) !!}
                     </div>
                 </div>
@@ -181,7 +182,7 @@
 
                 <!-- Modal body -->
                 <div class="modal-body">
-                    <div class="pt-4 -b-4">
+                    <div class="pt-3 mb-3">
                         {!! Form::email('email', null, ['class' => 'input-style', 'placeholder' => 'Email *']) !!}
                     </div>
                 </div>
@@ -214,7 +215,7 @@
 
                 <!-- Modal body -->
                 <div class="modal-body">
-                    <div class="pt-4 -b-4">
+                    <div class="pt-3 mb-3">
                         {!! Form::text('phone_number', null, ['class' => 'input-style', 'placeholder' => 'Phone *']) !!}
                     </div>
                 </div>
@@ -232,7 +233,7 @@
             <div class="let-us-hlep-form">
                 <!-- Modal body -->
                 <div class="modal-body">
-                    <div class="pt-4 -b-4">
+                    <div class="pt-3 mb-3">
                         <img src="assets/images/popcorn-icon.jpg" alt="" class="popcorn-icon" />
                         <h3 class="mb-2 text-center" id="thanks-name"></h3>
                         <p class="text-center">We can help you even faster if you answer a few question about your search.</p>
@@ -267,7 +268,7 @@
 
                 <!-- Modal body -->
                 <div class="modal-body">
-                    <div class="pt-4 -b-4">
+                    <div class="pt-3 mb-3">
                         <ul class="bedroom-listing">
                             <li>
                                 <div class="custom-control custom-radio custom-control-inline">
@@ -349,7 +350,7 @@
 
                 <!-- Modal body -->
                 <div class="modal-body">
-                    <div class="pt-4 -b-4">
+                    <div class="pt-3 mb-3">
                         {!! Form::textarea('location_or_neighborhood', null, ['class' => 'input-style text-area', 'style' => 'resize:none;','placeholder' => 'What are you looking for?']) !!}
                     </div>
                 </div>
@@ -381,7 +382,7 @@
                 </div>
                 <!-- Modal body -->
                 <div class="modal-body">
-                    <div class="pt-4 -b-4">
+                    <div class="pt-3 mb-3">
                         <ul class="bedroom-listing">
                             <li>
                                 <div class="custom-control custom-radio custom-control-inline">
@@ -439,7 +440,7 @@
 
                 <!-- Modal body -->
                 <div class="modal-body">
-                    <div class="pt-4 -b-4">
+                    <div class="pt-3 mb-3">
                         <ul class="bedroom-listing">
                             <li>
                                 <div class="custom-control custom-checkbox">
@@ -500,7 +501,7 @@
 
                 <!-- Modal body -->
                 <div class="modal-body">
-                    <div class="pt-4 -b-4">
+                    <div class="pt-3 mb-3">
                         <ul class="bedroom-listing">
                             <li>
                                 <div class="custom-control custom-radio custom-control-inline">
@@ -555,7 +556,7 @@
 
                 <!-- Modal body -->
                 <div class="modal-body">
-                    <div class="pt-4 -b-4">
+                    <div class="pt-3 mb-3">
                         <ul class="bedroom-listing">
                             <li>
                                 <div class="custom-control custom-radio custom-control-inline">
