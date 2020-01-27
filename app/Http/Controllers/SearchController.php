@@ -34,6 +34,10 @@ class SearchController extends Controller {
         return $this->__view($data);
     }
 
+    /**
+     * @param Request $request
+     * @return Factory|View
+     */
     public function filter(Request $request) {
         return $this->__view($this->__trigger($request));
     }

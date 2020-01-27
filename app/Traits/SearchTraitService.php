@@ -233,10 +233,16 @@ trait SearchTraitService
         return $this->query->whereHas('features');
     }
 
+    /**
+     * @return mixed
+     */
     private function sortBy()
     {
+        if(PRICE == $this->args->{__FUNCTION__}) {
+            return $this->query->orderBy('rent', 'asc');
+        }
 
-        return $this->query->orderBy('rent', $this->args->{__FUNCTION__});
+//        return $this->query->orderBy('rent', $this->args->{__FUNCTION__});
     }
 
     /**

@@ -10,7 +10,6 @@
     <script>
         Window.Laravel = {user: "{{ authenticated() ? myId() : null }}"};
     </script>
-	<script src="https://maps.googleapis.com/maps/api/js?key={{ config('services.google.map_api')  }}&libraries=places" type="text/javascript" async defer></script>
 
 	 <!-- CSS -->
 	{!! HTML::style('assets/css/dropzone.min.css') !!}
