@@ -96,6 +96,13 @@ return [
         'older'   => 'Oldest',
     ],
 
+    'sortBy' => [
+        ''    => 'Sort By',
+        'recommended' => 'Recommended',
+        'trending' => 'Trending',
+        'price' => 'Price',
+    ],
+
     'building_action' => [
         ''         => 'Select Building Action',
         ALLOWAGENT => 'Allow Agent',

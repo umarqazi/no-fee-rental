@@ -99,9 +99,9 @@ class Listing extends Model {
      *
      * @return mixed active listing
      */
-    public function scopeRentActive($query) {
+    public function scopeRent($query) {
         $clause['visibility'] = ACTIVELISTING;
-        return $query->where($clause)->orderBy('is_featured', APPROVEFEATURED);
+        return $query->where($clause);
     }
 
     /**
