@@ -88,10 +88,9 @@ class PaymentService {
      * @return string
      */
     private function __createSubscription() {
-//        dd(now()->addDays(TRIALDAYS)->format('dMY'));
         $subscription = $this->paymentMethod->subscriptions()->create($this->customer, [
             'plan' => $this->plan,
-//            'trial_end' => now()->addDays(TRIALDAYS)->format('dMY')
+            'trial_end' => strtotime(now()->addDays(TRIALDAYS))
         ]);
 
         $this->subscription = $subscription['id'];
