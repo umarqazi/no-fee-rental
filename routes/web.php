@@ -159,5 +159,5 @@ Route::get('/composer-dump', function() {
 use App\Traits\DispatchNotificationService;
 // Test Route
 Route::get('/test', function (\Illuminate\Http\Request $request) {
-    return view('advertise_with_us');
+    return (\App\Services\AWS3Service::getInstance()->read()->url('images/iXUvmyUF5XgMtVZsxcOvaamOsqiXHiXDxXgS9HZQ.jpeg'));
 })->name('web.test');

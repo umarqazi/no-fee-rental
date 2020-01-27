@@ -40,7 +40,7 @@
                 <div class="messages">
                     <ul>
                         @foreach($collection->messages as $message)
-                            @if($message->align === myId())
+                            @if($message->align == myId())
                                 <li class="replies">
                                     <img style="width: 25px;height: 25px;" src="{{ asset(mySelf()->profile_image ?? DUI) }}" alt="" />
                                     <p>{{ $message->message }}</p>

@@ -10,11 +10,10 @@ namespace App\Services;
 
 use App\Forms\Agent\CreateForm;
 use App\Forms\CompanyForm;
-use App\Forms\User\AgentInvitationForm;
+use App\Forms\InvitationForm;
 use App\Forms\User\ChangePasswordForm;
 use App\Forms\User\EditProfileForm;
 use App\Forms\User\UserForm;
-use App\Listing;
 use App\Repository\CompanyRepo;
 use App\Repository\ExclusiveSettingRepo;
 use App\Repository\MemberRepo;
@@ -22,10 +21,7 @@ use App\Repository\AgentRepo;
 use App\Repository\NeighborhoodRepo;
 use App\Repository\UserRepo;
 use App\Traits\DispatchNotificationService;
-use App\Traits\SearchTraitService;
-use App\User;
 use Illuminate\Support\Facades\DB;
-use Zend\Diactoros\Request;
 
 class UserService {
 
@@ -83,6 +79,14 @@ class UserService {
     }
 
     /**
+     * @param $keywords
+     * @return mixed
+     */
+    public function searchByEmail($keywords) {
+        return $this->userRepo->search($keywords)->first();
+    }
+
+    /**
      * @param $paginate
      *
      * @return array
@@ -121,7 +125,7 @@ class UserService {
         $user = $this->form($request);
 
             if ($request->user_type == AGENT) {
-                $agent = new AgentInvitationForm();
+                $agent = new InvitationForm();
                 $agent->invite_by = myId();
                 $agent->email = $request->email;
                 $agent->token = str_random(60);

@@ -419,3 +419,7 @@ if(!defined('PASTEVENT')) {
 if(!defined('REJECTEDEVENT')) {
     define('REJECTEDEVENT', '#FF0000');
 }
+
+if(!defined('GUEST')) {
+    define('GUEST', 'guest');
+}

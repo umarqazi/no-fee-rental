@@ -53,8 +53,8 @@ class ListingConversationService extends MemberService {
         parent::__construct();
         $this->listingRepo = new ListingRepo();
         $this->messageRepo = new MessageRepo();
-        $this->listingConversationRepo = new ListingConversationRepo();
         $this->calendarEventRepo = new CalendarRepo();
+        $this->listingConversationRepo = new ListingConversationRepo();
     }
 
     /**
@@ -317,7 +317,7 @@ class ListingConversationService extends MemberService {
      */
     private function __validateMessageForm($conversation_id, $request) {
         $form                  = new MessageForm();
-        $form->align           = myId();
+        $form->align           = myId() ?? GUEST;
         $form->conversation_id = $conversation_id;
         $form->message         = $request->message;
         $form->validate();

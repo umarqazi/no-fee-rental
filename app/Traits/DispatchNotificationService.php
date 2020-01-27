@@ -117,6 +117,7 @@ trait DispatchNotificationService
 
     /**
      * @param $data
+     * @return \Illuminate\Foundation\Bus\PendingDispatch
      */
     public static function AGENTINVITE($data)
     {
@@ -127,11 +128,28 @@ trait DispatchNotificationService
         self::$data->message = 'Agent invitation sent';
         self::$data->data->token = $data->data->token;
         self::$data->url = route('agent.signup_form', self::$data->data->token);
-        self::__onlyEmail();
+        return self::__onlyEmail();
     }
 
     /**
      * @param $data
+     * @return \Illuminate\Foundation\Bus\PendingDispatch
+     */
+    public static function ADDREPRESENTATIVE($data)
+    {
+        self::__setParams($data);
+        self::$data->via = 'info';
+        self::$data->view = 'invite_by_agent';
+        self::$data->subject = 'No Fee Rental Invitation';
+        self::$data->message = 'Agent invitation sent';
+        self::$data->data->token = $data->data->token;
+        self::$data->url = route('agent.signup_form', self::$data->data->token);
+        return self::__onlyEmail();
+    }
+
+    /**
+     * @param $data
+     * @return bool
      */
     public static function ADDMEMBER($data)
     {
@@ -141,7 +159,7 @@ trait DispatchNotificationService
         self::$data->subject = 'Add Member';
         self::$data->message = 'A new member has been added';
         self::$data->url = route('member.acceptInvitation', self::$data->data->data->token);
-        self::send();
+        return self::send();
     }
 
     /**

@@ -33,6 +33,15 @@ function uploadImage( $image, $path, $unlinkOld = false, $old_image = null ) {
 }
 
 /**
+ * @param $path
+ * @param $file
+ * @return mixed
+ */
+function awsFS($path, $file) {
+    return \App\Services\AWS3Service::getInstance()->upload($path, $file);
+}
+
+/**
  * @return Repository|mixed
  */
 function mailToAdmin() {

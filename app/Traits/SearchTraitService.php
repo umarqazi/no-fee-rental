@@ -91,6 +91,7 @@ trait SearchTraitService
                 'square_min' => isset($request->square_min) ? (int)$request->square_min : MINSQUARE,
                 'square_max' => isset($request->square_max) ? (int)$request->square_max : MAXSQUARE
             ],
+            'sortBy' => $request->sortBy
         ];
 
         return $data;
@@ -230,6 +231,12 @@ trait SearchTraitService
     private function petFriendly()
     {
         return $this->query->whereHas('features');
+    }
+
+    private function sortBy()
+    {
+
+        return $this->query->orderBy('rent', $this->args->{__FUNCTION__});
     }
 
     /**
