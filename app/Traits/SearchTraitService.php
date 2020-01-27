@@ -94,6 +94,8 @@ trait SearchTraitService
             'sortBy' => $request->sortBy
         ];
 
+        $this->saveSearch($data);
+
         return $data;
     }
 

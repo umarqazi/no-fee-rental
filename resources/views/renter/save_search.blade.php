@@ -37,22 +37,21 @@
                                     <div class="info">
                                         <p><strong>Beds: {{ !empty($criteria->beds) ? implode(',', $criteria->beds) : 0 }}</strong></p>
                                         <p><strong>Baths: {{ !empty($criteria->baths) ? implode(',', $criteria->baths) : 0 }}</strong></p>
-                                        <p><strong>Neighborhood: {{ !empty($criteria->neighborhood) ? neighborhoods($criteria->neighborhood) : 'N/A' }}</strong></p>
+                                        <p><strong>Neighborhood: {!! !empty($criteria->neighborhood)
+                                            ? "<a href='javascript:void(0);'
+                                                title='".implode(', ', $criteria->neighborhood)."'>".
+                                                str_formatting(count($criteria->neighborhood), 'Neighborhood')
+                                                ."</a>"
+                                            : 'N/A' !!}</strong></p>
                                         <p><strong>Apartment Features: {{ !empty($criteria->features) ? apartmentFeatures($criteria->features) : 'N/A' }}</strong></p>
-                                        {{--                                    <ul>--}}
-                                        {{--                                        <li><i class="fa fa-bed"></i> 2 Bed</li>--}}
-                                        {{--                                        <li><i class="fa fa-bath"></i> 1 Bath</li>--}}
-                                        {{--                                    </ul>--}}
-                                        {{--                                    <p>at West 96th Street,</p>--}}
-                                        {{--                                    <div class="price"><i class="fa fa-tag"></i> $5,870</div>--}}
                                     </div>
                                 </div>
                             </div>
                             <div>
-                                <p>Min Price: ${{ number_format($criteria->priceRange['min_price']) }}</p>
-                                <p>Max Price: ${{ number_format($criteria->priceRange['max_price']) }}</p>
-                                <p>Min Square: {{$criteria->squareRange['square_min']}}</p>
-                                <p>Max Square: {{$criteria->squareRange['square_max']}}</p>
+                                <p>Min Price: ${{ number_format($criteria->price['min_price']) }}</p>
+                                <p>Max Price: ${{ number_format($criteria->price['max_price']) }}</p>
+                                <p>Min Square: {{ str_formatting(number_format($criteria->square['square_min']), 'ft') }}</p>
+                                <p>Max Square: {{ str_formatting(number_format($criteria->square['square_max']), 'ft') }}</p>
                             </div>
                             <div>
                                 <a href="{{ $search->url }}"><i class="fa fa-eye view-icon"></i></a>

@@ -56,7 +56,7 @@ class SaveSearchService {
      *
      * @return bool|mixed
      */
-    protected function __saveSearch( $data ) {
+    public function saveSearch( $data ) {
         if ( isRenter() ) {
             unset( $data['openHouse'] );
             $data = \Opis\Closure\serialize( $data );

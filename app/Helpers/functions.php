@@ -1217,7 +1217,8 @@ function listing_detail( $id ) {
  * @return string
  */
 function str_formatting( $string, $phrase ) {
-    return $string . ' ' . ( $string > 1 ? $phrase . 's' : $phrase );
+    $string = floatval(preg_replace('/[^\d.]/', '', $string));
+    return number_format($string) . ' ' . ( $string > 1 ? $phrase . 's' : $phrase );
 }
 
 /**
