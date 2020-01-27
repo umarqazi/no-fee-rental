@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Agent;
 
 use App\Http\Controllers\Controller;
+use App\Services\FeatureListingService;
 use App\Services\ListingService;
 use App\Services\NeighborhoodService;
 use App\Services\UserService;
@@ -116,14 +117,13 @@ class ListingController extends Controller {
     }
 
     /**
+     * @param Request $request
      * @param $id
-     *
-     * @return RedirectResponse
+     * @return JsonResponse|RedirectResponse
      */
-    public function repost($id) {
-        return $this->listingService->repost($id)
-            ? success('Listing has been reposted')
-            : error('Something went wrong');
+    public function repost(Request $request, $id) {
+        $res = $this->listingService->makeRepost($id);
+        return sendResponse($request, $res, 'Listing has been re-posted');
     }
 
     /**
@@ -218,5 +218,15 @@ class ListingController extends Controller {
         return $this->listingService->requestForFeatured($id)
             ? success('Feature Request has been sent.')
             : error('Something went wrong');
+    }
+
+    /**
+     * @param Request $request
+     * @param $id
+     * @return JsonResponse|RedirectResponse
+     */
+    public function approve(Request $request, $id) {
+        $res = $this->listingService->makeFeatured($id);
+        return sendResponse($request, $res, 'Property has been marked as featured.');
     }
 }

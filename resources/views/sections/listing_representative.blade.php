@@ -1,7 +1,7 @@
 
 <div class="appointment-section">
     @if($listing->building->user_id == $listing->user_id && !empty($listing->building->contact))
-        <a href="{{ route('web.agentProfile', $listing->building->contact->id) }}">
+        <a href="{{ agents($listing->building->contact->id)->email_verified_at ? route('web.agentProfile', $listing->building->contact->id) : 'javascript:void(0);' }}">
             <ul>
                 <li>
                     <img src="{{ asset($listing->building->contact->profile_image ?? DUI) }}" alt="">

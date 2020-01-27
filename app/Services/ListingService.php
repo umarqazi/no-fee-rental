@@ -360,6 +360,22 @@ class ListingService extends BuildingService {
     }
 
     /**
+     * @param $id
+     * @return mixed
+     */
+    public function makeFeatured($id) {
+        return $this->addFeatured() ? $this->listingRepo->update($id, ['is_featured' => APPROVEFEATURED]) : false;
+    }
+
+    /**
+     * @param $id
+     * @return bool|mixed
+     */
+    public function makeRepost($id) {
+        return $this->addRepost() ? $this->repost($id) : false;
+    }
+
+    /**
      * @param $paginate
      *
      * @return array
@@ -682,6 +698,8 @@ class ListingService extends BuildingService {
      */
     private function __agentCollection($paginate) {
         return [
+            'has_featured' => $this->isFeaturedExist(),
+            'has_repost'   => $this->isRepostsExist(),
             'active'   => $this->getActiveInactive()
                 ->latest()
                 ->paginate($paginate, ['*'], 'active'),
@@ -763,6 +781,8 @@ class ListingService extends BuildingService {
      */
     private function __agentSearchCollection( $keywords, $paginate ) {
         return [
+            'has_featured' => $this->isFeaturedExist(),
+            'has_repost'   => $this->isRepostsExist(),
             'active' => $this->listingRepo->search( $keywords )
                 ->active()
                 ->latest()
@@ -842,6 +862,8 @@ class ListingService extends BuildingService {
      */
     private function __agentSortCollection( $paginate, $col, $order ) {
         return toObject( [
+            'has_featured' => $this->isFeaturedExist(),
+            'has_repost'   => $this->isRepostsExist(),
             'active'   => $this->getActiveInactive()
                         ->orderBy( $col, $order )
                         ->paginate( $paginate, [ '*' ], 'active' ),
