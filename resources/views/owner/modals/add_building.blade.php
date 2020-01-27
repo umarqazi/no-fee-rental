@@ -39,25 +39,26 @@
                         </div>
                     </div>
                     <div class="col-sm-12">
+                        <label>Contact Representative</label>
                         <div class="open-house-admin-section">
-                            <label>Contact Representative</label>
+                            {!! Form::hidden('representative_exists') !!}
                             <div class="row">
-                                <div class="col-md-4 selectAgent">
+                                <div class="col-md-4">
                                     <label for="select-agent">Email</label>
-                                    {!! Form::email('contact_representative', null, ['class' => 'input-style']) !!}
+                                    {!! Form::email('email', null, ['class' => 'input-style']) !!}
                                 </div>
-                                <div class="col-md-4 selectAgent">
+                                <div class="col-md-4">
                                     <label for="select-agent">Username:</label>
-                                    {!! Form::text('username', null, ['class' => 'input-style']) !!}
+                                    {!! Form::text('username', null, ['class' => 'input-style', 'readonly' => 'readonly']) !!}
                                 </div>
-                                <div class="col-md-4 selectAgent">
+                                <div class="col-md-4">
                                     <label for="select-agent">Phone Number:</label>
-                                    {!! Form::text('phone_number', null, ['class' => 'input-style']) !!}
+                                    {!! Form::text('phone_number', null, ['class' => 'input-style', 'readonly' => 'readonly']) !!}
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-12" style="margin-top: 10px">
                         <div class="form-group">
                             <div>
                                 <img class="img-thumbnail" src="{{isset($building->thumbnail) ? asset($building->thumbnail ?? DLI ) : asset(DLI) }}" id="img" style="width: 180px;height: 145px;margin-bottom: 15px;">
@@ -85,6 +86,26 @@
 </div>
 <div id="map" style="display: none;"></div>
 <script>
+    let representative = $('input[name=email]');
+
+    representative.on('blur', function() {
+        ajaxRequest('check-representative', 'post', {email: $(this).val()}).then(res => {
+            let username = $('input[name=username]');
+            let phone = $('input[name=phone_number]');
+            let representative = $('input[name=representative_exists]');
+
+            if(res.data === null) {
+                representative.val('false');
+                username.val('').removeAttr('readonly');
+                phone.val('').removeAttr('readonly');
+                return;
+            }
+
+            representative.val('true');
+            phone.val(res.data.phone_number).attr('readonly', 'readonly');
+            username.val(`${res.data.first_name} ${res.data.last_name}`).attr('readonly', 'readonly');
+        });
+    });
     initMap('map');
     autoComplete('controls');
     $('#controls').on('input keydown', function(e) {

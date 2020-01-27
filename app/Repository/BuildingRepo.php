@@ -26,12 +26,10 @@ class BuildingRepo extends BaseRepo {
     /**
      * @param $building
      * @param $data
-     *
      * @return mixed
      */
     public function updateAmenities($building, $data) {
-        $building->amenities()->detach();
-        return $this->attachAmenities($building, $data);
+        return $building->amenities()->sync($data);
     }
 
     /**

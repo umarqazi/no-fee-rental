@@ -83,6 +83,14 @@ class UserService {
     }
 
     /**
+     * @param $keywords
+     * @return mixed
+     */
+    public function searchByEmail($keywords) {
+        return $this->userRepo->search($keywords)->first();
+    }
+
+    /**
      * @param $paginate
      *
      * @return array

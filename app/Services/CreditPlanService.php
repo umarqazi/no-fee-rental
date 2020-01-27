@@ -138,7 +138,35 @@ class CreditPlanService extends PaymentService {
      */
     public function isRepostsExist() {
         $plan = $this->__currentBalance();
-        return $plan ? $plan->remaining_reposts > 0 : false;
+        return $plan ? $plan->remaining_repost > 0 : false;
+    }
+
+    /**
+     * @return bool
+     */
+    public function _FILO() {
+        return $this->listingRepo->find([
+            'user_id' => myId(),
+            'visibility' => ACTIVELISTING
+        ])->oldest()->update(['visibility' => ARCHIVED]);
+    }
+
+    /**
+     * @return bool|mixed
+     */
+    public function archive() {
+        return $this->addSlotCredit();
+    }
+
+    /**
+     * @return bool|mixed
+     */
+    public function unArchive() {
+        if($this->isSlotsExist()) {
+            return $this->addSlot();
+        }
+
+        return $this->_FILO();
     }
 
     /**
@@ -171,12 +199,23 @@ class CreditPlanService extends PaymentService {
     /**
      * @return bool|mixed
      */
-    public function reposts() {
+    public function addSlotCredit() {
+        $plan = $this->__currentBalance();
+        $availableSlots = $plan->remaining_slots;
+        return $this->creditPlanRepo->updateByClause(['user_id' => myId()], [
+            'remaining_slots' => $availableSlots >= 1 ? $availableSlots + 1 : 1
+        ]);
+    }
+
+    /**
+     * @return bool|mixed
+     */
+    public function addRepost() {
         $plan = $this->__currentBalance();
         $availableRepost = $plan->remaining_repost;
-        if($availableRepost > 1) {
+        if($availableRepost >= 1) {
             return $this->creditPlanRepo->updateByClause(['user_id' => myId()], [
-                'remaining_slots' => $availableRepost - 1
+                'remaining_repost' => $availableRepost - 1
             ]);
         }
 
@@ -186,12 +225,12 @@ class CreditPlanService extends PaymentService {
     /**
      * @return bool|mixed
      */
-    public function featured() {
+    public function addFeatured() {
         $plan = $this->__currentBalance();
         $availableFeatured = $plan->remaining_featured;
-        if($availableFeatured > 1) {
+        if($availableFeatured >= 1) {
             return $this->creditPlanRepo->updateByClause(['user_id' => myId()], [
-                'remaining_slots' => $availableFeatured - 1
+                'remaining_featured' => $availableFeatured - 1
             ]);
         }
 

@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\DB;
  * Class BuildingService
  * @package App\Services
  */
-class BuildingService {
+class BuildingService extends CreditPlanService {
 
     use DispatchNotificationService;
 
@@ -48,6 +48,7 @@ class BuildingService {
      * ManageBuildingService constructor.
      */
     public function __construct() {
+        parent::__construct();
         $this->amenitiesRepo     = new AmenityRepo();
         $this->listingRepo       = new ListingRepo();
         $this->buildingRepo      = new BuildingRepo();
@@ -117,7 +118,7 @@ class BuildingService {
 
     /**
      * @param $request
-     * @return string
+     * @return string|null
      */
     public function isOwnerOnly($request) {
         $action = null;

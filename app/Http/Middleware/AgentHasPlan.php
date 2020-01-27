@@ -40,8 +40,6 @@ class AgentHasPlan {
         $this->headers = $next($request);
         if(isMRGAgent() || mySelf()->created_at->addDays(TRIALDAYS)->format('Y-m-d') >= now()->format('Y-m-d')) {
             return $this->headers;
-        } else {
-            $this->service->planExpiredSlotsAction();
         }
 
         if($this->service->agentHasPlan()) {
@@ -70,8 +68,11 @@ class AgentHasPlan {
             case 'agent.repostListing':
                 return $this->__repostAction();
                 break;
+            case 'agent.archive':
+                return $this->__archiving();
+                break;
             case 'agent.unArchive':
-
+                return $this->__unArchiving();
                 break;
             default:
                 return true;
@@ -83,9 +84,11 @@ class AgentHasPlan {
      * @return bool|\Illuminate\Http\RedirectResponse
      */
     private function __slotsAction() {
-        return $this->service->isSlotsExist()
-            ? $this->headers
-            : error('You have no remaining slots to add');
+        if($this->service->isSlotsExist()) {
+            return $this->headers;
+        }
+
+        return $this->service->_FILO() ? $this->headers : error('Something Went Wrong');
     }
 
     /**
@@ -94,6 +97,20 @@ class AgentHasPlan {
     private function __repostAction() {
         return $this->service->isRepostsExist()
             ? $this->headers
-            : error('You have no remaining re-posts');
+            : $this->service->_FILO();
+    }
+
+    /**
+     * @return \Illuminate\Http\RedirectResponse|string
+     */
+    private function __archiving() {
+        return $this->service->archive() ? $this->headers : error('Something Went Wrong.');
+    }
+
+    /**
+     * @return bool|string
+     */
+    private function __unArchiving() {
+        return $this->service->unArchive() ? $this->headers : error('Something Went Wrong.');
     }
 }

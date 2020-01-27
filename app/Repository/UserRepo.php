@@ -147,4 +147,12 @@ class UserRepo extends BaseRepo {
     public function agentsWitPlan() {
         return $this->model->agentWithPremiumPlan();
     }
+
+    /**
+     * @param $keywords
+     * @return mixed
+     */
+    public function search($keywords) {
+        return $this->model->where('email', 'like', $keywords);
+    }
 }

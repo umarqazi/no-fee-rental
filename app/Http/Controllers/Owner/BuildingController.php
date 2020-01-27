@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Owner;
 
 use App\Services\BuildingService;
 use App\Http\Controllers\Controller;
+use App\Services\InvitationService;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -27,12 +28,16 @@ class BuildingController extends Controller {
     private $buildingService;
 
     /**
-     * ManageBuildingController constructor.
-     *
-     * @param BuildingService $service
+     * @var InvitationService
      */
-    public function __construct(BuildingService $service) {
-        $this->buildingService = $service;
+    private $invitationService;
+
+    /**
+     * BuildingController constructor.
+     */
+    public function __construct() {
+        $this->buildingService = new BuildingService();
+        $this->invitationService = new InvitationService();
     }
 
     /**
@@ -73,6 +78,7 @@ class BuildingController extends Controller {
      * @return Factory|View
      */
     public function create(Request $request) {
+        $request->contact_representative = $this->invitationService->addRepresentative($request);
         $this->buildingService->create($request);
         return success('Building has been added', route('owner.viewBuildings'));
     }
@@ -130,5 +136,14 @@ class BuildingController extends Controller {
     public function noFee($id, Request $request) {
         $res = $this->buildingService->noFee($id);
         return sendResponse($request, $res, 'Building Set as No Fee.');
+    }
+
+    /**
+     * @param Request $request
+     * @return JsonResponse|RedirectResponse
+     */
+    public function representative(Request $request) {
+        $res = $this->invitationService->checkExistence($request->email);
+        return response()->json(['data' => $res]);
     }
 }

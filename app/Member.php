@@ -19,33 +19,21 @@ class Member extends Model {
     protected $fillable = ['agent_id', 'member_id'];
 
     /**
-     * @return HasOne
-     */
-    public function membersColA() {
-        return $this->hasOne(User::class, 'id', 'member_id');
-    }
-
-    /**
-     * @return HasOne
-     */
-    public function membersColB() {
-        return $this->hasOne(User::class, 'id', 'agent_id');
-    }
-
-    /**
      * @return HasMany
      */
     public function invitedAgents() {
         return $this->hasMany(AgentInvite::class, 'invited_by', 'agent_id');
     }
 
+    /**
+     * @return \Illuminate\Support\Collection|\Tightenco\Collect\Support\Collection
+     */
     public function members() {
         $id = myId();
-        $results = DB::raw("SELECT * FROM users u1 INNER JOIN (SELECT DISTINCT u.id FROM `users` u 
-                      INNER JOIN members m ON (u.id = m.agent_id OR u.id = m.member_id) WHERE m.agent_id = {$id} OR m.member_id = {$id}) 
-                      as team ON team.id = u1.id WHERE u1.id != {$id}")->get();
-
-        return $results;
+        $results = DB::select("SELECT * FROM users u1 INNER JOIN (SELECT DISTINCT u.id FROM `users` u
+            INNER JOIN members m ON (u.id = m.agent_id OR u.id = m.member_id) WHERE m.agent_id = {$id} OR m.member_id = {$id})
+            as team ON team.id = u1.id WHERE u1.id != {$id}");
+        return collect($results);
     }
 
     /**
