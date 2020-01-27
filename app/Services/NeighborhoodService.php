@@ -99,7 +99,7 @@ class NeighborhoodService extends SearchService {
     /**
      * @return mixed
      */
-    public function get() {
+    public function getAll() {
         return $this->neighborhoodRepo->all();
     }
 
