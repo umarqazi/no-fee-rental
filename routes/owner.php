@@ -70,6 +70,7 @@ Route::get('/edit-building/{id}', 'Owner\BuildingController@edit')->name('owner.
 Route::get('/no-fee-building/{id}', 'Owner\BuildingController@noFee')->name('owner.noFeeBuilding');
 Route::get('/fee-building/{id}', 'Owner\BuildingController@fee')->name('owner.feeBuilding');
 Route::post('/is-unique-address', 'Owner\BuildingController@isUnique');
+Route::post('/check-representative', 'Owner\BuildingController@representative');
 Route::post('/add-building', 'Owner\BuildingController@create')->name('owner.addBuilding');
 Route::get('/all-buildings', 'Owner\BuildingController@index')->name('owner.viewBuildings');
 Route::post('/update-building/{id}', 'Owner\BuildingController@update')->name('owner.updateBuilding');
