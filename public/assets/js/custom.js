@@ -728,4 +728,9 @@ $(() => {
         $(this).toggleClass('far fa-star fas fa-star');
     });
     $('[data-toggle="tooltip"]').tooltip();
+
+    $(".money-mask, .price-range-ul > ul > li > input[name=min_price], .price-range-ul > ul > li >" +
+        "input[name=max_price], .search-input-wrap > input[name=min_price], .search-input-wrap >" +
+        " input[name=max_price], .dropdown-for-price > ul > li > input[name=min_price], .dropdown-for-price > ul >" +
+        " li > input[name=max_price ").maskMoney({prefix:'$ ', allowNegative: true, thousands:',', decimal:'.'});
 });

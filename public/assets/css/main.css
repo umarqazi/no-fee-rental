@@ -4297,9 +4297,10 @@ footer .copyright .social-icons li a:hover {
     border: 1px solid #495057;
     cursor: pointer;
 }
-.sortBy-listing .form-group.sortBy-wraper #sortBy:focus{
+.sortBy-listing .form-group.sortBy-wraper .form-control:focus{
     outline: none;
     box-shadow: none;
+    border: 1px solid #e77817;
 }
 .sortBy-listing .form-group.sortBy-wraper label{
     min-width: 70px;

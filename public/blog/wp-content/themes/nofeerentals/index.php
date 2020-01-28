@@ -52,8 +52,9 @@
         }
       ?>
 
-      <div class="text-center">
-        <a href="#" class="btn-default mt-5">View More</a>
+      <div class="text-center mt-3">
+        <!-- <a href="#" class="btn-default mt-5">View More</a> -->
+        <?php wpbeginner_numeric_posts_nav(); ?>
       </div>
 
     </section>
