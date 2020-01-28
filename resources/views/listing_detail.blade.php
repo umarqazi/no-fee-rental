@@ -17,10 +17,6 @@
                     <div class="product-title">
                         <p> {{ is_exclusive($listing) }} </p>
                         <div class="right-share-icons-side">
-                            {{--@if($listing->agent->user_type === OWNER)--}}
-                                {{--<img src="/assets/images/mail.png" data-placement="auto" data-toggle="tooltip" title="{{ $listing->agent->email }}" class="img-with-tooltip" alt=""/>--}}
-                                {{--<img src="/assets/images/telephone.png" class="img-with-tooltip" data-placement="auto" data-toggle="tooltip" title="{{ $listing->agent->phone_number }}" alt=""/>--}}
-                            {{--@endif--}}
                             <div class="dropdown-toggle share-icon-div" data-toggle="dropdown"><img src="/assets/images/share-icon.png" alt="" />
                              <ul class="dropdown-menu">
                                 <li> <a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
