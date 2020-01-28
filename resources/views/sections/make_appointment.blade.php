@@ -1,6 +1,6 @@
 
 @if(isRenter())
-    @if($listing->agent->plan->plan === GOLDPLAN || $listing->agent->plan->plan === PLATINUMPLAN)
+    @if($listing->agent->plan->plan === GOLDPLAN || $listing->agent->plan->plan === PLATINUMPLAN || !empty($listing->openHouse))
     <div class="calendar-wrap">
         <!--calendar slider -->
         <h3>Request for Schedule </h3>
