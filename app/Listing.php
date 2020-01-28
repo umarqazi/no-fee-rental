@@ -44,10 +44,17 @@ class Listing extends Model {
 	}
 
     /**
+     * @return HasOne
+     */
+	public function openHouse() {
+	    return $this->hasOne(OpenHouse::class)->where('date', now()->format('Y-m-d'));
+    }
+
+    /**
      * @return HasMany
      */
-	public function openHouses() {
-	    return $this->hasMany(OpenHouse::class, 'listing_id');
+    public function openHouses() {
+        return $this->hasMany(OpenHouse::class);
     }
 
     /**

@@ -443,26 +443,26 @@
                         <ul class="bedroom-listing">
                             <li>
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="catss-1" name="pets">
-                                    <label class="custom-control-label" for="catss-1">Cats</label>
+                                    <input type="checkbox" class="custom-control-input" id="cats" name="pets" value="1">
+                                    <label class="custom-control-label" for="cats">Cats</label>
                                 </div>
                             </li>
                             <li>
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="dogs-01" name="pets">
-                                    <label class="custom-control-label" for="dogs-01">Dogs</label>
+                                    <input type="checkbox" class="custom-control-input" id="dogs" name="pets" value="2">
+                                    <label class="custom-control-label" for="dogs">Dogs</label>
                                 </div>
                             </li>
                             <li>
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="pets-3" name="pets">
-                                    <label class="custom-control-label" for="pets-3">Other</label>
+                                    <input type="checkbox" class="custom-control-input" id="other" name="pets" value="3">
+                                    <label class="custom-control-label" for="other">Other</label>
                                 </div>
                             </li>
                             <li>
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="pets-4" name="pets">
-                                    <label class="custom-control-label" for="pets-4">No</label>
+                                    <input type="checkbox" class="custom-control-input" id="no" name="pets" value="4">
+                                    <label class="custom-control-label" for="no">No</label>
                                 </div>
                             </li>
                         </ul>
@@ -479,6 +479,39 @@
         </div>
     </div>
 </div>
+<script>
+    let li = $('.bedroom-listing > li');
+    $(() => {
+        if($('#other').is(':checked')) {
+            lp3(true);
+        }
+
+        if($('#no').is(':checked')) {
+            lp4(true);
+        }
+    });
+
+    function lp3(action) {
+        li.find('input[value=1], input[value=2], input[value=4]').prop('checked', false);
+        li.find('input[value=1], input[value=2]').prop('disabled', action);
+    }
+
+    function lp4(action) {
+        li.find('input[value=1], input[value=2], input[value=3]').prop('checked', false);
+        li.find('input[value=1], input[value=2]').prop('disabled', action);
+    }
+
+    $('#no, #other').change(function() {
+        let val = $(this).val();
+        if (val === '3') {
+            lp3($(this).is(':checked'));
+        }
+
+        if (val === '4') {
+            lp4($(this).is(':checked'));
+        }
+    });
+</script>
 <div class="modal fade need-help-modal let-us-help-modal" id="let-us-step12">
     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
         <div class="modal-content">

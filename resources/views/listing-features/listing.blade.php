@@ -53,34 +53,34 @@
 
                     {{--Hidden Fields--}}
                     @include('listing-features.hidden_fields')
+                    <div class="row">
+                        {{--Pets Feature--}}
+                        {!! features_pet() !!}
+                        {{--Features--}}
+                        {!! features() !!}
 
-                    {{--Pets Feature--}}
-                    {!! features_pet() !!}
-
-                    {{--Features--}}
-                    {!! features() !!}
-
-                    @if($action !== 'Building' || $action !== 'Update' || $action !== 'Copy')
-                        <div class="col-md-12" style="margin-top: 20px; margin-bottom: 20px; text-transform: capitalize;" id="amenities">
-                            <div class="row" style="display: none;">
-                                {!! amenities() !!}
+                        @if($action !== 'Building' || $action !== 'Update' || $action !== 'Copy')
+                            <div class="col-md-12" style="margin-top: 20px; margin-bottom: 20px; text-transform: capitalize;" id="amenities">
+                                <div class="row" style="display: none;">
+                                    {!! amenities() !!}
+                                </div>
                             </div>
+                        @endif
+
+                        {{--Basic User Info--}}
+                        @include('listing-features.basic_info')
+
+                        {{--Map View--}}
+                        <div class="col-md-12 mt-4">
+                            <div id="map"></div>
                         </div>
-                    @endif
-
-                    {{--Basic User Info--}}
-                    @include('listing-features.basic_info')
-
-                    {{--Map View--}}
-                    <div class="col-md-12 mt-4">
-                        <div id="map"></div>
-                    </div>
-                    <div class="col-md-12 mt-4 text-center">
-                        {!! Form::submit($action.' Listing', ['class' => 'btn-default submit']) !!}
+                        <div class="col-md-12 mt-4 text-center">
+                            {!! Form::submit($action.' Listing', ['class' => 'btn-default submit']) !!}
+                        </div>
                     </div>
                 </div>
-            </div>
             {!! Form::close() !!}
+            </div>
         </div>
     </div>
     {!! HTML::script('assets/js/listing.js') !!}

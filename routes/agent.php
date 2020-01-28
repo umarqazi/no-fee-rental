@@ -37,9 +37,10 @@ Route::middleware('agentHasPlan')->group(function () {
     Route::get('/finish-listing', 'Agent\ListingController@finishCreate')->name('agent.finishCreateListing');
     Route::get('/copy-list/{id}', 'Agent\ListingController@copy')->name('agent.copyListing');
     Route::get('/copying-list/{id}', 'Agent\ListingController@copy')->name('agent.approveRequest');
-    // Featured Listing
-    Route::get('/request-featured/{id}', 'Agent\ListingController@requestFeatured')->name('agent.requestFeatured');
 });
+
+// Featured Listing
+Route::get('/request-featured/{id}', 'Agent\ListingController@requestFeatured')->name('agent.requestFeatured');
 
 // Listing Routes
 Route::get('/listing/{sortBy}', 'Agent\ListingController@sortBy')->name('agent.sorting');

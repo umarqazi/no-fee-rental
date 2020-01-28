@@ -17,10 +17,6 @@
                     <div class="product-title">
                         <p> {{ is_exclusive($listing) }} </p>
                         <div class="right-share-icons-side">
-                            {{--@if($listing->agent->user_type === OWNER)--}}
-                                {{--<img src="/assets/images/mail.png" data-placement="auto" data-toggle="tooltip" title="{{ $listing->agent->email }}" class="img-with-tooltip" alt=""/>--}}
-                                {{--<img src="/assets/images/telephone.png" class="img-with-tooltip" data-placement="auto" data-toggle="tooltip" title="{{ $listing->agent->phone_number }}" alt=""/>--}}
-                            {{--@endif--}}
                             <div class="dropdown-toggle share-icon-div" data-toggle="dropdown"><img src="/assets/images/share-icon.png" alt="" />
                              <ul class="dropdown-menu">
                                 <li> <a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
@@ -124,14 +120,21 @@
                                     <span>Availability: </span>
                                     <strong> {{ $listing->availability !== '0' ? carbon($listing->availability)->format('M d, Y') : 'Not Available' }}</strong>
                                 </div>
-                                <div class="lease-term-section">
-                                    <span>Lease term: </span>
-                                     <strong> {{ $listing->lease_term ?? 'None' }}</strong>
-                                </div>
-                                <div class="lease-term-section">
-                                    <span>Free Month: </span>
-                                    <strong> {{ str_formatting($listing->free_months, 'Month') ?? 'None' }}</strong>
-                                </div>
+
+                                @if($listing->lease_term)
+                                    <div class="lease-term-section">
+                                        <span>Lease term: </span>
+                                         <strong> {{ $listing->lease_term }}</strong>
+                                    </div>
+                                @endif
+
+                                @if($listing->free_months)
+                                    <div class="lease-term-section">
+                                        <span>Free Month: </span>
+                                        <strong> {{ str_formatting($listing->free_months, 'Month') }}</strong>
+                                    </div>
+                                @endif
+
                                 <div class="lease-term-section">
                                    <span>Days on market:</span>
                                     <strong> {{ daysReadable($listing->created_at) }}</strong>
@@ -139,26 +142,34 @@
                             </div>
 
                             <div class="col-lg-6 col-sm-6">
-                                <div class="lease-term-section">
-                                    <span>Deposit: </span>
-                                    <strong>{{ ($listing->deposit) ?  '$' . number_format($listing->deposit,0) : 'None' }}</strong>
-                                </div>
-                                <div class="lease-term-section">
-                                    <span>Renter Rebate: </span>
-                                    <strong> {{ !empty($listing->renter_rebate) ? '$' . number_format($listing->renter_rebate) : 'None' }}</strong>
-                                </div>
-                                <div class="lease-term-section">
-                                    <span>Application fee: </span>
-                                    <strong>
-                                        {{ ($listing->application_fee) ?  '$' . number_format($listing->application_fee, 0) : 'None' }}
-                                    </strong>
-                                </div>
+
+                                @if($listing->deposit)
+                                    <div class="lease-term-section">
+                                        <span>Security Deposit: </span>
+                                        <strong>{{ '$' . number_format($listing->deposit) }}</strong>
+                                    </div>
+                                @endif
+
+                                @if($listing->renter_rebate)
+                                    <div class="lease-term-section">
+                                        <span>Renter Rebate: </span>
+                                        <strong> {{ '$' . number_format($listing->renter_rebate) }}</strong>
+                                    </div>
+                                @endif
+
+                                @if($listing->application_fee)
+                                    <div class="lease-term-section">
+                                        <span>Application fee: </span>
+                                        <strong>{{ '$' . number_format($listing->application_fee) }}</strong>
+                                    </div>
+                                @endif
+
                             </div>
                         </div>
                     </div>
 
                     {{--Open House--}}
-                    @if($listing->openHouses->isNotEmpty())
+                    @if(!empty($listing->openHouse))
                         <div class="open-house-section">
                             @include('sections.listing_open_house')
                         </div>

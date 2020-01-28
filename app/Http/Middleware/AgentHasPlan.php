@@ -95,9 +95,8 @@ class AgentHasPlan {
      * @return bool|\Illuminate\Http\RedirectResponse
      */
     private function __repostAction() {
-        return $this->service->isRepostsExist()
-            ? $this->headers
-            : $this->service->_FILO();
+        $this->service->isRepostsExist();
+        return $this->headers;
     }
 
     /**
