@@ -1,19 +1,20 @@
 <?php
-  namespace App\Repository;
 
-  use Newsletter;
+namespace App\Repository;
 
-  class NewsletterRepo {
+use Newsletter;
 
-      /**
-       * @param $request
-       *
-       * @return bool
-       */
-      public function subscribe($request){
-          if(Newsletter::subscribe($request->email)) {
-              return true;
-          }
-          return false;
-      }
-  }
+/**
+ * Class NewsletterRepo
+ * @package App\Repository
+ */
+class NewsletterRepo {
+
+    /**
+     * @param $request
+     * @return bool
+     */
+    public function subscribe($request) {
+        return Newsletter::subscribe($request->email) ? true : false;
+    }
+}

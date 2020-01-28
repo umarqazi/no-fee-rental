@@ -31,10 +31,11 @@ class RentController extends Controller {
     }
 
     /**
+     * @param Request $request
      * @return Factory|View
      */
-    public function index() {
-        $data = $this->__collection($this->rentService->get());
+    public function index(Request $request) {
+        $data = $this->__collection($this->rentService->get($request));
         return $this->__view($data);
     }
 

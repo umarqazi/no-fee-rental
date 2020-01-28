@@ -64,7 +64,7 @@
             <div class="sortBy-listing">
                 <div class="form-group sortBy-wraper">
                     <label for="sortBy">Sort By:</label>
-                    {!! Form::select('sortBy', ['' => 'Sort By', 'rent' => 'Cheapest'], request()->get('sortBy') ?? null, ['class' => 'form-control']) !!}
+                    {!! Form::select('sortBy', config('formfields.sortBy'), request()->get('sortBy') ?? null, ['class' => 'form-control']) !!}
                 </div>
             </div>
         </div>

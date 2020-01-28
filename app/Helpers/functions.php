@@ -1096,7 +1096,7 @@ function neighborhoods($id = null) {
     }
 
     $neighborhoods[''] = 'Select Neighborhood';
-    foreach ( $service->get()->sortBy('name') as $key => $value ) {
+    foreach ( $service->getAll()->sortBy('name') as $key => $value ) {
         $neighborhoods[ $value->id ] = $value->name;
     }
 
@@ -1217,7 +1217,8 @@ function listing_detail( $id ) {
  * @return string
  */
 function str_formatting( $string, $phrase ) {
-    return $string . ' ' . ( $string > 1 ? $phrase . 's' : $phrase );
+    $string = floatval(preg_replace('/[^\d.]/', '', $string));
+    return number_format($string) . ' ' . ( $string > 1 ? $phrase . 's' : $phrase );
 }
 
 /**

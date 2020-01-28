@@ -237,8 +237,15 @@ $(() => {
             street_address: {
                 required: true,
             },
-            contact_representative: {
+            email: {
+                email: true,
                 required: true,
+            },
+            username: {
+                required: true
+            },
+            phone_number: {
+                required: true
             },
             building_action: {
                 required: true,
@@ -256,11 +263,18 @@ $(() => {
             street_address: {
                 required: "Street Address is required.",
             },
-            contact_representative: {
-                required: "Contact Representative is required.",
-            },
             building_action: {
-                required: "Building Action is required.",
+                required: "Building action is required.",
+            },
+            email: {
+                email: "Please enter a valid email.",
+                required: "Email Action is required.",
+            },
+            username: {
+                required: "User name is requried."
+            },
+            phone_number: {
+                required: "Phone number is required."
             },
             thumbnail: {
                 required: "Thumbnail is required.",

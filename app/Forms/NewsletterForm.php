@@ -1,28 +1,29 @@
 <?php
-  namespace App\Forms;
 
-  class NewsletterForm extends BaseForm {
+namespace App\Forms;
 
-      /**
-       * @var string
-       */
-      public $email;
+/**
+* Class NewsletterForm
+* @package App\Forms
+*/
+class NewsletterForm extends BaseForm {
 
-      /**
-       * @return array
-       */
-      public function toArray() {
-          return [
-              'email' => $this->email,
-          ];
-      }
+    /**
+    * @var string
+    */
+    public $email;
 
-      /**
-       * @return array|mixed
-       */
-      public function rules() {
-          return [
-              'email' => 'required|email',
-          ];
-      }
-  }
+    /**
+    * @return array
+    */
+    public function toArray() {
+        return ['email' => $this->email];
+    }
+
+    /**
+    * @return array|mixed
+    */
+    public function rules() {
+        return ['email' => 'required|email'];
+    }
+}
