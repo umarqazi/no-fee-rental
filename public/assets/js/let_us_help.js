@@ -1,3 +1,36 @@
+
+let li = $('.bedroom-listing > li');
+$(() => {
+    if($('#other').is(':checked')) {
+        lp3(true);
+    }
+
+    if($('#no').is(':checked')) {
+        lp4(true);
+    }
+});
+
+function lp3(action) {
+    li.find('input[value=1], input[value=2], input[value=4]').prop('checked', false);
+    li.find('input[value=1], input[value=2]').prop('disabled', action);
+}
+
+function lp4(action) {
+    li.find('input[value=1], input[value=2], input[value=3]').prop('checked', false);
+    li.find('input[value=1], input[value=2]').prop('disabled', action);
+}
+
+$('#no, #other').change(function() {
+    let val = $(this).val();
+    if (val === '3') {
+        lp3($(this).is(':checked'));
+    }
+
+    if (val === '4') {
+        lp4($(this).is(':checked'));
+    }
+});
+
 let $let_us_help_form = $('#let_us_help');
 
 $body.on('keydown', function(e) {
