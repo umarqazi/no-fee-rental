@@ -737,5 +737,5 @@ $(() => {
         " li > input[name=max_price], .neighborhood-flex > .form-group > input[name=renter_rebate]," +
         " .neighborhood-flex > .form-group > input[name=rent], .unit-flex > .form-group >" +
         " input[name=application_fee], .availability-flex > .form-group > input[name=deposit]," +
-        " #invest > input[name=min_price]").maskMoney({prefix:'$ ', allowNegative: true, thousands:',', decimal:'.'});
+        " #invest > input[name=min_price]").simpleMoneyFormat();
 });
