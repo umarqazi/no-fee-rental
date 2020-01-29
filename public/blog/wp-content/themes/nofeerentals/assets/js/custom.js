@@ -117,7 +117,7 @@ $(document).ready(function() {
             $(".create-agent-listing").hide();
             $("#signup_form .btn-default").prop('disabled', false);
             $("#signup_form .agnet-input").prop('disabled', false);
-           
+
         } else {
             $("#signup_form .agnet-input").prop('disabled', true);
             $("#signup_form .finding-home-text").css('opacity', '0.3');
@@ -140,47 +140,6 @@ $(document).ready(function() {
             $("#" + get_btn_id).fadeIn();
         }
     });
-
-    /*$(function () {
-        $('#multiple').pignoseCalendar({
-            multiple: true
-        });
-    });
-
-    $('#image-gallery').lightSlider({
-        gallery: true,
-        item: 1,
-        thumbItem: 4,
-        slideMargin: 0,
-        speed: 900,
-        auto: false,
-        loop: true,
-        onSliderLoad: function () {
-            $('#image-gallery').removeClass('cS-hidden');
-        }
-    });
-
-    $('.property-listing.mobile-listing .owl-carousel').owlCarousel({
-        loop: false,
-        margin: 5,
-        nav: true,
-        responsive: {
-            0: {
-                items: 1
-            },
-            600: {
-                items: 1
-            },
-            1000: {
-                items: 2
-            }
-        }
-    });*/
-
-});
-
-$(document).ready(function() {
-
     $('#login-btn').on('click', function() {
         $('#signup').modal('hide');
         $('#login').modal('show');
@@ -204,18 +163,10 @@ $(document).ready(function() {
     $("#login-btn").click(function() {
         $('body').addClass('signup-modal-scroll');
     });
-    // $("#login").click(function() {
-    //     $('body').addClass('signup-modal-scroll');
-    // });
+
     $('.close-signup-modal').click(function() {
         $('body').removeClass('signup-modal-scroll');
     });
-    $(document).on("click", function (e) {
-        if ($(e.target).is("#signup-btn")==false && $(e.target).parents('#signup').length==0 && $(e.target).parents('#login').length==0) {
-            $("body").removeClass("signup-modal-scroll");
-        }
-    });
-
     function togglefooterlink() {
         if (window.matchMedia('(max-width: 1279px)').matches) {
             $(".collapseabe-link").click(function() {
@@ -226,23 +177,21 @@ $(document).ready(function() {
         }
     }
     togglefooterlink();
-
-
-    // range slider rent calculator
-
     $('#price-range-submit').hide();
-
-    
-
     $(function () {
         $("#slider-range-4").slider({
             range: true,
             orientation: "horizontal",
             //max: 10000,
             disabled: true,
-            values: [ 0, 50 ]          
+            values: [ 0, 50 ]
         });
+    });
 
-
-    }); 
+    $(document).on("click", function (e) {
+        if ($(e.target).is("#signup-btn")==false && $(e.target).parents('#signup').length==0 && $(e.target).parents('#login').length==0) {
+            $("body").removeClass("signup-modal-scroll");
+        }
+    });
 });
+
