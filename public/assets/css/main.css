@@ -983,6 +983,12 @@ h3 {
     padding: 5px 0px;
     width: 100%;
     line-height: 15px;
+    position: relative;
+}
+.header-wrapper .header-container .header-right-wrapper .recent-search-dropdown .dropDown ul li i{
+    position: absolute;
+    right: 5px;
+    cursor: pointer;
 }
 
 .header-wrapper .header-container .header-right-wrapper .recent-search-dropdown .dropDown ul li:last-child {
@@ -3468,6 +3474,7 @@ footer .copyright .social-icons li a:hover {
 
 .nearbyapartment h3 {
     color: #000;
+    text-align: center;
 }
 
 .listing-Details .listing-info .dropdown-toggle:after {

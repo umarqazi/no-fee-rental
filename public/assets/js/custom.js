@@ -727,10 +727,15 @@ $(() => {
     $('.notification-main-wrapper i').click(function () {
         $(this).toggleClass('far fa-star fas fa-star');
     });
+    $('.recent-star').click(function () {
+        $(this).addClass('fas fa-star');
+    });
     $('[data-toggle="tooltip"]').tooltip();
 
     $(".money-mask, .price-range-ul > ul > li > input[name=min_price], .price-range-ul > ul > li >" +
-        "input[name=max_price], .search-input-wrap > input[name=min_price], .search-input-wrap >" +
-        " input[name=max_price], .dropdown-for-price > ul > li > input[name=min_price], .dropdown-for-price > ul >" +
-        " li > input[name=max_price ").maskMoney({prefix:'$ ', allowNegative: true, thousands:',', decimal:'.'});
+        "input[name=max_price], .dropdown-for-price > ul > li > input[name=min_price], .dropdown-for-price > ul >" +
+        " li > input[name=max_price], .neighborhood-flex > .form-group > input[name=renter_rebate]," +
+        " .neighborhood-flex > .form-group > input[name=rent], .unit-flex > .form-group >" +
+        " input[name=application_fee], .availability-flex > .form-group > input[name=deposit]," +
+        " #invest > input[name=min_price]").maskMoney({prefix:'$ ', allowNegative: true, thousands:',', decimal:'.'});
 });

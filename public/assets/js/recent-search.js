@@ -137,7 +137,7 @@ function pushRecentSearch(data = null, $prepend) {
     if(data === null) {
         $target.append('<li><a href="javascript:void(0);" id="empty-keywords">You have no keywords yet to search</a></li>');
     } else {
-        let html = `<li><a href="${data.url}" title="${data.title}" class="recent" data-id="1">${data.string}</a></li>`;
+        let html = `<li><a href="${data.url}" title="${data.title}" class="recent" data-id="1"> ${data.string}</a> <i class="far fa-star recent-star"></i> </li>`;
         if($prepend) {
             $target.prepend(html);
         } else {
