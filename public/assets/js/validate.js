@@ -73,9 +73,7 @@ $(() => {
         };
     }(jQuery));
 
-    $('input[name=free_months], input[name=min_price], input[name=max_price], input[name=price],' +
-        ' input[name=renter_rebate], input[name=rent], input[name=application_fee], input[name=deposit], input[name=square_feet],' +
-        ' input[name=cvc]').inputFilter(function(value) {
+    $('input[name=free_months], input[name=square_feet], input[name=cvc]').inputFilter(function(value) {
         return /^\d*$/.test(value);
     });
 

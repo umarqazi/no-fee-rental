@@ -732,6 +732,15 @@ $(() => {
     });
     $('[data-toggle="tooltip"]').tooltip();
 
+    $(function() {
+        $("input[name=min_price], input[name=max_price], input[name=price], input[name=renter_rebate], " +
+            "input[name=rent], input[name=application_fee], input[name=deposit]").keypress(function (e) {
+            if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+                // $(".error").html("Number Only").stop().show().fadeOut("slow");
+                return false;
+            }
+        });
+    });
     $(".money-mask, .price-range-ul > ul > li > input[name=min_price], .price-range-ul > ul > li >" +
         "input[name=max_price], .dropdown-for-price > ul > li > input[name=min_price], .dropdown-for-price > ul >" +
         " li > input[name=max_price], .neighborhood-flex > .form-group > input[name=renter_rebate]," +
