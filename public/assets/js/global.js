@@ -439,6 +439,6 @@ $(() => {
         $('#login').modal('show');
     });
 
-    $body.find('.money-mask').maskMoney({prefix:'$ ', allowNegative: true, thousands:',', decimal:',', affixesStay: true});
+    // $body.find('.money-mask').maskMoney({prefix:'$ ', allowNegative: true, thousands:',', decimal:',', affixesStay: true});
 
 });
