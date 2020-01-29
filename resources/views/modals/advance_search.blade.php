@@ -37,8 +37,10 @@
                             <label class="label">Price Range</label>
                             <div class="slider-wrapper">
                                 <div class="search-input-wrap">
-                                {!! Form::number('min_price', null, ['min' => 0, 'max' => 990000, 'id' => 'min_price', 'class' => 'price-range-field input-style ASPm']) !!} -
-                                {!! Form::number('max_price', null, ['min' => 0, 'max' => 1000000, 'id' => 'max_price', 'class' => 'price-range-field input-style ASPM']) !!}
+                                {!! Form::text('min_price', null, ['min' => 0, 'max' => 990000, 'id' => 'min_price',
+                                'class' => 'price-range-field input-style ASPm']) !!} -
+                                {!! Form::text('max_price', null, ['min' => 0, 'max' => 1000000, 'id' => 'max_price',
+                                'class' => 'price-range-field input-style ASPM']) !!}
                             </div>
                                 <div id="slider-range" class="price-filter-range" name="rangeInput"></div>
                             </div>

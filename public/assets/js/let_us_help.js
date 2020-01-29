@@ -1,4 +1,3 @@
-
 let $let_us_help_form = $('#let_us_help');
 
 $body.on('keydown', function(e) {
