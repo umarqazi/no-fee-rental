@@ -119,6 +119,15 @@ $(() => {
             });
         }, 500);
     });
+
+    $body.on('change', 'select[name=bedrooms]', function () {
+        let $selector = $body.find('input[name=is_convertible]');
+        if($(this).val() == '0.5') {
+            $selector.prop('checked', false).attr('disabled', 'disabled');
+        } else {
+            $selector.removeAttr('disabled');
+        }
+    });
 });
 
 /**

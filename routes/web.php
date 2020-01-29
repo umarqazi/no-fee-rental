@@ -159,5 +159,12 @@ Route::get('/composer-dump', function() {
 use App\Traits\DispatchNotificationService;
 // Test Route
 Route::get('/test', function (\Illuminate\Http\Request $request) {
-    return (\App\Services\AWS3Service::getInstance()->read()->url('images/iXUvmyUF5XgMtVZsxcOvaamOsqiXHiXDxXgS9HZQ.jpeg'));
+    $ser = new \App\Services\SaveSearchService();
+    $data = [
+        'beds' => 2,
+        'baths' => 3,
+        'neighborhood' => 'Harlem',
+    ];
+
+    $ser->match($data);
 })->name('web.test');

@@ -4,9 +4,6 @@
 <div class="col-md-6">
     <div class="form-group" id="address">
         <label>Street Address</label>
-        <span class="invalid-feedback" role="alert">
-			{!! $errors->first('street_address') !!}
-		</span>
     </div>
 </div>
 <div class="col-md-6">
@@ -19,9 +16,6 @@
             'readonly' => 'readonly',
             'class' => 'input-style',
         ]) !!}
-        <span class="invalid-feedback" role="alert">
-			{!! $errors->first('display_address') !!}
-		</span>
     </div>
 </div>
 <div class="col-md-12 col-lg-12 col-xl-6">
@@ -29,23 +23,14 @@
         <div class="form-group">
             <label>Neighborhood</label>
             {!! Form::text('neighborhood', null, ['class' => 'input-style', 'readonly']) !!}
-            <span class="invalid-feedback" role="alert">
-			    {!! $errors->first('neighborhood') !!}
-		    </span>
         </div>
         <div class="form-group">
             <label>Renter Rebate</label>
             {!! Form::text('renter_rebate', null, ['class' => 'input-style', 'autocomplete' => 'off']) !!}
-            <span class="invalid-feedback" role="alert">
-			    {!! $errors->first('rent') !!}
-		    </span>
         </div>
         <div class="form-group">
             <label>Rent</label>
             {!! Form::text('rent', null, ['class' => 'input-style', 'autocomplete' => 'off']) !!}
-            <span class="invalid-feedback" role="alert">
-			    {!! $errors->first('rent') !!}
-		    </span>
         </div>
     </div>
 </div>
@@ -55,27 +40,21 @@
         <div class="form-group">
             <label>Unit</label>
             {!! Form::text('unit', null, ['class' => 'input-style', 'autocomplete' => 'off']) !!}
-            <span class="invalid-feedback" role="alert">
-			    {!! $errors->first('unit') !!}
-		    </span>
         </div>
         <div class="form-group">
             <label>Bedrooms</label>
             {!! Form::select('bedrooms', config('formfields.listing.beds'), null, ['class' => 'input-style']) !!}
-            <span class="invalid-feedback" role="alert">
-			    {!! $errors->first('bedrooms') !!}
-		    </span>
         </div>
         <div class="form-group">
             <label>Bathrooms</label>
             {!! Form::select('baths', config('formfields.listing.baths'), null, ['class' => 'input-style']) !!}
-            <span class="invalid-feedback" role="alert">
-			    {!! $errors->first('baths') !!}
-		    </span>
         </div>
         <div class="form-group by-add-only-chkbox">
             <div class="custom-control custom-checkbox by-add-only">
-                {!! Form::checkbox('is_convertible', null, false, ['class' => "custom-control-input", 'id' => 'convertible']) !!}
+                {!! Form::checkbox('is_convertible', null,
+                    (isset($listing->is_convertible) && ($listing->is_convertible == true)) ? true : false,
+                    ['class' => "custom-control-input", 'id' => 'convertible'])
+                !!}
                 <label class="custom-control-label" for="convertible"> Convertible</label>
             </div>
         </div>
@@ -86,23 +65,14 @@
         <div class="form-group">
             <label>Square Feet</label>
             {!! Form::text('square_feet', null, ['class' => 'input-style', 'autocomplete' => 'off']) !!}
-            <span class="invalid-feedback" role="alert">
-                {!! $errors->first('square_feet') !!}
-            </span>
         </div>
         <div class="form-group">
             <label>Free Months</label>
             {!! Form::text('free_months', null, ['class' => 'input-style', 'autocomplete' => 'off']) !!}
-            <span class="invalid-feedback" role="alert">
-                {!! $errors->first('free_months') !!}
-            </span>
         </div>
         <div class="form-group">
             <label>Application Fee</label>
             {!! Form::text('application_fee', null, ['class' => 'input-style', 'autocomplete' => 'off']) !!}
-            <span class="invalid-feedback" role="alert">
-			    {!! $errors->first('application_fee') !!}
-		    </span>
         </div>
     </div>
 </div>
@@ -112,24 +82,15 @@
         <div class="form-group">
             <label>Deposit</label>
             {!! Form::text('deposit', null, ['class' => 'input-style', 'autocomplete' => 'off']) !!}
-            <span class="invalid-feedback" role="alert">
-            {!! $errors->first('deposit') !!}
-        </span>
         </div>
         <div class="form-group">
             <label>Lease Term</label>
             {!! Form::select('lease_term', config('formfields.listing.free_months'), null, ['class' => 'input-style']) !!}
-            <span class="invalid-feedback" role="alert">
-			    {!! $errors->first('lease_term') !!}
-		    </span>
         </div>
         @if(!isOwner())
             <div class="form-group">
                 <label>Listing Type</label>
                 {!! Form::select('listing_type', config('formfields.listing.listing_type'), null, ['class' => 'input-style']) !!}
-                <span class="invalid-feedback" role="alert">
-                    {!! $errors->first('listing_type') !!}
-                </span>
             </div>
         @endif
     </div>
@@ -139,9 +100,6 @@
         <div class="form-group">
             <label>Availability</label>
             {!! Form::select('availability_type', config('formfields.listing.availability'), null, ['class' => 'input-style']) !!}
-            <span class="invalid-feedback" role="alert">
-                {!! $errors->first('availability_type') !!}
-            </span>
         </div>
         <div class="form-group availability-date" style="display: {{ isset($listing) && $listing->availability_type === 2 ? 'block' : 'none' }};">
             <label>Select Availability Date</label>
@@ -152,10 +110,8 @@
                     'class' => 'input-style',
                     'id' => 'availability_date',
                     'data-language' => 'en'
-                ]) !!}
-            <span class="invalid-feedback" role="alert">
-			    {!! $errors->first('availability') !!}
-		    </span>
+                ]
+            ) !!}
         </div>
     </div>
 </div>
@@ -181,8 +137,6 @@
         <div class="form-group">
             <label>Description</label>
             {!! Form::textarea('description', null, ['class' => 'text-area', 'style' => 'resize:none;']) !!}
-            <span class="invalid-feedback" role="alert">
-			{!! $errors->first('description') !!}
-		</span>
         </div>
     </div>
+</div>
