@@ -1231,6 +1231,14 @@ function str_formatting( $string, $phrase ) {
 }
 
 /**
+ * @param $value
+ * @return int
+ */
+function toValidPrice($value) {
+    return intval(preg_replace('/[^\d.]/', '', $value));
+}
+
+/**
  * @param $id
  *
  * @return mixed

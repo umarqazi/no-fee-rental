@@ -1,6 +1,6 @@
 
 @if(isRenter())
-    @if($listing->agent->plan->plan === GOLDPLAN || $listing->agent->plan->plan === PLATINUMPLAN || !empty($listing->openHouse))
+{{--    @if(isset($listing->agent->plan->plan) === GOLDPLAN || $listing->agent->plan->plan === PLATINUMPLAN || !empty($listing->openHouse))--}}
     <div class="calendar-wrap">
         <!--calendar slider -->
         <h3>Request for Schedule </h3>
@@ -55,9 +55,9 @@
         <span class="app-message-error" style="padding-left: 10px; color : red;font-size: 12px;position: relative; top: -15px;"></span>
         {!! Form::close() !!}
     </div>
-    @else
-        <div class="not-allowed-appointment"> No Appointment request exists for now.</div>
-    @endif
+    {{--@else--}}
+        {{--<div class="not-allowed-appointment"> No Appointment request exists for now.</div>--}}
+    {{--@endif--}}
 @else
     <div class="not-allowed-appointment"> {{ ucfirst(whoAmI()) }} are not allowed to make appointment request.</div>
 @endif

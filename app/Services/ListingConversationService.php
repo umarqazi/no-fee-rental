@@ -131,12 +131,12 @@ class ListingConversationService extends MemberService {
      */
     public function archive($id) {
         $listing = $this->listingConversationRepo->findById($id)->with('listing')->first();
-        $calender = $this->calendarEventRepo->find(['linked_id' => $listing->id , 'from' => $listing->from , 'to' => $listing->to])->first();
-        calendarEvent([
-            'title' => $listing->listing->display_address.'  (rejected)',
-            'url'   => '.loadConversation',
-            'color' => 'red',
-        ], true, $calender->id);
+//        $calender = $this->calendarEventRepo->find(['linked_id' => $listing->id , 'from' => $listing->from , 'to' => $listing->to])->first();
+//        calendarEvent([
+//            'title' => $listing->listing->display_address.'  (rejected)',
+//            'url'   => '.loadConversation',
+//            'color' => 'red',
+//        ], true, $calender->id);
         return $this->listingConversationRepo->update($id, ['is_archived' => true]);
     }
 

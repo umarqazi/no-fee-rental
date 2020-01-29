@@ -82,7 +82,5 @@
             </div>
         </div>
     </div>
-    @include('agent.modals.message')
-
     {!! HTML::script('assets/js/listing.js') !!}
 @endsection
