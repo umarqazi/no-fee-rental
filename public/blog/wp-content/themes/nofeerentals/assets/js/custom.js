@@ -117,7 +117,7 @@ $(document).ready(function() {
             $(".create-agent-listing").hide();
             $("#signup_form .btn-default").prop('disabled', false);
             $("#signup_form .agnet-input").prop('disabled', false);
-           
+
         } else {
             $("#signup_form .agnet-input").prop('disabled', true);
             $("#signup_form .finding-home-text").css('opacity', '0.3');
@@ -176,7 +176,6 @@ $(document).ready(function() {
             }
         }
     });*/
-
 });
 
 $(document).ready(function() {
@@ -232,7 +231,7 @@ $(document).ready(function() {
 
     $('#price-range-submit').hide();
 
-    
+
 
     $(function () {
         $("#slider-range-4").slider({
@@ -240,9 +239,17 @@ $(document).ready(function() {
             orientation: "horizontal",
             //max: 10000,
             disabled: true,
-            values: [ 0, 50 ]          
+            values: [ 0, 50 ]
         });
+    });
 
-
-    }); 
 });
+
+// $(window).on("load", function() {
+//     $('#categories-2 ul li > a:contains("Uncategorized")').each(function() {
+//         if ($(this).text() === 'Uncategorized') {
+//             $(this).parent().css('display' , 'none');
+//         }
+//     });
+// });
+

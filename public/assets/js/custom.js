@@ -728,4 +728,6 @@ $(() => {
         $(this).toggleClass('far fa-star fas fa-star');
     });
     $('[data-toggle="tooltip"]').tooltip();
+
+    $(".money-mask , .search-input-wrap > #min_price , .search-input-wrap > #max_price ").maskMoney({prefix:'$ ', allowNegative: true, thousands:',', decimal:'.'});
 });
