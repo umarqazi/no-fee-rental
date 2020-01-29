@@ -142,7 +142,8 @@
         </div>
     </div>
     <script src="http://no-fee-rental.teamtechverx.com/assets/js/vendor/jquery.validate.min.js"></script>
-    <script src="http://no-fee-rental.teamtechverx.com/assets/js/vendor/jquery.maskMoney.js"></script>
+<!--    <script src="http://no-fee-rental.teamtechverx.com/assets/js/vendor/jquery.maskMoney.js"></script>-->
+    <script src="http://no-fee-rental.teamtechverx.com/assets/js/vendor/simple.money.format.js"></script>
 </header>
 
 
