@@ -1,13 +1,15 @@
 
 @if($conversations->archived->total() > 0)
     @foreach ($conversations->archived as $archive)
-        <div class="message-row row">
+        <div class="message-row">
+            <div class="row conversation-pg-mrg">
             <div class="col-sm-6 col-lg-10 col-12">
                 <h3>{{ sprintf("%s %s", $archive->sender->first_name ?? $archive->username, $archive->sender->last_name ?? null) }}</h3>
             </div>
             <div class="col-sm-6 col-lg-2 col-12 view-buttons">
                 <a href="{{ route('agent.loadConversation', $archive->id) }}" class="view-chat-view"> View</a>
                 <a href="{{ route('agent.unArchiveConversation', $archive->id) }}" class="view-chat-archive"> UnArchive</a>
+            </div>
             </div>
             <div class="property">
                 <img src="{{ asset($archive->listing->thumbnail ?? DLI) }}" alt="" />

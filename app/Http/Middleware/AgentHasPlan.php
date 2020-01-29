@@ -36,8 +36,8 @@ class AgentHasPlan {
      * @return mixed
      */
     public function handle($request, Closure $next) {
-
         $this->headers = $next($request);
+        return $this->headers;
         if(isMRGAgent() || mySelf()->created_at->addDays(TRIALDAYS)->format('Y-m-d') >= now()->format('Y-m-d')) {
             return $this->headers;
         }
@@ -84,11 +84,11 @@ class AgentHasPlan {
      * @return bool|\Illuminate\Http\RedirectResponse
      */
     private function __slotsAction() {
-        if($this->service->isSlotsExist()) {
+//        if($this->service->isSlotsExist()) {
             return $this->headers;
-        }
+//        }
 
-        return $this->service->_FILO() ? $this->headers : error('Something Went Wrong');
+//        return $this->service->_FILO() ? $this->headers : error('Something Went Wrong');
     }
 
     /**
