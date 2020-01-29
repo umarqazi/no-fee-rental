@@ -254,7 +254,11 @@ label {
 .input-style:disabled {
     background: #ebebe4;
 }
-
+.form-control:focus{
+    border-color: #e77817;
+    outline: none;
+    box-shadow: none;
+}
 .exclusive-chkboxes {
     display: flex;
     align-items: center;
@@ -1253,7 +1257,7 @@ header .agent-avtar .avtar:hover div ul {
 
 .message-row .property {
     display: flex;
-    margin-top: 20px;
+    margin-top: 15px;
     align-items: center;
 }
 
@@ -2313,6 +2317,9 @@ header .agent-avtar .avtar:hover div ul {
     }
     .unit-flex .by-add-only-chkbox{
         margin-bottom: 15px !important;
+    }
+    .message-row .property{
+        display: block;
     }
 
 }

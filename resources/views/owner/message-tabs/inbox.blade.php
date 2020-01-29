@@ -1,13 +1,19 @@
 
 @if($conversations->active->total() > 0)
     @foreach ($conversations->active as $inbox)
-        <div class="message-row row">
-            <div class="col-sm-6 col-lg-10 col-12">
-                <h3>{{ sprintf("%s %s", $inbox->sender->first_name ?? $inbox->username, $inbox->sender->last_name ?? null) }}</h3>
-            </div>
-            <div class="col-sm-6 col-lg-2 col-12 view-buttons">
-                <a href="{{ route('owner.loadConversation', $inbox->id) }}" class="view-chat-view"> View</a>
-                <a href="{{ route('owner.archiveConversation', $inbox->id) }}" class="view-chat-archive"> Archive</a>
+        <div class="message-row">
+            <div class="row conversation-pg-mrg">
+                <div class="col-sm-6 col-lg-10 col-12">
+                    <h3>{{ sprintf("%s %s", $inbox->sender->first_name ?? $inbox->username, $inbox->sender->last_name ?? null) }}</h3>
+                    <p>Email: <strong><a href="javascript:void(0);" style="text-decoration:none;">{{ $inbox->sender->email }}</a></strong></p>
+                    <p>Phone No: <strong style="font-weight: 700;">{{ $inbox->sender->phone_number }}</strong></p>
+                </div>
+                <div class="col-sm-6 col-lg-2 col-12">
+                    <a href="{{ route('owner.loadConversation', $inbox->id) }}" class="view-chat-view"> View</a>
+                    <a href="{{ route('owner.archiveConversation', $inbox->id) }}" class="view-chat-archive"> Archive</a>
+                    <div class="clearfix"></div>
+                    <div class="reply-back-modal"><a href="javascript:void(0);" data-toggle="modal" data-target="#message-modal">Reply Back</a></div>
+                </div>
             </div>
             <div class="property">
                 <img src="{{ asset($inbox->listing->thumbnail ?? DLI) }}" alt="" />
@@ -21,7 +27,8 @@
                 </div>
             </div>
             <div class="date-text">
-                {{ sprintf("%s on %s", ucfirst($inbox->appointment_time ?? 'Requested'), $inbox->appointment_date->format('D, d/m/y')) }}
+                <div style="text-align: right;"><strong style='color:#000;'>({{ $inbox->conversation_type == APPOINTMENT ? 'Appointment' : 'Availability' }} Request)</strong></div>
+                <div style="text-align: right;">{{ sprintf("Requested on %s", $inbox->created_at->format('D, d/m/y')) }}</div>
             </div>
         </div>
     @endforeach

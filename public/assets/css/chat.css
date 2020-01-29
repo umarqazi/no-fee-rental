@@ -8,8 +8,8 @@
 
 .user-info .property-info{
     display: flex;
-    flex: 0 0 80%;
     margin-top: 10px;
+    justify-content: space-between;
 }
 
 .user-info .property-info ul{
@@ -35,6 +35,7 @@
 .user-info .clients-info {
     font-size: 14px;
     color: #808080;
+    flex: 0 0 12%;
 }
 .user-info .info{
     width: 100%;
@@ -737,4 +738,11 @@
 }
 #frame .content .message-input .wrap button:focus {
     outline: none;
+}
+
+
+@media screen and (max-width: 991px){
+    .user-info .clients-info{
+        flex: 0 0 25%;
+    }
 }

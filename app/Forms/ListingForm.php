@@ -157,16 +157,16 @@ class ListingForm extends BaseForm {
 			'unit'               => $this->unit,
             'freshness_score'    => $this->freshness_score,
             'availability_type'  => $this->availability_type,
-			'rent'               => $this->rent,
+			'rent'               => toValidPrice($this->rent),
 			'thumbnail'          => $this->thumbnail,
             'visibility'         => $this->visibility,
 			'square_feet'        => $this->square_feet,
 			'map_location'       => $this->map_location,
             'listing_type'       => $this->listing_type,
             'is_convertible'     => $this->is_convertible,
-            'renter_rebate'      => $this->renter_rebate,
-            'application_fee'    => $this->application_fee,
-            'deposit'            => $this->deposit,
+            'renter_rebate'      => toValidPrice($this->renter_rebate),
+            'application_fee'    => toValidPrice($this->application_fee),
+            'deposit'            => toValidPrice($this->deposit),
             'lease_term'         => $this->lease_term,
             'free_months'        => $this->free_months
         ];
@@ -178,17 +178,17 @@ class ListingForm extends BaseForm {
 	function rules() {
 		return [
             'neighborhood_id'   => 'required',
-			'street_address'    => 'required|string',
-			'display_address'   => 'required|string',
+			'street_address'    => 'required',
+			'display_address'   => 'required',
 			'availability_type' => 'required',
-			'map_location'      => 'required|string',
+			'map_location'      => 'required',
 			'bedrooms'          => 'required',
-			'baths'             => 'required|integer',
+			'baths'             => 'required',
             'thumbnail'         => 'sometimes|mimes:jpg,png,jpeg',
 			'description'       => 'required',
-			'rent'              => 'required|integer',
-			'square_feet'       => 'required|integer',
-            'listing_type'      => 'required|string'
+			'rent'              => 'required',
+			'square_feet'       => 'required',
+            'listing_type'      => 'required'
 		];
 	}
 }

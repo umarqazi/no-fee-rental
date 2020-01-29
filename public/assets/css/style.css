@@ -2118,23 +2118,26 @@ main {
     font-weight: 700;
     color: #000;
 }
-
+.conversation-pg-mrg p{
+    margin-bottom: 10px;
+}
 .view-chat-view {
     position: absolute;
-    right: 130px;
+    right: 95px;
     top: 5px;
-    font-size: 15px;
+    font-size: 11px;
     background: #223970;
     color: #fff;
     padding: 5px 12px;
     border-radius: 20px;
+
 }
 
 .view-chat-archive {
     position: absolute;
     right: 10px;
     top: 5px;
-    font-size: 15px;
+    font-size: 11px;
     background: #223970;
     color: #fff;
     padding: 5px 20px;
@@ -2151,6 +2154,11 @@ main {
 .view-chat-archive:active,
 .view-chat-archive:focus {
     color: #fff;
+}
+.reply-back-modal{
+    position: absolute;
+    top: 50px;
+    right: 15px;
 }
 
 @media only screen and (max-width: 576px) {

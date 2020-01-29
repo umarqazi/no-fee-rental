@@ -140,6 +140,7 @@ $(document).ready(function() {
             $("#" + get_btn_id).fadeIn();
         }
     });
+<<<<<<< HEAD
 
     /*$(function () {
         $('#multiple').pignoseCalendar({
@@ -180,6 +181,8 @@ $(document).ready(function() {
 
 $(document).ready(function() {
 
+=======
+>>>>>>> 82033415f159e04281af71a3c705123665c8ec3b
     $('#login-btn').on('click', function() {
         $('#signup').modal('hide');
         $('#login').modal('show');
@@ -203,18 +206,10 @@ $(document).ready(function() {
     $("#login-btn").click(function() {
         $('body').addClass('signup-modal-scroll');
     });
-    // $("#login").click(function() {
-    //     $('body').addClass('signup-modal-scroll');
-    // });
+
     $('.close-signup-modal').click(function() {
         $('body').removeClass('signup-modal-scroll');
     });
-    $(document).on("click", function (e) {
-        if ($(e.target).is("#signup-btn")==false && $(e.target).parents('#signup').length==0 && $(e.target).parents('#login').length==0) {
-            $("body").removeClass("signup-modal-scroll");
-        }
-    });
-
     function togglefooterlink() {
         if (window.matchMedia('(max-width: 1279px)').matches) {
             $(".collapseabe-link").click(function() {
@@ -225,14 +220,13 @@ $(document).ready(function() {
         }
     }
     togglefooterlink();
-
-
-    // range slider rent calculator
-
     $('#price-range-submit').hide();
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> 82033415f159e04281af71a3c705123665c8ec3b
     $(function () {
         $("#slider-range-4").slider({
             range: true,
@@ -243,6 +237,7 @@ $(document).ready(function() {
         });
     });
 
+<<<<<<< HEAD
 });
 
 // $(window).on("load", function() {
@@ -253,3 +248,12 @@ $(document).ready(function() {
 //     });
 // });
 
+=======
+    $(document).on("click", function (e) {
+        if ($(e.target).is("#signup-btn")==false && $(e.target).parents('#signup').length==0 && $(e.target).parents('#login').length==0) {
+            $("body").removeClass("signup-modal-scroll");
+        }
+    });
+});
+
+>>>>>>> 82033415f159e04281af71a3c705123665c8ec3b
