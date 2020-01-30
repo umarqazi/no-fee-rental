@@ -62,7 +62,7 @@
                             @endif
 
                             @if($listing->is_convertible)
-                                <span class="listing-detail-badges">Convertible</span>
+                                <span class="listing-detail-badges convertible-bg">Convertible</span>
                             @endif
                         </div>
                         <div class="estimation-time">
