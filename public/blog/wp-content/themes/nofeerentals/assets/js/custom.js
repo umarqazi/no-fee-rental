@@ -243,4 +243,3 @@ $(document).ready(function() {
             $("body").removeClass("signup-modal-scroll");
         }
     });
-});
