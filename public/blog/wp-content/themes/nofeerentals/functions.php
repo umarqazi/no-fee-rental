@@ -7,6 +7,9 @@
    * @package nofeerentals
    */
 
+update_option( 'siteurl', 'http://beta.nofeerentalsnyc.com/blog/' );
+update_option( 'home', 'http://beta.nofeerentalsnyc.com/blog/' );
+
   if ( ! function_exists( 'nofeerentals_setup' ) ) :
     /**
      * Sets up theme defaults and registers support for various WordPress features.
