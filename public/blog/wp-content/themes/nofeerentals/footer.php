@@ -124,12 +124,11 @@
           </div>
           <div class="row form-group">
             <div class="form-check col-lg-6 col-sm-6">
-              <div style="margin-left: 15px;">
-                <input class="form-check-input" name="remember" type="checkbox">
-                <label class="form-check-label" for="remember">
-                  Remember Me
-                </label>
-              </div>
+                <div class="custom-control custom-checkbox">
+                    <input class="custom-control-input" id="rememberMe" name="amenities[]" type="checkbox"
+                           value="10">
+                    <label class="custom-control-label" for="rememberMe">Remember Me</label>
+                </div>
             </div>
             <div class="col-lg-6 col-sm-6 forgot-pass">
               <a href="http://beta.nofeerentalsnyc.com/forgot-password">Forgot Password.</a>

@@ -40,16 +40,19 @@
                 </div>
                 <div class="row form-group">
                     <div class="form-check col-lg-6 col-sm-6">
-                        <div style="margin-left: 15px;">
-                            {!! Form::checkbox('remember', null, old('remember') ? 'checked' : '', ['class' => 'form-check-input']) !!}
-                            <label class="form-check-label" for="remember">
-                                {{ __('Remember Me') }}
-                            </label>
-                        </div>
-                    </div>
-                            <div class="col-lg-6 col-sm-6 forgot-pass">
-                                <a href="{{ route('forgot.password') }}">Forgot Password</a>
+                            {{--                            {!! Form::checkbox('remember', null, old('remember') ? 'checked' : '', ['class' => 'form-check-input']) !!}--}}
+                            <div class="custom-control custom-checkbox">
+                                <input class="custom-control-input" id="rememberMe" name="amenities[]" type="checkbox"
+                                       value="10">
+                                <label class="custom-control-label" for="rememberMe">Remember Me</label>
                             </div>
+{{--                            <label class="form-check-label" for="remember">--}}
+{{--                                {{ __('Remember Me') }}--}}
+{{--                            </label>--}}
+                    </div>
+                    <div class="col-lg-6 col-sm-6 forgot-pass">
+                        <a href="{{ route('forgot.password') }}">Forgot Password</a>
+                    </div>
 
                     <div class="col-md-12">
                         @if (Route::has('password.request'))
@@ -66,7 +69,7 @@
                 </div>
                 {!! Form::close() !!}
                 <p class="footer-text">Don’t have an account? <span class="signup-modal-btn"
-                    id="signup-btn">Signup</span></p>
+                                                                    id="signup-btn">Signup</span></p>
             </div>
 
         </div>

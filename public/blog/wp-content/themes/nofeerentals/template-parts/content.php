@@ -53,7 +53,8 @@
 		?>
 	</div><!-- .entry-content -->
 
-	<footer class="entry-footer">
+<!-- 	<footer class="entry-footer">
 		<?php nofeerentals_entry_footer(); ?>
-	</footer><!-- .entry-footer -->
+	</footer> -->
+	<!-- .entry-footer -->
 </article><!-- #post-<?php the_ID(); ?> -->

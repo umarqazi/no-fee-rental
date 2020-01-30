@@ -54,7 +54,7 @@
                 <div class="modal-body">
                     <div class="pt-3 mb-3 text-center" style="max-width: 100%;">
                          <span id="invest">
-                                {!! Form::text('min_price', null, ['class' => 'input-style money-mask1', 'placeholder' =>
+                                {!! Form::text('min_price', null, ['class' => 'input-style', 'placeholder' =>
                                 '$', 'style' => 'margin:10px 0px; width:100%; text-align:center;
                                 font-size:25px;'])
                                 !!}</span>
@@ -479,39 +479,6 @@
         </div>
     </div>
 </div>
-<script>
-    let li = $('.bedroom-listing > li');
-    $(() => {
-        if($('#other').is(':checked')) {
-            lp3(true);
-        }
-
-        if($('#no').is(':checked')) {
-            lp4(true);
-        }
-    });
-
-    function lp3(action) {
-        li.find('input[value=1], input[value=2], input[value=4]').prop('checked', false);
-        li.find('input[value=1], input[value=2]').prop('disabled', action);
-    }
-
-    function lp4(action) {
-        li.find('input[value=1], input[value=2], input[value=3]').prop('checked', false);
-        li.find('input[value=1], input[value=2]').prop('disabled', action);
-    }
-
-    $('#no, #other').change(function() {
-        let val = $(this).val();
-        if (val === '3') {
-            lp3($(this).is(':checked'));
-        }
-
-        if (val === '4') {
-            lp4($(this).is(':checked'));
-        }
-    });
-</script>
 <div class="modal fade need-help-modal let-us-help-modal" id="let-us-step12">
     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
         <div class="modal-content">

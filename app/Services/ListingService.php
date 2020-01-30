@@ -97,9 +97,9 @@ class ListingService extends BuildingService {
      * @return bool
      */
     private function __addListingEvents($listing) {
-        if(isAgent()) {
-            return addNewList();
-        }
+//        if(isAgent()) {
+//            return addNewList();
+//        }
 
 //        $listing->visibility !== PENDINGLISTING ?:
 //            DispatchNotificationService::LISTINGAPPROVALREQUEST(toObject([
