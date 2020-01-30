@@ -39,10 +39,10 @@
         <div class="mobile-nav">
             <ul id="menu-header-menu" class="menu-links">
                 <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-29">
-                    <a href="http://no-fee-rental.teamtechverx.com/listing-by-rent">Rent</a>
+                    <a href="http://beta.nofeerentalsnyc.com/listing-by-rent">Rent</a>
                 </li>
                 <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-33">
-                    <a href="http://no-fee-rental.teamtechverx.com/listing-by-neighborhood">Neighborhood</a>
+                    <a href="http://beta.nofeerentalsnyc.com/listing-by-neighborhood">Neighborhood</a>
                 </li>
                 <li>
                     <a href="" data-toggle="modal" data-target="#login" class="signin-modal-btn close-menu">Login</a>
@@ -94,7 +94,7 @@
                             Yousuf Khalid <i class="fa fa-angle-down"></i>
                         </a>
                         <div class="user-dropdown">
-                            <a href="http://no-fee-rental.teamtechverx.com/<?php echo guard(); ?>/home">Dashboard </a>
+                            <a href="http://beta.nofeerentalsnyc.com/<?php echo guard(); ?>/home">Dashboard </a>
                             <a href="<?php echo guard(); ?>">Profile Setting </a>
                             <a href="<?php echo guard(); ?>">Log Out </a>
                         </div>
@@ -141,8 +141,8 @@
 
         </div>
     </div>
-    <script src="http://no-fee-rental.teamtechverx.com/assets/js/vendor/jquery.validate.min.js"></script>
-    <script src="http://no-fee-rental.teamtechverx.com/assets/js/vendor/jquery.maskMoney.js"></script>
+    <script src="http://beta.nofeerentalsnyc.com/assets/js/vendor/jquery.validate.min.js"></script>
+    <script src="http://beta.nofeerentalsnyc.com/assets/js/vendor/jquery.maskMoney.js"></script>
 </header>
 
 

@@ -24,9 +24,9 @@
         <h4 class="collapseabe-link">Renters <i class="fas fa-angle-down"></i></h4>
         <div class="collapse-menu">
           <ul>
-            <li><a href="<?php bloginfo('url'); ?>/?page_id=49" class="ft-links">Renters Guide</a></li>
-            <li><a href="<?php bloginfo('url'); ?>/?post_type=help_and_answers" class="ft-links">Help and Answers</a></li>
-            <li><a href="<?php bloginfo('url'); ?>/?page_id=233" class="ft-links">Rent Calculator</a></li>
+            <li><a href="<?php bloginfo('url'); ?>/renter-guide/" class="ft-links">Renters Guide</a></li>
+            <li><a href="<?php bloginfo('url'); ?>/help_and_answers/" class="ft-links">Help and Answers</a></li>
+            <li><a href="<?php bloginfo('url'); ?>/rent-calculator/" class="ft-links">Rent Calculator</a></li>
             <li><a href="<?php bloginfo('url'); ?>" class="ft-links">Blog</a></li>
           </ul>
         </div>
@@ -35,10 +35,10 @@
         <h4 class="collapseabe-link"> Support <i class="fas fa-angle-down"></i></h4>
         <div class="collapse-menu">
           <ul>
-            <li><a href="http://no-fee-rental.teamtechverx.com/contact-us" class="ft-links">Contact Us</a></li>
-            <li><a href="http://no-fee-rental.teamtechverx.com/site-map" class="ft-links">Site Map</a></li>
-            <li><a href="<?php bloginfo('url'); ?>/?page_id=187" class="ft-links">Feedback</a></li>
-            <li><a href="http://no-fee-rental.teamtechverx.com/advertise-with-us" class="ft-links">Advertise with Us</a></li>
+            <li><a href="http://beta.nofeerentalsnyc.com/contact-us" class="ft-links">Contact Us</a></li>
+            <li><a href="http://beta.nofeerentalsnyc.com/site-map" class="ft-links">Site Map</a></li>
+            <li><a href="<?php bloginfo('url'); ?>/feed-back/" class="ft-links">Feedback</a></li>
+            <li><a href="http://beta.nofeerentalsnyc.com/advertise-with-us" class="ft-links">Advertise with Us</a></li>
           </ul>
         </div>
       </li>
@@ -46,10 +46,10 @@
         <h4 class="collapseabe-link">Company <i class="fas fa-angle-down"></i></h4>
         <div class="collapse-menu">
           <ul>
-            <li><a href="<?php bloginfo('url'); ?>/?page_id=66" class="ft-links">Our Story</a></li>
-            <li><a href="<?php bloginfo('url'); ?>/?post_type=press_cptui" class="ft-links"">Press</a></li>
-            <li><a href="<?php bloginfo('url'); ?>/?page_id=3" class="ft-links">Privacy Policy </a></li>
-            <li><a href="<?php bloginfo('url'); ?>/?page_id=27" class="ft-links">Terms</a></li>
+            <li><a href="<?php bloginfo('url'); ?>/about-us/" class="ft-links">Our Story</a></li>
+            <li><a href="<?php bloginfo('url'); ?>/press/" class="ft-links"">Press</a></li>
+            <li><a href="<?php bloginfo('url'); ?>/privacy-policy/" class="ft-links">Privacy Policy </a></li>
+            <li><a href="<?php bloginfo('url'); ?>/terms/" class="ft-links">Terms</a></li>
           </ul>
         </div>
       </li>
@@ -58,7 +58,7 @@
         <div class="newsletter">
           <div class="title">subscribe news letter</div>
           <p>Enter your email address &amp; get daily newsletter</p>
-          <form method="POST" action="http://no-fee-rental.teamtechverx.com/api/newsletter-subscribe" accept-charset="UTF-8" id="newsletter-form" class="newsletter-form ajax" reset="true">
+          <form method="POST" action="http://beta.nofeerentalsnyc.com/api/newsletter-subscribe" accept-charset="UTF-8" id="newsletter-form" class="newsletter-form ajax" reset="true">
             <input name="_token" type="hidden" value="0d93UMDvS4Sjfmoa9Lt7jJutbJVYodaQG0jcrRSF">
             <input class="fld" placeholder="Email Address" name="email" type="text">
             <label id="error" class="error email" for="email"></label>
@@ -132,7 +132,7 @@
               </div>
             </div>
             <div class="col-lg-6 col-sm-6 forgot-pass">
-              <a href="http://no-fee-rental.teamtechverx.com/forgot-password">Forgot Password.</a>
+              <a href="http://beta.nofeerentalsnyc.com/forgot-password">Forgot Password.</a>
             </div>
 
             <div class="col-md-12">
@@ -188,7 +188,7 @@
         <div class="login-heading">
           CREATE ACCOUNT
         </div>
-        <form method="POST" action="http://no-fee-rental.teamtechverx.com/api/user-signup" accept-charset="UTF-8" class="ajax" reset="true" id="signup_form" novalidate="novalidate">
+        <form method="POST" action="http://beta.nofeerentalsnyc.com/api/user-signup" accept-charset="UTF-8" class="ajax" reset="true" id="signup_form" novalidate="novalidate">
           <input name="_token" type="hidden" value="wgtYrzIjKZeqRuv67Xf1mCwnwFUW8JlmJKzf0lre">
           <div class="row">
             <div class="col-sm-12 mb-2">
@@ -274,7 +274,7 @@
 </div>
 
 
-<script src="http://no-fee-rental.teamtechverx.com/assets/js/vendor/jquery.validate.min.js"></script>
+<script src="http://beta.nofeerentalsnyc.com/assets/js/vendor/jquery.validate.min.js"></script>
 
 <?php wp_footer(); ?>
 
