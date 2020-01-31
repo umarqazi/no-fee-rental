@@ -11,10 +11,10 @@
                 <h4 class="collapseabe-link">Renters <i class="fas fa-angle-down"></i></h4>
                 <div class="collapse-menu">
                     <ul>
-                        <li><a href="http://no-fee-rental.teamtechverx.com/blog/?page_id=49" class="ft-links">Renters Guide</a></li>
-                        <li><a href="http://no-fee-rental.teamtechverx.com/blog/?post_type=help_and_answers" class="ft-links">Help and Answers</a></li>
-                        <li><a href="http://no-fee-rental.teamtechverx.com/blog/?page_id=233" class="ft-links">Rent Calculator</a></li>
-                        <li><a href="http://no-fee-rental.teamtechverx.com/blog" class="ft-links">Blog</a></li>
+                        <li><a href="/blog/renter-guide" class="ft-links">Renters Guide</a></li>
+                        <li><a href="/blog/help_and_answers" class="ft-links">Help and Answers</a></li>
+                        <li><a href="/blog/rent-calculator" class="ft-links">Rent Calculator</a></li>
+                        <li><a href="/blog" class="ft-links">Blog</a></li>
                     </ul>
                 </div>
             </li>
@@ -24,7 +24,7 @@
                     <ul>
                         <li><a href="{!! route('web.contact-us') !!}" class="ft-links">Contact Us</a></li>
                         <li><a href="{{ route('web.siteMap') }}" class="ft-links">Site Map</a></li>
-                        <li><a href="http://no-fee-rental.teamtechverx.com/blog/?page_id=187" class="ft-links">Feedback</a></li>
+                        <li><a href="/blog/feed-back" class="ft-links">Feedback</a></li>
                         <li><a href="{{ route('web.advertise') }}" class="ft-links">Advertise with Us</a></li>
                     </ul>
                 </div>
@@ -33,11 +33,10 @@
                 <h4 class="collapseabe-link">Company <i class="fas fa-angle-down"></i></h4>
                 <div class="collapse-menu">
                     <ul>
-                        <li><a href="http://no-fee-rental.teamtechverx.com/blog/?page_id=66" class="ft-links">Our Story</a></li>
-                        <li><a href="http://no-fee-rental.teamtechverx.com/blog/?post_type=press_cptui"
-                               class="ft-links">Press</a></li>
-                        <li><a href="http://no-fee-rental.teamtechverx.com/blog/?page_id=3" class="ft-links">Privacy Policy </a></li>
-                        <li><a href="http://no-fee-rental.teamtechverx.com/blog/?page_id=27" class="ft-links">Terms</a></li>
+                        <li><a href="/blog/about-us" class="ft-links">Our Story</a></li>
+                        <li><a href="/blog/press" class="ft-links">Press</a></li>
+                        <li><a href="/blog/privacy-policy" class="ft-links">Privacy Policy </a></li>
+                        <li><a href="/blog/terms" class="ft-links">Terms</a></li>
                     </ul>
                 </div>
             </li>
