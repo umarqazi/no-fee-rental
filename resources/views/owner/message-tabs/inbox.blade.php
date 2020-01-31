@@ -7,6 +7,7 @@
                     <h3>{{ sprintf("%s %s", $inbox->sender->first_name ?? $inbox->username, $inbox->sender->last_name ?? null) }}</h3>
                     <p>Email: <strong><a href="javascript:void(0);" style="text-decoration:none;">{{ $inbox->email ?? $inbox->sender->email }}</a></strong></p>
                     <p>Phone No: <strong style="font-weight: 700;">{{ $inbox->phone_number ?? $inbox->sender->phone_number }}</strong></p>
+
                 </div>
                 <div class="col-sm-6 col-lg-2 col-12">
                     <div class="conversation-buttons">
