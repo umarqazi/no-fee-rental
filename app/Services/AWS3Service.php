@@ -13,6 +13,8 @@ class AWS3Service {
      */
     private $aws_s3;
 
+    private $aws_url;
+
     /**
      * @var null
      */
@@ -23,6 +25,7 @@ class AWS3Service {
      */
     private function __construct() {
         $this->aws_s3 = \Storage::disk('s3');
+        $this->aws_url = config('filesystems.disks.s3.url');
     }
 
     /**
@@ -44,7 +47,7 @@ class AWS3Service {
      * @return bool
      */
     public function upload($path, $file, string $visibility = 'public') {
-        return $this->aws_s3->put($path, $file ,$visibility) ? true : false;
+        return $this->aws_s3->put($path, $file ,$visibility);
     }
 
     /**
@@ -65,19 +68,22 @@ class AWS3Service {
     }
 
     /**
-     * @param $path
      * @param $filename
      * @return bool
      */
-    public function delete($path, $filename) {
-        if ($this->aws_s3->delete($path.$filename)) {
+    public function delete($filename) {
+        if ($this->aws_s3->delete($filename)) {
             return true;
         }
 
         return false;
     }
 
-    public function read() {
-        return $this->aws_s3;
+    /**
+     * @param $image_name
+     * @return string
+     */
+    public function read($image_name) {
+        return sprintf('%s%s', $this->aws_url, $image_name);
     }
 }

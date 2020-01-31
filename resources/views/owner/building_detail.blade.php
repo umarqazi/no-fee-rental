@@ -31,7 +31,7 @@
             @foreach($building->listings as $apartment)
                 <div class="col-lg-3 col-sm-6 col-md-3">
                     <div class="listing-thumb">
-                        <img src="{{ asset( $apartment->thumbnail ?? DLI ) }}" alt="" style="height: 205px; width: 100%;" class="main-img" />
+                        <img src="{{ Storage::url( $apartment->thumbnail ?? DLI ) }}" alt="" style="height: 205px; width: 100%;" class="main-img" />
                         <div class="info">
                             <p><i class="fa fa-tag"></i> ${{ ($apartment->rent) ?   number_format($apartment->rent,0) : 'None' }}</p>
                             <ul>
@@ -82,7 +82,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <div>
-                        <img class="img-thumbnail" src="{{isset($building->thumbnail) ? asset($building->thumbnail ?? DLI ) : asset(DLI) }}" id="img" style="width: 180px;height: 145px;margin-bottom: 15px;">
+                        <img class="img-thumbnail" src="{{isset($building->thumbnail) ? Storage::url($building->thumbnail ?? DLI ) : Storage::url(DLI) }}" id="img" style="width: 180px;height: 145px;margin-bottom: 15px;">
                     </div>
                     {!! Form::file('thumbnail', ['id' => 'file-3']) !!}
                 </div>

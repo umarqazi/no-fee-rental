@@ -433,3 +433,10 @@ if(!defined('GUEST')) {
 if(!defined('PRICE')) {
     define('PRICE', 'price');
 }
+
+/**
+ * App Env
+ */
+if(!defined('PRODUCTION')) {
+    define('PRODUCTION', 'production');
+}

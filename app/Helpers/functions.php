@@ -21,24 +21,29 @@ use Illuminate\Support\Facades\Storage;
  * @return string|bool
  */
 function uploadImage( $image, $path, $unlinkOld = false, $old_image = null ) {
-    $name = str_random( 20 ) . '.' . $image->getClientOriginalExtension();
-    if(makeDir($path)) {
-        makeFile($path, $image, $name);
-        $full_image_name = 'storage/' . $path . '/' . $name;
-        ( ! $unlinkOld ) ?: removeFile( $old_image );
-        return $full_image_name;
-    }
+    if(config('app.env') === PRODUCTION) {
+        $image = \App\Services\AWS3Service::getInstance()->upload($path, $image);
+        (!$unlinkOld) ?: \App\Services\AWS3Service::getInstance()->delete($image);
+        return $image;
+    } else {
+        $name = str_random( 20 ) . '.' . $image->getClientOriginalExtension();
+        if(makeDir($path)) {
+            makeFile($path, $image, $name);
+            $full_image_name = 'storage/' . $path . '/' . $name;
+            ( ! $unlinkOld ) ?: removeFile( $old_image );
+            return $full_image_name;
+        }
 
-    return false;
+        return false;
+    }
 }
 
 /**
- * @param $path
- * @param $file
- * @return mixed
+ * @param $image_name
+ * @return string
  */
-function awsFS($path, $file) {
-    return \App\Services\AWS3Service::getInstance()->upload($path, $file);
+function readImage($image_name) {
+    return \App\Services\AWS3Service::getInstance()->read($image_name);
 }
 
 /**
@@ -1074,7 +1079,7 @@ function property_thumbs($listing) {
         }
     }
 
-    $html .= "<img src='".asset($listing->thumbnail ?? DLI)."' alt='' class='main-img'>";
+    $html .= "<img src='".Storage::url($listing->thumbnail ?? DLI)."' alt='' class='main-img'>";
     $html .= "<div class='info'><div class='info-link-text'>";
     $html .= "<p>$ ".number_format($listing->rent)." / month&nbsp;&nbsp;</p>";
     $html .= "<small> (";

@@ -31,7 +31,7 @@
                                                     <div class="review-box-wrapper">
                                                         <div class="review-inner-box-content">
                                                             <div class="agent-name">
-                                                                <img src="{{ asset($review->from->profile_image ?? DUI) }}" alt="user-icon">
+                                                                <img src="{{ Storage::url($review->from->profile_image ?? DUI) }}" alt="user-icon">
                                                                 <h4> {{ $review->from->first_name.' '.$review->from->last_name }} </h4>
                                                             </div>
                                                             <div class="stars-icons">

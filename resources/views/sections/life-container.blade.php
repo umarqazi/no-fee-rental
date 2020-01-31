@@ -2,7 +2,7 @@
     <div class="container-lg">
         <div class="row">
             <div class="p-0">
-                <img src="assets/images/your-life-bg-small.jpg" class="your-life-mb-img" alt="" />
+                <img src="{{ Storage::url('assets/images/your-life-bg-small.jpg') }}" class="your-life-mb-img" alt="" />
             </div>
             <div class="col-lg-5 wow fadeInLeft" data-wow-delay="0.2s">
                 <h3>Your Life, Our Time</h3>

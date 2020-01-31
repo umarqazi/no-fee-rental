@@ -21,7 +21,7 @@
         <div class="container-lg">
             <div class="row">
                 <div class="col-lg-7 p-0">
-                    <img src="{{ asset('assets/images/about-bg-small.jpg') }}" alt="" class="about-mb-img" />
+                    <img src="{{ Storage::url('assets/images/about-bg-small.jpg') }}" alt="" class="about-mb-img" />
                 </div>
                 <div class="col-lg-5 wow fadeInRight " data-wow-delay="0.2s">
                     <h3>The NO-FEE Rentals NYC Philosophy</h3>

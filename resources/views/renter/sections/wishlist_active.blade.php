@@ -3,7 +3,7 @@
 <div class="listing-wrapper">
     <div class="listing-row">
         <div class="img-holder">
-            <img src="assets/images/listing-img.jpg" alt="" class="main-img" />
+            <img src="{{ Storage::url('assets/images/listing-img.jpg') }}" alt="" class="main-img" />
         </div>
         <div class="info">
             <p class="title">West 96th Street</p>

@@ -17,7 +17,7 @@
                     <div class="product-title">
                         <p> {{ is_exclusive($listing) }} </p>
                         <div class="right-share-icons-side">
-                            <div class="dropdown-toggle share-icon-div" data-toggle="dropdown"><img src="/assets/images/share-icon.png" alt="" />
+                            <div class="dropdown-toggle share-icon-div" data-toggle="dropdown"><img src="{{ Storage::url('/assets/images/share-icon.png') }}" alt="" />
                              <ul class="dropdown-menu">
                                 <li> <a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
                                 <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
@@ -76,16 +76,16 @@
                     <div class="clearfix" style="max-width:100%;">
                         <ul id="image-gallery" class="gallery list-unstyled cS-hidden">
                             @foreach($listing->images as $images)
-                                <li data-thumb="{{ asset($images->listing_image ?? DLI) }}" class="large-view">
-                                    <a target="_blank" href="{{ asset($images->listing_image ??  DLI) }}">
-                                        <img src="{{ asset($images->listing_image ?? DLI) }}" alt=""/>
+                                <li data-thumb="{{ Storage::url($images->listing_image ?? DLI) }}" class="large-view">
+                                    <a target="_blank" href="{{ Storage::url($images->listing_image ??  DLI) }}">
+                                        <img src="{{ Storage::url($images->listing_image ?? DLI) }}" alt=""/>
                                     </a>
                                 </li>
                             @endforeach
                             @if(count($listing->images) < 1)
-                                <li data-thumb="{{ asset($listing->thumbnail ?? DLI) }}" class="large-view">
-                                    <a target="_blank" href="{{ asset($listing->thumbnail ??  DLI) }}">
-                                        <img src="{{ asset($listing->thumbnail ?? DLI) }}" alt=""/>
+                                <li data-thumb="{{ Storage::url($listing->thumbnail ?? DLI) }}" class="large-view">
+                                    <a target="_blank" href="{{ Storage::url($listing->thumbnail ??  DLI) }}">
+                                        <img src="{{ Storage::url($listing->thumbnail ?? DLI) }}" alt=""/>
                                     </a>
                                 </li>
                             @endif

@@ -32,9 +32,6 @@
                     </div>
                 </div>
             </div>
-            <!-- Modal footer -->
-{{--            <div class="modal-footer justify-content-center">--}}
-{{--            </div>--}}
         </div>
     </div>
 </div>
