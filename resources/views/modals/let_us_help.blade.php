@@ -55,8 +55,8 @@
                     <div class="pt-3 mb-3 text-center" style="max-width: 100%;">
                          <span id="invest">
                                 {!! Form::text('min_price', null, ['class' => 'input-style', 'placeholder' =>
-                                '$', 'style' => 'margin:10px 0px; width:100%; text-align:center;
-                                font-size:25px;'])
+                                '$', 'style' => 'margin:10px 0px; width:100%; text-align:left;
+                                font-size:16px;'])
                                 !!}</span>
                             <br/>  <h4 style="color: #223971;font-size: 24px; font-weight: 700; text-align:left">on rent
                             every
