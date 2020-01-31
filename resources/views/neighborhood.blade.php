@@ -10,7 +10,7 @@
         }
     </style>
     <section class="neighborhood-search neighbourhood-pd wow fadeIn neighborhood-banner-page" data-wow-delay="0.2s">
-        <div class="neighborhood-banner" style="background: url('{{ asset($data->neighborhood->banner ?? DLI) }}') no-repeat;">
+        <div class="neighborhood-banner" style="background: url('{{ Storage::url($data->neighborhood->banner ?? DLI) }}') no-repeat;">
             <div class="financial-district-section">
                 <div class="container-lg">
                     <div class="financial-district-inner">

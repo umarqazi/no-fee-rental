@@ -38,24 +38,18 @@ class MessageController extends Controller {
      */
     public function index() {
         $conversations = toObject($this->conversationService->fetchConversations($this->paginate));
-        return view('owner.message', compact('conversations'));
+        return view('owner.conversation', compact('conversations'));
     }
 
     /**
      * @param Request $request
      * @param $id
-     *
-     * @return JsonResponse|RedirectResponse
+     * @return mixed
      */
     public function accept(Request $request, $id) {
         $data = null;
-        if($this->conversationService->accept($id))
-            $data = $this->conversationService->loadMessages($id);
-        return sendResponse($request, $data);
-    }
-
-    public function deny() {
-
+        return $this->conversationService->accept($id)
+            ? redirect(route('owner.loadConversation', $id)) : false;
     }
 
     /**

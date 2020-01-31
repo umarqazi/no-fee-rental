@@ -11,7 +11,7 @@
             <h4>Page Not found</h4>
         </div>
         <div class="four-o-four-inner-content">
-            <img src="{{ asset('assets/images/404.png') }}" alt="404" />
+            <img src="{{ Storage::url('assets/images/404.png') }}" alt="404" />
             <p>We can't find the page you're looking for.</p>
             <div class="go-to-home"><a href="{{ route('web.index') }}" class="btn btn-default"> Go to Home Page</a></div>
         </div>

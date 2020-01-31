@@ -3,43 +3,43 @@
         <div class="modal-content">
             <!-- Modal Header -->
             <div class="modal-header">
-                <h4 class="modal-title">{{ mySelf()->first_name }}</h4>
+                <h4 class="modal-title request-type"></h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <!-- Modal body -->
             <div class="modal-body">
                 <p class="mb-3">Renter choose to anonymize their contact info:</p>
-                {!! Form::open() !!}
-                <textarea name="message" class="text-area" placeholder="Reply here.."></textarea>
+                {!! Form::open(['id' => 'reply-back', 'class' => 'ajax', 'reset' => 'true']) !!}
+                {!! Form::textarea('message', null, ['class' => 'text-area', 'placeholder' => 'Reply here...']) !!}
+                {!! Form::hidden('to', '', ['id' => 'chat-room']) !!}
                 <div class="actions-btns">
-                    <button type="submit" id="send-message" class="btn-default">Reply</button>
-                    <button class="border-btn">Reply Not Needed</button>
+                    {!! Form::submit('Reply', ['class' => 'btn-default']) !!}
+                    {{--<button type="submit" id="send-message" class="btn-default">Reply</button>--}}
                     <button class="archive">Archive Conversation</button>
                 </div>
                 {!! Form::close() !!}
                 <div class="message-list">
-                    <h3 id="user_name">Elitan</h3>
-                    <p>Reminder from Nofee: You have still not replied to Ethan in regards to 3 Bedrooms at West 96th Street / 911 ($4,400) </p>
-                    <p class="date">Sun, 05/5/19, 10:14 am</p>
+                    <h3 id="user_name">{{ sprintf('%s %s', mySelf()->first_name, mySelf()->last_name) }}</h3>
+                    <p></p>
+                    <p class="date"></p>
                 </div>
                 <div class="user-info">
-                    <h3 class="mb-2">Elitan</h3>
-                    <p>Name: <strong>Ethan</strong></p>
-                    <p>E-mail: <strong><a href="#">elitan001@nofee-msg.com</a></strong></p>
-                    <p>Phone: <strong>646-760-4979 </strong></p>
+                    <p>Name: <strong></strong></p>
+                    <p>E-mail: <strong><a href="#"></a></strong></p>
+                    <p>Phone: <strong> </strong></p>
                     <p>Question/Comments: <strong></strong></p>
                     <div class="property-info">
                         <img src="" alt="" />
                         <div class="info">
                             <div class="title">
-                                <p><i class="fa fa-tag"></i> $5,870</p>
-                                <p class="date">Sun, 05/5/19, 10:14 am</p>
+                                <p><i class="fa fa-tag"></i></p>
+                                <div class="appointment"></div>
                             </div>
                             <ul>
-                                <li><i class="fa fa-bed"></i> 2 Bed</li>
-                                <li><i class="fa fa-bath"></i> 1 Bath</li>
+                                <li></li>
+                                <li></li>
                             </ul>
-                            <p>at West 96th Street,</p>
+                            <p></p>
                         </div>
                     </div>
                 </div>

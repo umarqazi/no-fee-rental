@@ -44,4 +44,6 @@
             </div>
         </div>
     </div>
+    {!! HTML::script('assets/js/message.js') !!}
+    {!! HTML::script('assets/js/listing.js') !!}
 @endsection

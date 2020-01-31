@@ -44,9 +44,8 @@
             </div>
         </div>
     </div>
-    {{--Owner Messaging Modal--}}
-    @include('owner.modals.message')
 
     {{--Messaging Script--}}
     {!! HTML::script('assets/js/message.js') !!}
+    {!! HTML::script('assets/js/listing.js') !!}
 @endsection

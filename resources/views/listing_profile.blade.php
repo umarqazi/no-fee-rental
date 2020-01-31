@@ -6,7 +6,7 @@
         <div class="container-lg">
             <div class="agent-profile-view">
                 <div class="img-holder">
-                    <img src="{{ asset($data->agent->profile_image ?? DUI) }}" alt=""/>
+                    <img src="{{ Storage::url($data->agent->profile_image ?? DUI) }}" alt=""/>
                 </div>
                 <div class="agent-info">
                     <h2>{{ $data->agent->first_name.' '.$data->agent->last_name }}</h2>
@@ -21,15 +21,15 @@
                     @endif
                     <div class="contact-info contact-info-mobile">
                         <div>
-                            <img src="{{ asset('assets/images/close-envelope-new.png') }}" alt=""/> <a
+                            <img src="{{ Storage::url('assets/images/close-envelope-new.png') }}" alt=""/> <a
                                 href="#">{{ $data->agent->email }}</a>
                         </div>
                         <div>
-                            <img src="{{ asset('assets/images/call-icon.png') }}" alt=""/>
+                            <img src="{{ Storage::url('assets/images/call-icon.png') }}" alt=""/>
                             <a href="javascript:void(0);">{{ $data->agent->phone_number ?? 'None' }}</a>
                         </div>
                         <div>
-                            <img src="{{ asset('assets/images/location.png') }}" alt=""/> <a
+                            <img src="{{ Storage::url('assets/images/location.png') }}" alt=""/> <a
                                 href="#">{{ $data->agent->address ?? 'None' }}</a>
                         </div>
                     </div>
@@ -53,11 +53,11 @@
                         <div class="item">
                             <!-- <img src="/assest/images/check.png" alt="item-img"> -->
                             <div class="item-first-img">
-                                <img src="{{ asset('assets/images/check-icon.png') }}"/>
+                                <img src="{{ Storage::url('assets/images/check-icon.png') }}"/>
                             </div>
                             <p>{{$review->review_message}}</p>
                             <div class="item-profile-img">
-                                <img src="{{ asset($review->from->profile_image ?? DUI) }}"/>
+                                <img src="{{ Storage::url($review->from->profile_image ?? DUI) }}"/>
                             </div>
                             <strong>{{$review->from->first_name}} {{$review->from->last_name}}</strong>
                         </div>

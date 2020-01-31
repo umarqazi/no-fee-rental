@@ -61,7 +61,7 @@
                     <div class="col-md-12" style="margin-top: 10px">
                         <div class="form-group">
                             <div>
-                                <img class="img-thumbnail" src="{{isset($building->thumbnail) ? asset($building->thumbnail ?? DLI ) : asset(DLI) }}" id="img" style="width: 180px;height: 145px;margin-bottom: 15px;">
+                                <img class="img-thumbnail" src="{{isset($building->thumbnail) ? Storage::url($building->thumbnail ?? DLI ) : Storage::url(DLI) }}" id="img" style="width: 180px;height: 145px;margin-bottom: 15px;">
                             </div>
                             {!! Form::file('thumbnail', ['id' => 'file-3']) !!}
                             {!! Form::hidden('map_location', null) !!}

@@ -44,18 +44,13 @@ class ListingConversationController extends Controller {
     /**
      * @param Request $request
      * @param $id
-     *
-     * @return JsonResponse|RedirectResponse
+     * @return bool|Factory|View
      */
     public function accept(Request $request, $id) {
         $data = null;
-        if($this->conversationService->accept($id))
-            $data = $this->conversationService->loadMessages($id);
-        return sendResponse($request, $data);
-    }
-
-    public function deny() {
-
+        return $this->conversationService->accept($id)
+            ? $this->load($id)
+            : false;
     }
 
     /**
@@ -99,5 +94,25 @@ class ListingConversationController extends Controller {
     public function reply(Request $request, $id) {
         $res = $this->conversationService->reply($id, $request);
         return sendResponse($request, $res, null);
+    }
+
+    /**
+     * @param Request $request
+     * @param $id
+     * @return JsonResponse|RedirectResponse
+     */
+    public function replyModal(Request $request, $id) {
+        $res = $this->conversationService->loadMessages($id);
+        return sendResponse($request, $res,null);
+    }
+
+    /**
+     * @param Request $request
+     * @param $id
+     * @return JsonResponse|RedirectResponse
+     */
+    public function replyBack(Request $request, $id) {
+        $res = $this->conversationService->reply($id, $request);
+        return sendResponse($request, $res, 'Reply back message has been sent.');
     }
 }

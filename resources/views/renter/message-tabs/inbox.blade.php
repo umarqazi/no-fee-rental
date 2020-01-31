@@ -5,18 +5,18 @@
             <div class="row conversation-pg-mrg">
                 <div class="col-sm-6 col-lg-10 col-12">
                     <h3>{{ sprintf("%s %s", $inbox->sender->first_name ?? $inbox->username, $inbox->sender->last_name ?? null) }}</h3>
-                    <p>Email: <strong><a href="javascript:void(0);" style="text-decoration:none;">{{ $inbox->sender->email }}</a></strong></p>
-                    <p>Phone No: <strong style="font-weight: 700;">{{ $inbox->sender->phone_number }}</strong></p>
+                    <p>Email: <strong><a href="javascript:void(0);" style="text-decoration:none;">{{ $inbox->email ?? $inbox->sender->email }}</a></strong></p>
+                    <p>Phone No: <strong style="font-weight: 700;">{{ $inbox->phone_number ?? $inbox->sender->phone_number }}</strong></p>
                 </div>
                 <div class="col-sm-6 col-lg-2 col-12">
-                    <a href="{{ route('renter.loadConversation', $inbox->id) }}" class="view-chat-view"> View</a>
-                    <a href="{{ route('renter.archiveConversation', $inbox->id) }}" class="view-chat-archive"> Archive</a>
-                    <div class="clearfix"></div>
-                    <div class="reply-back-modal"><a href="javascript:void(0);" data-toggle="modal" data-target="#message-modal">Reply Back</a></div>
+                    <div class="conversation-buttons">
+                        <a href="{{ route('renter.loadConversation', $inbox->id) }}" class="view-chat-view"> View</a>
+                        <a href="{{ route('renter.archiveConversation', $inbox->id) }}" class="view-chat-archive archive"> Archive</a>
+                    </div>
                 </div>
             </div>
             <div class="property">
-                <img src="{{ asset($inbox->listing->thumbnail ?? DLI) }}" alt="" />
+                <img src="{{ Storage::url($inbox->listing->thumbnail ?? DLI) }}" alt="" />
                 <div class="info">
                     <ul>
                         <li><i class="fa fa-bed"></i> {{ str_formatting($inbox->listing->bedrooms, 'Bed') }}</li>

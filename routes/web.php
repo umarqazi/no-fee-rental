@@ -159,12 +159,5 @@ Route::get('/composer-dump', function() {
 use App\Traits\DispatchNotificationService;
 // Test Route
 Route::get('/test', function (\Illuminate\Http\Request $request) {
-    $ser = new \App\Services\SaveSearchService();
-    $data = [
-        'beds' => 2,
-        'baths' => 3,
-        'neighborhood' => 'Harlem',
-    ];
-
-    $ser->match($data);
+   return view('agent.modals.message');
 })->name('web.test');

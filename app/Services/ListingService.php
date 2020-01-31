@@ -119,7 +119,7 @@ class ListingService extends BuildingService {
      */
     public function insertImages( $id, $request ) {
         $batch = [];
-        $files = uploadMultiImages( $request->file( 'file' ), 'images/listing/images' );
+        $files = uploadMultiImages( $request->file( 'file' ), 'images/listing/backgrounds' );
         foreach ( $files as $file ) {
             $batch[] = [
                 'listing_id'    => $id,

@@ -32,7 +32,7 @@
                             </div>
 
                             <div class="img-wrapp">
-                                <img src="{{ asset($member->profile_image ?? DUI)}}" alt="" class="main-img" />
+                                <img src="{{ Storage::url($member->profile_image ?? DUI)}}" alt="" class="main-img" />
                             </div>
 
                             <div class="name">{{ $member->first_name.' '.$member->last_name }}</div>
