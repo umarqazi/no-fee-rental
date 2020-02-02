@@ -4,7 +4,7 @@
     <div class="wrapper">
         <div class="heading-wrapper">
             <h1>Buildings</h1>
-            <a href="javascript:void(0)" data-toggle="modal" data-target="#building-popup" class="btn-default">Add Building</a>
+            <a href="javascript:void(0)" data-toggle="modal" data-target="#building-popup" class="btn-default"><i class="fa fa-plus"></i> Add Building</a>
         </div>
         <div class="block listing-container" id="app">
             <div class="heading-wrapper pl-0">
@@ -42,7 +42,7 @@
                         @include('owner.building-tabs.fee_buildings')
                     </div>
                     <div class="tab-pane" id="owner-only-buildings">
-                        @include('owner.building-tabs.owner_only_building')
+                        @include('owner.building-tabs.owner_only_buildings')
                     </div>
                 </div>
             </div>
@@ -50,5 +50,5 @@
     </div>
     {{--Add Building--}}
     @include('owner.modals.add_building')
-    {!! HTML::script('assets/js/listing.js') !!}
+    {!! HTML::script('assets/js/tabs.js') !!}
 @endsection

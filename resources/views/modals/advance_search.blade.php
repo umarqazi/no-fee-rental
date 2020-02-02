@@ -83,15 +83,14 @@
                     {!! features_pet() !!}
 
                 </div>
-
-                    <div class="col-md-12 text-left mt-4 mb-4 bdr-top-btn">
-                        <button type="submit" class="btn-default search">Search</button>
-                    </div>
+                <div class="col-md-12 text-left mt-4 mb-4 bdr-top-btn">
+                    <button type="submit" class="btn-default search">Search</button>
                 </div>
-                {!! Form::close() !!}
             </div>
+            {!! Form::close() !!}
         </div>
     </div>
+</div>
 <script>
     enableDatePicker('#open_house', false);
 </script>

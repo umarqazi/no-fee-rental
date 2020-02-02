@@ -9,7 +9,7 @@
 <div class="wrapper building-details-wrapper">
     <div class="heading-wrapper">
         <h1>{{ $status }} Building</h1>
-        <a href="{{ route('owner.addApartment', $building->id) }}" class="btn-default" >Add Apartment</a>
+        <a href="{{ route('owner.addApartment', $building->id) }}" class="btn-default" ><i class="fa fa-plus"></i> Add Apartment</a>
     </div>
     <!--Grid view listing-->
     <div class="grid-view-wrapper" style="display: block;">
@@ -33,7 +33,7 @@
                     <div class="listing-thumb">
                         <img src="{{ Storage::url( $apartment->thumbnail ?? DLI ) }}" alt="" style="height: 205px; width: 100%;" class="main-img" />
                         <div class="info">
-                            <p><i class="fa fa-tag"></i> ${{ ($apartment->rent) ?   number_format($apartment->rent,0) : 'None' }}</p>
+                            <p><i class="fa fa-tag"></i> ${{ ($apartment->rent) ? number_format($apartment->rent) : 'None' }}</p>
                             <ul>
                                 <li><i class="fa fa-bed"></i> {{ str_formatting($apartment->bedrooms, 'Bed') }}</li>
                                 <li><i class="fa fa-bath"></i> {{ str_formatting($apartment->baths, 'Bath') }}</li>

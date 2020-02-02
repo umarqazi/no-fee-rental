@@ -30,15 +30,15 @@
                 <div class="tab-content">
                     {{--Inbox--}}
                     <div class="tab-pane active" id="tab-1">
-                        @include('owner.message-tabs.inbox')
+                        @include('owner.conversation-tabs.inbox')
                     </div>
                     {{--Archive--}}
                     <div class="tab-pane fade" id="tab-2">
-                        @include('owner.message-tabs.archived')
+                        @include('owner.conversation-tabs.archived')
                     </div>
                     {{--Request Meeting--}}
                     <div class="tab-pane fade" id="tab-3">
-                        @include('owner.message-tabs.meeting_request')
+                        @include('owner.conversation-tabs.meeting_request')
                     </div>
                 </div>
             </div>
@@ -47,5 +47,5 @@
 
     {{--Messaging Script--}}
     {!! HTML::script('assets/js/message.js') !!}
-    {!! HTML::script('assets/js/listing.js') !!}
+    {!! HTML::script('assets/js/tabs.js') !!}
 @endsection

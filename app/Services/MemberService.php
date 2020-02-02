@@ -40,19 +40,7 @@ class MemberService {
      * @return mixed
      */
     public function members() {
-        $collection = [];
-        $a = $this->memberRepo->myFriends()->get();
-        $b = $this->memberRepo->friend()->get();
-
-        foreach ($a as $friend) {
-            $collection[] = $friend->membersColA;
-        }
-
-        foreach ($b as $friend) {
-            $collection[] = $friend->membersColB;
-        }
-
-        return $collection;
+        return $this->memberRepo->team();
     }
 
     /**

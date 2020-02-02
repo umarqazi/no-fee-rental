@@ -44,10 +44,8 @@
             </div>
         </div>
     </div>
-    {{--Agent Messaging Modal--}}
-    @include('agent.modals.message')
 
     {{--Messaging Script--}}
+    {!! HTML::script('assets/js/tabs.js') !!}
     {!! HTML::script('assets/js/message.js') !!}
-    {!! HTML::script('assets/js/listing.js') !!}
 @endsection

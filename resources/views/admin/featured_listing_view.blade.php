@@ -53,5 +53,5 @@
 			</div>
 		</div>
 
-{!! HTML::script('assets/js/listing.js') !!}
+{!! HTML::script('assets/js/tabs.js') !!}
 @endsection

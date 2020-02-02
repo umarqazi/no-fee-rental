@@ -28,15 +28,8 @@ class MemberRepo extends BaseRepo {
     /**
      * @return mixed
      */
-    public function myFriends() {
-        return $this->model->teamAgent();
-    }
-
-    /**
-     * @return mixed
-     */
-    public function friend() {
-        return $this->model->teamMembers();
+    public function team() {
+        return $this->model->members();
     }
 
     /**
@@ -44,10 +37,11 @@ class MemberRepo extends BaseRepo {
      * @return mixed
      */
     public function unFriend($id) {
-        return $this->model->where(function ($subQuery) use ($id) {
-            return $subQuery->where('agent_id', myId())->where('member_id', $id);
-        })->orWhere(function ($subQuery) use ($id) {
-            return $subQuery->where('agent_id', $id)->where('member_id', myId());
-        })->delete();
+        $has = $this->model->where('agent_id', myId())->where('member_id', $id);
+        if($has->count() > 0) {
+            return $has->delete();
+        } else {
+            return $this->model->where('agent_id', $id)->where('member_id', myId())->delete();
+        }
     }
 }
