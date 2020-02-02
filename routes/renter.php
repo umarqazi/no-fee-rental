@@ -11,10 +11,7 @@
 |
 */
 
-// Home Routes
-//Route::get('/home', 'Renter\HomeController@index')->name('renter.index');
-
-// Auth Routes
+// Auth Route
 Route::get('/logout', 'Renter\AuthController@logout')->name('renter.logout');
 
 // Profile Routes
@@ -26,18 +23,18 @@ Route::post('/password-update', 'Renter\ProfileController@updatePassword')->name
 Route::get('/password-reset', 'Renter\ProfileController@resetPassword')->name('renter.resetPassword');
 
 // Listing Conversation Routes
-Route::get('/view-conversations', 'Renter\ListingConversationController@index')->name('renter.conversations');
-Route::get('/load-conversation/inbox/{id}', 'Renter\ListingConversationController@load')->name('renter.loadConversation');
-Route::post('/send-message/{id}', 'Renter\ListingConversationController@reply')->name('renter.sendMessage');
-Route::get('/archive-conversation/{id}', 'Renter\ListingConversationController@archive')->name('renter.archiveConversation');
-Route::get('/unArchive-conversation/{id}', 'Renter\ListingConversationController@unArchive')->name('renter.unArchiveConversation');
+Route::get('/view-conversations', 'Renter\ConversationController@index')->name('renter.conversations');
+Route::get('/load-conversation/inbox/{id}', 'Renter\ConversationController@load')->name('renter.loadConversation');
+Route::post('/send-message/{id}', 'Renter\ConversationController@reply')->name('renter.sendMessage');
+Route::get('/archive-conversation/{id}', 'Renter\ConversationController@archive')->name('renter.archiveConversation');
+Route::get('/unArchive-conversation/{id}', 'Renter\ConversationController@unArchive')->name('renter.unArchiveConversation');
 
 // Calender Routes
 Route::post('/add-event', 'Renter\CalendarController@create')->name('renter.addEvent');
 Route::get('/show-calendar', 'Renter\CalendarController@index')->name('renter.showCalendar');
 
-// Favourites(Wishlist) Routes
-Route::get('/favourite/listing-view', 'Renter\ListingController@wishList')->name('renter.index');
+// Favourites Routes
+Route::get('/favourite-listings', 'Renter\ListingController@wishList')->name('renter.index');
 
 // Save Search Routes
 Route::get('/save-searches', 'Renter\SaveSearchController@index')->name('renter.viewSaveSearch');

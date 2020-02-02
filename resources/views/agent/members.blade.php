@@ -4,7 +4,7 @@
 <div class="wrapper">
     <div class="heading-wrapper">
         <h1>Current Team</h1>
-        <a href="#" class="btn-default" data-toggle="modal" data-target="#invite-member">Add Member</a>
+        <a href="#" class="btn-default" data-toggle="modal" data-target="#invite-member"><i class="fa fa-plus"></i> Add Member</a>
     </div>
     <div class="block listing-container teams-container">
         <div class="heading-wrapper pl-0">
@@ -67,4 +67,6 @@
 @include('agent.modals.invite_member')
 {{--Agent Members Script--}}
 {!! HTML::script('assets/js/members.js') !!}
+{!! HTML::script('assets/js/tabs.js') !!}
+
 @endsection

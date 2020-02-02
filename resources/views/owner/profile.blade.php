@@ -26,7 +26,7 @@
                         </div>
                     </div>
                     <div class="detail">
-                        <p class="title">Username / Email</p>
+                        <p class="title">Email</p>
                         <p class="mb-4">{{ $user->email }}</p>
                         <p class="title">Your Cell Phone</p>
                         <p>{{ $user->phone_number }} </p>

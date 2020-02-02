@@ -25,13 +25,14 @@
             <div class="block-body">
                 <div class="tab-content">
                     <div class="tab-pane active" id="listing-active">
-                        @include('renter.sections.wishlist_active')
+                        @include('renter.wishlist.active')
                     </div>
                     <div class="tab-pane fade" id="listing-inactive">
-                        @include('renter.sections.wishlist_inactive')
+                        @include('renter.wishlist.inactive')
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    {!! HTML::script('assets/js/tabs.js') !!}
 @endsection

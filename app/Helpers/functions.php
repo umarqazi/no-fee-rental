@@ -1135,9 +1135,9 @@ function owners() {
  */
 function renters() {
     $data       = ( new \App\Services\UserService() )->renters();
-    $renters[''] = "Select Request Email";
+    $renters[''] = "Type Email or Name";
     foreach ( $data as $renter ) {
-        $renters[ $renter->email ] = sprintf( "%s", $renter->email );
+        $renters[ $renter->email ] = sprintf( "%s ( %s %s )", $renter->email, $renter->first_name, $renter->last_name );
     }
 
     return $renters;

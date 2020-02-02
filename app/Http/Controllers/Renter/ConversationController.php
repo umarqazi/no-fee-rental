@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Agent;
+namespace App\Http\Controllers\Renter;
 
 use App\Services\ListingConversationService;
 use Illuminate\Contracts\View\Factory;
@@ -14,12 +14,12 @@ use Illuminate\View\View;
  * Class ListingConversationController
  * @package App\Http\Controllers\Agent
  */
-class ListingConversationController extends Controller {
+class ConversationController extends Controller {
 
     /**
      * @var int
      */
-    private $paginate = 10;
+    private $paginate = 20;
 
     /**
      * @var ListingConversationService
@@ -38,19 +38,7 @@ class ListingConversationController extends Controller {
      */
     public function index() {
         $conversations = toObject($this->conversationService->fetchConversations($this->paginate));
-        return view('agent.conversation', compact('conversations'));
-    }
-
-    /**
-     * @param Request $request
-     * @param $id
-     * @return bool|Factory|View
-     */
-    public function accept(Request $request, $id) {
-        $data = null;
-        return $this->conversationService->accept($id)
-            ? $this->load($id)
-            : false;
+        return view('renter.conversation', compact('conversations'));
     }
 
     /**
@@ -82,7 +70,7 @@ class ListingConversationController extends Controller {
      */
     public function load($id) {
         $collection = $this->conversationService->loadMessages($id);
-        return view('agent.inbox', compact('collection'));
+        return view('renter.inbox', compact('collection'));
     }
 
     /**
@@ -94,25 +82,5 @@ class ListingConversationController extends Controller {
     public function reply(Request $request, $id) {
         $res = $this->conversationService->reply($id, $request);
         return sendResponse($request, $res, null);
-    }
-
-    /**
-     * @param Request $request
-     * @param $id
-     * @return JsonResponse|RedirectResponse
-     */
-    public function replyModal(Request $request, $id) {
-        $res = $this->conversationService->loadMessages($id);
-        return sendResponse($request, $res,null);
-    }
-
-    /**
-     * @param Request $request
-     * @param $id
-     * @return JsonResponse|RedirectResponse
-     */
-    public function replyBack(Request $request, $id) {
-        $res = $this->conversationService->reply($id, $request);
-        return sendResponse($request, $res, 'Reply back message has been sent.');
     }
 }
