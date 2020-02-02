@@ -1,5 +1,5 @@
 <header>
-    <a href="{{ url('/') }}"><img src="{!! asset('assets/images/logo1.png') !!}" alt="" class="logo" /></a>
+    <a href="{{ url('/') }}"><img src="{!! Storage::url('assets/images/logo1.png') !!}" alt="" class="logo" /></a>
     <div class="agent-avtar">
         {{--Notifications--}}
         @include('secured-layouts.sections.notification')
@@ -8,7 +8,7 @@
             <i class="fa fa-bars"></i>
         </span>
         <div class="avtar">
-            <img src="{!! asset( mySelf()->profile_image ?? DUI ) !!}" alt="" />
+            <img src="{!! Storage::url( mySelf()->profile_image ?? DUI ) !!}" alt="" />
             <div>{!! mySelf()->first_name !!} {!! mySelf()->last_name !!} <i class="fa fa-chevron-down"></i>
                 <ul>
                     <li><a href="{!! route(whoAmI().'.showProfile') !!}">Profile Settings</a></li>

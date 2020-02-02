@@ -101,7 +101,7 @@
             <div class="modal-body">
                 <h4 class="text-center mb-0">What is your Budget?</h4>
                 <div class="pt-4">
-                    {!! Form::text('price', null, ['class' => 'input-style money-mask', 'placeholder' => 'Budget']) !!}
+                    {!! Form::text('price', null, ['class' => 'input-style money-mask', 'placeholder' => '$']) !!}
                 </div>
             </div>
             <div class="modal-footer text-center">

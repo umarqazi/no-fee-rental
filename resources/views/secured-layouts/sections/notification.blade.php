@@ -2,7 +2,7 @@
 <div class="notifications">
     <div>
         <a href="javascript:void(0);" class="notification-listener">
-            <img src="{!! asset('assets/images/bell-icon.png') !!}" alt="" />
+            <img src="{!! Storage::url('assets/images/bell-icon.png') !!}" alt="" />
         </a>
         <span style="display:none;" class="noti-alert notification-alert"></span>
     </div>
@@ -16,19 +16,19 @@
         <div class="notification-inner-scroll" id="style-2">
             <div class="notification-content">
                 <div class="notification-inner-content">
-                    <img src="/assets/images/account-img.jpg" alt=""/>
+                    <img src="{{ Storage::url('/assets/images/account-img.jpg') }}" alt=""/>
                     <div class="listingnoti">
                         <h4>John Smith</h4>
                         <p>New guest account have been created</p>
                     </div>
                 </div>
                 <div class="right-side-icons">
-                    <img src="/assets/images/error-cross.png" class="cross-icon-noti"/>
+                    <img src="{{ Storage::url('/assets/images/error-cross.png') }}" class="cross-icon-noti"/>
                 </div>
             </div>
             <div class="notification-content">
                 <div class="notification-inner-content">
-                    <img src="/assets/images/account-img.jpg" alt=""/>
+                    <img src="{{ Storage::url('/assets/images/account-img.jpg') }}" alt=""/>
                     <div class="listingnoti">
                         <ul style="display: flex">
                             <li><h4>223 park slope.</h4></li>

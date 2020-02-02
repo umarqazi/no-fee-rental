@@ -403,6 +403,7 @@
     line-height: 20px;
 }
 
+
 .unavailable-btn i {
     margin-left: 30px;
     font-size: 18px;
@@ -1882,9 +1883,9 @@ main {
     color: red;
 }
 
-.price-wrapp {
-    margin-top: 10px;
-}
+/*.price-wrapp {*/
+/*    margin-top: 10px;*/
+/*}*/
 
 .price-wrapp .price {
     font-weight: bold;
@@ -2122,9 +2123,8 @@ main {
     margin-bottom: 10px;
 }
 .view-chat-view {
-    position: absolute;
-    right: 95px;
-    top: 5px;
+
+    margin-top: 5px;
     font-size: 11px;
     background: #223970;
     color: #fff;
@@ -2134,16 +2134,24 @@ main {
 }
 
 .view-chat-archive {
-    position: absolute;
-    right: 10px;
-    top: 5px;
+
+    margin-top: 5px;
     font-size: 11px;
     background: #223970;
     color: #fff;
     padding: 5px 20px;
     border-radius: 20px;
 }
-
+.conversation-buttons{
+    text-align: right;
+    margin-top: 5px;
+}
+.conversation-buttons a{
+    margin-right: 5px;
+}
+.conversation-buttons a:last-child{
+    margin-right: 0px;
+}
 .view-chat-view:hover,
 .view-chat-view:active,
 .view-chat-view:focus {

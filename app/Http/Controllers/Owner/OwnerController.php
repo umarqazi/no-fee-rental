@@ -64,7 +64,7 @@ class OwnerController extends Controller {
 	 * @return view
 	 */
 	public function resetPassword() {
-		return view('agent.update_password');
+		return view('owner.update_password');
 	}
 
 	/**

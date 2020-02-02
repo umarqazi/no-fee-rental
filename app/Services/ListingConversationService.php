@@ -109,18 +109,6 @@ class ListingConversationService extends MemberService {
      * @return mixed
      */
     public function accept($id) {
-        $listing = $this->listingConversationRepo->findById($id)->with('listing')->first();
-//        $calender = $this->calendarEventRepo->find(['linked_id' => $id])->first();
-//        DispatchNotificationService::APPROVEMEETINGREQUEST(toObject([
-//            'from' => $listing->from,
-//            'to'   => $listing->to,
-//            'data' => $listing
-//        ]));
-//        calendarEvent([
-//            'title' => $listing->listing->display_address.'  (Approved)',
-//            'url'   => '.loadConversation',
-//            'color' => 'green'
-//        ], true, $calender->id);
         return $this->listingConversationRepo->update($id, ['meeting_request' => 1]);
     }
 
@@ -130,13 +118,6 @@ class ListingConversationService extends MemberService {
      * @return mixed
      */
     public function archive($id) {
-        $listing = $this->listingConversationRepo->findById($id)->with('listing')->first();
-//        $calender = $this->calendarEventRepo->find(['linked_id' => $listing->id , 'from' => $listing->from , 'to' => $listing->to])->first();
-//        calendarEvent([
-//            'title' => $listing->listing->display_address.'  (rejected)',
-//            'url'   => '.loadConversation',
-//            'color' => 'red',
-//        ], true, $calender->id);
         return $this->listingConversationRepo->update($id, ['is_archived' => true]);
     }
 
@@ -146,7 +127,7 @@ class ListingConversationService extends MemberService {
      * @return mixed
      */
     public function unArchive($id) {
-        return $this->listingConversationRepo->update($id, ['is_archived' => false]);
+        return $this->listingConversationRepo->update($id, ['is_archived' => false, 'meeting_request' => true]);
     }
 
     /**
@@ -186,24 +167,6 @@ class ListingConversationService extends MemberService {
         if(!$appointment) {
             $appointment = $this->__validateAppointmentForm( $request );
             $appointment = $this->listingConversationRepo->create($appointment->toArray());
-//            calendarEvent([
-//                'title'      => $listing_detail->display_address.' (Pending)',
-//                'linked_id'  => $appointment->id,
-//                'from'       => $appointment->from,
-//                'to'         => $appointment->to,
-//                'start'      => $appointment->appointment_date->format('Y-m-d').' '.$appointment->appointment_time,
-//                'end'        => $appointment->appointment_date->format('Y-m-d').' '.$appointment->appointment_time,
-//                'color'      => 'light green',
-//                'url'        => 'javascript:void(0)'
-//            ]);
-//
-//            DispatchNotificationService::MEETINGREQUEST(toObject([
-//                'from' => $appointment->from,
-//                'to'   => $appointment->to,
-//                'data' => $appointment
-//            ]));
-//
-//            $this->__sendCCEmails($appointment);
             return $appointment;
         }
 

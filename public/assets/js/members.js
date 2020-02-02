@@ -1,5 +1,13 @@
 $(() => {
 
+    $('body').on('click', '.unfriend-user > a', async function (e) {
+        e.preventDefault();
+        let name = $(this).parents('.team-listing').find('.name').text();
+        if(await confirm(`You want to un-friend ${name}`)) {
+            window.location.href = $(this).attr('href');
+        }
+    });
+
     $('#agent_invites_table').DataTable({
         "ajax": {
             "url": "/agent/all-invites"

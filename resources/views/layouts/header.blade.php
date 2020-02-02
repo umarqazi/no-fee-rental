@@ -3,7 +3,7 @@
     <div class="user-avtar">
             @if(Auth::guard(whoAmI())->check())
                 <a href="javascript:void(0);">
-                    <img src = "{!! asset( mySelf()->profile_image ?? DUI ) !!}" alt="user-img" class="avtar" />
+                    <img src = "{!! Storage::url( mySelf()->profile_image ?? DUI ) !!}" alt="user-img" class="avtar" />
                     {{ mySelf()->first_name." ".mySelf()->last_name }} <i class="fa fa-angle-down"></i>
                 </a>
                 <div class="user-dropdown">
@@ -18,8 +18,8 @@
             <li><a href="{{ route('web.ListsByRent') }}">Rent</a></li>
             <li><a href="{{ route('web.neighborhood') }}">Neighborhood </a></li>
             @if(!authenticated())
-            <li><a href="" data-toggle="modal" data-target="#login" class="signin-modal-btn close-menu">Login</a></li>
-            <li><a href="#" data-toggle="modal" data-target="#signup" class="signup-modal-btn close-menu">Signup</a></li>
+                <li><a href="" data-toggle="modal" data-target="#login" class="signin-modal-btn close-menu">Login</a></li>
+                <li><a href="#" data-toggle="modal" data-target="#signup" class="signup-modal-btn close-menu">Signup</a></li>
             @endif
         </ul>
     </div>
@@ -28,7 +28,7 @@
 <div class="header-wrapper">
     <div class="container-fluid">
         <div class="header-container">
-            <a href="{!! url('/') !!}"> <img src="{{ asset('assets/images/logo.png') }}" class="logo" /></a>
+            <a href="{!! url('/') !!}"> <img src="{{ Storage::url('assets/images/logo.png') }}" class="logo" /></a>
 
             <div class="header-right-wrapper">
                 <ul class="menu-links">
@@ -50,7 +50,7 @@
                     <div class="login-user">
                         <a href="#">
                             <img
-                                src = "{!! asset( mySelf()->profile_image ?? DUI ) !!}"
+                                src = "{!! Storage::url( mySelf()->profile_image ?? DUI ) !!}"
                                 alt=""
                                 class="avtar"
                             />

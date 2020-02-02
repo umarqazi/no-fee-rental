@@ -30,18 +30,20 @@
                 <div class="tab-content">
                     {{--Inbox--}}
                     <div class="tab-pane active" id="tab-1">
-                        @include('renter.message-tabs.inbox')
+                        @include('renter.conversation-tabs.inbox')
                     </div>
                     {{--Archive--}}
                     <div class="tab-pane fade" id="tab-2">
-                        @include('renter.message-tabs.archived')
+                        @include('renter.conversation-tabs.archived')
                     </div>
                     {{--Request Meeting--}}
                     <div class="tab-pane fade" id="tab-3">
-                        @include('renter.message-tabs.pending_request')
+                        @include('renter.conversation-tabs.pending_request')
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    {!! HTML::script('assets/js/tabs.js') !!}
+    {!! HTML::script('assets/js/message.js') !!}
 @endsection

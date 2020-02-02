@@ -10,7 +10,7 @@
                 {!! Form::model($user, ['url' => route('admin.updateProfile'), 'method' => 'post', 'enctype' => 'multipart/form-data']) !!}
                 <div class="user-avtar">
                     <div class="img-holder">
-                        <img id="view_profile" src="{{ asset($user->profile_image ?? DUI ) }}" alt="" />
+                        <img id="view_profile" src="{{ Storage::url($user->profile_image ?? DUI ) }}" alt="" />
                         @if(!empty($user->profile_image))
                             <input type="hidden" name="old_profile" value="{{ $user->profile_image }}">
                         @endif
@@ -26,7 +26,7 @@
                         </div>
                     </div>
                     <div class="detail">
-                        <p class="title">Username / Email</p>
+                        <p class="title">Email</p>
                         <p class="mb-4">{{ $user->email }}</p>
                         <p class="title">Your Cell Phone</p>
                         <p>{{ $user->phone_number }} </p>

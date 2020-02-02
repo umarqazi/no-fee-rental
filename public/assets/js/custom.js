@@ -52,7 +52,6 @@ $(() => {
 
     });
 
-    $(".additional-info .input-style").attr("disabled", true);
 
 
     $('#datepicker').datepicker({

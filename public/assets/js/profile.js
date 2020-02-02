@@ -15,6 +15,8 @@ $(() => {
 
     $('#image-picker').hide();
 
+
+    $(".additional-info .input-style").attr("disabled", true);
     $(".edit-profile").click(function () {
         $('#image-picker').show();
         $(".additional-info .input-style").attr("disabled", false);

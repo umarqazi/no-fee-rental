@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Agent;
+namespace App\Http\Controllers\Renter;
 
 use App\Services\ListingConversationService;
 use Illuminate\Contracts\View\Factory;
@@ -14,12 +14,12 @@ use Illuminate\View\View;
  * Class ListingConversationController
  * @package App\Http\Controllers\Agent
  */
-class ListingConversationController extends Controller {
+class ConversationController extends Controller {
 
     /**
      * @var int
      */
-    private $paginate = 10;
+    private $paginate = 20;
 
     /**
      * @var ListingConversationService
@@ -38,24 +38,7 @@ class ListingConversationController extends Controller {
      */
     public function index() {
         $conversations = toObject($this->conversationService->fetchConversations($this->paginate));
-        return view('agent.conversation', compact('conversations'));
-    }
-
-    /**
-     * @param Request $request
-     * @param $id
-     *
-     * @return JsonResponse|RedirectResponse
-     */
-    public function accept(Request $request, $id) {
-        $data = null;
-        if($this->conversationService->accept($id))
-            $data = $this->conversationService->loadMessages($id);
-        return sendResponse($request, $data);
-    }
-
-    public function deny() {
-
+        return view('renter.conversation', compact('conversations'));
     }
 
     /**
@@ -87,7 +70,7 @@ class ListingConversationController extends Controller {
      */
     public function load($id) {
         $collection = $this->conversationService->loadMessages($id);
-        return view('agent.inbox', compact('collection'));
+        return view('renter.inbox', compact('collection'));
     }
 
     /**

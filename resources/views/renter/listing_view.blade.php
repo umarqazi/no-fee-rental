@@ -32,7 +32,7 @@
                                 @foreach($favourites->active[0]->favourite as $al)
                                     <div class="listing-row">
                                         <div class="img-holder">
-                                            <img src="{{ asset($al->thumbnail ?? DLI) }}" alt="" style="height: 205px; width: 100%;" class="main-img" />
+                                            <img src="{{ Storage::url($al->thumbnail ?? DLI) }}" alt="" style="height: 205px; width: 100%;" class="main-img" />
                                         </div>
                                         <div class="info">
                                             <p class="title">{{ str_limit(is_exclusive($al), STR_LIMIT_LIST_VIEW, ' ...') }}</p>
@@ -69,7 +69,7 @@
                                     @foreach($favourites->active[0]->favourite as $al)
                                         <div class="col-lg-3 col-md-4 col-sm-6">
                                             <div class="listing-thumb">
-                                                <img src="{{ asset( $al->thumbnail ?? DLI ) }}" alt="" style="height: 205px; width: 100%;" class="main-img" />
+                                                <img src="{{ Storage::url( $al->thumbnail ?? DLI ) }}" alt="" style="height: 205px; width: 100%;" class="main-img" />
                                                 <div class="info">
                                                     <p class="title">
                                                         {{ str_limit(is_exclusive($al), STR_LIMIT_GRID_VIEW, ' ...') }}
@@ -110,7 +110,7 @@
                             @foreach($favourites->inactive[0]->favourite as $il)
                                 <div class="listing-row">
                                     <div class="img-holder">
-                                        <img src="{{ asset( $il->thumbnail ?? DLI ) }}" alt="" style="height:205px;" class="main-img" />
+                                        <img src="{{ Storage::url( $il->thumbnail ?? DLI ) }}" alt="" style="height:205px;" class="main-img" />
                                     </div>
                                     <div class="info">
                                         <p class="title">{{ str_limit(is_exclusive($il), STR_LIMIT_LIST_VIEW, ' ...') }}</p>
@@ -142,7 +142,7 @@
                                 @foreach($favourites->inactive[0]->favourite as $il)
                                     <div class="col-lg-3 col-md-4 col-sm-6">
                                         <div class="listing-thumb">
-                                            <img src="{{ asset( $il->thumbnail ?? DLI ) }}" alt="" style="height:205px;" class="main-img" />
+                                            <img src="{{ Storage::url( $il->thumbnail ?? DLI ) }}" alt="" style="height:205px;" class="main-img" />
                                             <div class="info">
                                                 <p class="title">{{ str_limit(is_exclusive($il), STR_LIMIT_GRID_VIEW, ' ...') }}</p>
                                                 <p><i class="fa fa-tag"></i> ${{ ($il->rent) ?   number_format($il->rent,0) : 'None' }}</p>
@@ -175,5 +175,5 @@
             </div>
         </div>
     </div>
-    {!! HTML::script('assets/js/listing.js') !!}
+    {!! HTML::script('assets/js/tabs.js') !!}
 @endsection

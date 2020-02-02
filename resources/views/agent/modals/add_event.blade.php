@@ -22,11 +22,11 @@
                     {!! Form::text('title', null, ['class' => 'input-style']) !!}
                 </div>
                 <div class="form-group">
-                    <label> Start Date</label>
+                    <label> Start Date & Time</label>
                     {!! Form::text('start', null, ['class' => 'input-style', 'autocomplete' => 'off']) !!}
                 </div>
                 <div class="form-group">
-                    <label> End Date</label>
+                    <label> End Date & Time</label>
                     {!! Form::text('end', null, ['class' => 'input-style', 'autocomplete' => 'off']) !!}
                 </div>
             </div>

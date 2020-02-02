@@ -1,7 +1,5 @@
 @extends('secured-layouts.app')
-
 @section('title', 'Nofee Rental')
-
 @section('content')
     <div class="wrapper">
         <div class="heading-wrapper">
@@ -48,10 +46,4 @@
             </div>
         </div>
     </div>
-    <script>
-
-        window.onload = function() {
-            $(".additional-info .input-style").attr("disabled", false);
-        }
-    </script>
   @endsection
