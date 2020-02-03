@@ -7,11 +7,11 @@
             <div class="contact-info">
                 <div class="row justify-content-center mt-5">
                     <div class="col-lg-6">
-                        {!! Form::open(['url'=>route('password.email'), 'class'=>'contact-form ajax', 'id' => 'forgot-password', 'reset' => 'true', 'method'=>'post', 'enctype'=>'multipart/form-data']) !!}
+                        {!! Form::open(['url' => route('password.email'), 'class' => 'contact-form ajax', 'id' => 'forgot-password', 'reset' => 'true', 'method' => 'post']) !!}
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    {!! Form::text('email', null, ['class'=>'input-style', 'placeholder'=>'Enter email']) !!}
+                                    {!! Form::text('email', null, ['class' => 'input-style', 'placeholder' => 'Enter email']) !!}
                                     @if ($errors->has('email'))
                                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('email') }}</strong>

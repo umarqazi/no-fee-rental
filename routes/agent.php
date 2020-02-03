@@ -60,12 +60,14 @@ Route::post('/invite-agent', 'Agent\MemberController@invite')->name('agent.invit
 Route::get('/un-friend/{id}', 'Agent\MemberController@unFriend')->name('agent.unFriend');
 
 // Listing Conversation Routes
-Route::post('/accept-meeting/{id}', 'Agent\ListingConversationController@accept');
-Route::get('/view-conversations', 'Agent\ListingConversationController@index')->name('agent.conversations');
-Route::get('/load-conversation/inbox/{id}', 'Agent\ListingConversationController@load')->name('agent.loadConversation');
-Route::post('/send-message/{id}', 'Agent\ListingConversationController@reply')->name('agent.sendMessage');
-Route::get('/archive-conversation/{id}', 'Agent\ListingConversationController@archive')->name('agent.archiveConversation');
-Route::get('/unArchive-conversation/{id}', 'Agent\ListingConversationController@unArchive')->name('agent.unArchiveConversation');
+Route::get('/accept-meeting/{id}', 'Agent\ConversationController@accept');
+Route::get('/view-conversations', 'Agent\ConversationController@index')->name('agent.conversations');
+Route::get('/load-conversation/inbox/{id}', 'Agent\ConversationController@load')->name('agent.loadConversation');
+Route::post('/send-message/{id}', 'Agent\ConversationController@reply')->name('agent.sendMessage');
+Route::post('/send-reply/{id}', 'Agent\ConversationController@replyBack');
+Route::post('/reply-back/{id}', 'Agent\ConversationController@replyModal');
+Route::get('/archive-conversation/{id}', 'Agent\ConversationController@archive')->name('agent.archiveConversation');
+Route::get('/unArchive-conversation/{id}', 'Agent\ConversationController@unArchive')->name('agent.unArchiveConversation');
 
 // Calender Routes
 Route::post('/add-event', 'Agent\CalendarController@create')->name('agent.addEvent');

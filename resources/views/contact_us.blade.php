@@ -13,7 +13,7 @@
                     <div class="col-lg-4 ">
                         <div class="info">
                             <div class="info-inner">
-                                <img src="assets/images/location.png" alt="" />
+                                <img src="{{ Storage::url('assets/images/location.png') }}" alt="" />
                                 <div class="title"><h6> Sales/Advertising </h6>
                                     <p> info@nofeerentalsnyc.com </p>
                                 </div>
@@ -27,7 +27,7 @@
                     <div class="col-lg-4">
                         <div class="info">
                             <div class="info-inner">
-                                <img src="assets/images/close-envelope-new.png" alt="" />
+                                <img src="{{ Storage::url('assets/images/close-envelope-new.png') }}" alt="" />
                                 <div class="title"><h6> Support/Billing </h6>
                                     <a href="mailto:marketing@nofeerentals.com">support@nofeerentalsnyc.com</a>
                                 </div>
@@ -41,7 +41,7 @@
                     <div class="col-lg-4">
                         <div class="info">
                             <div class="info-inner">
-                                <img src="assets/images/call-icon.png" alt="" />
+                                <img src="{{ Storage::url('assets/images/call-icon.png') }}" alt="" />
                                 <div class="title"><h6> Careers </h6>
                                     <a href="#">careers@nofeerentalsnyc .com</a>
                                 </div>

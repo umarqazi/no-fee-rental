@@ -4,7 +4,7 @@
     @foreach($listing->pending as $pl)
         <div class="listing-row">
             <div class="img-holder">
-                <img src="{{ asset( $pl->thumbnail ?? DLI ) }}" alt="" style="height: 205px; width: 100%;" class="main-img" />
+                <img src="{{ Storage::url( $pl->thumbnail ?? DLI ) }}" alt="" style="height: 205px; width: 100%;" class="main-img" />
             </div>
             <div class="info">
                 <p class="title">{{ str_limit(is_exclusive($pl), STR_LIMIT_LIST_VIEW, ' ...') }}</p>
@@ -31,7 +31,7 @@
         @foreach($listing->pending as $pl)
             <div class="col-lg-3 col-md-4 col-sm-6">
                 <div class="listing-thumb">
-                    <img src="{{ asset( $pl->thumbnail ?? DLI) }}" alt="" style="height: 205px; width: 100%;" class="main-img" />
+                    <img src="{{ Storage::url( $pl->thumbnail ?? DLI) }}" alt="" style="height: 205px; width: 100%;" class="main-img" />
                     <div class="info">
                         <p class="title">{{ str_limit(is_exclusive($pl), STR_LIMIT_GRID_VIEW, ' ...') }}</p>
                         <p><i class="fa fa-tag"></i> ${{ ($pl->rent) ?   number_format($pl->rent,0) : 'None' }}</p>

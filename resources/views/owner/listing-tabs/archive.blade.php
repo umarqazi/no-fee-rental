@@ -4,7 +4,7 @@
     @foreach($listing->archived as $al)
         <div class="listing-row">
             <div class="img-holder">
-                <img src="{{ asset($al->thumbnail ?? DLI) }}" alt="" style="height: 205px; width: 100%;" class="main-img" />
+                <img src="{{ Storage::url($al->thumbnail ?? DLI) }}" alt="" style="height: 205px; width: 100%;" class="main-img" />
             </div>
             <div class="info">
                 <p class="title">{{ str_limit(is_exclusive($al), STR_LIMIT_LIST_VIEW, ' ...') }}</p>
@@ -22,7 +22,7 @@
                     @endif
                 </div>
                 <div class="actions-btns">
-                    @if(!empty($al->realty_id) && agentHasPlan() || empty($al->realty_id))
+                    @if(!empty($al->realty_id) || empty($al->realty_id))
                         <a href="{{ route(whoAmI().'.unArchive', $al->id) }}" title="UnArchive this Listing">
                             <button type="button" class="border-btn">UnArchive</button>
                         </a>
@@ -43,7 +43,7 @@
         @foreach($listing->archived as $al)
             <div class="col-lg-3 col-md-4 col-sm-6">
                 <div class="listing-thumb">
-                    <img src="{{ asset( $al->thumbnail ?? DLI ) }}" alt="" style="height: 205px; width: 100%;" class="main-img" />
+                    <img src="{{ Storage::url( $al->thumbnail ?? DLI ) }}" alt="" style="height: 205px; width: 100%;" class="main-img" />
                     <div class="info">
                         <p class="title">
                             {{ str_limit(is_exclusive($al), STR_LIMIT_GRID_VIEW, ' ...') }}
@@ -62,7 +62,7 @@
                             @endif
                         </div>
                         <div class="actions-btns">
-                            @if(!empty($al->realty_id) && agentHasPlan() || empty($al->realty_id))
+                            @if(!empty($al->realty_id) || empty($al->realty_id))
                                 <a href="{{ route(whoAmI().'.unArchive', $al->id) }}" title="UnArchive this Listing">
                                     <button type="button" class="border-btn">UnArchive</button>
                                 </a>

@@ -6,7 +6,7 @@
 <div class="wrapper">
     <div class="heading-wrapper">
         <h1>Calendar</h1>
-        <a href="javascript:void(0);" class="btn btn-default" data-toggle="modal" data-target="#add-event">Add Event</a>
+        <a href="javascript:void(0);" class="btn btn-default" data-toggle="modal" data-target="#add-event"><i class="fa fa-plus"></i> Add Event</a>
     </div>
     {!! $calendar !== null ? $calendar->calendar() : 'No Event Found' !!}
     {!! $calendar !== null ? $calendar->script() : '' !!}

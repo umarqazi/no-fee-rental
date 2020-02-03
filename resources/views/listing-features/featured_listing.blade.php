@@ -4,7 +4,7 @@
     @foreach($listing->featured as $fl)
         <div class="listing-row">
             <div class="img-holder">
-                <img src="{{ asset( $fl->thumbnail ?? DLI ) }}" alt="" style="height: 205px; width: 100%;" class="main-img" />
+                <img src="{{ Storage::url( $fl->thumbnail ?? DLI ) }}" alt="" style="height: 205px; width: 100%;" class="main-img" />
             </div>
             <div class="info">
                 <p class="title">{{ str_limit(is_exclusive($fl), STR_LIMIT_LIST_VIEW, ' ...') }}</p>
@@ -21,12 +21,12 @@
                 <div class="actions-btns">
                     <a href="{{ route('admin.editListing', $fl->id) }}">
                         <span>
-                            <img src="{{asset('assets/images/edit-icon.png')}}" alt="">
+                            <img src="{{Storage::url('assets/images/edit-icon.png')}}" alt="">
                         </span>
                     </a>
                     <a href="{{ route(whoAmI().'.copyListing', $fl->id) }}">
                         <span>
-                            <img src="{{asset('assets/images/copy-icon.png')}}" alt="">
+                            <img src="{{Storage::url('assets/images/copy-icon.png')}}" alt="">
                         </span>
                     </a>
                     <a href="{{ route('admin.repostListing', $fl->id) }}"><button type="button" class="border-btn">Repost</button></a>
@@ -49,7 +49,7 @@
         @foreach($listing->featured as $fl)
         <div class="col-lg-3 col-md-4 col-sm-6">
             <div class="listing-thumb">
-                <img src="{{ asset( $fl->thumbnail ?? DLI ) }}" alt="" style="height: 205px; width: 100%;" class="main-img" />
+                <img src="{{ Storage::url( $fl->thumbnail ?? DLI ) }}" alt="" style="height: 205px; width: 100%;" class="main-img" />
                 <div class="info">
                     <p class="title">{{ str_limit(is_exclusive($fl), STR_LIMIT_GRID_VIEW, ' ...') }}</p>
                     <p><i class="fa fa-tag"></i> ${{ ($fl->rent) ?   number_format($fl->rent,0) : 'None' }}</p>

@@ -1,11 +1,11 @@
 <div class="modal fade" id="check-availability">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <img src="{{ asset('assets/images/modal-close-icon.png') }}" alt="" class="close-modal close-signup-modal closemodal-check-availablility" data-dismiss="modal">
+            <img src="{{ Storage::url('assets/images/modal-close-icon.png') }}" alt="" class="close-modal close-signup-modal closemodal-check-availablility" data-dismiss="modal">
             <div class="modal-body">
                 <div class="row">
                     <div class="col-lg-4" id="listing-image">
-                        <img src="{{ asset('assets/images/modal-logo.png') }}" alt="" class="logo" />
+                        <img src="{{ Storage::url('assets/images/modal-logo.png') }}" alt="" class="logo" />
                     </div>
                     <div class="col-lg-8 padding-leftt-0">
                         <h3 id="address"></h3>

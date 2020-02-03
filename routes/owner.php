@@ -54,7 +54,7 @@ Route::get('/accept-invitation/{token}', 'Owner\MemberController@acceptInvitatio
 Route::get('/un-friend/{id}', 'Owner\MemberController@unFriend')->name('owner.unFriend');
 
 // Messaging Routes
-Route::post('/accept-meeting/{id}', 'Owner\MessageController@accept');
+Route::get('/accept-meeting/{id}', 'Owner\MessageController@accept');
 Route::get('/view-conversations', 'Owner\MessageController@index')->name('owner.conversations');
 Route::get('/load-conversation/inbox/{id}', 'Owner\MessageController@load')->name('owner.loadConversation');
 Route::post('/send-message/{id}', 'Owner\MessageController@reply')->name('owner.sendMessage');

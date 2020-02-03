@@ -4,7 +4,7 @@
     @foreach($listing->active as $al)
         <div class="listing-row">
             <div class="img-holder">
-                <img src="{{ asset($al->thumbnail ?? DLI) }}" alt="" style="height: 205px; width: 100%;" class="main-img" />
+                <img src="{{ Storage::url($al->thumbnail ?? DLI) }}" alt="" style="height: 205px; width: 100%;" class="main-img" />
             </div>
             <div class="info">
                 <p class="title">{{ str_limit(is_exclusive($al), STR_LIMIT_LIST_VIEW, ' ...') }}</p>
@@ -27,10 +27,10 @@
                 </div>
                 <div class="actions-btns">
                     <a href="{{ route(whoAmI().'.editListing', $al->id) }}">
-                        <span><img src="{{asset('assets/images/edit-icon.png')}}" alt=""></span>
+                        <span><img src="{{Storage::url('assets/images/edit-icon.png')}}" alt=""></span>
                     </a>
                     <a href="{{ route(whoAmI().'.copyListing', $al->id) }}">
-                        <span><img src="{{asset('assets/images/copy-icon.png')}}" alt=""></span>
+                        <span><img src="{{Storage::url('assets/images/copy-icon.png')}}" alt=""></span>
                     </a>
                     <a href="{{ route('listing.detail', $al->id) }}">
                         <i class="fa fa-eye" style="font-size: 24px;position: relative;top: 5px;"></i>
@@ -62,7 +62,7 @@
         @foreach($listing->active as $al)
             <div class="col-lg-3 col-md-4 col-sm-6">
                 <div class="listing-thumb">
-                    <img src="{{ asset( $al->thumbnail ?? DLI ) }}" alt="" style="height: 205px; width: 100%;" class="main-img" />
+                    <img src="{{ Storage::url( $al->thumbnail ?? DLI ) }}" alt="" style="height: 205px; width: 100%;" class="main-img" />
                     <div class="info">
                         <p class="title">
                             {{ str_limit(is_exclusive($al), STR_LIMIT_GRID_VIEW, ' ...') }}

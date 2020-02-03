@@ -1,5 +1,5 @@
 @extends('secured-layouts.app')
-@section('title', 'Nofee Rental')
+@section('title', 'View Profile')
 @section('content')
     <div class="wrapper">
         <div class="heading-wrapper">
@@ -10,7 +10,7 @@
                 {!! Form::model($user, ['url' => route('renter.profileUpdate'), 'method' => 'post', 'enctype' => 'multipart/form-data']) !!}
                 <div class="user-avtar">
                     <div class="img-holder">
-                        <img id="view_profile" src="{{ asset( $user->profile_image ?? DUI ) }}" alt="" />
+                        <img id="view_profile" src="{{ Storage::url( $user->profile_image ?? DUI ) }}" alt="" />
                         @if(!empty($user->profile_image))
                             <input type="hidden" name="old_profile" value="{{ $user->profile_image }}">
                         @endif
@@ -26,7 +26,7 @@
                         </div>
                     </div>
                     <div class="detail">
-                        <p class="title">Username / Email</p>
+                        <p class="title">Email</p>
                         <p class="mb-4">{{ $user->email }}</p>
                         <p class="title">Your Cell Phone</p>
                         <p>{{ $user->phone_number }} </p>
@@ -142,7 +142,6 @@
     {!! HTML::script('assets/js/vendor/amsify.js') !!}
     {!! HTML::script('assets/js/profile.js') !!}
     <script>
-
         if($('#exclusive-3').is(":checked")){
             $('#exclusive-1').attr('disabled', true);
             $('#exclusive-2').attr('disabled', true);
@@ -150,30 +149,7 @@
 
         $('.edit-profile').on('click', function (e) {
             let lang = [];
-            let neighbors = []
             let languages = @php echo json_encode(config('languages')); @endphp;
-
-
-            ajaxRequest('/all-neighborhoods', 'post', null, false).then(neighborhoods => {
-                neighborhoods.data.forEach(v => {
-                    neighbors.push(v.name);
-                });
-
-                $('input[name="neighborhood_expertise"]').amsifySuggestags({
-                    suggestions: neighbors,
-                    whiteList: true,
-                    afterAdd:function(value) {
-                        if($(".neighborhood_expertise > .amsify-suggestags-area > .amsify-suggestags-input-area> span").length > 2){
-                            $(".neighborhood_expertise > .amsify-suggestags-area > .amsify-suggestags-input-area > .amsify-suggestags-input").attr('readonly', true);
-                        }
-                        else{
-                            $(".neighborhood_expertise > .amsify-suggestags-area > .amsify-suggestags-input-area > .amsify-suggestags-input").attr('readonly', false);
-                        }
-                    },
-
-                });
-            });
-
             for (let language in languages) {
                 lang.push(languages[language]);
             }
@@ -184,14 +160,11 @@
                 afterAdd:function(value) {
                     if ($(".languages > .amsify-suggestags-area > .amsify-suggestags-input-area > span").length > 2) {
                         $(".languages > .amsify-suggestags-area > .amsify-suggestags-input-area > .amsify-suggestags-input").attr('readonly', true);
-                    }
-                    else {
+                    } else {
                         $(".languages > .amsify-suggestags-area > .amsify-suggestags-input-area > .amsify-suggestags-input").attr('readonly', false);
                     }
                 }
             });
         });
-
-
     </script>
 @endsection

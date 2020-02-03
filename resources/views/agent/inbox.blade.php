@@ -5,7 +5,7 @@
         <div class="user-info">
             <div class="property-info">
                 <div class="img-wrap">
-                    <img src="{{ asset($collection->listing->thumbnail ?? DLI ) }}" alt="">
+                    <img src="{{ Storage::url($collection->listing->thumbnail ?? DLI ) }}" alt="">
                 </div>
                 <div class="info">
                     <div class="title">
@@ -42,12 +42,12 @@
                         @foreach($collection->messages as $message)
                             @if($message->align == myId() || $message->align == GUEST)
                                 <li class="replies">
-                                    <img style="width: 25px;height: 25px;" src="{{ asset(mySelf()->profile_image ?? DUI) }}" alt="" />
+                                    <img style="width: 25px;height: 25px;" src="{{ Storage::url(mySelf()->profile_image ?? DUI) }}" alt="" />
                                     <p>{{ $message->message }}</p>
                                 </li>
                             @else
                                 <li class="sent">
-                                    <img  style="width: 25px;height: 25px;" src="{{ asset($collection->sender->profile_image ?? DUI) }}" alt="" />
+                                    <img  style="width: 25px;height: 25px;" src="{{ Storage::url($collection->sender->profile_image ?? DUI) }}" alt="" />
                                     <p>{{ $message->message }}</p>
                                 </li>
                             @endif
@@ -68,7 +68,7 @@
         </div>
     </div>
     {!! HTML::style('assets/css/chat.css') !!}
-{{--    {!! HTML::script('assets/js/message.js') !!}--}}
+    {!! HTML::script('assets/js/message.js') !!}
     <script>
         // Scroll to end of chat area
         window.onload = function () {

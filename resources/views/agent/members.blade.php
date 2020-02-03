@@ -4,7 +4,7 @@
 <div class="wrapper">
     <div class="heading-wrapper">
         <h1>Current Team</h1>
-        <a href="#" class="btn-default" data-toggle="modal" data-target="#invite-member">Add Member</a>
+        <a href="#" class="btn-default" data-toggle="modal" data-target="#invite-member"><i class="fa fa-plus"></i> Add Member</a>
     </div>
     <div class="block listing-container teams-container">
         <div class="heading-wrapper pl-0">
@@ -32,7 +32,7 @@
                             </div>
 
                             <div class="img-wrapp">
-                                <img src="{{ asset($member->profile_image ?? DUI)}}" alt="" class="main-img" />
+                                <img src="{{ Storage::url($member->profile_image ?? DUI)}}" alt="" class="main-img" />
                             </div>
 
                             <div class="name">{{ $member->first_name.' '.$member->last_name }}</div>
@@ -67,4 +67,6 @@
 @include('agent.modals.invite_member')
 {{--Agent Members Script--}}
 {!! HTML::script('assets/js/members.js') !!}
+{!! HTML::script('assets/js/tabs.js') !!}
+
 @endsection

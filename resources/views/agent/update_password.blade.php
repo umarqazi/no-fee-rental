@@ -13,6 +13,7 @@
             	    [
             	        'url'    => route('agent.updatePassword'),
             	        'method' => 'post',
+            	        'reset'  => 'true',
             	        'id'     => 'update_password',
             	        'class'  => 'ajax'
             	    ]) !!}
