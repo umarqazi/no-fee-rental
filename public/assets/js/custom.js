@@ -728,7 +728,7 @@ $(() => {
         $(this).toggleClass('far fa-star fas fa-star');
     });
     $('.recent-star').click(function () {
-        $(this).addClass('fas fa-star');
+        $(this).toggleClass('far fa-star fas fa-star');
     });
     $('[data-toggle="tooltip"]').tooltip();
 
