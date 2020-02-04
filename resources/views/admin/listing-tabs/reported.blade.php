@@ -29,7 +29,7 @@
                     @else
                         <span class="status" style="background: red;">Not Available</span>
                     @endif
-
+                    <p class="see-reports" data-toggle="modal" data-target="#seeReports">See Reports</p>
                 </div>
                 <div class="actions-btns">
                     <a href="{{ route(whoAmI().'.editListing', $al->id) }}">
@@ -87,10 +87,12 @@
                             @endif
 
                         </div>
-                        <div class="actions-btns">
+                        <div class="actions-btns action-btn-reports">
                             <a href="{{ route(whoAmI().'.archive', $al->id) }}" title="Archive this Listing">
                                 <button type="button" class="border-btn">Archive</button>
                             </a>
+                            <p class="see-reports" data-toggle="modal" data-target="#seeReports">See
+                                Reports</p>
                         </div>
                         <div class="list-actions-icons">
                             <a href="{{ route(whoAmI().'.editListing', $al->id) }}"><button><i class="fa fa-edit"></i></button></a>
@@ -107,3 +109,43 @@
     </div>
     {!! $listing->reported->render() !!}
 </div>
+
+<div class="modal fade" id="seeReports">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Report this listing <br>
+                    <p>6650 Hillside Road, New York, Upper West Side</p>
+                </h4>
+                 <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="profilecard-detaill">
+                    <h3>Report Reason</h3>
+
+                    <div class="form-group">
+                        <p><strong>User Name: </strong><span>Muhammad Yousuf</span></p>
+                    </div>
+                    <div class="form-group">
+                        <p><strong>Email: </strong><span></span></p>
+                    </div>
+                    <div class="form-group">
+                        <p><strong>phone Number: </strong><span></span></p>
+                    </div>
+                    <div class="form-group">
+                        <p><strong>Reason: </strong><span></span></p>
+                    </div>
+                    <div class="form-group text-message">
+                        <p><strong>Message: </strong> <span>jkhfjkhsdfjkhdf nbkhjkhasdfjk jbhjkhjkash kbjkhdjkhsfjk
+                            jbhjkashjkfhsj bjkhasdjkhjk bjksdfhjkdh jkbjkhjhjk jhjkhfjdhj jkhsjkadhjkfshjk
+                                jkshjksdfhjk jksdjkhdfjkh jkhejkhrjkk fnbjkhajkdshjkfh</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
