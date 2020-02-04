@@ -12,5 +12,5 @@
         {!! Form::close() !!}
     </div>
 @else
-    <div class="not-allowed-appointment"> You are not allowed to sent availability request</div>
+    <div class="not-allowed-appointment"> {{ ucfirst(whoAmI()) }}'s are not allowed to sent availability request</div>
 @endif

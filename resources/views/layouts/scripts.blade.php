@@ -4,11 +4,10 @@
     </script>
     {!! HTML::script('assets/js/vendor/jquery-3.2.1.min.js') !!}
     {!! HTML::script('assets/js/vendor/simple.money.format.js') !!}
+    {!! HTML::script('https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js') !!}
     {!! HTML::script('assets/js/vendor/toastr.js') !!}
     {!! HTML::script('assets/js/notification.js') !!}
     {!! HTML::script('assets/js/vendor/fSelect.js') !!}
-{{--    {!! HTML::script('assets/js/vendor/jquery.maskMoney.js') !!}--}}
-{{--    {!! HTML::script('https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js') !!}--}}
     {!! HTML::script('https://oss.maxcdn.com/respond/1.4.2/respond.min.js') !!}
     {!! HTML::script('https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js') !!}
     {!! HTML::script('assets/js/vendor/jquery.validate.min.js') !!}

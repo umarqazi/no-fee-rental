@@ -33,7 +33,7 @@ class SendEmailJob implements ShouldQueue
      * @param $data
      */
     public function __construct($data) {
-        $this->data = (object) $data;
+        $this->data = is_object($data) ? $data : toObject($data);
     }
 
     /**

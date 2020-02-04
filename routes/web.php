@@ -159,5 +159,5 @@ Route::get('/composer-dump', function() {
 use App\Traits\DispatchNotificationService;
 // Test Route
 Route::get('/test', function (\Illuminate\Http\Request $request) {
-   return view('agent.modals.message');
+   return view('mails.appointment_request');
 })->name('web.test');

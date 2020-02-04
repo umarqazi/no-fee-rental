@@ -8,12 +8,11 @@
 
 namespace App\Services;
 
-use App\Forms\Agent\CreateForm;
 use App\Forms\CompanyForm;
-use App\Forms\InvitationForm;
+use App\Forms\SignUpForm;
 use App\Forms\User\ChangePasswordForm;
 use App\Forms\User\EditProfileForm;
-use App\Forms\User\UserForm;
+use App\Forms\UserForm;
 use App\Repository\CompanyRepo;
 use App\Repository\ExclusiveSettingRepo;
 use App\Repository\MemberRepo;
@@ -23,6 +22,10 @@ use App\Repository\UserRepo;
 use App\Traits\DispatchNotificationService;
 use Illuminate\Support\Facades\DB;
 
+/**
+ * Class UserService
+ * @package App\Services
+ */
 class UserService {
 
     use DispatchNotificationService;
@@ -100,54 +103,65 @@ class UserService {
 
     /**
      * @param $request
-     *
-     * @return UserForm
+     * @return bool
      */
-    private function form($request) {
-        $user = new UserForm();
-        $user->id = $request->id ?? myId();
-        $user->first_name = $request->first_name;
-        $user->last_name = $request->last_name;
-        $user->email = $request->email;
-        $user->phone_number = $request->phone_number;
-        $user->user_type = $request->user_type;
-        $user->remember_token = str_random(60);
-        $user->validate();
-        return $user;
+    public function createByAdmin($request) {
+        $user = $this->__validateForm($request);
+        if($user = $this->userRepo->create($user->toArray())) {
+            $this->exclusiveSettingRepo->create(['user_id' => $user->id]);
+            DispatchNotificationService::ADDUSERBYADMIN($user);
+            return true;
+        }
+
+        return false;
     }
 
     /**
      * @param $request
      *
-     * @return bool|mixed
+     * @return mixed
      */
-    public function create($request) {
-        $user = $this->form($request);
+    public function invitedAgentSignup($request) {
+        $form = $this->__validateForm($request);
+        $form->emailVerified = now();
+        return $this->userRepo->updateByClause(['email' => $form->email], $form->toArray());
+    }
 
-            if ($request->user_type == AGENT) {
-                $agent = new InvitationForm();
-                $agent->invite_by = myId();
-                $agent->email = $request->email;
-                $agent->token = str_random(60);
-                $agent->accept = NULL;
-                $this->agentRepo->invite($agent->toArray());
-                $this->agentMail($agent);
-                return true;
+    /**
+     * @param $request
+     *
+     * @return bool
+     */
+    public function renterSignup($request){
+        $form = $this->__validateForm($request);
+        if($user = $this->userRepo->create($form->toArray())) {
+            DispatchNotificationService::USERSIGNUP($user);
+            return true ;
+        }
 
-            } else {
-                $response = $this->userRepo->create($user->toArray());
-                $this->exclusiveSettingRepo->create([
-                    'user_id' => $response->id,
-                ]);
+        return false;
+    }
 
-                DispatchNotificationService::ADDUSERBYADMIN(toObject([
-                    'to' => $response->id,
-                    'from' => myId(),
-                    'data' => $response
-                ]));
-                return $response;
-            }
+    /**
+     * @param $request
+     * @param bool $sendMail
+     *
+     * @return bool
+     */
+    public function signup($request, $sendMail = true) {
+        DB::beginTransaction();
+        $form = $this->__validateForm($request);
+        if($user = $this->userRepo->create($form->toArray())) {
+            $this->exclusiveSettingRepo->create(['user_id' => $user->id]);
 
+            if ($sendMail) { DispatchNotificationService::USERSIGNUP($user); }
+
+            DB::commit();
+            return true;
+        }
+
+        DB::rollback();
+        return false;
     }
 
 
@@ -157,7 +171,7 @@ class UserService {
      * @return mixed
      */
     public function update($id, $request) {
-        $user = $this->form($request);
+        $user = $this->__validateForm($request);
         return $this->userRepo->update($user->id, $user->toArray());
     }
 
@@ -360,12 +374,7 @@ class UserService {
      * @param $agent
      */
     private function agentMail($agent) {
-        DispatchNotificationService::AGENTINVITE(toObject([
-            'from' => myId(),
-            'to'   => $agent->email,
-            'data' => $agent,
-            'is_invite' => true
-        ]));
+        DispatchNotificationService::AGENTINVITE($agent);
     }
 
     /**
@@ -432,7 +441,10 @@ class UserService {
         $form->password = $request->password;
         $form->password_confirmation = $request->password_confirmation;
         $form->validate();
-        return $this->userRepo->update($form->id, ['password' => bcrypt($form->password)]);
+        return $this->userRepo->update($form->id, [
+            'email_verified_at' => now(),
+            'password' => bcrypt($form->password)
+        ]);
     }
 
     /**
@@ -446,126 +458,22 @@ class UserService {
 
     /**
      * @param $request
-     *
-     * @return mixed
+     * @return mixed|null
      */
-    public function invitedAgentSignup($request) {
-        return $this->signup($request, false);
-    }
-
-    /**
-     * @param $request
-     *
-     * @return bool
-     */
-    public function renterSignup($request){
-        $form = new CreateForm();
-        $form->first_name = $request->first_name;
-        $form->last_name = $request->last_name;
-        $form->email = $request->email;
-        $form->phone_number = $request->phone_number;
-        $form->user_type = $request->user_type;
-        $form->password = $request->password;
-        $form->license_number = $request->license_number;
-        $form->address = $request->address;
-        $form->password_confirmation = $request->password_confirmation;
-        $form->remember_token = str_random(60);
-        $form->validate();
-        $form->password = bcrypt($form->password);
-        $user = $this->userRepo->create($form->toArray());
-
-        DispatchNotificationService::USERSIGNUP(toObject([
-            'to'   =>  $user->id,
-            'from' => mailToAdmin(),
-            'data' => $user
-        ]));
-        return true ;
-    }
-
-        /**
-     * @param $request
-     * @param bool $sendMail
-     *
-     * @return bool
-     */
-    public function signup($request, $sendMail = true) {
-        $form = new CreateForm();
-        $form->first_name = $request->first_name;
-        $form->last_name = $request->last_name;
-        $form->email = $request->email;
-        $form->phone_number = $request->phone_number;
-        $form->user_type = $request->user_type;
-        $form->password = $request->password;
-        $form->license_number = $request->license_number;
-        $form->address = $request->address;
-        $form->password_confirmation = $request->password_confirmation;
-        $form->remember_token = str_random(60);
-        $form->validate();
-
-        DB::beginTransaction();
-        $form->password = bcrypt($form->password);
-        $user = $this->userRepo->create($form->toArray());
-        if ($user && $sendMail) {
-            $cForm = new CompanyForm();
-            $cForm->company = $request->company;
-            if (!$cForm->fails()) {
-                $company= $this->companyRepo->create($cForm->toArray());
-                $this->userRepo->update($user->id,['company_id' => $company->id]);
-            }
-            else {
-                $company= $this->companyRepo->find(['company' => $request->company])->first();
-                $this->userRepo->update($user->id,['company_id' => $company->id]);
-            }
-
-            DB::commit();
-            DispatchNotificationService::USERSIGNUP(toObject([
-                'to'   =>  $user->id,
-                'from' => mailToAdmin(),
-                'data' => $user
-            ]));
-
-            $this->exclusiveSettingRepo->create([
-                'user_id' => $user->id,
-            ]);
-
-            return true;
+    private function __manageCompany($request) {
+        if(!isset($request->company)) {
+            return null;
         }
 
-        if ($user) {
-            $cForm = new CompanyForm();
-            $cForm->company = $request->company;
-
-            if (!$cForm->fails()) {
-                $company= $this->companyRepo->create($cForm->toArray());
-                $this->userRepo->update($user->id,['company_id' => $company->id]);
-            }
-            else {
-                $company= $this->companyRepo->find(['company' => $request->company])->first();
-                $this->userRepo->update($user->id,['company_id' => $company->id]);
-            }
-            $invitedBy = $this->agentRepo->inviteBy($request->token);
-            if($invitedBy->user->user_type == AGENT) {
-                $this->memberRepo->create([
-                    'agent_id' => $invitedBy->invited_by,
-                    'member_id' => $user->id
-                ]);
-            }
-
-            DispatchNotificationService::USERSIGNUP(toObject([
-                'to'   =>  $user->id,
-                'from' => mailToAdmin(),
-                'data' => $user
-            ]));
-
-            $this->exclusiveSettingRepo->create([
-                'user_id' => $user->id,
-            ]);
-
-            DB::commit();
-            return true;
+        $cForm = new CompanyForm();
+        $cForm->company = $request->company;
+        if (!$cForm->fails()) {
+            $company= $this->companyRepo->create($cForm->toArray());
+        } else {
+            $company = $this->companyRepo->find(['company' => $request->company])->first();
         }
-        DB::rollback();
-        return false;
+
+        return $company->id;
     }
 
     /**
@@ -579,15 +487,16 @@ class UserService {
     }
 
     /**
+     * @param $request
      * @param $token
-     *
-     * @return bool
+     * @return bool|mixed
      */
-    public function verifyEmail($token) {
-        $res = $this->validateEncodedToken($token);
-        if ($res) {
-            $this->userRepo->update($res->id, ['email_verified_at' => now()]);
-            return true;
+    public function verifyEmail($request, $token) {
+        $user = $this->validateEncodedToken($token);
+        if (isset($user) && !empty($user)) {
+            if($this->userRepo->update($user->id, ['email_verified_at' => now()])) {
+                return (new AuthService($user->user_type == AGENT ? 'agent' : 'renter'))->loginUsingId($user->id);
+            }
         }
 
         return false;
@@ -743,5 +652,24 @@ class UserService {
      */
     public function agentsWithMRGCompany() {
         return $this->userRepo->mrgAgents()->count() > 0 ? true : false;
+    }
+
+    /**
+     * @param $request
+     * @return SignUpForm
+     */
+    private function __validateForm($request) {
+        $form = new SignUpForm();
+        $form->firstName      = $request->first_name;
+        $form->lastName       = $request->last_name;
+        $form->email          = $request->email;
+        $form->phoneNumber    = $request->phone_number;
+        $form->password       = bcrypt($request->password);
+        $form->license        = $request->license_number;
+        $form->userType       = $request->user_type;
+        $form->company        = $this->__manageCompany($request);
+        $form->remember_token = str_random(60);
+        $form->validate();
+        return $form;
     }
 }

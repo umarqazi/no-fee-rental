@@ -117,13 +117,9 @@ class FeatureListingService {
 	 * @return mixed
 	 */
 	public function mark($id) {
-		if ($this->listingRepo->update($id, ['is_featured' => APPROVEFEATURED])) {
-			$list = $this->listingRepo->find(['id' => $id])->with('agent')->first();
-			DispatchNotificationService::LISTINGFEATUREAPPROVED(toObject([
-			    'from' => myId(),
-                'to'   => $list->agent->id,
-                'data' => $list
-            ]));
+	    $listing = $this->listingRepo->find(['id' => $id]);
+		if ($listing->where('id', $id)->update(['is_featured' => APPROVEFEATURED])) {
+			DispatchNotificationService::LISTINGFEATUREAPPROVED($listing->first());
 
 			return true;
 		}

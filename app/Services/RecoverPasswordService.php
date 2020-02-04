@@ -15,14 +15,13 @@ use Illuminate\Support\Facades\DB;
 use App\Forms\ResetPasswordForm;
 use App\Repository\PasswordResetRepo;
 
+/**
+ * Class RecoverPasswordService
+ * @package App\Services
+ */
 class RecoverPasswordService {
 
     use DispatchNotificationService;
-
-    /**
-     * @var PasswordResetRepo
-     */
-    private $repo;
 
     /**
      * @var UserRepo
@@ -30,11 +29,16 @@ class RecoverPasswordService {
     private $userRepo;
 
     /**
+     * @var PasswordResetRepo
+     */
+    private $recoverPasswordRepo;
+
+    /**
      * RecoverPasswordService constructor.
      */
     public function __construct() {
         $this->userRepo = new UserRepo();
-        $this->repo = new PasswordResetRepo();
+        $this->recoverPasswordRepo = new PasswordResetRepo();
     }
 
     /**
@@ -53,7 +57,7 @@ class RecoverPasswordService {
      */
     private function validateToken($token) {
         if(!Session::has('token')) abort(401);
-        return ($res = $this->repo->validateToken($token)) ? $res->token : false;
+        return $this->recoverPasswordRepo->validateToken($token) ? true : false;
     }
 
     /**
@@ -63,7 +67,7 @@ class RecoverPasswordService {
      * @return bool
      */
     private function isValidEmail($token, $email) {
-        if($res = $this->repo->existingRequest($token)) {
+        if($res = $this->recoverPasswordRepo->validateToken($token)) {
             return $email == $res->email;
         }
 
@@ -80,7 +84,7 @@ class RecoverPasswordService {
         $form->email = $request->email;
         $form->token = $this->generateToken(60);
         $form->validate();
-        return $this->repo->create($form->toArray());
+        return $this->recoverPasswordRepo->create($form->toArray());
     }
 
     /**
@@ -107,20 +111,15 @@ class RecoverPasswordService {
     public function sendEmail($request) {
         DB::beginTransaction();
         if($this->isValidRequest($request)) {
-            $response = $this->makeHistory( $request );
-            if ( ! empty( $response ) ) {
+            if ($response = $this->makeHistory( $request )) {
                 $this->setExpiry( $response->token );
-                DispatchNotificationService::RESETPASSWORD(toObject([
-                    'from' => mailToAdmin(),
-                    'to'   => $response->email,
-                    'data' => $response
-                ]));
-
+                DispatchNotificationService::RESETPASSWORD($response);
                 DB::commit();
-
                 return true;
             }
         }
+
+        DB::rollBack();
         return false;
     }
 
@@ -133,11 +132,10 @@ class RecoverPasswordService {
 
     /**
      * @param $token
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View|void
+     * @return bool
      */
     public function resetForm($token) {
-        $token = $this->validateToken($token);
-        return (!empty($token)) ? view('auth.passwords.reset')->with('token', $token) : abort(404);
+        return $this->validateToken($token);
     }
 
     /**
@@ -148,13 +146,14 @@ class RecoverPasswordService {
     public function recover($request) {
         if($this->isValidEmail($request->token, $request->email)) {
             DB::beginTransaction();
-            $this->repo->deleteMultiple(['token' => $request->token]);
-            $this->userRepo->updateByClause(['email' => $request->email], ['password' => bcrypt($request->password)]);
-            DB::commit();
-            return true;
+            if($this->recoverPasswordRepo->deleteMultiple(['token' => $request->token])) {
+                $this->userRepo->updateByClause(['email' => $request->email], ['password' => bcrypt($request->password)]);
+                DB::commit();
+                return true;
+            }
         }
 
-            DB::rollBack();
-            return false;
+        DB::rollBack();
+        return false;
     }
 }

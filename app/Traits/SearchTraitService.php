@@ -84,12 +84,12 @@ trait SearchTraitService
             'availability' => $request->availability ?? null,
             'agentsWithPremiumPlan' => $request->agentsWithPremiumPlan ?? null,
             'price' => [
-                'min_price' => isset($request->min_price) ? (int)$request->min_price : MINPRICE,
-                'max_price' => isset($request->max_price) ? (int)$request->max_price : MAXPRICE
+                'min_price' => isset($request->min_price) ? toValidPrice($request->min_price) : MINPRICE,
+                'max_price' => isset($request->max_price) ? toValidPrice($request->max_price) : MAXPRICE
             ],
             'square' => [
-                'square_min' => isset($request->square_min) ? (int)$request->square_min : MINSQUARE,
-                'square_max' => isset($request->square_max) ? (int)$request->square_max : MAXSQUARE
+                'square_min' => isset($request->square_min) ? toValidPrice($request->square_min) : MINSQUARE,
+                'square_max' => isset($request->square_max) ? toValidPrice($request->square_max) : MAXSQUARE
             ],
             'sortBy' => $request->sortBy
         ];

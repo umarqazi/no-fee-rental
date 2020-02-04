@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Services\FeatureListingService;
 use Illuminate\Http\Request;
 
+/**
+ * Class FeaturedListingController
+ * @package App\Http\Controllers\Admin
+ */
 class FeaturedListingController extends Controller {
 
 	/**

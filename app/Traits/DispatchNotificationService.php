@@ -18,7 +18,7 @@ trait DispatchNotificationService
     /**
      * @var object
      */
-    private static $data;
+    private static $data = null;
 
     /**
      * // not required
@@ -65,11 +65,14 @@ trait DispatchNotificationService
      */
     public static function LISTINGFEATUREAPPROVED($data)
     {
-        self::__setParams($data);
-        self::$data->view = 'listing-feature-approved';
+        self::$data = toObject(self::$data);
+        self::$data->view = 'featured_listing_approved';
+        self::$data->via = 'info';
+        self::$data->to = $data->agent->id;
+        self::$data->toEmail = $data->agent->email;
         self::$data->subject = 'Featured Listing Request Approved';
         self::$data->message = 'Your Request to make this listing featured has been approved.';
-        self::$data->url = route('listing.detail', self::$data->data->data->id);
+        self::$data->url = route('listing.detail', $data->id);
         self::send();
     }
 
@@ -78,13 +81,13 @@ trait DispatchNotificationService
      */
     public static function USERSIGNUP($data)
     {
-        self::__setParams($data);
+        self::$data = toObject(self::$data);
         self::$data->via = 'info';
         self::$data->view = 'email_confirmation';
         self::$data->subject = 'Email Confirmation';
-        self::$data->message = 'Email confirmation request';
-        self::$data->url = route('user.confirmEmail', self::$data->data->data->remember_token);
-        self::send();
+        self::$data->toEmail = $data->email;
+        self::$data->url = route('user.confirmEmail', $data->remember_token);
+        self::__sendOnlyEmail();
     }
 
     /**
@@ -92,13 +95,14 @@ trait DispatchNotificationService
      */
     public static function ADDUSERBYADMIN($data)
     {
-        self::__setParams($data);
+        self::$data = toObject(self::$data);
         self::$data->via  = 'info';
         self::$data->view = 'add_user_by_admin';
         self::$data->subject = 'Account Created';
-        self::$data->message = 'New account created';
-        self::$data->url = route('user.change_password', self::$data->data->data->remember_token);
-        self::send();
+        self::$data->toEmail = $data->email;
+        self::$data->type = userTypeString($data->user_type);
+        self::$data->url = route($data->user_type == AGENT ? 'agent.signup_form' : 'user.change_password', $data->remember_token);
+        self::__sendOnlyEmail();
     }
 
     /**
@@ -106,13 +110,13 @@ trait DispatchNotificationService
      */
     public static function RESETPASSWORD($data)
     {
-        self::__setParams($data);
+        self::$data = toObject(self::$data);
         self::$data->view = 'reset_password';
-        self::$data->via = 'info';
+        self::$data->via = 'support';
+        self::$data->toEmail = $data->email;
         self::$data->subject = 'Password Reset';
-        self::$data->message = 'Password reset request';
-        self::$data->url = route('recover.password', self::$data->data->data->token);
-        self::send();
+        self::$data->url = route('recover.password', $data->token);
+        self::__sendOnlyEmail();
     }
 
     /**
@@ -180,9 +184,13 @@ trait DispatchNotificationService
      */
     public static function PLANPURCHASED($data)
     {
-        self::__setParams($data);
-        self::$data->view = 'plan-purchased';
-        self::$data->subject = 'New Credit Plan Purchased';
+        self::$data = toObject(self::$data);
+        self::$data->view = 'plan_purchased';
+        self::$data->via = 'info';
+        self::$data->to   = $data->agent->id;
+        self::$data->toEmail = $data->agent->email;
+        self::$data->plan    = currentPlan($data->credit_plan);
+        self::$data->subject = 'New Plan Purchased';
         self::$data->message = 'Credit plan has been purchased';
         self::$data->url = route('agent.creditPlan');
         self::send();
@@ -193,9 +201,13 @@ trait DispatchNotificationService
      */
     public static function PLANEXPIRED($data)
     {
-        self::__setParams($data);
-        self::$data->view = 'plan-expired';
+        self::$data = toObject(self::$data);
+        self::$data->view = 'plan_expired';
+        self::$data->via = 'info';
         self::$data->subject = 'Plan Expired';
+        self::$data->plan = currentPlan($data->plan->credit_plan);
+        self::$data->to = $data->id;
+        self::$data->toEmail = $data->email;
         self::$data->message = 'Credit plan has been expired';
         self::$data->url = route('agent.creditPlan');
         self::send();
@@ -204,13 +216,18 @@ trait DispatchNotificationService
     /**
      * @param $data
      */
-    public static function MEETINGREQUEST($data)
+    public static function APPOINTMENTREQUEST($data)
     {
-        self::__setParams($data);
-        self::$data->view = 'meeting-request';
-        self::$data->subject = 'Meeting Request';
+        self::$data = toObject(self::$data);
+        self::$data->view = 'appointment_request';
+        self::$data->subject = 'Appointment Request';
+        self::$data->via = 'info';
+        self::$data->toEmail = $data->listing->agent->email;
+        self::$data->listing = $data->listing;
+        self::$data->appointment = $data;
+        self::$data->to = $data->listing->agent->id;
         self::$data->message = 'New Meeting Request Received';
-        self::$data->url = false;
+        self::$data->url = route($data->listing->agent->user_type == AGENT ? 'agent.conversations' : 'owner.conversations');
         self::send();
     }
 
@@ -332,35 +349,16 @@ trait DispatchNotificationService
     }
 
     /**
-     * @return bool
-     */
-    private static function send()
-    {
-        return dispatchNotification(self::$data);
-    }
-
-    /**
      * @param $data
-     * @param bool $hasNotification
      */
-    private static function __setParams($data, $hasNotification = false)
+    private static function __setParams($data)
     {
-        $param = [];
-        if($hasNotification) {
 
-        }
-        $toAgent = is_int($data->to) ? agents($data->to ) : (object)['email' => $data->to];
-        $fromAgent = is_int($data->from) ? agents($data->from ) : (object)['email' => $data->from];
+
         self::$data = toObject([
-            'to' => $data->to,
-            'from' => $data->from,
-            'toEmail' => $toAgent->email,
-            'fromEmail' => $fromAgent->email,
+            'toEmail' => $data->to->email,
+            'fromEmail' => $data->from->email,
             'data' => $data,
-            'user' => toObject([
-                'to' => $toAgent,
-                'from' => $fromAgent,
-            ])
         ]);
 
     }
@@ -368,7 +366,14 @@ trait DispatchNotificationService
     /**
      * @return \Illuminate\Foundation\Bus\PendingDispatch
      */
-    private static function __onlyEmail() {
+    private static function __sendOnlyEmail() {
         return dispatchEmailQueue(self::$data);
+    }
+
+    /**
+     * @return bool
+     */
+    private static function send() {
+        return dispatchNotification(self::$data);
     }
 }

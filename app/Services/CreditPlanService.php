@@ -22,6 +22,8 @@ use Illuminate\Support\Facades\DB;
  */
 class CreditPlanService extends PaymentService {
 
+    use DispatchNotificationService;
+
     /**
      * @var ListingRepo
      */
@@ -85,8 +87,9 @@ class CreditPlanService extends PaymentService {
 
         } else {
 
-            if($this->__makeCreditPlan($this->currentPlan)) {
+            if($plan = $this->__makeCreditPlan($this->currentPlan)) {
                 if($this->__makePayment($this->request)) {
+                    DispatchNotificationService::PLANPURCHASED($plan);
                     DB::commit();
                     return 'Plan purchased Successfully';
                 }
@@ -326,11 +329,7 @@ class CreditPlanService extends PaymentService {
      * @return bool
      */
     private function __sendMail() {
-        DispatchNotificationService::PLANEXPIRED(toObject([
-            'from' => mailToAdmin(),
-            'to'   => myId(),
-            'data' => null
-        ]));
+        DispatchNotificationService::PLANEXPIRED(mySelf());
 
         return true;
     }

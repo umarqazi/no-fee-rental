@@ -12,6 +12,10 @@ namespace App\Repository;
 
 use App\ListingConversation;
 
+/**
+ * Class ListingConversationRepo
+ * @package App\Repository
+ */
 class ListingConversationRepo extends BaseRepo {
 
     /**

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Agent;
 
+use App\Services\InvitationService;
 use App\Services\MemberService;
 use App\Services\UserService;
 use Illuminate\Http\Request;
@@ -16,7 +17,7 @@ class MemberController extends Controller {
     /**
      * @var MemberService
      */
-    private $userService;
+    private $invitationService;
 
     /**
      * @var MemberService
@@ -28,7 +29,7 @@ class MemberController extends Controller {
      */
     public function __construct() {
         $this->memberService = new MemberService();
-        $this->userService = new UserService();
+        $this->invitationService = new InvitationService();
     }
 
     /**
@@ -61,7 +62,7 @@ class MemberController extends Controller {
             return sendResponse($request, $invite, 'Invitation cannot be sent to yourself.');
         }
         else {
-            $invite = $this->userService->sendInvite($request);
+            $invite = $this->invitationService->invite($request);
             return sendResponse($request, $invite, 'Invitation has been sent.');
         }
     }
@@ -73,8 +74,8 @@ class MemberController extends Controller {
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
     public function acceptInvitation($token) {
-        $authenticate_token = $this->userService->getAgentToken($token)->first();
-       $res  = $this->userService->addMember($authenticate_token);
+        $authenticate_token = $this->invitationService->getAgentToken($token)->first();
+       $res  = $this->invitationService->addMember($authenticate_token);
        if($res){
            return redirect(route('web.index'))
                ->with(['message' => 'You have been added to Team', 'alert_type' => 'success']);

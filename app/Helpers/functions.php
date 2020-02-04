@@ -58,6 +58,27 @@ function mailToAdmin() {
 }
 
 /**
+ * @param $type
+ * @return string
+ */
+function userTypeString($type) {
+    switch ($type) {
+        case ADMIN:
+            return 'Admin';
+            break;
+        case OWNER:
+            return 'Owner';
+            break;
+        case AGENT:
+            return 'Agent';
+            break;
+        case RENTER:
+            return 'Renter';
+            break;
+    }
+}
+
+/**
  * @param $data
  * @return mixed
  */
@@ -67,7 +88,7 @@ function sendViaSupport($data) {
         'password' => config('mail.support.password'),
     ];
     new \App\Services\MailService($credentials);
-    return dispatchMail($data->to, $data);
+    return dispatchMail($data->toEmail, $data);
 }
 
 /**
@@ -81,7 +102,7 @@ function sendViaInfo($data) {
     ];
 
     new \App\Services\MailService($credentials);
-    return dispatchMail($data->to, $data);
+    return dispatchMail($data->toEmail, $data);
 }
 
 /**

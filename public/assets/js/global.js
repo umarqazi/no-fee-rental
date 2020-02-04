@@ -401,12 +401,11 @@ $(() => {
         let rent = info.find('p:first').text();
         let address = info.find('p:last').text();
         data = data.split(',');
-        let bed = parseInt(data[0]); let bath = parseInt(data[1]);
         let modal = $('body').find('#check-availability');
         modal.find('.row > div > img').attr('src', img);
         modal.find('#address').text(address);
-        modal.find('.bedroms-baths-text > span:first').text(bed);
-        modal.find('.bedroms-baths-text > span:last').text(bath);
+        modal.find('.bedroms-baths-text > span:first').text(data[0]);
+        modal.find('.bedroms-baths-text > span:last').text(data[1]);
         modal.find('.row > div:eq(1) > small').text(rent);
         modal.find('input[name=listing_id]').val($(this).attr('list_id'));
         modal.find('input[name=to]').val($(this).attr('to'));
@@ -439,6 +438,6 @@ $(() => {
         $('#login').modal('show');
     });
 
-    // $body.find('.money-mask').maskMoney({prefix:'$ ', allowNegative: true, thousands:',', decimal:',', affixesStay: true});
+    $body.find('input[name=phone_number]').mask('(000) 000-000');
 
 });
