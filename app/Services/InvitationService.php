@@ -115,7 +115,7 @@ class InvitationService {
      */
     private function __create($request) {
         $invitation = $this->__validateForm($request);
-//        $this->__sendInvitationEmail($invitation);
+        $this->__sendInvitationEmail($invitation);
         return $this->invitationRepo->create($invitation->toArray());
     }
 

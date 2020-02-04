@@ -28,7 +28,7 @@ class UserController extends Controller {
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
 	public function create(Request $request) {
-		$user = $this->service->create($request);
+		$user = $this->service->createByAdmin($request);
         return sendResponse($request, $user, 'User has been added');
 	}
 

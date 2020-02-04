@@ -38,6 +38,14 @@ class AuthService {
     }
 
     /**
+     * @param $id
+     * @return mixed
+     */
+    public function loginUsingId($id) {
+        return $this->guard()->loginUsingId($id);
+    }
+
+    /**
      * @param Request $request
      *
      * @return JsonResponse|\Illuminate\Http\Response|Response|void
@@ -45,7 +53,6 @@ class AuthService {
      */
     public function login(Request $request) {
         $this->validateLogin($request);
-
         // If the class is using the ThrottlesLogins trait, we can automatically throttle
         // the login attempts for this application. We'll key this by the username and
         // the IP address of the client making these requests into this application.

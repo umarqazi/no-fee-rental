@@ -3,10 +3,10 @@
 @section('content')
     <div class="Notification-wrapper">
         <div class="logo-img">
-            <a href="javascript:void(0)"><img src="{{ asset('assets/images/logo.png') }}" alt="logo"></a>
+            <a href="javascript:void(0)"><img src="{{ Storage::url('assets/images/logo.png') }}" alt="logo"></a>
         </div>
         <div class="notification-inner-content">
-            <h2>PLAN PURCHASED</h2>
+            <h2>{{ strtoupper($data->plan) }} PURCHASED</h2>
             <p><b>Congratulations!!</b> on becoming a part of <a href="javascript:void(0);">Nofeerentalsnyc.com.</a></p>
             <div class="action-buttons">
                 <p><b>Regards,</b></p>

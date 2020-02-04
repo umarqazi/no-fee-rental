@@ -3,11 +3,11 @@
 @section('content')
     <div class="Notification-wrapper">
         <div class="logo-img">
-            <a href="javascript:void(0)"><img src="{{ asset('assets/images/logo.png') }}" alt="logo"></a>
+            <a href="javascript:void(0)"><img src="{{ Storage::url('assets/images/logo.png') }}" alt="logo"></a>
         </div>
         <div class="notification-inner-content">
-            <h2>PLAN EXPIRED</h2>
-            <p>We're Sorry to see you go! Your subscription plan has expired. To reactivate please log in HERE.
+            <h2>{{ strtoupper($data->plan) }} EXPIRED</h2>
+            <p>We're Sorry to see you go! Your subscription plan has expired. To reactivate please log in <a href="{{ route('web.index') }}">HERE</a>.
             Go to advertise with us at the bottom of the home page and pick the plan that best suits your needs.</p>
             <div class="action-buttons">
                 <p><b>Regards,</b></p>

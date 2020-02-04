@@ -9,12 +9,15 @@
 namespace App\Http\Controllers;
 
 use App\Services\UserService;
-use App\Traits\DispatchNotificationService;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
+/**
+ * Class UserController
+ * @package App\Http\Controllers
+ */
 class UserController extends Controller {
 
     /**
@@ -27,22 +30,6 @@ class UserController extends Controller {
      */
 	public function __construct() {
 		$this->userService = new UserService();
-	}
-
-	/**
-	 * @param Request $request
-	 *
-	 * @return RedirectResponse
-	 */
-	public function editProfile(Request $request) {
-		$update_data = $this->userService->updateProfile($request);
-		if ($request->hasFile('profile_image')) {
-			$update_data = $this->userService->updateProfileImage($request->file('profile_image'), myId(), $request->old_profile ?? null);
-		}
-
-		return $update_data
-		? success('Profile has been updated successfully')
-		: error('Something went wrong');
 	}
 
     /**
@@ -62,9 +49,6 @@ class UserController extends Controller {
 	 */
 	public function updatePassword(Request $request, $token) {
 		if ($user = $this->userService->validateEncodedToken($token)) {
-            if ($user->email_verified_at == null){
-                $this->confirmEmail($token) ;
-            }
 			$request->id = $user->id;
 			$this->userService->changePassword($request);
             return redirect('/')->with(['message' => 'Password has been updated', 'alert_type' => 'success']);
@@ -80,7 +64,7 @@ class UserController extends Controller {
      */
 	public function invitedAgentSignup(Request $request) {
 		$res = $this->userService->invitedAgentSignup($request);
-		return sendResponse($request, $res, 'We send an email to your account. Kindly verify your email', '/');
+		return sendResponse($request, $res, 'Account created successfully.', '/');
 	}
 
     /**
@@ -89,9 +73,8 @@ class UserController extends Controller {
      * @return Factory|RedirectResponse|View
      */
 	public function invitedAgentSignupForm($token) {
-		$authenticate_token = $this->userService->getAgentToken($token)->first();
-		if (!empty($authenticate_token) && $authenticate_token->token == $token) {
-			return view('invited_agent_signup', compact('authenticate_token'));
+		if ($agent = $this->userService->validateEncodedToken($token)) {
+			return view('invited_agent_signup', compact('agent'));
 		}
 
 		return error('Invalid token request cannot be processed.');
@@ -117,17 +100,28 @@ class UserController extends Controller {
         return sendResponse($request, $response, 'We send an email to your account. Kindly verify your email');
     }
 
-	/**
-	 * @param $token
-	 *
-	 * @return RedirectResponse
-	 */
-	public function confirmEmail($token) {
-		if ($this->userService->verifyEmail($token)) {
-			return success('Email has been verified.', '/');
+    /**
+     * @param Request $request
+     * @param $token
+     * @return RedirectResponse
+     */
+	public function confirmEmail(Request $request, $token) {
+	    dd($request->all(), $token);
+		if ($this->userService->verifyEmail($request, $token)) {
+			return isAgent()
+                ? redirect(route('web.advertise'))->with(
+                    [
+                        'alert_type' => 'success',
+                        'message' => 'Your email has been verified. Kindly choose a plan to post listings.'
+                    ])
+                : redirect(route('web.index'))->with(
+                    [
+                        'alert_type' => 'success',
+                        'message' => 'Your email has been verified.'
+                    ]);
 		}
 
-		return error('Something went wrong');
+		return error('Your verification token has been expired.');
 	}
 
     /**

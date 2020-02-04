@@ -8,4 +8,3 @@
     	</div>
     </section>
 @endsection
-

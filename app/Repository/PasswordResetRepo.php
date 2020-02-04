@@ -28,13 +28,4 @@ class PasswordResetRepo extends BaseRepo {
     public function validateToken($token) {
         return $this->find(['token' => $token])->first();
     }
-
-    /**
-     * @param $token
-     *
-     * @return mixed
-     */
-    public function existingRequest($token) {
-        return $this->find(['token' => $token])->first();
-    }
 }

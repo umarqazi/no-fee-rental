@@ -12,7 +12,7 @@ namespace App\Forms;
  * Class AgentForm
  * @package App\Forms
  */
-class AgentForm extends BaseForm {
+class SignUpForm extends BaseForm {
 
     /**
      * @var string
@@ -23,11 +23,6 @@ class AgentForm extends BaseForm {
      * @var string
      */
     public $company;
-
-    /**
-     * @var string
-     */
-    public $address;
 
     /**
      * @var string
@@ -60,19 +55,30 @@ class AgentForm extends BaseForm {
     public $userType;
 
     /**
+     * @var string
+     */
+    public $emailVerified;
+
+    /**
+     * @var string
+     */
+    public $remember_token;
+
+    /**
      * @return array
      */
     public function toArray() {
         return [
-            'first_name'     => $this->firstName,
-            'last_name'      => $this->lastName,
-            'email'          => $this->email,
-            'user_type'      => $this->userType,
-            'phone_number'   => $this->phoneNumber,
-            'password'       => $this->password,
-            'address'        => $this->address,
-            'company_id'     => $this->company,
-            'license_number' => $this->license
+            'first_name'        => $this->firstName,
+            'last_name'         => $this->lastName,
+            'email'             => $this->email,
+            'user_type'         => $this->userType,
+            'phone_number'      => $this->phoneNumber,
+            'password'          => $this->password,
+            'company_id'        => $this->company,
+            'license_number'    => $this->license,
+            'email_verified_at' => $this->emailVerified,
+            'remember_token'    => $this->remember_token
         ];
     }
 
@@ -85,10 +91,8 @@ class AgentForm extends BaseForm {
             'last_name'      => 'required',
             'email'          => 'required|email',
             'phone_number'   => 'required',
-            'password'       => 'required|min:9|confirmed',
-            'address'        => 'required',
-            'company'        => 'required',
-            'license_number' => 'required'
+            'user_type'      => 'required',
+            'password'       => 'required|min:9',
         ];
     }
 }

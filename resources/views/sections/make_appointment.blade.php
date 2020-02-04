@@ -59,7 +59,7 @@
         {{--<div class="not-allowed-appointment"> No Appointment request exists for now.</div>--}}
     {{--@endif--}}
 @else
-    <div class="not-allowed-appointment"> {{ ucfirst(whoAmI()) }} are not allowed to make appointment request.</div>
+    <div class="not-allowed-appointment"> {{ ucfirst(whoAmI()) }}'s are not allowed to make appointment request.</div>
 @endif
 
 <script>

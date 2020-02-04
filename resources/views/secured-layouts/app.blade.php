@@ -36,6 +36,7 @@
     @endif
 	{!! HTML::script('assets/js/vendor/jquery.validate.min.js') !!}
     {!! HTML::script('assets/js/vendor/jquery-ui.min.js') !!}
+	{!! HTML::script('https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js') !!}
 	{!! HTML::script('assets/js/vendor/lightslider.js') !!}
 	{!! HTML::script('assets/js/vendor/jquery.maskMoney.js') !!}
 	{!! HTML::script('assets/js/vendor/pignose.calendar.full.min.js') !!}

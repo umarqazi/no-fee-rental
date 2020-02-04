@@ -4,6 +4,10 @@ namespace App\Forms\User;
 
 use App\Forms\BaseForm;
 
+/**
+ * Class ChangePasswordForm
+ * @package App\Forms\User
+ */
 class ChangePasswordForm extends BaseForm {
 
 	/**

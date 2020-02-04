@@ -88,6 +88,7 @@ class CreateForm extends BaseForm
             'license_number' => $this->license_number,
             'remember_token' => $this->remember_token,
             'address' => $this->address,
+            'company_id' => $this->company ?? null
         ];
     }
 
@@ -99,7 +100,7 @@ class CreateForm extends BaseForm
         return [
             'first_name' => 'required|string',
             'last_name' => 'required|string',
-            'email' => 'required|email|unique:users',
+            'email' => 'required|email',
             'phone_number' => 'required|max:16',
             'password' => 'required|string|confirmed|min:8',
             'user_type' => 'required|integer',

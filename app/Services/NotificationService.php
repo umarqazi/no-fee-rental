@@ -57,7 +57,7 @@ class NotificationService extends ExclusiveSettingService {
      * @return bool
      */
     public function send() {
-//        $notification = $this->__create();
+        $notification = $this->__create();
         $settings = $this->__receiverExclusiveSettings($this->data->to);
 
         if ( empty( $settings ) ) {

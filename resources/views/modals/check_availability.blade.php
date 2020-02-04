@@ -12,7 +12,7 @@
                         <strong id="availability-rent"></strong> <small>For Rental</small>
                         <div class="after-border"></div>
                         <div class="bedroms-baths-text">
-                            <i class="fas fa-home"></i> <span id="availability-beds"></span> Bedrooms, <span id="availability-baths"></span> Baths
+                            <i class="fas fa-home"></i> <span id="availability-beds"></span>, <span id="availability-baths"></span>
                         </div>
                     </div>
                 </div>
@@ -45,7 +45,7 @@
                 {!! Form::close() !!}
                 </div>
                 @else
-                    You are not allowed to send request.
+                    {{ ucfirst(whoAmI()) }}'s are not allowed to send request.
                 @endif
             </div>
         </div>

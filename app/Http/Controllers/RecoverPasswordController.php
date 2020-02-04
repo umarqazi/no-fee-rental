@@ -4,23 +4,23 @@ namespace App\Http\Controllers;
 
 use App\Services\RecoverPasswordService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cookie;
-use Illuminate\Support\Facades\Session;
 
+/**
+ * Class RecoverPasswordController
+ * @package App\Http\Controllers
+ */
 class RecoverPasswordController extends Controller
 {
     /**
      * @var RecoverPasswordService
      */
-    private $service;
+    private $passwordRecoveryService;
 
     /**
      * RecoverPasswordController constructor.
-     *
-     * @param RecoverPasswordService $service
      */
-    public function __construct(RecoverPasswordService $service) {
-        $this->service = $service;
+    public function __construct() {
+        $this->passwordRecoveryService = new RecoverPasswordService();
         $this->middleware('guest');
     }
 
@@ -28,16 +28,19 @@ class RecoverPasswordController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function resetForm() {
-        return $this->service->linkRequestForm();
+        return $this->passwordRecoveryService->linkRequestForm();
     }
 
     /**
-     * @param Request $request
-     *
+     * @param $token
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function recoverForm(Request $request, $token) {
-        return $this->service->resetForm($token);
+    public function recoverForm($token) {
+        if($this->passwordRecoveryService->resetForm($token)) {
+            return view('auth.passwords.reset')->with('token', $token);
+        }
+
+        return error('You token has been expired.');
     }
 
     /**
@@ -46,7 +49,7 @@ class RecoverPasswordController extends Controller
      * @return bool
      */
     public function sendRequest(Request $request) {
-        $res = $this->service->sendEmail($request);
+        $res = $this->passwordRecoveryService->sendEmail($request);
         return sendResponse($request, $res,
             'We Send an Email to your account', null, 'invalid Email');
     }
@@ -57,7 +60,7 @@ class RecoverPasswordController extends Controller
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
     public function recover(Request $request) {
-        $res = $this->service->recover($request);
+        $res = $this->passwordRecoveryService->recover($request);
         return sendResponse($request, $res,
             'Your password has been reset.', null, 'Invalid Email');
     }

@@ -6,15 +6,10 @@
     <div class="logo-info-wrapper">
         <h3>Create Account</h3>
     </div>
-    {!! Form::open(['url' => route('agent.signup'), 'method' => 'post','id' => 'invited_agent_signup_form' ]) !!}
+    {!! Form::model($agent, ['url' => route('agent.signup'), 'method' => 'post','id' => 'invited_agent_signup_form' ]) !!}
     {!! Form::hidden('user_type', AGENT) !!}
-    {!! Form::hidden('token', $authenticate_token->token) !!}
+    {!! Form::hidden('token', $agent->remember_token) !!}
     <div class="row">
-        <div class="col-sm-12 mb-3">
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $errors->first('user_type') }}</strong>
-            </span>
-        </div>
         <div class="col-sm-12 ">
             <div class="row align-items-center license_num">
                 <div class="col-sm-6 ">
@@ -49,7 +44,7 @@
         </div>
         <div class="col-sm-6">
             <div class="form-group">
-                {!! Form::text('email', $authenticate_token->email, ['class'=>'input-style', 'readonly', 'placeholder'=>'Email']) !!}
+                {!! Form::text('email', null, ['class'=>'input-style', 'readonly', 'placeholder'=>'Email']) !!}
                 @if ($errors->has('email'))
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $errors->first('email') }}</strong>

@@ -2,6 +2,13 @@
 @section('title', 'Account Created')
 @section('content')
     <style>
+        .Notification-wrapper {
+            background-color: #fff;
+            display: inline-block;
+            width: 730px;
+            padding: 45px 45px 10px 45px;
+            border-bottom: 2px solid #ddd;
+        }
         .notification-inner-content h2{
             text-transform: uppercase;
         }
@@ -51,9 +58,9 @@
             }
         }
     </style>
-    <div class="Notification-wrapper">
+    <div class="Notification-wrapper" style="width: 730px;">
         <div class="logo-img">
-            <a href="javascript:void(0)"><img src="{{ asset('assets/images/logo.png') }}" alt="logo"></a>
+            <a href="javascript:void(0)"><img src="{{ Storage::url('assets/images/logo.png') }}" alt="logo"></a>
         </div>
         <div class="notification-inner-content">
             <h2>APPOINTMENT REQUEST</h2>
@@ -61,32 +68,30 @@
         <div class="showing-request">
             <p style="color: #808080; font-size: 16px;">You have a showing request!</p>
             <div class="see-clients-bg" style="background-color: #edeff0; padding: 10px">
-                <a href="javascript:void(0)" class="btn-default" style="text-decoration: none">See Clients Details !</a>
-                <p style="margin-bottom: 0;"><a href="#" style="color: #333">See rental details and accept or decline
-                        this request</a> </p>
+                <a href="javascript:void(0)" class="btn-default" style="text-decoration: none; background: #f36f21;color: #fff;text-transform: initial;font-size: 14px;
+            padding: 0px 30px;border-radius: 5px;line-height: 45px;display: inline-block;border: none;outline: none !important; cursor: pointer !important;">See Clients Details !</a>
+                <p style="margin-bottom: 0;"><a href="{{ $data->url }}" style="color: #333">See rental details and accept or decline this request</a> </p>
             </div>
         </div>
         <div class="schedule-dateTime">
             <table style="width:100%; margin-top: 15px;">
                 <tr>
                     <td><b>Requested Date:</b></td>
-                    <td>Thursday june, 26</td>
+                    <td>{{ $data->appointment->appointment_date->format('d M, Y') }}</td>
                 </tr>
                 <tr>
                     <td><b>Requested Time:</b></td>
-                    <td>10:30 AM</td>
+                    <td>{{ carbon($data->appointment->appointment_time)->format('h:i a') }}</td>
                 </tr>
                 <tr>
-                    <td><b>Listiing:</b></td>
-                    <td>401 E 34TH ST, Manhattan<br/><span style="font-size: 12px; color: #808080">$3000, 2BR, 1BA</span></td>
-                </tr>
-                <tr>
-                    <td><b>Renter move date:</b></td>
-                    <td>07/15/2014</td>
-                </tr>
-                <tr>
-                    <td><b>Renter income=40x rent?</b></td>
-                    <td>true</td>
+                    <td><b>Listing:</b></td>
+                    <td>{{ sprintf('%s, %s', is_exclusive($data->listing), $data->listing->neighborhood->name) }}<br/>
+                        <span style="font-size: 12px; color: #808080">
+                            ${{ number_format($data->listing->rent) }},
+                            {{ $data->listing->bedrooms < 1 ? 'Studio' : str_formatting($data->listing->bedrooms, 'Bed') }},
+                            {{ str_formatting($data->listing->baths, 'Bath') }}
+                        </span>
+                    </td>
                 </tr>
             </table>
         </div>

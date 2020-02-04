@@ -162,11 +162,10 @@ class ListingConversationService extends MemberService {
      * @return bool|mixed
      */
     private function __createAppointmentConversation($request) {
-        $listing_detail = listing_detail($request->listing_id);
-        $appointment = $this->__isNewAppointment($request);
-        if(!$appointment) {
+        if(!$this->__isNewAppointment($request)) {
             $appointment = $this->__validateAppointmentForm( $request );
             $appointment = $this->listingConversationRepo->create($appointment->toArray());
+            DispatchNotificationService::APPOINTMENTREQUEST($appointment);
             return $appointment;
         }
 
