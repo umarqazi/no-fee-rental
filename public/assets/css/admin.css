@@ -2145,6 +2145,9 @@ header .agent-avtar .avtar:hover div ul {
         display: block;
         text-align: center;
     }
+    .main-wrapper .grid-view-wrapper .listing-thumb .action-btn-reports{
+        display: flex;
+    }
     .main-wrapper .grid-view-wrapper .listing-thumb .actions-btns .border-btn {
         margin-top: 15px;
     }
@@ -2289,6 +2292,9 @@ header .agent-avtar .avtar:hover div ul {
         display: block;
         text-align: center;
     }
+    .main-wrapper .grid-view-wrapper .listing-thumb .action-btn-reports {
+        display: flex;
+    }
     .main-wrapper .grid-view-wrapper .listing-thumb .actions-btns .border-btn{
         margin-top: 10px;
     }
@@ -2382,6 +2388,42 @@ header .agent-avtar .avtar:hover div ul {
     display: inline-block;
     margin-right: 5px;
 }
+.see-reports{
+    text-align: right;
+    margin-top: 20px;
+    padding-right: 10px;
+    cursor: pointer;
+    text-decoration: underline;
+    color: #e77817;
+}
+#seeReports .modal-header h4{
+    color: #213970;
+    font-size: 20px;
+    font-weight: 700;
+}
+#seeReports .modal-header .modal-title p{
+    font-size: 14px;
+    color: #000000;
+    margin-bottom: 0px;
+    font-weight: 500;
+}
+#seeReports .form-group p{
+    display: flex;
+}
+#seeReports .form-group p span{
+    margin-left: 5px
+}
+#seeReports strong{
+    font-weight: 600;
+    color: #333;
+}
+#seeReports textarea{
+    width: 100%;
+    min-height:70px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
 .info .badges .status {
     position: relative !important;
     top: 0 !important;
@@ -2391,15 +2433,23 @@ header .agent-avtar .avtar:hover div ul {
     position: absolute;
     top: 15px;
     right: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    max-width: 55%;
 }
 .grid-badges span{
     display: inline-block;
-    margin-right: 5px;
 }
+.info .grid-badges span:last-child, .info .grid-badges span:nth-child(2){
+    margin-left: 5px !important;
+}
+
 .info .grid-badges .status {
     position: relative !important;
     top: 0 !important;
     right: 0 !important;
+    margin-bottom: 5px;
 }
 @media (min-width: 576px) {
     #building-popup .modal-dialog {
