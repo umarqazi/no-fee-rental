@@ -41,6 +41,12 @@
                     <a href="#">Recent Searches<i class="fa fa-angle-down"></i></a>
                     <div class="dropDown">
                         <ul class="neighborhoods_amenities">
+                            <li class="search-loader">
+                                <div class="boxx text-center">
+                                    <p style="display: inline-block;vertical-align: middle;margin-bottom: 0;margin-right: 10px;"></p>
+                                    <div class="loaderr-13"></div>
+                                </div>
+                            </li>
                        </ul>
 
                     </div>

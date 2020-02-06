@@ -252,11 +252,11 @@ class ListingService extends BuildingService {
     public function approve( $id ) {
         if ( $this->listingRepo->update( $id, [ 'visibility' => 1 ] ) ) {
             $list = $this->listingRepo->find( [ 'id' => $id ] )->with( 'agent' )->first();
-            DispatchNotificationService::LISTINGAPPROVED(toObject([
-                'data' => $list,
-                'from' => myId(),
-                'to'   => $list->agent->id,
-            ]));
+//            DispatchNotificationService::LISTINGAPPROVED(toObject([
+//                'data' => $list,
+//                'from' => myId(),
+//                'to'   => $list->agent->id,
+//            ]));
 
 //            calendarEvent( [
 //                'color' => UPDATEOPENHOUSECOLOR,
@@ -881,19 +881,14 @@ class ListingService extends BuildingService {
 
     /**
      * @param $data
-     * @param $features
-     *
      * @return PendingDispatch
      */
-    private function __manageSaveSearch( $data, $features ) {
+    private function __manageSaveSearch( $data ) {
         $array = [
-            'list_id'      => $data->id,
             'baths'        => $data->baths,
             'beds'         => $data->bedrooms,
-            'neighborhood' => $data->neighborhood_id,
-            'squareRange'  => $data->square_feet,
-            'priceRange'   => $data->square_feet,
-            'features'     => $features,
+            'price'        => $data->rent,
+            'neighborhood' => $data->neighborhood->name,
             'sender'       => isAdmin() ? $this->__sender( $data->user_id ) : mySelf()
         ];
 

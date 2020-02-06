@@ -39,3 +39,4 @@ Route::get('/favourite-listings', 'Renter\ListingController@wishList')->name('re
 // Save Search Routes
 Route::get('/save-searches', 'Renter\SaveSearchController@index')->name('renter.viewSaveSearch');
 Route::get('/delete-save-search/{id}', 'Renter\SaveSearchController@remove')->name('renter.removeSaveSearch');
+Route::post('/add-search', 'Renter\SaveSearchController@create');

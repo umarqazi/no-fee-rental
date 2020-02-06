@@ -33,25 +33,24 @@
                         <div class="search-list">
                             <div>
                                 <div class="property-info">
-                                    {{--                                <img src="assets/images/listing-img.jpg" alt="">--}}
+                                    {{-- <img src="assets/images/listing-img.jpg" alt="">--}}
                                     <div class="info">
-                                        <p><strong>Beds: {{ !empty($criteria->beds) ? implode(',', $criteria->beds) : 0 }}</strong></p>
-                                        <p><strong>Baths: {{ !empty($criteria->baths) ? implode(',', $criteria->baths) : 0 }}</strong></p>
-                                        <p><strong>Neighborhood: {!! !empty($criteria->neighborhood)
+                                        <p><strong>Beds: {{ !empty($criteria->beds) ? implode(',', $criteria->beds) : 'Any' }}</strong></p>
+                                        <p><strong>Baths: {{ !empty($criteria->baths) ? implode(',', $criteria->baths) : 'Any' }}</strong></p>
+                                        <p><strong>Neighborhood: {!! !empty($criteria->neighborhoods)
                                             ? "<a href='javascript:void(0);'
-                                                title='".implode(', ', $criteria->neighborhood)."'>".
-                                                str_formatting(count($criteria->neighborhood), 'Neighborhood')
+                                                title='".implode(', ', $criteria->neighborhoods)."'>".
+                                                str_formatting(count($criteria->neighborhoods), 'Neighborhood')
                                                 ."</a>"
-                                            : 'N/A' !!}</strong></p>
-                                        <p><strong>Apartment Features: {{ !empty($criteria->features) ? apartmentFeatures($criteria->features) : 'N/A' }}</strong></p>
+                                            : 'N/A' !!}</strong>
+                                        </p>
                                     </div>
                                 </div>
                             </div>
                             <div>
-                                <p>Min Price: ${{ number_format($criteria->price['min_price']) }}</p>
-                                <p>Max Price: ${{ number_format($criteria->price['max_price']) }}</p>
-                                <p>Min Square: {{ str_formatting(number_format($criteria->square['square_min']), 'ft') }}</p>
-                                <p>Max Square: {{ str_formatting(number_format($criteria->square['square_max']), 'ft') }}</p>
+                                <p>Price: </p>
+                                <p>Min Price: ${{ number_format($criteria->min_price) }}</p>
+                                <p>Max Price: ${{ number_format($criteria->max_price) }}</p>
                             </div>
                             <div>
                                 <a href="{{ $search->url }}"><i class="fa fa-eye view-icon"></i></a>

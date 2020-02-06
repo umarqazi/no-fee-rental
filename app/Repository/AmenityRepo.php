@@ -10,6 +10,10 @@ namespace App\Repository;
 
 use App\Amenity;
 
+/**
+ * Class AmenityRepo
+ * @package App\Repository
+ */
 class AmenityRepo extends BaseRepo {
 
     /**

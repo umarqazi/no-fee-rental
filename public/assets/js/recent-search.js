@@ -10,6 +10,7 @@ let $max_price = decodedURL.searchParams.getAll('max_price');
 let $neighborhoods = decodedURL.searchParams.getAll('neighborhood[]') || [];
 
 window.onload = function() {
+    $('body').find('.search-loader').hide();
     $old_queries = JSON.parse(localStorage.getItem('search-query'));
 
     if($old_queries === null) {
@@ -18,10 +19,10 @@ window.onload = function() {
 
     $old_queries.forEach((v, i) => {
         if(v.isNew) {
-            buildNewObject();
             manageStorage(i);
+            buildNewObject();
         } else {
-            oldObject(v);
+            oldObject(v, i);
         }
     });
 };
@@ -29,12 +30,14 @@ window.onload = function() {
 /**
  *
  * @param v
+ * @param i
  */
-function oldObject(v) {
+function oldObject(v, i) {
     let obj = {};
     obj.url = v.url;
     obj.title = 'Listings';
     obj.string = obj.title;
+    obj.isSave = v.isSave;
 
     if(v.min_price !== null) {
         obj.title += ` between $${formatNumber(v.min_price)}`;
@@ -61,7 +64,7 @@ function oldObject(v) {
         obj.string += bath; obj.title += bath;
     }
 
-    pushRecentSearch(obj, false);
+    pushRecentSearch(obj, false, i);
 }
 
 /**
@@ -109,6 +112,7 @@ function manageStorage(index) {
 
     $query = {
         isNew: false,
+        isSave: false,
         min_price: $min_price,
         max_price: $max_price,
         url: window.location.href,
@@ -131,13 +135,22 @@ function manageStorage(index) {
  *
  * @param data
  * @param $prepend
+ * @param i
  */
-function pushRecentSearch(data = null, $prepend) {
+function pushRecentSearch(data = null, $prepend, i) {
     let $target = $('body').find('.neighborhoods_amenities');
     if(data === null) {
         $target.append('<li><a href="javascript:void(0);" id="empty-keywords">You have no keywords yet to search</a></li>');
     } else {
-        let html = `<li><a href="${data.url}" title="${data.title}" class="recent" data-id="1"> ${data.string}</a> <i class="far fa-star recent-star"></i> </li>`;
+        let html = null;
+
+        if(Window.Laravel.userType == 4){
+            html = `<li><a href="${data.url}" title="${data.title}" class="recent" data-id="${i}"> ${data.string}</a> 
+                    <i class="${data.isSave ? 'fa fa-star saved-star' : 'far fa-star recent-star'}"></i> </li>`;
+        } else {
+            html = `<li><a href="${data.url}" title="${data.title}" class="recent" data-id="${i}"> ${data.string}</a> </li>`;
+        }
+
         if($prepend) {
             $target.prepend(html);
         } else {
@@ -149,7 +162,7 @@ function pushRecentSearch(data = null, $prepend) {
 
 $(document).ready(function () {
     let $body = $('body');
-
+    $body.find('.search-loader').show();
     // Neighborhood Select Management
     $('.neighborhood-list > li > div > input').click(function(){
         let name = $(this).val();
@@ -297,6 +310,30 @@ $(document).ready(function () {
         if(!$(this).prop('checked')) {
             $selector.trigger('click');
         }
+    });
+
+    $body.on('click', '.recent-star', async function () {
+        let index = $(this).parents('li').find('a').attr('data-id');
+        let search = $old_queries[index]; search.isSave = true;
+        $old_queries[index] = search;
+        await ajaxRequest('/renter/add-search', 'post', search, false).then(res => {
+            $(this).removeClass('far recent-star').addClass('fa saved-star');
+            localStorage.setItem('search-query', JSON.stringify($old_queries));
+            toastr.success('Search marked as favourite.');
+            return;
+        });
+    });
+
+    $body.on('click', '.saved-star', async function () {
+        let index = $(this).parents('li').find('a').attr('data-id');
+        let search = $old_queries[index]; search.isSave = false;
+        $old_queries[index] = search;
+        await ajaxRequest('/renter/add-search', 'post', search, false).then(res => {
+            $(this).removeClass('fa saved-star').addClass('far recent-star');
+            localStorage.setItem('search-query', JSON.stringify($old_queries));
+            toastr.success('Search removed from favourite.');
+            return;
+        });
     });
 
     // Submit FORM

@@ -57,21 +57,27 @@ class SaveSearchService {
      * @return bool|mixed
      */
     public function saveSearch( $data ) {
-        if ( isRenter() ) {
-            unset( $data['openHouse'] );
-            $data = \Opis\Closure\serialize( $data );
-            if ( $this->__userHasNewKeywords( $data ) ) {
-                return $this->saveSearchRepo->create( [
-                    'user_id'  => myId(),
-                    'url'      => url()->full(),
-                    'keywords' => $data,
-                ] );
-            }
-
-            return false;
+        $url = $data['url'];
+        $data = $this->__filterParams($data);
+        $data = \Opis\Closure\serialize( $data );
+        if ( $this->__userHasNewKeywords( $data ) ) {
+            return $this->saveSearchRepo->create( [
+                'user_id'  => myId(),
+                'url'      => $url,
+                'keywords' => $data,
+            ] );
         }
 
-        return false;
+        return $this->removeSearch($data);
+    }
+
+    /**
+     * @param $data
+     * @return mixed
+     */
+    public function removeSearch($data) {
+        return $this->saveSearchRepo
+            ->find( [ 'keywords' => $data, 'user_id' => myId() ] )->delete();
     }
 
     /**
@@ -82,65 +88,18 @@ class SaveSearchService {
     public function match( $criteria ) {
         $matchResults = [];
         foreach ( $this->saveSearchRepo->all() as $query ) {
-            $this->keywords = \Opis\Closure\unserialize( $query->keywords );
+            $this->keywords = $query->keywords;
             if ( $this->__validateKeywords( $criteria ) ) {
-                if ( $this->__checkFeatures( $criteria['features'] ) ) {
-//                    if($this->__checkAmenities($criteria['amenities'])) {
-                    $data = [
-                        'url'     => $query->url,
-                        'user_id' => $query->user_id,
-                    ];
-                    array_push( $matchResults, $data );
-                }
-//                }
+                $data = [
+                    'url'     => $query->url,
+                    'user'  => $query->user,
+                ];
+
+                array_push( $matchResults, $data );
             }
         }
 
         return $matchResults;
-    }
-
-    /**
-     * @param $features
-     *
-     * @return bool
-     */
-    protected function __checkFeatures( $features ) {
-        if ( empty( $this->keywords['features'] ) ) {
-            return true;
-        }
-        if ( is_array( $this->keywords['features'] ) && is_array( $features ) ) {
-            foreach ( $this->keywords['features'] as $feature ) {
-                if ( in_array( $feature, $features ) ) {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
-        return false;
-    }
-
-    /**
-     * @param $amenities
-     *
-     * @return bool
-     */
-    protected function __checkAmenities( $amenities ) {
-        if ( empty( $this->keywords['amenities'] ) ) {
-            return true;
-        }
-        if ( is_array( $this->keywords['amenities'] ) && is_array( $amenities ) ) {
-            foreach ( $this->keywords['amenities'] as $amenity ) {
-                if ( in_array( $amenity, $amenities ) ) {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
-        return false;
     }
 
     /**
@@ -149,13 +108,46 @@ class SaveSearchService {
      * @return bool
      */
     protected function __validateKeywords( $criteria ) {
-        return ( in_array( $criteria['beds'], $this->keywords['beds'] ) &&
-                 in_array( $criteria['baths'], $this->keywords['baths'] ) &&
-                 empty( $this->keywords['neighborhood'] ) ?: in_array($criteria['neighborhood'], $this->keywords['neighborhood']) &&
-              $criteria['square'] >= $this->keywords['square']['square_min'] &&
-              $criteria['square'] <= $this->keywords['square']['square_max'] &&
-              $criteria['price'] >= $this->keywords['price']['min_price'] &&
-              $criteria['price'] <= $this->keywords['price']['max_price'] );
+        return $this->__hasBed($criteria)
+            && $this->__hasBath($criteria)
+            && $this->__hasPriceBetween($criteria)
+            && $this->__hasNeighborhood($criteria);
+    }
+
+    /**
+     * @param $keywords
+     * @return bool
+     */
+    protected function __hasBed($keywords) {
+        return !empty($this->keywords['beds'])
+            ? in_array($keywords['beds'], $this->keywords['beds']) : true;
+    }
+
+    /**
+     * @param $keywords
+     * @return bool
+     */
+    protected function __hasBath($keywords) {
+        return !empty($this->keywords['baths'])
+            ? in_array($keywords['baths'], $this->keywords['baths']) : true;
+    }
+
+    /**
+     * @param $keywords
+     * @return bool
+     */
+    protected function __hasNeighborhood($keywords) {
+        return !empty( $this->keywords['neighborhood'] )
+            ? in_array($keywords['neighborhood'], $this->keywords['neighborhood']) : true;
+    }
+
+    /**
+     * @param $keywords
+     * @return bool
+     */
+    protected function __hasPriceBetween($keywords) {
+        return $keywords['price'] >= $this->keywords['min_price'] &&
+              $keywords['price'] <= $this->keywords['max_price'];
     }
 
     /**
@@ -167,5 +159,19 @@ class SaveSearchService {
         return $this->saveSearchRepo
                    ->find( [ 'keywords' => $data, 'user_id' => myId() ] )
                    ->count() < 1;
+    }
+
+    /**
+     * @param $data
+     * @return array
+     */
+    protected function __filterParams($data) {
+        return [
+            'beds' => $data['beds'],
+            'baths' => $data['baths'],
+            'min_price' => toValidPrice($data['min_price'][0]),
+            'max_price' => toValidPrice($data['max_price'][0]),
+            'neighborhoods' => $data['neighborhoods'],
+        ];
     }
 }

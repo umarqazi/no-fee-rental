@@ -2,6 +2,10 @@
 
 namespace App\Repository;
 
+/**
+ * Class BaseRepo
+ * @package App\Repository
+ */
 class BaseRepo implements IRepo {
 
 	/**

@@ -62,7 +62,7 @@ class NotificationService extends ExclusiveSettingService {
 
         if ( empty( $settings ) ) {
 //            socketEvent($notification);
-            dispatchEmailQueue( $this->data );
+            dispatchEmailQueue( $this->data, 2 );
             return true;
         }
 
@@ -72,7 +72,7 @@ class NotificationService extends ExclusiveSettingService {
         }
 
         if ( ! empty( $settings ) && $settings->allow_email ) {
-            dispatchEmailQueue( $this->data );
+            dispatchEmailQueue( $this->data, 2 );
             return true;
         }
 
