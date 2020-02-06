@@ -101,7 +101,7 @@ function buildNewObject() {
         obj.string += bath; obj.title += bath;
     }
 
-    pushRecentSearch(obj, true);
+    pushRecentSearch(obj, true, 0);
 }
 
 /**
