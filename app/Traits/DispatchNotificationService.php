@@ -327,11 +327,14 @@ trait DispatchNotificationService
      */
     public static function MATCHSEARCHRESULT($data)
     {
-        self::__setParams($data);
-        self::$data->view = 'listing-feature-approved';
-        self::$data->subject = 'Featured Listing Request Approved';
-        self::$data->message = 'Your Request to make this listing featured has been approved.';
-        self::$data->url = route('listing.detail', self::$data->data->data->id);
+        self::$data = toObject(self::$data);
+        self::$data->via = 'support';
+        self::$data->view = 'search_match';
+        self::$data->subject = 'Search Match Found';
+        self::$data->message = 'Search match has been found';
+        self::$data->url = $data->url;
+        self::$data->to = $data->user->id;
+        self::$data->toEmail = $data->user->email;
         self::send();
     }
 

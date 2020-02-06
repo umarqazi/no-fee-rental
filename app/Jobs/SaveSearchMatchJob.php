@@ -3,6 +3,7 @@
 namespace App\Jobs;
 
 use App\Services\SaveSearchService;
+use App\Traits\DispatchNotificationService;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
@@ -59,16 +60,12 @@ class SaveSearchMatchJob implements ShouldQueue {
         $this->saveSearchService = new SaveSearchService();
         $matchFounds             = $this->saveSearchService->match( $this->data );
         if ( ! empty( $matchFounds ) ) {
+
             foreach ( $matchFounds as $results ) {
-                $data = [
-                    'from'         => $this->data['sender']->id,
-                    'sender'       => $this->data['sender'],
-                    'to'           => $results['user_id'],
-                    'message'      => 'Listing Found',
-                    'url'          => route('listing.detail', $this->data['list_id'])
-                ];
-                dispatchNotification($data);
+                printf("[%s] Save Keywords Match Found For Current Listing..\n", now()->format('Y-m-d'));
+                DispatchNotificationService::MATCHSEARCHRESULT(toObject($results));
             }
+
         } else {
             printf("[%s] No Save Keywords Match Found For Current Listing..\n", now()->format('Y-m-d'));
         }

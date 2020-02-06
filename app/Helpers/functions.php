@@ -397,7 +397,7 @@ function socketEvent($data) {
  *
  * @return PendingDispatch
  */
-function dispatchListingNotification( $data, $delay = 5 ) {
+function dispatchListingNotification( $data, $delay = 10 ) {
     return dispatch( new SaveSearchMatchJob( $data ) )->delay( now()->addSeconds( $delay ) );
 }
 

@@ -106,7 +106,6 @@ class UserController extends Controller {
      * @return RedirectResponse
      */
 	public function confirmEmail(Request $request, $token) {
-	    dd($request->all(), $token);
 		if ($this->userService->verifyEmail($request, $token)) {
 			return isAgent()
                 ? redirect(route('web.advertise'))->with(

@@ -1,6 +1,9 @@
 
     <script>
-        Window.Laravel = {user: "{{ authenticated() ? myId() : null }}"};
+        Window.Laravel = {
+            user: "{{ authenticated() ? myId() : null }}",
+            userType: "{{ authenticated() ? mySelf()->user_type : null }}"
+        };
     </script>
     {!! HTML::script('assets/js/vendor/jquery-3.2.1.min.js') !!}
     {!! HTML::script('assets/js/vendor/simple.money.format.js') !!}

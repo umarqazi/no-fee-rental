@@ -25,14 +25,14 @@ class BuildingService extends CreditPlanService {
     use DispatchNotificationService;
 
     /**
-     * @var BuildingRepo
-     */
-    protected $buildingRepo;
-
-    /**
      * @var ListingRepo
      */
     protected $listingRepo;
+
+    /**
+     * @var BuildingRepo
+     */
+    protected $buildingRepo;
 
     /**
      * @var AmenityRepo

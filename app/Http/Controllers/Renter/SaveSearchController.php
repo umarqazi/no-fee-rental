@@ -43,6 +43,15 @@ class SaveSearchController extends Controller {
 
     /**
      * @param Request $request
+     * @return JsonResponse|RedirectResponse
+     */
+    public function create(Request $request) {
+        $response = $this->saveSearchService->saveSearch($request->all());
+        return sendResponse($request, $response, null);
+    }
+
+    /**
+     * @param Request $request
      * @param $id
      *
      * @return JsonResponse|RedirectResponse
