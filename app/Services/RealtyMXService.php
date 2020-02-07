@@ -10,6 +10,7 @@ namespace App\Services;
 
 use App\Repository\CompanyRepo;
 use App\Repository\NeighborhoodRepo;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use App\Traits\DispatchNotificationService;
 
@@ -56,6 +57,7 @@ class RealtyMXService extends ListingService {
      * @return bool
      */
     public function fetch( $properties ) {
+        DB::beginTransaction();
         if ( is_object( $properties ) ) {
             foreach ( $properties as $property ) {
                 $collection = collect( json_decode( json_encode( $property ) ) );
@@ -65,10 +67,13 @@ class RealtyMXService extends ListingService {
                     $this->__generateFeeListErrorReport( $collection );
                 }
             }
+
+            DB::commit();
             $this->__sendMails();
             return $this->__writeProgressCSVFile(now()->format('Ymd'));
         }
 
+        DB::rollBack();
         return false;
     }
 
@@ -113,6 +118,7 @@ class RealtyMXService extends ListingService {
         if ( $this->__isNewListing( $listing, $user ) ) {
             $attrib       = $listing->get( '@attributes' );
             $details      = $listing->get( 'details' );
+            $amenities    = !isset($details->amenities) ?: $this->__addAmenities(collect($details->amenities));
             $images       = $this->__images( $listing->get( 'media' )->photo );
             $location     = $listing->get( 'location' );
             $map_location = json_encode( [
@@ -125,12 +131,10 @@ class RealtyMXService extends ListingService {
                 'realty_url'      => $attrib->url ?? null,
                 'user_id'         => $user->id ?? null,
                 'building_type'   => $attrib->status ?? null,
+                'amenities'       => $amenities ?? null,
                 'unique_slug'     => str_random( 10 ) ?? null,
-                'neighborhood_id' => $this->__createNeighborhood( $location->neighborhood ) ?? null,
+                'neighborhood'    => $location->neighborhood ?? null,
                 'rent'            => $details->price ?? null,
-                'name'            => $user->first_name ?? null,
-                'email'           => $user->email ?? null,
-                'phone_number'    => $user->phone_number ?? null,
                 'thumbnail'       => $images[0] ?? null,
                 'availability'    => $details->availableOn ?? null,
                 'street_address'  => $location->address ?? null,
@@ -140,14 +144,15 @@ class RealtyMXService extends ListingService {
                 'square_feet'     => $details->squareFeet ?? null,
                 'unit'            => $location->apartment ?? null,
                 'description'     => $details->description ?? null,
-                'visibility'      => INACTIVELISTING ?? null,
+                'visibility'      => ACTIVELISTING,
                 'is_featured'     => DEACTIVE ?? null,
+                'contact_representative' => null,
                 'map_location'    => $map_location
             ];
 
             $building  = $this->__addBuilding( toObject( $data ) );
-            $this->attachAmenities($building, $this->__addAmenities($details->amenities));
             $data['building_id'] = $building->id;
+            $data['neighborhood_id'] = $building->neighborhood_id;
             $list = $this->listingRepo->create( $data );
             $this->__createImages( $list->id, $images );
             $this->__generateSuccessImportListingReport( $list );
@@ -201,8 +206,8 @@ class RealtyMXService extends ListingService {
             $agent    = $this->userRepo->create( [
                 'first_name'     => $username->first(),
                 'last_name'      => $username->last(),
-                'email'          => $agent->email,
-                'profile_image'  => $agent->photo,
+                'email'          => $agent->email ?? null,
+                'profile_image'  => $agent->photo ?? null,
                 'remember_token' => str_random( 60 ),
                 'user_type'      => AGENT,
                 'phone_number'   => $agent->phone_numbers->main,
@@ -339,7 +344,7 @@ class RealtyMXService extends ListingService {
             ],
             [
                 'realty_id' => 'unique:listings',
-                'email'     => 'unique:listings'
+                'email'     => 'unique:users'
             ]
         );
 
