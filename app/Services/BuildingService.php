@@ -166,7 +166,7 @@ class BuildingService extends CreditPlanService {
             $building = $this->__validateForm($request);
             $building = $this->buildingRepo->create($building->toArray());
 
-            if ( $request->has( 'amenities' ) ) {
+            if ( $request->amenities ) {
                 $this->__attachAmenities( $building, $request->amenities );
             }
         }
@@ -225,11 +225,23 @@ class BuildingService extends CreditPlanService {
         $form->building_action        = $request->building_action ?? ALLOWAGENT;
         $form->contact_representative = $request->contact_representative;
         $form->is_verified            = isAgent() ? false : true;
-        $form->thumbnail              = $request->hasFile('thumbnail')
-            ? uploadImage($request->thumbnail, 'images/listing/thumbnails')
-            : $request->old_thumbnail ?? $request->thumbnail ?? Null;
+        $form->thumbnail              = $this->__uploadImage($request);
         $form->validate();
         return $form;
+    }
+
+    /**
+     * @param $request
+     * @return bool|string|null
+     */
+    private function __uploadImage($request) {
+        if(strpos( $request->thumbnail, 'http' ) === 0) {
+            return $request->thumbnail;
+        } else {
+            return $request->hasFile('thumbnail')
+                ? uploadImage($request->thumbnail, 'images/listing/thumbnails')
+                : $request->old_thumbnail ?? $request->thumbnail ?? Null;
+        }
     }
 
     /**

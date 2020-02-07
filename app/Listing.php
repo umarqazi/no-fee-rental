@@ -144,7 +144,6 @@ class Listing extends Model {
     public function scopeRealty($query) {
         return $query->where([
             ['realty_id', '!=', NULL],
-            ['visibility', '=', ACTIVELISTING],
         ]);
     }
 
