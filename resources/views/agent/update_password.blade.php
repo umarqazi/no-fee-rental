@@ -36,7 +36,7 @@
                                 {!! Form::password('password_confirmation', ['class' => 'input-style', 'placeholder' => 'Confirm Password']) !!}
                             </div>
                         </div>
-                        <div class="col-md-12 mt-4">
+                        <div class="col-md-12 mt-4 text-center">
                        		{!! Form::submit('Update Password', ['class' => 'btn-default large-btn']) !!}
                             <a href="{{ url()->previous() }}" class="btn-default large-btn">Back</a>
                         </div>

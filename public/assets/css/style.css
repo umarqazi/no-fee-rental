@@ -634,6 +634,10 @@
     color: #000;
     display: inline-block;
     line-height: 22px;
+    margin-right: 2px;
+}
+.location-map-sec .transportation span:last-child{
+    margin-right: 0;
 }
 
 .location-map-sec .text-a {
