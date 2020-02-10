@@ -90,8 +90,8 @@ class CalendarService {
         $form->from          = $request->from ?? myId();
         $form->title         = $request->title;
         $form->model         = $request->model;
-        $form->start         = carbon($request->start)->format('Y-m-d h:i:s');
-        $form->end           = carbon($request->end)->format('Y-m-d h:i:s');
+        $form->start         = carbon($request->start)->format('Y-d-m h:i:s');
+        $form->end           = carbon($request->end)->format('Y-d-m h:i:s');
         $form->url           = $request->url;
         $form->ref_event_id  = $request->ref_event_id;
         $form->validate();

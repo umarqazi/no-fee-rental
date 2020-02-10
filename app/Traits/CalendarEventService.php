@@ -46,7 +46,7 @@ trait CalendarEventService
     public static function ADDAPPOINTMENT($data) {
         self::$data = toObject(self::$data);
         self::$data->title = sprintf("%s (Appointment Pending Request)", is_exclusive($data->listing));
-        self::$data->url = "view-conversations";
+        self::$data->url = "load-conversation/inbox/{$data->listing->id}";
         self::$data->ref_event_id = $data->id;
         self::$data->model = ListingConversation::class;
         self::$data->start = sprintf("%s %s", $data->appointment_date->format('Y-m-d'), $data->appointment_time);
