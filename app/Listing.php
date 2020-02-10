@@ -144,6 +144,9 @@ class Listing extends Model {
     public function scopeRealty($query) {
         return $query->where([
             ['realty_id', '!=', NULL],
+            isAdmin()
+                ? ['user_id', '>', 0]
+                : ['user_id', myId()]
         ]);
     }
 

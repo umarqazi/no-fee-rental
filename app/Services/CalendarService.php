@@ -8,7 +8,6 @@
 
 namespace App\Services;
 
-use App\Forms\AddEventForm;
 use App\Forms\EventForm;
 use App\Repository\CalendarRepo;
 
@@ -49,21 +48,27 @@ class CalendarService {
 
     /**
      * @param $id
-     *
+     * @param $model
      * @return bool|mixed
      */
-    public function removeEvent($id) {
-        return $this->calendarRepo->deleteMultiple(['linked_id' => $id]);
+    public function removeEvent($id, $model) {
+        return $this->calendarRepo->deleteMultiple([
+            ['ref_event_id', '=', $id],
+            ['model', '=', $model]
+        ]);
     }
 
     /**
      * @param $id
+     * @param $model
      * @param $data
-     *
      * @return mixed
      */
-    public function updateEvent($id, $data) {
-        return $this->calendarRepo->updateByClause(['id' => $id], $data);
+    public function updateEvent($id, $model, $data) {
+        return $this->calendarRepo->updateByClause([
+            ['ref_event_id', '=', $id],
+            ['model', '=', $model]
+        ], $data);
     }
 
     /**
@@ -88,7 +93,7 @@ class CalendarService {
         $form->start         = carbon($request->start)->format('Y-m-d h:i:s');
         $form->end           = carbon($request->end)->format('Y-m-d h:i:s');
         $form->url           = $request->url;
-        $form->ref_event_id  = $request->linked_id;
+        $form->ref_event_id  = $request->ref_event_id;
         $form->validate();
         return $form;
     }

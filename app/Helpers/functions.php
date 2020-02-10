@@ -589,8 +589,16 @@ function unitFeature( $features ) {
  */
 function openHouseTimeSlot( $index ) {
     $slots = config( 'openHouse' );
+    return (new Carbon( $slots[ $index ] ))->format('h:i:s a') ?? null;
+}
 
-    return new Carbon( $slots[ $index ] ) ?? null;
+/**
+ * @param $date
+ * @return false|int|string
+ */
+function reverseTimeSlot( $date ) {
+    $formatted = carbon($date)->format('H:i a');
+    return array_search($formatted, config('openHouse'));
 }
 
 /**
@@ -1187,24 +1195,48 @@ function agents($id = null) {
 }
 
 /**
- * @param $model
  * @param $data
  * @param bool $update
  * @param null $id
+ * @param null $model
  * @return mixed
  */
-function calendarEvent( $model, $data, $update = false, $id = null ) {
+function calendarEvent( $data, $update = false, $id = null, $model = null ) {
     $calendar = ( new \App\Services\CalendarService() );
-    return !$update ? $calendar->addEvent($model, $data) : $calendar->updateEvent($model, $id, $data);
+    return !$update ? $calendar->addEvent($data) : $calendar->updateEvent($id, $model, $data);
 }
 
 /**
  * @param $id
- *
+ * @param $model
  * @return bool|mixed
  */
-function deleteCalendarEvent( $id ) {
-    return ( new \App\Services\CalendarService() )->removeEvent( $id );
+function deleteCalendarEvent( $id, $model ) {
+    return ( new \App\Services\CalendarService() )->removeEvent( $id, $model );
+}
+
+/**
+ * @param $date
+ * @return string
+ */
+function color($date) {
+    $event = $date->format('Y-m-d');
+    $current = now()->format('Y-m-d');
+    if($event > $current) {
+        // future green
+        return '#53b951';
+    } elseif ($event == $current) {
+        // current orange
+        return '#e77818';
+    } elseif ($event < $current) {
+        // past grey
+        return '#cecccc';
+    } else {
+        // rejected red
+        return '#d41349';
+    }
+
+    return 'blue';
 }
 
 /**

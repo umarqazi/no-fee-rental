@@ -17,16 +17,17 @@ class OpenHouse extends Model {
     protected $fillable = ['listing_id', 'date', 'start_time', 'end_time', 'only_appt'];
 
     /**
-     * @var array
+     * @param $value
+     * @return \Illuminate\Support\Carbon
      */
-    protected $casts = [
-        'date'
-    ];
+    public function getDateAttribute($value) {
+        return carbon($value)->format('Y-m-d');
+    }
 
     /**
      * @return BelongsTo
      */
     public function listing() {
-        return $this->belongsTo(Listing::class, 'id', 'listing_id');
+        return $this->belongsTo(Listing::class, 'listing_id', 'id');
     }
 }

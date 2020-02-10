@@ -11,6 +11,10 @@ namespace App\Repository;
 use Calendar;
 use App\CalendarEvent;
 
+/**
+ * Class CalendarRepo
+ * @package App\Repository
+ */
 class CalendarRepo extends BaseRepo {
 
     /**
@@ -27,42 +31,17 @@ class CalendarRepo extends BaseRepo {
         $collection = null;
         $events = $this->model->allEvents()->get();
         foreach ($events as $event) {
-            if(isAgent()) {
-                if(strpos($event->title, '(rejected)') == false) {
-                    $tmp = \Calendar::event(
-                        $event->title,
-                        null,
-                        carbon($event->start)->format('y-m-d h:i:s a'),
-                        carbon($event->end)->format('y-m-d h:i:s a')
-                    );
+            $tmp = \Calendar::event(
+                $event->title,
+                null,
+                $event->start->format('y-m-d h:i:s a'),
+                $event->end->format('y-m-d h:i:s a')
+            );
 
-                    $collection = Calendar::addEvent($tmp, [
-                        'color' => $event->color,
-                        'url' => ($event->url !== 'javascript:void(0)') ? $event->url : $event->url
-                    ])->setCallbacks([
-                        'eventClick' => 'function(e) {
-                            ajaxRequest("/test", "get", null).then(res => { 
-                                console.log(res);
-                            });
-                        }'
-                    ]);
-                }
-            }
-            else   {
-                $tmp = \Calendar::event(
-                    $event->title,
-                    null,
-                    carbon($event->start)->format('y-m-d h:i:s a'),
-                    carbon($event->end)->format('y-m-d h:i:s a')
-                );
-
-                $collection = Calendar::addEvent($tmp, [
-                    'color' => $event->color,
-                    'url' => ($event->url !== 'javascript:void(0)') ? $event->url : $event->url
-                ]);
-
-            }
-
+            $collection = Calendar::addEvent($tmp, [
+                'color' => color($event->start),
+                'url' => $event->url
+            ]);
         }
 
         return $collection;

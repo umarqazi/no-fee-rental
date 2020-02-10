@@ -24,7 +24,7 @@ class CreateListingConversationsTable extends Migration {
             $table->string('email')->nullable();
             $table->string('phone_number')->nullable();
             $table->string('reply_rate')->nullable();
-            $table->date('appointment_date')->nullable();
+            $table->string('appointment_date')->nullable();
             $table->string('appointment_time')->nullable();
             $table->boolean('is_archived')->default(false);
             $table->enum('conversation_type', ['1', '2'])->comment = "1-Appointment, 2-Check Availability";
