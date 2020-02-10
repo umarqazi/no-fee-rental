@@ -13,6 +13,7 @@ use App\Forms\CheckAvailabilityForm;
 use App\Forms\MessageForm;
 use App\Repository\CalendarRepo;
 use App\Repository\ListingRepo;
+use App\Traits\CalendarEventService;
 use App\Traits\DispatchNotificationService;
 use Illuminate\Support\Facades\DB;
 use App\Repository\ListingConversationRepo;
@@ -24,7 +25,7 @@ use App\Repository\MessageRepo;
  */
 class ListingConversationService extends MemberService {
 
-    use DispatchNotificationService;
+    use DispatchNotificationService, CalendarEventService;
 
     /**
      * @var MessageRepo
@@ -165,6 +166,7 @@ class ListingConversationService extends MemberService {
         if(!$this->__isNewAppointment($request)) {
             $appointment = $this->__validateAppointmentForm( $request );
             $appointment = $this->listingConversationRepo->create($appointment->toArray());
+            CalendarEventService::ADDAPPOINTMENT($appointment);
             DispatchNotificationService::APPOINTMENTREQUEST($appointment);
             return $appointment;
         }
@@ -181,7 +183,9 @@ class ListingConversationService extends MemberService {
         $availability = $this->__isNewGuest($request);
         if(!$availability) {
             $availability = $this->__validateAvailabilityForm($request);
-            return $this->listingConversationRepo->create($availability->toArray());
+            $availability = $this->listingConversationRepo->create($availability->toArray());
+            CalendarEventService::ADDAVAILABILITY($availability);
+            return $availability;
         }
 
         return false;
@@ -200,6 +204,7 @@ class ListingConversationService extends MemberService {
             'to'      => $request->to,
             'sender'  => mySelf()
         ];
+
 
         return $this->messageRepo->create($message->toArray());
     }
@@ -247,8 +252,8 @@ class ListingConversationService extends MemberService {
         $form->to                = $request->to;
         $form->listing_id        = $request->listing_id;
         $form->conversation_type = $request->type;
-        $form->appointment_date  = $request->appointment_date;
-        $form->appointment_time  = $request->appointment_time;
+        $form->appointment_date  = carbon($request->appointment_date)->format('Y-m-d');
+        $form->appointment_time  = carbon($request->appointment_time)->format('h:i:s a');
         $form->validate();
         return $form;
     }

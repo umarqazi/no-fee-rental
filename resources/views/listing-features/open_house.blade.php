@@ -13,19 +13,24 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <label for="start">Start @:</label>
-                                {!! Form::select("open_house[{$key}][start_time]", config('openHouse'), $value->start_time, ['class' => 'form-control', 'id' => 'start']) !!}
+                                {!! Form::select("open_house[{$key}][start_time]", config('openHouse'), reverseTimeSlot($value->start_time), ['class' => 'form-control', 'id' => 'start']) !!}
                             </div>
                             <div class="col-md-6">
                                 <label for="sel1">End @:</label>
-                                {!! Form::select("open_house[{$key}][end_time]", config('openHouse'), $value->end_time, ['class' => 'form-control', 'id' => 'end']) !!}
+                                {!! Form::select("open_house[{$key}][end_time]", config('openHouse'), reverseTimeSlot($value->end_time), ['class' => 'form-control', 'id' => 'end']) !!}
                             </div>
                         </div>
                     </div>
                     <div class="col-md-12 mt-2 mb-2">
                         <div class="custom-control custom-checkbox by-add-only">
-                            {!! Form::checkbox("open_house[{$key}][by_appointment]", null, $value->only_appt ? true : false,
-                            ['class' => "custom-control-input", 'id' => $key]) !!}
-                            <label class="custom-control-label" for="{{ $key }}"> By appt only</label>
+                            <div class="custom-control custom-checkbox by-add-only">
+                                {!! Form::checkbox("open_house[{$key}][by_appointment]", null, $value->only_appt ? true : false,
+                                ['class' => "custom-control-input", 'id' => $key]) !!}
+                                <label class="custom-control-label" for="{{ $key }}"> By appt only</label>
+                            </div>
+                            <div class="remove-btn-wrapper remove-btnn ">
+                                <span class="remove-open-house">Remove</span>
+                            </div>
                         </div>
                     </div>
                 </div>

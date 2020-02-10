@@ -23,11 +23,6 @@ class ListingConversation extends Model {
     ];
 
     /**
-     * @var array
-     */
-    protected $dates = ['appointment_date'];
-
-    /**
      * @return HasOne
      */
     public function listing() {

@@ -13,6 +13,7 @@ use App\OpenHouse;
 use App\Repository\FeatureRepo;
 use App\Repository\OpenHouseRepo;
 use App\Repository\UserRepo;
+use App\Traits\CalendarEventService;
 use App\Traits\DispatchNotificationService;
 use Illuminate\Foundation\Bus\PendingDispatch;
 use Illuminate\Support\Facades\DB;
@@ -76,9 +77,9 @@ class ListingService extends BuildingService {
         $listing->building_id = $building->id;
         $listing->visibility  = $this->__visibility($building);
         $listing              = $this->__addList($listing);
-        $this->__addOpenHouse( $listing->id, $listing, $request->open_house );
+        $this->__addOpenHouse( $listing->id, $request->open_house );
         $this->__addFeatures( $listing->id, $request->features );
-        $this->__manageSaveSearch( $listing, $request->features );
+        $this->__manageSaveSearch( $listing );
         $this->__freshnessScore($listing);
 
 
@@ -141,7 +142,7 @@ class ListingService extends BuildingService {
     public function update( $id, $request ) {
         DB::beginTransaction();
         if ( $this->__updateList( $id, $this->__validateForm( $request ) ) ) {
-            $this->__updateOpenHouses( $id, $request, $request->open_house );
+            $this->__updateOpenHouses( $id, $request->open_house );
             $this->__updateFeatures( $id, $request->features );
             DB::commit();
 
@@ -524,60 +525,33 @@ class ListingService extends BuildingService {
 
     /**
      * @param $id
-     * @param $listing
      * @param $data
-     * @param bool $is_update
-     *
-     * @return mixed
+     * @param bool $is_updating
+     * @return bool
      */
-    private function __addOpenHouse( $id, $listing, $data, $is_update = false ) {
-        $batch = [];
+    private function __addOpenHouse( $id, $data, $is_updating = false ) {
+
+        if($is_updating) deleteCalendarEvent($id, OpenHouse::class);
 
         if($data[0]['date'] !== null) {
 
             foreach ($data as $key => $openHouse) {
-                $batch[] = [
+
+                $res = $this->openHouseRepo->create([
                     'listing_id' => $id,
                     'date' => $openHouse['date'],
-                    'start_time' => $openHouse['start_time'],
-                    'end_time' => $openHouse['end_time'],
-                    'only_appt' => $this->__byAppointment($openHouse),
-                    'created_at' => now(),
-                    'updated_at' => now()
-                ];
+                    'start_time' => openHouseTimeSlot($openHouse['start_time']),
+                    'end_time'   => openHouseTimeSlot($openHouse['end_time']),
+                    'only_appt'  => $this->__byAppointment($openHouse)
+                ]);
+
+                CalendarEventService::ADDOPENHOUSE($res);
             }
 
-            if ($this->openHouseRepo->insert($batch)) {
-//            $this->__addOpenHouseCalendarEvent($id, $listing, $data, $is_update);
-                return $id;
-            }
-
+            return true;
         }
 
         return false;
-    }
-
-    /**
-     * @param $listing
-     * @param $is_update
-     * @param $id
-     * @param $data
-     * @param $i
-     */
-    private function __addOpenHouseCalendarEvent( $id, $listing, $data, $update) {
-        $events = [];
-        dd($data);
-        foreach ($data as $key => $event) {
-            dd($event);
-            $events[] = [
-                'title'        => is_exclusive($listing),
-                'start'        => $event['start'],
-                'end'          => $event['end'],
-                'ref_event_id' => $id,
-            ];
-        }
-
-        dd($events);
     }
 
     /**
@@ -624,15 +598,13 @@ class ListingService extends BuildingService {
 
     /**
      * @param $id
-     * @param $listing
      * @param $data
-     *
-     * @return mixed
+     * @return bool
      */
-    private function __updateOpenHouses( $id, $listing, $data ) {
+    private function __updateOpenHouses( $id, $data ) {
         $this->openHouseRepo->deleteMultiple( [ 'listing_id' => $id ] );
 
-        return $this->__addOpenHouse( $id, $listing, $data, true );
+        return $this->__addOpenHouse( $id, $data, true );
     }
 
     /**

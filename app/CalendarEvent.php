@@ -12,16 +12,16 @@ use MaddHatter\LaravelFullcalendar\Event;
 class CalendarEvent extends Model implements Event {
 
     /**
+     * @var string
+     */
+    protected $table = 'events';
+
+    /**
      * @var array
      */
     protected $dates = [
         'start', 'end'
     ];
-
-    /**
-     * @var string
-     */
-    protected $table = 'events';
 
     /**
      * @var array
