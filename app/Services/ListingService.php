@@ -79,8 +79,8 @@ class ListingService extends BuildingService {
         $listing              = $this->__addList($listing);
         $this->__addOpenHouse( $listing->id, $request->open_house );
         $this->__addFeatures( $listing->id, $request->features );
-        $this->__manageSaveSearch( $listing );
         $this->__freshnessScore($listing);
+        $this->__manageSaveSearch( $listing );
 
 
         if($this->__addListingEvents($listing)) {
@@ -98,16 +98,6 @@ class ListingService extends BuildingService {
      * @return bool
      */
     private function __addListingEvents($listing) {
-//        if(isAgent()) {
-//            return addNewList();
-//        }
-
-//        $listing->visibility !== PENDINGLISTING ?:
-//            DispatchNotificationService::LISTINGAPPROVALREQUEST(toObject([
-//                'to'   => mailToAdmin(),
-//                'data' => $listing,
-//                'from' => $listing->user_id,
-//            ]));
 
         return true;
     }
@@ -253,16 +243,6 @@ class ListingService extends BuildingService {
     public function approve( $id ) {
         if ( $this->listingRepo->update( $id, [ 'visibility' => 1 ] ) ) {
             $list = $this->listingRepo->find( [ 'id' => $id ] )->with( 'agent' )->first();
-//            DispatchNotificationService::LISTINGAPPROVED(toObject([
-//                'data' => $list,
-//                'from' => myId(),
-//                'to'   => $list->agent->id,
-//            ]));
-
-//            calendarEvent( [
-//                'color' => UPDATEOPENHOUSECOLOR,
-//                'url'   => route( 'listing.detail', $id ),
-//            ], true, $list->id );
 
             return true;
         }
@@ -434,14 +414,6 @@ class ListingService extends BuildingService {
      */
     private function __validateForm( $request ) {
 
-        if($request->availability_type == 1) {
-            $request->availability = now()->format('Y-m-d');
-        } elseif ($request->availability_type == 2) {
-            $request->availability = carbon($request->availability)->format('Y-m-d');
-        } else {
-            $request->availability = NULL;
-        }
-
         $form                    = new ListingForm();
         $form->user_id           = $request->owner_id ?? $request->user_id ?? myId();
         $form->unique_slug       = $request->unique_slug ?? str_random( 20 );
@@ -450,7 +422,7 @@ class ListingService extends BuildingService {
         $form->display_address   = $request->display_address;
         $form->freshness_score   = $request->freshness_score;
         $form->availability_type = $request->availability_type;
-        $form->availability      = $request->availability;
+        $form->availability      = $this->__setAvailability($request);
         $form->visibility        = $request->visibility;
         $form->description       = $request->description;
         $form->neighborhood_id   = $request->neighborhood_id ?? $this->__neighborhoodHandler($request->neighborhood);
@@ -487,6 +459,22 @@ class ListingService extends BuildingService {
         }
 
         return $listing->thumbnail;
+    }
+
+    /**
+     * @param $request
+     * @return string|null
+     */
+    private function __setAvailability($request) {
+        if($request->availability_type == 1) {
+            $request->availability = now()->format('Y-m-d');
+        } elseif ($request->availability_type == 2) {
+            $request->availability = carbon($request->availability)->format('Y-m-d');
+        } else {
+            $request->availability = NULL;
+        }
+
+        return $request->availability;
     }
 
     /**
