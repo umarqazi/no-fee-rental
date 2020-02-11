@@ -65,7 +65,7 @@ trait CalendarEventService
         self::$data->url = "load-conversation/inbox/{$data->listing->id}";
         self::$data->ref_event_id = $data->id;
         self::$data->model = ListingConversation::class;
-        self::$data->start = sprintf("%s", $data->created_at->format('Y-m-d h:i:s a'));
+        self::$data->start = sprintf("%s", $data->created_at->format('Y-m-d h:i:s'));
         self::$data->end = self::$data->start;
         self::$data->from = $data->listing->agent->id;
         self::$data->to = null;

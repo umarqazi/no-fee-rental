@@ -30,12 +30,12 @@ class CalendarRepo extends BaseRepo {
     public function fetchEvents() {
         $collection = null;
         $events = $this->model->allEvents()->get();
-        foreach ($events as $event) {
+        foreach ($events as $key => $event) {
             $tmp = \Calendar::event(
                 $event->title,
-                null,
-                $event->start->format('y-m-d h:i:s a'),
-                $event->end->format('y-m-d h:i:s a')
+                $key,
+                $event->start->format('Y-m-d h:i:s'),
+                $event->end->format('Y-m-d h:i:s')
             );
 
             $collection = Calendar::addEvent($tmp, [
