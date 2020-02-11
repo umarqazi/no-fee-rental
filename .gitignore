@@ -27,3 +27,7 @@ yarn-error.log
 /credentials
 robots.txt
 /public/assets/default-images/
+/public/assets/js/notification.js
+/public/assets/js/socket-client.js
+/public/assets/js/tcp.js
+/resources/js/socket-client.js
