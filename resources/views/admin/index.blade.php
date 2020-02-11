@@ -94,10 +94,6 @@
     </div>
  {{--Add User Modal--}}
 @include('admin.modals.add_user')
-{{--Invite User Modal--}}
-@include('admin.modals.invite_agent')
-{{--Add Company Modal--}}
-@include('admin.modals.add_company')
 {{--User Page Script--}}
 {!! HTML::script('assets/js/user.js') !!}
 @endsection
