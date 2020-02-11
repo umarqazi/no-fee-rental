@@ -228,6 +228,31 @@ $(() => {
         }
     });
 
+    // Create Password form
+    $('#create-password').validate({
+        rules: {
+            password: {
+                required: true,
+                greaterThan: 8
+            },
+            password_confirmation: {
+                required: true,
+                equalTo: '#password'
+            }
+        },
+
+        messages: {
+            password: {
+                required: "Password is required.",
+                greaterThan: "Password should be greater than 8 characters"
+            },
+            password_confirmation: {
+                required: "Password confirmation is required.",
+                equalTo: "Password not match"
+            }
+        }
+    });
+
     // Add building Form Validations
     $('#add_building').validate({
         rules: {
