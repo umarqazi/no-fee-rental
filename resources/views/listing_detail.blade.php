@@ -217,7 +217,7 @@
     </div>
 
     {{--Listing Amenities & Features--}}
-    <div class="listing-aminities-sec">
+    <div class="listing-aminities-sec listing-aminities-p-color">
         <div class="container-lg">
             <div class="row">
 

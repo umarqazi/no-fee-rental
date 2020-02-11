@@ -2824,7 +2824,7 @@ footer .copyright .social-icons li a:hover {
     margin-bottom: 0px;
 }
 
-#boxscroll22 {
+#boxscroll-section {
     margin-top: 20px;
     height: 492px;
     overflow-y: auto;
@@ -3207,7 +3207,7 @@ footer .copyright .social-icons li a:hover {
 .listing-Details .listing-info .available-btn {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
 }
 
 .listing-Details .listing-info .product-title .flag-icon {
@@ -3221,10 +3221,16 @@ footer .copyright .social-icons li a:hover {
     margin-bottom: 20px;
     margin-top: 20px;
 }
+.listing-Details .listing-info .available-btn .estimation-time{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
 
 .listing-Details .listing-info .available-btn label {
     color: #6a6d72;
     font-size: 14px;
+    margin-left: 5px;
 }
 
 .listing-Details .listing-info .available-btn i {
@@ -3373,7 +3379,7 @@ footer .copyright .social-icons li a:hover {
 }
 
 .apointment-tabs .login-signup-tab {
-    width: 50%;
+    width: 300px;
     margin: 0 auto;
     padding: 10px 0px;
     text-align: center;
@@ -4224,11 +4230,14 @@ footer .copyright .social-icons li a:hover {
     width: 100%;
     padding-right: 0px;
 }
-
+.search-bdr-top-wrapper{
+    min-height:265px;
+}
 .search-bdr-top {
     width: 100%;
     background-color: #dee2e6;
     padding: 10px 15px;
+    position: relative;
 }
 
 .sort-by-wrapper {
@@ -4266,13 +4275,17 @@ footer .copyright .social-icons li a:hover {
     justify-content: center;
     flex-wrap: wrap;
 }
-
-.listing-wrapp {
+#mobile-tabs-collapse{
+    width:100%;
+}
+.mobile-tabs-collapse-inner {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    padding: 0px 15px;
     width: 100%;
+    align-items: center;
+}
+.listing-wrapp {
+    padding: 0px 15px;
 }
 
 #mobile-map-listing-view {
@@ -4289,6 +4302,12 @@ footer .copyright .social-icons li a:hover {
 
 .login-form-wrapper .row.form-group .forgot-pass {
     text-align: right;
+}
+.sortBy-listing{
+    padding: 0 15px;
+}
+.sortBy-listing select.form-control{
+    max-width: 150px;
 }
 .sortBy-listing .form-group.sortBy-wraper{
     display: flex;
@@ -4473,20 +4492,6 @@ footer .copyright .social-icons li a:hover {
     border: 1px solid #223971;
 }
 
-
-/*.agent-listing-profile #boxscroll22 {*/
-
-
-/*    height: auto;*/
-
-
-/*    overflow-y: hidden;*/
-
-
-/*    overflow-x: hidden;*/
-
-
-/*}*/
 
 .clients-reviews-section .owl-slider {
     display: block;
@@ -5766,16 +5771,21 @@ strong {
 }
 
 @media all and (max-width:1199px) {
+    .available-btn span {
+        margin-bottom: 10px;
+    }
+    .available-btn span{
+        display: inline-block;
+        margin-bottom: 5px;
+    }
+}
+@media only screen and (min-width:992px) and (max-width: 1199px) {
     .appointment-iconDetails ul li svg,
     .listing-Details .appointment-iconDetails ul li span {
         display: block;
         margin: 0 auto 10px;
     }
-    .available-btn span {
-        margin-bottom: 10px;
-    }
 }
-
 @media only screen and (max-width: 991px) {
     .profile-section-padding {
         padding-top: 20px;
@@ -5804,7 +5814,7 @@ strong {
         margin-top: 15px;
     }
     .mobile-view-dropdown {
-        display: block;
+        display: inline-block;
     }
     .mobile-view-dropdown i {
         color: #f36f21;
@@ -5816,7 +5826,7 @@ strong {
     .collapse.show {
         display: block !important;
     }
-    #boxscroll22 {
+    #boxscroll-section {
         height: 470px;
         overflow-x: hidden;
         overflow-y: auto;
@@ -5893,7 +5903,7 @@ strong {
     .neighborhood-search .search-result-wrapper .search-listing {
         margin-right: 0px;
     }
-    #boxscroll22 {
+    #boxscroll-section {
         padding-right: 10px;
     }
     .listing-right-padd {
@@ -6201,7 +6211,7 @@ strong {
     .mobile-map-icon {
         position: absolute;
         top: 3px;
-        right: 30px;
+        right: 15px;
         background: #223971;
         color: #fff;
         padding: 8px 0px;
@@ -6271,11 +6281,8 @@ strong {
         background-color: rgb(248, 248, 248);
         width: 100%;
         position: absolute;
-        width: calc(100% - 60px);
         top: 36px;
-        left: 30px;
-        right: 0px;
-        margin: 0;
+        padding-bottom: 15px;
     }
     .sort-by-wrapper .sort-by {
         padding-right: 15px;
@@ -6293,6 +6300,10 @@ strong {
     .listing-wrapp{
         padding: 0px 15px 10px;
     }
+    .mobile-tabs-collapse-inner{
+        display: block;
+    }
+
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
@@ -6308,9 +6319,7 @@ strong {
     #signup .modal-dialog-scrollable .modal-content {
         max-height: initial !important;
     }
-    .mobile-map-icon {
-        right: 45px;
-    }
+
     .site-map-banner{
         height: 220px;
     }
@@ -6551,6 +6560,7 @@ strong {
     }
     .owl-slider {
         display: block;
+        text-align: center;
         padding: 0px 15px;
     }
     .desktop-listiing {
@@ -6638,7 +6648,7 @@ strong {
     .agent-listing-profile .search-result-wrapper .search-listing .featured-properties .property-listing.mobile-listing {
         margin: 0px 0px;
     }
-    .agent-listing-profile .search-result-wrapper .search-listing #boxscroll22 {
+    .agent-listing-profile .search-result-wrapper .search-listing #boxscroll-section {
         margin-top: 15px;
     }
     .agent-listing-profile .profile-contact-section h3 {
@@ -6682,10 +6692,6 @@ strong {
         height: 80px !important;
         object-fit: cover;
     }
-    .apointment-tabs .login-signup-tab {
-        width: 100%;
-        padding: 15px;
-    }
     .calendarCarasoule .owl-carousel .owl-nav {
         top: -28px;
     }
@@ -6693,9 +6699,7 @@ strong {
         margin-top: 15px !important;
         margin-bottom: 15px !important;
     }
-    .location-map-sec {
-        padding: 0px 0px !important;
-    }
+
     .appointment-section {
         margin-top: 20px !important;
         margin-bottom: 20px !important;
@@ -6704,16 +6708,12 @@ strong {
         max-width: 22px;
         max-height: 22px;
     }
-    #boxscroll22 {
+    #boxscroll-section {
         height: auto;
         padding-right: 0px;
     }
     .financial-district-inner select option {
         font-size: 14px;
-    }
-    #mobile-tabs-collapse {
-        width: calc(100% - 30px);
-        left: 15px;
     }
     .saved-search-container .search-header {
         flex-wrap: wrap;
@@ -6805,7 +6805,6 @@ strong {
         margin-left: 0px;
         width: calc(100% / 2 - 15px);
     }
-
 }
 
 @media only screen and (max-width: 576px) {
@@ -6847,9 +6846,7 @@ strong {
     .listing-Details .listing-info .estimation-time {
         margin-top: 10px;
     }
-    .location-map-sec h3 {
-        margin-top: 20px;
-    }
+
     .apointment-interest-section {
         margin-top: 10px;
     }
@@ -7001,6 +6998,7 @@ strong {
         width: 100%;
         font-size: 14px;
     }
+
 }
 
 /*site map*/
