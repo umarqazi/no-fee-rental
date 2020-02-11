@@ -1,7 +1,5 @@
 @extends('layouts.app')
-
 @section('title', 'Nofee Rental')
-
 @section('content')
     <section class="inner-pages wow fadeIn" data-wow-delay="0.2s">
         <div class="container-lg">

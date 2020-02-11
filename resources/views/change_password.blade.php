@@ -5,11 +5,11 @@
 @section('content')
     <section class="inner-pages wow fadeIn" data-wow-delay="0.2s">
         <div class="container-lg">
-            <h2 class="text-center">Reset Password</h2>
+            <h2 class="text-center">Create Password</h2>
             <div class="contact-info">
                 <div class="row justify-content-center mt-5">
                     <div class="col-lg-6">
-                        <form method="POST" action="{{route('change-password', $token)}}">
+                        <form method="POST" class="ajax" reset="true" id="create-password" action="{{route('change-password', $token)}}">
                             <div class="row">
                                 <div class="col-sm-12">
                                     @csrf
@@ -41,6 +41,12 @@
                 </div>
             </div>
         </div>
-        </div>
     </section>
+    <script>
+        $('body').on('form-success-create-password', function () {
+            setTimeout(() => {
+                window.location.href = '/';
+            }, 1000);
+        })
+    </script>
 @endsection

@@ -50,9 +50,10 @@ class UserController extends Controller {
 	public function updatePassword(Request $request, $token) {
 		if ($user = $this->userService->validateEncodedToken($token)) {
 			$request->id = $user->id;
-			$this->userService->changePassword($request);
-            return redirect('/')->with(['message' => 'Password has been updated', 'alert_type' => 'success']);
+			$res = $this->userService->changePassword($request);
+            return sendResponse($request, $res, 'Password has been created');
 		}
+
 		return error('Invalid token request cannot be processed.');
 
 	}
