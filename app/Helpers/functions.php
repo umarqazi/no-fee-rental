@@ -291,6 +291,7 @@ function daysNumReadable( $date ) {
  * @return Carbon
  */
 function carbon( $string ) {
+//    $date = \DateTime::createFromFormat('m-d-Y h:i:s a', $string);
     return new Carbon( $string );
 }
 
