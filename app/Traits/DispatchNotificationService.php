@@ -332,7 +332,7 @@ trait DispatchNotificationService
         self::$data->view = 'search_match';
         self::$data->subject = 'Search Match Found';
         self::$data->message = 'Search match has been found';
-        self::$data->url = $data->url;
+        self::$data->url = route('listing.detail', $data->id);
         self::$data->to = $data->user->id;
         self::$data->toEmail = $data->user->email;
         self::send();

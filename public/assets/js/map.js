@@ -159,18 +159,17 @@ const multiMarkers = (coords, container, zoom = 10) => {
             if(resp.data.length > 1) {
                 html += '<div class="mapbox-content-wrapper">';
                 resp.data.forEach((res, b) => {
-                    html += `<a href="${domain}/listing-detail/${res.id}"><div class="location-thumbnaail location-image-btm"><div class="badge-icon-map">Open</div><img style="height: 170px; width: 300px;" src="${domain}/${res.thumbnail}"><div class="price-wrapp price-wrap-location">
+                    html += `<a href="${domain}/listing-detail/${res.id}"><div class="location-thumbnaail location-image-btm"><div class="badge-icon-map">${res.listing_type === 'exclusive' ? 'Exclusive' : 'open'}</div><img style="height: 170px; width: 300px;" src="https://nfr-bucket.s3.us-east-2.amazonaws.com/${res.thumbnail}"><div class="price-wrapp price-wrap-location">
 <p class="price" style="color:#223971">`+ '$'+res.rent.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') +`</p><div class="additional-info">
  <ul><li><p>${res.bedrooms}</p>Beds</li><li><p>${res.baths}</p>Baths</li></ul>
  </div></div></div> <p>${res.building_type === 'exclusive' ? res.street_address +' - '+res.unit : res.display_address} </p></a>`;
                  });
                 setTimeout(() => {
                     $('body').find('.mapboxgl-popup-content').addClass('single');
-                    //$('.single').css({'overflow-y': 'auto'});
                 },10);
                 html += '</div>';
             } else {
-                html += `<a href="${domain}/listing-detail/${resp.data[0].id}"><div class="location-thumbnaail location-image-btm"><div class="badge-icon-map">Open</div><img style="height: 170px; width: 300px;" src="${domain}/${resp.data[0].thumbnail}"><div class="price-wrapp price-wrap-location">
+                html += `<a href="${domain}/listing-detail/${resp.data[0].id}"><div class="location-thumbnaail location-image-btm"><div class="badge-icon-map">${resp.data[0].listing_type === 'exclusive' ? 'Exclusive' : 'Open'}</div><img style="height: 170px; width: 300px;" src="https://nfr-bucket.s3.us-east-2.amazonaws.com/${resp.data[0].thumbnail}"><div class="price-wrapp price-wrap-location">
  <p class="price" style="color:#223971">` + '$' + resp.data[0].rent.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + `</p><div class="additional-info">
 <ul><li><p>${resp.data[0].bedrooms}</p>Beds</li><li><p>${resp.data[0].baths}</p>Baths</li></ul>
 </div></div></div> <p>${resp.data[0].building_type === 'exclusive' ? resp.data[0].street_address +' - ('+resp.data[0].unit +')' : resp.data[0].display_address} </p></a>`;
@@ -183,7 +182,11 @@ const multiMarkers = (coords, container, zoom = 10) => {
     mapControls(new mapboxgl.NavigationControl(), 'bottom-right');
 };
 
+// const
 
+/**
+ * Dray polygons
+ */
 const draw = () => {
     drawPolygon(broklyn, 'aass');
 };

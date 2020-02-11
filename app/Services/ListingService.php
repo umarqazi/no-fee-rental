@@ -572,11 +572,7 @@ class ListingService extends BuildingService {
      */
     private function __updateList( $id, $listing ) {
         if ( ! empty( $listing->thumbnail ) ) {
-            $listing->thumbnail = uploadImage(
-                $listing->thumbnail,
-                'images/listing/thumbnails',
-                true,
-                $listing->old_thumbnail );
+            $listing->thumbnail = uploadImage($listing->thumbnail, 'images/listing/thumbnails');
         } else {
             $listing->thumbnail = $listing->old_thumbnail;
         }

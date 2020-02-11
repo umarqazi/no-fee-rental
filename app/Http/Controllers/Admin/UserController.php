@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Services\UserService;
 use Illuminate\Http\Request;
 
+/**
+ * Class UserController
+ * @package App\Http\Controllers\Admin
+ */
 class UserController extends Controller {
 
     /**
@@ -51,7 +55,7 @@ class UserController extends Controller {
      */
 	public function delete(Request $request, $id) {
 		$user = $this->service->delete($id);
-        return sendResponse($request, $user, 'User has been deleted.');
+        return sendResponse($request, $user, 'User has been deactivated.');
 	}
 
 	/**
