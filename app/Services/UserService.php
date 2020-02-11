@@ -268,7 +268,9 @@ class UserService {
      * @return bool
      */
     public function delete($id) {
-        return $this->userRepo->delete($id);
+        return $this->userRepo->update($id, [
+            'email_verified_at' => Null
+        ]);
     }
 
     /**

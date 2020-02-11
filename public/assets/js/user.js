@@ -20,6 +20,8 @@ $(() => {
         $('.modal-title').text('Update User');
         $('.modal-footer input').val('Update');
         $('#add-member').modal('show');
+        $('select[name=user_type]').attr('readonly', 'readonly');
+        $('input[name=email]').attr('readonly', 'readonly');
         $('[name="email"]').rules('remove', 'remote') ;
         await updateRecord('#update_user', route);
     });
@@ -32,9 +34,9 @@ $(() => {
         $('.modal-footer input').val('Add User');
         $('#first_name').val('');
         $('#last_name').val('');
-        $('#email').val('');
+        $('#email').removeAttr('readonly').val('');
         $('#phone_number').val('');
-        $('#user_type').val('');
+        $('#user_type').removeAttr('readonly').val('');
         $('[name="email"]').rules('add', {
             remote : {
                 headers: {
