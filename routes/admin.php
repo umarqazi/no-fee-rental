@@ -50,7 +50,6 @@ Route::prefix('listing')->group(function() {
 
     Route::get('/add-images/{id}', 'Admin\ListingController@createImages')->name('admin.createListingImages');
     Route::post('/upload-images/{id}', 'Admin\ListingController@uploadImages')->name('admin.listingImages');
-    Route::get('/remove-image/{id}', 'Admin\ListingController@removeImage');
 
     Route::get('/repost/{id}', 'Admin\ListingController@repost')->name('admin.repostListing');
     Route::get('/edit/{id}', 'Admin\ListingController@edit')->name('admin.editListing');
@@ -66,6 +65,8 @@ Route::prefix('listing')->group(function() {
     Route::get('/archive-listing/{id}', 'Admin\ListingController@archive')->name('admin.archive');
     Route::get('/unArchive-listing/{id}', 'Admin\ListingController@unArchive')->name('admin.unArchive');
 });
+
+Route::get('/remove-listing-image/{id}', 'Admin\ListingController@removeImage');
 
 // Featured Listing Routes
 Route::get('/feature-listing/{sortBy}', 'Admin\FeaturedListingController@sortBy')->name('admin.featureSorting');
