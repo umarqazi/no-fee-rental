@@ -20,8 +20,8 @@ class RecoverPasswordController extends Controller
      * RecoverPasswordController constructor.
      */
     public function __construct() {
-        $this->passwordRecoveryService = new RecoverPasswordService();
         $this->middleware('guest');
+        $this->passwordRecoveryService = new RecoverPasswordService();
     }
 
     /**
