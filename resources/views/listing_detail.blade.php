@@ -76,16 +76,16 @@
                     <div class="clearfix" style="max-width:100%;">
                         <ul id="image-gallery" class="gallery list-unstyled cS-hidden">
                             @foreach($listing->images as $images)
-                                <li data-thumb="{{ Storage::url($images->listing_image ?? DLI) }}" class="large-view">
-                                    <a target="_blank" href="{{ Storage::url($images->listing_image ??  DLI) }}">
-                                        <img src="{{ Storage::url($images->listing_image ?? DLI) }}" alt=""/>
+                                <li data-thumb="{{ is_realty_listing($images->listing_image) }}" class="large-view">
+                                    <a target="_blank" href="{{ is_realty_listing($images->listing_image) }}">
+                                        <img src="{{ is_realty_listing($images->listing_image) }}" alt=""/>
                                     </a>
                                 </li>
                             @endforeach
                             @if(count($listing->images) < 1)
-                                <li data-thumb="{{ Storage::url($listing->thumbnail ?? DLI) }}" class="large-view">
-                                    <a target="_blank" href="{{ Storage::url($listing->thumbnail ??  DLI) }}">
-                                        <img src="{{ Storage::url($listing->thumbnail ?? DLI) }}" alt=""/>
+                                <li data-thumb="{{ is_realty_listing($listing->thumbnail) }}" class="large-view">
+                                    <a target="_blank" href="{{ is_realty_listing($listing->thumbnail) }}">
+                                        <img src="{{ is_realty_listing($listing->thumbnail) }}" alt=""/>
                                     </a>
                                 </li>
                             @endif

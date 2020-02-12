@@ -6052,7 +6052,7 @@ strong {
         padding-right: 15px;
     }
     .search-bdr-top {
-        padding: 10px 0px 10px 15px;
+        padding: 10px 15px 10px 15px;
     }
     .header-bg .search-property .search-fld {
         flex: 0 0 32%;
@@ -6445,7 +6445,6 @@ strong {
     .mobile-tabs-collapse-inner{
         display: block;
     }
-
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
@@ -6547,7 +6546,7 @@ strong {
     .neighborhood-search .search-result-wrapper .search-listing .featured-properties .property-listing.mobile-listing {
         display: block;
         height: auto;
-        overflow: inherit;
+        overflow: hidden;
         width: 100%;
     }
     .neighborhood-search .search-result-wrapper .search-listing .featured-properties .property-listing.mobile-listing .property-thumb {
@@ -6569,7 +6568,7 @@ strong {
         margin: 15px 0px 0px;
         padding: 0px;
     }
-    .neighborhood-search .search-result-wrapper #contentscroll22 .property-listing .owl-nav {
+    .neighborhood-search .search-result-wrapper #contentscroll-sec .property-listing .owl-nav {
         position: absolute;
         display: flex;
         justify-content: center;
@@ -6580,31 +6579,31 @@ strong {
         transform: translateY(-50%);
         color: #f36f21;
     }
-    .neighborhood-search .search-result-wrapper #contentscroll22 .property-listing .owl-nav .owl-prev span {
+    .neighborhood-search .search-result-wrapper #contentscroll-sec .property-listing .owl-nav .owl-prev span {
         color: #f36f21;
         font-size: 36px;
         line-height: 16px;
         height: auto;
     }
-    .neighborhood-search .search-result-wrapper #contentscroll22 .property-listing .owl-nav .owl-next span {
+    .neighborhood-search .search-result-wrapper #contentscroll-sec .property-listing .owl-nav .owl-next span {
         color: #f36f21;
         font-size: 36px;
         line-height: 16px;
         height: auto;
     }
-    .neighborhood-search .search-result-wrapper #contentscroll22 .property-listing .owl-nav button {
+    .neighborhood-search .search-result-wrapper #contentscroll-sec .property-listing .owl-nav button {
         margin: 0px !important;
         padding: 0px;
         outline: none !important;
         border-radius: 50%;
     }
-    .neighborhood-search .search-result-wrapper #contentscroll22 .property-listing .owl-nav button.owl-prev {
+    .neighborhood-search .search-result-wrapper #contentscroll-sec .property-listing .owl-nav button.owl-prev {
         background: url(../images/slider-arrow-left.png) no-repeat;
         background-size: 100%;
         width: 40px;
         height: 40px;
     }
-    .neighborhood-search .search-result-wrapper #contentscroll22 .property-listing .owl-nav button.owl-next {
+    .neighborhood-search .search-result-wrapper #contentscroll-sec .property-listing .owl-nav button.owl-next {
         background: url(../images/slider-arrow-right.png) no-repeat;
         background-size: 100%;
         width: 40px;
