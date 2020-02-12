@@ -499,6 +499,14 @@ function toObject( $data ) {
 }
 
 /**
+ * @param $image
+ * @return mixed
+ */
+function is_realty_listing($image) {
+    return strpos($image, 'http') !== false ? $image : Storage::url($image ?? DLI);
+}
+
+/**
  * @param $data
  *
  * @return mixed
@@ -1109,7 +1117,7 @@ function property_thumbs($listing) {
         }
     }
 
-    $html .= "<img src='".Storage::url($listing->thumbnail ?? DLI)."' alt='' class='main-img'>";
+    $html .= "<img src='".is_realty_listing($listing->thumbnail)."' alt='' class='main-img'>";
     $html .= "<div class='info'><div class='info-link-text'>";
     $html .= "<p>$ ".number_format($listing->rent)." / month&nbsp;&nbsp;</p>";
     $html .= "<small> (";
