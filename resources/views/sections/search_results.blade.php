@@ -1,114 +1,115 @@
-
-<div class="search-bdr-top">
-    <div class="mobile-view-dropdown">
-        <i class="fa fa-bars"></i> Filters
-    </div>
-    <div class="mobile-map-icon"><i class="fas fa-map-marked-alt"></i></div>
-    <div id="mobile-map-listing-view">
-        <div id="mobile-map"></div>
-    </div>
-    <div class="row" id="mobile-tabs-collapse">
-        <div class="listing-wrapp">
-            <div class=" ">
-                {{--Bedrooms--}}
-                {!! Form::model(app('request')->all(), ['url' => route($filter_route, $param ?? null), 'method' => 'get', 'id' => 'search']) !!}
-                <div class="dropdown-wrap">
-                    @if($neigh_filter)
-                        <div class="neighborhoods-dropdown-listings">
-                            <button type="button" class="btn btn-primary neighborhood-field PN" id="neigh-for-dropdown">
-                                {{ is_array(app('request')->get('neighborhood'))
-                                ? sprintf("Neighborhoods (%s)", count(app('request')->get('neighborhood')))
-                                : app('request')->get('neighborhood') ?? 'Neighborhoods' }}
-                            </button>
-                            <div class="dropdown-for-neigh dropdown-listiing-rent-page search-result-section-neighborhood" id="neighborhood-searchchecbox">
-                                {!! filter_neighborhood_select(app('request')->get('neighborhood')) !!}
+<div class="search-bdr-top-wrapper">
+    <div class="search-bdr-top">
+        <div class="mobile-view-dropdown">
+            <i class="fa fa-bars"></i> Filters
+        </div>
+        <div class="mobile-map-icon"><i class="fas fa-map-marked-alt"></i></div>
+        <div id="mobile-map-listing-view">
+            <div id="mobile-map"></div>
+        </div>
+        <div class="row">
+            <div id="mobile-tabs-collapse">
+                <div class="mobile-tabs-collapse-inner">
+                    <div class="listing-wrapp">
+                        {{--Bedrooms--}}
+                        {!! Form::model(app('request')->all(), ['url' => route($filter_route, $param ?? null), 'method' => 'get', 'id' => 'search']) !!}
+                        <div class="dropdown-wrap">
+                            @if($neigh_filter)
+                                <div class="neighborhoods-dropdown-listings">
+                                    <button type="button" class="btn btn-primary neighborhood-field PN" id="neigh-for-dropdown">
+                                        {{ is_array(app('request')->get('neighborhood'))
+                                        ? sprintf("Neighborhoods (%s)", count(app('request')->get('neighborhood')))
+                                        : app('request')->get('neighborhood') ?? 'Neighborhoods' }}
+                                    </button>
+                                    <div class="dropdown-for-neigh dropdown-listiing-rent-page search-result-section-neighborhood" id="neighborhood-searchchecbox">
+                                        {!! filter_neighborhood_select(app('request')->get('neighborhood')) !!}
+                                    </div>
+                                </div>
+                            @else
+                                <input type="hidden" name="neighborhood" value="{{ request()->segment(2) }}">
+                            @endif
+                            <div class="main-search-beds">
+                                <button type="button" class="btn btn-primary" id="beds-for-dropdown">Beds</button>
+                                <div class="dropdown-for-beds dropdown-listiing-rent-page search-beds PBD" id="advance-search-chkbox">
+                                    {!! multi_select_beds(5, app('request')->get('beds') ?? null) !!}
+                                </div>
                             </div>
-                        </div>
-                    @else
-                        <input type="hidden" name="neighborhood" value="{{ request()->segment(2) }}">
-                    @endif
-                    <div class="main-search-beds">
-                        <button type="button" class="btn btn-primary" id="beds-for-dropdown">Beds</button>
-                        <div class="dropdown-for-beds dropdown-listiing-rent-page search-beds PBD" id="advance-search-chkbox">
-                            {!! multi_select_beds(5, app('request')->get('beds') ?? null) !!}
-                        </div>
-                    </div>
-                    <div class="main-bath-search">
-                        <button type="button" class="btn btn-primary" id="bath-for-dropdown">Baths</button>
-                        <div class="dropdown-for-baths dropdown-listiing-rent-page search-bath PBA" id="advance-search-chkbox">
-                            {!! multi_select_baths(5, app('request')->get('baths') ?? null) !!}
-                        </div>
-                    </div>
+                            <div class="main-bath-search">
+                                <button type="button" class="btn btn-primary" id="bath-for-dropdown">Baths</button>
+                                <div class="dropdown-for-baths dropdown-listiing-rent-page search-bath PBA" id="advance-search-chkbox">
+                                    {!! multi_select_baths(5, app('request')->get('baths') ?? null) !!}
+                                </div>
+                            </div>
 
-                    <div class="dropdown-listing-price-wrapper">
-                        <button type="button" class="btn btn-primary" id="price-for-dropdown">Price</button>
-                        <div class="dropdown-for-price dropdown-listiing-rent-page" id="advance-search-chkbox">
-                            <ul>
-                                <li>
-                                    {!! Form::text('min_price', Null,['class' => 'form-control PPm', 'placeholder'
-=> '$ min']) !!}
-                                <li>To</li>
-                                <li>
-                                    {!! Form::text('max_price', Null, ['class' => 'form-control PPM', 'placeholder'
-=>'$ max']) !!}
-                            </ul>
+                            <div class="dropdown-listing-price-wrapper">
+                                <button type="button" class="btn btn-primary" id="price-for-dropdown">Price</button>
+                                <div class="dropdown-for-price dropdown-listiing-rent-page" id="advance-search-chkbox">
+                                    <ul>
+                                        <li>
+                                        {!! Form::text('min_price', Null,['class' => 'form-control PPm', 'placeholder'
+        => '$ min']) !!}
+                                        <li>To</li>
+                                        <li>
+                                        {!! Form::text('max_price', Null, ['class' => 'form-control PPM', 'placeholder'
+        =>'$ max']) !!}
+                                    </ul>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-primary advance-search" data-toggle="modal" data-target="#advance-search">More</button>
+                            {!! Form::button('Search', ['class' => 'btn btn-primary text-right', 'type' => 'submit', 'style'
+                            => 'background:#f36f21;color:#ffff; border-color:#f36f21; padding-left:35px; padding-right:35px;'])
+                             !!}
+                        </div>
+                        {!! Form::close() !!}
+                    </div>
+                    <div class="sortBy-listing">
+                        <div class="form-group sortBy-wraper">
+                            <label for="sortBy">Sort By:</label>
+                            {!! Form::select('sortBy', config('formfields.sortBy'), request()->get('sortBy') ?? null, ['class' => 'form-control']) !!}
                         </div>
                     </div>
-                    <button type="button" class="btn btn-primary advance-search" data-toggle="modal" data-target="#advance-search">More</button>
-                    {!! Form::button('Search', ['class' => 'btn btn-primary text-right', 'type' => 'submit', 'style'
-                    => 'background:#f36f21;color:#ffff; border-color:#f36f21; padding-left:35px; padding-right:35px;'])
-                     !!}
-                </div>
-                {!! Form::close() !!}
-            </div>
-            <div class="sortBy-listing">
-                <div class="form-group sortBy-wraper">
-                    <label for="sortBy">Sort By:</label>
-                    {!! Form::select('sortBy', config('formfields.sortBy'), request()->get('sortBy') ?? null, ['class' => 'form-control']) !!}
                 </div>
             </div>
         </div>
-
     </div>
-</div>
-<div class="search-result-wrapper">
-    <div class="search-listing">
-        <h3></h3>
-        <div id="boxscroll22">
-            <div class="featured-properties" id="contentscroll22">
-                <div class="property-listing neighbourhood-listing">
-                    @foreach($data->listings as $listing)
-                        <input type='hidden' name='map_location' value={{ $listing->map_location }}>
-                        {!! property_thumbs($listing) !!}
-                    @endforeach
-                    @if(count($data->listings) < 1)
-                        No results found
-                    @endif
-                </div>
-                <div class="property-listing mobile-listing">
-                    <div class="owl-carousel owl-theme">
+    <div class="search-result-wrapper">
+        <div class="search-listing">
+            <h3></h3>
+            <div id="boxscroll-section">
+                <div class="featured-properties" id="contentscroll22">
+                    <div class="property-listing neighbourhood-listing">
                         @foreach($data->listings as $listing)
-                            <div class="items">
-                                {!! property_thumbs($listing) !!}
-                            </div>
+                            <input type='hidden' name='map_location' value={{ $listing->map_location }}>
+                            {!! property_thumbs($listing) !!}
                         @endforeach
                         @if(count($data->listings) < 1)
                             No results found
                         @endif
                     </div>
+                    <div class="property-listing mobile-listing">
+                        <div class="owl-carousel owl-theme">
+                            @foreach($data->listings as $listing)
+                                <div class="items">
+                                    {!! property_thumbs($listing) !!}
+                                </div>
+                            @endforeach
+                            @if(count($data->listings) < 1)
+                                No results found
+                            @endif
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+        {{--Desktop Map--}}
+        @if(count($data->listings) > 0)
+            <div class="map-wrapper">
+                <div class="swipe-btn"><i class="fa fa-angle-left"></i></div>
+                <div id="desktop-map"></div>
+            </div>
+        @endif
     </div>
-    {{--Desktop Map--}}
-    @if(count($data->listings) > 0)
-        <div class="map-wrapper">
-            <div class="swipe-btn"><i class="fa fa-angle-left"></i></div>
-            <div id="desktop-map"></div>
-        </div>
-    @endif
 </div>
-
 
 {{--Advance Search Modal--}}
 @include('modals.advance_search')
@@ -128,9 +129,9 @@
     });
 
     @if(count($data->listings) > 0)
-        if(coords !== []) {
-            multiMarkers(coords, 'desktop-map', 10);
-        }
+    if(coords !== []) {
+        multiMarkers(coords, 'desktop-map', 10);
+    }
     @endif
 
     $(".neighborhood-search .search-result-wrapper .map-wrapper .swipe-btn").on('click', function () {

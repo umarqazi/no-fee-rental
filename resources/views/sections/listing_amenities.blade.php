@@ -8,6 +8,6 @@
             </ul>
         @endforeach
     @else
-        None
+        <p>None</p>
     @endif
 </div>
