@@ -86,7 +86,7 @@ trait DispatchNotificationService
         self::$data->view = 'email_confirmation';
         self::$data->subject = 'Email Confirmation';
         self::$data->toEmail = $data->email;
-        self::$data->url = route('user.confirmEmail', $data->remember_token);
+        self::$data->url = route('web.confirmEmail', $data->remember_token);
         self::__sendOnlyEmail();
     }
 
@@ -101,7 +101,7 @@ trait DispatchNotificationService
         self::$data->subject = 'Account Created';
         self::$data->toEmail = $data->email;
         self::$data->type = userTypeString($data->user_type);
-        self::$data->url = route($data->user_type == AGENT ? 'agent.signup_form' : 'user.change_password', $data->remember_token);
+        self::$data->url = route($data->user_type == AGENT ? 'agent.signup_form' : 'web.createPassword', $data->remember_token);
         self::__sendOnlyEmail();
     }
 
@@ -131,7 +131,7 @@ trait DispatchNotificationService
         self::$data->subject = 'No Fee Rental Invitation';
         self::$data->message = 'Agent invitation sent';
         self::$data->data->token = $data->data->token;
-        self::$data->url = route('agent.signup_form', self::$data->data->token);
+        self::$data->url = route('web.agentInviteSignUp', self::$data->data->token);
         return self::__onlyEmail();
     }
 

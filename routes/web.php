@@ -13,30 +13,26 @@
 
 Route::get('/', 'HomeController@index')->name('web.index');
 
-// Search Listing Route
+// Search Listing Routes
 Route::get('/search', 'SearchController@indexSearch')->name('web.indexSearch');
 Route::get('/advance-search', 'SearchController@advanceSearch')->name('web.advanceSearch');
 Route::get('/advance-search-filter', 'SearchController@filter')->name('web.advanceSearchFilter');
 
 // Contact Us Routes
-Route::get('/contact-us', 'ContactUsController@index')->name('web.contact-us');
+Route::get('/contact-us', 'ContactUsController@index')->name('web.contactUs');
 Route::post('/contact-us', 'ContactUsController@sendRequest')->name('web.sendRequest');
 
-// subscription through mail chimp
-Route::post('/newsletter-subscribe', 'NewsletterController@subscribe')->name('newsLetter-subscription');
-
-// Wordpress Pages
-Route::get('/press', 'ContactUsController@showPress')->name('press');
-Route::post('newsletter', 'NewsletterController@store');
+// Mailchimp Subscription Routes
+Route::post('/subscribe-newsletter', 'NewsletterController@subscribe')->name('web.newsletter');
 
 // Profile Routes
 Route::get('/profile/{agentId}', 'UserController@agentProfileWithListing')->name('web.agentProfile');
 Route::get('/profile-search-filters/{agentId}', 'UserController@agentProfileSearchFilter')->name('web.agentProfileSearchFilter');
 Route::get('/profile-advance-search/{agentId}', 'UserController@agentProfileAdvanceSearch')->name('web.agentProfileAdvanceSearch');
 
-// Add User By Admin Change Password Routes
-Route::get('/change-password/{token}', 'UserController@changePassword')->name('user.change_password');
-Route::post('/change-password/{token}', 'UserController@updatePassword')->name('change-password');
+// Add User By Admin Create Password Routes
+Route::get('/create-password/{token}', 'UserController@changePassword')->name('web.createPassword');
+Route::post('/change-password/{token}', 'UserController@updatePassword')->name('web.updatePassword');
 
 // Forgot Password
 Route::get('/reset', 'RecoverPasswordController@sendRequest');
@@ -45,16 +41,16 @@ Route::post('/reset-password', 'RecoverPasswordController@sendRequest')->name('p
 Route::post('/update-password', 'RecoverPasswordController@recover')->name('password.update');
 Route::get('/reset-password/{token}', 'RecoverPasswordController@recoverForm')->name('recover.password');
 
-// Email Confirmation
-Route::get('/confirm-email/{token}', 'UserController@confirmEmail')->name('user.confirmEmail');
+// Email Confirmation (New Signed Up [Renter, Agent])
+Route::get('/confirm-email/{token}', 'UserController@confirmEmail')->name('web.confirmEmail');
 
-// Email Validation
+// Email Validation (By Ajax)
 Route::post('/verify-email', 'UserController@verifyEmail');
 
-// Renter  Validation
+// Renter  Validation (By Ajax)
 Route::post('/verify-renter', 'UserController@renterCheck');
 
-// License Routes
+// License Verification (By Ajax)
 Route::post('/verify-license', 'UserController@verifyLicense');
 Route::get('/license-verification/{license_number}', 'NYCProxyController@licenseVerification');
 
@@ -62,18 +58,18 @@ Route::get('/license-verification/{license_number}', 'NYCProxyController@license
 Route::post('/login')->name('attempt.login')->middleware('authguard');
 
 // Route for Invited Agent Signup
-Route::get('/signup/{token}', 'UserController@invitedAgentSignupForm')->name('agent.signup_form');
+Route::get('/agent-sign-up/{token}', 'UserController@invitedAgentSignupForm')->name('web.agentInviteSignUp');
 
 // User Signup Routes
-Route::post('/user-signup', 'UserController@signup')->name('user.signup');
-Route::post('/agent/signup', 'UserController@invitedAgentSignup')->name('agent.signup');
-Route::post('/renter-signup', 'UserController@renterSignup')->name('renter.signup');
+Route::post('/user/sign-up', 'UserController@signup')->name('user.signup');
+Route::post('/agent/sign-up', 'UserController@invitedAgentSignup')->name('agent.signup');
+Route::post('/renter/sign-up', 'UserController@renterSignup')->name('renter.signup');
 
 // Messaging Routes
 Route::post('/send-message', 'MessageController@send')->name('send.message');
 
 // Realty MX Routes
-Route::get('/realty/{file}', 'RealtyMXController@dispatchJob');
+Route::get('/realty/{fileName}', 'RealtyMXController@dispatchJob');
 Route::get('/realty-mx/{client}/{listing}', 'RealtyMXController@detail')->name('web.realty');
 
 // Listing Routes
@@ -139,6 +135,13 @@ Route::post('/nyc-data', 'NYCProxyController@nycData');
 
 // Member accept invitation
 Route::get('/accept-invitation/{token}', 'Agent\MemberController@acceptInvitation')->name('member.acceptInvitation');
+
+Route::get('/download/{filename}', function ($filename) {
+          //PDF file is stored under project/public/download/info.pdf
+    $file = "/var/www/html/no-fee-rental/storage/app/public/realty/csv/Realty-20200211/FtyzkRIsqN.csv";
+    $headers = array('Content-Type: application/csv');
+    return Response::download($file, 'realty.csv', $headers);
+});
 
 // Application Controlling Routes
 Route::get('/all-clear', function() {

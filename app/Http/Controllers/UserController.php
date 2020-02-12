@@ -38,7 +38,7 @@ class UserController extends Controller {
      * @return Factory|View
      */
 	public function changePassword($token) {
-		return view('change_password', compact('token'));
+		return view('create_password', compact('token'));
 	}
 
 	/**
@@ -114,7 +114,7 @@ class UserController extends Controller {
                         'alert_type' => 'success',
                         'message' => 'Your email has been verified. Kindly choose a plan to post listings.'
                     ])
-                : redirect(route('web.index'))->with(
+                : redirect(route('renter.index'))->with(
                     [
                         'alert_type' => 'success',
                         'message' => 'Your email has been verified.'
