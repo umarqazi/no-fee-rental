@@ -936,7 +936,7 @@ function neighborhood_site_map() {
 
             if(!$hasOpen) {
                 $hasOpen = true;
-                $content .= "<div class='col-md-4'><ul class=\"neighborhood-list\">";
+                $content .= "<div class='col-md-4 col-sm-4'><ul class=\"neighborhood-list\">";
             }
 
             $content .= "<li>";

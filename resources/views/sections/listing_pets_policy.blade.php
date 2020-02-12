@@ -3,7 +3,7 @@
     <h3>Pet Policy</h3>
     @php $pet = petPolicy($listing->features); @endphp
     @if(count($pet) < 1)
-        None
+        <p>None</p>
     @endif
     @foreach($pet as $feature)
         <ul class="second-ul">
