@@ -1,7 +1,5 @@
 @extends('layouts.app')
-
-@section('title', 'No Fee Rental | Reset Password')
-
+@section('title', 'No Fee Rental | Create Password')
 @section('content')
     <section class="inner-pages wow fadeIn" data-wow-delay="0.2s">
         <div class="container-lg">
@@ -9,7 +7,7 @@
             <div class="contact-info">
                 <div class="row justify-content-center mt-5">
                     <div class="col-lg-6">
-                        <form method="POST" class="ajax" reset="true" id="create-password" action="{{route('change-password', $token)}}">
+                        <form method="POST" class="ajax" reset="true" id="create-password" action="{{ route('web.updatePassword', $token) }}">
                             <div class="row">
                                 <div class="col-sm-12">
                                     @csrf

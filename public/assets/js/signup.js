@@ -1,16 +1,19 @@
 $(() => {
-    $('body').on('form-success-signup_form', function () {
+
+    let $body = $('body');
+
+    $body.on('form-success-signup_form', function () {
+        $('#signup').modal('hide');
         $('.check').remove();
     });
 
-    $('body').on('click', '#signup-option1', function(e) {
-        $('#signup_form').attr({'action': `${window.location.origin}/renter-signup`});
-
+    $body.on('click', '#signup-option1', function(e) {
+        $('#signup_form').attr({'action': `${window.location.origin}/renter/sign-up`});
     });
 
-    $('body').on('click', '#signup-option2', function(e) {
-        $('#signup_form').attr({'action': `${window.location.origin}/user-signup`});
-    })
+    $body.on('click', '#signup-option2', function(e) {
+        $('#signup_form').attr({'action': `${window.location.origin}/user/sign-up`});
+    });
 
     $("#signup-option2").trigger('click');
     let form = $('#signup_form');
@@ -26,7 +29,7 @@ $(() => {
             {license_number},
             false);
 
-        if (license_number !== '' && license_verify == 'true' && $selector.val().length >6) {
+        if (license_number !== '' && license_verify === 'true' && $selector.val().length > 6) {
             let res = await ajaxRequest(
                 `/license-verification/${license_number}`,
                 'GET',
@@ -61,9 +64,13 @@ $(() => {
     });
 });
 
+/**
+ *
+ * @param type
+ * @param msg
+ */
 function message(type, msg) {
-    $('.license_num > div.col-sm-6')
-        .after(`
+    $('.license_num > div.col-sm-6').after(`
             <div class="col-sm-6 ${type}">
                 <div class="verified-icon">
                     <i class="fas fa-${type}-circle"></i>

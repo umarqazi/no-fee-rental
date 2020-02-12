@@ -22,7 +22,7 @@
                 <h4 class="collapseabe-link"> Support <i class="fas fa-angle-down"></i></h4>
                 <div class="collapse-menu">
                     <ul>
-                        <li><a href="{!! route('web.contact-us') !!}" class="ft-links">Contact Us</a></li>
+                        <li><a href="{{ route('web.contactUs') }}" class="ft-links">Contact Us</a></li>
                         <li><a href="{{ route('web.siteMap') }}" class="ft-links">Site Map</a></li>
                         <li><a href="/blog/feed-back" class="ft-links">Feedback</a></li>
                         <li><a href="{{ route('web.advertise') }}" class="ft-links">Advertise with Us</a></li>
@@ -45,25 +45,30 @@
                 <div class="newsletter">
                     <div class="title">subscribe news letter</div>
                     <p>Enter your email address & get daily newsletter</p>
-                    {!! Form::open(['url' => route('newsLetter-subscription'), 'id' => 'newsletter-form', 'class' => 'newsletter-form ajax', 'reset' => 'true', 'method' => 'post']) !!}
+                    {!! Form::open([
+                        'url' => route('web.newsletter'),
+                        'id' => 'newsletter-form',
+                        'class' => 'newsletter-form ajax',
+                        'reset' => 'true',
+                        'method' => 'post'])
+                    !!}
                     {!! Form::text('email', null, ['class' => 'fld', 'placeholder' => 'Email Address', 'autocomplete' => 'off']) !!}
-                    <label id="error" class="error email" for="email"></label>
                     {!! Form::submit('Subscribe', ['class' => 'btn-default']) !!}
                     {!! Form::close() !!}
                 </div>
             </li>
         </ul>
         <div class="copyright wow fadeIn " data-wow-delay="0.3s">
-            <p><img src="{{ asset('assets/images/home-icon.png') }}" /> Fair Housing & Equal Opportunity</p>
+            <p><img src="{{ Storage::url('assets/images/home-icon.png') }}" /> Fair Housing & Equal Opportunity</p>
             <ul class="social-icons">
                 <li>
-                    <a href="#"><img src="{{ asset('assets/images/fb-icon.png') }}" alt="" /></a>
+                    <a href="#"><img src="{{ Storage::url('assets/images/fb-icon.png') }}" alt="" /></a>
                 </li>
                 <li>
-                    <a href="#"><img src="{{ asset('assets/images/twitter-icon.png') }}" alt="" /></a>
+                    <a href="#"><img src="{{ Storage::url('assets/images/twitter-icon.png') }}" alt="" /></a>
                 </li>
                 <li>
-                    <a href="#"><img src="{{ asset('assets/images/google-icon.png') }}" alt="" /></a>
+                    <a href="#"><img src="{{ Storage::url('assets/images/google-icon.png') }}" alt="" /></a>
                 </li>
             </ul>
         </div>

@@ -3,7 +3,7 @@
     <h3>Unit Features</h3>
     @php $unit = unitFeature($listing->features); @endphp
     @if(count($unit) < 1)
-        None
+        <p>None</p>
     @endif
     @foreach($unit as $feature)
         <ul class="second-ul">
