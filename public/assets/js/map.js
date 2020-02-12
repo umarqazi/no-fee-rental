@@ -139,7 +139,6 @@ const multiMarkers = (coords, container, zoom = 10) => {
 
     coords.forEach((coords, i) => {
         coords = JSON.parse(coords);
-        // MAP.flyTo({center: setLatLng(coords)});
 
         i = new mapboxgl.Marker({
             style: "cursor:pointer",
@@ -327,6 +326,13 @@ const drawPolygon = ($coordinates, id) => {
  * jquery api call
  */
 $(() => {
+
+    $('.property-thumb').hover(function() {
+        let lat_lng = JSON.parse($(this).find('input[name=map_location]').val());
+        MAP.setZoom = 20;
+        MAP.flyTo({center: setLatLng(lat_lng)});
+    });
+
     $('body').on('keyup, blur', '.mapboxgl-ctrl-geocoder--input', function() {
         let required = ['poi', 'address'];
         setTimeout(() => {

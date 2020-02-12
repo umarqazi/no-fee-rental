@@ -26,7 +26,7 @@ class Listing extends Model {
         'thumbnail', 'baths', 'bedrooms', 'unit', 'rent', 'square_feet',
         'description', 'is_featured', 'map_location', 'listing_type', 'is_convertible',
 		'visibility', 'realty_url', 'availability_type', 'availability', 'renter_rebate',
-        'application_fee', 'deposit', 'lease_term', 'free_months', 'freshness_score'
+        'application_fee', 'deposit', 'lease_term', 'free_months', 'freshness_score', 'created_at'
 	];
 
     /**
