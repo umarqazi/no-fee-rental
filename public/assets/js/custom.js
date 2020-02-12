@@ -291,7 +291,6 @@ $(() => {
 
     // end range slider 3
 
-
     $('.listing-Details .apointment-tabs ul li').click(function() {
         $('.listing-Details .apointment-tabs ul li').removeClass('active');
         $(this).addClass('active');
@@ -305,8 +304,14 @@ $(() => {
     });
 
     $(".mobile-view-dropdown").on('click', function() {
-        $(this).find("i").toggleClass('fa-bars fa-times');
+        // $(this).find("i").toggleClass('fa-bars fa-times');
         $("#mobile-tabs-collapse").slideToggle();
+    });
+    $('.search-bdr-top .mobile-view-dropdown').click( function () {
+        $('.search-result-wrapper .map-wrapper').hide();
+    });
+    $('.mobile-map-icon').click( function () {
+        $('#mobile-tabs-collapse').hide();
     });
 
     $(".listing-large-view").click(function() {
@@ -729,6 +734,7 @@ $(() => {
     $('.recent-star').click(function () {
         $(this).toggleClass('far fa-star fas fa-star');
     });
+
     $('[data-toggle="tooltip"]').tooltip();
 
     $(function() {
