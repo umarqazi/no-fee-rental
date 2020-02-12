@@ -1,3 +1,6 @@
+
+const AWS = "https://nfr-bucket.s3.us-east-2.amazonaws.com/";
+
 /**
  *
  * @param url
@@ -354,6 +357,25 @@ const setBySelector = function (selector) {
         }
     });
     return pushColumns(columns);
+};
+
+/**
+ *
+ * @param image
+ * @returns {string}
+ */
+const is_realty_listing = (image) => {
+    return image.indexOf('http') > -1
+        ? image : AWS + image;
+};
+
+/**
+ *
+ * @param listing
+ * @returns {*}
+ */
+const is_exclusive = (listing) => {
+    return listing.building_type === 'exclusive' ? listing.street_address + ' - (' + listing.unit + ')' : listing.display_address
 };
 
 /**
