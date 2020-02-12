@@ -72,12 +72,22 @@
             </div>
         </div>
     </div>
-    <div class="search-result-wrapper">
-        <div class="search-listing">
-            <h3></h3>
-            <div id="boxscroll-section">
-                <div class="featured-properties" id="contentscroll-sec">
-                    <div class="property-listing neighbourhood-listing">
+</div>
+<div class="search-result-wrapper">
+    <div class="search-listing">
+        <h3></h3>
+        <div id="boxscroll22">
+            <div class="featured-properties" id="contentscroll22">
+                <div class="property-listing neighbourhood-listing">
+                    @foreach($data->listings as $listing)
+                        {!! property_thumbs($listing, true) !!}
+                    @endforeach
+                    @if(count($data->listings) < 1)
+                        No results found
+                    @endif
+                </div>
+                <div class="property-listing mobile-listing">
+                    <div class="owl-carousel owl-theme">
                         @foreach($data->listings as $listing)
                             <input type='hidden' name='map_location' value={{ $listing->map_location }}>
                             {!! property_thumbs($listing) !!}
@@ -129,9 +139,9 @@
     });
 
     @if(count($data->listings) > 0)
-    if(coords !== []) {
-        multiMarkers(coords, 'desktop-map', 10);
-    }
+        if(coords !== []) {
+            multiMarkers(coords, 'desktop-map', 15);
+        }
     @endif
 
     $(".neighborhood-search .search-result-wrapper .map-wrapper .swipe-btn").on('click', function () {
@@ -140,7 +150,7 @@
         $body.find('#desktop-map').remove();
         $body.find('.map-wrapper').append(`<div id="desktop-map"></div>`);
         setTimeout(() => {
-            multiMarkers(coords, 'desktop-map', 10);
+            multiMarkers(coords, 'desktop-map', 15);
         }, 100);
         $(".neighborhood-search .search-result-wrapper .search-listing").toggleClass('hide-list');
         $(".neighborhood-search .search-result-wrapper .map-wrapper").toggleClass('full-map');

@@ -121,10 +121,7 @@ class RealtyMXService extends ListingService {
             $amenities    = !isset($details->amenities) ?: $this->__addAmenities(collect($details->amenities));
             $images       = $this->__images( $listing->get( 'media' )->photo );
             $location     = $listing->get( 'location' );
-            $map_location = json_encode( [
-                'latitude'  => $location->latitude,
-                'longitude' => $location->longitude
-            ] );
+            $map_location = sprintf('{"latitude":%s,"longitude":%s}', $location->latitude, $location->longitude);
 
             $data = [
                 'realty_id'       => $attrib->id ?? null,
@@ -145,6 +142,7 @@ class RealtyMXService extends ListingService {
                 'unit'            => $location->apartment ?? null,
                 'description'     => $details->description ?? null,
                 'visibility'      => ACTIVELISTING,
+                'created_at'      => $details->listedOn,
                 'is_featured'     => DEACTIVE ?? null,
                 'contact_representative' => null,
                 'map_location'    => $map_location
