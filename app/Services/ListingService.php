@@ -186,11 +186,9 @@ class ListingService extends BuildingService {
      * @return mixed
      */
     public function get($request) {
-        $location = json_decode($request->map_location);
-        $map = sprintf('{"latitude":"%s","longitude":"%s"}', $location->latitude, $location->longitude);
         return $this->listingRepo->find([
             'visibility' => ACTIVELISTING,
-            'map_location' => $map
+            'map_location' => $request->map_location
         ])->get();
     }
 

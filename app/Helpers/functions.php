@@ -1095,12 +1095,13 @@ function features() {
 
 /**
  * @param $listing
- * @return string|nul
- *
+ * @param bool $map_location
+ * @return string|null
  */
-function property_thumbs($listing) {
+function property_thumbs($listing, $map_location = false) {
     $html = null;
     $html .= "<div class='property-thumb'><div class='check-btn'>";
+    if($map_location) $html .= "<input type='hidden' name='map_location' value='{$listing->map_location}'>";
     $html .= "<a href='javascript:void(0);'>";
     $html .= "<button class='btn-default' list_id='{$listing->id}' to='{$listing->agent->id}' data-target=\"#check-availability\">Check Availability</button>";
     $html .= "</a></div>";

@@ -78,8 +78,7 @@
             <div class="featured-properties" id="contentscroll22">
                 <div class="property-listing neighbourhood-listing">
                     @foreach($data->listings as $listing)
-                        <input type='hidden' name='map_location' value={{ $listing->map_location }}>
-                        {!! property_thumbs($listing) !!}
+                        {!! property_thumbs($listing, true) !!}
                     @endforeach
                     @if(count($data->listings) < 1)
                         No results found
@@ -129,7 +128,7 @@
 
     @if(count($data->listings) > 0)
         if(coords !== []) {
-            multiMarkers(coords, 'desktop-map', 10);
+            multiMarkers(coords, 'desktop-map', 15);
         }
     @endif
 
@@ -139,7 +138,7 @@
         $body.find('#desktop-map').remove();
         $body.find('.map-wrapper').append(`<div id="desktop-map"></div>`);
         setTimeout(() => {
-            multiMarkers(coords, 'desktop-map', 10);
+            multiMarkers(coords, 'desktop-map', 15);
         }, 100);
         $(".neighborhood-search .search-result-wrapper .search-listing").toggleClass('hide-list');
         $(".neighborhood-search .search-result-wrapper .map-wrapper").toggleClass('full-map');
