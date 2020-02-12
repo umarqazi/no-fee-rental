@@ -4,9 +4,9 @@
             <i class="fa fa-bars"></i> Filters
         </div>
         <div class="mobile-map-icon"><i class="fas fa-map-marked-alt"></i></div>
-        <div id="mobile-map-listing-view">
-            <div id="mobile-map"></div>
-        </div>
+            <div id="mobile-map-listing-view">
+                <div id="mobile-map"></div>
+            </div>
         <div class="row">
             <div id="mobile-tabs-collapse">
                 <div class="mobile-tabs-collapse-inner">
@@ -76,7 +76,7 @@
         <div class="search-listing">
             <h3></h3>
             <div id="boxscroll-section">
-                <div class="featured-properties" id="contentscroll22">
+                <div class="featured-properties" id="contentscroll-sec">
                     <div class="property-listing neighbourhood-listing">
                         @foreach($data->listings as $listing)
                             <input type='hidden' name='map_location' value={{ $listing->map_location }}>
@@ -94,7 +94,7 @@
                                 </div>
                             @endforeach
                             @if(count($data->listings) < 1)
-                                No results found
+                                    <p>No results found</p>
                             @endif
                         </div>
                     </div>
