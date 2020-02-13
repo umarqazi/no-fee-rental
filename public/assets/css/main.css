@@ -2831,6 +2831,10 @@ footer .copyright .social-icons li a:hover {
     overflow-x: hidden;
     padding-right: 5px;
 }
+.no-result-found-search{
+    width: 100%;
+    text-align: center;
+}
 
 
 /*Rent calculator*/
@@ -4272,7 +4276,7 @@ footer .copyright .social-icons li a:hover {
 
 .property-listing.neighbourhood-listing {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     flex-wrap: wrap;
 }
 #mobile-tabs-collapse{
@@ -5518,7 +5522,7 @@ strong {
         flex: 0 0 30%;
     }
     .property-listing.neighbourhood-listing {
-        justify-content: center;
+        justify-content: flex-start;
     }
 }
 
