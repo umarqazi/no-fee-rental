@@ -16,7 +16,7 @@
                 </div>
             </div>
             <div class="property">
-                <img src="{{ Storage::url($inbox->listing->thumbnail ?? DLI) }}" alt="" />
+                <img src="{{ is_realty_listing($inbox->listing->thumbnail) }}" alt="" />
                 <div class="info">
                     <ul>
                         <li><i class="fa fa-bed"></i> {{ str_formatting($inbox->listing->bedrooms, 'Bed') }}</li>
