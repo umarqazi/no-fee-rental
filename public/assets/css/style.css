@@ -594,7 +594,7 @@
 
 .listing-aminities-sec {
     background-color: #F4F5F8;
-    padding: 30px 0px;
+    padding: 30px 0px 20px;
 }
 
 .location-map-sec {
@@ -2177,6 +2177,7 @@ main {
 }
 
 @media only screen and (max-width: 576px) {
+
     .view-buttons {
         margin-bottom: 30px;
     }
@@ -2203,6 +2204,8 @@ main {
         margin-bottom: 5px;
     }
 }
+
+
 .listing-info .fill-heart {
     display: inline-block;
     font-size: 25px;

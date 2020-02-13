@@ -5470,8 +5470,18 @@ strong {
         box-shadow: 0 1em 0 -.2em;
     }
 }
-
 /* end loaders*/
+
+/*resend email template css*/
+.resend-email-wraper img{
+    width: 75px;
+    height: 75px;
+    margin-bottom: 15px;
+}
+.resend-email-wraper h2{
+    margin-bottom: 15px;
+}
+
 /*Responsive style*/
 
 @media all and (min-width:4000px) {
@@ -7167,6 +7177,9 @@ strong {
     }
     .financial-district-inner .select2-container .select2-selection--single {
         height: 35px !important;
+    }
+    .listing-aminities-sec.listing-aminities-p-color .col-sm-4{
+        margin-bottom: 10px;
     }
 }
 
