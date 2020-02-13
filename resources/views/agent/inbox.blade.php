@@ -5,7 +5,7 @@
         <div class="user-info">
             <div class="property-info">
                 <div class="img-wrap">
-                    <img src="{{ Storage::url($collection->listing->thumbnail ?? DLI ) }}" alt="">
+                    <img src="{{ is_realty_listing($collection->listing->thumbnail) }}" alt="">
                 </div>
                 <div class="info">
                     <div class="title">
