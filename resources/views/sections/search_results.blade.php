@@ -4,9 +4,9 @@
             <i class="fa fa-bars"></i> Filters
         </div>
         <div class="mobile-map-icon"><i class="fas fa-map-marked-alt"></i></div>
-            <div id="mobile-map-listing-view">
-                <div id="mobile-map"></div>
-            </div>
+        <div id="mobile-map-listing-view">
+            <div id="mobile-map"></div>
+        </div>
         <div class="row">
             <div id="mobile-tabs-collapse">
                 <div class="mobile-tabs-collapse-inner">
@@ -47,18 +47,18 @@
                                     <ul>
                                         <li>
                                         {!! Form::text('min_price', Null,['class' => 'form-control PPm', 'placeholder'
-        => '$ min']) !!}
+                                        => '$ min']) !!}
                                         <li>To</li>
                                         <li>
                                         {!! Form::text('max_price', Null, ['class' => 'form-control PPM', 'placeholder'
-        =>'$ max']) !!}
+                                        =>'$ max']) !!}
                                     </ul>
                                 </div>
                             </div>
                             <button type="button" class="btn btn-primary advance-search" data-toggle="modal" data-target="#advance-search">More</button>
                             {!! Form::button('Search', ['class' => 'btn btn-primary text-right', 'type' => 'submit', 'style'
                             => 'background:#f36f21;color:#ffff; border-color:#f36f21; padding-left:35px; padding-right:35px;'])
-                             !!}
+                            !!}
                         </div>
                         {!! Form::close() !!}
                     </div>
@@ -72,25 +72,14 @@
             </div>
         </div>
     </div>
-</div>
-<div class="search-result-wrapper">
-    <div class="search-listing">
-        <h3></h3>
-        <div id="boxscroll22">
-            <div class="featured-properties" id="contentscroll22">
-                <div class="property-listing neighbourhood-listing">
-                    @foreach($data->listings as $listing)
-                        {!! property_thumbs($listing, true) !!}
-                    @endforeach
-                    @if(count($data->listings) < 1)
-                        No results found
-                    @endif
-                </div>
-                <div class="property-listing mobile-listing">
-                    <div class="owl-carousel owl-theme">
+    <div class="search-result-wrapper">
+        <div class="search-listing">
+            <h3></h3>
+            <div id="boxscroll-section">
+                <div class="featured-properties" id="contentscroll-sec">
+                    <div class="property-listing neighbourhood-listing">
                         @foreach($data->listings as $listing)
-                            <input type='hidden' name='map_location' value={{ $listing->map_location }}>
-                            {!! property_thumbs($listing) !!}
+                            {!! property_thumbs($listing, true) !!}
                         @endforeach
                         @if(count($data->listings) < 1)
                             No results found
@@ -100,11 +89,11 @@
                         <div class="owl-carousel owl-theme">
                             @foreach($data->listings as $listing)
                                 <div class="items">
-                                    {!! property_thumbs($listing) !!}
+                                    {!! property_thumbs($listing, true) !!}
                                 </div>
                             @endforeach
                             @if(count($data->listings) < 1)
-                                    <p>No results found</p>
+                                <p>No results found</p>
                             @endif
                         </div>
                     </div>
@@ -139,9 +128,9 @@
     });
 
     @if(count($data->listings) > 0)
-        if(coords !== []) {
-            multiMarkers(coords, 'desktop-map', 15);
-        }
+    if(coords !== []) {
+        multiMarkers(coords, 'desktop-map', 15);
+    }
     @endif
 
     $(".neighborhood-search .search-result-wrapper .map-wrapper .swipe-btn").on('click', function () {
