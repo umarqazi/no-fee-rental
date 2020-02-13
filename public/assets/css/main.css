@@ -4986,7 +4986,7 @@ list .property-info .info p {
 .neighborhood-banner {
     background: url(../images/neighborhood-banner.jpg) no-repeat;
     width: 100%;
-    height: 480px;
+    height: 300px;
     background-size: cover !important;
     background-position: center center !important;
     object-fit: cover;
@@ -6907,10 +6907,10 @@ strong {
         height: 220px;
     }
     .neighborhood-banner {
-        height: 350px;
+        height: 220px;
     }
     .four-o-four-wrapper {
-        height: 350px;
+        height: 220px;
     }
     .four-o-four-inner-content img {
         width: 250px;
@@ -7118,10 +7118,10 @@ strong {
         height: 120px;
     }
     .neighborhood-banner {
-        height: 220px;
+        height: 120px;
     }
     .four-o-four-wrapper {
-        height: 220px;
+        height: 120px;
     }
     .financial-district-inner {
         display: block;
@@ -7144,7 +7144,30 @@ strong {
         margin-left: 0;
         text-align: center;
     }
-
+    .financial-district-inner h3{
+        font-size: 14px;
+    }
+    .financial-district-inner .form-group{
+        height: calc(33px + 2px);
+        font-size: 14px;
+    }
+    .financial-district-inner .select2-container--default .select2-selection--single .select2-selection__rendered {
+        line-height: 35px !important;
+        font-size: 14px;
+    }
+    .financial-district-inner .select2-container .select2-selection--single {
+        height: 35px !important;
+    }
+    .select2-container--default .select2-selection--single .select2-selection__arrow {
+        height: 33px !important;
+    }
+    .financial-district-inner select.form-control:not([size]):not([multiple]) {
+        height: calc(33px + 2px);
+        font-size: 14px;
+    }
+    .financial-district-inner .select2-container .select2-selection--single {
+        height: 35px !important;
+    }
 }
 
 
