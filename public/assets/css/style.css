@@ -565,6 +565,9 @@
     font-size: 15px;
     color: #f36f21;
 }
+.listing-aminities-sec.listing-aminities-p-color p{
+    color: #272a31;
+}
 
 .listing-aminities-sec ul li {
     position: relative;
