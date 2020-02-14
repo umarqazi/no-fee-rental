@@ -308,11 +308,11 @@ $(() => {
         $(this).find("i").toggleClass('fa-bars fa-times');
         $("#mobile-tabs-collapse").slideToggle();
     });
-    $('.search-bdr-top .mobile-view-dropdown').click( function () {
-        $('.search-result-wrapper .map-wrapper').hide();
-        $('.mobile-map-icon').find('i').removeClass('fa-times');
-        $('.mobile-map-icon').find('i').addClass('fa-map-marked-alt');
-    });
+    // $('.search-bdr-top .mobile-view-dropdown').click( function () {
+    //     $('.search-result-wrapper .map-wrapper').hide();
+    //     $('.mobile-map-icon').find('i').removeClass('fa-times');
+    //     $('.mobile-map-icon').find('i').addClass('fa-map-marked-alt');
+    // });
     $('.mobile-map-icon').click( function () {
         $('#mobile-tabs-collapse').hide();
         $('.mobile-view-dropdown').find('i').removeClass('fa-times');

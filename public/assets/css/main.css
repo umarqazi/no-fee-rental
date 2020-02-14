@@ -2831,6 +2831,10 @@ footer .copyright .social-icons li a:hover {
     overflow-x: hidden;
     padding-right: 5px;
 }
+.no-result-found-search{
+    width: 100%;
+    text-align: center;
+}
 
 
 /*Rent calculator*/
@@ -4272,7 +4276,7 @@ footer .copyright .social-icons li a:hover {
 
 .property-listing.neighbourhood-listing {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     flex-wrap: wrap;
 }
 #mobile-tabs-collapse{
@@ -5470,8 +5474,18 @@ strong {
         box-shadow: 0 1em 0 -.2em;
     }
 }
-
 /* end loaders*/
+
+/*resend email template css*/
+.resend-email-wraper img{
+    width: 75px;
+    height: 75px;
+    margin-bottom: 15px;
+}
+.resend-email-wraper h2{
+    margin-bottom: 15px;
+}
+
 /*Responsive style*/
 
 @media all and (min-width:4000px) {
@@ -5508,7 +5522,7 @@ strong {
         flex: 0 0 30%;
     }
     .property-listing.neighbourhood-listing {
-        justify-content: center;
+        justify-content: flex-start;
     }
 }
 
@@ -7167,6 +7181,9 @@ strong {
     }
     .financial-district-inner .select2-container .select2-selection--single {
         height: 35px !important;
+    }
+    .listing-aminities-sec.listing-aminities-p-color .col-sm-4{
+        margin-bottom: 10px;
     }
 }
 

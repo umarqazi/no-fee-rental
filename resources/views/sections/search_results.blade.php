@@ -82,7 +82,9 @@
                             {!! property_thumbs($listing, true) !!}
                         @endforeach
                         @if(count($data->listings) < 1)
-                            No results found
+                                <div class="no-result-found-search">
+                                    <p>No results found</p>
+                                </div>
                         @endif
                     </div>
                     <div class="property-listing mobile-listing">
@@ -93,7 +95,9 @@
                                 </div>
                             @endforeach
                             @if(count($data->listings) < 1)
-                                <p>No results found</p>
+                                <div class="no-result-found-search">
+                                    <p>No results found</p>
+                                </div>
                             @endif
                         </div>
                     </div>
