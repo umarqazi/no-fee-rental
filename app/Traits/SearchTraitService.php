@@ -91,7 +91,7 @@ trait SearchTraitService
                 'square_min' => isset($request->square_min) ? toValidPrice($request->square_min) : MINSQUARE,
                 'square_max' => isset($request->square_max) ? toValidPrice($request->square_max) : MAXSQUARE
             ],
-            'sortBy' => $request->sortBy
+            'sortBy' => $request->sortBy ?? null
         ];
 
         return $data;
@@ -221,7 +221,7 @@ trait SearchTraitService
     private function agentsWithPremiumPlan()
     {
         $this->query->whereHas('agent.plan', function ($subQuery) {
-            return $subQuery->where(['plan' => PLATINUMPLAN, 'is_expired' => NOTEXPIRED]);
+            return $subQuery->where(['plan' => planEnum(PLATINUMPLAN), 'is_expired' => NOTEXPIRED]);
         });
     }
 

@@ -768,9 +768,6 @@ $(() => {
             move_in_date: {
                 required: true
             },
-            neighborhood: {
-                required: true
-            },
             first_name: {
                 required: true
             },
@@ -829,7 +826,7 @@ $(() => {
     // Let Us Help Form Validations
     $('#let_us_help').validate({
         rules:{
-            min_price: {
+            budget: {
                 required: true
             },
             location_preference: {
@@ -848,7 +845,7 @@ $(() => {
         },
 
         messages: {
-            min_price: 'Price is required'
+            budget: 'Budget is required.'
         }
     })
 });

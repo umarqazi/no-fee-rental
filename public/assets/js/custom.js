@@ -308,11 +308,11 @@ $(() => {
         $(this).find("i").toggleClass('fa-bars fa-times');
         $("#mobile-tabs-collapse").slideToggle();
     });
-    $('.search-bdr-top .mobile-view-dropdown').click( function () {
-        $('.search-result-wrapper .map-wrapper').hide();
-        $('.mobile-map-icon').find('i').removeClass('fa-times');
-        $('.mobile-map-icon').find('i').addClass('fa-map-marked-alt');
-    });
+    // $('.search-bdr-top .mobile-view-dropdown').click( function () {
+    //     $('.search-result-wrapper .map-wrapper').hide();
+    //     $('.mobile-map-icon').find('i').removeClass('fa-times');
+    //     $('.mobile-map-icon').find('i').addClass('fa-map-marked-alt');
+    // });
     $('.mobile-map-icon').click( function () {
         $('#mobile-tabs-collapse').hide();
         $('.mobile-view-dropdown').find('i').removeClass('fa-times');
@@ -366,7 +366,7 @@ $(() => {
         if ($('body').find('.pignose-availability').length > 0) {
             $('.pignose-availability').val(from);
         } else {
-            $('body').find('.article').append(`<input name='availability' class="pignose-availability" type='hidden' value='${from}'>`);
+            $('body').find('.article').append(`<input name='move_in_date' class="pignose-availability" type='hidden' value='${from}'>`);
         }
     }
 
@@ -378,7 +378,7 @@ $(() => {
         });
 
         let from = $('body').find('.pignose-calendar-unit-active').attr('data-date');
-        $('body').find('.article').append(`<input name='availability' class="pignose-availability" type='hidden' value='${from}'>`);
+        $('body').find('.article').append(`<input name='move_in_date' class="pignose-availability" type='hidden' value='${from}'>`);
     });
 
     $('#image-gallery').lightSlider({
@@ -752,7 +752,7 @@ $(() => {
             }
         });
     });
-    $(".money-mask, .price-range-ul > ul > li > input[name=min_price], .price-range-ul > ul > li >" +
+    $(".money-mask, .price-range-ul > ul > li > input[name=min_price], input[name=budget], .price-range-ul > ul > li >" +
         "input[name=max_price], .dropdown-for-price > ul > li > input[name=min_price], .dropdown-for-price > ul >" +
         " li > input[name=max_price], .neighborhood-flex > .form-group > input[name=renter_rebate]," +
         " .neighborhood-flex > .form-group > input[name=rent], .unit-flex > .form-group >" +
