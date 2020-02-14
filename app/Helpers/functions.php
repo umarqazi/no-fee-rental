@@ -291,7 +291,6 @@ function daysNumReadable( $date ) {
  * @return Carbon
  */
 function carbon( $string ) {
-//    $date = \DateTime::createFromFormat('m-d-Y h:i:s a', $string);
     return new Carbon( $string );
 }
 
@@ -339,6 +338,20 @@ function currentPlan($plan) {
         return 'Gold Plan';
     } else {
         return 'Platinum Plan';
+    }
+}
+
+/**
+ * @param $plan
+ * @return string
+ */
+function planEnum($plan) {
+    if($plan === BASICPLAN) {
+        return 'basic';
+    } else if ($plan === GOLDPLAN) {
+        return 'gold';
+    } else {
+        return 'platinum';
     }
 }
 

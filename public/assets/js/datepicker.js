@@ -758,7 +758,6 @@
                 offset = this.opts.offset,
                 main = pos[0],
                 secondary = pos[1];
-            console.log(main, dims,selfDims,this.opts.offset)
             switch (main) {
                 case 'top':
                     top = dims.top - selfDims.height - offset;
@@ -773,7 +772,6 @@
                     left = dims.left - selfDims.width - offset;
                     break;
             }
-            console.log(secondary)
             switch(secondary) {
                 case 'top':
                     top = dims.top;
@@ -794,7 +792,6 @@
                         left = dims.left + dims.width/2 - selfDims.width/2;
                     }
             }
-    console.log(left,top)
             this.$datepicker
                 .css({
                     left: left,

@@ -257,6 +257,8 @@ const fetchNeighbours = async (selector) => {
  *
  * @param selector
  * @param allowTime
+ * @param appendTag
+ * @param appendTarget
  */
 const enableDatePicker = (selector, allowTime = true) => {
     var start = new Date(),
@@ -294,6 +296,8 @@ const enableDatePicker = (selector, allowTime = true) => {
                     maxHours: 18
                 })
             }
+
+            $('label[for=lease-3]').text(`Choose Specific date...  (${fd})`);
         }
     });
 };

@@ -1,6 +1,11 @@
 
 let $body = $('body');
 let $get_start_form = $('#get_started');
+let $hasNeighborhoods = false;
+
+$('select[name="neighborhood[]"]').on('change', function() {
+    $hasNeighborhoods = $(this).val().length > 0;
+});
 
 $body.on('keydown', function(e) {
     if (e.keyCode === 13 && $body.find('#get_started > *').hasClass('show')) {
@@ -9,9 +14,16 @@ $body.on('keydown', function(e) {
 });
 
 $('.get_started_next_btn').on('click', function() {
+    $('.neigh').hide();
     let next = $(this).attr('next');
     let current = $(this).attr('current');
     let beds = $(this).parents('.modal-dialog-centered').find('.modal-body > div > div > ul');
+
+    if(!$hasNeighborhoods) {
+        $('.neigh').show();
+        return;
+    }
+
     if(beds[0]) {
         if(!beds.find('li').hasClass('white-border-chkbox')) {
             if($body.find('.get_start_error').length > 0) return;

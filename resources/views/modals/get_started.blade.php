@@ -26,6 +26,7 @@
                 <div class="pt-4">
                     {!! multi_or_single_neighborhood_selector(isset($neigh_filter) ? $neigh_filter : null, null) !!}
                 </div>
+                <span class="error neigh" style="display: none;">Neighborhood is required</span>
             </div>
             <div class="modal-footer text-center">
                 <button type="button" class="btn-default get_started_next_btn" data-toggle="modal" current="need-help-step1" next="need-help-step2">Next</button>
@@ -51,7 +52,7 @@
                         <label class="label">Bedrooms <span>(Select all that applies)</span></label>
                         <ul id="baths">
                             <li>
-                                {!! Form::checkbox('beds[]', 'studio', false, ['id' => 'checkbox-111']) !!}
+                                {!! Form::checkbox('beds[]', '0.5', false, ['id' => 'checkbox-111']) !!}
                                 <label for="checkbox-111"><span class="label-name">Studio</span></label>
                             </li>
                             <li>

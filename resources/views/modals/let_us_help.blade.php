@@ -54,7 +54,7 @@
                 <div class="modal-body">
                     <div class="pt-3 mb-3 text-center" style="max-width: 100%;">
                          <span id="invest">
-                                {!! Form::text('min_price', null, ['class' => 'input-style', 'placeholder' =>
+                                {!! Form::text('budget', null, ['class' => 'input-style', 'placeholder' =>
                                 '$', 'style' => 'margin:10px 0px; width:100%; text-align:left;
                                 font-size:16px;'])
                                 !!}</span>
@@ -97,7 +97,7 @@
                         <div class="form-group" id="advance-search-chkbox">
                             <label class="label">Beds <span>(Select all that applies)</span></label>
                             <ul id="beds">
-                                <li> <input type="checkbox" value="studio" id="bed-Checkbox" name="beds[]">
+                                <li> <input type="checkbox" value="0.5" id="bed-Checkbox" name="beds[]">
                                     <label for="bed-Checkbox"><span class="label-name">Studio</span></label>
                                 </li>
                                 <li> <input type="checkbox" value="1" id="bed-Checkbox-1" name="beds[]">
@@ -313,6 +313,7 @@
                         <li></li>
                         <li></li>
                     </ul>
+                    <h3 class="modal-title">Find In Neighborhoods</h3>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
 
@@ -443,25 +444,25 @@
                         <ul class="bedroom-listing">
                             <li>
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="cats" name="pets" value="1">
+                                    <input type="checkbox" class="custom-control-input" id="cats" name="pets" value="Cats">
                                     <label class="custom-control-label" for="cats">Cats</label>
                                 </div>
                             </li>
                             <li>
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="dogs" name="pets" value="2">
+                                    <input type="checkbox" class="custom-control-input" id="dogs" name="pets" value="Dogs">
                                     <label class="custom-control-label" for="dogs">Dogs</label>
                                 </div>
                             </li>
                             <li>
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="other" name="pets" value="3">
+                                    <input type="checkbox" class="custom-control-input" id="other" name="pets" value="Other">
                                     <label class="custom-control-label" for="other">Other</label>
                                 </div>
                             </li>
                             <li>
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="no" name="pets" value="4">
+                                    <input type="checkbox" class="custom-control-input" id="no" name="pets" value="No">
                                     <label class="custom-control-label" for="no">No</label>
                                 </div>
                             </li>

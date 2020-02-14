@@ -69,7 +69,7 @@ class RealtyMXService extends ListingService {
             }
 
             DB::commit();
-            $this->__sendMails();
+//            $this->__sendMails();
             return $this->__writeProgressCSVFile(now()->format('Ymd'));
         }
 
@@ -136,7 +136,7 @@ class RealtyMXService extends ListingService {
                 'availability'    => $details->availableOn ?? null,
                 'street_address'  => $location->address ?? null,
                 'display_address' => $location->address ?? null,
-                'bedrooms'        => $details->bedrooms ?? null,
+                'bedrooms'        => $details->bedrooms < 1 ? STUDIO : $details->bedrooms ?? null,
                 'baths'           => $details->bathrooms ?? null,
                 'square_feet'     => $details->squareFeet ?? null,
                 'unit'            => $location->apartment ?? null,
