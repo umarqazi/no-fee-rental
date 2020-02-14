@@ -3040,11 +3040,13 @@ footer .copyright .social-icons li a:hover {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+    margin-bottom: 10px;
 }
 
 .listing-detail-container .listing-info .product-title .right-share-icons-side {
     display: flex;
     justify-content: space-between;
+    max-height:30px;
     /*flex: auto;*/
 }
 .listing-detail-container .listing-info .product-title .right-share-icons-side .img-with-tooltip{
@@ -3061,6 +3063,7 @@ footer .copyright .social-icons li a:hover {
 .listing-detail-container .listing-info .product-title .heart-icon.favourite {
     background: url(../images/heart-icon-without-shadow.png) no-repeat 0px -65px;
     top: 0px;
+    max-height:30px;
 }
 
 .listing-detail-container .listing-info .product-title .heart-icon {
@@ -3212,6 +3215,7 @@ footer .copyright .social-icons li a:hover {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+    margin-bottom: 10px;
 }
 
 .listing-Details .listing-info .product-title .flag-icon {
@@ -3221,10 +3225,7 @@ footer .copyright .social-icons li a:hover {
     vertical-align: middle;
 }
 
-.listing-Details .listing-info .available-btn {
-    margin-bottom: 20px;
-    margin-top: 20px;
-}
+
 .listing-Details .listing-info .available-btn .estimation-time{
     display: flex;
     align-items: center;
@@ -3561,7 +3562,9 @@ footer .copyright .social-icons li a:hover {
     border: 1px solid #ced4da;
     padding: 10px;
 }
-
+#flag-icon .text-message textarea::placeholder {
+    font-size: 15px !important;
+}
 #flag-icon .modal-header h4 {
     color: #213970;
     font-size: 20px;
@@ -6687,7 +6690,6 @@ strong {
         width: 100%;
     }
     .listing-detail-container .listing-info .product-title p {
-        margin-bottom: 15px;
         font-size: 18px;
     }
     .listing-detail-container .listing-info .title-subtext {
