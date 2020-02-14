@@ -75,7 +75,6 @@ return [
             "Brooklyn Heights",
             "Brooklyn Navy Yard",
             "Clinton Hill",
-            "DUMBO",
             "Downtown Brooklyn",
             "Fort Greene",
             "Prospect Heights",

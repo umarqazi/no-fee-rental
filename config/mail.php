@@ -84,6 +84,10 @@ return [
     |
     */
 
+    'admin' => [
+        'email' => env('ADMIN_EMAIL', 'yousuf.khalid@techverx.com')
+    ],
+
     'info' => [
         'username' => env('INFO_MAIL_USERNAME'),
         'password' => env('INFO_MAIL_PASSWORD'),

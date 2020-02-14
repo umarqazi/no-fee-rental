@@ -440,3 +440,10 @@ if(!defined('PRICE')) {
 if(!defined('PRODUCTION')) {
     define('PRODUCTION', 'production');
 }
+
+/**
+ * Studio
+ */
+if(!defined('STUDIO')) {
+    define('STUDIO', 0.5);
+}

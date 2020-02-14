@@ -162,11 +162,5 @@ Route::get('/composer-dump', function() {
 use App\Traits\DispatchNotificationService;
 // Test Route
 Route::get('/test', function (\Illuminate\Http\Request $request) {
-    $data = [
-        'beds' => '2',
-        'baths' => '2',
-        'price' => '2222',
-        'neighborhoods' => 'Upper East Side'
-    ];
-    return (new \App\Services\SaveSearchService())->match($data);
+    return view('mails.get_started');
 })->name('web.test');

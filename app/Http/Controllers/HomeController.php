@@ -52,13 +52,7 @@ class HomeController extends Controller {
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
 	public function getStarted(Request $request) {
-	    
-        DispatchNotificationService::GETSTARED(toObject([
-            'from' => 'yousuf.khalid@gmail.com',
-            'to'   => 'shaban@gems.techverx.com',
-            'data' => $request->all()
-        ]));
-
+        DispatchNotificationService::GETSTARTED($request);
         return sendResponse($request, true, 'Request has been sent successfully');
     }
 
@@ -67,20 +61,16 @@ class HomeController extends Controller {
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
     public function letUsHelp(Request $request) {
-        $agents = [];
-        $request->agentsWithPremiumPlan = true;
+        $request->request->add([
+            'max_price' => $request->budget,
+            'agentsWithPremiumPlan' => true
+        ]);
+
         $data = toObject(['listings' => $this->searchService->search($request)]);
 
-        foreach ($data->listings as $user) {
-              $agents =   agents($user->user_id);
+        foreach ($data->listings as $listing) {
+            DispatchNotificationService::LETUSHELP($listing, $request);
         }
-
-        DispatchNotificationService::LETUSHELP(toObject([
-            'from' => $request->email,
-            'to'   => mailToAdmin() ,
-            'data' => $request->all()
-        ]));
-
 
         return sendResponse($request, true, 'Request has been sent successfully');
     }
