@@ -73,7 +73,7 @@ trait DispatchNotificationService
         self::$data->subject = 'Featured Listing Request Approved';
         self::$data->message = 'Your Request to make this listing featured has been approved.';
         self::$data->url = route('listing.detail', $data->id);
-        self::send();
+        self::__send();
     }
 
     /**
@@ -193,7 +193,7 @@ trait DispatchNotificationService
         self::$data->subject = 'New Plan Purchased';
         self::$data->message = 'Credit plan has been purchased';
         self::$data->url = route('agent.creditPlan');
-        self::send();
+        self::__send();
     }
 
     /**
@@ -210,7 +210,7 @@ trait DispatchNotificationService
         self::$data->toEmail = $data->email;
         self::$data->message = 'Credit plan has been expired';
         self::$data->url = route('agent.creditPlan');
-        self::send();
+        self::__send();
     }
 
     /**
@@ -226,9 +226,9 @@ trait DispatchNotificationService
         self::$data->listing = $data->listing;
         self::$data->appointment = $data;
         self::$data->to = $data->listing->agent->id;
-        self::$data->message = 'New Meeting Request Received';
+        self::$data->message = 'New Appointment Request Received';
         self::$data->url = route($data->listing->agent->user_type == AGENT ? 'agent.conversations' : 'owner.conversations');
-        self::send();
+        self::__send();
     }
 
     /**
@@ -260,14 +260,16 @@ trait DispatchNotificationService
     /**
      * @param $data
      */
-    public static function GETSTARED($data)
+    public static function GETSTARTED($data)
     {
-        self::__setParams($data);
-        self::$data->view = 'get-started';
-        self::$data->subject = 'Get Started Query Received';
-        self::$data->message = 'You have a new get started request';
+        self::$data = toObject(self::$data);
+        self::$data->via = 'info';
+        self::$data->view = 'get_started';
+        self::$data->subject = 'Get Started Request Received';
+        self::$data->toEmail = config('mail.admin.email');
+        self::$data->request = toObject($data->all());
         self::$data->url = null;
-        self::__onlyEmail();
+        self::__sendOnlyEmail();
     }
 
     /**
@@ -286,14 +288,19 @@ trait DispatchNotificationService
     /**
      * @param $data
      */
-    public static function LETUSHELP($data)
+    public static function LETUSHELP($data, $request)
     {
-        self::__setParams($data);
-        self::$data->view = 'let-us-help';
-        self::$data->subject = 'let us help Request Approved';
-        self::$data->message = 'You have a new let us help request.';
-        self::$data->url = null;
-        self::__onlyEmail();
+        self::$data = toObject(self::$data);
+        self::$data->via = 'support';
+        self::$data->view = 'let_us_help';
+        self::$data->subject = 'Let Us Help Request';
+        self::$data->toEmail = $data->agent->email;
+        self::$data->to = $data->agent->id;
+        self::$data->listing = $data;
+        self::$data->request = toObject($request->all());
+        self::$data->message = "New Let Us Help Query Received";
+        self::$data->url = route('web.index');
+        self::__send();
     }
 
     /**
@@ -335,7 +342,7 @@ trait DispatchNotificationService
         self::$data->url = route('listing.detail', $data->id);
         self::$data->to = $data->user->id;
         self::$data->toEmail = $data->user->email;
-        self::send();
+        self::__send();
     }
 
     /**
@@ -376,7 +383,7 @@ trait DispatchNotificationService
     /**
      * @return bool
      */
-    private static function send() {
+    private static function __send() {
         return dispatchNotification(self::$data);
     }
 }

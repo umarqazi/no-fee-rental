@@ -11,22 +11,22 @@ $(() => {
 });
 
 function lp3(action) {
-    li.find('input[value=1], input[value=2], input[value=4]').prop('checked', false);
-    li.find('input[value=1], input[value=2]').prop('disabled', action);
+    li.find('input[value=Cats], input[value=Dogs], input[value=No]').prop('checked', false);
+    li.find('input[value=Cats], input[value=Dogs]').prop('disabled', action);
 }
 
 function lp4(action) {
-    li.find('input[value=1], input[value=2], input[value=3]').prop('checked', false);
-    li.find('input[value=1], input[value=2]').prop('disabled', action);
+    li.find('input[value=Cats], input[value=Dogs], input[value=Other]').prop('checked', false);
+    li.find('input[value=Cats], input[value=Dogs]').prop('disabled', action);
 }
 
 $('#no, #other').change(function() {
     let val = $(this).val();
-    if (val === '3') {
+    if (val === 'Other') {
         lp3($(this).is(':checked'));
     }
 
-    if (val === '4') {
+    if (val === 'No') {
         lp4($(this).is(':checked'));
     }
 });
