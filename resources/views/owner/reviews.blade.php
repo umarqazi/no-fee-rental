@@ -62,7 +62,7 @@
     {!! HTML::style('https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css') !!}
     {!! HTML::script('https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js') !!}
     <script>
-        let $disabledResults = $('select[name=email]');
+        let $disabledResults = $('select[name=review_from]');
         $disabledResults.select2();
     </script>
 @endsection

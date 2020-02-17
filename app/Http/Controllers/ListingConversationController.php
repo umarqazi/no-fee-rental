@@ -35,4 +35,14 @@ class ListingConversationController extends Controller {
         $response = $this->conversationService->create($request);
         return sendResponse($request, $response, 'Request has been Sent.', null, 'Request already sent');
     }
+
+    /**
+     * @param Request $request
+     * @param $id
+     * @return JsonResponse|RedirectResponse
+     */
+    public function interested(Request $request, $id) {
+        $res = $this->conversationService->interested($id);
+        return sendResponse($request, $res, 'Request has been Sent.');
+    }
 }

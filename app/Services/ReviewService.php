@@ -8,11 +8,10 @@
 
 namespace App\Services;
 
+use App\Forms\ReviewForm;
 use App\Repository\ReviewRepo;
 use App\Repository\UserRepo;
-use App\Repository\UserReviewRepo;
 use App\Traits\DispatchNotificationService;
-use Illuminate\Foundation\Bus\PendingDispatch;
 
 /**
  * Class ReviewService
@@ -26,12 +25,7 @@ class ReviewService {
     protected $reviewRepo;
 
     /**
-     * @var UserReviewRepo
-     */
-    protected $userReviewRepo;
-
-    /**
-     * @var UserReviewRepo
+     * @var UserRepo
      */
     protected $userRepo;
 
@@ -39,8 +33,8 @@ class ReviewService {
      * ReviewService constructor.
      */
     public function __construct() {
-        $this->reviewRepo = new ReviewRepo();
         $this->userRepo = new UserRepo();
+        $this->reviewRepo = new ReviewRepo();
     }
 
     /**
@@ -48,24 +42,10 @@ class ReviewService {
      * @return bool|mixed
      */
     public function sendRequest($request) {
-
-       $renter = $this->userRepo->find(['email' => $request->email])->first();
-
-       $review = $this->reviewRepo->create([
-           'review_for'      =>  myId() ,
-           'review_from'     => $renter->id,
-           'request_message' => $request->message,
-           'token'           => str_random(50),
-           'is_token_used'   => FALSE
-        ]);
-
-       DispatchNotificationService::REVIEWREQUEST(toObject([
-            'from' => myId(),
-            'to'   => $renter->id,
-            'data' => $review
-        ]));
-
-       return $review;
+        $review = $this->__validateForm($request);
+        $review = $this->reviewRepo->create($review->toArray());
+        DispatchNotificationService::REVIEWREQUEST($review);
+        return $review;
     }
 
     /**
@@ -75,26 +55,36 @@ class ReviewService {
         return $this->reviewRepo->reviews()->get();
     }
 
-    public function show() {
-
-    }
-
-    public function hide() {
-
-    }
-
+    /**
+     * @param $request
+     * @return ReviewForm
+     */
     private function __validateForm($request) {
+        $form = new ReviewForm();
+        $form->for = myId();
+        $form->from = $request->review_from;
+        $form->message = $request->message;
+        $form->token = str_random(60);
+        $form->token_used = FALSE;
+        $form->validate();
 
+        return $form;
     }
 
     /**
      * @param $request
-     *
-     * @return PendingDispatch
+     * @return bool|mixed
      */
     public function create($request){
         $reviewRequest = $this->reviewRepo->find(['token' => $request->ReviewToken])->first();
-        $review = $reviewRequest->is_token_used == 0  ? $this->reviewRepo->update($reviewRequest->id , ['rating' => $request->rating , 'review_message' => $request->review ,'is_token_used' => 1]) : false ;
-        return $review ;
+        if(!$reviewRequest->is_token_used){
+            return $this->reviewRepo->update($reviewRequest->id , [
+                'is_token_used' => TRUE,
+                'rating' => $request->rating,
+                'review_message' => $request->review
+            ]);
+        }
+
+        return false;
     }
 }
