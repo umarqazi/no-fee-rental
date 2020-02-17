@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'No Fee Rental | Create Password')
+@section('title', 'Create Password')
 @section('content')
     <section class="inner-pages wow fadeIn" data-wow-delay="0.2s">
         <div class="container-lg">

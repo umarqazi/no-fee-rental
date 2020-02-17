@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'No Fee Rental | Listing Detail')
+@section('title', 'Resend Email')
 @section('content')
     <div class="listing-Details neighborhood-search wow fadeIn listing-detail-container">
         <div class="container">

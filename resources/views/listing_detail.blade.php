@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'No Fee Rental | Listing Detail')
+@section('title', is_exclusive($listing))
 @section('content')
 <style>
     .modal {
