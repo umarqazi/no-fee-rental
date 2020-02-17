@@ -59,6 +59,16 @@ class ListingConversationService extends MemberService {
     }
 
     /**
+     * @param $id
+     * @return bool
+     */
+    public function interested($id) {
+        $listing = $this->listingRepo->edit($id)->first();
+        DispatchNotificationService::INTERESTED($listing);
+        return true;
+    }
+
+    /**
      * @param $request
      *
      * @return bool

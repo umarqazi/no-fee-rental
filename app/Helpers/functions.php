@@ -1189,7 +1189,7 @@ function renters() {
     $data       = ( new \App\Services\UserService() )->renters();
     $renters[''] = "Type Email or Name";
     foreach ( $data as $renter ) {
-        $renters[ $renter->email ] = sprintf( "%s ( %s %s )", $renter->email, $renter->first_name, $renter->last_name );
+        $renters[ $renter->id ] = sprintf( "%s ( %s %s )", $renter->email, $renter->first_name, $renter->last_name );
     }
 
     return $renters;

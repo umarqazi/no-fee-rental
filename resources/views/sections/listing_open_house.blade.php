@@ -8,12 +8,23 @@
         <div class="apointment-interest-section">
             @if($listing->openHouse->only_appt)
                 <span> (By appointment only)</span>
-            @else
-                <button class="btn btn-default">Interested</button>
+            @elseif(isRenter())
+                <button class="btn btn-default interested">Interested</button>
             @endif
-            {{--                                        <div class="request-send">--}}
-            {{--                                        <i class="fas fa-check-circle"></i>Request Sent--}}
-            {{--                                        </div>--}}
+                <div class="request-send" style="display: none;">
+                    <i class="fas fa-check-circle"></i>Request Sent
+                </div>
         </div>
     </div>
 @endif
+
+<script>
+    $('.interested').on('click', async function () {
+        let id = '{{ $listing->id }}';
+        await ajaxRequest(`/interested/${id}`, 'post').then(res => {
+            $('.interested').hide();
+            $('.request-send').show();
+            setTimeout(() => { $('.request-send').hide(); }, 2000);
+        });
+    });
+</script>
