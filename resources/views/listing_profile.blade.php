@@ -13,7 +13,7 @@
                     <p>{{ $data->agent->description ?? 'No bio found' }}</p>
                     @if($data->agent->user_type != OWNER)
                         <p class="expertise"><strong>Languages:</strong>
-                            <a href="javascript:void(0);">{{ $data->agent->languages }}</a>
+                            <a href="javascript:void(0);">{{ $data->agent->languages !== '' ? $data->agent->languages : 'None' }}</a>
                         </p>
                         <p class="expertise"><strong>Neighborhood Expertise:</strong>
                             <a href="javascript:void(0);">{{ neighborhoodExpertise($data->agent->neighborExpertise) }}</a>

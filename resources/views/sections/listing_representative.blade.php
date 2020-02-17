@@ -4,7 +4,7 @@
         <a href="{{ agents($listing->building->contact->id)->email_verified_at ? route('web.agentProfile', $listing->building->contact->id) : 'javascript:void(0);' }}">
             <ul>
                 <li>
-                    <img src="{{ Storage::url($listing->building->contact->profile_image ?? DUI) }}" alt="">
+                    <img src="{{ is_realty_listing($listing->building->contact->profile_image ?? DUI) }}" alt="">
                 </li>
                 <li>
                     <h5> {{ $listing->building->contact->first_name.' '.$listing->building->contact->last_name }}</h5>
@@ -17,7 +17,7 @@
         <a href="{{ route('web.agentProfile', $listing->agent->id) }}">
             <ul>
                 <li>
-                    <img src="{{ Storage::url($listing->agent->profile_image ?? DUI) }}" alt="">
+                    <img src="{{ is_realty_listing($listing->agent->profile_image ?? DUI) }}" alt="">
                 </li>
                 <li>
                     <h5> {{ $listing->agent->first_name.' '.$listing->agent->last_name }}</h5>
