@@ -79,6 +79,10 @@ Route::get('/listing-detail/{id}', 'ListingController@viewDetail')->name('listin
 Route::post('/interested/{id}', 'ListingConversationController@interested');
 Route::post('/send-request', 'ListingConversationController@create')->name('web.listConversation');
 
+// Resend Email
+Route::get('/resend-email/{token}', 'UserController@resendEmailView');
+Route::post('/resend-email', 'UserController@resendEmail')->name('web.resendEmail');
+
 // Notification Routes
 Route::post('/delete-notification/{id}', 'NotificationController@delete');
 Route::post('/read-notification/{id}', 'NotificationController@markAsRead');
