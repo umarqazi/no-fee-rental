@@ -2,9 +2,9 @@ $(() => {
 
     let $body = $('body');
 
-    $body.on('form-success-signup_form', function () {
+    $body.on('form-success-signup_form', function (e, v) {
         $('#signup').modal('hide');
-        $('.check').remove();
+        window.location.href = `/resend-email/${v}`;
     });
 
     $body.on('click', '#signup-option1', function(e) {

@@ -9,6 +9,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\UserService;
+use App\Traits\DispatchNotificationService;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -88,7 +89,7 @@ class UserController extends Controller {
 	 */
 	public function signup(Request $request){
 		$response = $this->userService->signup($request);
-		return sendResponse($request, $response, 'We send an email to your account. Kindly verify your email');
+		return sendResponse($request, $response, null);
 	}
 
     /**
@@ -98,7 +99,7 @@ class UserController extends Controller {
      */
     public function renterSignup(Request $request){
         $response = $this->userService->renterSignup($request);
-        return sendResponse($request, $response, 'We send an email to your account. Kindly verify your email');
+        return sendResponse($request, $response, null);
     }
 
     /**
@@ -207,10 +208,53 @@ class UserController extends Controller {
             if($favourite){
                 return sendResponse($request, $favourite, null);
             }
-        }
-        else {
+        } else {
             return 'false';
         }
+
+        return false;
+    }
+
+    /**
+     * @param $token
+     * @return Factory|View
+     */
+    public function resendEmailView($token) {
+        if($user = $this->userService->validateEncodedToken($token)) {
+            return view('resend_email', compact('user'));
+        }
+
+        return error('Invalid token cannot process', '/');
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse|RedirectResponse
+     */
+    public function resendEmail(Request $request) {
+        if($user = $this->userService->validateEncodedToken($request->token)) {
+            DispatchNotificationService::USERSIGNUP($user);
+            $user->delay = $this->__setDelay($user);
+            return sendResponse($request, $user, 'Email has been resend.');
+        }
+
+        return error('Invalid token cannot process');
+    }
+
+    /**
+     * @param $user
+     * @return mixed
+     */
+    private function __setDelay($user) {
+        if(session()->has($user->remember_token)) {
+            $last_delay = session()->get($user->remember_token);
+            $add_delay = $last_delay * 2;
+            session()->put($user->remember_token, $add_delay);
+        } else {
+            session()->put($user->remember_token, 20);
+        }
+
+        return session()->get($user->remember_token);
     }
 
     /**

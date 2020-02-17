@@ -43,6 +43,6 @@ class ListingConversationController extends Controller {
      */
     public function interested(Request $request, $id) {
         $res = $this->conversationService->interested($id);
-        return sendResponse($request, $res, 'Request has been Sent.');
+        return sendResponse($request, $res, null);
     }
 }
