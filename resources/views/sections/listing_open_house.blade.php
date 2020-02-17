@@ -24,7 +24,6 @@
         await ajaxRequest(`/interested/${id}`, 'post').then(res => {
             $('.interested').hide();
             $('.request-send').show();
-            setTimeout(() => { $('.request-send').hide(); }, 2000);
         });
     });
 </script>

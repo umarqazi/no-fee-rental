@@ -136,7 +136,7 @@ class UserService {
         $form = $this->__validateForm($request);
         if($user = $this->userRepo->create($form->toArray())) {
             DispatchNotificationService::USERSIGNUP($user);
-            return true ;
+            return $user->remember_token;
         }
 
         return false;
@@ -157,7 +157,7 @@ class UserService {
             if ($sendMail) { DispatchNotificationService::USERSIGNUP($user); }
 
             DB::commit();
-            return true;
+            return $user->remember_token;
         }
 
         DB::rollback();

@@ -6,7 +6,7 @@
     <title>@yield('title')</title>
     <style type="text/css">
         body{
-            background: #edeff0;
+            background-color: #edeff0;
             margin: 0;
             padding: 0;
             font-family: sans-serif;
@@ -17,6 +17,7 @@
             font-size: 14px;
         }
         .main-wrapper{
+            background-color: #edeff0;
             width: 100%;
             padding:40px 15px;
             text-align: center;
@@ -99,7 +100,7 @@
             margin-bottom: 10px;
             line-height: 22px;
         }
-        .notification-main-footer a{
+        .notification-main-footer .social-icons a{
             text-decoration: none;
             margin-right: 20px;
             display: inline-block;

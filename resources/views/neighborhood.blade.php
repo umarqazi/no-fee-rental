@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Neighborhood')
+@section('title', $data->neighborhood->name ?? 'Unknow')
 @section('content')
     <style>
         #advance-search {
