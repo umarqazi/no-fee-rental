@@ -12,7 +12,7 @@
             <!-- Modal body -->
             {!! Form::model(!authenticated() ?: mySelf(),
                 [
-                    'url' => route('send.message'),
+                    'url' => route('web.listConversation'),
                     'class' => 'ajax',
                     'id' => 'appointment',
                     'method' => 'post',

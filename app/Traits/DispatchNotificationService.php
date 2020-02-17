@@ -234,14 +234,37 @@ trait DispatchNotificationService
     /**
      * @param $data
      */
+    public static function INTERESTED($data)
+    {
+        self::$data = toObject(self::$data);
+        self::$data->via = 'info';
+        self::$data->subject = 'NoFeeRentalsNYC - You have a client coming to your open house!!';
+        self::$data->view = 'interested';
+        self::$data->agent = $data->agent;
+        self::$data->to = self::$data->agent->id;
+        self::$data->toEmail = self::$data->agent->email;
+        self::$data->renter = mySelf();
+        self::$data->message = 'You have a client coming to your open house!!';
+        self::$data->url = route('listing.detail', $data->id);
+        self::__send();
+    }
+
+    /**
+     * @param $data
+     */
     public static function REVIEWREQUEST($data)
     {
-        self::__setParams($data);
-        self::$data->view = 'review-request';
+        self::$data = toObject(self::$data);
+        self::$data->via = 'info';
+        self::$data->view = 'request_review';
         self::$data->subject = 'Review Request';
-        self::$data->message = $data->data->request_message;
-        self::$data->url = route('web.makeReview',self::$data->data->data->token );
-        self::send();
+        self::$data->renter = $data->from;
+        self::$data->to = $data->from->id;
+        self::$data->toEmail = $data->from->email;
+        self::$data->review_message = $data->request_message;
+        self::$data->message = 'Review Request Received';
+        self::$data->url = route('web.makeReview', $data->token );
+        self::__send();
     }
 
     /**
@@ -302,20 +325,6 @@ trait DispatchNotificationService
         self::$data->url = route('web.index');
         self::__send();
     }
-
-    /**
-     * @param $data
-     */
-    public static function INTERESTED($data)
-    {
-        self::__setParams($data);
-        self::$data->view = 'listing-feature-approved';
-        self::$data->subject = 'Featured Listing Request Approved';
-        self::$data->message = 'Your Request to make this listing featured has been approved.';
-        self::$data->url = route('listing.detail', self::$data->data->data->id);
-        self::send();
-    }
-
     /**
      * @param $data
      */

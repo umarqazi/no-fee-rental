@@ -65,9 +65,6 @@ Route::post('/user/sign-up', 'UserController@signup')->name('user.signup');
 Route::post('/agent/sign-up', 'UserController@invitedAgentSignup')->name('agent.signup');
 Route::post('/renter/sign-up', 'UserController@renterSignup')->name('renter.signup');
 
-// Messaging Routes
-Route::post('/send-message', 'MessageController@send')->name('send.message');
-
 // Realty MX Routes
 Route::get('/realty/{fileName}', 'RealtyMXController@dispatchJob');
 Route::get('/realty-mx/{client}/{listing}', 'RealtyMXController@detail')->name('web.realty');
@@ -79,6 +76,7 @@ Route::post('/is-owner-only', 'ListingController@isOwnerOnly');
 Route::get('/listing-detail/{id}', 'ListingController@viewDetail')->name('listing.detail');
 
 // Listing Conversation Routes
+Route::post('/interested/{id}', 'ListingConversationController@interested');
 Route::post('/send-request', 'ListingConversationController@create')->name('web.listConversation');
 
 // Notification Routes
