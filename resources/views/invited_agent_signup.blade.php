@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'No Fee Rental | SignUp')
+@section('title', 'Agent SignUp')
 @section('content')
 
 <div class="container login-form-wrapper" style="padding: 110px;">

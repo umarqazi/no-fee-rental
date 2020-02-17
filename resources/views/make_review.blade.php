@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'No Fee Rental | Make Review')
+@section('title', 'Make Review')
 @section('content')
     <section class=" press-section wow fadeIn featured-properties neighborhood-search agent-listing-profile" data-wow-delay="0.2s">
         <div class="profile-contact-section profile-section-padding">
