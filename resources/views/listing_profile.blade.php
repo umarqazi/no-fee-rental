@@ -1,12 +1,12 @@
 @extends('layouts.app')
-@section('title', 'No Fee Rental | Profile')
+@section('title', 'Profile Listing')
 @section('content')
     <section class="wow fadeIn featured-properties neighborhood-search agent-listing-profile"
              data-wow-delay="0.2s">
         <div class="container-lg">
             <div class="agent-profile-view">
                 <div class="img-holder">
-                    <img src="{{ Storage::url($data->agent->profile_image ?? DUI) }}" alt=""/>
+                    <img src="{{ is_realty_listing($data->agent->profile_image ?? DUI) }}" alt=""/>
                 </div>
                 <div class="agent-info">
                     <h2>{{ $data->agent->first_name.' '.$data->agent->last_name }}</h2>
@@ -57,7 +57,7 @@
                             </div>
                             <p>{{$review->review_message}}</p>
                             <div class="item-profile-img">
-                                <img src="{{ Storage::url($review->from->profile_image ?? DUI) }}"/>
+                                <img src="{{ is_realty_listing($review->from->profile_image ?? DUI) }}"/>
                             </div>
                             <strong>{{$review->from->first_name}} {{$review->from->last_name}}</strong>
                         </div>

@@ -8,7 +8,7 @@
             <i class="fa fa-bars"></i>
         </span>
         <div class="avtar">
-            <img src="{!! Storage::url( mySelf()->profile_image ?? DUI ) !!}" alt="" />
+            <img src="{!! is_realty_listing( mySelf()->profile_image ?? DUI ) !!}" alt="" />
             <div>{!! mySelf()->first_name !!} {!! mySelf()->last_name !!} <i class="fa fa-chevron-down"></i>
                 <ul>
                     <li><a href="{!! route(whoAmI().'.showProfile') !!}">Profile Settings</a></li>
