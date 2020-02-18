@@ -1380,6 +1380,7 @@ h3 {
     font-size: 14px;
     margin: 0px 0px 15px;
     display: none;
+    color:#000;
 }
 
 .login-modal .modal-dialog .login-form-wrapper .mobile-display {

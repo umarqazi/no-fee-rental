@@ -90,7 +90,7 @@
                         <li>25 featured listings</li>
                         <li>100 Reposts</li>
                         <li>Close more deals than ever before.</li>
-                        <li>Varified client leads based on your expertise </li>
+                        <li>Verified client leads based on your expertise </li>
                         <li>Direct leads from our client questioner form</li>
                         <li>Featured listing in our weekly news letter</li>
                     </ul>

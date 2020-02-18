@@ -25,7 +25,6 @@ trait CalendarEventService
 
     /**
      * @param $data
-     * @param $listing
      */
     public static function ADDOPENHOUSE($data) {
         self::$data = toObject(self::$data);
