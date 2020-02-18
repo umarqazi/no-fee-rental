@@ -320,7 +320,6 @@ $(document).ready(function () {
             $(this).removeClass('far recent-star').addClass('fa saved-star');
             localStorage.setItem('search-query', JSON.stringify($old_queries));
             toastr.success('Search marked as favourite.');
-            return;
         });
     });
 
@@ -332,7 +331,6 @@ $(document).ready(function () {
             $(this).removeClass('fa saved-star').addClass('far recent-star');
             localStorage.setItem('search-query', JSON.stringify($old_queries));
             toastr.success('Search removed from favourite.');
-            return;
         });
     });
 
