@@ -527,7 +527,7 @@ class ListingService extends BuildingService {
 
                 $res = $this->openHouseRepo->create([
                     'listing_id' => $id,
-                    'date' => $openHouse['date'],
+                    'date' => genericFormat($openHouse['date']),
                     'start_time' => openHouseTimeSlot($openHouse['start_time']),
                     'end_time'   => openHouseTimeSlot($openHouse['end_time']),
                     'only_appt'  => $this->__byAppointment($openHouse)

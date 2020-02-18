@@ -39,13 +39,12 @@
                 <a href="javascript:void(0);" class="btn-default add-more">Add more</a>
             </div>
         </div>
-    </div>
     @else
     <div class="datepicker-withtime">
         <div class="row">
             <div class="col-md-4">
                 <label>Date</label>
-                {!! Form::text('open_house[0][date]', null, ['class' => 'input-style open-house-date', 'autocomplete' => 'off', 'data-date-format' => 'yyyy-mm-dd']) !!}
+                {!! Form::text('open_house[0][date]', null, ['class' => 'input-style open-house-date', 'autocomplete' => 'off', 'data-date-format' => 'mm-dd-yyyy']) !!}
             </div>
             <div class="col-md-4">
                 <label for="start">Start @:</label>
