@@ -11,6 +11,10 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\View\View;
 
+/**
+ * Class CalendarController
+ * @package App\Http\Controllers\Agent
+ */
 class CalendarController extends Controller {
 
     /**

@@ -336,9 +336,8 @@ $(document).ready(function () {
 
     // Submit FORM
     $('#index-search-from, #advance-search, #search').on('submit', function (e) {
-        e.preventDefault();
-        // if($old_queries === null) $old_queries = [];
-        // $old_queries.push({isNew: true});
-        // localStorage.setItem('search-query', JSON.stringify($old_queries));
+        if($old_queries === null) $old_queries = [];
+        $old_queries.push({isNew: true});
+        localStorage.setItem('search-query', JSON.stringify($old_queries));
     });
 });
