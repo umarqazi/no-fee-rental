@@ -33,8 +33,8 @@ trait CalendarEventService
         self::$data->ref_event_id = $data->listing->id;
         self::$data->title = sprintf("%s (Open House)", is_exclusive($data->listing));
         self::$data->url = route('listing.detail', $data->listing_id);
-        self::$data->start = sprintf("%s %s", carbon($data->date)->format('Y-m-d'), $data->start_time);
-        self::$data->end = sprintf("%s %s", carbon($data->date)->format('Y-m-d'), $data->end_time);
+        self::$data->start = sprintf("%s %s", carbon($data->date)->format('m-d-Y'), carbon($data->start_time)->format('h:i a'));
+        self::$data->end = sprintf("%s %s", carbon($data->date)->format('m-d-Y'), carbon($data->end_time)->format('h:i a'));
         self::$data->from = $data->listing->user_id;
         self::$data->to = null;
         self::__create();
@@ -49,7 +49,7 @@ trait CalendarEventService
         self::$data->url = "load-conversation/inbox/{$data->listing->id}";
         self::$data->ref_event_id = $data->id;
         self::$data->model = ListingConversation::class;
-        self::$data->start = sprintf("%s %s", $data->appointment_date->format('Y-m-d'), $data->appointment_time);
+        self::$data->start = sprintf("%s %s", $data->appointment_date->format('m-d-Y'), carbon($data->appointment_time)->format('h:i a'));
         self::$data->end = self::$data->start;
         self::$data->from = myId();
         self::$data->to = $data->listing->agent->id;
@@ -65,10 +65,10 @@ trait CalendarEventService
         self::$data->url = "load-conversation/inbox/{$data->listing->id}";
         self::$data->ref_event_id = $data->id;
         self::$data->model = ListingConversation::class;
-        self::$data->start = sprintf("%s", $data->created_at->format('Y-m-d h:i:s'));
+        self::$data->start = sprintf("%s", $data->created_at->format('m-d-Y h:i a'));
         self::$data->end = self::$data->start;
-        self::$data->from = $data->listing->agent->id;
-        self::$data->to = null;
+        self::$data->from = $data->from;
+        self::$data->to = $data->to ?? null;
         self::__create();
     }
 

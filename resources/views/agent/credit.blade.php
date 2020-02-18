@@ -15,7 +15,7 @@
             <div class="plans-wrapper">
                 <div class="inner-plans-wrapper">
                     <div class="current-plans {{ isset($currentPlan) && $currentPlan->plan == BASICPLAN ? '' : 'platinum-plan' }}">
-                        <h3> Basic Plan</h3>
+                        <h3> Basic </h3>
                         <h2>$40</h2> <small>/Month</small>
                         <div class="text-with-tick-image">
                             <ul>
@@ -25,18 +25,18 @@
                                 <li>30 Reposts</li>
                             </ul>
                         </div>
-                        @if(isset($currentPlan) && $currentPlan->plan == BASICPLAN)
+                        @if($currentPlan != null && $currentPlan->plan == BASICPLAN)
                             <a href="{{ route('agent.plan') }}" class="btn btn-default">
                                 Current Plan
                             </a>
+                        @elseif ($currentPlan != null)
+                            <button type="button" class="btn-default switch-plan">Switch Plan</button>
                         @else
-                            <a href="javascript:void(0);" class="btn btn-default credit-plan">
-                                Get Started
-                            </a>
+                            <button type="button" class="btn-default credit-plan">Get Started</button>
                         @endif
                     </div>
                     <div class="current-plans {{ isset($currentPlan) && $currentPlan->plan == GOLDPLAN ? '' : 'platinum-plan' }}">
-                        <h3> Gold Plan</h3>
+                        <h3> Gold </h3>
                         <h2>$70</h2> <small>/Month</small>
                         <div class="text-with-tick-image">
                             <ul>
@@ -48,18 +48,18 @@
                                 <li>Featured listing in our weekly news letter</li>
                             </ul>
                         </div>
-                        @if(isset($currentPlan) && $currentPlan->plan == GOLDPLAN)
+                        @if($currentPlan != null && $currentPlan->plan == GOLDPLAN)
                             <a href="{{ route('agent.plan') }}" class="btn btn-default">
                                 Current Plan
                             </a>
+                        @elseif ($currentPlan != null)
+                            <button type="button" class="btn-default switch-plan">Switch Plan</button>
                         @else
-                            <a href="javascript:void(0);" class="btn btn-default credit-plan">
-                                Get Started
-                            </a>
+                            <button type="button" class="btn-default credit-plan">Get Started</button>
                         @endif
                     </div>
                     <div class="current-plans {{ isset($currentPlan) && $currentPlan->plan == PLATINUMPLAN ? '' : 'platinum-plan' }}">
-                        <h3> Platinum Plan</h3>
+                        <h3> Platinum </h3>
                         <h2>$100</h2> <small>/Month</small>
                         <div class="text-with-tick-image">
                             <ul>
@@ -73,14 +73,14 @@
                                 <li>Featured listing in our weekly news letter</li>
                             </ul>
                         </div>
-                        @if(isset($currentPlan) && $currentPlan->plan == PLATINUMPLAN)
+                        @if($currentPlan != null && $currentPlan->plan == PLATINUMPLAN)
                             <a href="{{ route('agent.plan') }}" class="btn btn-default">
                                 Current Plan
                             </a>
+                        @elseif ($currentPlan != null)
+                            <button type="button" class="btn-default switch-plan">Switch Plan</button>
                         @else
-                            <a href="javascript:void(0);" class="btn btn-default credit-plan">
-                                Get Started
-                            </a>
+                            <button type="button" class="btn-default credit-plan">Get Started</button>
                         @endif
                     </div>
                 </div>

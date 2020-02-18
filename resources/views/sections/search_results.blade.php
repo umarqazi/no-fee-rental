@@ -88,18 +88,19 @@
                         @endif
                     </div>
                     <div class="property-listing mobile-listing">
+                        @if(count($data->listings) > 0)
                         <div class="owl-carousel owl-theme">
                             @foreach($data->listings as $listing)
                                 <div class="items">
                                     {!! property_thumbs($listing, true) !!}
                                 </div>
                             @endforeach
-                            @if(count($data->listings) < 1)
-                                <div class="no-result-found-search">
-                                    <p>No results found</p>
-                                </div>
-                            @endif
                         </div>
+                        @else
+                            <div class="no-result-found-search">
+                                <p>No results found</p>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
