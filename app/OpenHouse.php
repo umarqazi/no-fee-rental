@@ -21,7 +21,7 @@ class OpenHouse extends Model {
      * @return \Illuminate\Support\Carbon
      */
     public function getDateAttribute($value) {
-        return carbon($value)->format('Y-m-d');
+        return carbon($value)->format('m-d-Y');
     }
 
     /**
