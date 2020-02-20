@@ -35,7 +35,7 @@
             </div>
             <div class="switch-buttons">
                 <h3> Cancellation</h3>
-                <p> You can <a href="javascript:void(0)" class="change-card"> cancel your plan here. </a> <br />
+                <p> You can <a href="{{ route('agent.cancelPlan') }}" class="change-card"> cancel your plan here. </a> <br />
                     You’ll be able to use your Pro Credits until the end of your billing cycle.
                 </p>
             </div>

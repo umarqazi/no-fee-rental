@@ -66,4 +66,13 @@ class CreditPlanController extends Controller {
         $res = $this->creditPlanService->purchasePlan($request);
         return sendResponse($request, true, $res);
     }
+
+
+    /**
+     * @param Request $request
+     * @return mixed
+     */
+    public function cancel(Request $request) {
+        return dd($this->creditPlanService->cancel());
+    }
 }

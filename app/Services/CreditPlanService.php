@@ -102,6 +102,13 @@ class CreditPlanService extends PaymentService {
     }
 
     /**
+     * @return mixed
+     */
+    public function cancel() {
+        return $this->__cancelSubscription();
+    }
+
+    /**
      * @return bool
      */
     public function agentHasPlan() {

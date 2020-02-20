@@ -82,6 +82,7 @@ Route::get('/reviews' , 'Agent\AgentController@reviews')->name('agent.reviews');
 // Credit Plan Routes
 Route::get('/credit-plan', 'Agent\CreditPlanController@index')->name('agent.creditPlan');
 Route::get('/show-plan', 'Agent\CreditPlanController@subscription')->name('agent.plan');
+Route::get('/cancel-plan', 'Agent\CreditPlanController@cancel')->name('agent.cancelPlan');
 Route::post('/change-card', 'Agent\CreditPlanController@changeCard')->name('agent.changeCard');
 Route::post('/purchase-plan', 'Agent\CreditPlanController@create')->name('agent.purchasePlan');
 
