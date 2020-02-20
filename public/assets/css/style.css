@@ -428,6 +428,7 @@
 
 .listing-Details.neighborhood-search {
     padding-bottom: 10px !important;
+    min-height: 100%;
 }
 
 .listing-detail-container .listing-info .apartment-details {
