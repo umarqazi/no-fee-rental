@@ -143,16 +143,6 @@ Route::get('/advertise-with-us', 'AdvertiseController@index')->name('web.adverti
 Route::post('/boroughs', 'NYCProxyController@boroughs');
 Route::post('/nyc-data', 'NYCProxyController@nycData');
 
-// Member accept invitation
-Route::get('/accept-invitation/{token}', 'Agent\MemberController@acceptInvitation')->name('member.acceptInvitation');
-
-Route::get('/download/{filename}', function ($filename) {
-          //PDF file is stored under project/public/download/info.pdf
-    $file = "/var/www/html/no-fee-rental/storage/app/public/realty/csv/Realty-20200211/FtyzkRIsqN.csv";
-    $headers = array('Content-Type: application/csv');
-    return Response::download($file, 'realty.csv', $headers);
-});
-
 // Application Controlling Routes
 Route::get('/all-clear', function() {
     artisan(['config:cache', 'view:clear', 'route:clear']);
