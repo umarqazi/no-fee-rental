@@ -619,40 +619,40 @@ $(() => {
         }
     });
 
-    // Add Building Rules
-    $('#add_building').validate({
-        rules: {
-            building_action: {
-                required: true
-            },
-            neighborhood: {
-                required:true,
-            },
-            address: {
-                required: true,
-                remote: {
-                    headers: {
-                        'X-CSRF-TOKEN': TOKEN
-                    },
-                    url: "/owner/is-unique-address",
-                    type: "post",
-                }
-            }
-        },
-
-        messages: {
-            address: {
-                required: "Address is required",
-                remote: "Building with this address already taken"
-            },
-            neighborhood: {
-                required: "Neighborhood is required"
-            },
-            building_action: {
-                required: "Building action is required"
-            },
-        }
-    });
+    // // Add Building Rules
+    // $('#add_building').validate({
+    //     rules: {
+    //         building_action: {
+    //             required: true
+    //         },
+    //         neighborhood: {
+    //             required:true,
+    //         },
+    //         address: {
+    //             required: true,
+    //             remote: {
+    //                 headers: {
+    //                     'X-CSRF-TOKEN': TOKEN
+    //                 },
+    //                 url: "/owner/is-unique-address",
+    //                 type: "post",
+    //             }
+    //         }
+    //     },
+    //
+    //     messages: {
+    //         address: {
+    //             required: "Address is required",
+    //             remote: "Building with this address already taken"
+    //         },
+    //         neighborhood: {
+    //             required: "Neighborhood is required"
+    //         },
+    //         building_action: {
+    //             required: "Building action is required"
+    //         },
+    //     }
+    // });
 
     // Agent Inbox Rule
     $('#send-message').validate({

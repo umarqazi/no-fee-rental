@@ -32,8 +32,8 @@ trait CalendarEventService
         self::$data->ref_event_id = $data->listing->id;
         self::$data->title = sprintf("%s (Open House)", is_exclusive($data->listing));
         self::$data->url = route('listing.detail', $data->listing_id);
-        self::$data->start = sprintf("%s %s", carbon($data->date)->format('m-d-Y'), carbon($data->start_time)->format('h:i a'));
-        self::$data->end = sprintf("%s %s", carbon($data->date)->format('m-d-Y'), carbon($data->end_time)->format('h:i a'));
+        self::$data->start = sprintf("%s %s", $data->date, carbon($data->start_time)->format('h:i a'));
+        self::$data->end = sprintf("%s %s", $data->date, carbon($data->end_time)->format('h:i a'));
         self::$data->from = $data->listing->user_id;
         self::$data->to = null;
         self::__create();

@@ -134,8 +134,7 @@ class InvitationService {
             return $user->id;
         }
 
-        if($invitation = $this->__create($request)) {
-            $user = $this->__addUser($request);
+        if($invitation = $this->__addUser($request)) {
             $this->__sendRepresentativeInviteEmail($user, $invitation);
             DB::commit();
             return true;
