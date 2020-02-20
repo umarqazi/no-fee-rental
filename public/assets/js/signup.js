@@ -3,6 +3,7 @@ $(() => {
     let $body = $('body');
 
     $body.on('form-success-signup_form', function (e, v) {
+        console.log(v);
         $('#signup').modal('hide');
         window.location.href = `/resend-email/${v}`;
     });
@@ -12,11 +13,11 @@ $(() => {
     });
 
     $body.on('click', '#signup-option2', function(e) {
-        $('#signup_form').attr({'action': `${window.location.origin}/user/sign-up`});
+        $('#signup_form').attr({'action': `${window.location.origin}/agent/sign-up`});
     });
 
     $("#signup-option2").trigger('click');
-    let form = $('#signup_form');
+    let form = $('#signup_form, #invited_sign_up');
     let $selector = $('input[name=license_number]');
     let $first_name = $('input[name=first_name]');
     let $last_name = $('input[name=last_name]');

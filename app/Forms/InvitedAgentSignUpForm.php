@@ -1,10 +1,14 @@
 <?php
 
-namespace App\Forms\Agent;
+namespace App\Forms;
 
 use App\Forms\BaseForm;
 
-class CreateForm extends BaseForm
+/**
+ * Class InvitedAgentSignUpForm
+ * @package App\Forms\Agent
+ */
+class InvitedAgentSignUpForm extends BaseForm
 {
 
     /**
@@ -40,16 +44,6 @@ class CreateForm extends BaseForm
     /**
      * @var string
      */
-    public $password_confirmation;
-
-    /**
-     * @var string
-     */
-    public $remember_token;
-
-    /**
-     * @var string
-     */
 
     public $license_number;
 
@@ -59,22 +53,10 @@ class CreateForm extends BaseForm
     public $company;
 
     /**
-     * @var string
-     */
-    public $address;
-
-    /**
-     * @var string
-     */
-    public $description;
-
-    /**
      * Get the instance as an array.
      *
      * @return array
      */
-
-
     public function toArray()
     {
         return [
@@ -84,10 +66,9 @@ class CreateForm extends BaseForm
             'phone_number' => $this->phone_number,
             'user_type' => $this->user_type,
             'password' => $this->password,
-            'password_confirmation' => $this->password_confirmation,
+            'status'   => ACTIVE,
+            'email_verified_at' => now(),
             'license_number' => $this->license_number,
-            'remember_token' => $this->remember_token,
-            'address' => $this->address,
             'company_id' => $this->company ?? null
         ];
     }
@@ -101,8 +82,9 @@ class CreateForm extends BaseForm
             'first_name' => 'required|string',
             'last_name' => 'required|string',
             'email' => 'required|email',
+            'license_number' => 'required',
             'phone_number' => 'required|max:16',
-            'password' => 'required|string|confirmed|min:8',
+            'password' => 'required|string|min:8',
             'user_type' => 'required|integer',
         ];
     }

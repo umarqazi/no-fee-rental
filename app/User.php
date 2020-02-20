@@ -73,6 +73,13 @@ class User extends Authenticate implements CanResetPassword {
         return $this->hasOne(CreditPlan::class, 'user_id', 'id');
     }
 
+    /**
+     * @return HasOne
+     */
+    public function exclusiveSettings() {
+        return $this->hasOne(ExclusiveSetting::class);
+    }
+
 	/**
 	 * @return HasMany
 	 */

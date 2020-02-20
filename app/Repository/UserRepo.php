@@ -85,6 +85,16 @@ class UserRepo extends BaseRepo {
 
     /**
      * @param $email
+     */
+    public function findAgentByEmail($email) {
+        $this->model->where([
+            ['email' => $email],
+            ['user_type' => AGENT]
+        ])->first();
+    }
+
+    /**
+     * @param $email
      *
      * @return mixed
      */

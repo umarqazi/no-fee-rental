@@ -144,6 +144,6 @@ class BuildingController extends Controller {
      */
     public function representative(Request $request) {
         $res = $this->invitationService->checkExistence($request->email);
-        return response()->json(['data' => $res]);
+        return response()->json(['data' => $res], 200);
     }
 }

@@ -6,9 +6,9 @@
     <div class="logo-info-wrapper">
         <h3>Create Account</h3>
     </div>
-    {!! Form::model($agent, ['url' => route('agent.signup'), 'method' => 'post','id' => 'invited_agent_signup_form' ]) !!}
+    {!! Form::model($agent, ['url' => route('web.agentToAgentInviteSignUp'), 'method' => 'post','id' => 'invited_sign_up', 'class' => 'ajax']) !!}
     {!! Form::hidden('user_type', AGENT) !!}
-    {!! Form::hidden('token', $agent->remember_token) !!}
+    {!! Form::hidden('token', $agent->token) !!}
     <div class="row">
         <div class="col-sm-12 ">
             <div class="row align-items-center license_num">
@@ -117,6 +117,10 @@
             setTimeout(() => {
                 $(this).siblings('input').attr('type', 'password');
             }, 10);
+        });
+
+        $('body').on('form-success-invited_sign_up', function () {
+            setTimeout(() => { window.location.href = '/advertise-with-us' }, 1000);
         });
     </script>
 @endsection
