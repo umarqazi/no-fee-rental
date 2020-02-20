@@ -62,7 +62,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Email</label>
-                                {!! Form::text('email', null, ['class'=>'input-style']) !!}
+                                {!! Form::text('email', null, ['class'=>'input-style', 'readonly' => 'readonly']) !!}
                                 @if ($errors->has('email'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('email') }}</strong>

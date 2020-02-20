@@ -408,6 +408,68 @@ $(() => {
         }
     });
 
+    // Invited agent sign_up
+    $('#invited_sign_up').validate({
+        rules: {
+            user_type: "required",
+            first_name: "required",
+            last_name: "required",
+            phone_number: {
+                required : true ,
+                /* format: true ,
+                */  },
+            license_number: {
+                required:true,
+                remote: {
+                    headers: {
+                        'X-CSRF-TOKEN': TOKEN
+                    },
+                    url: "/verify-license",
+                    type: "post",
+                }
+            },
+            password: {
+                required: true,
+                greaterThan: 8
+            },
+            password_confirmation: {
+                required: true,
+                equalTo: '#password',
+            }
+        },
+
+        messages: {
+            license_number: {
+                required: "License number is required.",
+                remote: "License already taken",
+            },
+            user_type: {
+                required: "Select user type."
+            },
+            first_name: {
+                required: "First name is required."
+            },
+            last_name: {
+                required: "Last name is required."
+            },
+            email: {
+                required: "Email is required.",
+                email: "Please enter valid email"
+            },
+            phone_number: {
+                required: "Phone number is required."
+            },
+            password: {
+                required: "Password is required.",
+                greaterThan: "Password should be greater than 8 characters."
+            },
+            password_confirmation: {
+                required: "Confirm password is required",
+                equalTo: "Password not matched."
+            },
+        }
+    });
+
     // Create User Form Validations
     $('#add_user').validate({
       rules: {
@@ -454,6 +516,14 @@ $(() => {
         email: {
           required: true,
           email: true,
+          remote: {
+              headers: {
+                  'X-CSRF-TOKEN': TOKEN
+              },
+
+              url: "/agent/validate-email",
+              type: "post",
+          },
         }
       },
 
@@ -461,6 +531,7 @@ $(() => {
         email: {
           required: "Email is required.",
           email: "Enter a valid Email.",
+          remote: "User with this email already exists having some other user type."
         }
       }
     });

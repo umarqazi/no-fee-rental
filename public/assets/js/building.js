@@ -6,10 +6,15 @@ representative.on('blur', function() {
         let phone = $('input[name=phone_number]');
         let representative = $('input[name=representative_exists]');
 
-        if(res.data === null) {
+        if(res.data === false) {
             representative.val('false');
             username.val('').removeAttr('readonly');
             phone.val('').removeAttr('readonly');
+            return;
+        } else if(res.data === null) {
+            let $validator = $(`#${$('body').find('form').attr('id')}`).validate();
+            let errors = { email: "This email already exists as some other user type." };
+            $validator.showErrors(errors);
             return;
         }
 

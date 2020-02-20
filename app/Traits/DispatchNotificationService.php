@@ -101,7 +101,7 @@ trait DispatchNotificationService
         self::$data->subject = 'Account Created';
         self::$data->toEmail = $data->email;
         self::$data->type = userTypeString($data->user_type);
-        self::$data->url = route($data->user_type == AGENT ? 'agent.signup_form' : 'web.createPassword', $data->remember_token);
+        self::$data->url = route($data->user_type == AGENT ? 'web.addAgentByAdminSignUp' : 'web.createPassword', $data->remember_token);
         self::__sendOnlyEmail();
     }
 
@@ -125,30 +125,32 @@ trait DispatchNotificationService
      */
     public static function AGENTINVITE($data)
     {
-        self::__setParams($data);
+        self::$data = toObject(self::$data);
         self::$data->via = 'info';
         self::$data->view = 'invite_by_agent';
         self::$data->subject = 'No Fee Rental Invitation';
-        self::$data->message = 'Agent invitation sent';
-        self::$data->data->token = $data->data->token;
-        self::$data->url = route('web.agentInviteSignUp', self::$data->data->token);
-        return self::__onlyEmail();
+        self::$data->toEmail = $data->email;
+        self::$data->inviteBy = mySelf();
+        self::$data->url = route('web.agentToAgentInviteForm', $data->token);
+        return self::__sendOnlyEmail();
     }
 
     /**
      * @param $data
+     * @param $inviteBy
      * @return \Illuminate\Foundation\Bus\PendingDispatch
      */
-    public static function ADDREPRESENTATIVE($data)
+    public static function REPRESENTATIVEINVITE($data, $inviteBy)
     {
-        self::__setParams($data);
+        dd($data, $inviteBy);
+        self::$data = toObject(self::$data);
         self::$data->via = 'info';
-        self::$data->view = 'invite_by_agent';
-        self::$data->subject = 'No Fee Rental Invitation';
-        self::$data->message = 'Agent invitation sent';
-        self::$data->data->token = $data->data->token;
-        self::$data->url = route('agent.signup_form', self::$data->data->token);
-        return self::__onlyEmail();
+        self::$data->view = 'invite_representative';
+        self::$data->subject = 'Contact Representative';
+        self::$data->toEmail = $data->email;
+        self::$data->owner = $data->user;
+        self::$data->url = route('agent.signup_form', $data->remember_roken);
+        return self::__sendOnlyEmail();
     }
 
     /**
@@ -157,13 +159,31 @@ trait DispatchNotificationService
      */
     public static function ADDMEMBER($data)
     {
-        self::__setParams($data);
+        self::$data = toObject(self::$data);
         self::$data->view = 'add_member';
         self::$data->via = 'info';
-        self::$data->subject = 'Add Member';
+        self::$data->subject = 'Member Request';
+        self::$data->message = 'A new member has been added';
+        self::$data->to = $data->id;
+        self::$data->invited_by = mySelf();
+        self::$data->toEmail = $data->email;
+        self::$data->url = route('web.acceptInvitation', encrypt(['agent_id' => mySelf()->id, 'member_id' => $data->id]));
+        return self::__send();
+    }
+
+    /**
+     * @param $data
+     * @return bool
+     */
+    public static function ADDREPRESENTATIVE($data)
+    {
+        self::$data = toObject(self::$data);
+        self::$data->view = 'add_representative';
+        self::$data->via = 'info';
+        self::$data->subject = 'Add Representative';
         self::$data->message = 'A new member has been added';
         self::$data->url = route('member.acceptInvitation', self::$data->data->data->token);
-        return self::send();
+        return self::__send();
     }
 
     /**

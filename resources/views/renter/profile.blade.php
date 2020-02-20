@@ -7,12 +7,12 @@
         </div>
         <div class="block profile-container">
             <div class="block-body">
-                {!! Form::model($user, ['url' => route('renter.profileUpdate'), 'method' => 'post', 'enctype' => 'multipart/form-data']) !!}
+                {!! Form::model(mySelf(), ['url' => route('renter.profileUpdate'), 'method' => 'post', 'enctype' => 'multipart/form-data']) !!}
                 <div class="user-avtar">
                     <div class="img-holder">
-                        <img id="view_profile" src="{{ Storage::url( $user->profile_image ?? DUI ) }}" alt="" />
+                        <img id="view_profile" src="{{ Storage::url( mySelf()->profile_image ?? DUI ) }}" alt="" />
                         @if(!empty($user->profile_image))
-                            <input type="hidden" name="old_profile" value="{{ $user->profile_image }}">
+                            <input type="hidden" name="old_profile" value="{{ mySelf()->profile_image }}">
                         @endif
                         <label @if($errors->isEmpty()) @endif id="image-picker">
                             <i class="fa fa-edit edit-btn"></i>{!! Form::file('profile_image', ['class' => 'd-none']) !!}
@@ -27,9 +27,9 @@
                     </div>
                     <div class="detail">
                         <p class="title">Email</p>
-                        <p class="mb-4">{{ $user->email }}</p>
+                        <p class="mb-4">{{ mySelf()->email }}</p>
                         <p class="title">Your Cell Phone</p>
-                        <p>{{ $user->phone_number }} </p>
+                        <p>{{ mySelf()->phone_number }} </p>
                     </div>
                 </div>
                 <div class="additional-info">
@@ -62,7 +62,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Email</label>
-                                {!! Form::text('email', null, ['class'=>'input-style']) !!}
+                                {!! Form::text('email', null, ['class'=>'input-style', 'readonly' => 'readonly']) !!}
                                 @if ($errors->has('email'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('email') }}</strong>
@@ -109,18 +109,27 @@
                                 <label> Notification Settings</label>
                                 <div class="exclusive-chkboxes">
                                     <div class="custom-control custom-checkbox">
-                                        <input class="custom-control-input input-style" id="exclusive-1" name="allow_web_notifications" type="checkbox"
-                                               value="two"   {{  $exclusiveSettings ? ($exclusiveSettings->allow_web_notification === 1 ? 'checked' : null) : 'checked'  }}>
+                                        {!! Form::checkbox('allow_web_notification', 'two', mySelf()->exclusiveSettings->allow_web_notification ? true : false,
+                                            [
+                                                'id' => 'exclusive-1',
+                                                'class' => 'custom-control-input input-style'
+                                            ]) !!}
                                         <label class="custom-control-label" for="exclusive-1">Allow Web Notifications</label>
                                     </div>
                                     <div class="custom-control custom-checkbox">
-                                        <input class="custom-control-input input-style" id="exclusive-2" name="allow_email_notifications" type="checkbox"
-                                               value="two"  {{ $exclusiveSettings  ? ($exclusiveSettings->allow_email === 1 ? 'checked' : null) : 'checked' }}>
+                                        {!! Form::checkbox('allow_email', 'two', mySelf()->exclusiveSettings->allow_email ? true : false,
+                                            [
+                                                'id' => 'exclusive-2',
+                                                'class' => 'custom-control-input input-style'
+                                            ]) !!}
                                         <label class="custom-control-label" for="exclusive-2">Allow Email Notifications</label>
                                     </div>
                                     <div class="custom-control custom-checkbox">
-                                        <input class="custom-control-input input-style" id="exclusive-3" name="disable" type="checkbox"
-                                               value="one" {{ $exclusiveSettings  ? ($exclusiveSettings->allow_web_notification === 0 && $exclusiveSettings->allow_email === 0 ? 'checked' : null) : null }}>
+                                        {!! Form::checkbox('disable', 'one', false,
+                                            [
+                                                'id' => 'exclusive-3',
+                                                'class' => 'custom-control-input input-style'
+                                            ]) !!}
                                         <label class="custom-control-label" for="exclusive-3">Disable All</label>
                                     </div>
                                 </div>

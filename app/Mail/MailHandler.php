@@ -34,6 +34,7 @@ class MailHandler extends Mailable {
 	 */
 	public function build() {
 		$data = $this->data;
+		print_r($this->data->view);
 		return $this->subject($this->data->subject)
             ->view("mails.{$this->data->view}", compact('data'));
 	}

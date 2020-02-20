@@ -54,6 +54,7 @@ Route::get('/make-featured/{id}', 'Agent\ListingController@approve')->name('agen
 
 
 // Agent Members Routes
+Route::post('/validate-email', 'Agent\MemberController@validateEmail');
 Route::get('/team', 'Agent\MemberController@index')->name('agent.team');
 Route::get('/all-invites', 'Agent\MemberController@get')->name('agent.getInvites');
 Route::post('/invite-agent', 'Agent\MemberController@invite')->name('agent.inviteMember');

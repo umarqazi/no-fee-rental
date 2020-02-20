@@ -22,20 +22,16 @@ class ProfileController extends Controller {
 
     /**
      * ProfileController constructor.
-     *
-     * @param UserService $service
      */
-    public function __construct(UserService $service) {
-        $this->userService = $service;
+    public function __construct() {
+        $this->userService = new UserService();
     }
 
     /**
      * @return Factory|View
      */
     public function profile() {
-        $user = mySelf();
-        $exclusiveSettings = $this->userService->getExclusiveSettings(myId());
-        return view('renter.profile', compact('user', 'exclusiveSettings'));
+        return view('renter.profile');
     }
 
     /**
