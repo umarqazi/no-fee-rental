@@ -163,7 +163,7 @@ trait DispatchNotificationService
         self::$data->view = 'add_member';
         self::$data->via = 'info';
         self::$data->subject = 'Member Request';
-        self::$data->message = 'A new member has been added';
+        self::$data->message = 'New Add Member Request Found.';
         self::$data->to = $data->id;
         self::$data->invited_by = mySelf();
         self::$data->toEmail = $data->email;

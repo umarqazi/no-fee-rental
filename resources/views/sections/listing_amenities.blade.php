@@ -4,7 +4,7 @@
     @if(isset($listing->building->amenities) && sizeof($listing->building->amenities) > 0  )
         @foreach($listing->building->amenities as $amenity)
             <ul class="second-ul">
-                <li>{{ $amenity->amenities }}</li>
+                <li>{{ ucwords($amenity->amenities) }}</li>
             </ul>
         @endforeach
     @else

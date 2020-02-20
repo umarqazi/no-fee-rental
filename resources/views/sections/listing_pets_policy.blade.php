@@ -7,7 +7,7 @@
     @endif
     @foreach($pet as $feature)
         <ul class="second-ul">
-            <li>{{ $feature }}</li>
+            <li>{{ ucwords($feature) }}</li>
         </ul>
     @endforeach
 </div>
