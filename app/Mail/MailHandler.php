@@ -34,7 +34,7 @@ class MailHandler extends Mailable {
 	 */
 	public function build() {
 		$data = $this->data;
-		print_r($this->data->view);
+		print sprintf("Mail Sending to [%s] targeting view [%s]\n", $this->data->toEmail ?? null, $this->data->view ?? null);
 		return $this->subject($this->data->subject)
             ->view("mails.{$this->data->view}", compact('data'));
 	}

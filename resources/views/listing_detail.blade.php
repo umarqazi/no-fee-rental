@@ -135,20 +135,20 @@
                                     </div>
                                 @endif
 
-                                <div class="lease-term-section">
-                                   <span>Days on market:</span>
-                                    <strong> {{ daysReadable($listing->created_at) }}</strong>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-6 col-sm-6">
-
                                 @if($listing->deposit)
                                     <div class="lease-term-section">
                                         <span>Security Deposit: </span>
                                         <strong>{{ '$' . number_format($listing->deposit) }}</strong>
                                     </div>
                                 @endif
+                            </div>
+
+                            <div class="col-lg-6 col-sm-6">
+
+                                <div class="lease-term-section">
+                                    <span>Days on market:</span>
+                                    <strong> {{ daysReadable($listing->created_at) }}</strong>
+                                </div>
 
                                 @if($listing->renter_rebate)
                                     <div class="lease-term-section">

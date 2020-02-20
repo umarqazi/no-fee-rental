@@ -187,6 +187,7 @@ class UserService {
             $password = $this->__validateChangePasswordForm($request);
             return $this->userRepo->update($user->id, [
                 'status'   => ACTIVE,
+                'email_verified_at' => now(),
                 'password' => bcrypt($password->password)
             ]);
         }

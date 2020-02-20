@@ -66,17 +66,15 @@ class NotificationService extends ExclusiveSettingService {
             return true;
         }
 
-        if ( ! empty( $settings ) && $settings->allow_web_notification ) {
-//            socketEvent($notification);
-            return true;
-        }
-
-        if ( ! empty( $settings ) && $settings->allow_email ) {
+        if($settings->allow_email) {
             dispatchEmailQueue( $this->data, 2 );
-            return true;
         }
 
-        return false;
+        if ($settings->allow_web_notification ) {
+//            socketEvent($notification);
+        }
+
+        return true;
     }
 
     /**
