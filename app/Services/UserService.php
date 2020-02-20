@@ -9,10 +9,11 @@
 namespace App\Services;
 
 use App\Forms\CompanyForm;
+use App\Forms\CreateUserByAdminForm;
+use App\Forms\InvitedAgentSignUpForm;
 use App\Forms\SignUpForm;
 use App\Forms\User\ChangePasswordForm;
 use App\Forms\User\EditProfileForm;
-use App\Forms\UserForm;
 use App\Repository\CompanyRepo;
 use App\Repository\ExclusiveSettingRepo;
 use App\Repository\MemberRepo;
@@ -67,18 +68,130 @@ class UserService {
         $this->userRepo = new UserRepo();
         $this->companyRepo = new CompanyRepo();
         $this->agentRepo = new AgentRepo();
-        $this->memberRepo = new MemberRepo();
         $this->neighborhoodRepo = new NeighborhoodRepo();
         $this->exclusiveSettingRepo = new ExclusiveSettingRepo();
     }
 
     /**
-     * @param $paginate
-     *
-     * @return array
+     * @param $request
+     * @return bool
      */
-    public function get($paginate) {
-        return $this->collection($paginate);
+    public function agentSignup($request) {
+        DB::beginTransaction();
+        $form = $this->__validateDirectSignUpForm($request);
+        if($user = $this->userRepo->create($form->toArray())) {
+            DispatchNotificationService::USERSIGNUP($user);
+            DB::commit();
+            return $user->remember_token;
+        }
+
+        DB::rollBack();
+        return false;
+    }
+
+    /**
+     * @param $request
+     *
+     * @return bool
+     */
+    public function renterSignup($request){
+        DB::beginTransaction();
+        $form = $this->__validateDirectSignUpForm($request);
+        if($user = $this->userRepo->create($form->toArray())) {
+            DispatchNotificationService::USERSIGNUP($user);
+            DB::commit();
+            return $user->remember_token;
+        }
+
+        DB::rollBack();
+        return false;
+    }
+
+    /**
+     * @param $request
+     * @return bool|mixed
+     */
+    public function addByAdminAgentSignUp($request) {
+        DB::beginTransaction();
+        $form = $this->__validateInvitedAgentForm($request);
+        if($user = $this->validateRememberToken($request->token)) {
+            if($this->userRepo->update($user->id, $form->toArray())) {
+                DB::commit();
+                return (new AuthService('agent'))->loginUsingId($user->id);
+            }
+        }
+
+        DB::rollBack();
+        return false;
+    }
+
+    /**
+     * @param $token
+     * @return bool|mixed
+     */
+    public function verifyEmail($token) {
+        $user = $this->validateRememberToken($token);
+        if (isset($user) && !empty($user)) {
+            if($this->userRepo->update($user->id, ['email_verified_at' => now(), 'status' => ACTIVE])) {
+                $this->addExclusiveSettings($user->id);
+                return (new AuthService($user->user_type == AGENT ? 'agent' : 'renter'))->loginUsingId($user->id);
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * @param $token
+     *
+     * @return bool
+     */
+    public function validateRememberToken($token) {
+        $user = $this->userRepo->find(['remember_token' => $token])->first();
+        return $user ? $user : false;
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function addExclusiveSettings($id) {
+        return $this->exclusiveSettingRepo->create(['user_id' => $id]);
+    }
+
+    /**
+     * @param $request
+     * @return bool
+     */
+    public function createUserByAdmin($request) {
+        DB::beginTransaction();
+        $user = $this->__validateAddUserByAdminForm($request);
+        if($user = $this->userRepo->create($user->toArray())) {
+            $this->addExclusiveSettings($user->id);
+            DispatchNotificationService::ADDUSERBYADMIN($user);
+            DB::commit();
+            return true;
+        }
+
+        DB::rollBack();
+        return false;
+    }
+
+    /**
+     * @param $request
+     * @param $token
+     * @return bool|mixed
+     */
+    public function changePassword($request, $token) {
+        if($user = $this->validateRememberToken($token)) {
+            $password = $this->__validateChangePasswordForm($request);
+            return $this->userRepo->update($user->id, [
+                'status'   => ACTIVE,
+                'password' => bcrypt($password->password)
+            ]);
+        }
+
+        return false;
     }
 
     /**
@@ -89,81 +202,6 @@ class UserService {
         return $this->userRepo->search($keywords)->first();
     }
 
-    /**
-     * @param $paginate
-     *
-     * @return array
-     */
-    private function collection($paginate) {
-        $agents = $this->agents()->paginate($paginate, ['*'], 'agents');
-        $renters = $this->renters()->paginate($paginate, ['*'], 'renters');
-
-        return compact('agents', 'renters');
-    }
-
-    /**
-     * @param $request
-     * @return bool
-     */
-    public function createByAdmin($request) {
-        $user = $this->__validateForm($request);
-        if($user = $this->userRepo->create($user->toArray())) {
-            $this->exclusiveSettingRepo->create(['user_id' => $user->id]);
-            DispatchNotificationService::ADDUSERBYADMIN($user);
-            return true;
-        }
-
-        return false;
-    }
-
-    /**
-     * @param $request
-     *
-     * @return mixed
-     */
-    public function invitedAgentSignup($request) {
-        $form = $this->__validateForm($request);
-        $form->emailVerified = now();
-        return $this->userRepo->updateByClause(['email' => $form->email], $form->toArray());
-    }
-
-    /**
-     * @param $request
-     *
-     * @return bool
-     */
-    public function renterSignup($request){
-        $form = $this->__validateForm($request);
-        if($user = $this->userRepo->create($form->toArray())) {
-            DispatchNotificationService::USERSIGNUP($user);
-            return $user->remember_token;
-        }
-
-        return false;
-    }
-
-    /**
-     * @param $request
-     * @param bool $sendMail
-     *
-     * @return bool
-     */
-    public function signup($request, $sendMail = true) {
-        DB::beginTransaction();
-        $form = $this->__validateForm($request);
-        if($user = $this->userRepo->create($form->toArray())) {
-            $this->exclusiveSettingRepo->create(['user_id' => $user->id]);
-
-            if ($sendMail) { DispatchNotificationService::USERSIGNUP($user); }
-
-            DB::commit();
-            return $user->remember_token;
-        }
-
-        DB::rollback();
-        return false;
-    }
-
 
     /**
      * @param $request
@@ -171,8 +209,8 @@ class UserService {
      * @return mixed
      */
     public function update($id, $request) {
-        $user = $this->__validateForm($request);
-        return $this->userRepo->update($user->id, $user->toArray());
+        $user = $this->__validateAddUserByAdminForm($request);
+        return $this->userRepo->update($id, $user->toArray());
     }
 
     /**
@@ -373,135 +411,12 @@ class UserService {
     }
 
     /**
-     * @param $agent
-     */
-    private function agentMail($agent) {
-        DispatchNotificationService::AGENTINVITE($agent);
-    }
-
-    /**
-     * @param $agent
-     * @param $user
-     */
-    private function memberMail($agent, $user) {
-        DispatchNotificationService::ADDMEMBER(toObject([
-            'from' => myId(),
-            'to'   => $user->id,
-            'data' => $agent
-        ]));
-    }
-
-    /**
-     * @param $request
-     *
-     * @return bool
-     */
-    public function sendInvite($request) {
-        $agent = new AgentInvitationForm();
-        $agent->invite_by = myId();
-        $agent->email = $request->email;
-        $agent->token = str_random(60);
-        if(isAdmin()) {
-            $agent->accept = NULL;
-        }
-        else {
-            $agent->accept = 0 ;
-        }
-        if ($agent->fails()) {
-            if($InviteRes = $this->agentRepo->find(['email' => $request->email])->first()) {
-                if($UserRes = $this->userRepo->find(['email' => $request->email])->first()) {
-                    $this->memberMail($agent, $UserRes);
-                    $this->agentRepo->update($InviteRes->id, ['token' => $agent->token]);
-                    return true ;
-                }
-                $this->agentRepo->update($InviteRes->id, ['token' => $agent->token]);
-                $InviteRes = $this->agentRepo->find(['email' => $request->email])->first();
-                $this->agentMail($InviteRes);
-                return true;
-            }
-
-            return $agent->validate();
-        }
-        if($UserRes = $this->userRepo->find(['email' => $request->email])->first()) {
-            $this->memberMail($agent, $UserRes);
-            $this->agentRepo->invite($agent->toArray());
-            return true ;
-        }
-        $inviteRes = $this->agentRepo->invite($agent->toArray());
-        $this->agentMail($inviteRes);
-        return true;
-    }
-
-    /**
-     * @param $request
-     *
-     * @return mixed
-     */
-    public function changePassword($request) {
-        $form = new ChangePasswordForm();
-        $form->id = $request->id ?? myId();
-        $form->password = $request->password;
-        $form->password_confirmation = $request->password_confirmation;
-        $form->validate();
-        return $this->userRepo->update($form->id, [
-            'email_verified_at' => now(),
-            'password' => bcrypt($form->password)
-        ]);
-    }
-
-    /**
      * @param $clause
      *
      * @return mixed
      */
     public function first($clause) {
         return $this->userRepo->find($clause);
-    }
-
-    /**
-     * @param $request
-     * @return mixed|null
-     */
-    private function __manageCompany($request) {
-        if(!isset($request->company)) {
-            return null;
-        }
-
-        $cForm = new CompanyForm();
-        $cForm->company = $request->company;
-        if (!$cForm->fails()) {
-            $company= $this->companyRepo->create($cForm->toArray());
-        } else {
-            $company = $this->companyRepo->find(['company' => $request->company])->first();
-        }
-
-        return $company->id;
-    }
-
-    /**
-     * @param $token
-     *
-     * @return bool
-     */
-    public function validateEncodedToken($token) {
-        $record = $this->userRepo->find(['remember_token' => $token])->first();
-        return $record ? $record : false;
-    }
-
-    /**
-     * @param $request
-     * @param $token
-     * @return bool|mixed
-     */
-    public function verifyEmail($request, $token) {
-        $user = $this->validateEncodedToken($token);
-        if (isset($user) && !empty($user)) {
-            if($this->userRepo->update($user->id, ['email_verified_at' => now()])) {
-                return (new AuthService($user->user_type == AGENT ? 'agent' : 'renter'))->loginUsingId($user->id);
-            }
-        }
-
-        return false;
     }
 
     /**
@@ -658,9 +573,40 @@ class UserService {
 
     /**
      * @param $request
+     * @return mixed|null
+     */
+    private function __manageCompany($request) {
+
+        if(!isset($request->company)) {
+            return null;
+        }
+
+        $company = $this->__validateCompanyForm($request);
+
+        if (!$company->fails()) {
+            $company= $this->companyRepo->create($company->toArray());
+        } else {
+            $company = $this->companyRepo->find(['company' => $request->company])->first();
+        }
+
+        return $company->id;
+    }
+
+    /**
+     * @param $request
+     * @return CompanyForm
+     */
+    private function __validateCompanyForm($request) {
+        $form = new CompanyForm();
+        $form->company = $request->company;
+        return $form;
+    }
+
+    /**
+     * @param $request
      * @return SignUpForm
      */
-    private function __validateForm($request) {
+    private function __validateDirectSignUpForm($request) {
         $form = new SignUpForm();
         $form->firstName      = $request->first_name;
         $form->lastName       = $request->last_name;
@@ -672,6 +618,57 @@ class UserService {
         $form->company        = $this->__manageCompany($request);
         $form->remember_token = str_random(60);
         $form->validate();
+
+        return $form;
+    }
+
+    /**
+     * @param $request
+     * @return InvitedAgentSignUpForm
+     */
+    private function __validateInvitedAgentForm($request) {
+        $form = new InvitedAgentSignUpForm();
+        $form->first_name     = $request->first_name;
+        $form->last_name      = $request->last_name;
+        $form->email          = $request->email;
+        $form->phone_number   = $request->phone_number;
+        $form->password       = bcrypt($request->password);
+        $form->license_number = $request->license_number;
+        $form->user_type      = AGENT;
+        $form->company        = $this->__manageCompany($request);
+        $form->validate();
+
+        return $form;
+    }
+
+    /**
+     * @param $request
+     * @return ChangePasswordForm
+     */
+    private function __validateChangePasswordForm($request) {
+        $form = new ChangePasswordForm();
+        $form->id = $request->id;
+        $form->password = $request->password;
+        $form->password_confirmation = $request->password_confirmation;
+        $form->validate();
+
+        return $form;
+    }
+
+    /**
+     * @param $request
+     * @return CreateUserByAdminForm
+     */
+    private function __validateAddUserByAdminForm($request) {
+        $form = new CreateUserByAdminForm();
+        $form->firstName      = $request->first_name;
+        $form->lastName       = $request->last_name;
+        $form->email          = $request->email;
+        $form->phoneNumber    = $request->phone_number;
+        $form->userType       = $request->user_type;
+        $form->rememberToken  = str_random(60);
+        $form->validate();
+
         return $form;
     }
 }

@@ -12,7 +12,7 @@ namespace App\Forms;
  * Class RenterForm
  * @package App\Forms
  */
-class RenterForm extends BaseForm {
+class CreateUserByAdminForm extends BaseForm {
 
     /**
      * @var string
@@ -32,11 +32,6 @@ class RenterForm extends BaseForm {
     /**
      * @var string
      */
-    public $password;
-
-    /**
-     * @var string
-     */
     public $phoneNumber;
 
     /**
@@ -45,16 +40,21 @@ class RenterForm extends BaseForm {
     public $userType;
 
     /**
+     * @var string
+     */
+    public $rememberToken;
+
+    /**
      * @return array
      */
     public function toArray() {
         return [
-            'first_name'     => $this->firstName,
-            'last_name'      => $this->lastName,
-            'email'          => $this->email,
-            'phone_number'   => $this->phoneNumber,
-            'password'       => $this->password,
-            'user_type'      => $this->userType
+            'first_name'        => $this->firstName,
+            'last_name'         => $this->lastName,
+            'email'             => $this->email,
+            'phone_number'      => $this->phoneNumber,
+            'remember_token'    => $this->rememberToken,
+            'user_type'         => $this->userType,
         ];
     }
 
@@ -65,9 +65,9 @@ class RenterForm extends BaseForm {
         return [
             'first_name'     => 'required',
             'last_name'      => 'required',
-            'email'          => 'required|email',
+            'email'          => 'required|email|unique:users',
             'phone_number'   => 'required',
-            'password'       => 'required|min:9|confirmed',
+            'remember_token' => 'required',
         ];
     }
 }

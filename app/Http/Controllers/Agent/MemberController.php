@@ -17,12 +17,12 @@ class MemberController extends Controller {
     /**
      * @var MemberService
      */
-    private $invitationService;
+    private $memberService;
 
     /**
      * @var MemberService
      */
-    private $memberService;
+    private $invitationService;
 
     /**
      * MemberController constructor.
@@ -50,36 +50,24 @@ class MemberController extends Controller {
     }
 
     /**
-     *  Send Invitation to agents
-     *
      * @param Request $request
-     *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
     public function invite(Request $request) {
-        if($request->email == mySelf()->email){
-            $invite = 'false' ;
-            return sendResponse($request, $invite, 'Invitation cannot be sent to yourself.');
-        }
-        else {
-            $invite = $this->invitationService->invite($request);
-            return sendResponse($request, $invite, 'Invitation has been sent.');
-        }
+        $invite = $this->invitationService->invite($request);
+        return sendResponse($request, $invite, 'Invitation has been sent.', null, 'Email already exists with some other user type.');
     }
+
     /**
-     *  Accept Invitation
-     *
      * @param Request $request
-     *
-     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
+     * @return string
      */
-    public function acceptInvitation($token) {
-        $authenticate_token = $this->invitationService->getAgentToken($token)->first();
-       $res  = $this->invitationService->addMember($authenticate_token);
-       if($res){
-           return redirect(route('web.index'))
-               ->with(['message' => 'You have been added to Team', 'alert_type' => 'success']);
-       }
+    public function validateEmail(Request $request) {
+        return $this->invitationService->validateEmail($request);
+    }
+
+    public function notAmI(Request $request) {
+
     }
 
     /**

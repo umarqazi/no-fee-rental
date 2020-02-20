@@ -8,6 +8,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\InvitationService;
 use App\Services\UserService;
 use App\Traits\DispatchNotificationService;
 use Illuminate\Contracts\View\Factory;
@@ -27,70 +28,26 @@ class UserController extends Controller {
 	private $userService;
 
     /**
+     * @var InvitationService
+     */
+	private $invitationService;
+
+    /**
      * UserController constructor.
      */
 	public function __construct() {
 		$this->userService = new UserService();
-	}
-
-    /**
-     * @param $token
-     *
-     * @return Factory|View
-     */
-	public function changePassword($token) {
-		return view('create_password', compact('token'));
-	}
-
-	/**
-	 * @param Request $request
-	 * @param $token
-	 *
-	 * @return RedirectResponse
-	 */
-	public function updatePassword(Request $request, $token) {
-		if ($user = $this->userService->validateEncodedToken($token)) {
-			$request->id = $user->id;
-			$res = $this->userService->changePassword($request);
-            return sendResponse($request, $res, 'Password has been created');
-		}
-
-		return error('Invalid token request cannot be processed.');
-
+		$this->invitationService = new InvitationService();
 	}
 
     /**
      * @param Request $request
-     *
-     * @return RedirectResponse
+     * @return \Illuminate\Http\JsonResponse|RedirectResponse
      */
-	public function invitedAgentSignup(Request $request) {
-		$res = $this->userService->invitedAgentSignup($request);
-		return sendResponse($request, $res, 'Account created successfully.', '/');
-	}
-
-    /**
-     * @param $token
-     *
-     * @return Factory|RedirectResponse|View
-     */
-	public function invitedAgentSignupForm($token) {
-		if ($agent = $this->userService->validateEncodedToken($token)) {
-			return view('invited_agent_signup', compact('agent'));
-		}
-
-		return error('Invalid token request cannot be processed.');
-	}
-
-	/**
-	 * @param Request $request
-	 *
-	 * @return RedirectResponse
-	 */
-	public function signup(Request $request){
-		$response = $this->userService->signup($request);
-		return sendResponse($request, $response, null);
-	}
+    public function agentSignUp(Request $request) {
+        $token = $this->userService->agentSignup($request);
+        return sendResponse($request, $token, null);
+    }
 
     /**
      * @param Request $request
@@ -98,18 +55,43 @@ class UserController extends Controller {
      * @return RedirectResponse
      */
     public function renterSignup(Request $request){
-        $response = $this->userService->renterSignup($request);
-        return sendResponse($request, $response, null);
+        $token = $this->userService->renterSignup($request);
+        return sendResponse($request, $token, null);
+    }
+
+    /**
+     * @param $token
+     * @return Factory|View
+     */
+    public function resendEmailView($token) {
+        if($user = $this->userService->validateRememberToken($token)) {
+            return view('resend_email', compact('user'));
+        }
+
+        return error('Invalid token cannot process', '/');
     }
 
     /**
      * @param Request $request
+     * @return \Illuminate\Http\JsonResponse|RedirectResponse
+     */
+    public function resendEmail(Request $request) {
+        if($user = $this->userService->validateRememberToken($request->token)) {
+            DispatchNotificationService::USERSIGNUP($user);
+            $user->delay = $this->__setDelay($user);
+            return sendResponse($request, $user, 'Email has been resend.');
+        }
+
+        return error('Invalid token cannot process');
+    }
+
+    /**
      * @param $token
      * @return RedirectResponse
      */
-	public function confirmEmail(Request $request, $token) {
-		if ($this->userService->verifyEmail($request, $token)) {
-			return isAgent()
+    public function confirmEmail($token) {
+        if ($this->userService->verifyEmail($token)) {
+            return isAgent()
                 ? redirect(route('web.advertise'))->with(
                     [
                         'alert_type' => 'success',
@@ -120,10 +102,91 @@ class UserController extends Controller {
                         'alert_type' => 'success',
                         'message' => 'Your email has been verified.'
                     ]);
+        }
+
+        return error('Your verification token has been expired.');
+    }
+
+    /**
+     * @param $token
+     * @return Factory|RedirectResponse|View
+     */
+    public function addAgentByAdminSignUpForm($token) {
+        if($agent = $this->userService->validateRememberToken($token)) {
+            return view('add_agent_by_admin_sign_up', compact('agent'));
+        }
+
+        return error('Invalid token cannot process.', '/');
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse|RedirectResponse
+     */
+    public function createAddedAgentAccount(Request $request) {
+        $response = $this->userService->addByAdminAgentSignUp($request);
+        return sendResponse($request,
+            $response,
+            'Your email has been verified. Kindly choose a plan to post listings.', route('web.advertise'));
+    }
+
+    /**
+     * @param $token
+     *
+     * @return Factory|View
+     */
+	public function changePassword($token) {
+		return view('create_password', compact('token'));
+	}
+
+    /**
+     * @param Request $request
+     * @param $token
+     * @return \Illuminate\Http\JsonResponse|RedirectResponse
+     */
+    public function acceptInvitation(Request $request, $token) {
+        if($res  = $this->invitationService->addMember($token)) {
+            return sendResponse($request, $res, 'You have been added to Team');
+        }
+
+        return error('Invalid token cannot processed', '/');
+    }
+
+    /**
+     * @param Request $request
+     * @param $token
+     * @return \Illuminate\Http\JsonResponse|RedirectResponse
+     */
+	public function updatePassword(Request $request, $token) {
+	    $res = $this->userService->changePassword($request, $token);
+		return sendResponse($request, $res, 'Password has been created', null, 'Invalid token request cannot be processed.');
+
+	}
+
+    /**
+     * @param $token
+     *
+     * @return Factory|RedirectResponse|View
+     */
+	public function invitedAgentSignUpForm($token) {
+		if ($agent = $this->invitationService->validateInvitedAgentToken($token)) {
+			return view('invited_agent_signup', compact('agent'));
 		}
 
-		return error('Your verification token has been expired.');
+		return error('Invalid token request cannot be processed.');
 	}
+
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse|RedirectResponse
+     */
+	public function invitedAgentSignUp(Request $request) {
+	    $response = $this->invitationService->addInvitedAgentSignUp($request);
+	    return sendResponse($request,
+            $response,
+            'Your email has been verified. Kindly choose a plan to post listings.', route('web.advertise'));
+    }
 
     /**
      * @param Request $request
@@ -216,48 +279,6 @@ class UserController extends Controller {
     }
 
     /**
-     * @param $token
-     * @return Factory|View
-     */
-    public function resendEmailView($token) {
-        if($user = $this->userService->validateEncodedToken($token)) {
-            return view('resend_email', compact('user'));
-        }
-
-        return error('Invalid token cannot process', '/');
-    }
-
-    /**
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse|RedirectResponse
-     */
-    public function resendEmail(Request $request) {
-        if($user = $this->userService->validateEncodedToken($request->token)) {
-            DispatchNotificationService::USERSIGNUP($user);
-            $user->delay = $this->__setDelay($user);
-            return sendResponse($request, $user, 'Email has been resend.');
-        }
-
-        return error('Invalid token cannot process');
-    }
-
-    /**
-     * @param $user
-     * @return mixed
-     */
-    private function __setDelay($user) {
-        if(session()->has($user->remember_token)) {
-            $last_delay = session()->get($user->remember_token);
-            $add_delay = $last_delay * 2;
-            session()->put($user->remember_token, $add_delay);
-        } else {
-            session()->put($user->remember_token, 20);
-        }
-
-        return session()->get($user->remember_token);
-    }
-
-    /**
      *
      * return Renters
      */
@@ -279,5 +300,21 @@ class UserController extends Controller {
                 'filter_route'  => 'web.agentProfileSearchFilter',
                 'search_route'  => 'web.agentProfileAdvanceSearch'
             ]);
+    }
+
+    /**
+     * @param $user
+     * @return mixed
+     */
+    private function __setDelay($user) {
+        if(session()->has($user->remember_token)) {
+            $last_delay = session()->get($user->remember_token);
+            $add_delay = $last_delay * 2;
+            session()->put($user->remember_token, $add_delay);
+        } else {
+            session()->put($user->remember_token, 20);
+        }
+
+        return session()->get($user->remember_token);
     }
 }

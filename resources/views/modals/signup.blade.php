@@ -32,7 +32,7 @@
                 <div class="login-heading">
                     Create Account
                 </div>
-                {!! Form::open(['url' => route('user.signup'), 'class' => 'ajax', 'reset' => 'true' , 'method' => 'post', 'id' => 'signup_form']) !!}
+                {!! Form::open(['url' => route('web.agentSignUp'), 'class' => 'ajax', 'reset' => 'true' , 'method' => 'post', 'id' => 'signup_form']) !!}
                 <div class="row">
                     <div class="col-sm-12 mb-2">
                         <div class="custom-control custom-radio custom-control-inline">

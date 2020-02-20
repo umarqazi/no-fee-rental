@@ -30,7 +30,6 @@ class ChangePasswordForm extends BaseForm {
 	 */
 	public function toArray() {
 		return [
-			'id' => $this->id,
 			'password' => $this->password,
 			'password_confirmation' => $this->password_confirmation,
 		];

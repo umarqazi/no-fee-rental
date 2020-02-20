@@ -41,8 +41,6 @@ Route::post('/reset-password', 'RecoverPasswordController@sendRequest')->name('p
 Route::post('/update-password', 'RecoverPasswordController@recover')->name('password.update');
 Route::get('/reset-password/{token}', 'RecoverPasswordController@recoverForm')->name('recover.password');
 
-// Email Confirmation (New Signed Up [Renter, Agent])
-Route::get('/confirm-email/{token}', 'UserController@confirmEmail')->name('web.confirmEmail');
 
 // Email Validation (By Ajax)
 Route::post('/verify-email', 'UserController@verifyEmail');
@@ -57,13 +55,23 @@ Route::get('/license-verification/{license_number}', 'NYCProxyController@license
 // Login route for all user type
 Route::post('/login')->name('attempt.login')->middleware('authguard');
 
-// Route for Invited Agent Signup
-Route::get('/agent-sign-up/{token}', 'UserController@invitedAgentSignupForm')->name('web.agentInviteSignUp');
+// Route for Added Agent By Admin Signup
+Route::post('/invited/agent/sign-up', 'UserController@createAddedAgentAccount')->name('web.createAddedAgentAccount');
+Route::get('/agent/sign-up/{token}', 'UserController@addAgentByAdminSignUpForm')->name('web.addAgentByAdminSignUp');
 
-// User Signup Routes
-Route::post('/user/sign-up', 'UserController@signup')->name('user.signup');
-Route::post('/agent/sign-up', 'UserController@invitedAgentSignup')->name('agent.signup');
-Route::post('/renter/sign-up', 'UserController@renterSignup')->name('renter.signup');
+// User Direct Signup Routes
+Route::post('/agent/sign-up', 'UserController@agentSignUp')->name('web.agentSignUp');
+Route::post('/renter/sign-up', 'UserController@renterSignUp')->name('web.renterSignUp');
+
+// Agent to Agent Invitation SignUp
+Route::post('/invited-agent/sign-up', 'UserController@invitedAgentSignUp')->name('web.agentToAgentInviteSignUp');
+Route::get('/invited-agent/sign-up/{token}', 'UserController@invitedAgentSignUpForm')->name('web.agentToAgentInviteForm');
+
+// Existing Agent accept invitation
+Route::get('/accept-invitation/{token}', 'UserController@acceptInvitation')->name('web.acceptInvitation');
+
+// Email Confirmation (Direct Signed Up [Renter, Agent])
+Route::get('/confirm-email/{token}', 'UserController@confirmEmail')->name('web.confirmEmail');
 
 // Realty MX Routes
 Route::get('/realty/{fileName}', 'RealtyMXController@dispatchJob');
@@ -135,9 +143,6 @@ Route::get('/advertise-with-us', 'AdvertiseController@index')->name('web.adverti
 Route::post('/boroughs', 'NYCProxyController@boroughs');
 Route::post('/nyc-data', 'NYCProxyController@nycData');
 
-// Member accept invitation
-Route::get('/accept-invitation/{token}', 'Agent\MemberController@acceptInvitation')->name('member.acceptInvitation');
-
 Route::get('/download/{filename}', function ($filename) {
           //PDF file is stored under project/public/download/info.pdf
     $file = "/var/www/html/no-fee-rental/storage/app/public/realty/csv/Realty-20200211/FtyzkRIsqN.csv";
@@ -164,5 +169,4 @@ Route::get('/composer-dump', function() {
 use App\Traits\DispatchNotificationService;
 // Test Route
 Route::get('/test', function (\Illuminate\Http\Request $request) {
-    return view('mails.get_started');
 })->name('web.test');

@@ -438,20 +438,18 @@ class RealtyMXService extends ListingService {
      * @return string
      */
     private function __writeProgressCSVFile( $filepath ) {
-        $path = "storage/realty/csv/Realty-$filepath";
-        if(makeDir($path)) {
-            $path = sprintf("%s/%s.csv", base_path(str_replace('storage', 'storage/app/public', $path)), str_random(10));
-            $file    = fopen( $path, "w") or die ('Failed to create & open file');
-            $header = ['Date', now()->format('d M, Y')];
-            fputcsv($file, $header);
-            $columns = [ 'Listing_web_id', 'URL', 'Reason_of_rejection' ];
-            fputcsv( $file, $columns );
-            foreach ( $this->report as $report ) {
-                fputcsv( $file, $report );
-            }
-
-            fclose( $file );
+        $path = "storage/realty/csv";
+        $path = sprintf("%s/%s.csv", base_path(str_replace('storage', 'storage/app/public', $path)), 'realty');
+        $file    = fopen( $path, "w") or die ('Failed to create & open file');
+        $header = ['Date', now()->format('d M, Y')];
+        fputcsv($file, $header);
+        $columns = [ 'Listing_web_id', 'URL', 'Reason_of_rejection' ];
+        fputcsv( $file, $columns );
+        foreach ( $this->report as $report ) {
+            fputcsv( $file, $report );
         }
+
+        fclose( $file );
         return $path;
     }
 
