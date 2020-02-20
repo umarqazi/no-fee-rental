@@ -407,7 +407,7 @@ class UserService {
      * @return mixed
      */
     public function updateProfileImage($profile_image, $id, $old_image = null) {
-        $destinationPath = 'storage/data/' . $id . '/profile_image';
+        $destinationPath = 'images/users/profile/';
         return uploadImage($profile_image, $destinationPath, true, $old_image);
     }
 

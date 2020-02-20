@@ -85,6 +85,16 @@ class PaymentService {
     }
 
     /**
+     * @return mixed
+     */
+    protected function __cancelSubscription() {
+        $data = $this->customerRepo->find(['user_id' => myId()])->first();
+        $this->customer = $data->customer_id;
+        $this->subscription = $data->subscription_id;
+        return $this->__cancelPlan();
+    }
+
+    /**
      * @return string
      */
     private function __createSubscription() {
