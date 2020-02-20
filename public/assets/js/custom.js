@@ -1,4 +1,3 @@
-
 $(() => {
 
     new WOW().init();
@@ -344,7 +343,7 @@ $(() => {
 
         } else {
             $("#signup_form .agnet-input").prop('disabled', true);
-            $("#signup_form .finding-home-text").css('opacity', '0.3');
+            $("#signup_form .finding-home-text").css('opacity', '0.8');
             $("#signup_form .btn-default").prop('disabled', true);
             $(".finding-home-text").show();
             $(".create-client-listing").hide();
