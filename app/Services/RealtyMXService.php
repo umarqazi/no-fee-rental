@@ -450,7 +450,8 @@ class RealtyMXService extends ListingService {
         }
 
         fclose( $file );
-        return $path;
+        $headers = array('Content-Type: application/csv');
+        return Response::download($path, 'realty.csv', $headers);
     }
 
     /**
