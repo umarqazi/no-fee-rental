@@ -120,9 +120,7 @@
 <div class="row">
     <div class="col-md-6">
         <div class="choose-cover">
-            <img class="img-thumbnail" src="{{ isset($listing->thumbnail)
-                ? (is_realty_listing($listing) ? $listing-> thumbnail : Storage::url($listing->thumbnail ?? DLI ))
-                : Storage::url(DLI) }}" id="img" style="{{($action == 'Update' || $action == 'Copy') ? '' : ''}}">
+            <img class="img-thumbnail" src="{{ is_realty_listing($listing->thumbnail ?? DLI) }}" id="img" style="{{($action == 'Update' || $action == 'Copy') ? '' : ''}}">
             <div class="box">
                 {!! Form::file('thumbnail',['class' => 'inputfile inputfile-3', 'id' => 'file-3']) !!}
                 <label for="file-3" id="error-message">

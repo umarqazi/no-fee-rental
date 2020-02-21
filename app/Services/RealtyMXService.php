@@ -11,7 +11,6 @@ namespace App\Services;
 use App\Repository\CompanyRepo;
 use App\Repository\NeighborhoodRepo;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
 use App\Traits\DispatchNotificationService;
 
@@ -446,13 +445,12 @@ class RealtyMXService extends ListingService {
         fputcsv($file, $header);
         $columns = [ 'Listing_web_id', 'URL', 'Reason_of_rejection' ];
         fputcsv( $file, $columns );
-        foreach ( $this->report as $report ) {
-            fputcsv( $file, $report );
-        }
+            foreach ( $this->report as $report ) {
+                fputcsv( $file, $report );
+            }
 
-        fclose( $file );
-        $headers = array('Content-Type: application/csv');
-        return Response::download($path, 'realty.csv', $headers);
+            fclose( $file );
+            return $path;
     }
 
     /**

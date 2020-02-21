@@ -397,29 +397,6 @@ function dispatchNotification( $data ) {
 
 /**
  * @param $data
- */
-function socketEvent($data) {
-    $socket = new \App\Services\SocketService(request()->root(), config('socket.port'));
-    $socket->setQueryParams([
-        'token' => 'edihsudshuz',
-        'id' => '8780',
-        'cid' => '344',
-        'cmp' => 2339
-    ]);
-
-    $socket->emit('notification-channel', [
-        'id' => $data->id,
-        'to' => $data->to,
-        'from' => $data->from,
-        'message' => $data->message,
-        'url' => $data->url,
-        'is_read' => false,
-        'profile_image' => asset(mySelf()->profile_image ?? DUI)
-    ]);
-}
-
-/**
- * @param $data
  * @param int $delay
  *
  * @return PendingDispatch
@@ -657,12 +634,13 @@ function amenities() {
     $perColumn = ceil($total / 3);
     foreach ($amenities as $key => $amenity ) {
         $i ++;
+        $id = str_random(10);
         $html .= '<ul class="checkbox-listing"><li><div class="custom-control custom-checkbox">';
         $html .= Form::checkbox( 'amenities[]', $amenity->id, null, [
             'class' => 'custom-control-input',
-            'id'    => $key
+            'id'    => $id
         ] );
-        $html .= '<label class="custom-control-label" for="' . $key . '">' . $amenity->amenities . '</label></div></li></ul>';
+        $html .= '<label class="custom-control-label" for="' . $id . '">' . $amenity->amenities . '</label></div></li></ul>';
         if ( ( $key + 1 ) % $perColumn === 0 ) {
             $html .= '</div><div class="col-sm-4"><h3>&nbsp;</h3>';
         } elseif ( $i === $total ) {

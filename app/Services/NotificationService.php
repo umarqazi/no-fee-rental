@@ -54,14 +54,12 @@ class NotificationService extends ExclusiveSettingService {
     }
 
     /**
-     * @return bool
+     * @return bool|mixed
      */
     public function send() {
-        $notification = $this->__create();
         $settings = $this->__receiverExclusiveSettings($this->data->to);
 
         if ( empty( $settings ) ) {
-//            socketEvent($notification);
             dispatchEmailQueue( $this->data, 2 );
             return true;
         }
@@ -70,11 +68,7 @@ class NotificationService extends ExclusiveSettingService {
             dispatchEmailQueue( $this->data, 2 );
         }
 
-        if ($settings->allow_web_notification ) {
-//            socketEvent($notification);
-        }
-
-        return true;
+        return $this->__create();
     }
 
     /**
@@ -107,15 +101,14 @@ class NotificationService extends ExclusiveSettingService {
      * @return mixed
      */
     private function __create() {
-        $notification = $this->__validateForm($this->data);
+        $notification = $this->__validateForm();
         return $this->notificationRepo->create( $notification->toArray() );
     }
 
     /**
-     * @param $request
      * @return NotificationForm
      */
-    private function __validateForm($request) {
+    private function __validateForm() {
         $form          = new NotificationForm();
         $form->to      = $this->data->to;
         $form->url     = $this->data->url;

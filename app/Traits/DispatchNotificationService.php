@@ -320,12 +320,16 @@ trait DispatchNotificationService
      */
     public static function LISTINGREPORT($data)
     {
-        self::__setParams($data);
-        self::$data->view = 'listing-report';
+        self::$data = toObject(self::$data);
+        self::$data->view = 'listing_report';
+        self::$data->via = 'info';
         self::$data->subject = 'Listing report Query Received';
         self::$data->message = 'You have a new Listing report.';
-        self::$data->url = null;
-        self::__onlyEmail();
+        self::$data->report = $data;
+        self::$data->to = 1;
+        self::$data->toEmail = config('mail.admin.email');
+        self::$data->url = route('listing.detail', $data->listing_id);
+        self::__send();
     }
 
     /**
@@ -344,18 +348,6 @@ trait DispatchNotificationService
         self::$data->message = "New Let Us Help Query Received";
         self::$data->url = route('web.index');
         self::__send();
-    }
-    /**
-     * @param $data
-     */
-    public static function OPENHOUSE($data)
-    {
-        self::__setParams($data);
-        self::$data->view = 'listing-feature-approved';
-        self::$data->subject = 'Featured Listing Request Approved';
-        self::$data->message = 'Your Request to make this listing featured has been approved.';
-        self::$data->url = route('listing.detail', self::$data->data->data->id);
-        self::send();
     }
 
     /**
@@ -379,27 +371,16 @@ trait DispatchNotificationService
      */
     public static function CONTACTUS($data)
     {
-        self::__setParams($data);
-        self::$data->view = 'contact-us';
-        self::$data->subject = 'Contact Us';
+        self::$data = toObject(self::$data);
+        self::$data->via = 'info';
+        self::$data->view = 'contact_us';
+        self::$data->subject = 'Contact Us Message';
         self::$data->message = 'New User contact you';
+        self::$data->to = 1;
+        self::$data->request = $data;
+        self::$data->toEmail = config('mail.admin.email');
         self::$data->url = 'http://www.gmail.com';
-        self::send();
-    }
-
-    /**
-     * @param $data
-     */
-    private static function __setParams($data)
-    {
-
-
-        self::$data = toObject([
-            'toEmail' => $data->to->email,
-            'fromEmail' => $data->from->email,
-            'data' => $data,
-        ]);
-
+        self::__send();
     }
 
     /**

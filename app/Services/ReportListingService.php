@@ -10,6 +10,7 @@ namespace App\Services;
 
 use App\Repository\ReportListingRepo;
 use App\Traits\DispatchNotificationService;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class ReportListingService
@@ -36,23 +37,14 @@ class ReportListingService {
      * @return bool
      */
     public function report($request) {
-        $res = $this->reportListingRepo->create($request->all());
-        if($res) {
-            $this->__sendReportEmail($res);
+        DB::beginTransaction();
+        if($report = $this->reportListingRepo->create($request->all())) {
+            DispatchNotificationService::LISTINGREPORT($report);
+            DB::commit();
             return true;
         }
 
+        DB::rollBack();
         return false;
-    }
-
-    /**
-     * @param $data
-     */
-    private function __sendReportEmail($data) {
-        DispatchNotificationService::LISTINGREPORT(toObject([
-            'from' => $data->email,
-            'to'   => mailToAdmin(),
-            'data' => $data
-        ]));
     }
 }
