@@ -56,7 +56,6 @@
 		<div class="loader-wrap"> </div>
 		<div class="main-loader"></div>
 	</div>
-
 @include('secured-layouts.header')
 <div class="main-wrapper">
 	@section('sidebar')

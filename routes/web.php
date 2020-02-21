@@ -159,7 +159,16 @@ Route::get('/composer-dump', function() {
     dd('composer dump-succeed');
 });
 
-use App\Traits\DispatchNotificationService;
+// Realty Import CSV Report Download
+Route::get('/download/realty-csv-report', 'RealtyMXController@download');
+
+use Workerman\Worker;
+use PHPSocketIO\SocketIO;
 // Test Route
 Route::get('/test', function (\Illuminate\Http\Request $request) {
+    $io = new SocketIO(8080);
+    $io->emit('notification-channel', [
+        'client' => 'hire'
+    ]);
+    Worker::runAll();
 })->name('web.test');

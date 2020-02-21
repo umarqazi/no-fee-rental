@@ -25,7 +25,7 @@ class ReportListingController extends Controller {
 
     /**
      * @param Request $request
-     * @return \Illuminate\Http\JsonResponse|RedirectResponse
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
     public function report(Request $request) {
         $res = $this->reportListingService->report($request);

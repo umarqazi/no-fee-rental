@@ -235,6 +235,5 @@ return [
         'XmlParser' => Orchestra\Parser\Xml\Facade::class,
         'Stripe' => Cartalyst\Stripe\Laravel\Facades\Stripe::class,
         'Soda'  => socrata\soda\Client::class,
-        'MapBox' => \ZakClayton\Mapbox\MapboxApi::class,
 	],
 ];
