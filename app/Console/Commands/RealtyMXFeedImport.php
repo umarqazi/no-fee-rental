@@ -13,7 +13,7 @@ class RealtyMXFeedImport extends Command
      *
      * @var string
      */
-    protected $signature = 'import:feed {feed-name}';
+    protected $signature = 'import:feed';
 
     /**
      * The console command description.
@@ -33,13 +33,12 @@ class RealtyMXFeedImport extends Command
     }
 
     /**
-     * Execute the console command.
-     *
-     * @return mixed
+     * @return bool
+     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
     public function handle() {
         printf("%s\n", $this->description);
         $realtyController = new RealtyMXController(new RealtyMXService);
-        return $realtyController->dispatchJob($this->argument('feed-name'));
+        return $realtyController->dispatchJob();
     }
 }

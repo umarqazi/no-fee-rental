@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Services\RealtyMXService;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Contracts\View\Factory;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 use Orchestra\Parser\Xml\Facade as XmlParser;
 use Zend\Diactoros\Request;
@@ -16,6 +17,7 @@ use Zend\Diactoros\Request;
 class RealtyMXController extends Controller {
 
     const DEFAULT_PATH = 'storage/app/public/realty/csv/realty.csv';
+    const REALTY_FEED = 'https://realtymx.com/demo/admin/tools/nofeerentalsnyc.xml';
 
     /**
      * @var RealtyMXService
@@ -58,25 +60,18 @@ class RealtyMXController extends Controller {
     }
 
     /**
-     * @param $file
-     *
-     * @return string
+     * @return bool
+     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
-	public function dispatchJob($file) {
-		$filePath = base_path('storage/app/realtyMXFeed/' . $file);
-		$xml = XmlParser::load($filePath);
-		$content = $xml->getContent();
-		return $this->realtyService->fetch($content->properties->property);
+	public function dispatchJob() {
+		$fileName = 'realtyMXFeed/'.basename(self::REALTY_FEED);
+		if(Storage::disk('local')->put($fileName, file_get_contents(self::REALTY_FEED))) {
+            $filePath = Storage::disk('local')->get($fileName);
+            $xml = XmlParser::extract($filePath);
+            $content = $xml->getContent();
+            return $this->realtyService->fetch($content->properties->property ?? $content->property);
+        }
 
-//        return $this->realtyService->writeCSV($this->report, public_path().'/csv/realty.csv');
+        return $this->realtyService->writeCSV($this->report, public_path().'/csv/realty.csv');
 	}
-
-    /**
-     * @param $property
-     * @param $url
-     * @param $ror
-     */
-    private function makeReport($property, $url, $ror) {
-        $this->report[] = [$this->realtyService->webId($property), $url, $ror];
-    }
 }
