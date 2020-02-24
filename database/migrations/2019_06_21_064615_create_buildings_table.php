@@ -22,7 +22,7 @@ class CreateBuildingsTable extends Migration {
             $table->unsignedInteger('neighborhood_id')->nullable();
             $table->string('map_location');
             $table->string('address');
-            $table->string('thumbnail');
+            $table->string('thumbnail')->nullable();
             $table->enum('building_action', ['OO', 'AA'])->default('AA')->comment = 'Owner Only(OO), Allow Agent(AA)';
             $table->enum('type', ['no fee', 'fee'])->default('no fee');
             $table->boolean('is_verified')->default(false);

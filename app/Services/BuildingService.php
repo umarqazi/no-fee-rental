@@ -226,7 +226,7 @@ class BuildingService extends CreditPlanService {
         $form->contact_representative = $request->contact_representative;
         $form->is_verified            = isAgent() ? false : true;
         $form->thumbnail              = $this->__uploadImage($request);
-        $form->validate();
+//        $form->validate();
         return $form;
     }
 
@@ -238,7 +238,7 @@ class BuildingService extends CreditPlanService {
         if(strpos( $request->thumbnail, 'http' ) === 0) {
             return $request->thumbnail;
         } else {
-            return $request->hasFile('thumbnail')
+            return isset($request->thumbnail)
                 ? uploadImage($request->thumbnail, 'images/listing/thumbnails')
                 : $request->old_thumbnail ?? $request->thumbnail ?? Null;
         }
