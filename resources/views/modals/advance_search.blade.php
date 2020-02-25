@@ -19,7 +19,7 @@
             </div>
             {{--Modal body--}}
             <div class="modal-body">
-                {!! Form::model(app('request')->all(), ['url' => route($search_route ?? 'web.advanceSearch', $param ?? null), 'method' => 'get', 'id' => 'modal-search-from']) !!}
+                {!! Form::model(app('request')->all(), ['url' => route($search_route ?? 'web.search', $param ?? null), 'method' => 'get', 'id' => 'modal-search-from']) !!}
                 <div class="row">
                     <div class="col-md-6 search-form-grou-mrg-btm">
                         <div class="form-group advance-search-modal-beds search-beds ASBD" id="advance-search-chkbox">

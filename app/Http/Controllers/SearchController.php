@@ -19,6 +19,11 @@ class SearchController extends Controller {
     private $searchService;
 
     /**
+     * @var int
+     */
+    private $paginate = 20;
+
+    /**
      * SearchController constructor.
      */
     public function __construct() {
@@ -30,8 +35,21 @@ class SearchController extends Controller {
      * @return Factory|View
      */
     public function indexSearch(Request $request) {
-        $data = $this->__trigger($request);
+        $listing = $this->searchService->search($request)->paginate($this->paginate);
+        $listing->appends($request->all());
+        $data = toObject(['listings' => $listing]);
         return $this->__view($data);
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
+     */
+    public function nextSearch(Request $request) {
+        $listing = $this->searchService->search($request)->paginate($this->paginate);
+        $listing->appends($request->all());
+        $data = toObject(['listings' => $listing]);
+        return sendResponse($request, $data, null);
     }
 
     /**
@@ -57,7 +75,7 @@ class SearchController extends Controller {
      * @return object
      */
     private function __trigger($request) {
-        return toObject(['listings' => $this->searchService->search($request)]);
+//        return toObject(['listings' => ]);
     }
 
     /**
@@ -68,7 +86,7 @@ class SearchController extends Controller {
         return view('listing_search_results', compact('data'))
             ->with([
                 'neigh_filter' => true,
-                'filter_route' => 'web.advanceSearchFilter'
+                'filter_route' => 'web.search'
             ]);
     }
 }

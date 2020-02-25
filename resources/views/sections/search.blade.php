@@ -2,7 +2,7 @@
     <div class="banner-wrapper wow fadeInUp " data-wow-delay="0.2s">
         <h1>NYC’s Premier Source For NO FEE Rentals</h1>
         <div class="advce-search-form-wrapper" style="position: relative">
-            {!! Form::model(app('request')->all(), ['url' => route('web.indexSearch'), 'method' => 'get', 'id' => 'index-search-from']) !!}
+            {!! Form::model(app('request')->all(), ['url' => route('web.search'), 'method' => 'get', 'id' => 'index-search-from']) !!}
             <div class="search-property">
                 <div style="position:relative;height: 55px; line-height: 55px;" class="search-neighborhood">
                     <i class="fas fa-search"></i>
