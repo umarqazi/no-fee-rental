@@ -120,7 +120,6 @@
 {{--Check Availability--}}
 @include('modals.check_availability')
 
-{!! HTML::script('assets/js/app.js') !!}
 {!! HTML::script('assets/js/input-to-dropdown.js') !!}
 {!! HTML::script('assets/js/search-result.js') !!}
 {!! HTML::style('https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.css') !!}

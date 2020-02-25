@@ -122,7 +122,7 @@ class RealtyMXService extends ListingService {
             'neighborhood_id'   => $building->neighborhood_id,
             'rent'              => $details->price ?? null,
             'thumbnail'         => $building->thumbnail ?? null,
-            'availability'      => $details->availableOn ?? null,
+            'availability'      => null,
             'availability_type' => ACTIVE,
             'street_address'    => sprintf("%s, New York", $location->address ?? null),
             'display_address'   => $location->address ?? null,
@@ -405,7 +405,7 @@ class RealtyMXService extends ListingService {
      * @param $list
      */
     private function __generateExistingListErrorReport( $list ) {
-        array_push($this->report, $this->__errorReporting($list, 'We already import this list on no fee platform'));
+        array_push($this->report, $this->__errorReporting($list, 'none'));
     }
 
     /**

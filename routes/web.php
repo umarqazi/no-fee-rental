@@ -14,9 +14,10 @@
 Route::get('/', 'HomeController@index')->name('web.index');
 
 // Search Listing Routes
-Route::get('/search', 'SearchController@indexSearch')->name('web.indexSearch');
-Route::get('/advance-search', 'SearchController@advanceSearch')->name('web.advanceSearch');
-Route::get('/advance-search-filter', 'SearchController@filter')->name('web.advanceSearchFilter');
+Route::get('/search', 'SearchController@indexSearch')->name('web.search');
+Route::post('/search', 'SearchController@nextSearch');
+//Route::get('/advance-search', 'SearchController@advanceSearch')->name('web.advanceSearch');
+//Route::get('/advance-search-filter', 'SearchController@filter')->name('web.advanceSearchFilter');
 
 // Contact Us Routes
 Route::get('/contact-us', 'ContactUsController@index')->name('web.contactUs');
