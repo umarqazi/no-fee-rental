@@ -2,25 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\ListingService;
 use App\Services\RentService;
-use App\Services\SearchService;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
+/**
+ * Class RentController
+ * @package App\Http\Controllers
+ */
 class RentController extends Controller {
 
     /**
      * @var RentService
      */
     private $rentService;
-
-    /**
-     * @var SearchService
-     */
-    private $searchService;
 
     /**
      * @var int
@@ -32,7 +29,6 @@ class RentController extends Controller {
      */
     public function __construct() {
         $this->rentService   = new RentService();
-        $this->searchService = new SearchService();
     }
 
     /**
@@ -40,7 +36,7 @@ class RentController extends Controller {
      * @return Factory|View
      */
     public function index(Request $request) {
-        $data = $this->__collection($this->rentService->get($this->paginate));
+        $data = $this->__collection($this->rentService->get($request, $this->paginate));
         return $this->__view($data);
     }
 
@@ -49,26 +45,7 @@ class RentController extends Controller {
      * @return \Illuminate\Http\JsonResponse|RedirectResponse
      */
     public function rentNext(Request $request) {
-        return sendResponse($request, $this->rentService->get($this->paginate), null);
-    }
-
-    /**
-     * @param Request $request
-     *
-     * @return Factory|View
-     */
-    public function advanceSearch(Request $request) {
-        $data = $this->__collection($this->searchService->search($request));
-        return $this->__view($data);
-    }
-
-    /**
-     * @param Request $request
-     * @return Factory|View
-     */
-    public function filter(Request $request){
-         $data =  $this->__collection($this->searchService->search($request));
-        return $this->__view($data);
+        return sendResponse($request, $this->rentService->get($request, $this->paginate), null);
     }
 
     /**
@@ -80,7 +57,8 @@ class RentController extends Controller {
             'min_price' => MINPRICE,
             'max_price' => (int)$price
         ];
-        $data = $this->__collection($this->searchService->search(toObject($setParams)));
+
+        $data = $this->__collection($this->rentService->get(toObject($setParams), $this->paginate));
         return $this->__view($data);
     }
 
@@ -100,8 +78,8 @@ class RentController extends Controller {
         return view('rent', compact('data'))
             ->with([
                 'neigh_filter'  => true,
-                'filter_route'  => 'web.rentFilter',
-                'search_route'  => 'web.advanceRentSearch'
+                'filter_route'  => 'web.ListsByRent',
+                'search_route'  => 'web.ListsByRent'
             ]);
     }
 }

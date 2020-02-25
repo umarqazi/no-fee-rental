@@ -100,12 +100,8 @@ Route::post('/fetch-notifications', 'NotificationController@get');
 Route::get('/all-notifications', 'NotificationController@all');
 
 // Rent Routes
-Route::get('/listing-by-rent/{sort}', 'RentController@sort');
-Route::post('/ajax-listing-by-rent', 'RentController@rentNext');
-Route::get('/find-apartments/{price}', 'RentController@findApartment');
-Route::get('/listing-by-rent', 'RentController@index')->name('web.ListsByRent');
-Route::get('/listing-by-rent-filter', 'RentController@filter')->name('web.rentFilter');
-Route::get('/listing-by-rent-search', 'RentController@advanceSearch')->name('web.advanceRentSearch');
+Route::post('/rent', 'RentController@rentNext');
+Route::get('/rent', 'RentController@index')->name('web.ListsByRent');
 
 // Neighborhood Routes
 Route::post('/all-neighborhoods', 'NeighborhoodController@all');

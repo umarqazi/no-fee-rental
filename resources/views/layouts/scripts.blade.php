@@ -35,7 +35,7 @@
     <script>
         $(() => {
 
-            $('button[data-target="#check-availability"]').on('click', function() {
+            $('body').on('click', 'button[data-target="#check-availability"]', function() {
                 @if(!authenticated())
                     $('#login').modal('show');
                 @else
