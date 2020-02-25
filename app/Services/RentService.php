@@ -15,7 +15,7 @@ use Illuminate\Pagination\Paginator;
  * Class RentService
  * @package App\Services
  */
-class RentService {
+class RentService extends SearchService {
 
     /**
      * @var ListingRepo
@@ -26,6 +26,7 @@ class RentService {
      * RentService constructor.
      */
     public function __construct() {
+        parent::__construct();
         $this->listingRepo = new ListingRepo();
     }
 
@@ -33,8 +34,9 @@ class RentService {
      * @param $paginate
      * @return mixed
      */
-    public function get($paginate) {
-        $listings = new Paginator($this->listingRepo->rent()->orderBy('is_featured', APPROVEFEATURED)->get(), $paginate);
+    public function get($request, $paginate) {
+        $listings = $this->search($request)->paginate($paginate);
+        $listings->appends($request->all());
         return $listings;
     }
 }

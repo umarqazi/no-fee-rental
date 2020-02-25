@@ -251,7 +251,6 @@ trait SearchTraitService
     private function fetchQuery()
     {
         return $this->query->where('visibility', ACTIVE)
-            ->orderBy('is_featured', APPROVEFEATURED)
-            ->get();
+            ->orderBy('is_featured', APPROVEFEATURED);
     }
 }

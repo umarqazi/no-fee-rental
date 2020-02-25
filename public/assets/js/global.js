@@ -390,6 +390,16 @@ const scrollDown = (selector) => {
     selector.animate({scrollTop: selector[0].scrollHeight});
 };
 
+/**
+ *
+ * @param value
+ * @param phrase
+ * @returns {string}
+ */
+const str_formatting = (value, phrase) => {
+    return value < 1 ? 'Studio' : (value > 1 ? value + ' '+ phrase + "s" : value + ' '+ phrase);
+};
+
 $(() => {
 
     let $body = $('body');
