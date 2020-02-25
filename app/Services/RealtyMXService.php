@@ -102,70 +102,99 @@ class RealtyMXService extends ListingService {
     }
 
     /**
+     * @param $building
+     * @param $listing
+     * @return bool
+     */
+    private function __pushListing($building, $listing) {
+        $details      = $listing->get( 'details' );
+        $location     = $listing->get( 'location' );
+        $attrib       = $listing->get( '@attributes' );
+        $amenities    = !isset($details->amenities) ?: $this->__addAmenities(collect($details->amenities));
+        $images       = isset($listing->get( 'media' )->photo) ? collect($this->__images( $listing->get( 'media' )->photo )) : [];
+        $data = [
+            'realty_id'         => $attrib->id ?? null,
+            'realty_url'        => $attrib->url ?? null,
+            'building_id'       => $building->id,
+            'user_id'           => $building->user_id,
+            'listing_type'      => $this->__isExclusive($details) ? EXCLUSIVE : OPEN,
+            'unique_slug'       => str_random(10) ?? null,
+            'neighborhood_id'   => $building->neighborhood_id,
+            'rent'              => $details->price ?? null,
+            'thumbnail'         => $building->thumbnail ?? null,
+            'availability'      => $details->availableOn ?? null,
+            'availability_type' => ACTIVE,
+            'street_address'    => sprintf("%s, New York", $location->address ?? null),
+            'display_address'   => $location->address ?? null,
+            'bedrooms'          => $details->bedrooms < 1 ? STUDIO : $details->bedrooms ?? null,
+            'baths'             => $details->bathrooms ?? null,
+            'square_feet'       => $details->squareFeet ?? null,
+            'unit'              => is_object($location->apartment) ? null : $location->apartment,
+            'description'       => $details->description ?? null,
+            'visibility'        => ACTIVELISTING,
+            'created_at'        => $details->listedOn,
+            'is_featured'       => REJECTFEATURED ?? null,
+            'map_location'      => $building->map_location
+        ];
+
+        $list = $this->listingRepo->create($data);
+
+        if (count($images) > 0) {
+            $this->__createImages($list->id, $images);
+        }
+
+        $this->__generateSuccessImportListingReport($list);
+        return true;
+    }
+
+    /**
+     * @param $agent
+     * @param $listing
+     * @return bool|mixed
+     */
+    private function __pushBuilding( $agent, $listing ) {
+        $location     = $listing->get( 'location' );
+        $images       = isset($listing->get( 'media' )->photo) ? collect($this->__images( $listing->get( 'media' )->photo )) : [];
+        $map_location = sprintf('{"latitude":%s,"longitude":%s}', $location->latitude ?? '123', $location->longitude ?? '123');
+
+        $building = [
+            'user_id' => $agent->id ?? null,
+            'neighborhood_id' => $this->__neighborhoodHandler($location->neighborhood),
+            'map_location' => $map_location,
+            'address' => sprintf("%s, New York", $location->address ?? null),
+            'thumbnail' => $images[0] ?? null,
+            'is_verified' => TRUE
+        ];
+
+        if(!$uniqueBuilding = $this->__isNewBuilding($building['address'])) {
+            $uniqueBuilding = $this->buildingRepo->create($building);
+        }
+
+        return $uniqueBuilding;
+    }
+
+    /**
      * @param $agent
      * @param $listing
      * @return bool
      */
     private function __createList( $agent, $listing ) {
         if ( !$uniqueListing = $this->__isNewListing( $listing, $agent ) ) {
-            $attrib       = $listing->get( '@attributes' );
-            $details      = $listing->get( 'details' );
-            $amenities    = !isset($details->amenities) ?: $this->__addAmenities(collect($details->amenities));
-            $images       = isset($listing->get( 'media' )->photo) ? collect($this->__images( $listing->get( 'media' )->photo )) : [];
-            $location     = $listing->get( 'location' );
-            $neighborhood_id = $this->__neighborhoodHandler($location->neighborhood);
-            $map_location = sprintf('{"latitude":%s,"longitude":%s}', $location->latitude ?? '123', $location->longitude ?? '123');
-            if(isset($agent->id)) {
-                $building = [
-                    'user_id' => $agent->id ?? null,
-                    'neighborhood_id' => $neighborhood_id,
-                    'map_location' => $map_location,
-                    'address' => sprintf("%s, New York", $location->address ?? null),
-                    'thumbnail' => $images[0] ?? null,
-                    'is_verified' => TRUE
-                ];
-
-                $building = $this->buildingRepo->create($building);
-                $data = [
-                    'realty_id' => $attrib->id ?? null,
-                    'realty_url' => $attrib->url ?? null,
-                    'building_id' => $building->id,
-                    'user_id'     => $building->user_id,
-                    'listing_type' => $this->__isExclusive($details) ? EXCLUSIVE : OPEN,
-                    'amenities' => $amenities ?? null,
-                    'unique_slug' => str_random(10) ?? null,
-                    'neighborhood_id' => $building->neighborhood_id,
-                    'rent' => $details->price ?? null,
-                    'thumbnail' => $building->thumbnail ?? null,
-                    'availability' => $details->availableOn ?? null,
-                    'availability_type' => 1,
-                    'street_address' => sprintf("%s, New York", $location->address ?? null),
-                    'display_address' => $location->address ?? null,
-                    'bedrooms' => $details->bedrooms < 1 ? STUDIO : $details->bedrooms ?? null,
-                    'baths' => $details->bathrooms ?? null,
-                    'square_feet' => $details->squareFeet ?? null,
-                    'unit' => is_object($location->apartment) ? null : $location->apartment,
-                    'description' => $details->description ?? null,
-                    'visibility' => ACTIVELISTING,
-                    'created_at' => $details->listedOn,
-                    'is_featured' => DEACTIVE ?? null,
-                    'map_location' => $building->map_location
-                ];
-
-                $list = $this->listingRepo->create($data);
-
-                if (count($images) > 0) {
-                    $this->__createImages($list->id, $images);
-                }
-
-                $this->__generateSuccessImportListingReport($list);
-                return true;
-            }
-            print sprintf('Skipping');
+            return $this->__pushListing($this->__pushBuilding( $agent, $listing ), $listing);
         }
 
-        $this->__generateExistingListErrorReport( $listing );
+        $this->__generateExistingListErrorReport( $uniqueListing );
         return false;
+    }
+
+    /**
+     * @param $building_address
+     *
+     * @return bool
+     */
+    private function __isNewBuilding( $building_address ) {
+       $building = $this->buildingRepo->find(['address' => $building_address]);
+       return $building->count() > 0 ? $building->first() : false;
     }
 
     /**
@@ -259,7 +288,7 @@ class RealtyMXService extends ListingService {
             ]);
 
             if ($agent) {
-                array_push($this->agents, $agent);
+                array_push($this->agents, $agent->email);
 
                 return $agent;
             }
@@ -397,7 +426,9 @@ class RealtyMXService extends ListingService {
      * @return array
      */
     private function __errorReporting($list, $message) {
-        return [$list->get('@attributes')->id, isset($list->realty_url) ? $list->realty_url : $list->get('@attributes')->url, $message];
+        return isset($list->realty_url)
+            ? [$list->realty_id, route('web.realty', [$list->unique_slug, $list->realty_id]), $message]
+            : [$list->get('@attributes')->id, $list->get('@attributes')->url, $message];
     }
 
     /**
@@ -418,6 +449,7 @@ class RealtyMXService extends ListingService {
             }
 
             fclose( $file );
+            print_r($this->agents);
             return $path;
     }
 

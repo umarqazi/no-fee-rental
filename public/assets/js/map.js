@@ -327,11 +327,11 @@ const drawPolygon = ($coordinates, id) => {
  */
 $(() => {
 
-    $('.property-thumb').hover(function() {
-        let lat_lng = JSON.parse($(this).find('input[name=map_location]').val());
-        MAP.setZoom = 20;
-        MAP.flyTo({center: setLatLng(lat_lng)});
-    });
+    // $('.property-thumb').hover(function() {
+    //     let lat_lng = JSON.parse($(this).find('input[name=map_location]').val());
+    //     MAP.setZoom = 20;
+    //     MAP.flyTo({center: setLatLng(lat_lng)});
+    // });
 
     $('body').on('keyup, blur', '.mapboxgl-ctrl-geocoder--input', function() {
         let required = ['poi', 'address'];

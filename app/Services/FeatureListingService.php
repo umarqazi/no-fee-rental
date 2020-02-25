@@ -118,7 +118,7 @@ class FeatureListingService {
 	 */
 	public function mark($id) {
 	    $listing = $this->listingRepo->find(['id' => $id]);
-		if ($listing->where('id', $id)->update(['is_featured' => APPROVEFEATURED])) {
+		if ($listing->update(['is_featured' => APPROVEFEATURED])) {
 			DispatchNotificationService::LISTINGFEATUREAPPROVED($listing->first());
 
 			return true;

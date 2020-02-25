@@ -72,7 +72,7 @@
             </div>
         </div>
     </div>
-    <div class="search-result-wrapper">
+    <div class="search-result-wrapper" id="app">
         <div class="search-listing">
             <h3></h3>
             <div id="boxscroll-section">
@@ -106,7 +106,7 @@
             </div>
         </div>
         {{--Desktop Map--}}
-        @if(count($data->listings) > 0)
+        @if(count($data->listings->items()) > 0)
             <div class="map-wrapper">
                 <div class="swipe-btn"><i class="fa fa-angle-left"></i></div>
                 <div id="desktop-map"></div>
@@ -114,28 +114,77 @@
         @endif
     </div>
 </div>
-
 {{--Advance Search Modal--}}
 @include('modals.advance_search')
 
 {{--Check Availability--}}
 @include('modals.check_availability')
 
+{!! HTML::script('assets/js/app.js') !!}
 {!! HTML::script('assets/js/input-to-dropdown.js') !!}
 {!! HTML::script('assets/js/search-result.js') !!}
 {!! HTML::style('https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.css') !!}
 {!! HTML::script('https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.js') !!}
 <script>
-
-    let coords = [];
-    $('input[name=map_location]').each(function(i, v) {
-        coords.push($(v).val());
+    @php $listing = collect($data->listings)->toArray(); @endphp
+    let nextPage = "{{ $listing['next_page_url'] }}";
+    $('#boxscroll-section').scroll(function (e) {
+        console.log($('#boxscroll-section').scrollTop(), $('#boxscroll-section').height(), $(window).height());
+        // if($('#boxscroll-section').scrollTop() >= ($('#boxscroll-section').height() - $(window).height()) * 0.7) {
+        //     ajaxRequest(`${window.location.origin}/ajax-listing-by-rent${nextPage}`, 'post').then(res => {
+        //         nextPage = res.data.next_page_url;
+        //         res.data.data.forEach((v, i) => {
+        //             $('.property-listing > .property-thumb:last').after(property_thumb());
+        //         });
+        //     });
+        // }
     });
 
-    @if(count($data->listings) > 0)
-    if(coords !== []) {
-        multiMarkers(coords, 'desktop-map', 15);
+    function property_thumb() {
+
+        return `<div class='property-thumb'>
+            <div class='check-btn'>
+                <input type='hidden' name='map_location' value='{$listing->map_location}'>
+                <a href='javascript:void(0);'>
+                    <button class='btn-default' list_id='as' to='as' data-target="#check-availability">Check Availability</button>
+                </a>
+            </div>
+            @if(!authenticated())
+                <span class='display-heart-icon'></span>
+            @endif
+
+            @if(isRenter())
+{{--                <span id ='' class='heart-icon favourite'></span>@if(isFavourite($listing["favourites"],$listing->id))--}}
+
+                {{--@else--}}
+                    <span id ='asd' class='heart-icon'></span>
+                {{--@endif--}}
+            @endif
+
+            <img src='".is_realty_listing($listing->thumbnail)."' alt='' class='main-img'>
+            <div class='info'>
+                <div class='info-link-text'>
+                    <p>$ 1200 / month&nbsp;&nbsp;</p>
+                    <small> (12bd, 2ba) </small>
+                    <p>897 venue</p>
+                </div>
+                <a href='#' class='btn viewfeature-btn'> View </a>
+            </div>
+            <div class='feaure-policy-text'>
+                <p>$ 1200 / month </p>
+                <span> 876 ajsdk</span>
+            </div>
+        </div>`
     }
+    // let coords = [];
+    // $('input[name=map_location]').each(function(i, v) {
+    //     coords.push($(v).val());
+    // });
+
+    @if(count($data->listings) > 0)
+    // if(coords !== []) {
+        // multiMarkers(coords, 'desktop-map', 15);
+    // }
     @endif
 
     $(".neighborhood-search .search-result-wrapper .map-wrapper .swipe-btn").on('click', function () {
@@ -144,7 +193,7 @@
         $body.find('#desktop-map').remove();
         $body.find('.map-wrapper').append(`<div id="desktop-map"></div>`);
         setTimeout(() => {
-            multiMarkers(coords, 'desktop-map', 15);
+            // multiMarkers(coords, 'desktop-map', 15);
         }, 100);
         $(".neighborhood-search .search-result-wrapper .search-listing").toggleClass('hide-list');
         $(".neighborhood-search .search-result-wrapper .map-wrapper").toggleClass('full-map');

@@ -241,13 +241,7 @@ class ListingService extends BuildingService {
      * @return bool
      */
     public function approve( $id ) {
-        if ( $this->listingRepo->update( $id, [ 'visibility' => 1 ] ) ) {
-            $list = $this->listingRepo->find( [ 'id' => $id ] )->with( 'agent' )->first();
-
-            return true;
-        }
-
-        return false;
+        return $this->listingRepo->update( $id, [ 'visibility' => 1 ]) ? true : false;
     }
 
     /**
@@ -331,12 +325,6 @@ class ListingService extends BuildingService {
      */
     public function requestForFeatured( $id ) {
         $request = $this->listingRepo->sendRequest( $id );
-        DispatchNotificationService::LISTINGFEATUREREQUEST(toObject([
-            'from' => myId(),
-            'to'   => mailToAdmin(),
-            'data' => $request
-        ]));
-
         return $request;
     }
 

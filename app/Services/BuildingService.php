@@ -226,7 +226,7 @@ class BuildingService extends CreditPlanService {
         $form->contact_representative = $request->contact_representative;
         $form->is_verified            = isAgent() ? false : true;
         $form->thumbnail              = $this->__uploadImage($request);
-//        $form->validate();
+        $form->validate();
         return $form;
     }
 
