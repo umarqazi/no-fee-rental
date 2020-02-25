@@ -101,6 +101,7 @@ Route::get('/all-notifications', 'NotificationController@all');
 
 // Rent Routes
 Route::get('/listing-by-rent/{sort}', 'RentController@sort');
+Route::post('/ajax-listing-by-rent', 'RentController@rentNext');
 Route::get('/find-apartments/{price}', 'RentController@findApartment');
 Route::get('/listing-by-rent', 'RentController@index')->name('web.ListsByRent');
 Route::get('/listing-by-rent-filter', 'RentController@filter')->name('web.rentFilter');

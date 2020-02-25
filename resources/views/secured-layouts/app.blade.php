@@ -47,7 +47,7 @@
     {!! HTML::script('assets/js/validate.js') !!}
     {!! HTML::script('assets/js/global.js') !!}
 	{!! HTML::script('assets/js/map.js') !!}
-	<scrip src="{{ asset('assets/js/mapbox.js') }}" async></scrip>
+	<scrip src="{{ asset('assets/js/listing_view.js') }}" async></scrip>
 	{!! HTML::script('assets/js/vendor/datatable.min.js') !!}
 
 </head>

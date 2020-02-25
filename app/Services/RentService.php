@@ -6,13 +6,15 @@
  * @project no-fee-rental
  */
 
-
 namespace App\Services;
 
-
-use App\Listing;
 use App\Repository\ListingRepo;
+use Illuminate\Pagination\Paginator;
 
+/**
+ * Class RentService
+ * @package App\Services
+ */
 class RentService {
 
     /**
@@ -28,17 +30,11 @@ class RentService {
     }
 
     /**
-     * @param $request
+     * @param $paginate
      * @return mixed
      */
-    public function get($request) {
-        $listings = null;
-        if($request->has('sortBy')) {
-            $listings = $this->listingRepo->rent()->orderBy('rent', 'asc');
-        } else {
-            $listings = $this->listingRepo->rent();
-        }
-
-        return $listings->orderBy('is_featured', APPROVEFEATURED)->get();
+    public function get($paginate) {
+        $listings = new Paginator($this->listingRepo->rent()->orderBy('is_featured', APPROVEFEATURED)->get(), $paginate);
+        return $listings;
     }
 }

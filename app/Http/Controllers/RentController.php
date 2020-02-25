@@ -23,10 +23,15 @@ class RentController extends Controller {
     private $searchService;
 
     /**
+     * @var int
+     */
+    private $paginate = 20;
+
+    /**
      * RentController constructor.
      */
     public function __construct() {
-        $this->rentService    = new RentService();
+        $this->rentService   = new RentService();
         $this->searchService = new SearchService();
     }
 
@@ -35,8 +40,16 @@ class RentController extends Controller {
      * @return Factory|View
      */
     public function index(Request $request) {
-        $data = $this->__collection($this->rentService->get($request));
+        $data = $this->__collection($this->rentService->get($this->paginate));
         return $this->__view($data);
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse|RedirectResponse
+     */
+    public function rentNext(Request $request) {
+        return sendResponse($request, $this->rentService->get($this->paginate), null);
     }
 
     /**

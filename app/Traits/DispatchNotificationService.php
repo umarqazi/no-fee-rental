@@ -21,46 +21,6 @@ trait DispatchNotificationService
     private static $data = null;
 
     /**
-     * // not required
-     * @param $data
-     */
-    public static function LISTINGAPPROVALREQUEST($data)
-    {
-        self::__setParams($data);
-        self::$data->view = 'listing-request';
-        self::$data->subject = 'Listing Request';
-        self::$data->message = 'New Listing Approval Request Received.';
-        self::$data->url = route('admin.viewListing');
-        self::send();
-    }
-
-    /**
-     * @param $data
-     */
-    public static function LISTINGAPPROVED($data)
-    {
-        self::__setParams($data);
-        self::$data->view = 'listing-approved';
-        self::$data->subject = 'Listing Approved';
-        self::$data->message = 'Listing has been Approved.';
-        self::$data->url = route('listing.detail', self::$data->data->data->id);
-        self::send();
-    }
-
-    /**
-     * @param $data
-     */
-    public static function LISTINGFEATUREREQUEST($data)
-    {
-        self::__setParams($data);
-        self::$data->view = 'listing-feature-request';
-        self::$data->subject = 'Featured Listing Request';
-        self::$data->message = 'New Request Received to Make Listing Featured.';
-        self::$data->url = route('admin.featureListing');
-        self::send();
-    }
-
-    /**
      * @param $data
      */
     public static function LISTINGFEATUREAPPROVED($data)
