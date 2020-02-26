@@ -379,7 +379,37 @@ const is_realty_listing = (image) => {
  * @returns {*}
  */
 const is_exclusive = (listing) => {
-    return listing.building_type === 'exclusive' ? listing.street_address + ' - (' + listing.unit + ')' : listing.display_address
+    let address = listing.building_type === 'exclusive' ? listing.street_address + ' - (' + listing.unit + ')' : listing.display_address;
+    return address + ', ' + listing.neighborhood.name;
+};
+
+/**
+ *
+ * @param v
+ * @returns {string}
+ */
+const property_thumb = (v) => {
+    return `<div class='property-thumb'>
+            <div class='check-btn'>
+                <input type='hidden' name='map_location' value='{$listing->map_location}'>
+                <a href='javascript:void(0);'>
+                    <button class='btn-default' list_id='${v.id}' to='${v.user_id}' data-target="#check-availability">Check Availability</button>
+                </a>
+            </div>
+            <img src='${is_realty_listing(v.thumbnail)}' alt='' class='main-img'>
+            <div class='info'>
+                <div class='info-link-text'>
+                    <p>$ ${formatNumber(v.rent)} / month </p>
+                    <small> (${v.bedrooms} bd, ${v.baths} ba) </small>
+                    <p>${is_exclusive(v)}</p>
+                </div>
+                <a href='${window.location.origin}/listing-detail/${v.id}' class='btn viewfeature-btn'> View </a>
+            </div>
+            <div class='feaure-policy-text'>
+                <p>$ ${formatNumber(v.rent)} / month </p>
+                <span> ${str_formatting(v.bedrooms, 'bed')}, ${str_formatting(v.baths, 'bath')}</span>
+            </div>
+        </div>`;
 };
 
 /**

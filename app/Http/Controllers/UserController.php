@@ -216,35 +216,6 @@ class UserController extends Controller {
 	}
 
     /**
-     * @param $agentId
-     * @return Factory|View
-     */
-	public function agentProfileWithListing($agentId) {
-        $data = $this->userService->getAgentWithListings($agentId);
-        return $this->__view($data, $agentId);
-    }
-
-    /**
-     * @param $id
-     * @param Request $request
-     * @return Factory|View
-     */
-    public function agentProfileAdvanceSearch($id, Request $request) {
-	    $data = $this->userService->advanceSearch($id, $request);
-	    return $this->__view($data, $id);
-    }
-
-    /**
-     * @param $id
-     * @param Request $request
-     * @return Factory|View
-     */
-    public function agentProfileSearchFilter($id, Request $request) {
-        $data = $this->userService->advanceSearch($id, $request);
-        return $this->__view($data, $id);
-    }
-
-    /**
      * @param Request $request
      * @param $id
      * @return \Illuminate\Http\JsonResponse|RedirectResponse|string
@@ -285,21 +256,6 @@ class UserController extends Controller {
     public function getRenters() {
         $renters = $this->userService->getRenters();
         return $renters;
-    }
-
-    /**
-     * @param $data
-     * @param $agentId
-     * @return Factory|View
-     */
-    private function __view($data, $agentId) {
-        return view('listing_profile', compact('data'))
-            ->with([
-                'neigh_filter'  => true,
-                'param'         => $agentId,
-                'filter_route'  => 'web.agentProfileSearchFilter',
-                'search_route'  => 'web.agentProfileAdvanceSearch'
-            ]);
     }
 
     /**

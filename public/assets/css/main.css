@@ -1888,10 +1888,10 @@ footer .copyright .social-icons li a:hover {
 }
 
 #advance-search .slider-wrapper .input-style {
-    width: 125px;
+    width: 155px;
     -webkit-appearance: none;
     text-align: center;
-    height: 36px;
+    height: 40px;
 }
 
 #advance-search .slider-wrapper .ui-slider .ui-slider-handle {
@@ -1930,9 +1930,12 @@ footer .copyright .social-icons li a:hover {
 }
 
 #advance-search .search-input-wrap {
-    width: 83%;
+    width: 100%;
     margin: 0 auto;
     margin-bottom: 10px;
+}
+.price-range-advance-srch .form-group{
+    margin-bottom: 30px;
 }
 
 #advance-search .search-input-wrap input:nth-child(1) {

@@ -18,9 +18,9 @@ use Illuminate\View\View;
 class NeighborhoodController extends Controller {
 
     /**
-     * @var SearchService
+     * @var int
      */
-    private $searchService;
+    private $paginate = 20;
 
     /**
      * @var NeighborhoodService
@@ -31,7 +31,6 @@ class NeighborhoodController extends Controller {
      * NeighborhoodController constructor.
      */
     public function __construct() {
-        $this->searchService = new SearchService();
         $this->neighborhoodService = new NeighborhoodService();
     }
 
@@ -46,52 +45,30 @@ class NeighborhoodController extends Controller {
     }
 
     /**
+     * @param Request $request
      * @return RedirectResponse
      */
-    public function index() {
-        $neighborhood = $this->neighborhoodService->first();
-        return redirect()->route('web.ListsByNeighborhood', $neighborhood->name);
-    }
-
-    /**
-     * @param $neighborhood
-     *
-     * @return Factory|View
-     */
-    public function find($neighborhood) {
-        $data = $this->neighborhoodService->find($neighborhood);
-        return $this->__view($data);
+    public function index(Request $request) {
+        $listings = $this->__fetchListings($request);
+        return view('neighborhood', compact('listings'))->with([
+            'route' => 'web.listsByNeighborhood',
+            'neigh_filter' => false
+        ]);
     }
 
     /**
      * @param Request $request
-     * @return Factory|View
+     * @return JsonResponse|RedirectResponse
      */
-    public function filter(Request $request) {
-        $data = $this->neighborhoodService->searchFilters($request);
-        return $this->__view($data);
+    public function pagination(Request $request) {
+        return sendResponse($request, $this->__fetchListings($request), null);
     }
 
     /**
-     * @param Request $request
-     *
-     * @return Factory|View
+     * @param $request
+     * @return mixed|String
      */
-    public function advanceSearch(Request $request) {
-        $data = $this->neighborhoodService->searchFilters($request);
-        return $this->__view($data);
-    }
-
-    /**
-     * @param $data
-     * @return Factory|View
-     */
-    private function __view($data) {
-        return view('neighborhood', compact('data'))
-            ->with([
-                'neigh_filter'  => false,
-                'filter_route'  => 'web.neighborhoodFilter',
-                'search_route'  => 'web.advanceNeighborhoodSearch'
-            ]);
+    private function __fetchListings($request) {
+        return $this->neighborhoodService->searchListings($request, $this->paginate);
     }
 }

@@ -12,21 +12,21 @@
                 <div class="mobile-tabs-collapse-inner">
                     <div class="listing-wrapp">
                         {{--Bedrooms--}}
-                        {!! Form::model(app('request')->all(), ['url' => route($filter_route, $param ?? null), 'method' => 'get', 'id' => 'search']) !!}
+                        {!! Form::model(app('request')->all(), ['url' => route($route, $params ?? null), 'method' => 'get', 'id' => 'search']) !!}
                         <div class="dropdown-wrap">
                             @if($neigh_filter)
                                 <div class="neighborhoods-dropdown-listings">
                                     <button type="button" class="btn btn-primary neighborhood-field PN" id="neigh-for-dropdown">
                                         {{ is_array(app('request')->get('neighborhood'))
-                                        ? sprintf("Neighborhoods (%s)", count(app('request')->get('neighborhood')))
-                                        : app('request')->get('neighborhood') ?? 'Neighborhoods' }}
+                                            ? sprintf("Neighborhoods (%s)", count(app('request')->get('neighborhood')))
+                                            : app('request')->get('neighborhood') ?? 'Neighborhoods' }}
                                     </button>
                                     <div class="dropdown-for-neigh dropdown-listiing-rent-page search-result-section-neighborhood" id="neighborhood-searchchecbox">
                                         {!! filter_neighborhood_select(app('request')->get('neighborhood')) !!}
                                     </div>
                                 </div>
                             @else
-                                <input type="hidden" name="neighborhood" value="{{ request()->segment(2) }}">
+                                <input type="hidden" name="neighborhood" value="{{ request()->get('neighborhood') }}">
                             @endif
                             <div class="main-search-beds">
                                 <button type="button" class="btn btn-primary" id="beds-for-dropdown">Beds</button>
@@ -46,12 +46,10 @@
                                 <div class="dropdown-for-price dropdown-listiing-rent-page" id="advance-search-chkbox">
                                     <ul>
                                         <li>
-                                        {!! Form::text('min_price', Null,['class' => 'form-control PPm', 'placeholder'
-                                        => '$ min']) !!}
+                                        {!! Form::text('min_price', Null,['class' => 'form-control PPm', 'placeholder' => '$ min']) !!}
                                         <li>To</li>
                                         <li>
-                                        {!! Form::text('max_price', Null, ['class' => 'form-control PPM', 'placeholder'
-                                        =>'$ max']) !!}
+                                        {!! Form::text('max_price', Null, ['class' => 'form-control PPM', 'placeholder' =>'$ max']) !!}
                                     </ul>
                                 </div>
                             </div>
@@ -78,19 +76,19 @@
             <div id="boxscroll-section">
                 <div class="featured-properties" id="contentscroll-sec">
                     <div class="property-listing neighbourhood-listing">
-                        @foreach($data->listings as $listing)
+                        @foreach($listings as $listing)
                             {!! property_thumbs($listing, true) !!}
                         @endforeach
-                        @if(count($data->listings) < 1)
-                                <div class="no-result-found-search">
-                                    <p>No results found</p>
-                                </div>
+                        @if(count($listings) < 1)
+                            <div class="no-result-found-search">
+                                <p>No results found</p>
+                            </div>
                         @endif
                     </div>
                     <div class="property-listing mobile-listing">
-                        @if(count($data->listings) > 0)
+                        @if(count($listings) > 0)
                         <div class="owl-carousel owl-theme">
-                            @foreach($data->listings as $listing)
+                            @foreach($listings as $listing)
                                 <div class="items">
                                     {!! property_thumbs($listing, true) !!}
                                 </div>
@@ -106,7 +104,7 @@
             </div>
         </div>
         {{--Desktop Map--}}
-        @if(count($data->listings) > 0)
+        @if(count($listings) > 0)
             <div class="map-wrapper">
                 <div class="swipe-btn"><i class="fa fa-angle-left"></i></div>
                 <div id="desktop-map"></div>
@@ -126,7 +124,9 @@
 {!! HTML::script('https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.js') !!}
 <script>
     let nextPage = insertParam(`page`, 2);
-    nextPage = window.location.origin + '/{{ request()->segment(1) }}?' + nextPage;
+    let url = document.location.href;
+    url = url.replace(document.location.search, '');
+    nextPage = url + '?' + nextPage;
     $('#boxscroll-section').scroll(function () {
         if($(this).scrollTop() + $(this).innerHeight() >= $(this)[0].scrollHeight) {
             if(nextPage !== null) {
@@ -140,47 +140,12 @@
         }
     });
 
-    function property_thumb(v) {
-        return `<div class='property-thumb'>
-            <div class='check-btn'>
-                <input type='hidden' name='map_location' value='{$listing->map_location}'>
-                <a href='javascript:void(0);'>
-                    <button class='btn-default' list_id='${v.id}' to='${v.user_id}' data-target="#check-availability">Check Availability</button>
-                </a>
-            </div>
-            @if(!authenticated())
-                <span class='display-heart-icon'></span>
-            @endif
-
-            @if(isRenter())
-{{--                <span id ='' class='heart-icon favourite'></span>@if(isFavourite($listing["favourites"],$listing->id))--}}
-
-                {{--@else--}}
-                    <span id ='asd' class='heart-icon'></span>
-                {{--@endif--}}
-            @endif
-
-            <img src='${is_realty_listing(v.thumbnail)}' alt='' class='main-img'>
-            <div class='info'>
-                <div class='info-link-text'>
-                    <p>$ ${formatNumber(v.rent)} / month </p>
-                    <small> (${v.bedrooms} bd, ${v.baths} ba) </small>
-                    <p>${is_exclusive(v)}</p>
-                </div>
-                <a href='${window.location.origin}/listing-detail/${v.id}' class='btn viewfeature-btn'> View </a>
-            </div>
-            <div class='feaure-policy-text'>
-                <p>$ ${formatNumber(v.rent)} / month </p>
-                <span> ${str_formatting(v.bedrooms, 'bed')}, ${str_formatting(v.baths, 'bath')}</span>
-            </div>
-        </div>`;
-    }
     // let coords = [];
     // $('input[name=map_location]').each(function(i, v) {
     //     coords.push($(v).val());
     // });
 
-    @if(count($data->listings) > 0)
+    @if(count($listings) > 0)
     // if(coords !== []) {
         // multiMarkers(coords, 'desktop-map', 15);
     // }

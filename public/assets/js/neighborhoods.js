@@ -1,10 +1,6 @@
 
 let $body = $('body');
 
-$body.on('change', '#neighborhood', function () {
-    window.location.href = `${window.location.origin}/listing-by-neighborhood/${$(this).val()}`;
-});
-
 $('#add_neighborhood').on('click', function () {
     $body.find('input[type=submit]').val('Create');
 });

@@ -27,7 +27,7 @@ use Illuminate\Support\Facades\DB;
  * Class UserService
  * @package App\Services
  */
-class UserService {
+class UserService extends SearchService {
 
     use DispatchNotificationService;
 
@@ -40,11 +40,6 @@ class UserService {
      * @var AgentRepo
      */
     private $agentRepo;
-
-    /**
-     * @var MemberRepo
-     */
-    private $memberRepo;
 
     /**
      * @var CompanyRepo
@@ -65,6 +60,7 @@ class UserService {
      * UserService constructor.
      */
     public function __construct() {
+        parent::__construct();
         $this->userRepo = new UserRepo();
         $this->companyRepo = new CompanyRepo();
         $this->agentRepo = new AgentRepo();
@@ -450,38 +446,6 @@ class UserService {
      */
     public function associatedAgents($id) {
         return $this->userRepo->find(['company_id' => $id])->withcompany()->get();
-    }
-
-    /**
-     * @param $id
-     *
-     * @return mixed
-     */
-    public function getAgentWithListings($id) {
-        $data = $this->userRepo->profileDetail($id)->first();
-        return toObject([
-            'agent'    => $data,
-            'listings' => $data->listings,
-            'reviews'  => $data->reviews
-        ]);
-    }
-
-    /**
-     * @param $id
-     * @param $request
-     * @return object
-     */
-    public function advanceSearch($id, $request) {
-        $service = new SearchService();
-        $request->agentProfile = $id;
-        $data = collect($service->search($request));
-        $info = $data->first();
-        $agent = $info->agent ?? $this->userRepo->findAgent($id);
-        return toObject([
-            'agent'    => $agent,
-            'listings' => $data,
-            'reviews'  => $agent->agent->reviews ?? $agent->reviews
-        ]);
     }
 
     /**
