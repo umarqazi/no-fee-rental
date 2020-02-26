@@ -130,7 +130,7 @@
     $('#boxscroll-section').scroll(function () {
         if($(this).scrollTop() + $(this).innerHeight() >= $(this)[0].scrollHeight) {
             if(nextPage !== null) {
-                ajaxRequest(`${nextPage}`, 'post', null, false).then(res => {
+                ajaxRequest(`${nextPage}`, 'post', null).then(res => {
                     nextPage = res.data.next_page_url;
                     res.data.data.forEach(v => {
                         $('.property-listing > .property-thumb:last').after(property_thumb(v));
