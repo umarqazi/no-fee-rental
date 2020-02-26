@@ -18,13 +18,13 @@ Route::post('/search', 'SearchController@pagination');
 Route::get('/search', 'SearchController@search')->name('web.search');
 
 // Rent Routes
-Route::post('/rent', 'RentController@pagination');
-Route::get('/rent', 'RentController@index')->name('web.listsByRent');
+Route::post('/listings-by-rent', 'RentController@pagination');
+Route::get('/listings-by-rent', 'RentController@index')->name('web.listsByRent');
 
 // Neighborhood Routes
 Route::post('/all-neighborhoods', 'NeighborhoodController@all');
-Route::post('/neighborhood', 'NeighborhoodController@pagination');
-Route::get('/neighborhood', 'NeighborhoodController@index')->name('web.listsByNeighborhood');
+Route::post('/listings-by-neighborhood', 'NeighborhoodController@pagination');
+Route::get('/listings-by-neighborhood', 'NeighborhoodController@index')->name('web.listsByNeighborhood');
 
 // Profile Routes
 Route::post('/profile/{id}', 'ProfileController@pagination');
