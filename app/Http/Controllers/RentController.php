@@ -36,16 +36,23 @@ class RentController extends Controller {
      * @return Factory|View
      */
     public function index(Request $request) {
-        $data = $this->__collection($this->rentService->get($request, $this->paginate));
-        return $this->__view($data);
+        return $this->__view($this->__fetchListings($request));
     }
 
     /**
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse|RedirectResponse
      */
-    public function rentNext(Request $request) {
+    public function pagination(Request $request) {
         return sendResponse($request, $this->rentService->get($request, $this->paginate), null);
+    }
+
+    /**
+     * @param $request
+     * @return mixed
+     */
+    private function __fetchListings($request) {
+        return $this->rentService->get($request, $this->paginate);
     }
 
     /**
@@ -53,33 +60,22 @@ class RentController extends Controller {
      * @return Factory|View
      */
     public function findApartment($price) {
-        $setParams = [
+        $params = [
             'min_price' => MINPRICE,
             'max_price' => (int)$price
         ];
 
-        $data = $this->__collection($this->rentService->get(toObject($setParams), $this->paginate));
-        return $this->__view($data);
+        return $this->__view($this->rentService->get(toObject($params), $this->paginate));
     }
 
     /**
-     * @param $data
-     * @return array
-     */
-    private function __collection($data) {
-        return toObject(['listings' => $data]);
-    }
-
-    /**
-     * @param $data
+     * @param $listings
      * @return Factory|View
      */
-    private function __view($data) {
-        return view('rent', compact('data'))
-            ->with([
-                'neigh_filter'  => true,
-                'filter_route'  => 'web.ListsByRent',
-                'search_route'  => 'web.ListsByRent'
-            ]);
+    private function __view($listings) {
+        return view('rent', compact('listings'))->with([
+            'neigh_filter'  => true,
+            'route'  => 'web.listsByRent',
+        ]);
     }
 }

@@ -75,13 +75,12 @@ function buildNewObject() {
     obj.url = window.location.href;
     obj.title = 'Listings';
     obj.string = obj.title;
-
-    if($min_price !== null) {
+    if($min_price.length > 0) {
         obj.title += ` between $${formatNumber($min_price)}`;
         obj.string += ` between $${formatNumber($min_price)}`;
     }
 
-    if($max_price !== null) {
+    if($max_price.length > 0) {
         obj.title += ` and $${formatNumber($max_price)}`;
         obj.string += ` and $${formatNumber($max_price)}`;
     }
@@ -335,9 +334,13 @@ $(document).ready(function () {
     });
 
     // Submit FORM
-    $('#index-search-from, #advance-search, #search').on('submit', function (e) {
+    $('#index-search-from, #modal-search-from, #search').on('submit', function (e) {
+        e.preventDefault();
+        let res = $(this).serialize();
+        res= res.replace(/&?[^=&]+=(&|$)/g,'');
         if($old_queries === null) $old_queries = [];
         $old_queries.push({isNew: true});
         localStorage.setItem('search-query', JSON.stringify($old_queries));
+        window.location.href = `${$(this).attr('action')}${res !== '' ? '?' + res : ''}`;
     });
 });

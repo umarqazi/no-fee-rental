@@ -224,6 +224,14 @@ function isMRGAgent() {
 }
 
 /**
+ * @param $id
+ * @return mixed
+ */
+function findUserById($id) {
+    return (new \App\Services\UserService())->findById($id);
+}
+
+/**
  * @param $favourites
  * @param $listing_id
  *
@@ -1158,6 +1166,15 @@ function neighborhoods($id = null) {
     }
 
     return $neighborhoods;
+}
+
+/**
+ * @return array
+ */
+function firstNeighborhood() {
+    $neighborhood = (new \App\Services\NeighborhoodService())->first();
+    $neighborhood = $neighborhood->name;
+    return compact('neighborhood');
 }
 
 /**

@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', $data->neighborhood->name ?? 'Unknow')
+@section('title', request()->get('neighborhood') ?? 'Unknow')
 @section('content')
     <style>
         #advance-search {
@@ -14,7 +14,7 @@
             <div class="financial-district-section">
                 <div class="container-lg">
                     <div class="financial-district-inner">
-                        <h3>{{ $data->neighborhood->name ?? 'Unknown' }}</h3>
+                        <h3>{{ request()->get('neighborhood') ?? 'Unknown' }}</h3>
                         <div class="form-group neighborhood-selection">
                             <select class="form-control" id="neighborhood">
                                 <option value="">Neighborhoods</option>
@@ -36,12 +36,15 @@
             @include('sections.search_results')
         </div>
     </section>
-    {!! HTML::script('assets/js/neighborhoods.js') !!}
     {!! HTML::style('https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css') !!}
     {!! HTML::script('https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js') !!}
     <script>
         let $disabledResults = $('#neighborhood');
         $disabledResults.select2();
+
+        $('body').on('change', '#neighborhood', function () {
+            document.location.search = insertParam('neighborhood', $(this).val());
+        });
     </script>
 @endsection
 

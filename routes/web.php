@@ -14,10 +14,21 @@
 Route::get('/', 'HomeController@index')->name('web.index');
 
 // Search Listing Routes
-Route::get('/search', 'SearchController@indexSearch')->name('web.search');
-Route::post('/search', 'SearchController@nextSearch');
-//Route::get('/advance-search', 'SearchController@advanceSearch')->name('web.advanceSearch');
-//Route::get('/advance-search-filter', 'SearchController@filter')->name('web.advanceSearchFilter');
+Route::post('/search', 'SearchController@pagination');
+Route::get('/search', 'SearchController@search')->name('web.search');
+
+// Rent Routes
+Route::post('/rent', 'RentController@pagination');
+Route::get('/rent', 'RentController@index')->name('web.listsByRent');
+
+// Neighborhood Routes
+Route::post('/all-neighborhoods', 'NeighborhoodController@all');
+Route::post('/neighborhood', 'NeighborhoodController@pagination');
+Route::get('/neighborhood', 'NeighborhoodController@index')->name('web.listsByNeighborhood');
+
+// Profile Routes
+Route::post('/profile/{id}', 'ProfileController@pagination');
+Route::get('/profile/{id}', 'ProfileController@index')->name('web.agentProfile');
 
 // Contact Us Routes
 Route::get('/contact-us', 'ContactUsController@index')->name('web.contactUs');
@@ -25,11 +36,6 @@ Route::post('/contact-us', 'ContactUsController@sendRequest')->name('web.sendReq
 
 // Mailchimp Subscription Routes
 Route::post('/subscribe-newsletter', 'NewsletterController@subscribe')->name('web.newsletter');
-
-// Profile Routes
-Route::get('/profile/{agentId}', 'UserController@agentProfileWithListing')->name('web.agentProfile');
-Route::get('/profile-search-filters/{agentId}', 'UserController@agentProfileSearchFilter')->name('web.agentProfileSearchFilter');
-Route::get('/profile-advance-search/{agentId}', 'UserController@agentProfileAdvanceSearch')->name('web.agentProfileAdvanceSearch');
 
 // Add User By Admin Create Password Routes
 Route::get('/create-password/{token}', 'UserController@changePassword')->name('web.createPassword');
@@ -99,17 +105,6 @@ Route::post('/mark-all-as-read', 'NotificationController@markAllAsRead');
 Route::post('/push-notification', 'NotificationController@push');
 Route::post('/fetch-notifications', 'NotificationController@get');
 Route::get('/all-notifications', 'NotificationController@all');
-
-// Rent Routes
-Route::post('/rent', 'RentController@rentNext');
-Route::get('/rent', 'RentController@index')->name('web.ListsByRent');
-
-// Neighborhood Routes
-Route::post('/all-neighborhoods', 'NeighborhoodController@all');
-Route::get('/listing-by-neighborhood', 'NeighborhoodController@index')->name('web.neighborhood');
-Route::get('/listing-by-neighborhood/filter', 'NeighborhoodController@filter')->name('web.neighborhoodFilter');
-Route::get('/listing-by-neighborhood/advance-search', 'NeighborhoodController@advanceSearch')->name('web.advanceNeighborhoodSearch');
-Route::match(['get', 'post'], '/listing-by-neighborhood/{neighborhood}', 'NeighborhoodController@find')->name('web.ListsByNeighborhood');
 
 // Review Routes
 Route::get('/send-a-review/{token}', 'ReviewController@index')->name('web.makeReview');

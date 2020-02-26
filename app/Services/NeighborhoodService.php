@@ -153,39 +153,14 @@ class NeighborhoodService extends SearchService {
     }
 
     /**
-     * @param $neighborhood
-     *
+     * @param $request
+     * @param $paginate
      * @return mixed
      */
-    public function find($neighborhood) {
-        $data = $this->neighborhoodRepo->getNeighborhoodWithListing($neighborhood)->first();
-        return toObject($this->__collection($data));
-    }
-
-    /**
-     * @param $request
-     * @return object
-     */
-    public function searchFilters($request) {
-        $data = collect($this->search($request));
-        $info = $data->first();
-        return toObject([
-            'listings'     => $data,
-            'neighborhood' => $info->neighborhood
-                ?? ($request->neighborhood ? $this->findByName($request->neighborhood) : $this->first()),
-        ]);
-    }
-
-    /**
-     * @param $data
-     *
-     * @return array
-     */
-    private function __collection($data) {
-        return [
-            'neighborhood'  => $data,
-            'listings'      => $data->listings
-        ];
+    public function searchListings($request, $paginate) {
+        $listing = $this->search($request)->with('neighborhood')->paginate($paginate);
+        $listing->appends($request->all());
+        return $listing;
     }
 
     /**

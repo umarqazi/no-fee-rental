@@ -56,7 +56,6 @@ trait SearchTraitService
      */
     public function search($request)
     {
-
         collect($this->__setSearchParams($request))->map(function ($args, $method) {
             if (method_exists($this, $method) && !empty($args)) {
                 $this->args = toObject([$method => $args]);

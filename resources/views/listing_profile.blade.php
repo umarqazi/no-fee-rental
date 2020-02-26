@@ -6,31 +6,31 @@
         <div class="container-lg">
             <div class="agent-profile-view">
                 <div class="img-holder">
-                    <img src="{{ is_realty_listing($data->agent->profile_image ?? DUI) }}" alt=""/>
+                    <img src="{{ is_realty_listing($agent->profile_image ?? DUI) }}" alt=""/>
                 </div>
                 <div class="agent-info">
-                    <h2>{{ $data->agent->first_name.' '.$data->agent->last_name }}</h2>
-                    <p>{{ $data->agent->description ?? 'No bio found' }}</p>
-                    @if($data->agent->user_type != OWNER)
+                    <h2>{{ $agent->first_name.' '.$agent->last_name }}</h2>
+                    <p>{{ $agent->description ?? 'No bio found' }}</p>
+                    @if($agent->user_type != OWNER)
                         <p class="expertise"><strong>Languages:</strong>
-                            <a href="javascript:void(0);">{{ $data->agent->languages !== '' ? $data->agent->languages : 'None' }}</a>
+                            <a href="javascript:void(0);">{{ $agent->languages !== '' ? $agent->languages : 'None' }}</a>
                         </p>
                         <p class="expertise"><strong>Neighborhood Expertise:</strong>
-                            <a href="javascript:void(0);">{{ neighborhoodExpertise($data->agent->neighborExpertise) }}</a>
+                            <a href="javascript:void(0);">{{ neighborhoodExpertise($agent->neighborExpertise) }}</a>
                         </p>
                     @endif
                     <div class="contact-info contact-info-mobile">
                         <div>
                             <img src="{{ Storage::url('assets/images/close-envelope-new.png') }}" alt=""/> <a
-                                href="#">{{ $data->agent->email }}</a>
+                                href="#">{{ $agent->email }}</a>
                         </div>
                         <div>
                             <img src="{{ Storage::url('assets/images/call-icon.png') }}" alt=""/>
-                            <a href="javascript:void(0);">{{ $data->agent->phone_number ?? 'None' }}</a>
+                            <a href="javascript:void(0);">{{ $agent->phone_number ?? 'None' }}</a>
                         </div>
                         <div>
                             <img src="{{ Storage::url('assets/images/location.png') }}" alt=""/> <a
-                                href="#">{{ $data->agent->address ?? 'None' }}</a>
+                                href="#">{{ $agent->address ?? 'None' }}</a>
                         </div>
                     </div>
                 </div>
@@ -46,10 +46,10 @@
         <div class="clients-reviews-section">
             <div class="">
                 <h3> What our clients say about him</h3>
-                @if(sizeof($data->reviews) > 0)
+                @if(sizeof($agent->reviews) > 0)
                 <div class="owl-slider">
                     <div id="ClientCarousel" class="owl-carousel">
-                        @foreach($data->reviews as $key => $review)
+                        @foreach($agent->reviews as $key => $review)
                         <div class="item">
                             <!-- <img src="/assest/images/check.png" alt="item-img"> -->
                             <div class="item-first-img">

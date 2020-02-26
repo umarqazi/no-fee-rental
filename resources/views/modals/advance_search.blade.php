@@ -19,7 +19,11 @@
             </div>
             {{--Modal body--}}
             <div class="modal-body">
-                {!! Form::model(app('request')->all(), ['url' => route($search_route ?? 'web.search', $param ?? null), 'method' => 'get', 'id' => 'modal-search-from']) !!}
+                {!! Form::model(app('request')->all(), [
+                    'url' => route($route ?? 'web.search', $params ?? null),
+                    'method' => 'get',
+                    'id' => 'modal-search-from'
+                ]) !!}
                 <div class="row">
                     <div class="col-md-6 search-form-grou-mrg-btm">
                         <div class="form-group advance-search-modal-beds search-beds ASBD" id="advance-search-chkbox">
@@ -31,28 +35,24 @@
                             {!! multi_select_baths(5, app('request')->get('baths') ?? null) !!}
                         </div>
                     </div>
-                    {{--Baths--}}
-                    <div class="col-md-6">
+
+                    <div class="col-md-6 price-range-advance-srch">
                         <div class="form-group">
                             <label class="label">Price Range</label>
                             <div class="slider-wrapper">
                                 <div class="search-input-wrap">
-                                {!! Form::text('min_price', null, ['min' => 0, 'max' => 990000, 'id' => 'min_price',
-                                'class' => 'price-range-field input-style ASPm']) !!} -
-                                {!! Form::text('max_price', null, ['min' => 0, 'max' => 1000000, 'id' => 'max_price',
-                                'class' => 'price-range-field input-style ASPM']) !!}
-                            </div>
-                                <div id="slider-range" class="price-filter-range" name="rangeInput"></div>
+                                    {!! Form::text('min_price', null, ['id' => 'min_price', 'class' => 'input-style ASPm', 'placeholder' => '$ Min Price']) !!} -
+                                    {!! Form::text('max_price', null, ['id' => 'max_price', 'class' => 'input-style ASPM', 'placeholder' => '$ Max Price']) !!}
+                                </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="label">Square feet</label>
                             <div class="slider-wrapper">
                                 <div class="search-input-wrap">
-                                {!! Form::number('square_min', null, ['min' => 0, 'max' => 990000, 'id' => 'min_price_2', 'class' => 'price-range-field input-style']) !!} -
-                                {!! Form::number('square_max', null, ['min' => 0, 'max' => 1000000, 'id' => 'max_price_2', 'class' => 'price-range-field input-style']) !!}
+                                    {!! Form::number('square_min', null, ['id' => 'min_price_2', 'class' => 'input-style', 'placeholder' => 'Min Square ft']) !!} -
+                                    {!! Form::number('square_max', null, ['id' => 'max_price_2', 'class' => 'input-style', 'placeholder' => 'Max Square ft']) !!}
                                 </div>
-                                <div id="slider-range-2" class="price-filter-range" name="rangeInput"></div>
                             </div>
                         </div>
                     </div>
@@ -65,7 +65,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label class="label">Open House</label>
-                            {!! Form::text('openHouse', null, ['autocomplete' => 'off', 'id' => 'open_house', 'placeholder', 'Open House', 'class' => 'input-style']) !!}
+                            {!! Form::text('openHouse', null, ['autocomplete' => 'off', 'id' => 'open_house', 'placeholder' => 'Open House', 'class' => 'input-style']) !!}
                         </div>
                     </div>
 

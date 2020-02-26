@@ -14,14 +14,14 @@ use Illuminate\Contracts\View\Factory;
 class SearchController extends Controller {
 
     /**
-     * @var SearchService
-     */
-    private $searchService;
-
-    /**
      * @var int
      */
     private $paginate = 20;
+
+    /**
+     * @var SearchService
+     */
+    private $searchService;
 
     /**
      * SearchController constructor.
@@ -34,59 +34,29 @@ class SearchController extends Controller {
      * @param Request $request
      * @return Factory|View
      */
-    public function indexSearch(Request $request) {
-        $listing = $this->searchService->search($request)->paginate($this->paginate);
-        $listing->appends($request->all());
-        $data = toObject(['listings' => $listing]);
-        return $this->__view($data);
+    public function search(Request $request) {
+        $listings = $this->__fetchListings($request);
+        return view('listing_search_results', compact('listings'))->with([
+            'route' => 'web.search',
+            'neigh_filter' => true
+        ]);
     }
 
     /**
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
-    public function nextSearch(Request $request) {
-        $listing = $this->searchService->search($request)->paginate($this->paginate);
-        $listing->appends($request->all());
-        $data = toObject(['listings' => $listing]);
-        return sendResponse($request, $data, null);
-    }
-
-    /**
-     * @param Request $request
-     * @return Factory|View
-     */
-    public function filter(Request $request) {
-        return $this->__view($this->__trigger($request));
-    }
-
-    /**
-     * @param Request $request
-     *
-     * @return Factory|View
-     */
-    public function advanceSearch(Request $request) {
-        $data = $this->__trigger($request);
-        return $this->__view($data);
+    public function pagination(Request $request) {
+        return sendResponse($request, $this->__fetchListings($request), null);
     }
 
     /**
      * @param $request
-     * @return object
+     * @return mixed
      */
-    private function __trigger($request) {
-//        return toObject(['listings' => ]);
-    }
-
-    /**
-     * @param $data
-     * @return Factory|View
-     */
-    private function __view($data) {
-        return view('listing_search_results', compact('data'))
-            ->with([
-                'neigh_filter' => true,
-                'filter_route' => 'web.search'
-            ]);
+    private function __fetchListings($request) {
+        $listings = $this->searchService->search($request)->with('neighborhood')->paginate($this->paginate);
+        $listings->appends($request->all());
+        return $listings;
     }
 }
