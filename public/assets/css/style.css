@@ -428,7 +428,11 @@
 
 .listing-Details.neighborhood-search {
     padding-bottom: 10px !important;
-    min-height: 100%;
+    min-height: calc(100% - 435px);
+}
+
+.listing-Details.neighborhood-search .resend-email-wraper{
+    margin-top: 30px;
 }
 
 .listing-detail-container .listing-info .apartment-details {
