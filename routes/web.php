@@ -159,9 +159,5 @@ use Workerman\Worker;
 use PHPSocketIO\SocketIO;
 // Test Route
 Route::get('/test', function (\Illuminate\Http\Request $request) {
-    $io = new SocketIO(8080);
-    $io->emit('notification-channel', [
-        'client' => 'hire'
-    ]);
-    Worker::runAll();
+//    dd(ucwords(strtolower(MRG)));
 })->name('web.test');

@@ -27,7 +27,7 @@ class ProfileService extends SearchService {
      * @return mixed
      */
     public function searchListings($request, $paginate) {
-        $listings = $this->search($request)->with('neighborhood')->paginate($paginate);
+        $listings = $this->search($request)->with(['neighborhood', 'favourites'])->paginate($paginate);
         $listings->appends($request->all());
         return $listings;
     }

@@ -435,6 +435,20 @@ if(!defined('PRICE')) {
 }
 
 /**
+ * sort by recommended
+ */
+if(!defined('RECOMMENDED')) {
+    define('RECOMMENDED', 'recommended');
+}
+
+/**
+ * sort by trending
+ */
+if(!defined('TRENDING')) {
+    define('TRENDING', 'trending');
+}
+
+/**
  * App Env
  */
 if(!defined('PRODUCTION')) {

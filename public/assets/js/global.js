@@ -366,11 +366,31 @@ const setBySelector = function (selector) {
 /**
  *
  * @param image
- * @returns {string}
+ * @returns {*}
  */
 const is_realty_listing = (image) => {
-    return image.indexOf('http') > -1
-        ? image : AWS + image;
+    if(image !== null) {
+        return image.indexOf('http') > -1
+            ? image : AWS + image;
+    }
+
+    return null;
+};
+
+/**
+ *
+ * @param $fav
+ * @param $listing_id
+ * @returns {boolean}
+ */
+const is_favourite = ($fav, $listing_id) => {
+    if($fav.length > 0) {
+        for(let i = 0; i < $fav.length; i ++) {
+            return $fav[i].pivot.user_id == myId() && $fav[i].pivot.listing_id == $listing_id;
+        }
+    }
+
+    return false;
 };
 
 /**
@@ -385,18 +405,46 @@ const is_exclusive = (listing) => {
 
 /**
  *
+ */
+const isRenter = () => {
+    return Window.Laravel.userType === '4';
+};
+
+/**
+ *
+ * @returns {boolean}
+ */
+const authenticated = () => {
+    return Window.Laravel.user !== '';
+};
+
+/**
+ *
+ * @returns {string}
+ */
+const myId = () => {
+    return Window.Laravel.user;
+};
+
+/**
+ *
  * @param v
  * @returns {string}
  */
 const property_thumb = (v) => {
-    return `<div class='property-thumb'>
+    let $html = `<div class='property-thumb'>
             <div class='check-btn'>
-                <input type='hidden' name='map_location' value='{$listing->map_location}'>
+                <input type='hidden' name='map_location' value='${v.map_location}'>
                 <a href='javascript:void(0);'>
                     <button class='btn-default' list_id='${v.id}' to='${v.user_id}' data-target="#check-availability">Check Availability</button>
                 </a>
-            </div>
-            <img src='${is_realty_listing(v.thumbnail)}' alt='' class='main-img'>
+            </div>`;
+    if(!authenticated())
+        $html += `<span class='display-heart-icon'></span>`;
+    if(isRenter())
+        $html += `<span id ='${v.id}' class='heart-icon ${is_favourite(v.favourites, v.id) ? 'favourite' : null}'></span>`;
+
+        $html += `<img src='${is_realty_listing(v.thumbnail)}' alt='' class='main-img'>
             <div class='info'>
                 <div class='info-link-text'>
                     <p>$ ${formatNumber(v.rent)} / month </p>
@@ -410,6 +458,8 @@ const property_thumb = (v) => {
                 <span> ${str_formatting(v.bedrooms, 'bed')}, ${str_formatting(v.baths, 'bath')}</span>
             </div>
         </div>`;
+
+    return $html;
 };
 
 /**

@@ -237,11 +237,15 @@ trait SearchTraitService
      */
     private function sortBy()
     {
-        if(PRICE == $this->args->{__FUNCTION__}) {
-            return $this->query->orderBy('rent', 'asc');
+        switch ($this->args->{__FUNCTION__}) {
+            case PRICE:
+                return $this->query->orderBy('rent', 'asc');
+                break;
+            case TRENDING:
+                break;
+            case RECOMMENDED:
+                break;
         }
-
-//        return $this->query->orderBy('rent', $this->args->{__FUNCTION__});
     }
 
     /**

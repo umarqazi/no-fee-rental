@@ -35,7 +35,7 @@ class RentService extends SearchService {
      * @return mixed
      */
     public function get($request, $paginate) {
-        $listings = $this->search($request)->with('neighborhood')->paginate($paginate);
+        $listings = $this->search($request)->with(['neighborhood', 'favourites'])->paginate($paginate);
         $listings->appends($request->all());
         return $listings;
     }

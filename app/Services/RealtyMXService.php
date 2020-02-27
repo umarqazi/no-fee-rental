@@ -131,7 +131,7 @@ class RealtyMXService extends ListingService {
             'square_feet'       => $details->squareFeet ?? null,
             'unit'              => is_object($location->apartment) ? null : $location->apartment,
             'description'       => $details->description ?? null,
-            'visibility'        => ACTIVELISTING,
+            'visibility'        => $building->user->company->company == ucwords(strtolower(MRG)),
             'created_at'        => $details->listedOn,
             'is_featured'       => REJECTFEATURED ?? null,
             'map_location'      => $building->map_location
@@ -155,7 +155,12 @@ class RealtyMXService extends ListingService {
     private function __pushBuilding( $agent, $listing ) {
         $location     = $listing->get( 'location' );
         $images       = isset($listing->get( 'media' )->photo) ? collect($this->__images( $listing->get( 'media' )->photo )) : [];
-        $map_location = sprintf('{"latitude":%s,"longitude":%s}', $location->latitude ?? '123', $location->longitude ?? '123');
+
+        $map_location = sprintf(
+            '{"latitude":%s,"longitude":%s}',
+            isset($location->latitude) ? (is_object($location->latitude) ? null : $location->latitude) : null,
+              isset($location->longitude) ? (is_object($location->longitude) ? null : $location->longitude) : null
+            );
 
         $building = [
             'user_id' => $agent->id ?? null,

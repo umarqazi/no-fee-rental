@@ -239,7 +239,7 @@ function findUserById($id) {
  */
 function isFavourite( $favourites, $listing_id ) {
     foreach ( $favourites as $key => $fav ) {
-        if ( $fav["pivot"]->user_id == myId() && $fav["pivot"]->listing_id == $listing_id ) {
+        if ( $fav->pivot->user_id == myId() && $fav->pivot->listing_id == $listing_id ) {
             return true;
         }
     }

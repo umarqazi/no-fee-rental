@@ -189,7 +189,7 @@ class ListingService extends BuildingService {
         return $this->listingRepo->find([
             'visibility' => ACTIVELISTING,
             'map_location' => $request->map_location
-        ])->get();
+        ])->with('neighborhood')->get();
     }
 
     /**
