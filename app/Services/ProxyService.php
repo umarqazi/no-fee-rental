@@ -153,13 +153,13 @@ class ProxyService {
 
         if(!empty($res)) {
             foreach ($res as $index => $value) {
-                $collection[] = $value['the_geom']['coordinates'][0];
+                $collection['polygons'][] = $value['the_geom']['coordinates'][0];
                 $collection['school_dist'] = "Zone {$value['schooldist']}";
                 $collection['school_dist_url'] = "https://insideschools.org/search/results?district={$value['schooldist']}";
             }
         }
 
-        return array_values($collection);
+        return $collection;
     }
 
     /**

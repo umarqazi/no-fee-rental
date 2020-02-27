@@ -158,7 +158,7 @@ class NeighborhoodService extends SearchService {
      * @return mixed
      */
     public function searchListings($request, $paginate) {
-        $listing = $this->search($request)->with('neighborhood')->paginate($paginate);
+        $listing = $this->search($request)->with(['neighborhood', 'favourites'])->paginate($paginate);
         $listing->appends($request->all());
         return $listing;
     }

@@ -55,7 +55,7 @@ class SearchController extends Controller {
      * @return mixed
      */
     private function __fetchListings($request) {
-        $listings = $this->searchService->search($request)->with('neighborhood')->paginate($this->paginate);
+        $listings = $this->searchService->search($request)->with(['neighborhood', 'favourites'])->paginate($this->paginate);
         $listings->appends($request->all());
         return $listings;
     }

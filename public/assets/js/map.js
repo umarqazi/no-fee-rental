@@ -154,7 +154,7 @@ const multiMarkers = (coords, container, zoom = 10) => {
             let domain = window.location.origin;
             let map_location = JSON.stringify({'latitude': current.lat, 'longitude': current.lng});
             let resp = await ajaxRequest(`/listing-detail`, 'post', {map_location: map_location});
-
+            console.log(resp);
             if(resp.data.length > 1) {
                 html += '<div class="mapbox-content-wrapper">';
                 resp.data.forEach((res, b) => {
@@ -208,13 +208,6 @@ const drawListingPopUp = (listing) => {
 };
 
 /**
- * Dray polygons
- */
-const draw = () => {
-    drawPolygon(broklyn, 'aass');
-};
-
-/**
  *
  * @param container
  */
@@ -245,7 +238,7 @@ const initMap = (container) => {
  * @returns {Promise<void>}
  */
 const schoolZone = async (coords) => {
-    coords.range = 1200;
+    coords.range = 1200; // Set Bounding Area
     await ajaxRequest('/nyc-data', 'post', coords, false).then(response => {
         response = JSON.parse(response);
         schoolData(response.schoolData);
@@ -264,7 +257,6 @@ const transportation = async (data) => {
     if(data.length > 0) {
         data.forEach((res, i) => {
             let html = '<div class="transportation">';
-            // setMarker(res.coords);
             res.line_badge.forEach(badge => {
                 badge = badge.replace('Express', '');
                 html += `<span class="span-box text-${badge.toLowerCase()}"> ${badge} </span> `;
@@ -285,14 +277,14 @@ const transportation = async (data) => {
  * @returns {Promise<void>}
  */
 const schoolData = async (data) => {
-    if(data.length > 0) {
-        $('body').find('#insideschool').append(`<a href="${data[2]}" target="_blank">${data[1]}</a>`);
-        data.forEach((res, i) => {
+    // if(data.length > 0) {
+        $('body').find('#insideschool').append(`<a href="${data.school_dist_url}" target="_blank">${data.school_dist}</a>`);
+        data.polygons.forEach((res, i) => {
             drawPolygon(res, i);
         });
-    } else {
-        $('body').find('#insideschool').append(`<span>No School Zone Found</span>`);
-    }
+    // } else {
+    //     $('body').find('#insideschool').append(`<span>No School Zone Found</span>`);
+    // }
 };
 
 /**
@@ -302,7 +294,7 @@ const schoolData = async (data) => {
  */
 const drawPolygon = ($coordinates, id) => {
     MAP.addLayer({
-        'id': `maine-${id}`,
+        'id': `school-zone-${id}`,
         'type': 'fill',
         'source': {
             'type': 'geojson',
@@ -323,15 +315,35 @@ const drawPolygon = ($coordinates, id) => {
 };
 
 /**
+ * Ready Hover effect
+ */
+const addHoverEffect = () => {
+    $('body').find('.property-thumb').hover(function() {
+        let lat_lng = JSON.parse($(this).find('input[name=map_location]').val());
+        MAP.setZoom = 20;
+        MAP.flyTo({center: setLatLng(lat_lng)});
+    });
+};
+
+/**
+ * Set Coordinates
+ */
+const drawCoords = () => {
+    let coords = [];
+    $('body').find('input[name=map_location]').each(function(i, v) {
+        coords.push($(v).val());
+    });
+
+    if(coords.length > 0) {
+        multiMarkers(coords, 'desktop-map', 15);
+        addHoverEffect();
+    }
+};
+
+/**
  * jquery api call
  */
 $(() => {
-
-    // $('.property-thumb').hover(function() {
-    //     let lat_lng = JSON.parse($(this).find('input[name=map_location]').val());
-    //     MAP.setZoom = 20;
-    //     MAP.flyTo({center: setLatLng(lat_lng)});
-    // });
 
     $('body').on('keyup, blur', '.mapboxgl-ctrl-geocoder--input', function() {
         let required = ['poi', 'address'];

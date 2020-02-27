@@ -123,6 +123,8 @@
 {!! HTML::style('https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.css') !!}
 {!! HTML::script('https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.js') !!}
 <script>
+    window.onload = () => { drawCoords(); };
+
     let nextPage = insertParam(`page`, 2);
     let url = document.location.href;
     url = url.replace(document.location.search, '');
@@ -135,30 +137,18 @@
                     res.data.data.forEach(v => {
                         $('.property-listing > .property-thumb:last').after(property_thumb(v));
                     });
+                    drawCoords();
                 });
             }
         }
     });
-
-    // let coords = [];
-    // $('input[name=map_location]').each(function(i, v) {
-    //     coords.push($(v).val());
-    // });
-
-    @if(count($listings) > 0)
-    // if(coords !== []) {
-        // multiMarkers(coords, 'desktop-map', 15);
-    // }
-    @endif
 
     $(".neighborhood-search .search-result-wrapper .map-wrapper .swipe-btn").on('click', function () {
         let $body = $('body');
         $(this).find('i').toggleClass('fa-angle-left fa-angle-right');
         $body.find('#desktop-map').remove();
         $body.find('.map-wrapper').append(`<div id="desktop-map"></div>`);
-        setTimeout(() => {
-            // multiMarkers(coords, 'desktop-map', 15);
-        }, 100);
+        setTimeout(() => { drawCoords(); }, 100);
         $(".neighborhood-search .search-result-wrapper .search-listing").toggleClass('hide-list');
         $(".neighborhood-search .search-result-wrapper .map-wrapper").toggleClass('full-map');
     });
@@ -170,5 +160,4 @@
     $('.search-result-section-neighborhood').find('ul > li > div > input').on('click', function() {
         $('.neighborhood-field').text($(this).val());
     });
-
 </script>
