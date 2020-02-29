@@ -25,7 +25,7 @@ class OpenHouse extends Model {
         if(\DateTime::createFromFormat('m-d-Y', $value)) {
             return $value;
         }
-        
+
         return carbon($value)->format('m-d-Y');
     }
 
