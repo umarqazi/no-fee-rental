@@ -122,8 +122,8 @@ class RealtyMXService extends ListingService {
             'neighborhood_id'   => $building->neighborhood_id,
             'rent'              => $details->price ?? null,
             'thumbnail'         => $building->thumbnail ?? null,
-            'availability'      => null,
-            'availability_type' => ACTIVE,
+            'availability'      => $details->availableOn ?? null,
+            'availability_type' => isset($details->availableOn) ? AVAILABLE_BY_DATE : NOT_AVAILABLE,
             'street_address'    => sprintf("%s, New York", $location->address ?? null),
             'display_address'   => $location->address ?? null,
             'bedrooms'          => $details->bedrooms < 1 ? STUDIO : $details->bedrooms ?? null,
@@ -132,7 +132,8 @@ class RealtyMXService extends ListingService {
             'unit'              => is_object($location->apartment) ? null : $location->apartment,
             'description'       => $details->description ?? null,
             'visibility'        => $building->user->company->company == ucwords(strtolower(MRG)),
-            'created_at'        => $details->listedOn,
+            'expire_on'         => carbon($details->listedOn)->addDays(LISTING_EXPIRY_DAYS) ?? now()->addDays(LISTING_EXPIRY_DAYS),
+            'created_at'        => $details->listedOn ?? now(),
             'is_featured'       => REJECTFEATURED ?? null,
             'map_location'      => $building->map_location
         ];

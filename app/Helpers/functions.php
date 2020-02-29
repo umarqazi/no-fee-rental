@@ -626,8 +626,8 @@ function reverseTimeSlot( $date ) {
  * @return bool
  */
 function isOpenToday($openHouse) {
-    return carbon($openHouse->date)->format('m-d-Y') >= now()->format('m-d-Y')
-        && daysNumReadable(carbon($openHouse->date)) < 8;
+    return carbon(genericFormat($openHouse->date))->format('m-d-Y') >= now()->format('m-d-Y')
+        && daysNumReadable(carbon(genericFormat($openHouse->date))) < 8;
 }
 
 /**

@@ -138,6 +138,11 @@ class ListingForm extends BaseForm {
      */
     public $free_months;
 
+    /**
+     * @var string
+     */
+    public $expire_on;
+
 
     /**
      * @return array
@@ -168,6 +173,7 @@ class ListingForm extends BaseForm {
             'application_fee'    => toValidPrice($this->application_fee),
             'deposit'            => toValidPrice($this->deposit),
             'lease_term'         => $this->lease_term,
+            'listed_on'          => $this->expire_on,
             'free_months'        => $this->free_months
         ];
 	}

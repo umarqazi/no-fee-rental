@@ -92,6 +92,27 @@ if (!defined('ARCHIVED')) {
 }
 
 /**
+ * availability type
+ */
+if (!defined('AVAILABLE_BY_DATE')) {
+    define('AVAILABLE_BY_DATE', 2);
+}
+
+/**
+ * listing expiry days
+ */
+if (!defined('LISTING_EXPIRY_DAYS')) {
+    define('LISTING_EXPIRY_DAYS', 30);
+}
+
+/**
+ * availability type
+ */
+if (!defined('NOT_AVAILABLE')) {
+    define('NOT_AVAILABLE', 0);
+}
+
+/**
  * Cheapest listing
  */
 if(!defined('CHEAPEST')) {

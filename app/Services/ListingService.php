@@ -14,7 +14,6 @@ use App\Repository\FeatureRepo;
 use App\Repository\OpenHouseRepo;
 use App\Repository\UserRepo;
 use App\Traits\CalendarEventService;
-use App\Traits\DispatchNotificationService;
 use Illuminate\Foundation\Bus\PendingDispatch;
 use Illuminate\Support\Facades\DB;
 use App\Repository\ListingImagesRepo;
@@ -70,7 +69,11 @@ class ListingService extends BuildingService {
     public function create( $request ) {
         DB::beginTransaction();
 
-        $request->freshness_score = MAXFRESHNESSSCORE;
+        $request->request->add([
+            'expire_on'       => now()->addDays(LISTING_EXPIRY_DAYS),
+            'freshness_score' => MAXFRESHNESSSCORE
+        ]);
+
         $listing              = $this->__validateForm( $request );
         $listing->thumbnail   = $this->__uploadImage( $listing );
         $building             = $this->manageBuilding( $request );
@@ -429,6 +432,7 @@ class ListingService extends BuildingService {
         $form->deposit           = $request->deposit;
         $form->lease_term        = $request->lease_term;
         $form->free_months       = $request->free_months;
+        $form->expire_on         = $request->expire_on;
         $form->validate();
 
         return $form;
@@ -515,7 +519,7 @@ class ListingService extends BuildingService {
 
                 $res = $this->openHouseRepo->create([
                     'listing_id' => $id,
-                    'date' => genericFormat($openHouse['date']),
+                    'date'       => $openHouse['date'],
                     'start_time' => openHouseTimeSlot($openHouse['start_time']),
                     'end_time'   => openHouseTimeSlot($openHouse['end_time']),
                     'only_appt'  => $this->__byAppointment($openHouse)

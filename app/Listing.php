@@ -23,7 +23,7 @@ class Listing extends Model {
 	protected $fillable = [
 		'user_id', 'realty_id', 'unique_slug', 'neighborhood_id', 'building_id',
         'name', 'email', 'phone_number', 'street_address', 'display_address',
-        'thumbnail', 'baths', 'bedrooms', 'unit', 'rent', 'square_feet',
+        'thumbnail', 'baths', 'bedrooms', 'unit', 'rent', 'square_feet', 'expire_on',
         'description', 'is_featured', 'map_location', 'listing_type', 'is_convertible',
 		'visibility', 'realty_url', 'availability_type', 'availability', 'renter_rebate',
         'application_fee', 'deposit', 'lease_term', 'free_months', 'freshness_score', 'created_at'
