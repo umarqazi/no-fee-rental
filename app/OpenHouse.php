@@ -21,6 +21,11 @@ class OpenHouse extends Model {
      * @return \Illuminate\Support\Carbon
      */
     public function getDateAttribute($value) {
+
+        if(\DateTime::createFromFormat('m-d-Y', $value)) {
+            return $value;
+        }
+        
         return carbon($value)->format('m-d-Y');
     }
 

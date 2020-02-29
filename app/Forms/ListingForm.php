@@ -173,7 +173,7 @@ class ListingForm extends BaseForm {
             'application_fee'    => toValidPrice($this->application_fee),
             'deposit'            => toValidPrice($this->deposit),
             'lease_term'         => $this->lease_term,
-            'listed_on'          => $this->expire_on,
+            'expire_on'          => $this->expire_on,
             'free_months'        => $this->free_months
         ];
 	}
