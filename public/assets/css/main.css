@@ -6470,10 +6470,10 @@ strong {
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
     #advance-search .slider-wrapper .input-style {
-        width: 105px;
+        width: 140px;
     }
     .neighborhood-search .search-result-wrapper .search-listing .featured-properties .property-listing {
-        margin: 15px -15px 0px;
+        margin: 15px -15px 0;
     }
     .neighborhood-search {
         margin: 75px auto !important;
@@ -6948,6 +6948,15 @@ strong {
     .neighborhood-search .search-result-wrapper .map-wrapper {
         left: 15px;
         width: calc(100% - 30px);
+    }
+    #advance-search .slider-wrapper .input-style{
+        width: 100%;
+    }
+    #advance-search .search-input-wrap input:nth-child(1) {
+        margin-right: 0;
+    }
+    #advance-search .search-input-wrap input:nth-child(2) {
+        margin-left: 0;
     }
 }
 
