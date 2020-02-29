@@ -554,6 +554,6 @@ $(() => {
         $('#login').modal('show');
     });
 
-    $body.find('input[name=phone_number]').mask('(000) 000-000');
+    $body.find('input[name=phone_number]').mask('(000) 000-0000');
 
 });

@@ -1,6 +1,7 @@
 
 
 {!! Form::hidden('user_id') !!}
+{!! Form::hidden('expire_on') !!}
 {!! Form::hidden('visibility') !!}
 @if($action !== 'Copy')
     {!! Form::hidden('unique_slug') !!}

@@ -118,7 +118,7 @@
                             <div class="col-lg-6 col-sm-6 bdr-right">
                                 <div class="lease-term-section">
                                     <span>Availability: </span>
-                                    <strong> {{ $listing->availability !== '0' ? carbon($listing->availability)->format('M d, Y') : 'Not Available' }}</strong>
+                                    <strong> {{ is_available($listing->availability) ? carbon($listing->availability)->format('M d, Y') : 'Not Available' }}</strong>
                                 </div>
 
                                 @if($listing->lease_term)
