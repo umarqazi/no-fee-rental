@@ -50,7 +50,8 @@ class NeighborhoodController extends Controller {
      */
     public function index(Request $request) {
         $listings = $this->__fetchListings($request);
-        return view('neighborhood', compact('listings'))->with([
+        $neighborhood = $this->neighborhoodService->findByName($request->neighborhood)->first();
+        return view('neighborhood', compact('listings', 'neighborhood'))->with([
             'route' => 'web.listsByNeighborhood',
             'neigh_filter' => false
         ]);
