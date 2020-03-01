@@ -112,6 +112,24 @@ class InvitationService {
 
     /**
      * @param $request
+     * @return bool|mixed
+     */
+    public function addInvitedRepresentative($request) {
+        DB::beginTransaction();
+        if($representative = $this->validateInvitedRepresentativeToken($request->token)) {
+            $form = $this->__validateInvitedAgentForm($request);
+            if($user = $this->userRepo->update($representative->id, $form->toArray())) {
+                DB::commit();
+                return (new AuthService('agent'))->loginUsingId($representative->id);
+            }
+        }
+
+        DB::rollBack();
+        return false;
+    }
+
+    /**
+     * @param $request
      * @return string
      */
     public function validateEmail($request) {
@@ -129,13 +147,14 @@ class InvitationService {
     public function addRepresentative($request) {
         DB::beginTransaction();
         if($request->representative_exists == 'true') {
-            $this->__sendAddRepresentativeEmail($request);
             $user = $this->userRepo->find(['email' => $request->email])->first();
+            $request->request->add(['user' => $user]);
+            $this->__sendAddRepresentativeEmail($request);
             return $user->id;
         }
 
         if($invitation = $this->__addUser($request)) {
-            $this->__sendRepresentativeInviteEmail($user, $invitation);
+            $this->__sendRepresentativeInviteEmail($invitation);
             DB::commit();
             return true;
         }
@@ -166,6 +185,15 @@ class InvitationService {
     public function validateInvitedAgentToken($token) {
         $agent = $this->invitationRepo->find(['token' => $token]);
         return $agent->count() > 0 ? $agent->first() : false;
+    }
+
+    /**
+     * @param $token
+     * @return bool
+     */
+    public function validateInvitedRepresentativeToken($token) {
+        $representative = $this->userRepo->find(['remember_token' => $token]);
+        return $representative->count() > 0 ? $representative->first() : false;
     }
 
     /**
@@ -249,8 +277,8 @@ class InvitationService {
      * @param $invitation
      * @return \Illuminate\Foundation\Bus\PendingDispatch
      */
-    private function __sendRepresentativeInviteEmail($request, $invitation) {
-        return DispatchNotificationService::REPRESENTATIVEINVITE($request, $invitation);
+    private function __sendRepresentativeInviteEmail($invitation) {
+        return DispatchNotificationService::REPRESENTATIVEINVITE($invitation);
     }
 
     /**

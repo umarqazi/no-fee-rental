@@ -349,6 +349,13 @@ function addNewList() {
 }
 
 /**
+ * @return bool
+ */
+function isAgentHasPlan() {
+    return (new \App\Services\CreditPlanService())->agentHasPlan();
+}
+
+/**
  * @param $plan
  * @return string
  */
@@ -381,7 +388,7 @@ function planEnum($plan) {
  * @return mixed
  */
 function billingCycle($currentPlan) {
-    return $currentPlan->updated_at->addDays(MAXPLANDAYS)->format('D m, Y h:m s');
+    return $currentPlan->updated_at->addDays(MAXPLANDAYS)->format('d m, Y h:m s');
 }
 
 /**
@@ -498,6 +505,19 @@ function sendResponse( $request, $data = null, $msg = null, $path = null, $error
  */
 function toast( $message, $type ) {
     return "<script>toastr.{$type}('{$message}');</script>";
+}
+
+/**
+ * @param $message
+ * @return mixed
+ */
+function bootstrapAlertDanger($message) {
+    return "<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+            {$message}
+            <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                <span aria-hidden='true'>&times;</span>
+            </button>
+        </div>";
 }
 
 /**

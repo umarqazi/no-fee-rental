@@ -74,6 +74,10 @@ Route::post('/renter/sign-up', 'UserController@renterSignUp')->name('web.renterS
 Route::post('/invited-agent/sign-up', 'UserController@invitedAgentSignUp')->name('web.agentToAgentInviteSignUp');
 Route::get('/invited-agent/sign-up/{token}', 'UserController@invitedAgentSignUpForm')->name('web.agentToAgentInviteForm');
 
+// Representative SignUp
+Route::post('/invited-representative/sign-up', 'UserController@invitedRepresentativeSignUp')->name('web.invitedRepresentativeSignUp');
+Route::get('/invited-representative/sign-up/{token}', 'UserController@invitedRepresentativeSignUpForm')->name('web.invitedRepresentativeSignUpForm');
+
 // Existing Agent accept invitation
 Route::get('/accept-invitation/{token}', 'UserController@acceptInvitation')->name('web.acceptInvitation');
 
@@ -136,6 +140,9 @@ Route::get('/advertise-with-us', 'AdvertiseController@index')->name('web.adverti
 Route::post('/boroughs', 'NYCProxyController@boroughs');
 Route::post('/nyc-data', 'NYCProxyController@nycData');
 
+// Stripe WebHooks
+Route::stripeWebhooks('/v1/webhook_endpoints');
+
 // Application Controlling Routes
 Route::get('/all-clear', function() {
     artisan(['config:cache', 'view:clear', 'route:clear']);
@@ -159,5 +166,6 @@ use Workerman\Worker;
 use PHPSocketIO\SocketIO;
 // Test Route
 Route::get('/test', function (\Illuminate\Http\Request $request) {
+    dd((new \App\Services\CreditPlanService())->getProducts());
 //    dd(ucwords(strtolower(MRG)));
 })->name('web.test');

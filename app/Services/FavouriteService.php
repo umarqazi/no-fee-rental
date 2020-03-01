@@ -9,22 +9,25 @@
 
 namespace App\Services;
 
-
 use App\Repository\FavouriteRepo;
 use App\Repository\UserRepo;
 
+/**
+ * Class FavouriteService
+ * @package App\Services
+ */
 class FavouriteService {
 
     /**
      * @var FavouriteRepo
      */
-    protected $repo;
+    protected $favouriteRepo;
 
     /**
      * FavouriteService constructor.
      */
     public function __construct() {
-        $this->repo = new UserRepo();
+        $this->favouriteRepo = new UserRepo();
     }
 
     /**
@@ -32,9 +35,8 @@ class FavouriteService {
      * @return array
      */
     public function getFavouriteListing($paginate) {
-        $active = $this->repo->activeFav()->paginate($paginate, ['*'], 'active-favourites');
-        $inactive = $this->repo->inActiveFav()->paginate($paginate, ['*'], 'inactive-favourites');
+        $active = $this->favouriteRepo->activeFav()->paginate($paginate, ['*'], 'active-favourites');
+        $inactive = $this->favouriteRepo->inActiveFav()->paginate($paginate, ['*'], 'inactive-favourites');
         return compact('active', 'inactive');
     }
-
 }

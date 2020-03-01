@@ -256,21 +256,21 @@ if(!defined('PLATINUMPLAN')) {
  * Stripe Basic Plan
  */
 if(!defined('BASICPLANID')) {
-    define('BASICPLANID', 'basic_00000');
+    define('BASICPLANID', 'plan_GpUlNYHVxWGijz');
 }
 
 /**
  * Stripe Gold Plan
  */
 if(!defined('GOLDPLANID')) {
-    define('GOLDPLANID', 'gold_00000');
+    define('GOLDPLANID', 'plan_GpUlw90Ho4o6Va');
 }
 
 /**
  * Stripe Platinum Plan
  */
 if(!defined('PLATINUMPLANID')) {
-    define('PLATINUMPLANID', 'platinum_00000');
+    define('PLATINUMPLANID', 'plan_GpUlgeEn55mZBq');
 }
 
 /**

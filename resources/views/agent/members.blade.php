@@ -1,5 +1,5 @@
 @extends('secured-layouts.app')
-@section('title', 'NoFee Rental Members')
+@section('title', 'Members')
 @section('content')
 <div class="wrapper">
     <div class="heading-wrapper">

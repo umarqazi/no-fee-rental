@@ -1,11 +1,16 @@
 @extends('secured-layouts.app')
-@section('title', 'No Fee Rental')
+@section('title', 'Listings')
 @section('content')
     <div class="wrapper">
         <div class="heading-wrapper">
             <h1>Listings</h1>
             <a href="{{ route('agent.addListing') }}" class="btn-default"><i class="fa fa-plus"></i> Add Listing</a>
         </div>
+
+        @if(!isAgentHasPlan() && !isMRGAgent())
+            {!! bootstrapAlertDanger('You have no plan to post listing <b><a href="'.route("agent.creditPlan").'">click here</a></b> to purchase a plan and we are good to go.') !!}
+        @endif
+
         <div class="filter-mobile-data-wrapper">
         <div class="filter-mobile-data">
             <i class="fa fa-bars filters-icon"></i> Filters

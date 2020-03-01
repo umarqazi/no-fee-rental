@@ -21,7 +21,7 @@
                 'method' => 'post',
                 'class' => 'ajax',
                 'reset' => 'true',
-                'id' => 'stripe-checkout'
+                'id' => 'payment_modal'
             ]) !!}
 
                 {!! Form::hidden('credit_plan', null, ['class' => 'credit_plan']) !!}

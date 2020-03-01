@@ -14,6 +14,9 @@
 // Auth Route
 Route::get('/logout', 'Renter\AuthController@logout')->name('renter.logout');
 
+// Index Routes
+Route::get('/favourite-listings', 'Renter\WishListController@index')->name('renter.index');
+
 // Profile Routes
 Route::get('/show-profile', 'Renter\ProfileController@profile')->name('renter.showProfile');
 Route::post('/update-profile', 'Renter\ProfileController@updateProfile')->name('renter.profileUpdate');
@@ -32,9 +35,6 @@ Route::get('/unArchive-conversation/{id}', 'Renter\ConversationController@unArch
 // Calender Routes
 Route::post('/add-event', 'Renter\CalendarController@create')->name('renter.addEvent');
 Route::get('/show-calendar', 'Renter\CalendarController@index')->name('renter.showCalendar');
-
-// Favourites Routes
-Route::get('/favourite-listings', 'Renter\ListingController@wishList')->name('renter.index');
 
 // Save Search Routes
 Route::get('/save-searches', 'Renter\SaveSearchController@index')->name('renter.viewSaveSearch');

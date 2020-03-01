@@ -100,16 +100,15 @@ trait DispatchNotificationService
      * @param $inviteBy
      * @return \Illuminate\Foundation\Bus\PendingDispatch
      */
-    public static function REPRESENTATIVEINVITE($data, $inviteBy)
+    public static function REPRESENTATIVEINVITE($data)
     {
-        dd($data, $inviteBy);
         self::$data = toObject(self::$data);
         self::$data->via = 'info';
         self::$data->view = 'invite_representative';
         self::$data->subject = 'Contact Representative';
         self::$data->toEmail = $data->email;
-        self::$data->owner = $data->user;
-        self::$data->url = route('agent.signup_form', $data->remember_roken);
+        self::$data->owner = mySelf();
+        self::$data->url = route('web.invitedRepresentativeSignUpForm', $data->remember_token);
         return self::__sendOnlyEmail();
     }
 
@@ -141,8 +140,11 @@ trait DispatchNotificationService
         self::$data->view = 'add_representative';
         self::$data->via = 'info';
         self::$data->subject = 'Add Representative';
-        self::$data->message = 'A new member has been added';
-        self::$data->url = route('member.acceptInvitation', self::$data->data->data->token);
+        self::$data->message = 'You added as an representative';
+        self::$data->to = $data->user->id;
+        self::$data->owner = mySelf();
+        self::$data->toEmail = $data->user->email;
+        self::$data->url = null;
         return self::__send();
     }
 
@@ -151,12 +153,13 @@ trait DispatchNotificationService
      */
     public static function REALTYAGENTINVITE($data)
     {
-        self::__setParams($data);
+        self::$data = toObject(self::$data);
+        self::$data->via = 'info';
+        self::$data->toEmail = 'yousuf.khalid@techverx.com';
         self::$data->view = 'realty-agent-invite';
         self::$data->subject = 'Invitation From No Fee Rental';
-        self::$data->message = 'We import your listing from realty MX to active and publish your listings on no fee rentals NYC follow the link given below.';
-        self::$data->url = route('user.change_password', self::$data->data->agent->remember_token);
-        self::send();
+        self::$data->url = route('user.change_password', $data->remember_token);
+        self::__sendOnlyEmail();
     }
 
     /**

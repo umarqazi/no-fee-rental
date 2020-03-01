@@ -15,27 +15,31 @@
             <div class="pg-header">
                 <p>  Your billing cycle ends on <b>{{ billingCycle($currentPlan) }}</b>, and is currently set to renew. The current payment method is: American Express ending with 8000
                 </p>
-                <a href="javascript:void(0)" class="change-card credit-plan"> Change Card </a>
+                <a href="javascript:void(0)" class="change-card"> Change Card </a>
             </div>
             <div class="switching-plans">
                 <h3>Switching Plans</h3>
                 <p> <b> Upgrades </b> take place immediately. You will be charged the difference between the two plans. The additional Pro Credits will be added to your account. Your billing cycle will remain the same.</p>
                 <p> <b> Downgrades </b> don't take effect until the end of your billing cycle, at which point you will be downgraded to your new plan.
-                    <br> You are currently subscribed to the <b> Pro/Silver plan.</b> </p>
+                    <br> You are currently subscribed to the <b> {{ currentPlan($currentPlan->plan) }}</b> </p>
             </div>
             <div class="switch-buttons">
-                <div class="switch-gold">
-                    <a href="javascript:void(0)" class="btn btn-default gold-btn-bg">Gold - $60 / month</a>
+                <div class="switch-gold {{ $currentPlan->plan == BASICPLAN ? 'hidden' : '' }}">
+                    <a href="javascript:void(0)" class="btn btn-default switch-plan gold-btn-bg">Basic - $40 / month</a>
+                    <p class="desc-gold"> Switch to Basic</p>
+                </div>
+                <div class="switch-gold {{ $currentPlan->plan == GOLDPLAN ? 'hidden' : '' }}">
+                    <a href="javascript:void(0)" class="btn btn-default switch-plan gold-btn-bg">Gold - $70 / month</a>
                     <p class="desc-gold"> Switch to Gold</p>
                 </div>
-                <div class="switch-gold">
-                    <a href="javascript:void(0)" class="btn btn-default platinum-btn-bg">Platinum - $100 / month</a>
+                <div class="switch-gold {{ $currentPlan->plan == PLATINUMPLAN ? 'hidden' : '' }}">
+                    <a href="javascript:void(0)" class="btn btn-default switch-plan platinum-btn-bg">Platinum - $100 / month</a>
                     <p class="desc-platinum"> Switch to Platinum</p>
                 </div>
             </div>
             <div class="switch-buttons">
                 <h3> Cancellation</h3>
-                <p> You can <a href="{{ route('agent.cancelPlan') }}" class="change-card"> cancel your plan here. </a> <br />
+                <p> You can <a href="{{ route('agent.cancelPlan') }}" class="cancel-plan"> cancel your plan here. </a> <br />
                     You’ll be able to use your Pro Credits until the end of your billing cycle.
                 </p>
             </div>

@@ -176,6 +176,18 @@ class UserController extends Controller {
 		return error('Invalid token request cannot be processed.');
 	}
 
+    /**
+     * @param $token
+     *
+     * @return Factory|RedirectResponse|View
+     */
+    public function invitedRepresentativeSignUpForm($token) {
+        if ($agent = $this->invitationService->validateInvitedRepresentativeToken($token)) {
+            return view('invited_representative_signup_form', compact('agent'));
+        }
+
+        return error('Invalid token request cannot be processed.');
+    }
 
     /**
      * @param Request $request
@@ -184,6 +196,17 @@ class UserController extends Controller {
 	public function invitedAgentSignUp(Request $request) {
 	    $response = $this->invitationService->addInvitedAgentSignUp($request);
 	    return sendResponse($request,
+            $response,
+            'Your email has been verified. Kindly choose a plan to post listings.', route('web.advertise'));
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse|RedirectResponse
+     */
+    public function invitedRepresentativeSignUp(Request $request) {
+        $response = $this->invitationService->addInvitedRepresentative($request);
+        return sendResponse($request,
             $response,
             'Your email has been verified. Kindly choose a plan to post listings.', route('web.advertise'));
     }
