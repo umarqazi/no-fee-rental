@@ -2537,3 +2537,7 @@ header .agent-avtar .avtar:hover div ul {
     font-weight: 600;
     color: #000;
 }
+
+.hidden {
+    display: none !important;
+}

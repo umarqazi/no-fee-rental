@@ -95,6 +95,13 @@ class PaymentService {
     }
 
     /**
+     * @return mixed
+     */
+    protected function __getProducts() {
+        return  $this->paymentMethod->plans()->all();
+    }
+
+    /**
      * @return string
      */
     private function __createSubscription() {

@@ -1,5 +1,5 @@
 @extends('secured-layouts.app')
-@section('title', 'Messages')
+@section('title', 'Inbox')
 @section('content')
     <div class="wrapper">
         <div class="user-info">

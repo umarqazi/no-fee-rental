@@ -1,5 +1,5 @@
 @extends('secured-layouts.app')
-@section('title', 'Nofee Rental')
+@section('title', sprintf("%s Listing", $action))
 @section('content')
     {!! HTML::style('https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.css') !!}
     {!! HTML::style('https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.2/mapbox-gl-geocoder.css') !!}

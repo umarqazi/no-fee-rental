@@ -52,7 +52,6 @@ Route::get('/remove-listing-image/{id}', 'Agent\ListingController@removeImage');
 Route::post('/upload-listing-images/{id}', 'Agent\ListingController@uploadImages')->name('agent.listingImages');
 Route::get('/make-featured/{id}', 'Agent\ListingController@approve')->name('agent.makeFeature');
 
-
 // Agent Members Routes
 Route::post('/validate-email', 'Agent\MemberController@validateEmail');
 Route::get('/team', 'Agent\MemberController@index')->name('agent.team');
@@ -85,6 +84,8 @@ Route::get('/show-plan', 'Agent\CreditPlanController@subscription')->name('agent
 Route::get('/cancel-plan', 'Agent\CreditPlanController@cancel')->name('agent.cancelPlan');
 Route::post('/change-card', 'Agent\CreditPlanController@changeCard')->name('agent.changeCard');
 Route::post('/purchase-plan', 'Agent\CreditPlanController@create')->name('agent.purchasePlan');
+Route::post('/upgrade-plan', 'Agent\CreditPlanController@upgrade');
+Route::post('/downgrade-plan', 'Agent\CreditPlanController@downgrade');
 
 Route::get('/basic-plan', function() {
     return view('agent.credit_plan');

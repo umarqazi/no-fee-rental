@@ -1,5 +1,5 @@
 @extends('secured-layouts.app')
-@section('title', 'Nofee Rental')
+@section('title', 'Saved Searches')
 @section('content')
     <style>
         .property-info p{

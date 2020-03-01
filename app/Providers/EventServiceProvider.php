@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Listeners\ChargeSucceed;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -15,6 +16,10 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
+        'stripe-webhooks::charge.succeeded' => [
+            ChargeSucceed::class
+        ],
+
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],

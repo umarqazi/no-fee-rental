@@ -37,79 +37,26 @@ class AgentHasPlan {
      */
     public function handle($request, Closure $next) {
         $this->headers = $next($request);
-        return $this->headers;
-        if(isMRGAgent() || mySelf()->created_at->addDays(TRIALDAYS)->format('Y-m-d') >= now()->format('Y-m-d')) {
+
+        if(isMRGAgent()) {
             return $this->headers;
         }
 
         if($this->service->agentHasPlan()) {
+
+            if(mySelf()->created_at->addDays(TRIALDAYS)->format('Y-m-d') >= now()->format('Y-m-d')) {
+                return $this->headers;
+            }
+
             if(!$this->service->isExpired() && $this->service->isExpired() !== null) {
-                return $this->__performAction($request);
+                return $this->headers;
             }
 
             $this->service->listenForExpiry();
             return error('Your plan has been expired');
         }
 
-        return error('You have no subscription plan for listings');
-    }
+        return error('You have no subscription plan to post listings');
 
-    /**
-     * @param $request
-     * @return bool
-     */
-    private function __performAction($request) {
-        switch ($request->route()->getName()) {
-            case 'agent.addListing':
-            case 'agent.createListingImages':
-            case 'agent.copyListing':
-                return $this->__slotsAction();
-                break;
-            case 'agent.repostListing':
-                return $this->__repostAction();
-                break;
-            case 'agent.archive':
-                return $this->__archiving();
-                break;
-            case 'agent.unArchive':
-                return $this->__unArchiving();
-                break;
-            default:
-                return true;
-                break;
-        }
-    }
-
-    /**
-     * @return bool|\Illuminate\Http\RedirectResponse
-     */
-    private function __slotsAction() {
-//        if($this->service->isSlotsExist()) {
-            return $this->headers;
-//        }
-
-//        return $this->service->_FILO() ? $this->headers : error('Something Went Wrong');
-    }
-
-    /**
-     * @return bool|\Illuminate\Http\RedirectResponse
-     */
-    private function __repostAction() {
-        $this->service->isRepostsExist();
-        return $this->headers;
-    }
-
-    /**
-     * @return \Illuminate\Http\RedirectResponse|string
-     */
-    private function __archiving() {
-        return $this->service->archive() ? $this->headers : error('Something Went Wrong.');
-    }
-
-    /**
-     * @return bool|string
-     */
-    private function __unArchiving() {
-        return $this->service->unArchive() ? $this->headers : error('Something Went Wrong.');
     }
 }

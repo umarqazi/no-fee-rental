@@ -60,6 +60,13 @@ class CreditPlanService extends PaymentService {
     }
 
     /**
+     * @return mixed
+     */
+    public function getProducts() {
+        return $this->__getProducts();
+    }
+
+    /**
      * @param $request
      * @return mixed
      */

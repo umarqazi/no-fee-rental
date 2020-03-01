@@ -22,6 +22,7 @@ class CreateCreditPlansTable extends Migration {
             $table->string('remaining_repost');
             $table->string('remaining_featured');
             $table->enum('plan', ['basic', 'gold', 'platinum']);
+            $table->boolean('is_cancel')->default(false);
             $table->boolean('is_expired')->default(true);
             $table->timestamps();
 
