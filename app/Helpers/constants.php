@@ -410,7 +410,7 @@ if(!defined('OTHER')) {
  * Web Owner Listing
  */
 if(!defined('MRG')) {
-    define('MRG', 'MANHATTAN REALTY GROUP');
+    define('MRG', 'Manhattan Realty Group');
 }
 
 /**

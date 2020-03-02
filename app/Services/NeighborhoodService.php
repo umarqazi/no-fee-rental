@@ -10,12 +10,18 @@ namespace App\Services;
 
 use App\Forms\NeighborhoodForm;
 use App\Repository\NeighborhoodRepo;
+use App\Traits\SortListingService;
+use Illuminate\Pagination\Paginator;
 
 /**
  * Class NeighborhoodService
  * @package App\Services
  */
 class NeighborhoodService extends SearchService {
+
+    use SortListingService {
+        SortListingService::__construct as private __sortConstruct;
+    }
 
     /**
      * @var object
@@ -158,9 +164,27 @@ class NeighborhoodService extends SearchService {
      * @return mixed
      */
     public function searchListings($request, $paginate) {
-        $listing = $this->search($request)->with(['neighborhood', 'favourites'])->paginate($paginate);
+        $listing = $this->search($request)->with(['neighborhood', 'favourites']);
+        $listing = $this->__sorting($request, $listing, $paginate);
         $listing->appends($request->all());
         return $listing;
+    }
+
+    /**
+     * @param $request
+     * @param $listings
+     * @param $paginate
+     * @return mixed
+     */
+    private function __sorting($request, $listings, $paginate) {
+        $this->__sortConstruct($listings->get());
+        if(method_exists(SortListingService::class, $request->sortBy)) {
+            $listings = new Paginator($this->{$request->sortBy}(), $paginate);
+        } else {
+            $listings = $listings->paginate($paginate);
+        }
+
+        return $listings;
     }
 
     /**
