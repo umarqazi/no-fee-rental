@@ -67,7 +67,7 @@ $(() => {
         let count = 0 ;
         $('.agents_list_popup ol').empty();
         let res = await ajaxRequest(route, 'get');
-        $('#add-company').modal('show');
+        $('#company').modal('show');
         $('.share_list_popup ul').empty();
         $('.modal-header h4').empty();
         $('.modal-header h4').append(res[0]['company']['company'] +' Agent(s)');
