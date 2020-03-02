@@ -8,7 +8,7 @@ $('#add_neighborhood').on('click', function () {
 $body.on('click', '#viewNeighborhoodContent', async function() {
     let $id = $(this).attr('ref_id');
     await ajaxRequest(`neighborhood/edit/${$id}`, 'post').then(res => {
-        let $src = res.data.banner !== null ? res.data.banner : `assets/images/default-images/listing.jpeg`;
+        let $src = res.data.banner !== null ? is_realty_listing(res.data.banner) : `assets/images/default-images/listing.jpeg`;
         $('#boro').text(res.data.boro.boro);
         $('#name').text(res.data.name);
         $('#banner').attr('src', `${window.location.origin}/${$src}`);
