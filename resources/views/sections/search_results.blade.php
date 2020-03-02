@@ -126,14 +126,17 @@
     window.onload = () => { drawCoords(); };
 
     let nextPage = insertParam(`page`, 2);
-    let url = document.location.href;
-    url = url.replace(document.location.search, '');
-    nextPage = url + '?' + nextPage;
+    let url = new URL(document.location.href).pathname;
+    url = url + '?' + nextPage;
+
     $('#boxscroll-section').scroll(function () {
         if($(this).scrollTop() + $(this).innerHeight() >= $(this)[0].scrollHeight) {
             if(nextPage !== null) {
-                ajaxRequest(`${nextPage}`, 'post', null).then(res => {
+                nextPage = null;
+                ajaxRequest(`${url}`, 'post', null).then(res => {
                     nextPage = res.data.next_page_url;
+                    url = window.location.pathname + '?' + nextPage.split('?')[1];
+                    console.log(url);
                     res.data.data.forEach(v => {
                         $('.property-listing > .property-thumb:last').after(property_thumb(v));
                     });

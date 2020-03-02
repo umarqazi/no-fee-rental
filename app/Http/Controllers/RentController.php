@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Services\RentService;
 use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -41,10 +42,10 @@ class RentController extends Controller {
 
     /**
      * @param Request $request
-     * @return \Illuminate\Http\JsonResponse|RedirectResponse
+     * @return JsonResponse|RedirectResponse
      */
     public function pagination(Request $request) {
-        return sendResponse($request, $this->rentService->get($request, $this->paginate), null);
+        return sendResponse($request, $this->__fetchListings($request), null);
     }
 
     /**
