@@ -11,6 +11,8 @@
 |
  */
 
+Route::post('/stripe-checkout', function(\Illuminate\Http\Request $request) { return print_r($request->all()); });
+
 Route::get('/', 'HomeController@index')->name('web.index');
 
 // Search Listing Routes
@@ -141,7 +143,7 @@ Route::post('/boroughs', 'NYCProxyController@boroughs');
 Route::post('/nyc-data', 'NYCProxyController@nycData');
 
 // Stripe WebHooks
-Route::stripeWebhooks('/v1/webhook_endpoints');
+//Route::stripeWebhooks('/v1/webhook_endpoints');
 
 // Application Controlling Routes
 Route::get('/all-clear', function() {
