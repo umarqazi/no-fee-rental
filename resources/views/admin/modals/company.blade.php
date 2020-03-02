@@ -1,5 +1,5 @@
 
-<div class="modal fade" id="add-company">
+<div class="modal fade" id="company">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
 
