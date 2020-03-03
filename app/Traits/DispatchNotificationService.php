@@ -28,6 +28,7 @@ trait DispatchNotificationService
         self::$data = toObject(self::$data);
         self::$data->view = 'featured_listing_approved';
         self::$data->via = 'info';
+        self::$data->from = myId();
         self::$data->to = $data->agent->id;
         self::$data->toEmail = $data->agent->email;
         self::$data->subject = 'Featured Listing Request Approved';
@@ -124,6 +125,7 @@ trait DispatchNotificationService
         self::$data->subject = 'Member Request';
         self::$data->message = 'New Add Member Request Found.';
         self::$data->to = $data->id;
+        self::$data->from = myId();
         self::$data->invited_by = mySelf();
         self::$data->toEmail = $data->email;
         self::$data->url = route('web.acceptInvitation', encrypt(['agent_id' => mySelf()->id, 'member_id' => $data->id]));
@@ -143,6 +145,7 @@ trait DispatchNotificationService
         self::$data->message = 'You added as an representative';
         self::$data->to = $data->user->id;
         self::$data->owner = mySelf();
+        self::$data->from = myId();
         self::$data->toEmail = $data->user->email;
         self::$data->url = null;
         return self::__send();
@@ -242,6 +245,7 @@ trait DispatchNotificationService
         self::$data->view = 'request_review';
         self::$data->subject = 'Review Request';
         self::$data->renter = $data->from;
+        self::$data->from = $data->from->id;
         self::$data->to = $data->from->id;
         self::$data->toEmail = $data->from->email;
         self::$data->review_message = $data->request_message;

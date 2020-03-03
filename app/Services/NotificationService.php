@@ -61,14 +61,19 @@ class NotificationService extends ExclusiveSettingService {
 
         if ( empty( $settings ) ) {
             dispatchEmailQueue( $this->data, 2 );
-            return true;
+            return $this->__create();
         }
 
         if($settings->allow_email) {
             dispatchEmailQueue( $this->data, 2 );
+            return true;
         }
 
-        return $this->__create();
+        if($settings->allow_web_notification) {
+            return $this->__create();
+        }
+
+        return false;
     }
 
     /**
@@ -114,6 +119,7 @@ class NotificationService extends ExclusiveSettingService {
         $form->url     = $this->data->url;
         $form->message = $this->data->message;
         $form->validate();
+
         return $form;
     }
 

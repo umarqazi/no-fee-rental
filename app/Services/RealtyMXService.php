@@ -131,7 +131,7 @@ class RealtyMXService extends ListingService {
             'square_feet'       => $details->squareFeet ?? null,
             'unit'              => is_object($location->apartment) ? null : $location->apartment,
             'description'       => $details->description ?? null,
-            'visibility'        => $building->user->company->company == ucwords(strtolower(MRG)),
+            'visibility'        => isset($building->user->company->company) ? $building->user->company->company == ucwords(strtolower(MRG)) : INACTIVELISTING,
             'expire_on'         => carbon($details->listedOn)->addDays(LISTING_EXPIRY_DAYS) ?? now()->addDays(LISTING_EXPIRY_DAYS),
             'created_at'        => $details->listedOn ?? now(),
             'is_featured'       => REJECTFEATURED ?? null,
@@ -309,15 +309,20 @@ class RealtyMXService extends ListingService {
      * @return mixed
      */
     private function __createCompany( $company ) {
-        if ( ! $uniqueCompany = $this->__isNewCompany( $company ) ) {
-            $company = $this->companyRepo->create( [
-                'company' => $company
-            ] );
 
-            return $company->id;
+        if( ! is_object($company)) {
+            if ( ! $uniqueCompany = $this->__isNewCompany( $company ) ) {
+                $company = $this->companyRepo->create( [
+                    'company' => $company
+                ] );
+
+                return $company->id;
+            }
+
+            return $uniqueCompany->id;
         }
 
-        return $uniqueCompany->id;
+        return null;
     }
 
     /**
