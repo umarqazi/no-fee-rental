@@ -1539,7 +1539,7 @@ h3 {
 
 .featured-properties .property-listing .property-thumb .info p {
     color: #fff;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 500;
     margin-bottom: 0;
     position: relative;
@@ -2746,7 +2746,10 @@ footer .copyright .social-icons li a:hover {
     width: 100%;
     height: 100%;
 }
-
+#desktop-map canvas {
+    width:100% !important;
+    height:100% !important;
+}
 
 /*}*/
 
@@ -4045,7 +4048,7 @@ footer .copyright .social-icons li a:hover {
 }
 
 .featured-properties .property-listing .info .info-link-text p:nth-of-type(2) {
-    font-size: 13px;
+    font-size: 11px;
     font-weight: 600;
     display: block;
 }
@@ -4082,7 +4085,7 @@ footer .copyright .social-icons li a:hover {
 
 .featured-properties .property-listing .feaure-policy-text p {
     color: #fff;
-    font-size: 16px;
+    font-size: 18px;
     margin-bottom: 5px;
 }
 
@@ -4093,7 +4096,7 @@ footer .copyright .social-icons li a:hover {
 }
 
 .featured-properties .property-listing .feaure-policy-text span {
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 600;
 }
 
@@ -5508,7 +5511,11 @@ strong {
         text-overflow: ellipsis;
     }
 }
-
+@media all and (min-width: 3500px) {
+    .neighborhood-search .search-result-wrapper .map-wrapper {
+        flex: 0 0 38% !important;
+    }
+}
 @media all and (min-width:3000px) {
     .about-us-container {
         min-height: 1150px !important;
@@ -5661,6 +5668,12 @@ strong {
         height: 250px;
         max-width: 445px;
     }
+    #boxscroll-section {
+        height: 815px;
+    }
+    .neighborhood-search .search-result-wrapper .map-wrapper {
+        height: 850px;
+    }
 }
 
 @media all and (min-width: 2751px) {
@@ -5741,7 +5754,7 @@ strong {
         padding: 0px 25px;
     }
     .neighborhood-search .search-result-wrapper .search-listing .featured-properties .property-listing .property-thumb {
-        width: calc(100% / 3 - 30px);
+        width: calc(100% / 2 - 30px);
     }
     .property-listing .info .info-link-text p:nth-of-type(2) {
         white-space: nowrap;
@@ -5947,6 +5960,11 @@ strong {
     .listing-Details .appointment-iconDetails ul li span {
         display: block;
         margin: 0 auto 10px;
+    }
+}
+@media only screen and (min-width: 991px) and (max-width: 1760px) {
+    .header-bg {
+        background-position: 100% 50% !important;
     }
 }
 @media only screen and (max-width: 991px) {
@@ -6480,6 +6498,14 @@ strong {
     }
     #signup .modal-dialog-scrollable .modal-content {
         max-height: initial !important;
+    }
+    .about-us-container.about-us-large-img .container-lg ,
+    .your-life-container.ur-life-large-img .container-lg {
+        padding: 0 0;
+    }
+    .about-us-container.about-us-large-img .container-lg  .col-lg-5 ,
+    .your-life-container.ur-life-large-img .container-lg .col-lg-5 {
+        padding: 0 30px;
     }
     .sortBy-listing{
         margin-top: 10px;
