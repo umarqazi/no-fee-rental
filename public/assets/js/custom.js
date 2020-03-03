@@ -543,3 +543,9 @@ $(() => {
         " input[name=application_fee], .availability-flex > .form-group > input[name=deposit]," +
         " #invest > input[name=min_price]").simpleMoneyFormat();
 });
+
+
+$(window).on('load', function () {
+    // nice Scroll
+    $("#boxscroll-section").niceScroll("#contentscroll-sec",{cursorcolor:"#6c757d",cursoropacitymax:0.9,boxzoom:true,touchbehavior:true});
+});
