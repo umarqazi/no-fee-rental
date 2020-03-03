@@ -4,16 +4,18 @@
         <a href="javascript:void(0);" class="notification-listener">
             <img src="{!! Storage::url('assets/images/bell-icon.png') !!}" alt="" />
         </a>
-        <span style="display:none;" class="noti-alert notification-alert"></span>
+        <span style="display:{{ hasNewNotification($notifications) ? 'block;' : 'none' }}" class="noti-alert notification-alert"></span>
     </div>
 </div>
 <main>
     <div class="notification-container notification-main-wrapper">
-        <h3>Notifications <span class="badge badge-light">4</span>
-            {{--            <i class="material-icons dp48 right">settings</i>--}}
-            <a href="javascript:void(0);" class="mark-read"> Mark as read</a>
+        <h3>Notifications <span class="badge badge-light">{{ hasNewNotification($notifications, true) }}</span>
+            <a href="#" class="mark-read"> Mark all as read</a>
         </h3>
         <div class="notification-inner-scroll" id="style-2">
+            @foreach($notifications as $notification)
+
+            @endforeach
             <div class="notification-content">
                 <div class="notification-inner-content">
                     <img src="{{ Storage::url('/assets/images/account-img.jpg') }}" alt=""/>
@@ -87,3 +89,9 @@
         </div>
     </div>
 </main>
+<script>
+    let $body = $('body');
+    $body.on('click', '.notification-listener', function () {
+        $(".notification-container").toggleClass("toggle-notification");
+    });
+</script>

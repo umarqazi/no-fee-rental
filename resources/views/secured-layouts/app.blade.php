@@ -25,8 +25,6 @@
 
     {{-- JS --}}
     {!! HTML::script('assets/js/vendor/jquery-3.2.1.min.js') !!}
-{{--	{!! HTML::script('assets/js/socket-client.js') !!}--}}
-	{!! HTML::script('assets/js/notification.js') !!}
 	{!! HTML::script('assets/js/tcp.js') !!}
     {!! HTML::script('https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js') !!}
 

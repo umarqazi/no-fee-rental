@@ -1,5 +1,5 @@
 @extends('secured-layouts.app')
-@section('title', 'Nofee Rental')
+@section('title', 'Notifications')
 @section('content')
     <style>
         .notification-details{

@@ -39,6 +39,28 @@ function uploadImage( $image, $path, $unlinkOld = false, $old_image = null ) {
 }
 
 /**
+ * @param $notifications
+ * @param bool $unreadCount
+ * @return bool|int
+ */
+function hasNewNotification($notifications, $unreadCount = false) {
+    $count = 0;
+    foreach ($notifications as $notification) {
+        if(!$unreadCount) {
+
+            if($notification->is_read === 0) return true;
+
+        } elseif ($notification->is_read === 0) {
+
+            $count ++;
+
+        }
+    }
+
+    return $count > 0 ? $count : false;
+}
+
+/**
  * @param $image_name
  * @return string
  */

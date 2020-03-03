@@ -11,7 +11,7 @@ $body.on('click', '#viewNeighborhoodContent', async function() {
         let $src = res.data.banner !== null ? is_realty_listing(res.data.banner) : `assets/images/default-images/listing.jpeg`;
         $('#boro').text(res.data.boro.boro);
         $('#name').text(res.data.name);
-        $('#banner').attr('src', `${window.location.origin}/${$src}`);
+        $('#banner').attr('src', $src);
         $('#content').text(res.data.content !== null ? res.data.content : 'Null');
         $('#view-content').modal('show');
     }).catch(err => {
