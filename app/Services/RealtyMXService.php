@@ -10,6 +10,7 @@ namespace App\Services;
 
 use App\Repository\CompanyRepo;
 use App\Traits\DispatchNotificationService;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
 /**
@@ -24,6 +25,11 @@ class RealtyMXService extends ListingService {
      * @var CompanyRepo
      */
     protected $companyRepo;
+
+    /**
+     * @var Collection
+     */
+    private $images;
 
     /**
      * @var array
@@ -110,8 +116,7 @@ class RealtyMXService extends ListingService {
         $details      = $listing->get( 'details' );
         $location     = $listing->get( 'location' );
         $attrib       = $listing->get( '@attributes' );
-        $amenities    = !isset($details->amenities) ?: $this->__addAmenities(collect($details->amenities));
-        $images       = isset($listing->get( 'media' )->photo) ? collect($this->__images( $listing->get( 'media' )->photo )) : [];
+//        $amenities    = !isset($details->amenities) ?: $this->__addAmenities(collect($details->amenities));
         $data = [
             'realty_id'         => $attrib->id ?? null,
             'realty_url'        => $attrib->url ?? null,
@@ -121,7 +126,7 @@ class RealtyMXService extends ListingService {
             'unique_slug'       => str_random(10) ?? null,
             'neighborhood_id'   => $building->neighborhood_id,
             'rent'              => $details->price ?? null,
-            'thumbnail'         => $building->thumbnail ?? null,
+            'thumbnail'         => $this->images !== null && $this->images->count() > 0 ? $this->images->random() : null,
             'availability'      => $details->availableOn ?? null,
             'availability_type' => isset($details->availableOn) ? AVAILABLE_BY_DATE : NOT_AVAILABLE,
             'street_address'    => sprintf("%s, New York", $location->address ?? null),
@@ -140,8 +145,8 @@ class RealtyMXService extends ListingService {
 
         $list = $this->listingRepo->create($data);
 
-        if (count($images) > 0) {
-            $this->__createImages($list->id, $images);
+        if ($this->images !== null && $this->images->count() > 0) {
+            $this->__createImages($list->id);
         }
 
         $this->__generateSuccessImportListingReport($list);
@@ -154,13 +159,15 @@ class RealtyMXService extends ListingService {
      * @return bool|mixed
      */
     private function __pushBuilding( $agent, $listing ) {
-        $location     = $listing->get( 'location' );
-        $images       = isset($listing->get( 'media' )->photo) ? collect($this->__images( $listing->get( 'media' )->photo )) : [];
+        $location = $listing->get( 'location' );
+        $this->images = isset($listing->get( 'media' )->photo)
+                        ? $this->__images( $listing->get( 'media' )->photo )
+                        : null;
 
         $map_location = sprintf(
             '{"latitude":%s,"longitude":%s}',
-            isset($location->latitude) ? (is_object($location->latitude) ? null : $location->latitude) : null,
-              isset($location->longitude) ? (is_object($location->longitude) ? null : $location->longitude) : null
+            isset($location->latitude) && !is_object($location->latitude) ? $location->latitude : null,
+              isset($location->longitude) && !is_object($location->longitude) ? $location->longitude : null
             );
 
         $building = [
@@ -168,7 +175,7 @@ class RealtyMXService extends ListingService {
             'neighborhood_id' => $this->__neighborhoodHandler($location->neighborhood),
             'map_location' => $map_location,
             'address' => sprintf("%s, New York", $location->address ?? null),
-            'thumbnail' => $images[0] ?? null,
+            'thumbnail' => $this->images !== null && $this->images->count() > 0 ? $this->images->random() : null,
             'is_verified' => TRUE
         ];
 
@@ -327,13 +334,11 @@ class RealtyMXService extends ListingService {
 
     /**
      * @param $list_id
-     * @param $images
-     *
      * @return mixed
      */
-    private function __createImages( $list_id, $images ) {
+    private function __createImages( $list_id ) {
         $collection = null;
-        foreach ( $images as $image ) {
+        foreach ( $this->images as $image ) {
             $collection[] = [
                 'listing_id'    => $list_id,
                 'listing_image' => $image,
@@ -348,20 +353,20 @@ class RealtyMXService extends ListingService {
 
     /**
      * @param $images
-     *
-     * @return array
+     * @return Collection
      */
-    private function __images( $images ) {
+    private function __images( $images ): Collection {
         $collection = [];
+        $this->images = null;
         foreach ( $images as $image ) {
-
             $image = collect( json_decode( json_encode( $image ) ) );
+
             if(isset($image->get( '@attributes' )->url)) {
                 array_push( $collection, $image->get( '@attributes' )->url ?? null );
             }
         }
 
-        return $collection;
+        return collect($collection);
     }
 
     /**
