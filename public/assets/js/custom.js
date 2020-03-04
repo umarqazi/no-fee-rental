@@ -208,15 +208,20 @@ $(() => {
     });
 
     $('.property-listing.mobile-listing .owl-carousel').owlCarousel({
-        loop: false,
-        margin: 5,
+        autoplay: true,
+        responsiveClass: true,
+        autoHeight: true,
+        autoplayTimeout: 7000,
+        smartSpeed: 800,
+        margin: 15,
         nav: true,
+        dots:false,
         responsive: {
             0: {
                 items: 1
             },
-            600: {
-                items: 1
+            577: {
+                items: 2
             },
             1000: {
                 items: 2
@@ -230,6 +235,7 @@ $(() => {
         autoHeight: true,
         autoplayTimeout: 7000,
         smartSpeed: 800,
+        margin: 15,
         nav: true,
         dots: false,
         responsive: {
@@ -237,7 +243,7 @@ $(() => {
                 items: 1
             },
 
-            600: {
+            577: {
                 items: 2
             },
 
@@ -545,7 +551,4 @@ $(() => {
 });
 
 
-$(window).on('load', function () {
-    // nice Scroll
-    $("#boxscroll-section").niceScroll("#contentscroll-sec",{cursorcolor:"#6c757d",cursoropacitymax:0.9,boxzoom:true,touchbehavior:true});
-});
+

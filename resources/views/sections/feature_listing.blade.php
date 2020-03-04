@@ -132,6 +132,7 @@
         autoHeight: true,
         autoplayTimeout: 7000,
         smartSpeed: 800,
+        margin: 15,
         nav: true,
         dots:false,
         responsive: {
@@ -139,7 +140,7 @@
                 items: 1
             },
 
-            600: {
+            577: {
                 items: 2
             },
 
