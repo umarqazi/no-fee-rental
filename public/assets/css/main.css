@@ -5496,6 +5496,28 @@ strong {
     margin-bottom: 15px;
 }
 
+/*custom scrollbar css*/
+
+#boxscroll-section::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 10px;
+    background-color: #F5F5F5;
+}
+
+#boxscroll-section::-webkit-scrollbar
+{
+    width: 12px;
+    background-color: #F5F5F5;
+}
+
+#boxscroll-section::-webkit-scrollbar-thumb
+{
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #dee2e6;
+}
+
 /*Responsive style*/
 
 @media all and (min-width:4000px) {
@@ -5513,7 +5535,13 @@ strong {
 }
 @media all and (min-width: 3500px) {
     .neighborhood-search .search-result-wrapper .map-wrapper {
-        flex: 0 0 38% !important;
+        flex: 0 0 44% !important;
+    }
+    #boxscroll-section {
+        height: 1460px !important;
+    }
+    .neighborhood-search .search-result-wrapper .map-wrapper {
+        height: 1500px !important;
     }
 }
 @media all and (min-width:3000px) {
@@ -5651,6 +5679,12 @@ strong {
     .featured-properties .property-listing .property-thumb {
         width: calc(100% / 5 - 30px);
     }
+    #boxscroll-section {
+        height: 840px;
+    }
+    .neighborhood-search .search-result-wrapper .map-wrapper {
+        height: 880px;
+    }
 }
 
 @media all and (min-width: 2560px) {
@@ -5664,15 +5698,15 @@ strong {
         width: calc(100% / 6 - 30px);
     }
     .neighborhood-search .search-result-wrapper .search-listing .featured-properties .property-listing .property-thumb {
-        width: calc(100% / 5 - 30px);
+        width: calc(100% / 4 - 30px);
         height: 250px;
         max-width: 445px;
     }
     #boxscroll-section {
-        height: 815px;
+        height: 1165px;
     }
     .neighborhood-search .search-result-wrapper .map-wrapper {
-        height: 850px;
+        height: 1200px;
     }
 }
 
@@ -5709,6 +5743,9 @@ strong {
         width: 235px;
         overflow: hidden;
         text-overflow: ellipsis;
+    }
+    .neighborhood-search .search-result-wrapper .map-wrapper {
+        flex: 0 0 35%;
     }
 }
 
@@ -5794,7 +5831,7 @@ strong {
         margin: 0px -15px;
     }
     .featured-properties .property-listing .property-thumb {
-        margin: 0px 15px;
+
         overflow: hidden;
         width: calc(100% / 3 - 30px);
         margin-bottom: 30px;
@@ -5960,6 +5997,12 @@ strong {
     .listing-Details .appointment-iconDetails ul li span {
         display: block;
         margin: 0 auto 10px;
+    }
+    .featured-properties .property-listing .property-thumb {
+        margin: 0px 15px;
+        overflow: hidden;
+        width: calc(100% / 2 - 30px);
+        margin-bottom: 30px;
     }
 }
 @media only screen and (min-width: 991px) and (max-width: 1760px) {
@@ -6430,21 +6473,7 @@ strong {
     .neighborhood-search .search-result-wrapper .search-listing {
         padding: 0px 0px 0px 0px;
     }
-    /*agent profile */
-    .agent-profile-view {
-        justify-content: center;
-        flex-direction: column;
-    }
-    .agent-profile-view .img-holder {
-        width: auto;
-        margin-right: 30px;
-        flex: 0 0 370px;
-        margin: 0 auto 20px auto;
-        max-width: 370px;
-    }
-    .agent-profile-view .img-holder {
-        flex: 0 0 260px;
-    }
+
     #advance-search .slider-wrapper .search-input-wrap #slider-range {
         width: 100% !important;
     }
@@ -6749,7 +6778,6 @@ strong {
     }
     .owl-slider {
         display: block;
-        text-align: center;
         padding: 0px 15px;
     }
     .desktop-listiing {
@@ -6984,6 +7012,21 @@ strong {
     #advance-search .search-input-wrap input:nth-child(2) {
         margin-left: 0;
     }
+    /*agent profile */
+    .agent-profile-view {
+        justify-content: center;
+        flex-direction: column;
+    }
+    .agent-profile-view .img-holder {
+        width: auto;
+        margin-right: 30px;
+        flex: 0 0 370px;
+        margin: 0 auto 20px auto;
+        max-width: 370px;
+    }
+    .agent-profile-view .img-holder {
+        flex: 0 0 260px;
+    }
 }
 
 @media only screen and (min-width: 577px) and (max-width: 767px) {
@@ -6991,7 +7034,7 @@ strong {
         width: 70%;
     }
     .property-listing .owl-slider .property-thumb {
-        width: 92% !important;
+        width: 100% !important;
     }
     .site-map-banner{
         height: 220px;
@@ -7002,6 +7045,10 @@ strong {
     .site-map-wrapper .let-us-help-modal .nav-pills li{
         margin-left: 0;
     }
+    .featured-properties .property-listing .property-thumb{
+        margin: 0 0;
+    }
+
 }
 
 @media only screen and (max-width: 576px) {
