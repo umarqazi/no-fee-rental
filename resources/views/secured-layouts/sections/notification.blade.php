@@ -13,6 +13,9 @@
             <a href="#" class="mark-read"> Mark all as read</a>
         </h3>
         <div class="notification-inner-scroll" id="style-2">
+            @if($notifications->count() < 1)
+                <p class="text-center" style="margin: 10px;">No Notifications Found</p>
+            @endif
             @foreach($notifications as $notification)
                 @if($notification->model !== null)
                     @if($notification->model == 'App\Listing')
