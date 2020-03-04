@@ -8,6 +8,10 @@
 
 namespace App\Traits;
 
+use App\ContactUs;
+use App\Listing;
+use App\User;
+
 /**
  * Trait SendEmailService
  * @package App\Traits
@@ -28,7 +32,9 @@ trait DispatchNotificationService
         self::$data = toObject(self::$data);
         self::$data->view = 'featured_listing_approved';
         self::$data->via = 'info';
-        self::$data->from = myId();
+        self::$data->from = admin('id');
+        self::$data->model = Listing::class;
+        self::$data->linked_id = $data->id;
         self::$data->to = $data->agent->id;
         self::$data->toEmail = $data->agent->email;
         self::$data->subject = 'Featured Listing Request Approved';
@@ -122,6 +128,7 @@ trait DispatchNotificationService
         self::$data = toObject(self::$data);
         self::$data->view = 'add_member';
         self::$data->via = 'info';
+        self::$data->model = User::class;
         self::$data->subject = 'Member Request';
         self::$data->message = 'New Add Member Request Found.';
         self::$data->to = $data->id;
@@ -145,6 +152,7 @@ trait DispatchNotificationService
         self::$data->message = 'You added as an representative';
         self::$data->to = $data->user->id;
         self::$data->owner = mySelf();
+        self::$data->model = User::class;
         self::$data->from = myId();
         self::$data->toEmail = $data->user->email;
         self::$data->url = null;
@@ -174,6 +182,8 @@ trait DispatchNotificationService
         self::$data->view = 'plan_purchased';
         self::$data->via = 'info';
         self::$data->to   = $data->agent->id;
+        self::$data->from = admin('id');
+        self::$data->model = User::class;
         self::$data->toEmail = $data->agent->email;
         self::$data->plan    = currentPlan($data->credit_plan);
         self::$data->subject = 'New Plan Purchased';
@@ -191,6 +201,8 @@ trait DispatchNotificationService
         self::$data->view = 'plan_expired';
         self::$data->via = 'info';
         self::$data->subject = 'Plan Expired';
+        self::$data->from = admin('id');
+        self::$data->model = User::class;
         self::$data->plan = currentPlan($data->plan->credit_plan);
         self::$data->to = $data->id;
         self::$data->toEmail = $data->email;
@@ -208,6 +220,9 @@ trait DispatchNotificationService
         self::$data->view = 'appointment_request';
         self::$data->subject = 'Appointment Request';
         self::$data->via = 'info';
+        self::$data->linked_id = $data->listing->id;
+        self::$data->from = myId();
+        self::$data->model = Listing::class;
         self::$data->toEmail = $data->listing->agent->email;
         self::$data->listing = $data->listing;
         self::$data->appointment = $data;
@@ -226,6 +241,9 @@ trait DispatchNotificationService
         self::$data->via = 'info';
         self::$data->subject = 'NoFeeRentalsNYC - You have a client coming to your open house!!';
         self::$data->view = 'interested';
+        self::$data->from = myId();
+        self::$data->linked_id = $data->id;
+        self::$data->model = Listing::class;
         self::$data->agent = $data->agent;
         self::$data->to = self::$data->agent->id;
         self::$data->toEmail = self::$data->agent->email;
@@ -245,6 +263,7 @@ trait DispatchNotificationService
         self::$data->view = 'request_review';
         self::$data->subject = 'Review Request';
         self::$data->renter = $data->from;
+        self::$data->model = User::class;
         self::$data->from = $data->from->id;
         self::$data->to = $data->from->id;
         self::$data->toEmail = $data->from->email;
@@ -276,7 +295,7 @@ trait DispatchNotificationService
         self::$data->via = 'info';
         self::$data->view = 'get_started';
         self::$data->subject = 'Get Started Request Received';
-        self::$data->toEmail = config('mail.admin.email');
+        self::$data->toEmail = admin('email');
         self::$data->request = toObject($data->all());
         self::$data->url = null;
         self::__sendOnlyEmail();
@@ -293,7 +312,10 @@ trait DispatchNotificationService
         self::$data->subject = 'Listing report Query Received';
         self::$data->message = 'You have a new Listing report.';
         self::$data->report = $data;
-        self::$data->to = 1;
+        self::$data->model = Listing::class;
+        self::$data->linked_id = $data->listing_id;
+        self::$data->from = $data->id;
+        self::$data->to = admin('id');
         self::$data->toEmail = config('mail.admin.email');
         self::$data->url = route('listing.detail', $data->listing_id);
         self::__send();
@@ -310,6 +332,8 @@ trait DispatchNotificationService
         self::$data->subject = 'Let Us Help Request';
         self::$data->toEmail = $data->agent->email;
         self::$data->to = $data->agent->id;
+        self::$data->from = admin('id');
+        self::$data->model = User::class;
         self::$data->listing = $data;
         self::$data->request = toObject($request->all());
         self::$data->message = "New Let Us Help Query Received";
@@ -329,6 +353,9 @@ trait DispatchNotificationService
         self::$data->message = 'Search match has been found';
         self::$data->url = route('listing.detail', $data->id);
         self::$data->to = $data->user->id;
+        self::$data->from = $data->agent->id;
+        self::$data->linked_id = $data->id;
+        self::$data->model = Listing::class;
         self::$data->toEmail = $data->user->email;
         self::__send();
     }
@@ -343,9 +370,11 @@ trait DispatchNotificationService
         self::$data->view = 'contact_us';
         self::$data->subject = 'Contact Us Message';
         self::$data->message = 'New User contact you';
-        self::$data->to = 1;
+        self::$data->to = admin('id');
         self::$data->request = $data;
-        self::$data->toEmail = config('mail.admin.email');
+        self::$data->linked_id = $data->id;
+        self::$data->model = ContactUs::class;
+        self::$data->toEmail = admin('email');
         self::$data->url = 'http://www.gmail.com';
         self::__send();
     }

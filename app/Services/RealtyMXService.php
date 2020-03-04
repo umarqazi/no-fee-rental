@@ -114,7 +114,6 @@ class RealtyMXService extends ListingService {
      * @return bool
      */
     private function __pushListing($building, $listing) {
-//        dd($listing);
         $details      = $listing->get( 'details' );
         $location     = $listing->get( 'location' );
         $attrib       = $listing->get( '@attributes' );
@@ -238,7 +237,7 @@ class RealtyMXService extends ListingService {
      * @return bool
      */
     private function __isExclusive($details) {
-        return isset($details->exlusive);
+        return isset($details->exclusive) ? true : false;
     }
 
     /**

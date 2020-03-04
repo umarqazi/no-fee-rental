@@ -17,7 +17,10 @@ class CreateNotificationsTable extends Migration {
     public function up() {
         Schema::create('notifications', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('from')->nullable();
             $table->unsignedInteger('to');
+            $table->unsignedInteger('linked_id')->nullable();
+            $table->string('model')->nullable();
             $table->text('message');
             $table->text('url');
             $table->boolean('is_read')->default(0)->comment = "0-Unread, 1-Read";

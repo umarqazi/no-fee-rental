@@ -85,7 +85,7 @@ return [
     */
 
     'admin' => [
-        'email' => env('ADMIN_EMAIL', 'yousuf.khalid@techverx.com')
+        'email' => config('app.env') == PRODUCTION ? env('ADMIN_EMAIL_PRODUCTION', '') : env('ADMIN_EMAIL_LOCAL', '')
     ],
 
     'info' => [

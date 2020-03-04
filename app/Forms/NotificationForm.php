@@ -25,6 +25,21 @@ class NotificationForm extends BaseForm {
     public $url;
 
     /**
+     * @var int
+     */
+    public $from;
+
+    /**
+     * @var string
+     */
+    public $model;
+
+    /**
+     * @var int
+     */
+    public $linked;
+
+    /**
      * @var string
      */
     public $message;
@@ -34,9 +49,12 @@ class NotificationForm extends BaseForm {
      */
     public function toArray() {
         return [
-            'to'      => $this->to,
-            'url'     => $this->url,
-            'message' => $this->message,
+            'to'        => $this->to,
+            'url'       => $this->url,
+            'linked_id' => $this->linked,
+            'from'      => $this->from,
+            'model'     => $this->model,
+            'message'   => $this->message,
         ];
     }
 
