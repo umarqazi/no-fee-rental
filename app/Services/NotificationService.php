@@ -116,7 +116,10 @@ class NotificationService extends ExclusiveSettingService {
     private function __validateForm() {
         $form          = new NotificationForm();
         $form->to      = $this->data->to;
+        $form->from    = $this->data->from ?? null;
+        $form->linked  = $this->data->linked_id ?? null;
         $form->url     = $this->data->url;
+        $form->model   = $this->data->model ?? null;
         $form->message = $this->data->message;
         $form->validate();
 

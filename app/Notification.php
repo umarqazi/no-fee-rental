@@ -14,5 +14,5 @@ class Notification extends Model {
     /**
      * @var array
      */
-    protected $fillable = ['to', 'message', 'is_read', 'url'];
+    protected $fillable = ['to', 'model', 'from', 'linked_id', 'message', 'is_read', 'url'];
 }

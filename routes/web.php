@@ -168,6 +168,5 @@ use Workerman\Worker;
 use PHPSocketIO\SocketIO;
 // Test Route
 Route::get('/test', function (\Illuminate\Http\Request $request) {
-    dd((new \App\Services\CreditPlanService())->getProducts());
-//    dd(ucwords(strtolower(MRG)));
+    dd(fromAdmin('id'));
 })->name('web.test');

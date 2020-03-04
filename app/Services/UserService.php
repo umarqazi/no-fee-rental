@@ -530,6 +530,14 @@ class UserService extends SearchService {
     }
 
     /**
+     * @param $email
+     * @return mixed
+     */
+    public function findByEmail($email) {
+        return $this->userRepo->find(['email' => $email])->first();
+    }
+
+    /**
      * @return mixed
      */
     public function agentsWithMRGCompany() {

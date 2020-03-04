@@ -39,6 +39,15 @@ function uploadImage( $image, $path, $unlinkOld = false, $old_image = null ) {
 }
 
 /**
+ * @param $key
+ * @return mixed
+ */
+function admin($key) {
+    $admin = (new \App\Services\UserService())->findByEmail(config('mail.admin.email'));
+    return $admin->{$key};
+}
+
+/**
  * @param $notifications
  * @param bool $unreadCount
  * @return bool|int
