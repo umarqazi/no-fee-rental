@@ -17,7 +17,6 @@
     {!! HTML::script('assets/js/global.js') !!}
     {!! HTML::script('assets/js/map.js') !!}
     {!! HTML::script('assets/js/validate.js') !!}
-    {!! HTML::script('assets/js/vendor/jquery.nicescroll.min.js') !!}
     {!! HTML::script('assets/js/vendor/owl.carousel.min.js') !!}
     {!! HTML::script('assets/js/vendor/pignose.calendar.full.min.js') !!}
     {!! HTML::script('https://code.jquery.com/ui/1.12.1/jquery-ui.js') !!}
