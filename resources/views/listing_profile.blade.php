@@ -45,7 +45,7 @@
         </div>
         <div class="clients-reviews-section">
             <div class="">
-                <h3> What our clients say about him</h3>
+                <h3> What our clients say about <b>{{ $agent->first_name }}</b></h3>
                 @if(sizeof($agent->reviews) > 0)
                 <div class="owl-slider">
                     <div id="ClientCarousel" class="owl-carousel">

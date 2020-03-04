@@ -10,6 +10,7 @@ namespace App\Services;
 
 use App\Repository\CompanyRepo;
 use App\Traits\DispatchNotificationService;
+use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
@@ -113,6 +114,7 @@ class RealtyMXService extends ListingService {
      * @return bool
      */
     private function __pushListing($building, $listing) {
+//        dd($listing);
         $details      = $listing->get( 'details' );
         $location     = $listing->get( 'location' );
         $attrib       = $listing->get( '@attributes' );
@@ -137,7 +139,7 @@ class RealtyMXService extends ListingService {
             'unit'              => is_object($location->apartment) ? null : $location->apartment,
             'description'       => $details->description ?? null,
             'visibility'        => isset($building->user->company->company) ? $building->user->company->company == ucwords(strtolower(MRG)) : INACTIVELISTING,
-            'expire_on'         => carbon($details->listedOn)->addDays(LISTING_EXPIRY_DAYS) ?? now()->addDays(LISTING_EXPIRY_DAYS),
+            'expire_on'         => $this->__expiryDate($details->listedOn)->addDays(LISTING_EXPIRY_DAYS)->format('Y-m-d h:i:s'),
             'created_at'        => $details->listedOn ?? now(),
             'is_featured'       => REJECTFEATURED ?? null,
             'map_location'      => $building->map_location
@@ -221,6 +223,14 @@ class RealtyMXService extends ListingService {
         }
 
         return $neighborhood->id;
+    }
+
+    /**
+     * @param $expiry
+     * @return Carbon
+     */
+    private function __expiryDate($expiry): Carbon {
+        return isset($expiry) ? carbon($expiry) : now();
     }
 
     /**

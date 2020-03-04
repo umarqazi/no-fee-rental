@@ -1,7 +1,6 @@
 "use strict";
 
 let currentUser = Window.Laravel.user;
-let socket = require('./socket-client').socket;
 
 /**
  * Hide Notification alert icon

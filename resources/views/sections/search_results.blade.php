@@ -123,6 +123,7 @@
 {!! HTML::style('https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.css') !!}
 {!! HTML::script('https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.js') !!}
 <script>
+
     window.onload = () => { drawCoords(); };
 
     let nextPage = insertParam(`page`, 2);
