@@ -4011,11 +4011,14 @@ footer .copyright .social-icons li a:hover {
     color: #fff;
     font-size: 13px;
 }
-
+.lSSlideWrapper {
+    background-color: #eee;
+}
 #image-gallery li.lslide img {
     width: 100%;
-    height: 600px;
-    object-fit: cover;
+    height: auto;
+    object-fit: contain;
+    max-height: 470px;
 }
 
 .featured-properties .property-listing .info a {
@@ -5867,7 +5870,7 @@ strong {
         height: 100%;
     }
     .lSSlideOuter .lSSlideWrapper #image-gallery>li img {
-        max-height: 600px;
+        max-height: 340px;
     }
     .about-us-container {
         background: url(../images/about-bg.jpg) no-repeat center left -270px #ffffff;
@@ -6412,7 +6415,7 @@ strong {
         display: none;
     }
     .lSSlideOuter .lSSlideWrapper #image-gallery>li img {
-        max-height: 600px;
+        max-height: 461px;
     }
     .header-bg .search-property .fa-search {
         top: 28px;
@@ -7048,7 +7051,9 @@ strong {
     .featured-properties .property-listing .property-thumb{
         margin: 0 0;
     }
-
+    .lSSlideOuter .lSSlideWrapper #image-gallery>li img {
+        max-height: 355px;
+    }
 }
 
 @media only screen and (max-width: 576px) {
@@ -7137,7 +7142,7 @@ strong {
         margin-right: 0;
     }
     .lSSlideOuter .lSSlideWrapper #image-gallery>li img {
-        max-height: 300px;
+        max-height: 190px;
     }
     .let-us-hlep-form .btn-default {
         padding: 0px 20px;

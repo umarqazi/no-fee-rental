@@ -356,9 +356,9 @@
     object-fit: cover;
 }
 
-.large-view img {
-    max-height: 450px;
-}
+/*.large-view img {*/
+/*    max-height: 450px;*/
+/*}*/
 
 .signup-modal-scroll {
     overflow: hidden;
