@@ -480,6 +480,19 @@ const str_formatting = (value, phrase) => {
     return value < 1 ? 'Studio' : (value > 1 ? value + ' '+ phrase + "s" : value + ' '+ phrase);
 };
 
+/**
+ * Toggle eye view
+ */
+const toggleEye = ($event) => {
+    $event.toggleClass('fa-eye-slash');
+    if($event.hasClass('fa-eye-slash')) {
+        $event.siblings('input').attr('type', 'text');
+    } else {
+        $event.siblings('input').attr('type', 'password');
+    }
+};
+
+
 $(() => {
 
     let $body = $('body');

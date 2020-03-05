@@ -7,7 +7,6 @@
                 <img src="{{asset('assets/images/modal-logo.png')}}" alt="" class="logo" />
 
                 <ul class="create-client-listing">
-{{--                    <h3>LET'S STARTED</h3>--}}
                     <li>Save your searches</li>
                     <li>Mark your favorite listings</li>
                     <li>Get email notification for new listings in neighborhoods that you like</li>
@@ -107,4 +106,4 @@
         </div>
     </div>
 </div>
-    {!! HTML::script('assets/js/signup.js') !!}
+{!! HTML::script('assets/js/signup.js') !!}
