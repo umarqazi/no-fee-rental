@@ -1,5 +1,4 @@
 
-let $body = $('body');
 let $form = $('#signup_form #invited_sign_up');
 
 $(() => {
