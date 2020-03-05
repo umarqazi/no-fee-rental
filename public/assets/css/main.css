@@ -5535,10 +5535,18 @@ strong {
         overflow: hidden;
         text-overflow: ellipsis;
     }
+    .neighborhood-search .search-result-wrapper .search-listing .featured-properties .property-listing .property-thumb{
+        width: calc(100% / 4 - 30px) !important;
+    }
+}
+@media (min-width: 3001px) {
+    .neighborhood-search .search-result-wrapper .map-wrapper {
+        flex: 0 0 50% !important;
+    }
 }
 @media all and (min-width: 3500px) {
     .neighborhood-search .search-result-wrapper .map-wrapper {
-        flex: 0 0 44% !important;
+        flex: 0 0 50% !important;
     }
     #boxscroll-section {
         height: 1460px !important;
@@ -5563,13 +5571,12 @@ strong {
     .desktop-listiing {
         justify-content: center;
     }
-    .neighborhood-search .search-result-wrapper .map-wrapper {
-        flex: 0 0 30%;
-    }
     .property-listing.neighbourhood-listing {
         justify-content: flex-start;
     }
+
 }
+
 
 @media (min-width: 576px) {
     .login .modal-dialog-centered {
@@ -5652,7 +5659,7 @@ strong {
         max-width: 1600px;
     }
     .neighborhood-search .search-result-wrapper .search-listing .featured-properties .property-listing .property-thumb {
-        width: calc(100% / 4 - 30px);
+        width: calc(100% / 3 - 30px);
         height: 250px;
     }
     .featured-properties .property-listing .property-thumb {
@@ -5669,6 +5676,12 @@ strong {
     }
     .neighborhood-search .search-result-wrapper .map-wrapper {
         flex: 0 0 30%;
+    }
+    #boxscroll-section {
+       height: 530px;
+    }
+    .neighborhood-search .search-result-wrapper .map-wrapper {
+        height: 570px;
     }
 }
 
@@ -5935,9 +5948,7 @@ strong {
         margin-bottom: 15px;
     }
     /*agent profile responsive*/
-    .agent-profile-view .agent-info .contact-info {
-        display: block;
-    }
+
     .agent-profile-view .agent-info .contact-info>div {
         margin-bottom: 10px;
     }
@@ -5954,7 +5965,7 @@ strong {
         padding: 20px 0px 0px !important;
     }
     .agent-listing-profile .search-result-wrapper .search-listing .featured-properties .property-listing .property-thumb {
-        width: calc(100% / 3 - 30px);
+        width: calc(100% / 2 - 30px);
     }
     .footer-wrapper .fas.fa-angle-down {
         display: block;
@@ -6514,6 +6525,9 @@ strong {
         padding: 0px 15px 10px;
     }
     .mobile-tabs-collapse-inner{
+        display: block;
+    }
+    .agent-profile-view .agent-info .contact-info {
         display: block;
     }
 }
