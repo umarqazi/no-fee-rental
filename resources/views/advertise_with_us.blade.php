@@ -82,7 +82,7 @@
                 </div>
                 <div class="clm premium-plan platinum-plan">
                     <div class="plan-header ">
-                        <div class="title"><i class="fa fa-star"></i> PREMIUM <i class="fa fa-star"></i></div>
+                        <div class="title"><i class="fa fa-star"></i> PLATINUM <i class="fa fa-star"></i></div>
                         <p class="subtext">Supercharge your business!</p>
                     </div>
                     <div class="price-title">

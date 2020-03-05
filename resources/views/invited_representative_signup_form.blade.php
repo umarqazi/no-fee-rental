@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('title', 'Representative SignUp')
 @section('content')
-
     <div class="container login-form-wrapper" style="padding: 110px;">
         <div class="logo-info-wrapper">
             <h3>Create Account</h3>
@@ -96,33 +95,8 @@
             {!! Form::close() !!}
         </div>
     </div>
+    {!! HTML::script('assets/js/signup.js') !!}
     <script>
-        $('.input-style').prop("disabled", true);
-        let $signup = $('#invited_agent_signup_form');
-        $signup.on('click', '.fa-eye:first', function () {
-            $(this).removeClass('fa-eye').addClass('fa-eye-slash');
-            $(this).siblings('input').attr('type', 'text');
-        });
-
-        $signup.on('click', '.fa-eye-slash:first', function () {
-            $(this).removeClass('fa-eye-slash').addClass('fa-eye');
-            setTimeout(() => {
-                $(this).siblings('input').attr('type', 'password');
-            }, 10);
-        });
-
-        $signup.on('click', '.fa-eye:last', function () {
-            $(this).removeClass('fa-eye').addClass('fa-eye-slash');
-            $(this).siblings('input').attr('type', 'text');
-        });
-
-        $signup.on('click', '.fa-eye-slash:last', function () {
-            $(this).removeClass('fa-eye-slash').addClass('fa-eye');
-            setTimeout(() => {
-                $(this).siblings('input').attr('type', 'password');
-            }, 10);
-        });
-
         $('body').on('form-success-invited_sign_up', function () {
             setTimeout(() => { window.location.href = '/advertise-with-us' }, 1000);
         });

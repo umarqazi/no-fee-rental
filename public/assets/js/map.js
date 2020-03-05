@@ -331,7 +331,8 @@ const addHoverEffect = () => {
 const drawCoords = () => {
     let coords = [];
     $('body').find('input[name=map_location]').each(function(i, v) {
-        coords.push($(v).val());
+        let cord = $(v).val();
+        coords.push(cord.replace(/\\/g, ""));
     });
 
     if(coords.length > 0) {

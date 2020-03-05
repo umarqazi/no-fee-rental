@@ -86,9 +86,11 @@
     {!! HTML::script('assets/js/listing.js') !!}
 <script>
     window.onload = function() {
+        let coords = $('input[name=map_location]').val();
+        coords = coords.replace(/\\/g, "");
         enableDatePicker('#availability_date, .open-house-date', false);
         @if($action === 'Copy' || $action === 'Update' || $action === 'Building')
-            setMap('map', JSON.parse($('input[name=map_location]').val()));
+            setMap('map', JSON.parse(coords));
             setTimeout(() => {
                 $('body').find('.mapboxgl-ctrl-geocoder--input').val("{!! $listing->street_address !!}");
                 $('body').find('.mapboxgl-ctrl-geocoder--input').attr('readonly', 'readonly');
