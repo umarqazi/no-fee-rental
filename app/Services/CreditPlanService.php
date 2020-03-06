@@ -119,7 +119,7 @@ class CreditPlanService extends PaymentService {
      * @return bool
      */
     public function agentHasPlan() {
-        return $this->creditPlanRepo->find(['user_id' => myId()])->count() > 0 ? true : false;
+        return $this->creditPlanRepo->find(['user_id' => myId()])->where('is_cancel', FALSE)->count() > 0 ? true : false;
     }
 
     /**

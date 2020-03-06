@@ -189,9 +189,10 @@ class ListingService extends BuildingService {
      * @return mixed
      */
     public function get($request) {
+        $map_location = str_replace('\\', '', $request->map_location);
         return $this->listingRepo->find([
             'visibility' => ACTIVELISTING,
-            'map_location' => $request->map_location
+            'map_location' => $map_location
         ])->with('neighborhood')->get();
     }
 

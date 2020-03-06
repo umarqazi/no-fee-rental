@@ -1,8 +1,9 @@
 
-let $form = $('#signup_form #invited_sign_up');
 
 $(() => {
 
+    let $body = $('body');
+    let $form = $('#signup_form, #invited_sign_up');
     // Form Success Event Call
     $body.on('form-success-signup_form', function (e, v) {
         $('#signup').modal('hide');
@@ -57,12 +58,14 @@ $(() => {
 let $submit = $('input[type=submit]');
 let $first_name = $('input[name=first_name]');
 let $last_name = $('input[name=last_name]');
+let $form = $('#signup_form #invited_sign_up');
 
 /**
  * Success Handler
  * @param res
  */
 function success(res) {
+    let $body = $('body');
     $('.input-style').removeAttr("disabled");
     $('.license_valid-text').text("You provided a valid license. You are welcome to fill the details below and become a part of NO FEE Rentals NYC.");
     $('.times').remove();
@@ -86,6 +89,7 @@ function success(res) {
  * Error Handler
  */
 function error() {
+    let $body = $('body');
     $body.find('.check').remove();
     if ($('.times').length < 1) {
         message('times', 'Invalid License Number');

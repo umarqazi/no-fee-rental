@@ -14,7 +14,7 @@
             <p>Welcome to the nofeerentalsnyc.com family!!</p>
             <div class="plans-wrapper">
                 <div class="inner-plans-wrapper">
-                    <div class="current-plans {{ isset($currentPlan) && $currentPlan->plan == BASICPLAN ? '' : 'platinum-plan' }}">
+                    <div class="current-plans {{ isset($currentPlan) && $currentPlan->plan == BASICPLAN && !$currentPlan->is_cancel ? '' : 'platinum-plan' }}">
                         <h3> Basic </h3>
                         <h2>$40</h2> <small>/Month</small>
                         <div class="text-with-tick-image">
@@ -25,17 +25,19 @@
                                 <li>30 Reposts</li>
                             </ul>
                         </div>
-                        @if($currentPlan != null && $currentPlan->plan == BASICPLAN)
-                            <a href="{{ route('agent.plan') }}" class="btn btn-default">
-                                Current Plan
-                            </a>
-                        @elseif ($currentPlan != null)
-                            <button type="button" class="btn-default switch-plan">Switch Plan</button>
+                        @if(!$currentPlan->is_cancel)
+                            @if($currentPlan != null && $currentPlan->plan == BASICPLAN)
+                                <a href="{{ route('agent.plan') }}" class="btn btn-default">
+                                    Current Plan
+                                </a>
+                            @elseif ($currentPlan != null)
+                                <button type="button" class="btn-default switch-plan">Switch Plan</button>
+                            @endif
                         @else
                             <button type="button" class="btn-default credit-plan">Get Started</button>
                         @endif
                     </div>
-                    <div class="current-plans {{ isset($currentPlan) && $currentPlan->plan == GOLDPLAN ? '' : 'platinum-plan' }}">
+                    <div class="current-plans {{ isset($currentPlan) && $currentPlan->plan == GOLDPLAN && !$currentPlan->is_cancel ? '' : 'platinum-plan' }}">
                         <h3> Gold </h3>
                         <h2>$70</h2> <small>/Month</small>
                         <div class="text-with-tick-image">
@@ -48,17 +50,19 @@
                                 <li>Featured listing in our weekly news letter</li>
                             </ul>
                         </div>
-                        @if($currentPlan != null && $currentPlan->plan == GOLDPLAN)
-                            <a href="{{ route('agent.plan') }}" class="btn btn-default">
-                                Current Plan
-                            </a>
-                        @elseif ($currentPlan != null)
-                            <button type="button" class="btn-default switch-plan">Switch Plan</button>
+                        @if(!$currentPlan->is_cancel)
+                            @if($currentPlan != null && $currentPlan->plan == GOLDPLAN)
+                                <a href="{{ route('agent.plan') }}" class="btn btn-default">
+                                    Current Plan
+                                </a>
+                            @elseif ($currentPlan != null)
+                                <button type="button" class="btn-default switch-plan">Switch Plan</button>
+                            @endif
                         @else
                             <button type="button" class="btn-default credit-plan">Get Started</button>
                         @endif
                     </div>
-                    <div class="current-plans {{ isset($currentPlan) && $currentPlan->plan == PLATINUMPLAN ? '' : 'platinum-plan' }}">
+                    <div class="current-plans {{ isset($currentPlan) && $currentPlan->plan == PLATINUMPLAN && !$currentPlan->is_cancel ? '' : 'platinum-plan' }}">
                         <h3> Platinum </h3>
                         <h2>$100</h2> <small>/Month</small>
                         <div class="text-with-tick-image">
@@ -73,12 +77,14 @@
                                 <li>Featured listing in our weekly news letter</li>
                             </ul>
                         </div>
-                        @if($currentPlan != null && $currentPlan->plan == PLATINUMPLAN)
-                            <a href="{{ route('agent.plan') }}" class="btn btn-default">
-                                Current Plan
-                            </a>
-                        @elseif ($currentPlan != null)
-                            <button type="button" class="btn-default switch-plan">Switch Plan</button>
+                        @if(!$currentPlan->is_cancel)
+                            @if($currentPlan != null && $currentPlan->plan == PLATINUMPLAN)
+                                <a href="{{ route('agent.plan') }}" class="btn btn-default">
+                                    Current Plan
+                                </a>
+                            @elseif ($currentPlan != null)
+                                <button type="button" class="btn-default switch-plan">Switch Plan</button>
+                            @endif
                         @else
                             <button type="button" class="btn-default credit-plan">Get Started</button>
                         @endif

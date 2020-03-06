@@ -182,7 +182,7 @@ class PaymentService {
     private function __createCard() {
         $card = $this->paymentMethod
                      ->cards()
-                     ->create( $this->__createCustomer(), $this->__createToken() );
+                     ->create( $this->customer ? $this->customer : $this->__createCustomer(), $this->__createToken() );
 
         $this->card = $card['id'];
         return $this;
@@ -196,6 +196,7 @@ class PaymentService {
         $this->request = $this->__validateForm($request);
         $credentials = $this->customerRepo->find(['user_id' => myId()])->first();
         $this->paymentMethod->cards()->delete($credentials->customer_id, $credentials->card_id);
+        $this->customer = $credentials->customer_id;
         return $this->__createCard()->__updateCardDetails();
     }
 

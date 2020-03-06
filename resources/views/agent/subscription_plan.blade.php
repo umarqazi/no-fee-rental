@@ -13,8 +13,7 @@
         <div class="credit-plans basic-plan-wrapper">
             <h3>Current Plan - {{ currentPlan($currentPlan->plan) }}</h3>
             <div class="pg-header">
-                <p>  Your billing cycle ends on <b>{{ billingCycle($currentPlan) }}</b>, and is currently set to renew. The current payment method is: American Express ending with 8000
-                </p>
+                <p>  Your billing cycle ends on <b>{{ billingCycle($currentPlan) }}</b>, and is currently set to renew.</p>
                 <a href="javascript:void(0)" class="change-card"> Change Card </a>
             </div>
             <div class="switching-plans">
@@ -58,17 +57,22 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($currentPlan->transactions as $transaction)
-                                    <tr>
-                                        <td>{{ $transaction->created_at->format('d-m-Y') }}</td>
-                                        <td>${{ $transaction->amt_paid }}</td>
-                                        <td>{{ $transaction->txn_status }}</td>
-                                        <td>
-                                            <a href="{{ $transaction->receipt_url }}" class="desktop-table-td"> View Receipt </a>
-                                            <a href="{{ $transaction->receipt_url }}" class="mobile-table-td"> <i class="far fa-eye"></i> </a>
-                                        </td>
-                                    </tr>
-                                @endforeach
+                                    @foreach($currentPlan->transactions as $transaction)
+                                        <tr>
+                                            <td>{{ $transaction->created_at->format('d-m-Y') }}</td>
+                                            <td>${{ $transaction->amt_paid }}</td>
+                                            <td>{{ $transaction->txn_status }}</td>
+                                            <td>
+                                                <a href="{{ $transaction->receipt_url }}" class="desktop-table-td"> View Receipt </a>
+                                                <a href="{{ $transaction->receipt_url }}" class="mobile-table-td"> <i class="far fa-eye"></i> </a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    @if($currentPlan->transactions->count() < 1)
+                                        <tr>
+                                            <td class="text-center" colspan="4">No Transactions Found</td>
+                                        </tr>
+                                    @endif
                                 </tbody>
                             </table>
                         </div>
