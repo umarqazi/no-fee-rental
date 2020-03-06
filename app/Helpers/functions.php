@@ -419,7 +419,7 @@ function planEnum($plan) {
  * @return mixed
  */
 function billingCycle($currentPlan) {
-    return $currentPlan->updated_at->addDays(MAXPLANDAYS)->format('d m, Y h:m s');
+    return $currentPlan->updated_at->addDays(MAXPLANDAYS)->format('d-m-Y h:m a');
 }
 
 /**

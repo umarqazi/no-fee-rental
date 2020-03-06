@@ -160,7 +160,10 @@ class RealtyMXService extends ListingService {
      * @return bool|mixed
      */
     private function __pushBuilding( $agent, $listing ) {
+        $building_amenities = null;
         $location = $listing->get( 'location' );
+        $details = collect($listing->get('details'));
+        $building_amenities = $this->__buildingAmenities($details->get('building-amenities'));
         $this->images = isset($listing->get( 'media' )->photo)
                         ? $this->__images( $listing->get( 'media' )->photo )
                         : null;
@@ -182,10 +185,77 @@ class RealtyMXService extends ListingService {
 
         if(!$uniqueBuilding = $this->__isNewBuilding($building['address'])) {
             $uniqueBuilding = $this->buildingRepo->create($building);
+            if($building_amenities !== null) {
+                $uniqueBuilding->amenities()->attach($building_amenities);
+            }
         }
 
         return $uniqueBuilding;
     }
+
+    /**
+     * @param $amenities
+     * @return array
+     */
+    private function __buildingAmenities($amenities) {
+        $collection = [];
+        $amenities = collect($amenities)->keys();
+        $amenities = $amenities->reject(function($key) {
+            return $key === 'other';
+        });
+
+        foreach ($amenities as $amenity){
+            $id = null;
+            if(! $uniqueAmenity = $this->__isNewAmenity($amenity)) {
+                $amenity = $this->amenitiesRepo->create(['amenities'  => $amenity]);
+                $id = $amenity->id;
+            } else {
+                $id = $uniqueAmenity->id;
+            }
+
+            array_push($collection, $id);
+        }
+
+        return $collection;
+    }
+
+    /**
+     * @param $amenities
+     * @return array
+     */
+    private function __apartmentAmenities($amenities) {
+        $collection = [];
+        $amenities = collect($amenities)->keys();
+        $amenities = $amenities->reject(function($key) {
+            return $key === 'NOFEE';
+        });
+
+        foreach ($amenities as $amenity){
+            $id = null;
+            if(! $uniqueAmenity = $this->__isNewAmenity($amenity)) {
+                $amenity = $this->amenitiesRepo->create(['amenities'  => $amenity]);
+                $id = $amenity->id;
+            } else {
+                $id = $uniqueAmenity->id;
+            }
+
+            array_push($collection, $id);
+        }
+
+        return $collection;
+    }
+
+//    private function __pets($policy) {
+//        $build =
+//        $policy = collect($policy)->keys();
+//        if(strpos('dogs', '')) {
+//
+//        }
+//
+//        if(strpos('cats', '')) {
+//
+//        }
+//    }
 
     /**
      * @param $agent

@@ -153,7 +153,7 @@ const multiMarkers = (coords, container, zoom = 10) => {
             let current = MARKER.getLngLat();
             let domain = window.location.origin;
             let map_location = JSON.stringify({'latitude': current.lat, 'longitude': current.lng});
-            let resp = await ajaxRequest(`/listing-detail`, 'post', {map_location: map_location});
+            let resp = await ajaxRequest(`/listing-detail`, 'post', {map_location});
             console.log(resp);
             if(resp.data.length > 1) {
                 html += '<div class="mapbox-content-wrapper">';
