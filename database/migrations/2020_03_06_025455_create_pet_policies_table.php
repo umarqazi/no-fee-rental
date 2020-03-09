@@ -15,6 +15,7 @@ class CreatePetPoliciesTable extends Migration
     {
         Schema::create('pet_policies', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name');
             $table->timestamps();
         });
     }
