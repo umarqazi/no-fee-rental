@@ -85,7 +85,6 @@ class RealtyMXService extends ListingService {
         $listing = $this->listingRepo
             ->find
             ( [
-                'visibility'  => true,
                 'realty_id'   => $realty_id,
                 'unique_slug' => $unique_id,
             ] )
