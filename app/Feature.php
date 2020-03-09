@@ -4,11 +4,15 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Feature
+ * @package App
+ */
 class Feature extends Model {
     /**
      * @var array
      */
-    protected $fillable = ['amenities'];
+    protected $fillable = ['name'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany

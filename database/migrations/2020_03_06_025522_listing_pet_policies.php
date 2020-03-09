@@ -13,7 +13,13 @@ class ListingPetPolicies extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('listing_pet_policies', function (Blueprint $table) {
+            $table->unsignedInteger('listing_id');
+            $table->unsignedInteger('pet_policy_id');
+
+            $table->foreign('listing_id')->references('id')->on('listings');
+            $table->foreign('pet_policy_id')->references('id')->on('pet_policies');
+        });
     }
 
     /**
@@ -23,6 +29,6 @@ class ListingPetPolicies extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('listing_pet_policies');
     }
 }

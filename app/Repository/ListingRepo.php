@@ -22,7 +22,7 @@ class ListingRepo extends BaseRepo {
      * @return mixed
      */
 	public function detail($id) {
-        return $this->find(['id' => $id])->where('visibility', '!=', ARCHIVED);
+        return $this->find(['id' => $id]);
     }
 
     /**
