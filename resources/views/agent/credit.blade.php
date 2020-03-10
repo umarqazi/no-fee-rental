@@ -25,7 +25,7 @@
                                 <li>30 Reposts</li>
                             </ul>
                         </div>
-                        @if(!$currentPlan->is_cancel)
+                        @if(!empty($currentPlan) && !$currentPlan->is_cancel)
                             @if($currentPlan != null && $currentPlan->plan == BASICPLAN)
                                 <a href="{{ route('agent.plan') }}" class="btn btn-default">
                                     Current Plan
@@ -50,7 +50,7 @@
                                 <li>Featured listing in our weekly news letter</li>
                             </ul>
                         </div>
-                        @if(!$currentPlan->is_cancel)
+                        @if(!empty($currentPlan) && !$currentPlan->is_cancel)
                             @if($currentPlan != null && $currentPlan->plan == GOLDPLAN)
                                 <a href="{{ route('agent.plan') }}" class="btn btn-default">
                                     Current Plan
@@ -77,7 +77,7 @@
                                 <li>Featured listing in our weekly news letter</li>
                             </ul>
                         </div>
-                        @if(!$currentPlan->is_cancel)
+                        @if(!empty($currentPlan) && !$currentPlan->is_cancel)
                             @if($currentPlan != null && $currentPlan->plan == PLATINUMPLAN)
                                 <a href="{{ route('agent.plan') }}" class="btn btn-default">
                                     Current Plan
