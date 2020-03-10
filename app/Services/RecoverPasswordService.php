@@ -147,7 +147,10 @@ class RecoverPasswordService {
         if($this->isValidEmail($request->token, $request->email)) {
             DB::beginTransaction();
             if($this->recoverPasswordRepo->deleteMultiple(['token' => $request->token])) {
-                $this->userRepo->updateByClause(['email' => $request->email], ['password' => bcrypt($request->password)]);
+                $this->userRepo->updateByClause(['email' => $request->email], [
+                    'email_verified_at' => now(),
+                    'password' => bcrypt($request->password)
+                ]);
                 DB::commit();
                 return true;
             }

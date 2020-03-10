@@ -36,7 +36,7 @@ $(() => {
 
     $license_number.on('input blur', async () => {
         let license_number = $license_number.val();
-        if(license_number.length >= 11) {
+        if(license_number.length >= 8) {
             ajaxRequest(`/verify-license`,'POST',{license_number},false).then(res => {
                 if (res === 'true') {
                     ajaxRequest(`/license-verification/${license_number}`,'GET',
@@ -58,7 +58,7 @@ $(() => {
 let $submit = $('input[type=submit]');
 let $first_name = $('input[name=first_name]');
 let $last_name = $('input[name=last_name]');
-let $form = $('#signup_form #invited_sign_up');
+let $form = $('#signup_form, #invited_sign_up');
 
 /**
  * Success Handler
@@ -69,9 +69,17 @@ function success(res) {
     $('.input-style').removeAttr("disabled");
     $('.license_valid-text').text("You provided a valid license. You are welcome to fill the details below and become a part of NO FEE Rentals NYC.");
     $('.times').remove();
-    $form.append(`<input type="hidden" name="company" value="${res[0].business_name}">
-                  <input type="hidden" name="address" value="${res[0].business_address_1}">
-    `);
+
+    let cname = res[0].business_name;
+    let caddress = res[0].business_address_1;
+    if(!$('input').hasClass('cname') && !$('input').hasClass('caddress')) {
+        $form.append(`<input type="hidden" name="company" class="cname" value="${cname}">
+                  <input type="hidden" name="address" class="caddress" value="${caddress}">
+        `);
+    } else {
+        $body.find('.cname').val(cname);
+        $body.find('.caddress').val(caddress);
+    }
 
     if(res[0].license_holder_name) {
         let str_split = res[0].license_holder_name.split(" ");
@@ -94,6 +102,9 @@ function error() {
     if ($('.times').length < 1) {
         message('times', 'Invalid License Number');
     }
+
+    $body.find('.cname').remove();
+    $body.find('.caddress').remove();
 
     $body.find('.license_valid-text').text("We are sorry your license is invalid. Please check your license Number again.");
     $submit.attr({'disabled': 'true'});
