@@ -397,11 +397,9 @@ class RealtyMXService extends ListingService {
     private function __createCompany( $company ) {
 
         if( ! is_object($company)) {
+            $company = ucwords(strtolower($company));
             if ( ! $uniqueCompany = $this->__isNewCompany( $company ) ) {
-                $company = $this->companyRepo->create( [
-                    'company' => $company
-                ] );
-
+                $company = $this->companyRepo->create(['company' => $company]);
                 return $company->id;
             }
 

@@ -26,7 +26,7 @@ class CompanyForm extends BaseForm {
      */
 	public function toArray() {
 		return [
-			'company' => $this->company,
+			'company' => ucwords(strtolower($this->company)),
 		];
 	}
 }

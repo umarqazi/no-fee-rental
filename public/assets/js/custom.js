@@ -452,6 +452,7 @@ $(() => {
         }
     });
 
+
     $(".dropdown-beds").click(function() {
         $(".dropdown-beds #advance-search-beds").toggle();
     });
@@ -542,9 +543,8 @@ $(() => {
             }
         });
     });
-    $('body').find(".money-mask, .price-range-ul > ul > li > input[name=min_price], input[name=budget], .price-range-ul > ul > li >" +
-        "input[name=max_price], .dropdown-for-price > ul > li > input[name=min_price], .dropdown-for-price > ul >" +
-        " li > input[name=max_price], .neighborhood-flex > .form-group > input[name=renter_rebate]," +
+    $('body').find(".money-mask, input[name=min_price], input[name=budget], input[name=max_price], input[name=square_min], input[name=square_max]," +
+        ".neighborhood-flex > .form-group > input[name=renter_rebate]," +
         " .neighborhood-flex > .form-group > input[name=rent], .unit-flex > .form-group >" +
         " input[name=application_fee], .availability-flex > .form-group > input[name=deposit]," +
         " #invest > input[name=min_price]").simpleMoneyFormat();
