@@ -8,7 +8,7 @@
         </div>
 
         @if(!isAgentHasPlan() && !isMRGAgent())
-            {!! bootstrapAlertDanger('You have no plan to post listing <b><a href="'.route("agent.creditPlan").'">click here</a></b> to purchase a plan and we are good to go.') !!}
+            {!! bootstrapAlertDanger('You have no plan to post listing <b><a href="'.route("agent.creditPlan").'">Click Here</a></b> to purchase a plan and we are good to go.') !!}
         @endif
 
         <div class="filter-mobile-data-wrapper">

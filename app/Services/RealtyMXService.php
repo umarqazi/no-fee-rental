@@ -200,11 +200,12 @@ class RealtyMXService extends ListingService {
         $collection = [];
         $amenities = collect($amenities)->keys();
         $amenities = $amenities->reject(function($key) {
-            return $key === 'other';
+            return $key === 'other' || $key === '0';
         });
 
         foreach ($amenities as $amenity){
             $id = null;
+            $amenity = preg_replace('/(?<!\ )[A-Z]/', ' $0', $amenity);
             if(! $uniqueAmenity = $this->__isNewAmenity($amenity)) {
                 $amenity = $this->amenitiesRepo->create(['amenities'  => $amenity]);
                 $id = $amenity->id;
