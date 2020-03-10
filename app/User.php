@@ -2,6 +2,7 @@
 
 namespace App;
 
+use function foo\func;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -237,27 +238,6 @@ class User extends Authenticate implements CanResetPassword {
      */
     public function scopeWithReviews($query) {
         return $query->with('reviews.from');
-    }
-
-
-    /**
-     * @param $query
-     * @return mixed
-     */
-    public function scopeActiveFavourites($query) {
-        return $query->with(['favourite' => function($sub) {
-            return $sub->where('visibility', ACTIVE);
-        }]);
-    }
-
-    /**
-     * @param $query
-     * @return mixed
-     */
-    public function scopeInactiveFavourites($query) {
-        return $query->with(['favourite' => function($sub) {
-            return $sub->where('visibility', DEACTIVE);
-        }]);
     }
 
     /**

@@ -9,10 +9,10 @@
             <div class="heading-wrapper pl-0">
                 <ul class="nav nav-pills">
                     <li class="nav-item">
-                        <a class="nav-link active" data-toggle="pill" href="#listing-active">Active ({{ $favourites->active->total() }})</a>
+                        <a class="nav-link active" data-toggle="pill" href="#listing-active">Active ({{ count($favourites->active) }})</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="pill" href="#listing-inactive">Closed ({{ $favourites->inactive->total() }})</a>
+                        <a class="nav-link" data-toggle="pill" href="#listing-inactive">Closed ({{ count($favourites->inactive) }})</a>
                     </li>
                 </ul>
                 <div class="filter-wrapper">
@@ -30,7 +30,7 @@
                                 @foreach($favourites->active as $al)
                                     <div class="listing-row">
                                         <div class="img-holder">
-                                            <img src="{{ Storage::url($al->thumbnail ?? DLI) }}" alt="" style="height: 205px; width: 100%;" class="main-img" />
+                                            <img src="{{ is_realty_listing($al->thumbnail ?? DLI) }}" alt="" style="height: 205px; width: 100%;" class="main-img" />
                                         </div>
                                         <div class="info">
                                             <p class="title">{{ str_limit(is_exclusive($al), STR_LIMIT_LIST_VIEW, ' ...') }}</p>
@@ -54,19 +54,21 @@
                                         </div>
                                     </div>
                                 @endforeach
-                                @if($favourites->active->total() < 1)
-                                    <p class="null">No Record Found</p>
-                                @endif
+                                {{--@if($favourites->active->favourite->count() < 1)--}}
+                                    {{--<p class="null">No Record Found</p>--}}
+                                {{--@endif--}}
+
+{{--                                    {!! $favourites->active->render() !!}--}}
                             </div>
 
 
                             <!--Grid view listing-->
                             <div class="grid-view-wrapper">
                                 <div class="row">
-                                    @foreach($favourites->active[0]->favourite as $al)
+                                    @foreach($favourites->active as $al)
                                         <div class="col-lg-3 col-md-4 col-sm-6">
                                             <div class="listing-thumb">
-                                                <img src="{{ Storage::url( $al->thumbnail ?? DLI ) }}" alt="" style="height: 205px; width: 100%;" class="main-img" />
+                                                <img src="{{ is_realty_listing( $al->thumbnail ?? DLI ) }}" alt="" style="height: 205px; width: 100%;" class="main-img" />
                                                 <div class="info">
                                                     <p class="title">
                                                         {{ str_limit(is_exclusive($al), STR_LIMIT_GRID_VIEW, ' ...') }}
@@ -92,22 +94,23 @@
                                             </div>
                                         </div>
                                     @endforeach
-                                    @if(sizeof($favourites->active[0]->favourite) < 1)
-                                        <p class="null">No Record Found</p>
-                                    @endif
-                                </div>
-                           {{--     {!! $favourites->active[0]->favourite->render() !!}
-                           --}} </div>
+                                    {{--@if($favourites->active->favourite->count() < 1)--}}
+                                        {{--<p class="null">No Record Found</p>--}}
+                                    {{--@endif--}}
 
-                    </div>
+{{--                                        {!! $favourites->active->render() !!}--}}
+                                </div>
+                            </div>
+                        </div>
+
                     <div class="tab-pane fade" id="listing-inactive">
 
                         <!--List view listing-->
                         <div class="listing-wrapper">
-                            @foreach($favourites->inactive[0]->favourite as $il)
+                            @foreach($favourites->inactive as $il)
                                 <div class="listing-row">
                                     <div class="img-holder">
-                                        <img src="{{ Storage::url( $il->thumbnail ?? DLI ) }}" alt="" style="height:205px;" class="main-img" />
+                                        <img src="{{ is_realty_listing( $il->thumbnail ?? DLI ) }}" alt="" style="height:205px;" class="main-img" />
                                     </div>
                                     <div class="info">
                                         <p class="title">{{ str_limit(is_exclusive($il), STR_LIMIT_LIST_VIEW, ' ...') }}</p>
@@ -128,18 +131,19 @@
                                     </div>
                                 </div>
                             @endforeach
-                            @if(sizeof($favourites->inactive[0]->favourite) < 1)
-                                <p class="null">No Record Found</p>
-                            @endif
+                            {{--@if($favourites->inactive < 1)--}}
+                                {{--<p class="null">No Record Found</p>--}}
+                            {{--@endif--}}
+{{--                                {!! $favourites->inactive->render() !!}--}}
                         </div>
 
                         <!--Grid view listing-->
                         <div class="grid-view-wrapper">
                             <div class="row">
-                                @foreach($favourites->inactive[0]->favourite as $il)
+                                @foreach($favourites->inactive as $il)
                                     <div class="col-lg-3 col-md-4 col-sm-6">
                                         <div class="listing-thumb">
-                                            <img src="{{ Storage::url( $il->thumbnail ?? DLI ) }}" alt="" style="height:205px;" class="main-img" />
+                                            <img src="{{ is_realty_listing( $il->thumbnail ?? DLI ) }}" alt="" style="height:205px;" class="main-img" />
                                             <div class="info">
                                                 <p class="title">{{ str_limit(is_exclusive($il), STR_LIMIT_GRID_VIEW, ' ...') }}</p>
                                                 <p><i class="fa fa-tag"></i> ${{ ($il->rent) ?   number_format($il->rent,0) : 'None' }}</p>
@@ -160,13 +164,12 @@
                                         </div>
                                     </div>
                                 @endforeach
-                                @if(sizeof($favourites->active[0]->favourite) < 1)
-                                    <p class="null">No Record Found</p>
-                                @endif
+                                {{--@if($favourites->inactive->favourite->count() < 1)--}}
+                                    {{--<p class="null">No Record Found</p>--}}
+                                {{--@endif--}}
+{{--                                    {!! $favourites->inactive->render() !!}--}}
                             </div>
-                            {!! $favourites->inactive->render() !!}
                         </div>
-
                     </div>
                 </div>
             </div>
