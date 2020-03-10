@@ -168,7 +168,5 @@ use Workerman\Worker;
 use PHPSocketIO\SocketIO;
 // Test Route
 Route::get('/test', function (\Illuminate\Http\Request $request) {
-    $name = 'MANHATTAN REALTY GROUP';
-    $name2 = 'Manhattan Realty Group';
-    dd(ucwords(strtolower($name2)));
+    dd(mySelf()->favourite, myId());
 })->name('web.test');

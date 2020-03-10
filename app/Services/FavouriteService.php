@@ -6,11 +6,9 @@
  * @project no-fee-rental
  */
 
-
 namespace App\Services;
 
 use App\Repository\FavouriteRepo;
-use App\Repository\UserRepo;
 
 /**
  * Class FavouriteService
@@ -27,7 +25,7 @@ class FavouriteService {
      * FavouriteService constructor.
      */
     public function __construct() {
-        $this->favouriteRepo = new UserRepo();
+        $this->favouriteRepo = new FavouriteRepo();
     }
 
     /**
@@ -35,8 +33,8 @@ class FavouriteService {
      * @return array
      */
     public function getFavouriteListing($paginate) {
-        $active = $this->favouriteRepo->activeFav()->paginate($paginate, ['*'], 'active-favourites');
-        $inactive = $this->favouriteRepo->inActiveFav()->paginate($paginate, ['*'], 'inactive-favourites');
+        $active = $this->favouriteRepo->active($paginate);
+        $inactive = $this->favouriteRepo->inactive($paginate);
         return compact('active', 'inactive');
     }
 }

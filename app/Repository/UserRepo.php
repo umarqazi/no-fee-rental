@@ -136,21 +136,6 @@ class UserRepo extends BaseRepo {
         $user->favourite()->detach($listing);
     }
 
-
-    /**
-     * @return mixed
-     */
-    public function activeFav() {
-        return $this->find(['id' => myId()])->activefavourites();
-    }
-
-    /**
-     * @return mixed
-     */
-    public function inActiveFav() {
-        return $this->find(['id' => myId()])->inactivefavourites();
-    }
-
     /**
      * @return mixed
      */

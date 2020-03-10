@@ -17,7 +17,7 @@ class WishListController extends Controller {
     /**
      * @var int
      */
-    private $paginate = 5;
+    private $paginate = 100;
 
     /**
      * @var ListingService

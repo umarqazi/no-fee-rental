@@ -91,13 +91,21 @@ class UserController extends Controller {
      */
     public function confirmEmail($token) {
         if ($this->userService->verifyEmail($token)) {
-            return isAgent()
-                ? redirect(route('web.advertise'))->with(
-                    [
-                        'alert_type' => 'success',
-                        'message' => 'Your email has been verified. Kindly choose a plan to post listings.'
-                    ])
-                : redirect(route('renter.index'))->with(
+            if(isAgent()) {
+                return isMRGAgent()
+                    ? redirect(route('web.index'))->with(
+                        [
+                            'alert_type' => 'success',
+                            'message' => 'Your email has been verified.'
+                        ])
+                    : redirect(route('web.advertise'))->with(
+                        [
+                            'alert_type' => 'success',
+                            'message' => 'Your email has been verified. Kindly choose a plan to post listings.'
+                        ]);
+            }
+
+            return redirect(route('renter.index'))->with(
                     [
                         'alert_type' => 'success',
                         'message' => 'Your email has been verified.'
