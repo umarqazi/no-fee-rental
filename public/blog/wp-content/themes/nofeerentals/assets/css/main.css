@@ -1249,7 +1249,7 @@ h4{
     line-height: 30px;
 }
 
-footer {
+/*footer {
     background: #223971;
     padding: 80px 0px 20px;
     position: relative;
@@ -1350,6 +1350,11 @@ footer .footer-wrapper .newsletter .newsletter-form .btn-default {
     top: 2px;
     bottom: 2px;
     cursor: pointer;
+}*/
+
+#center-content-no-padd .kc-container{
+    max-width: 100%;
+    padding: 0;
 }
 
 .newsletter-form label.error,

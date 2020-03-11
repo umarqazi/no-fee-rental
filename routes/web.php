@@ -142,24 +142,42 @@ Route::get('/advertise-with-us', 'AdvertiseController@index')->name('web.adverti
 Route::post('/boroughs', 'NYCProxyController@boroughs');
 Route::post('/nyc-data', 'NYCProxyController@nycData');
 
-// Stripe WebHooks
-//Route::stripeWebhooks('/v1/webhook_endpoints');
+// WP Pages Routes
 
-// Application Controlling Routes
-Route::get('/all-clear', function() {
-    artisan(['config:cache', 'view:clear', 'route:clear']);
-    dd('Config Cleared, View Cleared, Routes Cleared..');
-});
+// About Us
+Route::get('/about-us', function () {
+    return view('our_story');
+})->name('web.aboutUs');
 
-Route::get('/migrate-fresh-seed', function() {
-    artisan(['migrate:fresh', 'db:seed']);
-    dd('Migration fresh with seeding..');
-});
+// Rent Calculator
+Route::get('/rent-calculator', function () {
+    return view('rent_calculator');
+})->name('web.rentCalculator');
 
-Route::get('/composer-dump', function() {
-    exec('composer dump-autoload');
-    dd('composer dump-succeed');
-});
+// Renter Guide
+Route::get('/renter-guide', function () {
+    return view('renter_guide');
+})->name('web.renterGuide');
+
+// Help and Answer
+Route::get('/help-and-answer', function () {
+    return view('help_and_answer');
+})->name('web.helpAndAnswer');
+
+// Privacy Policy
+Route::get('/privacy-policy', function () {
+    return view('privacy_policy');
+})->name('web.privacyPolicy');
+
+// Terms
+Route::get('/terms', function () {
+    return view('terms');
+})->name('web.terms');
+
+// Feedback
+Route::get('/feedback', function () {
+    return view('feedback');
+})->name('web.feedback');
 
 // Realty Import CSV Report Download
 Route::get('/download/realty-csv-report', 'RealtyMXController@download');
@@ -168,5 +186,5 @@ use Workerman\Worker;
 use PHPSocketIO\SocketIO;
 // Test Route
 Route::get('/test', function (\Illuminate\Http\Request $request) {
-    dd(mySelf()->favourite, myId());
+    return view('our_story');
 })->name('web.test');

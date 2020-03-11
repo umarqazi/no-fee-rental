@@ -54,11 +54,11 @@
                                         </div>
                                     </div>
                                 @endforeach
-                                {{--@if($favourites->active->favourite->count() < 1)--}}
-                                    {{--<p class="null">No Record Found</p>--}}
-                                {{--@endif--}}
+                                @if(count($favourites->active) < 1)
+                                    <p class="null">No Record Found</p>
+                                @endif
 
-{{--                                    {!! $favourites->active->render() !!}--}}
+                                    {!! $favourites->active->links() !!}
                             </div>
 
 
@@ -94,11 +94,11 @@
                                             </div>
                                         </div>
                                     @endforeach
-                                    {{--@if($favourites->active->favourite->count() < 1)--}}
-                                        {{--<p class="null">No Record Found</p>--}}
-                                    {{--@endif--}}
+                                    @if(count($favourites->active) < 1)
+                                        <p class="null">No Record Found</p>
+                                    @endif
 
-{{--                                        {!! $favourites->active->render() !!}--}}
+                                        {!! $favourites->active->links() !!}
                                 </div>
                             </div>
                         </div>
@@ -131,10 +131,11 @@
                                     </div>
                                 </div>
                             @endforeach
-                            {{--@if($favourites->inactive < 1)--}}
-                                {{--<p class="null">No Record Found</p>--}}
-                            {{--@endif--}}
-{{--                                {!! $favourites->inactive->render() !!}--}}
+                            @if(count($favourites->inactive) < 1)
+                                <p class="null">No Record Found</p>
+                            @endif
+
+                                {!! $favourites->inactive->links() !!}
                         </div>
 
                         <!--Grid view listing-->
@@ -164,10 +165,11 @@
                                         </div>
                                     </div>
                                 @endforeach
-                                {{--@if($favourites->inactive->favourite->count() < 1)--}}
-                                    {{--<p class="null">No Record Found</p>--}}
-                                {{--@endif--}}
-{{--                                    {!! $favourites->inactive->render() !!}--}}
+                                @if(count($favourites->inactive) < 1)
+                                    <p class="null">No Record Found</p>
+                                @endif
+
+                                    {!! $favourites->inactive->links() !!}
                             </div>
                         </div>
                     </div>

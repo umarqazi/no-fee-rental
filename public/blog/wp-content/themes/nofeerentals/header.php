@@ -22,20 +22,12 @@
     <?php wp_head(); ?>
 </head>
 
-<body <?php body_class(); ?>
+<body <?php body_class(); ?>>
 
 <header>
 
     <div class="mobile-menu">
         <i class="fa fa-times close-menu-btn"></i>
-<!--        <div class="user-avtar">-->
-<!--            <a href="#"><img src="assets/images/agent-img.jpg" alt="" class="avtar" /> Jhone Doe <i class="fa fa-angle-down"></i></a>-->
-<!--            <div class="user-dropdown">-->
-<!--                <a href="#">Dashboard </a>-->
-<!--                <a href="#">Profile Setting </a>-->
-<!--                <a href="#">Log Out </a>-->
-<!--            </div>-->
-<!--        </div>-->
         <div class="mobile-nav">
             <ul id="menu-header-menu" class="menu-links">
                 <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-29">

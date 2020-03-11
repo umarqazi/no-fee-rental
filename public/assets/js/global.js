@@ -48,6 +48,12 @@ const ajaxRequest = async function (url, type, data, loading = true, form = null
                 populateErrors(form, err.responseJSON.errors);
                 return;
             }
+
+            if(err.status === 419) {
+                window.location.reload();
+                return;
+            }
+
             if (
                 err.responseJSON.msg !== '' &&
                 err.responseJSON.msg !== null &&

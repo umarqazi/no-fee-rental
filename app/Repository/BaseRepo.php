@@ -94,6 +94,15 @@ class BaseRepo implements IRepo {
 	}
 
     /**
+     * @param $column
+     * @param $value
+     * @return mixed
+     */
+	public function like($column, $value) {
+	    return $this->model->where($column, 'like', "%{$value}%");
+    }
+
+    /**
      * @param $id
      *
      * @return mixed

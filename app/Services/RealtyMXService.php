@@ -205,7 +205,8 @@ class RealtyMXService extends ListingService {
 
         foreach ($amenities as $amenity){
             $id = null;
-            $amenity = preg_replace('/(?<!\ )[A-Z]/', ' $0', $amenity);
+            $amenity = preg_replace('/(\w+)([A-Z])/U', '\\1 \\2', $amenity);
+            if($amenity == '0') continue;
             if(! $uniqueAmenity = $this->__isNewAmenity($amenity)) {
                 $amenity = $this->amenitiesRepo->create(['amenities'  => $amenity]);
                 $id = $amenity->id;
@@ -342,7 +343,7 @@ class RealtyMXService extends ListingService {
      * @return mixed|bool
      */
     private function __isNewAmenity($amenity) {
-        $amenity = $this->amenitiesRepo->find(['amenities' => $amenity]);
+        $amenity = $this->amenitiesRepo->like('amenities', $amenity);
         return $amenity->count() > 0 ? $amenity->first() : false;
     }
 
