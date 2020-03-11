@@ -51,7 +51,6 @@ return [
         '3' => 'Children Playroom',
         '4' => 'Common Outdoor Space',
         '5' => 'Concierge',
-        '6' => 'Diplomats OK',
         '7' => 'Doorman',
         '8' => 'Elevator',
         '9' => 'Garage',

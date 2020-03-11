@@ -7,8 +7,8 @@
    * @package nofeerentals
    */
 
-update_option( 'siteurl', 'http://beta.nofeerentalsnyc.com/blog/' );
-update_option( 'home', 'http://beta.nofeerentalsnyc.com/blog/' );
+update_option( 'siteurl', 'http://localhost:8000/blog/' );
+update_option( 'home', 'http://localhost:8000/blog/' );
 
   if ( ! function_exists( 'nofeerentals_setup' ) ) :
     /**
@@ -270,4 +270,8 @@ function wpbeginner_numeric_posts_nav() {
 
     echo '</ul></div>' . "\n";
 
+}
+
+function get_wp_page() {
+     return include get_template_directory().'/templates/tpl-full-width.php';
 }

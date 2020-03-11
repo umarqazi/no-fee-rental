@@ -1003,7 +1003,7 @@ function neighborhood_site_map() {
             }
 
             $content .= "<li>";
-            $content .= "<a href='".route('web.ListsByNeighborhood', $neighborhood->name)."'>";
+            $content .= "<a href='".route('web.listsByNeighborhood', $neighborhood->name)."'>";
             $content .= "<label class=\"\" for=\"{$id}\">{$neighborhood->name}</label></a></li>";
 
             if($i == $perColum) {

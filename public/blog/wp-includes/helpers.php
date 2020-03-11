@@ -22,37 +22,3 @@
  * @package WordPress
  */
 
-function dd($data) {
- echo "<pre>";
- print_r($data);
- die();
-}
-
-function isAuthenticated() {
-   if(isset($_SESSION['api_token']) || isset($_SESSION['guard'])) {
-	return true;
-   }
-
-   return false;
-}
-
-function guard() {
-	return $_SESSION['guard'];
-}
-
-function routeWP($url) {
-dd($url);
-  switch($url) {
-	case guard().'.index':
-	  dd('dashboard');
-	break;
-	case guard().'.showProfile':
-		dd('profile');
-	break;
-	case guard().'logout':
-		dd('logout');
-	break;
-  }
-dd($url);die;
- return $url;
-}
