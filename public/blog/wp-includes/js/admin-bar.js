@@ -1,5 +1,5 @@
 /**
- * @output wp-includes/js/admin-bar.js
+ * @output blog-includes/js/admin-bar.js
  */
 
 /* jshint loopfunc: true */
@@ -7,7 +7,7 @@
 if ( typeof(jQuery) != 'undefined' ) {
 	if ( typeof(jQuery.fn.hoverIntent) == 'undefined' ) {
 		/* jshint ignore:start */
-		// hoverIntent v1.8.1 - Copy of wp-includes/js/hoverIntent.min.js
+		// hoverIntent v1.8.1 - Copy of blog-includes/js/hoverIntent.min.js
 		!function(a){a.fn.hoverIntent=function(b,c,d){var e={interval:100,sensitivity:6,timeout:0};e="object"==typeof b?a.extend(e,b):a.isFunction(c)?a.extend(e,{over:b,out:c,selector:d}):a.extend(e,{over:b,out:b,selector:c});var f,g,h,i,j=function(a){f=a.pageX,g=a.pageY},k=function(b,c){return c.hoverIntent_t=clearTimeout(c.hoverIntent_t),Math.sqrt((h-f)*(h-f)+(i-g)*(i-g))<e.sensitivity?(a(c).off("mousemove.hoverIntent",j),c.hoverIntent_s=!0,e.over.apply(c,[b])):(h=f,i=g,c.hoverIntent_t=setTimeout(function(){k(b,c)},e.interval),void 0)},l=function(a,b){return b.hoverIntent_t=clearTimeout(b.hoverIntent_t),b.hoverIntent_s=!1,e.out.apply(b,[a])},m=function(b){var c=a.extend({},b),d=this;d.hoverIntent_t&&(d.hoverIntent_t=clearTimeout(d.hoverIntent_t)),"mouseenter"===b.type?(h=c.pageX,i=c.pageY,a(d).on("mousemove.hoverIntent",j),d.hoverIntent_s||(d.hoverIntent_t=setTimeout(function(){k(c,d)},e.interval))):(a(d).off("mousemove.hoverIntent",j),d.hoverIntent_s&&(d.hoverIntent_t=setTimeout(function(){l(c,d)},e.timeout)))};return this.on({"mouseenter.hoverIntent":m,"mouseleave.hoverIntent":m},e.selector)}}(jQuery);
 		/* jshint ignore:end */
 	}
@@ -37,15 +37,15 @@ if ( typeof(jQuery) != 'undefined' ) {
 		 *
 		 * @since 3.5.0
 		 *
-		 * @param {boolean} unbind If true removes the wp-mobile-hover class.
+		 * @param {boolean} unbind If true removes the blog-mobile-hover class.
 		 *
 		 * @return {void}
 		 */
 		touchOpen = function(unbind) {
-			adminbar.find('li.menupop').on('click.wp-mobile-hover', function(e) {
+			adminbar.find('li.menupop').on('click.blog-mobile-hover', function(e) {
 				var el = $(this);
 
-				if ( el.parent().is('#wp-admin-bar-root-default') && !el.hasClass('hover') ) {
+				if ( el.parent().is('#blog-admin-bar-root-default') && !el.hasClass('hover') ) {
 					e.preventDefault();
 					adminbar.find('li.menupop.hover').removeClass('hover');
 					el.addClass('hover');
@@ -62,7 +62,7 @@ if ( typeof(jQuery) != 'undefined' ) {
 				}
 
 				if ( unbind ) {
-					$('li.menupop').off('click.wp-mobile-hover');
+					$('li.menupop').off('click.blog-mobile-hover');
 					disableHoverIntent = false;
 				}
 			});
@@ -78,7 +78,7 @@ if ( typeof(jQuery) != 'undefined' ) {
 		touchClose = function() {
 			var mobileEvent = /Mobile\/.+Safari/.test(navigator.userAgent) ? 'touchstart' : 'click';
 			// close any open drop-downs when the click/touch is not on the toolbar
-			$(document.body).on( mobileEvent+'.wp-mobile-hover', function(e) {
+			$(document.body).on( mobileEvent+'.blog-mobile-hover', function(e) {
 				if ( !$(e.target).closest('#wpadminbar').length )
 					adminbar.find('li.menupop.hover').removeClass('hover');
 			});
@@ -133,10 +133,10 @@ if ( typeof(jQuery) != 'undefined' ) {
 		 *
 		 * @return {void}
 		 **/
-		$('#wp-admin-bar-get-shortlink').click(function(e){
+		$('#blog-admin-bar-get-shortlink').click(function(e){
 			e.preventDefault();
 			$(this).addClass('selected').children('.shortlink-input').blur(function(){
-				$(this).parents('#wp-admin-bar-get-shortlink').removeClass('selected');
+				$(this).parents('#blog-admin-bar-get-shortlink').removeClass('selected');
 			}).focus().select();
 		});
 
@@ -206,7 +206,7 @@ if ( typeof(jQuery) != 'undefined' ) {
 		 * @return {void}
 		 */
 		adminbar.click( function(e) {
-			if ( e.target.id != 'wpadminbar' && e.target.id != 'wp-admin-bar-top-secondary' ) {
+			if ( e.target.id != 'wpadminbar' && e.target.id != 'blog-admin-bar-top-secondary' ) {
 				return;
 			}
 
@@ -265,10 +265,10 @@ if ( typeof(jQuery) != 'undefined' ) {
 			 *
 			 * @return {void}
 			 */
-			$('#wp-admin-bar-logout a').click( function() {
+			$('#blog-admin-bar-logout a').click( function() {
 				try {
 					for ( var key in sessionStorage ) {
-						if ( key.indexOf('wp-autosave-') != -1 )
+						if ( key.indexOf('blog-autosave-') != -1 )
 							sessionStorage.removeItem(key);
 					}
 				} catch(e) {}
@@ -431,7 +431,7 @@ if ( typeof(jQuery) != 'undefined' ) {
 				if ( ! t || t == d || t == aB )
 					return;
 				// Check if we've found the shortlink node.
-				if ( t.id && t.id == 'wp-admin-bar-get-shortlink' )
+				if ( t.id && t.id == 'blog-admin-bar-get-shortlink' )
 					break;
 				t = t.parentNode;
 			}
@@ -471,7 +471,7 @@ if ( typeof(jQuery) != 'undefined' ) {
 			var distance, speed, step, steps, timer, speed_step;
 
 			// Ensure that the #wpadminbar was the target of the click.
-			if ( t.id != 'wpadminbar' && t.id != 'wp-admin-bar-top-secondary' )
+			if ( t.id != 'wpadminbar' && t.id != 'blog-admin-bar-top-secondary' )
 				return;
 
 			distance    = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
@@ -524,11 +524,11 @@ if ( typeof(jQuery) != 'undefined' ) {
 					scrollToTop( e.target || e.srcElement );
 				});
 
-				addEvent( document.getElementById('wp-admin-bar-logout'), 'click', function() {
+				addEvent( document.getElementById('blog-admin-bar-logout'), 'click', function() {
 					if ( 'sessionStorage' in window ) {
 						try {
 							for ( var key in sessionStorage ) {
-								if ( key.indexOf('wp-autosave-') != -1 )
+								if ( key.indexOf('blog-autosave-') != -1 )
 									sessionStorage.removeItem(key);
 							}
 						} catch(e) {}

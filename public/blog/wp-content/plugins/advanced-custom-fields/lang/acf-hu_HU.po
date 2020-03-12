@@ -1724,7 +1724,7 @@ msgid "Message"
 msgstr "Üzenet"
 
 #: fields/message.php:104
-msgid "Please note that all text will first be passed through the wp function "
+msgid "Please note that all text will first be passed through the blog function "
 msgstr "Minden szöveg elsőként áthalad a következő beépített WP funkción: "
 
 #: fields/message.php:112

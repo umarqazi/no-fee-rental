@@ -228,15 +228,15 @@ class CreditPlanService extends PaymentService {
      * @return bool|mixed
      */
     public function addRepost() {
-        $plan = $this->__currentBalance();
-        $availableRepost = $plan->remaining_repost;
-        if($availableRepost >= 1) {
-            return $this->creditPlanRepo->updateByClause(['user_id' => myId()], [
-                'remaining_repost' => $availableRepost - 1
-            ]);
-        }
+//        $plan = $this->__currentBalance();
+//        $availableRepost = $plan->remaining_repost;
+//        if($availableRepost >= 1) {
+//            return $this->creditPlanRepo->updateByClause(['user_id' => myId()], [
+//                'remaining_repost' => $availableRepost - 1
+//            ]);
+//        }
 
-        return false;
+        return true;
     }
 
     /**

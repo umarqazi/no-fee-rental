@@ -102,7 +102,7 @@ class Custom_Background {
 
 		wp_enqueue_media();
 		wp_enqueue_script( 'custom-background' );
-		wp_enqueue_style( 'wp-color-picker' );
+		wp_enqueue_style( 'blog-color-picker' );
 	}
 
 	/**
@@ -517,7 +517,7 @@ class Custom_Background {
 		$thumbnail = wp_get_attachment_image_src( $id, 'thumbnail' );
 		set_theme_mod( 'background_image_thumb', esc_url_raw( $thumbnail[0] ) );
 
-		/** This action is documented in wp-admin/custom-header.php */
+		/** This action is documented in blog-admin/custom-header.php */
 		do_action( 'wp_create_file_in_uploads', $file, $id ); // For replication
 		$this->updated = true;
 	}
@@ -578,7 +578,7 @@ class Custom_Background {
 			exit;
 		}
 		$attachment_id = absint( $_POST['attachment_id'] );
-		/** This filter is documented in wp-admin/includes/media.php */
+		/** This filter is documented in blog-admin/includes/media.php */
 		$sizes = array_keys(
 			apply_filters(
 				'image_size_names_choose',

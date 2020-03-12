@@ -12,9 +12,9 @@
                 <div class="collapse-menu">
                     <ul>
                         <li><a href="{{ route('web.renterGuide') }}" class="ft-links">Renters Guide</a></li>
-                        <li><a href="/blog/help_and_answers" class="ft-links">Help and Answers</a></li>
+                        <li><a href="{{ route('web.helpAndAnswer') }}" class="ft-links">Help and Answers</a></li>
                         <li><a href="{{ route('web.rentCalculator') }}" class="ft-links">Rent Calculator</a></li>
-                        <li><a href="/blog" class="ft-links">Blog</a></li>
+                        <li><a href="{{ route('web.blog') }}" class="ft-links">Blog</a></li>
                     </ul>
                 </div>
             </li>
@@ -34,7 +34,7 @@
                 <div class="collapse-menu">
                     <ul>
                         <li><a href="{{ route('web.aboutUs') }}" class="ft-links">Our Story</a></li>
-                        <li><a href="/blog/press" class="ft-links">Press</a></li>
+                        <li><a href="{{ route('web.press') }}" class="ft-links">Press</a></li>
                         <li><a href="{{ route('web.privacyPolicy') }}" class="ft-links">Privacy Policy </a></li>
                         <li><a href="{{ route('web.terms') }}" class="ft-links">Terms</a></li>
                     </ul>

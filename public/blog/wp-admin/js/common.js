@@ -1,5 +1,5 @@
 /**
- * @output wp-admin/js/common.js
+ * @output blog-admin/js/common.js
  */
 
 /* global setUserSetting, ajaxurl, commonL10n, alert, confirm, pagenow */
@@ -478,8 +478,8 @@ $document.ready( function() {
 		$adminMenuWrap = $( '#adminmenuwrap' ),
 		$wpwrap = $( '#wpwrap' ),
 		$adminmenu = $( '#adminmenu' ),
-		$overlay = $( '#wp-responsive-overlay' ),
-		$toolbar = $( '#wp-toolbar' ),
+		$overlay = $( '#blog-responsive-overlay' ),
+		$toolbar = $( '#blog-toolbar' ),
 		$toolbarPopups = $toolbar.find( 'a[aria-haspopup="true"]' ),
 		$sortables = $('.meta-box-sortables'),
 		wpResponsiveActive = false,
@@ -496,7 +496,7 @@ $document.ready( function() {
 			adminbar: $adminbar.height(),
 			menu: $adminMenuWrap.height()
 		},
-		$headerEnd = $( '.wp-header-end' );
+		$headerEnd = $( '.blog-header-end' );
 
 	/**
 	 * Makes the fly-out submenu header clickable, when the menu is folded.
@@ -505,7 +505,7 @@ $document.ready( function() {
 	 *
 	 * @returns {void}
 	 */
-	$adminmenu.on('click.wp-submenu-head', '.wp-submenu-head', function(e){
+	$adminmenu.on('click.blog-submenu-head', '.blog-submenu-head', function(e){
 		$(e.target).parent().siblings('a').get(0).click();
 	});
 
@@ -518,7 +518,7 @@ $document.ready( function() {
 		var viewportWidth = getViewportWidth() || 961;
 
 		// reset any compensation for submenus near the bottom of the screen
-		$('#adminmenu div.wp-submenu').css('margin-top', '');
+		$('#adminmenu div.blog-submenu').css('margin-top', '');
 
 		if ( viewportWidth < 960 ) {
 			if ( $body.hasClass('auto-fold') ) {
@@ -543,7 +543,7 @@ $document.ready( function() {
 			}
 		}
 
-		$document.trigger( 'wp-collapse-menu', { state: menuState } );
+		$document.trigger( 'blog-collapse-menu', { state: menuState } );
 	});
 
 	/**
@@ -554,7 +554,7 @@ $document.ready( function() {
 	 * @returns {void}
 	 */
 	function currentMenuItemHasPopup() {
-		var $current = $( 'a.wp-has-current-submenu' );
+		var $current = $( 'a.blog-has-current-submenu' );
 
 		if ( 'folded' === menuState ) {
 			// When folded or auto-folded and not responsive view, the current menu item does have a fly-out sub-menu.
@@ -565,7 +565,7 @@ $document.ready( function() {
 		}
 	}
 
-	$document.on( 'wp-menu-state-set wp-collapse-menu wp-responsive-activate wp-responsive-deactivate', currentMenuItemHasPopup );
+	$document.on( 'blog-menu-state-set blog-collapse-menu blog-responsive-activate blog-responsive-deactivate', currentMenuItemHasPopup );
 
 	/**
 	 * Ensures an admin submenu is within the visual viewport.
@@ -578,7 +578,7 @@ $document.ready( function() {
 	 */
 	function adjustSubmenu( $menuItem ) {
 		var bottomOffset, pageHeight, adjustment, theFold, menutop, wintop, maxtop,
-			$submenu = $menuItem.find( '.wp-submenu' );
+			$submenu = $menuItem.find( '.blog-submenu' );
 
 		menutop = $menuItem.offset().top;
 		wintop = $window.scrollTop();
@@ -615,8 +615,8 @@ $document.ready( function() {
 		 *
 		 * @returns {void}
 		 */
-		$body.on( mobileEvent+'.wp-mobile-hover', function(e) {
-			if ( $adminmenu.data('wp-responsive') ) {
+		$body.on( mobileEvent+'.blog-mobile-hover', function(e) {
+			if ( $adminmenu.data('blog-responsive') ) {
 				return;
 			}
 
@@ -632,17 +632,17 @@ $document.ready( function() {
 		 *
 		 * @returns {void}
 		 */
-		$adminmenu.find( 'a.wp-has-submenu' ).on( mobileEvent + '.wp-mobile-hover', function( event ) {
+		$adminmenu.find( 'a.blog-has-submenu' ).on( mobileEvent + '.blog-mobile-hover', function( event ) {
 			var $menuItem = $(this).parent();
 
-			if ( $adminmenu.data( 'wp-responsive' ) ) {
+			if ( $adminmenu.data( 'blog-responsive' ) ) {
 				return;
 			}
 
 			// Show the sub instead of following the link if:
 			//	- the submenu is not open
 			//	- the submenu is not shown inline or the menu is not folded
-			if ( ! $menuItem.hasClass( 'opensub' ) && ( ! $menuItem.hasClass( 'wp-menu-open' ) || $menuItem.width() < 40 ) ) {
+			if ( ! $menuItem.hasClass( 'opensub' ) && ( ! $menuItem.hasClass( 'blog-menu-open' ) || $menuItem.width() < 40 ) ) {
 				event.preventDefault();
 				adjustSubmenu( $menuItem );
 				$adminmenu.find( 'li.opensub' ).removeClass( 'opensub' );
@@ -652,7 +652,7 @@ $document.ready( function() {
 	}
 
 	if ( ! isIOS && ! isAndroid ) {
-		$adminmenu.find( 'li.wp-has-submenu' ).hoverIntent({
+		$adminmenu.find( 'li.blog-has-submenu' ).hoverIntent({
 
 			/**
 			 * Opens the submenu when hovered over the menu item for desktops.
@@ -661,14 +661,14 @@ $document.ready( function() {
 			 */
 			over: function() {
 				var $menuItem = $( this ),
-					$submenu = $menuItem.find( '.wp-submenu' ),
+					$submenu = $menuItem.find( '.blog-submenu' ),
 					top = parseInt( $submenu.css( 'top' ), 10 );
 
 				if ( isNaN( top ) || top > -5 ) { // the submenu is visible
 					return;
 				}
 
-				if ( $adminmenu.data( 'wp-responsive' ) ) {
+				if ( $adminmenu.data( 'blog-responsive' ) ) {
 					// The menu is in responsive mode, bail
 					return;
 				}
@@ -684,12 +684,12 @@ $document.ready( function() {
 			 * @returns {void}
 			 */
 			out: function(){
-				if ( $adminmenu.data( 'wp-responsive' ) ) {
+				if ( $adminmenu.data( 'blog-responsive' ) ) {
 					// The menu is in responsive mode, bail
 					return;
 				}
 
-				$( this ).removeClass( 'opensub' ).find( '.wp-submenu' ).css( 'margin-top', '' );
+				$( this ).removeClass( 'opensub' ).find( '.blog-submenu' ).css( 'margin-top', '' );
 			},
 			timeout: 200,
 			sensitivity: 7,
@@ -703,8 +703,8 @@ $document.ready( function() {
 		 *
 		 * @returns {void}
 		 */
-		$adminmenu.on( 'focus.adminmenu', '.wp-submenu a', function( event ) {
-			if ( $adminmenu.data( 'wp-responsive' ) ) {
+		$adminmenu.on( 'focus.adminmenu', '.blog-submenu a', function( event ) {
+			if ( $adminmenu.data( 'blog-responsive' ) ) {
 				// The menu is in responsive mode, bail
 				return;
 			}
@@ -718,8 +718,8 @@ $document.ready( function() {
 			 *
 			 * @returns {void}
 			 */
-		}).on( 'blur.adminmenu', '.wp-submenu a', function( event ) {
-			if ( $adminmenu.data( 'wp-responsive' ) ) {
+		}).on( 'blur.adminmenu', '.blog-submenu a', function( event ) {
+			if ( $adminmenu.data( 'blog-responsive' ) ) {
 				return;
 			}
 
@@ -730,7 +730,7 @@ $document.ready( function() {
 			 *
 			 * @returns {void}
 			 */
-		}).find( 'li.wp-has-submenu.wp-not-current-submenu' ).on( 'focusin.adminmenu', function() {
+		}).find( 'li.blog-has-submenu.blog-not-current-submenu' ).on( 'focusin.adminmenu', function() {
 			adjustSubmenu( $( this ) );
 		});
 	}
@@ -738,7 +738,7 @@ $document.ready( function() {
 	/*
 	 * The `.below-h2` class is here just for backward compatibility with plugins
 	 * that are (incorrectly) using it. Do not use. Use `.inline` instead. See #34570.
-	 * If '.wp-header-end' is found, append the notices after it otherwise
+	 * If '.blog-header-end' is found, append the notices after it otherwise
 	 * after the first h1 or h2 heading found within the main content.
 	 */
 	if ( ! $headerEnd.length ) {
@@ -761,7 +761,7 @@ $document.ready( function() {
 
 			// Ensure plain text
 			$button.find( '.screen-reader-text' ).text( btnText );
-			$button.on( 'click.wp-dismiss-notice', function( event ) {
+			$button.on( 'click.blog-dismiss-notice', function( event ) {
 				event.preventDefault();
 				$el.fadeTo( 100, 0, function() {
 					$el.slideUp( 100, function() {
@@ -774,7 +774,7 @@ $document.ready( function() {
 		});
 	}
 
-	$document.on( 'wp-updates-notice-added wp-plugin-install-error wp-plugin-update-error wp-plugin-delete-error wp-theme-install-error wp-theme-delete-error', makeNoticesDismissible );
+	$document.on( 'blog-updates-notice-added blog-plugin-install-error blog-plugin-update-error blog-plugin-delete-error blog-theme-install-error blog-theme-delete-error', makeNoticesDismissible );
 
 	// Init screen meta
 	screenMeta.init();
@@ -834,11 +834,11 @@ $document.ready( function() {
 	 *
 	 * @returns {boolean}
 	 */
-	$body.on( 'click.wp-toggle-checkboxes', 'thead .check-column :checkbox, tfoot .check-column :checkbox', function( event ) {
+	$body.on( 'click.blog-toggle-checkboxes', 'thead .check-column :checkbox, tfoot .check-column :checkbox', function( event ) {
 		var $this = $(this),
 			$table = $this.closest( 'table' ),
 			controlChecked = $this.prop('checked'),
-			toggle = event.shiftKey || $this.data('wp-toggle');
+			toggle = event.shiftKey || $this.data('blog-toggle');
 
 		$table.children( 'tbody' ).filter(':visible')
 			.children().children('.check-column').find(':checkbox')
@@ -1016,7 +1016,7 @@ $document.ready( function() {
 	 * @returns {void}
 	 */
 	(function(){
-		var button, input, form = $('form.wp-upload-form');
+		var button, input, form = $('form.blog-upload-form');
 
 		// Exit when no upload form is found.
 		if ( ! form.length )
@@ -1058,7 +1058,7 @@ $document.ready( function() {
 		var windowPos = $window.scrollTop(),
 			resizing = ! event || event.type !== 'scroll';
 
-		if ( isIOS || isIE8 || $adminmenu.data( 'wp-responsive' ) ) {
+		if ( isIOS || isIE8 || $adminmenu.data( 'blog-responsive' ) ) {
 			return;
 		}
 
@@ -1236,7 +1236,7 @@ $document.ready( function() {
 	function setPinMenu() {
 		resetHeights();
 
-		if ( $adminmenu.data('wp-responsive') ) {
+		if ( $adminmenu.data('blog-responsive') ) {
 			$body.removeClass( 'sticky-menu' );
 			unpinMenu();
 		} else if ( height.menu + height.adminbar > height.window ) {
@@ -1251,7 +1251,7 @@ $document.ready( function() {
 	if ( ! isIOS ) {
 		$window.on( 'scroll.pin-menu', pinMenu );
 		$document.on( 'tinymce-editor-init.pin-menu', function( event, editor ) {
-			editor.on( 'wp-autoresize', resetHeights );
+			editor.on( 'blog-autoresize', resetHeights );
 		});
 	}
 
@@ -1275,23 +1275,23 @@ $document.ready( function() {
 			var self = this;
 
 			// Modify functionality based on custom activate/deactivate event
-			$document.on( 'wp-responsive-activate.wp-responsive', function() {
+			$document.on( 'blog-responsive-activate.blog-responsive', function() {
 				self.activate();
-			}).on( 'wp-responsive-deactivate.wp-responsive', function() {
+			}).on( 'blog-responsive-deactivate.blog-responsive', function() {
 				self.deactivate();
 			});
 
-			$( '#wp-admin-bar-menu-toggle a' ).attr( 'aria-expanded', 'false' );
+			$( '#blog-admin-bar-menu-toggle a' ).attr( 'aria-expanded', 'false' );
 
 			// Toggle sidebar when toggle is clicked.
-			$( '#wp-admin-bar-menu-toggle' ).on( 'click.wp-responsive', function( event ) {
+			$( '#blog-admin-bar-menu-toggle' ).on( 'click.blog-responsive', function( event ) {
 				event.preventDefault();
 
 				// close any open toolbar submenus.
 				$adminbar.find( '.hover' ).removeClass( 'hover' );
 
-				$wpwrap.toggleClass( 'wp-responsive-open' );
-				if ( $wpwrap.hasClass( 'wp-responsive-open' ) ) {
+				$wpwrap.toggleClass( 'blog-responsive-open' );
+				if ( $wpwrap.hasClass( 'blog-responsive-open' ) ) {
 					$(this).find('a').attr( 'aria-expanded', 'true' );
 					$( '#adminmenu a:first' ).focus();
 				} else {
@@ -1300,8 +1300,8 @@ $document.ready( function() {
 			} );
 
 			// Add menu events.
-			$adminmenu.on( 'click.wp-responsive', 'li.wp-has-submenu > a', function( event ) {
-				if ( ! $adminmenu.data('wp-responsive') ) {
+			$adminmenu.on( 'click.blog-responsive', 'li.blog-has-submenu > a', function( event ) {
+				if ( ! $adminmenu.data('blog-responsive') ) {
 					return;
 				}
 
@@ -1310,10 +1310,10 @@ $document.ready( function() {
 			});
 
 			self.trigger();
-			$document.on( 'wp-window-resized.wp-responsive', $.proxy( this.trigger, this ) );
+			$document.on( 'blog-window-resized.blog-responsive', $.proxy( this.trigger, this ) );
 
 			// This needs to run later as UI Sortable may be initialized later on $(document).ready().
-			$window.on( 'load.wp-responsive', function() {
+			$window.on( 'load.blog-responsive', function() {
 				var width = navigator.userAgent.indexOf('AppleWebKit/') > -1 ? $window.width() : window.innerWidth;
 
 				if ( width <= 782 ) {
@@ -1339,7 +1339,7 @@ $document.ready( function() {
 				$body.addClass( 'auto-fold' );
 			}
 
-			$adminmenu.data( 'wp-responsive', 1 );
+			$adminmenu.data( 'blog-responsive', 1 );
 			this.disableSortables();
 		},
 
@@ -1355,7 +1355,7 @@ $document.ready( function() {
 		 */
 		deactivate: function() {
 			setPinMenu();
-			$adminmenu.removeData('wp-responsive');
+			$adminmenu.removeData('blog-responsive');
 			this.enableSortables();
 		},
 
@@ -1376,12 +1376,12 @@ $document.ready( function() {
 
 			if ( viewportWidth <= 782 ) {
 				if ( ! wpResponsiveActive ) {
-					$document.trigger( 'wp-responsive-activate' );
+					$document.trigger( 'blog-responsive-activate' );
 					wpResponsiveActive = true;
 				}
 			} else {
 				if ( wpResponsiveActive ) {
-					$document.trigger( 'wp-responsive-deactivate' );
+					$document.trigger( 'blog-responsive-deactivate' );
 					wpResponsiveActive = false;
 				}
 			}
@@ -1402,16 +1402,16 @@ $document.ready( function() {
 		 */
 		enableOverlay: function() {
 			if ( $overlay.length === 0 ) {
-				$overlay = $( '<div id="wp-responsive-overlay"></div>' )
+				$overlay = $( '<div id="blog-responsive-overlay"></div>' )
 					.insertAfter( '#wpcontent' )
 					.hide()
-					.on( 'click.wp-responsive', function() {
+					.on( 'click.blog-responsive', function() {
 						$toolbar.find( '.menupop.hover' ).removeClass( 'hover' );
 						$( this ).hide();
 					});
 			}
 
-			$toolbarPopups.on( 'click.wp-responsive', function() {
+			$toolbarPopups.on( 'click.blog-responsive', function() {
 				$overlay.show();
 			});
 		},
@@ -1424,7 +1424,7 @@ $document.ready( function() {
 		 * @returns {void}
 		 */
 		disableOverlay: function() {
-			$toolbarPopups.off( 'click.wp-responsive' );
+			$toolbarPopups.off( 'click.blog-responsive' );
 			$overlay.hide();
 		},
 
@@ -1514,11 +1514,11 @@ $document.ready( function() {
 			menuState = 'open';
 		}
 
-		$document.trigger( 'wp-menu-state-set', { state: menuState } );
+		$document.trigger( 'blog-menu-state-set', { state: menuState } );
 	}
 
 	// Set the menu state when the window gets resized.
-	$document.on( 'wp-window-resized.set-menu-state', setMenuState );
+	$document.on( 'blog-window-resized.set-menu-state', setMenuState );
 
 	/**
 	 * Sets ARIA attributes on the collapse/expand menu button.
@@ -1531,7 +1531,7 @@ $document.ready( function() {
 	 *
 	 * @returns {void}
 	 */
-	$document.on( 'wp-menu-state-set wp-collapse-menu', function( event, eventData ) {
+	$document.on( 'blog-menu-state-set blog-collapse-menu', function( event, eventData ) {
 		var $collapseButton = $( '#collapse-button' ),
 			ariaExpanded = 'true',
 			ariaLabelText = commonL10n.collapseMenu;
@@ -1554,10 +1554,10 @@ $document.ready( function() {
 	makeNoticesDismissible();
 	aria_button_if_js();
 
-	$document.on( 'wp-pin-menu wp-window-resized.pin-menu postboxes-columnchange.pin-menu postbox-toggled.pin-menu wp-collapse-menu.pin-menu wp-scroll-start.pin-menu', setPinMenu );
+	$document.on( 'blog-pin-menu blog-window-resized.pin-menu postboxes-columnchange.pin-menu postbox-toggled.pin-menu blog-collapse-menu.pin-menu blog-scroll-start.pin-menu', setPinMenu );
 
 	// Set initial focus on a specific element.
-	$( '.wp-initial-focus' ).focus();
+	$( '.blog-initial-focus' ).focus();
 
 	// Toggle update details on update-core.php.
 	$body.on( 'click', '.js-update-details-toggle', function() {
@@ -1591,7 +1591,7 @@ $document.ready( function() {
 	 * @returns {void}
 	 */
 	function triggerEvent() {
-		$document.trigger( 'wp-window-resized' );
+		$document.trigger( 'blog-window-resized' );
 	}
 
 	/**
@@ -1606,7 +1606,7 @@ $document.ready( function() {
 		timeout = window.setTimeout( triggerEvent, 200 );
 	}
 
-	$window.on( 'resize.wp-fire-once', fireOnce );
+	$window.on( 'resize.blog-fire-once', fireOnce );
 }());
 
 // Make Windows 8 devices play along nicely.

@@ -311,7 +311,7 @@ if ( apply_filters( 'custom_menu_order', false ) ) {
 // Prevent adjacent separators
 $prev_menu_was_separator = false;
 foreach ( $menu as $id => $data ) {
-	if ( false === stristr( $data[4], 'wp-menu-separator' ) ) {
+	if ( false === stristr( $data[4], 'blog-menu-separator' ) ) {
 
 		// This item is not a separator, so falsey the toggler and do nothing
 		$prev_menu_was_separator = false;
@@ -331,7 +331,7 @@ unset( $id, $data, $prev_menu_was_separator );
 // Remove the last menu item if it is a separator.
 $last_menu_key = array_keys( $menu );
 $last_menu_key = array_pop( $last_menu_key );
-if ( ! empty( $menu ) && 'wp-menu-separator' == $menu[ $last_menu_key ][4] ) {
+if ( ! empty( $menu ) && 'blog-menu-separator' == $menu[ $last_menu_key ][4] ) {
 	unset( $menu[ $last_menu_key ] );
 }
 unset( $last_menu_key );
