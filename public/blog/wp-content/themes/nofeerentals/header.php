@@ -101,7 +101,7 @@
 
             if(is_front_page()) {
 
-                $featured_image = get_the_post_thumbnail_url(6) ? get_the_post_thumbnail_url(6) : 'http://nofeerentalsblog.wp/blog/wp-content/themes/nofeerentals/assets/images/banner-bg.jpg';
+                $featured_image = get_the_post_thumbnail_url(6) ? get_the_post_thumbnail_url(6) : 'http://nofeerentalsblog.blog/blog/blog-content/themes/nofeerentals/assets/images/banner-bg.jpg';
 
                 $title = get_field('title', 6) ? get_field('title', 6) : get_the_title(6);
 
@@ -109,7 +109,7 @@
 
             } else {
 
-                $featured_image = get_the_post_thumbnail_url(get_the_ID()) ? get_the_post_thumbnail_url(get_the_ID()) : 'http://nofeerentalsblog.wp/blog/wp-content/themes/nofeerentals/assets/images/banner-bg.jpg';
+                $featured_image = get_the_post_thumbnail_url(get_the_ID()) ? get_the_post_thumbnail_url(get_the_ID()) : 'http://nofeerentalsblog.blog/blog/blog-content/themes/nofeerentals/assets/images/banner-bg.jpg';
 
                 $title = get_field('title', get_the_ID()) ? get_field('title', get_the_ID()) : get_the_title(get_the_ID());
 

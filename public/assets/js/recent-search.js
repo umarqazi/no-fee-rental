@@ -9,7 +9,7 @@ let $min_price = decodedURL.searchParams.getAll('min_price');
 let $max_price = decodedURL.searchParams.getAll('max_price');
 let $neighborhoods = decodedURL.searchParams.getAll('neighborhood[]') || [];
 
-window.onload = function() {
+window.onload = () => {
     $('body').find('.search-loader').hide();
     $old_queries = JSON.parse(localStorage.getItem('search-query'));
 
@@ -18,89 +18,14 @@ window.onload = function() {
     }
 
     $old_queries.forEach((v, i) => {
-        if(v.isNew) {
-            manageStorage(i);
-            buildNewObject();
-        } else {
-            oldObject(v, i);
-        }
+        makeString(v, i);
     });
 };
 
-/**
- *
- * @param v
- * @param i
- */
-function oldObject(v, i) {
-    let obj = {};
-    obj.url = v.url;
-    obj.title = 'Listings';
-    obj.string = obj.title;
-    obj.isSave = v.isSave;
+function makeString(v, i) {
+    if(v.isNew) manageStorage(i);
 
-    if(v.min_price !== null) {
-        obj.title += ` between $${formatNumber(v.min_price)}`;
-        obj.string += ` between $${formatNumber(v.min_price)}`;
-    }
-
-    if(v.max_price !== null) {
-        obj.title += ` and $${formatNumber(v.max_price)}`;
-        obj.string += ` and $${formatNumber(v.max_price)}`;
-    }
-
-    if(v.neighborhoods !== null) {
-        obj.title += ` in ${v.neighborhoods.length > 1 ? v.neighborhoods.join(', ') + ' Neighborhoods' : v.neighborhoods + ' Neighborhood'}`;
-        obj.string += ` in ${v.neighborhoods.length > 1 ? v.neighborhoods.length + ' Neighborhoods' : v.neighborhoods + ' Neighborhood'}`;
-    }
-
-    if(v.beds !== null) {
-        let bed = ` with at least ${v.beds.length > 1 ? v.beds.join(', ') + ' bedrooms' : v.beds + ' bedroom'}`;
-        obj.title += bed; obj.string += bed;
-    }
-
-    if(v.baths !== null) {
-        let bath = ` with at least ${v.baths.length > 1 ? v.baths.join(', ') + ' bathrooms' : v.baths + ' bathroom'}`;
-        obj.string += bath; obj.title += bath;
-    }
-
-    pushRecentSearch(obj, false, i);
-}
-
-/**
- * build new search obj
- */
-function buildNewObject() {
-    let obj = {};
-    obj.url = window.location.href;
-    obj.title = 'Listings';
-    obj.string = obj.title;
-    if($min_price.length > 0) {
-        obj.title += ` between $${formatNumber($min_price)}`;
-        obj.string += ` between $${formatNumber($min_price)}`;
-    }
-
-    if($max_price.length > 0) {
-        obj.title += ` and $${formatNumber($max_price)}`;
-        obj.string += ` and $${formatNumber($max_price)}`;
-    }
-
-    if($neighborhoods.length > 0) {
-        obj.title += ` in ${$neighborhoods.length > 1 ? $neighborhoods.join(', ') + ' Neighborhoods' : $neighborhoods + ' Neighborhood'}`;
-        obj.string += ` in ${$neighborhoods.length > 1 ? $neighborhoods.length + ' Neighborhoods' : $neighborhoods + ' Neighborhood'}`;
-    }
-
-    if($beds.length > 0) {
-        let bed = ` with at least ${$beds.length > 1 ? $beds.join(', ') + ' bedrooms' : $beds + ' bedroom'}`;
-        obj.title += bed; obj.string += bed;
-    }
-
-    if($baths.length > 0) {
-        let bath = ` with at least ${$baths.length > 1 ? $baths.join(', ') + ' bathrooms' : $baths + ' bathroom'}`;
-        obj.string += bath; obj.title += bath;
-    }
-
-    pushRecentSearch(obj, true, 0);
+    console.log(v);
 }
 
 /**
@@ -112,12 +37,12 @@ function manageStorage(index) {
     $query = {
         isNew: false,
         isSave: false,
-        min_price: $min_price,
-        max_price: $max_price,
+        $min_price: $min_price,
+        $max_price: $max_price,
         url: window.location.href,
-        beds: $beds.length > 0 ? $beds : null,
-        baths: $baths.length > 0 ? $baths : null,
-        neighborhoods: $neighborhoods.length > 0 ? $neighborhoods : null,
+        $beds: $beds.length > 0 ? $beds : [],
+        $baths: $baths.length > 0 ? $baths : [],
+        $neighborhoods: $neighborhoods.length > 0 ? $neighborhoods : [],
     };
 
     $old_queries.splice(index, 1);
@@ -138,6 +63,7 @@ function manageStorage(index) {
  */
 function pushRecentSearch(data = null, $prepend, i) {
     let $target = $('body').find('.neighborhoods_amenities');
+
     if(data === null) {
         $target.append('<li><a href="javascript:void(0);" id="empty-keywords">You have no keywords yet to search</a></li>');
     } else {
@@ -162,6 +88,7 @@ function pushRecentSearch(data = null, $prepend, i) {
 $(document).ready(function () {
     let $body = $('body');
     $body.find('.search-loader').show();
+
     // Neighborhood Select Management
     $('.neighborhood-list > li > div > input').click(function(){
         let name = $(this).val();

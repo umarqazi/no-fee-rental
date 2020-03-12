@@ -1,5 +1,5 @@
 /**
- * @output wp-includes/js/customize-preview-widgets.js
+ * @output blog-includes/js/customize-preview-widgets.js
  */
 
 /* global _wpWidgetCustomizerPreviewSettings */
@@ -90,7 +90,7 @@ wp.customize.widgetsPreview = wp.customize.WidgetCustomizerPreview = (function( 
 		 * @constructs
 		 * @augments wp.customize.selectiveRefresh.Partial
 		 *
-		 * @alias wp.customize.widgetsPreview.WidgetPartial
+		 * @alias blog.customize.widgetsPreview.WidgetPartial
 		 * @memberOf wp.customize.widgetsPreview
 		 *
 		 * @param {string} id             The partial's ID.
@@ -168,7 +168,7 @@ wp.customize.widgetsPreview = wp.customize.WidgetCustomizerPreview = (function( 
 		 * @augments wp.customize.selectiveRefresh.Partial
 		 *
 		 * @memberOf wp.customize.widgetsPreview
-		 * @alias wp.customize.widgetsPreview.SidebarPartial
+		 * @alias blog.customize.widgetsPreview.SidebarPartial
 		 *
 		 * @param {string} id             The partial's ID.
 		 * @param {Object} options        Options used to initialize the partial's instance.

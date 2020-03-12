@@ -1,6 +1,6 @@
 <?php
 /**
- * Defines constants and global variables that can be overridden, generally in wp-config.php.
+ * Defines constants and global variables that can be overridden, generally in blog-config.php.
  *
  * @package WordPress
  * @subpackage Multisite
@@ -11,7 +11,7 @@
  * Defines Multisite upload constants.
  *
  * Exists for backward compatibility with legacy file-serving through
- * wp-includes/ms-files.php (wp-content/blogs.php in MU).
+ * blog-includes/ms-files.php (blog-content/blogs.php in MU).
  *
  * @since 3.0.0
  */
@@ -25,10 +25,10 @@ function ms_upload_constants() {
 
 	// Base uploads dir relative to ABSPATH
 	if ( ! defined( 'UPLOADBLOGSDIR' ) ) {
-		define( 'UPLOADBLOGSDIR', 'wp-content/blogs.dir' );
+		define( 'UPLOADBLOGSDIR', 'blog-content/blogs.dir' );
 	}
 
-	// Note, the main site in a post-MU network uses wp-content/uploads.
+	// Note, the main site in a post-MU network uses blog-content/uploads.
 	// This is handled in wp_upload_dir() by ignoring UPLOADS for this case.
 	if ( ! defined( 'UPLOADS' ) ) {
 		$site_id = get_current_blog_id();
@@ -36,7 +36,7 @@ function ms_upload_constants() {
 		define( 'UPLOADS', UPLOADBLOGSDIR . '/' . $site_id . '/files/' );
 
 		// Uploads dir relative to ABSPATH
-		if ( 'wp-content/blogs.dir' == UPLOADBLOGSDIR && ! defined( 'BLOGUPLOADDIR' ) ) {
+		if ( 'blog-content/blogs.dir' == UPLOADBLOGSDIR && ! defined( 'BLOGUPLOADDIR' ) ) {
 			define( 'BLOGUPLOADDIR', WP_CONTENT_DIR . '/blogs.dir/' . $site_id . '/files/' );
 		}
 	}
@@ -71,7 +71,7 @@ function ms_cookie_constants() {
 		if ( ! is_subdomain_install() || trim( parse_url( get_option( 'siteurl' ), PHP_URL_PATH ), '/' ) ) {
 			define( 'ADMIN_COOKIE_PATH', SITECOOKIEPATH );
 		} else {
-			define( 'ADMIN_COOKIE_PATH', SITECOOKIEPATH . 'wp-admin' );
+			define( 'ADMIN_COOKIE_PATH', SITECOOKIEPATH . 'blog-admin' );
 		}
 	}
 
@@ -91,7 +91,7 @@ function ms_cookie_constants() {
  * Defines Multisite file constants.
  *
  * Exists for backward compatibility with legacy file-serving through
- * wp-includes/ms-files.php (wp-content/blogs.php in MU).
+ * blog-includes/ms-files.php (blog-content/blogs.php in MU).
  *
  * @since 3.0.0
  */
@@ -138,11 +138,11 @@ function ms_subdomain_constants() {
 
 	if ( $subdomain_error ) {
 		$vhost_deprecated = sprintf(
-			/* translators: 1: VHOST, 2: SUBDOMAIN_INSTALL, 3: wp-config.php, 4: is_subdomain_install() */
+			/* translators: 1: VHOST, 2: SUBDOMAIN_INSTALL, 3: blog-config.php, 4: is_subdomain_install() */
 			__( 'The constant %1$s <strong>is deprecated</strong>. Use the boolean constant %2$s in %3$s to enable a subdomain configuration. Use %4$s to check whether a subdomain configuration is enabled.' ),
 			'<code>VHOST</code>',
 			'<code>SUBDOMAIN_INSTALL</code>',
-			'<code>wp-config.php</code>',
+			'<code>blog-config.php</code>',
 			'<code>is_subdomain_install()</code>'
 		);
 		if ( $subdomain_error_warn ) {

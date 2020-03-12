@@ -55,7 +55,7 @@ class acf_revisions {
 	function wp_preview_post_fields( $fields ) {
 		
 		// bail early if not previewing a post
-		if( acf_maybe_get_POST('wp-preview') !== 'dopreview' ) return $fields;
+		if( acf_maybe_get_POST('blog-preview') !== 'dopreview' ) return $fields;
 		
 		
 		// add to fields if ACF has changed

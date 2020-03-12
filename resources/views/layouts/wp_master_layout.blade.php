@@ -1,18 +1,26 @@
 
-{!! HTML::style('blog/wp-content/themes/nofeerentals/assets/css/main.css') !!}
-{!! HTML::style('/blog/wp-content/plugins/kingcomposer/assets/frontend/css/kingcomposer.min.css') !!}
+{!! HTML::style('wp') !!}
+{!! HTML::style('blog') !!}
 {!! HTML::style('/blog/wp-content/plugins/kingcomposer/assets/css/animate.css') !!}
 {!! HTML::style('/blog/wp-content/plugins/kingcomposer/assets/css/icons.css') !!}
-<?php wp_head(); ?>
+
+@if($header)
+    @php wp_head() @endphp
+@endif
 
 @php
-    $page_data = get_page( $page_id );
-    $title = get_field('title', $page_id);
-    $sub_title = get_field('sub_title', $page_id);
-    $banner_img = get_the_post_thumbnail_url($page_id);
+        $title = get_field($title, $page_id);
+        $sub_title = get_field($sub_title, $page_id);
+
+        if($is_slug) {
+            $banner_img = get_field($banner_image, $page_id);
+        } else {
+            $page_data = get_page( $page_id );
+            $banner_img = get_the_post_thumbnail_url($page_id);
+        }
 @endphp
 
-@if($banner)
+@if($has_banner)
     <div class="blog-banner-img-wrapper">
         <div class="blog-banner-text">
 
@@ -32,7 +40,10 @@
 
     </div>
 @endif
-{!! $page_data->post_content !!}
+
+@if($has_post)
+    {!! $page_data->post_content !!}
+@endif
 
 <script>
     {!! get_field('add_js_code_here', $page_id) !!}

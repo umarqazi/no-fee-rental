@@ -8343,7 +8343,7 @@ CSSLint.addRule({
     // rule information
     id: "bulletproof-font-face",
     name: "Use the bulletproof @font-face syntax",
-    desc: "Use the bulletproof @font-face syntax to avoid 404's in old IE (http://www.fontspring.com/blog/the-new-bulletproof-font-face-syntax).",
+    desc: "Use the bulletproof @font-face syntax to avoid 404's in old IE (http://www.fontspring.com/wp/the-new-bulletproof-font-face-syntax).",
     url: "https://github.com/CSSLint/csslint/wiki/Bulletproof-font-face",
     browsers: "All",
 

@@ -7,15 +7,15 @@
  */
 /**
  * Bootstrap file for setting the ABSPATH constant
- * and loading the wp-config.php file. The wp-config.php
- * file will then load the wp-settings.php file, which
+ * and loading the blog-config.php file. The blog-config.php
+ * file will then load the blog-settings.php file, which
  * will then set up the WordPress environment.
  *
- * If the wp-config.php file is not found then an error
+ * If the blog-config.php file is not found then an error
  * will be displayed asking the visitor to set up the
- * wp-config.php file.
+ * blog-config.php file.
  *
- * Will also search for wp-config.php in WordPress' parent
+ * Will also search for blog-config.php in WordPress' parent
  * directory to allow the WordPress directory to remain
  * untouched.
  *

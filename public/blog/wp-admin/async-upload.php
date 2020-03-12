@@ -1,6 +1,6 @@
 <?php
 /**
- * Server-side file upload handler from wp-plupload or other asynchronous upload methods.
+ * Server-side file upload handler from blog-plupload or other asynchronous upload methods.
  *
  * @package WordPress
  * @subpackage Administration

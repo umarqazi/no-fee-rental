@@ -3404,10 +3404,10 @@ msgstr ""
 #~ msgstr "Nu a fost selectat nici un fișier"
 
 #~ msgid ""
-#~ "Please note that all text will first be passed through the wp function "
+#~ "Please note that all text will first be passed through the blog function "
 #~ msgstr ""
 #~ "Vă rugăm să rețineți că toate textele vor fi mai întâi trecute prin "
-#~ "funcția wp"
+#~ "funcția blog"
 
 #~ msgid "Select"
 #~ msgstr "Selectează"

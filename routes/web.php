@@ -164,6 +164,52 @@ Route::get('/help-and-answer', function () {
     return view('help_and_answer');
 })->name('web.helpAndAnswer');
 
+// Help and Answer Details
+Route::get('/help-and-answer/{slug}', function ($slug) {
+    $data = array('name' => $slug, 'post_type' => 'help_and_answers');
+    $data = query_posts($data);
+
+    if(count($data) < 1) {
+        return redirect('/404');
+    }
+
+    return view('help_and_answer_detail', compact('data'));
+})->name('web.helpAndAnswerDetail');
+
+// Press
+Route::get('/press', function () {
+    return view('press');
+})->name('web.press');
+
+// Press Details
+Route::get('/press/{slug}', function ($slug) {
+    $data = array('name' => $slug, 'post_type' => 'press_cptui');
+    $data = query_posts($data);
+
+    if(count($data) < 1) {
+        return redirect('/404');
+    }
+
+    return view('press_detail', compact('data'));
+})->name('web.pressDetail');
+
+// Blog
+Route::get('/blog', function () {
+    return view('blog');
+})->name('web.blog');
+
+// Blog Details
+Route::get('/blog-detail/{slug}', function ($slug) {
+    $data = array('name' => $slug, 'post_type' => 'post');
+    $data = query_posts($data);
+
+    if(count($data) < 1) {
+        return redirect('/404');
+    }
+
+    return view('blog_detail', compact('data'));
+})->name('web.blogDetail');
+
 // Privacy Policy
 Route::get('/privacy-policy', function () {
     return view('privacy_policy');
@@ -186,5 +232,5 @@ use Workerman\Worker;
 use PHPSocketIO\SocketIO;
 // Test Route
 Route::get('/test', function (\Illuminate\Http\Request $request) {
-    return view('our_story');
+    return view('blog');
 })->name('web.test');

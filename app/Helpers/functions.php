@@ -78,6 +78,26 @@ function readImage($image_name) {
 }
 
 /**
+ * @param $total
+ * @param $perPage
+ * @return string|null
+ */
+function pagination($total, $perPage) {
+    $html = null;
+    $current = $_GET['page'] ?? null;
+    $total = ceil($total / $perPage);
+    $html .= '<ul class="pagination" role="navigation">';
+    for($i = 1; $i <= $total; $i ++) {
+        $url = url()->current().'?page='.$i;
+        $html .= "<li class='page-item ";
+        $html .= $i == $current ? 'active' : '';
+        $html .= "'><a class=\"page-link\" href=\"{$url}\">{$i}</a></li>";
+    }
+    $html .= '</ul>';
+    return $html;
+}
+
+/**
  * @return Repository|mixed
  */
 function mailToAdmin() {

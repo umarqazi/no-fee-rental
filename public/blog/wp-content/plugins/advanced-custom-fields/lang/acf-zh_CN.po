@@ -1752,7 +1752,7 @@ msgid "Message"
 msgstr "消息"
 
 #: fields/message.php:104
-msgid "Please note that all text will first be passed through the wp function "
+msgid "Please note that all text will first be passed through the blog function "
 msgstr "请注意，所有文本将首页通过WP过滤功能"
 
 #: fields/message.php:112

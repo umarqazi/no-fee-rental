@@ -21,7 +21,7 @@ define('LARAVEL_START', microtime(true));
 |
 */
 
-require __DIR__. '/blog/wp-load.php';
+require __DIR__ . '/blog/wp-load.php';
 
 require __DIR__.'/../vendor/autoload.php';
 

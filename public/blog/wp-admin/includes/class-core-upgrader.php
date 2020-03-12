@@ -11,10 +11,10 @@
  * Core class used for updating core.
  *
  * It allows for WordPress to upgrade itself in combination with
- * the wp-admin/includes/update-core.php file.
+ * the blog-admin/includes/update-core.php file.
  *
  * @since 2.8.0
- * @since 4.6.0 Moved to its own file from wp-admin/includes/class-wp-upgrader.php.
+ * @since 4.6.0 Moved to its own file from blog-admin/includes/class-blog-upgrader.php.
  *
  * @see WP_Upgrader
  */
@@ -153,12 +153,12 @@ class Core_Upgrader extends WP_Upgrader {
 		}
 
 		// Copy update-core.php from the new version into place.
-		if ( ! $wp_filesystem->copy( $working_dir . '/wordpress/wp-admin/includes/update-core.php', $wp_dir . 'wp-admin/includes/update-core.php', true ) ) {
+		if ( ! $wp_filesystem->copy( $working_dir . '/wordpress/blog-admin/includes/update-core.php', $wp_dir . 'blog-admin/includes/update-core.php', true ) ) {
 			$wp_filesystem->delete( $working_dir, true );
 			WP_Upgrader::release_lock( 'core_updater' );
-			return new WP_Error( 'copy_failed_for_update_core_file', __( 'The update cannot be installed because we will be unable to copy some files. This is usually due to inconsistent file permissions.' ), 'wp-admin/includes/update-core.php' );
+			return new WP_Error( 'copy_failed_for_update_core_file', __( 'The update cannot be installed because we will be unable to copy some files. This is usually due to inconsistent file permissions.' ), 'blog-admin/includes/update-core.php' );
 		}
-		$wp_filesystem->chmod( $wp_dir . 'wp-admin/includes/update-core.php', FS_CHMOD_FILE );
+		$wp_filesystem->chmod( $wp_dir . 'blog-admin/includes/update-core.php', FS_CHMOD_FILE );
 
 		require_once( ABSPATH . 'wp-admin/includes/update-core.php' );
 
@@ -189,10 +189,10 @@ class Core_Upgrader extends WP_Upgrader {
 			}
 
 			if ( $try_rollback ) {
-				/** This filter is documented in wp-admin/includes/update-core.php */
+				/** This filter is documented in blog-admin/includes/update-core.php */
 				apply_filters( 'update_feedback', $result );
 
-				/** This filter is documented in wp-admin/includes/update-core.php */
+				/** This filter is documented in blog-admin/includes/update-core.php */
 				apply_filters( 'update_feedback', $this->strings['start_rollback'] );
 
 				$rollback_result = $this->upgrade( $current, array_merge( $parsed_args, array( 'do_rollback' => true ) ) );
@@ -209,7 +209,7 @@ class Core_Upgrader extends WP_Upgrader {
 			}
 		}
 
-		/** This action is documented in wp-admin/includes/class-wp-upgrader.php */
+		/** This action is documented in blog-admin/includes/class-blog-upgrader.php */
 		do_action(
 			'upgrader_process_complete',
 			$this,
@@ -393,7 +393,7 @@ class Core_Upgrader extends WP_Upgrader {
 
 		foreach ( $checksums as $file => $checksum ) {
 			// Skip files which get updated
-			if ( 'wp-content' == substr( $file, 0, 10 ) ) {
+			if ( 'blog-content' == substr( $file, 0, 10 ) ) {
 				continue;
 			}
 			if ( ! file_exists( ABSPATH . $file ) || md5_file( ABSPATH . $file ) !== $checksum ) {

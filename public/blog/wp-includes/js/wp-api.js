@@ -1,5 +1,5 @@
 /**
- * @output wp-includes/js/wp-api.js
+ * @output blog-includes/js/blog-api.js
  */
 
 (function( window, undefined ) {
@@ -22,7 +22,7 @@
 	window.wp            = window.wp || {};
 	/** @namespace wp.api */
 	wp.api               = wp.api || new WP_API();
-	wp.api.versionString = wp.api.versionString || 'wp/v2/';
+	wp.api.versionString = wp.api.versionString || 'blog/v2/';
 
 	// Alias _includes to _.contains, ensuring it is available if lodash is used.
 	if ( ! _.isFunction( _.includes ) && _.isFunction( _.contains ) ) {
@@ -186,7 +186,7 @@
 	 * @param {string}   route          The endpoint route.
 	 * @param {int}      part           The number of parts from the end of the route to retrieve. Default 1.
 	 *                                  Example route `/a/b/c`: part 1 is `c`, part 2 is `b`, part 3 is `a`.
-	 * @param {string}  [versionString] Version string, defaults to `wp.api.versionString`.
+	 * @param {string}  [versionString] Version string, defaults to `blog.api.versionString`.
 	 * @param {boolean} [reverse]       Whether to reverse the order when extracting the route part. Optional, default false.
 	 */
 	wp.api.utils.extractRoutePart = function( route, part, versionString, reverse ) {
@@ -426,7 +426,7 @@
 				 * Uses the embedded data if available, otherwises fetches the
 				 * data from the server.
 				 *
-				 * @return {Deferred.promise} promise Resolves to a wp.api.collections[ collectionName ]
+				 * @return {Deferred.promise} promise Resolves to a blog.api.collections[ collectionName ]
 				 * collection.
 				 */
 				var postId, embeddeds, getObjects,
@@ -743,7 +743,7 @@
 			 */
 			FeaturedMediaMixin = {
 				getFeaturedMedia: function() {
-					return buildModelGetter( this, this.get( 'featured_media' ), 'Media', 'wp:featuredmedia', 'source_url' );
+					return buildModelGetter( this, this.get( 'featured_media' ), 'Media', 'blog:featuredmedia', 'source_url' );
 				}
 			};
 
@@ -1039,8 +1039,8 @@
 					success = options.success;
 					options.success = function( data, textStatus, request ) {
 						if ( ! _.isUndefined( request ) ) {
-							self.state.totalPages   = parseInt( request.getResponseHeader( 'x-wp-totalpages' ), 10 );
-							self.state.totalObjects = parseInt( request.getResponseHeader( 'x-wp-total' ), 10 );
+							self.state.totalPages   = parseInt( request.getResponseHeader( 'x-blog-totalpages' ), 10 );
+							self.state.totalObjects = parseInt( request.getResponseHeader( 'x-blog-total' ), 10 );
 						}
 
 						if ( null === self.state.currentPage ) {
@@ -1120,7 +1120,7 @@
 
 	// If wpApiSettings is unavailable, try the default.
 	if ( _.isEmpty( wpApiSettings ) ) {
-		wpApiSettings.root = window.location.origin + '/wp-json/';
+		wpApiSettings.root = window.location.origin + '/blog-json/';
 	}
 
 	Endpoint = Backbone.Model.extend(/** @lends Endpoint.prototype */{
@@ -1163,11 +1163,11 @@
 			} else if (
 				! _.isUndefined( sessionStorage ) &&
 				( _.isUndefined( wpApiSettings.cacheSchema ) || wpApiSettings.cacheSchema ) &&
-				sessionStorage.getItem( 'wp-api-schema-model' + model.get( 'apiRoot' ) + model.get( 'versionString' ) )
+				sessionStorage.getItem( 'blog-api-schema-model' + model.get( 'apiRoot' ) + model.get( 'versionString' ) )
 			) {
 
 				// Used a cached copy of the schema model if available.
-				model.schemaModel.set( model.schemaModel.parse( JSON.parse( sessionStorage.getItem( 'wp-api-schema-model' + model.get( 'apiRoot' ) + model.get( 'versionString' ) ) ) ) );
+				model.schemaModel.set( model.schemaModel.parse( JSON.parse( sessionStorage.getItem( 'blog-api-schema-model' + model.get( 'apiRoot' ) + model.get( 'versionString' ) ) ) ) );
 			} else {
 				model.schemaModel.fetch( {
 					/**
@@ -1182,7 +1182,7 @@
 						// Store a copy of the schema model in the session cache if available.
 						if ( ! _.isUndefined( sessionStorage ) && ( _.isUndefined( wpApiSettings.cacheSchema ) || wpApiSettings.cacheSchema ) ) {
 							try {
-								sessionStorage.setItem( 'wp-api-schema-model' + model.get( 'apiRoot' ) + model.get( 'versionString' ), JSON.stringify( newSchemaModel ) );
+								sessionStorage.setItem( 'blog-api-schema-model' + model.get( 'apiRoot' ) + model.get( 'versionString' ), JSON.stringify( newSchemaModel ) );
 							} catch ( error ) {
 
 								// Fail silently, fixes errors in safari private mode.
@@ -1491,7 +1491,7 @@
 	wp.api.endpoints = new Backbone.Collection();
 
 	/**
-	 * Initialize the wp-api, optionally passing the API root.
+	 * Initialize the blog-api, optionally passing the API root.
 	 *
 	 * @param {object} [args]
 	 * @param {string} [args.nonce] The nonce. Optional, defaults to wpApiSettings.nonce.
@@ -1504,8 +1504,8 @@
 
 		args                      = args || {};
 		attributes.nonce          = _.isString( args.nonce ) ? args.nonce : ( wpApiSettings.nonce || '' );
-		attributes.apiRoot        = args.apiRoot || wpApiSettings.root || '/wp-json';
-		attributes.versionString  = args.versionString || wpApiSettings.versionString || 'wp/v2/';
+		attributes.apiRoot        = args.apiRoot || wpApiSettings.root || '/blog-json';
+		attributes.versionString  = args.versionString || wpApiSettings.versionString || 'blog/v2/';
 		attributes.schema         = args.schema || null;
 		attributes.modelEndpoints = args.modelEndpoints || [ 'me', 'settings' ];
 		if ( ! attributes.schema && attributes.apiRoot === wpApiSettings.root && attributes.versionString === wpApiSettings.versionString ) {
@@ -1539,7 +1539,7 @@
 	 * Construct the default endpoints and add to an endpoints collection.
 	 */
 
-	// The wp.api.init function returns a promise that will resolve with the endpoint once it is ready.
+	// The blog.api.init function returns a promise that will resolve with the endpoint once it is ready.
 	wp.api.loadPromise = wp.api.init();
 
 } )();

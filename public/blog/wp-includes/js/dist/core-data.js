@@ -585,7 +585,7 @@ __webpack_require__.d(resolvers_namespaceObject, "canUser", function() { return 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/objectSpread.js
 var objectSpread = __webpack_require__(7);
 
-// EXTERNAL MODULE: external {"this":["wp","data"]}
+// EXTERNAL MODULE: external {"this":["blog","data"]}
 var external_this_wp_data_ = __webpack_require__(5);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/slicedToArray.js + 1 modules
@@ -771,7 +771,7 @@ var rememo = __webpack_require__(30);
 var equivalent_key_map = __webpack_require__(76);
 var equivalent_key_map_default = /*#__PURE__*/__webpack_require__.n(equivalent_key_map);
 
-// EXTERNAL MODULE: external {"this":["wp","url"]}
+// EXTERNAL MODULE: external {"this":["blog","url"]}
 var external_this_wp_url_ = __webpack_require__(25);
 
 // CONCATENATED MODULE: ./node_modules/@wordpress/core-data/build-module/queried-data/get-query-parts.js
@@ -946,7 +946,7 @@ var redux = __webpack_require__(71);
 var regenerator = __webpack_require__(23);
 var regenerator_default = /*#__PURE__*/__webpack_require__.n(regenerator);
 
-// EXTERNAL MODULE: external {"this":["wp","apiFetch"]}
+// EXTERNAL MODULE: external {"this":["blog","apiFetch"]}
 var external_this_wp_apiFetch_ = __webpack_require__(33);
 var external_this_wp_apiFetch_default = /*#__PURE__*/__webpack_require__.n(external_this_wp_apiFetch_);
 
@@ -1234,17 +1234,17 @@ var defaultEntities = [{
   name: 'postType',
   kind: 'root',
   key: 'slug',
-  baseURL: '/wp/v2/types'
+  baseURL: '/blog/v2/types'
 }, {
   name: 'media',
   kind: 'root',
-  baseURL: '/wp/v2/media',
+  baseURL: '/blog/v2/media',
   plural: 'mediaItems'
 }, {
   name: 'taxonomy',
   kind: 'root',
   key: 'slug',
-  baseURL: '/wp/v2/taxonomies',
+  baseURL: '/blog/v2/taxonomies',
   plural: 'taxonomies'
 }];
 var kinds = [{
@@ -1268,7 +1268,7 @@ function loadPostTypeEntities() {
         case 0:
           _context.next = 2;
           return apiFetch({
-            path: '/wp/v2/types?context=edit'
+            path: '/blog/v2/types?context=edit'
           });
 
         case 2:
@@ -1276,7 +1276,7 @@ function loadPostTypeEntities() {
           return _context.abrupt("return", Object(external_lodash_["map"])(postTypes, function (postType, name) {
             return {
               kind: 'postType',
-              baseURL: '/wp/v2/' + postType.rest_base,
+              baseURL: '/blog/v2/' + postType.rest_base,
               name: name
             };
           }));
@@ -1303,7 +1303,7 @@ function loadTaxonomyEntities() {
         case 0:
           _context2.next = 2;
           return apiFetch({
-            path: '/wp/v2/taxonomies?context=edit'
+            path: '/blog/v2/taxonomies?context=edit'
           });
 
         case 2:
@@ -1311,7 +1311,7 @@ function loadTaxonomyEntities() {
           return _context2.abrupt("return", Object(external_lodash_["map"])(taxonomies, function (taxonomy, name) {
             return {
               kind: 'taxonomy',
-              baseURL: '/wp/v2/' + taxonomy.rest_base,
+              baseURL: '/blog/v2/' + taxonomy.rest_base,
               name: name
             };
           }));
@@ -1774,7 +1774,7 @@ function userPermissions() {
   userPermissions: userPermissions
 }));
 
-// EXTERNAL MODULE: external {"this":["wp","deprecated"]}
+// EXTERNAL MODULE: external {"this":["blog","deprecated"]}
 var external_this_wp_deprecated_ = __webpack_require__(49);
 var external_this_wp_deprecated_default = /*#__PURE__*/__webpack_require__.n(external_this_wp_deprecated_);
 
@@ -2059,7 +2059,7 @@ function resolvers_getAuthors() {
         case 0:
           _context.next = 2;
           return apiFetch({
-            path: '/wp/v2/users/?who=authors&per_page=-1'
+            path: '/blog/v2/users/?who=authors&per_page=-1'
           });
 
         case 2:
@@ -2198,7 +2198,7 @@ function resolvers_getThemeSupports() {
         case 0:
           _context4.next = 2;
           return apiFetch({
-            path: '/wp/v2/themes?status=active'
+            path: '/blog/v2/themes?status=active'
           });
 
         case 2:
@@ -2311,7 +2311,7 @@ function resolvers_canUser(action, resource, id) {
           throw new Error("'".concat(action, "' is not a valid action."));
 
         case 4:
-          path = id ? "/wp/v2/".concat(resource, "/").concat(id) : "/wp/v2/".concat(resource);
+          path = id ? "/blog/v2/".concat(resource, "/").concat(id) : "/blog/v2/".concat(resource);
           _context7.prev = 5;
           _context7.next = 8;
           return apiFetch({

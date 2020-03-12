@@ -35,15 +35,15 @@
                         </div>
                         <div class="col-md-4 col-sm-4">
                             <ul class="neighborhood-list">
-                                <li><a href="http://no-fee-rental.teamtechverx.com/blog/?post_type=help_and_answers">Help and Answers</a> </li>
-                                <li><a href="http://no-fee-rental.teamtechverx.com/blog/">Blog</a> </li>
+                                <li><a href="{{ route('web.helpAndAnswer') }}">Help and Answers</a> </li>
+                                <li><a href="{{ route('wp') }}">Blog</a> </li>
                                 <li><a href="{{ route('web.feedback') }}">Feedback</a> </li>
                                 <li><a href="{{ route('web.aboutUs') }}">Our Story</a> </li>
                             </ul>
                         </div>
                         <div class="col-md-4 col-sm-4">
                             <ul class="neighborhood-list">
-                                <li><a href="http://no-fee-rental.teamtechverx.com/blog/?page_id=70">Press</a> </li>
+                                <li><a href="{{ route('web.press') }}">Press</a> </li>
                                 <li><a href="{{ route('web.privacyPolicy') }}">Privacy Policy</a> </li>
                                 <li><a href="{{ route('web.terms') }}">Terms</a> </li>
                                 <li><a href="{{ route('web.advertise') }}">Advertise with us</a> </li>

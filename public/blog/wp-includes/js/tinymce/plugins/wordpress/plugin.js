@@ -75,7 +75,7 @@ tinymce.PluginManager.add( 'wordpress', function( editor ) {
 			}
 		}
 
-		editor.fire( 'wp-toolbar-toggle' );
+		editor.fire( 'blog-toolbar-toggle' );
 	}
 
 	// Add the kitchen sink button :)
@@ -113,8 +113,8 @@ tinymce.PluginManager.add( 'wordpress', function( editor ) {
 				title = __( 'Read more...' );
 
 				event.content = event.content.replace( /<!--more(.*?)-->/g, function( match, moretext ) {
-					return '<img src="' + tinymce.Env.transparentSrc + '" data-wp-more="more" data-wp-more-text="' + moretext + '" ' +
-						'class="wp-more-tag mce-wp-more" alt="" title="' + title + '" data-mce-resize="false" data-mce-placeholder="1" />';
+					return '<img src="' + tinymce.Env.transparentSrc + '" data-blog-more="more" data-blog-more-text="' + moretext + '" ' +
+						'class="blog-more-tag mce-blog-more" alt="" title="' + title + '" data-mce-resize="false" data-mce-placeholder="1" />';
 				});
 			}
 
@@ -122,7 +122,7 @@ tinymce.PluginManager.add( 'wordpress', function( editor ) {
 				title = __( 'Page break' );
 
 				event.content = event.content.replace( /<!--nextpage-->/g,
-					'<img src="' + tinymce.Env.transparentSrc + '" data-wp-more="nextpage" class="wp-more-tag mce-wp-nextpage" ' +
+					'<img src="' + tinymce.Env.transparentSrc + '" data-blog-more="nextpage" class="blog-more-tag mce-blog-nextpage" ' +
 						'alt="" title="' + title + '" data-mce-resize="false" data-mce-placeholder="1" />' );
 			}
 
@@ -139,7 +139,7 @@ tinymce.PluginManager.add( 'wordpress', function( editor ) {
 				event.content = event.content.replace( /<(script|style)[^>]*>[\s\S]*?<\/\1>/g, function( match, tag ) {
 					return '<img ' +
 						'src="' + tinymce.Env.transparentSrc + '" ' +
-						'data-wp-preserve="' + encodeURIComponent( match ) + '" ' +
+						'data-blog-preserve="' + encodeURIComponent( match ) + '" ' +
 						'data-mce-resize="false" ' +
 						'data-mce-placeholder="1" '+
 						'class="mce-object" ' +
@@ -172,15 +172,15 @@ tinymce.PluginManager.add( 'wordpress', function( editor ) {
 					string,
 					moretext = '';
 
-				if ( image.indexOf( 'data-wp-more="more"' ) !== -1 ) {
+				if ( image.indexOf( 'data-blog-more="more"' ) !== -1 ) {
 					if ( match = image.match( /data-wp-more-text="([^"]+)"/ ) ) {
 						moretext = match[1];
 					}
 
 					string = '<!--more' + moretext + '-->';
-				} else if ( image.indexOf( 'data-wp-more="nextpage"' ) !== -1 ) {
+				} else if ( image.indexOf( 'data-blog-more="nextpage"' ) !== -1 ) {
 					string = '<!--nextpage-->';
-				} else if ( image.indexOf( 'data-wp-preserve' ) !== -1 ) {
+				} else if ( image.indexOf( 'data-blog-preserve' ) !== -1 ) {
 					if ( match = image.match( / data-wp-preserve="([^"]+)"/ ) ) {
 						string = decodeURIComponent( match[1] );
 					}
@@ -195,7 +195,7 @@ tinymce.PluginManager.add( 'wordpress', function( editor ) {
 	editor.on( 'ResolveName', function( event ) {
 		var attr;
 
-		if ( event.target.nodeName === 'IMG' && ( attr = editor.dom.getAttrib( event.target, 'data-wp-more' ) ) ) {
+		if ( event.target.nodeName === 'IMG' && ( attr = editor.dom.getAttrib( event.target, 'data-blog-more' ) ) ) {
 			event.name = attr;
 		}
 	});
@@ -203,17 +203,17 @@ tinymce.PluginManager.add( 'wordpress', function( editor ) {
 	// Register commands
 	editor.addCommand( 'WP_More', function( tag ) {
 		var parent, html, title,
-			classname = 'wp-more-tag',
+			classname = 'blog-more-tag',
 			dom = editor.dom,
 			node = editor.selection.getNode(),
 			rootNode = editor.getBody();
 
 		tag = tag || 'more';
-		classname += ' mce-wp-' + tag;
+		classname += ' mce-blog-' + tag;
 		title = tag === 'more' ? 'Read more...' : 'Next page';
 		title = __( title );
 		html = '<img src="' + tinymce.Env.transparentSrc + '" alt="" title="' + title + '" class="' + classname + '" ' +
-			'data-wp-more="' + tag + '" data-mce-resize="false" data-mce-placeholder="1" />';
+			'data-blog-more="' + tag + '" data-mce-resize="false" data-mce-placeholder="1" />';
 
 		// Most common case
 		if ( node === rootNode || ( node.nodeName === 'P' && node.parentNode === rootNode ) ) {
@@ -326,17 +326,17 @@ tinymce.PluginManager.add( 'wordpress', function( editor ) {
 		header = [ __( 'Letter' ), __( 'Action' ), __( 'Letter' ), __( 'Action' ) ];
 		header = '<tr><th>' + header.join( '</th><th>' ) + '</th></tr>';
 
-		html = '<div class="wp-editor-help">';
+		html = '<div class="blog-editor-help">';
 
 		// Main section, default and additional shortcuts
 		html = html +
 			'<h2>' + __( 'Default shortcuts,' ) + ' ' + meta + '</h2>' +
-			'<table class="wp-help-th-center fixed">' +
+			'<table class="blog-help-th-center fixed">' +
 				header +
 				table1.join('') +
 			'</table>' +
 			'<h2>' + __( 'Additional shortcuts,' ) + ' ' + access + '</h2>' +
-			'<table class="wp-help-th-center fixed">' +
+			'<table class="blog-help-th-center fixed">' +
 				header +
 				table2.join('') +
 			'</table>';
@@ -345,14 +345,14 @@ tinymce.PluginManager.add( 'wordpress', function( editor ) {
 			// Text pattern section
 			html = html +
 				'<h2>' + __( 'When starting a new paragraph with one of these formatting shortcuts followed by a space, the formatting will be applied automatically. Press Backspace or Escape to undo.' ) + '</h2>' +
-				'<table class="wp-help-th-center fixed">' +
+				'<table class="blog-help-th-center fixed">' +
 					tr({ '*':  'Bullet list', '1.':  'Numbered list' }) +
 					tr({ '-':  'Bullet list', '1)':  'Numbered list' }) +
 				'</table>';
 
 			html = html +
 				'<h2>' + __( 'The following formatting shortcuts are replaced when pressing Enter. Press Escape or the Undo button to undo.' ) + '</h2>' +
-				'<table class="wp-help-single">' +
+				'<table class="blog-help-single">' +
 					tr({ '>': 'Blockquote' }) +
 					tr({ '##': 'Heading 2' }) +
 					tr({ '###': 'Heading 3' }) +
@@ -366,7 +366,7 @@ tinymce.PluginManager.add( 'wordpress', function( editor ) {
 		// Focus management section
 		html = html +
 			'<h2>' + __( 'Focus shortcuts:' ) + '</h2>' +
-			'<table class="wp-help-single">' +
+			'<table class="blog-help-single">' +
 				tr({ 'Alt + F8':  'Inline toolbar (when an image, link or preview is selected)' }) +
 				tr({ 'Alt + F9':  'Editor menu (when enabled)' }) +
 				tr({ 'Alt + F10': 'Editor toolbar' }) +
@@ -380,7 +380,7 @@ tinymce.PluginManager.add( 'wordpress', function( editor ) {
 			title: editor.settings.classic_block_editor ? 'Classic Block Keyboard Shortcuts' : 'Keyboard Shortcuts',
 			items: {
 				type: 'container',
-				classes: 'wp-help',
+				classes: 'blog-help',
 				html: html
 			},
 			buttons: {
@@ -391,7 +391,7 @@ tinymce.PluginManager.add( 'wordpress', function( editor ) {
 
 		if ( dialog.$el ) {
 			dialog.$el.find( 'div[role="application"]' ).attr( 'role', 'document' );
-			$wrap = dialog.$el.find( '.mce-wp-help' );
+			$wrap = dialog.$el.find( '.mce-blog-help' );
 
 			if ( $wrap[0] ) {
 				$wrap.attr( 'tabindex', '0' );
@@ -449,7 +449,7 @@ tinymce.PluginManager.add( 'wordpress', function( editor ) {
 
 		editor.addMenuItem( 'add_media', {
 			text: 'Add Media',
-			icon: 'wp-media-library',
+			icon: 'blog-media-library',
 			context: 'insert',
 			cmd: 'WP_Medialib'
 		});
@@ -523,7 +523,7 @@ tinymce.PluginManager.add( 'wordpress', function( editor ) {
 			bodyClass.push('webkit');
 		}
 
-		bodyClass.push('wp-editor');
+		bodyClass.push('blog-editor');
 
 		each( bodyClass, function( cls ) {
 			if ( cls ) {
@@ -598,7 +598,7 @@ tinymce.PluginManager.add( 'wordpress', function( editor ) {
 			event.content = wp.editor.removep( event.content );
 		} else {
 			// Restore formatting of block boundaries.
-			event.content = event.content.replace( /-->\s*<!-- wp:/g, '-->\n\n<!-- wp:' );
+			event.content = event.content.replace( /-->\s*<!-- wp:/g, '-->\n\n<!-- blog:' );
 		}
 	});
 
@@ -1042,13 +1042,13 @@ tinymce.PluginManager.add( 'wordpress', function( editor ) {
 				this.reposition();
 
 				if ( isChromeRtl ) {
-					tinymce.$( '.mce-widget.mce-tooltip' ).addClass( 'wp-hide-mce-tooltip' );
+					tinymce.$( '.mce-widget.mce-tooltip' ).addClass( 'blog-hide-mce-tooltip' );
 				}
 			} );
 
 			toolbar.on( 'hide', function() {
 				if ( isChromeRtl ) {
-					tinymce.$( '.mce-widget.mce-tooltip' ).removeClass( 'wp-hide-mce-tooltip' );
+					tinymce.$( '.mce-widget.mce-tooltip' ).removeClass( 'blog-hide-mce-tooltip' );
 				}
 			} );
 

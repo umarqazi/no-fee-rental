@@ -14,8 +14,8 @@ $search_page_banner = get_field('search_page_banner', 'options');
 $search_page_title = get_field('search_page_title', 'options');
 
 ?>
-    <div class="blog-banner-img-wrapper">
-<!--        <div class="blog-banner-text">-->
+    <div class="wp-banner-img-wrapper">
+<!--        <div class="wp-banner-text">-->
 <!--            --><?php //if($search_page_title){ ?><!--<h4>--><?php //echo $search_page_title; ?><!--</h4>-->
 <!--        </div>-->
         <?php if($search_page_banner){ ?>
@@ -29,7 +29,7 @@ $search_page_title = get_field('search_page_title', 'options');
             </div>
     </div>
 
-    <section id="primary" class="content-area inner-pages blog-page single-post">
+    <section id="primary" class="content-area inner-pages wp-page single-post">
         <div class="container">
             <div class="row">
                 <div class="col-lg-9">
@@ -74,8 +74,8 @@ $search_page_banner = get_field('search_page_banner', 'options');
 $search_page_title = get_field('search_page_title', 'options');
 
 ?>
-    <div class="blog-banner-img-wrapper">
-<!--        <div class="blog-banner-text">-->
+    <div class="wp-banner-img-wrapper">
+<!--        <div class="wp-banner-text">-->
 <!--            --><?php //if($search_page_title){ ?><!--<h4>--><?php //echo $search_page_title; ?><!--</h4>-->
 <!--        </div>-->
         <?php if($search_page_banner){ ?>
@@ -89,7 +89,7 @@ $search_page_title = get_field('search_page_title', 'options');
             </div>
     </div>
 
-    <section id="primary" class="content-area inner-pages blog-page single-post">
+    <section id="primary" class="content-area inner-pages wp-page single-post">
         <div class="container">
             <div class="row">
                 <div class="col-lg-9">

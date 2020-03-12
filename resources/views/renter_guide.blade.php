@@ -1,8 +1,20 @@
 
 @extends('layouts.app')
-@section('title', 'Create Password')
+@section('title', 'Renter Guide')
 @section('content')
 
-    @include('layouts.wp_master_layout', ['page_id' => 49, 'banner' => false])
+    @php
+        $params = [
+            'title' => 'title',
+            'sub_title' => 'sub_title',
+            'has_banner' => false,
+            'page_id' => 49,
+            'header'  => true,
+            'has_post' => true,
+            'is_slug' => false
+        ];
+    @endphp
+
+    @include('layouts.wp_master_layout', $params)
 
 @endsection

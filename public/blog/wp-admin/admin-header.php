@@ -193,7 +193,7 @@ $admin_body_class .= ' no-customize-support no-svg';
 
 if ( $current_screen->is_block_editor() ) {
 	// Default to is-fullscreen-mode to avoid jumps in the UI.
-	$admin_body_class .= ' block-editor-page is-fullscreen-mode wp-embed-responsive';
+	$admin_body_class .= ' block-editor-page is-fullscreen-mode blog-embed-responsive';
 
 	if ( current_theme_supports( 'editor-styles' ) && current_theme_supports( 'dark-editor-style' ) ) {
 		$admin_body_class .= ' is-dark-theme';
@@ -210,7 +210,7 @@ if ( $current_screen->is_block_editor() ) {
  * in two important ways:
  *
  * 1. `$classes` is a space-separated string of class names instead of an array.
- * 2. Not all core admin classes are filterable, notably: wp-admin, wp-core-ui,
+ * 2. Not all core admin classes are filterable, notably: blog-admin, blog-core-ui,
  *    and no-js cannot be removed.
  *
  * @since 2.3.0
