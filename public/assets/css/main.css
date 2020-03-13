@@ -5289,12 +5289,12 @@ list .property-info .info p {
     background-repeat: no-repeat;
     background-size: 100%;
 }
-.bullet-list li:last-child{
-    text-align: center;
+.bullet-list .li-last-child{
     margin-top: 0;
+    text-align: center;
 }
-.bullet-list li:last-child:before{
-    display: none;
+.bullet-list .li-last-child:before{
+    display: none
 }
 strong {
     font-weight: 600;
