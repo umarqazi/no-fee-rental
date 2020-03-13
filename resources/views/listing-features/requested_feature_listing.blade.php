@@ -3,7 +3,7 @@
 	@foreach($listing->request_featured as $rf)
 	<div class="listing-row">
 		<div class="img-holder">
-			<img src="{{ is_realty_listing($rl->thumbnail) }}" alt="" style="height:205px;" class="main-img" />
+			<img src="{{ is_realty_listing($rf->thumbnail) }}" alt="" style="height:205px;" class="main-img" />
 		</div>
 		<div class="info">
 			<p class="title">{{ $rf->display_address }}</p>
@@ -38,7 +38,7 @@
 		@foreach($listing->request_featured as $rf)
 		<div class="col-lg-3 col-md-4 col-sm-6">
 			<div class="listing-thumb">
-				<img src="{{ is_realty_listing($rl->thumbnail) }}" alt="" style="height:205px;" class="main-img" />
+				<img src="{{ is_realty_listing($rf->thumbnail) }}" alt="" style="height:205px;" class="main-img" />
 				<div class="info">
 					<p class="title">{{ str_limit($rf->display_address, $limit = 25, $end = '...') }}</p>
 					<p><i class="fa fa-tag"></i> ${{ ($rf->rent) ?   number_format($rf->rent,0) : 'None' }}</p>

@@ -101,7 +101,7 @@ class ListingService extends BuildingService {
      * @return bool
      */
     private function __addListingEvents($listing) {
-
+        $this->addSlot();
         return true;
     }
 
@@ -225,7 +225,7 @@ class ListingService extends BuildingService {
      * @return mixed
      */
     public function setArchive($id) {
-        return $this->listingRepo->update($id, ['visibility' => ARCHIVED]);
+        return $this->listingRepo->update($id, ['visibility' => ARCHIVED, 'is_featured' => FALSE]);
     }
 
     /**
