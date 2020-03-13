@@ -2150,17 +2150,6 @@ footer .copyright .social-icons li a:hover {
     padding-left: 15px;
 }
 
-.inner-pages ul li:before {
-    position: absolute;
-    left: 0;
-    top: 8px;
-    content: "";
-    width: 8px;
-    height: 8px;
-    background: #223971;
-    border-radius: 50%;
-}
-
 .about-us h3 {
     color: #000;
     margin-bottom: 15px;
@@ -2846,9 +2835,6 @@ footer .copyright .social-icons li a:hover {
 
 /*Rent calculator*/
 
-.calculator-container {
-    background: #fff;
-}
 
 .calculator-container .calculator-wrapper {
     display: flex;
@@ -5289,12 +5275,12 @@ list .property-info .info p {
     background-repeat: no-repeat;
     background-size: 100%;
 }
-.bullet-list li:last-child{
-    text-align: center;
+.bullet-list .li-last-child{
     margin-top: 0;
+    text-align: center;
 }
-.bullet-list li:last-child:before{
-    display: none;
+.bullet-list .li-last-child:before{
+    display: none
 }
 strong {
     font-weight: 600;
@@ -5519,6 +5505,38 @@ strong {
     border-radius: 10px;
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
     background-color: #dee2e6;
+}
+.pagination {
+    margin-top: 40px;
+    justify-content: center;
+}
+.pagination .page-item {
+    margin-right: 10px;
+}
+.pagination .page-link {
+    position: relative;
+    display: block;
+    padding: .5rem .75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: #000;
+    background-color: #fff;
+    border: 1px solid #f36f21;
+    border-radius: 50%;
+}
+.page-item:first-child .page-link{
+     border-top-left-radius: 50% !important;
+     border-bottom-left-radius: 50% !important;
+}
+.page-item:last-child .page-link {
+    border-top-right-radius: 50% !important;
+    border-bottom-right-radius: 50% !important;
+}
+.pagination .page-link:active,
+.pagination .page-link:focus {
+    box-shadow: none !important;
+    background-color: #f36f21;
+    color:#fff;
 }
 
 /*Responsive style*/

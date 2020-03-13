@@ -154,14 +154,14 @@ body {
     font-size: 16px;
 }
 
+.container-fluid,
 .container-lg {
     position: relative;
     max-width: 100%;
     width: 100%;
-    padding: 0px 15px;
+    padding: 0px 30px;
     margin: 0 auto;
 }
-
 button {
     cursor: pointer;
     -webkit-transition: all ease 0.4s;
@@ -3195,6 +3195,9 @@ li.definitions-listings h4{
     left: 50%;
     color: #fff;
     transform: translate(-50%, -50%);
+}
+.rental-guides-container .rental-guides-row .info {
+    line-height: 30px;
 }
 /*Responsive style*/
 @media (min-width: 1600px) {

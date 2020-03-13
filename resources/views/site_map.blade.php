@@ -36,7 +36,7 @@
                         <div class="col-md-4 col-sm-4">
                             <ul class="neighborhood-list">
                                 <li><a href="{{ route('web.helpAndAnswer') }}">Help and Answers</a> </li>
-                                <li><a href="{{ route('wp') }}">Blog</a> </li>
+                                <li><a href="{{ route('web.blog') }}">Blog</a> </li>
                                 <li><a href="{{ route('web.feedback') }}">Feedback</a> </li>
                                 <li><a href="{{ route('web.aboutUs') }}">Our Story</a> </li>
                             </ul>
