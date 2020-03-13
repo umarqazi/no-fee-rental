@@ -76,12 +76,12 @@ function wpmu_delete_blog( $blog_id, $drop = false ) {
 
 	$current_network = get_network();
 
-	// If a full wp object is not available, do not destroy anything.
+	// If a full blog object is not available, do not destroy anything.
 	if ( $drop && ! $blog ) {
 		$drop = false;
 	}
 
-	// Don't destroy the initial, main, or root wp.
+	// Don't destroy the initial, main, or root blog.
 	if ( $drop && ( 1 == $blog_id || is_main_site( $blog_id ) || ( $blog->path == $current_network->path && $blog->domain == $current_network->domain ) ) ) {
 		$drop = false;
 	}
@@ -106,7 +106,7 @@ function wpmu_delete_blog( $blog_id, $drop = false ) {
 			)
 		);
 
-		// Remove users from this wp.
+		// Remove users from this blog.
 		if ( ! empty( $users ) ) {
 			foreach ( $users as $user_id ) {
 				remove_user_from_blog( $user_id, $blog_id );
@@ -833,7 +833,7 @@ function choose_primary_blog() {
 		} elseif ( count( $all_blogs ) == 1 ) {
 			$blog = reset( $all_blogs );
 			echo esc_url( get_home_url( $blog->userblog_id ) );
-			if ( $primary_blog != $blog->userblog_id ) { // Set the primary wp again if it's out of sync with wp list.
+			if ( $primary_blog != $blog->userblog_id ) { // Set the primary blog again if it's out of sync with blog list.
 				update_user_meta( get_current_user_id(), 'primary_blog', $blog->userblog_id );
 			}
 		} else {
@@ -957,7 +957,7 @@ function confirm_delete_users( $users ) {
 					if ( is_array( $blog_users ) && ! empty( $blog_users ) ) {
 						$user_site      = "<a href='" . esc_url( get_home_url( $details->userblog_id ) ) . "'>{$details->blogname}</a>";
 						$user_dropdown  = '<label for="reassign_user" class="screen-reader-text">' . __( 'Select a user' ) . '</label>';
-						$user_dropdown .= "<select name='wp[$user_id][$key]' id='reassign_user'>";
+						$user_dropdown .= "<select name='blog[$user_id][$key]' id='reassign_user'>";
 						$user_list      = '';
 						foreach ( $blog_users as $user ) {
 							if ( ! in_array( $user->ID, $allusers ) ) {

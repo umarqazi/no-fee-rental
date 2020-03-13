@@ -457,9 +457,9 @@ function is_front_page() {
 }
 
 /**
- * Determines whether the query is for the wp homepage.
+ * Determines whether the query is for the blog homepage.
  *
- * The wp homepage is the page that shows the time-based wp content of the site.
+ * The blog homepage is the page that shows the time-based blog content of the site.
  *
  * is_home() is dependent on the site's "Front page displays" Reading Settings 'show_on_front'
  * and 'page_for_posts'.
@@ -476,7 +476,7 @@ function is_front_page() {
  * @see is_front_page()
  * @global WP_Query $wp_query Global WP_Query instance.
  *
- * @return bool True if wp view homepage, otherwise false.
+ * @return bool True if blog view homepage, otherwise false.
  */
 function is_home() {
 	global $wp_query;

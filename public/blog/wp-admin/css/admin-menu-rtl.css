@@ -229,7 +229,7 @@
 	background-color: #32373c;
 }
 
-/* ensure that blog-submenu's box shadow doesn't appear on top of the focused menu item's background. */
+/* ensure that wp-submenu's box shadow doesn't appear on top of the focused menu item's background. */
 #adminmenu li.menu-top:hover,
 #adminmenu li.opensub > a.menu-top,
 #adminmenu li > a.menu-top:focus {
@@ -491,7 +491,7 @@ ul#adminmenu > li.current > a.current:after {
 	cursor: inherit;
 }
 
-/* @todo: is this even needed given that it's nested beneath the above li.blog-menu-separator? */
+/* @todo: is this even needed given that it's nested beneath the above li.wp-menu-separator? */
 #adminmenu div.separator {
 	height: 2px;
 	padding: 0;

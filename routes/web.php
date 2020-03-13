@@ -194,7 +194,7 @@ Route::get('/press/{slug}', function ($slug) {
 })->name('web.pressDetail');
 
 // Blog
-Route::get('/blog', function () {
+Route::get('/blogs', function () {
     return view('blog');
 })->name('web.blog');
 

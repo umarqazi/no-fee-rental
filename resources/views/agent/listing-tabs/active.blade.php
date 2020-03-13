@@ -35,7 +35,7 @@
                     <a href="{{ route('listing.detail', $al->id) }}">
                         <i class="fa fa-eye" style="font-size: 24px;position: relative;top: 5px;"></i>
                     </a>
-                    @if($listing->has_repost)
+                    @if($listing->has_repost || isMRGAgent())
                         <a href="{{ route(whoAmI().'.repostListing', $al->id) }}">
                             <button type="button" class="border-btn">Repost</button>
                         </a>
@@ -43,10 +43,12 @@
                     <a href="{{ route(whoAmI().'.archive', $al->id) }}" title="Archive this Listing">
                         <button type="button" class="border-btn">Archive</button>
                     </a>
-                    @if($listing->has_featured && ($al->is_featured != APPROVEFEATURED))
-                        <a href="{{ route('agent.makeFeature', $al->id )}}" title="Make this property featured">
-                            <button type="button" class="border-btn">Make Featured</button>
-                        </a>
+                    @if($al->is_featured != APPROVEFEATURED)
+                        @if($listing->has_featured || isMRGAgent())
+                            <a href="{{ route('agent.makeFeature', $al->id )}}" title="Make this property featured">
+                                <button type="button" class="border-btn">Make Featured</button>
+                            </a>
+                        @endif
                     @else
                         @if($al->is_featured != APPROVEFEATURED && $al->is_featured != REQUESTFEATURED)
                             <a href="{{ route(whoAmI().'.requestFeatured', $al->id) }}">
@@ -93,16 +95,26 @@
                             @endif
                         </div>
                         <div class="actions-btns">
-                            <a href="{{ route(whoAmI().'.repostListing', $al->id) }}">
-                                <button type="button" class="border-btn">Repost</button>
-                            </a>
+                            @if($listing->has_repost || isMRGAgent())
+                                <a href="{{ route(whoAmI().'.repostListing', $al->id) }}">
+                                    <button type="button" class="border-btn">Repost</button>
+                                </a>
+                            @endif
                             <a href="{{ route(whoAmI().'.archive', $al->id) }}" title="Archive this Listing">
                                 <button type="button" class="border-btn">Archive</button>
                             </a>
-                            @if($al->is_featured != APPROVEFEATURED && $al->is_featured != REQUESTFEATURED)
-                                <a href="{{ route(whoAmI().'.requestFeatured', $al->id) }}">
-                                    <button type="button" class="border-btn">Request for Featured</button>
-                                </a>
+                            @if($al->is_featured != APPROVEFEATURED)
+                                @if($listing->has_featured || isMRGAgent())
+                                    <a href="{{ route('agent.makeFeature', $al->id )}}" title="Make this property featured">
+                                        <button type="button" class="border-btn">Make Featured</button>
+                                    </a>
+                                @endif
+                            @else
+                                @if($al->is_featured != APPROVEFEATURED && $al->is_featured != REQUESTFEATURED)
+                                    <a href="{{ route(whoAmI().'.requestFeatured', $al->id) }}">
+                                        <button type="button" class="border-btn">Request for Featured</button>
+                                    </a>
+                                @endif
                             @endif
                         </div>
                         <div class="list-actions-icons">

@@ -48,7 +48,7 @@ class FeaturedListingController extends Controller {
 	 */
 	public function approve($id) {
 		return $this->service->mark($id)
-		? success('Property has been marked as featured.')
+		? success('Listing has been marked as featured.')
 		: error('Something went wrong');
 	}
 

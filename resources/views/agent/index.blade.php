@@ -56,9 +56,11 @@
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="pill" href="#archived">Archived ( {{ $listing->archived->total() }} )</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="pill" href="#pending">Pending ( {{ $listing->pending->total() }} )</a>
-                    </li>
+                    @if(!isMRGAgent())
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="pill" href="#pending">Pending ( {{ $listing->pending->total() }} )</a>
+                        </li>
+                    @endif
                 </ul>
                 <div class="filter-wrapper">
                     <div class="listing-views">

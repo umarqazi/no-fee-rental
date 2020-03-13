@@ -46,51 +46,6 @@ function mysql2date( $format, $date, $translate = true ) {
 }
 
 /**
- * @param $credentials
- * @return bool
- */
-function authenticate($credentials) {
-    $ch = curl_init();
-    $fields_string = null;
-    $url = 'http://no-fee-rental.teamtechverx.com/api/login';
-    $fields = [
-        'email'    => $credentials['email'],
-        'password' => $credentials['password']
-    ];
-
-    foreach($fields as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
-    rtrim($fields_string, '&');
-
-    //set the url, number of POST vars, POST data
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch,CURLOPT_URL, $url);
-    curl_setopt($ch,CURLOPT_POST, count($fields));
-    curl_setopt($ch,CURLOPT_POSTFIELDS, $fields_string);
-
-    //execute post
-    $result = json_decode(curl_exec($ch));
-
-    //close connection
-    curl_close($ch);
-
-    if($result->status) {
-        $cookie_name  = 'auth-user';
-        $cookie_value = $result->user->id;
-        setcookie($cookie_name, $cookie_value, time() + 3600, '/');
-        return true;
-    }
-
-    return false;
-}
-
-/**
- * @return bool
- */
-function isAuthenticated() {
-    return isset($_COOKIE['auth-user']) ? true : false;
-}
-
-/**
  * Retrieve the current time based on specified type.
  *
  * The 'mysql' type will return the time in the format for MySQL DATETIME field.

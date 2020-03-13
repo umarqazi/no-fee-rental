@@ -1503,7 +1503,7 @@ function createRegistry() {
 
 /* harmony default export */ var default_registry = (createRegistry());
 
-// EXTERNAL MODULE: external {"this":["blog","reduxRoutine"]}
+// EXTERNAL MODULE: external {"this":["wp","reduxRoutine"]}
 var external_this_wp_reduxRoutine_ = __webpack_require__(224);
 var external_this_wp_reduxRoutine_default = /*#__PURE__*/__webpack_require__.n(external_this_wp_reduxRoutine_);
 
@@ -1853,16 +1853,16 @@ var inherits = __webpack_require__(13);
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/assertThisInitialized.js
 var assertThisInitialized = __webpack_require__(3);
 
-// EXTERNAL MODULE: external {"this":["blog","element"]}
+// EXTERNAL MODULE: external {"this":["wp","element"]}
 var external_this_wp_element_ = __webpack_require__(0);
 
-// EXTERNAL MODULE: external {"this":["blog","isShallowEqual"]}
+// EXTERNAL MODULE: external {"this":["wp","isShallowEqual"]}
 var external_this_wp_isShallowEqual_ = __webpack_require__(42);
 
-// EXTERNAL MODULE: external {"this":["blog","compose"]}
+// EXTERNAL MODULE: external {"this":["wp","compose"]}
 var external_this_wp_compose_ = __webpack_require__(6);
 
-// EXTERNAL MODULE: external {"this":["blog","priorityQueue"]}
+// EXTERNAL MODULE: external {"this":["wp","priorityQueue"]}
 var external_this_wp_priorityQueue_ = __webpack_require__(225);
 
 // CONCATENATED MODULE: ./node_modules/@wordpress/data/build-module/components/registry-provider/index.js
