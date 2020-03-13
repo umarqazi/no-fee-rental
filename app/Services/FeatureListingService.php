@@ -58,10 +58,12 @@ class FeatureListingService {
         return [
             'featured'         => $this->listingRepo->search($keywords)
                                              ->featured()
-                                             ->paginate($paginate, ['*'], 'featured'),
+                                             ->paginate($paginate, ['*'], 'featured')
+                                             ->appends($keywords),
             'request_featured' => $this->listingRepo->search($keywords)
                                              ->requestfeatured()
-                                             ->paginate($paginate, ['*'], 'request-featured'),
+                                             ->paginate($paginate, ['*'], 'request-featured')
+                                             ->appends($keywords),
         ];
     }
 

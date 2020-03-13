@@ -217,6 +217,9 @@ class CreditPlanService extends PaymentService {
      * @return bool|mixed
      */
     public function addSlotCredit() {
+
+        if(isMRGAgent()) return true;
+
         $plan = $this->__currentBalance();
         $availableSlots = $plan->remaining_slots;
         return $this->creditPlanRepo->updateByClause(['user_id' => myId()], [
@@ -228,13 +231,16 @@ class CreditPlanService extends PaymentService {
      * @return bool|mixed
      */
     public function addRepost() {
-//        $plan = $this->__currentBalance();
-//        $availableRepost = $plan->remaining_repost;
-//        if($availableRepost >= 1) {
-//            return $this->creditPlanRepo->updateByClause(['user_id' => myId()], [
-//                'remaining_repost' => $availableRepost - 1
-//            ]);
-//        }
+
+        if(isMRGAgent()) return true;
+
+        $plan = $this->__currentBalance();
+        $availableRepost = $plan->remaining_repost;
+        if($availableRepost >= 1) {
+            return $this->creditPlanRepo->updateByClause(['user_id' => myId()], [
+                'remaining_repost' => $availableRepost - 1
+            ]);
+        }
 
         return true;
     }
@@ -244,9 +250,7 @@ class CreditPlanService extends PaymentService {
      */
     public function addFeatured() {
 
-        if(isMRGAgent()) {
-            return true;
-        }
+        if(isMRGAgent()) return true;
 
         $plan = $this->__currentBalance();
         $availableFeatured = $plan->remaining_featured;

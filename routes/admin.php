@@ -39,7 +39,7 @@ Route::prefix('listing')->group(function() {
 
     Route::post('/create-listing', 'Admin\ListingController@create')->name('admin.createListing');
 
-    Route::match(['get', 'post'], '/search', 'Admin\ListingController@searchWithFilters')->name('admin.listingSearch');
+    Route::get('/filter', 'Admin\ListingController@searchWithFilters')->name('admin.listingSearch');
 
     Route::get('/property', 'Admin\AdminController@viewPropertyListing')->name('property-listing');
 
@@ -70,7 +70,7 @@ Route::get('/remove-listing-image/{id}', 'Admin\ListingController@removeImage');
 
 // Featured Listing Routes
 Route::get('/feature-listing/{sortBy}', 'Admin\FeaturedListingController@sortBy')->name('admin.featureSorting');
-Route::match(['get', 'post'], '/search-feature-listing', 'Admin\FeaturedListingController@searchWithFilters')->name('admin.featureListingSearch');
+Route::get('/filter-feature-listing', 'Admin\FeaturedListingController@searchWithFilters')->name('admin.featureListingSearch');
 Route::get('/feature-listing', 'Admin\FeaturedListingController@index')->name('admin.featureListing');
 Route::get('/make-feature/{id}', 'Admin\FeaturedListingController@approve')->name('admin.approveFeature');
 Route::get('/remove-featured-listing/{id}', 'Admin\FeaturedListingController@remove')->name('admin.removeFeatured');

@@ -28,9 +28,9 @@
                                 </div>
                             </div>
 
-                            <form action="{{ route('admin.listingSearch') }}" id="search" method="post">
+                            <form action="{{ route('admin.listingSearch') }}" class="search" method="get">
                                 @csrf
-                                <input value="{{ !empty(Request::get('beds')) ? Request::get('beds') : '' }}" type="number" name="beds" class="filter-input" placeholder="All Beds" />
+                                <input value="{{ !empty(Request::get('bedrooms')) ? Request::get('bedrooms') : '' }}" type="number" name="bedrooms" class="filter-input" placeholder="All Beds" />
                                 <input value="{{ !empty(Request::get('baths')) ? Request::get('baths') : '' }}" type="number" name="baths" class="filter-input" placeholder="All Baths" />
                                 <button type="submit" class="btn-default">Filter</button>
                             </form>
