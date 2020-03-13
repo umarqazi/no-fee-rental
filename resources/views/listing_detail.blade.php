@@ -65,10 +65,10 @@
                                 <span class="listing-detail-badges convertible-bg">Convertible</span>
                             @endif
                         </div>
-                        <div class="estimation-time">
-                            <i class="far fa-clock"></i>
-                            <label> {{ dateReadable($listing->updated_at) }} since last update </label>
-                        </div>
+                        {{--<div class="estimation-time">--}}
+                            {{--<i class="far fa-clock"></i>--}}
+                            {{--<label>  since last update </label>--}}
+                        {{--</div>--}}
                     </div>
                 </div>
 
@@ -146,8 +146,8 @@
                             <div class="col-lg-6 col-sm-6">
 
                                 <div class="lease-term-section">
-                                    <span>Days on market:</span>
-                                    <strong> {{ daysReadable($listing->created_at) }}</strong>
+                                    <span>Last Updated:</span>
+                                    <strong> {{ dateReadable($listing->updated_at) }}</strong>
                                 </div>
 
                                 @if($listing->renter_rebate)
@@ -212,26 +212,25 @@
                 </div>
             </div>
         </div>
-        <h3 class="mt-5 mb-3 description-title">Description</h3>
-        <p>{!! $listing->description ?? 'No description' !!}</p>
-    </div>
+        {{--Listing Amenities & Features--}}
+        <div class="listing-aminities-sec listing-aminities-p-color">
+            <div class="container-lg">
+                <div class="row">
 
-    {{--Listing Amenities & Features--}}
-    <div class="listing-aminities-sec listing-aminities-p-color">
-        <div class="container-lg">
-            <div class="row">
+                    {{--Amenities--}}
+                    @include('sections.listing_amenities')
 
-                {{--Amenities--}}
-                @include('sections.listing_amenities')
+                    {{--Listing Feaures--}}
+                    @include('sections.listing_features')
 
-                {{--Listing Feaures--}}
-                @include('sections.listing_features')
+                    {{--Pet Policy--}}
+                    @include('sections.listing_pets_policy')
 
-                {{--Pet Policy--}}
-                @include('sections.listing_pets_policy')
-
+                </div>
             </div>
         </div>
+        <h3 class="mt-5 mb-3 description-title">Description</h3>
+        <p>{!! $listing->description ?? 'No description' !!}</p>
     </div>
 
     <div class="location-map-sec">
@@ -277,7 +276,9 @@
 {!! HTML::style('https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.css') !!}
 {!! HTML::script('https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.js') !!}
 <script>
-    setMap('map', JSON.parse('{!! $listing->map_location !!}'), true, true, '{!! $listing->street_address !!}', 13);
-    schoolZone(JSON.parse('{!! $listing->map_location !!}'));
+    let coord = '{!! $listing->map_location !!}';
+    coord = coord.replace(/\\/g, "");
+    setMap('map', JSON.parse(coord), true, true, '{!! $listing->street_address !!}', 13);
+    schoolZone(JSON.parse(coord));
 </script>
 @endsection

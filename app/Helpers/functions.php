@@ -86,6 +86,7 @@ function pagination($total, $perPage) {
     $html = null;
     $current = $_GET['page'] ?? null;
     $total = ceil($total / $perPage);
+    if($total <= 1) return null;
     $html .= '<ul class="pagination" role="navigation">';
     for($i = 1; $i <= $total; $i ++) {
         $url = url()->current().'?page='.$i;
@@ -1186,7 +1187,7 @@ function property_thumbs($listing, $map_location = false) {
     $html .= "<div class='property-thumb'><div class='check-btn'>";
     if($map_location) $html .= "<input type='hidden' name='map_location' value='{$listing->map_location}'>";
     $html .= "<a href='javascript:void(0);'>";
-    $html .= "<button class='btn-default' list_id='{$listing->id}' to='{$listing->agent->id}' data-target=\"#check-availability\">Check Availability</button>";
+//    $html .= "<button class='btn-default' list_id='{$listing->id}' to='{$listing->agent->id}' data-target=\"#check-availability\">Check Availability</button>";
     $html .= "</a></div>";
 
     if(!authenticated()) {
@@ -1349,7 +1350,7 @@ function color($date) {
 function is_exclusive( $listing ) {
     if ( $listing !== null ) {
         if ( $listing->listing_type === EXCLUSIVE ) {
-            return sprintf( "%s - (%s)", $listing->street_address, $listing->unit ?? '#' );
+            return sprintf( "%s - %s", $listing->street_address, $listing->unit ?? '#' );
         }
 
         return $listing->display_address;

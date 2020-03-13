@@ -41,7 +41,7 @@ function _get_list_table( $class, $args = array() ) {
 
 	if ( isset( $core_classes[ $class ] ) ) {
 		foreach ( (array) $core_classes[ $class ] as $required ) {
-			require_once( ABSPATH . 'blog-admin/includes/class-blog-' . $required . '-list-table.php' );
+			require_once( ABSPATH . 'wp-admin/includes/class-wp-' . $required . '-list-table.php' );
 		}
 
 		if ( isset( $args['screen'] ) ) {

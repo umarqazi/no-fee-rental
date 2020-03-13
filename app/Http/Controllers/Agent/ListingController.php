@@ -227,6 +227,6 @@ class ListingController extends Controller {
      */
     public function approve(Request $request, $id) {
         $res = $this->listingService->makeFeatured($id);
-        return sendResponse($request, $res, 'Property has been marked as featured.');
+        return sendResponse($request, $res, 'Listing has been marked as featured.');
     }
 }

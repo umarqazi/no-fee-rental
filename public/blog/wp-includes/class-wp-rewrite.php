@@ -1265,19 +1265,19 @@ class WP_Rewrite {
 
 		// Old feed and service files.
 		$deprecated_files = array(
-			'.*blog-(atom|rdf|rss|rss2|feed|commentsrss2)\.php$' => $this->index . '?feed=old',
-			'.*blog-app\.php(/.*)?$' => $this->index . '?error=403',
+			'.*wp-(atom|rdf|rss|rss2|feed|commentsrss2)\.php$' => $this->index . '?feed=old',
+			'.*wp-app\.php(/.*)?$' => $this->index . '?error=403',
 		);
 
 		// Registration rules.
 		$registration_pages = array();
 		if ( is_multisite() && is_main_site() ) {
-			$registration_pages['.*blog-signup.php$']   = $this->index . '?signup=true';
-			$registration_pages['.*blog-activate.php$'] = $this->index . '?activate=true';
+			$registration_pages['.*wp-signup.php$']   = $this->index . '?signup=true';
+			$registration_pages['.*wp-activate.php$'] = $this->index . '?activate=true';
 		}
 
 		// Deprecated.
-		$registration_pages['.*blog-register.php$'] = $this->index . '?register=true';
+		$registration_pages['.*wp-register.php$'] = $this->index . '?register=true';
 
 		// Post rewrite rules.
 		$post_rewrite = $this->generate_rewrite_rules( $this->permalink_structure, EP_PERMALINK );

@@ -430,7 +430,7 @@ class WP_Customize_Nav_Menu_Setting extends WP_Customize_Setting {
 		$value   = array_merge( $default, $value );
 		$value   = wp_array_slice_assoc( $value, array_keys( $default ) );
 
-		$value['name']        = trim( esc_html( $value['name'] ) ); // This sanitization code is used in blog-admin/nav-menus.php.
+		$value['name']        = trim( esc_html( $value['name'] ) ); // This sanitization code is used in wp-admin/nav-menus.php.
 		$value['description'] = sanitize_text_field( $value['description'] );
 		$value['parent']      = max( 0, intval( $value['parent'] ) );
 		$value['auto_add']    = ! empty( $value['auto_add'] );
@@ -439,7 +439,7 @@ class WP_Customize_Nav_Menu_Setting extends WP_Customize_Setting {
 			$value['name'] = _x( '(unnamed)', 'Missing menu name.' );
 		}
 
-		/** This filter is documented in blog-includes/class-blog-customize-setting.php */
+		/** This filter is documented in wp-includes/class-wp-customize-setting.php */
 		return apply_filters( "customize_sanitize_{$this->id}", $value, $this );
 	}
 
@@ -619,7 +619,7 @@ class WP_Customize_Nav_Menu_Setting extends WP_Customize_Setting {
 	 *
 	 * @see WP_Customize_Nav_Menu_Setting::update()
 	 *
-	 * @param array $data Additional information passed back to the 'saved' event on `blog.customize`.
+	 * @param array $data Additional information passed back to the 'saved' event on `wp.customize`.
 	 * @return array Export data.
 	 */
 	public function amend_customize_save_response( $data ) {

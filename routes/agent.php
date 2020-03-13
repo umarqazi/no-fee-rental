@@ -41,6 +41,7 @@ Route::middleware('agentHasPlan')->group(function () {
 
 // Featured Listing
 Route::get('/request-featured/{id}', 'Agent\ListingController@requestFeatured')->name('agent.requestFeatured');
+Route::get('/make-featured/{id}', 'Agent\ListingController@approve')->name('agent.makeFeature');
 
 // Listing Routes
 Route::get('/listing/{sortBy}', 'Agent\ListingController@sortBy')->name('agent.sorting');
@@ -50,7 +51,6 @@ Route::get('/edit-list/{id}', 'Agent\ListingController@edit')->name('agent.editL
 Route::match(['get', 'post'], '/search-listing', 'Agent\ListingController@searchWithFilters')->name('agent.listingSearch');
 Route::get('/remove-listing-image/{id}', 'Agent\ListingController@removeImage');
 Route::post('/upload-listing-images/{id}', 'Agent\ListingController@uploadImages')->name('agent.listingImages');
-Route::get('/make-featured/{id}', 'Agent\ListingController@approve')->name('agent.makeFeature');
 
 // Agent Members Routes
 Route::post('/validate-email', 'Agent\MemberController@validateEmail');

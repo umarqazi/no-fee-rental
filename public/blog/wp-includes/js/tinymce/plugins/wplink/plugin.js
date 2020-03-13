@@ -3,7 +3,7 @@
 		url: '#',
 		renderHtml: function() {
 			return (
-				'<div id="' + this._id + '" class="blog-link-preview">' +
+				'<div id="' + this._id + '" class="wp-link-preview">' +
 					'<a href="' + this.url + '" target="_blank" rel="noopener" tabindex="-1">' + this.url + '</a>' +
 				'</div>'
 			);
@@ -55,7 +55,7 @@
 	tinymce.ui.Factory.add( 'WPLinkInput', tinymce.ui.Control.extend( {
 		renderHtml: function() {
 			return (
-				'<div id="' + this._id + '" class="blog-link-input">' +
+				'<div id="' + this._id + '" class="wp-link-input">' +
 					'<input type="text" value="" placeholder="' + tinymce.translate( 'Paste URL or type to search' ) + '" />' +
 					'<input type="text" style="display:none" value="" />' +
 				'</div>'
@@ -414,7 +414,7 @@
 							}
 
 							$.post( window.ajaxurl, {
-								action: 'blog-link-ajax',
+								action: 'wp-link-ajax',
 								page: 1,
 								search: request.term,
 								_ajax_linking_nonce: $( '#_ajax_linking_nonce' ).val()
@@ -426,7 +426,7 @@
 							last = request.term;
 						},
 						focus: function( event, ui ) {
-							$input.attr( 'aria-activedescendant', 'mce-blog-autocomplete-' + ui.item.ID );
+							$input.attr( 'aria-activedescendant', 'mce-wp-autocomplete-' + ui.item.ID );
 							/*
 							 * Don't empty the URL input field, when using the arrow keys to
 							 * highlight items. See api.jqueryui.com/autocomplete/#event-focus
@@ -472,8 +472,8 @@
 						var fallbackTitle = ( typeof window.wpLinkL10n !== 'undefined' ) ? window.wpLinkL10n.noTitle : '',
 							title = item.title ? item.title : fallbackTitle;
 
-						return $( '<li role="option" id="mce-blog-autocomplete-' + item.ID + '">' )
-						.append( '<span>' + title + '</span>&nbsp;<span class="blog-editor-float-right">' + item.info + '</span>' )
+						return $( '<li role="option" id="mce-wp-autocomplete-' + item.ID + '">' )
+						.append( '<span>' + title + '</span>&nbsp;<span class="wp-editor-float-right">' + item.info + '</span>' )
 						.appendTo( ul );
 					};
 
@@ -553,9 +553,9 @@
 					event.toolbar = toolbar;
 
 					if ( $linkNode.attr( 'data-wplink-url-error' ) === 'true' ) {
-						toolbar.$el.find( '.blog-link-preview a' ).addClass( 'wplink-url-error' );
+						toolbar.$el.find( '.wp-link-preview a' ).addClass( 'wplink-url-error' );
 					} else {
-						toolbar.$el.find( '.blog-link-preview a' ).removeClass( 'wplink-url-error' );
+						toolbar.$el.find( '.wp-link-preview a' ).removeClass( 'wplink-url-error' );
 						hasLinkError = false;
 					}
 				}
