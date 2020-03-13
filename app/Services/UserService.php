@@ -75,6 +75,18 @@ class UserService extends SearchService {
     public function agentSignup($request) {
         DB::beginTransaction();
         $form = $this->__validateDirectSignUpForm($request);
+        if($user = $this->userRepo->isUniqueEmail($form->email)) {
+            if($this->userRepo->update($user->id, $form->toArray())) {
+                $user = $this->userRepo->isUniqueEmail($form->email);
+                DispatchNotificationService::USERSIGNUP($user);
+                DB::commit();
+                return $user->remember_token;
+            }
+
+            DB::rollBack();
+            return false;
+        }
+
         if($user = $this->userRepo->create($form->toArray())) {
             DispatchNotificationService::USERSIGNUP($user);
             DB::commit();
@@ -251,15 +263,15 @@ class UserService extends SearchService {
      * @return bool
      */
     public function isUniqueEmail($request) {
-        if (!$this->agentRepo->isUniqueEmail($request->email)) {
-            if (!$this->userRepo->isUniqueEmail($request->email)) {
+        if ($user = $this->userRepo->isUniqueEmail($request->email)) {
+            if($user->company->company == MRG) {
                 return 'true';
             }
 
             return 'false';
         }
 
-        return 'false';
+        return 'true';
     }
 
     /**

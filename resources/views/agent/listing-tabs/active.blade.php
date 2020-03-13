@@ -48,9 +48,7 @@
                             <a href="{{ route('agent.makeFeature', $al->id )}}" title="Make this property featured">
                                 <button type="button" class="border-btn">Make Featured</button>
                             </a>
-                        @endif
-                    @else
-                        @if($al->is_featured != APPROVEFEATURED && $al->is_featured != REQUESTFEATURED)
+                        @elseif($al->is_featured != REQUESTFEATURED)
                             <a href="{{ route(whoAmI().'.requestFeatured', $al->id) }}">
                                 <button type="button" class="border-btn">Request for Featured</button>
                             </a>
@@ -108,9 +106,7 @@
                                     <a href="{{ route('agent.makeFeature', $al->id )}}" title="Make this property featured">
                                         <button type="button" class="border-btn">Make Featured</button>
                                     </a>
-                                @endif
-                            @else
-                                @if($al->is_featured != APPROVEFEATURED && $al->is_featured != REQUESTFEATURED)
+                                @elseif($al->is_featured != REQUESTFEATURED)
                                     <a href="{{ route(whoAmI().'.requestFeatured', $al->id) }}">
                                         <button type="button" class="border-btn">Request for Featured</button>
                                     </a>

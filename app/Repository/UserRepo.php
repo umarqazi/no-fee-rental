@@ -54,7 +54,8 @@ class UserRepo extends BaseRepo {
 	 * @return bool
 	 */
 	public function isUniqueEmail($email) {
-		return $this->findByEmail($email) ? true : false;
+        $user = $this->findByEmail($email);
+		return $user ? $user : false;
 	}
 
     /**

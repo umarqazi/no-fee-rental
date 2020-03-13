@@ -50,7 +50,6 @@ Route::post('/reset-password', 'RecoverPasswordController@sendRequest')->name('p
 Route::post('/update-password', 'RecoverPasswordController@recover')->name('password.update');
 Route::get('/reset-password/{token}', 'RecoverPasswordController@recoverForm')->name('recover.password');
 
-
 // Email Validation (By Ajax)
 Route::post('/verify-email', 'UserController@verifyEmail');
 

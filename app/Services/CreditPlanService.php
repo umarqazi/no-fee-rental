@@ -202,6 +202,9 @@ class CreditPlanService extends PaymentService {
      * @return bool|mixed
      */
     public function addSlot() {
+
+        if(isMRGAgent()) return true;
+
         $plan = $this->__currentBalance();
         $availableSlots = $plan->remaining_slots;
         if($availableSlots >= 1) {
