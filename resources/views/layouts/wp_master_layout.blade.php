@@ -1,8 +1,7 @@
 
 {!! HTML::style('wp') !!}
 {!! HTML::style('blog') !!}
-{!! HTML::style('/blog/wp-content/plugins/kingcomposer/assets/css/animate.css') !!}
-{!! HTML::style('/blog/wp-content/plugins/kingcomposer/assets/css/icons.css') !!}
+
 
 @if($header)
     @php wp_head() @endphp

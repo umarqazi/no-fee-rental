@@ -1,3 +1,5 @@
+{!! HTML::style('/blog/wp-content/plugins/kingcomposer/assets/css/animate.css') !!}
+{!! HTML::style('/blog/wp-content/plugins/kingcomposer/assets/css/icons.css') !!}
 @php $data = collect($data)->first() @endphp
 @extends('layouts.app')
 @section('title', $data->post_title)
@@ -15,7 +17,6 @@
             'is_slug' => true
         ];
     @endphp
-
     @include('layouts.wp_master_layout', $params)
 
     @if (have_posts())
