@@ -82,6 +82,13 @@ $(() => {
             $selector.removeAttr('disabled');
         }
     });
+
+    $('.search').on('submit', function (e) {
+        e.preventDefault();
+        let res = $(this).serialize();
+        res = res.replace(/&?[^=&]+=(&|$)/g,'');
+        window.location.href = `${$(this).attr('action')}${res !== '' ? '?' + res : ''}`;
+    });
 });
 
 /**

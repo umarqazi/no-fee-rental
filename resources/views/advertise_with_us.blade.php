@@ -35,18 +35,20 @@
                         <li>30 Reposts   </li>
 
                     </ul>
-                    @if(!isMRGAgent())
-                        <div class="text-center action-btn">
-                            @if($currentPlan != null && $currentPlan->plan == BASICPLAN)
-                                <a href="{{ route('agent.plan') }}" class="btn btn-default">
-                                    Current Plan
-                                </a>
-                            @elseif ($currentPlan != null)
-                                <button type="button" class="btn-default switch-plan">Switch Plan</button>
-                            @else
-                                <button type="button" class="btn-default credit-plan">Get Started</button>
-                            @endif
-                        </div>
+                    @if(!isAdmin())
+                        @if(!isMRGAgent())
+                            <div class="text-center action-btn">
+                                @if($currentPlan != null && $currentPlan->plan == BASICPLAN)
+                                    <a href="{{ route('agent.plan') }}" class="btn btn-default">
+                                        Current Plan
+                                    </a>
+                                @elseif ($currentPlan != null)
+                                    <button type="button" class="btn-default switch-plan">Switch Plan</button>
+                                @else
+                                    <button type="button" class="btn-default credit-plan">Get Started</button>
+                                @endif
+                            </div>
+                        @endif
                     @endif
                 </div>
                 <div class="clm plus-plan platinum-plan">
@@ -66,18 +68,20 @@
                         <li>Featured listing in our weekly news letter</li>
 
                     </ul>
-                    @if(!isMRGAgent())
-                        <div class="text-center action-btn">
-                            @if($currentPlan != null && $currentPlan->plan == GOLDPLAN)
-                                <a href="{{ route('agent.plan') }}" class="btn btn-default">
-                                    Current Plan
-                                </a>
-                            @elseif ($currentPlan != null)
-                                <button type="button" class="btn-default switch-plan">Switch Plan</button>
-                            @else
-                                <button type="button" class="btn-default credit-plan">Get Started</button>
-                            @endif
-                        </div>
+                    @if(!isAdmin())
+                        @if(!isMRGAgent())
+                            <div class="text-center action-btn">
+                                @if($currentPlan != null && $currentPlan->plan == GOLDPLAN)
+                                    <a href="{{ route('agent.plan') }}" class="btn btn-default">
+                                        Current Plan
+                                    </a>
+                                @elseif ($currentPlan != null)
+                                    <button type="button" class="btn-default switch-plan">Switch Plan</button>
+                                @else
+                                    <button type="button" class="btn-default credit-plan">Get Started</button>
+                                @endif
+                            </div>
+                        @endif
                     @endif
                 </div>
                 <div class="clm premium-plan platinum-plan">
@@ -98,18 +102,20 @@
                         <li>Direct leads from our client questioner form</li>
                         <li>Featured listing in our weekly news letter</li>
                     </ul>
-                    @if(!isMRGAgent())
-                        <div class="text-center action-btn">
-                            @if($currentPlan != null && $currentPlan->plan == PLATINUMPLAN)
-                                <a href="{{ route('agent.plan') }}" class="btn btn-default">
-                                    Current Plan
-                                </a>
-                            @elseif ($currentPlan != null)
-                                <button type="button" class="btn-default switch-plan">Switch Plan</button>
-                            @else
-                                <button type="button" class="btn-default credit-plan">Get Started</button>
-                            @endif
-                        </div>
+                    @if(!isAdmin())
+                        @if(!isMRGAgent())
+                            <div class="text-center action-btn">
+                                @if($currentPlan != null && $currentPlan->plan == PLATINUMPLAN)
+                                    <a href="{{ route('agent.plan') }}" class="btn btn-default">
+                                        Current Plan
+                                    </a>
+                                @elseif ($currentPlan != null)
+                                    <button type="button" class="btn-default switch-plan">Switch Plan</button>
+                                @else
+                                    <button type="button" class="btn-default credit-plan">Get Started</button>
+                                @endif
+                            </div>
+                        @endif
                     @endif
                 </div>
             </div>

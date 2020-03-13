@@ -31,12 +31,11 @@
                             </div>
                             <span>Sort By</span>
                         </div>
-						<form action="{{ route('admin.featureListingSearch') }}" id="search" method="post">
-							@csrf
-							<input value="{{ !empty(Request::get('beds')) ? Request::get('beds') : '' }}" type="number" name="beds" class="filter-input" placeholder="All Beds" />
+						{!! Form::open(['url' => route('admin.featureListingSearch'), 'class' => 'search', 'method' => 'get']) !!}
+							<input value="{{ !empty(Request::get('bedrooms')) ? Request::get('bedrooms') : '' }}" type="number" name="bedrooms" class="filter-input" placeholder="All Beds" />
 							<input value="{{ !empty(Request::get('baths')) ? Request::get('baths') : '' }}" type="number" name="baths" class="filter-input" placeholder="All Baths" />
 							<button type="submit" class="btn-default">Filter</button>
-						</form>
+						{!! Form::close() !!}
 					</div>
 				</div>
 				<div class="block-body">
@@ -54,4 +53,5 @@
 		</div>
 
 {!! HTML::script('assets/js/tabs.js') !!}
+{!! HTML::script('assets/js/listing.js') !!}
 @endsection

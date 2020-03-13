@@ -1072,8 +1072,8 @@ function panel_listing_filters($params) {
     }
 
     $html .= '</ul></div><span>Sort By</span></div>';
-    $html .= Form::open(['url' => route(whoAmI().'.listingSearch'), 'id' => 'search', 'method' => 'post']);
-    $html .= Form::number('beds', $params['beds'] ?? null, ['class' => 'filter-input', 'placeholder' => 'All Beds', 'autocomplete' => 'off']);
+    $html .= Form::open(['url' => route(whoAmI().'.listingSearch'), 'class' => 'search', 'method' => 'get']);
+    $html .= Form::number('bedrooms', $params['bedrooms'] ?? null, ['class' => 'filter-input', 'placeholder' => 'All Beds', 'autocomplete' => 'off']);
     $html .= Form::number('baths', $params['baths'] ?? null, ['class' => 'filter-input', 'placeholder' => 'All Baths', 'autocomplete' => 'off']);
     $html .= Form::button('Filter', ['class' => 'btn-default', 'type' => 'submit']);
     $html .= Form::close();

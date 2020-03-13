@@ -267,7 +267,7 @@ class ListingService extends BuildingService {
         $keywords = [];
         $results = null;
         ! empty( $request->baths ) ? $keywords['baths'] = $request->baths : null;
-        ! empty( $request->beds ) ? $keywords['bedrooms'] = $request->beds : null;
+        ! empty( $request->bedrooms ) ? $keywords['bedrooms'] = $request->bedrooms : null;
 
         if(isAdmin()) {
             $results = $this->__adminSearchCollection( $keywords, $paginate );
@@ -675,27 +675,33 @@ class ListingService extends BuildingService {
             'active'     => $this->listingRepo->search( $keywords )
                                             ->active()
                                             ->latest()
-                                            ->paginate($paginate, ['*'], 'active'),
+                                            ->paginate($paginate, ['*'], 'active')
+                                            ->appends($keywords),
             'realty'     => $this->listingRepo->search( $keywords )
                                             ->realty()
                                             ->latest()
-                                            ->paginate($paginate, ['*'], 'realty'),
+                                            ->paginate($paginate, ['*'], 'realty')
+                                            ->appends($keywords),
             'archived'   => $this->listingRepo->search( $keywords )
                                             ->archived()
                                             ->latest()
-                                            ->paginate($paginate, ['*'], 'archive'),
+                                            ->paginate($paginate, ['*'], 'archive')
+                                            ->appends($keywords),
             'owner_only' => $this->listingRepo->search( $keywords )
                                             ->ownerOnly()
                                             ->latest()
-                                            ->paginate($paginate, ['*'], 'owner_only'),
+                                            ->paginate($paginate, ['*'], 'owner_only')
+                                            ->appends($keywords),
             'pending'    => $this->listingRepo->search( $keywords )
                                             ->pending()
                                             ->latest()
-                                            ->paginate($paginate, ['*'], 'pending'),
+                                            ->paginate($paginate, ['*'], 'pending')
+                                            ->appends($keywords),
             'reported'   => $this->listingRepo->search( $keywords )
                                             ->reportedLists()
                                             ->latest()
-                                            ->paginate($paginate, ['*'], 'reported'),
+                                            ->paginate($paginate, ['*'], 'reported')
+                                            ->appends($keywords),
         ];
     }
 
