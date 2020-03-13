@@ -182,7 +182,7 @@ var toConsumableArray = __webpack_require__(17);
 // EXTERNAL MODULE: external "lodash"
 var external_lodash_ = __webpack_require__(2);
 
-// EXTERNAL MODULE: external {"this":["blog","i18n"]}
+// EXTERNAL MODULE: external {"this":["wp","i18n"]}
 var external_this_wp_i18n_ = __webpack_require__(1);
 
 // CONCATENATED MODULE: ./node_modules/@wordpress/keycodes/build-module/platform.js

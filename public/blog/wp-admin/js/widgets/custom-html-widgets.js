@@ -1,8 +1,8 @@
 /**
- * @output blog-admin/js/widgets/custom-html-widgets.js
+ * @output wp-admin/js/widgets/custom-html-widgets.js
  */
 
-/* global blog */
+/* global wp */
 /* eslint consistent-this: [ "error", "control" ] */
 /* eslint no-magic-numbers: ["error", { "ignore": [0,1,-1] }] */
 
@@ -36,7 +36,7 @@ wp.customHtmlWidgets = ( function( $ ) {
 		/**
 		 * Text widget control.
 		 *
-		 * @constructs blog.customHtmlWidgets.CustomHtmlWidgetControl
+		 * @constructs wp.customHtmlWidgets.CustomHtmlWidgetControl
 		 * @augments Backbone.View
 		 * @abstract
 		 *
@@ -274,7 +274,7 @@ wp.customHtmlWidgets = ( function( $ ) {
 	/**
 	 * Mapping of widget ID to instances of CustomHtmlWidgetControl subclasses.
 	 *
-	 * @alias blog.customHtmlWidgets.widgetControls
+	 * @alias wp.customHtmlWidgets.widgetControls
 	 *
 	 * @type {Object.<string, wp.textWidgets.CustomHtmlWidgetControl>}
 	 */
@@ -283,7 +283,7 @@ wp.customHtmlWidgets = ( function( $ ) {
 	/**
 	 * Handle widget being added or initialized for the first time at the widget-added event.
 	 *
-	 * @alias blog.customHtmlWidgets.handleWidgetAdded
+	 * @alias wp.customHtmlWidgets.handleWidgetAdded
 	 *
 	 * @param {jQuery.Event} event - Event.
 	 * @param {jQuery}       widgetContainer - Widget container element.
@@ -333,7 +333,7 @@ wp.customHtmlWidgets = ( function( $ ) {
 		 * This ensures that the textarea is visible and the editor can be initialized.
 		 */
 		renderWhenAnimationDone = function() {
-			if ( ! ( wp.customize ? widgetContainer.parent().hasClass( 'expanded' ) : widgetContainer.hasClass( 'open' ) ) ) { // Core merge: The blog.customize condition can be eliminated with this change being in core: https://github.com/xwp/wordpress-develop/pull/247/commits/5322387d
+			if ( ! ( wp.customize ? widgetContainer.parent().hasClass( 'expanded' ) : widgetContainer.hasClass( 'open' ) ) ) { // Core merge: The wp.customize condition can be eliminated with this change being in core: https://github.com/xwp/wordpress-develop/pull/247/commits/5322387d
 				setTimeout( renderWhenAnimationDone, animatedCheckDelay );
 			} else {
 				widgetControl.initializeEditor();
@@ -345,7 +345,7 @@ wp.customHtmlWidgets = ( function( $ ) {
 	/**
 	 * Setup widget in accessibility mode.
 	 *
-	 * @alias blog.customHtmlWidgets.setupAccessibleMode
+	 * @alias wp.customHtmlWidgets.setupAccessibleMode
 	 *
 	 * @returns {void}
 	 */
@@ -380,7 +380,7 @@ wp.customHtmlWidgets = ( function( $ ) {
 	 * the widgets admin screen and also via the 'widget-synced' event when making
 	 * a change to a widget in the customizer.
 	 *
-	 * @alias blog.customHtmlWidgets.handleWidgetUpdated
+	 * @alias wp.customHtmlWidgets.handleWidgetUpdated
 	 *
 	 * @param {jQuery.Event} event - Event.
 	 * @param {jQuery}       widgetContainer - Widget container element.
@@ -409,9 +409,9 @@ wp.customHtmlWidgets = ( function( $ ) {
 	 *
 	 * This function exists to prevent the JS file from having to boot itself.
 	 * When WordPress enqueues this script, it should have an inline script
-	 * attached which calls blog.textWidgets.init().
+	 * attached which calls wp.textWidgets.init().
 	 *
-	 * @alias blog.customHtmlWidgets.init
+	 * @alias wp.customHtmlWidgets.init
 	 *
 	 * @param {object} settings - Options for code editor, exported from PHP.
 	 *

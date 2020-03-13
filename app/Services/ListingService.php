@@ -881,6 +881,10 @@ class ListingService extends BuildingService {
      * @return int
      */
     private function __visibility($building) {
+        if(isMRGAgent()) {
+            return ACTIVELISTING;
+        }
+
         return !$building->is_verified && isAgent()
             ? PENDINGLISTING : ACTIVELISTING;
     }

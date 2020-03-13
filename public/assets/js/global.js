@@ -405,7 +405,7 @@ const is_favourite = ($fav, $listing_id) => {
  * @returns {*}
  */
 const is_exclusive = (listing) => {
-    let address = listing.building_type === 'exclusive' ? listing.street_address + ' - (' + listing.unit + ')' : listing.display_address;
+    let address = listing.building_type === 'exclusive' ? listing.street_address + ' - ' + listing.unit : listing.display_address;
     return address + ', ' + listing.neighborhood.name;
 };
 
@@ -442,7 +442,6 @@ const property_thumb = (v) => {
             <div class='check-btn'>
                 <input type='hidden' name='map_location' value='${v.map_location}'>
                 <a href='javascript:void(0);'>
-                    <button class='btn-default' list_id='${v.id}' to='${v.user_id}' data-target="#check-availability">Check Availability</button>
                 </a>
             </div>`;
     if(!authenticated())

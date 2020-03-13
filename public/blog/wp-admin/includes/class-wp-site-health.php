@@ -995,7 +995,7 @@ class WP_Site_Health {
 					sprintf(
 						/* translators: 1: The name of the drop-in. 2: The name of the database engine. */
 						__( 'You are using a %1$s drop-in which might mean that a %2$s database is not being used.' ),
-						'<code>blog-content/db.php</code>',
+						'<code>wp-content/db.php</code>',
 						( $this->is_mariadb ? 'MariaDB' : 'MySQL' )
 					),
 					array(
@@ -1657,7 +1657,7 @@ class WP_Site_Health {
 			$headers['Authorization'] = 'Basic ' . base64_encode( wp_unslash( $_SERVER['PHP_AUTH_USER'] ) . ':' . wp_unslash( $_SERVER['PHP_AUTH_PW'] ) );
 		}
 
-		$url = rest_url( 'blog/v2/types/post' );
+		$url = rest_url( 'wp/v2/types/post' );
 
 		// The context for this is editing with the new block editor.
 		$url = add_query_arg(
@@ -1821,7 +1821,7 @@ class WP_Site_Health {
 		 * Or maybe you want to introduce a new test, is caching enabled/disabled/stale for example.
 		 *
 		 * Tests may be added either as direct, or asynchronous ones. Any test that may require some time
-		 * to complete should run asynchronously, to avoid extended loading periods within blog-admin.
+		 * to complete should run asynchronously, to avoid extended loading periods within wp-admin.
 		 *
 		 * @since 5.2.0
 		 *

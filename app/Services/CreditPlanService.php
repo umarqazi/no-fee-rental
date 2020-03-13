@@ -243,6 +243,11 @@ class CreditPlanService extends PaymentService {
      * @return bool|mixed
      */
     public function addFeatured() {
+
+        if(isMRGAgent()) {
+            return true;
+        }
+
         $plan = $this->__currentBalance();
         $availableFeatured = $plan->remaining_featured;
         if($availableFeatured >= 1) {

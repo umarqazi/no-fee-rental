@@ -1,14 +1,14 @@
 /**
- * @output blog-admin/js/color-picker.js
+ * @output wp-admin/js/color-picker.js
  */
 
 /* global wpColorPickerL10n */
 ( function( $, undef ) {
 
 	var ColorPicker,
-		_before = '<button type="button" class="button blog-color-result" aria-expanded="false"><span class="blog-color-result-text"></span></button>',
-		_after = '<div class="blog-picker-holder" />',
-		_wrap = '<div class="blog-picker-container" />',
+		_before = '<button type="button" class="button wp-color-result" aria-expanded="false"><span class="wp-color-result-text"></span></button>',
+		_after = '<div class="wp-picker-holder" />',
+		_wrap = '<div class="wp-picker-container" />',
 		_button = '<input type="button" class="button button-small" />',
 		_wrappingLabel = '<label></label>',
 		_wrappingLabelText = '<span class="screen-reader-text"></span>';
@@ -108,7 +108,7 @@
 			self.initialValue = el.val();
 
 			// Add a CSS class to the input field.
-			el.addClass( 'blog-color-picker' );
+			el.addClass( 'wp-color-picker' );
 
 			/*
 			 * Check if there's already a wrapping label, e.g. in the Customizer.
@@ -138,7 +138,7 @@
 				.insertBefore( self.wrappingLabel )
 				.css( { backgroundColor: self.initialValue } );
 			// Set the toggle button span element text.
-			self.toggler.find( '.blog-color-result-text' ).text( wpColorPickerL10n.pick );
+			self.toggler.find( '.wp-color-result-text' ).text( wpColorPickerL10n.pick );
 			// Set up the Iris container and insert it after the wrapping label.
 			self.pickerContainer = $( _after ).insertAfter( self.wrappingLabel );
 			// Store a reference to the Clear/Default button.
@@ -147,19 +147,19 @@
 			// Set up the Clear/Default button.
 			if ( self.options.defaultColor ) {
 				self.button
-					.addClass( 'blog-picker-default' )
+					.addClass( 'wp-picker-default' )
 					.val( wpColorPickerL10n.defaultString )
 					.attr( 'aria-label', wpColorPickerL10n.defaultAriaLabel );
 			} else {
 				self.button
-					.addClass( 'blog-picker-clear' )
+					.addClass( 'wp-picker-clear' )
 					.val( wpColorPickerL10n.clear )
 					.attr( 'aria-label', wpColorPickerL10n.clearAriaLabel );
 			}
 
 			// Wrap the wrapping label in its wrapper and append the Clear/Default button.
 			self.wrappingLabel
-				.wrap( '<span class="blog-picker-input-wrap hidden" />' )
+				.wrap( '<span class="wp-picker-input-wrap hidden" />' )
 				.after( self.button );
 
 			/*
@@ -167,7 +167,7 @@
 			 * Store a reference to the input wrapper: we'll use this to toggle
 			 * the controls visibility.
 			 */
-			self.inputWrapper = el.closest( '.blog-picker-input-wrap' );
+			self.inputWrapper = el.closest( '.wp-picker-input-wrap' );
 
 			el.iris( {
 				target: self.pickerContainer,
@@ -236,7 +236,7 @@
 			 * @since 3.5
 			 */
 			self.toggler.click( function(){
-				if ( self.toggler.hasClass( 'blog-picker-open' ) ) {
+				if ( self.toggler.hasClass( 'wp-picker-open' ) ) {
 					self.close();
 				} else {
 					self.open();
@@ -277,13 +277,13 @@
 			 */
 			self.button.click( function( event ) {
 				var me = $( this );
-				if ( me.hasClass( 'blog-picker-clear' ) ) {
+				if ( me.hasClass( 'wp-picker-clear' ) ) {
 					self.element.val( '' );
 					self.toggler.css( 'backgroundColor', '' );
 					if ( $.isFunction( self.options.clear ) ) {
 						self.options.clear.call( this, event );
 					}
-				} else if ( me.hasClass( 'blog-picker-default' ) ) {
+				} else if ( me.hasClass( 'wp-picker-default' ) ) {
 					self.element.val( self.options.defaultColor ).change();
 				}
 			});
@@ -298,9 +298,9 @@
 		open: function() {
 			this.element.iris( 'toggle' );
 			this.inputWrapper.removeClass( 'hidden' );
-			this.wrap.addClass( 'blog-picker-active' );
+			this.wrap.addClass( 'wp-picker-active' );
 			this.toggler
-				.addClass( 'blog-picker-open' )
+				.addClass( 'wp-picker-open' )
 				.attr( 'aria-expanded', 'true' );
 			$( 'body' ).trigger( 'click.wpcolorpicker' ).on( 'click.wpcolorpicker', this.close );
 		},
@@ -314,9 +314,9 @@
 		close: function() {
 			this.element.iris( 'toggle' );
 			this.inputWrapper.addClass( 'hidden' );
-			this.wrap.removeClass( 'blog-picker-active' );
+			this.wrap.removeClass( 'wp-picker-active' );
 			this.toggler
-				.removeClass( 'blog-picker-open' )
+				.removeClass( 'wp-picker-open' )
 				.attr( 'aria-expanded', 'false' );
 			$( 'body' ).off( 'click.wpcolorpicker', this.close );
 		},

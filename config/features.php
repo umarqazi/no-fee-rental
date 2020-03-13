@@ -68,6 +68,5 @@ return [
         '21' => 'Valet',
         '22' => 'Virtual Doorman',
         '23' => 'Wheelchair Access',
-        '24' => 'WiFi',
     ]
 ];

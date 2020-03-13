@@ -130,10 +130,10 @@ class WP_Widget_Media_Audio extends WP_Widget_Media {
 	 * @since 4.8.0
 	 */
 	public function enqueue_preview_scripts() {
-		/** This filter is documented in blog-includes/media.php */
+		/** This filter is documented in wp-includes/media.php */
 		if ( 'mediaelement' === apply_filters( 'wp_audio_shortcode_library', 'mediaelement' ) ) {
-			wp_enqueue_style( 'blog-mediaelement' );
-			wp_enqueue_script( 'blog-mediaelement' );
+			wp_enqueue_style( 'wp-mediaelement' );
+			wp_enqueue_script( 'wp-mediaelement' );
 		}
 	}
 
@@ -145,8 +145,8 @@ class WP_Widget_Media_Audio extends WP_Widget_Media {
 	public function enqueue_admin_scripts() {
 		parent::enqueue_admin_scripts();
 
-		wp_enqueue_style( 'blog-mediaelement' );
-		wp_enqueue_script( 'blog-mediaelement' );
+		wp_enqueue_style( 'wp-mediaelement' );
+		wp_enqueue_script( 'wp-mediaelement' );
 
 		$handle = 'media-audio-widget';
 		wp_enqueue_script( $handle );
@@ -158,7 +158,7 @@ class WP_Widget_Media_Audio extends WP_Widget_Media {
 		wp_add_inline_script(
 			$handle,
 			sprintf(
-				'blog.mediaWidgets.modelConstructors[ %s ].prototype.schema = %s;',
+				'wp.mediaWidgets.modelConstructors[ %s ].prototype.schema = %s;',
 				wp_json_encode( $this->id_base ),
 				wp_json_encode( $exported_schema )
 			)
@@ -168,8 +168,8 @@ class WP_Widget_Media_Audio extends WP_Widget_Media {
 			$handle,
 			sprintf(
 				'
-					blog.mediaWidgets.controlConstructors[ %1$s ].prototype.mime_type = %2$s;
-					blog.mediaWidgets.controlConstructors[ %1$s ].prototype.l10n = _.extend( {}, blog.mediaWidgets.controlConstructors[ %1$s ].prototype.l10n, %3$s );
+					wp.mediaWidgets.controlConstructors[ %1$s ].prototype.mime_type = %2$s;
+					wp.mediaWidgets.controlConstructors[ %1$s ].prototype.l10n = _.extend( {}, wp.mediaWidgets.controlConstructors[ %1$s ].prototype.l10n, %3$s );
 				',
 				wp_json_encode( $this->id_base ),
 				wp_json_encode( $this->widget_options['mime_type'] ),
