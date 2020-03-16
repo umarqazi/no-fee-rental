@@ -139,7 +139,6 @@
                 ajaxRequest(`${url}`, 'post', null).then(res => {
                     nextPage = res.data.next_page_url;
                     url = window.location.pathname + '?' + nextPage.split('?')[1];
-                    console.log(url);
                     res.data.data.forEach(v => {
                         $('.property-listing > .property-thumb:last').after(property_thumb(v));
                     });

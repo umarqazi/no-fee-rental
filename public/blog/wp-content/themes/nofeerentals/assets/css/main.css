@@ -3199,6 +3199,8 @@ li.definitions-listings h4{
 .rental-guides-container .rental-guides-row .info {
     line-height: 30px;
 }
+
+
 /*Responsive style*/
 @media (min-width: 1600px) {
     .container-lg,

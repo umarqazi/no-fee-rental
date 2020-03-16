@@ -2,6 +2,7 @@
 @extends('layouts.app')
 @section('title', $data->post_title)
 @section('content')
+    {!! HTML::style('blog/wp-content/themes/nofeerentals/assets/css/main.css') !!}
 
     @php
         $params = [
