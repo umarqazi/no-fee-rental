@@ -19,5 +19,21 @@ $(() => {
 
     $('body').on('click', '.remove-open-house', function() {
         $(this).parents('.row:first').remove();
-    })
+    });
+
+    $('body').on('blur', '.open-house-date', function () {
+
+        let start = $(this).parents('.openhouse').find('.start');
+        let end = $(this).parents('.openhouse').find('.end');
+        if($(this).val() !== '') {
+            start.rules('add', {required: true, messages: { required: 'Start Time is required.' } });
+            end.rules('add', {required: true, messages: { required: 'End Time is required.' }});
+            return;
+        }
+
+        if($(this).val() === '') {
+            start.rules('remove');
+            end.rules('remove');
+        }
+    });
 });
