@@ -454,12 +454,15 @@ class RealtyMXService extends ListingService {
      * @return bool
      */
     private function __isNewListing( $listing, $user ) {
-        $listing = $this->listingRepo->find(['realty_id' => $listing->get( '@attributes' )->id])
-            ->whereHas('agent', function ($subQuery) use ($user) {
-                return $subQuery->where('email', $user->email);
-            });
+        if($listing = $this->listingRepo->find(['realty_id' => $listing->get( '@attributes' )->id])->first()) {
+            if($listing->agent->email == $user->email) {
+                return false;
+            } else {
+                return $listing;
+            }
+        }
 
-        return $listing->count() > 0 ? $listing->first() : false;
+        return false;
     }
 
     /**

@@ -124,7 +124,9 @@
 {!! HTML::script('https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.js') !!}
 <script>
 
-    window.onload = () => { drawCoords(); };
+    $(() => {
+        drawCoords();
+    });
 
     let nextPage = insertParam(`page`, 2);
     let url = new URL(document.location.href).pathname;
