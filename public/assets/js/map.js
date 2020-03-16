@@ -319,7 +319,8 @@ const drawPolygon = ($coordinates, id) => {
  */
 const addHoverEffect = () => {
     $('body').find('.property-thumb').hover(function() {
-        let lat_lng = JSON.parse($(this).find('input[name=map_location]').val());
+        let lat_lng = $(this).find('input[name=map_location]').val();
+        lat_lng = JSON.parse(lat_lng.replace(/\\/g, ""));
         MAP.setZoom = 20;
         MAP.flyTo({center: setLatLng(lat_lng)});
     });

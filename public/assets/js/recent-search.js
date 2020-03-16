@@ -22,10 +22,51 @@ window.onload = () => {
     });
 };
 
-function makeString(v, i) {
-    if(v.isNew) manageStorage(i);
 
-    console.log(v);
+let newPush = false;
+function makeString(v, i) {
+    if(v.isNew) {
+        newPush = true;
+        manageStorage(i);return;
+    }
+
+    let obj = {};
+    obj.url = v.url;
+    obj.title = 'Listings';
+    obj.string = obj.title;
+    obj.isSave = v.isSave;
+
+    if(v.$min_price.length > 0) {
+        obj.title += ` between $${formatNumber(v.$min_price)}`;
+        obj.string += ` between $${formatNumber(v.$min_price)}`;
+    }
+
+    if(v.$max_price.length > 0) {
+        obj.title += ` and $${formatNumber(v.$max_price)}`;
+        obj.string += ` and $${formatNumber(v.$max_price)}`;
+    }
+
+    if(v.$neighborhoods.length > 0) {
+        obj.title += ` in ${v.$neighborhoods.length > 1 ? v.$neighborhoods.join(', ') + ' Neighborhoods' : v.$neighborhoods + ' Neighborhood'}`;
+        obj.string += ` in ${v.$neighborhoods.length > 1 ? v.$neighborhoods.length + ' Neighborhoods' : v.$neighborhoods + ' Neighborhood'}`;
+    }
+
+    if(v.$beds.length > 0) {
+        let bed = ` with at least ${v.$beds.length > 1 ? v.$beds.join(', ') + ' bedrooms' : v.$beds + ' bedroom'}`;
+        obj.title += bed; obj.string += bed;
+    }
+
+    if(v.$baths.length > 0) {
+        let bath = ` with at least ${v.$baths.length > 1 ? v.$baths.join(', ') + ' bathrooms' : v.$baths + ' bathroom'}`;
+        obj.string += bath; obj.title += bath;
+    }
+
+    if(newPush) {
+        newPush = false;
+        pushRecentSearch(obj, true, i);
+    } else {
+        pushRecentSearch(obj, false, i);
+    }
 }
 
 /**
@@ -53,6 +94,24 @@ function manageStorage(index) {
 
     $old_queries.splice(0, 0, $query);
     localStorage.setItem('search-query', JSON.stringify($old_queries));
+    makeString($query, index);
+}
+
+/**
+ *
+ * @param res
+ * @returns {Promise<boolean>}
+ */
+async function isUnique(res) {
+    let isUnique = true;
+    let a = JSON.parse(localStorage.getItem('search-query'));
+    if(a !== null) {
+        await a.forEach((v) => {
+            if(v.url === res) isUnique = false;
+        });
+    }
+
+    return isUnique;
 }
 
 /**
@@ -261,13 +320,14 @@ $(document).ready(function () {
     });
 
     // Submit FORM
-    $('#index-search-from, #modal-search-from, #search').on('submit', function (e) {
+    $('#index-search-from, #modal-search-from, #search').on('submit', async function (e) {
         e.preventDefault();
         let res = $(this).serialize();
         res= res.replace(/&?[^=&]+=(&|$)/g,'');
+        let url = `${$(this).attr('action')}${res !== '' ? '?' + res : ''}`;
         if($old_queries === null) $old_queries = [];
-        $old_queries.push({isNew: true});
-        localStorage.setItem('search-query', JSON.stringify($old_queries));
-        window.location.href = `${$(this).attr('action')}${res !== '' ? '?' + res : ''}`;
+        if(await isUnique(url)) $old_queries.push({isNew: true});
+        if(res !== '')  localStorage.setItem('search-query', JSON.stringify($old_queries));
+        window.location.href = url;
     });
 });
