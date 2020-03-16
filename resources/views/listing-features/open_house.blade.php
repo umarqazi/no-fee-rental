@@ -41,18 +41,18 @@
         </div>
     @else
     <div class="datepicker-withtime">
-        <div class="row">
+        <div class="row openhouse">
             <div class="col-md-4">
                 <label>Date</label>
                 {!! Form::text('open_house[0][date]', null, ['class' => 'input-style open-house-date', 'autocomplete' => 'off', 'data-date-format' => 'mm-dd-yyyy']) !!}
             </div>
             <div class="col-md-4">
                 <label for="start">Start @:</label>
-                {!! Form::select('open_house[0][start_time]', config('openHouse'), null, ['class' => 'form-control', 'id' => 'start']) !!}
+                {!! Form::select('open_house[0][start_time]', config('openHouse'), null, ['class' => 'start form-control', 'id' => 'start']) !!}
             </div>
             <div class="col-md-4">
                 <label for="sel1">End @:</label>
-                {!! Form::select('open_house[0][end_time]', config('openHouse'), null, ['class' => 'form-control', 'id' => 'end']) !!}
+                {!! Form::select('open_house[0][end_time]', config('openHouse'), null, ['class' => 'end form-control', 'id' => 'end']) !!}
             </div>
             <div class="col-md-12">
                 <div class="custom-control custom-checkbox by-add-only">
