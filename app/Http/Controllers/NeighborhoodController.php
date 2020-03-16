@@ -49,6 +49,7 @@ class NeighborhoodController extends Controller {
      * @return RedirectResponse
      */
     public function index(Request $request) {
+        $request->neighborhood ?? $request->request->add(firstNeighborhood());
         $listings = $this->__fetchListings($request);
         $neighborhood = $this->neighborhoodService->findByName($request->neighborhood)->first();
         return view('neighborhood', compact('listings', 'neighborhood'))->with([
