@@ -167,11 +167,11 @@ class SaveSearchService {
      */
     protected function __filterParams($data) {
         return [
-            'beds' => $data['beds'],
-            'baths' => $data['baths'],
-            'min_price' => toValidPrice($data['min_price'][0]),
-            'max_price' => toValidPrice($data['max_price'][0]),
-            'neighborhoods' => $data['neighborhoods'],
+            'beds' => $data['beds'] ?? null,
+            'baths' => $data['baths'] ?? null,
+            'min_price' => isset($data['min_price'][0]) ? toValidPrice($data['min_price'][0]) : null,
+            'max_price' => isset($data['max_price'][0]) ? toValidPrice($data['max_price'][0]) : null,
+            'neighborhoods' => $data['neighborhoods'] ?? null,
         ];
     }
 }

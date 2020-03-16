@@ -84,15 +84,18 @@ function readImage($image_name) {
  */
 function pagination($total, $perPage) {
     $html = null;
+    $active = false;
     $current = $_GET['page'] ?? null;
+    if($current === null) $active = true;
     $total = ceil($total / $perPage);
     if($total <= 1) return null;
     $html .= '<ul class="pagination" role="navigation">';
     for($i = 1; $i <= $total; $i ++) {
         $url = url()->current().'?page='.$i;
         $html .= "<li class='page-item ";
-        $html .= $i == $current ? 'active' : '';
+        $html .= $i == $current || $active ? 'active' : '';
         $html .= "'><a class=\"page-link\" href=\"{$url}\">{$i}</a></li>";
+        $active = false;
     }
     $html .= '</ul>';
     return $html;
