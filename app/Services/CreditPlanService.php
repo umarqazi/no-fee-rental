@@ -203,7 +203,7 @@ class CreditPlanService extends PaymentService {
      */
     public function addSlot() {
 
-        if(isMRGAgent()) return true;
+        if(isMRGAgent() || isAdmin()) return true;
 
         $plan = $this->__currentBalance();
         $availableSlots = $plan->remaining_slots;
@@ -221,7 +221,7 @@ class CreditPlanService extends PaymentService {
      */
     public function addSlotCredit() {
 
-        if(isMRGAgent()) return true;
+        if(isMRGAgent() || isAdmin()) return true;
 
         $plan = $this->__currentBalance();
         $availableSlots = $plan->remaining_slots;
@@ -235,7 +235,7 @@ class CreditPlanService extends PaymentService {
      */
     public function addRepost() {
 
-        if(isMRGAgent()) return true;
+        if(isMRGAgent() || isAdmin()) return true;
 
         $plan = $this->__currentBalance();
         $availableRepost = $plan->remaining_repost;
@@ -253,7 +253,7 @@ class CreditPlanService extends PaymentService {
      */
     public function addFeatured() {
 
-        if(isMRGAgent()) return true;
+        if(isMRGAgent() || isAdmin()) return true;
 
         $plan = $this->__currentBalance();
         $availableFeatured = $plan->remaining_featured;

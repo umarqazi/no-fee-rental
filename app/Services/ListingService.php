@@ -514,25 +514,21 @@ class ListingService extends BuildingService {
 
         if($is_updating) deleteCalendarEvent($id, OpenHouse::class);
 
-        if($data[0]['date'] !== null) {
-
             foreach ($data as $key => $openHouse) {
+                if($openHouse['date'] !== null && $openHouse['start_time'] !== null && $openHouse['end_time'] !== null) {
+                    $res = $this->openHouseRepo->create([
+                        'listing_id' => $id,
+                        'date'       => $openHouse['date'],
+                        'start_time' => openHouseTimeSlot($openHouse['start_time']),
+                        'end_time'   => openHouseTimeSlot($openHouse['end_time']),
+                        'only_appt'  => $this->__byAppointment($openHouse)
+                    ]);
 
-                $res = $this->openHouseRepo->create([
-                    'listing_id' => $id,
-                    'date'       => $openHouse['date'],
-                    'start_time' => openHouseTimeSlot($openHouse['start_time']),
-                    'end_time'   => openHouseTimeSlot($openHouse['end_time']),
-                    'only_appt'  => $this->__byAppointment($openHouse)
-                ]);
-
-                CalendarEventService::ADDOPENHOUSE($res);
+                    CalendarEventService::ADDOPENHOUSE($res);
+                }
             }
 
-            return true;
-        }
-
-        return false;
+        return true;
     }
 
     /**
