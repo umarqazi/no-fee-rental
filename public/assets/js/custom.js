@@ -543,11 +543,11 @@ $(() => {
             }
         });
     });
-    $('body').find(".money-mask, input[name=min_price], input[name=budget], input[name=max_price], input[name=square_min], input[name=square_max]," +
+    $('body').find(".money-mask, input[name=min_price], input[name=budget], input[name=max_price]," +
         ".neighborhood-flex > .form-group > input[name=renter_rebate]," +
         " .neighborhood-flex > .form-group > input[name=rent], .unit-flex > .form-group >" +
         " input[name=application_fee], .availability-flex > .form-group > input[name=deposit]," +
-        " #invest > input[name=min_price]").simpleMoneyFormat();
+        " #invest > input[name=min_price], input[name=square_min], input[name=square_max], input[name=square_feet]").simpleMoneyFormat();
 });
 
 

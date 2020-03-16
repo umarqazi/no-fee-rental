@@ -8,7 +8,7 @@
         $args = array(
             'post_type' => 'press_cptui',
             'post_status' => 'publish',
-            'posts_per_page' => 3,
+            'posts_per_page' => WP_PAGINATION,
             'paged' => $paged
         );
 
@@ -44,7 +44,7 @@
                 </div>
                 @php $press_counter++ @endphp
             @endwhile
-            {!! pagination($press->found_posts, 3) !!}
+            {!! pagination($press->found_posts, WP_PAGINATION) !!}
         </section>
     @endif
 

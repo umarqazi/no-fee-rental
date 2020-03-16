@@ -324,6 +324,7 @@ $(document).ready(function () {
         e.preventDefault();
         let res = $(this).serialize();
         res= res.replace(/&?[^=&]+=(&|$)/g,'');
+        res = res.replace(/neighborhood|&&neighborhood/, '&neighborhood');
         let url = `${$(this).attr('action')}${res !== '' ? '?' + res : ''}`;
         if($old_queries === null) $old_queries = [];
         if(await isUnique(url)) $old_queries.push({isNew: true});

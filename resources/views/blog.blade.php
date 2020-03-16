@@ -8,7 +8,7 @@
         $args = array(
             'post_type' => 'post',
             'post_status' => 'publish',
-            'posts_per_page' => 3,
+            'posts_per_page' => WP_PAGINATION,
             'paged' => $paged
         );
 
@@ -63,7 +63,7 @@
             @endwhile
 
             <div class="text-center mt-3">
-                {!! pagination($blog->found_posts, 3) !!}
+                {!! pagination($blog->found_posts, WP_PAGINATION) !!}
             </div>
 
         </section>

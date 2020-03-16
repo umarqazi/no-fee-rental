@@ -50,8 +50,8 @@
                             <label class="label">Square feet</label>
                             <div class="slider-wrapper">
                                 <div class="search-input-wrap">
-                                    {!! Form::number('square_min', null, ['id' => 'min_price_2', 'class' => 'input-style', 'placeholder' => 'Min Square ft']) !!} -
-                                    {!! Form::number('square_max', null, ['id' => 'max_price_2', 'class' => 'input-style', 'placeholder' => 'Max Square ft']) !!}
+                                    {!! Form::text('square_min', null, ['id' => 'min_price_2', 'pattern' => '\d*', 'maxlength' => '4', 'class' => 'input-style', 'placeholder' => 'Min Square ft']) !!} -
+                                    {!! Form::text('square_max', null, ['id' => 'max_price_2', 'pattern' => '\d*', 'maxlength' => '4', 'class' => 'input-style', 'placeholder' => 'Max Square ft']) !!}
                                 </div>
                             </div>
                         </div>

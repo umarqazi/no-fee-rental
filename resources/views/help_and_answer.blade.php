@@ -8,7 +8,7 @@
         $args = array(
             'post_type' => 'help_and_answers',
             'post_status' => 'publish',
-            'posts_per_page' => 3,
+            'posts_per_page' => WP_PAGINATION,
             'paged' => $paged
         );
 
@@ -44,7 +44,7 @@
                     </div>
                     @php $press_counter++ @endphp
             @endwhile
-                   {!! pagination($help_and_answers->found_posts, 3) !!}
+                   {!! pagination($help_and_answers->found_posts, WP_PAGINATION) !!}
         </section>
     @endif
 

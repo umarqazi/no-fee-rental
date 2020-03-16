@@ -482,3 +482,10 @@ if(!defined('PRODUCTION')) {
 if(!defined('STUDIO')) {
     define('STUDIO', 0.5);
 }
+
+/**
+ * WP Pagination Limit
+ */
+if(!defined('WP_PAGINATION')) {
+    define('WP_PAGINATION', 9);
+}
