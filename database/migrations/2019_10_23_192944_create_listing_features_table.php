@@ -18,10 +18,10 @@ class CreateListingFeaturesTable extends Migration {
         Schema::create('listing_features', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('listing_id');
-            $table->string('value');
-            $table->timestamps();
+            $table->unsignedInteger('feature_id');
 
             $table->foreign('listing_id')->references('id')->on('listings');
+            $table->foreign('feature_id')->references('id')->on('features');
         });
     }
 

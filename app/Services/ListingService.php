@@ -12,6 +12,7 @@ use App\Forms\ListingForm;
 use App\OpenHouse;
 use App\Repository\FeatureRepo;
 use App\Repository\OpenHouseRepo;
+use App\Repository\PetPolicyRepo;
 use App\Repository\UserRepo;
 use App\Traits\CalendarEventService;
 use Illuminate\Foundation\Bus\PendingDispatch;
@@ -35,6 +36,11 @@ class ListingService extends BuildingService {
     protected $featureRepo;
 
     /**
+     * @var PetPolicyRepo
+     */
+    protected $petPolicyRepo;
+
+    /**
      * @var SearchService
      */
     protected $searchService;
@@ -56,6 +62,7 @@ class ListingService extends BuildingService {
         parent::__construct();
         $this->userRepo          = new UserRepo();
         $this->featureRepo       = new FeatureRepo();
+        $this->petPolicyRepo     = new PetPolicyRepo();
         $this->openHouseRepo     = new OpenHouseRepo();
         $this->listingImagesRepo = new ListingImagesRepo();
         $this->searchService     = new SearchService();
@@ -81,7 +88,8 @@ class ListingService extends BuildingService {
         $listing->visibility  = $this->__visibility($building);
         $listing              = $this->__addList($listing);
         $this->__addOpenHouse( $listing->id, $request->open_house );
-        $this->__addFeatures( $listing->id, $request->features );
+        $this->__addFeatures( $listing, $request->features );
+        $this->__addPets( $listing, $request->pets );
         $this->__freshnessScore($listing);
         $this->__manageSaveSearch( $listing );
 
@@ -135,8 +143,10 @@ class ListingService extends BuildingService {
     public function update( $id, $request ) {
         DB::beginTransaction();
         if ( $this->__updateList( $id, $this->__validateForm( $request ) ) ) {
+            $listing = $this->listingRepo->findById($id)->first();
             $this->__updateOpenHouses( $id, $request->open_house );
-            $this->__updateFeatures( $id, $request->features );
+            $this->__updateFeatures( $listing, $request->features );
+            $this->__updatePets( $listing, $request->pets );
             DB::commit();
 
             return true;
@@ -532,25 +542,21 @@ class ListingService extends BuildingService {
     }
 
     /**
-     * @param $id
+     * @param $listing
      * @param $features
-     *
      * @return mixed
      */
-    private function __addFeatures( $id, $features ) {
-        $batch = [];
-        if ( ! empty( $features ) && count( $features ) > 0 ) {
-            foreach ( $features as $feature ) {
-                $batch[] = [
-                    'listing_id' => $id,
-                    'value'      => $feature,
-                    'created_at' => now(),
-                    'updated_at' => now()
-                ];
-            }
-        }
+    private function __addFeatures( $listing, $features ) {
+        return $this->listingRepo->attachFeatures($listing, $features);
+    }
 
-        return $this->featureRepo->insert( $batch );
+    /**
+     * @param $listing
+     * @param $pets
+     * @return mixed
+     */
+    private function __addPets( $listing, $pets ) {
+        return $this->listingRepo->attachPets($listing, $pets);
     }
 
     /**
@@ -581,15 +587,21 @@ class ListingService extends BuildingService {
     }
 
     /**
-     * @param $id
+     * @param $listing
      * @param $data
-     *
      * @return mixed
      */
-    private function __updateFeatures( $id, $data ) {
-        $this->featureRepo->deleteMultiple( [ 'listing_id' => $id ] );
+    private function __updateFeatures( $listing, $data ) {
+        return $this->listingRepo->syncFeatures($listing, $data);
+    }
 
-        return $this->__addFeatures( $id, $data );
+    /**
+     * @param $listing
+     * @param $data
+     * @return mixed
+     */
+    private function __updatePets( $listing, $data ) {
+        return $this->listingRepo->syncPets($listing, $data);
     }
 
     /**

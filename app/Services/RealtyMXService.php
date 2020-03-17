@@ -116,7 +116,8 @@ class RealtyMXService extends ListingService {
         $details      = $listing->get( 'details' );
         $location     = $listing->get( 'location' );
         $attrib       = $listing->get( '@attributes' );
-//        $amenities    = !isset($details->amenities) ?: $this->__addAmenities(collect($details->amenities));
+        $apartment_pets = $this->__apartmentPets($details);
+        $apartment_features = $this->__apartmentFeatures(collect($details)->get('unit-amenities'));
         $data = [
             'realty_id'         => $attrib->id ?? null,
             'realty_url'        => $attrib->url ?? null,
@@ -148,6 +149,15 @@ class RealtyMXService extends ListingService {
         if ($this->images !== null && $this->images->count() > 0) {
             $this->__createImages($list->id);
         }
+
+        if($apartment_features !== null) {
+            $list->features()->attach($apartment_features);
+        }
+
+        if($apartment_pets !== null) {
+            $list->pets()->attach($apartment_pets);
+        }
+
 
         $this->__generateSuccessImportListingReport($list);
         return true;
@@ -221,23 +231,25 @@ class RealtyMXService extends ListingService {
     }
 
     /**
-     * @param $amenities
+     * @param $features
      * @return array
      */
-    private function __apartmentAmenities($amenities) {
+    private function __apartmentFeatures($features) {
         $collection = [];
-        $amenities = collect($amenities)->keys();
-        $amenities = $amenities->reject(function($key) {
+        $features = collect($features)->keys();
+        $features = $features->reject(function($key) {
             return $key === 'NOFEE';
         });
 
-        foreach ($amenities as $amenity){
+        foreach ($features as $feature){
             $id = null;
-            if(! $uniqueAmenity = $this->__isNewAmenity($amenity)) {
-                $amenity = $this->amenitiesRepo->create(['amenities'  => $amenity]);
-                $id = $amenity->id;
+            $feature = preg_replace('/(\w+)([A-Z])/U', '\\1 \\2', $feature);
+            if($feature == '0') continue;
+            if(! $uniqueFeature = $this->__isNewFeature($feature)) {
+                $feature = $this->featureRepo->create(['name'  => $feature]);
+                $id = $feature->id;
             } else {
-                $id = $uniqueAmenity->id;
+                $id = $uniqueFeature->id;
             }
 
             array_push($collection, $id);
@@ -246,17 +258,34 @@ class RealtyMXService extends ListingService {
         return $collection;
     }
 
-//    private function __pets($policy) {
-//        $build =
-//        $policy = collect($policy)->keys();
-//        if(strpos('dogs', '')) {
-//
-//        }
-//
-//        if(strpos('cats', '')) {
-//
-//        }
-//    }
+    /**
+     * @param $policy
+     * @return array
+     */
+    private function __apartmentPets($policy) {
+        $collection = [];
+        $policy = collect($policy)->get('pets');
+
+        if($policy === null) {
+            array_push($collection, 4);
+        } else {
+            $cats = false;
+            $dogs = false;
+            $policy = collect($policy)->keys();
+
+            foreach ($policy as $pet) {
+                if(strpos($pet, 'cats') !== false && !$cats) {
+                    $cats = true;
+                    array_push($collection, 1);
+                } elseif(strpos($pet, 'dogs') !== false && !$dogs) {
+                    $dogs = true;
+                    array_push($collection, 2);
+                }
+            }
+        }
+
+        return $collection;
+    }
 
     /**
      * @param $agent
@@ -312,39 +341,26 @@ class RealtyMXService extends ListingService {
     }
 
     /**
-     * @param $amenities
-     *
-     * @return array
-     */
-    private function __addAmenities($amenities) {
-        $collection = [];
-        $amenities = collect($amenities)->keys();
-        $amenities = $amenities->reject(function($key) {
-            return $key === 'other';
-        });
-
-        foreach ($amenities as $amenity){
-            $id = null;
-            if(! $uniqueAmenity = $this->__isNewAmenity($amenity)) {
-                $amenity = $this->amenitiesRepo->create(['amenities'  => $amenity]);
-                $id = $amenity->id;
-            } else {
-                $id = $uniqueAmenity->id;
-            }
-
-            array_push($collection, $id);
-        }
-
-        return $collection;
-    }
-
-    /**
      * @param $amenity
      * @return mixed|bool
      */
     private function __isNewAmenity($amenity) {
         $amenity = $this->amenitiesRepo->like('amenities', $amenity);
         return $amenity->count() > 0 ? $amenity->first() : false;
+    }
+
+    /**
+     * @param $feature
+     * @return bool
+     */
+    private function __isNewFeature($feature) {
+
+        if(empty($feature) || $feature === '') {
+            return false;
+        }
+
+        $feature = $this->featureRepo->like('name', $feature);
+        return $feature->count() > 0 ? $feature->first() : false;
     }
 
     /**

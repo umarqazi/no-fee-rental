@@ -8,6 +8,7 @@
 
 namespace App\Repository;
 
+use App\Feature;
 use App\ListingFeature;
 
 /**
@@ -20,6 +21,6 @@ class FeatureRepo extends BaseRepo {
      * AmenityTypeRepo constructor.
      */
     public function __construct() {
-        parent::__construct(new ListingFeature());
+        parent::__construct(new Feature());
     }
 }

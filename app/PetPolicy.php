@@ -8,8 +8,7 @@ use Illuminate\Database\Eloquent\Model;
  * Class PetPolicy
  * @package App
  */
-class PetPolicy extends Model
-{
+class PetPolicy extends Model {
 
     /**
      * @var array
@@ -23,8 +22,8 @@ class PetPolicy extends Model
         return $this->belongsToMany(
             Listing::class,
             'listing_pet_policies',
-            'listing_id',
-            'pet_policy_id'
+            'pet_policy_id',
+            'listing_id'
         );
     }
 }

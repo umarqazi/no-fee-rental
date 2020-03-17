@@ -135,7 +135,6 @@ class ListingController extends Controller {
     public function edit($id) {
         $action = 'Update';
         $listing = $this->listingService->edit($id)->first();
-        $listing->features = findFeatures($listing->features);
         $listing->user_id = $listing->agent->id;
         $listing->neighborhood = $listing->neighborhood ? $listing->neighborhood->name : Null;
         return view('listing-features.listing', compact('listing', 'action'));
@@ -184,7 +183,6 @@ class ListingController extends Controller {
     public function copy($id) {
         $action = 'Copy';
         $listing = $this->listingService->edit($id)->first();
-        $listing->features = findFeatures($listing->features);
         $listing->user_id = $listing->agent->id;
         $listing->neighborhood = $listing->neighborhood ? $listing->neighborhood->name : Null;
         return view('listing-features.listing', compact('listing', 'action'));

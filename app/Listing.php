@@ -30,10 +30,27 @@ class Listing extends Model {
 	];
 
     /**
-     * @return HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function features() {
-        return $this->hasMany(ListingFeature::class, 'listing_id');
+        return $this->belongsToMany(
+            Feature::class,
+            'listing_features',
+            'listing_id',
+            'feature_id'
+        );
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function pets() {
+        return $this->belongsToMany(
+            PetPolicy::class,
+            'listing_pet_policies',
+            'listing_id',
+            'pet_policy_id'
+        );
     }
 
 	/**

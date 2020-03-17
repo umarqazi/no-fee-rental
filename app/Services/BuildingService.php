@@ -121,7 +121,6 @@ class BuildingService extends CreditPlanService {
      * @return string|null
      */
     public function isOwnerOnly($request) {
-        $action = null;
         $building = $this->buildingRepo->ownerOnlyBuilding($request->address);
         if(isAdmin()) {
             return 'false';
@@ -136,8 +135,6 @@ class BuildingService extends CreditPlanService {
 
             return 'false';
         }
-
-        return $action;
     }
 
     /**
