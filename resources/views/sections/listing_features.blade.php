@@ -1,13 +1,12 @@
 
 <div class="col-md-3 col-sm-4">
     <h3>Unit Features</h3>
-    @php $unit = unitFeature($listing->features); @endphp
-    @if(count($unit) < 1)
-        <p>None</p>
-    @endif
-    @foreach($unit as $feature)
+    @foreach($listing->features as $feature)
         <ul class="second-ul">
-            <li>{{ ucwords($feature) }}</li>
+            <li>{{ ucwords($feature->name) }}</li>
         </ul>
     @endforeach
+    @if(count($listing->features) < 1)
+        <p>None</p>
+    @endif
 </div>

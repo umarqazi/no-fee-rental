@@ -56,13 +56,14 @@
                     <div class="row">
                         {{--Pets Feature--}}
                         {!! features_pet() !!}
+
                         {{--Features--}}
                         {!! features() !!}
 
                         @if($action !== 'Building' || $action !== 'Update' || $action !== 'Copy')
                             <div class="col-md-12" style="margin-top: 20px; margin-bottom: 20px; text-transform: capitalize;" id="amenities">
                                 <div class="row" style="display: none;">
-                                    {!! amenities() !!}
+                                    {!! buildingfeatures() !!}
                                 </div>
                             </div>
                         @endif

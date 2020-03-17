@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
  * @package App
  */
 class Feature extends Model {
+
     /**
      * @var array
      */
@@ -17,7 +18,7 @@ class Feature extends Model {
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function apartment() {
+    public function listing() {
         return $this->belongsToMany(
             Listing::class,
             'listing_features',

@@ -161,4 +161,39 @@ class ListingRepo extends BaseRepo {
         $belongsTo = $this->getBuilding($id);
         return $belongsTo->building->type === FEE;
     }
+
+    /**
+     * @param $listing
+     * @param $features
+     * @return mixed
+     */
+    public function attachFeatures($listing, $features) {
+        return $listing->features()->attach($features);
+    }
+
+    /**
+     * @param $listing
+     * @param $features
+     * @return mixed
+     */
+    public function syncFeatures($listing, $features) {
+        return $listing->features()->sync($features);
+    }
+
+    /**
+     * @param $listing
+     * @param $pets
+     */
+    public function attachPets($listing, $pets) {
+        $listing->pets()->attach($pets);
+    }
+
+    /**
+     * @param $listing
+     * @param $pets
+     * @return mixed
+     */
+    public function syncPets($listing, $pets) {
+        return $listing->pets()->sync($pets);
+    }
 }

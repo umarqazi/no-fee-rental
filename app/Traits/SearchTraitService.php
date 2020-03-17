@@ -76,6 +76,7 @@ trait SearchTraitService
             'neighborhood' => $request->neighborhood ?? null,
             'beds' => $request->beds ?? null,
             'baths' => $request->baths ?? null,
+            'pets' => $request->pets ?? null,
             'features' => $request->features ?? null,
             'openHouse' => $request->openHouse ?? null,
             'amenities' => $request->amenities ?? null,
@@ -185,13 +186,24 @@ trait SearchTraitService
     }
 
     /**
-     * filter for amenities
+     * filter for features
      */
     private function features()
     {
         $features = $this->args->{__FUNCTION__};
         $this->query->whereHas('features', function ($query) use ($features) {
-            return $query->whereIn('value', $features);
+            return $query->whereIn('feature_id', $features);
+        });
+    }
+
+    /**
+     * filter for pets
+     */
+    private function pets()
+    {
+        $pets = $this->args->{__FUNCTION__};
+        $this->query->whereHas('pets', function ($query) use ($pets) {
+            return $query->whereIn('pet_policy_id', $pets);
         });
     }
 

@@ -72,7 +72,7 @@
                     {{-- Building Features--}}
                     <div class="col-md-12" style="margin-top: 10px;">
                         <div class="row">
-                            {!! amenities() !!}
+                            {!! buildingfeatures() !!}
                         </div>
                     </div>
 

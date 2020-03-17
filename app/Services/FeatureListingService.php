@@ -197,7 +197,7 @@ class FeatureListingService {
             'recommended' => $this->recommended()->paginate($paginate),
             'trending'    => $this->featured()->trending()->paginate($paginate),
             'price'       => $this->listingRepo->price()->paginate($paginate),
-            'pet_policy'  => $this->featured()->petFriendly()->paginate($paginate),
+            'pet_policy'  => [],
         ]);
     }
 }

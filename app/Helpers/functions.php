@@ -603,20 +603,6 @@ function dataTable( $data ) {
 }
 
 /**
- * @param $features
- *
- * @return array|mixed
- */
-function findFeatures( $features ) {
-    $collection = [];
-    foreach ( $features as $feature ) {
-        $collection[] = $feature->value;
-    }
-
-    return $collection;
-}
-
-/**
  * @param $neighborhoods
  *
  * @return string
@@ -628,53 +614,6 @@ function neighborhoodExpertise( $neighborhoods ) {
     }
 
     return ( count( $collect ) > 0 ) ? implode( ', ', $collect ) : 'None';
-}
-
-/**
- * @param $features
- *
- * @return string
- */
-function apartmentFeatures($features) {
-    $unit = unitFeature($features);
-    $policy = petPolicy($features);
-    $unit = implode(', ', $unit);
-    $policy = implode(', ', $policy);
-    return $unit.', '.$policy;
-}
-
-/**
- * @param $features
- *
- * @return array
- */
-function petPolicy( $features ) {
-    $collection    = [];
-    $configFeature = config( 'features.pet_policy' );
-    foreach ( $features as $feature ) {
-        if ( strpos( $feature->value ?? $feature, 'p' ) !== false ) {
-            $collection[] = $configFeature[ $feature->value ?? $feature ];
-        }
-    }
-
-    return $collection;
-}
-
-/**
- * @param $features
- *
- * @return array
- */
-function unitFeature( $features ) {
-    $collection    = [];
-    $configFeature = config( 'features.apartment_features' );
-    foreach ( $features as $feature ) {
-        if ( strpos( $feature->value ?? $feature, 'u' ) !== false ) {
-            $collection[] = $configFeature[ $feature->value ?? $feature ];
-        }
-    }
-
-    return $collection;
 }
 
 /**
@@ -708,7 +647,7 @@ function isOpenToday($openHouse) {
 /**
  * @return string
  */
-function amenities() {
+function buildingfeatures() {
     $i = 0;
     $html    = '<div class="col-md-4"><h3>Building Features</h3>';
     $service = new \App\Services\AmenityService();
@@ -1089,20 +1028,18 @@ function panel_listing_filters($params) {
  */
 function features_pet() {
     $html = null;
-    $pets = config('features.pet_policy');
+    $pets = (new \App\Services\PetPolicyService())->get();
+    $html .= "<div class='col-md-12' style='margin-top: 10px;'>";
+    $html .= "<h3>Pet Policy</h3><div class='row'><div class='col-md-4'>";
     foreach ($pets as $type => $pet) {
-        if($type === 'title') {
-            $html .= "<div class='col-md-12' style='margin-top: 10px;'>";
-            $html .= "<h3>" . $pet . "</h3><div class='row'><div class='col-md-4'>";
-        } else {
-            $html .= "<ul class='checkbox-listing'><li><div class='custom-control custom-checkbox'>";
-            $html .= Form::checkbox( "features[]", $type, null,
-                [
-                    'class' => 'custom-control-input',
-                    'id'    => "listitem{$type}"
-                ]);
-            $html .= "<label class='custom-control-label' for='listitem{$type}'>{$pet}</label></div></li></ul>";
-        }
+        $id = str_random(10);
+        $html .= "<ul class='checkbox-listing'><li><div class='custom-control custom-checkbox'>";
+        $html .= Form::checkbox( "pets[]", $pet->id, null,
+            [
+                'class' => "custom-control-input pets-{$type}",
+                'id'    => "listitem-{$id}"
+            ]);
+        $html .= "<label class='custom-control-label' for='listitem-{$id}'>{$pet->name}</label></div></li></ul>";
     }
 
     $html .= "</div></div></div>";
@@ -1110,32 +1047,32 @@ function features_pet() {
     $html .= "<script>
         let row = $('.row');
         $(() => {
-            if($('#listitemp3').is(':checked')) {
+            if($('#listitemp-3').is(':checked')) {
                 p3(true);
             }
 
-            if($('#listitemp4').is(':checked')) {
+            if($('#listitemp-4').is(':checked')) {
                 p4(true);
             }
         });
 
         function p3(action) {
-            row.find('input[value=p1], input[value=p2], input[value=p4]').prop('checked', false);
-            row.find('input[value=p1], input[value=p2]').prop('disabled', action);
+            row.find('input[value=1], input[value=2], input[value=4]').prop('checked', false);
+            row.find('input[value=1], input[value=2]').prop('disabled', action);
         }
 
         function p4(action) {
-            row.find('input[value=p1], input[value=p2], input[value=p3]').prop('checked', false);
-            row.find('input[value=p1], input[value=p2]').prop('disabled', action);
+            row.find('input[value=1], input[value=2], input[value=3]').prop('checked', false);
+            row.find('input[value=1], input[value=2]').prop('disabled', action);
         }
 
-        $('#listitemp4, #listitemp3').change(function() {
+        $('#listitem-4, #listitem-3').change(function() {
             let val = $(this).val();
-            if (val === 'p3') {
+            if (val === '3') {
                 p3($(this).is(':checked'));
             }
 
-            if (val === 'p4') {
+            if (val === '4') {
                 p4($(this).is(':checked'));
             }
         });</script>";
@@ -1148,34 +1085,29 @@ function features_pet() {
  */
 function features() {
     $i = 0;
-    $open = false;
     $html     = null;
-    $features = collect(config( 'features.apartment_features' ));
+    $features = (new \App\Services\FeatureService())->get();
     $total = ($features->count() - 1);
     $per_column = ceil($total / 3);
+    $html .= "<div class='col-md-12' style='margin-top: 10px;'>";
+    $html .= "<h3>Unit Feature</h3><div class='row'><div class='col-md-4'>";
     foreach ( $features as $type => $feature ) {
-        if($type === 'title') {
-            $open = true;
-            $html .= "<div class='col-md-12' style='margin-top: 10px;'>";
-            $html .= "<h3>" . $feature . "</h3><div class='row'><div class='col-md-4'>";
-        } else {
-            $i ++;
-            $html .= "<ul class='checkbox-listing'><li><div class='custom-control custom-checkbox'>";
-            $html .= Form::checkbox( "features[]", $type, null,
-                        [
-                            'class' => 'custom-control-input',
-                            'id'    => "listitem{$type}"
-                        ]);
-            $html .= "<label class='custom-control-label' for='listitem{$type}'>{$feature}</label></div></li></ul>";
-            if($i == $per_column) {
-                $i = 0; $open = true;
-                $html .= "</div><div class='col-md-4'>";
-            }
+        $i ++;
+        $id = str_random(10);
+        $html .= "<ul class='checkbox-listing'><li><div class='custom-control custom-checkbox'>";
+        $html .= Form::checkbox( "features[]", $feature->id, null,
+                    [
+                        'class' => 'custom-control-input',
+                        'id'    => "listitem-{$id}"
+                    ]);
+        $html .= "<label class='custom-control-label' for='listitem-{$id}'>{$feature->name}</label></div></li></ul>";
+        if($i == $per_column) {
+            $i = 0;
+            $html .= "</div><div class='col-md-4'>";
         }
     }
 
-    if($open === true) { $open = false;$html .= "</div>"; }
-    $html .= "</div></div>";
+    $html .= "</div></div></div>";
 
     return $html;
 }

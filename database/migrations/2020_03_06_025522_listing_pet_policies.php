@@ -14,6 +14,7 @@ class ListingPetPolicies extends Migration
     public function up()
     {
         Schema::create('listing_pet_policies', function (Blueprint $table) {
+            $table->increments('id');
             $table->unsignedInteger('listing_id');
             $table->unsignedInteger('pet_policy_id');
 
