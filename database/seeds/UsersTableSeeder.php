@@ -83,7 +83,7 @@ class UsersTableSeeder extends Seeder
                     'password' => bcrypt('123456789'),
                     'email_verified_at' => now(),
                     'phone_number' => '(646) 209-3664',
-                    'license_number' => '10311204670',
+                    'license_number' => null,
                     'remember_token' => str_random(60),
                     'created_at' => now(),
                     'updated_at' => now(),

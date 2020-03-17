@@ -64,7 +64,7 @@
     <div class="unit-flex">
         <div class="form-group">
             <label>Square Feet</label>
-            {!! Form::text('square_feet', null, ['pattern' => '\d*', 'maxlength' => '4', 'class' => 'input-style', 'autocomplete' => 'off']) !!}
+            {!! Form::text('square_feet', null, ['oninput' => "this.value = this.value.replace(/[^0-9]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');", 'class' => 'input-style', 'autocomplete' => 'off']) !!}
         </div>
         <div class="form-group">
             <label>Free Months</label>
