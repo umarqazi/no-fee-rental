@@ -32,18 +32,18 @@ function makeString(v, i) {
 
     let obj = {};
     obj.url = v.url;
+    obj.isSave = v.isSave;
     obj.title = 'Listings';
     obj.string = obj.title;
-    obj.isSave = v.isSave;
 
     if(v.$min_price.length > 0) {
-        obj.title += ` between $${formatNumber(v.$min_price)}`;
-        obj.string += ` between $${formatNumber(v.$min_price)}`;
+        obj.title += ` ${v.$max_price.length > 0 ? 'between' : 'in'} $${formatNumber(v.$min_price)}`;
+        obj.string += ` ${v.$max_price.length > 0 ? 'between' : 'in'} $${formatNumber(v.$min_price)}`;
     }
 
     if(v.$max_price.length > 0) {
-        obj.title += ` and $${formatNumber(v.$max_price)}`;
-        obj.string += ` and $${formatNumber(v.$max_price)}`;
+        obj.title += ` ${v.$min_price.length > 0 ? 'and' : 'in'} $${formatNumber(v.$max_price)}`;
+        obj.string += ` ${v.$min_price.length > 0 ? 'and' : 'in'} $${formatNumber(v.$max_price)}`;
     }
 
     if(v.$neighborhoods.length > 0) {
@@ -61,12 +61,12 @@ function makeString(v, i) {
         obj.string += bath; obj.title += bath;
     }
 
-    if(newPush) {
-        newPush = false;
-        pushRecentSearch(obj, true, i);
-    } else {
-        pushRecentSearch(obj, false, i);
-    }
+        if (newPush) {
+            newPush = false;
+            pushRecentSearch(obj, true, i);
+        } else {
+            pushRecentSearch(obj, false, i);
+        }
 }
 
 /**
@@ -112,6 +112,27 @@ async function isUnique(res) {
     }
 
     return isUnique;
+}
+
+/**
+ *
+ * @param string
+ * @returns {Promise<boolean>}
+ */
+async function isValid(string) {
+    let isValid = false;
+    string = decodeURIComponent(string);
+    string = string.split('&');
+
+    if(string.length > 0) {
+        await string.forEach(v => {
+            if(v.includes('min_price') || v.includes('max_price') || v.includes('beds[]') || v.includes('neighborhood[]')) {
+                isValid = true;
+            }
+        });
+    }
+
+    return isValid;
 }
 
 /**
@@ -324,11 +345,17 @@ $(document).ready(function () {
         e.preventDefault();
         let res = $(this).serialize();
         res= res.replace(/&?[^=&]+=(&|$)/g,'');
-        res = res.replace(/neighborhood|&&neighborhood/, '&neighborhood');
+        res = res.replace(/neighborhood|&neighborhood|&&neighborhood/, '&neighborhood');
+        res = res.replace(/max_price|&max_price|&&max_price/, '&max_price');
+        res = res.replace(/square_max|&square_max|&&square_max/, '&square_max');
         let url = `${$(this).attr('action')}${res !== '' ? '?' + res : ''}`;
         if($old_queries === null) $old_queries = [];
-        if(await isUnique(url)) $old_queries.push({isNew: true});
-        if(res !== '')  localStorage.setItem('search-query', JSON.stringify($old_queries));
+
+        if(await isUnique(url) && res !== '' && await isValid(res)) {
+            $old_queries.push({isNew: true});
+            localStorage.setItem('search-query', JSON.stringify($old_queries));
+        }
+
         window.location.href = url;
     });
 });
