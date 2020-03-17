@@ -8,7 +8,7 @@ $(() => {
 
     $( "<button class='mapboxgl-popup-close-button' type='button' aria-label='Close popup'>×</button>" ).insertAfter( ".mapboxgl-popup-anchor-top" );
     //randomly change banner images on load
-    let image = ["1.jpg", "2.jpg", "3.jpg"];
+    let image = ["1-min.jpg", "2-min.jpg", "3-min.jpg"];
     let x = Math.floor(image.length * Math.random());
     $('body').find('.header-bg').css({ "background": "url(../assets/images/" + image[x] + ")" });
 
