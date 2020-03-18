@@ -49,6 +49,14 @@ class NotificationController extends Controller
     }
 
     /**
+     * @param Request $request
+     * @return mixed
+     */
+    public function removeSelected(Request $request) {
+        return $this->service->deleteSelected($request);
+    }
+
+    /**
      * @param $id
      * @return mixed
      */

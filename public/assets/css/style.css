@@ -1461,8 +1461,6 @@
     /*background: rgba(34, 57, 113, 0.83);*/
     background: transparent;
     border-radius: 0.5rem;
-    box-sizing: border-box;
-    box-shadow: 0.5rem 0.5rem 2rem 0 rgba(0, 0, 0, 0.2);
     animation-name: dropPanel;
     animation-iteration-count: 1;
     animation-timing-function: all;
@@ -1522,7 +1520,7 @@
     top: 5px;
     width: 20px;
     height: 20px;
-    right: 5px;
+    right: 0px;
     cursor: pointer;
 }
 .notification-main-wrapper .notification-content h4{
@@ -1556,16 +1554,22 @@ main {
     position: relative;
     border-bottom: 1px solid #ddd;
 }
+.notification-container.notification-main-wrapper ul.first-ul {
+    padding: 0 5px;
+}
 .notification-main-wrapper .notification-inner-content{
     display: flex;
     /*justify-content: space-around;*/
-    padding: 10px 10px 10px 0px;
+    padding: 10px 0px 10px 0px;
 }
 .notification-main-wrapper .notification-content:last-child{
     border-bottom: 0;
 }
 .notification-main-wrapper .notification-inner-content .listingnoti {
     margin-left: 5px;
+}
+.notification-content.unread {
+    background-color: #eee;
 }
 .notification-main-wrapper .notification-inner-content ul{
     display: flex;
@@ -1608,6 +1612,7 @@ main {
     max-height: 300px;
     overflow-y: auto;
     background-color: #fff;
+    padding: 0 5px;
 }
 .notification-content.hide-notification{
     display: none;

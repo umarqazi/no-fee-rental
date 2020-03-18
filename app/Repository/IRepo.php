@@ -37,12 +37,12 @@ interface IRepo {
 	 */
 	public function delete($id);
 
-	/**
-	 * @param $clause
-	 *
-	 * @return bool|mixed
-	 */
-	public function deleteMultiple($clause);
+    /**
+     * @param $column
+     * @param $data
+     * @return mixed
+     */
+	public function deleteMultiple($column, $data);
 
 	/**
 	 * @param $data

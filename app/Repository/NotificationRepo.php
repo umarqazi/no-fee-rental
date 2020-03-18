@@ -41,6 +41,14 @@ class NotificationRepo extends BaseRepo {
     }
 
     /**
+     * @param $ids
+     * @return bool|mixed
+     */
+    public function deleteSelected($ids) {
+        return $this->deleteMultiple('id', $ids);
+    }
+
+    /**
      * @param $id
      * @return mixed
      */

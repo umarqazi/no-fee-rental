@@ -10,7 +10,7 @@
 <main>
     <div class="notification-container notification-main-wrapper">
         <h3>Notifications <span class="badge badge-light">{{ hasNewNotification($notifications, true) }}</span>
-            <a href="#" class="mark-read"> Mark all as read</a>
+            <a href="javascript:void(0);" class="mark-read mark-all-as-read"> Mark all as read</a>
         </h3>
         <div class="notification-inner-scroll" id="style-2">
             @if($notifications->count() < 1)
@@ -18,10 +18,10 @@
             @endif
             @foreach($notifications as $notification)
                 @if($notification->model !== null)
-                    @if($notification->model == 'App\Listing')
+                    @if($notification->model == \App\Listing::class)
                         @php $listing = (new $notification->model)->where('id', $notification->linked_id)->first(); @endphp
-                        <div class="notification-content">
-                            <a href="{{ $notification->url }}">
+                        <div class="notification-content {{ $notification->is_read ? '' : 'unread' }}">
+                            <a href="{{ $notification->url }}" data-id="{{ $notification->id }}">
                                 <div class="notification-inner-content">
                                     <img src="{{ is_realty_listing($listing->thumbnail ?? DLI) }}" alt=""/>
                                     <div class="listingnoti">
@@ -37,13 +37,13 @@
                                 </div>
                             </a>
                             <div class="right-side-icons">
-                                <img src="/assets/images/error-cross.png" class="cross-icon-noti"/>
+                                <img src="{{ Storage::url('/assets/images/error-cross.png') }}" class="cross-icon-noti remove-single"/>
                             </div>
                         </div>
-                    @elseif ($notification->model == 'App\User')
+                    @elseif ($notification->model == \App\User::class)
                         @php $user = (new $notification->model)->where('id', $notification->from)->first(); @endphp
-                        <div class="notification-content">
-                            <a href="{{ $notification->url }}">
+                        <div class="notification-content {{ $notification->is_read ? '' : 'unread' }}">
+                            <a href="{{ $notification->url }}" data-id="{{ $notification->id }}">
                                 <div class="notification-inner-content">
                                     <img src="{{ Storage::url($user->profile_image ?? DUI) }}" alt=""/>
                                     <div class="listingnoti">
@@ -53,7 +53,7 @@
                                 </div>
                             </a>
                             <div class="right-side-icons">
-                                <img src="{{ Storage::url('/assets/images/error-cross.png') }}" class="cross-icon-noti"/>
+                                <img src="{{ Storage::url('/assets/images/error-cross.png') }}" class="cross-icon-noti remove-single"/>
                             </div>
                         </div>
                     @endif
@@ -66,9 +66,3 @@
         </div>
     </div>
 </main>
-<script>
-    let $body = $('body');
-    $body.on('click', '.notification-listener', function () {
-        $(".notification-container").toggleClass("toggle-notification");
-    });
-</script>

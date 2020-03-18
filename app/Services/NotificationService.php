@@ -86,6 +86,15 @@ class NotificationService extends ExclusiveSettingService {
     }
 
     /**
+     * @param $request
+     *
+     * @return mixed
+     */
+    public function deleteSelected( $request ) {
+        return $this->notificationRepo->deleteSelected( $request->ids );
+    }
+
+    /**
      * @param $id
      * @return mixed
      */

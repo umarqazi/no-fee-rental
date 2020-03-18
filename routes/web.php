@@ -107,6 +107,7 @@ Route::post('/resend-email', 'UserController@resendEmail')->name('web.resendEmai
 Route::post('/delete-notification/{id}', 'NotificationController@delete');
 Route::post('/read-notification/{id}', 'NotificationController@markAsRead');
 Route::post('/mark-all-as-read', 'NotificationController@markAllAsRead');
+Route::post('/remove-selected', 'NotificationController@removeSelected');
 Route::post('/push-notification', 'NotificationController@push');
 Route::post('/fetch-notifications', 'NotificationController@get');
 Route::get('/all-notifications', 'NotificationController@all');
