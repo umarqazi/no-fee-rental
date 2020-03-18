@@ -70,11 +70,7 @@
                     </div>
 
                     {{-- Building Features--}}
-                    <div class="col-md-12" style="margin-top: 10px;">
-                        <div class="row">
-                            {!! buildingfeatures() !!}
-                        </div>
-                    </div>
+                    {!! buildingfeatures() !!}
 
                     {{--Apartment Features--}}
                     {!! features() !!}

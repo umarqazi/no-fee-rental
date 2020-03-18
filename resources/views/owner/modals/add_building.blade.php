@@ -70,7 +70,7 @@
                     <div class="col-sm-12">
                         <div class="amenities-section form-group">
                             <div class="row">
-                                {!! amenities() !!}
+                                {!! buildingfeatures() !!}
                             </div>
                         </div>
                     </div>
