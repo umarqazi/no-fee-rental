@@ -645,36 +645,6 @@ function isOpenToday($openHouse) {
 }
 
 /**
- * @return string
- */
-function buildingfeatures() {
-    $i = 0;
-    $html    = '<div class="col-md-4"><h3>Building Features</h3>';
-    $service = new \App\Services\AmenityService();
-    $amenities = $service->get();
-    $total = $amenities->count();
-    $perColumn = ceil($total / 3);
-    foreach ($amenities as $key => $amenity ) {
-        $i ++;
-        $id = str_random(10);
-        $html .= '<ul class="checkbox-listing"><li><div class="custom-control custom-checkbox">';
-        $html .= Form::checkbox( 'amenities[]', $amenity->id, null, [
-            'class' => 'custom-control-input',
-            'id'    => $id
-        ] );
-        $html .= '<label class="custom-control-label" for="' . $id . '">' . $amenity->amenities . '</label></div></li></ul>';
-        if ( ( $key + 1 ) % $perColumn === 0 ) {
-            $html .= '</div><div class="col-sm-4"><h3>&nbsp;</h3>';
-        } elseif ( $i === $total ) {
-            $i = 0;
-            $html .= '</div>';
-        }
-    }
-
-    return $html;
-}
-
-/**
  * @return string|null
  */
 function bedsDropDown() {
@@ -1085,29 +1055,70 @@ function features_pet() {
  */
 function features() {
     $i = 0;
-    $html     = null;
-    $features = (new \App\Services\FeatureService())->get();
-    $total = ($features->count() - 1);
+    $html       = null;
+    $features   = (new \App\Services\FeatureService())->get();
+    $total      = $features->count();
     $per_column = ceil($total / 3);
-    $html .= "<div class='col-md-12' style='margin-top: 10px;'>";
-    $html .= "<h3>Unit Feature</h3><div class='row'><div class='col-md-4'>";
+    $html .= "<div class='col-md-12' style='margin-top: 10px;'>"; // Main div Start
+    $html .= "<h3>Unit Feature</h3>";
+    $html .= "<div class='row'>"; // Row Start
     foreach ( $features as $type => $feature ) {
+
+        if($i == 0) $html .= "<div class='col-md-4'><ul class='checkbox-listing'>";
+
         $i ++;
         $id = str_random(10);
-        $html .= "<ul class='checkbox-listing'><li><div class='custom-control custom-checkbox'>";
+        $html .= "<li><div class='custom-control custom-checkbox'>";
         $html .= Form::checkbox( "features[]", $feature->id, null,
                     [
                         'class' => 'custom-control-input',
                         'id'    => "listitem-{$id}"
                     ]);
-        $html .= "<label class='custom-control-label' for='listitem-{$id}'>{$feature->name}</label></div></li></ul>";
+        $html .= "<label class='custom-control-label' for='listitem-{$id}'>{$feature->name}</label></div></li>";
+
         if($i == $per_column) {
-            $i = 0;
-            $html .= "</div><div class='col-md-4'>";
+            $i = 0; $html .= "</ul></div>";
         }
     }
 
-    $html .= "</div></div></div>";
+    $html .= "</div>"; // Row Close
+    $html .= "</div>"; // Main div Close
+
+    return $html;
+}
+
+/**
+ * @return string
+ */
+function buildingfeatures() {
+    $i = 0; $html = null;
+    $html .= '<div class="col-md-12" style="margin-top: 10px;">'; // Main div start
+    $html .= '<h3>Building Features</h3>';
+    $html .= '<div class="row">'; // Row Start
+    $service = new \App\Services\AmenityService();
+    $amenities = $service->get();
+    $total = $amenities->count();
+    $perColumn = ceil($total / 3);
+    foreach ($amenities as $key => $amenity ) {
+        if($i == 0) $html .= '<div class="col-sm-4">';
+
+        $i ++;
+        $id = str_random(10);
+        $html .= '<ul class="checkbox-listing"><li><div class="custom-control custom-checkbox">';
+        $html .= Form::checkbox( 'amenities[]', $amenity->id, null, [
+            'class' => 'custom-control-input',
+            'id'    => $id
+        ] );
+        $html .= '<label class="custom-control-label" for="' . $id . '">' . $amenity->amenities . '</label></div></li></ul>';
+
+        if ( $perColumn == $i ) {
+            $i = 0;
+            $html .= '</div>';
+        }
+    }
+
+    $html .= '</div>'; // Row end
+    $html .= '</div>'; // Main div end
 
     return $html;
 }
