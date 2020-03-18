@@ -66,13 +66,13 @@ class BaseRepo implements IRepo {
 		return ($record) ? $record->delete() : false;
 	}
 
-	/**
-	 * @param $clause
-	 *
-	 * @return bool|mixed
-	 */
-	public function deleteMultiple($clause) {
-		return $this->model->where($clause)->delete();
+    /**
+     * @param $column
+     * @param array $data
+     * @return mixed
+     */
+	public function deleteMultiple($column, $data) {
+		return $this->model->whereIn($column, $data)->delete();
 	}
 
 	/**

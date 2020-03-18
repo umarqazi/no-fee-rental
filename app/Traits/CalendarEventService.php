@@ -66,7 +66,7 @@ trait CalendarEventService
         self::$data->model = ListingConversation::class;
         self::$data->start = sprintf("%s", $data->created_at->format('m-d-Y h:i a'));
         self::$data->end = self::$data->start;
-        self::$data->from = $data->from;
+        self::$data->from = $data->from ?? $data->to;
         self::$data->to = $data->to ?? null;
         self::__create();
     }

@@ -518,13 +518,8 @@ $(() => {
     $(".header-bg .search-property .search-fld").click(function(e) {
         $(".neighborhood-search-dropdown").toggle();
     });
-    $(".checkbox-all").click(function () {
-        $(".checkBoxClass").prop('checked', $(this).prop('checked'));
-    });
-    $('.notification-container .notification-content .cross-icon-noti').click(function () {
-        $('.notification-container').removeClass('hide-notification');
-        $(this).parents('.notification-container .notification-content').addClass('hide-notification');
-    });
+
+
     $('.notification-main-wrapper i').click(function () {
         $(this).toggleClass('far fa-star fas fa-star');
     });
