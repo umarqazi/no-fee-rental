@@ -52,10 +52,8 @@ class CalendarService {
      * @return bool|mixed
      */
     public function removeEvent($id, $model) {
-        return $this->calendarRepo->deleteMultiple([
-            ['ref_event_id', '=', $id],
-            ['model', '=', $model]
-        ]);
+        $event = $this->calendarRepo->find(['ref_event_id' => $id, 'model' => $model]);
+        return $event->delete();
     }
 
     /**
