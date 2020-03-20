@@ -581,7 +581,7 @@ class ListingService extends BuildingService {
      * @return bool
      */
     private function __updateOpenHouses( $id, $data ) {
-        $this->openHouseRepo->deleteMultiple( [ 'listing_id' => $id ] );
+        $this->openHouseRepo->deleteMultiple('listing_id', [$id] );
 
         return $this->__addOpenHouse( $id, $data, true );
     }

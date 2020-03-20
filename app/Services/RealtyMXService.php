@@ -144,6 +144,7 @@ class RealtyMXService extends ListingService {
             'map_location'      => $building->map_location
         ];
 
+
         $list = $this->listingRepo->create($data);
 
         if ($this->images !== null && $this->images->count() > 0) {
@@ -157,7 +158,6 @@ class RealtyMXService extends ListingService {
         if($apartment_pets !== null) {
             $list->pets()->attach($apartment_pets);
         }
-
 
         $this->__generateSuccessImportListingReport($list);
         return true;
@@ -293,12 +293,55 @@ class RealtyMXService extends ListingService {
      * @return bool
      */
     private function __createList( $agent, $listing ) {
-        if ( !$uniqueListing = $this->__isNewListing( $listing, $agent ) ) {
+        $uniqueListing = $this->__isNewListing( $listing, $agent );
+
+        if ( $uniqueListing->isUnique !== false ) {
             return $this->__pushListing($this->__pushBuilding( $agent, $listing ), $listing);
         }
 
+        $this->__updateList($uniqueListing, $listing);
         $this->__generateExistingListErrorReport( $uniqueListing );
         return false;
+    }
+
+    /**
+     * @param $dirty
+     * @param $fresh
+     * @return bool
+     */
+    private function __updateList($dirty, $fresh) {
+        $details      = $fresh->get( 'details' );
+        $location     = $fresh->get( 'location' );
+        $attrib       = $fresh->get( '@attributes' );
+        $apartment_pets = $this->__apartmentPets($details);
+        $apartment_features = $this->__apartmentFeatures(collect($details)->get('unit-amenities'));
+        $data = [
+            'realty_url'        => $attrib->url ?? null,
+            'listing_type'      => $this->__isExclusive($details) ? EXCLUSIVE : OPEN,
+            'rent'              => $details->price ?? null,
+            'thumbnail'         => $this->images !== null && $this->images->count() > 0 ? $this->images->random() : null,
+            'availability'      => $details->availableOn ?? null,
+            'availability_type' => isset($details->availableOn) ? AVAILABLE_BY_DATE : NOT_AVAILABLE,
+            'bedrooms'          => $details->bedrooms < 1 ? STUDIO : $details->bedrooms ?? null,
+            'baths'             => $details->bathrooms ?? null,
+            'square_feet'       => $details->squareFeet ?? null,
+            'unit'              => is_object($location->apartment) ? null : $location->apartment,
+            'description'       => $details->description ?? null,
+            'visibility'        => isset($dirty->user->company->company) ? $dirty->user->company->company == ucwords(strtolower(MRG)) : INACTIVELISTING,
+            'map_location'      => $dirty->map_location
+        ];
+
+        $this->listingRepo->update($dirty->id, $data);
+
+        if($apartment_pets !== null) {
+            $dirty->pets()->sync($apartment_pets);
+        }
+
+        if($apartment_features !== null) {
+            $dirty->features()->sync($apartment_features);
+        }
+
+        return true;
     }
 
     /**
@@ -470,15 +513,22 @@ class RealtyMXService extends ListingService {
      * @return bool
      */
     private function __isNewListing( $listing, $user ) {
-        if($listing = $this->listingRepo->find(['realty_id' => $listing->get( '@attributes' )->id])->first()) {
+        $listing = $this->listingRepo->find([
+            'realty_id'       => $listing->get( '@attributes' )->id,
+            'display_address' => $listing->get('location')->address
+        ])->first();
+
+        if($listing->count() > 0) {
+
             if($listing->agent->email == $user->email) {
-                return false;
-            } else {
+                $listing->isUnique = false;
                 return $listing;
             }
+
         }
 
-        return false;
+        $listing->isUnique = true;
+        return $listing;
     }
 
     /**
