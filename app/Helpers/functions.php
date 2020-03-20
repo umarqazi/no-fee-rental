@@ -1333,7 +1333,7 @@ function listing_detail( $id ) {
  * @return string
  */
 function str_formatting( $string, $phrase ) {
-    $string = intval(preg_replace('/[^\d.]/', '', $string));
+    $string = floatval(preg_replace('/[^\d.]/', '', $string));
     return number_format($string) . ' ' . ( $string > 1 ? $phrase . 's' : $phrase );
 }
 
