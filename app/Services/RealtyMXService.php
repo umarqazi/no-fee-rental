@@ -518,7 +518,7 @@ class RealtyMXService extends ListingService {
             'display_address' => $listing->get('location')->address
         ])->first();
 
-        if($listing->count() > 0) {
+        if($listing !== null) {
 
             if($listing->agent->email == $user->email) {
                 $listing->isUnique = false;
