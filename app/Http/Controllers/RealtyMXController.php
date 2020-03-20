@@ -64,14 +64,14 @@ class RealtyMXController extends Controller {
      * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
 	public function dispatchJob() {
-		$fileName = 'realtyMXFeed/'.basename(self::REALTY_FEED);
-		if(Storage::disk('local')->put($fileName, file_get_contents(self::REALTY_FEED))) {
-            $filePath = Storage::disk('local')->get($fileName);
+//		$fileName = 'realtyMXFeed/'.basename(self::REALTY_FEED);
+//		if(Storage::disk('local')->put($fileName, file_get_contents(self::REALTY_FEED))) {
+            $filePath = Storage::disk('local')->get($fileName ?? 'realtyMXFeed/nofeerentalsnyc.xml');
             $xml = XmlParser::extract($filePath);
             $content = $xml->getContent();
             return $this->realtyService->fetch($content->properties->property ?? $content->property);
-        }
+//        }
 
-        return $this->realtyService->writeCSV($this->report, public_path().'/csv/realty.csv');
+//        return $this->realtyService->writeCSV($this->report, public_path().'/csv/realty.csv');
 	}
 }
