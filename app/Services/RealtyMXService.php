@@ -294,7 +294,7 @@ class RealtyMXService extends ListingService {
      */
     private function __createList( $agent, $listing ) {
         $uniqueListing = $this->__isNewListing( $listing, $agent );
-
+dd($uniqueListing);
         if ( $uniqueListing->isUnique !== false ) {
             return $this->__pushListing($this->__pushBuilding( $agent, $listing ), $listing);
         }
@@ -513,14 +513,15 @@ class RealtyMXService extends ListingService {
      * @return bool
      */
     private function __isNewListing( $listing, $user ) {
-        $listing = $this->listingRepo->find([
+        $list = $this->listingRepo->find([
             'realty_id'       => $listing->get( '@attributes' )->id,
             'display_address' => $listing->get('location')->address
         ])->first();
 
-        if($listing !== null) {
+        if($list !== null) {
 
-            if($listing->agent->email == $user->email) {
+            dd($listing, $user, $list, $list->agent);
+            if($list->agent->email == $user->email) {
                 $listing->isUnique = false;
                 return $listing;
             }
