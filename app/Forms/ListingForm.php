@@ -165,7 +165,7 @@ class ListingForm extends BaseForm {
 			'rent'               => toValidPrice($this->rent),
 			'thumbnail'          => $this->thumbnail,
             'visibility'         => $this->visibility,
-			'square_feet'        => $this->square_feet,
+			'square_feet'        => toValidPrice($this->square_feet),
 			'map_location'       => $this->map_location,
             'listing_type'       => $this->listing_type,
             'is_convertible'     => $this->is_convertible,
