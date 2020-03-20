@@ -109,7 +109,6 @@ class ListingService extends BuildingService {
      * @return bool
      */
     private function __addListingEvents($listing) {
-        $this->addSlot();
         return true;
     }
 
@@ -895,7 +894,12 @@ class ListingService extends BuildingService {
      * @return int
      */
     private function __visibility($building) {
+
         if(isMRGAgent()) {
+            return ACTIVELISTING;
+        }
+
+        if($this->agentHasPlan() && $this->addSlot()) {
             return ACTIVELISTING;
         }
 
