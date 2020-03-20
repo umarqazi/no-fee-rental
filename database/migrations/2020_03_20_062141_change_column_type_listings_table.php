@@ -19,8 +19,8 @@ class ChangeColumnTypeListingsTable extends Migration
         });
 
         Schema::table('listings', function (Blueprint $table) {
-            $table->string('rent')->nullable()->after('unit');
-            $table->string('square_feet')->nullable()->after('rent');
+            $table->bigInteger('rent')->nullable()->after('unit');
+            $table->bigInteger('square_feet')->nullable()->after('rent');
         });
     }
 
