@@ -526,7 +526,7 @@ class RealtyMXService extends ListingService {
             }
 
         }
-
+        $listing = toObject($listing);
         $listing->isUnique = true;
         return $listing;
     }
