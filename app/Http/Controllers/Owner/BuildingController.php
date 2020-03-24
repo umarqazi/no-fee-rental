@@ -78,7 +78,7 @@ class BuildingController extends Controller {
      * @return Factory|View
      */
     public function create(Request $request) {
-        $request->request()->add([
+        $request->request->add([
             'contact_representative' => $this->invitationService->addRepresentative($request)
         ]);
 
