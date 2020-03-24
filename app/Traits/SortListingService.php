@@ -35,7 +35,8 @@ trait SortListingService {
      */
     public function recommended() {
         $sorted = $this->collection->sortBy(function ($value) {
-            return $value->agent->company->company === MRG;
+            return !empty($value->agent->company)
+                ? $value->agent->company->company === MRG : false;
         })->values();
 
         return $sorted;

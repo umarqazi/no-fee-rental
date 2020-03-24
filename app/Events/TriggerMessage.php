@@ -12,8 +12,8 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
  * Class TriggerMessage
  * @package App\Events
  */
-class TriggerMessage implements ShouldBroadcast {
-    use Dispatchable, InteractsWithSockets, SerializesModels;
+class TriggerMessage {
+    use SerializesModels;
 
     /**
      * @var array
@@ -27,26 +27,5 @@ class TriggerMessage implements ShouldBroadcast {
      */
     public function __construct($data) {
         $this->data = (is_object($data)) ? $data : toObject($data);
-    }
-
-    /**
-     * @return string
-     */
-    public function broadcastAs() {
-        return 'message';
-    }
-
-    /**
-     * @return Channel|Channel|Channel[]
-     */
-    public function broadcastOn() {
-        return new Channel('messaging-channel.'.$this->data->to);
-    }
-
-    /**
-     * @return array
-     */
-    public function broadcastWith() {
-        return collect($this->data)->toArray();
     }
 }

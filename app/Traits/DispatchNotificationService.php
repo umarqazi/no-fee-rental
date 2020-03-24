@@ -369,7 +369,7 @@ trait DispatchNotificationService
         self::$data->via = 'info';
         self::$data->view = 'contact_us';
         self::$data->subject = 'Contact Us Message';
-        self::$data->message = 'New User contact you';
+        self::$data->message = 'New User Contacts With You';
         self::$data->to = admin('id');
         self::$data->request = $data;
         self::$data->linked_id = $data->id;

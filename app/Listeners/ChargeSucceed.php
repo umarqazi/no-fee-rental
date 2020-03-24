@@ -20,9 +20,9 @@ class ChargeSucceed
      *
      * @return void
      */
-    public function __construct(StripeWebhookCall $webHook)
+    public function __construct()
     {
-        $this->webHook = $webHook;
+
     }
 
     /**
@@ -33,6 +33,6 @@ class ChargeSucceed
      */
     public function handle($event)
     {
-        dd('success', $this->webHook);
+        dd('success', $event);
     }
 }

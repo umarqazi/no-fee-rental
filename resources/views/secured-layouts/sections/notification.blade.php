@@ -56,6 +56,22 @@
                                 <img src="{{ Storage::url('/assets/images/error-cross.png') }}" class="cross-icon-noti remove-single"/>
                             </div>
                         </div>
+                    @elseif ($notification->model == \App\ContactUs::class)
+                        @php $user = (new $notification->model)->where('id', $notification->linked_id)->first() @endphp
+                        <div class="notification-content {{ $notification->is_read ? '' : 'unread' }}">
+                            <a href="{{ $notification->url }}" data-id="{{ $notification->id }}">
+                                <div class="notification-inner-content">
+                                    <img src="{{ Storage::url(DUI) }}" alt=""/>
+                                    <div class="listingnoti">
+                                        <h4>{{ $user->username }}</h4>
+                                        <p>{{ str_limit($notification->message, 50) }}</p>
+                                    </div>
+                                </div>
+                            </a>
+                            <div class="right-side-icons">
+                                <img src="{{ Storage::url('/assets/images/error-cross.png') }}" class="cross-icon-noti remove-single"/>
+                            </div>
+                        </div>
                     @endif
                 @endif
             @endforeach

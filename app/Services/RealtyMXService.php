@@ -294,7 +294,7 @@ class RealtyMXService extends ListingService {
      */
     private function __createList( $agent, $listing ) {
         $uniqueListing = $this->__isNewListing( $listing, $agent );
-dd($uniqueListing);
+
         if ( $uniqueListing->isUnique !== false ) {
             return $this->__pushListing($this->__pushBuilding( $agent, $listing ), $listing);
         }
@@ -520,13 +520,15 @@ dd($uniqueListing);
 
         if($list !== null) {
 
-            dd($listing, $user, $list, $list->agent);
             if($list->agent->email == $user->email) {
                 $listing->isUnique = false;
                 return $listing;
             }
 
+            $listing->isUnique = true;
+            return $listing;
         }
+
         $listing = toObject($listing);
         $listing->isUnique = true;
         return $listing;
