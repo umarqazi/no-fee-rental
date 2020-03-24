@@ -31,6 +31,10 @@ $('#controls').on('input keydown', function(e) {
     }
 });
 
+$('input[name=thumbnail]').on('change', function (e) {
+    livePreview(e.target.files[0], '#preview-img');
+});
+
 $('#add_building').on('submit', function(e) {
     if(!$('#add_building').valid()) {
         e.preventDefault();
