@@ -40,12 +40,7 @@ class ContactUsService {
 	    $contact = $this->__validateForm($request);
         DB::beginTransaction();
 	    if($contact = $this->repo->create($contact->toArray())) {
-            DispatchNotificationService::CONTACTUS(toObject([
-                'to'   => mailToAdmin(),
-                'from' => $contact->email,
-                'data' => $contact
-            ]));
-
+            DispatchNotificationService::CONTACTUS($contact);
             DB::commit();
             return true;
         }

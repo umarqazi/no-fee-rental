@@ -46,10 +46,10 @@
                                 <div class="dropdown-for-price dropdown-listiing-rent-page" id="advance-search-chkbox">
                                     <ul>
                                         <li>
-                                        {!! Form::text('min_price', Null,['class' => 'form-control PPm', 'placeholder' => '$ min']) !!}
+                                        {!! Form::text('min_price', Null,['class' => 'form-control PPm', 'placeholder' => '$ Min Price']) !!}
                                         <li>To</li>
                                         <li>
-                                        {!! Form::text('max_price', Null, ['class' => 'form-control PPM', 'placeholder' =>'$ max']) !!}
+                                        {!! Form::text('max_price', Null, ['class' => 'form-control PPM', 'placeholder' =>'$ Max Price']) !!}
                                     </ul>
                                 </div>
                             </div>

@@ -1017,26 +1017,26 @@ function features_pet() {
     $html .= "<script>
         let row = $('.row');
         $(() => {
-            if($('#listitemp-3').is(':checked')) {
+            if($('.pets-2').is(':checked')) {
                 p3(true);
             }
 
-            if($('#listitemp-4').is(':checked')) {
+            if($('.pets-3').is(':checked')) {
                 p4(true);
             }
         });
 
         function p3(action) {
-            row.find('input[value=1], input[value=2], input[value=4]').prop('checked', false);
-            row.find('input[value=1], input[value=2]').prop('disabled', action);
+            row.find('.pets-0, .pets-1, .pets-3').prop('checked', false);
+            row.find('.pets-0, .pets-1').prop('disabled', action);
         }
 
         function p4(action) {
-            row.find('input[value=1], input[value=2], input[value=3]').prop('checked', false);
-            row.find('input[value=1], input[value=2]').prop('disabled', action);
+            row.find('.pets-0, .pets-1, .pets-2').prop('checked', false);
+            row.find('.pets-0, .pets-1').prop('disabled', action);
         }
 
-        $('#listitem-4, #listitem-3').change(function() {
+        $('.pets-3, .pets-2').change(function() {
             let val = $(this).val();
             if (val === '3') {
                 p3($(this).is(':checked'));
@@ -1054,8 +1054,7 @@ function features_pet() {
  * @return string|null
  */
 function features() {
-    $i = 0;
-    $html       = null;
+    $i = 0; $html = null; $open =false;
     $features   = (new \App\Services\FeatureService())->get();
     $total      = $features->count();
     $per_column = ceil($total / 3);
@@ -1064,7 +1063,10 @@ function features() {
     $html .= "<div class='row'>"; // Row Start
     foreach ( $features as $type => $feature ) {
 
-        if($i == 0) $html .= "<div class='col-md-4'><ul class='checkbox-listing'>";
+        if($i == 0) {
+            $open = true;
+            $html .= "<div class='col-md-4'><ul class='checkbox-listing'>";
+        }
 
         $i ++;
         $id = str_random(10);
@@ -1077,8 +1079,13 @@ function features() {
         $html .= "<label class='custom-control-label' for='listitem-{$id}'>{$feature->name}</label></div></li>";
 
         if($i == $per_column) {
+            $open = false;
             $i = 0; $html .= "</ul></div>";
         }
+    }
+
+    if($open) {
+        $html .= "</ul></div>"; // Optional
     }
 
     $html .= "</div>"; // Row Close
@@ -1091,7 +1098,7 @@ function features() {
  * @return string
  */
 function buildingfeatures() {
-    $i = 0; $html = null;
+    $i = 0; $html = null; $open = false;
     $html .= '<div class="col-md-12" style="margin-top: 10px;">'; // Main div start
     $html .= '<h3>Building Features</h3>';
     $html .= '<div class="row">'; // Row Start
@@ -1100,7 +1107,11 @@ function buildingfeatures() {
     $total = $amenities->count();
     $perColumn = ceil($total / 3);
     foreach ($amenities as $key => $amenity ) {
-        if($i == 0) $html .= '<div class="col-sm-4">';
+
+        if($i == 0) {
+            $open = true;
+            $html .= '<div class="col-sm-4">';
+        }
 
         $i ++;
         $id = str_random(10);
@@ -1112,9 +1123,13 @@ function buildingfeatures() {
         $html .= '<label class="custom-control-label" for="' . $id . '">' . $amenity->amenities . '</label></div></li></ul>';
 
         if ( $perColumn == $i ) {
-            $i = 0;
-            $html .= '</div>';
+            $open = false;
+            $i = 0; $html .= '</div>';
         }
+    }
+
+    if($open) {
+        $html .= '</div>'; // Optional
     }
 
     $html .= '</div>'; // Row end

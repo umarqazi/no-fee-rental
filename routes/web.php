@@ -232,5 +232,6 @@ use Workerman\Worker;
 use PHPSocketIO\SocketIO;
 // Test Route
 Route::get('/test', function (\Illuminate\Http\Request $request) {
-    return view('blog');
+    \Illuminate\Support\Facades\Event::fire('charge.success', ['a' => 'b']);
+    return 'ok';
 })->name('web.test');

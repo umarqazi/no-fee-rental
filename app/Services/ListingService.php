@@ -87,29 +87,16 @@ class ListingService extends BuildingService {
         $listing->building_id = $building->id;
         $listing->visibility  = $this->__visibility($building);
         $listing              = $this->__addList($listing);
-        $this->__addOpenHouse( $listing->id, $request->open_house );
-        $this->__addFeatures( $listing, $request->features );
-        $this->__addPets( $listing, $request->pets );
-        $this->__freshnessScore($listing);
         $this->__manageSaveSearch( $listing );
 
-
-        if($this->__addListingEvents($listing)) {
+        if($this->__addListingEvents($request, $listing)) {
             DB::commit();
             return $listing->id;
         }
 
+
         DB::rollBack();
         return false;
-
-    }
-
-    /**
-     * @param $listing
-     * @return bool
-     */
-    private function __addListingEvents($listing) {
-        return true;
     }
 
     /**
@@ -120,7 +107,11 @@ class ListingService extends BuildingService {
      */
     public function insertImages( $id, $request ) {
         $batch = [];
-        $files = uploadMultiImages( $request->file( 'file' ), 'images/listing/backgrounds' );
+        $files = uploadMultiImages(
+            $request->file( 'file' ),
+            'images/listing/backgrounds'
+        );
+
         foreach ( $files as $file ) {
             $batch[] = [
                 'listing_id'    => $id,
@@ -887,6 +878,18 @@ class ListingService extends BuildingService {
         }
 
         return true;
+    }
+
+    /**
+     * @param $request
+     * @param $listing
+     * @return bool
+     */
+    private function __addListingEvents($request, $listing) {
+        return $this->__addOpenHouse( $listing->id, $request->open_house) &&
+            $this->__addFeatures( $listing, $request->features ) &&
+            $this->__addPets( $listing, $request->pets ) &&
+            $this->__freshnessScore($listing);
     }
 
     /**
