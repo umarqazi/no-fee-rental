@@ -295,12 +295,12 @@ class RealtyMXService extends ListingService {
     private function __createList( $agent, $listing ) {
         $uniqueListing = $this->__isNewListing( $listing, $agent );
 
-        if ( $uniqueListing->isUnique !== false ) {
+        if ( $uniqueListing->isNew == true ) {
             return $this->__pushListing($this->__pushBuilding( $agent, $listing ), $listing);
         }
 
         $this->__updateList($uniqueListing, $listing);
-        $this->__generateExistingListErrorReport( $uniqueListing );
+
         return false;
     }
 
@@ -313,13 +313,16 @@ class RealtyMXService extends ListingService {
         $details      = $fresh->get( 'details' );
         $location     = $fresh->get( 'location' );
         $attrib       = $fresh->get( '@attributes' );
+        $images       = isset($fresh->get( 'media' )->photo)
+                        ? $this->__images( $fresh->get( 'media' )->photo )
+                        : null;
         $apartment_pets = $this->__apartmentPets($details);
         $apartment_features = $this->__apartmentFeatures(collect($details)->get('unit-amenities'));
         $data = [
             'realty_url'        => $attrib->url ?? null,
             'listing_type'      => $this->__isExclusive($details) ? EXCLUSIVE : OPEN,
             'rent'              => $details->price ?? null,
-            'thumbnail'         => $this->images !== null && $this->images->count() > 0 ? $this->images->random() : null,
+            'thumbnail'         => $images !== null && $images->count() > 0 ? $images->random() : null,
             'availability'      => $details->availableOn ?? null,
             'availability_type' => isset($details->availableOn) ? AVAILABLE_BY_DATE : NOT_AVAILABLE,
             'bedrooms'          => $details->bedrooms < 1 ? STUDIO : $details->bedrooms ?? null,
@@ -327,7 +330,7 @@ class RealtyMXService extends ListingService {
             'square_feet'       => $details->squareFeet ?? null,
             'unit'              => is_object($location->apartment) ? null : $location->apartment,
             'description'       => $details->description ?? null,
-            'visibility'        => isset($dirty->user->company->company) ? $dirty->user->company->company == ucwords(strtolower(MRG)) : INACTIVELISTING,
+            'visibility'        => isset($dirty->agent->company->company) ? $dirty->agent->company->company == ucwords(strtolower(MRG)) : INACTIVELISTING,
             'map_location'      => $dirty->map_location
         ];
 
@@ -341,6 +344,7 @@ class RealtyMXService extends ListingService {
             $dirty->features()->sync($apartment_features);
         }
 
+        $this->__generateExistingListReport( $dirty );
         return true;
     }
 
@@ -435,7 +439,7 @@ class RealtyMXService extends ListingService {
                 'profile_image' => $agent->photo ?? null,
                 'remember_token' => str_random(60),
                 'user_type' => AGENT,
-                'phone_number' => $agent->phone_numbers->main ?? null,
+                'phone_number' => $agent->phone_numbers->main,
                 'company_id' => $this->__createCompany($agent->company),
             ]);
 
@@ -513,24 +517,22 @@ class RealtyMXService extends ListingService {
      * @return bool
      */
     private function __isNewListing( $listing, $user ) {
-        $list = $this->listingRepo->find([
-            'realty_id'       => $listing->get( '@attributes' )->id,
-            'display_address' => $listing->get('location')->address
-        ])->first();
+        $realty_id = str_replace(' ', '', $listing->get('@attributes')->id);
+        $listing = $this->listingRepo->find(['realty_id' => $realty_id])->first();
 
-        if($list !== null) {
+        if($listing != null) {
 
-            if($list->agent->email == $user->email) {
-                $listing->isUnique = false;
+            if($listing->agent->email == $user->email) {
+                $listing->isNew = false;
                 return $listing;
             }
 
-            $listing->isUnique = true;
+            $listing->isNew = true;
             return $listing;
         }
 
         $listing = toObject($listing);
-        $listing->isUnique = true;
+        $listing->isNew = true;
         return $listing;
     }
 
@@ -570,7 +572,7 @@ class RealtyMXService extends ListingService {
     /**
      * @param $list
      */
-    private function __generateExistingListErrorReport( $list ) {
+    private function __generateExistingListReport( $list ) {
         array_push($this->report, $this->__errorReporting($list, 'none'));
     }
 

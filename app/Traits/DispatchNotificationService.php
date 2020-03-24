@@ -155,7 +155,7 @@ trait DispatchNotificationService
         self::$data->model = User::class;
         self::$data->from = myId();
         self::$data->toEmail = $data->user->email;
-        self::$data->url = null;
+        self::$data->url = 'javascript:void(0)';
         return self::__send();
     }
 

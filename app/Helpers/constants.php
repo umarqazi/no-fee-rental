@@ -489,3 +489,10 @@ if(!defined('STUDIO')) {
 if(!defined('WP_PAGINATION')) {
     define('WP_PAGINATION', 9);
 }
+
+/**
+ * Dump old meeting request after MAX_DAYS_FOR_DUMP_MEETING_REQUESTS
+ */
+if(!defined('MAX_DAYS_FOR_DUMP_MEETING_REQUESTS')) {
+    define('MAX_DAYS_FOR_DUMP_MEETING_REQUESTS', 90);
+}

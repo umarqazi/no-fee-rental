@@ -78,7 +78,10 @@ class BuildingController extends Controller {
      * @return Factory|View
      */
     public function create(Request $request) {
-        $request->contact_representative = $this->invitationService->addRepresentative($request);
+        $request->request()->add([
+            'contact_representative' => $this->invitationService->addRepresentative($request)
+        ]);
+
         $this->buildingService->create($request);
         return success('Building has been added', route('owner.viewBuildings'));
     }

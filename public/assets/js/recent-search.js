@@ -37,13 +37,13 @@ function makeString(v, i) {
     obj.string = obj.title;
 
     if(v.$min_price.length > 0) {
-        obj.title += ` ${v.$max_price.length > 0 ? 'between' : 'in'} $${formatNumber(v.$min_price)}`;
-        obj.string += ` ${v.$max_price.length > 0 ? 'between' : 'in'} $${formatNumber(v.$min_price)}`;
+        obj.title += ` ${v.$max_price.length > 0 ? 'between' : 'above'} $${formatNumber(v.$min_price)}`;
+        obj.string += ` ${v.$max_price.length > 0 ? 'between' : 'above'} $${formatNumber(v.$min_price)}`;
     }
 
     if(v.$max_price.length > 0) {
-        obj.title += ` ${v.$min_price.length > 0 ? 'and' : 'in'} $${formatNumber(v.$max_price)}`;
-        obj.string += ` ${v.$min_price.length > 0 ? 'and' : 'in'} $${formatNumber(v.$max_price)}`;
+        obj.title += ` ${v.$min_price.length > 0 ? 'and' : 'below'} $${formatNumber(v.$max_price)}`;
+        obj.string += ` ${v.$min_price.length > 0 ? 'and' : 'below'} $${formatNumber(v.$max_price)}`;
     }
 
     if(v.$neighborhoods.length > 0) {
