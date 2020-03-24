@@ -120,7 +120,7 @@ class ListingConversationService extends MemberService {
      * @return mixed
      */
     public function accept($id) {
-        return $this->listingConversationRepo->update($id, ['meeting_request' => 1]);
+        return $this->listingConversationRepo->update($id, ['meeting_request' => true]);
     }
 
     /**
@@ -139,6 +139,22 @@ class ListingConversationService extends MemberService {
      */
     public function unArchive($id) {
         return $this->listingConversationRepo->update($id, ['is_archived' => false, 'meeting_request' => true]);
+    }
+
+    /**
+     * @param array $ids
+     * @return mixed
+     */
+    public function archiveOldRequests(array $ids) {
+        return $this->listingConversationRepo->updateMultiRows($ids, ['is_archived' => true]);
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function inactiveConversations() {
+        return $this->listingConversationRepo->inactiveConversations()->get();
     }
 
     /**

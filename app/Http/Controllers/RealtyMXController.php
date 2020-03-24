@@ -71,7 +71,7 @@ class RealtyMXController extends Controller {
             $content = $xml->getContent();
             return $this->realtyService->fetch($content->properties->property ?? $content->property);
 //        }
-
+//
 //        return $this->realtyService->writeCSV($this->report, public_path().'/csv/realty.csv');
 	}
 }

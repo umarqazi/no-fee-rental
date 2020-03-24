@@ -2,6 +2,8 @@
 
 namespace App\Console;
 
+use App\Console\Commands\DumpOldMeetingRequests;
+use App\Console\Commands\RealtySyndication;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -13,7 +15,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        Commands\RealtyMXFeedImport::class,
+        RealtySyndication::class,
+        DumpOldMeetingRequests::class
     ];
 
     /**
@@ -24,7 +27,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('import:feed demo.xml')->everyMinute();
+        $schedule->command('dump:old_requests')->daily();
     }
 
     /**

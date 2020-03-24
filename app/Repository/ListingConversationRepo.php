@@ -85,6 +85,16 @@ class ListingConversationRepo extends BaseRepo {
     /**
      * @return mixed
      */
+    public function inactiveConversations() {
+        return $this->find([
+            'meeting_request'          => DEACTIVE,
+            'is_archived'              => FALSE,
+        ]);
+    }
+
+    /**
+     * @return mixed
+     */
     public function sender() {
         return $this->model->with('sender');
     }
