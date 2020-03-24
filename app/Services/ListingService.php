@@ -87,7 +87,14 @@ class ListingService extends BuildingService {
         $listing->building_id = $building->id;
         $listing->visibility  = $this->__visibility($building);
         $listing              = $this->__addList($listing);
-        $this->__manageSaveSearch( $listing );
+
+        if($request->features !== null) {
+            $this->__addFeatures( $listing, $request->features );
+        }
+
+        if($request->pets !== null) {
+            $this->__addPets( $listing, $request->pets );
+        }
 
         if($this->__addListingEvents($request, $listing)) {
             DB::commit();
@@ -887,8 +894,6 @@ class ListingService extends BuildingService {
      */
     private function __addListingEvents($request, $listing) {
         return $this->__addOpenHouse( $listing->id, $request->open_house) &&
-            $this->__addFeatures( $listing, $request->features ) &&
-            $this->__addPets( $listing, $request->pets ) &&
             $this->__freshnessScore($listing);
     }
 
