@@ -33,6 +33,6 @@ class ChargeSucceed
      */
     public function handle($event)
     {
-        dd('success', $event);
+        print_r('success', $event);die();
     }
 }

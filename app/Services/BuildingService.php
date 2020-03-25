@@ -188,8 +188,7 @@ class BuildingService extends CreditPlanService {
     public function create( $request ) {
         DB::beginTransaction();
         $building = $this->__validateForm($request);
-        $building = $this->buildingRepo->create($building->toArray());
-        if($building) {
+        if($building = $this->buildingRepo->create($building->toArray())) {
             $this->__attachAmenities($building, $request->amenities);
             DB::commit();
             return true;

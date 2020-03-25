@@ -2,4 +2,12 @@
 
 use \Illuminate\Support\Facades\Event;
 
-Event::listen('charge.success', \App\Listeners\ChargeSucceed::class);
+
+//customer.subscription.deleted
+//customer.subscription.updated
+//customer.subscription.created
+//invoice.created
+//invoice.payment_failed
+//invoice.payment_succeeded
+//recipient.created
+Event::listen('customer.subscription.deleted', \App\Listeners\ChargeSucceed::class);

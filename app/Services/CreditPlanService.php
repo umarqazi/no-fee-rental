@@ -112,7 +112,24 @@ class CreditPlanService extends PaymentService {
      * @return mixed
      */
     public function cancel() {
-        return $this->__cancelSubscription();
+        if($this->__cancelSubscription()) {
+            dd('yes');
+            $cancelPlan = $this->creditPlanRepo->find([
+                'user_id' => myId()
+            ])->update(['is_cancel' => TRUE]);
+
+            if($cancelPlan) {
+                return $this->listingRepo->find([
+                    'user_id' => myId()
+                ])->update([
+                    'visibility' => ARCHIVED
+                ]);
+            }
+
+            return false;
+        }
+
+        return false;
     }
 
     /**
@@ -278,7 +295,7 @@ class CreditPlanService extends PaymentService {
      * @return mixed
      */
     public function myPlan() {
-        return $this->creditPlanRepo->find(['user_id' => myId()])->first();
+        return $this->creditPlanRepo->find(['user_id' => myId()])->latest()->first();
     }
 
     /**
@@ -305,8 +322,9 @@ class CreditPlanService extends PaymentService {
     private function __currentBalance() {
         return $this->creditPlanRepo->find([
             'user_id' => myId(),
+            'is_cancel' => FALSE,
             'is_expired' => NOTEXPIRED
-        ])->first();
+        ])->latest()->first();
     }
 
     /**
