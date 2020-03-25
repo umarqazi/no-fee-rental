@@ -73,6 +73,12 @@ class CreditPlanController extends Controller {
      * @return mixed
      */
     public function cancel(Request $request) {
-        return dd($this->creditPlanService->cancel());
+        $response = $this->creditPlanService->cancel();
+        return sendResponse(
+            $request,
+            $response,
+            'Plan has been canceled',
+            route(whoAmI().'.creditPlan')
+        );
     }
 }

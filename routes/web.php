@@ -11,7 +11,7 @@
 |
  */
 
-Route::post('/stripe-checkout', function(\Illuminate\Http\Request $request) { return print_r($request->all()); });
+Route::post('/stripe-checkout', 'WebHooksController@callBack');
 
 Route::get('/', 'HomeController@index')->name('web.index');
 
@@ -232,8 +232,5 @@ use Workerman\Worker;
 use PHPSocketIO\SocketIO;
 // Test Route
 Route::get('/test', function (\Illuminate\Http\Request $request) {
-    $string = " Test String";
-    $string = str_replace('/\s+/', '', $string);
-//    $string = preg_replace('/(\w+)([A-Z])/U', '\\1 \\2', $string);
-    dd($string);
+
 })->name('web.test');
