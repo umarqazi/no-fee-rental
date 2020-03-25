@@ -1,10 +1,11 @@
-{!! HTML::style('/blog/wp-content/plugins/kingcomposer/assets/css/animate.css') !!}
-{!! HTML::style('/blog/wp-content/plugins/kingcomposer/assets/css/icons.css') !!}
+
 @php $data = collect($data)->first() @endphp
 @extends('layouts.app')
 @section('title', $data->post_title)
 @section('content')
-    {!! HTML::style('blog/wp-content/themes/nofeerentals/assets/css/main.css') !!}
+    {!! HTML::style('/blog/wp-content/plugins/kingcomposer/assets/css/animate.css') !!}
+    {!! HTML::style('/blog/wp-content/plugins/kingcomposer/assets/css/icons.css') !!}
+    {!! HTML::style('/blog/wp-content/themes/nofeerentals/assets/css/main.css') !!}
 
     @php
         $params = [

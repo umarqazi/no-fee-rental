@@ -2,18 +2,22 @@
 
 namespace App\Listeners;
 
+use App\Repository\CreditPlanRepo;
+use App\Services\CreditPlanService;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Spatie\StripeWebhooks\StripeWebhookCall;
 
 /**
- * Class ChargeSucceed
+ * Class CancelPlan
  * @package App\Listeners
  */
-class ChargeSucceed
+class CancelPlan
 {
 
-    public $webHook;
+    /**
+     * @var CreditPlanService
+     */
+    private $creditPlanRepo;
 
     /**
      * Create the event listener.
@@ -22,7 +26,7 @@ class ChargeSucceed
      */
     public function __construct()
     {
-
+        $this->creditPlanRepo = new CreditPlanRepo();
     }
 
     /**
@@ -33,6 +37,6 @@ class ChargeSucceed
      */
     public function handle($event)
     {
-
+//        $this->creditPlanRepo->;
     }
 }
