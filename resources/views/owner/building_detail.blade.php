@@ -95,7 +95,7 @@
 
         <div class="amenities-section">
             <div class="row">
-               {!! amenities() !!}
+               {!! buildingfeatures() !!}
             </div>
         </div>
         <div class="col-md-12 mt-4 text-center">
