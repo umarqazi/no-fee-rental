@@ -150,6 +150,7 @@ class InvitationService {
             $user = $this->userRepo->find(['email' => $request->email])->first();
             $request->request->add(['user' => $user]);
             $this->__sendAddRepresentativeEmail($request);
+            DB::commit();
             return $user->id;
         }
 
