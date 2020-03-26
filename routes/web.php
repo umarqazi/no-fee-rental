@@ -194,12 +194,12 @@ Route::get('/press/{slug}', function ($slug) {
 })->name('web.pressDetail');
 
 // Blog
-Route::get('/blogs', function () {
+Route::get('/blog', function () {
     return view('blog');
 })->name('web.blog');
 
 // Blog Details
-Route::get('/blog-detail/{slug}', function ($slug) {
+Route::get('/blog/{slug}', function ($slug) {
     $data = array('name' => $slug, 'post_type' => 'post');
     $data = query_posts($data);
 
