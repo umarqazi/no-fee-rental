@@ -7,8 +7,8 @@
    * @package nofeerentals
    */
 
-update_option( 'siteurl', 'http://localhost:8000/blog/' );
-update_option( 'home', 'http://localhost:8000/blog/' );
+//update_option( 'siteurl', 'http://localhost:8000/blog/' );
+//update_option( 'home', 'http://localhost:8000/blog/' );
 
   if ( ! function_exists( 'nofeerentals_setup' ) ) :
     /**
