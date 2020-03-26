@@ -12,7 +12,7 @@
    * @package nofeerentals
    */
 
-  wp_redirect('/blogs');
+//  wp_redirect('/blog');
   get_header();
 
   global $wp_query;
