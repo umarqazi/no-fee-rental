@@ -48,4 +48,4 @@
     {!! get_field('add_js_code_here', $page_id) !!}
 </script>
 
-{!! HTML::script('/blog/wp-content/plugins/kingcomposer/assets/frontend/js/kingcomposer.min.js') !!}
+{!! HTML::script('/wp/wp-content/plugins/kingcomposer/assets/frontend/js/kingcomposer.min.js') !!}
