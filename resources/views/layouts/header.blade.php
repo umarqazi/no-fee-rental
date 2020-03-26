@@ -28,7 +28,7 @@
 <div class="header-wrapper">
     <div class="container-fluid">
         <div class="header-container">
-            <a href="{!! url('/') !!}"> <img src="{{ Storage::url('assets/images/logo.png') }}" class="logo" /></a>
+            <a href="{!! route('web.index') !!}"> <img src="{{ Storage::url('assets/images/logo.png') }}" class="logo" /></a>
 
             <div class="header-right-wrapper">
                 <ul class="menu-links">
