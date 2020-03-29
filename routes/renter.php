@@ -40,3 +40,4 @@ Route::get('/show-calendar', 'Renter\CalendarController@index')->name('renter.sh
 Route::get('/save-searches', 'Renter\SaveSearchController@index')->name('renter.viewSaveSearch');
 Route::get('/delete-save-search/{id}', 'Renter\SaveSearchController@remove')->name('renter.removeSaveSearch');
 Route::post('/add-search', 'Renter\SaveSearchController@create');
+Route::post('/remove-search', 'Renter\SaveSearchController@removeByKeywords');

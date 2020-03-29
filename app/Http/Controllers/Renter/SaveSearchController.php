@@ -60,4 +60,13 @@ class SaveSearchController extends Controller {
         $res = $this->saveSearchService->remove($id);
         return sendResponse($request, $res, 'Search has been deleted.');
     }
+
+    /**
+     * @param Request $request
+     * @return JsonResponse|RedirectResponse
+     */
+    public function removeByKeywords(Request $request) {
+        $response = $this->saveSearchService->removeSearch($request->all());
+        return sendResponse($request, $response, null);
+    }
 }
