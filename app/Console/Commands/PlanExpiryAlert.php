@@ -11,14 +11,14 @@ class PlanExpiryAlert extends Command
      *
      * @var string
      */
-    protected $signature = 'command:name';
+    protected $signature = 'plan:expiry';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Check for Users Who\'s plans about to expire.';
 
     /**
      * Create a new command instance.
