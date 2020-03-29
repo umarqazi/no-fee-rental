@@ -48,7 +48,6 @@
                                 </div>
                             </div>
                             <div>
-                                <p>Price: </p>
                                 <p>Min Price: ${{ number_format($criteria->min_price) }}</p>
                                 <p>Max Price: ${{ number_format($criteria->max_price) }}</p>
                             </div>
