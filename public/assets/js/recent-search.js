@@ -333,7 +333,7 @@ $(document).ready(function () {
         let index = $(this).parents('li').find('a').attr('data-id');
         let search = $old_queries[index]; search.isSave = false;
         $old_queries[index] = search;
-        await ajaxRequest('/renter/add-search', 'post', search, false).then(res => {
+        await ajaxRequest('/renter/remove-search', 'post', search, false).then(res => {
             $(this).removeClass('fa saved-star').addClass('far recent-star');
             localStorage.setItem('search-query', JSON.stringify($old_queries));
             toastr.success('Search removed from favourite.');

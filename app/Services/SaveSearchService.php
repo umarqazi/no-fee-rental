@@ -60,15 +60,12 @@ class SaveSearchService {
         $url = $data['url'];
         $data = $this->__filterParams($data);
         $data = \Opis\Closure\serialize( $data );
-        if ( $this->__userHasNewKeywords( $data ) ) {
-            return $this->saveSearchRepo->create( [
-                'user_id'  => myId(),
-                'url'      => $url,
-                'keywords' => $data,
-            ] );
-        }
 
-        return $this->removeSearch($data);
+        return $this->saveSearchRepo->create( [
+            'user_id'  => myId(),
+            'url'      => $url,
+            'keywords' => $data,
+        ] );
     }
 
     /**
@@ -76,8 +73,14 @@ class SaveSearchService {
      * @return mixed
      */
     public function removeSearch($data) {
-        return $this->saveSearchRepo
-            ->find( [ 'keywords' => $data, 'user_id' => myId() ] )->delete();
+        $data = $this->__filterParams($data);
+        $data = \Opis\Closure\serialize( $data );
+        if($this->__userHasNewKeywords($data)) {
+            return $this->saveSearchRepo
+                ->find( [ 'keywords' => $data, 'user_id' => myId() ] )->delete();
+        }
+
+        return true;
     }
 
     /**
@@ -158,7 +161,7 @@ class SaveSearchService {
     protected function __userHasNewKeywords( $data ) {
         return $this->saveSearchRepo
                    ->find( [ 'keywords' => $data, 'user_id' => myId() ] )
-                   ->count() < 1;
+                   ->count() > 0;
     }
 
     /**
