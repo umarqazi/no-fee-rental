@@ -282,7 +282,7 @@ const enableDatePicker = (selector, allowTime = true) => {
         timepicker: allowTime,
         language: 'en',
         startDate: start,
-        dateFormat: "mm-d-yyyy",
+        dateFormat: "mm/d/yyyy",
         minDate: new Date(),
         minHours: startHours,
         maxHours: 18,

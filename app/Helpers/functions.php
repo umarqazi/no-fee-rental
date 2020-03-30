@@ -359,25 +359,25 @@ function carbon( $string ) {
 
 /**
  * @param $date
- * @param bool $hasDate
+ * @param bool $hasTime
  * @return string
  */
-function genericFormat($date, $hasDate = false) {
-    $date = \DateTime::createFromFormat($hasDate ? 'm-d-Y h:i' : 'm-d-Y' , $date);
-    return $date->format($hasDate ? 'Y-m-d h:i:s' : 'Y-m-d');
+function genericDateFormat($date, $hasTime = false) {
+    $date = \DateTime::createFromFormat($hasTime ? 'm/d/Y h:i a' : 'm/d/Y', $date);
+    return $date->format($hasTime ? 'Y-m-d h:i:s' : 'Y-m-d');
 }
 
-/**
- * @param $string
- * @return bool|string
- */
-function calendarDate($string) {
-
-    if(strpos($string, 'pm')) {
-        return genericFormat(str_replace(' pm', '', $string), true);
-    }
-        return genericFormat(str_replace(' am', '', $string), true);
-}
+///**
+// * @param $string
+// * @return bool|string
+// */
+//function calendarDate($string) {
+//
+//    if(strpos($string, 'pm')) {
+//        return genericFormat(str_replace(' pm', '', $string), true);
+//    }
+//        return genericFormat(str_replace(' am', '', $string), true);
+//}
 
 /**
  * @param $date
@@ -640,8 +640,8 @@ function reverseTimeSlot( $date ) {
  * @return bool
  */
 function isOpenToday($openHouse) {
-    return carbon(genericFormat($openHouse->date))->format('m-d-Y') >= now()->format('m-d-Y')
-        && daysNumReadable(carbon(genericFormat($openHouse->date))) < 8;
+    return carbon(genericDateFormat($openHouse->date))->format('m-d-Y') >= now()->format('m-d-Y')
+        && daysNumReadable(carbon(genericDateFormat($openHouse->date))) < 8;
 }
 
 /**

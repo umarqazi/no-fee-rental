@@ -9,47 +9,6 @@ const hideAlert = () => {
     $('body').find('.notification-alert').hide();
 };
 
-// /**
-//  *
-//  * @param data
-//  */
-// const pushNotification = (data) => {
-//     $('.notification-inner-scroll').prepend(`
-//         <div class="notiofication-content ${(data.is_read) ? 'notification-bg-read' : 'unread'}" data-id="${data.id}">
-//             <img src="${data.profile_image}" alt="">
-//             <a href="${data.url}">${data.message}</a> <i class="fas fa-times"></i>
-//         </div>
-//     `);
-// };
-
-// /**
-//  *
-//  * @returns {Promise<void>}
-//  */
-// window.onload = async function () {
-//     hideAlert();
-//     await ajaxRequest('/fetch-notifications', 'post', null, false)
-//         .then(res => {
-//         res.data.forEach(collection => {
-//             if(collection.is_read === 0) {
-//                 showAlert();
-//             }
-//
-//             let obj = {
-//                 'id': collection.id,
-//                 'is_read': collection.is_read,
-//                 'profile_image': `${window.location.origin}/${collection.from.profile_image}`,
-//                 'url': collection.url,
-//                 'message': collection.message
-//             };
-//             pushNotification(obj);
-//         });
-//     })
-//         .catch(err => {
-//             console.log(err);
-//     });
-// };
-
 /**
  * Show Notification alert icon
  */
@@ -108,7 +67,7 @@ $(() => {
     $body.on('click', '.mark-selected-as-read', async function (e) {
         let ids = [];
         e.preventDefault();
-        if(!$('.checkBoxClass').is(':checked')) {
+        if(!$('body').find('.checkBoxClass').is(':checked')) {
             alert('Select at least one notification');
             return;
         }
@@ -125,7 +84,7 @@ $(() => {
     $body.on('click', '.delete-selected', async function (e) {
         let ids = [];
         e.preventDefault();
-        if(!$('.checkBoxClass').is(':checked')) {
+        if(!$('body').find('.checkBoxClass').is(':checked')) {
             alert('Select at least one notification');
             return;
         }

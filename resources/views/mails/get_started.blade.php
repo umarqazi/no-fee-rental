@@ -94,7 +94,7 @@
                 </tr>
                 <tr>
                     <td><b>Renter Move Date:</b></td>
-                    <td>{{ carbon(genericFormat($data->request->move_in_date))->format('d M, Y') }}</td>
+                    <td>{{ carbon(genericDateFormat($data->request->move_in_date))->format('d M, Y') }}</td>
                 </tr>
                 <tr>
                     <td><b>Renter Budget:</b></td>

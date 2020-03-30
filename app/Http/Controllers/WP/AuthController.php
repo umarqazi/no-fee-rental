@@ -31,24 +31,7 @@ class AuthController extends Controller {
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
     public function login(Request $request) {
-        $this->data = toObject($request->all());
-        $user = $this->__verifyUser();
-        if($user && $this->attemptLogin($request)) {
-            return response()->json([
-                'status' => true,
-                'user' => [
-                    'id' => $user->id
-                ],
-                'guard' => $this->__guardAssign($user),
-                'msg' => 'Authentication successful',
-                'api_token' => $user->api_token
-            ], 200);
-        }
-
-        return response()->json([
-            'status' => false,
-            'msg' => 'Wrong email or password',
-        ], 401);
+       return view('blog');
     }
 
     /**
