@@ -349,6 +349,7 @@ class Listing extends Model {
     }
 
     /**
+     * @param $query
      * @return mixed
      */
     public function scopePetFriendly($query) {

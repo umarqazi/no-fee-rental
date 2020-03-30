@@ -52,6 +52,12 @@ function makeString(v, i) {
     }
 
     if(v.$beds.length > 0) {
+        var index = v.$beds.indexOf('0.5');
+
+        if (index !== -1) {
+            v.$beds[index] = 'Studio';
+        }
+
         let bed = ` with at least ${v.$beds.length > 1 ? v.$beds.join(', ') + ' bedrooms' : v.$beds + ' bedroom'}`;
         obj.title += bed; obj.string += bed;
     }

@@ -45,10 +45,10 @@ trait CalendarEventService
     public static function ADDAPPOINTMENT($data) {
         self::$data = toObject(self::$data);
         self::$data->title = sprintf("%s (Appointment Pending Request)", is_exclusive($data->listing));
-        self::$data->url = "load-conversation/inbox/{$data->listing->id}";
+        self::$data->url = "load-conversation/inbox/{$data->id}";
         self::$data->ref_event_id = $data->id;
         self::$data->model = ListingConversation::class;
-        self::$data->start = sprintf("%s %s", $data->appointment_date->format('m-d-Y'), carbon($data->appointment_time)->format('h:i a'));
+        self::$data->start = sprintf("%s %s", $data->appointment_date->format('m/d/Y'), carbon($data->appointment_time)->format('h:i a'));
         self::$data->end = self::$data->start;
         self::$data->from = myId();
         self::$data->to = $data->listing->agent->id;
@@ -61,10 +61,10 @@ trait CalendarEventService
     public static function ADDAVAILABILITY($data) {
         self::$data = toObject(self::$data);
         self::$data->title = sprintf("%s (Availability Request)", is_exclusive($data->listing));
-        self::$data->url = "load-conversation/inbox/{$data->listing->id}";
+        self::$data->url = "load-conversation/inbox/{$data->id}";
         self::$data->ref_event_id = $data->id;
         self::$data->model = ListingConversation::class;
-        self::$data->start = sprintf("%s", $data->created_at->format('m-d-Y h:i a'));
+        self::$data->start = sprintf("%s", $data->created_at->format('m/d/Y h:i a'));
         self::$data->end = self::$data->start;
         self::$data->from = $data->from ?? $data->to;
         self::$data->to = $data->to ?? null;

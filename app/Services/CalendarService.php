@@ -88,8 +88,8 @@ class CalendarService {
         $form->from          = $request->from ?? myId();
         $form->title         = $request->title;
         $form->model         = $request->model;
-        $form->start         = calendarDate($request->start);
-        $form->end           = calendarDate($request->end);
+        $form->start         = genericDateFormat($request->start, true);
+        $form->end           = genericDateFormat($request->end, true);
         $form->url           = $request->url;
         $form->ref_event_id  = $request->ref_event_id;
         $form->validate();

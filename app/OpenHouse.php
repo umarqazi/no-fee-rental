@@ -22,11 +22,10 @@ class OpenHouse extends Model {
      */
     public function getDateAttribute($value) {
 
-        if(\DateTime::createFromFormat('m-d-Y', $value)) {
-            return $value;
+        if(\DateTime::createFromFormat('Y-m-d', $value)) {
+            return carbon($value)->format('m/d/Y');
         }
 
-        return carbon($value)->format('m-d-Y');
     }
 
     /**
