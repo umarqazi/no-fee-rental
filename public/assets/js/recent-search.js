@@ -142,6 +142,7 @@ async function isValid(string) {
  * @param i
  */
 function pushRecentSearch(data = null, $prepend, i) {
+    $('body').find('.search-loader').hide();
     let $target = $('body').find('.neighborhoods_amenities');
 
     if(data === null) {

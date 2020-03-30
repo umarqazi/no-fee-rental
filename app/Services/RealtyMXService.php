@@ -56,19 +56,18 @@ class RealtyMXService extends ListingService {
      * @return bool
      */
     public function fetch( $properties ) {
-        DB::beginTransaction();
         if ( is_object( $properties ) ) {
             foreach ( $properties as $property ) {
                 $collection = collect( json_decode( json_encode( $property ) ) );
                 if ( $this->__isNoFeeListing( $collection ) ) {
+                    DB::beginTransaction();
                     print sprintf("%s\n", $collection->get('@attributes')->id);
-                    $this->__create( $collection );
+                    $this->__create( $collection ); DB::commit();
                 } else {
                     $this->__generateFeeListErrorReport( $collection );
                 }
             }
 
-            DB::commit();
 //            $this->__sendMails();
             return $this->__writeProgressCSVFile(now()->format('Ymd'));
         }
@@ -95,24 +94,54 @@ class RealtyMXService extends ListingService {
 
     /**
      * @param $listing
+     * @return bool
      */
     private function __create( $listing ) {
+
+        // Create Agents and company | uniqueness (email, company)
         $agents = $listing->get('agents');
-        foreach ( $agents as $agent ) {
-            if($agent = $this->__pushAgent( $agent )) {
-                $this->__createList( $agent, $listing );
-            } else {
-                $this->__errorReporting($listing, 'Invalid Agent Details');
+        if(is_array($agents->agent)) {
+
+            // Process All Stuff with Each Agent
+            foreach ( $agents->agent as $agent ) {
+
+                $this->_startProcess($agent, $listing);
             }
+
+            return true;
+        }
+
+        if($agent = $this->__pushAgent( $agents->agent )) {
+
+            $this->_startProcess($agent, $listing);
+        }
+
+        return false;
+    }
+
+    private function _startProcess($agent, $listing)
+    {
+        // Process All Stuff with Each Agent
+        if($agent = $this->__pushAgent( $agent )) {
+            // Create Building | uniqueness (address)
+            if($building = $this->__pushBuilding( $agent, $listing )) {
+
+                // Create Listing | based on (agent)
+                $this->__createList( $agent, $building, $listing );
+            }
+
+        } else {
+            $this->__errorReporting($listing, 'Invalid Agent Details');
         }
     }
 
     /**
+     * @param $agent
      * @param $building
      * @param $listing
      * @return bool
      */
-    private function __pushListing($building, $listing) {
+    private function __pushListing($agent, $building, $listing) {
         $details      = $listing->get( 'details' );
         $location     = $listing->get( 'location' );
         $attrib       = $listing->get( '@attributes' );
@@ -122,7 +151,7 @@ class RealtyMXService extends ListingService {
             'realty_id'         => $attrib->id ?? null,
             'realty_url'        => $attrib->url ?? null,
             'building_id'       => $building->id,
-            'user_id'           => $building->user_id,
+            'user_id'           => $agent->id,
             'listing_type'      => $this->__isExclusive($details) ? EXCLUSIVE : OPEN,
             'unique_slug'       => str_random(10) ?? null,
             'neighborhood_id'   => $building->neighborhood_id,
@@ -192,14 +221,16 @@ class RealtyMXService extends ListingService {
             'is_verified' => TRUE
         ];
 
-        if(!$uniqueBuilding = $this->__isNewBuilding($building['address'])) {
-            $uniqueBuilding = $this->buildingRepo->create($building);
+        // Check whether building is new
+        $isNewBuilding = $this->__isNewBuilding($building['address']);
+        if($isNewBuilding === true) {
+            $isNewBuilding = $this->buildingRepo->create($building);
             if($building_amenities !== null) {
-                $uniqueBuilding->amenities()->attach($building_amenities);
+                $isNewBuilding->amenities()->attach($building_amenities);
             }
         }
 
-        return $uniqueBuilding;
+        return $isNewBuilding;
     }
 
     /**
@@ -289,17 +320,19 @@ class RealtyMXService extends ListingService {
 
     /**
      * @param $agent
+     * @param $building
      * @param $listing
      * @return bool
      */
-    private function __createList( $agent, $listing ) {
-        $uniqueListing = $this->__isNewListing( $listing, $agent );
+    private function __createList( $agent, $building, $listing ) {
 
-        if ( $uniqueListing->isNew == true ) {
-            return $this->__pushListing($this->__pushBuilding( $agent, $listing ), $listing);
+        $isNewListing = $this->__isNewListing( $building, $agent, $listing->get('@attributes')->id );
+
+        if ( $isNewListing === true ) {
+            return $this->__pushListing($agent, $building, $listing);
         }
 
-        $this->__updateList($uniqueListing, $listing);
+        $this->__updateList($isNewListing, $listing);
 
         return false;
     }
@@ -355,7 +388,7 @@ class RealtyMXService extends ListingService {
      */
     private function __isNewBuilding( $building_address ) {
        $building = $this->buildingRepo->find(['address' => $building_address]);
-       return $building->count() > 0 ? $building->first() : false;
+       return $building->count() > 0 ? $building->first() : true;
     }
 
     /**
@@ -411,18 +444,25 @@ class RealtyMXService extends ListingService {
     }
 
     /**
-     * @param $agent
-     *
-     * @return mixed
+     * @param object $agent
+     * @return bool|mixed
      */
-    private function __pushAgent( $agent ) {
-        if(is_array($agent)) {
-            foreach ($agent as $user) {
-               return $this->__createAgent($user);
+    private function __pushAgent( object $agent ) {
+        if(is_object($agent)) {
+
+            // Check whether agent is new or not
+            $isUniqueAgent = $this->__isNewAgent($agent);
+
+            // Create New Agent
+            if($isUniqueAgent === true) {
+                return $this->__createAgent($agent);
             }
+
+            // Return existing matched agent
+            return $isUniqueAgent;
         }
 
-        return $this->__createAgent($agent);
+        return false;
     }
 
     /**
@@ -430,27 +470,25 @@ class RealtyMXService extends ListingService {
      * @return bool|mixed
      */
     private function __createAgent($agent) {
-        if (!$uniqueAgent = $this->__isNewAgent($agent)) {
-            $username = collect(explode(' ', $agent->name));
-            $agent = $this->userRepo->create([
-                'first_name' => $username->first() ?? null,
-                'last_name' => $username->last() ?? null,
-                'email' => $agent->email ?? null,
-                'profile_image' => $agent->photo ?? null,
-                'remember_token' => str_random(60),
-                'user_type' => AGENT,
-                'phone_number' => $agent->phone_numbers->main,
-                'company_id' => $this->__createCompany($agent->company),
-            ]);
+        $username = collect(explode(' ', $agent->name));
+        $agent = $this->userRepo->create([
+            'first_name'     => $username->first() ?? null,
+            'last_name'      => $username->last() ?? null,
+            'email'          => $agent->email ?? null,
+            'profile_image'  => $agent->photo ?? null,
+            'remember_token' => str_random(60),
+            'user_type'      => AGENT,
+            'phone_number'   => $agent->phone_numbers->main,
+            'company_id'     => $this->__createCompany($agent->company),
+        ]);
 
-            if ($agent) {
-                array_push($this->agents, $agent->email);
+        if ($agent) {
+            array_push($this->agents, $agent->email);
 
-                return $agent;
-            }
+            return $agent;
         }
 
-        return $uniqueAgent;
+        return $agent;
     }
 
     /**
@@ -511,29 +549,30 @@ class RealtyMXService extends ListingService {
     }
 
     /**
-     * @param $listing
+     * @param $building
      * @param $user
-     *
+     * @param $realtyId
      * @return bool
      */
-    private function __isNewListing( $listing, $user ) {
-        $realty_id = str_replace(' ', '', $listing->get('@attributes')->id);
-        $listing = $this->listingRepo->find(['realty_id' => $realty_id])->first();
+    private function __isNewListing( $building, $user, $realtyId ) {
+        $listing = $this->listingRepo->find([
+            'user_id'      => $user->id,
+            'realty_id'    => $realtyId,
+            'map_location' => $building->map_location
+        ]);
 
-        if($listing != null) {
-
+        if($listing->count() > 0) {
+            $listing = $listing->first();
             if($listing->agent->email == $user->email) {
-                $listing->isNew = false;
                 return $listing;
             }
 
-            $listing->isNew = true;
-            return $listing;
+            else {
+                return true;
+            }
         }
 
-        $listing = toObject($listing);
-        $listing->isNew = true;
-        return $listing;
+        return true;
     }
 
     /**
@@ -559,7 +598,7 @@ class RealtyMXService extends ListingService {
      */
     private function __isNewAgent( $agent ) {
         $agent = $this->userRepo->find( [ 'email' => $agent->email ] );
-        return $agent->count() > 0 ? $agent->first() : false;
+        return $agent->count() > 0 ? $agent->first() : true;
     }
 
     /**
