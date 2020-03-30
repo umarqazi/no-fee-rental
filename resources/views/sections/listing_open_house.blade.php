@@ -3,7 +3,7 @@
 @if(isOpenToday($listing->openHouse))
     <div class="open-house-inner">
         <div class="open-timings">
-            <p>{{ carbon(genericFormat($listing->openHouse->date))->format('D, M y'). ' | '. $listing->openHouse->start_time . ' - ' . $listing->openHouse->end_time }}</p>
+            <p>{{ carbon(genericDateFormat($listing->openHouse->date))->format('M d, Y'). ' | '. $listing->openHouse->start_time . ' - ' . $listing->openHouse->end_time }}</p>
         </div>
         <div class="apointment-interest-section">
             @if($listing->openHouse->only_appt)

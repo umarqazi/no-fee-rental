@@ -520,12 +520,11 @@ class ListingService extends BuildingService {
     private function __addOpenHouse( $id, $data, $is_updating = false ) {
 
         if($is_updating) deleteCalendarEvent($id, OpenHouse::class);
-
             foreach ($data as $key => $openHouse) {
                 if($openHouse['date'] !== null && $openHouse['start_time'] !== null && $openHouse['end_time'] !== null) {
                     $res = $this->openHouseRepo->create([
                         'listing_id' => $id,
-                        'date'       => $openHouse['date'],
+                        'date'       => genericDateFormat($openHouse['date']),
                         'start_time' => openHouseTimeSlot($openHouse['start_time']),
                         'end_time'   => openHouseTimeSlot($openHouse['end_time']),
                         'only_appt'  => $this->__byAppointment($openHouse)

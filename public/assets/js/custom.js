@@ -144,7 +144,7 @@ $(() => {
     function onSelectHandler(date, context) {
         let from = null;
         if (date[0] !== null) {
-            from = date[0].format('YYYY-MM-DD');
+            from = date[0].format('MM/DD/YYYY');
         }
 
         if ($('body').find('.pignose-availability').length > 0) {
@@ -158,11 +158,16 @@ $(() => {
         let date = new Date();
         $('#multiple').pignoseCalendar({
             minDate: date.setDate(date.getDate() - 1),
+            format: "MM/DD/YYYY",
             select: onSelectHandler
         });
 
         let from = $('body').find('.pignose-calendar-unit-active').attr('data-date');
-        $('body').find('.article').append(`<input name='move_in_date' class="pignose-availability" type='hidden' value='${from}'>`);
+        if(from !== undefined) {
+            from = from.split('-');
+            from = from[1] + '/' + from[2] + '/' + from[0];
+            $('body').find('.article').append(`<input name='move_in_date' class="pignose-availability" type='hidden' value='${from}'>`);
+        }
     });
 
     $('#image-gallery').lightSlider({

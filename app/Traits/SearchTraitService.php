@@ -125,7 +125,7 @@ trait SearchTraitService
      */
     private function openHouse()
     {
-        $date = genericFormat($this->args->{__FUNCTION__});
+        $date = genericDateFormat($this->args->{__FUNCTION__});
         $this->query->orWhereHas('openHouses', function ($query) use ($date) {
             return $query->where('open_houses.date', 'like', $date);
         });

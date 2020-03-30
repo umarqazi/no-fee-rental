@@ -28,7 +28,7 @@
             </div>
             <div class="date-text">
                 <div style="text-align: right;"><strong style='color:#000;'>({{ $inbox->conversation_type == APPOINTMENT ? 'Appointment' : 'Availability' }} Request)</strong></div>
-                <div style="text-align: right;">{{ sprintf("Requested on %s", $inbox->created_at->format('D, d/m/y h:i a')) }}</div>
+                <div style="text-align: right;">{{ sprintf("Requested on %s", $inbox->created_at->format('D, m/d/y h:i a')) }}</div>
             </div>
         </div>
     @endforeach
