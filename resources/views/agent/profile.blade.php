@@ -182,15 +182,7 @@
 
                 $('input[name="neighborhood_expertise"]').amsifySuggestags({
                     suggestions: neighbors,
-                    whiteList: true,
-                    // afterAdd:function(value) {
-                    //     if($(".neighborhood_expertise > .amsify-suggestags-area > .amsify-suggestags-input-area> span").length > 2){
-                    //         $(".neighborhood_expertise > .amsify-suggestags-area > .amsify-suggestags-input-area > .amsify-suggestags-input").attr('readonly', true);
-                    //     }
-                    //     else{
-                    //         $(".neighborhood_expertise > .amsify-suggestags-area > .amsify-suggestags-input-area > .amsify-suggestags-input").attr('readonly', false);
-                    //     }
-                    // },
+                    whiteList: true
 
                 });
              });

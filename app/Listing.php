@@ -110,6 +110,18 @@ class Listing extends Model {
     }
 
     /**
+     * @param $value
+     * @return string|null
+     */
+    public function getAvailabilityAttribute($value) {
+        if(\DateTime::createFromFormat('Y-m-d', $value)) {
+            return carbon($value)->format('m/d/Y');
+        }
+
+        return null;
+    }
+
+    /**
      * @param $query
      *
      * @return mixed

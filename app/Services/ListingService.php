@@ -469,7 +469,7 @@ class ListingService extends BuildingService {
         if($request->availability_type == 1) {
             $request->availability = now()->format('Y-m-d');
         } elseif ($request->availability_type == 2) {
-            $request->availability = carbon($request->availability)->format('Y-m-d');
+            $request->availability = genericDateFormat($request->availability);
         } else {
             $request->availability = NULL;
         }

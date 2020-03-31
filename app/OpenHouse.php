@@ -26,6 +26,8 @@ class OpenHouse extends Model {
             return carbon($value)->format('m/d/Y');
         }
 
+        return null;
+
     }
 
     /**
