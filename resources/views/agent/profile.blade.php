@@ -164,6 +164,8 @@
     {!! HTML::script('assets/js/vendor/amsify.js') !!}
     {!! HTML::script('assets/js/profile.js') !!}
     <script>
+
+
         if($('#exclusive-3').is(":checked")){
             $('#exclusive-1').attr('disabled', true);
             $('#exclusive-2').attr('disabled', true);
@@ -181,14 +183,14 @@
                 $('input[name="neighborhood_expertise"]').amsifySuggestags({
                     suggestions: neighbors,
                     whiteList: true,
-                    afterAdd:function(value) {
-                        if($(".neighborhood_expertise > .amsify-suggestags-area > .amsify-suggestags-input-area> span").length > 2){
-                            $(".neighborhood_expertise > .amsify-suggestags-area > .amsify-suggestags-input-area > .amsify-suggestags-input").attr('readonly', true);
-                        }
-                        else{
-                            $(".neighborhood_expertise > .amsify-suggestags-area > .amsify-suggestags-input-area > .amsify-suggestags-input").attr('readonly', false);
-                        }
-                    },
+                    // afterAdd:function(value) {
+                    //     if($(".neighborhood_expertise > .amsify-suggestags-area > .amsify-suggestags-input-area> span").length > 2){
+                    //         $(".neighborhood_expertise > .amsify-suggestags-area > .amsify-suggestags-input-area > .amsify-suggestags-input").attr('readonly', true);
+                    //     }
+                    //     else{
+                    //         $(".neighborhood_expertise > .amsify-suggestags-area > .amsify-suggestags-input-area > .amsify-suggestags-input").attr('readonly', false);
+                    //     }
+                    // },
 
                 });
              });

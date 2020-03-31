@@ -415,7 +415,7 @@ class UserService extends SearchService {
      * @return mixed
      */
     public function updateProfileImage($profile_image, $id, $old_image = null) {
-        $destinationPath = 'images/users/profile/';
+        $destinationPath = 'images/users/profile';
         return uploadImage($profile_image, $destinationPath, true, $old_image);
     }
 

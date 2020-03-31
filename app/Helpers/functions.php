@@ -21,9 +21,9 @@ use Illuminate\Support\Facades\Storage;
  * @return string|bool
  */
 function uploadImage( $image, $path, $unlinkOld = false, $old_image = null ) {
-    if(config('app.env') === PRODUCTION) {
+    if(config('app.env') == PRODUCTION) {
         $image = \App\Services\AWS3Service::getInstance()->upload($path, $image);
-        (!$unlinkOld) ?: \App\Services\AWS3Service::getInstance()->delete($image);
+        (!$unlinkOld) ?: \App\Services\AWS3Service::getInstance()->delete($old_image);
         return $image;
     } else {
         $name = str_random( 20 ) . '.' . $image->getClientOriginalExtension();

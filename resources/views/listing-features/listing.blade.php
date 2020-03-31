@@ -87,6 +87,7 @@
     {!! HTML::script('assets/js/listing.js') !!}
 <script>
     window.onload = function() {
+        CKEDITOR.replace( 'description' );
         let coords = $('input[name=map_location]').val();
         coords = coords.replace(/\\/g, "");
         enableDatePicker('#availability_date, .open-house-date', false);
