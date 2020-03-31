@@ -10,7 +10,7 @@
                 </div>
                 <div class="agent-info">
                     <h2>{{ $agent->first_name.' '.$agent->last_name }}</h2>
-                    <p>{{ $agent->description ?? 'No bio found' }}</p>
+                    <p>{!! $agent->description ?? 'No bio found' !!}</p>
                     @if($agent->user_type != OWNER)
                         <p class="expertise"><strong>Languages:</strong>
                             <a href="javascript:void(0);">{{ $agent->languages !== '' ? $agent->languages : 'None' }}</a>

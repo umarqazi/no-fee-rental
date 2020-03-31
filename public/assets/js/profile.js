@@ -20,6 +20,7 @@ $(() => {
     $(".edit-profile").click(function () {
         $('#image-picker').show();
         $(".additional-info .input-style").attr("disabled", false);
+        CKEDITOR.replace( 'description' );
         $(this).hide();
 
         if($('#exclusive-3').is(":checked")){
