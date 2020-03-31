@@ -92,14 +92,9 @@ $(() => {
                greaterThan: 0
            },
 
-           square_feet: {
-               required: true,
-               squareFeet: 0
-           },
            availability: {
                required: true,
                validateSelect: true,
-               dateFormat : true,
            },
            listing_type: {
                required: true,
