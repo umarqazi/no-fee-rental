@@ -236,6 +236,18 @@ class ListingService extends BuildingService {
     }
 
     /**
+     * @param null $id
+     * @return mixed
+     */
+    public function archiveByUser($id = null) {
+        return $this->listingRepo->updateByClause([
+            'user_id' => $id ?? myId(),
+            'visibility' => ACTIVELISTING
+        ], [
+            'visibility' => ARCHIVED, 'is_featured' => FALSE
+        ]);
+    }
+    /**
      * @param $id
      * @return bool|mixed
      */

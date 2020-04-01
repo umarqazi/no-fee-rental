@@ -27,7 +27,6 @@ Route::post('/password-update', 'Admin\AdminController@updatePassword')->name('a
 
 // User Routes
 Route::post('/delete-user/{id}', 'Admin\UserController@delete')->name('admin.deleteUser');
-Route::post('/status-update/{id}', 'Admin\UserController@status')->name('admin.statusUser');
 Route::post('/create-user', 'Admin\UserController@create')->name('admin.createUser');
 Route::post('/edit-user/{id}', 'Admin\UserController@edit')->name('admin.editUser');
 Route::post('/update-user/{id}', 'Admin\UserController@update')->name('admin.updateUser');

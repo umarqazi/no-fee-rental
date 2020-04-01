@@ -95,7 +95,7 @@ class RouteServiceProvider extends ServiceProvider {
 	 */
 	protected function mapAgentRoutes() {
 		Route::prefix('agent')
-			->middleware(['web', 'auth:agent'])
+			->middleware(['web', 'auth:agent', 'isActive'])
 			->namespace($this->namespace)
 			->group(base_path('routes/agent.php'));
 	}
@@ -109,7 +109,7 @@ class RouteServiceProvider extends ServiceProvider {
      */
     protected function mapOwnerRoutes() {
         Route::prefix('owner')
-             ->middleware(['web', 'auth:owner'])
+             ->middleware(['web', 'auth:owner', 'isActive'])
              ->namespace($this->namespace)
              ->group(base_path('routes/owner.php'));
     }
@@ -123,7 +123,7 @@ class RouteServiceProvider extends ServiceProvider {
      */
     protected function mapRenterRoutes() {
         Route::prefix('renter')
-             ->middleware(['web', 'auth:renter'])
+             ->middleware(['web', 'auth:renter', 'isActive'])
              ->namespace($this->namespace)
              ->group(base_path('routes/renter.php'));
     }

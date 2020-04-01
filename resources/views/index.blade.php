@@ -11,7 +11,7 @@
     <section class="need-help-container wow fadeIn " data-wow-delay="0.2s">
         <div class="container container-need">
             <div class="wrapper">
-                <h2>nEED hELP?</h2>
+                <h2>NEED hELP?</h2>
                 <p>It’s easy: Just tell us what you’re looking for and we’ll do the rest. <br> How? We’ll put you in touch with one of our neighborhood experts based on your needs.</p>
                 <button type="button" class="btn-default" data-toggle="modal" data-target="#need-help-step1">Get started</button>
             </div>

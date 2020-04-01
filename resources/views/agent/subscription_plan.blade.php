@@ -24,15 +24,24 @@
             </div>
             <div class="switch-buttons">
                 <div class="switch-gold {{ $currentPlan->plan == BASICPLAN ? 'hidden' : '' }}">
-                    <a href="javascript:void(0)" class="btn btn-default switch-plan gold-btn-bg">Basic - $40 / month</a>
+                    <a href="javascript:void(0)" class="btn btn-default switch-plan gold-btn-bg">
+                        Basic - $40 / month
+                        <span style="display: none;" class="creditplan">0</span>
+                    </a>
                     <p class="desc-gold"> Switch to Basic</p>
                 </div>
                 <div class="switch-gold {{ $currentPlan->plan == GOLDPLAN ? 'hidden' : '' }}">
-                    <a href="javascript:void(0)" class="btn btn-default switch-plan gold-btn-bg">Gold - $70 / month</a>
+                    <a href="javascript:void(0)" class="btn btn-default switch-plan gold-btn-bg">
+                        Gold - $70 / month
+                        <span style="display: none;" class="creditplan">1</span>
+                    </a>
                     <p class="desc-gold"> Switch to Gold</p>
                 </div>
                 <div class="switch-gold {{ $currentPlan->plan == PLATINUMPLAN ? 'hidden' : '' }}">
-                    <a href="javascript:void(0)" class="btn btn-default switch-plan platinum-btn-bg">Platinum - $100 / month</a>
+                    <a href="javascript:void(0)" class="btn btn-default switch-plan platinum-btn-bg">
+                        Platinum - $100 / month
+                        <span style="display: none;" class="creditplan">2</span>
+                    </a>
                     <p class="desc-platinum"> Switch to Platinum</p>
                 </div>
             </div>
