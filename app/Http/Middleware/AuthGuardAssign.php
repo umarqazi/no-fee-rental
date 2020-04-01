@@ -23,17 +23,23 @@ class AuthGuardAssign {
      * @param $request
      * @param Closure $next
      *
-     * @return JsonResponse|RedirectResponse|Response|\Symfony\Component\HttpFoundation\Response|void
+     * @return JsonResponse|RedirectResponse|Response
      * @throws ValidationException
      */
 	public function handle($request, Closure $next) {
 		$this->request = $request;
 		$user = $this->__userType();
+
 		if (empty($user)) {
 			$msg = 'Wrong Email or Password.';
             return sendResponse($request, false, null, null, $msg);
+
 		} else if(empty($user->email_verified_at)) {
 		    $msg = 'Your Email is not verified';
+            return sendResponse($request, false, null, null, $msg);
+
+		} else if($user->status !== ACTIVE) {
+		    $msg = 'Your Account Status is blocked. Contact Administrator';
             return sendResponse($request, false, null, null, $msg);
         }
 
@@ -61,6 +67,8 @@ class AuthGuardAssign {
 	 * @return mixed
 	 */
 	private function __userType() {
-		return \App\User::whereEmail($this->request->email)->select(['user_type', 'email_verified_at'])->first();
+		return \App\User::whereEmail($this->request->email)->select([
+		    'user_type', 'email_verified_at', 'status'
+        ])->first();
 	}
 }

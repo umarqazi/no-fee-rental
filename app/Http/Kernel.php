@@ -61,6 +61,7 @@ class Kernel extends HttpKernel {
 		'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
 		'authguard' => \App\Http\Middleware\AuthGuardAssign::class,
         'agentHasPlan' => \App\Http\Middleware\AgentHasPlan::class,
+        'isActive' => \App\Http\Middleware\IsAccountActive::class,
 	];
 
 	/**

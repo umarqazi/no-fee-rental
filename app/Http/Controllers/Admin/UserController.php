@@ -40,20 +40,10 @@ class UserController extends Controller {
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
-	public function status(Request $request, $id) {
-		$status = $this->userService->status($id);
-        return sendResponse($request, true, ($status) ? 'User has been active' : 'User has been deactive');
-	}
-
-    /**
-     * @param Request $request
-     * @param $id
-     *
-     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
-     */
 	public function delete(Request $request, $id) {
-		$user = $this->userService->delete($id);
-        return sendResponse($request, $user, 'User has been deactivated.');
+		$user = $this->userService->status($id);
+		$msg = ($user) ? 'User has been activated.' : 'User has been deactivated.';
+        return sendResponse($request, true, $msg);
 	}
 
 	/**

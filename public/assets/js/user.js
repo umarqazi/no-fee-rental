@@ -52,14 +52,18 @@ $(() => {
         $(this).find('form').trigger('reset');
     });
 
-    $body.on('click', '#deleteUser', async function(e) {
-        let route = $(this).attr('route');
-        await deleteRecord(route, $(`#${$(this).parents('table').attr('id')}`).DataTable(), $(this));
-    });
-
     $body.on('click', '#updateUserStatus', async function(e) {
         let route = $(this).attr('route');
-        await toggleStatus(route, $(`#${$(this).parents('table').attr('id')}`).DataTable(), $(this));
+        if (await confirm('Sure to perform this action?')) {
+            if(await ajaxRequest(route, 'post', null)) {
+                if ($(this).hasClass('fa-eye')) {
+                    $(this).addClass('fa-eye-slash').removeClass('fa-eye');
+                } else if ($(this).hasClass('fa-eye-slash')) {
+                    $(this).addClass('fa-eye').removeClass('fa-eye-slash');
+                }
+                $(`#${$(this).parents('table').attr('id')}`).DataTable().ajax.reload();
+            }
+        }
     });
 
     $body.on('click', '#viewAssociatedAgents', async function() {
@@ -87,11 +91,18 @@ $(() => {
         },
         {
             render: (data, type, row) => {
-                return `<i class="fa fa-edit px-2 action-btn" id="updateUser" ref_id="${row.id}" route="/admin/edit-user/${row.id}"></i>
-                        <i class="fa fa-trash action-btn" id="deleteUser" ref_id="${row.id}" route="/admin/delete-user/${row.id}"></i>`;
+                return row.status ? '<span class="status">Active</span>' : '<span class="status" style="background: red;">Inactive</span>';
             },
             targets: 4
+        },
+        {
+            render: (data, type, row) => {
+                return `<i class="fa ${row.status ? 'fa-eye' : 'fa-eye-slash'} action-btn" id="updateUserStatus" ref_id="${row.id}" route="/admin/delete-user/${row.id}"></i>
+                        <i class="fa fa-edit px-2 action-btn" id="updateUser" ref_id="${row.id}" route="/admin/edit-user/${row.id}"></i>`;
+            },
+            targets: 5
         }];
+
     dataTables('#agents_table', '/admin/get-agents', columns, columnDefs);
 
     // +++++ Owner Table +++++ //
@@ -103,11 +114,17 @@ $(() => {
         targets: 0
         },
         {
-        render: (data, type, row) => {
-            return `<i class="fa fa-edit px-2 action-btn" id="updateUser" ref_id="${row.id}" route="/admin/edit-user/${row.id}"></i>
-                    <i class="fa fa-trash action-btn" id="deleteUser" ref_id="${row.id}" route="/admin/delete-user/${row.id}"></i>`;
+            render: (data, type, row) => {
+                return row.status ? '<span class="status">Active</span>' : '<span class="status" style="background: red;">Inactive</span>';
+            },
+            targets: 3
         },
-        targets: 3
+        {
+        render: (data, type, row) => {
+            return `<i class="fa ${row.status ? 'fa-eye' : 'fa-eye-slash'} action-btn" id="updateUserStatus" ref_id="${row.id}" route="/admin/delete-user/${row.id}"></i>
+                    <i class="fa fa-edit px-2 action-btn" id="updateUser" ref_id="${row.id}" route="/admin/edit-user/${row.id}"></i>`;
+        },
+        targets: 4
     }];
     dataTables('#owners_table', '/admin/get-owners', columns, columnDefs);
 
@@ -119,9 +136,14 @@ $(() => {
 
     }, {
         render: (data, type, row) => {
-            return `<i class="fa fa-edit px-2 action-btn" id="updateUser" ref_id="${row.id}" route="/admin/edit-user/${row.id}"></i>
-                    <i class="fa fa-trash action-btn" id="deleteUser" ref_id="${row.id}" route="/admin/delete-user/${row.id}"></i>`;
-        }, targets: 3
+            return `<i class="fa ${row.status ? 'fa-eye' : 'fa-eye-slash'} action-btn" id="updateUserStatus" ref_id="${row.id}" route="/admin/delete-user/${row.id}"></i>
+                    <i class="fa fa-edit px-2 action-btn" id="updateUser" ref_id="${row.id}" route="/admin/edit-user/${row.id}"></i>`;
+        }, targets: 4
+    }, {
+        render: (data, type, row) => {
+            return row.status ? '<span class="status">Active</span>' : '<span class="status" style="background: red;">Inactive</span>';
+        },
+        targets: 3
     }];
 
     dataTables('#renters_table', '/admin/get-renters', columns, columnDefs);

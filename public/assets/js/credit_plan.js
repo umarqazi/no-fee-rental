@@ -26,8 +26,8 @@ $('.change-card').on('click', function() {
 
 $('.switch-plan').on('click', async function () {
     let DOM = $(this).parents('div.platinum-plan');
-    creditPlan = DOM.index();
-   if(await confirm(`You want switch to this plan?`)){
+    creditPlan = DOM.index() !== -1 ? DOM.index() : $(this).find('.creditplan').text();
+    if(await confirm(`You want switch to this plan?`)){
         await ajaxRequest('/agent/purchase-plan', 'post', {credit_plan: creditPlan}).then(res => {
             setTimeout(() => { window.location.reload() }, 1000);
         });
