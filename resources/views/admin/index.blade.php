@@ -1,6 +1,16 @@
 @extends('secured-layouts.app')
 @section('title', 'Users Management')
 @section('content')
+    <style>
+        .status {
+            font-size: 11px;
+            background: #00a651;
+            color: #fff;
+            padding: 5px 12px;
+            border-radius: 20px;
+        }
+
+    </style>
     <div class="wrapper">
         <div class="heading-wrapper">
             <h1>User Accounts</h1>
@@ -36,6 +46,7 @@
                                     <th>Email</th>
                                     <th>Phone Number</th>
                                     <th>License Number</th>
+                                    <th>Account Status</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
@@ -52,6 +63,7 @@
                                     <th>Owner Name</th>
                                     <th>Email</th>
                                     <th>Phone Number</th>
+                                    <th>Account Status</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
@@ -67,6 +79,7 @@
                                     <th>Renter Name</th>
                                     <th>Email</th>
                                     <th>Phone Number</th>
+                                    <th>Account Status</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
@@ -94,6 +107,8 @@
     </div>
  {{--Add User Modal--}}
 @include('admin.modals.add_user')
+{{--User Profile--}}
+@include('admin.modals.view_profile')
 {{--Company Modal--}}
 @include('admin.modals.company')
 {{--User Page Script--}}

@@ -14,6 +14,7 @@ use App\Repository\CreditPlanRepo;
 use App\Repository\ListingRepo;
 use App\Repository\ManageTransactionRepo;
 use App\Traits\DispatchNotificationService;
+use App\Traits\UserSoftDelete;
 use Illuminate\Support\Facades\DB;
 
 /**
@@ -22,7 +23,7 @@ use Illuminate\Support\Facades\DB;
  */
 class CreditPlanService extends PaymentService {
 
-    use DispatchNotificationService;
+    use DispatchNotificationService, UserSoftDelete;
 
     /**
      * @var ListingRepo
@@ -109,21 +110,20 @@ class CreditPlanService extends PaymentService {
     }
 
     /**
-     * @return mixed
+     * @param null $id
+     * @return bool
      */
-    public function cancel() {
-        if($this->__cancelSubscription()) {
-            dd('yes');
+    public function cancel($id = null) {
+        if($this->__cancelSubscription($id)) {
+
             $cancelPlan = $this->creditPlanRepo->find([
-                'user_id' => myId()
-            ])->update(['is_cancel' => TRUE]);
+                'user_id'    => $id ?? myId(),
+                'is_expired' => NOTEXPIRED,
+            ])->update(['is_cancel' => TRUE, 'is_expired' => TRUE]);
 
             if($cancelPlan) {
-                return $this->listingRepo->find([
-                    'user_id' => myId()
-                ])->update([
-                    'visibility' => ARCHIVED
-                ]);
+                $this->archiveListings($id);
+                return true;
             }
 
             return false;
@@ -136,7 +136,11 @@ class CreditPlanService extends PaymentService {
      * @return bool
      */
     public function agentHasPlan() {
-        return $this->creditPlanRepo->find(['user_id' => myId()])->where('is_cancel', FALSE)->count() > 0 ? true : false;
+        return $this->creditPlanRepo
+            ->find(['user_id' => myId()])
+            ->where('is_cancel', FALSE)
+            ->where('is_expired', FALSE)
+            ->latest()->count() > 0 ? true : false;
     }
 
     /**
@@ -227,9 +231,11 @@ class CreditPlanService extends PaymentService {
         $plan = $this->__currentBalance();
         $availableSlots = $plan->remaining_slots;
         if($availableSlots >= 1) {
-            return $this->creditPlanRepo->updateByClause(['user_id' => myId()], [
-                'remaining_slots' => $availableSlots - 1
-            ]);
+            return $this->creditPlanRepo->updateByClause([
+                'user_id' => myId(),
+                'is_cancel' => FALSE,
+                'is_expired' => NOTEXPIRED
+            ], ['remaining_slots' => $availableSlots - 1]);
         }
 
         return false;
@@ -246,7 +252,11 @@ class CreditPlanService extends PaymentService {
 
         $plan = $this->__currentBalance();
         $availableSlots = $plan->remaining_slots;
-        return $this->creditPlanRepo->updateByClause(['user_id' => myId()], [
+        return $this->creditPlanRepo->updateByClause([
+            'user_id' => myId(),
+            'is_cancel' => FALSE,
+            'is_expired' => NOTEXPIRED
+        ], [
             'remaining_slots' => $availableSlots >= 1 ? $availableSlots + 1 : 1
         ]);
     }
@@ -263,7 +273,11 @@ class CreditPlanService extends PaymentService {
         $plan = $this->__currentBalance();
         $availableRepost = $plan->remaining_repost;
         if($availableRepost >= 1) {
-            return $this->creditPlanRepo->updateByClause(['user_id' => myId()], [
+            return $this->creditPlanRepo->updateByClause([
+                'user_id' => myId(),
+                'is_cancel' => FALSE,
+                'is_expired' => NOTEXPIRED
+            ], [
                 'remaining_repost' => $availableRepost - 1
             ]);
         }
@@ -283,7 +297,11 @@ class CreditPlanService extends PaymentService {
         $plan = $this->__currentBalance();
         $availableFeatured = $plan->remaining_featured;
         if($availableFeatured >= 1) {
-            return $this->creditPlanRepo->updateByClause(['user_id' => myId()], [
+            return $this->creditPlanRepo->updateByClause([
+                'user_id' => myId(),
+                'is_cancel' => FALSE,
+                'is_expired' => NOTEXPIRED
+            ], [
                 'remaining_featured' => $availableFeatured - 1
             ]);
         }
@@ -295,7 +313,7 @@ class CreditPlanService extends PaymentService {
      * @return mixed
      */
     public function myPlan() {
-        return $this->creditPlanRepo->find(['user_id' => myId()])->latest()->first();
+        return $this->creditPlanRepo->find(['user_id' => myId(), 'is_cancel' => FALSE])->latest()->first();
     }
 
     /**
@@ -360,7 +378,7 @@ class CreditPlanService extends PaymentService {
 
         return !$update
             ? $this->creditPlanRepo->create($credits->toArray())
-            : $this->creditPlanRepo->updateByClause(['user_id' => myId()], $credits->toArray());
+            : $this->creditPlanRepo->updateByClause(['user_id' => myId(), 'is_cancel' => FALSE], $credits->toArray());
     }
 
     /**

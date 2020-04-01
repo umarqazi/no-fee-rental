@@ -173,7 +173,7 @@
 
         $('.edit-profile').on('click', function (e) {
             let lang = [];
-            let neighbors = []
+            let neighbors = [];
             let languages = @php echo json_encode(config('languages')); @endphp;
             ajaxRequest('/all-neighborhoods', 'post', null, false).then(neighborhoods => {
                 neighborhoods.data.forEach(v => {
@@ -192,16 +192,8 @@
                 }
 
                 $('input[name="languages"]').amsifySuggestags({
-                suggestions: lang,
-                whiteList: true,
-                    afterAdd:function(value) {
-                        if ($(".languages > .amsify-suggestags-area > .amsify-suggestags-input-area > span").length > 2) {
-                            $(".languages > .amsify-suggestags-area > .amsify-suggestags-input-area > .amsify-suggestags-input").attr('readonly', true);
-                        }
-                        else {
-                            $(".languages > .amsify-suggestags-area > .amsify-suggestags-input-area > .amsify-suggestags-input").attr('readonly', false);
-                        }
-                    }
+                    suggestions: lang,
+                    whiteList: true,
                 });
             });
     </script>

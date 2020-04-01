@@ -182,25 +182,6 @@ async function deleteRecord(route, table, form) {
 
 /**
  *
- * @param route
- * @param table
- * @param form
- * @returns {Promise<void>}
- */
-async function toggleStatus(route, table, form) {
-    if (await confirm('Sure to perform this action?')) {
-        let res = await ajaxRequest(route, 'post', null);
-        if (form.hasClass('fa-eye')) {
-            form.addClass('fa-eye-slash').removeClass('fa-eye');
-        } else if (form.hasClass('fa-eye-slash')) {
-            form.addClass('fa-eye').removeClass('fa-eye-slash');
-        }
-        return res;
-    }
-}
-
-/**
- *
  * @param form_id
  * @param route
  * @returns {Promise<void>}

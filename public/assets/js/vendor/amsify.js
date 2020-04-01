@@ -608,7 +608,7 @@ var AmsifySuggestags;
         },
 
         printValues : function() {
-            console.info(this.tagNames, $(this.selector).val());
+            // console.info(this.tagNames, $(this.selector).val());
         },
 
         checkMethod : function() {

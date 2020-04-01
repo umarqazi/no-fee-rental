@@ -22,7 +22,7 @@
                     @endif
                 </div>
                 <div class="actions-btns">
-                    @if(!empty($al->realty_id) || empty($al->realty_id))
+                    @if(isAgentHasPlan() || isMRGAgent())
                         <a href="{{ route(whoAmI().'.unArchive', $al->id) }}" title="UnArchive this Listing">
                             <button type="button" class="border-btn">UnArchive</button>
                         </a>
@@ -62,7 +62,7 @@
                             @endif
                         </div>
                         <div class="actions-btns">
-                            @if(!empty($al->realty_id) || empty($al->realty_id))
+                            @if(isAgentHasPlan() || isMRGAgent())
                                 <a href="{{ route(whoAmI().'.unArchive', $al->id) }}" title="UnArchive this Listing">
                                     <button type="button" class="border-btn">UnArchive</button>
                                 </a>

@@ -16,11 +16,11 @@ use App\Forms\User\ChangePasswordForm;
 use App\Forms\User\EditProfileForm;
 use App\Repository\CompanyRepo;
 use App\Repository\ExclusiveSettingRepo;
-use App\Repository\MemberRepo;
 use App\Repository\AgentRepo;
 use App\Repository\NeighborhoodRepo;
 use App\Repository\UserRepo;
 use App\Traits\DispatchNotificationService;
+use App\Traits\UserSoftDelete;
 use Illuminate\Support\Facades\DB;
 
 /**
@@ -29,7 +29,7 @@ use Illuminate\Support\Facades\DB;
  */
 class UserService extends SearchService {
 
-    use DispatchNotificationService;
+    use DispatchNotificationService, UserSoftDelete;
 
     /**
      * @var UserRepo
@@ -517,6 +517,7 @@ class UserService extends SearchService {
         $user = $this->userRepo->edit($id);
         $status = $user->first();
         $update = $status->status !== 1;
+        $this->triggerEvents($status);
         $user->update(['status' => $update]);
         return $update;
     }
