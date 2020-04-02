@@ -8,6 +8,10 @@
     .modal-backdrop {
         z-index: 20;
     }
+
+    .a2a_default_style a {
+        float: none !important;
+    }
 </style>
 <section class="listing-Details neighborhood-search wow fadeIn listing-detail-container" data-wow-delay="0.2s">
     <div class="container-lg">
@@ -17,13 +21,12 @@
                     <div class="product-title">
                         <p> {{ is_exclusive($listing) }} </p>
                         <div class="right-share-icons-side">
-                            <div class="dropdown-toggle share-icon-div" data-toggle="dropdown"><img src="{{ Storage::url('/assets/images/share-icon.png') }}" alt="" />
-                             <ul class="dropdown-menu">
-                                <li> <a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
-                                <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
-                                <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
-                                <li><a href="#"><i class="fab fa-youtube"></i> Youtube</a></li>
-                              </ul>
+                            <div class="dropdown-toggle share-icon-div a2a_kit a2a_kit_size_32 a2a_default_style" data-toggle="dropdown"><img src="{{ Storage::url('/assets/images/share-icon.png') }}" alt="" />
+                                <ul class="dropdown-menu">
+                                    <li><a class="a2a_button_facebook"><i class="fab fa-facebook "></i> Facebook</a></li>
+                                    <li><a class="a2a_button_twitter"><i class="fab fa-twitter"></i> Twitter</a></li>
+                                    <li><a class="a2a_button_linkedin"><i class="fab fa-instagram"></i> LinkedIn</a></li>
+                                </ul>
                             </div>
                             @if(!authenticated())
                                <span id="display-heart-icon" class="display-heart-icon"></span>
@@ -273,6 +276,7 @@
 
 {{--Make Appointment--}}
 @include('modals.appointment')
+<script async src="https://static.addtoany.com/menu/page.js"></script>
 {!! HTML::style('https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.css') !!}
 {!! HTML::script('https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.js') !!}
 <script>
