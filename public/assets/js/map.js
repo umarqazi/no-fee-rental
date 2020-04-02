@@ -1,10 +1,13 @@
 "use strict";
 
-let MAP, MARKER;
-let defaultCoords =  {latitude: 40.785091, longitude: -73.968285}; // New York Center point
+let MAP, MARKER, defaultCoords =  {latitude: 40.785091, longitude: -73.968285}; // New York Center point
+
+let MAP_INITIALIZED = false;
+
 const BBOX = [
     -74.2590879797556, 40.477399, -73.7008392055224, 40.917576401307
 ];
+
 const defaultBounds = [
     [-74.04728500751165, 40.68392799015035], // Southwest coordinates
     [-73.91058699000139, 40.87764500765852]  // Northeast coordinates
@@ -102,7 +105,6 @@ const setMap = (container, coords, addMarker = true, showPop = true, html = null
     });
 
     mapControls(new mapboxgl.NavigationControl(), 'bottom-right');
-
     MAP.flyTo({center: setLatLng(coords)});
     (addMarker) ? setMarker(coords) : null;
     (showPop) ? showPopUp(MARKER, html) : null;
@@ -127,21 +129,28 @@ const showPopUp = (m, html) => {
  * @param container
  * @param zoom
  */
-const multiMarkers = (coords, container, zoom = 10) => {
-    MAP = new mapboxgl.Map({
-        accessToken: setToken(),
-        container: container,
-        // maxBounds: defaultBounds,
-        style: 'mapbox://styles/mapbox/light-v10',
-        center: setLatLng(defaultCoords),
-        zoom: zoom
-    });
+const multiMarkers = (coords, container, zoom = 14) => {
+    if(!MAP_INITIALIZED) {
+        MAP = new mapboxgl.Map({
+            accessToken: setToken(),
+            container: container,
+            // maxBounds: defaultBounds,
+            style: 'mapbox://styles/mapbox/light-v10',
+            center: setLatLng(defaultCoords),
+            zoom: zoom
+        });
+
+        MAP_INITIALIZED = true;
+        mapControls(new mapboxgl.NavigationControl(), 'bottom-right');
+
+    }
 
     coords.forEach((coords, i) => {
         coords = JSON.parse(coords);
 
         i = new mapboxgl.Marker({
             style: "cursor:pointer",
+            color: "#223971"
         })
             .setLngLat(setLatLng(coords))
             .setPopup( new mapboxgl.Popup().setHTML('') )
@@ -154,7 +163,6 @@ const multiMarkers = (coords, container, zoom = 10) => {
             let domain = window.location.origin;
             let map_location = JSON.stringify({'latitude': current.lat, 'longitude': current.lng});
             let resp = await ajaxRequest(`/listing-detail`, 'post', {map_location});
-            console.log(resp);
             if(resp.data.length > 1) {
                 html += '<div class="mapbox-content-wrapper">';
                 resp.data.forEach((res, b) => {
@@ -170,9 +178,9 @@ const multiMarkers = (coords, container, zoom = 10) => {
 
             i.getPopup().setHTML(html);
         });
+        console.log(i);
     });
 
-    mapControls(new mapboxgl.NavigationControl(), 'bottom-right');
 };
 
 /**
@@ -321,8 +329,12 @@ const addHoverEffect = () => {
     $('body').find('.property-thumb').hover(function() {
         let lat_lng = $(this).find('input[name=map_location]').val();
         lat_lng = JSON.parse(lat_lng.replace(/\\/g, ""));
-        MAP.setZoom = 20;
-        MAP.flyTo({center: setLatLng(lat_lng)});
+
+        MAP.flyTo({
+            center: setLatLng(lat_lng),
+            zoom: 14,
+            speed: 0.5
+        });
     });
 };
 
@@ -337,7 +349,7 @@ const drawCoords = () => {
     });
 
     if(coords.length > 0) {
-        multiMarkers(coords, 'desktop-map', 15);
+        multiMarkers(coords, 'desktop-map', 10);
         addHoverEffect();
     }
 };
