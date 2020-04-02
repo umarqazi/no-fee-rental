@@ -272,10 +272,11 @@ function isOwner() {
 }
 
 /**
+ * @param null $id
  * @return mixed
  */
-function isMRGAgent() {
-    return (new \App\Services\UserService())->agentsWithMRGCompany();
+function isMRGAgent($id = null) {
+    return (new \App\Services\UserService())->agentsWithMRGCompany($id);
 }
 
 /**

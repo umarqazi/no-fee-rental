@@ -42,10 +42,11 @@ class UserRepo extends BaseRepo {
 	}
 
     /**
+     * @param null $id
      * @return mixed
      */
-	public function mrgAgents() {
-        return $this->model->mrgAgents();
+	public function mrgAgents($id = null) {
+        return $this->model->mrgAgents($id);
     }
 
 	/**
