@@ -25,7 +25,8 @@
                                 <ul class="dropdown-menu">
                                     <li><a class="a2a_button_facebook"><i class="fab fa-facebook "></i> Facebook</a></li>
                                     <li><a class="a2a_button_twitter"><i class="fab fa-twitter"></i> Twitter</a></li>
-                                    <li><a class="a2a_button_linkedin"><i class="fab fa-instagram"></i> LinkedIn</a></li>
+                                    <li><a class="a2a_button_linkedin"><i class="fab fa-linkedin-in"></i> LinkedIn</a></li>
+                                    <li><a class="a2a_button_google_gmail"><i class="far fa-envelope"></i> Gmail</a></li>
                                 </ul>
                             </div>
                             @if(!authenticated())
@@ -276,7 +277,7 @@
 
 {{--Make Appointment--}}
 @include('modals.appointment')
-<script async src="https://static.addtoany.com/menu/page.js"></script>
+{!! HTML::script('https://static.addtoany.com/menu/page.js') !!}
 {!! HTML::style('https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.css') !!}
 {!! HTML::script('https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.js') !!}
 <script>
