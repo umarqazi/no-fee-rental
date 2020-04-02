@@ -178,7 +178,6 @@ const multiMarkers = (coords, container, zoom = 14) => {
 
             i.getPopup().setHTML(html);
         });
-        console.log(i);
     });
 
 };
