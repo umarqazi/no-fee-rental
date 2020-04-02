@@ -44,7 +44,10 @@
             cursor: pointer;
         }
         .notification-details .notification-main-wrapper .notification-inner-scroll .custom-checkbox{
-            margin-top: 10px;
+            margin-top: 15px;
+        }
+        .notification-main-wrapper .notification-inner-content {
+            margin-left: 25px;
         }
         .notification-details .notification-main-wrapper .mark-read{
             position: relative;
@@ -69,6 +72,13 @@
             top: 0px;
             font-size: 18px;
             cursor: pointer;
+        }
+
+        .notification-checkbox {
+            position: absolute;
+            padding: 5px;
+            margin-top: 20px;
+            text-align: center;
         }
     </style>
     <div class="wrapper">
@@ -97,11 +107,11 @@
                                     @php $listing = (new $notification->model)->where('id', $notification->linked_id)->first(); @endphp
                                     <div class="notification-content {{ $notification->is_read ? '' : 'unread' }}">
                                         <a href="{{ $notification->url }}" data-id="{{ $notification->id }}">
+                                            <div class="custom-control custom-checkbox notification-checkbox">
+                                                {!! Form::checkbox('remove', $notification->id, false, ['class' => 'custom-control-input checkBoxClass', 'id' => $key]) !!}
+                                                <label class="custom-control-label" for="{{ $key }}"></label>
+                                            </div>
                                             <div class="notification-inner-content">
-                                                <div class="custom-control custom-checkbox">
-                                                    {!! Form::checkbox('remove', $notification->id, false, ['class' => 'custom-control-input checkBoxClass', 'id' => $key]) !!}
-                                                    <label class="custom-control-label" for="{{ $key }}"></label>
-                                                </div>
                                                 <img src="{{ is_realty_listing($listing->thumbnail ?? DLI) }}" alt=""/>
                                                 <div class="listingnoti">
                                                     <ul style="display: flex">
@@ -123,11 +133,11 @@
                                     @php $user = (new $notification->model)->where('id', $notification->from)->first(); @endphp
                                     <div class="notification-content {{ $notification->is_read ? '' : 'unread' }}">
                                         <a href="{{ $notification->url }}" data-id="{{ $notification->id }}">
+                                            <div class="custom-control custom-checkbox notification-checkbox">
+                                                {!! Form::checkbox('remove', $notification->id, false, ['class' => 'custom-control-input checkBoxClass', 'id' => $key]) !!}
+                                                <label class="custom-control-label" for="{{ $key }}"></label>
+                                            </div>
                                             <div class="notification-inner-content">
-                                                <div class="custom-control custom-checkbox">
-                                                    {!! Form::checkbox('remove', $notification->id, false, ['class' => 'custom-control-input checkBoxClass', 'id' => $key]) !!}
-                                                    <label class="custom-control-label" for="{{ $key }}"></label>
-                                                </div>
                                                 <img src="{{ Storage::url($user->profile_image ?? DUI) }}" alt=""/>
                                                 <div class="listingnoti">
                                                     <h4>{{ sprintf('%s %s', $user->first_name, $user->last_name) }}</h4>
@@ -143,6 +153,10 @@
                                     @php $user = (new $notification->model)->where('id', $notification->linked_id)->first() @endphp
                                     <div class="notification-content {{ $notification->is_read ? '' : 'unread' }}">
                                         <a href="{{ $notification->url }}" data-id="{{ $notification->id }}">
+                                            <div class="custom-control custom-checkbox notification-checkbox">
+                                                {!! Form::checkbox('remove', $notification->id, false, ['class' => 'custom-control-input checkBoxClass', 'id' => $key]) !!}
+                                                <label class="custom-control-label" for="{{ $key }}"></label>
+                                            </div>
                                             <div class="notification-inner-content">
                                                 <img src="{{ Storage::url(DUI) }}" alt=""/>
                                                 <div class="listingnoti">
