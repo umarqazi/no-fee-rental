@@ -16,11 +16,11 @@ trait UserSoftDelete {
         switch ($user->user_type) {
             case AGENT:
                 $this->archiveListings($user->id);
-                $this->_cancelSubscription($user->id);
+                (isMRGAgent($user->id)) ?: $this->_cancelSubscription($user->id);
                 break;
 
             case OWNER:
-
+                $this->archiveListings($user->id);
                 break;
 
             case RENTER:

@@ -551,10 +551,11 @@ class UserService extends SearchService {
     }
 
     /**
-     * @return mixed
+     * @param null $id
+     * @return bool
      */
-    public function agentsWithMRGCompany() {
-        return $this->userRepo->mrgAgents()->count() > 0 ? true : false;
+    public function agentsWithMRGCompany($id = null) {
+        return $this->userRepo->mrgAgents($id)->count() > 0 ? true : false;
     }
 
     /**
