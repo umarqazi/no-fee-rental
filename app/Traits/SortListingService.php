@@ -8,7 +8,6 @@
 
 namespace App\Traits;
 
-use App\Repository\SortListingRepo;
 use Illuminate\Support\Collection;
 
 /**
@@ -31,25 +30,32 @@ trait SortListingService {
     }
 
     /**
-     * @return Collection|mixed
+     * @return array
      */
     public function recommended() {
-        $sorted = $this->collection->sortBy(function ($value) {
-            return !empty($value->agent->company)
-                ? $value->agent->company->company === MRG : false;
-        })->values();
+        $first = []; $last = [];
+        foreach ($this->collection as $index => $listing) {
+            if(!empty($listing->agent->company)) {
+                $listing->agent->company->company == MRG
+                    ? array_push($first, $listing)
+                    : array_push($last, $listing);
+            }
+        }
 
-        return $sorted;
+        return array_merge($first, $last);
     }
 
     /**
-     * @return mixed
+     * @return array
      */
     public function trending() {
-        $sorted = $this->collection->sort(function ($value) {
-            return $value->favourites->count() > 0;
-        })->values();
+        $first = []; $last = [];
+        foreach ($this->collection as $index => $listing) {
+            $listing->favourites->count() > 0
+                ? array_push($first, $listing)
+                : array_push($last, $listing);
+        }
 
-        return $sorted;
+        return array_merge($first, $last);
     }
 }

@@ -77,7 +77,9 @@ const autoComplete = (container) => {
  * @returns {*}
  */
 const setMarker = (coords) => {
-    MARKER = new mapboxgl.Marker()
+    MARKER = new mapboxgl.Marker({
+        color: "#223971"
+    })
         .setLngLat(setLatLng(coords))
         .addTo(MAP);
 
