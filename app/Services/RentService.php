@@ -56,7 +56,7 @@ class RentService extends SearchService {
     private function __sorting($request, $listings, $paginate) {
         $this->__sortConstruct($listings->get());
         if(method_exists(SortListingService::class, $request->sortBy)) {
-            $listings = new Paginator($this->{$request->sortBy}(), $paginate);
+            $listings = customPaginator($request, $this->{$request->sortBy}(), $paginate);
         } else {
             $listings = $listings->paginate($paginate);
         }

@@ -2,7 +2,9 @@
 @extends('layouts.app')
 @section('title', 'Blog')
 @section('content')
-
+    <meta http-equiv='cache-control' content='no-cache'>
+    <meta http-equiv='expires' content='0'>
+    <meta http-equiv='pragma' content='no-cache'>
     @php
         $paged = isset($_GET['page']) ? $_GET['page'] : 1;
         $args = array(

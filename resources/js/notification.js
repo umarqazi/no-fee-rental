@@ -33,7 +33,7 @@ $(() => {
         $main.find('.unread').find('a').each((index, value) => {
             ids.push($(value).attr('data-id'));
         });
-
+        if(ids.length < 1) return;
         await ajaxRequest('/mark-all-as-read', 'post', {ids}, false);
         $main.find('.unread').removeClass('unread');
         hideAlert();

@@ -78,6 +78,25 @@ function readImage($image_name) {
 }
 
 /**
+ * @param $request
+ * @param $collection
+ * @param $paginate
+ * @return \Illuminate\Pagination\LengthAwarePaginator
+ */
+function customPaginator($request, $collection, $paginate) {
+    $per_page = $paginate;
+    $current_page = $request->page ?? 1;
+    $starting_point = ($current_page * $per_page) - $per_page;
+    $items = collect(array_slice($collection, $starting_point, $per_page, true));
+    $paginated = new \Illuminate\Pagination\LengthAwarePaginator($items->values(), count($collection), $paginate, $current_page, [
+        'path' => $request->url(),
+        'query' => $request->query(),
+    ]);
+
+    return $paginated;
+}
+
+/**
  * @param $total
  * @param $perPage
  * @return string|null
