@@ -87,7 +87,7 @@
                     </div>
                     <div class="property-listing mobile-listing">
                         @if(count($listings) > 0)
-                        <div class="owl-carousel owl-theme">
+                        <div class="owl-carousel owl-theme" id="owl-demo">
                             @foreach($listings as $listing)
                                 <div class="items">
                                     {!! property_thumbs($listing, true) !!}
@@ -122,6 +122,7 @@
 {!! HTML::script('assets/js/search-result.js') !!}
 {!! HTML::style('https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.css') !!}
 {!! HTML::script('https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.js') !!}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 <script>
 
     $(() => {
@@ -142,6 +143,25 @@
                     res.data.data.forEach(v => {
                         $('.property-listing > .property-thumb:last').after(property_thumb(v));
                     });
+                    drawCoords();
+                });
+            }
+        }
+    });
+
+    // Mobile Responsive Owl
+    $('body').on('click', '.owl-next', function() {
+        if($(this).hasClass('disabled')) {
+            if(nextPage !== null) {
+                nextPage = null;
+                ajaxRequest(`${url}`, 'post', null).then(async res => {
+                    let collection = [];
+                    nextPage = res.data.next_page_url;
+                    url = window.location.pathname + '?' + nextPage.split('?')[1];
+                    await res.data.data.forEach(v => {
+                        $('#owl-demo').trigger('add.owl.carousel', [property_thumb(v)]).trigger('refresh.owl.carousel');
+                    });
+
                     drawCoords();
                 });
             }

@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html>
 <head>
     <title>{{ __('No Fee Rentals | ') }}@yield('title')</title>
     <meta charset="utf-8">

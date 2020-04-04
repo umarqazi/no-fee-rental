@@ -1,9 +1,14 @@
-{!! HTML::style('/wp/wp-content/themes/nofeerentals/assets/css/main.css') !!}
 
-@php $data = collect($data)->first() @endphp
+@php
+    $data = collect($data)->first();
+@endphp
 @extends('layouts.app')
 @section('title', $data->post_title)
 @section('content')
+    <meta http-equiv='cache-control' content='no-cache'>
+    <meta http-equiv='expires' content='0'>
+    <meta http-equiv='pragma' content='no-cache'>
+    {!! HTML::style('/wp/wp-content/themes/nofeerentals/assets/css/main.css') !!}
 
     @php
         $params = [
