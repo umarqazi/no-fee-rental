@@ -3,9 +3,9 @@
         color: red !important;
     }
 </style>
-<link rel="stylesheet" type="text/css" href="http://no-fee-rental.teamtechverx.com/assets/css/datepicker.min.css">
-<script src="http://no-fee-rental.teamtechverx.com/assets/js/datepicker.min.js"></script>
-<script src="http://no-fee-rental.teamtechverx.com/assets/js/datepicker.en.js"></script>
+{!! HTML::style('assets/css/datepicker.min.css') !!}
+{!! HTML::script('assets/js/datepicker.min.js') !!}
+{!! HTML::script('assets/js/datepicker.en.js') !!}
 {!! HTML::style('assets/css/credit.css') !!}
 <div class="modal fade" id="myModal-currentPlan">
     <div class="modal-dialog modal-dialog-centered">
