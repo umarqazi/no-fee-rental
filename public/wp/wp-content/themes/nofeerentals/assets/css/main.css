@@ -1570,12 +1570,12 @@ footer .copyright .social-icons li a:hover {
   content: "";
   width: 15px;
   height: 15px;
-  background-image: url('http://no-fee-rental.teamtechverx.com/blog/wp-content/uploads/2019/09/check.png');
+  background-image: url('../../../../uploads/2019/09/check.png');
   background-repeat: no-repeat;
   background-size:100%;
 }
 .inner-pages ul.use-of-lists li:before{
-  background-image: url('http://no-fee-rental.teamtechverx.com/blog/wp-content/uploads/2019/09/check-white.png') !important;
+  background-image: url('../../../../uploads/2019/09/check-white.png') !important;
 }
 .bullet-list li{
  padding-left: 25px !important;
