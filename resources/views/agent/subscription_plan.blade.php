@@ -1,9 +1,9 @@
 @extends('secured-layouts.app')
 @section('title', currentPlan($currentPlan->plan))
 @section('content')
-    <link rel="stylesheet" type="text/css" href="http://no-fee-rental.teamtechverx.com/assets/css/datepicker.min.css">
-    <script src="http://no-fee-rental.teamtechverx.com/assets/js/datepicker.min.js"></script>
-    <script src="http://no-fee-rental.teamtechverx.com/assets/js/datepicker.en.js"></script>
+    {!! HTML::style('assets/css/datepicker.min.css') !!}
+    {!! HTML::script('assets/js/datepicker.min.js') !!}
+    {!! HTML::script('assets/js/datepicker.en.js') !!}
     {{--basic plan page--}}
     <div class="wrapper">
         <div class="heading-wrapper">
