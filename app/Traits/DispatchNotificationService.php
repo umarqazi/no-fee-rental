@@ -185,7 +185,7 @@ trait DispatchNotificationService
         self::$data->from = admin('id');
         self::$data->model = User::class;
         self::$data->toEmail = $data->agent->email;
-        self::$data->plan    = currentPlan($data->credit_plan);
+        self::$data->plan    = ucfirst($data->plan). ' Plan';
         self::$data->subject = 'New Plan Purchased';
         self::$data->message = 'Credit plan has been purchased';
         self::$data->url = route('agent.creditPlan');
