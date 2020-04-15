@@ -1,5 +1,7 @@
 "use strict";
 
+let dloader = new Date();
+dloader.getSeconds();
 let $query = [];
 let $old_queries = [];
 let decodedURL = new URL(decodeURIComponent(window.location.href));

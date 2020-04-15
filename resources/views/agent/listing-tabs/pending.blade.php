@@ -7,7 +7,7 @@
                 <img src="{{ Storage::url( $pl->thumbnail ?? DLI ) }}" alt="" style="height: 205px; width: 100%;" class="main-img" />
             </div>
             <div class="info">
-                <p class="title">{{ str_limit(is_exclusive($pl), STR_LIMIT_LIST_VIEW, ' ...') }}</p>
+                <p class="title">{!! str_limit(is_exclusive($pl), STR_LIMIT_LIST_VIEW, ' ...') !!}</p>
                 <p><i class="fa fa-tag"></i> ${{ ($pl->rent) ?   number_format($pl->rent,0) : 'None' }}</p>
                 <p>Freshness Score : {{ $pl->freshness_score }}%</p>
                 <ul>
@@ -33,7 +33,7 @@
                 <div class="listing-thumb">
                     <img src="{{ Storage::url( $pl->thumbnail ?? DLI) }}" alt="" style="height: 205px; width: 100%;" class="main-img" />
                     <div class="info">
-                        <p class="title">{{ str_limit(is_exclusive($pl), STR_LIMIT_GRID_VIEW, ' ...') }}</p>
+                        <p class="title">{!! str_limit(is_exclusive($pl), STR_LIMIT_LIST_VIEW, ' ...') !!}</p>
                         <p><i class="fa fa-tag"></i> ${{ ($pl->rent) ?   number_format($pl->rent,0) : 'None' }}</p>
                         <p>Freshness Score : {{ $pl->freshness_score }}%</p>
                         <ul>
