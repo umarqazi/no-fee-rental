@@ -7,8 +7,8 @@
    * @package nofeerentals
    */
 
-update_option( 'siteurl', 'http://beta.nofeerentalsnyc.com/wp' );
-update_option( 'home', 'http://beta.nofeerentalsnyc.com/wp' );
+update_option( 'siteurl', 'https://beta.nofeerentalsnyc.com/wp' );
+update_option( 'home', 'https://beta.nofeerentalsnyc.com/wp' );
 
   if ( ! function_exists( 'nofeerentals_setup' ) ) :
     /**

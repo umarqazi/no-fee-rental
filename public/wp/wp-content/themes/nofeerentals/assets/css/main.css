@@ -2427,7 +2427,7 @@ footer .copyright .social-icons li a:hover {
 .listing-detail-container .listing-info .apartment-details span {
     font-size: 18px;
     color: #6a6d72;
-}
+transparent url('../../../../uploads/2020/03/about-us-and-home-page-header-min.jpg') center center/cover no-repeat fixed}
 
 .listing-detail-container .listing-info .info-listing {
     border-top: #ebebeb solid 1px;
@@ -3134,7 +3134,7 @@ li.definitions-listings h4{
     font-size: 16px;
     font-weight: 700;
     color: #223971;
-}
+}transparent url('../../../../uploads/2020/03/about-us-and-home-page-header-min.jpg') center center/cover no-repeat fixed
 .blog-page.single-post #search-2{
     margin-bottom: 15px;
 }
@@ -3309,7 +3309,7 @@ li.definitions-listings h4{
         text-align: center;
         margin-bottom: 15px;
     }
-    .login-info img {
+    .login-info img {transparent url('../../../../uploads/2020/03/about-us-and-home-page-header-min.jpg') center center/cover no-repeat fixed
         width: 25px;
         height: 25px;
     }
@@ -4165,6 +4165,11 @@ li.definitions-listings h4{
 }
 
 .kc-css-3998444.kc_row {
-    background: transparent url('../../../../uploads/2020/03/about-us-and-home-page-header-min.jpg') center center/cover no-repeat fixed;
+    background: transparent url('../../../../uploads/2020/03/about-us-and-home-page-header-min.jpg') center center/cover no-repeat fixed !important;
+    margin-bottom: 16px;
+}
+
+.kc-css-2209539 {
+    background: transparent url('../../../../uploads/2020/03/term of use-min.jpg') center center/cover no-repeat fixed !important;
     margin-bottom: 16px;
 }
