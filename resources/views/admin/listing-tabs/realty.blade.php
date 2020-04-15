@@ -7,7 +7,7 @@
                 <img src="{{ is_realty_listing($al->thumbnail) }}" alt="" style="height: 205px; width: 100%;" class="main-img" />
             </div>
             <div class="info">
-                <p class="title">{{ str_limit(is_exclusive($al), STR_LIMIT_LIST_VIEW, ' ...') }}</p>
+                <p class="title">{!! str_limit(is_exclusive($al), STR_LIMIT_LIST_VIEW, ' ...') !!}</p>
                 <p><i class="fa fa-tag"></i> ${{ ($al->rent) ?   number_format($al->rent,0) : 'None' }}</p>
                 <p>Freshness Score : {{ $al->freshness_score }}%</p>
                 <ul>
@@ -75,7 +75,7 @@
                     <img src="{{ is_realty_listing($al->thumbnail) }}" alt="" style="height: 205px; width: 100%;" class="main-img" />
                     <div class="info">
                         <p class="title">
-                            {{ str_limit(is_exclusive($al), STR_LIMIT_GRID_VIEW, ' ...') }}
+                            {!! str_limit(is_exclusive($al), STR_LIMIT_LIST_VIEW, ' ...') !!}
                         </p>
                         <p><i class="fa fa-tag"></i> ${{ ($al->rent) ?   number_format($al->rent,0) : 'None' }}</p>
                         <p>Freshness Score : {{ $al->freshness_score }}%</p>
