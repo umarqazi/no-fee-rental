@@ -21,7 +21,7 @@
 
     <div class="wrapper">
         <div class="heading-wrapper">
-            <h1>{{$action}} Listing</h1>
+            <h1>{{$action == 'Building' ? 'Add Apartment' : $action}} Listing</h1>
         </div>
         <div class="block add-new-listing-wrapper">
             <div class="block-body">
@@ -76,7 +76,7 @@
                             <div id="map"></div>
                         </div>
                         <div class="col-md-12 mt-4 text-center">
-                            {!! Form::submit($action.' Listing', ['class' => 'btn-default submit']) !!}
+                            {!! Form::submit($action == 'Building' ? 'Add Apartment' : $action . ' Listing', ['class' => 'btn-default submit']) !!}
                         </div>
                     </div>
                 </div>

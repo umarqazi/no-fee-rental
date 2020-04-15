@@ -7,7 +7,7 @@
                 <img src="{{ is_realty_listing($building->thumbnail) }}" alt="" style="height: 205px; width: 100%;" class="main-img" />
             </div>
             <div class="info">
-                <p class="title">{{ $building->address }}</p>
+                <p class="title">{!! str_replace('\\', '', $building->address) !!}</p>
                 <p class="title">Total Apartments: {{ count($building->listings) }}</p>
                 <p>Posted On: {{ $building->created_at->format("m/d/y H:m A") }}</p>
                 <span class="status" style="background-color:#223970;">No Fee Building</span>
@@ -37,7 +37,7 @@
                     <img src="{{ is_realty_listing($building->thumbnail) }}" alt="" style="height: 205px; width: 100%;" class="main-img" />
                     <div class="info">
                         <p class="title">
-                            {{ $building->address }}
+                            {!! str_replace('\\', '', $building->address) !!}
                         </p>
                         <p>Posted On: {{ $building->created_at->format("m/d/y H:m A") }}</p>
                         <span class="status" style="background-color:#223970;">No Fee Building</span>

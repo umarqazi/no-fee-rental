@@ -1331,6 +1331,7 @@ function color($date) {
 function is_exclusive( $listing ) {
     if ( $listing !== null ) {
         if ( $listing->listing_type === EXCLUSIVE ) {
+            $listing->street_address = str_replace('\\', '', $listing->street_address);
             return sprintf( "%s - %s", $listing->street_address, $listing->unit ?? '#' );
         }
 
