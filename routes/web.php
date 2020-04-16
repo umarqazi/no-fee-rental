@@ -21,6 +21,7 @@ Route::get('/search', 'SearchController@search')->name('web.search');
 
 // Rent Routes
 Route::post('/listings-by-rent', 'RentController@pagination');
+Route::get('/find-apartments/{price}', 'RentController@findApartment');
 Route::get('/listings-by-rent', 'RentController@index')->name('web.listsByRent');
 
 // Neighborhood Routes

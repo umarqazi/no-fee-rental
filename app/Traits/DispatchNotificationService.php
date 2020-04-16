@@ -185,7 +185,7 @@ trait DispatchNotificationService
         self::$data->from = admin('id');
         self::$data->model = User::class;
         self::$data->toEmail = $data->agent->email;
-        self::$data->plan    = ucfirst($data->plan). ' Plan';
+        self::$data->plan    = currentPlan($data->plan);
         self::$data->subject = 'New Plan Purchased';
         self::$data->message = 'Credit plan has been purchased';
         self::$data->url = route('agent.creditPlan');
@@ -203,7 +203,7 @@ trait DispatchNotificationService
         self::$data->subject = 'Plan Expired';
         self::$data->from = admin('id');
         self::$data->model = User::class;
-        self::$data->plan = currentPlan($data->plan->credit_plan);
+        self::$data->plan = currentPlan($data->plan);
         self::$data->to = $data->id;
         self::$data->toEmail = $data->email;
         self::$data->message = 'Credit plan has been expired';
