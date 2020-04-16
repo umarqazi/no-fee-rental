@@ -438,34 +438,19 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
 
+                @php $pets = (new \App\Services\PetPolicyService())->get(); @endphp
                 <!-- Modal body -->
                 <div class="modal-body">
                     <div class="pt-3 mb-3">
                         <ul class="bedroom-listing">
+                            @foreach($pets as $key => $pet)
                             <li>
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="cats" name="pets" value="Cats">
-                                    <label class="custom-control-label" for="cats">Cats</label>
+                                    <input type="checkbox" class="custom-control-input lu-pets-{{ $key }}" id="pets-{{ $pet->id }}" name="pets[]" value="{{ $pet->id }}">
+                                    <label class="custom-control-label" for="pets-{{ $pet->id }}">{{ $pet->name }}</label>
                                 </div>
                             </li>
-                            <li>
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="dogs" name="pets" value="Dogs">
-                                    <label class="custom-control-label" for="dogs">Dogs</label>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="other" name="pets" value="Other">
-                                    <label class="custom-control-label" for="other">Other</label>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="no" name="pets" value="No">
-                                    <label class="custom-control-label" for="no">No</label>
-                                </div>
-                            </li>
+                            @endforeach
                         </ul>
                     </div>
                     <div class="text-center">
@@ -480,6 +465,38 @@
         </div>
     </div>
 </div>
+<script>
+    let t = $('.bedroom-listing');
+    $(() => {
+        if($('.lu-pets-2').is(':checked')) {
+            p3(true);
+        }
+
+        if($('.lu-pets-3').is(':checked')) {
+            p4(true);
+        }
+    });
+
+    function p3(action) {
+        t.find('.lu-pets-0, .lu-pets-1, .lu-pets-3').prop('checked', false);
+        t.find('.lu-pets-0, .lu-pets-1').prop('disabled', action);
+    }
+
+    function p4(action) {
+        t.find('.lu-pets-0, .lu-pets-1, .lu-pets-2').prop('checked', false);
+        t.find('.lu-pets-0, .lu-pets-1').prop('disabled', action);
+    }
+
+    $('.lu-pets-3, .lu-pets-2').change(function() {
+        let val = $(this).val();
+        if (val === '3') {
+            p3($(this).is(':checked'));
+        }
+
+        if (val === '4') {
+            p4($(this).is(':checked'));
+        }
+    });</script>
 <div class="modal fade need-help-modal let-us-help-modal" id="let-us-step12">
     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
         <div class="modal-content">
