@@ -435,9 +435,9 @@ function isAgentHasPlan() {
  * @return string
  */
 function currentPlan($plan) {
-    if($plan === BASICPLAN) {
+    if($plan == BASICPLAN) {
         return 'Basic Plan';
-    } else if ($plan === GOLDPLAN) {
+    } else if ($plan == GOLDPLAN) {
         return 'Gold Plan';
     } else {
         return 'Platinum Plan';

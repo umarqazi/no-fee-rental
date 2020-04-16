@@ -58,15 +58,17 @@ class RentController extends Controller {
 
     /**
      * @param $price
+     * @param Request $request
      * @return Factory|View
      */
-    public function findApartment($price) {
-        $params = [
+    public function findApartment($price, Request $request) {
+        $request->request->add([
+            'price' => true,
             'min_price' => MINPRICE,
             'max_price' => (int)$price
-        ];
+        ]);
 
-        return $this->__view($this->rentService->get(toObject($params), $this->paginate));
+        return $this->__view($this->rentService->get($request, $this->paginate));
     }
 
     /**
