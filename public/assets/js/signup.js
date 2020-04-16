@@ -3,7 +3,9 @@
 $(() => {
 
     let $body = $('body');
-    let $form = $('#signup_form, #invited_sign_up');
+    $('.agnet-input').attr('disabled', "disabled");
+    let $form = $('#signup_form');
+    let $iform = $('#invited_sign_up');
     // Form Success Event Call
     $body.on('form-success-signup_form', function (e, v) {
         $('#signup').modal('hide');
@@ -26,6 +28,15 @@ $(() => {
     });
 
     $form.find('.fa-eye:last').on('click', function () {
+        toggleEye($(this));
+    });
+
+    // Sign-up Password Show Hide
+    $iform.find('.fa-eye:first').on('click', function () {
+        toggleEye($(this));
+    });
+
+    $iform.find('.fa-eye:last').on('click', function () {
         toggleEye($(this));
     });
 

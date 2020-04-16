@@ -71,7 +71,8 @@ class MemberController extends Controller {
     }
 
     /**
-     * un friend Agent
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function unFriend($id) {
         $this->memberService->unFriend($id);

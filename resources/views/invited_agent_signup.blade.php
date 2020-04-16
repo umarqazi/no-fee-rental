@@ -91,7 +91,6 @@
         {!! Form::close() !!}
     </div>
 </div>
-    {!! HTML::script('assets/js/signup.js') !!}
     <script>
         $('body').on('form-success-invited_sign_up', function () {
             setTimeout(() => { window.location.href = '/advertise-with-us' }, 1000);
