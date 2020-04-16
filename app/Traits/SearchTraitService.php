@@ -202,7 +202,6 @@ trait SearchTraitService
     private function pets()
     {
         $pets = $this->args->{__FUNCTION__};
-        dd($pets);
         $this->query->whereHas('pets', function ($query) use ($pets) {
             return $query->whereIn('pet_policy_id', $pets);
         });
