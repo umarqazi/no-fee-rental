@@ -31,9 +31,10 @@ class MemberService {
 
     /**
      * @param $id
+     * @return mixed
      */
     public function unFriend($id) {
-        $this->memberRepo->unFriend($id);
+        return $this->memberRepo->unFriend($id);
     }
 
     /**

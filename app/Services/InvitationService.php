@@ -100,6 +100,7 @@ class InvitationService {
         if($agent = $this->validateInvitedAgentToken($request->token)) {
             $form = $this->__validateInvitedAgentForm($request);
             if($user = $this->userRepo->create($form->toArray())) {
+                $this->invitationRepo->find(['email' => $user->email])->delete();
                 $this->memberRepo->create(['agent_id' => $agent->invited_by, 'member_id' => $user->id]);
                 DB::commit();
                 return (new AuthService('agent'))->loginUsingId($user->id);
@@ -157,7 +158,7 @@ class InvitationService {
         if($invitation = $this->__addUser($request)) {
             $this->__sendRepresentativeInviteEmail($invitation);
             DB::commit();
-            return true;
+            return $invitation->id;
         }
 
         DB::rollBack();
