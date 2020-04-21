@@ -122,6 +122,14 @@ class Listing extends Model {
     }
 
     /**
+     * @param $value
+     * @return \Illuminate\Support\Carbon
+     */
+    public function getExpireOnAttribute($value) {
+        return carbon($value);
+    }
+
+    /**
      * @param $query
      *
      * @return mixed

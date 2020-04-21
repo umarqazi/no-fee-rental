@@ -1,12 +1,12 @@
 
-<div class="col-md-3 col-sm-4">
+<div class="col-md-4 col-sm-6">
     <h3>Building Features</h3>
     @if(isset($listing->building->amenities) && sizeof($listing->building->amenities) > 0  )
-        @foreach($listing->building->amenities as $amenity)
-            <ul class="second-ul">
+        <ul class="second-ul">
+            @foreach($listing->building->amenities as $key => $amenity)
                 <li>{{ ucwords($amenity->amenities) }}</li>
-            </ul>
-        @endforeach
+            @endforeach
+        </ul>
     @else
         <p>None</p>
     @endif

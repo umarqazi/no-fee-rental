@@ -12,9 +12,6 @@
                 <li class="nav-item">
                     <a class="nav-link active" data-toggle="pill" href="#listing-active">Current Team</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="pill" href="#agent-invites">Invites</a>
-                </li>
             </ul>
         </div>
         <div class="block-body">
@@ -45,18 +42,6 @@
                         </li>
                         @endforeach
                     </ul>
-                </div>
-
-                <div class="tab-pane fade" id="agent-invites">
-                       <table class="table" id="agent_invites_table" style="width: 100%;">
-                           <thead>
-                           <th>Id</th>
-                           <th>Email</th>
-                           <th>Invited On</th>
-                           <th>Request</th>
-                           </thead>
-                       </table>
-                    <tbody></tbody>
                 </div>
             </div>
         </div>

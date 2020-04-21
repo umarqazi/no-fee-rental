@@ -22,4 +22,11 @@ class CreditPlanRepo extends BaseRepo {
     public function __construct() {
         parent::__construct(new CreditPlan());
     }
+
+    /**
+     * @return mixed
+     */
+    public function activePlans() {
+        return $this->model->where(['is_cancel' => FALSE, 'is_expired' => FALSE]);
+    }
 }

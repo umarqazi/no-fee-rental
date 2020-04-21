@@ -203,7 +203,7 @@ trait DispatchNotificationService
         self::$data->subject = 'Plan Expired';
         self::$data->from = admin('id');
         self::$data->model = User::class;
-        self::$data->plan = currentPlan($data->plan);
+        self::$data->plan = currentPlan($data->plan->plan);
         self::$data->to = $data->id;
         self::$data->toEmail = $data->email;
         self::$data->message = 'Credit plan has been expired';
