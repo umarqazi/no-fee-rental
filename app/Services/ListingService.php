@@ -309,6 +309,20 @@ class ListingService extends BuildingService {
     /**
      * @return mixed
      */
+    public function allPublished() {
+        return $this->listingRepo->allActive();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function allFeatured() {
+        return $this->listingRepo->allFeatured();
+    }
+
+    /**
+     * @return mixed
+     */
     public function getRealty() {
         return $this->listingRepo->realty();
     }

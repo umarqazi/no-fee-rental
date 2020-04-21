@@ -119,7 +119,7 @@ class PaymentService {
      * @param $request
      * @return mixed
      */
-    protected function __upgradePlan($request) {
+    protected function __changePlan($request) {
         $this->plan = $this->__selectedPlan($request->credit_plan);
         $customer = $this->customerRepo->find(['user_id' => myId()])->first();
         $subscription = $this->paymentMethod->subscriptions()

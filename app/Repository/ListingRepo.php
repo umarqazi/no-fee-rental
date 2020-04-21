@@ -67,6 +67,20 @@ class ListingRepo extends BaseRepo {
 	    return $this->model->active();
     }
 
+    /**
+     * @return mixed
+     */
+    public function allActive() {
+	    return $this->model->where('visibility', '!=', ARCHIVED);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function allFeatured() {
+        return $this->model->where('is_featured', APPROVEFEATURED);
+    }
+
 	/**
      * @return mixed
      */

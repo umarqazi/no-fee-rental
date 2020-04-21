@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Services\ListingService;
 use Illuminate\Console\Command;
 
 class FeatureListingExpiry extends Command
@@ -35,8 +36,7 @@ class FeatureListingExpiry extends Command
      *
      * @return mixed
      */
-    public function handle()
-    {
-        //
+    public function handle() {
+        $featured = (new ListingService())->allFeatured();
     }
 }

@@ -64,7 +64,7 @@ class CreditPlanController extends Controller {
      */
     public function create(Request $request) {
         $res = $this->creditPlanService->purchasePlan($request);
-        return sendResponse($request, true, $res);
+        return sendResponse($request, $res['status'], $res['msg'], null, $res['msg']);
     }
 
 

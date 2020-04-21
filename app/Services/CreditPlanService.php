@@ -36,7 +36,7 @@ class CreditPlanService extends PaymentService {
     protected $creditPlanRepo;
 
     /**
-     * @var string
+     * @var object
      */
     private $currentPlan;
 
@@ -68,6 +68,13 @@ class CreditPlanService extends PaymentService {
     }
 
     /**
+     * @return mixed
+     */
+    public function allActivePlans() {
+        return $this->creditPlanRepo->activePlans();
+    }
+
+    /**
      * @param $request
      * @return mixed
      */
@@ -77,21 +84,26 @@ class CreditPlanService extends PaymentService {
 
     /**
      * @param $request
-     * @return bool
+     * @return array|bool|string
      */
     public function purchasePlan($request) {
         DB::beginTransaction();
         $this->request = $request;
         $this->currentPlan = $this->__selectPlan($this->request->credit_plan);
-
         if($this->agentHasPlan()) {
 
-            if($this->__makeCreditPlan($this->currentPlan, true)) {
-                if($this->__upgradePlan($this->request)) {
-                    DB::commit();
-                    return 'Plan has been updated';
-                }
+            $existingPlan = $this->myPlan();
+
+            // Check whether Upgrade or Downgrade
+            if($existingPlan->plan < $this->request->credit_plan) {
+                // If upgrade perform quick action
+                return $this->__upgrade();
+            } else {
+                // if Downgrade check listings and then perform
+                return $this->__downgrade();
             }
+
+
 
         } else {
 
@@ -99,7 +111,10 @@ class CreditPlanService extends PaymentService {
                 if($this->__makePayment($this->request)) {
                     DispatchNotificationService::PLANPURCHASED($plan);
                     DB::commit();
-                    return 'Plan purchased Successfully';
+                    return [
+                        'status' => true,
+                        'msg'    => 'Plan purchased Successfully'
+                    ];
                 }
             }
 
@@ -107,6 +122,50 @@ class CreditPlanService extends PaymentService {
 
         DB::rollBack();
         return false;
+    }
+
+    /**
+     * @return array|bool
+     */
+    private function __upgrade() {
+        if($this->__makeCreditPlan($this->currentPlan, true)) {
+            if($this->__changePlan($this->request)) {
+                DB::commit();
+                return [
+                    'status' => true,
+                    'msg'    => 'Plan has been updated'
+                ];
+            }
+        }
+
+        DB::rollBack();
+        return false;
+    }
+
+    /**
+     * @return array|bool
+     */
+    private function __downgrade() {
+        $lists = mySelf()->listings();
+        $activeLists = $lists->where('visibility', ACTIVELISTING)->count();
+        $availableFeatured = $lists->where('is_featured', APPROVEFEATURED)->count();
+        if($this->currentPlan->slots >= $activeLists) {
+            if($this->currentPlan->features >= $availableFeatured) {
+                return $this->__upgrade();
+            }
+
+            DB::rollBack();
+            return [
+                'status' => false,
+                'msg'    => 'Unable to change Plan. You have more active featured listings W.R.T Selecting plan.'
+            ];
+        }
+
+        DB::rollBack();
+        return [
+            'status' => false,
+            'msg'    => 'Unable to change Plan. You have more active listing W.R.T Selecting plan.'
+        ];
     }
 
     /**
@@ -144,10 +203,12 @@ class CreditPlanService extends PaymentService {
     }
 
     /**
+     * @param $planId null
+     *
      * @return bool
      */
-    public function isExpired() {
-        if($plan = $this->__currentBalance()) {
+    public function isExpired($planId = null) {
+        if($plan = $this->__currentBalance($planId)) {
             return $plan->updated_at->addDays(MAXPLANDAYS)->format('Y-m-d') > now()->format('Y-m-d')
                 ? false : true;
         }
@@ -208,14 +269,21 @@ class CreditPlanService extends PaymentService {
     }
 
     /**
+     * @param $planId null
+     *
      * @return bool|mixed
      */
-    public function listenForExpiry() {
-        if($this->isExpired() !== null || !$this->isExpired()) {
-            $this->__sendMail();
-            return $this->__performExpiryAction();
+    public function listenForExpiry($planId = null) {
+        if(isMRGAgent()) return true;
+        DB::beginTransaction();
+        if($this->isExpired($planId) !== null) {
+            $agent = $this->__performExpiryAction($planId);
+            $this->__sendMail($agent);
+            DB::commit();
+            return true;
         }
 
+        DB::rollBack();
         return false;
     }
 
@@ -298,8 +366,8 @@ class CreditPlanService extends PaymentService {
         $availableFeatured = $plan->remaining_featured;
         if($availableFeatured >= 1) {
             return $this->creditPlanRepo->updateByClause([
-                'user_id' => myId(),
-                'is_cancel' => FALSE,
+                'user_id'    => myId(),
+                'is_cancel'  => FALSE,
                 'is_expired' => NOTEXPIRED
             ], [
                 'remaining_featured' => $availableFeatured - 1
@@ -313,7 +381,11 @@ class CreditPlanService extends PaymentService {
      * @return mixed
      */
     public function myPlan() {
-        return $this->creditPlanRepo->find(['user_id' => myId(), 'is_cancel' => FALSE])->latest()->first();
+        return $this->creditPlanRepo->find([
+            'user_id'    => myId(),
+            'is_cancel'  => FALSE,
+            'is_expired' => FALSE
+        ])->latest()->first();
     }
 
     /**
@@ -324,10 +396,25 @@ class CreditPlanService extends PaymentService {
     }
 
     /**
+     * @param null $planId
+     *
      * @return mixed
      */
-    public function planExpiredSlotsAction() {
+    public function planExpiredSlotsAction($planId = null) {
+
         $listings = $this->listingRepo->activeInactive();
+
+        if($planId !== null) {
+            $agent = $this->creditPlanRepo->edit($planId)->first()->agent;
+            $listings->where('user_id', $agent->id)
+                ->update([
+                    'is_featured' => FALSE,
+                    'visibility'  => ARCHIVED
+                ]);
+
+            return $agent;
+        }
+
         return $listings->update([
             'is_featured' => FALSE,
             'visibility'  => ARCHIVED
@@ -335,12 +422,20 @@ class CreditPlanService extends PaymentService {
     }
 
     /**
+     * @param $planId null
+     *
      * @return mixed
      */
-    private function __currentBalance() {
+    private function __currentBalance($planId = null) {
+
+        if($planId !== null) {
+            return $this->creditPlanRepo
+                ->edit($planId)->first();
+        }
+
         return $this->creditPlanRepo->find([
-            'user_id' => myId(),
-            'is_cancel' => FALSE,
+            'user_id'    => myId(),
+            'is_cancel'  => FALSE,
             'is_expired' => NOTEXPIRED
         ])->latest()->first();
     }
@@ -382,24 +477,38 @@ class CreditPlanService extends PaymentService {
     }
 
     /**
+     * @param $planId null
+     *
      * @return bool|mixed
      */
-    private function __performExpiryAction() {
-        if($this->planExpiredSlotsAction()) {
-            return $this->creditPlanRepo->updateByClause(
-                ['user_id' => myId()],
+    private function __performExpiryAction($planId = null) {
+
+        $agent = $this->planExpiredSlotsAction($planId);
+
+        if($planId !== null) {
+            $this->creditPlanRepo->updateByClause(
+                ['id' => $planId],
                 ['is_expired' => EXPIRED]
             );
+
+            return $agent;
         }
 
-        return false;
+        $this->creditPlanRepo->updateByClause(
+            ['user_id' => myId()],
+            ['is_expired' => EXPIRED]
+        );
+
+        return $agent;
     }
 
     /**
+     * @param $agent
+     *
      * @return bool
      */
-    private function __sendMail() {
-        DispatchNotificationService::PLANEXPIRED(mySelf());
+    private function __sendMail($agent) {
+        DispatchNotificationService::PLANEXPIRED($agent === true ? mySelf() : $agent);
 
         return true;
     }

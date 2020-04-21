@@ -43,9 +43,11 @@ class ListingExpiry extends Command {
     public function handle()
     {
         $today = now()->format('d-m-Y');
-        $listings = (new ListingService())->activeListings();
-        foreach ($listings as $key => $listing) {
-            print_r("{$listing->created_at->format('d-m-Y')}\n");
+        $listings = (new ListingService());
+        foreach ($listings->allPublished()->get() as $key => $listing) {
+            if($today >= $listing->expire_on->format('d-m-Y')) {
+                $listings->setArchive($listing->id);
+            }
         }
     }
 }

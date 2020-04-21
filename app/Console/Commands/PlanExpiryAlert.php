@@ -2,8 +2,14 @@
 
 namespace App\Console\Commands;
 
+use App\CreditPlan;
+use App\Services\CreditPlanService;
 use Illuminate\Console\Command;
 
+/**
+ * Class PlanExpiryAlert
+ * @package App\Console\Commands
+ */
 class PlanExpiryAlert extends Command
 {
     /**
@@ -37,6 +43,11 @@ class PlanExpiryAlert extends Command
      */
     public function handle()
     {
-        //
+        $plans = (new CreditPlanService());
+        foreach($plans->allActivePlans()->get() as $plan) {
+            if($plan->created_at->addDays(30)->format('d-m-Y') <= now()->format('d-m-Y')) {
+                $plans->listenForExpiry($plan->id);
+            }
+        }
     }
 }
