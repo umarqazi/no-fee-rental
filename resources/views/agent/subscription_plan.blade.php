@@ -11,6 +11,14 @@
             <a href="{{ url()->previous() }}" class="btn-default">Back</a>
         </div>
         <div class="credit-plans basic-plan-wrapper">
+            <div style="margin: 10px 0 40px 0;">
+                <p>Our monthly plans offer the best value for advertising on our site! You can choose between three tiers of plans, and you can
+                    <br>upgrade, downgrade or cancel at anytime:
+                    <a href="javascript:void(0);" data-toggle="modal" data-target='#plan_info'>
+                        more info
+                    </a>
+                </p>
+            </div>
             <h3>Current Plan - {{ currentPlan($currentPlan->plan) }}</h3>
             <div class="pg-header">
                 <p>  Your billing cycle ends on <b>{{ billingCycle($currentPlan) }}</b>, and is currently set to renew.</p>
@@ -90,6 +98,7 @@
             </div>
         </div>
     </div>
+    @include('agent.modals.plan_info')
     @include('modals.payment_checkout')
     {!! HTML::script('assets/js/credit_plan.js') !!}
 @endsection
