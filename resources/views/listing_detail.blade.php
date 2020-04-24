@@ -12,10 +12,6 @@
     .a2a_default_style a {
         float: none !important;
     }
-
-    .second-ul {
-        column-count: 2;
-    }
 </style>
 <section class="listing-Details neighborhood-search wow fadeIn listing-detail-container" data-wow-delay="0.2s">
     <div class="container-lg">
