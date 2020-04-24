@@ -1,5 +1,5 @@
 
-<div class="col-md-3 col-sm-4">
+<div class="col-md-4 col-sm-6">
     <h3>Pet Policy</h3>
     <ul class="second-ul">
         @foreach($listing->pets as $pet)
