@@ -496,3 +496,10 @@ if(!defined('WP_PAGINATION')) {
 if(!defined('MAX_DAYS_FOR_DUMP_MEETING_REQUESTS')) {
     define('MAX_DAYS_FOR_DUMP_MEETING_REQUESTS', 90);
 }
+
+/**
+ * Check Availability Placeholder
+ */
+if(!defined('CHECK_AVAILABILITY_PLACEHOLDER')) {
+    define('CHECK_AVAILABILITY_PLACEHOLDER', 'Hello! I am interested in learning more about this apartment. Is it still available for a showing?');
+}

@@ -7,7 +7,7 @@
         {!! Form::text('username', mySelf()->first_name ?? null, ['class' => 'form-control', 'placeholder' => 'User Name']) !!}
         {!! Form::text('email', null, ['class' => 'form-control', 'placeholder' => 'email@example.com']) !!}
         {!! Form::text('phone_number', null, ['class' => 'form-control', 'placeholder' => 'Phone Number']) !!}
-        {!! Form::textarea('message', null, ['class' => 'form-control', 'style' => 'resize:none;', 'placeholder' => 'Message']) !!}
+        {!! Form::textarea('message', CHECK_AVAILABILITY_PLACEHOLDER, ['class' => 'form-control', 'style' => 'resize:none;', 'placeholder' => 'Message']) !!}
         {!! Form::button('send', ['class' => 'btn btn-default text-center', 'type' => 'submit']) !!}
         {!! Form::close() !!}
     </div>
