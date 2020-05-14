@@ -56,7 +56,7 @@
                                     <span>{!! get_the_date('j M Y') !!}</span>
                                 </h3>
                                 {!! the_excerpt() !!}
-                                <a href="{{ route('web.blogDetail', $blog->post->post_name) }}">READ MORE</a>
+                                <a target="_blank" href="{{ route('web.blogDetail', $blog->post->post_name) }}">READ MORE</a>
                             </div>
                         </div>
                     </div>
