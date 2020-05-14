@@ -25,6 +25,8 @@
     {{--Attach Sctipts--}}
     @include('layouts.scripts')
 
+    @include('layouts.usernoise')
+
 
 </head>
     <body <?php body_class(); ?>>

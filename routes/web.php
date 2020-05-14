@@ -229,8 +229,6 @@ Route::get('/feedback', function () {
 // Realty Import CSV Report Download
 Route::get('/download/realty-csv-report', 'RealtyMXController@download');
 
-use Workerman\Worker;
-use PHPSocketIO\SocketIO;
 // Test Route
 Route::get('/test', function (\Illuminate\Http\Request $request) {
 

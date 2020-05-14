@@ -38,7 +38,7 @@
                         <div class="our-passion">
                             <h3>{!! the_title() !!}</h3>
                             {!! the_excerpt() !!}
-                            <p><a href="{{ route('web.pressDetail', $press->post->post_name) }}">Read More</a></p>
+                            <p><a target="_blank" href="{{ route('web.pressDetail', $press->post->post_name) }}">Read More</a></p>
                         </div>
                     </div>
                 </div>
