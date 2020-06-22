@@ -3,7 +3,7 @@
 Plugin Name: KingComposer
 Plugin URI: https://kingcomposer.com/
 Description: KingComposer is the most professional WordPress page builder plugin, it's lightweight and high efficiency to help you build any layout design quickly.
-Version: 2.9
+Version: 2.9.4
 Author: King-Theme
 Author URI: http://king-theme.com/
 Text Domain: kingcomposer
@@ -452,6 +452,25 @@ class KingComposer{
 	}
 
 	public function convert_maps(){
+		
+		global $post;
+	
+		$post_id = isset($post) && isset($post->ID) ? $post->ID : 0;
+		
+		if (
+			!$post && 
+			isset($_GET['kc_action']) &&
+			$_GET['kc_action'] == 'live-editor' &&
+			isset($_GET['id'])
+		) {
+			$post_id = (Int)$_GET['id'];
+		}
+		
+		if (
+			(is_admin() && !kc_admin_enable()) ||
+			!current_user_can( 'edit_post', $post_id )
+		) return;
+		
 		/*
 			Convert maps from php to js
 		*/

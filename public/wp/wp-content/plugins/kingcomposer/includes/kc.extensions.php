@@ -256,7 +256,7 @@ class kc_extensions {
 			wp_verify_nonce($_POST['kc-nonce'], 'kc-nonce')
 		){
 			
-			if (!is_admin() || !current_user_can('upload_files')) {
+			if (!is_admin() || !current_user_can('upload_files') || !current_user_can('manage_options')) {
 				header('HTTP/1.0 403 Forbidden');
 				exit;
 			}

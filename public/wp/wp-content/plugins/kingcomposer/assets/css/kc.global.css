@@ -37,15 +37,6 @@ body.kc-request-iframe #wpbody-content{
 	margin: 0px !important;
 	padding: 0px !important;
 }
-#wp-admin-bar-kc-edit a{
-	background: #42bce2;
-    color: #fff !important;
-    border-radius: 1px;
-}
-#wp-admin-bar-kc-edit a:hover{
-	background: #3ba6c7 !important;
-    color: #fff !important;
-}
 .kc-updated{
 	background: #fff;
     border-left: 4px solid #d54e21;

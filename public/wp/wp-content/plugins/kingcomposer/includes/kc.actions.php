@@ -69,6 +69,7 @@ function kc_admin_init() {
 	    	}*/
 
 	    	wp_redirect("admin.php?page=kingcomposer&screen=welcome");
+	    	
 	    }
 	}
 
@@ -103,7 +104,40 @@ function kc_admin_init() {
 
 		$role->add_cap('access_kingcomposer');
 	}
-
+	
+	/*
+	*	Edit with KC into none wp-blocks editor
+	*/
+	
+	$disable_blocks = false;
+	
+	if (
+		isset($_GET['kc_action']) &&
+		$_GET['kc_action'] == 'enable_builder'
+	) {
+		$disable_blocks = true;
+	}
+	
+	if (
+		isset($_GET['action']) &&
+		isset($_GET['post']) &&
+		$_GET['action'] == 'edit'
+	) {
+		$get_data = (array)get_post_meta ($_GET['post'] , 'kc_data', true);
+		if (
+			is_array($get_data) && 
+			isset($get_data['mode']) && 
+			$get_data['mode'] == 'kc'
+		) {
+			$disable_blocks = true;
+		} else if ($disable_blocks === true){
+			kc_process_save_meta($_GET['post'], array('mode' => 'kc'));
+		}
+	}
+	
+	if ($disable_blocks === true) {
+		add_filter( 'use_block_editor_for_post', '__return_false', 666 );
+	}
 
 }
 
@@ -242,10 +276,7 @@ add_filter ('admin_body_class', 'kc_admin_body_classes');
 function kc_admin_body_classes ($classes) {
 
 	global $kc, $wp_version;
-	
-	if (version_compare($wp_version, '5.0') >= 0)
-		$classes .= ' WP5';
-	
+
 	if ($kc->action == 'live-editor')
 		return "$classes kc-live-editor kc-request-iframe";
 
@@ -265,10 +296,44 @@ add_action ('admin_bar_menu', 'kc_admin_bar', 999);
 
 function kc_admin_bar ($wp_admin_bar) {
 
-	global $kc;
+	global $kc, $post, $wp_the_query, $wp_admin_bar;
+	
 	if ($kc->user_can_edit() !== false)
 	{
+		
+		if (is_admin()) {
+			$screen = get_current_screen();
+			if( $screen->base == 'post')
+				$wp_admin_bar->add_node(
+					array(
+						'id'    => 'kc-backend-edit',
+						'title' => '<i class="fa-edit"></i> '.__('Edit with KingComposer', 'kingcomposer'),
+						'href'  => admin_url('post.php?action=edit&kc_action=enable_builder&post=' . $post->ID )
+					)
+				);
+		}else{
+			
+			$current_object = $wp_the_query->get_queried_object();
+
+			if ( empty( $current_object ) )
+				return;
+			
+			if ( ! empty( $current_object->post_type )
+			     && ( $post_type_object = get_post_type_object( $current_object->post_type ) )
+			     && current_user_can( 'edit_post', $current_object->ID )
+			     && $post_type_object->show_in_admin_bar
+			     && $edit_post_link = get_edit_post_link( $current_object->ID ) )
+			{
+				$wp_admin_bar->add_menu( array(
+					'id'    => 'kc-backend-edit',
+					'title' => '<i class="fa-edit"></i> '.__('Edit with KingComposer', 'kingcomposer'),
+					'href'  => admin_url('post.php?action=edit&kc_action=enable_builder&post=' . $post->ID )
+				) );
+			}
+		}
+		
 		do_action('kc-live-edit-link', $wp_admin_bar);
+		
 	}
 
 }
@@ -569,9 +634,24 @@ add_filter ('tiny_mce_before_init', 'kc_tinymce_fix');
 */
 
 function kc_admin_footer (){
-
-	if (is_admin() && !kc_admin_enable())
-		return;
+	
+	global $post;
+	
+	$post_id = isset($post) && isset($post->ID) ? $post->ID : 0;
+	
+	if (
+		!$post && 
+		isset($_GET['kc_action']) &&
+		$_GET['kc_action'] == 'live-editor' &&
+		isset($_GET['id'])
+	) {
+		$post_id = (Int)$_GET['id'];
+	}
+	
+	if (
+		(is_admin() && !kc_admin_enable()) ||
+		!current_user_can( 'edit_post', $post_id )
+	) return;
 
 	do_action('kc_before_admin_footer');
 
@@ -747,10 +827,12 @@ function kc_process_save_meta($id, $meta = array()) {
 	if (!add_post_meta( $id, 'kc_data', $param, true))
 		update_post_meta( $id, 'kc_data', $param );
 	
-	$raw_content = stripslashes($_POST['content']);
-	
-	if (!add_post_meta( $id, 'kc_raw_content', $raw_content, true))
-		update_post_meta( $id, 'kc_raw_content', $raw_content );
+	if (isset($_POST['content'])) {
+		$raw_content = stripslashes($_POST['content']);
+		
+		if (!add_post_meta( $id, 'kc_raw_content', $raw_content, true))
+			update_post_meta( $id, 'kc_raw_content', $raw_content );
+	}
 		
 	return $param;
 
@@ -1030,8 +1112,8 @@ function kc_gutenberg_compatible( $return, $post ) {
 
 function kc_block_editor_compatible($post) {
 
-	do_action('edit_form_after_title');
-	do_action('edit_form_after_editor');
+	do_action('edit_form_after_title', $post);
+	do_action('edit_form_after_editor', $post);
 	kc_action_the_post($post);
 	?>
 	<form id="post" style="display: none;">

@@ -103,7 +103,7 @@ kc_js_callback( 'kc_front.owl_slider' );
 	
 					case 'lightbox':
 	
-						echo '<a class="kc-image-link kc-pretty-photo" data-lightbox="kc-lightbox" rel="prettyPhoto['. $atts['_id'] .']" href="'. esc_attr( esc_attr( $attachment_data_full[$i][0] ) ) .'">'
+						echo '<a class="kc-image-link kc-pretty-photo" data-lightbox="kc-lightbox" rel="prettyPhoto['. esc_attr($atts['_id']) .']" href="'. esc_attr( $attachment_data_full[$i][0] ) .'">'
 							.'<img src="'. esc_attr( $image[0] ) .'" alt="'. $alttext .'" /></a>';
 						break;
 	

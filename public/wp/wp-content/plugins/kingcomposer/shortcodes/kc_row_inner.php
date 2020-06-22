@@ -32,7 +32,7 @@ if( !empty( $atts['equal_height'] ) )
 {
 	$attributes[] = 'data-kc-equalheight="true"';
 	$attributes[] = 'data-kc-row-action="true"';
-    $attributes[] = 'data-kc-equalheight-align="'. $atts['column_align'] .'"';
+    $attributes[] = 'data-kc-equalheight-align="'. esc_attr($atts['column_align']) .'"';
 }
 
 /**

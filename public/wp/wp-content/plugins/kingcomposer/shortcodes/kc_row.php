@@ -30,7 +30,7 @@ if( empty($atts['column_align']) )
 
 if( !empty( $atts['equal_height'] ) ){
     $element_attributes[] = 'data-kc-equalheight="true"';
-    $element_attributes[] = 'data-kc-equalheight-align="'. $atts['column_align'] .'"';
+    $element_attributes[] = 'data-kc-equalheight-align="'. esc_attr($atts['column_align']) .'"';
 }
 	
 
@@ -39,7 +39,7 @@ if( isset( $atts['use_container'] ) && $atts['use_container'] == 'yes' )
 	$cont_class[] = ' kc-container';
 
 if( !empty( $atts['container_class'] ) )
-	$cont_class[] = ' '.$atts['container_class'];
+	$cont_class[] = ' '.esc_attr($atts['container_class']);
 
 if( !empty( $atts['css'] ) )
 	$css_classes[] = $atts['css'];

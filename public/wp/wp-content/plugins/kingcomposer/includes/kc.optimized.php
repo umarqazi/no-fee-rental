@@ -363,16 +363,16 @@ class kc_optimized {
 		$active_plugins = (array) get_option( 'active_plugins', array() );
 		$ignores = array();
 		$list = array(
-			'blog-fastest-cache/wpFastestCache.php',
+			'wp-fastest-cache/wpFastestCache.php',
 			'w3-total-cache/w3-total-cache.php',
-			'blog-super-cache/blog-cache.php',
-			'blog-hide-security-enhancer/blog-hide.php',
+			'wp-super-cache/wp-cache.php',
+			'wp-hide-security-enhancer/wp-hide.php',
 			'adrotate/adrotate.php',
 			'adrotate-pro/adrotate.php',
 			'mobilepress/mobilepress.php',
 			'speed-booster-pack/speed-booster-pack.php',
 			/*'cdn-enabler/cdn-enabler.php',*/
-			'blog-performance-score-booster/blog-performance-score-booster.php',
+			'wp-performance-score-booster/wp-performance-score-booster.php',
 			'bwp-minify/bwp-minify.php',
 			'check-and-enable-gzip-compression/richards-toolbox.php',
 			'gzippy/gzippy.php',
