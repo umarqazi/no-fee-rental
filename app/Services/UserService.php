@@ -264,7 +264,7 @@ class UserService extends SearchService {
      */
     public function isUniqueEmail($request) {
         if ($user = $this->userRepo->isUniqueEmail($request->email)) {
-            if($user->company->company == MRG) {
+            if($user->company && $user->company->company == MRG) {
                 return 'true';
             }
 
