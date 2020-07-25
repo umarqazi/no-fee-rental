@@ -1,7 +1,9 @@
 "use strict";
 
 let currentUser = Window.Laravel.user;
-let socket = require('./socket-client').socket;
+let io = require('socket.io-client');
+let protocol = `http://localhost:8080`;
+let socket = io(protocol);
 
 // Event Emitter
 const emit = async () => {
