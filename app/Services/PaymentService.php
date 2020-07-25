@@ -86,13 +86,18 @@ class PaymentService {
 
     /**
      * @param $id
-     * @return mixed
+     * @return mixed|bool
      */
     protected function __cancelSubscription($id) {
         $data = $this->customerRepo->find(['user_id' => $id ?? myId()])->first();
-        $this->customer = $data->customer_id;
-        $this->subscription = $data->subscription_id;
-        return $this->__cancelPlan();
+        if(isset($data->customer_id))
+        {
+            $this->customer = $data->customer_id;
+            $this->subscription = $data->subscription_id;
+            return $this->__cancelPlan();
+        }
+
+        return false;
     }
 
     /**
