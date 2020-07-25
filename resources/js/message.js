@@ -2,7 +2,7 @@
 
 let currentUser = Window.Laravel.user;
 let io = require('socket.io-client');
-let protocol = `http://localhost:8080`;
+let protocol = `https://nofeerentalsnyc.com:8080`;
 let socket = io(protocol);
 
 // Event Emitter

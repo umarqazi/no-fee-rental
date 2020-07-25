@@ -447,7 +447,7 @@ class RealtyMXService extends ListingService {
      * @param object $agent
      * @return bool|mixed
      */
-    private function __pushAgent( object $agent ) {
+    private function __pushAgent( $agent ) {
         if(is_object($agent)) {
 
             // Check whether agent is new or not
@@ -478,7 +478,7 @@ class RealtyMXService extends ListingService {
             'profile_image'  => $agent->photo ?? null,
             'remember_token' => str_random(60),
             'user_type'      => AGENT,
-            'phone_number'   => $agent->phone_numbers->main,
+            'phone_number'   => $agent->phone_numbers->main ?? null,
             'company_id'     => $this->__createCompany($agent->company),
         ]);
 

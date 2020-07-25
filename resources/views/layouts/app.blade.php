@@ -22,6 +22,7 @@
     {!! HTML::style('https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css') !!}
     {!! HTML::style('https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.css') !!}
     {!! HTML::style('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800|Raleway:300,400,500,600,700,800,900') !!}
+	{!! HTML::style('assets/css/popup.css') !!}
     {{--Attach Sctipts--}}
     @include('layouts.scripts')
 

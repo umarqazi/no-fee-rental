@@ -41,7 +41,7 @@
 @endif
 
 @if($has_post)
-    {!! $page_data->post_content !!}
+page_data->post_content !!}
 @endif
 
 <script>
