@@ -12,7 +12,7 @@
   "devDependencies": {
     "axios": "^0.18.1",
     "bootstrap": "^4.0.0",
-    "cross-env": "^5.1",
+    "cross-env": "^5.2.1",
     "jquery": "^3.2",
     "laravel-mix": "^4.0.7",
     "lodash": "^4.17.5",
@@ -21,13 +21,16 @@
     "sass": "^1.15.2",
     "sass-loader": "^7.1.0",
     "vue": "^2.5.17",
-    "vue-template-compiler": "^2.6.10"
+    "vue-template-compiler": "^2.6.10",
+    "webpack-cli": "^3.3.12",
+    "ws": "3.3.2"
   },
   "dependencies": {
     "dotenv": "^8.2.0",
     "laravel-echo": "^1.5.4",
     "redis": "^2.8.0",
     "socket.io": "^2.2.0",
-    "socket.io-client": "^2.2.0"
+    "socket.io-client": "^2.2.0",
+    "webpack": "^4.44.0"
   }
 }
