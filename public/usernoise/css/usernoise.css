@@ -1,5 +1,5 @@
 @import url(../vendor/font/css/usernoise-embedded.css);
-@import url(../js/popup/dist/popup.css);
+
 button#un-button {
   position: fixed;
   opacity: 0.95;
