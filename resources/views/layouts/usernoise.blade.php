@@ -1,4 +1,4 @@
-<link rel='stylesheet' id='usernoise-button-css'  href='/usernoise/css/usernoise.css' type='text/css' media='all' />
+{!! HTML::style('usernoise/css/usernoise.css') !!}
 <script type='text/javascript'>
     <!-- This data is used to configure Usernoise during bootstrap -->
     /* <![CDATA[ */
@@ -89,5 +89,5 @@
     };
     /* ]]> */
 </script>
-<script type='text/javascript' src='/usernoise/js/usernoise.js'></script>
+{!! HTML::script('usernoise/js/usernoise.js') !!}
 <!-- end of Usernoise code -->
