@@ -11,8 +11,8 @@
             <p>You can signup using the link given below.</p>
             <p><a href="{{ $data->url }}">Click Here</a></p>
             <p>By logging in to the account you agree to the Terms and Conditions and our Privacy Policy. They both could be found in the links below.</p>
-            <p>Terms and Conditions: <a href="https://www.nofeerentalsnyc.com/terms-of-use">https://www.nofeerentalsnyc.com/terms-of-use</a></p>
-            <p>Privacy Policy: <a href="https://www.nofeerentalsnyc.com/privacy-policy">https://www.nofeerentalsnyc.com/privacy-policy</a></p>
+            <p>Terms and Conditions: <a href="{{ route('web.terms') }}">{{ route('web.terms') }}</a></p>
+            <p>Privacy Policy: <a href="{{ route('web.privacyPolicy') }}">{{ route('web.privacyPolicy') }}</a></p>
         </div>
     </div>
 @endsection

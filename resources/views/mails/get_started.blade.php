@@ -68,12 +68,12 @@
         <div class="notification-inner-content">
             <h2>Get Started Request</h2>
         </div>
-        <div class="showing-request">
-            <div class="see-clients-bg" style="background-color: #edeff0; padding: 10px">
-                <a href="javascript:void(0)" class="btn-default" style="text-decoration: none; background: #f36f21;color: #fff;text-transform: initial;font-size: 14px;
-            padding: 0px 30px;border-radius: 5px;line-height: 45px;display: inline-block;border: none;outline: none !important; cursor: pointer !important;">See Clients Details !</a>
-            </div>
-        </div>
+        {{--<div class="showing-request">--}}
+            {{--<div class="see-clients-bg" style="background-color: #edeff0; padding: 10px">--}}
+                {{--<a href="javascript:void(0)" class="btn-default" style="text-decoration: none; background: #f36f21;color: #fff;text-transform: initial;font-size: 14px;--}}
+            {{--padding: 0px 30px;border-radius: 5px;line-height: 45px;display: inline-block;border: none;outline: none !important; cursor: pointer !important;">See Clients Details !</a>--}}
+            {{--</div>--}}
+        {{--</div>--}}
         <div class="schedule-dateTime">
             <table style="width:100%; margin-top: 15px;">
                 <tr>
