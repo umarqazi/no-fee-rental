@@ -54,7 +54,7 @@
 
         @media only screen and (min-width: 767px){
             .Notification-wrapper{
-                width: 730px;
+                width: 730px;yousuf.khalid+11@techverx.com
             }
         }
     </style>
