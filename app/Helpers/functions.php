@@ -491,7 +491,7 @@ function dispatchNotification( $data ) {
  *
  * @return PendingDispatch
  */
-function dispatchListingNotification( $data, $delay = 10 ) {
+function dispatchListingNotification( $data, $delay = 2 ) {
     return dispatch( new SaveSearchMatchJob( $data ) )->delay( now()->addSeconds( $delay ) );
 }
 
@@ -500,7 +500,7 @@ function dispatchListingNotification( $data, $delay = 10 ) {
  * @param int $delay
  * @return PendingDispatch
  */
-function dispatchEmailQueue( $data, $delay = 10 ) {
+function dispatchEmailQueue( $data, $delay = 2 ) {
     return dispatch( new \App\Jobs\SendEmailJob( $data ) )->delay( now()->addSeconds( $delay ) );
 }
 
