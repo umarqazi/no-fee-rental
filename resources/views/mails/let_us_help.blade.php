@@ -67,10 +67,10 @@
         </div>
         <div class="showing-request">
             <p style="color: #808080; font-size: 16px;">You have been matched with a renter based on your expertise and listings!</p>
-            <div class="see-clients-bg" style="background-color: #edeff0; padding: 10px">
-                <a href="javascript:void(0)" class="btn-default" style="text-decoration: none; background: #f36f21;color: #fff;text-transform: initial;font-size: 14px;
-            padding: 0px 30px;border-radius: 5px;line-height: 45px;display: inline-block;border: none;outline: none !important; cursor: pointer !important;">See Clients Details !</a>
-            </div>
+            {{--<div class="see-clients-bg" style="background-color: #edeff0; padding: 10px">--}}
+                {{--<a href="javascript:void(0)" class="btn-default" style="text-decoration: none; background: #f36f21;color: #fff;text-transform: initial;font-size: 14px;--}}
+            {{--padding: 0px 30px;border-radius: 5px;line-height: 45px;display: inline-block;border: none;outline: none !important; cursor: pointer !important;">See Clients Details !</a>--}}
+            {{--</div>--}}
         </div>
         <div class="schedule-dateTime">
             <table style="width:100%; margin-top: 15px;">
