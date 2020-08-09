@@ -68,7 +68,7 @@
         <div class="showing-request">
             <p style="color: #808080; font-size: 16px;">You have a showing request!</p>
             <div class="see-clients-bg" style="background-color: #edeff0; padding: 10px">
-                <a href="javascript:void(0)" class="btn-default" style="text-decoration: none; background: #f36f21;color: #fff;text-transform: initial;font-size: 14px;
+                <a href="{{ $data->clientDetails }}" class="btn-default" style="text-decoration: none; background: #f36f21;color: #fff;text-transform: initial;font-size: 14px;
             padding: 0px 30px;border-radius: 5px;line-height: 45px;display: inline-block;border: none;outline: none !important; cursor: pointer !important;">See Clients Details !</a>
                 <p style="margin-bottom: 0;"><a href="{{ $data->url }}" style="color: #333">See rental details and accept or decline this request</a> </p>
             </div>
