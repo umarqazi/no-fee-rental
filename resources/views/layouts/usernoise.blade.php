@@ -1,93 +1,94 @@
-{!! HTML::style('usernoise/css/usernoise.css') !!}
+
+
+<link rel='stylesheet' id='usernoise-button-css'  href='/wp/wp-content/plugins/usernoise/css/button.css?ver=3.7.20' type='text/css' media='all' />
+<link rel='stylesheet' id='usernoise-form-css'  href='/wp/wp-content/plugins/usernoise/css/form.css?ver=3.7.20' type='text/css' media='all' />
+<link rel='stylesheet' id='font-awesome-css'  href='/wp/wp-content/plugins/usernoise/vendor/font-awesome/css/font-awesome.css?ver=3.7.20' type='text/css' media='all' />
+
 <script type='text/javascript'>
-    <!-- This data is used to configure Usernoise during bootstrap -->
     /* <![CDATA[ */
-    var usernoise = {
-        "i18n": { // Edit the strings below if you want to translate Usernoise
-            "Leave a feedback": "Feedback",
-            "Enter your feedback here": "Enter your feedback here",
-            "Next": "Next",
-            "Taking screenshot": "Taking screenshot",
-            "Take a screenshot": "Take a screenshot",
-            "screenshot.png": "screenshot.png",
-            "Cancel": "Cancel",
-            "Add some details": "Details",
-            "Back": "Back",
-            "Submit": "Submit",
-            "Submitting": "Submitting",
-            "Error sending feedback": "Error sending feedback",
-            "Close": "Close",
-            "OKText": "Your feedback was submitted successfully",
-            "Done": "Done",
-            "Please enter a valid email address": "Please enter a valid email address",
-            "This field is required": "This field is required"
-        },
-        "config": {
-            "button": {
-                "enabled": true,
-                "disableOnMobiles": false, // If the button should be disabled on small screen devices
-                "text": "Feedback", // Button text
-                "style": "background-color: #404040; color: #FFFFFF", // Button CSS style
-                "class": "un-left" // Button class. Available ones are un-left, un-right, un-bottom, un-top
-            },
-
-            // Usernoise URLs. Please only change if you know what you're doing
-            "urls": {
-                "feedback": {post: "{{ route('feedback.send') }}"},
-                "usernoise": "/usernoise/",
-                "html2canvasproxy": "/usernoise/proxy.php"
-            },
-            screenshot: {enable: true},
-            // Form fields
-            "form": {
-                "fields": {
-                    "email": {
-                        "type": "email", // Available types - text, email, dropdown
-                        "label": "Email address", //label displayed next to the field
-                        "placeholder": "you@example.com", // Placeholder displayed by default
-                        "validators": ["email"] // Validator rules applied. Available ones - 'email', 'presence'
-                    },
-                    "summary": {
-                        "type": "text",
-                        "label": "Summary",
-                        "placeholder": "Short summary",
-                        "validators": ["required"]
-                    },
-                    "type": {
-                        "type": "dropdown",
-                        "label": "Feedback type",
-                        "default": null,
-                        "default_text": "Please select", // Text displayed when no value is selected
-                        "options": { // Option definitions
-                            "idea": "Idea",
-                            "question": "Question",
-                            "problem": "Problem",
-                            "praise": "Praise"
-                        },
-                        "validators": ['required']
-                    },
-                    "mood": {
-                        type: "dropdown",
-                        label: 'How are you feeling?',
-                        default: null,
-                        default_text: 'Please select',
-                        "options": {
-                            "excited": "Excited!",
-                            "happy": "Happy",
-                            "confused": "Confused",
-                            "worried": "Worried",
-                            "frustrated": "Frustrated",
-                            "angry": "Angry"
-                        },
-                        "validators": ['required']
-
-                    }
-
-                }
-            },
-        },
-    };
+    var usernoiseButton = {"text":"Feedback","style":"background-color: #404040; color: #FFFFFF","class":"un-left","windowUrl":"\/wp\/wp-admin\/admin-ajax.php?action=un_load_window","showButton":"1","disableOnMobiles":null};
     /* ]]> */
 </script>
-{!! HTML::script('usernoise/js/usernoise.js') !!}
-<!-- end of Usernoise code -->
+
+<script type="text/javascript" src="{{ asset('assets/js/vendor/usernoise.js') }}"></script>
+
+<script>
+    (function() {
+        jQuery(function($) {
+
+            var err, is_mobile_device,
+                _this = this;
+            if (navigator && navigator.appVersion && (navigator.appVersion.indexOf("MSIE 6.0") !== -1 || navigator.appVersion.indexOf("MSIE 7.0") !== -1)) {
+                return;
+            }
+            usernoiseButton.button = new usernoise.UsernoiseButton();
+            usernoise.window = {
+                show: usernoiseButton.button.showWindow
+            };
+
+
+            $(".un-feedback-form").each(function() {
+                new usernoise.FeedbackForm($(this));
+            });
+
+            is_mobile_device = function() {
+                return window.innerWidth <= 800 && window.innerHeight <= 600;
+            };
+
+
+            if (usernoiseButton.showButton && !(usernoiseButton.disableOnMobiles && is_mobile_device())) {
+                usernoiseButton.button.show();
+            }
+
+            $(document).bind("sent#feedbackform#window.un", function() {
+                var $overlay, closeOverlay;
+                closeOverlay = function() {
+                    $("#un-thankyou").find("a").unbind("click");
+                    $("#un-thankyou").fadeOut("fast", function() {
+                        $("#un-overlay").fadeOut("fast", function() {
+                            $("#un-overlay").remove();
+                        });
+                    });
+                };
+                $overlay = $("<div id=\"un-overlay\" />").appendTo($("body"));
+                $("#un-overlay").click(closeOverlay).fadeIn("fast", function() {
+                    $("#un-thankyou").fadeIn("fast", function() {
+                        setTimeout(closeOverlay, 5000);
+                    }).find("#un-feedback-close").click(closeOverlay);
+                });
+            });
+            try {
+                $("#" + usernoiseButton.custom_button_id).click(function() {
+                    usernoise.window.show();
+                    return false;
+                });
+            } catch (_error) {
+                err = _error;
+                alert("It looks like you entere wrong HTML ID value for custom Usernoise feedback button.");
+            }
+            if (jQuery.on) {
+                jQuery.on('click', 'a[rel=usernoise], button[rel=usernoise], a[href="#usernoise"]', function() {
+                    usernoise.window.show();
+                    return false;
+                });
+            }
+            $("a[rel=usernoise]").click(function() {
+                usernoise.window.show();
+                return false;
+            });
+            $("button[rel=usernoise]").click(function() {
+                usernoise.window.show();
+                return false;
+            });
+            $("a[href=\"#usernoise\"]").click(function() {
+                usernoise.window.show();
+                return false;
+            });
+        });
+
+    }).call(this);
+
+    /*
+    //@ sourceMappingURL=button.map
+    */
+</script>

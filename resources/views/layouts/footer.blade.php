@@ -24,7 +24,7 @@
                     <ul>
                         <li><a href="{{ route('web.contactUs') }}" class="ft-links">Contact Us</a></li>
                         <li><a href="{{ route('web.siteMap') }}" class="ft-links">Site Map</a></li>
-                        <li><a href="{{ route('web.feedback') }}" class="ft-links">Feedback</a></li>
+                        <li><a href="{{ route('web.terms') }}" class="ft-links">Terms</a></li>
                         <li><a href="{{ route('web.advertise') }}" class="ft-links">Advertise with Us</a></li>
                     </ul>
                 </div>
@@ -36,7 +36,6 @@
                         <li><a href="{{ route('web.aboutUs') }}" class="ft-links">Our Story</a></li>
                         <li><a href="{{ route('web.press') }}" class="ft-links">Press</a></li>
                         <li><a href="{{ route('web.privacyPolicy') }}" class="ft-links">Privacy Policy </a></li>
-                        <li><a href="{{ route('web.terms') }}" class="ft-links">Terms</a></li>
                     </ul>
                 </div>
             </li>

@@ -224,11 +224,6 @@ Route::get('/terms', function () {
     return view('terms');
 })->name('web.terms');
 
-// Feedback
-Route::get('/feedback', function () {
-    return view('feedback');
-})->name('web.feedback');
-
 // Realty Import CSV Report Download
 Route::get('/download/realty-csv-report', 'RealtyMXController@download');
 
