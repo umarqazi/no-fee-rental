@@ -228,6 +228,7 @@ trait DispatchNotificationService
         self::$data->appointment = $data;
         self::$data->to = $data->listing->agent->id;
         self::$data->message = 'New Appointment Request Received';
+        self::$data->clientDetails = route($data->listing->agent->user_type == AGENT ? 'agent.loadConversation' : 'owner.loadConversation', $data->id);
         self::$data->url = route($data->listing->agent->user_type == AGENT ? 'agent.conversations' : 'owner.conversations');
         self::__send();
     }
