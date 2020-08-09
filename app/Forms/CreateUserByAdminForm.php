@@ -55,7 +55,6 @@ class CreateUserByAdminForm extends BaseForm {
             'phone_number'      => $this->phoneNumber,
             'remember_token'    => $this->rememberToken,
             'user_type'         => $this->userType,
-            'email_verified_at' => now()
         ];
     }
 

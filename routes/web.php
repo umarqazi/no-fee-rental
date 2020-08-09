@@ -64,21 +64,24 @@ Route::get('/license-verification/{license_number}', 'NYCProxyController@license
 // Login route for all user type
 Route::post('/login')->name('attempt.login')->middleware('authguard');
 
-// Route for Added Agent By Admin Signup
-Route::post('/invited/agent/sign-up', 'UserController@createAddedAgentAccount')->name('web.createAddedAgentAccount');
-Route::get('/agent/sign-up/{token}', 'UserController@addAgentByAdminSignUpForm')->name('web.addAgentByAdminSignUp');
+Route::middleware('guest')->group(function () {
 
-// User Direct Signup Routes
-Route::post('/agent/sign-up', 'UserController@agentSignUp')->name('web.agentSignUp');
-Route::post('/renter/sign-up', 'UserController@renterSignUp')->name('web.renterSignUp');
+    // Route for Added Agent By Admin Signup
+    Route::post('/invited/agent/sign-up', 'UserController@createAddedAgentAccount')->name('web.createAddedAgentAccount');
+    Route::get('/agent/sign-up/{token}', 'UserController@addAgentByAdminSignUpForm')->name('web.addAgentByAdminSignUp');
 
-// Agent to Agent Invitation SignUp
-Route::post('/invited-agent/sign-up', 'UserController@invitedAgentSignUp')->name('web.agentToAgentInviteSignUp');
-Route::get('/invited-agent/sign-up/{token}', 'UserController@invitedAgentSignUpForm')->name('web.agentToAgentInviteForm');
+    // User Direct Signup Routes
+    Route::post('/agent/sign-up', 'UserController@agentSignUp')->name('web.agentSignUp');
+    Route::post('/renter/sign-up', 'UserController@renterSignUp')->name('web.renterSignUp');
 
-// Representative SignUp
-Route::post('/invited-representative/sign-up', 'UserController@invitedRepresentativeSignUp')->name('web.invitedRepresentativeSignUp');
-Route::get('/invited-representative/sign-up/{token}', 'UserController@invitedRepresentativeSignUpForm')->name('web.invitedRepresentativeSignUpForm');
+    // Agent to Agent Invitation SignUp
+    Route::post('/invited-agent/sign-up', 'UserController@invitedAgentSignUp')->name('web.agentToAgentInviteSignUp');
+    Route::get('/invited-agent/sign-up/{token}', 'UserController@invitedAgentSignUpForm')->name('web.agentToAgentInviteForm');
+
+    // Representative SignUp
+    Route::post('/invited-representative/sign-up', 'UserController@invitedRepresentativeSignUp')->name('web.invitedRepresentativeSignUp');
+    Route::get('/invited-representative/sign-up/{token}', 'UserController@invitedRepresentativeSignUpForm')->name('web.invitedRepresentativeSignUpForm');
+});
 
 // Existing Agent accept invitation
 Route::get('/accept-invitation/{token}', 'UserController@acceptInvitation')->name('web.acceptInvitation');

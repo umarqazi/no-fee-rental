@@ -60,12 +60,12 @@ class NotificationService extends ExclusiveSettingService {
         $settings = $this->__receiverExclusiveSettings($this->data->to);
 
         if ( empty( $settings ) ) {
-            dispatchEmailQueue( $this->data, 2 );
+            dispatchEmailQueue( $this->data, 0 );
             return $this->__create();
         }
 
         if($settings->allow_email) {
-            dispatchEmailQueue( $this->data, 2 );
+            dispatchEmailQueue( $this->data, 0 );
         }
 
         if($settings->allow_web_notification) {

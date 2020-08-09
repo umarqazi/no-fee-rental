@@ -8,6 +8,11 @@ use Illuminate\Auth\AuthenticationException as Auth;
 use Illuminate\Database\Eloquent\ModelNotFoundException as ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
+/**
+ * Class Handler
+ *
+ * @package App\Exceptions
+ */
 class Handler extends ExceptionHandler {
 	/**
 	 * A list of the exception types that are not reported.
@@ -34,10 +39,6 @@ class Handler extends ExceptionHandler {
      * @throws Exception
      */
 	public function report(Exception $exception) {
-
-		if ($exception instanceof ModelNotFoundException) {
-			dd('Requested Record Not Exist');
-		}
 		parent::report($exception);
 	}
 
@@ -61,16 +62,23 @@ class Handler extends ExceptionHandler {
         return parent::render($request, $exception);
 	}
 
-	/**
-	 * @param \Illuminate\Http\Request $request
-	 * @param Auth $exception
-	 *
-	 * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse|\Symfony\Component\HttpFoundation\Response|void
-	 */
-//	protected function unauthenticated($request, Auth $exception) {
-//
-//		if ($request->ajax() || $request->expectsJson() || $exception->guards()[0]) {
-//			return redirect(route('web.index'));
-//		}
-//	}
+    /**
+     * Unauthenticated action
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param Auth $exception
+     *
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Symfony\Component\HttpFoundation\Response
+     */
+	protected function unauthenticated($request, Auth $exception) {
+
+	    if(authenticated()) {
+            session()->forget('__destination');
+	        $guard = ucfirst($exception->guards()[0]);
+	        return error(sprintf("Unable to access %s panel as you already logged in as an %s.", $guard, ucfirst(whoAmI())));
+        }
+
+	    session()->put('__destination', encrypt($request->url()));
+        return redirect(route('web.index'));
+	}
 }

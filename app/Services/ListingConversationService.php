@@ -211,6 +211,7 @@ class ListingConversationService extends MemberService {
             $availability = $this->__validateAvailabilityForm($request);
             $availability = $this->listingConversationRepo->create($availability->toArray());
             CalendarEventService::ADDAVAILABILITY($availability);
+            DispatchNotificationService::AVAILABILITYREQUEST($availability);
             return $availability;
         }
 

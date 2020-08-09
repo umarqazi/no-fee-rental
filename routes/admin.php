@@ -26,6 +26,7 @@ Route::get('/password-reset', 'Admin\AdminController@resetPassword')->name('admi
 Route::post('/password-update', 'Admin\AdminController@updatePassword')->name('admin.updatePassword');
 
 // User Routes
+Route::post('/resend-email/{id}', 'Admin\UserController@resendEmail');
 Route::post('/delete-user/{id}', 'Admin\UserController@delete')->name('admin.deleteUser');
 Route::post('/create-user', 'Admin\UserController@create')->name('admin.createUser');
 Route::post('/edit-user/{id}', 'Admin\UserController@edit')->name('admin.editUser');

@@ -40,6 +40,17 @@ class UserController extends Controller {
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
+	public function resendEmail(Request $request, $id) {
+        $user = $this->userService->resendEmail($id);
+        return sendResponse($request, $user, 'Email has been sent successfully.');
+    }
+
+    /**
+     * @param Request $request
+     * @param $id
+     *
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
+     */
 	public function delete(Request $request, $id) {
 		$user = $this->userService->status($id);
 		$msg = ($user) ? 'User has been activated.' : 'User has been deactivated.';

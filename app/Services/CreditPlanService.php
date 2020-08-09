@@ -415,10 +415,8 @@ class CreditPlanService extends PaymentService {
             return $agent;
         }
 
-        return $listings->update([
-            'is_featured' => FALSE,
-            'visibility'  => ARCHIVED
-        ]);
+        $listings->update(['is_featured' => FALSE, 'visibility'  => ARCHIVED]);
+        return mySelf();
     }
 
     /**
@@ -508,7 +506,7 @@ class CreditPlanService extends PaymentService {
      * @return bool
      */
     private function __sendMail($agent) {
-        DispatchNotificationService::PLANEXPIRED($agent === true ? mySelf() : $agent);
+        DispatchNotificationService::PLANEXPIRED($agent);
 
         return true;
     }

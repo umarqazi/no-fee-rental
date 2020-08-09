@@ -66,6 +66,14 @@ $(() => {
         }
     });
 
+    $body.on('click', '#resendEmail', async function(e) {
+        e.preventDefault();
+        let route = $(this).attr('route');
+        if(await confirm('Sure to resend an email?')) {
+            await ajaxRequest(route, 'post', null);
+        }
+    });
+
     $body.on('click', '#viewAssociatedAgents', async function() {
         let route = $(this).attr('route');
         let count = 0 ;
@@ -83,7 +91,8 @@ $(() => {
 
     // +++++ Agents Table +++++ //
     let columns = ['first_name', 'email', 'phone_number','license_number'];
-    let columnDefs = [{
+    let columnDefs = [
+        {
             render: (data, type, row) => {
                 return row.first_name+' '+row.last_name;
             },
@@ -97,8 +106,12 @@ $(() => {
         },
         {
             render: (data, type, row) => {
-                return `<i class="fa ${row.status ? 'fa-eye' : 'fa-eye-slash'} action-btn" id="updateUserStatus" ref_id="${row.id}" route="/admin/delete-user/${row.id}"></i>
-                        <i class="fa fa-edit px-2 action-btn" id="updateUser" ref_id="${row.id}" route="/admin/edit-user/${row.id}"></i>`;
+                let html = `<i class="fa ${row.status ? 'fa-eye' : 'fa-eye-slash'} action-btn" id="updateUserStatus" ref_id="${row.id}" route="/admin/delete-user/${row.id}"></i>
+                            <i class="fa fa-edit px-2 action-btn" id="updateUser" ref_id="${row.id}" route="/admin/edit-user/${row.id}"></i>`;
+                if(row.email_verified_at == null)
+                    html += `<i title="Resend Email" class="fa fa-paper-plane px-2 action-btn" id="resendEmail" ref_id="${row.id}" route="/admin/resend-email/${row.id}"></i>`;
+
+                return html;
             },
             targets: 5
         }];
@@ -107,7 +120,8 @@ $(() => {
 
     // +++++ Owner Table +++++ //
     columns = ['first_name', 'email', 'phone_number'];
-    columnDefs = [{
+    columnDefs = [
+        {
         render: (data, type, row) => {
             return row.first_name+' '+row.last_name;
         },
@@ -121,8 +135,13 @@ $(() => {
         },
         {
         render: (data, type, row) => {
-            return `<i class="fa ${row.status ? 'fa-eye' : 'fa-eye-slash'} action-btn" id="updateUserStatus" ref_id="${row.id}" route="/admin/delete-user/${row.id}"></i>
-                    <i class="fa fa-edit px-2 action-btn" id="updateUser" ref_id="${row.id}" route="/admin/edit-user/${row.id}"></i>`;
+            let html = `<i class="fa ${row.status ? 'fa-eye' : 'fa-eye-slash'} action-btn" id="updateUserStatus" ref_id="${row.id}" route="/admin/delete-user/${row.id}"></i>
+                        <i class="fa fa-edit px-2 action-btn" id="updateUser" ref_id="${row.id}" route="/admin/edit-user/${row.id}"></i>`;
+
+            if(row.email_verified_at == null)
+                html += `<i title="Resend Email" class="fa fa-paper-plane px-2 action-btn" id="resendEmail" ref_id="${row.id}" route="/admin/resend-email/${row.id}"></i>`;
+
+            return html;
         },
         targets: 4
     }];
@@ -136,8 +155,14 @@ $(() => {
 
     }, {
         render: (data, type, row) => {
-            return `<i class="fa ${row.status ? 'fa-eye' : 'fa-eye-slash'} action-btn" id="updateUserStatus" ref_id="${row.id}" route="/admin/delete-user/${row.id}"></i>
-                    <i class="fa fa-edit px-2 action-btn" id="updateUser" ref_id="${row.id}" route="/admin/edit-user/${row.id}"></i>`;
+            let html = `<i class="fa ${row.status ? 'fa-eye' : 'fa-eye-slash'} action-btn" id="updateUserStatus" ref_id="${row.id}" route="/admin/delete-user/${row.id}"></i>
+                        <i class="fa fa-edit px-2 action-btn" id="updateUser" ref_id="${row.id}" route="/admin/edit-user/${row.id}"></i>`;
+
+            if(row.email_verified_at == null)
+                html += `<i title="Resend Email" class="fa fa-paper-plane px-2 action-btn" id="resendEmail" ref_id="${row.id}" route="/admin/resend-email/${row.id}"></i>`;
+
+            return html;
+
         }, targets: 4
     }, {
         render: (data, type, row) => {
