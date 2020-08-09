@@ -33,8 +33,7 @@ class AuthController extends Controller {
 
     /**
      * @param Request $request
-     *
-     * @return JsonResponse|\Illuminate\Http\Response|Response|void
+     * @return JsonResponse|\Illuminate\Http\RedirectResponse|Response
      * @throws ValidationException
      */
 	public function login(Request $request) {

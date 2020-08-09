@@ -513,6 +513,20 @@ class UserService extends SearchService {
      *
      * @return bool
      */
+    public function resendEmail($id) {
+        if($user = $this->findById($id)) {
+            DispatchNotificationService::ADDUSERBYADMIN($user);
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * @param $id
+     *
+     * @return bool
+     */
     public function status($id) {
         $user = $this->userRepo->edit($id);
         $status = $user->first();

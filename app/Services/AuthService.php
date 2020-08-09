@@ -60,7 +60,15 @@ class AuthService {
 
         if ($this->attemptLogin($request)) {
             //dispatchPlanExpiryCheckListener();
-            return sendResponse($request, ['url' => route("{$this->guard}.index")], null);
+
+            $url = route("{$this->guard}.index");
+
+            if(session()->has('__destination')) {
+                $url = decrypt(session()->get('__destination'));
+                session()->forget('__destination');
+            }
+
+            return sendResponse($request, ['url' => $url], null);
         }
 
         $this->incrementLoginAttempts($request);
