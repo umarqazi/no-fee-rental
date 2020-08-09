@@ -125,7 +125,7 @@ class User extends Authenticate implements CanResetPassword {
 	 * @return mixed
 	 */
 	public function scopeAgents($query) {
-		return $query->whereuser_type(AGENT)->where('email_verified_at', '!=', null)->with('plan');
+		return $query->whereuser_type(AGENT)->with('plan');
 	}
 
 	/**
@@ -134,7 +134,7 @@ class User extends Authenticate implements CanResetPassword {
 	 * @return mixed
 	 */
 	public function scopeRenters($query) {
-		return $query->whereuser_type(RENTER)->where('email_verified_at', '!=', null);
+		return $query->whereuser_type(RENTER);
 	}
 
     /**
@@ -154,7 +154,7 @@ class User extends Authenticate implements CanResetPassword {
      * @return mixed
      */
 	public function scopeOwners($query) {
-	    return $query->whereuser_type(OWNER)->where('email_verified_at', '!=', null);
+	    return $query->whereuser_type(OWNER);
     }
 
     /**

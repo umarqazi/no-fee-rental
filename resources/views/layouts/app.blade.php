@@ -25,7 +25,7 @@
     {{--Attach Sctipts--}}
     @include('layouts.scripts')
 
-    @include('layouts.usernoise')
+{{--    @include('layouts.usernoise')--}}
 
 
 </head>

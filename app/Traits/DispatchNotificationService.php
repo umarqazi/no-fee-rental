@@ -235,6 +235,28 @@ trait DispatchNotificationService
     /**
      * @param $data
      */
+    public static function AVAILABILITYREQUEST($data)
+    {
+        self::$data = toObject(self::$data);
+        self::$data->view = 'availability_request';
+        self::$data->subject = 'Availability Request';
+        self::$data->via = 'info';
+        self::$data->linked_id = $data->listing->id;
+        self::$data->from = myId();
+        self::$data->model = Listing::class;
+        self::$data->toEmail = $data->listing->agent->email;
+        self::$data->listing = $data->listing;
+        self::$data->appointment = $data;
+        self::$data->to = $data->listing->agent->id;
+        self::$data->message = 'New Availability Request Received';
+        self::$data->clientDetails = route($data->listing->agent->user_type == AGENT ? 'agent.loadConversation' : 'owner.loadConversation', $data->id);
+        self::$data->url = route($data->listing->agent->user_type == AGENT ? 'agent.conversations' : 'owner.conversations');
+        self::__send();
+    }
+
+    /**
+     * @param $data
+     */
     public static function INTERESTED($data)
     {
         self::$data = toObject(self::$data);
