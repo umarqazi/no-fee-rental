@@ -109,7 +109,7 @@ $(() => {
                 let html = `<i class="fa ${row.status ? 'fa-eye' : 'fa-eye-slash'} action-btn" id="updateUserStatus" ref_id="${row.id}" route="/admin/delete-user/${row.id}"></i>
                             <i class="fa fa-edit px-2 action-btn" id="updateUser" ref_id="${row.id}" route="/admin/edit-user/${row.id}"></i>`;
                 if(row.email_verified_at == null)
-                    html += `<i title="Resend Email" class="fa fa-paper-plane px-2 action-btn" id="resendEmail" ref_id="${row.id}" route="/admin/resend-email/${row.id}"></i>`;
+                    html += `<i title="Resend Email" class="fa fa-paper-plane action-btn" id="resendEmail" ref_id="${row.id}" route="/admin/resend-email/${row.id}"></i>`;
 
                 return html;
             },
@@ -139,7 +139,7 @@ $(() => {
                         <i class="fa fa-edit px-2 action-btn" id="updateUser" ref_id="${row.id}" route="/admin/edit-user/${row.id}"></i>`;
 
             if(row.email_verified_at == null)
-                html += `<i title="Resend Email" class="fa fa-paper-plane px-2 action-btn" id="resendEmail" ref_id="${row.id}" route="/admin/resend-email/${row.id}"></i>`;
+                html += `<i title="Resend Email" class="fa fa-paper-plane action-btn" id="resendEmail" ref_id="${row.id}" route="/admin/resend-email/${row.id}"></i>`;
 
             return html;
         },
@@ -159,7 +159,7 @@ $(() => {
                         <i class="fa fa-edit px-2 action-btn" id="updateUser" ref_id="${row.id}" route="/admin/edit-user/${row.id}"></i>`;
 
             if(row.email_verified_at == null)
-                html += `<i title="Resend Email" class="fa fa-paper-plane px-2 action-btn" id="resendEmail" ref_id="${row.id}" route="/admin/resend-email/${row.id}"></i>`;
+                html += `<i title="Resend Email" class="fa fa-paper-plane action-btn" id="resendEmail" ref_id="${row.id}" route="/admin/resend-email/${row.id}"></i>`;
 
             return html;
 
