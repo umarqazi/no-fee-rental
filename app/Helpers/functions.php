@@ -501,7 +501,7 @@ function dispatchListingNotification( $data, $delay = 0 ) {
  * @return PendingDispatch
  */
 function dispatchEmailQueue( $data, $delay = 0 ) {
-    return dispatch( new \App\Jobs\SendEmailJob( $data ) )->delay( now()->addSeconds( $delay ) );
+    return dispatch_now( new \App\Jobs\SendEmailJob( $data ) )->delay( now()->addSeconds( $delay ) );
 }
 
 /**

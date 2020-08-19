@@ -14,6 +14,7 @@ use App\Forms\InvitedAgentSignUpForm;
 use App\Forms\SignUpForm;
 use App\Forms\User\ChangePasswordForm;
 use App\Forms\User\EditProfileForm;
+use App\Jobs\SendEmailJob;
 use App\Repository\CompanyRepo;
 use App\Repository\ExclusiveSettingRepo;
 use App\Repository\AgentRepo;
