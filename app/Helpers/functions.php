@@ -502,17 +502,18 @@ function dispatchListingNotification( $data, $delay = 0 ) {
  */
 function dispatchEmailQueue( $data, $delay = 0 ) {
 
-    $via = null;
-    switch ($data->via) {
-        case 'info':
-            $via = sendViaInfo($data);
-            break;
-        case 'support':
-            $via = sendViaSupport($data);
-            break;
-    }
-
-    return $via;
+//    $via = null;
+//    switch ($data->via) {
+//        case 'info':
+//            $via = sendViaInfo($data);
+//            break;
+//        case 'support':
+//            $via = sendViaSupport($data);
+//            break;
+//    }
+//
+//    return $via;
+    return dispatchMail($data->toEmail, $data);
 }
 
 /**
