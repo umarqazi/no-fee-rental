@@ -49,8 +49,6 @@ class MailService {
         );
         $transport->setUsername($this->credentials->email);
         $transport->setPassword($this->credentials->password);
-
-        $gmail = new Swift_Mailer($transport);
-        Mail::setSwiftMailer($gmail);
+        Mail::setSwiftMailer(new Swift_Mailer($transport));
     }
 }

@@ -11,6 +11,7 @@ use Illuminate\Queue\SerializesModels;
  * @package App\Mail
  */
 class MailHandler extends Mailable {
+
 	use Queueable, SerializesModels;
 
 	/**
@@ -27,15 +28,13 @@ class MailHandler extends Mailable {
 		$this->data = is_object($data) ? $data : toObject($data);
 	}
 
-	/**
-	 * Build the message.
-	 *
-	 * @return $this
-	 */
+    /**
+     * @return MailHandler
+     */
 	public function build() {
 		$data = $this->data;
 		print sprintf("Mail Sending to [%s] targeting view [%s]\n", $this->data->toEmail ?? null, $this->data->view ?? null);
-		return $this->subject($this->data->subject)
-            ->view("mails.{$this->data->view}", compact('data'));
+		$mail = $this->subject($this->data->subject);
+		return $mail->view("mails.{$this->data->view}", compact('data'));
 	}
 }
