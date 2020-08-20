@@ -199,7 +199,7 @@ class CreditPlanService extends PaymentService {
             ->find(['user_id' => myId()])
             ->where('is_cancel', FALSE)
             ->where('is_expired', FALSE)
-            ->latest()->count() > 0 ? true : false;
+            ->latest()->count() > 0;
     }
 
     /**

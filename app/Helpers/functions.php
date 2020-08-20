@@ -473,7 +473,7 @@ function billingCycle($currentPlan) {
  * @return mixed
  */
 function dispatchMail( $to, $data ) {
-    return \Illuminate\Support\Facades\Mail::to( $to )->send( new App\Mail\MailHandler( $data ) );
+    return \Illuminate\Support\Facades\Mail::to( $to )->queue( new App\Mail\MailHandler( $data ) );
 }
 
 /**
@@ -501,7 +501,18 @@ function dispatchListingNotification( $data, $delay = 0 ) {
  * @return PendingDispatch
  */
 function dispatchEmailQueue( $data, $delay = 0 ) {
-    return dispatch_now( new \App\Jobs\SendEmailJob( $data ) );
+
+    $via = null;
+    switch ($data->via) {
+        case 'info':
+            $via = sendViaInfo($data);
+            break;
+        case 'support':
+            $via = sendViaSupport($data);
+            break;
+    }
+
+    return $via;
 }
 
 /**
