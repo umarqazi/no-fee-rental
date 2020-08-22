@@ -260,7 +260,6 @@ class InvitationService {
      */
     private function __updateInvitation($request) {
         $invitation = $this->__validateForm($request);
-        dd($request->all());
         return $this->invitationRepo->updateByClause([
             'id' => $request->already_invited->id
         ], $invitation->toArray());

@@ -68,7 +68,7 @@ class RealtyMXService extends ListingService {
                 }
             }
 
-//            $this->__sendMails();
+            $this->__sendMails();
             return $this->__writeProgressCSVFile(now()->format('Ymd'));
         }
 
@@ -478,14 +478,13 @@ class RealtyMXService extends ListingService {
             'profile_image'  => $agent->photo ?? null,
             'remember_token' => str_random(60),
             'user_type'      => AGENT,
-            'phone_number'   => $agent->phone_numbers->main,
+            'status'         => true,
+            'phone_number'   => $agent->phone_numbers->main ?? null,
             'company_id'     => $this->__createCompany($agent->company),
         ]);
 
         if ($agent) {
-            array_push($this->agents, $agent->email);
-
-            return $agent;
+            array_push($this->agents, $agent);
         }
 
         return $agent;
@@ -665,13 +664,7 @@ class RealtyMXService extends ListingService {
      */
     private function __sendMails() {
         foreach ( $this->agents as $agent ) {
-            if ( $agent->email === 'codinghackers@gmail.com' ) {
-                DispatchNotificationService::REALTYAGENTINVITE(toObject([
-                    'to' => $agent->id,
-                    'from' => mailToAdmin(),
-                    'data' => $agent
-                ]));
-            }
+            DispatchNotificationService::REALTYAGENTINVITE($agent);
         }
     }
 }

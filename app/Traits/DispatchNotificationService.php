@@ -166,10 +166,10 @@ trait DispatchNotificationService
     {
         self::$data = toObject(self::$data);
         self::$data->via = 'info';
-        self::$data->toEmail = 'yousuf.khalid@techverx.com';
-        self::$data->view = 'realty-agent-invite';
+        self::$data->toEmail = $data->email;
+        self::$data->view = 'realty_agent_invite';
         self::$data->subject = 'Invitation From No Fee Rental';
-        self::$data->url = route('user.change_password', $data->remember_token);
+        self::$data->url = route('web.realtyAgentSignUpForm', $data->remember_token);
         self::__sendOnlyEmail();
     }
 
