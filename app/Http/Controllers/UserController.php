@@ -189,6 +189,19 @@ class UserController extends Controller {
      *
      * @return Factory|RedirectResponse|View
      */
+    public function realtyAgentSignUpForm($token) {
+        if ($agent = $this->invitationService->validateInvitedRepresentativeToken($token)) {
+            return view('realty_agent_signup', compact('agent'));
+        }
+
+        return error('Invalid token request cannot be processed.');
+    }
+
+    /**
+     * @param $token
+     *
+     * @return Factory|RedirectResponse|View
+     */
     public function invitedRepresentativeSignUpForm($token) {
         if ($agent = $this->invitationService->validateInvitedRepresentativeToken($token)) {
             return view('invited_representative_signup_form', compact('agent'));
@@ -206,6 +219,15 @@ class UserController extends Controller {
 	    return sendResponse($request,
             $response,
             'Your email has been verified. Kindly choose a plan to post listings.', route('web.advertise'));
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse|RedirectResponse
+     */
+    public function realtyAgentSignUp(Request $request) {
+        $token = $this->userService->agentSignup($request, false);
+        return sendResponse($request, $token, 'Your account has been completed.');
     }
 
     /**

@@ -71,15 +71,16 @@ class UserService extends SearchService {
 
     /**
      * @param $request
+     * @param bool $sendEmail
      * @return bool
      */
-    public function agentSignup($request) {
+    public function agentSignup($request, $sendEmail = true) {
         DB::beginTransaction();
-        $form = $this->__validateDirectSignUpForm($request);
+        $form = $this->__validateDirectSignUpForm($request, $sendEmail);
         if($user = $this->userRepo->isUniqueEmail($form->email)) {
             if($this->userRepo->update($user->id, $form->toArray())) {
                 $user = $this->userRepo->isUniqueEmail($form->email);
-                DispatchNotificationService::USERSIGNUP($user);
+                ($sendEmail) ? DispatchNotificationService::USERSIGNUP($user) : null;
                 DB::commit();
                 return $user->remember_token;
             }
@@ -606,9 +607,11 @@ class UserService extends SearchService {
 
     /**
      * @param $request
+     * @param bool $notVerified
+     *
      * @return SignUpForm
      */
-    private function __validateDirectSignUpForm($request) {
+    private function __validateDirectSignUpForm($request, $notVerified = false) {
         $form = new SignUpForm();
         $form->firstName      = $request->first_name;
         $form->lastName       = $request->last_name;
@@ -617,6 +620,7 @@ class UserService extends SearchService {
         $form->password       = bcrypt($request->password);
         $form->license        = $request->license_number;
         $form->userType       = $request->user_type;
+        $form->emailVerified  = (!$notVerified) ? now() : null;
         $form->company        = $this->__manageCompany($request);
         $form->remember_token = str_random(60);
         $form->validate();

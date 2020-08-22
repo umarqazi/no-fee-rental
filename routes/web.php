@@ -78,6 +78,10 @@ Route::middleware('guest')->group(function () {
     Route::post('/invited-agent/sign-up', 'UserController@invitedAgentSignUp')->name('web.agentToAgentInviteSignUp');
     Route::get('/invited-agent/sign-up/{token}', 'UserController@invitedAgentSignUpForm')->name('web.agentToAgentInviteForm');
 
+    // Realty Agent Signup
+    Route::post('/realty-agent/sign-up', 'UserController@realtyAgentSignUp')->name('web.realtyAgentSignUp');
+    Route::get('/realty-agent/sign-up/{token}', 'UserController@realtyAgentSignUpForm')->name('web.realtyAgentSignUpForm');
+
     // Representative SignUp
     Route::post('/invited-representative/sign-up', 'UserController@invitedRepresentativeSignUp')->name('web.invitedRepresentativeSignUp');
     Route::get('/invited-representative/sign-up/{token}', 'UserController@invitedRepresentativeSignUpForm')->name('web.invitedRepresentativeSignUpForm');
@@ -229,5 +233,5 @@ Route::get('/download/realty-csv-report', 'RealtyMXController@download');
 
 // Test Route
 Route::get('/test', function (\Illuminate\Http\Request $request) {
-
+    return new \App\Mail\MailHandler(['url' => 'abc.com']);
 })->name('web.test');
